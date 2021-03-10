@@ -57,6 +57,8 @@ publish_package:
   script:
     - |
       {
+        echo $CI_COMMIT_DESCRIPTION
+        echo $${MAJOR}
         npm publish &&
         echo "Successfully published version ${NPM_PACKAGE_VERSION} of ${NPM_PACKAGE_NAME} to GitLab's NPM registry: ${CI_PROJECT_URL}/-/packages"
       } || {

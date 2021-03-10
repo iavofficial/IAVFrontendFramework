@@ -3,7 +3,7 @@ default:
 
   # Validate that the repository contains a package.json and extract a few values from it. Setting certificates for npm.
   before_script:
-    - ./ci_cd/scripts/setup_npm
+    - chmod +x ./ci_cd/scripts/setup_npm.sh
 #    - |
 #      if [[ ! -f package.json ]]; then
 #        echo "No package.json found! A package.json file is required to publish a package to GitLab's NPM registry."

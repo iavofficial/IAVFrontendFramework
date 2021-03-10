@@ -1,7 +1,7 @@
 {
-  "name": "disa-framework",
-  "version": "0.1.0",
-  "private": true,
+  "name": "@td-d/disa-framework",
+  "version": "0.0.3",
+  "private": false,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",

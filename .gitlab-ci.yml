@@ -66,3 +66,12 @@ publish_package:
       }
   rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
+  
+  create_release:
+    image: registry.gitlab.com/gitlab-org/release-cli:latest
+    stage: deploy
+    script:
+      - echo "Creating release ..."
+    release:
+      tag_name: ${MAJOR}_${MINOR}_${REVISION}
+      description: "Test release"

@@ -64,4 +64,3 @@ publish_package:
       }
   rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
-      when: on_success

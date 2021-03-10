@@ -18,7 +18,7 @@ default:
 validate_package_scope:
   stage: build
   script:
-    - ./ci_cd/scripts/setup_npm
+    - ./ci_cd/scripts/setup_npm.sh
     - |
       if [[ ! $NPM_PACKAGE_NAME =~ ^@$CI_PROJECT_ROOT_NAMESPACE/ ]]; then
         echo "Invalid package scope! Packages must be scoped in the root namespace of the project, e.g. \"@${CI_PROJECT_ROOT_NAMESPACE}/${CI_PROJECT_NAME}\""
@@ -33,7 +33,7 @@ validate_package_scope:
 create_npmrc:
   stage: build
   script:
-    - ./ci_cd/scripts/setup_npm
+    - ./ci_cd/scripts/setup_npm.sh
     - |
       if [[ ! -f .npmrc ]]; then
         echo 'No .npmrc found! Creating one now. Please review the following link for more information: https://docs.gitlab.com/ee/user/packages/npm_registry/index.html#authenticating-with-a-ci-job-token'
@@ -57,7 +57,7 @@ create_npmrc:
 publish_package:
   stage: deploy
   script:
-    - ./ci_cd/scripts/setup_npm
+    - ./ci_cd/scripts/setup_npm.sh
     - |
       {
         echo $CI_COMMIT_DESCRIPTION

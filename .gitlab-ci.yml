@@ -69,7 +69,7 @@ publish_package:
   
 create_release:
   image: registry.gitlab.com/gitlab-org/release-cli:latest
-  stage: deploy
+  stage: .post
   script:
     - echo "Creating release ..."
   release:

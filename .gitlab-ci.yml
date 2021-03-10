@@ -1,8 +1,7 @@
-# This file is a template, and might need editing before it works on your project.
 default:
   image: node:latest
 
-  # Validate that the repository contains a package.json and extract a few values from it.
+  # Validate that the repository contains a package.json and extract a few values from it. Setting certificates for npm.
   before_script:
     - |
       if [[ ! -f package.json ]]; then
@@ -25,6 +24,8 @@ validate_package_scope:
         echo 'For more information, see https://docs.gitlab.com/ee/user/packages/npm_registry/#package-naming-convention'
         exit 1
       fi
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
 
 # If no .npmrc if included in the repo, generate a temporary one to use during the publish step
 # that is configured to publish to GitLab's NPM registry
@@ -45,6 +46,8 @@ create_npmrc:
   artifacts:
     paths:
       - .npmrc
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
 
 # Publish the package. If the version in package.json has not yet been published, it will be
 # published to GitLab's NPM registry. If the version already exists, the publish command
@@ -54,9 +57,10 @@ publish_package:
   script:
     - |
       {
-        echo $CI_COMMIT_BRANCH
         npm publish &&
         echo "Successfully published version ${NPM_PACKAGE_VERSION} of ${NPM_PACKAGE_NAME} to GitLab's NPM registry: ${CI_PROJECT_URL}/-/packages"
       } || {
         echo "No new version of ${NPM_PACKAGE_NAME} published. This is most likely because version ${NPM_PACKAGE_VERSION} already exists in GitLab's NPM registry."
       }
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'

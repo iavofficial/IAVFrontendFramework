@@ -1,6 +1,6 @@
 {
   "name": "@td-d/disa-framework",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": false,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",

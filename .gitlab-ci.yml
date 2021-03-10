@@ -11,6 +11,7 @@ default:
       fi
     - NPM_PACKAGE_NAME=$(node -p "require('./package.json').name")
     - NPM_PACKAGE_VERSION=$(node -p "require('./package.json').version")
+    - git config --global http.sslCAInfo ./ca-bundle-including-iav_gitlab
     - npm config set cafile ./ca-bundle-including-iav_gitlab
 
 # Validate that the package name is properly scoped to the project's root namespace.

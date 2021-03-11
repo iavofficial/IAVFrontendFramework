@@ -1,0 +1,1 @@
+npm config set cafile $IAV_CA_BUNDLE

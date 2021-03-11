@@ -11,7 +11,10 @@ default:
 validate_package_scope:
   stage: build
   script:
-    - ./ci_cd/scripts/setup_npm.sh
+#    - ./ci_cd/scripts/setup_npm.sh
+    - NPM_PACKAGE_NAME=$(node -p "require('./package.json').name")
+    - NPM_PACKAGE_VERSION=$(node -p "require('./package.json').version")
+    - npm config set cafile $IAV_CA_BUNDLE
     - |
       if [[ ! -f package.json ]]; then
         echo "No package.json found! A package.json file is required to publish a package to GitLab's NPM registry."

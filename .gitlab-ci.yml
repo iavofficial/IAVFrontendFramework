@@ -3,7 +3,7 @@ default:
 
   # Validate that the repository contains a package.json and extract a few values from it. Setting certificates for npm.
   before_script:
-    - if [! [type "command" &> /dev/null]]; then
+    - if [ ! [ -x "$(command -v curl)" ]]; then
         echo "in";
         apk add --update curl && rm -rf /var/cache/apk/*;
         exit 0;

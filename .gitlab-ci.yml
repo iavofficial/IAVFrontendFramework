@@ -29,7 +29,7 @@ validate_package_scope:
       fi
     - NPM_PACKAGE_NAME=$(node -p "require('./package.json').name")
     - NPM_PACKAGE_VERSION=$(node -p "require('./package.json').version")
-    - npm config set cafile ./ci_cd/ca-bundle-including-iav_gitlab.crt
+    - npm config set cafile $IAV_CA_BUNDLE
     - |
       if [[ ! $NPM_PACKAGE_NAME =~ ^@$CI_PROJECT_ROOT_NAMESPACE/ ]]; then
         echo "Invalid package scope! Packages must be scoped in the root namespace of the project, e.g. \"@${CI_PROJECT_ROOT_NAMESPACE}/${CI_PROJECT_NAME}\""
@@ -52,7 +52,7 @@ create_npmrc:
       fi
     - NPM_PACKAGE_NAME=$(node -p "require('./package.json').name")
     - NPM_PACKAGE_VERSION=$(node -p "require('./package.json').version")
-    - npm config set cafile ./ci_cd/ca-bundle-including-iav_gitlab.crt
+    - npm config set cafile $IAV_CA_BUNDLE
     - |
       if [[ ! -f .npmrc ]]; then
         echo 'No .npmrc found! Creating one now. Please review the following link for more information: https://docs.gitlab.com/ee/user/packages/npm_registry/index.html#authenticating-with-a-ci-job-token'
@@ -84,7 +84,7 @@ publish_package:
       fi
     - NPM_PACKAGE_NAME=$(node -p "require('./package.json').name")
     - NPM_PACKAGE_VERSION=$(node -p "require('./package.json').version")
-    - npm config set cafile ./ci_cd/ca-bundle-including-iav_gitlab.crt
+    - npm config set cafile $IAV_CA_BUNDLE
     - |
       {
         echo $CI_COMMIT_DESCRIPTION
@@ -101,7 +101,7 @@ create_release:
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   stage: .post
   variables:
-    SSL_CERT_FILE: "./ci_cd/ca-bundle-including-iav_gitlab.crt"
+    SSL_CERT_FILE: $IAV_CA_BUNDLE
   script:
     - echo "Creating release ..."
   release:

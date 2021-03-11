@@ -74,7 +74,7 @@ create_release:
   script:
     - apk add --update npm
   release:
-    tag_name: ver. $(node -p "require('./package.json').version")
+    tag_name: ver_$(node -p "require('./package.json').version")
     description: "Test release"
   rules:
     - if: '$CI_COMMIT_BRANCH == "master"'

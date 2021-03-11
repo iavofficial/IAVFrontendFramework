@@ -3,7 +3,7 @@ default:
 
   # Validate that the repository contains a package.json and extract a few values from it. Setting certificates for npm.
   before_script:
-    - apt install curl
+    - apt-get install curl
     - curl --cacert $IAV_CA_BUNDLE "https://gitlab.iavgroup.local"
 #    - chmod +x ./ci_cd/scripts/setup_npm.sh
 #    - |

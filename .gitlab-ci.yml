@@ -10,9 +10,8 @@ default:
 
 validate_package_scope:
   stage: build
-  before_script:
-    - ./ci_cd/scripts/set_npm_variables.sh
   script:
+    - ./ci_cd/scripts/set_npm_variables.sh
     - |
       if [[ ! -f package.json ]]; then
         echo "No package.json found! A package.json file is required to publish a package to GitLab's NPM registry."
@@ -57,9 +56,8 @@ create_npmrc:
 # will fail and the existing package will not be updated.
 publish_package:
   stage: deploy
-  before_script:
-    - ./ci_cd/scripts/setup_npm.sh
   script:
+    - ./ci_cd/scripts/setup_npm.sh
     - |
       {
         npm publish &&
@@ -72,13 +70,11 @@ publish_package:
   
 create_release:
   stage: .post
-  before_script:
-    - ./ci_cd/scripts/set_npm_variables.sh
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   variables:
     SSL_CERT_FILE: $IAV_CA_BUNDLE
   script:
-    - echo "Creating release ..."
+    - ./ci_cd/scripts/set_npm_variables.sh
   release:
     tag_name: ${MAJOR}_${MINOR}_${REVISION}
     description: "Test release"

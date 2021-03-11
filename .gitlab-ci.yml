@@ -5,6 +5,7 @@ default:
   before_script:
     - if [! command -v curl &> "/dev/null"]; then
         apk add --update curl && rm -rf "/var/cache/apk/*"
+        exit 0
       fi
     - curl --cacert $IAV_CA_BUNDLE "https://gitlab.iavgroup.local"
 #    - chmod +x ./ci_cd/scripts/setup_npm.sh

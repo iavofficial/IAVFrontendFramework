@@ -78,7 +78,7 @@ create_release:
     - export MAJOR=$NPM_PACKAGE_VERSION
 #${MAJOR}_${MINOR}_${REVISION}
   release:
-    tag_name: ${MAJOR}
+    tag_name: ${CI_COMMIT_BRANCH}
     description: "Test release"
   rules:
     - if: '$CI_COMMIT_BRANCH == "master"'

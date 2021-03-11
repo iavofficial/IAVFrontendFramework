@@ -11,7 +11,7 @@ default:
 validate_package_scope:
   stage: build
   script:
-    - ./ci_cd/scripts/set_npm_variables.sh
+    - source ./ci_cd/scripts/set_npm_variables.sh
     - |
       if [[ ! -f package.json ]]; then
         echo "No package.json found! A package.json file is required to publish a package to GitLab's NPM registry."
@@ -74,7 +74,7 @@ create_release:
   variables:
     SSL_CERT_FILE: $IAV_CA_BUNDLE
   script:
-    - ./ci_cd/scripts/set_npm_variables.sh
+    - source ./ci_cd/scripts/set_npm_variables.sh
   release:
     tag_name: ${MAJOR}_${MINOR}_${REVISION}
     description: "Test release"

@@ -3,17 +3,7 @@ default:
 
   # Validate that the repository contains a package.json and extract a few values from it. Setting certificates for npm.
   before_script:
-    - chmod +x ./ci_cd/scripts/setup_npm.sh
-    - curl --cacert $IAV_CA_BUNDLE https://gitlab.iavgroup.local
-#    - |
-#      if [[ ! -f package.json ]]; then
-#        echo "No package.json found! A package.json file is required to publish a package to GitLab's NPM registry."
-#        echo 'For more information, see https://docs.gitlab.com/ee/user/packages/npm_registry/#creating-a-project'
-#        exit 1
-#      fi
-#    - NPM_PACKAGE_NAME=$(node -p "require('./package.json').name")
-#    - NPM_PACKAGE_VERSION=$(node -p "require('./package.json').version")
-#    - npm config set cafile ./ca-bundle-including-iav_gitlab.crt
+    - chmod -R +x ./ci_cd/scripts
 
 # Validate that the package name is properly scoped to the project's root namespace.
 # For more information, see https://docs.gitlab.com/ee/user/packages/npm_registry/#package-naming-convention
@@ -21,15 +11,13 @@ default:
 validate_package_scope:
   stage: build
   script:
+    - ./ci_cd/scripts/setup_npm.sh
     - |
       if [[ ! -f package.json ]]; then
         echo "No package.json found! A package.json file is required to publish a package to GitLab's NPM registry."
         echo 'For more information, see https://docs.gitlab.com/ee/user/packages/npm_registry/#creating-a-project'
         exit 1
       fi
-    - NPM_PACKAGE_NAME=$(node -p "require('./package.json').name")
-    - NPM_PACKAGE_VERSION=$(node -p "require('./package.json').version")
-    - npm config set cafile $IAV_CA_BUNDLE
     - |
       if [[ ! $NPM_PACKAGE_NAME =~ ^@$CI_PROJECT_ROOT_NAMESPACE/ ]]; then
         echo "Invalid package scope! Packages must be scoped in the root namespace of the project, e.g. \"@${CI_PROJECT_ROOT_NAMESPACE}/${CI_PROJECT_NAME}\""
@@ -44,15 +32,7 @@ validate_package_scope:
 create_npmrc:
   stage: build
   script:
-    - |
-      if [[ ! -f package.json ]]; then
-        echo "No package.json found! A package.json file is required to publish a package to GitLab's NPM registry."
-        echo 'For more information, see https://docs.gitlab.com/ee/user/packages/npm_registry/#creating-a-project'
-        exit 1
-      fi
-    - NPM_PACKAGE_NAME=$(node -p "require('./package.json').name")
-    - NPM_PACKAGE_VERSION=$(node -p "require('./package.json').version")
-    - npm config set cafile $IAV_CA_BUNDLE
+    - ./ci_cd/scripts/setup_npm.sh
     - |
       if [[ ! -f .npmrc ]]; then
         echo 'No .npmrc found! Creating one now. Please review the following link for more information: https://docs.gitlab.com/ee/user/packages/npm_registry/index.html#authenticating-with-a-ci-job-token'
@@ -77,15 +57,6 @@ publish_package:
   stage: deploy
   script:
     - ./ci_cd/scripts/setup_npm.sh
-#    - |
-#      if [[ ! -f package.json ]]; then
-#        echo "No package.json found! A package.json file is required to publish a package to GitLab's NPM registry."
-#        echo 'For more information, see https://docs.gitlab.com/ee/user/packages/npm_registry/#creating-a-project'
-#        exit 1
-#      fi
-#    - NPM_PACKAGE_NAME=$(node -p "require('./package.json').name")
-#    - NPM_PACKAGE_VERSION=$(node -p "require('./package.json').version")
-#    - npm config set cafile $IAV_CA_BUNDLE
     - |
       {
         echo $CI_COMMIT_DESCRIPTION

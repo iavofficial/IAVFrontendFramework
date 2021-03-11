@@ -10,8 +10,9 @@ default:
 
 validate_package_scope:
   stage: build
+  before_script:
+    - ./ci_cd/scripts/set_npm_variables.sh
   script:
-    - ./ci_cd/scripts/setup_npm.sh
     - |
       if [[ ! -f package.json ]]; then
         echo "No package.json found! A package.json file is required to publish a package to GitLab's NPM registry."
@@ -34,7 +35,6 @@ validate_package_scope:
 create_npmrc:
   stage: build
   script:
-    - ./ci_cd/scripts/setup_npm.sh
     - |
       if [[ ! -f .npmrc ]]; then
         echo 'No .npmrc found! Creating one now. Please review the following link for more information: https://docs.gitlab.com/ee/user/packages/npm_registry/index.html#authenticating-with-a-ci-job-token'
@@ -57,12 +57,11 @@ create_npmrc:
 # will fail and the existing package will not be updated.
 publish_package:
   stage: deploy
-  script:
+  before_script:
     - ./ci_cd/scripts/setup_npm.sh
+  script:
     - |
       {
-        echo $CI_COMMIT_DESCRIPTION
-        echo ${MAJOR}
         npm publish &&
         echo "Successfully published version ${NPM_PACKAGE_VERSION} of ${NPM_PACKAGE_NAME} to GitLab's NPM registry: ${CI_PROJECT_URL}/-/packages"
       } || {
@@ -73,6 +72,8 @@ publish_package:
   
 create_release:
   stage: .post
+  before_script:
+    - ./ci_cd/scripts/set_npm_variables.sh
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   variables:
     SSL_CERT_FILE: $IAV_CA_BUNDLE

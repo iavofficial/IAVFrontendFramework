@@ -75,6 +75,7 @@ create_release:
     - apk add --update npm
     - source ./ci_cd/scripts/set_npm_variables.sh
     - echo $NPM_PACKAGE_VERSION
+    - export MAJOR=$NPM_PACKAGE_VERSION
 #${MAJOR}_${MINOR}_${REVISION}
   release:
     tag_name: ${NPM_PACKAGE_VERSION}

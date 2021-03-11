@@ -70,12 +70,12 @@ create_release:
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   variables:
     SSL_CERT_FILE: $IAV_CA_BUNDLE
-    PACKAGE_VERSION: ${(node -p "require('./package.json').version")}
+    PACKAGE_VERSION: [$(node -p "require('./package.json').version")]
   script:
     - apk add --update npm
     - echo $PACKAGE_VERSION
   release:
     tag_name: ver_$(node -p "require('./package.json').version")
-    description: ./ci_cd/scripts/$(node -p "require('./package.json').version").md
+    description: ./ci_cd/release_notes/$(node -p "require('./package.json').version").md
   rules:
     - if: '$CI_COMMIT_BRANCH == "master"'

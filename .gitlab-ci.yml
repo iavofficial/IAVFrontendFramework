@@ -78,7 +78,7 @@ create_release:
     - export CI_COMMIT_BRANCH=$NPM_PACKAGE_VERSION
 #${MAJOR}_${MINOR}_${REVISION}
   release:
-    tag_name: ${CI_COMMIT_BRANCH}
+    tag_name: $(node -p "require('./package.json').version")
     description: "Test release"
   rules:
     - if: '$CI_COMMIT_BRANCH == "master"'

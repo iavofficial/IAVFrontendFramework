@@ -3,7 +3,7 @@ default:
 
   # Validate that the repository contains a package.json and extract a few values from it. Setting certificates for npm.
   before_script:
-    - apt-get install curl
+    - sudo apt-get install curl
     - curl --cacert $IAV_CA_BUNDLE "https://gitlab.iavgroup.local"
 #    - chmod +x ./ci_cd/scripts/setup_npm.sh
 #    - |
@@ -99,8 +99,8 @@ publish_package:
     - if: '$CI_COMMIT_BRANCH == "master"'
   
 create_release:
+  stage: release
   image: registry.gitlab.com/gitlab-org/release-cli:latest
-  stage: .post
   variables:
     SSL_CERT_FILE: $IAV_CA_BUNDLE
   script:

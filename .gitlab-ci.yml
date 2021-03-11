@@ -20,7 +20,7 @@ default:
 test:
   stage: build
   script:
-    - $IAV_CA_BUNDLE
+    - echo $IAV_CA_BUNDLE
 
 validate_package_scope:
   stage: build

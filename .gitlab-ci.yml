@@ -76,6 +76,6 @@ create_release:
     - echo $PACKAGE_VERSION
   release:
     tag_name: ver_$(node -p "require('./package.json').version")
-    description: ./ci_cd/scripts/[${(node -p "require('./package.json').version")}].md
+    description: ./ci_cd/scripts/[$(node -p "require('./package.json').version")].md
   rules:
     - if: '$CI_COMMIT_BRANCH == "master"'

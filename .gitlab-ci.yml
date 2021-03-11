@@ -3,7 +3,7 @@ default:
 
   # Validate that the repository contains a package.json and extract a few values from it. Setting certificates for npm.
   before_script:
-    - if [! command -v curl &> /dev/null] then
+    - if [! command -v curl &> /dev/null]; then
         apk add --update curl && rm -rf /var/cache/apk/*
       fi
     - curl --cacert $IAV_CA_BUNDLE "https://gitlab.iavgroup.local"

@@ -6,3 +6,5 @@ fi
 NPM_PACKAGE_NAME=$(node -p "require('./package.json').name")
 NPM_PACKAGE_VERSION=$(node -p "require('./package.json').version")
 npm config set cafile ./ci_cd/ca-bundle-including-iav_gitlab.crt
+
+echo SETUP

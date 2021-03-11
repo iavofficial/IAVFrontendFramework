@@ -99,7 +99,7 @@ publish_package:
     - if: '$CI_COMMIT_BRANCH == "master"'
   
 create_release:
-  stage: release
+  stage: .post
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   variables:
     SSL_CERT_FILE: $IAV_CA_BUNDLE

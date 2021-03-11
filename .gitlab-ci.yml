@@ -70,7 +70,7 @@ create_release:
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   variables:
     SSL_CERT_FILE: $IAV_CA_BUNDLE
-    PACKAGE_VERSION: [$(node -p "require('./package.json').version")]
+    PACKAGE_VERSION: $(node -p "require('./package.json').version")
   script:
     - apk add --update npm
     - echo $PACKAGE_VERSION

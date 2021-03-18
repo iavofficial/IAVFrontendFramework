@@ -3,9 +3,9 @@ import CompanyLogo from '../assets/company_logo.png'
 import { BLUE1, BLUE2 } from './Constants.js';
 
 const DisaHeader = () => (
-    <div className={"p-d-flex p-jc-between"} style={{ "backgroundColor": BLUE2}}>
-        <img src={AppLogo} alt="DISA Logo" style={{ "backgroundColor": BLUE1 }} />
-        <img src={CompanyLogo} alt="Company Logo" />
+    <div className={"p-d-flex p-jc-between p-align-center"} style={{ "backgroundColor": BLUE2 }}>
+        <img className={"p-lg-2"} src={AppLogo} alt="DISA Logo" style={{ "padding": "0px", "backgroundColor": BLUE1 }} />
+        <img src={CompanyLogo} alt="Company Logo" style={{ "width": "104px", "height": "75px" }} />
     </div>
 );
 

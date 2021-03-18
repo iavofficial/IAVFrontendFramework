@@ -1,16 +1,23 @@
+import React from 'react';
 import DisaHeader from './DisaHeader.js';
+import Navbar from './Navbar.js';
+import Disatab from './Disatab.js';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-const Disapage = () => (
-    <div>
-        <DisaHeader />
-        <div className="p-grid" style={{"margin": "0"}}>
-            <div className="p-col p-d-flex p-dir-col" style={{ "backgroundColor": "red" }}>
-                <span>Hallo</span>
-                <span>Welt</span>
+const Disapage = (props) => {
+    return (
+        <Router>
+            <DisaHeader />
+            <div className="p-d-flex" style={{ "margin": "0" }}>
+                <Navbar>
+                    {props.tabs.map((tab) => <Disatab selectedIcon={tab.selectedIcon} deselectedIcon={tab.deselectedIcon} to={tab.to} name={tab.name} disabled={tab.disabled}></Disatab>)}
+                </Navbar>
+                <div className="p-col">
+                    {props.tabs.map((tab) => <Route path={tab.to} exact component={tab.component} />)}
+                </div>
             </div>
-            <div className="p-col"></div>
-        </div>
-    </div>
-);
+        </Router>
+    );
+};
 
 export default Disapage;

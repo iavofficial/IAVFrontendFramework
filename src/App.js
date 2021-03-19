@@ -4,8 +4,8 @@ import navFleetSelected from './assets/nav_fleet_selected.png';
 import navFleetDeselected from './assets/nav_fleet_deselected.png';
 import navFleetDetailSelected from './assets/nav_fleet_detail_selected.png';
 import navFleetDetailDeselected from './assets/nav_fleet_detail_deselected.png';
-import Disapage from "./components/Disapage.js";
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import DisaPage from './components/disaPage.js';
+import BaseContent from './components/baseContent.js'
 
 function App() {
   let tabs = [
@@ -23,7 +23,7 @@ function App() {
       to: "/test1",
       name: "Test1",
       disabled: false,
-      component: () => "This is a test 1"
+      component: BaseContent
     },
     {
       selectedIcon: navFleetDetailSelected,
@@ -31,12 +31,12 @@ function App() {
       to: "/test2",
       name: "Test2",
       disabled: true,
-      component: () => "This is a test 2"
+      component: () => "This is the second test"
     }
   ]
 
   return (
-    <Disapage tabs={tabs} />
+    <DisaPage tabs={tabs} />
   );
 }
 

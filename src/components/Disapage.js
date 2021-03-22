@@ -3,7 +3,7 @@ import PropTypes, { shape } from 'prop-types';
 import { BrowserRouter as Router } from 'react-router-dom';
 import './disaPage.css'
 import DisaHeader from './disaHeader.js';
-import DisaTab from './disaTab.js';
+import DisaTab from './navbarTab.js';
 import Navbar from './navbar.js';
 import Content from './content.js';
 

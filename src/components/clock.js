@@ -6,6 +6,9 @@ class Clock extends Component {
         this.state = {
             date: new Date()
         }
+    }
+
+    componentDidMount() {
         setInterval(() => this.setState({ date: new Date() }), 1000);
     }
 

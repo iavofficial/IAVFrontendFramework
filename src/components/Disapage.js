@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes, { shape } from 'prop-types';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import './disaPage.css'
 import DisaHeader from './disaHeader.js';
 import DisaTab from './disaTab.js';
 import Navbar from './navbar.js';
+import Content from './content.js';
 
 const DisaPage = (props) => {
     return (
@@ -13,11 +14,9 @@ const DisaPage = (props) => {
                 <DisaHeader />
                 <div className="p-d-flex" style={{ height: "100%", margin: "0" }}>
                     <Navbar>
-                        {props.tabs.map((tab) => <DisaTab selectedIcon={tab.selectedIcon} deselectedIcon={tab.deselectedIcon} to={tab.to} name={tab.name} disabled={tab.disabled} />)}
+                        {props.navbarTabs.map((tab) => <DisaTab selectedIcon={tab.selectedIcon} deselectedIcon={tab.deselectedIcon} to={tab.to} name={tab.name} disabled={tab.disabled} />)}
                     </Navbar>
-                    <div style={{ width: "100%" }}>
-                        {props.tabs.map((tab) => <Route path={tab.to} exact component={tab.component} />)}
-                    </div>
+                    <Content navbarTabs={props.navbarTabs} contentTabs={props.contentTabs} />
                 </div>
             </div>
         </Router>
@@ -25,15 +24,21 @@ const DisaPage = (props) => {
 };
 
 DisaPage.propTypes = {
-    tabs: PropTypes.arrayOf(
+    navbarTabs: PropTypes.arrayOf(
         shape({
             name: PropTypes.string.isRequired,
             to: PropTypes.string.isRequired,
-            active: PropTypes.bool.isRequired,
             disabled: PropTypes.bool.isRequired,
             selectedIcon: PropTypes.string.isRequired,
             deselectedIcon: PropTypes.string.isRequired
         }).isRequired
+    ),
+    contentTabs: PropTypes.arrayOf(
+        shape({
+            uiElement: PropTypes.element,
+            refreshOnClick: PropTypes.bool,
+            data: PropTypes.func
+        })
     )
 };
 

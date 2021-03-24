@@ -14,9 +14,9 @@ const DisaPage = (props) => {
                 <DisaHeader />
                 <div className="p-d-flex" style={{ height: "100%", margin: "0" }}>
                     <Navbar>
-                        {props.navbarTabs.map((tab) => <DisaTab selectedIcon={tab.selectedIcon} deselectedIcon={tab.deselectedIcon} to={tab.to} name={tab.name} disabled={tab.disabled} />)}
+                        {props.views.map((tab) => <DisaTab selectedIcon={tab.selectedIcon} deselectedIcon={tab.deselectedIcon} to={tab.to} name={tab.name} disabled={tab.disabled} />)}
                     </Navbar>
-                    <Content navbarTabs={props.navbarTabs} contentTabs={props.contentTabs} />
+                    <Content views={props.views} />
                 </div>
             </div>
         </Router>
@@ -24,7 +24,7 @@ const DisaPage = (props) => {
 };
 
 DisaPage.propTypes = {
-    navbarTabs: PropTypes.arrayOf(
+    views: PropTypes.arrayOf(
         shape({
             name: PropTypes.string.isRequired,
             to: PropTypes.string.isRequired,
@@ -32,13 +32,6 @@ DisaPage.propTypes = {
             selectedIcon: PropTypes.string.isRequired,
             deselectedIcon: PropTypes.string.isRequired
         }).isRequired
-    ),
-    contentTabs: PropTypes.arrayOf(
-        shape({
-            uiElement: PropTypes.element,
-            refreshOnClick: PropTypes.bool,
-            data: PropTypes.func
-        })
     )
 };
 

@@ -27,14 +27,15 @@ class App extends Component {
         }
       ]
     };
-    this.navbarTabs = [
+    this.views = [
       {
         selectedIcon: navFleetSelected,
         deselectedIcon: navFleetDeselected,
         to: "/",
         name: "Root",
         disabled: false,
-        component: (props) => <div>This is the root. Example data: {props.test1}</div>
+        component: (props) => <div>This is the root. Example data: {props.test1}</div>,
+        contentTabs: this.state.contentTabs
       },
       {
         selectedIcon: navFleetSelected,
@@ -48,7 +49,8 @@ class App extends Component {
               <button onClick={this.testCallback}>Test for callback</button>
             </div>
           </BaseContent>
-        )
+        ),
+        contentTabs: this.state.contentTabs
       },
       {
         selectedIcon: navFleetDetailSelected,
@@ -56,7 +58,8 @@ class App extends Component {
         to: "/test2",
         name: "Test2",
         disabled: true,
-        component: () => "This is the second test"
+        component: () => "This is the second test",
+        contentTabs: this.state.contentTabs
       }
     ]
   }
@@ -72,7 +75,7 @@ class App extends Component {
 
   render() {
     return (
-      <DisaPage navbarTabs={this.navbarTabs} contentTabs={this.state.contentTabs} />
+      <DisaPage views={this.views} />
     );
   }
 }

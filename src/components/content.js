@@ -14,10 +14,10 @@ class Content extends Component {
         return (
             <div className="p-d-flex p-flex-column" style={{ width: "100%" }}>
                 <div className="p-d-flex" style={{ height: DISATABHEIGHT }}>
-                    {this.props.contentTabs.map((tab) => tab.refreshOnClick ? React.cloneElement(tab.uiElement, { onClick: () => this.setState(tab.data()) }) : tab.uiElement)}
+                    {this.props.views.map((view) => <Route path={view.to} exact component={() => view.contentTabs.map((tab) => tab.refreshOnClick ? React.cloneElement(tab.uiElement, { onClick: () => this.setState(tab.data()) }) : tab.uiElement)} />)}
                 </div>
                 <div style={{ height: "100%" }}>
-                    {this.props.navbarTabs.map((tab) => <Route path={tab.to} exact component={() => tab.component(this.state)} />)}
+                    {this.props.views.map((tab) => <Route path={tab.to} exact component={() => tab.component(this.state)} />)}
                 </div>
             </div>
         );
@@ -25,7 +25,7 @@ class Content extends Component {
 }
 
 Content.propTypes = {
-    navbarTabs: PropTypes.arrayOf(
+    views: PropTypes.arrayOf(
         shape({
             name: PropTypes.string.isRequired,
             to: PropTypes.string.isRequired,
@@ -33,13 +33,6 @@ Content.propTypes = {
             selectedIcon: PropTypes.string.isRequired,
             deselectedIcon: PropTypes.string.isRequired
         }).isRequired
-    ),
-    contentTabs: PropTypes.arrayOf(
-        shape({
-            uiElement: PropTypes.element,
-            refreshOnClick: PropTypes.bool,
-            data: PropTypes.func
-        })
     )
 }
 

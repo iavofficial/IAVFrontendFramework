@@ -14,7 +14,7 @@ const Navbar = (props) => {
                 <span style={{ fontWeight: "bold", color: "white", marginLeft: "10px" }}>PLACEHOLDER</span>
                 <img src={LogoutPic} style={{ marginLeft: "auto", marginRight: "20px", cursor: "pointer" }} alt="" />
             </div>
-            {React.Children.map(props.children, (child) =>
+            {React.Children.map(props.children, child =>
                 React.cloneElement(child, { active: location.pathname === child.props.to })
             )}
             <div style={{ marginTop: "auto" }}>

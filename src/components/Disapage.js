@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes, { shape } from 'prop-types';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './disaPage.css'
 import DisaHeader from './disaHeader.js';
 import DisaTab from './navbarTab.js';
 import Navbar from './navbar.js';
-import Content from './content.js';
+import Content from './content.js'
 
 const DisaPage = (props) => {
     return (
@@ -14,9 +14,9 @@ const DisaPage = (props) => {
                 <DisaHeader />
                 <div className="p-d-flex" style={{ height: "100%", margin: "0" }}>
                     <Navbar>
-                        {props.views.map((tab) => <DisaTab selectedIcon={tab.selectedIcon} deselectedIcon={tab.deselectedIcon} to={tab.to} name={tab.name} disabled={tab.disabled} />)}
+                        {props.views.map(view => <DisaTab selectedIcon={view.selectedIcon} deselectedIcon={view.deselectedIcon} to={view.to} name={view.name} disabled={view.disabled} />)}
                     </Navbar>
-                    <Content views={props.views} />
+                    {props.views.map(view => <Route exact path={view.to} component={() => <Content component={view.component} contentTabs={view.contentTabs} />}/>)}
                 </div>
             </div>
         </Router>
@@ -30,7 +30,8 @@ DisaPage.propTypes = {
             to: PropTypes.string.isRequired,
             disabled: PropTypes.bool.isRequired,
             selectedIcon: PropTypes.string.isRequired,
-            deselectedIcon: PropTypes.string.isRequired
+            deselectedIcon: PropTypes.string.isRequired,
+            content: PropTypes.element.isRequired
         }).isRequired
     )
 };

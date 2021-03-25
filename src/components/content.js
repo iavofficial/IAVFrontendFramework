@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
 import PropTypes, { shape } from 'prop-types';
 import { DISATABHEIGHT } from './constants.js';
 
@@ -14,10 +13,10 @@ class Content extends Component {
         return (
             <div className="p-d-flex p-flex-column" style={{ width: "100%" }}>
                 <div className="p-d-flex" style={{ height: DISATABHEIGHT }}>
-                    {this.props.views.map((view) => <Route path={view.to} exact component={() => view.contentTabs.map((tab) => tab.refreshOnClick ? React.cloneElement(tab.uiElement, { onClick: () => this.setState(tab.data()) }) : tab.uiElement)} />)}
+                    {this.props.contentTabs.map(tab => tab.refreshOnClick ? React.cloneElement(tab.uiElement, { onClick: () => this.setState(tab.data()) }) : tab.uiElement)}
                 </div>
                 <div style={{ height: "100%" }}>
-                    {this.props.views.map((tab) => <Route path={tab.to} exact component={() => tab.component(this.state)} />)}
+                    {this.props.component(this.state)}
                 </div>
             </div>
         );
@@ -25,15 +24,14 @@ class Content extends Component {
 }
 
 Content.propTypes = {
-    views: PropTypes.arrayOf(
+    contentTabs: PropTypes.arrayOf(
         shape({
-            name: PropTypes.string.isRequired,
-            to: PropTypes.string.isRequired,
-            disabled: PropTypes.bool.isRequired,
-            selectedIcon: PropTypes.string.isRequired,
-            deselectedIcon: PropTypes.string.isRequired
+            uiElement: PropTypes.element.isRequired,
+            refreshOnClick: PropTypes.bool.isRequired,
+            data: PropTypes.func.isRequired
         }).isRequired
-    )
+    ),
+    component: PropTypes.element.isRequired
 }
 
 export default Content;

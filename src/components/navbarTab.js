@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
 import Radium from 'radium';
-import { BLUE3, GRAY2, DISATABHEIGHT } from './constants.js';
 import { Link } from 'react-router-dom';
 
-const DisaTab = (props) => {
+import { BLUE3, GRAY2, DISATABHEIGHT } from './constants.js';
+
+const NavbarTab = (props) => {
     const tabStyle = {
         height: DISATABHEIGHT,
         cursor: props.active || props.disabled ? "default" : "pointer",
@@ -30,7 +31,7 @@ const DisaTab = (props) => {
     );
 }
 
-DisaTab.propTypes = {
+NavbarTab.propTypes = {
     name: PropTypes.string.isRequired,
     to: PropTypes.string.isRequired,
     active: PropTypes.bool.isRequired,
@@ -39,4 +40,4 @@ DisaTab.propTypes = {
     deselectedIcon: PropTypes.string.isRequired
 }
 
-export default Radium(DisaTab);
+export default Radium(NavbarTab);

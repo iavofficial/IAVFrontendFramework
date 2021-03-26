@@ -42,5 +42,8 @@
   "exports": {
     ".": "./src/components/disaPage.js",
     "./content": "./src/components/content.js"
-  }
+  },
+  "keywords": [
+	"disa-framework"
+  ]
 }

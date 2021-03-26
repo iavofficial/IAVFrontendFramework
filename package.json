@@ -38,5 +38,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "exports": {
+    ".": "./src/components/disaPage.js",
+    "./content": "./src/components/content.js"
   }
 }

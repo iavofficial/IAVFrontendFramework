@@ -21,3 +21,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# files only for development
+/src/develop
+/src/App.js
+/src/App.css
+/src/index.css
+/src/index.js

@@ -51,7 +51,12 @@
     ".": "./src/components/disaPage.js",
     "./content": "./src/components/content.js"
   },
+  "babel": {
+    "presets": [
+      "@babel/preset-react"
+    ]
+  },
   "keywords": [
-	"disa-framework"
+    "disa-framework"
   ]
 }

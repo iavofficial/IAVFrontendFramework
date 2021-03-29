@@ -46,7 +46,6 @@
       "last 1 safari version"
     ]
   },
-  "main": "./src/components/disapage.js",
   "exports": {
     ".": "./src/components/disaPage.js",
     "./content": "./src/components/content.js"

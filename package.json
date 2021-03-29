@@ -2,6 +2,13 @@
   "name": "@td-d/disa-framework",
   "version": "0.0.1",
   "private": false,
+  "description": "This framework takes care of a DISA application's basic structure.",
+  "contributors": [
+    {
+      "name": "Joerg Jonas Krahn",
+      "email": "joerg.jonas.krahn@iav.de"
+    }
+  ],
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
@@ -39,6 +46,7 @@
       "last 1 safari version"
     ]
   },
+  "main": "./src/components/disapage.js",
   "exports": {
     ".": "./src/components/disaPage.js",
     "./content": "./src/components/content.js"

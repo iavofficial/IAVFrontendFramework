@@ -46,17 +46,17 @@
       "last 1 safari version"
     ]
   },
-  "main": "./src/components/disaPage.js",
+  "main": "./lib/components/disaPage.js",
   "exports": {
-    ".": "./src/components/disaPage.js",
-    "./content": "./src/components/content.js"
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-react"
-    ]
+    ".": "./lib/components/disaPage.js",
+    "./content": "./lib/components/content.js"
   },
   "keywords": [
     "disa-framework"
-  ]
+  ],
+  "devDependencies": {
+    "@babel/cli": "^7.13.14",
+    "@babel/core": "^7.12.3",
+    "@babel/preset-react": "^7.13.13"
+  }
 }

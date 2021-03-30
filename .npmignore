@@ -4,8 +4,4 @@
 # files only for development
 /node_modules
 /public
-/src/develop
-/src/App.css
-/src/App.js
-/src/index.css
-/src/index.js
+/src

@@ -12,7 +12,7 @@ class Content extends Component {
     render() {
         return (
             <div className="p-d-flex p-flex-column" style={{ width: "100%" }}>
-                <Contentbar contentTabs={this.props.contentTabs} />
+                <Contentbar contentElements={this.props.contentElements} />
                 <div style={{ height: "100%" }}>
                     <Contentborder>
                         {this.props.children}
@@ -24,7 +24,7 @@ class Content extends Component {
 }
 
 Content.propTypes = {
-    contentTabs: PropTypes.arrayOf(PropTypes.element).isRequired,
+    contentElements: PropTypes.arrayOf(PropTypes.element).isRequired,
 }
 
 export default Content;

@@ -5,12 +5,12 @@ import { DISATABHEIGHT } from './constants.js';
 
 const Contentbar = (props) => (
     <div className="p-d-flex" style={{ height: DISATABHEIGHT }}>
-        {props.contentTabs}
+        {props.contentElements}
     </div>
 );
 
 Contentbar.propTypes = {
-    contentTabs: PropTypes.arrayOf(PropTypes.element).isRequired,
+    contentElements: PropTypes.arrayOf(PropTypes.element).isRequired,
 }
 
 export default Contentbar;

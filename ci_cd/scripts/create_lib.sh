@@ -1,3 +1,4 @@
+npm config set registry http://registry.npmjs.org/;
 npm install;
 rm -R ./lib;
 mkdir -p ./lib/assets && cp -R ./src/assets ./lib/assets;

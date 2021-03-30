@@ -1,1 +1,1 @@
-export * from "./components/disaPage.js";
+export { default as DisaPage } from "./components/disaPage.js";

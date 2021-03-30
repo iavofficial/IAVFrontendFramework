@@ -44,6 +44,7 @@
       "last 1 safari version"
     ]
   },
+  "main": "./lib/disaPage.js",
   "exports": {
     ".": "./lib/components/disaPage.js",
     "./content": "./lib/components/content.js"

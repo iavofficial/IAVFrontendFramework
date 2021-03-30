@@ -8,7 +8,7 @@ class Test3Component extends Component {
 
     render() {
         return (
-            <Content contentTabs={this.context.contentTabs}>
+            <Content contentElements={this.context.contentTabs}>
                 <div>"This is the third test."</div>
             </Content>
         );

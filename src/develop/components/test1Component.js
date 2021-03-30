@@ -9,7 +9,7 @@ class Test1Component extends Component {
 
     render() {
         return (
-            <Content contentTabs={this.context.contentTabs}>
+            <Content contentElements={this.context.contentTabs}>
                 <div>Test</div>
             </Content>
         );

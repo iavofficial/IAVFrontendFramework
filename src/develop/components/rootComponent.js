@@ -16,7 +16,7 @@ class RootComponent extends Component {
 
     render() {
         return (
-            <Content contentTabs={[...this.context.contentTabs, ...this.state.contentTabs]}>
+            <Content contentElements={[...this.context.contentTabs, ...this.state.contentTabs]}>
                 <div>This is the root. Example data: {this.context.test1}</div>
                 <button onClick={function () { this.context.updateTest1("changed") }.bind(this)}>Click here to test the context</button>
                 <div>This is the root. Example data: {this.state.localState}</div>

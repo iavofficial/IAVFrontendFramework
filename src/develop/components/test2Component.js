@@ -9,7 +9,7 @@ class Test2Component extends Component {
 
     render() {
         return (
-            <Content contentTabs={this.context.contentTabs}>
+            <Content contentElements={this.context.contentTabs}>
                 <div>
                     This is the second test.<br />
                     {this.context.test1}

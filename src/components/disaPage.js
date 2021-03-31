@@ -7,6 +7,7 @@ import PropTypes, { shape } from 'prop-types';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import './css/disaPage.css';
+import Login from './login.js';
 import DisaHeader from './disaHeader.js';
 import NavbarTab from './navbarTab.js';
 import Navbar from './navbar.js';
@@ -15,7 +16,7 @@ import CookieBanner from './cookieBanner.js';
 
 const DisaPage = (props) => {
     return (
-        <>
+        <Login>
             <Router>
                 <div className={"p-d-flex p-flex-column"} style={{ height: "100%", bottom: "0" }}>
                     <DisaHeader />
@@ -29,7 +30,7 @@ const DisaPage = (props) => {
                 </div>
             </Router>
             <CookieBanner />
-        </>
+        </Login>
     );
 };
 

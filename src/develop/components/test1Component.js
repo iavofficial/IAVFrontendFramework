@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { SecondContext } from '../contexts/SecondContext';
-import Content from '../../components/content.js';
+import Content from '../../components/content/content.js';
 
 class Test1Component extends Component {
     constructor(props) {

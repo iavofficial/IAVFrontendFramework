@@ -8,8 +8,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import './css/disaPage.css';
 import DisaHeader from './disaHeader.js';
-import NavbarTab from './navbarTab.js';
-import Navbar from './navbar.js';
+import NavbarTab from './navbar/navbarTab.js';
+import Navbar from './navbar/navbar.js';
 import Imprint from './imprint.js';
 import CookieBanner from './cookieBanner.js';
 

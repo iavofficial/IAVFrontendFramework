@@ -1,5 +1,5 @@
 import React from 'react';
-import { GRAY1 } from './constants.js'
+import { GRAY1 } from '../constants.js'
 
 const ContentBorder = (props) => (
     <div className="p-d-flex p-flex-column" style={{ height: "100%" }}>

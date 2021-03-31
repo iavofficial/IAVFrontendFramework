@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import Content from '../../components/content.js';
+import Content from '../../components/content/content.js';
 
 class Test3Component extends Component {
     constructor(props) {

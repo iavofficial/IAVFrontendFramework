@@ -7,3 +7,5 @@ export const BLUE4 = "#14639e";
 
 export const GRAY1 = "#f0f0f0";
 export const GRAY2 = "#cdcdcd";
+
+export const DARK_RED = "#C00000";

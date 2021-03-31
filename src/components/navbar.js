@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import UserPic from '../assets/user.png';
 import LogoutPic from '../assets/logout_icon.png';
@@ -19,6 +19,9 @@ const Navbar = (props) => {
                 React.cloneElement(child, { active: location.pathname === child.props.to })
             )}
             <div style={{ marginTop: "auto" }}>
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                    <Link style={{ fontWeight: "bolder", textDecoration: "none", color: "black" }} to="/imprint">Imprint</Link>
+                </div>
                 <Clock />
             </div>
         </div>

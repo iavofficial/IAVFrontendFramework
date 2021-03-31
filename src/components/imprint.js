@@ -1,3 +1,5 @@
+import React from 'react';
+
 const Imprint = () => (
     <div className="p-as-center p-m-auto p-text-center">
         <h5>Impressum</h5>

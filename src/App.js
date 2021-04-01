@@ -26,7 +26,7 @@ class App extends Component {
         to: "/",
         name: "Root",
         disabled: false,
-        component: (props) => <RootComponent />,
+        component: RootComponent,
       },
       {
         selectedIcon: navFleetSelected,
@@ -34,7 +34,7 @@ class App extends Component {
         to: "/test1",
         name: "Test1",
         disabled: false,
-        component: (props) => <Test1Component />,
+        component: Test1Component,
       },
       {
         selectedIcon: navFleetSelected,
@@ -42,7 +42,7 @@ class App extends Component {
         to: "/test2",
         name: "Test2",
         disabled: false,
-        component: (props) => <Test2Component />,
+        component: Test2Component,
       },
       {
         selectedIcon: navFleetDetailSelected,
@@ -50,7 +50,7 @@ class App extends Component {
         to: "/test3",
         name: "Test3",
         disabled: true,
-        component: (props) => <Test3Component />,
+        component: Test3Component,
       }
     ]
     return (

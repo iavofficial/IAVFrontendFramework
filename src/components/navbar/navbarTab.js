@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Radium from 'radium';
 import { Link } from 'react-router-dom';
 
-import { BLUE3, GRAY2, DISATABHEIGHT } from './constants.js';
+import { BLUE3, GRAY2, DISATABHEIGHT } from '../constants.js';
 
 const NavbarTab = (props) => {
     const tabStyle = {

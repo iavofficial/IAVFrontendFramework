@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-import UserPic from '../assets/user.png';
-import LogoutPic from '../assets/logout_icon.png';
-import Clock from './clock.js';
-import { BLUE4, DISATABHEIGHT } from './constants.js';
+import UserPic from '../../assets/user.png';
+import LogoutPic from '../../assets/logout_icon.png';
+import Clock from '../clock.js';
+import { BLUE4, DISATABHEIGHT } from '../constants.js';
 
 const Navbar = (props) => {
     let location = useLocation();

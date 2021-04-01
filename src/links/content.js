@@ -1,1 +1,1 @@
-export { default as Content } from "./lib/components/content.js";
+export { default as Content } from "./lib/components/content/content.js";

@@ -13,25 +13,24 @@ import Navbar from './navbar/navbar.js';
 import Imprint from './imprint.js';
 import CookieBanner from './cookieBanner.js';
 
-const DisaPage = (props) => {
-    return (
-        <>
-            <Router>
-                <div className={"p-d-flex p-flex-column"} style={{ height: "100%", bottom: "0" }}>
-                    <DisaHeader />
-                    <div className="p-d-flex" style={{ height: "100%", margin: "0" }}>
-                        <Navbar>
-                            {props.views.map(view => <NavbarTab selectedIcon={view.selectedIcon} deselectedIcon={view.deselectedIcon} to={view.to} name={view.name} disabled={view.disabled} />)}
-                        </Navbar>
-                        {props.views.map(view => <Route exact path={view.to} component={view.component} />)}
-                        <Route exact path={"/imprint"} component={Imprint} />
-                    </div>
+const DisaPage = (props) => (
+    <>
+        <Router>
+            <div className={"p-d-flex p-flex-column"} style={{ height: "100%", bottom: "0" }}>
+                <DisaHeader />
+                <div className="p-d-flex" style={{ height: "100%", margin: "0" }}>
+                    <Navbar>
+                        {props.views.map(view => <NavbarTab selectedIcon={view.selectedIcon} deselectedIcon={view.deselectedIcon} to={view.to} name={view.name} disabled={view.disabled} />)}
+                    </Navbar>
+                    {console.log(props.views[0].component)}
+                    {props.views.map(view => <Route exact path={view.to} component={view.component} />)}
+                    <Route exact path={"/imprint"} component={Imprint} />
                 </div>
-            </Router>
-            <CookieBanner />
-        </>
-    );
-};
+            </div>
+        </Router>
+        <CookieBanner />
+    </>
+)
 
 DisaPage.propTypes = {
     views: PropTypes.arrayOf(

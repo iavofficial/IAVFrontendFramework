@@ -3,6 +3,7 @@ import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 
 import { DARK_RED } from './constants';
+import { acceptedCookiesName } from './cookieHandler.js';
 
 class CookieBanner extends Component {
     constructor(props) {
@@ -18,6 +19,9 @@ class CookieBanner extends Component {
     }
 
     acceptCookies() {
+        let exprireDate = new Date();
+        exprireDate.setMonth(exprireDate.getMonth() + 1);
+        document.cookie = acceptedCookiesName + "=true; expires=" + exprireDate.toUTCString();
         this.setState({ visible: false });
     }
 

@@ -7,7 +7,7 @@ import PropTypes, { shape } from 'prop-types';
 import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
 
 import './css/disaPage.css';
-import Login from './login/login.js';
+import BasicLoginView from './login/basicLoginView.js';
 import DisaHeader from './disaHeader.js';
 import NavbarTab from './navbar/navbarTab.js';
 import Navbar from './navbar/navbar.js';
@@ -41,7 +41,7 @@ const DisaPage = (props) => {
         return (
             <>
                 <Router>
-                    <Route exact path="/login" component={Login} />
+                    <Route exact path="/login" component={props.loginView !== undefined && props.loginView !== null ? props.loginView : BasicLoginView} />
                     <Route exact path="/imprint" component={Imprint} />
                     <Redirect exact from="/" to="/login" />
                 </Router>

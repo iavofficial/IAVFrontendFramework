@@ -3,10 +3,9 @@ import { Link } from 'react-router-dom';
 import { BLUE1, BLUE3 } from '../constants.js';
 import AppLogo from '../../assets/app_logo.png';
 import Bus from "../../assets/bus.png"
-import './login.css';
 import { Button } from 'primereact/button';
 
-const StandardLoginView = () => (
+const BasicLoginView = () => (
     <div className="p-d-flex" style={{ height: "100%" }}>
         <div className="p-d-flex p-flex-column p-shadow-10" style={{ width: "750px", margin: "auto" }}>
             <div className={"p-d-flex"} style={{ backgroundColor: BLUE1, color: "white", alignItems: "center" }}>
@@ -31,4 +30,4 @@ const StandardLoginView = () => (
     </div>
 );
 
-export default StandardLoginView;
+export default BasicLoginView;

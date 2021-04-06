@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import { BLUE1, BLUE3 } from '../constants.js';
 import AppLogo from '../../assets/app_logo.png';
 import Bus from "../../assets/bus.png"
@@ -14,9 +16,17 @@ const StandardLoginView = () => (
             <div className="p-d-flex">
                 <img src={Bus} style={{ width: "55%", height: "90%" }} alt=""></img>
                 <form style={{ width: "45%", height: "100%" }} className="p-mr-4 p-mt-4" onSubmit={() => console.log("")}>
-                    <Button label="Login" style={{ border: "none", backgroundColor: BLUE3}} />
+                    <div className={"p-d-flex p-flex-column"}>
+                        <input name="email" type="email" className={"p-inputtext"} placeholder="Email address" required autoFocus style={{ marginBottom: "1rem" }} />
+                        <input name="password" type="password" className={"p-inputtext"} placeholder="Password" required style={{ marginBottom: "1rem" }} />
+                        <div>
+                            <Button label="Login" style={{ width: "150px", float: "right", border: "none", backgroundColor: BLUE3 }} />
+                        </div>
+                    </div>
                 </form>
             </div>
+            <Link style={{ alignSelf: "center", fontWeight: "bolder", textDecoration: "none", color: "black" }} to="/imprint">Imprint</Link>
+            <span style={{ alignSelf: "center" }}>&copy; IAV GmbH 2020</span>
         </div>
     </div>
 );

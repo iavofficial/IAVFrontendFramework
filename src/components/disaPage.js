@@ -19,6 +19,7 @@ import Auth from '../contexts/auth.js';
 
 const DisaPage = (props) => {
     const LoginProvider = props.loginProvider !== undefined && props.loginProvider !== null ? props.loginProvider : DummyLoginProvider;
+    const LoginView = props.loginView !== undefined && props.loginView !== null ? props.loginView : BasicLoginView;
     return (
         <LoginProvider>
             { !acceptedCookies() && <CookieBanner />}
@@ -35,7 +36,7 @@ const DisaPage = (props) => {
                                         </Navbar>
                                         {props.views.map(view => <Route exact path={view.to} component={view.component} />)}
                                         <Route exact path="/imprint" component={Imprint} />
-                                        <Redirect exact from="login" to="/" />
+                                        <Redirect exact from="login" to={props.startingPoint} />
                                     </div>
                                 </div>
                             </Router>
@@ -43,7 +44,7 @@ const DisaPage = (props) => {
                     } else {
                         return (
                             <Router>
-                                <Route exact path="/login" component={props.loginView !== undefined && props.loginView !== null ? props.loginView : BasicLoginView} />
+                                <Route exact path="/login" component={LoginView} />
                                 <Route exact path="/imprint" component={Imprint} />
                                 <Redirect exact from="/" to="/login" />
                             </Router >
@@ -66,6 +67,7 @@ DisaPage.propTypes = {
             component: PropTypes.elementType.isRequired
         }).isRequired
     ),
+    startingPoint: PropTypes.string.isRequired,
     loginView: PropTypes.elementType,
     loginProvider: PropTypes.object
 };

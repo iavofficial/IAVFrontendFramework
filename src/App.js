@@ -12,6 +12,7 @@ import navFleetDetailDeselected from './develop/assets/nav_fleet_detail_deselect
 import DisaPage from './components/disaPage.js';
 import FirstContextClass from './develop/contexts/FirstContext.js';
 import SecondContextClass from './develop/contexts/SecondContext.js';
+import AWSLoginProvider from './components/login/awsLoginProvider.js'
 
 class App extends Component {
   constructor(props) {
@@ -56,7 +57,7 @@ class App extends Component {
     return (
       <FirstContextClass>
         <SecondContextClass>
-          <DisaPage views={views} />
+          <DisaPage views={views} startingPoint="/" loginProvider={AWSLoginProvider} />
         </SecondContextClass>
       </FirstContextClass>
     );

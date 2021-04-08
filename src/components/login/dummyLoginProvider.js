@@ -6,7 +6,7 @@ class DummyLoginProvider extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            authenticated: false
+            isAuthenticated: false
         }
         this.isAuthenticated = this.isAuthenticated.bind(this);
         this.login = this.login.bind(this);
@@ -14,19 +14,18 @@ class DummyLoginProvider extends Component {
     }
 
     isAuthenticated() {
-        console.log(this.state.authenticated);
-        return this.state.authenticated;
+        return this.state.isAuthenticated;
     }
 
     login() {
         this.setState({
-            authenticated: true
+            isAuthenticated: true
         });
     }
 
     logout() {
         this.setState({
-            authenticated: false
+            isAuthenticated: false
         });
     }
 

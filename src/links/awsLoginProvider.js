@@ -1,0 +1,1 @@
+export { default as AWSLoginProvider } from "./lib/components/login/awsLoginProvider.js";

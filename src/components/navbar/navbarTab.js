@@ -3,17 +3,17 @@ import PropTypes from 'prop-types';
 import Radium from 'radium';
 import { Link } from 'react-router-dom';
 
-import { BLUE3, GRAY2, DISATABHEIGHT } from '../constants.js';
+import { BLUE1, GRAY2, DISATABHEIGHT } from '../constants.js';
 
 const NavbarTab = (props) => {
     const tabStyle = {
         height: DISATABHEIGHT,
         cursor: props.active || props.disabled ? "default" : "pointer",
-        backgroundColor: props.active && !props.disabled ? BLUE3 : "white",
+        backgroundColor: props.active && !props.disabled ? BLUE1 : "white",
         color: props.active && !props.disabled ? "white" : "black",
         opacity: props.disabled ? 0.5 : 1,
         ':hover': {
-            backgroundColor: props.disabled ? "white" : BLUE3
+            backgroundColor: props.disabled ? "white" : BLUE1
         }
     }
     const tab = (

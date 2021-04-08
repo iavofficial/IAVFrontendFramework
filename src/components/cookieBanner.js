@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 
-import { DARK_RED } from './constants';
+import { RED, BLUE1, GRAY3 } from './constants';
 import { acceptedCookiesName } from './cookieHandler.js';
 
 class CookieBanner extends Component {
@@ -20,13 +20,13 @@ class CookieBanner extends Component {
 
     acceptCookies() {
         let exprireDate = new Date();
-        exprireDate.setMonth(exprireDate.getMonth() + 1);
+        exprireDate.setUTCFullYear(exprireDate.getUTCFullYear() + 1);
         document.cookie = acceptedCookiesName + "=true; expires=" + exprireDate.toUTCString();
         this.setState({ visible: false });
     }
 
     rejectCookies() {
-        this.setState({ visible: true, icon: "pi pi-times-circle", iconColor: DARK_RED, message: "You have to accept cookies. Otherwise you can't use this website." });
+        this.setState({ visible: true, icon: "pi pi-times-circle", iconColor: RED, message: "You have to accept cookies. Otherwise you can't use this website." });
     }
 
     render() {
@@ -34,8 +34,9 @@ class CookieBanner extends Component {
             <Dialog header="This website uses cookies." position={"bottom"} visible={this.state.visible} modal dismissableMask={false} closable={false}
                 footer={
                     <div style={{ display: "flex", justifyContent: "flex-end" }}>
-                        <Button icon="pi pi-times" className="p-button-secondary" label="Reject cookies" onClick={this.rejectCookies} />
-                        <Button icon="pi pi-check" label="Allow cookies" onClick={this.acceptCookies} />
+                        <Button icon="pi pi-times" className="p-button-secondary" label="Reject cookies" onClick={this.rejectCookies}
+                            style={{ backgroundColor: GRAY3, border: "none" }} />
+                        <Button icon="pi pi-check" label="Allow cookies" onClick={this.acceptCookies} style={{ backgroundColor: BLUE1, border: "none" }} />
                     </div>
                 }>
                 <div style={{ display: "flex", alignItems: "center" }}>

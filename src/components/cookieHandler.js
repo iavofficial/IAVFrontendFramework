@@ -6,3 +6,7 @@ export function getCookie(name) {
     let requestedCookie = cookies.find(cookie => cookie.startsWith(name + "="));
     return requestedCookie !== undefined ? requestedCookie.substring(name.length + 1, requestedCookie.length) : "";
 }
+
+export function acceptedCookies() {
+    return getCookie(acceptedCookiesName) === "true";
+}

@@ -1,10 +1,10 @@
-import { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from 'primereact/button';
+import { Component } from "react";
+import { Link } from "react-router-dom";
+import { Button } from "primereact/button";
 
-import { BLUE1, BLUE4 } from '../constants.js';
-import AppLogo from '../../assets/app_logo.png';
-import Auth from '../../contexts/auth.js';
+import { BLUE1, BLUE4 } from "../constants";
+import AppLogo from "../../assets/app_logo.png";
+import Auth from "../../contexts/auth";
 
 class BasicLoginView extends Component {
     constructor(props) {

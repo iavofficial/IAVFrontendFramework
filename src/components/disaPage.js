@@ -1,21 +1,21 @@
-import 'primeflex/primeflex.css';
-import 'primereact/resources/themes/nova/theme.css';
-import 'primereact/resources/primereact.css';
+import "primeflex/primeflex.css";
+import "primereact/resources/themes/nova/theme.css";
+import "primereact/resources/primereact.css";
 import "primeicons/primeicons.css";
-import React from 'react';
-import PropTypes, { shape } from 'prop-types';
-import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
+import React from "react";
+import PropTypes, { shape } from "prop-types";
+import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 
-import './css/disaPage.css';
-import BasicLoginView from './login/basicLoginView.js';
-import DisaHeader from './disaHeader.js';
-import NavbarTab from './navbar/navbarTab.js';
-import Navbar from './navbar/navbar.js';
-import Imprint from './imprint.js';
-import CookieBanner from './cookieBanner.js';
-import { acceptedCookies } from './cookieHandler.js';
-import DummyLoginProvider from './login/dummyLoginProvider.js';
-import Auth from '../contexts/auth.js';
+import "./css/disaPage.css";
+import BasicLoginView from "./login/basicLoginView.js";
+import DisaHeader from "./disaHeader.js";
+import NavbarTab from "./navbar/navbarTab.js";
+import Navbar from "./navbar/navbar.js";
+import Imprint from "./imprint.js";
+import CookieBanner from "./cookieBanner.js";
+import { acceptedCookies } from "./cookieHandler.js";
+import DummyLoginProvider from "./login/dummyLoginProvider.js";
+import Auth from "../contexts/auth.js";
 
 const DisaPage = (props) => {
     const LoginProvider = props.loginProvider !== undefined && props.loginProvider !== null ? props.loginProvider : DummyLoginProvider;

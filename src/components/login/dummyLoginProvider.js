@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import Auth from '../../contexts/auth.js';
+import Auth from "../../contexts/auth";
 
 class DummyLoginProvider extends Component {
     constructor(props) {

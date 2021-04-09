@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 import Auth from "../../contexts/auth";
 import { cognitoLogin, cognitoLogout, cognitoCheckIsAuthenticated, cognitoCompletePassword, cognitoRefreshAccessToken } from "../../services/cognitoService";

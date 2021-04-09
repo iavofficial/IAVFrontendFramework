@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useContext } from "react";
+import { Link, useLocation } from "react-router-dom";
 
-import UserPic from '../../assets/user.png';
-import LogoutPic from '../../assets/logout_icon.png';
-import Clock from '../clock.js';
-import { BLUE3, DISATABHEIGHT } from '../constants.js';
-import Auth from '../../contexts/auth.js';
+import UserPic from "../../assets/user.png";
+import LogoutPic from "../../assets/logout_icon.png";
+import Clock from "../clock";
+import { BLUE3, DISATABHEIGHT } from "../constants";
+import Auth from "../../contexts/auth";
 
 const Navbar = (props) => {
     let location = useLocation();

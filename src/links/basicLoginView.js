@@ -1,1 +1,1 @@
-export { default as BasicLoginView } from "./lib/components/login/basicLoginView.js";
+export { default as BasicLoginView } from "./lib/components/login/basicLoginView";

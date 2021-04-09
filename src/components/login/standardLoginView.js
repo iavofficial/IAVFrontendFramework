@@ -1,10 +1,9 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-import { BLUE1, BLUE3 } from '../constants.js';
-import AppLogo from '../../assets/app_logo.png';
+import { BLUE1, BLUE3 } from "../constants";
+import AppLogo from "../../assets/app_logo.png";
 import Bus from "../../assets/bus.png"
-import './login.css';
-import { Button } from 'primereact/button';
+import { Button } from "primereact/button";
 
 const StandardLoginView = () => (
     <div className="p-d-flex" style={{ height: "100%" }}>

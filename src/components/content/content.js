@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
-import Contentbar from './contentbar.js';
-import Contentborder from './contentBorder.js';
+import Contentbar from "./contentbar";
+import Contentborder from "./contentBorder";
 
 class Content extends Component {
     constructor(props) {

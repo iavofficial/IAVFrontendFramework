@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import { DISATABHEIGHT } from '../constants.js';
+import { DISATABHEIGHT } from "../constants";
 
 const Contentbar = (props) => (
     <div className="p-d-flex" style={{ height: DISATABHEIGHT }}>

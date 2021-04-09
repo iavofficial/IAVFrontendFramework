@@ -1,19 +1,19 @@
-import 'primeflex/primeflex.css';
-import 'primereact/resources/themes/nova/theme.css';
-import 'primereact/resources/primereact.css';
+import "primeflex/primeflex.css";
+import "primereact/resources/themes/nova/theme.css";
+import "primereact/resources/primereact.css";
 import "primeicons/primeicons.css";
-import React from 'react';
-import PropTypes, { shape } from 'prop-types';
-import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
+import React from "react";
+import PropTypes, { shape } from "prop-types";
+import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 
-import './css/disaPage.css';
-import Login from './login/login.js';
-import DisaHeader from './disaHeader.js';
-import NavbarTab from './navbar/navbarTab.js';
-import Navbar from './navbar/navbar.js';
-import Imprint from './imprint.js';
-import CookieBanner from './cookieBanner.js';
-import { acceptedCookiesName, getCookie } from './cookieHandler.js';
+import "./css/disaPage.css";
+import Login from "./login/login.js";
+import DisaHeader from "./disaHeader.js";
+import NavbarTab from "./navbar/navbarTab.js";
+import Navbar from "./navbar/navbar.js";
+import Imprint from "./imprint";
+import CookieBanner from "./cookieBanner";
+import { acceptedCookiesName, getCookie } from "./cookieHandler";
 
 const isAuthenticated = false;
 

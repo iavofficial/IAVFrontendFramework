@@ -1,7 +1,7 @@
-import React from 'react';
-import AppLogo from '../assets/app_logo.png';
-import CompanyLogo from '../assets/company_logo.png';
-import { BLUE4, BLUE5 } from './constants.js';
+import React from "react";
+import AppLogo from "../assets/app_logo.png";
+import CompanyLogo from "../assets/company_logo.png";
+import { BLUE4, BLUE5 } from "./constants";
 
 const DisaHeader = () => (
     <div className={"p-d-flex p-jc-between p-align-center"} style={{ backgroundColor: BLUE5 }}>

@@ -1,5 +1,5 @@
-import { Component } from 'react';
-import StandardLoginView from './standardLoginView.js';
+import { Component } from "react";
+import StandardLoginView from "./standardLoginView";
 
 class Login extends Component {
     constructor(props) {

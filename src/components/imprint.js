@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Imprint = () => (
     <div className="p-d-flex" style={{ height: "100%", width: "100%", justifyContent: "center", alignItems: "center" }}>
@@ -10,7 +10,7 @@ const Imprint = () => (
             <span>Deutschland</span> <br /><br />
             <span>Tel.: +49 30 3997-80</span> <br />
             <span>Fax: +49 30 3997-89926</span> <br />
-            <span lang='EN-GB'>E-Mail: impressum[at]iav.com</span> <br />
+            <span lang="EN-GB">E-Mail: impressum[at]iav.com</span> <br />
 
             <span>Internet: <a
                 href="http://www.iav.com">www.iav.com</a></span> <br /> <br />

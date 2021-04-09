@@ -57,7 +57,7 @@ class App extends Component {
     return (
       <FirstContextClass>
         <SecondContextClass>
-          <DisaPage views={views} startingPoint="/" loginProvider={AWSLoginProvider} />
+          <DisaPage views={views} startingPoint="/" loginProvider={AWSLoginProvider}/>
         </SecondContextClass>
       </FirstContextClass>
     );

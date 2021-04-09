@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 import Auth from "../../contexts/auth";
+import { getConfig } from "./api";
 import { cognitoLogin, cognitoLogout, cognitoCheckIsAuthenticated, cognitoCompletePassword, cognitoRefreshAccessToken } from "../../services/cognitoService";
 
 
@@ -16,6 +18,13 @@ class AWSLoginProvider extends Component {
             userAttributes: {},             // user attributes retrieved from cognito necessary for the completePassword workflow
             loginError: {}
         }
+        this.isAuthenticated = this.isAuthenticated.bind(this);
+        this.login = this.login.bind(this);
+        this.logout = this.logout.bind(this);
+        this.completePassword = this.completePassword.bind(this);
+        this.setCustomerName = this.setCustomerName.bind(this);
+        this.refreshSession = this.refreshSession.bind(this);
+        this.processSuccessfulAuth = this.processSuccessfulAuth.bind(this);
     }
 
     componentDidUpdate() {
@@ -29,24 +38,8 @@ class AWSLoginProvider extends Component {
         })
     }
 
-    completePassword(newPassword) {
-        cognitoCompletePassword(this.state.userAttributes, newPassword).then(result => (
-            this.processSuccessfulAuth(result)
-        )).catch(err => (
-            this.setState({
-                isAuthenticated: false,
-                userData: {},
-                loginError: err
-            })
-        ))
-    }
-
-    // setCustomerName missing
-
-    refreshSession() {
-        cognitoRefreshAccessToken().then(result => {
-            // missing
-        })
+    isAuthenticated() {
+        return this.state.isAuthenticated;
     }
 
     login(credentials) {
@@ -79,6 +72,43 @@ class AWSLoginProvider extends Component {
         console.log("logged out")
     }
 
+    completePassword(newPassword) {
+        cognitoCompletePassword(this.state.userAttributes, newPassword).then(result => (
+            this.processSuccessfulAuth(result)
+        )).catch(err => (
+            this.setState({
+                isAuthenticated: false,
+                userData: {},
+                loginError: err
+            })
+        ))
+    }
+
+    setCustomerName(customerName) {
+        this.setState(prevState => ({
+            userData: {
+                ...prevState.userData,
+                customerName: customerName
+            }
+        }))
+    }
+
+    refreshSession() {
+        cognitoRefreshAccessToken().then(result => {
+            if (result.idToken.jwtToken) {
+                this.setState(prevState => ({
+                    userData: {
+                        ...prevState.userData,
+                        jwtToken: result.idToken.jwtToken
+                    }
+                }))
+            }
+        }).catch(err => {
+            cognitoLogout();
+            console.log("Failed to refresh sessio. User got logged out.")
+        })
+    }
+
     processSuccessfulAuth() {
         this.setState({
             isAuthenticated: true,
@@ -102,13 +132,17 @@ class AWSLoginProvider extends Component {
     render() {
         return (
             <Auth.Provider value={{
-                ...this.state, login: this.login, completePassword: this.completePassword,
-                logout: this.logout, refreshSession: this.refreshSession /* missing setCustomerName */
+                ...this.state, login: this.login, completePassword: this.completePassword, logout: this.logout,
+                refreshSession: this.refreshSession, customerName: this.setCustomerName, isAuthenticated: this.isAuthenticated
             }}>
                 {this.props.children}
             </Auth.Provider>
         )
     }
+}
+
+AWSLoginProvider.propTypes = {
+    rootURL: PropTypes.string.isRequired
 }
 
 export default AWSLoginProvider;

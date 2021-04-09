@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { Dialog } from 'primereact/dialog';
-import { Button } from 'primereact/button';
+import React, { Component } from "react";
+import { Dialog } from "primereact/dialog";
+import { Button } from "primereact/button";
 
-import { RED, BLUE1, GRAY3 } from './constants';
-import { acceptedCookiesName } from './cookieHandler.js';
+import { RED, BLUE1, GRAY3 } from "./constants";
+import { acceptedCookiesName } from "./cookieHandler";
 
 class CookieBanner extends Component {
     constructor(props) {

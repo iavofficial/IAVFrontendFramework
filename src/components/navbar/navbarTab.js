@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Radium from 'radium';
-import { Link } from 'react-router-dom';
+import React from "react";
+import PropTypes from "prop-types";
+import Radium from "radium";
+import { Link } from "react-router-dom";
 
-import { BLUE1, GRAY2, DISATABHEIGHT } from '../constants.js';
+import { BLUE1, GRAY2, DISATABHEIGHT } from "../constants.js";
 
 const NavbarTab = (props) => {
     const tabStyle = {
@@ -12,7 +12,7 @@ const NavbarTab = (props) => {
         backgroundColor: props.active && !props.disabled ? BLUE1 : "white",
         color: props.active && !props.disabled ? "white" : "black",
         opacity: props.disabled ? 0.5 : 1,
-        ':hover': {
+        ":hover": {
             backgroundColor: props.disabled ? "white" : BLUE1
         }
     }

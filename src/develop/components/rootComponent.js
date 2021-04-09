@@ -1,6 +1,6 @@
-import { Component } from 'react';
-import { FirstContext } from "../contexts/FirstContext.js";
-import Content from '../../components/content/content.js';
+import { Component } from "react";
+import { FirstContext } from "../contexts/FirstContext";
+import Content from "../../components/content/content";
 
 class RootComponent extends Component {
     constructor(props) {

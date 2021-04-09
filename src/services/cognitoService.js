@@ -45,7 +45,7 @@ function handleSessionResult(user) {
     const username = session.getIdToken().payload["cognito:username"];
     if (groups !== undefined) {
         let privLevel = -1;
-        for (group of groups) {
+        for (let group of groups) {
             let grpPrivLevl;
             if (group === "USER") {
                 grpPrivLevl = privLvls.USER;

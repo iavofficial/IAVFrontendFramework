@@ -10,3 +10,5 @@ export const GRAY2 = "#cdcdcd";
 export const GRAY3 = "#9a9a9a";
 
 export const RED = "#ce0037";
+
+export const privLvls = Object.freeze({ "USER": 1, "ADMIN": 2 })

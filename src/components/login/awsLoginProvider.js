@@ -36,7 +36,7 @@ class AWSLoginProvider extends Component {
         this.componentDidRender();
     }
 
-    // This function is not a react hook. This function was made to avoid code duplication.
+    // This function is not a react hook. This function was introduced to avoid code duplication.
     componentDidRender() {
         cognitoCheckIsAuthenticated().then(result => (
             this.processSuccessfulAuth(result)
@@ -47,6 +47,12 @@ class AWSLoginProvider extends Component {
                     isAuthenticated: false
                 });
             }
+        }).then(() => {
+            if (this.state.isLoading) {
+                this.setState({
+                    isLoading: false
+                });
+            }
         })
     }
 
@@ -55,6 +61,9 @@ class AWSLoginProvider extends Component {
     }
 
     login(credentials) {
+        this.setState({
+            isLoading: true
+        });
         cognitoLogin(credentials).then(result => {
             if (result.jwtToken) {
                 this.processSuccessfulAuth(result);
@@ -75,6 +84,9 @@ class AWSLoginProvider extends Component {
     }
 
     logout() {
+        this.setState({
+            isLoading: true
+        });
         cognitoLogout();
         this.setState({
             isAuthenticated: false,
@@ -89,6 +101,9 @@ class AWSLoginProvider extends Component {
     }
 
     completePassword(newPassword) {
+        this.setState({
+            isLoading: true
+        });
         cognitoCompletePassword(this.state.userAttributes, newPassword).then(result => (
             this.processSuccessfulAuth(result)
         )).catch(err => (
@@ -110,6 +125,9 @@ class AWSLoginProvider extends Component {
     }
 
     refreshSession() {
+        this.setState({
+            isLoading: true
+        });
         cognitoRefreshAccessToken().then(result => {
             if (result.idToken.jwtToken) {
                 this.setState(prevState => ({
@@ -158,10 +176,6 @@ class AWSLoginProvider extends Component {
             </AuthContext.Provider>
         )
     }
-}
-
-AWSLoginProvider.propTypes = {
-    rootURL: PropTypes.string.isRequired
 }
 
 export default AWSLoginProvider;

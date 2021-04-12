@@ -14,7 +14,9 @@ const Navbar = (props) => {
         <div className="p-d-flex p-dir-col p-lg-2" style={{ "padding": "0px" }}>
             <div className="p-d-flex p-align-center" style={{ height: DISATABHEIGHT, backgroundColor: BLUE3 }}>
                 <img src={UserPic} style={{ marginLeft: "5%" }} alt="" />
-                <span style={{ fontWeight: "bold", color: "white", marginLeft: "10px" }}>{context.getUsername()}</span>
+                <span style={{ fontWeight: "bold", color: "white", marginLeft: "10px", maxWidth: "60%", textOverflow: "ellipsis", overflow: "hidden" }}>
+                    {context.getUsername()}
+                </span>
                 <img src={LogoutPic} style={{ marginLeft: "auto", marginRight: "20px", cursor: "pointer" }} alt="" onClick={context.logout} />
             </div>
             {React.Children.map(props.children, child =>

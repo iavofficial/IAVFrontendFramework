@@ -90,8 +90,7 @@ class App extends Component {
     return (
       <FirstContextClass>
         <SecondContextClass>
-          <DisaPage views={views} startingPoint="/" loginProvider={AWSLoginProvider}
-            loginProviderAttributes={{ rootURL: config.API_Root }} />
+          <DisaPage views={views} startingPoint="/" loginProvider={AWSLoginProvider} />
         </SecondContextClass>
       </FirstContextClass>
     );

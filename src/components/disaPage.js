@@ -69,7 +69,6 @@ DisaPage.propTypes = {
     ),
     startingPoint: PropTypes.string.isRequired,
     loginView: PropTypes.elementType,
-    loginProvider: PropTypes.object,
     loginProvider: PropTypes.object
 };
 

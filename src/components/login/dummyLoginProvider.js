@@ -6,32 +6,40 @@ class DummyLoginProvider extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isAuthenticated: false
+            isAuthenticated: false,
+            username: ""
         }
         this.isAuthenticated = this.isAuthenticated.bind(this);
         this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
+        this.getUsername = this.getUsername.bind(this);
     }
 
     isAuthenticated() {
         return this.state.isAuthenticated;
     }
 
-    login() {
+    login(credentials) {
         this.setState({
-            isAuthenticated: true
+            isAuthenticated: true,
+            username: credentials.email
         });
     }
 
     logout() {
         this.setState({
-            isAuthenticated: false
+            isAuthenticated: false,
+            username: ""
         });
+    }
+
+    getUsername() {
+        return this.state.username;
     }
 
     render() {
         return (
-            <Auth.Provider value={{ ...this.state, isAuthenticated: this.isAuthenticated, login: this.login, logout: this.logout, changePassword: this.changePassword }}>
+            <Auth.Provider value={{ ...this.state, isAuthenticated: this.isAuthenticated, login: this.login, logout: this.logout, getUsername: this.getUsername }}>
                 {this.props.children}
             </Auth.Provider>
         );

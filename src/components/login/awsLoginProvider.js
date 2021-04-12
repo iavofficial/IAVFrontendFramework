@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import Auth from "../../contexts/auth";
+import AuthContext from "../../contexts/auth";
 import { getConfig } from "./api";
 import { cognitoLogin, cognitoLogout, cognitoCheckIsAuthenticated, cognitoCompletePassword, cognitoRefreshAccessToken } from "../../services/cognitoService";
-
 
 class AWSLoginProvider extends Component {
     constructor(props) {
@@ -18,23 +17,36 @@ class AWSLoginProvider extends Component {
             userAttributes: {},             // user attributes retrieved from cognito necessary for the completePassword workflow
             loginError: {}
         }
+        this.componentDidRender = this.componentDidRender.bind(this);
         this.isAuthenticated = this.isAuthenticated.bind(this);
         this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
+        this.getUsername = this.getUsername.bind(this);
         this.completePassword = this.completePassword.bind(this);
         this.setCustomerName = this.setCustomerName.bind(this);
         this.refreshSession = this.refreshSession.bind(this);
         this.processSuccessfulAuth = this.processSuccessfulAuth.bind(this);
     }
 
+    componentDidMount() {
+        this.componentDidRender();
+    }
+
     componentDidUpdate() {
+        this.componentDidRender();
+    }
+
+    // This function is not a react hook. This function was made to avoid code duplication.
+    componentDidRender() {
         cognitoCheckIsAuthenticated().then(result => (
             this.processSuccessfulAuth(result)
         )).catch(() => {
-            this.setState({
-                userData: {},
-                isAuthenticated: false
-            });
+            if (Object.entries(this.state.userData).length !== 0 || this.state.isAuthenticated !== false) {
+                this.setState({
+                    userData: {},
+                    isAuthenticated: false
+                });
+            }
         })
     }
 
@@ -72,6 +84,10 @@ class AWSLoginProvider extends Component {
         console.log("logged out")
     }
 
+    getUsername() {
+        return this.state.userData.user;
+    }
+
     completePassword(newPassword) {
         cognitoCompletePassword(this.state.userAttributes, newPassword).then(result => (
             this.processSuccessfulAuth(result)
@@ -105,20 +121,23 @@ class AWSLoginProvider extends Component {
             }
         }).catch(err => {
             cognitoLogout();
-            console.log("Failed to refresh sessio. User got logged out.")
+            console.log("Failed to refresh session. User got logged out.")
         })
     }
 
-    processSuccessfulAuth() {
-        this.setState({
-            isAuthenticated: true,
-            isNewPasswordRequired: false,
-            userData: {},
-            loginError: {}
-        });
+    processSuccessfulAuth(userData) {
+        if (this.state.isAuthenticated !== true || this.state.isNewPasswordRequired !== false ||
+            Object.entries(this.state.userData).length === 0 || Object.entries(this.state.loginError).length !== 0) {
+            this.setState({
+                isAuthenticated: true,
+                isNewPasswordRequired: false,
+                userData: userData,
+                loginError: {}
+            });
+        }
         if (!this.state.appConfig) {
             console.log("Requesting app config");
-            getConfig(this.state.userData.jwtToken).then(config => (        // getConfig missing
+            getConfig(userData.jwtToken).then(config => (
                 this.setState({
                     appConfig: config.config
                 })
@@ -131,12 +150,12 @@ class AWSLoginProvider extends Component {
 
     render() {
         return (
-            <Auth.Provider value={{
-                ...this.state, login: this.login, completePassword: this.completePassword, logout: this.logout,
+            <AuthContext.Provider value={{
+                ...this.state, login: this.login, completePassword: this.completePassword, logout: this.logout, getUsername: this.getUsername,
                 refreshSession: this.refreshSession, customerName: this.setCustomerName, isAuthenticated: this.isAuthenticated
             }}>
                 {this.props.children}
-            </Auth.Provider>
+            </AuthContext.Provider>
         )
     }
 }

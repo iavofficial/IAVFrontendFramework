@@ -5,7 +5,7 @@ let cognitoUser;
 
 export function cognitoLogin(credentials) {
     return Auth.signOut().then(() => (
-        Auth.signIn(credentials.username, credentials.password).then(user => {
+        Auth.signIn(credentials.email, credentials.password).then(user => {
             cognitoUser = user;
             if (user.challengeName === "NEW_PASSWORD_REQUIRED") {
                 delete user.challengeParam.userAttributes.email_verified;
@@ -58,13 +58,12 @@ function handleSessionResult(user) {
         }
         if (privLevel !== -1) {
             let customerId = user.attributes["custom:customerId"];
-            const result = {
+            return {
                 jwtToken: jwtToken,
                 user: username,
                 customerId: customerId,
                 privileges: privLevel,
             };
-            return result;
         } else {
             throw new Error("UserGroupError"); // throw invalid user error if no legal group is assigned
         }

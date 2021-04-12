@@ -4,7 +4,7 @@ import { Button } from "primereact/button";
 
 import { BLUE1, BLUE4 } from "../constants";
 import AppLogo from "../../assets/app_logo.png";
-import Auth from "../../contexts/auth";
+import AuthContext from "../../contexts/auth";
 
 class BasicLoginView extends Component {
     constructor(props) {
@@ -19,7 +19,7 @@ class BasicLoginView extends Component {
 
     submit = (event) => {
         event.preventDefault();
-        this.context.login(this.state.email, this.state.password);
+        this.context.login({ email: this.state.email, password: this.state.password });
     }
 
     handleChange({ target: { name, value } }) {
@@ -57,6 +57,6 @@ class BasicLoginView extends Component {
     }
 };
 
-BasicLoginView.contextType = Auth;
+BasicLoginView.contextType = AuthContext;
 
 export default BasicLoginView;

@@ -15,15 +15,15 @@ import Imprint from "./imprint.js";
 import CookieBanner from "./cookieBanner.js";
 import { acceptedCookies } from "./cookieHandler.js";
 import DummyLoginProvider from "./login/dummyLoginProvider.js";
-import Auth from "../contexts/auth.js";
+import AuthContext from "../contexts/auth.js";
 
 const DisaPage = (props) => {
     const LoginProvider = props.loginProvider !== undefined && props.loginProvider !== null ? props.loginProvider : DummyLoginProvider;
     const LoginView = props.loginView !== undefined && props.loginView !== null ? props.loginView : BasicLoginView;
     return (
-        <LoginProvider>
+        <LoginProvider {...props.loginProviderAttributes}>
             { !acceptedCookies() && <CookieBanner />}
-            <Auth.Consumer>
+            <AuthContext.Consumer>
                 {(context) => {
                     if (context.isAuthenticated()) {
                         return (
@@ -51,7 +51,7 @@ const DisaPage = (props) => {
                         );
                     }
                 }}
-            </Auth.Consumer>
+            </AuthContext.Consumer>
         </LoginProvider>
     );
 };
@@ -69,6 +69,7 @@ DisaPage.propTypes = {
     ),
     startingPoint: PropTypes.string.isRequired,
     loginView: PropTypes.elementType,
+    loginProvider: PropTypes.object,
     loginProvider: PropTypes.object
 };
 

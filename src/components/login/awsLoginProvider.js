@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 
 import AuthContext from "../../contexts/auth";
 import { getConfig } from "./api";
@@ -47,17 +46,15 @@ class AWSLoginProvider extends Component {
                     isAuthenticated: false
                 });
             }
-        }).then(() => {
-            if (this.state.isLoading) {
-                this.setState({
-                    isLoading: false
-                });
-            }
         })
     }
 
     isAuthenticated() {
         return this.state.isAuthenticated;
+    }
+
+    getUsername() {
+        return this.state.userData.user;
     }
 
     login(credentials) {
@@ -80,24 +77,30 @@ class AWSLoginProvider extends Component {
                 userData: {},
                 loginError: err
             })
-        ));
+        )).then(() => {
+            if (this.state.isLoading) {
+                this.setState({
+                    isLoading: false
+                });
+            }
+        })
     }
 
     logout() {
         this.setState({
             isLoading: true
         });
-        cognitoLogout();
-        this.setState({
-            isAuthenticated: false,
-            userData: {},
-            loginError: {}
-        });
+        cognitoLogout().then(() => {
+            if (this.state.isLoading) {
+                this.setState({
+                    isLoading: false,
+                    isAuthenticated: false,
+                    userData: {},
+                    loginError: {}
+                });
+            }
+        })
         console.log("logged out")
-    }
-
-    getUsername() {
-        return this.state.userData.user;
     }
 
     completePassword(newPassword) {
@@ -112,7 +115,13 @@ class AWSLoginProvider extends Component {
                 userData: {},
                 loginError: err
             })
-        ))
+        )).then(() => {
+            if (this.state.isLoading) {
+                this.setState({
+                    isLoading: false
+                });
+            }
+        })
     }
 
     setCustomerName(customerName) {
@@ -137,9 +146,15 @@ class AWSLoginProvider extends Component {
                     }
                 }))
             }
-        }).catch(err => {
+        }).catch(() => {
             cognitoLogout();
             console.log("Failed to refresh session. User got logged out.")
+        }).then(() => {
+            if (this.state.isLoading) {
+                this.setState({
+                    isLoading: false
+                });
+            }
         })
     }
 

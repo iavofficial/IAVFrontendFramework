@@ -15,6 +15,7 @@ import SecondContextClass from "./develop/contexts/SecondContext";
 import AWSLoginProvider from "./components/login/awsLoginProvider"
 import { config } from "./develop/config";
 import Amplify from "@aws-amplify/core";
+import AWSLoginView from "./components/login/awsLoginView";
 
 const authConfig = {
   // REQUIRED - Amazon Cognito Region
@@ -90,7 +91,7 @@ class App extends Component {
     return (
       <FirstContextClass>
         <SecondContextClass>
-          <DisaPage views={views} startingPoint="/" loginProvider={AWSLoginProvider} />
+          <DisaPage views={views} startingPoint="/" loginProvider={AWSLoginProvider} loginView={AWSLoginView} />
         </SecondContextClass>
       </FirstContextClass>
     );

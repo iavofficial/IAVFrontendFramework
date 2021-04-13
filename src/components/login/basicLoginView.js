@@ -1,10 +1,10 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "primereact/button";
 
-import { BLUE1, BLUE4 } from "../constants";
+import { BLUE4 } from "../constants";
 import AppLogo from "../../assets/app_logo.png";
 import AuthContext from "../../contexts/auth";
+import LoginButtonAndSpinner from "./loginButtonWithSpinner";
 
 class BasicLoginView extends Component {
     constructor(props) {
@@ -39,12 +39,14 @@ class BasicLoginView extends Component {
                     <div className="p-d-flex" style={{ justifyContent: "center", marginBottom: "30px" }}>
                         <form style={{ width: "85%", height: "100%" }} className="p-mr-4 p-mt-4" onSubmit={this.submit}>
                             <div className={"p-d-flex p-flex-column"}>
+                                <label className="inputLabel">Email address</label>
                                 <input value={this.state.email} onChange={this.handleChange} name="email" type="email"
                                     className={"p-inputtext"} placeholder="Email address" required autoFocus style={{ marginBottom: "1rem" }} />
+                                <label className="inputLabel">Password</label>
                                 <input value={this.state.password} onChange={this.handleChange} name="password" type="password"
                                     className={"p-inputtext"} placeholder="Password" required style={{ marginBottom: "1rem" }} />
                                 <div>
-                                    <Button label="Login" style={{ width: "150px", float: "right", border: "none", backgroundColor: BLUE1 }} />
+                                    <LoginButtonAndSpinner isLoading={this.context.isLoading} />
                                 </div>
                             </div>
                         </form>

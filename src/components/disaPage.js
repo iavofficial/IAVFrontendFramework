@@ -7,6 +7,8 @@ import PropTypes, { shape } from "prop-types";
 import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 
 import "./css/disaPage.css";
+import "./css/disaFramework.css";
+import "./css/error.css";
 import BasicLoginView from "./login/basicLoginView.js";
 import DisaHeader from "./disaHeader.js";
 import NavbarTab from "./navbar/navbarTab.js";

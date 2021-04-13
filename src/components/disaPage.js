@@ -23,7 +23,7 @@ const DisaPage = (props) => {
     const LoginProvider = props.loginProvider !== undefined && props.loginProvider !== null ? props.loginProvider : DummyLoginProvider;
     const LoginView = props.loginView !== undefined && props.loginView !== null ? props.loginView : BasicLoginView;
     return (
-        <LoginProvider {...props.loginProviderAttributes}>
+        <LoginProvider {...props.loginProviderProps}>
             { !acceptedCookies() && <CookieBanner />}
             <AuthContext.Consumer>
                 {(context) => {
@@ -71,7 +71,8 @@ DisaPage.propTypes = {
     ),
     startingPoint: PropTypes.string.isRequired,
     loginView: PropTypes.elementType,
-    loginProvider: PropTypes.object
+    loginProvider: PropTypes.object,
+    loginProviderProps: PropTypes.object
 };
 
 export default DisaPage;

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 import AuthContext from "../../contexts/auth";
 import { getConfig } from "./api";
@@ -46,7 +47,7 @@ class AWSLoginProvider extends Component {
                     isAuthenticated: false
                 });
             }
-        })
+        });
     }
 
     isAuthenticated() {
@@ -69,7 +70,7 @@ class AWSLoginProvider extends Component {
                     isAuthenticated: false,
                     userData: result.userAttributes,
                     isNewPasswordRequired: true
-                })
+                });
             }
         }).catch(err => (
             this.setState({
@@ -78,12 +79,10 @@ class AWSLoginProvider extends Component {
                 loginError: err
             })
         )).then(() => {
-            if (this.state.isLoading) {
-                this.setState({
-                    isLoading: false
-                });
-            }
-        })
+            this.setState({
+                isLoading: false
+            });
+        });
     }
 
     logout() {
@@ -91,15 +90,13 @@ class AWSLoginProvider extends Component {
             isLoading: true
         });
         cognitoLogout().then(() => {
-            if (this.state.isLoading) {
-                this.setState({
-                    isLoading: false,
-                    isAuthenticated: false,
-                    userData: {},
-                    loginError: {}
-                });
-            }
-        })
+            this.setState({
+                isLoading: false,
+                isAuthenticated: false,
+                userData: {},
+                loginError: {}
+            });
+        });
         console.log("logged out")
     }
 
@@ -116,12 +113,10 @@ class AWSLoginProvider extends Component {
                 loginError: err
             })
         )).then(() => {
-            if (this.state.isLoading) {
-                this.setState({
-                    isLoading: false
-                });
-            }
-        })
+            this.setState({
+                isLoading: false
+            });
+        });
     }
 
     setCustomerName(customerName) {
@@ -130,7 +125,7 @@ class AWSLoginProvider extends Component {
                 ...prevState.userData,
                 customerName: customerName
             }
-        }))
+        }));
     }
 
     refreshSession() {
@@ -144,18 +139,16 @@ class AWSLoginProvider extends Component {
                         ...prevState.userData,
                         jwtToken: result.idToken.jwtToken
                     }
-                }))
+                }));
             }
         }).catch(() => {
             cognitoLogout();
-            console.log("Failed to refresh session. User got logged out.")
+            console.log("Failed to refresh session. User got logged out.");
         }).then(() => {
-            if (this.state.isLoading) {
-                this.setState({
-                    isLoading: false
-                });
-            }
-        })
+            this.setState({
+                isLoading: false
+            });
+        });
     }
 
     processSuccessfulAuth(userData) {
@@ -170,14 +163,14 @@ class AWSLoginProvider extends Component {
         }
         if (!this.state.appConfig) {
             console.log("Requesting app config");
-            getConfig(userData.jwtToken).then(config => (
+            getConfig(userData.jwtToken, this.props.apiRoot).then(config => (
                 this.setState({
                     appConfig: config.config
                 })
             )).catch(err => {
                 console.log("Failed to retrieve app config. Printing error:");
                 console.log(err);
-            })
+            });
         }
     }
 
@@ -192,5 +185,9 @@ class AWSLoginProvider extends Component {
         )
     }
 }
+
+AWSLoginProvider.propTypes = {
+    apiRoot: PropTypes.string.isRequired
+};
 
 export default AWSLoginProvider;

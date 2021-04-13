@@ -4,13 +4,7 @@ import { BLUE1 } from "../constants";
 // props.isLoading
 const LoginButtonWithSpinner = props => (
     <>
-        {
-            (() => {
-                let test = props.isLoading && <ProgressSpinner style={{ height: "40px", width: "40px", float: "left" }} />;
-                console.log(test);
-            })()
-        }
-        {props.isLoading && <ProgressSpinner style={{ height: "40px", width: "40px", float: "left" }} />}
+        {props.isLoading && <ProgressSpinner style={{ height: "30px", width: "30px", float: "left" }} />}
         <Button label="Login" style={{ width: "150px", float: "right", border: "none", backgroundColor: BLUE1 }} />
     </>
 )

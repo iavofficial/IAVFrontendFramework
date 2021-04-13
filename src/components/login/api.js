@@ -1,21 +1,21 @@
-export function getConfig(rootURL, token) {
-    const args = {
+export function getConfig(token, apiRoot) {
+    const params = {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": "bearer" + token
+            "Authorization": "bearer " + token
         }
     }
-    return fetchJSON(rootURL + "config", args);
+    return fetchJSON(apiRoot + "config", params);
 }
 
-function fetchJSON(url, args) {
-    return fetch(url, args).then(response => {
-        if(response.ok){
-            return response.json();
+function fetchJSON(url, ...args) {
+    return fetch(url, ...args).then(response => {
+        if (!response.ok) {
+            throw new FetchError(response);
         }
-        throw new FetchError(response);
-    })
+        return response.json();
+    });
 }
 
 class FetchError extends Error {

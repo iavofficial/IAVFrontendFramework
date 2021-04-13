@@ -16,7 +16,7 @@ export function cognitoLogin(credentials) {
                 return handleSessionResult(user);
             }
         })
-    ))
+    ));
 }
 
 export function cognitoLogout() {
@@ -31,11 +31,11 @@ export function cognitoCompletePassword(sessionUserAttributes, newPassword) {
     return Auth.completeNewPassword(cognitoUser, newPassword, sessionUserAttributes).then(user => {
         cognitoUser = user;
         return handleSessionResult(user);
-    })
+    });
 }
 
 export function cognitoRefreshAccessToken() {
-    Auth.currentSession();
+    return Auth.currentSession();
 }
 
 function handleSessionResult(user) {

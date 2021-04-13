@@ -111,7 +111,7 @@ class AWSLoginView extends Component {
             </div >
         );
     }
-};
+}
 
 AWSLoginView.contextType = AuthContext;
 

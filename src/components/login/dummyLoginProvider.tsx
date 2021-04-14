@@ -1,9 +1,15 @@
-import React, { Component } from "react";
+import { Component } from "react";
 
 import Auth from "../../contexts/auth";
+import { Credentials } from "./loginProvider";
 
-class DummyLoginProvider extends Component {
-    constructor(props) {
+interface State {
+    isAuthenticated: boolean;
+    username: String;
+}
+
+class DummyLoginProvider extends Component<any, State> {
+    constructor(props: any) {
         super(props);
         this.state = {
             isAuthenticated: false,
@@ -19,7 +25,7 @@ class DummyLoginProvider extends Component {
         return this.state.isAuthenticated;
     }
 
-    login(credentials) {
+    login(credentials: Credentials) {
         this.setState({
             isAuthenticated: true,
             username: credentials.email

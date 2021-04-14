@@ -1,8 +1,12 @@
 import React from "react";
 import { Component } from "react";
 
-class Clock extends Component {
-    constructor(props) {
+interface State {
+    date: Date;
+}
+
+class Clock extends Component<any, State> {
+    constructor(props: any) {
         super(props);
         this.state = {
             date: new Date()

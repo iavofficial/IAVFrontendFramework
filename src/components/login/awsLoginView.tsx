@@ -6,8 +6,13 @@ import AppLogo from "../../assets/app_logo.png";
 import AuthContext from "../../contexts/auth";
 import LoginButtonAndSpinner from "./loginButtonWithSpinner";
 
-class AWSLoginView extends Component {
-    constructor(props) {
+interface State {
+    email: String;
+    password: String
+}
+
+class AWSLoginView extends Component<any, State> {
+    constructor(props: any) {
         super(props);
         this.state = {
             email: "",
@@ -19,7 +24,7 @@ class AWSLoginView extends Component {
         this.LoginForm = this.LoginForm.bind(this);
     }
 
-    submit = (event) => {
+    submit = (event: Event) => {
         event.preventDefault();
         if (this.context.isNewPasswordRequired) {
             this.context.completePassword(this.state.password);
@@ -80,10 +85,10 @@ class AWSLoginView extends Component {
             <form style={{ width: "85%", height: "100%" }} className="p-mr-4 p-mt-4" onSubmit={this.submit}>
                 <div className={"p-d-flex p-flex-column"}>
                     <label className="inputLabel">Email address</label>
-                    <input value={this.state.email} onChange={this.handleChange} name="email" type="email"
+                    <input value={this.state.email.valueOf()} onChange={this.handleChange} name="email" type="email"
                         className={"p-inputtext"} placeholder="Email address" required autoFocus style={{ marginBottom: "1rem" }} />
                     <label className="inputLabel" >Password</label>
-                    <input value={this.state.password} onChange={this.handleChange} name="password" type="password"
+                    <input value={this.state.password.valueOf()} onChange={this.handleChange} name="password" type="password"
                         className={"p-inputtext"} placeholder="Password" required style={{ marginBottom: "1rem" }} />
                     <div>
                         <LoginButtonAndSpinner isLoading={this.context.isLoading} />

@@ -6,8 +6,13 @@ import AppLogo from "../../assets/app_logo.png";
 import AuthContext from "../../contexts/auth";
 import LoginButtonAndSpinner from "./loginButtonWithSpinner";
 
-class BasicLoginView extends Component {
-    constructor(props) {
+interface State {
+    email: String;
+    password: String;
+}
+
+class BasicLoginView extends Component<any, State> {
+    constructor(props: any) {
         super(props);
         this.state = {
             email: "",
@@ -17,7 +22,7 @@ class BasicLoginView extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    submit = (event) => {
+    submit = (event: Event) => {
         event.preventDefault();
         this.context.login({ email: this.state.email, password: this.state.password });
     }

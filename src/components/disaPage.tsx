@@ -3,23 +3,32 @@ import "primereact/resources/themes/nova/theme.css";
 import "primereact/resources/primereact.css";
 import "primeicons/primeicons.css";
 import React from "react";
-import PropTypes, { shape } from "prop-types";
 import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 
 import "./css/disaPage.css";
 import "./css/disaFramework.css";
 import "./css/error.css";
-import BasicLoginView from "./login/basicLoginView.js";
-import DisaHeader from "./disaHeader.js";
-import NavbarTab from "./navbar/navbarTab.js";
-import Navbar from "./navbar/navbar.js";
-import Imprint from "./imprint.js";
-import CookieBanner from "./cookieBanner.js";
-import { acceptedCookies } from "./cookieHandler.js";
-import DummyLoginProvider from "./login/dummyLoginProvider.js";
-import AuthContext from "../contexts/auth.js";
+import BasicLoginView from "./login/basicLoginView";
+import DisaHeader from "./disaHeader";
+import NavbarTab from "./navbar/navbarTab";
+import Navbar from "./navbar/navbar";
+import Imprint from "./imprint";
+import CookieBanner from "./cookieBanner";
+import { acceptedCookies } from "./cookieHandler";
+import DummyLoginProvider from "./login/dummyLoginProvider";
+import AuthContext from "../contexts/auth";
+import View from "./view";
 
-const DisaPage = (props) => {
+interface Props {
+    views: View[];
+    startingPoint: String;
+    loginView: React.ComponentType;
+    // TODO: Refactor this
+    loginProvider: any;
+    loginProviderProps: any;
+}
+
+const DisaPage = (props: Props) => {
     const LoginProvider = props.loginProvider !== undefined && props.loginProvider !== null ? props.loginProvider : DummyLoginProvider;
     const LoginView = props.loginView !== undefined && props.loginView !== null ? props.loginView : BasicLoginView;
     return (
@@ -36,9 +45,9 @@ const DisaPage = (props) => {
                                         <Navbar>
                                             {props.views.map(view => <NavbarTab selectedIcon={view.selectedIcon} deselectedIcon={view.deselectedIcon} to={view.to} name={view.name} disabled={view.disabled} />)}
                                         </Navbar>
-                                        {props.views.map(view => <Route exact path={view.to} component={view.component} />)}
+                                        {props.views.map(view => <Route exact path={view.to.valueOf()} component={view.component} />)}
                                         <Route exact path="/imprint" component={Imprint} />
-                                        <Redirect exact from="login" to={props.startingPoint} />
+                                        <Redirect exact from="login" to={props.startingPoint.valueOf()} />
                                     </div>
                                 </div>
                             </Router>
@@ -56,23 +65,6 @@ const DisaPage = (props) => {
             </AuthContext.Consumer>
         </LoginProvider>
     );
-};
-
-DisaPage.propTypes = {
-    views: PropTypes.arrayOf(
-        shape({
-            name: PropTypes.string.isRequired,
-            to: PropTypes.string.isRequired,
-            disabled: PropTypes.bool.isRequired,
-            selectedIcon: PropTypes.string.isRequired,
-            deselectedIcon: PropTypes.string.isRequired,
-            component: PropTypes.elementType.isRequired
-        }).isRequired
-    ),
-    startingPoint: PropTypes.string.isRequired,
-    loginView: PropTypes.elementType,
-    loginProvider: PropTypes.object,
-    loginProviderProps: PropTypes.object
 };
 
 export default DisaPage;

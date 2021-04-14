@@ -5,8 +5,15 @@ import { Button } from "primereact/button";
 import { RED, BLUE1, GRAY3 } from "./constants";
 import { acceptedCookiesName } from "./cookieHandler";
 
-class CookieBanner extends Component {
-    constructor(props) {
+interface State {
+    visible: boolean;
+    icon: String;
+    iconColor: String;
+    message: String;
+}
+
+class CookieBanner extends Component<any, State> {
+    constructor(props: any) {
         super(props);
         this.state = {
             visible: true,
@@ -29,9 +36,10 @@ class CookieBanner extends Component {
         this.setState({ visible: true, icon: "pi pi-times-circle", iconColor: RED, message: "You have to accept cookies. Otherwise you can't use this website." });
     }
 
+    // Dialog has to have the onHide property. Otherwise the typescript compiler will throw an error.
     render() {
         return (
-            <Dialog header="This website uses cookies." position={"bottom"} visible={this.state.visible} modal dismissableMask={false} closable={false}
+            <Dialog header="This website uses cookies." position={"bottom"} visible={this.state.visible} modal dismissableMask={false} closable={false} onHide={() => ""}
                 footer={
                     <div style={{ display: "flex", justifyContent: "flex-end" }}>
                         <Button icon="pi pi-times" className="p-button-secondary" label="Reject cookies" onClick={this.rejectCookies}
@@ -40,7 +48,7 @@ class CookieBanner extends Component {
                     </div>
                 }>
                 <div style={{ display: "flex", alignItems: "center" }}>
-                    <span className={this.state.icon} style={{ marginRight: "10px", fontSize: "xx-large", color: this.state.iconColor }} />
+                    <span className={this.state.icon.valueOf()} style={{ marginRight: "10px", fontSize: "xx-large", color: this.state.iconColor.valueOf() }} />
                     <span>{this.state.message}</span>
                 </div>
             </Dialog>

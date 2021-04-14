@@ -4,9 +4,24 @@ import PropTypes from "prop-types";
 import AuthContext from "../../contexts/auth";
 import { getConfig } from "./api";
 import { cognitoLogin, cognitoLogout, cognitoCheckIsAuthenticated, cognitoCompletePassword, cognitoRefreshAccessToken } from "../../services/cognitoService";
+import LoginProvider, { Credentials } from "./loginProvider";
 
-class AWSLoginProvider extends Component {
-    constructor(props) {
+interface Props {
+    apiRoot: String;
+}
+
+interface State {
+    isAuthenticated: boolean;
+    isNewPasswordRequired: boolean;
+    isLoading: boolean;
+    userData: any;
+    appConfig: any;
+    userAttributes: any;
+    loginError: any;
+}
+
+class AWSLoginProvider extends Component<Props, State> implements LoginProvider {
+    constructor(props: Props) {
         super(props);
         this.state = {
             isAuthenticated: false,         // true if user is authenticated
@@ -58,7 +73,7 @@ class AWSLoginProvider extends Component {
         return this.state.userData.user;
     }
 
-    login(credentials) {
+    login(credentials: Credentials) {
         this.setState({
             isLoading: true
         });
@@ -100,7 +115,7 @@ class AWSLoginProvider extends Component {
         console.log("logged out")
     }
 
-    completePassword(newPassword) {
+    completePassword(newPassword: String) {
         this.setState({
             isLoading: true
         });
@@ -119,7 +134,7 @@ class AWSLoginProvider extends Component {
         });
     }
 
-    setCustomerName(customerName) {
+    setCustomerName(customerName: String) {
         this.setState(prevState => ({
             userData: {
                 ...prevState.userData,
@@ -185,9 +200,5 @@ class AWSLoginProvider extends Component {
         )
     }
 }
-
-AWSLoginProvider.propTypes = {
-    apiRoot: PropTypes.string.isRequired
-};
 
 export default AWSLoginProvider;

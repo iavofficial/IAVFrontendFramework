@@ -16,6 +16,7 @@ import AWSLoginProvider from "./components/login/awsLoginProvider"
 import { config } from "./develop/config";
 import Amplify from "@aws-amplify/core";
 import AWSLoginView from "./components/login/awsLoginView";
+import View from "./components/view";
 
 const authConfig = {
   // REQUIRED - Amazon Cognito Region
@@ -55,39 +56,11 @@ class App extends Component {
 
   render() {
     let views = [
-      {
-        selectedIcon: navFleetSelected,
-        deselectedIcon: navFleetDeselected,
-        to: "/",
-        name: "Root",
-        disabled: false,
-        component: RootComponent,
-      },
-      {
-        selectedIcon: navFleetSelected,
-        deselectedIcon: navFleetDeselected,
-        to: "/test1",
-        name: "Test1",
-        disabled: false,
-        component: Test1Component,
-      },
-      {
-        selectedIcon: navFleetSelected,
-        deselectedIcon: navFleetDeselected,
-        to: "/test2",
-        name: "Test2",
-        disabled: false,
-        component: Test2Component,
-      },
-      {
-        selectedIcon: navFleetDetailSelected,
-        deselectedIcon: navFleetDetailDeselected,
-        to: "/test3",
-        name: "Test3",
-        disabled: true,
-        component: Test3Component,
-      }
-    ]
+      new View(navFleetSelected, navFleetDeselected, "/", "Root", false, RootComponent),
+      new View(navFleetSelected, navFleetDeselected, "/test1", "Test1", false, Test1Component),
+      new View(navFleetSelected, navFleetDeselected, "/test2", "Test2", false, Test2Component),
+      new View(navFleetDetailSelected, navFleetDetailDeselected, "/test3", "Test3", true, Test3Component)
+    ];
     return (
       <FirstContextClass>
         <SecondContextClass>

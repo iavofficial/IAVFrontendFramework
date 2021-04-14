@@ -3,7 +3,7 @@ import React, { Component } from "react";
 export const FirstContext = React.createContext({});
 
 class FirstContextClass extends Component {
-    constructor(props) {
+    constructor(props: any) {
         super(props);
         this.state = {
             test1: "default",

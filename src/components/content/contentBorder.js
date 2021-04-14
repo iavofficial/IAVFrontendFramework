@@ -1,4 +1,3 @@
-import React from "react";
 import { GRAY1 } from "../constants"
 
 const ContentBorder = (props) => (

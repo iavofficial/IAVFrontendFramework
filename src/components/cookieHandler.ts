@@ -1,6 +1,6 @@
 export const acceptedCookiesName = "acceptedCookies";
 
-export function getCookie(name) {
+export function getCookie(name: String) {
     let decodedCookies = decodeURIComponent(document.cookie);
     let cookies = decodedCookies.split(";");
     let requestedCookie = cookies.find(cookie => cookie.startsWith(name + "="));

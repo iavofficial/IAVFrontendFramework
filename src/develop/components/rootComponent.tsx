@@ -3,7 +3,7 @@ import { FirstContext } from "../contexts/FirstContext";
 import Content from "../../components/content/content";
 
 class RootComponent extends Component {
-    constructor(props) {
+    constructor(props: any) {
         super(props);
         this.state = {
             localState: "default",

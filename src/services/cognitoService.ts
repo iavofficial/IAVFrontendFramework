@@ -1,11 +1,12 @@
 import { Auth } from "aws-amplify";
 import { privLvls } from "../components/constants";
+import { Credentials } from "../components/login/loginProvider";
 
-let cognitoUser;
+let cognitoUser: any;
 
-export function cognitoLogin(credentials) {
+export function cognitoLogin(credentials: Credentials) {
     return Auth.signOut().then(() => (
-        Auth.signIn(credentials.email, credentials.password).then(user => {
+        Auth.signIn(credentials.email.valueOf(), credentials.password.valueOf()).then(user => {
             cognitoUser = user;
             if (user.challengeName === "NEW_PASSWORD_REQUIRED") {
                 delete user.challengeParam.userAttributes.email_verified;
@@ -27,8 +28,8 @@ export function cognitoCheckIsAuthenticated() {
     return Auth.currentAuthenticatedUser().then(user => handleSessionResult(user));
 }
 
-export function cognitoCompletePassword(sessionUserAttributes, newPassword) {
-    return Auth.completeNewPassword(cognitoUser, newPassword, sessionUserAttributes).then(user => {
+export function cognitoCompletePassword(sessionUserAttributes: any, newPassword: String) {
+    return Auth.completeNewPassword(cognitoUser, newPassword.valueOf(), sessionUserAttributes).then(user => {
         cognitoUser = user;
         return handleSessionResult(user);
     });
@@ -38,7 +39,7 @@ export function cognitoRefreshAccessToken() {
     return Auth.currentSession();
 }
 
-function handleSessionResult(user) {
+function handleSessionResult(user: any) {
     const session = user.getSignInUserSession();
     const jwtToken = session.getIdToken().getJwtToken();
     const groups = session.getIdToken().payload["cognito:groups"];
@@ -46,7 +47,7 @@ function handleSessionResult(user) {
     if (groups !== undefined) {
         let privLevel = -1;
         for (let group of groups) {
-            let grpPrivLevl;
+            let grpPrivLevl = -1;
             if (group === "USER") {
                 grpPrivLevl = privLvls.USER;
             } else if (group === "ADMIN") {

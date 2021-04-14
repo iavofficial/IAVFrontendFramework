@@ -4,8 +4,12 @@ import PropTypes from "prop-types";
 import Contentbar from "./contentbar";
 import Contentborder from "./contentBorder";
 
-class Content extends Component {
-    constructor(props) {
+interface Props {
+    contentElements: React.Component[]
+}
+
+class Content extends Component<Props> {
+    constructor(props: Props) {
         super(props);
     }
 
@@ -21,10 +25,6 @@ class Content extends Component {
             </div>
         );
     }
-}
-
-Content.propTypes = {
-    contentElements: PropTypes.arrayOf(PropTypes.element).isRequired,
 }
 
 export default Content;

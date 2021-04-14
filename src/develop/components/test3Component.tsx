@@ -1,21 +1,18 @@
 import { Component } from "react";
-import { SecondContext } from "../contexts/SecondContext";
 import Content from "../../components/content/content";
 
-class Test1Component extends Component {
-    constructor(props) {
+class Test3Component extends Component {
+    constructor(props: any) {
         super(props);
     }
 
     render() {
         return (
             <Content contentElements={this.context.contentTabs}>
-                <div>Test</div>
+                <div>"This is the third test."</div>
             </Content>
         );
     }
 }
 
-Test1Component.contextType = SecondContext;
-
-export default Test1Component;
+export default Test3Component;

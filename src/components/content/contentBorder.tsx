@@ -1,6 +1,6 @@
 import { GRAY1 } from "../constants"
 
-const ContentBorder = (props) => (
+const ContentBorder = (props: any) => (
     <div className="p-d-flex p-flex-column" style={{ height: "100%" }}>
         <div style={{ height: "100%", borderStyle: "solid", borderWidth: "15px 0px 0px 15px", borderColor: GRAY1 }}>
             {props.children}

@@ -1,4 +1,3 @@
-import React from "react";
 import AppLogo from "../assets/app_logo.png";
 import CompanyLogo from "../assets/company_logo.png";
 import { BLUE4, BLUE5 } from "./constants";

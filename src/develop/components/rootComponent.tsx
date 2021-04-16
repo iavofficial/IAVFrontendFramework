@@ -2,8 +2,13 @@ import { Component } from "react";
 import { FirstContext } from "../contexts/FirstContext";
 import Content from "../../components/content/content";
 
-class RootComponent extends Component {
-    constructor(props: any) {
+interface State {
+    localState: String,
+    contentTabs: JSX.Element[]
+}
+
+class RootComponent extends Component<any, State> {
+    constructor(props) {
         super(props);
         this.state = {
             localState: "default",

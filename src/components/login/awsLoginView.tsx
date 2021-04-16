@@ -24,7 +24,7 @@ class AWSLoginView extends Component<any, State> {
         this.LoginForm = this.LoginForm.bind(this);
     }
 
-    submit = (event: Event) => {
+    submit = (event) => {
         event.preventDefault();
         if (this.context.isNewPasswordRequired) {
             this.context.completePassword(this.state.password);
@@ -34,9 +34,8 @@ class AWSLoginView extends Component<any, State> {
     }
 
     handleChange({ target: { name, value } }) {
-        this.setState({
-            [name]: value
-        });
+        let newState = { [name]: value } as Pick<State, keyof State>;
+        this.setState(newState);
     }
 
     getErrorTextFromCode(code) {

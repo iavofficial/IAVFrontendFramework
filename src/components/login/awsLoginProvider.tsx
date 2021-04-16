@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import { Component } from "react";
 
 import AuthContext from "../../contexts/auth";
 import { getConfig } from "./api";
@@ -148,11 +147,11 @@ class AWSLoginProvider extends Component<Props, State> implements LoginProvider 
             isLoading: true
         });
         cognitoRefreshAccessToken().then(result => {
-            if (result.idToken.jwtToken) {
+            if (result.getIdToken().getJwtToken()) {
                 this.setState(prevState => ({
                     userData: {
                         ...prevState.userData,
-                        jwtToken: result.idToken.jwtToken
+                        jwtToken: result.getIdToken().getJwtToken()
                     }
                 }));
             }

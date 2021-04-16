@@ -10,9 +10,7 @@ export function cognitoLogin(credentials: Credentials) {
             cognitoUser = user;
             if (user.challengeName === "NEW_PASSWORD_REQUIRED") {
                 delete user.challengeParam.userAttributes.email_verified;
-                return ({
-                    userAttributes: user.challengeParam.userAttributes
-                });
+                return (new UserInformation(null, null, null, null, user.challengeParam.userAttributes));
             } else {
                 return handleSessionResult(user);
             }
@@ -59,16 +57,37 @@ function handleSessionResult(user: any) {
         }
         if (privLevel !== -1) {
             let customerId = user.attributes["custom:customerId"];
-            return {
-                jwtToken: jwtToken,
-                user: username,
-                customerId: customerId,
-                privileges: privLevel,
-            };
+            return new UserInformation(jwtToken, username, customerId, privLevel, null);
         } else {
             throw new Error("UserGroupError"); // throw invalid user error if no legal group is assigned
         }
     } else {
         throw new Error("UserGroupError"); // throw invalid user error (user is valid and authorized, but is not assigned any groups)
+    }
+}
+
+class UserInformation {
+    constructor(private _jwtToken: any, private _user: String | null, private _customerId: number | null,
+        private _privileges: number | null, private _userAttributes: any) {
+    }
+
+    get jwtToken() {
+        return this._jwtToken;
+    }
+
+    get user() {
+        return this._user;
+    }
+
+    get customerId() {
+        return this._customerId;
+    }
+
+    get privileges() {
+        return this._privileges;
+    }
+
+    get userAttributes() {
+        return this._userAttributes;
     }
 }

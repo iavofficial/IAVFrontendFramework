@@ -6,7 +6,7 @@ interface Props {
     contentElements: React.Component[]
 }
 
-const Contentbar: React.FunctionComponent<Props> = (props) => (
+const Contentbar = (props: Props) => (
     <div className="p-d-flex" style={{ height: DISATABHEIGHT }}>
         {props.contentElements}
     </div>

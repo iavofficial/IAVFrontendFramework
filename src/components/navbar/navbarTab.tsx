@@ -1,4 +1,3 @@
-import React from "react";
 import Radium from "radium";
 import { Link } from "react-router-dom";
 
@@ -27,14 +26,14 @@ const NavbarTab = (props: Props) => {
     const tab = (
         <div style={{ borderStyle: "solid", borderWidth: "0px 0px 1px 0px", borderColor: GRAY2 }}>
             <div className="p-d-flex p-align-center" style={tabStyle}>
-                <img src={props.active && !props.disabled ? props.selectedIcon : props.deselectedIcon} style={{ marginLeft: "5%" }} alt="" />
+                <img src={props.active && !props.disabled ? props.selectedIcon.valueOf() : props.deselectedIcon.valueOf()} style={{ marginLeft: "5%" }} alt="" />
                 <span style={{ fontWeight: "bold" }}>{props.name}</span>
             </div>
         </div>
     );
     return (
         props.disabled ? tab :
-            <Link style={{ textDecoration: "none" }} to={props.to}>
+            <Link style={{ textDecoration: "none" }} to={props.to.valueOf()}>
                 {tab}
             </Link>
     );

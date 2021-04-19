@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { Component, FormEvent } from "react";
 import { Link } from "react-router-dom";
 
 import { BLUE4 } from "../constants";
@@ -22,12 +22,12 @@ class BasicLoginView extends Component<any, State> {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    submit = (event) => {
+    submit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         this.context.login({ email: this.state.email, password: this.state.password });
     }
 
-    handleChange({ target: { name, value } }) {
+    handleChange({ target: { name, value } }: { target: { name: string, value: any } }) {
         let newState = { [name]: value } as Pick<State, keyof State>;
         this.setState(newState);
     }

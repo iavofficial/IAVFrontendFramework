@@ -1,12 +1,12 @@
 import Radium from "radium";
 import { Link } from "react-router-dom";
 
-import { BLUE1, GRAY2, DISATABHEIGHT } from "../constants.js";
+import { BLUE1, GRAY2, DISATABHEIGHT } from "../constants";
 
 interface Props {
     name: String;
     to: String;
-    active: boolean;
+    active?: boolean;
     disabled: boolean;
     selectedIcon: String;
     deselectedIcon: String;

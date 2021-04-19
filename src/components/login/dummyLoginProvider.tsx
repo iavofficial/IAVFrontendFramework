@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 
 import Auth from "../../contexts/auth";
 import { Credentials } from "./loginProvider";
@@ -8,8 +8,8 @@ interface State {
     username: String;
 }
 
-class DummyLoginProvider extends Component<any, State> {
-    constructor(props: any) {
+class DummyLoginProvider extends Component<React.PropsWithChildren<any>, State> {
+    constructor(props: React.PropsWithChildren<any>) {
         super(props);
         this.state = {
             isAuthenticated: false,

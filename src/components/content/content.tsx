@@ -7,7 +7,7 @@ interface Props {
     contentElements: React.Component[]
 }
 
-class Content extends Component<Props> {
+class Content extends Component<React.PropsWithChildren<Props>> {
     constructor(props: Props) {
         super(props);
     }

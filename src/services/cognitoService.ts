@@ -10,7 +10,7 @@ export function cognitoLogin(credentials: Credentials) {
             cognitoUser = user;
             if (user.challengeName === "NEW_PASSWORD_REQUIRED") {
                 delete user.challengeParam.userAttributes.email_verified;
-                return (new UserInformation(null, null, null, null, user.challengeParam.userAttributes));
+                return new InvalidUserInformation(user.challengeParam.userAttributes);
             } else {
                 return handleSessionResult(user);
             }
@@ -57,7 +57,7 @@ function handleSessionResult(user: any) {
         }
         if (privLevel !== -1) {
             let customerId = user.attributes["custom:customerId"];
-            return new UserInformation(jwtToken, username, customerId, privLevel, null);
+            return new ValidUserInformation(jwtToken, username, customerId, privLevel);
         } else {
             throw new Error("UserGroupError"); // throw invalid user error if no legal group is assigned
         }
@@ -66,25 +66,30 @@ function handleSessionResult(user: any) {
     }
 }
 
-class UserInformation {
-    constructor(private _jwtToken: any, private _user: String | null, private _customerId: number | null,
-        private _privileges: number | null, private _userAttributes: any) {
+export class ValidUserInformation {
+    constructor(private _jwtToken: any, private _username: string, private _customerId: number, private _privLevel: number) {
+        this._username = _username;
     }
 
     get jwtToken() {
         return this._jwtToken;
     }
 
-    get user() {
-        return this._user;
+    get username() {
+        return this._username;
     }
 
     get customerId() {
         return this._customerId;
     }
 
-    get privileges() {
-        return this._privileges;
+    get privLevel() {
+        return this._privLevel;
+    }
+}
+
+export class InvalidUserInformation {
+    constructor(private _userAttributes: any) {
     }
 
     get userAttributes() {

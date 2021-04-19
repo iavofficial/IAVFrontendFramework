@@ -1,8 +1,11 @@
-import { Component } from "react";
+import React, { Component } from "react";
 
 import AuthContext from "../../contexts/auth";
 import { getConfig } from "./api";
-import { cognitoLogin, cognitoLogout, cognitoCheckIsAuthenticated, cognitoCompletePassword, cognitoRefreshAccessToken } from "../../services/cognitoService";
+import {
+    ValidUserInformation, cognitoLogin, cognitoLogout, cognitoCheckIsAuthenticated,
+    cognitoCompletePassword, cognitoRefreshAccessToken
+} from "../../services/cognitoService";
 import LoginProvider, { Credentials } from "./loginProvider";
 
 interface Props {
@@ -19,7 +22,7 @@ interface State {
     loginError: any;
 }
 
-class AWSLoginProvider extends Component<Props, State> implements LoginProvider {
+class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, State> implements LoginProvider {
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -37,7 +40,6 @@ class AWSLoginProvider extends Component<Props, State> implements LoginProvider 
         this.logout = this.logout.bind(this);
         this.getUsername = this.getUsername.bind(this);
         this.completePassword = this.completePassword.bind(this);
-        this.setCustomerName = this.setCustomerName.bind(this);
         this.refreshSession = this.refreshSession.bind(this);
         this.processSuccessfulAuth = this.processSuccessfulAuth.bind(this);
     }
@@ -69,7 +71,7 @@ class AWSLoginProvider extends Component<Props, State> implements LoginProvider 
     }
 
     getUsername() {
-        return this.state.userData.user;
+        return this.state.userData.username;
     }
 
     login(credentials: Credentials) {
@@ -77,7 +79,7 @@ class AWSLoginProvider extends Component<Props, State> implements LoginProvider 
             isLoading: true
         });
         cognitoLogin(credentials).then(result => {
-            if (result.jwtToken) {
+            if (result instanceof ValidUserInformation) {
                 this.processSuccessfulAuth(result);
             } else {
                 this.setState({
@@ -133,15 +135,6 @@ class AWSLoginProvider extends Component<Props, State> implements LoginProvider 
         });
     }
 
-    setCustomerName(customerName: String) {
-        this.setState(prevState => ({
-            userData: {
-                ...prevState.userData,
-                customerName: customerName
-            }
-        }));
-    }
-
     refreshSession() {
         this.setState({
             isLoading: true
@@ -165,7 +158,7 @@ class AWSLoginProvider extends Component<Props, State> implements LoginProvider 
         });
     }
 
-    processSuccessfulAuth(userData) {
+    processSuccessfulAuth(userData: ValidUserInformation) {
         if (this.state.isAuthenticated !== true || this.state.isNewPasswordRequired !== false ||
             Object.entries(this.state.userData).length === 0 || Object.entries(this.state.loginError).length !== 0) {
             this.setState({
@@ -192,7 +185,7 @@ class AWSLoginProvider extends Component<Props, State> implements LoginProvider 
         return (
             <AuthContext.Provider value={{
                 ...this.state, login: this.login, completePassword: this.completePassword, logout: this.logout, getUsername: this.getUsername,
-                refreshSession: this.refreshSession, customerName: this.setCustomerName, isAuthenticated: this.isAuthenticated
+                refreshSession: this.refreshSession, isAuthenticated: this.isAuthenticated
             }}>
                 {this.props.children}
             </AuthContext.Provider>

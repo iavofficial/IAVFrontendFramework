@@ -48,8 +48,8 @@ const authConfig = {
   authenticationFlowType: 'USER_SRP_AUTH',
 };
 
-class App extends Component {
-  constructor(props) {
+class App extends Component<any> {
+  constructor(props: any) {
     super(props);
     Amplify.configure(authConfig);
   }

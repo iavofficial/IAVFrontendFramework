@@ -2,8 +2,8 @@ import React, { Component } from "react";
 
 export const SecondContext = React.createContext({});
 
-class SecondContextClass extends Component {
-    constructor(props: any) {
+class SecondContextClass extends Component<React.PropsWithChildren<any>> {
+    constructor(props: React.PropsWithChildren<any>) {
         super(props);
         this.state = {
             test3: "default",

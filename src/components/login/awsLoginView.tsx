@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { Component, FormEvent, FormEventHandler } from "react";
 import { Link } from "react-router-dom";
 
 import { BLUE4 } from "../constants";
@@ -24,7 +24,7 @@ class AWSLoginView extends Component<any, State> {
         this.LoginForm = this.LoginForm.bind(this);
     }
 
-    submit = (event) => {
+    submit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (this.context.isNewPasswordRequired) {
             this.context.completePassword(this.state.password);
@@ -33,12 +33,12 @@ class AWSLoginView extends Component<any, State> {
         }
     }
 
-    handleChange({ target: { name, value } }) {
+    handleChange({ target: { name, value } }: { target: { name: string, value: any } }) {
         let newState = { [name]: value } as Pick<State, keyof State>;
         this.setState(newState);
     }
 
-    getErrorTextFromCode(code) {
+    getErrorTextFromCode(code: string) {
         if (code) {
             if (code === "UserGroupError") {
                 return "invalid access configuration";                      // user was not added to a group

@@ -5,7 +5,7 @@ import { Credentials } from "./loginProvider";
 
 interface State {
     isAuthenticated: boolean;
-    username: String;
+    username: string;
 }
 
 class DummyLoginProvider extends Component<React.PropsWithChildren<any>, State> {

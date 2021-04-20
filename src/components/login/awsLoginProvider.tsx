@@ -9,7 +9,7 @@ import {
 import LoginProvider, { Credentials } from "./loginProvider";
 
 interface Props {
-    apiRoot: String;
+    apiRoot: string;
 }
 
 interface State {

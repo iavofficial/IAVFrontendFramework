@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 import { BLUE1, GRAY2, DISATABHEIGHT } from "../constants";
 
 interface Props {
-    name: String;
-    to: String;
-    active?: boolean;
+    name: string;
+    to: string;
     disabled: boolean;
-    selectedIcon: String;
-    deselectedIcon: String;
+    selectedIcon: string;
+    deselectedIcon: string;
+    active?: boolean;
 }
 
 const NavbarTab = (props: Props) => {

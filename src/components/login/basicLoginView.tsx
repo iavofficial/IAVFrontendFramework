@@ -7,8 +7,8 @@ import AuthContext from "../../contexts/auth";
 import LoginButtonAndSpinner from "./loginButtonWithSpinner";
 
 interface State {
-    email: String;
-    password: String;
+    email: string;
+    password: string;
 }
 
 class BasicLoginView extends Component<any, State> {

@@ -7,7 +7,7 @@ import Clock from "../clock";
 import { BLUE3, DISATABHEIGHT } from "../constants";
 import AuthContext from "../../contexts/auth";
 
-const Navbar = (props: any) => {
+const Navbar = (props: React.PropsWithChildren<any>) => {
     let location = useLocation();
     let context = useContext(AuthContext);
     return (

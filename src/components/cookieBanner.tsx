@@ -7,9 +7,9 @@ import { acceptedCookiesName } from "./cookieHandler";
 
 interface State {
     visible: boolean;
-    icon: String;
-    iconColor: String;
-    message: String;
+    icon: string;
+    iconColor: string;
+    message: string;
 }
 
 class CookieBanner extends Component<any, State> {

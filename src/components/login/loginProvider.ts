@@ -1,13 +1,14 @@
 export interface Credentials {
-    email: String;
-    password: String;
+    email: string;
+    password: string;
 }
 
 interface LoginProvider {
     isAuthenticated: () => boolean;
     login: (credentials: Credentials) => any;
     logout: () => any;
-    getUsername: () => String;
+    getUsername: () => string;
+    [attribute: string]: any
 }
 
 export default LoginProvider;

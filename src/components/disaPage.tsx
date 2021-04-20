@@ -18,21 +18,22 @@ import { acceptedCookies } from "./cookieHandler";
 import DummyLoginProvider from "./login/dummyLoginProvider";
 import AuthContext from "../contexts/auth";
 import View from "./view";
+import LoginProvider from "./login/loginProvider";
 
 interface Props {
     views: View[];
     startingPoint: String;
     loginView: React.ComponentType;
     // TODO: Refactor this
-    loginProvider: any;
+    loginProvider: React.ComponentType<LoginProvider>;
     loginProviderProps: any;
 }
 
 const DisaPage = (props: Props) => {
-    const LoginProvider = props.loginProvider !== undefined && props.loginProvider !== null ? props.loginProvider : DummyLoginProvider;
+    const ActualLoginProvider = props.loginProvider !== undefined && props.loginProvider !== null ? props.loginProvider : DummyLoginProvider;
     const LoginView = props.loginView !== undefined && props.loginView !== null ? props.loginView : BasicLoginView;
     return (
-        <LoginProvider {...props.loginProviderProps}>
+        <ActualLoginProvider {...props.loginProviderProps}>
             { !acceptedCookies() && <CookieBanner />}
             <AuthContext.Consumer>
                 {(context) => {
@@ -43,7 +44,7 @@ const DisaPage = (props: Props) => {
                                     <DisaHeader />
                                     <div className="p-d-flex" style={{ height: "100%", margin: "0" }}>
                                         <Navbar>
-                                            {props.views.map(view => <NavbarTab selectedIcon={view.selectedIcon} deselectedIcon={view.deselectedIcon} to={view.to} name={view.name} disabled={view.disabled} />)}
+                                            {props.views.map(view => <NavbarTab selectedIcon={view.selectedIcon.valueOf()} deselectedIcon={view.deselectedIcon.valueOf()} to={view.to.valueOf()} name={view.name.valueOf()} disabled={view.disabled} />)}
                                         </Navbar>
                                         {props.views.map(view => <Route exact path={view.to.valueOf()} component={view.component} />)}
                                         <Route exact path="/imprint" component={Imprint} />
@@ -63,7 +64,7 @@ const DisaPage = (props: Props) => {
                     }
                 }}
             </AuthContext.Consumer>
-        </LoginProvider>
+        </ActualLoginProvider>
     );
 };
 

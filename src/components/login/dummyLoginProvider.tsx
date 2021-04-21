@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import Auth from "../../contexts/auth";
 import { Credentials } from "./loginProvider";
 
-interface State {
+export interface State {
     isAuthenticated: boolean;
     username: string;
 }

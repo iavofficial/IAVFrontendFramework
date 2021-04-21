@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import Contentbar from "./contentbar";
 import Contentborder from "./contentBorder";
 
-interface Props {
+export interface Props {
     contentElements: React.Component[]
 }
 

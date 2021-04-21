@@ -6,7 +6,7 @@ import AppLogo from "../../assets/app_logo.png";
 import AuthContext from "../../contexts/auth";
 import LoginButtonAndSpinner from "./loginButtonWithSpinner";
 
-interface State {
+export interface State {
     email: string;
     password: string
 }

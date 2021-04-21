@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "outDir": "transpiled_ts",
     "target": "es5",
     "lib": [
       "dom",

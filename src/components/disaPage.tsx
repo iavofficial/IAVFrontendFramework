@@ -13,20 +13,18 @@ import DisaHeader from "./disaHeader";
 import NavbarTab from "./navbar/navbarTab";
 import Navbar from "./navbar/navbar";
 import Imprint from "./imprint";
-import CookieBanner from "./cookieBanner";
-import { acceptedCookies } from "./cookieHandler";
+import CookieBanner from "./cookie/cookieBanner";
+import { acceptedCookies } from "./cookie/cookieHandler";
 import DummyLoginProvider from "./login/dummyLoginProvider";
 import AuthContext from "../contexts/auth";
 import View from "./view";
-import LoginProvider from "./login/loginProvider";
 
-interface Props {
+export interface Props {
     views: View[];
-    startingPoint: String;
-    loginView: React.ComponentType;
-    // TODO: Refactor this
-    loginProvider: React.ComponentType<LoginProvider>;
-    loginProviderProps: any;
+    startingPoint: string;
+    loginView?: React.ComponentType;
+    loginProvider?: React.ComponentType<any>/* & LoginProvider*/;
+    loginProviderProps?: any;
 }
 
 const DisaPage = (props: Props) => {

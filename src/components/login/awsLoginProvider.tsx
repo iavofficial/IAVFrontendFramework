@@ -8,11 +8,11 @@ import {
 } from "../../services/cognitoService";
 import LoginProvider, { Credentials } from "./loginProvider";
 
-interface Props {
+export interface Props {
     apiRoot: string;
 }
 
-interface State {
+export interface State {
     isAuthenticated: boolean;
     isNewPasswordRequired: boolean;
     isLoading: boolean;

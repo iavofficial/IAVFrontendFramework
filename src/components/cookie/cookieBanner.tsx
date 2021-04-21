@@ -2,7 +2,7 @@ import { Component } from "react";
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 
-import { RED, BLUE1, GRAY3 } from "./constants";
+import { RED, BLUE1, GRAY3 } from "../constants";
 import { acceptedCookiesName } from "./cookieHandler";
 
 interface State {

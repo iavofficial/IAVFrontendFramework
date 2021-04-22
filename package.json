@@ -34,7 +34,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build-lib-linux": "",
+    "build-lib-win": "scripts\\windows\\build.bat"
   },
   "eslintConfig": {
     "extends": [
@@ -66,6 +68,7 @@
     "@babel/cli": "^7.13.14",
     "@babel/core": "^7.12.3",
     "@babel/preset-react": "^7.13.13",
+    "@babel/preset-typescript": "^7.12.1",
     "@types/radium": "^0.24.3",
     "@types/react-router-dom": "^5.1.7"
   }

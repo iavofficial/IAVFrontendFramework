@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
-    "outDir": "transpiled_ts",
+    // Ensure that .d.ts files are created by tsc, but not .js files
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    // Ensure that Babel can safely transpile files in the TypeScript project
+    "isolatedModules": true,
     "target": "es5",
     "lib": [
       "dom",
@@ -17,9 +21,8 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "rootDir": "lib"
   },
   "include": [
     "src"

@@ -3,7 +3,7 @@ cp -R ./src/assets ./lib/assets;
 
 npx tsc;
 
-if $? = 0
+if [ $? = 0 ]
 then
     npx babel ./src/components --out-dir ./lib/components --copy-files;
     npx babel ./src/contexts --out-dir ./lib/contexts --copy-files;

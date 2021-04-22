@@ -73,7 +73,7 @@ create_release:
   variables:
     SSL_CERT_FILE: $IAV_CA_BUNDLE
   script:
-    - apk add --update npm
+    - apk add --update nodejs nodejs-npm
   release:
     tag_name: ver_$(node -p "require('./package.json').version")
     description: ./ci_cd/release_notes/$(node -p "require('./package.json').version").md

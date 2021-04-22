@@ -35,8 +35,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "build-lib-linux": "",
-    "build-lib-win": "scripts\\windows\\build.bat"
+    "build-lib-linux": "./scripts/ci_cd/create_lib.sh",
+    "build-lib-windows": "scripts\\windows\\build.bat"
   },
   "eslintConfig": {
     "extends": [

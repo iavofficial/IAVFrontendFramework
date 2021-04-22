@@ -1,4 +1,4 @@
-import { Component, FormEvent, FormEventHandler } from "react";
+import { Component, FormEvent } from "react";
 import { Link } from "react-router-dom";
 
 import { BLUE4 } from "../constants";

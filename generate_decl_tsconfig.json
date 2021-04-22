@@ -1,11 +1,13 @@
 {
-  "compilerOptions": {
-      "noEmit": true,
+    "compilerOptions": {
+      "declaration": true,
+      "emitDeclarationOnly": true,
+      "isolatedModules": true,
       "target": "es5",
       "lib": [
-          "dom",
-          "dom.iterable",
-          "esnext"
+        "dom",
+        "dom.iterable",
+        "esnext"
       ],
       "allowJs": true,
       "skipLibCheck": true,
@@ -19,8 +21,11 @@
       "resolveJsonModule": true,
       "jsx": "react-jsx",
       "rootDir": "lib"
-  },
-  "include": [
-      "src"
-  ]
-}
+    },
+    "include": [
+      "lib"
+    ],
+    "exclude": [
+      "lib/*.js"
+    ]
+  }

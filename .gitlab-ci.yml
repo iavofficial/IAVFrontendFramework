@@ -9,7 +9,7 @@ default:
 validate_package_scope:
   stage: build
   script:
-    - source ./ci_cd/scripts/set_npm_variables.sh
+    - source ./scripts/ci_cd/set_npm_variables.sh
     - |
       if [[ ! -f package.json ]]; then
         echo "No package.json found! A package.json file is required to publish a package to GitLab's NPM registry."
@@ -53,8 +53,8 @@ create_npmrc:
 publish_package:
   stage: deploy
   script:
-    - ./ci_cd/scripts/setup_npm.sh
-    - ./ci_cd/scripts/create_lib.sh
+    - ./scripts/ci_cd/setup_npm.sh
+    - ./scripts/ci_cd/create_lib.sh
     - |
       {
         npm publish &&

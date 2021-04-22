@@ -69,7 +69,7 @@ publish_package:
 # Create release so observer of this project will get a notification e-mail.
 create_release:
   stage: .post
-  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  image: registry.gitlab.com/gitlab-org/release-cli:0.6.0
   variables:
     SSL_CERT_FILE: $IAV_CA_BUNDLE
   script:

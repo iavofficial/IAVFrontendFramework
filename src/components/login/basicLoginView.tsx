@@ -18,16 +18,15 @@ export class BasicLoginView extends Component<any, State> {
             email: "",
             password: ""
         }
-        this.submit = this.submit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
     }
 
+    // These two functions life on the class instance not on the prototype thanks to @babel/plugin-proposal-class-properties.
     submit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         this.context.login({ email: this.state.email, password: this.state.password });
     }
 
-    handleChange({ target: { name, value } }: { target: { name: string, value: any } }) {
+    handleChange = ({ target: { name, value } }: { target: { name: string, value: any } }) => {
         let newState = { [name]: value } as Pick<State, keyof State>;
         this.setState(newState);
     }

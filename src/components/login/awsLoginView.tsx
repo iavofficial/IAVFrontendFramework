@@ -24,6 +24,7 @@ export class AWSLoginView extends Component<any, State> {
         this.LoginForm = this.LoginForm.bind(this);
     }
 
+    // These two functions life on the class instance not on the prototype thanks to @babel/plugin-proposal-class-properties.
     submit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (this.context.isNewPasswordRequired) {
@@ -33,7 +34,7 @@ export class AWSLoginView extends Component<any, State> {
         }
     }
 
-    handleChange({ target: { name, value } }: { target: { name: string, value: any } }) {
+    handleChange = ({ target: { name, value } }: { target: { name: string, value: any } }) => {
         let newState = { [name]: value } as Pick<State, keyof State>;
         this.setState(newState);
     }

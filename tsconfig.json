@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "outDir": "tsc_transpiled",
+        "noEmit": true,
         "target": "es5",
         "lib": [
             "dom",

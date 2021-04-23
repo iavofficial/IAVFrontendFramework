@@ -1,2 +1,2 @@
 // @ts-ignore
-export * from "./components/login/dummyLoginProvider";
+export * from "./lib/components/login/dummyLoginProvider";

@@ -1,2 +1,2 @@
 // @ts-ignore
-export * from "./components/disaPage";
+export * from "./lib/components/disaPage";

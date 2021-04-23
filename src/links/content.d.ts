@@ -1,2 +1,2 @@
 // @ts-ignore
-export * from "./components/content/content";
+export * from "./lib/components/content/content";

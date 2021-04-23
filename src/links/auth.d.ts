@@ -1,2 +1,2 @@
 // @ts-ignore
-export * from "./contexts/auth";
+export * from "./lib/contexts/auth";

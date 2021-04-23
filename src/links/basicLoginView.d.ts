@@ -1,2 +1,2 @@
 // @ts-ignore
-export * from "./components/login/basicLoginView";
+export * from "./lib/components/login/basicLoginView";

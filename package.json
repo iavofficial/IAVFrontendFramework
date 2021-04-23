@@ -70,7 +70,6 @@
     "@babel/preset-react": "^7.13.13",
     "@babel/preset-typescript": "^7.12.1",
     "@types/radium": "^0.24.3",
-    "@types/react-router-dom": "^5.1.7",
-    "tsc-watch": "^4.2.9"
+    "@types/react-router-dom": "^5.1.7"
   }
 }

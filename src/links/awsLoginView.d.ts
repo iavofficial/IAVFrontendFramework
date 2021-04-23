@@ -1,2 +1,2 @@
 // @ts-ignore
-export * from "./components/login/awsLoginView";
+export * from "./lib/components/login/awsLoginView";

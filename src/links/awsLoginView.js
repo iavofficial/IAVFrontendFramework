@@ -1,1 +1,1 @@
-export { default as AWSLoginView } from "./lib/components/login/awsLoginView";
+export * from "./lib/components/login/awsLoginView";

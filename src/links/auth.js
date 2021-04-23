@@ -1,1 +1,1 @@
-export { default as Auth } from "./lib/contexts/login/auth";
+export * from "./lib/contexts/login/auth";

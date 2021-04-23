@@ -1,1 +1,1 @@
-export { default as AWSLoginProvider } from "./lib/components/login/awsLoginProvider";
+export * from "./lib/components/login/awsLoginProvider";

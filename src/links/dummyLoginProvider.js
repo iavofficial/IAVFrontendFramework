@@ -1,1 +1,1 @@
-export { default as DummyLoginProvider } from "./lib/components/login/dummyLoginProvider";
+export * from "./lib/components/login/dummyLoginProvider";

@@ -1,7 +1,6 @@
 {
     "presets": [
         "@babel/preset-react",
-        "@babel/plugin-proposal-class-properties",
         [
             "@babel/preset-typescript",
             {
@@ -9,5 +8,8 @@
                 "allExtensions": true
             }
         ]
+    ],
+    "plugins": [
+        "@babel/plugin-proposal-class-properties"
     ]
 }

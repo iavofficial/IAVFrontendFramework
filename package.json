@@ -10,7 +10,6 @@
     }
   ],
   "dependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.3",
@@ -70,6 +69,7 @@
     "@babel/core": "^7.12.3",
     "@babel/preset-react": "^7.13.13",
     "@babel/preset-typescript": "^7.12.1",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@types/radium": "^0.24.3",
     "@types/react-router-dom": "^5.1.7"
   }

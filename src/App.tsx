@@ -1,6 +1,5 @@
 // TODO: Problem mit Content: Kein React.cloneElement(...) möglich. Normaler Methodenaufruf notwendig.
 import { Component } from "react";
-import "./App.css";
 import { RootComponent } from "./develop/components/rootComponent"
 import { Test1Component } from "./develop/components/test1Component"
 import { Test2Component } from "./develop/components/test2Component"

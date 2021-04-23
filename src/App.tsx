@@ -17,7 +17,6 @@ import { config } from "./develop/config";
 import Amplify from "@aws-amplify/core";
 import AWSLoginView from "./components/login/awsLoginView";
 import View from "./components/view";
-import DummyLoginProvider from "./components/login/dummyLoginProvider";
 
 const authConfig = {
   // REQUIRED - Amazon Cognito Region

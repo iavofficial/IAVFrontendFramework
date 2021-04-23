@@ -2,7 +2,7 @@
 /build
 
 # files for ci / cd
-/ci_cd
+/scripts
 
 # files only for development
 /public
@@ -11,3 +11,5 @@
 # config files
 .babelrc
 .gitlab-ci.yml
+tsconfig.json
+generate_decl_tsconfig.json

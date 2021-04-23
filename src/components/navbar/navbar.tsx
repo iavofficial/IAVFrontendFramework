@@ -3,9 +3,9 @@ import { Link, useLocation } from "react-router-dom";
 
 import UserPic from "../../assets/user.png";
 import LogoutPic from "../../assets/logout_icon.png";
-import Clock from "../clock";
+import { Clock } from "../clock";
 import { BLUE3, DISATABHEIGHT } from "../constants";
-import AuthContext from "../../contexts/auth";
+import { AuthContext } from "../../contexts/auth";
 
 const Navbar = (props: React.PropsWithChildren<any>) => {
     let location = useLocation();

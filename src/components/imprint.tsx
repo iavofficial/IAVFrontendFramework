@@ -1,4 +1,4 @@
-const Imprint = () => (
+export const Imprint = () => (
     <div className="p-d-flex" style={{ height: "100%", width: "100%", justifyContent: "center", alignItems: "center" }}>
         <div style={{ textAlign: "center" }}>
             <h5>Impressum</h5>
@@ -27,5 +27,3 @@ const Imprint = () => (
         </div>
     </div>
 );
-
-export default Imprint;

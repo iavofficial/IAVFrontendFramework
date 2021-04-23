@@ -3,15 +3,15 @@ import { Link } from "react-router-dom";
 
 import { BLUE4 } from "../constants";
 import AppLogo from "../../assets/app_logo.png";
-import AuthContext from "../../contexts/auth";
-import LoginButtonAndSpinner from "./loginButtonWithSpinner";
+import { AuthContext } from "../../contexts/auth";
+import { LoginButtonWithSpinner } from "./loginButtonWithSpinner";
 
 export interface State {
     email: string;
     password: string
 }
 
-class AWSLoginView extends Component<any, State> {
+export class AWSLoginView extends Component<any, State> {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -71,7 +71,7 @@ class AWSLoginView extends Component<any, State> {
                         <input name="password" type="password" id="inputPassword" style={{ width: "100%", marginTop: "5px", marginBottom: "10px" }}
                             className={"form-control p-inputtext " + (this.context.loginError.code ? "invalid" : "")} placeholder="New password"
                             onChange={this.handleChange} required autoFocus />
-                        <LoginButtonAndSpinner isLoading={this.context.isLoading} />
+                        <LoginButtonWithSpinner isLoading={this.context.isLoading} />
                         <div className="invalid">{this.getErrorTextFromCode(this.context.loginError.code)}</div>
                     </div>
                 </form>
@@ -90,7 +90,7 @@ class AWSLoginView extends Component<any, State> {
                     <input value={this.state.password.valueOf()} onChange={this.handleChange} name="password" type="password"
                         className={"p-inputtext"} placeholder="Password" required style={{ marginBottom: "1rem" }} />
                     <div>
-                        <LoginButtonAndSpinner isLoading={this.context.isLoading} />
+                        <LoginButtonWithSpinner isLoading={this.context.isLoading} />
                     </div>
                     <div className="invalid">{this.getErrorTextFromCode(this.context.loginError.code)}</div>
                 </div>
@@ -118,5 +118,3 @@ class AWSLoginView extends Component<any, State> {
 }
 
 AWSLoginView.contextType = AuthContext;
-
-export default AWSLoginView;

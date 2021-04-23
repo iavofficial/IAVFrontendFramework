@@ -4,7 +4,7 @@ interface State {
     date: Date;
 }
 
-class Clock extends Component<any, State> {
+export class Clock extends Component<any, State> {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -32,5 +32,3 @@ class Clock extends Component<any, State> {
         );
     }
 }
-
-export default Clock;

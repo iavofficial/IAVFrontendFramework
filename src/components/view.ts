@@ -1,6 +1,6 @@
 import React from "react";
 
-class View {
+export class View {
     constructor(private _selectedIcon: String, private _deselectedIcon: String, private _to: String,
         private _name: String, private _disabled: boolean, private _component: React.ComponentType) {
     }
@@ -29,5 +29,3 @@ class View {
         return this._component;
     }
 }
-
-export default View;

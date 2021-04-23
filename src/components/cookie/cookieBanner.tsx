@@ -12,7 +12,7 @@ interface State {
     message: string;
 }
 
-class CookieBanner extends Component<any, State> {
+export class CookieBanner extends Component<any, State> {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -55,5 +55,3 @@ class CookieBanner extends Component<any, State> {
         );
     }
 }
-
-export default CookieBanner;

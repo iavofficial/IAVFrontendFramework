@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 export const FirstContext = React.createContext({});
 
-class FirstContextClass extends Component<React.PropsWithChildren<any>> {
+export class FirstContextClass extends Component<React.PropsWithChildren<any>> {
     constructor(props: React.PropsWithChildren<any>) {
         super(props);
         this.state = {
@@ -29,5 +29,3 @@ class FirstContextClass extends Component<React.PropsWithChildren<any>> {
         );
     }
 }
-
-export default FirstContextClass;

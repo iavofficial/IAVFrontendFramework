@@ -8,16 +8,16 @@ import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 import "./css/disaPage.css";
 import "./css/disaFramework.css";
 import "./css/error.css";
-import BasicLoginView from "./login/basicLoginView";
-import DisaHeader from "./disaHeader";
+import { BasicLoginView } from "./login/basicLoginView";
+import { DisaHeader } from "./disaHeader";
 import NavbarTab from "./navbar/navbarTab";
 import Navbar from "./navbar/navbar";
-import Imprint from "./imprint";
-import CookieBanner from "./cookie/cookieBanner";
+import { Imprint } from "./imprint";
+import { CookieBanner } from "./cookie/cookieBanner";
 import { acceptedCookies } from "./cookie/cookieHandler";
-import DummyLoginProvider from "./login/dummyLoginProvider";
-import AuthContext from "../contexts/auth";
-import View from "./view";
+import { DummyLoginProvider } from "./login/dummyLoginProvider";
+import { AuthContext } from "../contexts/auth";
+import { View } from "./view";
 
 export interface Props {
     views: View[];
@@ -27,7 +27,7 @@ export interface Props {
     loginProviderProps?: any;
 }
 
-const DisaPage = (props: Props) => {
+export const DisaPage = (props: Props) => {
     const ActualLoginProvider = props.loginProvider !== undefined && props.loginProvider !== null ? props.loginProvider : DummyLoginProvider;
     const LoginView = props.loginView !== undefined && props.loginView !== null ? props.loginView : BasicLoginView;
     return (
@@ -65,5 +65,3 @@ const DisaPage = (props: Props) => {
         </ActualLoginProvider>
     );
 };
-
-export default DisaPage;

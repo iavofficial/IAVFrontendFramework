@@ -1,22 +1,22 @@
 // TODO: Problem mit Content: Kein React.cloneElement(...) möglich. Normaler Methodenaufruf notwendig.
 import { Component } from "react";
 import "./App.css";
-import RootComponent from "./develop/components/rootComponent"
-import Test1Component from "./develop/components/test1Component"
-import Test2Component from "./develop/components/test2Component"
-import Test3Component from "./develop/components/test3Component"
+import { RootComponent } from "./develop/components/rootComponent"
+import { Test1Component } from "./develop/components/test1Component"
+import { Test2Component } from "./develop/components/test2Component"
+import { Test3Component } from "./develop/components/test3Component"
 import navFleetSelected from "./develop/assets/nav_fleet_selected.png";
 import navFleetDeselected from "./develop/assets/nav_fleet_deselected.png";
 import navFleetDetailSelected from "./develop/assets/nav_fleet_detail_selected.png";
 import navFleetDetailDeselected from "./develop/assets/nav_fleet_detail_deselected.png";
-import DisaPage from "./components/disaPage";
-import FirstContextClass from "./develop/contexts/FirstContext";
-import SecondContextClass from "./develop/contexts/SecondContext";
-import AWSLoginProvider from "./components/login/awsLoginProvider"
+import { DisaPage } from "./components/disaPage";
+import { FirstContextClass } from "./develop/contexts/FirstContext";
+import { SecondContextClass } from "./develop/contexts/SecondContext";
+import { AWSLoginProvider } from "./components/login/awsLoginProvider"
 import { config } from "./develop/config";
 import Amplify from "@aws-amplify/core";
-import AWSLoginView from "./components/login/awsLoginView";
-import View from "./components/view";
+import { AWSLoginView } from "./components/login/awsLoginView";
+import { View } from "./components/view";
 
 const authConfig = {
   // REQUIRED - Amazon Cognito Region

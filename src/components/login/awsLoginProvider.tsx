@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 
-import AuthContext from "../../contexts/auth";
+import { AuthContext } from "../../contexts/auth";
 import { getConfig } from "./api";
 import {
     ValidUserInformation, cognitoLogin, cognitoLogout, cognitoCheckIsAuthenticated,
     cognitoCompletePassword, cognitoRefreshAccessToken
 } from "../../services/cognitoService";
-import LoginProvider, { Credentials } from "./loginProvider";
+import { LoginProvider, Credentials } from "./loginProvider";
 
 export interface Props {
     apiRoot: string;
@@ -22,7 +22,7 @@ export interface State {
     loginError: any;
 }
 
-class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, State> implements LoginProvider {
+export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, State> implements LoginProvider {
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -192,5 +192,3 @@ class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, State> 
         )
     }
 }
-
-export default AWSLoginProvider;

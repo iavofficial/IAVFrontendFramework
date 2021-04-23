@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 
-import Contentbar from "./contentbar";
-import Contentborder from "./contentBorder";
+import { Contentbar } from "./contentbar";
+import { ContentBorder } from "./contentBorder";
 
 export interface Props {
     contentElements: React.Component[]
 }
 
-class Content extends Component<React.PropsWithChildren<Props>> {
+export class Content extends Component<React.PropsWithChildren<Props>> {
     constructor(props: Props) {
         super(props);
     }
@@ -17,13 +17,11 @@ class Content extends Component<React.PropsWithChildren<Props>> {
             <div className="p-d-flex p-flex-column" style={{ width: "100%" }}>
                 <Contentbar contentElements={this.props.contentElements} />
                 <div style={{ height: "100%" }}>
-                    <Contentborder>
+                    <ContentBorder>
                         {this.props.children}
-                    </Contentborder>
+                    </ContentBorder>
                 </div>
             </div>
         );
     }
 }
-
-export default Content;

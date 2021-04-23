@@ -1,8 +1,8 @@
 import { Component } from "react";
 import { FirstContext } from "../contexts/FirstContext";
-import Content from "../../components/content/content";
+import { Content } from "../../components/content/content";
 
-class Test2Component extends Component {
+export class Test2Component extends Component {
     constructor(props: any) {
         super(props);
     }
@@ -20,5 +20,3 @@ class Test2Component extends Component {
 }
 
 Test2Component.contextType = FirstContext;
-
-export default Test2Component;

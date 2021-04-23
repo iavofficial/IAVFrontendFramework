@@ -1,5 +1,5 @@
 import React from "react";
-import LoginProvider, { Credentials } from "../components/login/loginProvider";
+import { LoginProvider, Credentials } from "../components/login/loginProvider";
 
 const placeholderContext: LoginProvider = {
     isAuthenticated: () => false,
@@ -8,4 +8,6 @@ const placeholderContext: LoginProvider = {
     getUsername: () => "PLACEHOLDER"
 }
 
-export default React.createContext<LoginProvider>(placeholderContext);
+const authContext = React.createContext<LoginProvider>(placeholderContext);
+
+export { authContext as AuthContext };

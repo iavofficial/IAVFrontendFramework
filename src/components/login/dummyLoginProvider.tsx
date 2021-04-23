@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import Auth from "../../contexts/auth";
+import { AuthContext } from "../../contexts/auth";
 import { Credentials } from "./loginProvider";
 
 export interface State {
@@ -8,7 +8,7 @@ export interface State {
     username: string;
 }
 
-class DummyLoginProvider extends Component<React.PropsWithChildren<any>, State> {
+export class DummyLoginProvider extends Component<React.PropsWithChildren<any>, State> {
     constructor(props: React.PropsWithChildren<any>) {
         super(props);
         this.state = {
@@ -45,11 +45,9 @@ class DummyLoginProvider extends Component<React.PropsWithChildren<any>, State> 
 
     render() {
         return (
-            <Auth.Provider value={{ ...this.state, isAuthenticated: this.isAuthenticated, login: this.login, logout: this.logout, getUsername: this.getUsername }}>
+            <AuthContext.Provider value={{ ...this.state, isAuthenticated: this.isAuthenticated, login: this.login, logout: this.logout, getUsername: this.getUsername }}>
                 {this.props.children}
-            </Auth.Provider>
+            </AuthContext.Provider>
         );
     }
 }
-
-export default DummyLoginProvider;

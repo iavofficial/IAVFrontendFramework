@@ -1,7 +1,7 @@
 import { Component } from "react";
-import Content from "../../components/content/content";
+import { Content } from "../../components/content/content";
 
-class Test3Component extends Component {
+export class Test3Component extends Component {
     constructor(props: any) {
         super(props);
     }
@@ -14,5 +14,3 @@ class Test3Component extends Component {
         );
     }
 }
-
-export default Test3Component;

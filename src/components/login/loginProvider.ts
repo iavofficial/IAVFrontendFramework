@@ -3,7 +3,7 @@ export interface Credentials {
     password: string;
 }
 
-export default interface LoginProvider {
+export interface LoginProvider {
     isAuthenticated(): boolean;
     login(credentials: Credentials): any;
     logout(): any;

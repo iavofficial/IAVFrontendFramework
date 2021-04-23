@@ -3,15 +3,15 @@ import { Link } from "react-router-dom";
 
 import { BLUE4 } from "../constants";
 import AppLogo from "../../assets/app_logo.png";
-import AuthContext from "../../contexts/auth";
-import LoginButtonAndSpinner from "./loginButtonWithSpinner";
+import { AuthContext } from "../../contexts/auth";
+import { LoginButtonWithSpinner } from "./loginButtonWithSpinner";
 
 export interface State {
     email: string;
     password: string;
 }
 
-class BasicLoginView extends Component<any, State> {
+export class BasicLoginView extends Component<any, State> {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -50,7 +50,7 @@ class BasicLoginView extends Component<any, State> {
                                 <input value={this.state.password.valueOf()} onChange={this.handleChange} name="password" type="password"
                                     className={"p-inputtext"} placeholder="Password" required style={{ marginBottom: "1rem" }} />
                                 <div>
-                                    <LoginButtonAndSpinner isLoading={this.context.isLoading} />
+                                    <LoginButtonWithSpinner isLoading={this.context.isLoading} />
                                 </div>
                             </div>
                         </form>
@@ -64,5 +64,3 @@ class BasicLoginView extends Component<any, State> {
 };
 
 BasicLoginView.contextType = AuthContext;
-
-export default BasicLoginView;

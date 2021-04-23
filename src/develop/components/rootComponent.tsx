@@ -1,13 +1,13 @@
 import { Component } from "react";
 import { FirstContext } from "../contexts/FirstContext";
-import Content from "../../components/content/content";
+import { Content } from "../../components/content/content";
 
 interface State {
     localState: String,
     contentTabs: JSX.Element[]
 }
 
-class RootComponent extends Component<any, State> {
+export class RootComponent extends Component<any, State> {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -32,5 +32,3 @@ class RootComponent extends Component<any, State> {
 }
 
 RootComponent.contextType = FirstContext;
-
-export default RootComponent;

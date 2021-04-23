@@ -3,5 +3,6 @@ Xcopy src\assets lib\assets /i
 
 npx babel src\components --out-dir lib\components --copy-files --extensions .ts,.tsx &^
 npx babel src\contexts --out-dir lib\contexts --copy-files --extensions .ts,.tsx &^
+npx babel ./src/services --out-dir ./lib/services --copy-files --extensions .ts,.tsx &^
 npx babel src\links --out-dir lib --copy-files &&^
 npx tsc --p ./generate_decl_tsconfig.json

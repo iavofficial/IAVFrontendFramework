@@ -1,5 +1,5 @@
 mkdir ./decl_generated;
-cp -R ./src ./decl_generated;
+cp -R ./src/* ./decl_generated;
 npx tsc;
 
 mkdir ./lib;

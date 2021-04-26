@@ -1,8 +1,12 @@
-rmdir /S /q lib
-Xcopy src\assets lib\assets /i
+Xcopy src decl_generated /e /i
+call npx tsc
 
-npx babel src\components --out-dir lib\components --copy-files --extensions .ts,.tsx &^
-npx babel src\contexts --out-dir lib\contexts --copy-files --extensions .ts,.tsx &^
-npx babel ./src/services --out-dir ./lib/services --copy-files --extensions .ts,.tsx &^
-npx babel src\links --out-dir lib --copy-files &&^
-npx tsc --p ./generate_decl_tsconfig.json
+rmdir /S /q lib
+Xcopy decl_generated\assets lib\assets /e /i
+
+call npx babel decl_generated\components --out-dir lib\components --copy-files --extensions .ts,.tsx
+call npx babel decl_generated\contexts --out-dir lib\contexts --copy-files --extensions .ts,.tsx
+call npx babel decl_generated\services --out-dir lib\services --copy-files --extensions .ts,.tsx
+call npx babel decl_generated\links --out-dir lib --copy-files
+
+rmdir /S /q decl_generated

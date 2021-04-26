@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
-    "noEmit": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "isolatedModules": true,
     "target": "es5",
     "lib": [
       "dom",
@@ -18,9 +20,12 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "jsx": "react-jsx",
-    "isolatedModules": true
+    "rootDir": "decl_generated"
   },
   "include": [
-    "src"
+    "decl_generated"
+  ],
+  "exclude": [
+    "decl_generated/links"
   ]
 }

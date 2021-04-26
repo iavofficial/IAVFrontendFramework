@@ -13,6 +13,6 @@
         "@babel/plugin-proposal-class-properties"
     ],
     "ignore": [
-        "src/**/*.d.ts"
+        "decl_generated/**/*.d.ts"
     ]
 }

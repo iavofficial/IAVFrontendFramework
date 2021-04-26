@@ -1,15 +1,16 @@
-mkdir ./lib;
-cp -R ./src/assets ./lib/assets;
-
+mkdir ./decl_generated;
+cp -R ./src ./decl_generated;
 npx tsc;
+
+mkdir ./lib;
+cp -R ./decl_generated/assets ./lib/assets;
 
 if [ $? = 0 ]
 then
-    npx babel ./src/components --out-dir ./lib/components --copy-files --extensions .ts,.tsx;
-    npx babel ./src/contexts --out-dir ./lib/contexts --copy-files --extensions .ts,.tsx;
-    npx babel ./src/services --out-dir ./lib/services --copy-files --extensions .ts,.tsx;
-    npx babel ./src/links --out-dir . --copy-files;
-    npx tsc --p ./generate_decl_tsconfig.json;
+    npx babel ./decl_generated/components --out-dir ./lib/components --copy-files --extensions .ts,.tsx;
+    npx babel ./decl_generated/contexts --out-dir ./lib/contexts --copy-files --extensions .ts,.tsx;
+    npx babel ./decl_generated/services --out-dir ./lib/services --copy-files --extensions .ts,.tsx;
+    npx babel ./decl_generated/links --out-dir . --copy-files;
 else
     exit 1;
 fi

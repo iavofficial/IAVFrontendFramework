@@ -11,6 +11,7 @@ then
     npx babel ./decl_generated/contexts --out-dir ./lib/contexts --copy-files --extensions .ts,.tsx;
     npx babel ./decl_generated/services --out-dir ./lib/services --copy-files --extensions .ts,.tsx;
     npx babel ./decl_generated/links --out-dir ./lib --copy-files;
+    rm -R ./decl_generated;
 else
     exit 1;
 fi

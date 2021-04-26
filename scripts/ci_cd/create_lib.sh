@@ -10,7 +10,7 @@ then
     npx babel ./decl_generated/components --out-dir ./lib/components --copy-files --extensions .ts,.tsx;
     npx babel ./decl_generated/contexts --out-dir ./lib/contexts --copy-files --extensions .ts,.tsx;
     npx babel ./decl_generated/services --out-dir ./lib/services --copy-files --extensions .ts,.tsx;
-    npx babel ./decl_generated/links --out-dir . --copy-files;
+    npx babel ./decl_generated/links --out-dir ./lib --copy-files;
 else
     exit 1;
 fi

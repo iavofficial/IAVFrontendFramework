@@ -12,4 +12,4 @@
 .babelrc
 .gitlab-ci.yml
 tsconfig.json
-generate_decl_tsconfig.json
+tsconfig_generate_lib.json

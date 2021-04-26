@@ -20,7 +20,8 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "jsx": "react-jsx",
-    "rootDir": "src"
+    "rootDir": "src",
+    "noEmit": true
   },
   "include": [
     "src"

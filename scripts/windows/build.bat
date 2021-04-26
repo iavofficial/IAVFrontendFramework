@@ -1,5 +1,5 @@
 Xcopy src decl_generated /e /i
-call npx tsc
+call npx tsc --p tsconfig_generate_lib.json
 
 rmdir /S /q lib
 Xcopy decl_generated\assets lib\assets /e /i

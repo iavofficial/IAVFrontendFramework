@@ -1,6 +1,6 @@
 mkdir ./decl_generated;
 cp -R ./src/* ./decl_generated;
-npx tsc;
+npx tsc --p tsconfig_generate_lib.json;
 
 mkdir ./lib;
 cp -R ./decl_generated/assets ./lib/assets;

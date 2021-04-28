@@ -8,14 +8,14 @@ import navFleetSelected from "./develop/assets/nav_fleet_selected.png";
 import navFleetDeselected from "./develop/assets/nav_fleet_deselected.png";
 import navFleetDetailSelected from "./develop/assets/nav_fleet_detail_selected.png";
 import navFleetDetailDeselected from "./develop/assets/nav_fleet_detail_deselected.png";
-import { DisaPage } from "./components/disaPage";
+import { DisaPage } from "./lib/components/disaPage";
 import { FirstContextClass } from "./develop/contexts/FirstContext";
 import { SecondContextClass } from "./develop/contexts/SecondContext";
-import { AWSLoginProvider } from "./components/login/awsLoginProvider";
+import { AWSLoginProvider } from "./lib/components/login/awsLoginProvider";
 import { config } from "./develop/config";
 import Amplify from "@aws-amplify/core";
-import { AWSLoginView } from "./components/login/awsLoginView";
-import { View } from "./components/view";
+import { AWSLoginView } from "./lib/components/login/awsLoginView";
+import { View } from "./lib/components/view";
 
 const authConfig = {
   // REQUIRED - Amazon Cognito Region

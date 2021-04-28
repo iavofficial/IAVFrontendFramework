@@ -34,14 +34,6 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
             userAttributes: {},             // user attributes retrieved from cognito necessary for the completePassword workflow
             loginError: {}
         }
-        this.componentDidRender = this.componentDidRender.bind(this);
-        this.isAuthenticated = this.isAuthenticated.bind(this);
-        this.login = this.login.bind(this);
-        this.logout = this.logout.bind(this);
-        this.getUsername = this.getUsername.bind(this);
-        this.completePassword = this.completePassword.bind(this);
-        this.refreshSession = this.refreshSession.bind(this);
-        this.processSuccessfulAuth = this.processSuccessfulAuth.bind(this);
     }
 
     componentDidMount() {
@@ -53,7 +45,7 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
     }
 
     // This function is not a react hook. This function was introduced to avoid code duplication.
-    componentDidRender() {
+    componentDidRender = () => {
         cognitoCheckIsAuthenticated().then(result => (
             this.processSuccessfulAuth(result)
         )).catch(() => {
@@ -66,15 +58,15 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
         });
     }
 
-    isAuthenticated() {
+    isAuthenticated = () => {
         return this.state.isAuthenticated;
     }
 
-    getUsername() {
+    getUsername = () => {
         return this.state.userData.username;
     }
 
-    login(credentials: Credentials) {
+    login = (credentials: Credentials) => {
         this.setState({
             isLoading: true
         });
@@ -101,7 +93,7 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
         });
     }
 
-    logout() {
+    logout = () => {
         this.setState({
             isLoading: true
         });
@@ -116,7 +108,7 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
         console.log("logged out")
     }
 
-    completePassword(newPassword: String) {
+    completePassword = (newPassword: String) => {
         this.setState({
             isLoading: true
         });
@@ -135,7 +127,7 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
         });
     }
 
-    refreshSession() {
+    refreshSession = () => {
         this.setState({
             isLoading: true
         });
@@ -158,7 +150,7 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
         });
     }
 
-    processSuccessfulAuth(userData: ValidUserInformation) {
+    processSuccessfulAuth = (userData: ValidUserInformation) => {
         if (this.state.isAuthenticated !== true || this.state.isNewPasswordRequired !== false ||
             Object.entries(this.state.userData).length === 0 || Object.entries(this.state.loginError).length !== 0) {
             this.setState({

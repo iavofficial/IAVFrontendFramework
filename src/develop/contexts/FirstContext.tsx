@@ -14,10 +14,9 @@ export class FirstContextClass extends Component<React.PropsWithChildren<any>> {
                 <div style={{ backgroundColor: "grey", padding: "4px", marginRight: "10px" }}>Test field global state 2</div>
             ]
         }
-        this.updateTest1 = this.updateTest1.bind(this);
     }
 
-    updateTest1(string: string) {
+    updateTest1 = (string: string) => {
         this.setState({ ...this.state, test1: string });
     }
 

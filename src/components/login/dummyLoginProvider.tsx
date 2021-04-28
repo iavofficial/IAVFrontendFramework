@@ -15,31 +15,27 @@ export class DummyLoginProvider extends Component<React.PropsWithChildren<any>, 
             isAuthenticated: false,
             username: ""
         }
-        this.isAuthenticated = this.isAuthenticated.bind(this);
-        this.login = this.login.bind(this);
-        this.logout = this.logout.bind(this);
-        this.getUsername = this.getUsername.bind(this);
     }
 
-    isAuthenticated() {
+    isAuthenticated = () => {
         return this.state.isAuthenticated;
     }
 
-    login(credentials: Credentials) {
+    login = (credentials: Credentials) => {
         this.setState({
             isAuthenticated: true,
             username: credentials.email
         });
     }
 
-    logout() {
+    logout = () => {
         this.setState({
             isAuthenticated: false,
             username: ""
         });
     }
 
-    getUsername() {
+    getUsername = () => {
         return this.state.username;
     }
 

@@ -11,7 +11,7 @@ import navFleetDetailDeselected from "./develop/assets/nav_fleet_detail_deselect
 import { DisaPage } from "./components/disaPage";
 import { FirstContextClass } from "./develop/contexts/FirstContext";
 import { SecondContextClass } from "./develop/contexts/SecondContext";
-import { AWSLoginProvider } from "./components/login/awsLoginProvider"
+import { AWSLoginProvider } from "./components/login/awsLoginProvider";
 import { config } from "./develop/config";
 import Amplify from "@aws-amplify/core";
 import { AWSLoginView } from "./components/login/awsLoginView";

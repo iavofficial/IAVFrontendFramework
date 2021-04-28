@@ -18,12 +18,13 @@ import { acceptedCookies } from "./cookie/cookieHandler";
 import { DummyLoginProvider } from "./login/dummyLoginProvider";
 import { AuthContext } from "../contexts/auth";
 import { View } from "./view";
+import { LoginProvider } from "./login/loginProvider";
 
 export interface Props {
     views: View[];
     startingPoint: string;
-    loginView?: React.ComponentType;
-    loginProvider?: React.ComponentType<any>/* & LoginProvider*/;
+    loginView?: React.ComponentType<any>;
+    loginProvider?: React.ComponentClass<any> & { prototype: LoginProvider };
     loginProviderProps?: any;
 }
 

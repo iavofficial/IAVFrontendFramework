@@ -18,10 +18,6 @@ export class AWSLoginView extends Component<any, State> {
             email: "",
             password: ""
         }
-        this.submit = this.submit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.NewPasswordForm = this.NewPasswordForm.bind(this);
-        this.LoginForm = this.LoginForm.bind(this);
     }
 
     // These two functions life on the class instance not on the prototype thanks to @babel/plugin-proposal-class-properties.
@@ -54,7 +50,7 @@ export class AWSLoginView extends Component<any, State> {
         return "";
     }
 
-    NewPasswordForm() {
+    NewPasswordForm = () => {
         return (
             <div style={{ width: "85%" }}>
                 <div>
@@ -80,7 +76,7 @@ export class AWSLoginView extends Component<any, State> {
         )
     }
 
-    LoginForm() {
+    LoginForm = () => {
         return (
             <form style={{ width: "85%", height: "100%" }} className="p-mr-4 p-mt-4" onSubmit={this.submit}>
                 <div className={"p-d-flex p-flex-column"}>

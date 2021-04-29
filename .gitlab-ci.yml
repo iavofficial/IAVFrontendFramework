@@ -57,6 +57,7 @@ publish_package:
     - ./scripts/ci_cd/create_lib.sh
     - |
       {
+        cd ./lib &&
         npm publish &&
         echo "Successfully published version ${NPM_PACKAGE_VERSION} of ${NPM_PACKAGE_NAME} to GitLab's NPM registry: ${CI_PROJECT_URL}/-/packages"
       } || {

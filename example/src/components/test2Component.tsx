@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { FirstContext } from "../contexts/FirstContext";
-import { Content } from "@td-d/disa-framework/content";
+import { Content } from "disa-framework/content";
 
 export class Test2Component extends Component {
     constructor(props: any) {

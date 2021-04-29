@@ -1,8 +1,8 @@
 import { Component } from "react";
 import Amplify from "@aws-amplify/core";
-import { DisaPage } from '@td-d/disa-framework/disaPage';
-import { AWSLoginProvider } from "@td-d/disa-framework/awsLoginProvider";
-import { AWSLoginView } from "@td-d/disa-framework/awsLoginView";
+import { DisaPage } from 'disa-framework/disaPage';
+import { AWSLoginProvider } from "disa-framework/awsLoginProvider";
+import { AWSLoginView } from "disa-framework/awsLoginView";
 
 import { config } from "./config";
 import { RootComponent } from './components/rootComponent'
@@ -15,7 +15,7 @@ import navFleetDetailSelected from './assets/nav_fleet_detail_selected.png';
 import navFleetDetailDeselected from './assets/nav_fleet_detail_deselected.png';
 import { FirstContextClass } from './contexts/FirstContext';
 import { SecondContextClass } from './contexts/SecondContext';
-import { View } from "@td-d/disa-framework/view";
+import { View } from "disa-framework/view";
 
 const authConfig = {
   // REQUIRED - Amazon Cognito Region

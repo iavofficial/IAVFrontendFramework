@@ -41,9 +41,6 @@
   "keywords": [
     "disa-framework"
   ],
-  "files": [
-    "/lib/lib/*"
-  ],
   "dependencies": {
     "aws-amplify": "^3.3.26",
     "primereact": "^6.2.1",

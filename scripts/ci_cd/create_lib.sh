@@ -8,6 +8,7 @@ then
     npx babel ./src/links --out-dir ./lib --extensions .ts,.tsx --copy-files;
     cp ./package.json ./lib;
     cp ./.npmrc ./lib;
+    cp ./README.md ./lib;
 else
     exit 1;
 fi

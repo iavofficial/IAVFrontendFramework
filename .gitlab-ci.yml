@@ -54,7 +54,7 @@ publish_package:
   stage: deploy
   script:
     - ./scripts/ci_cd/setup_npm.sh
-    - ./scripts/ci_cd/create_lib.sh
+    - npm run build-linux
     - |
       {
         cd ./lib &&

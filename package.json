@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "devmode": ".\\scripts\\windows\\build_devmode.bat",
-    "build-lib-linux": "./scripts/ci_cd/create_lib.sh",
+    "build-linux": "./scripts/ci_cd/create_lib.sh",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

@@ -42,7 +42,7 @@
     "disa-framework"
   ],
   "files": [
-    "/lib/*"
+    "/lib/lib/*"
   ],
   "dependencies": {
     "aws-amplify": "^3.3.26",

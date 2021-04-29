@@ -1,18 +1,18 @@
 // TODO: Problem mit Content: Kein React.cloneElement(...) möglich. Normaler Methodenaufruf notwendig.
 import { Component } from "react";
-import { RootComponent } from "./develop/components/rootComponent"
-import { Test1Component } from "./develop/components/test1Component"
-import { Test2Component } from "./develop/components/test2Component"
-import { Test3Component } from "./develop/components/test3Component"
+import { RootComponent } from "./example/components/rootComponent"
+import { Test1Component } from "./example/components/test1Component"
+import { Test2Component } from "./example/components/test2Component"
+import { Test3Component } from "./example/components/test3Component"
 import navFleetSelected from "./develop/assets/nav_fleet_selected.png";
 import navFleetDeselected from "./develop/assets/nav_fleet_deselected.png";
 import navFleetDetailSelected from "./develop/assets/nav_fleet_detail_selected.png";
 import navFleetDetailDeselected from "./develop/assets/nav_fleet_detail_deselected.png";
 import { DisaPage } from "./lib/components/disaPage";
-import { FirstContextClass } from "./develop/contexts/FirstContext";
-import { SecondContextClass } from "./develop/contexts/SecondContext";
+import { FirstContextClass } from "./example/contexts/FirstContext";
+import { SecondContextClass } from "./example/contexts/SecondContext";
 import { AWSLoginProvider } from "./lib/components/login/awsLoginProvider";
-import { config } from "./develop/config";
+import { config } from "./example/config";
 import Amplify from "@aws-amplify/core";
 import { AWSLoginView } from "./lib/components/login/awsLoginView";
 import { View } from "./lib/components/view";

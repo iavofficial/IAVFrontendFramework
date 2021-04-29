@@ -1,9 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "lib",
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "isolatedModules": true,
+    "noEmit": true,
     "target": "es5",
     "lib": [
       "dom",
@@ -21,12 +18,9 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "jsx": "react-jsx",
-    "rootDir": "src",
+    "isolatedModules": true
   },
   "include": [
     "src"
-  ],
-  "exclude": [
-    "src/links"
   ]
 }

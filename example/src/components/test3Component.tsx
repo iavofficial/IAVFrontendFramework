@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Content } from "../../lib/components/content/content";
+import { Content } from "@td-d/disa-framework/content";
 
 export class Test3Component extends Component {
     constructor(props: any) {

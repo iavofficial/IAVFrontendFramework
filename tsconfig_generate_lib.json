@@ -20,12 +20,12 @@
       "moduleResolution": "node",
       "resolveJsonModule": true,
       "jsx": "react-jsx",
-      "rootDir": "decl_generated"
+      "rootDir": "src"
     },
     "include": [
-      "decl_generated"
+      "src"
     ],
     "exclude": [
-      "decl_generated/links"
+      "src/links"
     ]
   }

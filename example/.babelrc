@@ -1,6 +1,6 @@
 {
     "presets": [
-        "@babel/preset-react",
+        "@babel/preset-react" ,
         [
             "@babel/preset-typescript",
             {
@@ -8,11 +8,5 @@
                 "allExtensions": true
             }
         ]
-    ],
-    "plugins": [
-        "@babel/plugin-proposal-class-properties"
-    ],
-    "ignore": [
-        "src/**/*.d.ts"
     ]
 }

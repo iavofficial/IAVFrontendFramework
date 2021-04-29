@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { FirstContext } from "../contexts/FirstContext";
-import { Content } from "../../lib/components/content/content";
+import { Content } from "@td-d/disa-framework/content";
 
 interface State {
     localState: String,

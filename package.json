@@ -10,13 +10,10 @@
     }
   ],
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "dev": ".\\scripts\\windows\\build_devmode.bat",
+    "devmode": ".\\scripts\\windows\\build_devmode.bat",
     "build-lib-linux": "./scripts/ci_cd/create_lib.sh",
-    "build-lib-windows": "scripts\\windows\\build.bat"
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -43,6 +40,9 @@
   },
   "keywords": [
     "disa-framework"
+  ],
+  "files": [
+    "./lib"
   ],
   "dependencies": {
     "aws-amplify": "^3.3.26",

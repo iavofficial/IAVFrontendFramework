@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import { Content } from "disa-framework/content";
 
 export class Test3Component extends Component {

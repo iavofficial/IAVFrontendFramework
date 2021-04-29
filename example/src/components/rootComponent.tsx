@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import { FirstContext } from "../contexts/FirstContext";
 import { Content } from "disa-framework/content";
 

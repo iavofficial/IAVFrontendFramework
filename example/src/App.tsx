@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import Amplify from "@aws-amplify/core";
 import { DisaPage } from 'disa-framework/disaPage';
 import { AWSLoginProvider } from "disa-framework/awsLoginProvider";

@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "devmode": ".\\scripts\\windows\\build_devmode.bat",
-    "build-linux": "./scripts/ci_cd/create_lib.sh",
+    "build-linux": "./scripts/ci_cd/build.sh",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -33,10 +33,10 @@
       "last 1 safari version"
     ]
   },
-  "main": "./lib/disaPage.js",
+  "main": "./build/disaPage.js",
   "exports": {
-    ".": "./lib/components/disaPage.js",
-    "./content": "./lib/components/content.js"
+    ".": "./build/components/disaPage.js",
+    "./content": "./build/components/content.js"
   },
   "keywords": [
     "disa-framework"

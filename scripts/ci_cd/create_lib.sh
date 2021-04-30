@@ -1,14 +1,14 @@
-mkdir ./lib;
+mkdir ./build;
 
 npx tsc;
 
 if [ $? = 0 ]
 then
-    npx babel ./src/lib --out-dir ./lib/lib --extensions .ts,.tsx --copy-files;
-    npx babel ./src/links --out-dir ./lib --extensions .ts,.tsx --copy-files;
-    cp ./package.json ./lib;
-    cp ./.npmrc ./lib;
-    cp ./README.md ./lib;
+    npx babel ./src/build --out-dir ./build/build --extensions .ts,.tsx --copy-files;
+    npx babel ./src/links --out-dir ./build --extensions .ts,.tsx --copy-files;
+    cp ./package.json ./build;
+    cp ./.npmrc ./build;
+    cp ./README.md ./build;
 else
     exit 1;
 fi

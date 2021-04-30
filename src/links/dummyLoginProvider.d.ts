@@ -1,1 +1,1 @@
-export * from "./lib/components/login/dummyLoginProvider";
+export * from "./build/components/login/dummyLoginProvider";

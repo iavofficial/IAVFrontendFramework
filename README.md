@@ -1,70 +1,69 @@
-# Getting Started with Create React App
+# Disa Framework (how to use it)
+This react framework was created to speed up development in the disa front-end environment. To use this framework follow these steps and read the wiki pages for further information. You maybe want to inspect examples. In this case you should visit the "Disa Framework Example" repository on GitLab (https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework-example) and clone it. There are also wiki pages containing examples.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Installation
+To install this package add a .npmrc file to your project. This file has to contain the following lines:
+
+>@td-d:registry=https://gitlab.iavgroup.local/api/v4/projects/8537/packages/npm/
+>'//gitlab.iavgroup.local/api/v4/projects/8537/packages/npm/:_authToken'="_rzbtzRRGvQ7HJx__mVw"
+
+After adding this file you are able to install the disa-framework package by using following command:
+`npm install @td-d/disa-framework`
+
+Congratulations. You have installed the latest disa-framework package.
+
+## Submit to new updates
+Every time a package with a new version is released a gitlab release will be created. To get an email if this happens you have to execute the following steps:
+Go to "Project overview" --> Click the drop down icon next to the notification bell --> Select "Custom" --> Close the drop down menu --> Click the bell --> Tick "New release" and hit the "OK" button
+
+## Imports
+This framework uses ES-6 import/export syntax. All exports are named exports. To import a module just type the name of the npm package and add the component you want to import. For example:
+```javascript
+import { DisaPage } from "@td-d/disa-framework/disaPage"
+```
+
+## Getting started
+The main component of this framework is the "DisaPage" component. To do the basic setup you have to render this component in the render method of your application. You will see that this frameworks provides a login system and the basic frame of a disa web application.
+The DisaPage component has the properties:
+1. views: Array of views (a specific class) to provide in order to render tabs in the navigation bar and the associated component.
+2. startingPoint: The "entry URL" of your application. This doesn't mean the login page but the Path the user will be redirected after successfull authentication.
+3. loginProvider: This attribute will get explained later
+4. loginView: This attribute will get explained later
+5. loginProviderProps
+
+### Login system
+The login system is seperated into two parts: The so called "LoginProvider" and the "LoginView". The LoginProvider is the Component which handles authentication (login, logout, ...). The LoginView is just the view a user will get displayed when the login page is shown. Because the authentication provider and the view are seperated it is possible to mix login providers and views.
+The disa framework already provides two login providers. These are the "AWSLoginProvider" and the "DummyLoginProvider". The AWSloginProvider uses Amplify and is able to handle authentication with AWS. To use this login provider you have to use Amplify and configure it. You also have to provide the "loginProviderProps" with "apiRoot". The dummy login provider is the standard login provider (which will get used if nothing is specified) and authenticates every combination of email and password. This login provider is intended to be used while developing.
+There are also two login views provided. One is the "AWSLoginView" which should be used with the AWSLoginProvider. There is also the "BasicLoginView" component which can be used in combination with the dummy login provider. The basic login view is the default login view.
+In order to specify the login provider and the login view you can pass it to the DisaPage component using the "loginProvider" and "loginView" props.
+It is also possible to implement own login providers and login views and pass it to the DisaPage component. For further information about this read the corresponding wiki page.
+
+### How to specify navigation tabs
+To let the developer specify navigation tabs the class "View" is exported as a module. In order to specify navigation tabs you have to create an array of instances of this class. This array has to be passed to the DisaPage's "views" property. The view class has the following attributes:
+1. selectedIcon: Icon to be shown if the tab is selected.
+2. deselectedIcon: Icon to be shown if the tab is deselected.
+3. to: Route (URL) on which the tab will be active.
+4. disabled: Boolean which is true if the tab should be selected to turn it not clickable.
+5. component: The component (type, not an instance) bound to this tab. It will get rendered in the so called content section if the tab is active.
+
+#### Some notes for implementing a component bound to a view
+The component should have the "Content" component as the root component in its render method. This component renders the so called "content bar" in the content section. You can pass an array of elements for the content bar using the content's component "contentElements".
+
+
+
+# Disa Framework (how to develop)
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+### `npm devmode`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This command build the framework to the "build" folder. Tsc and babel will watch files in src/links and src/lib for changes and recompile it if necessary.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### `npm run build-linux`
 
-### `npm test`
+This command executes the build script for linux environments / the ci / cd pipeline.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Example project
+To be able to view the results of code changes in the framework live an example project lifes in the "example" folder. To develop properly you should use the "npm devmode" command in the frameworks root folder and the "npm start" command in the example project's root folder.

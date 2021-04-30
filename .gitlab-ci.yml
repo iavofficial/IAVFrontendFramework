@@ -23,7 +23,7 @@ validate_package_scope:
         exit 1
       fi
   rules:
-    - if: '$CI_COMMIT_BRANCH == "master"'
+    - if: '$CI_COMMIT_BRANCH == "develop"'
 
 # If no .npmrc if included in the repo, generate a temporary one to use during the publish step
 # that is configured to publish to GitLab's NPM registry
@@ -45,7 +45,7 @@ create_npmrc:
     paths:
       - .npmrc
   rules:
-    - if: '$CI_COMMIT_BRANCH == "master"'
+    - if: '$CI_COMMIT_BRANCH == "develop"'
 
 # Publish the package. If the version in package.json has not yet been published, it will be
 # published to GitLab's NPM registry. If the version already exists, the publish command
@@ -65,7 +65,7 @@ publish_package:
         exit 1
       }
   rules:
-    - if: '$CI_COMMIT_BRANCH == "master"'
+    - if: '$CI_COMMIT_BRANCH == "develop"'
 
 # Create release so observer of this project will get a notification e-mail.
 create_release:
@@ -79,4 +79,4 @@ create_release:
     tag_name: ver_$(node -p "require('./package.json').version")
     description: ./scripts/ci_cd/release_notes/$(node -p "require('./package.json').version").md
   rules:
-    - if: '$CI_COMMIT_BRANCH == "master"'
+    - if: '$CI_COMMIT_BRANCH == "develop"'

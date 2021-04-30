@@ -1,1 +1,1 @@
-export * from "./build/components/content/content";
+export * from "./lib/components/content/content";

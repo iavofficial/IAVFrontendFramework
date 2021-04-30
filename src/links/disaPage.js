@@ -1,1 +1,1 @@
-export * from "./build/components/disaPage";
+export * from "./lib/components/disaPage";

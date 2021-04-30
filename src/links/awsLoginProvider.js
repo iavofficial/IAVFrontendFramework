@@ -1,1 +1,1 @@
-export * from "./build/components/login/awsLoginProvider";
+export * from "./lib/components/login/awsLoginProvider";

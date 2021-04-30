@@ -1,1 +1,1 @@
-export * from "./build/contexts/login/auth";
+export * from "./lib/contexts/login/auth";

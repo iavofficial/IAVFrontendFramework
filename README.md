@@ -16,6 +16,9 @@ Congratulations. You have installed the latest disa-framework package.
 Every time a package with a new version is released a gitlab release will be created. To get an email if this happens you have to execute the following steps:\
 Go to "Project overview" --> Click the drop down icon next to the notification bell --> Select "Custom" --> Close the drop down menu --> Click the bell --> Tick "New release" and hit the "OK" button
 
+## TypeScript
+This framework supports TypeScript although you can also use it with JavaScript.
+
 ## Imports
 This framework uses ES-6 import/export syntax. All exports are named exports. To import a module just type the name of the npm package and add the component you want to import. For example:\
 ```javascript
@@ -51,7 +54,7 @@ The component should have the "Content" component as the root component in its r
 
 
 
-# Disa Framework (how to develop)
+# Disa Framework (devnotes)
 
 ## Available Scripts
 

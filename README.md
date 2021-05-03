@@ -7,8 +7,8 @@ To install this package add a .npmrc file to your project. This file has to cont
 >@td-d:registry=https://gitlab.iavgroup.local/api/v4/projects/8537/packages/npm/
 >'//gitlab.iavgroup.local/api/v4/projects/8537/packages/npm/:_authToken'="_rzbtzRRGvQ7HJx__mVw"
 
-After adding this file you are able to install the disa-framework package by using following command:
-`npm install @td-d/disa-framework`
+After adding this file you are able to install the disa-framework package by using following command:\
+`npm install @td-d/disa-framework`\
 
 Congratulations. You have installed the latest disa-framework package.
 
@@ -20,37 +20,37 @@ Go to "Project overview" --> Click the drop down icon next to the notification b
 This framework supports TypeScript although you can also use it with JavaScript.
 
 ## Imports
-This framework uses ES-6 import/export syntax. All exports are named exports. To import a module just type the name of the npm package and add the component you want to import. For example:\
+This framework uses ES-6 import/export syntax. All exports are named exports. To import a module just type the name of the npm package and add the component you want to import. For example:
 ```javascript
 import { DisaPage } from "@td-d/disa-framework/disaPage"
 ```
 
 ## Getting started
-The main component of this framework is the "DisaPage" component. To do the basic setup you have to render this component in the render method of your application. You will see that this frameworks provides a login system and the basic frame of a disa web application.\
-The DisaPage component has the properties:\
+The main component of this framework is the DisaPage component. To do the basic setup you have to render this component in the render method of your application. You will see that this frameworks provides a login system and the basic frame of a disa web application.\
+The DisaPage component has the properties:
 1. views: Array of views (a specific class) to provide in order to render tabs in the navigation bar and the associated component.
-2. startingPoint: The "entry URL" of your application. This doesn't mean the login page but the Path the user will be redirected after successfull authentication.
-3. loginProvider: This attribute will get explained later
-4. loginView: This attribute will get explained later
-5. loginProviderProps
+2. startingPoint: The "entry URL" of your application. This doesn't mean the login page but the path the user will be redirected after successfull authentication.
+3. loginProvider (optional): This attribute will get explained later
+4. loginView (optional): This attribute will get explained later
+5. loginProviderProps (optional): Object with attributes which will get passed to the login provider.
 
 ### Login system
-The login system is seperated into two parts: The so called "LoginProvider" and the "LoginView". The LoginProvider is the Component which handles authentication (login, logout, ...). The LoginView is just the view a user will get displayed when the login page is shown. Because the authentication provider and the view are seperated it is possible to mix login providers and views.\
-The disa framework already provides two login providers. These are the "AWSLoginProvider" and the "DummyLoginProvider". The AWSloginProvider uses Amplify and is able to handle authentication with AWS. To use this login provider you have to use Amplify and configure it. You also have to provide the "loginProviderProps" with "apiRoot". The dummy login provider is the standard login provider (which will get used if nothing is specified) and authenticates every combination of email and password. This login provider is intended to be used while developing.\
-There are also two login views provided. One is the "AWSLoginView" which should be used with the AWSLoginProvider. There is also the "BasicLoginView" component which can be used in combination with the dummy login provider. The basic login view is the default login view.\
+The login system is seperated into two parts: The so called LoginProvider and the LoginView. The LoginProvider is the component which handles authentication (login, logout, ...). The LoginView is just the view shown to a user when logging in. Because the authentication provider and the view are seperated it's possible to mix login providers and views.\
+The disa framework already provides two login providers. These are the AWSLoginProvider and the DummyLoginProvider. The AWSLoginProvider uses Amplify and is able to handle authentication with AWS. To use this login provider you have to use Amplify and configure it. You also have to provide the "loginProviderProps" with "apiRoot". The dummy login provider is the standard login provider (which will get used if nothing is specified) and authenticates every combination of email and password. This login provider is intended to be used while developing.\
+There are also two login views provided. One is the AWSLoginView which should be used with the AWSLoginProvider. There is also the BasicLoginView component which can be used in combination with the dummy login provider. The basic login view is the default login view.\
 In order to specify the login provider and the login view you can pass it to the DisaPage component using the "loginProvider" and "loginView" props.
 It is also possible to implement own login providers and login views and pass it to the DisaPage component. For further information about this read the corresponding wiki page.
 
 ### How to specify navigation tabs
-To let the developer specify navigation tabs the class "View" is exported as a module. In order to specify navigation tabs you have to create an array of instances of this class. This array has to be passed to the DisaPage's "views" property. The view class has the following attributes:\
+To let the developer specify navigation tabs the class View is exported as a module. In order to specify navigation tabs you have to create an array of instances of this class. This array has to be passed to the DisaPage's "views" property. The view class has the following attributes:
 1. selectedIcon: Icon to be shown if the tab is selected.
 2. deselectedIcon: Icon to be shown if the tab is deselected.
 3. to: Route (URL) on which the tab will be active.
-4. disabled: Boolean which is true if the tab should be selected to turn it not clickable.
+4. disabled: Boolean which is true if the tab shouldn't be clickable.
 5. component: The component (type, not an instance) bound to this tab. It will get rendered in the so called content section if the tab is active.
 
 #### Some notes for implementing a component bound to a view
-The component should have the "Content" component as the root component in its render method. This component renders the so called "content bar" in the content section. You can pass an array of elements for the content bar using the content's component "contentElements".
+The component should have the Content component as the root component in its render method. This component renders the so called "content bar" in the content section. You can pass an array of elements for the content bar using the content's component "contentElements" property.
 
 
 
@@ -62,11 +62,11 @@ In the project directory, you can run:
 
 ### `npm devmode`
 
-This command build the framework to the "build" folder. Tsc and babel will watch files in src/links and src/lib for changes and recompile it if necessary.
+This command builds the framework to the "build" folder. Tsc and babel will watch files in src/links and src/lib for changes and recompile it if necessary.
 
 ### `npm run build-linux`
 
 This command executes the build script for linux environments / the ci / cd pipeline.
 
 ## Example project
-To be able to view the results of code changes in the framework live an example project lifes in the "example" folder. To develop properly you should use the "npm devmode" command in the frameworks root folder and the "npm start" command in the example project's root folder.
+To be able to view the results of code changes in the framework live there is an example project in the "example" folder. To develop properly you should use the "npm devmode" command in the frameworks root folder and the "npm start" command in the example project's root folder.

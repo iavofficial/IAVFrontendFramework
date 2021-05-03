@@ -29,7 +29,7 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
             isAuthenticated: false,         // true if user is authenticated
             isNewPasswordRequired: false,   // true if user logs in for the first time with his temp password and has to set a new one
             isLoading: false,               // true if user is in process of logging in
-            userData: {},                   // contains user information such as user privileges and customerId
+            userData: {},                   // contains user information
             appConfig: {},                  // contains app config data (such as gmaps API-Key)
             userAttributes: {},             // user attributes retrieved from cognito necessary for the completePassword workflow
             loginError: {}

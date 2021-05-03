@@ -56,8 +56,7 @@ function handleSessionResult(user: any) {
             }
         }
         if (privLevel !== -1) {
-            let customerId = user.attributes["custom:customerId"];
-            return new ValidUserInformation(jwtToken, username, customerId, privLevel);
+            return new ValidUserInformation(jwtToken, username, privLevel);
         } else {
             throw new Error("UserGroupError"); // throw invalid user error if no legal group is assigned
         }
@@ -67,7 +66,7 @@ function handleSessionResult(user: any) {
 }
 
 export class ValidUserInformation {
-    constructor(private _jwtToken: any, private _username: string, private _customerId: number, private _privLevel: number) {
+    constructor(private _jwtToken: any, private _username: string, private _privLevel: number) {
         this._username = _username;
     }
 
@@ -78,11 +77,7 @@ export class ValidUserInformation {
     get username() {
         return this._username;
     }
-
-    get customerId() {
-        return this._customerId;
-    }
-
+    
     get privLevel() {
         return this._privLevel;
     }

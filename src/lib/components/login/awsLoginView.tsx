@@ -35,16 +35,20 @@ export class AWSLoginView extends Component<any, State> {
         this.setState(newState);
     }
 
-    getErrorTextFromCode(code: string) {
-        if (code) {
-            if (code === "UserGroupError") {
-                return "invalid access configuration";                      // user was not added to a group
-            } else if (code === "NotAuthorizedException") {
-                return "invalid username or password";                      // invalid user credentials
-            } else if (code === "InvalidPasswordException") {
-                return "password did not meet the requirements";            // set password does not conform to password policy
+    getErrorText(error: any) {
+        if (error) {
+            if (error.code) {
+                if (error.code === "UserGroupError") {
+                    return "invalid access configuration";                      // user was not added to a group
+                } else if (error.code === "NotAuthorizedException") {
+                    return "invalid username or password";                      // invalid user credentials
+                } else if (error.code === "InvalidPasswordException") {
+                    return "password did not meet the requirements";            // set password does not conform to password policy
+                } else {
+                    return "server error";
+                }
             } else {
-                return "server error";
+                return error.message ? error.message : "";
             }
         }
         return "";
@@ -62,14 +66,14 @@ export class AWSLoginView extends Component<any, State> {
                         <li>At least one digit</li>
                     </ul>
                 </div>
-                <form autoComplete="off">
+                <form autoComplete="off" onSubmit={this.submit}>
                     <div>
                         <label className={"inputLabel " + (this.context.loginError.code ? "invalid" : "")}>New password</label>
                         <input name="password" type="password" id="inputPassword" style={{ width: "100%", marginTop: "5px", marginBottom: "10px" }}
                             className={"form-control p-inputtext " + (this.context.loginError.code ? "invalid" : "")} placeholder="New password"
                             onChange={this.handleChange} required autoFocus />
                         <LoginButtonWithSpinner isLoading={this.context.isLoading} />
-                        <div className="invalid">{this.getErrorTextFromCode(this.context.loginError.code)}</div>
+                        <div className="invalid">{this.getErrorText(this.context.loginError)}</div>
                     </div>
                 </form>
             </div>
@@ -89,7 +93,7 @@ export class AWSLoginView extends Component<any, State> {
                     <div>
                         <LoginButtonWithSpinner isLoading={this.context.isLoading} />
                     </div>
-                    <div className="invalid">{this.getErrorTextFromCode(this.context.loginError.code)}</div>
+                    <div className="invalid">{this.getErrorText(this.context.loginError)}</div>
                 </div>
             </form>
         )

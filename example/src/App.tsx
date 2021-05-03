@@ -4,7 +4,7 @@ import { DisaPage } from 'disa-framework/disaPage';
 import { AWSLoginProvider } from "disa-framework/awsLoginProvider";
 import { AWSLoginView } from "disa-framework/awsLoginView";
 
-import { config } from "./config";
+import { config } from "./config_disa-framework_test";
 import { RootComponent } from './components/rootComponent'
 import { Test1Component } from './components/test1Component'
 import { Test2Component } from './components/test2Component'
@@ -64,7 +64,7 @@ class App extends Component<any> {
       <FirstContextClass>
         <SecondContextClass>
           <DisaPage views={views} startingPoint="/" loginView={AWSLoginView} loginProvider={AWSLoginProvider}
-            loginProviderProps={{ apiRoot: "https://tj25ai6jb4.execute-api.eu-central-1.amazonaws.com/stage/" }} />
+            loginProviderProps={{ apiRoot: config.API_Root }} />
         </SecondContextClass>
       </FirstContextClass>
     );

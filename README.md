@@ -26,7 +26,7 @@ import { DisaPage } from "@td-d/disa-framework/disaPage"
 ```
 
 ## Layout
-![Here should be a diagram.](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/blob/develop/doc/diagrams/layout.png)
+![Here should be a diagram.](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/blob/develop/doc/diagrams/layout.png?raw=true)
 
 ## Getting started
 The main component of this framework is the DisaPage component. To do the basic setup you have to render this component in the render method of your application. You will see that this frameworks provides a login system and the basic frame of a disa web application.\

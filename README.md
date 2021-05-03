@@ -25,6 +25,9 @@ This framework uses ES-6 import/export syntax. All exports are named exports. To
 import { DisaPage } from "@td-d/disa-framework/disaPage"
 ```
 
+## Layout
+![Here should be a diagram.](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/blob/develop/doc/diagrams/layout.png)
+
 ## Getting started
 The main component of this framework is the DisaPage component. To do the basic setup you have to render this component in the render method of your application. You will see that this frameworks provides a login system and the basic frame of a disa web application.\
 The DisaPage component has the properties:

@@ -8,7 +8,7 @@ To install this package add a .npmrc file to your project. This file has to cont
 >'//gitlab.iavgroup.local/api/v4/projects/8537/packages/npm/:_authToken'="_rzbtzRRGvQ7HJx__mVw"
 
 After adding this file you are able to install the disa-framework package by using following command:\
-`npm install @td-d/disa-framework`\
+`npm install @td-d/disa-framework`
 
 Congratulations. You have installed the latest disa-framework package.
 

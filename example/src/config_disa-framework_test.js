@@ -2,7 +2,7 @@ function getConfig() {
     let apiRoot = "https://tj25ai6jb4.execute-api.eu-central-1.amazonaws.com/stage/"; // (set)
     let domain = "localhost";
     let cognitoPoolId = "eu-central-1_NEZERq3VI"; // set
-    let cognitoAppClientId = "4nce4b9hpcgd9qh1ogepdb8cvp"; // set
+    let cognitoAppClientId = "35782dm4qcjcrajr3ls01d346i"; // set
     let region = "eu-central-1"; // (set)
 
     if (window.env) {

@@ -13,7 +13,7 @@ export interface Props {
 }
 
 export interface State {
-    isAuthenticated: boolean;
+    hasAuthenticated: boolean;
     isNewPasswordRequired: boolean;
     isLoading: boolean;
     userData: any;
@@ -26,7 +26,7 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
     constructor(props: Props) {
         super(props);
         this.state = {
-            isAuthenticated: false,         // true if user is authenticated
+            hasAuthenticated: false,         // true if user is authenticated
             isNewPasswordRequired: false,   // true if user logs in for the first time with his temp password and has to set a new one
             isLoading: false,               // true if user is in process of logging in
             userData: {},                   // contains user information
@@ -49,17 +49,17 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
         cognitoCheckIsAuthenticated().then(result => (
             this.processSuccessfulAuth(result)
         )).catch(() => {
-            if (Object.entries(this.state.userData).length !== 0 || this.state.isAuthenticated !== false) {
+            if (Object.entries(this.state.userData).length !== 0 || this.state.hasAuthenticated !== false) {
                 this.setState({
                     userData: {},
-                    isAuthenticated: false
+                    hasAuthenticated: false
                 });
             }
         });
     }
 
-    isAuthenticated = () => {
-        return this.state.isAuthenticated;
+    hasAuthenticated = () => {
+        return this.state.hasAuthenticated;
     }
 
     getUsername = () => {
@@ -75,14 +75,14 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
                 this.processSuccessfulAuth(result);
             } else {
                 this.setState({
-                    isAuthenticated: false,
+                    hasAuthenticated: false,
                     userData: result.userAttributes,
                     isNewPasswordRequired: true
                 });
             }
         }).catch(err => (
             this.setState({
-                isAuthenticated: false,
+                hasAuthenticated: false,
                 userData: {},
                 loginError: err
             })
@@ -100,7 +100,7 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
         cognitoLogout().then(() => {
             this.setState({
                 isLoading: false,
-                isAuthenticated: false,
+                hasAuthenticated: false,
                 userData: {},
                 loginError: {}
             });
@@ -116,7 +116,7 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
             this.processSuccessfulAuth(result)
         )).catch(err => (
             this.setState({
-                isAuthenticated: false,
+                hasAuthenticated: false,
                 userData: {},
                 loginError: err
             })
@@ -151,10 +151,10 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
     }
 
     processSuccessfulAuth = (userData: ValidUserInformation) => {
-        if (this.state.isAuthenticated !== true || this.state.isNewPasswordRequired !== false ||
+        if (this.state.hasAuthenticated !== true || this.state.isNewPasswordRequired !== false ||
             Object.entries(this.state.userData).length === 0 || Object.entries(this.state.loginError).length !== 0) {
             this.setState({
-                isAuthenticated: true,
+                hasAuthenticated: true,
                 isNewPasswordRequired: false,
                 userData: userData,
                 loginError: {}
@@ -177,7 +177,7 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
         return (
             <AuthContext.Provider value={{
                 ...this.state, login: this.login, completePassword: this.completePassword, logout: this.logout, getUsername: this.getUsername,
-                refreshSession: this.refreshSession, isAuthenticated: this.isAuthenticated
+                refreshSession: this.refreshSession, hasAuthenticated: this.hasAuthenticated
             }}>
                 {this.props.children}
             </AuthContext.Provider>

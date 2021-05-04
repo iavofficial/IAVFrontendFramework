@@ -4,7 +4,7 @@ export interface Credentials {
 }
 
 export interface LoginProvider {
-    isAuthenticated(): boolean;
+    hasAuthenticated(): Boolean;
     login(credentials: Credentials): any;
     logout(): any;
     getUsername(): string;

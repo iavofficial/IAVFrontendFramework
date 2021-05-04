@@ -66,20 +66,7 @@ function handleSessionResult(user: any) {
 }
 
 export class ValidUserInformation {
-    constructor(private _jwtToken: any, private _username: string, private _privLevel: number) {
-        this._username = _username;
-    }
-
-    get jwtToken() {
-        return this._jwtToken;
-    }
-
-    get username() {
-        return this._username;
-    }
-    
-    get privLevel() {
-        return this._privLevel;
+    constructor(public jwtToken: any, public username: string, public privLevel: number) {
     }
 }
 

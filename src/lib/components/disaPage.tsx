@@ -36,7 +36,7 @@ export const DisaPage = (props: Props) => {
             { !acceptedCookies() && <CookieBanner />}
             <AuthContext.Consumer>
                 {(context) => {
-                    if (context.isAuthenticated()) {
+                    if (context.hasAuthenticated()) {
                         return (
                             <Router>
                                 <div className={"p-d-flex p-flex-column"} style={{ height: "100%", bottom: "0" }}>

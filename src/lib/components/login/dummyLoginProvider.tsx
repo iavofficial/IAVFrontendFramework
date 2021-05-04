@@ -4,7 +4,7 @@ import { AuthContext } from "../../contexts/auth";
 import { Credentials } from "./loginProvider";
 
 export interface State {
-    isAuthenticated: boolean;
+    hasAuthenticated: boolean;
     username: string;
 }
 
@@ -12,25 +12,25 @@ export class DummyLoginProvider extends Component<React.PropsWithChildren<any>, 
     constructor(props: React.PropsWithChildren<any>) {
         super(props);
         this.state = {
-            isAuthenticated: false,
+            hasAuthenticated: false,
             username: ""
         }
     }
 
-    isAuthenticated = () => {
-        return this.state.isAuthenticated;
+    hasAuthenticated = () => {
+        return this.state.hasAuthenticated;
     }
 
     login = (credentials: Credentials) => {
         this.setState({
-            isAuthenticated: true,
+            hasAuthenticated: true,
             username: credentials.email
         });
     }
 
     logout = () => {
         this.setState({
-            isAuthenticated: false,
+            hasAuthenticated: false,
             username: ""
         });
     }
@@ -41,7 +41,7 @@ export class DummyLoginProvider extends Component<React.PropsWithChildren<any>, 
 
     render() {
         return (
-            <AuthContext.Provider value={{ ...this.state, isAuthenticated: this.isAuthenticated, login: this.login, logout: this.logout, getUsername: this.getUsername }}>
+            <AuthContext.Provider value={{ ...this.state, hasAuthenticated: this.hasAuthenticated, login: this.login, logout: this.logout, getUsername: this.getUsername }}>
                 {this.props.children}
             </AuthContext.Provider>
         );

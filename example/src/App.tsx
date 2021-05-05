@@ -55,9 +55,9 @@ class App extends Component<any> {
 
   render() {
     let views = [
-      new View(navFleetSelected, navFleetDeselected, "/", "Root", false, RootComponent),
-      new View(navFleetSelected, navFleetDeselected, "/test1", "Test1", false, Test1Component),
-      new View(navFleetSelected, navFleetDeselected, "/test2", "Test2", false, Test2Component),
+      new View(navFleetSelected, navFleetDeselected, "/", "Root", false, RootComponent, ["USER"]),
+      new View(navFleetSelected, navFleetDeselected, "/test1", "Test1", false, Test1Component, ["ADMIN"]),
+      new View(navFleetSelected, navFleetDeselected, "/test2", "Test2", false, Test2Component, ["USER"]),
       new View(navFleetDetailSelected, navFleetDetailDeselected, "/test3", "Test3", true, Test3Component)
     ];
     return (

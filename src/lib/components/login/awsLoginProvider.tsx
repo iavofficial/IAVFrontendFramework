@@ -10,6 +10,8 @@ import { LoginProvider, Credentials } from "./loginProvider";
 
 export interface Props {
     apiRoot: string;
+    failOnNoLegalGroup?: Boolean,
+    legalGroups?: string[]
 }
 
 export interface State {
@@ -26,7 +28,7 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
     constructor(props: Props) {
         super(props);
         this.state = {
-            hasAuthenticated: false,         // true if user is authenticated
+            hasAuthenticated: false,        // true if user is authenticated
             isNewPasswordRequired: false,   // true if user logs in for the first time with his temp password and has to set a new one
             isLoading: false,               // true if user is in process of logging in
             userData: {},                   // contains user information
@@ -34,6 +36,11 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
             userAttributes: {},             // user attributes retrieved from cognito necessary for the completePassword workflow
             loginError: {}
         }
+    }
+
+    static defaultProps = {
+        failOnNoLegalGroup: false,
+        legalGroups: []
     }
 
     componentDidMount() {
@@ -46,9 +53,9 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
 
     // This function is not a react hook. This function was introduced to avoid code duplication.
     componentDidRender = () => {
-        cognitoCheckIsAuthenticated().then(result => (
+        cognitoCheckIsAuthenticated(this.props.failOnNoLegalGroup!, this.props.legalGroups!).then((result) =>
             this.processSuccessfulAuth(result)
-        )).catch(() => {
+        ).catch(() => {
             if (Object.entries(this.state.userData).length !== 0 || this.state.hasAuthenticated !== false) {
                 this.setState({
                     userData: {},
@@ -66,11 +73,15 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
         return this.state.userData.username;
     }
 
+    getUserGroups = () => {
+        return this.state.userData.groups? this.state.userData.groups : [];
+    }
+
     login = (credentials: Credentials) => {
         this.setState({
             isLoading: true
         });
-        cognitoLogin(credentials).then(result => {
+        cognitoLogin(credentials, this.props.failOnNoLegalGroup!, this.props.legalGroups!).then(result => {
             if (result instanceof ValidUserInformation) {
                 this.processSuccessfulAuth(result);
             } else {
@@ -112,7 +123,7 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
         this.setState({
             isLoading: true
         });
-        cognitoCompletePassword(this.state.userAttributes, newPassword).then(result => (
+        cognitoCompletePassword(this.state.userAttributes, newPassword, this.props.failOnNoLegalGroup!, this.props.legalGroups!).then(result => (
             this.processSuccessfulAuth(result)
         )).catch(err => (
             this.setState({
@@ -177,7 +188,7 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
         return (
             <AuthContext.Provider value={{
                 ...this.state, login: this.login, completePassword: this.completePassword, logout: this.logout, getUsername: this.getUsername,
-                refreshSession: this.refreshSession, hasAuthenticated: this.hasAuthenticated
+                getUserGroups: this.getUserGroups, refreshSession: this.refreshSession, hasAuthenticated: this.hasAuthenticated
             }}>
                 {this.props.children}
             </AuthContext.Provider>

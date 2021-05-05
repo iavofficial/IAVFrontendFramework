@@ -1,6 +1,7 @@
 import { Auth } from "aws-amplify";
 import { privLvls } from "../components/constants";
 import { Credentials } from "../components/login/loginProvider";
+import { containsOneOrMoreGroups } from "./groupChecker";
 
 let cognitoUser: any;
 
@@ -42,18 +43,12 @@ function handleSessionResult(user: any, failOnNoLegalGroup: Boolean, legalGroups
     const jwtToken = session.getIdToken().getJwtToken();
     const groups = session.getIdToken().payload["cognito:groups"];
     const username = session.getIdToken().payload["cognito:username"];
-    console.log(failOnNoLegalGroup);
     if (failOnNoLegalGroup) {
-        if (!groups || groups.length === 0) {
+        if (!groups) {
             throw new Error("UserGroupError"); // throw invalid user error (user is valid and authorized, but is not assigned any legal groups)
         }
-        for (let i = 0; i < groups.length; i++) {
-            if (legalGroups.includes(groups[i])) {
-                break;
-            }
-            if (i === groups.length - 1) {
-                throw new Error("UserGroupError"); // throw invalid user error (user is valid and authorized, but is not assigned any legal groups)
-            }
+        if (!containsOneOrMoreGroups(groups, legalGroups)) {
+            throw new Error("UserGroupError"); // throw invalid user error (user is valid and authorized, but is not assigned any legal groups)
         }
     }
     return new ValidUserInformation(jwtToken, username, groups);

@@ -6,7 +6,7 @@ import {
     ValidUserInformation, cognitoLogin, cognitoLogout, cognitoCheckIsAuthenticated,
     cognitoCompletePassword, cognitoRefreshAccessToken
 } from "../../services/cognitoService";
-import { LoginProvider, Credentials } from "./loginProvider";
+import { LoginProvider, Credentials, securableFunctionType } from "./loginProvider";
 
 export interface Props {
     apiRoot: string;
@@ -65,6 +65,19 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
         });
     }
 
+    // Executes func. If it fails and throws NotAuthedError the session will be refreshed and the execution retried.
+    // If it fails again the error will not be catched.
+    execIfAuthed(func: securableFunctionType) {
+        return func().catch(err => {
+            if (err.code === "NotAuthedError") {
+                this.refreshSession()
+                    .then(func)
+            } else {
+                throw err;
+            }
+        });
+    }
+
     hasAuthenticated = () => {
         return this.state.hasAuthenticated;
     }
@@ -74,7 +87,7 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
     }
 
     getUserGroups = () => {
-        return this.state.userData.groups? this.state.userData.groups : [];
+        return this.state.userData.groups ? this.state.userData.groups : [];
     }
 
     login = (credentials: Credentials) => {
@@ -142,23 +155,17 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
         this.setState({
             isLoading: true
         });
-        cognitoRefreshAccessToken().then(result => {
+        return cognitoRefreshAccessToken().then(result => {
             if (result.getIdToken().getJwtToken()) {
                 this.setState(prevState => ({
+                    isLoading: false,
                     userData: {
                         ...prevState.userData,
                         jwtToken: result.getIdToken().getJwtToken()
                     }
                 }));
             }
-        }).catch(() => {
-            cognitoLogout();
-            console.log("Failed to refresh session. User got logged out.");
-        }).then(() => {
-            this.setState({
-                isLoading: false
-            });
-        });
+        })
     }
 
     processSuccessfulAuth = (userData: ValidUserInformation) => {
@@ -188,7 +195,7 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
         return (
             <AuthContext.Provider value={{
                 ...this.state, login: this.login, completePassword: this.completePassword, logout: this.logout, getUsername: this.getUsername,
-                getUserGroups: this.getUserGroups, refreshSession: this.refreshSession, hasAuthenticated: this.hasAuthenticated
+                getUserGroups: this.getUserGroups, refreshSession: this.refreshSession, hasAuthenticated: this.hasAuthenticated, execIfAuthed: this.execIfAuthed
             }}>
                 {this.props.children}
             </AuthContext.Provider>

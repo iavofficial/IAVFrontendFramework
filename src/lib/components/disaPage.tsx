@@ -10,8 +10,7 @@ import "./css/disaFramework.css";
 import "./css/error.css";
 import { BasicLoginView } from "./login/basicLoginView";
 import { DisaHeader } from "./disaHeader";
-import NavbarTab from "./navbar/navbarTab";
-import Navbar from "./navbar/navbar";
+import { Navbar } from "./navbar/navbar";
 import { Imprint } from "./imprint";
 import { CookieBanner } from "./cookie/cookieBanner";
 import { acceptedCookies } from "./cookie/cookieHandler";
@@ -43,9 +42,9 @@ export const DisaPage = (props: Props) => {
                                     <DisaHeader />
                                     <div className="p-d-flex" style={{ height: "100%", margin: "0" }}>
                                         <Navbar>
-                                            {props.views.map(view => <NavbarTab selectedIcon={view.selectedIcon.valueOf()} deselectedIcon={view.deselectedIcon.valueOf()} to={view.to.valueOf()} name={view.name.valueOf()} disabled={view.disabled} />)}
+                                            {props.views.map(view => view.navbarTab)}
                                         </Navbar>
-                                        {props.views.map(view => <Route exact path={view.to.valueOf()} component={view.component} />)}
+                                        {props.views.map(view => <Route exact path={view.path.valueOf()} component={view.component} />)}
                                         <Route exact path="/imprint" component={Imprint} />
                                         <Redirect exact from="login" to={props.startingPoint.valueOf()} />
                                     </div>

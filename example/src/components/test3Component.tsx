@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Content } from "disa-framework/content";
 
 export class Test3Component extends Component {
-    constructor(props: any) {
+    constructor(props: string) {
         super(props);
     }
 

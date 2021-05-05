@@ -16,6 +16,8 @@ import navFleetDetailDeselected from './assets/nav_fleet_detail_deselected.png';
 import { FirstContextClass } from './contexts/FirstContext';
 import { SecondContextClass } from './contexts/SecondContext';
 import { View } from "disa-framework/view";
+import { StandardNavbarTab } from "disa-framework/standardNavbarTab";
+import { GroupCheckedNavbarTab } from "disa-framework/groupCheckedNavbarTab";
 
 const authConfig = {
   // REQUIRED - Amazon Cognito Region
@@ -55,10 +57,14 @@ class App extends Component<any> {
 
   render() {
     let views = [
-      new View(navFleetSelected, navFleetDeselected, "/", "Root", false, RootComponent, ["USER"]),
-      new View(navFleetSelected, navFleetDeselected, "/test1", "Test1", false, Test1Component, ["ADMIN"]),
-      new View(navFleetSelected, navFleetDeselected, "/test2", "Test2", false, Test2Component, ["USER"]),
-      new View(navFleetDetailSelected, navFleetDetailDeselected, "/test3", "Test3", true, Test3Component)
+      new View(<StandardNavbarTab name="Root" redirectTo="/" disabled={false} selectedIcon={navFleetSelected}
+        deselectedIcon={navFleetDeselected} />, RootComponent, "/"),
+      new View(<GroupCheckedNavbarTab name="Test1" redirectTo="/test1" disabled={false} selectedIcon={navFleetSelected}
+        deselectedIcon={navFleetDeselected} permittedGroups={["USER", "ADMIN"]} />, Test1Component, "/test1"),
+      new View(<GroupCheckedNavbarTab name="Test2" redirectTo="/test2" disabled={false} selectedIcon={navFleetSelected}
+        deselectedIcon={navFleetDeselected} permittedGroups={["ADMIN"]} />, Test2Component, "/test2"),
+      new View(<StandardNavbarTab name="Test3" redirectTo="/test3" disabled={true} selectedIcon={navFleetDetailSelected}
+        deselectedIcon={navFleetDetailDeselected} />, Test3Component, "/test3")
     ];
     return (
       <FirstContextClass>

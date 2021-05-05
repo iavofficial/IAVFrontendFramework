@@ -7,7 +7,7 @@ import { Clock } from "../clock";
 import { BLUE3, DISATABHEIGHT } from "../constants";
 import { AuthContext } from "../../contexts/auth";
 
-const Navbar = (props: React.PropsWithChildren<any>) => {
+export const Navbar = (props: React.PropsWithChildren<any>) => {
     let location = useLocation();
     let context = useContext(AuthContext);
     return (
@@ -31,5 +31,3 @@ const Navbar = (props: React.PropsWithChildren<any>) => {
         </div>
     );
 };
-
-export default Navbar;

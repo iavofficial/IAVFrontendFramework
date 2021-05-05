@@ -3,17 +3,9 @@ import Radium from "radium";
 import { Link } from "react-router-dom";
 
 import { BLUE1, GRAY2, DISATABHEIGHT } from "../constants";
+import { navbarTab } from "./navbarTab";
 
-interface Props {
-    name: string;
-    to: string;
-    disabled: boolean;
-    selectedIcon: string;
-    deselectedIcon: string;
-    active?: boolean;
-}
-
-const NavbarTab = (props: Props) => {
+const StandardNavbarTabUnprocessed: navbarTab = (props) => {
     const tabStyle = {
         height: DISATABHEIGHT,
         cursor: props.active || props.disabled ? "default" : "pointer",
@@ -34,10 +26,10 @@ const NavbarTab = (props: Props) => {
     );
     return (
         props.disabled ? tab :
-            <Link style={{ textDecoration: "none" }} to={props.to.valueOf()}>
+            <Link style={{ textDecoration: "none" }} to={props.redirectTo.valueOf()}>
                 {tab}
             </Link>
     );
 }
 
-export default Radium(NavbarTab);
+export const StandardNavbarTab = Radium(StandardNavbarTabUnprocessed);

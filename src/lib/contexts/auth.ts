@@ -5,7 +5,8 @@ const placeholderContext: LoginProvider = {
     hasAuthenticated: () => false,
     login: (credentials: Credentials) => false,
     logout: () => false,
-    getUsername: () => "PLACEHOLDER"
+    getUsername: () => "PLACEHOLDER",
+    execIfAuthed: (func: Function) => func()
 }
 
 const authContext = React.createContext<LoginProvider>(placeholderContext);

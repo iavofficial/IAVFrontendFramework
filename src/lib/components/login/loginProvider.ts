@@ -6,11 +6,11 @@ export interface Credentials {
 export type securableFunctionType = (...rest: any) => Promise<any>;
 
 export interface LoginProvider {
-    login: (credentials: Credentials, ...rest: any) => any;
+    login(credentials: Credentials, ...rest: any): any;
     logout(): any;
     hasAuthenticated(): Boolean;
     getUsername(): string;
-    execIfAuthed: (func: securableFunctionType) => Promise<any>;
+    execIfAuthed(func: securableFunctionType): Promise<any>;
     [attribute: string]: any;
 }
 

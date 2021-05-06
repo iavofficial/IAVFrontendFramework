@@ -92,7 +92,8 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
 
     login = (credentials: Credentials) => {
         this.setState({
-            isLoading: true
+            isLoading: true,
+            loginError: {}
         });
         cognitoLogin(credentials, this.props.failOnNoLegalGroup!, this.props.legalGroups!).then(result => {
             if (result instanceof ValidUserInformation) {

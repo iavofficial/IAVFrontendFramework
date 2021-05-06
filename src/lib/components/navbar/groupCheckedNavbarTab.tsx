@@ -14,6 +14,6 @@ export const GroupCheckedNavbarTab: navbarTab<Props> = (props) => {
     let disabled = !containsOneOrMoreGroups(getUserGroups(), props.permittedGroups);
     return (
         <StandardNavbarTab deselectedIcon={props.deselectedIcon} selectedIcon={props.selectedIcon}
-            disabled={disabled} name={props.name} redirectTo={props.redirectTo} active={props.active} />
+            disabled={disabled} name={props.name} to={props.to} active={props.active} />
     );
 }

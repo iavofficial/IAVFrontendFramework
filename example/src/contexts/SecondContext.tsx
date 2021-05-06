@@ -8,7 +8,8 @@ export class SecondContextClass extends Component<React.PropsWithChildren<any>> 
         this.state = {
             test3: "default",
             contentTabs: [
-                <div style={{ backgroundColor: "grey", padding: "4px", marginRight: "10px" }}>Another element</div>
+                <div style={{ backgroundColor: "#5daedb", color: "white", padding: "4px", marginRight: "5px", display: "flex", alignItems: "center" }}>
+                    <span>Another <b>global</b> element</span></div>,
             ]
         }
     }

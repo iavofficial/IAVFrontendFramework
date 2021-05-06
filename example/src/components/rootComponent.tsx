@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { FirstContext } from "../contexts/FirstContext";
 import { Content } from "disa-framework/content";
+import { Button } from "primereact/button";
 
 interface State {
     localState: String,
@@ -13,8 +14,10 @@ export class RootComponent extends Component<any, State> {
         this.state = {
             localState: "default",
             contentTabs: [
-                <div style={{ backgroundColor: "grey", padding: "4px", marginRight: "10px" }}>Test field local state</div>,
-                <div style={{ backgroundColor: "grey", padding: "4px", marginRight: "10px" }}>Test field local state 2</div>
+                <div style={{ backgroundColor: "#5daedb", color: "white", padding: "4px", marginRight: "5px", display: "flex", alignItems: "center" }}>
+                    <span>Test field <b>local</b> element 1</span></div>,
+                <div style={{ backgroundColor: "#5daedb", color: "white", padding: "4px", marginRight: "5px", display: "flex", alignItems: "center" }}>
+                    <span>Test field <b>local</b> element 2</span></div>,
             ]
         }
     }
@@ -22,10 +25,18 @@ export class RootComponent extends Component<any, State> {
     render() {
         return (
             <Content contentElements={[...this.context.contentTabs, ...this.state.contentTabs]}>
-                <div>This is the root. Example data: {this.context.test1}</div>
-                <button onClick={function (this: RootComponent) { this.context.updateTest1("changed") }.bind(this)}>Click here to test the context</button>
-                <div>This is the root. Example data: {this.state.localState}</div>
-                <button onClick={function (this: RootComponent) { this.setState({ localState: "changed local state" }) }.bind(this)}>Click here to test the context</button>
+                <div>Example data <b>global</b> context: {this.context.test1}</div>
+                <div>Example data <b>local</b> context: {this.state.localState}</div>
+                <div style={{ margin: "20px 0px 20px 0px" }}>
+                    <Button onClick={function (this: RootComponent) { this.context.updateTest1("changed with local element") }.bind(this)}>
+                        <span>Change <b>global</b> context</span>
+                    </Button>
+                </div>
+                <div>
+                    <Button onClick={function (this: RootComponent) { this.setState({ localState: "changed local state" }) }.bind(this)}>
+                        <span>Change <b>local</b> context</span>
+                    </Button>
+                </div>
             </Content>
         );
     }

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Button } from "primereact/button";
 
 export const FirstContext = React.createContext({});
 
@@ -9,15 +10,20 @@ export class FirstContextClass extends Component<React.PropsWithChildren<any>> {
             test1: "default",
             test2: "default",
             contentTabs: [
-                <div style={{ backgroundColor: "grey", padding: "4px", marginRight: "10px" }}
-                    onClick={function (this: FirstContextClass) { this.updateTest1("changed with tab") }.bind(this)}>Test field global state 1</div>,
-                <div style={{ backgroundColor: "grey", padding: "4px", marginRight: "10px" }}>Test field global state 2</div>
+                <Button style={{ width: "200px", height: "40px", margin: "5px", alignSelf: "center" }} onClick={function (this: FirstContextClass) { this.updateTest1("changed with global element") }.bind(this)}>
+                    <span>Change <b>global</b> Context</span></Button>,
+                <div style={{
+                    backgroundColor: "#5daedb", color: "white", marginRight: "5px", display: "flex", alignItems: "center",
+                    justifyContent: "center", flexDirection: "column"
+                }}>
+                    <div>Elocity - E1 - B X 1234</div>
+                    <div>ELOZZZE1ZLP002525</div>
+                </div>
             ]
         }
-        this.updateTest1 = this.updateTest1.bind(this);
     }
 
-    updateTest1(string: string) {
+    updateTest1 = (string: string) => {
         this.setState({ ...this.state, test1: string });
     }
 

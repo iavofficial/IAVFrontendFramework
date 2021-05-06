@@ -57,14 +57,16 @@ class App extends Component<any> {
 
   render() {
     let views = [
-      new View(<StandardNavbarTab name="Root" redirectTo="/" disabled={false} selectedIcon={navFleetSelected}
-        deselectedIcon={navFleetDeselected} />, RootComponent, "/"),
-      new View(<GroupCheckedNavbarTab name="Test1" redirectTo="/test1" disabled={false} selectedIcon={navFleetSelected}
-        deselectedIcon={navFleetDeselected} permittedGroups={["USER", "ADMIN"]} />, Test1Component, "/test1"),
-      new View(<GroupCheckedNavbarTab name="Test2" redirectTo="/test2" disabled={false} selectedIcon={navFleetSelected}
-        deselectedIcon={navFleetDeselected} permittedGroups={["ADMIN"]} />, Test2Component, "/test2"),
-      new View(<StandardNavbarTab name="Test3" redirectTo="/test3" disabled={true} selectedIcon={navFleetDetailSelected}
-        deselectedIcon={navFleetDetailDeselected} />, Test3Component, "/test3")
+      new View(<StandardNavbarTab name="Root" to="/" disabled={false} selectedIcon={navFleetSelected}
+        deselectedIcon={navFleetDeselected} />, RootComponent),
+      new View(<GroupCheckedNavbarTab name="Test1" to="/test1" disabled={false} selectedIcon={navFleetSelected}
+        deselectedIcon={navFleetDeselected} permittedGroups={["USER", "ADMIN"]} />, Test1Component),
+      new View(<GroupCheckedNavbarTab name="Test2" to="/test2" disabled={false} selectedIcon={navFleetSelected}
+        deselectedIcon={navFleetDeselected} permittedGroups={["USER", "ADMIN"]} />, Test2Component),
+      new View(<GroupCheckedNavbarTab name="Test3" to="/test3" disabled={true} selectedIcon={navFleetDetailSelected}
+        deselectedIcon={navFleetDetailDeselected} permittedGroups={["ADMIN"]} />, Test3Component),
+      new View(<StandardNavbarTab name="Test4" to="/test4" disabled={true} selectedIcon={navFleetDetailSelected}
+        deselectedIcon={navFleetDetailDeselected} />, Test3Component)
     ];
     return (
       <FirstContextClass>

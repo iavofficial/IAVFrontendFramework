@@ -1,7 +1,7 @@
 import React from "react";
 
 export class View {
-    constructor(private _navbarTab: React.ReactElement, private _component: React.ComponentType<any>, private _path: string) {
+    constructor(private _navbarTab: React.ReactElement, private _component: React.ComponentType<any>) {
     }
 
     get navbarTab() {
@@ -10,9 +10,5 @@ export class View {
 
     get component() {
         return this._component;
-    }
-
-    get path() {
-        return this._path;
     }
 }

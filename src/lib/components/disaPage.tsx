@@ -41,10 +41,8 @@ export const DisaPage = (props: Props) => {
                                 <div className={"p-d-flex p-flex-column"} style={{ height: "100%", bottom: "0" }}>
                                     <DisaHeader />
                                     <div className="p-d-flex" style={{ height: "100%", margin: "0" }}>
-                                        <Navbar>
-                                            {props.views.map(view => view.navbarTab)}
-                                        </Navbar>
-                                        {props.views.map(view => <Route exact path={view.path.valueOf()} component={view.component} />)}
+                                        <Navbar views={props.views} />
+                                        {props.views.map(view => <Route exact path={view.navbarTab.props.to.valueOf()} component={view.component} />)}
                                         <Route exact path="/imprint" component={Imprint} />
                                         <Redirect exact from="login" to={props.startingPoint.valueOf()} />
                                     </div>

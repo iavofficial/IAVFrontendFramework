@@ -26,7 +26,7 @@ const StandardNavbarTabUnprocessed: navbarTab = (props) => {
     );
     return (
         props.disabled ? tab :
-            <Link style={{ textDecoration: "none" }} to={props.redirectTo.valueOf()}>
+            <Link style={{ textDecoration: "none" }} to={props.to.valueOf()}>
                 {tab}
             </Link>
     );

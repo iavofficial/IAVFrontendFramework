@@ -10,10 +10,7 @@ export class Test2Component extends Component {
     render() {
         return (
             <Content contentElements={this.context.contentTabs}>
-                <div>
-                    This is the second test.<br />
-                    {this.context.test1}
-                </div>
+                <div>Example data <b>global</b> context: {this.context.test1}</div>
             </Content>
         );
     }

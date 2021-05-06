@@ -2,7 +2,7 @@ import React from "react";
 
 export interface navbarTabProps {
     name: string;
-    redirectTo: string;
+    to: string;
     disabled: boolean;
     selectedIcon: string;
     deselectedIcon: string;

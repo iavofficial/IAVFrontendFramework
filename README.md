@@ -1,5 +1,5 @@
 # Disa Framework (how to use it)
-This react framework was created to speed up development in the disa front-end environment. To use this framework follow these steps and read the wiki pages for further information. You maybe want to inspect examples. In this case you should visit the "Disa Framework Example" repository on GitLab (https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework-example) and clone it. There are also wiki pages containing examples.
+This react framework was created to speed up development in the disa front-end environment. To use this framework follow these steps and read the wiki pages for further information. You maybe want to inspect examples. For this you can look up the example in the "example" folder of this project. There are also wiki pages containing examples.
 
 ## Installation
 To install this package add a .npmrc file to your project. This file has to contain the following lines:
@@ -47,7 +47,7 @@ It is also possible to implement own login providers and login views and pass it
 
 ### How to specify navigation tabs
 To let the developer specify navigation tabs the class View is exported as a module. In order to specify navigation tabs you have to create an array of instances of this class. This array has to be passed to the DisaPage's "views" property.  The view class has the following attributes:
-1. navbarTab: This is the instance of the naviation element which gets rendered in the navigation bar. You can pass different navigation elements to the view including instances of components you have implemented on your own. The wiki provides you an example for implementing an own navigation component. The framework provides two types of navigation components:
+1. navbarTab: This is the instance of the navigation component which gets rendered in the navigation bar. You can pass different navigation elements to the view including instances of components you have implemented on your own. The wiki provides you an example for implementing an own navigation component. The framework provides two types of navigation components:
 	1. StandardNavbarTab: This is just a navigation component without any extra functionality. This component has the following properties:
 		- selectedIcon: Icon to be shown if the tab is selected.
 		- deselectedIcon: Icon to be shown if the tab is deselected.
@@ -57,7 +57,7 @@ To let the developer specify navigation tabs the class View is exported as a mod
 2. component: The component (type, not an instance) bound to this tab. It will get rendered in the so called content section if the tab is active.
 
 #### Some notes for implementing a component bound to a view
-The component should have the Content component as the root component in its render method. This component renders the so called "content bar" in the content section. You can pass an array of elements for the content bar using the content's component "contentElements" property.
+The component should have the Content component as the root component in its render method. This component renders the so called "content bar" in the content section. You can pass an array of elements for the content bar using the content's component contentElements property.
 
 
 

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { FirstContext } from "../contexts/FirstContext";
+import { FirstExampleContext } from "../contexts/FirstExampleContext";
 import { Content } from "disa-framework/content";
 
-export class Test2Component extends Component {
+export class ThirdExampleComponent extends Component {
     constructor(props: any) {
         super(props);
     }
@@ -10,10 +10,10 @@ export class Test2Component extends Component {
     render() {
         return (
             <Content contentElements={this.context.contentTabs}>
-                <div>Example data <b>global</b> context: {this.context.test1}</div>
+                <div>Example data <b>global</b> context: {this.context.exampleData}</div>
             </Content>
         );
     }
 }
 
-Test2Component.contextType = FirstContext;
+ThirdExampleComponent.contextType = FirstExampleContext;

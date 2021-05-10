@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 
-export const SecondContext = React.createContext({});
+export const SecondExampleContext = React.createContext({});
 
-export class SecondContextClass extends Component<React.PropsWithChildren<any>> {
+export class SecondContextComponent extends Component<React.PropsWithChildren<any>> {
     constructor(props: React.PropsWithChildren<any>) {
         super(props);
         this.state = {
-            test3: "default",
+            exampleData: "default",
             contentTabs: [
                 <div style={{ backgroundColor: "#5daedb", color: "white", padding: "4px", marginRight: "5px", display: "flex", alignItems: "center" }}>
                     <span>Another <b>global</b> element</span></div>,
@@ -16,9 +16,9 @@ export class SecondContextClass extends Component<React.PropsWithChildren<any>> 
 
     render() {
         return (
-            <SecondContext.Provider value={this.state}>
+            <SecondExampleContext.Provider value={this.state}>
                 {this.props.children}
-            </SecondContext.Provider>
+            </SecondExampleContext.Provider>
         );
     }
 }

@@ -7,7 +7,6 @@ export interface navbarTabProps {
     selectedIcon: string;
     deselectedIcon: string;
     active?: boolean;
-    [attribute: string]: any;
 }
 
 export type navbarTab<additional = {}> = React.ComponentType<navbarTabProps & additional>;

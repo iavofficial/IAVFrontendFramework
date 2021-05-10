@@ -5,19 +5,25 @@ import { AWSLoginProvider } from "disa-framework/awsLoginProvider";
 import { AWSLoginView } from "disa-framework/awsLoginView";
 
 import { config } from "./config_disa-framework_test";
-import { RootComponent } from './components/rootComponent'
-import { Test1Component } from './components/test1Component'
-import { Test2Component } from './components/test2Component'
-import { Test3Component } from './components/test3Component'
+import navDashboardSelected from "./assets/nav_dashboard_selected.png";
+import navDashboardDeselected from "./assets/nav_dashboard_deselected.png";
+import navDiagnosticsSelected from "./assets/nav_diagnostics_selected.png";
+import navDiagnosticsDeselected from "./assets/nav_diagnostics_deselected.png";
+import navExpertSelected from "./assets/nav_expert_selected.png";
+import navExpertDeselected from "./assets/nav_expert_deselected.png";
 import navFleetSelected from './assets/nav_fleet_selected.png';
 import navFleetDeselected from './assets/nav_fleet_deselected.png';
 import navFleetDetailSelected from './assets/nav_fleet_detail_selected.png';
 import navFleetDetailDeselected from './assets/nav_fleet_detail_deselected.png';
-import { FirstContextClass } from './contexts/FirstContext';
-import { SecondContextClass } from './contexts/SecondContext';
+import { FirstContextComponent } from './contexts/FirstExampleContext';
+import { SecondContextComponent } from './contexts/SecondExampleContext';
 import { View } from "disa-framework/view";
 import { StandardNavbarTab } from "disa-framework/standardNavbarTab";
 import { GroupCheckedNavbarTab } from "disa-framework/groupCheckedNavbarTab";
+import { FirstExampleComponent } from "./components/firstExampleComponent";
+import { ThirdExampleComponent } from "./components/thirdExampleComponent";
+import { FourthExampleComponent } from "./components/fourthExampleComponent";
+import { SecondExampleComponent } from "./components/secondExampleComponent";
 
 const authConfig = {
   // REQUIRED - Amazon Cognito Region
@@ -57,24 +63,24 @@ class App extends Component<any> {
 
   render() {
     let views = [
-      new View(<StandardNavbarTab name="Root" to="/" disabled={false} selectedIcon={navFleetSelected}
-        deselectedIcon={navFleetDeselected} />, RootComponent),
-      new View(<GroupCheckedNavbarTab name="Test1" to="/test1" disabled={false} selectedIcon={navFleetSelected}
-        deselectedIcon={navFleetDeselected} permittedGroups={["USER", "ADMIN"]} />, Test1Component),
-      new View(<GroupCheckedNavbarTab name="Test2" to="/test2" disabled={false} selectedIcon={navFleetSelected}
-        deselectedIcon={navFleetDeselected} permittedGroups={["USER", "ADMIN"]} />, Test2Component),
-      new View(<GroupCheckedNavbarTab name="Test3" to="/test3" disabled={true} selectedIcon={navFleetDetailSelected}
-        deselectedIcon={navFleetDetailDeselected} permittedGroups={["ADMIN"]} />, Test3Component),
-      new View(<StandardNavbarTab name="Test4" to="/test4" disabled={true} selectedIcon={navFleetDetailSelected}
-        deselectedIcon={navFleetDetailDeselected} />, Test3Component)
+      new View(<StandardNavbarTab name="1. Example" to="/" disabled={false} selectedIcon={navDashboardSelected}
+        deselectedIcon={navDashboardDeselected} />, FirstExampleComponent),
+      new View(<StandardNavbarTab name="2. Example" to="/example2" disabled={false} selectedIcon={navFleetSelected}
+        deselectedIcon={navFleetDeselected} />, SecondExampleComponent),
+      new View(<GroupCheckedNavbarTab name="3. Example" to="/example3" disabled={false} selectedIcon={navDiagnosticsSelected}
+        deselectedIcon={navDiagnosticsDeselected} permittedGroups={["USER", "ADMIN"]} />, ThirdExampleComponent),
+      new View(<GroupCheckedNavbarTab name="4. Example" to="/example4" disabled={true} selectedIcon={navExpertSelected}
+        deselectedIcon={navExpertDeselected} permittedGroups={["ADMIN"]} />, FourthExampleComponent),
+      new View(<StandardNavbarTab name="5. Example" to="/example5" disabled={true} selectedIcon={navFleetDetailSelected}
+        deselectedIcon={navFleetDetailDeselected} />, FourthExampleComponent)
     ];
     return (
-      <FirstContextClass>
-        <SecondContextClass>
+      <FirstContextComponent>
+        <SecondContextComponent>
           <DisaPage views={views} startingPoint="/" loginView={AWSLoginView} loginProvider={AWSLoginProvider}
             loginProviderProps={{ apiRoot: config.API_Root }} />
-        </SecondContextClass>
-      </FirstContextClass>
+        </SecondContextComponent>
+      </FirstContextComponent>
     );
   }
 }

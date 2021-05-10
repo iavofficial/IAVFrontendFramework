@@ -3,14 +3,14 @@ import { Button } from "primereact/button";
 
 export const FirstExampleContext = React.createContext({});
 
-export class FirstContextComponent extends Component<React.PropsWithChildren<any>> {
+export class FirstExampleContextComponent extends Component<React.PropsWithChildren<any>> {
     constructor(props: React.PropsWithChildren<any>) {
         super(props);
         this.state = {
             exampleData: "default",
             contentTabs: [
                 <Button style={{ width: "200px", height: "40px", margin: "5px", alignSelf: "center" }}
-                    onClick={function (this: FirstContextComponent) { this.updateExampleData("changed with global button") }.bind(this)}>
+                    onClick={function (this: FirstExampleContextComponent) { this.updateExampleData("changed with global button") }.bind(this)}>
                     <span>Change <b>global</b> Context</span>
                 </Button>,
                 <div style={{

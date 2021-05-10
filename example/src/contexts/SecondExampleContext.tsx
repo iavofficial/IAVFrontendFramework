@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 export const SecondExampleContext = React.createContext({});
 
-export class SecondContextComponent extends Component<React.PropsWithChildren<any>> {
+export class SecondExampleContextComponent extends Component<React.PropsWithChildren<any>> {
     constructor(props: React.PropsWithChildren<any>) {
         super(props);
         this.state = {

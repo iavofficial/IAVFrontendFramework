@@ -15,8 +15,8 @@ import navFleetSelected from './assets/nav_fleet_selected.png';
 import navFleetDeselected from './assets/nav_fleet_deselected.png';
 import navFleetDetailSelected from './assets/nav_fleet_detail_selected.png';
 import navFleetDetailDeselected from './assets/nav_fleet_detail_deselected.png';
-import { FirstContextComponent } from './contexts/FirstExampleContext';
-import { SecondContextComponent } from './contexts/SecondExampleContext';
+import { FirstExampleContextComponent } from './contexts/FirstExampleContext';
+import { SecondExampleContextComponent } from './contexts/SecondExampleContext';
 import { View } from "disa-framework/view";
 import { StandardNavbarTab } from "disa-framework/standardNavbarTab";
 import { GroupCheckedNavbarTab } from "disa-framework/groupCheckedNavbarTab";
@@ -75,12 +75,12 @@ class App extends Component<any> {
         deselectedIcon={navFleetDetailDeselected} />, FourthExampleComponent)
     ];
     return (
-      <FirstContextComponent>
-        <SecondContextComponent>
+      <FirstExampleContextComponent>
+        <SecondExampleContextComponent>
           <DisaPage views={views} startingPoint="/" loginView={AWSLoginView} loginProvider={AWSLoginProvider}
             loginProviderProps={{ apiRoot: config.API_Root }} />
-        </SecondContextComponent>
-      </FirstContextComponent>
+        </SecondExampleContextComponent>
+      </FirstExampleContextComponent>
     );
   }
 }

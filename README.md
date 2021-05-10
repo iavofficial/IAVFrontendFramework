@@ -49,14 +49,15 @@ To let the developer specify navigation tabs the class View is exported as a mod
 	2. GroupCheckedNavbarTab: This navigation component adds the functionality of group checking. In addition to the previously explained properties it has the permittedGroups property. Only these usergroups are able to access the component bound to this navigation element. To be able to use this navigation component your login provider has to implement the method "getUserGroups: string[]" (also comes with AWSLoginProvider).
 2. component: The component (type, not an instance) bound to this tab. It will get rendered in the so called content section if the tab is active.
 
+#### Some notes for implementing a component bound to a view
+The component should have the Content component as the root component in its render method. This component renders the so called "content bar" in the content section. You can pass an array of elements for the content bar using the content's component contentElements property.
+
 ### Login system
 The login system is seperated into two parts: The so called LoginProvider and the LoginView. The LoginProvider is the component which handles authentication (login, logout, ...). The LoginView is just the view shown to a user when logging in. Because the authentication provider and the view are seperated it's possible to mix login providers and views.\
 The disa framework already provides two login providers. These are the AWSLoginProvider and the DummyLoginProvider. The AWSLoginProvider uses Amplify and is able to handle authentication with AWS. To use this login provider you have to use Amplify and configure it. You also have to provide the "loginProviderProps" with "apiRoot". The dummy login provider is the standard login provider (which will get used if nothing is specified) and authenticates every combination of email and password. This login provider is intended to be used while developing.\
 There are also two login views provided. One is the AWSLoginView which should be used with the AWSLoginProvider. There is also the BasicLoginView component which can be used in combination with the dummy login provider. The basic login view is the default login view.\
 In order to specify the login provider and the login view you can pass it to the DisaPage component using the "loginProvider" and "loginView" props.
 It is also possible to implement own login providers and login views and pass it to the DisaPage component. For further information about this read the corresponding wiki page.
-#### Some notes for implementing a component bound to a view
-The component should have the Content component as the root component in its render method. This component renders the so called "content bar" in the content section. You can pass an array of elements for the content bar using the content's component contentElements property.
 
 ### Ensure a valid authentication when accessing protected resources
 To access protected resources you have to ensure that the user is currently authenticated. For this purpose every login provider has to implement the execIfAuthed method. This method takes a function and tries to execute it. If it fails the method may refresh the session / token and retry the passed function (so does the AWSLoginProvider). The passed function has to return a JavaScript Promise. The execIfAuthed method also returns a Promise.\

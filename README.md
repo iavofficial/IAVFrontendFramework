@@ -46,12 +46,15 @@ In order to specify the login provider and the login view you can pass it to the
 It is also possible to implement own login providers and login views and pass it to the DisaPage component. For further information about this read the corresponding wiki page.
 
 ### How to specify navigation tabs
-To let the developer specify navigation tabs the class View is exported as a module. In order to specify navigation tabs you have to create an array of instances of this class. This array has to be passed to the DisaPage's "views" property. The view class has the following attributes:
+To let the developer specify navigation tabs the class View is exported as a module. In order to specify navigation tabs you have to create an array of instances of this class. This array has to be passed to the DisaPage's "views" property.  The view class has the following attributes:
+1. navbarTab: This is the instance of the naviation element which gets rendered in the navigation bar. You can pass different navigation elements to the view including instances of components you have implemented on your own. The wiki provides you an example for implementing an own navigation component. The framework provides two types of navigation components:
+1. StandardNavbarTab: This is just a navigation component without any extra functionality. This component has the following properties:
 1. selectedIcon: Icon to be shown if the tab is selected.
 2. deselectedIcon: Icon to be shown if the tab is deselected.
 3. to: Route (URL) on which the tab will be active.
 4. disabled: Boolean which is true if the tab shouldn't be clickable.
-5. component: The component (type, not an instance) bound to this tab. It will get rendered in the so called content section if the tab is active.
+2. GroupCheckedNavbarTab: This navigation component adds the functionality of group checking. In addition to the previously explained properties it has the permittedGroups property. Only these usergroups are able to access the component bound to this navigation element. To be able to use this navigation component your login provider has to implement the method "getUserGroups: string[]" (also comes with AWSLoginProvider).
+2. component: The component (type, not an instance) bound to this tab. It will get rendered in the so called content section if the tab is active.
 
 #### Some notes for implementing a component bound to a view
 The component should have the Content component as the root component in its render method. This component renders the so called "content bar" in the content section. You can pass an array of elements for the content bar using the content's component "contentElements" property.

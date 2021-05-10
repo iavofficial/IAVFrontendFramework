@@ -53,7 +53,7 @@ To let the developer specify navigation tabs the class View is exported as a mod
 - deselectedIcon: Icon to be shown if the tab is deselected.
 - to: Route (URL) on which the tab will be active.
 - disabled: Boolean which is true if the tab shouldn't be clickable.
-2. GroupCheckedNavbarTab: This navigation component adds the functionality of group checking. In addition to the previously explained properties it has the permittedGroups property. Only these usergroups are able to access the component bound to this navigation element. To be able to use this navigation component your login provider has to implement the method "getUserGroups: string[]" (also comes with AWSLoginProvider).
+2. GroupCheckedNavbarTab: This navigation component adds the functionality of group checking. In addition to the previously explained properties it has the permittedGroups property. Only these usergroups are able to access the component bound to this navigation element. To be able to use this navigation component your login provider has to implement the method "getUserGroups: string[]" (also comes with AWSLoginProvider).	
 2. component: The component (type, not an instance) bound to this tab. It will get rendered in the so called content section if the tab is active.
 
 #### Some notes for implementing a component bound to a view

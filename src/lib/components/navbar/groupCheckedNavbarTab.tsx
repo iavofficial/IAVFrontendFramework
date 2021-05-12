@@ -11,9 +11,10 @@ export interface Props {
 
 export const GroupCheckedNavbarTab: navbarTab<Props> = (props) => {
     let { getUserGroups } = useContext(AuthContext);
-    let disabled = !containsOneOrMoreGroups(getUserGroups(), props.permittedGroups);
     return (
-        <StandardNavbarTab deselectedIcon={props.deselectedIcon} selectedIcon={props.selectedIcon}
-            disabled={disabled} name={props.name} to={props.to} active={props.active} />
+        containsOneOrMoreGroups(getUserGroups(), props.permittedGroups) ?
+            <StandardNavbarTab deselectedIcon={props.deselectedIcon} selectedIcon={props.selectedIcon}
+                disabled={props.disabled} name={props.name} to={props.to} active={props.active} /> :
+            <></>
     );
 }

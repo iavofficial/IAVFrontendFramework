@@ -75,12 +75,13 @@ class App extends Component<any> {
         deselectedIcon={navFleetDetailDeselected} />, FourthExampleComponent)
     ];
     return (
-      <FirstExampleContextComponent>
-        <SecondExampleContextComponent>
-          <DisaPage views={views} startingPoint="/" loginView={AWSLoginView} loginProvider={AWSLoginProvider}
-            loginProviderProps={{ apiRoot: config.API_Root }} />
-        </SecondExampleContextComponent>
-      </FirstExampleContextComponent>
+      <AWSLoginProvider apiRoot={config.API_Root}>
+        <FirstExampleContextComponent>
+          <SecondExampleContextComponent>
+            <DisaPage views={views} startingPoint="/" loginView={AWSLoginView} />
+          </SecondExampleContextComponent>
+        </FirstExampleContextComponent>
+      </AWSLoginProvider>
     );
   }
 }

@@ -15,7 +15,7 @@ import { Imprint } from "./imprint";
 import { CookieBanner } from "./cookie/cookieBanner";
 import { acceptedCookies } from "./cookie/cookieHandler";
 import { DummyLoginProvider } from "./login/dummyLoginProvider";
-import { AuthContext } from "../contexts/auth";
+import { AuthContext, placeholderContext } from "../contexts/auth";
 import { View } from "./view";
 
 export interface Props {
@@ -26,7 +26,8 @@ export interface Props {
 
 export const DisaPage = (props: Props) => {
     const context = useContext(AuthContext);
-    const OptionalDummyLoginProvider = context ? DummyLoginProvider : React.Fragment;
+    // Compare references. If the context is still placeholderContext the default DummyLoginProvider should be used.
+    const OptionalDummyLoginProvider = context === placeholderContext ? DummyLoginProvider : React.Fragment;
     const LoginView = props.loginView !== undefined && props.loginView !== null ? props.loginView : BasicLoginView;
     return (
         <OptionalDummyLoginProvider>

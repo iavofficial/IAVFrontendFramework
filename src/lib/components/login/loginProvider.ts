@@ -13,10 +13,3 @@ export interface LoginProvider {
     execIfAuthed(func: securableFunctionType): Promise<any>;
     [attribute: string]: any;
 }
-
-export class NotAuthedError extends Error {
-    static code = "NotAuthedError";
-    constructor(message: string) {
-        super(message);
-    }
-}

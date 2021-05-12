@@ -68,12 +68,12 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
     // Executes func. If it fails and throws NotAuthedError the session will be refreshed and the execution retried.
     // If it fails again the error will not be catched.
     execIfAuthed(func: securableFunctionType) {
-        return func().catch(err => {
-            if (err.code === "NotAuthedError") {
-                this.refreshSession()
+        return func().then(response => {
+            if (response.status === 401) {
+                return this.refreshSession()
                     .then(func)
             } else {
-                throw err;
+                return response;
             }
         });
     }

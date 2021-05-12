@@ -2,7 +2,7 @@ import "primeflex/primeflex.css";
 import "primereact/resources/themes/nova/theme.css";
 import "primereact/resources/primereact.css";
 import "primeicons/primeicons.css";
-import React from "react";
+import React, { useContext } from "react";
 import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 
 import "./css/disaPage.css";
@@ -17,22 +17,20 @@ import { acceptedCookies } from "./cookie/cookieHandler";
 import { DummyLoginProvider } from "./login/dummyLoginProvider";
 import { AuthContext } from "../contexts/auth";
 import { View } from "./view";
-import { LoginProvider } from "./login/loginProvider";
 
 export interface Props {
     views: View[];
     startingPoint: string;
     loginView?: React.ComponentType<any>;
-    loginProvider?: React.ComponentClass<any> & { prototype: LoginProvider };
-    loginProviderProps?: any;
 }
 
 export const DisaPage = (props: Props) => {
-    const ActualLoginProvider = props.loginProvider !== undefined && props.loginProvider !== null ? props.loginProvider : DummyLoginProvider;
+    const context = useContext(AuthContext);
+    const OptionalDummyLoginProvider = context ? DummyLoginProvider : React.Fragment;
     const LoginView = props.loginView !== undefined && props.loginView !== null ? props.loginView : BasicLoginView;
     return (
-        <ActualLoginProvider {...props.loginProviderProps}>
-            { !acceptedCookies() && <CookieBanner />}
+        <OptionalDummyLoginProvider>
+            {!acceptedCookies() && <CookieBanner />}
             <AuthContext.Consumer>
                 {(context) => {
                     if (context.hasAuthenticated()) {
@@ -60,6 +58,6 @@ export const DisaPage = (props: Props) => {
                     }
                 }}
             </AuthContext.Consumer>
-        </ActualLoginProvider>
+        </OptionalDummyLoginProvider>
     );
 };

@@ -6,10 +6,11 @@ import LogoutPic from "../../assets/logout_icon.png";
 import { Clock } from "../clock";
 import { BLUE3, DISATABHEIGHT } from "../constants";
 import { AuthContext } from "../../contexts/auth";
-import { View } from "../view";
+import { View } from "./wrapper/view";
+import { TabAndContentWrapper } from "./wrapper/tabAndContentWrapper";
 
 interface Props {
-    views: View[];
+    tabAndContentWrappers: TabAndContentWrapper[];
 }
 
 export const Navbar = (props: Props) => {
@@ -24,7 +25,7 @@ export const Navbar = (props: Props) => {
                 </span>
                 <img src={LogoutPic} style={{ marginLeft: "auto", marginRight: "20px", cursor: "pointer" }} alt="" onClick={context.logout} />
             </div>
-            {props.views.map(view => React.cloneElement(view.navbarTab, { active: location.pathname === view.navbarTab.props.to }))}
+            {props.tabAndContentWrappers.map(wrapper => React.cloneElement(wrapper.getNavbarComponent()/*, { active: location.pathname === wrapper.navbarTab.props.to }*/))}
             <div style={{ marginTop: "auto" }}>
                 <div style={{ display: "flex", justifyContent: "center" }}>
                     <Link style={{ fontWeight: "bolder", color: "black" }} to="/imprint">Imprint</Link>

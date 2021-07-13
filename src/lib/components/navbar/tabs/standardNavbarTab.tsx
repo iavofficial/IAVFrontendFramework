@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Radium from "radium";
 import { Link } from "react-router-dom";
 
-import { BLUE1, GRAY2, DISATABHEIGHT } from "../constants";
+import { BLUE1, GRAY2, DISATABHEIGHT } from "../../constants";
 import { navbarTabProps } from "./navbarTab";
 
 interface State {

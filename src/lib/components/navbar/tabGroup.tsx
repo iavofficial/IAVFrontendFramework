@@ -1,3 +1,4 @@
+import React from "react";
 import { Accordion, AccordionTab } from 'primereact/accordion';
 
 export const TabGroup = (props: any) => (

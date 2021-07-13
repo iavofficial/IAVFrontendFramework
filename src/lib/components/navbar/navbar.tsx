@@ -25,7 +25,7 @@ export const Navbar = (props: Props) => {
                 </span>
                 <img src={LogoutPic} style={{ marginLeft: "auto", marginRight: "20px", cursor: "pointer" }} alt="" onClick={context.logout} />
             </div>
-            {props.tabAndContentWrappers.map(wrapper => React.cloneElement(wrapper.getNavbarComponent()/*, { active: location.pathname === wrapper.navbarTab.props.to }*/))}
+            {props.tabAndContentWrappers.map(wrapper => wrapper.getNavbarComponent())}
             <div style={{ marginTop: "auto" }}>
                 <div style={{ display: "flex", justifyContent: "center" }}>
                     <Link style={{ fontWeight: "bolder", color: "black" }} to="/imprint">Imprint</Link>

@@ -44,8 +44,7 @@
   "dependencies": {
     "primeflex": "^2.0.0",
     "primeicons": "^4.1.0",
-    "primereact": "^6.2.1",
-    "radium": "^0.26.1"
+    "primereact": "^6.2.1"
   },
   "peerDependencies": {
     "react": "^17.0.1",
@@ -65,12 +64,11 @@
     "@types/jest": "^26.0.22",
     "@types/lodash": "^4.14.168",
     "@types/node": "^12.20.7",
-    "@types/radium": "^0.24.3",
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.3",
     "@types/react-router-dom": "^5.1.7",
+    "aws-amplify": "^3.3.26",
     "react-scripts": "4.0.3",
-    "typescript": "^4.2.4",
-    "aws-amplify": "^3.3.26"
+    "typescript": "^4.2.4"
   }
 }

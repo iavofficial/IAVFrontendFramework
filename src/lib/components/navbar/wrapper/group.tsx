@@ -6,7 +6,7 @@ import { View } from "./view";
 import { TabGroup } from "../tabGroup";
 
 export class Group {
-    constructor(private _views: View[]) {
+    constructor(private _name: string, private _views: View[]) {
     }
 
     getRoutes = () => {
@@ -19,9 +19,13 @@ export class Group {
 
     getNavbarComponent = () => {
         return (
-            <TabGroup>
+            <TabGroup name={this._name}>
                 {this._views.map(view => view.getNavbarComponent())}
             </TabGroup>
         )
+    }
+
+    get name() {
+        return this._name;
     }
 }

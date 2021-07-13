@@ -1,9 +1,13 @@
 import React from "react";
 import { Accordion, AccordionTab } from 'primereact/accordion';
 
-export const TabGroup = (props: any) => (
+interface Props {
+    name: String
+}
+
+export const TabGroup = (props: React.PropsWithChildren<Props>) => (
     <Accordion>
-        <AccordionTab header="Test">
+        <AccordionTab header={props.name}>
             {props.children}
         </AccordionTab>
     </Accordion>

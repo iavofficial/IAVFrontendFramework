@@ -1,5 +1,4 @@
-import React, { Component, useState } from "react";
-import Radium from "radium";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import { BLUE1, GRAY2, DISATABHEIGHT } from "../../constants";
@@ -20,10 +19,7 @@ export const StandardNavbarTab = (props: navbarTabProps) => {
         cursor: active || props.disabled ? "default" : "pointer",
         backgroundColor: (active || hovering) && !props.disabled ? BLUE1 : "white",
         color: (active || hovering) && !props.disabled ? "white" : "black",
-        opacity: props.disabled ? 0.5 : 1,
-        ":hover": {
-            backgroundColor: props.disabled ? "white" : BLUE1
-        }
+        opacity: props.disabled ? 0.5 : 1
     };
 
     const tab = (

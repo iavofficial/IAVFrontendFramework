@@ -70,12 +70,15 @@ class App extends Component<any> {
         deselectedIcon={navFleetDeselected} />, SecondExampleComponent),
       new View(<GroupCheckedNavbarTab name="3. Example" to="/example3" disabled={false} selectedIcon={navDiagnosticsSelected}
         deselectedIcon={navDiagnosticsDeselected} permittedGroups={["USER", "ADMIN"]} />, ThirdExampleComponent),
-      new Group([
-        new View(<StandardNavbarTab name="1. Group Example" to="/group-example1" disabled={false} selectedIcon={navFleetSelected}
-        deselectedIcon={navFleetDeselected} />, SecondExampleComponent),
-        new View(<StandardNavbarTab name="2. Group Example" to="/group-example2" disabled={true} selectedIcon={navFleetDetailSelected}
-        deselectedIcon={navFleetDetailDeselected} />, FourthExampleComponent)
-      ]),
+      new Group(
+        "Test Gruppe",
+        [
+          new View(<StandardNavbarTab name="1. Group Example" to="/group-example1" disabled={false} selectedIcon={navFleetSelected}
+            deselectedIcon={navFleetDeselected} />, SecondExampleComponent),
+          new View(<StandardNavbarTab name="2. Group Example" to="/group-example2" disabled={true} selectedIcon={navFleetDetailSelected}
+            deselectedIcon={navFleetDetailDeselected} />, FourthExampleComponent)
+        ]
+      ),
       new View(<GroupCheckedNavbarTab name="4. Example" to="/example4" disabled={true} selectedIcon={navExpertSelected}
         deselectedIcon={navExpertDeselected} permittedGroups={["ADMIN"]} />, FourthExampleComponent),
       new View(<StandardNavbarTab name="5. Example" to="/example5" disabled={true} selectedIcon={navFleetDetailSelected}

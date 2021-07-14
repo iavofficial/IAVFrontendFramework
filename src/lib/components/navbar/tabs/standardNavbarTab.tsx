@@ -23,21 +23,21 @@ export const StandardNavbarTab = (props: navbarTabProps) => {
     };
 
     const tab = (
-        <div style={{ borderStyle: "solid", borderWidth: "0px 0px 1px 0px", borderColor: GRAY2 }}
-            onMouseEnter={() => setHovering(true)} onMouseLeave={() => setHovering(false)}>
-            <div className="p-d-flex p-align-center" style={tabStyle}>
-                {console.log(props.selectedIcon.valueOf())}
-                <img src={(active || hovering) && !props.disabled ? props.selectedIcon.valueOf() : props.deselectedIcon.valueOf()}
-                    style={{ marginLeft: "5%" }} alt="" />
-                <span style={{ fontWeight: "bold" }}>{props.name}</span>
+        <div className={"navbar-tab-wrapper " + (active ? "active" : "")}>
+            <div className="navbar-tab" style={{ borderColor: GRAY2 }}
+                onMouseEnter={() => setHovering(true)} onMouseLeave={() => setHovering(false)}>
+                <div className="p-d-flex p-align-center" style={tabStyle}>
+                    <img src={(active || hovering) && !props.disabled ? props.selectedIcon.valueOf() : props.deselectedIcon.valueOf()} alt="" />
+                    <span className="navbar-tab-name">{props.name}</span>
+                </div>
             </div>
         </div>
     );
 
     return (
         props.disabled ? tab :
-        <Link style={{ textDecoration: "none" }} to={props.to.valueOf()}>
-            {tab}
-        </Link>
+            <Link style={{ textDecoration: "none" }} to={props.to.valueOf()}>
+                {tab}
+            </Link>
     );
 }

@@ -6,7 +6,7 @@ import { View } from "./view";
 import { TabGroup } from "../tabGroup";
 
 export class Group {
-    constructor(private _name: string, private _views: View[]) {
+    constructor(private _name: string, private _logo: ReactElement, private _views: View[]) {
     }
 
     getRoutes = () => {
@@ -19,7 +19,7 @@ export class Group {
 
     getNavbarComponent = () => {
         return (
-            <TabGroup name={this._name}>
+            <TabGroup name={this._name} logo={this._logo}>
                 {this._views.map(view => view.getNavbarComponent())}
             </TabGroup>
         )

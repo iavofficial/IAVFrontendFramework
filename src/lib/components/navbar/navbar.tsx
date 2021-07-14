@@ -1,20 +1,20 @@
 import React, { useContext } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import UserPic from "../../assets/user.png";
 import LogoutPic from "../../assets/logout_icon.png";
 import { Clock } from "../clock";
 import { BLUE3, DISATABHEIGHT } from "../constants";
 import { AuthContext } from "../../contexts/auth";
-import { View } from "./wrapper/view";
 import { TabAndContentWrapper } from "./wrapper/tabAndContentWrapper";
+
+import "../css/navbar.css";
 
 interface Props {
     tabAndContentWrappers: TabAndContentWrapper[];
 }
 
 export const Navbar = (props: Props) => {
-    let location = useLocation();
     let context = useContext(AuthContext);
     return (
         <div className="p-d-flex p-dir-col p-lg-2" style={{ "padding": "0px" }}>

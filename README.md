@@ -26,6 +26,9 @@ This framework uses ES-6 import/export syntax. All exports are named exports. To
 import { DisaPage } from "@td-d/disa-framework/disaPage"
 ```
 
+### Cookies
+This framework adds a banner for cookies by itself. Without accepting cookies the user cannot use the web application.
+
 ### Layout
 ![Here should be a diagram describing the layout.](./doc/diagrams/layout.png?raw=true)
 

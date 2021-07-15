@@ -13,7 +13,7 @@ After adding this file you are able to install the disa-framework package by usi
 Congratulations. You have installed the latest disa-framework package.
 
 ## Basics
-### Submit to new updates
+### Subscribe to new updates
 Every time a package with a new version is released a gitlab release will be created. To get an email if this happens you have to execute the following steps:\
 Go to "Project overview" --> Click the drop down icon next to the notification bell --> Select "Custom" --> Close the drop down menu --> Click the bell --> Tick "New release" and hit the "OK" button
 
@@ -27,7 +27,7 @@ import { DisaPage } from "@td-d/disa-framework/disaPage"
 ```
 
 ### Cookies
-This framework adds a banner for cookies by itself. Without accepting cookies the user cannot use the web application.
+This framework adds a banner for cookies by itself. Without accepting cookies the user cannot use the web application. *Please explain how the cookie banner works and where to find its integration in the project - make it easy for yourself by adding code snippets*
 
 ### Layout
 ![Here should be a diagram describing the layout.](./doc/diagrams/layout.png?raw=true)
@@ -42,6 +42,7 @@ The DisaPage component has the properties:
 5. loginProviderProps (optional): Object with attributes which will get passed to the login provider.
 
 ### How to specify navigation tabs
+*Try to reduce text by including sample code snippets*
 To let the developer specify navigation tabs the class View is exported as a module. In order to specify navigation tabs the developer has to create an array of instances of this class. The developer is also able to create instances of the class "Group". This class let's the developer specify groups of navigation tabs which are grouped under a specified label. The array has to be passed to the DisaPage's "views" property. The view class has the following attributes:
 1. navbarTab: This is the instance of the navigation component which gets rendered in the navigation bar. You can pass different navigation elements to the view including instances of components you have implemented on your own. The wiki provides you an example for implementing an own navigation component. The framework provides two types of navigation components:
 	1. StandardNavbarTab: This is just a navigation component without any extra functionality. This component has the following properties:

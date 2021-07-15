@@ -100,7 +100,6 @@ To render your views and to do configuration you can follow the structure of thi
   </FirstExampleContextComponent>
 </AWSLoginProvider>
 ```
-An example for configuring Amplify can be found .
 
 ### Ensure a valid authentication when accessing protected resources
 To access protected resources you have to ensure that the user is currently authenticated. For this purpose every login provider has to implement the execIfAuthed method. This method takes a function and tries to execute it. If it fails the method may refresh the session / token and retry the passed function (so does the AWSLoginProvider). The passed function has to return a JavaScript Promise. The execIfAuthed method also returns a Promise.\

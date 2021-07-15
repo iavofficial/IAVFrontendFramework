@@ -84,8 +84,15 @@ In order to specify the login provider and the login view you can pass it to the
 It is also possible to implement own login providers and login views and pass it to the DisaPage component. Further information about implementing a custom login provider can be found [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/How-to-implement-a-login-provider). Further information about implementing a custom login view can be found [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/How-to-implement-a-login-view).
 
 ### Piecing everything together ###
-To render your views and to do configuration you can follow the structure of this code snippet.
+To render your views and to do configuration you can follow the structure of this code snippet. This could be returned inside the body of the render method of your App.tsx.
 ```javascript
+<AWSLoginProvider apiRoot={config.API_Root}>
+  <FirstExampleContextComponent>
+    <SecondExampleContextComponent>
+      <DisaPage tabAndContentWrappers={views} startingPoint="/" loginView={AWSLoginView} />
+    </SecondExampleContextComponent>
+  </FirstExampleContextComponent>
+</AWSLoginProvider>
 ```
 
 ### Ensure a valid authentication when accessing protected resources

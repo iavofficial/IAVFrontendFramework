@@ -28,8 +28,7 @@ import { DisaPage } from "@td-d/disa-framework/disaPage"
 
 ### Cookies
 This framework adds a banner for cookies **by itself without any action of the developer**. The user can either reject or accept cookies. In case of rejection the user won't be able to use the application. In case that the user accepts cookies a **cookie with the expiration time of one year will be set** in order to save this decision. If this cookie is found by the application the cookie banner won't render again.\
-The cookie banner component is **conditionally rendered by the "DisaPage" component**. Rendering of the cookie banner doesn't depend on whether the user is logged in or not.
-
+The cookie banner component is **conditionally rendered by the "DisaPage" component**. Rendering of the cookie banner doesn't depend on whether the user is logged in or not.\
 *Please remove if the text fit's the requirements: Please explain how the cookie banner works and where to find its integration in the project - make it easy for yourself by adding code snippets*
 
 ### Layout
@@ -45,25 +44,25 @@ The DisaPage component has the properties:
 5. loginProviderProps (optional): Object with attributes which will get passed to the login provider.
 
 ### How to specify navigation tabs
-*Try to reduce text by including sample code snippets*
+*Please remove if the text fit's the requirements: Try to reduce text by including sample code snippets*\
 To let the developer specify navigation tabs the class View is exported as a module. In order to specify navigation tabs the developer has to create an array of instances of this class. The developer is also able to create instances of the class "Group". This class let's the developer specify groups of navigation tabs which are grouped under a specified label. The array has to be passed to the DisaPage's "views" property.\
 An example:
 ```javascript
-    let views = [
-      new View(<GroupCheckedNavbarTab name="3. Example" to="/example3" disabled={false} selectedIcon={navDiagnosticsSelected}
-        deselectedIcon={navDiagnosticsDeselected} permittedGroups={["USER", "ADMIN"]} />, ThirdExampleComponent),
-      new Group(
-        "Test Gruppe", otaLogo,
-        [
-          new View(<StandardNavbarTab name="1. Group Example" to="/group-example1" disabled={false} selectedIcon={navFleetSelected}
-            deselectedIcon={navFleetDeselected} />, SecondExampleComponent),
-          new View(<StandardNavbarTab name="2. Group Example" to="/group-example2" disabled={true} selectedIcon={navFleetDetailSelected}
-            deselectedIcon={navFleetDetailDeselected} />, FourthExampleComponent)
-        ]
-      ),
-      new View(<GroupCheckedNavbarTab name="4. Example" to="/example4" disabled={true} selectedIcon={navExpertSelected}
-        deselectedIcon={navExpertDeselected} permittedGroups={["ADMIN"]} />, FourthExampleComponent)
-    ];
+let views = [
+  new View(<GroupCheckedNavbarTab name="3. Example" to="/example3" disabled={false} selectedIcon={navDiagnosticsSelected}
+    deselectedIcon={navDiagnosticsDeselected} permittedGroups={["USER", "ADMIN"]} />, ThirdExampleComponent),
+  new Group(
+    "Test Gruppe", otaLogo,
+    [
+      new View(<StandardNavbarTab name="1. Group Example" to="/group-example1" disabled={false} selectedIcon={navFleetSelected}
+        deselectedIcon={navFleetDeselected} />, SecondExampleComponent),
+      new View(<StandardNavbarTab name="2. Group Example" to="/group-example2" disabled={true} selectedIcon={navFleetDetailSelected}
+        deselectedIcon={navFleetDetailDeselected} />, FourthExampleComponent)
+    ]
+  ),
+  new View(<GroupCheckedNavbarTab name="4. Example" to="/example4" disabled={true} selectedIcon={navExpertSelected}
+    deselectedIcon={navExpertDeselected} permittedGroups={["ADMIN"]} />, FourthExampleComponent)
+];
 ```
 
 #### Some notes for implementing a component bound to a view

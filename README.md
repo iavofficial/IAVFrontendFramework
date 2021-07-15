@@ -83,6 +83,11 @@ In order to specify the login provider and the login view you can pass it to the
 
 It is also possible to implement own login providers and login views and pass it to the DisaPage component. Further information about implementing a custom login provider can be found [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/How-to-implement-a-login-provider). Further information about implementing a custom login view can be found [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/How-to-implement-a-login-view).
 
+### Piecing everything together ###
+To render your views and to do configuration you can follow the structure of this code snippet.
+```javascript
+```
+
 ### Ensure a valid authentication when accessing protected resources
 To access protected resources you have to ensure that the user is currently authenticated. For this purpose every login provider has to implement the execIfAuthed method. This method takes a function and tries to execute it. If it fails the method may refresh the session / token and retry the passed function (so does the AWSLoginProvider). The passed function has to return a JavaScript Promise. The execIfAuthed method also returns a Promise.\
 The AWSLoginProvider tries to refresh the access token and retries your method if your method throws an error including the attribute code with it's value being "NotAuthedError".

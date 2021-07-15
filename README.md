@@ -1,5 +1,5 @@
 # Disa Framework (how to use it)
-This react framework was created to speed up development in the disa front-end environment. To use this framework follow these steps and read the wiki pages for further information. You maybe want to inspect examples. For this you can look up the example in the "example" folder of this project.
+This react framework was created to speed up development in the disa front-end environment. To use this framework follow these steps and read the wiki pages for further information. You maybe want to inspect examples. For this you can look up the example in the "example" folder of this project. TEST
 
 ## Installation
 To install this package add a .npmrc file to your project. This file has to contain the following lines:

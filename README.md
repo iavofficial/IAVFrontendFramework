@@ -27,7 +27,10 @@ import { DisaPage } from "@td-d/disa-framework/disaPage"
 ```
 
 ### Cookies
-This framework adds a banner for cookies by itself. Without accepting cookies the user cannot use the web application. *Please explain how the cookie banner works and where to find its integration in the project - make it easy for yourself by adding code snippets*
+This framework adds a banner for cookies **by itself without any action of the developer**. The user can either reject or accept cookies. In case of rejection the user won't be able to use the application. In case that the user accepts cookies a **cookie with the expiration time of one year will be set** in order to save this decision. If this cookie is found by the application the cookie banner won't render again.\
+The cookie banner component is **conditionally rendered by the "DisaPage" component**. Rendering of the cookie banner doesn't depend on whether the user is logged in or not.
+
+*Please remove if the text fit's the requirements: Please explain how the cookie banner works and where to find its integration in the project - make it easy for yourself by adding code snippets*
 
 ### Layout
 ![Here should be a diagram describing the layout.](./doc/diagrams/layout.png?raw=true)

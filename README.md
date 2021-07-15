@@ -45,7 +45,7 @@ The DisaPage component has the properties:
 
 ### How to specify navigation tabs
 *Please remove if the text fit's the requirements: Try to reduce text by including sample code snippets*\
-To let the developer specify navigation tabs the class View is exported as a module. It encapsulates the element which is rendered in the navigation bar and the component which is rendered in the content section. In order to specify navigation tabs the developer has to **create an array of instances of this class**. The developer is also able to create instances of the class "Group". This class let's the developer specify groups of navigation tabs which are grouped under a specified label. The array has to be passed to the DisaPage's "views" property.\
+To let the developer specify navigation tabs the class View is exported as a module. It encapsulates the element which is rendered in the navigation bar and the component which is rendered in the content section. In order to specify navigation tabs the developer has to **create an array of instances of this class**. The developer is also able to create instances of the class "Group". This class let's the developer specify groups of navigation tabs with a specified label. The array has to be passed to the DisaPage's "views" property.\
 An example:
 ```javascript
 let views = [

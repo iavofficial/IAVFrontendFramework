@@ -1,13 +1,22 @@
-.group-name {
-    text-transform: uppercase;
-    margin-right: 20%;
+.group-wrapper {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 5%;
 }
 
-.group-logo-wrapper {
-    height: 100%;
-    margin-left: 10%;
-    display: flex;
-    align-items: center;
+.group-name {
+    text-transform: uppercase;
+}
+
+.group-logo {
+    width: 20px;
+    /* Calculated from width of navigation logos */
+    margin-left: 15px;
+    /* Calculated from width of navigation logos */
+    margin-right: 25px;
 }
 
 .navbar-tab {
@@ -36,6 +45,7 @@
 }
 
 /* Anpassen des Akkordion-Styles */
+
 .p-accordion-header {
     height: 35px !important;
 }

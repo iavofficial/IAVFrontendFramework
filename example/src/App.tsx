@@ -72,7 +72,7 @@ class App extends Component<any> {
       new View(<GroupCheckedNavbarTab name="3. Example" to="/example3" disabled={false} selectedIcon={navDiagnosticsSelected}
         deselectedIcon={navDiagnosticsDeselected} permittedGroups={["USER", "ADMIN"]} />, ThirdExampleComponent),
       new Group(
-        "Test Gruppe", <img src={otaLogo} style={{height: "60%"}}/>,
+        "Test Gruppe", otaLogo,
         [
           new View(<StandardNavbarTab name="1. Group Example" to="/group-example1" disabled={false} selectedIcon={navFleetSelected}
             deselectedIcon={navFleetDeselected} />, SecondExampleComponent),

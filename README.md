@@ -67,6 +67,13 @@ let views = [
 You can find a detailed explanation of the attributes [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/Views-and-Groups-in-Detail).
 #### Some notes for implementing a component bound to a view
 The component should have the Content component as the root component in its render method. This component renders the so called "content bar" in the content section. You can pass an array of elements for the content bar using the content's component contentElements property.
+Example:
+```javascript
+<Content contentElements={[...this.context.contentTabs, ...this.state.contentTabs]}>
+     <div>Example data <b>global</b> context: {this.context.exampleData}</div>
+</Content>
+```
+A detailed explanation can be found
 
 ### Login system
 The login system is seperated into two parts: The so called LoginProvider and the LoginView. The LoginProvider is the component which handles authentication (login, logout, ...). The LoginView is just the view shown to a user when logging in. Because the authentication provider and the view are seperated it's possible to mix login providers and views.\

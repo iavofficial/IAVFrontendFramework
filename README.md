@@ -46,7 +46,25 @@ The DisaPage component has the properties:
 
 ### How to specify navigation tabs
 *Try to reduce text by including sample code snippets*
-To let the developer specify navigation tabs the class View is exported as a module. In order to specify navigation tabs the developer has to create an array of instances of this class. The developer is also able to create instances of the class "Group". This class let's the developer specify groups of navigation tabs which are grouped under a specified label. The array has to be passed to the DisaPage's "views" property.
+To let the developer specify navigation tabs the class View is exported as a module. In order to specify navigation tabs the developer has to create an array of instances of this class. The developer is also able to create instances of the class "Group". This class let's the developer specify groups of navigation tabs which are grouped under a specified label. The array has to be passed to the DisaPage's "views" property.\
+An example:
+```javascript
+    let views = [
+      new View(<GroupCheckedNavbarTab name="3. Example" to="/example3" disabled={false} selectedIcon={navDiagnosticsSelected}
+        deselectedIcon={navDiagnosticsDeselected} permittedGroups={["USER", "ADMIN"]} />, ThirdExampleComponent),
+      new Group(
+        "Test Gruppe", otaLogo,
+        [
+          new View(<StandardNavbarTab name="1. Group Example" to="/group-example1" disabled={false} selectedIcon={navFleetSelected}
+            deselectedIcon={navFleetDeselected} />, SecondExampleComponent),
+          new View(<StandardNavbarTab name="2. Group Example" to="/group-example2" disabled={true} selectedIcon={navFleetDetailSelected}
+            deselectedIcon={navFleetDetailDeselected} />, FourthExampleComponent)
+        ]
+      ),
+      new View(<GroupCheckedNavbarTab name="4. Example" to="/example4" disabled={true} selectedIcon={navExpertSelected}
+        deselectedIcon={navExpertDeselected} permittedGroups={["ADMIN"]} />, FourthExampleComponent)
+    ];
+```
 
 #### Some notes for implementing a component bound to a view
 The component should have the Content component as the root component in its render method. This component renders the so called "content bar" in the content section. You can pass an array of elements for the content bar using the content's component contentElements property.

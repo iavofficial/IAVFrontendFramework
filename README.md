@@ -69,7 +69,7 @@ You can find a detailed explanation of the attributes [here](https://gitlab.iavg
 As you can see there are two types of navigation tabs. However you are free to implement your own. Further information can be found [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/How-to-implement-a-navigation-component).
 
 #### Some notes for implementing a component bound to a view
-The component should have the Content component as the root component in its render method. This component renders the so called "content bar" in the content section. You can pass an array of elements for the content bar using the content's component contentElements property.
+The component should have the Content component as the root component in its render method. This component renders the so called "content bar" in the content section. You can pass an array of elements for the content bar using the content's component contentElements property.\
 Example:
 ```javascript
 <Content contentElements={[...this.context.contentTabs, ...this.state.contentTabs]}>

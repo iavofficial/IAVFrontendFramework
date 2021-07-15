@@ -66,6 +66,8 @@ let views = [
 ```
 You can find a detailed explanation of the attributes [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/Views-and-Groups-in-Detail).
 
+As you can see there are two types of navigation tabs. However you are free to implement your oww. Further information can be found [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/How-to-implement-a-navigation-component).
+
 #### Some notes for implementing a component bound to a view
 The component should have the Content component as the root component in its render method. This component renders the so called "content bar" in the content section. You can pass an array of elements for the content bar using the content's component contentElements property.
 Example:
@@ -95,6 +97,7 @@ To render your views and to do configuration you can follow the structure of thi
   </FirstExampleContextComponent>
 </AWSLoginProvider>
 ```
+An example for configuring Amplify can be found [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/%5BExample-(TypeScript)%5D-Configuring-Amplify).
 
 ### Ensure a valid authentication when accessing protected resources
 To access protected resources you have to ensure that the user is currently authenticated. For this purpose every login provider has to implement the execIfAuthed method. This method takes a function and tries to execute it. If it fails the method may refresh the session / token and retry the passed function (so does the AWSLoginProvider). The passed function has to return a JavaScript Promise. The execIfAuthed method also returns a Promise.\

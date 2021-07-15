@@ -64,7 +64,7 @@ let views = [
     deselectedIcon={navExpertDeselected} permittedGroups={["ADMIN"]} />, FourthExampleComponent)
 ];
 ```
-
+You can find a detailed explanation of the attributes by visiting this wiki page: [https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/Views-and-Groups-in-Detail]
 #### Some notes for implementing a component bound to a view
 The component should have the Content component as the root component in its render method. This component renders the so called "content bar" in the content section. You can pass an array of elements for the content bar using the content's component contentElements property.
 

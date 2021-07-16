@@ -1,1 +1,1 @@
-export * from "./lib/components/internationalization/i18n";
+export * from "./lib/internationalization/i18n";

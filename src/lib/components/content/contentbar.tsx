@@ -1,9 +1,9 @@
-import React from "react";
+import React, { ReactElement } from "react";
 
 import { DISATABHEIGHT } from "../constants";
 
 interface Props {
-    contentElements: React.Component[]
+    contentElements: ReactElement[]
 }
 
 export const Contentbar = (props: Props) => (

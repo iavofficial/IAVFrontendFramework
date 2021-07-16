@@ -42,10 +42,13 @@
     "disa-framework"
   ],
   "dependencies": {
+    "i18next": "^20.3.3",
+    "i18next-browser-languagedetector": "^6.1.2",
     "primeflex": "^2.0.0",
     "primeicons": "^4.1.0",
     "primereact": "^6.2.1",
-    "radium": "^0.26.1"
+    "radium": "^0.26.1",
+    "react-i18next": "^11.11.3"
   },
   "peerDependencies": {
     "react": "^17.0.1",
@@ -69,8 +72,8 @@
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.3",
     "@types/react-router-dom": "^5.1.7",
+    "aws-amplify": "^3.3.26",
     "react-scripts": "4.0.3",
-    "typescript": "^4.2.4",
-    "aws-amplify": "^3.3.26"
+    "typescript": "^4.2.4"
   }
 }

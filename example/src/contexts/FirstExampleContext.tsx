@@ -1,9 +1,18 @@
-import React, { Component } from "react";
+import React, { Component, ReactElement } from "react";
 import { Button } from "primereact/button";
 
-export const FirstExampleContext = React.createContext({});
+interface State {
+    exampleData: string,
+    contentTabs: ReactElement[]
+}
 
-export class FirstExampleContextComponent extends Component<React.PropsWithChildren<any>> {
+interface ContextType extends State {
+    updateExampleData: (string: string) => void
+}
+
+export const FirstExampleContext = React.createContext<ContextType | undefined>(undefined);
+
+export class FirstExampleContextComponent extends Component<React.PropsWithChildren<any>, State> {
     constructor(props: React.PropsWithChildren<any>) {
         super(props);
         this.state = {

@@ -40,7 +40,7 @@ The DisaPage component has the properties:
 1. views: Array of views (a specific class) to provide in order to render tabs in the navigation bar and the associated component.
 2. startingPoint: The "entry URL" of your application. This doesn't mean the login page but the path the user will be redirected after successfull authentication.
 3. loginView (optional): This attribute will get explained later
-4. translations (optional): Translations for internationalization.
+4. translations (optional): Translations for internationalization
 5. skipI18nextInit (optional): Flag that tells the framework it has to skip the initialization of I18next. This could be helpful if you have to add extra logic in the initialization process.
 
 ### How to specify navigation tabs

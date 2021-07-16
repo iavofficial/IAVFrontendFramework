@@ -5,6 +5,10 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import translationEN from "./en.json";
 import translationDE from "./de.json";
 
+interface translations {
+//    ...translations: Object
+}
+
 export const initI18next = (translations: Object) => {
     let resources = {
         en: {
@@ -16,9 +20,9 @@ export const initI18next = (translations: Object) => {
     }
     Object.keys(translations).forEach(key => {
         if (Object.keys(resources).includes(key)) {
-
+//            resources[key].translation.concat(translations[key]);
         } else {
-            resources[key] = translations[key];
+//            resources[key] = translations[key];
         }
     })
     i18n

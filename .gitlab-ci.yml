@@ -28,8 +28,6 @@ validate_package_scope:
         echo 'For more information, see https://docs.gitlab.com/ee/user/packages/npm_registry/#package-naming-convention'
         exit 1
       fi
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "develop"'
 
 # If no .npmrc if included in the repo, generate a temporary one to use during the publish step
 # that is configured to publish to GitLab's NPM registry
@@ -50,8 +48,6 @@ create_npmrc:
   artifacts:
     paths:
       - .npmrc
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "develop"'
 
 # Builds the framework
 build_package:
@@ -62,8 +58,6 @@ build_package:
   artifacts:
     paths:
       - ./build
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "develop"'
 
 # Publish the package. If the version in package.json has not yet been published, it will be
 # published to GitLab's NPM registry. If the version already exists, the publish command
@@ -82,7 +76,7 @@ publish_package:
         exit 1
       }
   rules:
-    - if: '$CI_COMMIT_BRANCH == "develop"'
+    - if: '$CI_COMMIT_BRANCH == "master"'
 
 # Create release so observer of this project will get a notification e-mail.
 create_release:
@@ -96,4 +90,4 @@ create_release:
     tag_name: ver_$(node -p "require('./package.json').version")
     description: ./scripts/ci_cd/release_notes/$(node -p "require('./package.json').version").md
   rules:
-    - if: '$CI_COMMIT_BRANCH == "develop"'
+    - if: '$CI_COMMIT_BRANCH == "master"'

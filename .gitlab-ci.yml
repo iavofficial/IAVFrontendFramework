@@ -71,6 +71,7 @@ build_package:
 publish_package:
   stage: publish
   script:
+    - ./scripts/ci_cd/setup_npm.sh
     - |
       {
         cd ./build &&

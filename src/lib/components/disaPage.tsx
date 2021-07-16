@@ -2,7 +2,7 @@ import "primeflex/primeflex.css";
 import "primereact/resources/themes/nova/theme.css";
 import "primereact/resources/primereact.css";
 import "primeicons/primeicons.css";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 
 import "./css/disaPage.css";
@@ -17,14 +17,23 @@ import { acceptedCookies } from "./cookie/cookieHandler";
 import { DummyLoginProvider } from "./login/dummyLoginProvider";
 import { AuthContext, placeholderContext } from "../contexts/auth";
 import { View } from "./view";
+import { initI18next, Translations } from "../internationalization/i18n";
 
 export interface Props {
     views: View[];
     startingPoint: string;
     loginView?: React.ComponentType<any>;
+    translations?: Translations;
+    skipI18nextInit?: boolean;
 }
 
 export const DisaPage = (props: Props) => {
+    // Init I18Next only once (if it should not be skipped)
+    useEffect(() => {
+        if(!props.skipI18nextInit) {
+            initI18next(props.translations);
+        }
+    }, []);
     const context = useContext(AuthContext);
     // Compare references. If the context is still placeholderContext the default DummyLoginProvider should be used.
     const OptionalDummyLoginProvider = context === placeholderContext ? DummyLoginProvider : React.Fragment;

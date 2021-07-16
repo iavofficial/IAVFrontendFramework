@@ -1,4 +1,13 @@
 {
-    "test": "test from en json 2",
-    "test": "test from en json 1"
+    "Date": "date",
+    "Imprint": "Imprint",
+    "Germany": "Deutschland",
+    "Internet": "Internet",
+    "Headquarter": "Headquarter",
+    "Register_court": "Register court",
+    "Registration_number": "Registration number",
+    "USt_Ident_Number": "USt-Ident-Number",
+    "Managing_directors": "Managing directors",
+    "Chairman": "Vorsitzender",
+    "Chairman_supervisory_board": "Chairman of the supervisory board"
 }

@@ -1,3 +1,13 @@
 {
-    "test": "test from de json"
+    "Date": "Datum",
+    "Imprint": "Impressum",
+    "Germany": "Deutschland",
+    "Internet": "Internet",
+    "Headquarter": "Sitz",
+    "Register_court": "Registergericht",
+    "Registration_number": "Registernummer",
+    "USt_Ident_Number": "USt-Ident-Nummer",
+    "Managing_directors": "Geschäftsführer",
+    "Chairman": "Chairman",
+    "Chairman_supervisory_board": "Vorsitzender des Aufsichtsrates"
 }

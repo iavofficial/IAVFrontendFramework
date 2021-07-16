@@ -39,9 +39,9 @@ The main component of this framework is the DisaPage component. To do the basic 
 The DisaPage component has the properties:
 1. views: Array of views (a specific class) to provide in order to render tabs in the navigation bar and the associated component.
 2. startingPoint: The "entry URL" of your application. This doesn't mean the login page but the path the user will be redirected after successfull authentication.
-3. loginProvider (optional): This attribute will get explained later
-4. loginView (optional): This attribute will get explained later
-5. loginProviderProps (optional): Object with attributes which will get passed to the login provider.
+3. loginView (optional): This attribute will get explained later
+4. translations (optional): Translations for internationalization.
+5. skipI18nextInit (optional): Flag that tells the framework it has to skip the initialization of I18next. This could be helpful if you have to add extra logic in the initialization process.
 
 ### How to specify navigation tabs
 *Please remove if the text fit's the requirements: Try to reduce text by including sample code snippets*\
@@ -100,6 +100,30 @@ To render your views and to do configuration you can follow the structure of thi
   </FirstExampleContextComponent>
 </AWSLoginProvider>
 ```
+
+### Internationalization ###
+The framework uses I18next for internationalization. It provides a default initialization of I18next which automatically gets executed when the "DisaPage" component mounts. It also provides translations in english and german for texts of framework components. You can provide own translations by defining .json files and defining an object of the following structure:
+```javascript
+let translations = {
+  es: {
+    translation: importedJsonFileEs
+  },
+  pt: {
+    translation: importedJsonFilePt
+  }
+}
+```
+This object then has to be passed to the "DisaPage" component. The .json file has to include simple key value pairs like this:
+```javascript
+{
+  "greeting": "hello",
+  "promote_programming": "Programming is fun!"
+}
+```
+
+If you have to add extra logic in the initialization you can skip the default initialization by setting the "skipI18nextInit" flag.
+
+You can find more information about I18next [here](https://react.i18next.com/).
 
 ### Ensure a valid authentication when accessing protected resources
 To access protected resources you have to ensure that the user is currently authenticated. For this purpose every login provider has to implement the execIfAuthed method. This method takes a function and tries to execute it. If it fails the method may refresh the session / token and retry the passed function (so does the AWSLoginProvider). The passed function has to return a JavaScript Promise. The execIfAuthed method also returns a Promise.\

@@ -1,3 +1,5 @@
+**Important note: Developers which enhance the framework or the example project should read the "devnotes" chapter at the end of this file before developing.**
+
 # Disa Framework (how to use it)
 This react framework was created to speed up development in the disa front-end environment. To use this framework follow these steps and read the wiki pages for further information. You maybe want to inspect examples. For this you can look up the example in the "example" folder of this project.
 
@@ -143,6 +145,9 @@ This command builds the framework to the "build" folder. Tsc and babel will watc
 ### `npm run build-linux`
 
 This command executes the build script for linux environments / the ci / cd pipeline.
+
+## **IMPORTANT: NPM version** ##
+Major release 17 of npm must be installed at least. Otherwise issues with typescript will occur.
 
 ## Example project
 To be able to view the results of code changes in the framework live there is an example project in the "example" folder. To develop properly you should use the "npm devmode" command in the frameworks root folder and the "npm start" command in the example project's root folder.

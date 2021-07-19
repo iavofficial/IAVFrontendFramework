@@ -1,0 +1,81 @@
+.group-wrapper {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 5%;
+}
+
+.group-name {
+    text-transform: uppercase;
+}
+
+.group-logo {
+    width: 20px;
+    /* Calculated from width of navigation logos */
+    margin-left: 15px;
+    /* Calculated from width of navigation logos */
+    margin-right: 25px;
+}
+
+.navbar-tab {
+    border-style: solid;
+    border-width: 0px 0px 1px 0px;
+}
+
+.navbar-tab img {
+    margin-left: 5%;
+}
+
+.navbar-tab-name {
+    font-weight: bold;
+}
+
+.p-accordion-content .navbar-tab-wrapper {
+    border-width: 0px 3px 0px 0px !important;
+    border: solid;
+    border-color: #5daedb;
+}
+
+.p-accordion-content .navbar-tab-wrapper.active {
+    border-width: 0px 3px 0px 0px !important;
+    border: solid;
+    border-color: #14639e;
+}
+
+/* Anpassen des Akkordion-Styles */
+
+.p-accordion-header {
+    height: 35px !important;
+}
+
+.p-accordion-header a {
+    height: 100%;
+    padding: 0px !important;
+    border-radius: 0px !important;
+    background-color: white !important;
+    border-width: 0px 0px 1px 0px !important;
+    border-color: #cdcdcd !important;
+    color: #5daedb !important;
+    outline: 0px !important;
+    font-weight: 500 !important;
+}
+
+.p-accordion .p-accordion-header:not(.p-disabled) .p-accordion-header-link:focus {
+    box-shadow: none !important;
+}
+
+.p-accordion-content {
+    padding: 0 !important;
+    border: none !important;
+}
+
+.p-accordion-header-link {
+    flex-direction: row-reverse !important;
+    justify-content: space-between !important;
+}
+
+.p-accordion-header-text {
+    width: 100%;
+}

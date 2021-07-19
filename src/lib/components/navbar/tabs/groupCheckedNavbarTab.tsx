@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 
 import { navbarTab } from "./navbarTab";
-import { AuthContext } from "../../contexts/auth";
-import { containsOneOrMoreGroups } from "../../services/groupChecker";
+import { AuthContext } from "../../../contexts/auth";
+import { containsOneOrMoreGroups } from "../../../services/groupChecker";
 import { StandardNavbarTab } from "./standardNavbarTab";
 
 export interface Props {
@@ -15,7 +15,7 @@ export const GroupCheckedNavbarTab: navbarTab<Props> = (props) => {
     return (
         permitted ?
             <StandardNavbarTab deselectedIcon={props.deselectedIcon} selectedIcon={props.selectedIcon}
-                disabled={props.disabled} name={props.name} to={props.to} active={props.active} /> :
+                disabled={props.disabled} name={props.name} to={props.to} /> :
             <></>
     );
 }

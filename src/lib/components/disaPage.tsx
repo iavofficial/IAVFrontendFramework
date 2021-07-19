@@ -16,10 +16,10 @@ import { CookieBanner } from "./cookie/cookieBanner";
 import { acceptedCookies } from "./cookie/cookieHandler";
 import { DummyLoginProvider } from "./login/dummyLoginProvider";
 import { AuthContext, placeholderContext } from "../contexts/auth";
-import { View } from "./view";
+import { TabAndContentWrapper } from "./navbar/wrapper/tabAndContentWrapper";
 
 export interface Props {
-    views: View[];
+    tabAndContentWrappers: TabAndContentWrapper[];
     startingPoint: string;
     loginView?: React.ComponentType<any>;
 }
@@ -40,8 +40,8 @@ export const DisaPage = (props: Props) => {
                                 <div className={"p-d-flex p-flex-column"} style={{ height: "100%", bottom: "0" }}>
                                     <DisaHeader />
                                     <div className="p-d-flex" style={{ height: "100%", margin: "0" }}>
-                                        <Navbar views={props.views} />
-                                        {props.views.map(view => <Route exact path={view.navbarTab.props.to.valueOf()} component={view.component} />)}
+                                        <Navbar tabAndContentWrappers={props.tabAndContentWrappers} />
+                                        {props.tabAndContentWrappers.map(wrapper => wrapper.getRoutes())}
                                         <Route exact path="/imprint" component={Imprint} />
                                         <Redirect exact from="login" to={props.startingPoint.valueOf()} />
                                     </div>

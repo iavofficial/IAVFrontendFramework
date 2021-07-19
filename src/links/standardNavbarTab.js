@@ -1,1 +1,1 @@
-export * from "./lib/components/navbar/standardNavbarTab";
+export * from "./lib/components/navbar/tabs/standardNavbarTab";

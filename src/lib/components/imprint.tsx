@@ -1,3 +1,5 @@
+import React from "react";
+
 export const Imprint = () => (
     <div className="p-d-flex" style={{ height: "100%", width: "100%", justifyContent: "center", alignItems: "center" }}>
         <div style={{ textAlign: "center" }}>

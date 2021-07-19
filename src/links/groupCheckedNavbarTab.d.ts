@@ -1,1 +1,1 @@
-export * from "./lib/components/navbar/groupCheckedNavbarTab";
+export * from "./lib/components/navbar/tabs/groupCheckedNavbarTab";

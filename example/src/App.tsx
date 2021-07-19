@@ -15,9 +15,11 @@ import navFleetSelected from './assets/nav_fleet_selected.png';
 import navFleetDeselected from './assets/nav_fleet_deselected.png';
 import navFleetDetailSelected from './assets/nav_fleet_detail_selected.png';
 import navFleetDetailDeselected from './assets/nav_fleet_detail_deselected.png';
+import otaLogo from "./assets/ota_logo.png";
 import { FirstExampleContextComponent } from './contexts/FirstExampleContext';
 import { SecondExampleContextComponent } from './contexts/SecondExampleContext';
 import { View } from "disa-framework/view";
+import { Group } from "disa-framework/group";
 import { StandardNavbarTab } from "disa-framework/standardNavbarTab";
 import { GroupCheckedNavbarTab } from "disa-framework/groupCheckedNavbarTab";
 import { FirstExampleComponent } from "./components/firstExampleComponent";
@@ -69,6 +71,15 @@ class App extends Component<any> {
         deselectedIcon={navFleetDeselected} />, SecondExampleComponent),
       new View(<GroupCheckedNavbarTab name="3. Example" to="/example3" disabled={false} selectedIcon={navDiagnosticsSelected}
         deselectedIcon={navDiagnosticsDeselected} permittedGroups={["USER", "ADMIN"]} />, ThirdExampleComponent),
+      new Group(
+        "Test Gruppe", otaLogo,
+        [
+          new View(<StandardNavbarTab name="1. Group Example" to="/group-example1" disabled={false} selectedIcon={navFleetSelected}
+            deselectedIcon={navFleetDeselected} />, SecondExampleComponent),
+          new View(<StandardNavbarTab name="2. Group Example" to="/group-example2" disabled={true} selectedIcon={navFleetDetailSelected}
+            deselectedIcon={navFleetDetailDeselected} />, FourthExampleComponent)
+        ]
+      ),
       new View(<GroupCheckedNavbarTab name="4. Example" to="/example4" disabled={true} selectedIcon={navExpertSelected}
         deselectedIcon={navExpertDeselected} permittedGroups={["ADMIN"]} />, FourthExampleComponent),
       new View(<StandardNavbarTab name="5. Example" to="/example5" disabled={true} selectedIcon={navFleetDetailSelected}
@@ -78,7 +89,7 @@ class App extends Component<any> {
       <AWSLoginProvider apiRoot={config.API_Root}>
         <FirstExampleContextComponent>
           <SecondExampleContextComponent>
-            <DisaPage views={views} startingPoint="/" loginView={AWSLoginView} />
+            <DisaPage tabAndContentWrappers={views} startingPoint="/" loginView={AWSLoginView} />
           </SecondExampleContextComponent>
         </FirstExampleContextComponent>
       </AWSLoginProvider>

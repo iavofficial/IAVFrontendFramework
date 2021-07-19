@@ -1,3 +1,5 @@
+**Important note: Developers which enhance the framework or the example project should read the "devnotes" chapter at the end of this file before developing.**
+
 # Disa Framework (how to use it)
 This react framework was created to speed up development in the disa front-end environment. To use this framework follow these steps and read the wiki pages for further information. You maybe want to inspect examples. For this you can look up the example in the "example" folder of this project.
 
@@ -39,9 +41,9 @@ The main component of this framework is the DisaPage component. To do the basic 
 The DisaPage component has the properties:
 1. views: Array of views (a specific class) to provide in order to render tabs in the navigation bar and the associated component.
 2. startingPoint: The "entry URL" of your application. This doesn't mean the login page but the path the user will be redirected after successfull authentication.
-3. loginProvider (optional): This attribute will get explained later
-4. loginView (optional): This attribute will get explained later
-5. loginProviderProps (optional): Object with attributes which will get passed to the login provider.
+3. loginView (optional): This attribute will get explained later
+4. translations (optional): Translations for internationalization
+5. skipI18nextInit (optional): Flag that tells the framework it has to skip the initialization of I18next. This could be helpful if you have to add extra logic in the initialization process.
 
 ### How to specify navigation tabs
 *Please remove if the text fit's the requirements: Try to reduce text by including sample code snippets*\
@@ -101,6 +103,30 @@ To render your views and to do configuration you can follow the structure of thi
 </AWSLoginProvider>
 ```
 
+### Internationalization ###
+The framework uses I18next for internationalization. It provides a default initialization of I18next which automatically gets executed when the "DisaPage" component mounts. It also provides translations in english and german for texts of framework components. You can provide own translations by defining .json files and defining an object of the following structure:
+```javascript
+let translations = {
+  es: {
+    translation: importedJsonFileEs
+  },
+  pt: {
+    translation: importedJsonFilePt
+  }
+}
+```
+This object then has to be passed to the "DisaPage" component. The .json file has to include simple key value pairs like this:
+```javascript
+{
+  "greeting": "hello",
+  "promote_programming": "Programming is fun!"
+}
+```
+
+If you have to add extra logic in the initialization you can skip the default initialization by setting the "skipI18nextInit" flag.
+
+You can find more information about I18next [here](https://react.i18next.com/).
+
 ### Ensure a valid authentication when accessing protected resources
 To access protected resources you have to ensure that the user is currently authenticated. For this purpose every login provider has to implement the execIfAuthed method. This method takes a function and tries to execute it. If it fails the method may refresh the session / token and retry the passed function (so does the AWSLoginProvider). The passed function has to return a JavaScript Promise. The execIfAuthed method also returns a Promise.\
 The AWSLoginProvider tries to refresh the access token and retries your method if your method throws an error including the attribute code with it's value being "NotAuthedError".
@@ -119,6 +145,9 @@ This command builds the framework to the "build" folder. Tsc and babel will watc
 ### `npm run build-linux`
 
 This command executes the build script for linux environments / the ci / cd pipeline.
+
+## **IMPORTANT: NPM version** ##
+Major release 17 of npm must be installed at least. Otherwise issues with typescript will occur.
 
 ## Example project
 To be able to view the results of code changes in the framework live there is an example project in the "example" folder. To develop properly you should use the "npm devmode" command in the frameworks root folder and the "npm start" command in the example project's root folder.

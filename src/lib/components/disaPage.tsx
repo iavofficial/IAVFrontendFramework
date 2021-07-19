@@ -16,11 +16,11 @@ import { CookieBanner } from "./cookie/cookieBanner";
 import { acceptedCookies } from "./cookie/cookieHandler";
 import { DummyLoginProvider } from "./login/dummyLoginProvider";
 import { AuthContext, placeholderContext } from "../contexts/auth";
-import { View } from "./navbar/wrapper/view";
+import { TabAndContentWrapper } from "./navbar/wrapper/tabAndContentWrapper";
 import { initI18next, Translations } from "../internationalization/i18n";
 
 export interface Props {
-    views: View[];
+    tabAndContentWrappers: TabAndContentWrapper[];
     startingPoint: string;
     loginView?: React.ComponentType<any>;
     translations?: Translations;

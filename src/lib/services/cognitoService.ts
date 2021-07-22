@@ -1,6 +1,6 @@
 import { Auth } from "aws-amplify";
-import { privLvls } from "../components/constants";
-import { Credentials } from "../components/login/loginProvider";
+
+import { Credentials } from "../contexts/auth";
 import { containsOneOrMoreGroups } from "./groupChecker";
 
 let cognitoUser: any;

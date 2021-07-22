@@ -13,13 +13,8 @@
     "devmode": ".\\scripts\\windows\\build_devmode.bat",
     "build-linux": "./scripts/ci_cd/build.sh",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "eject": "react-scripts eject",
+    "lint": "eslint"
   },
   "browserslist": {
     "production": [
@@ -48,6 +43,7 @@
     "primeicons": "^4.1.0",
     "primereact": "^6.2.1",
     "radium": "^0.26.1",
+    "react-cookie": "^4.0.3",
     "react-i18next": "^11.11.3"
   },
   "peerDependencies": {
@@ -72,7 +68,12 @@
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.3",
     "@types/react-router-dom": "^5.1.7",
+    "@typescript-eslint/eslint-plugin": "^4.28.4",
+    "@typescript-eslint/parser": "^4.28.4",
     "aws-amplify": "^3.3.26",
+    "eslint": "^7.31.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "react-scripts": "4.0.3",
     "typescript": "^4.2.4"
   }

@@ -6,11 +6,11 @@ import {
     ValidUserInformation, cognitoLogin, cognitoLogout, cognitoCheckIsAuthenticated,
     cognitoCompletePassword, cognitoRefreshAccessToken
 } from "../../services/cognitoService";
-import { LoginProvider, Credentials, securableFunctionType } from "./loginProvider";
+import { LoginProvider, Credentials, securableFunctionType } from "../../contexts/auth";
 
 export interface Props {
     apiRoot: string;
-    failOnNoLegalGroup?: Boolean,
+    failOnNoLegalGroup?: boolean,
     legalGroups?: string[]
 }
 

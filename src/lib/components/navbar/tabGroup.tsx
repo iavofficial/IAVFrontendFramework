@@ -15,7 +15,7 @@ export const TabGroup = (props: React.PropsWithChildren<Props>) => {
     );
 
     return (
-        <Accordion expandIcon="pi pi-chevron-left">
+        <Accordion activeIndex={0} expandIcon="pi pi-chevron-left">
             <AccordionTab headerTemplate={header}>
                 {props.children}
             </AccordionTab>

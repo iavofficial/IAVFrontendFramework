@@ -1,15 +1,27 @@
 import React from "react";
-import { LoginProvider, Credentials } from "../components/login/loginProvider";
-import { securableFunctionType } from "../components/login/loginProvider"
 
-export const placeholderContext: LoginProvider = {
-    hasAuthenticated: () => false,
-    login: (credentials: Credentials) => false,
-    logout: () => false,
-    getUsername: () => "PLACEHOLDER",
-    execIfAuthed: (func: securableFunctionType) => func()
+export interface Credentials {
+    email: string;
+    password: string;
 }
 
-const authContext = React.createContext<LoginProvider>(placeholderContext);
+export type securableFunctionType = (...rest: any) => Promise<any>;
 
-export { authContext as AuthContext };
+export interface LoginProvider {
+    login(credentials: Credentials, ...rest: any): any;
+    logout(): any;
+    hasAuthenticated(): boolean;
+    getUsername(): string;
+    execIfAuthed(func: securableFunctionType): Promise<any>;
+}
+
+export interface LoginContextType {
+    login(credentials: Credentials, ...rest: any): any;
+    logout(): any;
+    hasAuthenticated(): boolean;
+    getUsername(): string;
+    execIfAuthed(func: securableFunctionType): Promise<any>;
+    [attribute: string]: any;
+}
+
+export const AuthContext = React.createContext<LoginContextType | undefined>(undefined);

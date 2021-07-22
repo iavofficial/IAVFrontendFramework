@@ -1,4 +1,5 @@
 {
+    "option_name": "German",
     "Date": "Datum",
     "Imprint": "Impressum",
     "Germany": "Deutschland",
@@ -10,6 +11,7 @@
     "Managing_directors": "Geschäftsführer",
     "Chairman": "Chairman",
     "Chairman_supervisory_board": "Vorsitzender des Aufsichtsrates",
+    "allow_cookies_header": "Diese Webseite benutzt Cookies.",
     "allow_cookies_disclaimer": "Diese Website benötigt die Erlaubnis Cookies zu verwenden.",
     "allow_cookies_button": "Cookies erlauben"
 }

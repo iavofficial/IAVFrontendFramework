@@ -4,6 +4,9 @@ import { DisaPage } from 'disa-framework/disaPage';
 import { AWSLoginProvider } from "disa-framework/awsLoginProvider";
 import { AWSLoginView } from "disa-framework/awsLoginView";
 
+import translationES from "./assets/translations/es.json";
+import translationEN from "./assets/translations/en.json";
+import translationDE from "./assets/translations/de.json";
 import { config } from "./config_disa-framework_test";
 import navDashboardSelected from "./assets/nav_dashboard_selected.png";
 import navDashboardDeselected from "./assets/nav_dashboard_deselected.png";
@@ -64,7 +67,7 @@ class App extends Component<any> {
   }
 
   render() {
-    let views = [
+    const views = [
       new View(<StandardNavbarTab name="1. Example" to="/" disabled={false} selectedIcon={navDashboardSelected}
         deselectedIcon={navDashboardDeselected} />, FirstExampleComponent),
       new View(<StandardNavbarTab name="2. Example" to="/example2" disabled={false} selectedIcon={navFleetSelected}
@@ -85,11 +88,26 @@ class App extends Component<any> {
       new View(<StandardNavbarTab name="5. Example" to="/example5" disabled={true} selectedIcon={navFleetDetailSelected}
         deselectedIcon={navFleetDetailDeselected} />, FourthExampleComponent)
     ];
+
+    const translations = (
+      {
+        es: {
+          translation: translationES
+        },
+        en: {
+          translation: translationEN
+        },
+        de: {
+          translation: translationDE
+        }
+      }
+    );
+
     return (
       <AWSLoginProvider apiRoot={config.API_Root}>
         <FirstExampleContextComponent>
           <SecondExampleContextComponent>
-            <DisaPage tabAndContentWrappers={views} startingPoint="/" loginView={AWSLoginView} />
+            <DisaPage tabAndContentWrappers={views} startingPoint="/" loginView={AWSLoginView} translations={translations} />
           </SecondExampleContextComponent>
         </FirstExampleContextComponent>
       </AWSLoginProvider>

@@ -10,8 +10,8 @@ export interface Props {
 }
 
 export const GroupCheckedNavbarTab: navbarTab<Props> = (props) => {
-    let { getUserGroups } = useContext(AuthContext);
-    let permitted = getUserGroups ? containsOneOrMoreGroups(getUserGroups(), props.permittedGroups) : false;
+    const authContext = useContext(AuthContext);
+    const permitted = containsOneOrMoreGroups(authContext?.getUserGroups(), props.permittedGroups);
     return (
         permitted ?
             <StandardNavbarTab deselectedIcon={props.deselectedIcon} selectedIcon={props.selectedIcon}

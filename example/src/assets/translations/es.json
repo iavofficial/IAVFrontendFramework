@@ -1,0 +1,18 @@
+{
+    "option_name": "Spanish",
+    "Date": "Fecha",
+    "Imprint": "Imprimir",
+    "Germany": "Alemania",
+    "Internet": "Internet",
+    "Headquarter": "Sede",
+    "Register_court": "Tribunal de registro",
+    "Registration_number": "Número de registro",
+    "USt_Ident_Number": "USt-Ident-Número",
+    "Managing_directors": "Directores generales",
+    "Chairman": "Presidente",
+    "Chairman_supervisory_board": "Presidente de la Junta Supervisora",
+    "allow_cookies_header": "La aplicación web usas cookies.",
+    "allow_cookies_disclaimer": "La aplicación web necesita permiso para usar cookies.",
+    "allow_cookies_button": "Permitir cookies",
+    "bytes_example": "{{count}} son 1KiB"
+}

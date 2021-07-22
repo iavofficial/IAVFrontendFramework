@@ -119,12 +119,16 @@ let translations = {
 This object then has to be passed to the "DisaPage" component. The .json file has to include simple key value pairs like this:
 ```javascript
 {
+  "option_name": "German",
   "greeting": "hello",
   "promote_programming": "Programming is fun!"
 }
 ```
+The key *option_name* is mandatory. The corresponding value will be listed in the language selection menu.
 
-If you have to add extra logic in the initialization you can skip the default initialization by setting the "skipI18nextInit" flag.
+If you want to initialize i18next your own way (for example to specify a interpolation function) you can define an initialization function and pass it to the *DisaPage* component by using the *initI18Next* property. If the user hasn't accepted cookies, i18next will be initialized by the framework regardless whether this property is specified or not. In case the *initI18Next* property is specified the function will be executed when the user accepts cookies.
+
+You may want to use another internationalization library or use own implementations. The Disa-Framework introduces the concept of *LanguageProviders*. The default language provider comes with the framework and uses i18next. You can specify your oww *LanguageProvider*. This LanguageProvider has to use the *LanguageContext* (has to render LanguageContext.Provider) from *"@...scope.../disa-framework/language"*. The framework detects that LanguageContext.Provider was rendered and skips the default initialization.
 
 You can find more information about I18next [here](https://react.i18next.com/).
 

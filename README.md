@@ -44,7 +44,7 @@ The DisaPage component has the properties:
 2. startingPoint: The "entry URL" of your application. This doesn't mean the login page but the path the user will be redirected after successfull authentication.
 3. loginView (optional): This attribute will get explained later
 4. translations (optional): Translations for internationalization
-5. skipI18nextInit (optional): Flag that tells the framework it has to skip the initialization of I18next. This could be helpful if you have to add extra logic in the initialization process.
+5. initI18Next (optional): Custom function for initializing i18next. If the user hasn't accepted cookies, i18next will be initialized by the framework regardless whether this property is specified or not. In case the property is specified the function will be executed when the user accepts cookies.
 
 ### How to specify navigation tabs
 *Please remove if the text fit's the requirements: Try to reduce text by including sample code snippets*\

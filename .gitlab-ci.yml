@@ -39,7 +39,7 @@ create_npmrc:
         echo 'No .npmrc found! Creating one now. Please review the following link for more information: https://docs.gitlab.com/ee/user/packages/npm_registry/index.html#authenticating-with-a-ci-job-token'
         printenv
         {
-          echo '@${CI_PROJECT_ROOT_NAMESPACE}
+          echo '@${CI_PROJECT_ROOT_NAMESPACE}'
         } >> .npmrc
 
       fi

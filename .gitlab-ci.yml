@@ -4,6 +4,9 @@ default:
   before_script:
     - chmod -R +x ./ci_cd/scripts
 
+variables:
+  NPM_TOKEN: ${CI_JOB_TOKEN}
+
 # Validate that the package name is properly scoped to the project's root namespace.
 # For more information, see https://docs.gitlab.com/ee/user/packages/npm_registry/#package-naming-convention
 validate_package_scope:

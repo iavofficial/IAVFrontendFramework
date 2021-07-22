@@ -105,7 +105,7 @@ To render your views and to do configuration you can follow the structure of thi
 ```
 
 ### Internationalization ###
-The framework uses I18next for internationalization. It provides a default initialization of I18next which automatically gets executed when the "DisaPage" component mounts. It also provides translations in english and german for texts of framework components. You can provide own translations by defining .json files and defining an object of the following structure:
+The framework uses I18next for internationalization. It provides a default initialization of I18next which automatically gets executed when the *DisaPage* component mounts. It also provides translations in english and german for texts of framework components. You can provide own translations by defining .json files and defining an object of the following structure:
 ```javascript
 let translations = {
   es: {
@@ -126,7 +126,7 @@ This object then has to be passed to the "DisaPage" component. The .json file ha
 ```
 The key *option_name* is mandatory. The corresponding value will be listed in the language selection menu.
 
-If you want to initialize i18next your own way (for example to specify a interpolation function) you can define an initialization function and pass it to the *DisaPage* component by using the *initI18Next* property. If the user hasn't accepted cookies, i18next will be initialized by the framework regardless whether this property is specified or not. In case the *initI18Next* property is specified the function will be executed when the user accepts cookies.
+If you want to initialize i18next your own way (for example to specify an interpolation function) you can define an initialization function and pass it to the *DisaPage* component by using the *initI18Next* property. If the user hasn't accepted cookies, i18next will be initialized by the framework regardless whether this property is specified or not. In case the *initI18Next* property is specified the function will be executed when the user accepts cookies.
 
 You may want to use another internationalization library or use own implementations. The Disa-Framework introduces the concept of *LanguageProviders*. The default language provider comes with the framework and uses i18next. You can specify your oww *LanguageProvider*. This LanguageProvider has to use the *LanguageContext* (has to render LanguageContext.Provider) from *"@...scope.../disa-framework/language"*. The framework detects that LanguageContext.Provider was rendered and skips the default initialization.
 

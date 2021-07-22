@@ -78,7 +78,7 @@ publish_package:
         exit 1
       }
   rules:
-    - if: '$CI_COMMIT_BRANCH == "master"'
+    - if: '$CI_COMMIT_BRANCH == "develop"'
 
 # Create release so observer of this project will get a notification e-mail.
 create_release:
@@ -92,4 +92,4 @@ create_release:
     tag_name: ver_$(node -p "require('./package.json').version")
     description: ./scripts/ci_cd/release_notes/$(node -p "require('./package.json').version").md
   rules:
-    - if: '$CI_COMMIT_BRANCH == "master"'
+    - if: '$CI_COMMIT_BRANCH == "develop"'

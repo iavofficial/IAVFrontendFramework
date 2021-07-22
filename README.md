@@ -1,7 +1,7 @@
-**Important note: Developers which enhance the framework or the example project should read the "devnotes" chapter at the end of this file before developing.**
+**Important note: Developers which enhance the framework or the example project should read the *devnotes* chapter at the end of this file before developing.**
 
 # Disa Framework (how to use it)
-This react framework was created to speed up development in the disa front-end environment. To use this framework follow these steps and read the wiki pages for further information. You maybe want to inspect examples. For this you can look up the example in the "example" folder of this project.
+This react framework was created to speed up development in the disa front-end environment. To use this framework follow these steps and read the wiki pages for further information. You maybe want to inspect examples. For this you can look up the example in the *example* folder of this project.
 
 ## Installation
 To install this package add a .npmrc file to your project. This file has to contain the following lines:
@@ -17,7 +17,7 @@ Congratulations. You have installed the latest disa-framework package.
 ## Basics
 ### Subscribe to new updates
 Every time a package with a new version is released a gitlab release will be created. To get an email if this happens you have to execute the following steps:\
-Go to "Project overview" --> Click the drop down icon next to the notification bell --> Select "Custom" --> Close the drop down menu --> Click the bell --> Tick "New release" and hit the "OK" button
+Go to *Project overview* --> Click the drop down icon next to the notification bell --> Select *Custom* --> Close the drop down menu --> Click the bell --> Tick *New release* and hit the *OK* button
 
 ### TypeScript
 This framework supports TypeScript although you can also use it with JavaScript.
@@ -34,7 +34,7 @@ import { DisaPage } from "@td-d/disa-framework/disaPage"
 **Please remove if the text fit's the requirements: Please explain how the cookie banner works and where to find its integration in the project - make it easy for yourself by adding code snippets**
 
 This framework adds a banner for cookies **by itself without any action of the developer**. Cookies have to be accepted for proper functionality. Without accepting the user can't use the web application. When accepting a **cookie with the expiration time of one year will be set** in order to save the decision. If this cookie is found, the cookie banner won't render again.\
-The cookie banner component is **conditionally rendered by the *DisaPage* component**. The code can be found in *"src/lib/components/cookie/cookieBanner.tsx"* Rendering of the cookie banner doesn't depend on whether the user is logged in or not.
+The cookie banner component is **conditionally rendered by the *DisaPage* component**. The code can be found in *src/lib/components/cookie/cookieBanner.tsx* Rendering of the cookie banner doesn't depend on whether the user is logged in or not.
 
 ### Layout
 ![Here should be a diagram describing the layout.](./doc/diagrams/layout.png?raw=true)
@@ -50,7 +50,7 @@ The DisaPage component has the properties:
 
 ### How to specify navigation tabs
 *Please remove if the text fit's the requirements: Try to reduce text by including sample code snippets*\
-To let the developer specify navigation tabs the class View is exported as a module. It encapsulates the element which is rendered in the navigation bar and the component which is rendered in the content section. In order to specify navigation tabs the developer has to **create an array of instances of this class**. The developer is also able to create instances of the class "Group". This class let's the developer specify groups of navigation tabs with a specified label. The array has to be passed to the DisaPage's "views" property.\
+To let the developer specify navigation tabs the class View is exported as a module. It encapsulates the element which is rendered in the navigation bar and the component which is rendered in the content section. In order to specify navigation tabs the developer has to **create an array of instances of this class**. The developer is also able to create instances of the class *Group*. This class let's the developer specify groups of navigation tabs with a specified label. The array has to be passed to the DisaPage's *views* property.\
 An example:
 ```javascript
 let views = [
@@ -74,7 +74,7 @@ You can find a detailed explanation of the attributes [here](https://gitlab.iavg
 As you can see there are two types of navigation tabs. However you are free to implement your own. Further information can be found [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/How-to-implement-a-navigation-component).
 
 #### Some notes for implementing a component bound to a view
-The component should have the Content component as the root component in its render method. This component renders the so called "content bar" in the content section. You can pass an array of elements for the content bar using the content's component contentElements property.\
+The component should have the Content component as the root component in its render method. This component renders the so called *content bar* in the content section. You can pass an array of elements for the content bar using the content's component contentElements property.\
 Example:
 ```javascript
 <Content contentElements={[...this.context.contentTabs, ...this.state.contentTabs]}>
@@ -86,11 +86,11 @@ A detailed explanation can be found [here](https://gitlab.iavgroup.local/td-d/ed
 ### Login system
 The login system is seperated into two parts: The so called LoginProvider and the LoginView. The LoginProvider is the component which handles authentication (login, logout, ...). The LoginView is just the view shown to a user when logging in. Because the authentication provider and the view are seperated it's possible to mix login providers and views.
 
-The disa framework already provides two login providers. These are the AWSLoginProvider and the DummyLoginProvider. The AWSLoginProvider uses Amplify and is able to handle authentication with AWS. To use this login provider you have to use Amplify and configure it (further information [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/%5BExample-(TypeScript)%5D-Configuring-Amplify)). You also have to provide the "loginProviderProps" with "apiRoot". The dummy login provider is the standard login provider (which will get used if nothing is specified) and authenticates every combination of email and password. This login provider is intended to be used while developing.
+The disa framework already provides two login providers. These are the AWSLoginProvider and the DummyLoginProvider. The AWSLoginProvider uses Amplify and is able to handle authentication with AWS. To use this login provider you have to use Amplify and configure it (further information [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/%5BExample-(TypeScript)%5D-Configuring-Amplify)). You also have to provide the *loginProviderProps* with *apiRoot*. The dummy login provider is the standard login provider (which will get used if nothing is specified) and authenticates every combination of email and password. This login provider is intended to be used while developing.
 
 There are also two login views provided. One is the AWSLoginView which should be used with the AWSLoginProvider. There is also the BasicLoginView component which can be used in combination with the dummy login provider. The basic login view is the default login view.
 
-In order to specify the login provider and the login view you can pass it to the DisaPage component using the "loginProvider" and "loginView" props.
+In order to specify the login provider and the login view you can pass it to the DisaPage component using the *loginProvider* and *loginView* props.
 
 It is also possible to implement own login providers and login views and pass it to the DisaPage component. Further information about implementing a custom login provider can be found [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/How-to-implement-a-login-provider). Further information about implementing a custom login view can be found [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/How-to-implement-a-login-view).
 
@@ -118,7 +118,7 @@ let translations = {
   }
 }
 ```
-This object then has to be passed to the "DisaPage" component. The .json file has to include simple key value pairs like this:
+This object then has to be passed to the *DisaPage* component. The .json file has to include simple key value pairs like this:
 ```javascript
 {
   "option_name": "German",
@@ -130,13 +130,13 @@ The key *option_name* is mandatory. The corresponding value will be listed in th
 
 If you want to initialize i18next your own way (for example to specify an interpolation function) you can define an initialization function and pass it to the *DisaPage* component by using the *initI18Next* property. If the user hasn't accepted cookies, i18next will be initialized by the framework regardless whether this property is specified or not. In case the *initI18Next* property is specified the function will be executed when the user accepts cookies.
 
-You may want to use another internationalization library or use own implementations. The Disa-Framework introduces the concept of *LanguageProviders*. The default language provider comes with the framework and uses i18next. You can specify your own *LanguageProvider*. This LanguageProvider has to use the *LanguageContext* (has to render LanguageContext.Provider) from *"@...scope.../disa-framework/language"* and pass certain properties (futher information [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/More-information-about-Languageprovider)). The framework detects that LanguageContext.Provider was rendered and skips the default initialization.
+You may want to use another internationalization library or use own implementations. The Disa-Framework introduces the concept of *LanguageProviders*. The default language provider comes with the framework and uses i18next. You can specify your own *LanguageProvider*. This LanguageProvider has to use the *LanguageContext* (has to render LanguageContext.Provider) from *@...scope.../disa-framework/language* and pass certain properties (futher information [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/More-information-about-Languageprovider)). The framework detects that LanguageContext.Provider was rendered and skips the default initialization.
 
 You can find more information about I18next [here](https://react.i18next.com/).
 
 ### Ensure a valid authentication when accessing protected resources
 To access protected resources you have to ensure that the user is currently authenticated. For this purpose every login provider has to implement the execIfAuthed method. This method takes a function and tries to execute it. If it fails the method may refresh the session / token and retry the passed function (so does the AWSLoginProvider). The passed function has to return a JavaScript Promise. The execIfAuthed method also returns a Promise.\
-The AWSLoginProvider tries to refresh the access token and retries your method if your method throws an error including the attribute code with it's value being "NotAuthedError".
+The AWSLoginProvider tries to refresh the access token and retries your method if your method throws an error including the attribute code with it's value being *NotAuthedError*.
 
 
 # Disa Framework (devnotes)
@@ -147,7 +147,7 @@ In the project directory, you can run:
 
 ### `npm devmode`
 
-This command builds the framework to the "build" folder. Tsc and babel will watch files in src/links and src/lib for changes and recompile it if necessary.
+This command builds the framework to the *build* folder. Tsc and babel will watch files in src/links and src/lib for changes and recompile it if necessary.
 
 ### `npm run build-linux`
 
@@ -157,4 +157,4 @@ This command executes the build script for linux environments / the ci / cd pipe
 Major release 17 of npm must be installed at least. Otherwise issues with typescript will occur.
 
 ## Example project
-To be able to view the results of code changes in the framework live there is an example project in the "example" folder. To develop properly you should use the "npm devmode" command in the frameworks root folder and the "npm start" command in the example project's root folder.
+To be able to view the results of code changes in the framework live there is an example project in the *example* folder. To develop properly you should use the *npm devmode* command in the frameworks root folder and the *npm start* command in the example project's root folder.

@@ -22,6 +22,8 @@ Go to "Project overview" --> Click the drop down icon next to the notification b
 ### TypeScript
 This framework supports TypeScript although you can also use it with JavaScript.
 
+It is recommended to use TypeScript. If you develop own implementations with framework given contexts you have to pass certain properties to the contexts's provider. If you forget to pass this properties the TypeScript compiler will remind you.
+
 ### Imports
 This framework uses ES-6 import/export syntax. All exports are named exports. To import a module just type the name of the npm package and add the component you want to import. For example:
 ```javascript
@@ -128,7 +130,7 @@ The key *option_name* is mandatory. The corresponding value will be listed in th
 
 If you want to initialize i18next your own way (for example to specify an interpolation function) you can define an initialization function and pass it to the *DisaPage* component by using the *initI18Next* property. If the user hasn't accepted cookies, i18next will be initialized by the framework regardless whether this property is specified or not. In case the *initI18Next* property is specified the function will be executed when the user accepts cookies.
 
-You may want to use another internationalization library or use own implementations. The Disa-Framework introduces the concept of *LanguageProviders*. The default language provider comes with the framework and uses i18next. You can specify your oww *LanguageProvider*. This LanguageProvider has to use the *LanguageContext* (has to render LanguageContext.Provider) from *"@...scope.../disa-framework/language"*. The framework detects that LanguageContext.Provider was rendered and skips the default initialization.
+You may want to use another internationalization library or use own implementations. The Disa-Framework introduces the concept of *LanguageProviders*. The default language provider comes with the framework and uses i18next. You can specify your own *LanguageProvider*. This LanguageProvider has to use the *LanguageContext* (has to render LanguageContext.Provider) from *"@...scope.../disa-framework/language"*. The framework detects that LanguageContext.Provider was rendered and skips the default initialization.
 
 You can find more information about I18next [here](https://react.i18next.com/).
 

@@ -17,7 +17,7 @@ export const CookieBanner = (props: any) => {
     const acceptCookies = () => {
         const exprireDate = new Date();
         exprireDate.setUTCFullYear(exprireDate.getUTCFullYear() + 1);
-        setCookie(ACCEPTED_COOKIES_NAME, "true", { expires: exprireDate })
+        setCookie(ACCEPTED_COOKIES_NAME, "true", { expires: exprireDate });
         setVisible(false);
     }
 

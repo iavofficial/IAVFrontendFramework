@@ -72,7 +72,7 @@ export const I18NextLanguageProvider = (props: React.PropsWithChildren<Props>) =
     return (
         <LanguageContext.Provider value={{
             fallbackLang: props.fallbackLang, resources: resources, activeLang: activeLang,
-            selectlanguage: selectLanguage, useCustomTranslation: useCustomTranslation
+            selectLanguage: selectLanguage, useCustomTranslation: useCustomTranslation
         }}>
             {loaded && props.children}
         </LanguageContext.Provider>

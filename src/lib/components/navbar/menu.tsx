@@ -23,7 +23,7 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>((props, ref) =>
                     {
                         label: langContext?.resources[key].translation.option_name,
                         icon: langContext?.activeLang === key ? "pi pi-check" : "",
-                        command: () => langContext?.selectlanguage(key)
+                        command: () => langContext?.selectLanguage(key)
                     }
                 );
                 if (langContext?.activeLang === key) {
@@ -35,7 +35,7 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>((props, ref) =>
             {
                 label: langContext?.resources[langContext.fallbackLang].translation.option_name,
                 icon: !notFallbackLang ? "pi pi-check" : "",
-                command: () => langContext?.selectlanguage(langContext.fallbackLang)
+                command: () => langContext?.selectLanguage(langContext.fallbackLang)
             }
         );
     }

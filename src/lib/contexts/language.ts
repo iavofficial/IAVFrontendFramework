@@ -23,7 +23,7 @@ export interface LanguageContextType {
     fallbackLang: string,
     resources: Translations,
     activeLang: string,
-    selectlanguage: (lang: string) => void,
+    selectLanguage: (lang: string) => void,
     useCustomTranslation: (key: string, ...translationParams: any[]) => string
     [attribute: string]: any;
 }

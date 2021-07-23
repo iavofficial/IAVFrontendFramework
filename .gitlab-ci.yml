@@ -68,6 +68,7 @@ publish_package:
   stage: publish
   script:
     - ./scripts/ci_cd/setup_npm.sh
+    - export GIT_SSL_NO_VERIFY=1
     - |
       {
         npm run semantic-release

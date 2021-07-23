@@ -13,8 +13,13 @@
     "devmode": ".\\scripts\\windows\\build_devmode.bat",
     "build-linux": "./scripts/ci_cd/build.sh",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "semantic-release": "semantic-release"
   },
+    "publishConfig": {
+    "access": "public"
+  },
+  "files": [ "./build" ],
   "eslintConfig": {
     "extends": [
       "react-app",

@@ -48,7 +48,7 @@ The DisaPage component has the properties:
 
 ### Internationalization ###
 **Add an concrete example on how to setup i18n for a framework user**
-The framework uses I18next for internationalization. It provides a default initialization of I18next which automatically gets executed when the *DisaPage* component mounts. It also provides translations in english and german for texts of framework components. You can provide own translations by defining .json files and defining an object of the following structure:
+The framework uses I18next for internationalization. It provides a default initialization of I18next which automatically gets executed when the *DisaPage* component mounts. It also provides translations in english and german for texts of framework components. To setup i18next with the default implementation of the framework you have to create an object with the following structure and pass it to the *DisaPage* component.
 ```javascript
 let translations = {
   es: {
@@ -58,8 +58,15 @@ let translations = {
     translation: importedJsonFilePt
   }
 }
+
+...
+render() {
+  ...
+  <DisaPage translations={translations} .../>
+  ...
+}
 ```
-This object then has to be passed to the *DisaPage* component. The .json file has to include simple key value pairs like this:
+The .json file has to include simple key value pairs like this:
 ```javascript
 {
   "option_name": "German",
@@ -76,29 +83,48 @@ const t = useTranslation();
 const exampleTranslation = <div>Example translation: {t("Imprint")}</div>;
 ```
 
-If you want to initialize i18next your own way (for example to specify an interpolation function) you can define an initialization function and pass it to the *DisaPage* component by using the *initI18Next* property. If the user hasn't accepted cookies, i18next will be initialized by the framework regardless whether this property is specified or not. In case the *initI18Next* property is specified the function will be executed when the user accepts cookies.
+If you want to initialize i18next your own way (for example to specify an interpolation function) you can define an initialization function and pass it to the *DisaPage* component by using the *initI18Next* property. If the user hasn't accepted cookies, i18next will be initialized by the framework regardless whether this property is specified or not. In case the *initI18Next* property is specified the function will be executed when the user accepts cookies.\
+An example:
+```javascript
+const initFunction = () => {
+  i18n
+    .use(initReactI18next)
+    .use(LanguageDetector)
+    .init({
+        debug: false,
+        fallbackLng: "en",
+        resources: resources,
+        detection: {
+            caches: ["cookie"],
+            cookieMinutes: 525600
+        }
+    });
+}
+```
 
 You can find more information about I18next [here](https://react.i18next.com/).
 
 ### How to specify navigation tabs
 *Please remove if the text fit's the requirements: Try to reduce text by including sample code snippets*\
-To let the developer specify navigation tabs the class View is exported as a module. It encapsulates the element which is rendered in the navigation bar and the component which is rendered in the content section. In order to specify navigation tabs the developer has to **create an array of instances of this class**. The developer is also able to create instances of the class *Group*. This class let's the developer specify groups of navigation tabs with a specified label. The array has to be passed to the DisaPage's *views* property.\
+To let the developer specify navigation tabs the class View is exported as a module. It encapsulates the element which is rendered in the navigation bar and the component which is rendered in the content section. In order to specify navigation tabs the developer has to **create an array of instances of this class**. The developer is also able to create instances of the class *Group*. This class let's the developer specify groups of navigation tabs with a specified label. The array has to be passed to the DisaPage's *views* property. A special property is the *name* property. In order to make internationalization possible you can pass a function besides defining a simple string. This function takes a translation function which can be used to get a translation.\
 An example:
 ```javascript
 let views = [
-  new View(<GroupCheckedNavbarTab name="3. Example" to="/example3" disabled={false} selectedIcon={navDiagnosticsSelected}
-    deselectedIcon={navDiagnosticsDeselected} permittedGroups={["USER", "ADMIN"]} />, ThirdExampleComponent),
-  new Group(
-    "Test Gruppe", otaLogo,
-    [
-      new View(<StandardNavbarTab name="1. Group Example" to="/group-example1" disabled={false} selectedIcon={navFleetSelected}
-        deselectedIcon={navFleetDeselected} />, SecondExampleComponent),
-      new View(<StandardNavbarTab name="2. Group Example" to="/group-example2" disabled={true} selectedIcon={navFleetDetailSelected}
-        deselectedIcon={navFleetDetailDeselected} />, FourthExampleComponent)
-    ]
-  ),
-  new View(<GroupCheckedNavbarTab name="4. Example" to="/example4" disabled={true} selectedIcon={navExpertSelected}
-    deselectedIcon={navExpertDeselected} permittedGroups={["ADMIN"]} />, FourthExampleComponent)
+    new View(<StandardNavbarTab name={"Example without Translation"} to="/" disabled={false} selectedIcon={navDashboardSelected}
+      deselectedIcon={navDashboardDeselected} />, FirstExampleComponent),
+    new View(<StandardNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/example2" disabled={false} selectedIcon={navFleetSelected}
+      deselectedIcon={navFleetDeselected} />, SecondExampleComponent),
+    new Group(
+      "Test Gruppe", otaLogo,
+      [
+        new View(<StandardNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/group-example1" disabled={false} selectedIcon={navFleetSelected}
+          deselectedIcon={navFleetDeselected} />, SecondExampleComponent),
+        new View(<StandardNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/group-example2" disabled={true} selectedIcon={navFleetDetailSelected}
+          deselectedIcon={navFleetDetailDeselected} />, FourthExampleComponent)
+      ]
+    ),
+    new View(<GroupCheckedNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/example4" disabled={true} selectedIcon={navExpertSelected}
+      deselectedIcon={navExpertDeselected} permittedGroups={["ADMIN"]} />, FourthExampleComponent)
 ];
 ```
 You can find a detailed explanation of the attributes [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/Views-and-Groups-in-Detail).

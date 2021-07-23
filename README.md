@@ -46,6 +46,40 @@ The DisaPage component has the properties:
 4. translations (optional): Translations for internationalization
 5. initI18Next (optional): Custom function for initializing i18next. If the user hasn't accepted cookies, i18next will be initialized by the framework regardless whether this property is specified or not. In case the property is specified the function will be executed when the user accepts cookies.
 
+### Internationalization ###
+**Add an concrete example on how to setup i18n for a framework user**
+The framework uses I18next for internationalization. It provides a default initialization of I18next which automatically gets executed when the *DisaPage* component mounts. It also provides translations in english and german for texts of framework components. You can provide own translations by defining .json files and defining an object of the following structure:
+```javascript
+let translations = {
+  es: {
+    translation: importedJsonFileEs
+  },
+  pt: {
+    translation: importedJsonFilePt
+  }
+}
+```
+This object then has to be passed to the *DisaPage* component. The .json file has to include simple key value pairs like this:
+```javascript
+{
+  "option_name": "German",
+  "greeting": "hello",
+  "promote_programming": "Programming is fun!"
+}
+```
+The key *option_name* is mandatory. The corresponding value will be listed in the language selection menu.
+
+To get a translation by it's key you should use the *useTranslation* hook from *...disa-framework/internationalization_hooks*. This hook returns a function which generates the translation.\
+An example:
+```javascript
+const t = useTranslation();
+const exampleTranslation = <div>Example translation: {t("Imprint")}</div>;
+```
+
+If you want to initialize i18next your own way (for example to specify an interpolation function) you can define an initialization function and pass it to the *DisaPage* component by using the *initI18Next* property. If the user hasn't accepted cookies, i18next will be initialized by the framework regardless whether this property is specified or not. In case the *initI18Next* property is specified the function will be executed when the user accepts cookies.
+
+You can find more information about I18next [here](https://react.i18next.com/).
+
 ### How to specify navigation tabs
 *Please remove if the text fit's the requirements: Try to reduce text by including sample code snippets*\
 To let the developer specify navigation tabs the class View is exported as a module. It encapsulates the element which is rendered in the navigation bar and the component which is rendered in the content section. In order to specify navigation tabs the developer has to **create an array of instances of this class**. The developer is also able to create instances of the class *Group*. This class let's the developer specify groups of navigation tabs with a specified label. The array has to be passed to the DisaPage's *views* property.\
@@ -104,35 +138,6 @@ To render your views and to do configuration you can follow the structure of thi
   </FirstExampleContextComponent>
 </AWSLoginProvider>
 ```
-
-### Internationalization ###
-**Add an concrete example on how to setup i18n for a framework user**
-The framework uses I18next for internationalization. It provides a default initialization of I18next which automatically gets executed when the *DisaPage* component mounts. It also provides translations in english and german for texts of framework components. You can provide own translations by defining .json files and defining an object of the following structure:
-```javascript
-let translations = {
-  es: {
-    translation: importedJsonFileEs
-  },
-  pt: {
-    translation: importedJsonFilePt
-  }
-}
-```
-This object then has to be passed to the *DisaPage* component. The .json file has to include simple key value pairs like this:
-```javascript
-{
-  "option_name": "German",
-  "greeting": "hello",
-  "promote_programming": "Programming is fun!"
-}
-```
-The key *option_name* is mandatory. The corresponding value will be listed in the language selection menu.
-
-If you want to initialize i18next your own way (for example to specify an interpolation function) you can define an initialization function and pass it to the *DisaPage* component by using the *initI18Next* property. If the user hasn't accepted cookies, i18next will be initialized by the framework regardless whether this property is specified or not. In case the *initI18Next* property is specified the function will be executed when the user accepts cookies.
-
-You may want to use another internationalization library or use own implementations. The Disa-Framework introduces the concept of *LanguageProviders*. The default language provider comes with the framework and uses i18next. You can specify your own *LanguageProvider*. This LanguageProvider has to use the *LanguageContext* (has to render LanguageContext.Provider) from *@...scope.../disa-framework/language* and pass certain properties (futher information [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/More-information-about-Languageprovider)). The framework detects that LanguageContext.Provider was rendered and skips the default initialization.
-
-You can find more information about I18next [here](https://react.i18next.com/).
 
 ### Ensure a valid authentication when accessing protected resources
 To access protected resources you have to ensure that the user is currently authenticated. For this purpose every login provider has to implement the execIfAuthed method. This method takes a function and tries to execute it. If it fails the method may refresh the session / token and retry the passed function (so does the AWSLoginProvider). The passed function has to return a JavaScript Promise. The execIfAuthed method also returns a Promise.\

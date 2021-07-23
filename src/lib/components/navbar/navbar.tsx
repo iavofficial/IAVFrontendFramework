@@ -10,7 +10,7 @@ import { BLUE3, DISATABHEIGHT } from "../constants";
 import { AuthContext } from "../../contexts/auth";
 import { TabAndContentWrapper } from "./wrapper/tabAndContentWrapper";
 import { SettingsMenu } from "./menu";
-import { LanguageContext } from "../../contexts/language";
+import { useTranslation } from "../internationalization/internationalization_hooks";
 
 interface Props {
     tabAndContentWrappers: TabAndContentWrapper[];
@@ -19,7 +19,7 @@ interface Props {
 export const Navbar = (props: Props) => {
     const menuRef = React.createRef<ContextMenu>();
     const authContext = useContext(AuthContext);
-    const langContext = useContext(LanguageContext);
+    const t = useTranslation();
 
     const hideMenu = (e: React.KeyboardEvent) => {
         if (e.key === "Escape") {
@@ -47,9 +47,9 @@ export const Navbar = (props: Props) => {
 
             <div style={{ marginTop: "auto" }}>
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                    <Link style={{ fontWeight: "bolder", color: "black" }} to="/imprint">{langContext?.useCustomTranslation("Imprint")}</Link>
+                    <Link style={{ fontWeight: "bolder", color: "black" }} to="/imprint">{t("Imprint")}</Link>
                 </div>
-                <Clock/>
+                <Clock />
             </div>
 
         </div>

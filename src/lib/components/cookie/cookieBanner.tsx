@@ -7,11 +7,12 @@ import { BLUE1 } from "../constants";
 import { LanguageContext } from "../../contexts/language";
 import { ACCEPTED_COOKIES_NAME } from "../../constants";
 import { useCookiesAccepted } from "./cookieHooks";
+import { useTranslation } from "../internationalization/internationalization_hooks";
 
 export const CookieBanner = (props: any) => {
 
     const [visible, setVisible] = useState(!useCookiesAccepted());
-    const langContext = useContext(LanguageContext);
+    const t = useTranslation();
     const [cookies, setCookie, removeCookie] = useCookies([ACCEPTED_COOKIES_NAME]);
 
     const acceptCookies = () => {
@@ -23,17 +24,17 @@ export const CookieBanner = (props: any) => {
 
     // Dialog has to have the onHide property. Otherwise the typescript compiler will throw an error.
     return (
-        <Dialog header={langContext?.useCustomTranslation("allow_cookies_header")} position={"bottom"} visible={visible} modal dismissableMask={false}
+        <Dialog header={t("allow_cookies_header")} position={"bottom"} visible={visible} modal dismissableMask={false}
             closable={false} onHide={() => ""}
             footer={
                 <div style={{ display: "flex", justifyContent: "flex-end" }}>
-                    <Button icon="pi pi-check" label={langContext?.useCustomTranslation("allow_cookies_button")} onClick={acceptCookies}
+                    <Button icon="pi pi-check" label={t("allow_cookies_button")} onClick={acceptCookies}
                         style={{ backgroundColor: BLUE1, border: "none" }} />
                 </div>
             }>
             <div style={{ display: "flex", alignItems: "center" }}>
                 <span className={"pi pi-info-circle"} style={{ marginRight: "10px", fontSize: "xx-large", color: "black" }} />
-                <span>{langContext?.useCustomTranslation("allow_cookies_disclaimer")}</span>
+                <span>{t("allow_cookies_disclaimer")}</span>
             </div>
         </Dialog>
     );

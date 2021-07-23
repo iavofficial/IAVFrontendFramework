@@ -1,30 +1,32 @@
 import React from "react";
 
 export interface TranslationKeys extends Object {
-    option_name: string,
+    option_name: string;
     [key: string]: any;
 }
 
 export interface Translation {
-    [translation: string]: any
-    translation: TranslationKeys
+    [translation: string]: any;
+    translation: TranslationKeys;
 }
 
 export interface Translations {
-    [lang: string]: Translation
+    [lang: string]: Translation;
 }
 
+export type TranslateFunctionType = (key: string, ...translationParameters: any[]) => string;
+
 export interface LanguageProvider {
-    useCustomTranslation: (key: string, ...translationParameters: any[]) => string,
-    selectLanguage: (lang: string) => void
+    useCustomTranslation: TranslateFunctionType;
+    selectLanguage: (lang: string) => void;
 }
 
 export interface LanguageContextType {
-    fallbackLang: string,
-    resources: Translations,
-    activeLang: string,
-    selectLanguage: (lang: string) => void,
-    useCustomTranslation: (key: string, ...translationParams: any[]) => string
+    fallbackLang: string;
+    resources: Translations;
+    activeLang: string;
+    selectLanguage: (lang: string) => void;
+    useCustomTranslation: TranslateFunctionType;
     [attribute: string]: any;
 }
 

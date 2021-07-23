@@ -61,7 +61,7 @@ export const I18NextLanguageProvider = (props: React.PropsWithChildren<Props>) =
 
     const useCustomTranslation = (key: string, ...translationParams: any[]) => {
         const [t, i18n, ready] = useTranslation();
-        return translationParams ? t(key, ...translationParams) : t(key)
+        return t(key, ...translationParams);
     }
 
     const selectLanguage = (lang: string) => {

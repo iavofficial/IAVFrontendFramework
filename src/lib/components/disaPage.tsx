@@ -32,13 +32,12 @@ export const DisaPage = (props: Props) => {
     const authContext = useContext(AuthContext);
     const languageContext = useContext(LanguageContext);
 
-    const LanguageProvider = languageContext ? React.Fragment : I18NextLanguageProvider;
     const LoginProvider = authContext ? React.Fragment : DummyLoginProvider;
     const LoginView = props.loginView ? props.loginView : BasicLoginView;
 
     return (
         <CookiesProvider>
-            <LanguageProvider fallbackLang="en" translations={props.translations} initI18Next={props.initI18Next}>
+            <I18NextLanguageProvider fallbackLang="en" translations={props.translations} initI18Next={props.initI18Next}>
                 <CookieBanner />
                 <LoginProvider>
                     {authContext?.hasAuthenticated() ?
@@ -61,7 +60,7 @@ export const DisaPage = (props: Props) => {
                         </Router >
                     }
                 </LoginProvider>
-            </LanguageProvider>
+            </I18NextLanguageProvider>
         </CookiesProvider>
     );
 };

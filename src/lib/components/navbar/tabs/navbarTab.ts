@@ -1,7 +1,9 @@
 import React from "react";
 
+import { TranslateFunctionType } from "../../../contexts/language";
+
 export interface navbarTabProps {
-    name: string;
+    name: string | ((t: TranslateFunctionType) => string);
     to: string;
     disabled: boolean;
     selectedIcon: string;

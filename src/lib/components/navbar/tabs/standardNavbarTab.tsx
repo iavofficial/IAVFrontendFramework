@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import { BLUE1, GRAY2, DISATABHEIGHT } from "../../constants";
+import { useTranslation } from "../../internationalization/internationalization_hooks";
 import { navbarTabProps } from "./navbarTab";
 
 interface State {
@@ -13,6 +14,8 @@ export const StandardNavbarTab = (props: navbarTabProps) => {
     const active = useLocation().pathname === props.to;
 
     const [hovering, setHovering] = useState(false);
+
+    const t = useTranslation();
 
     const tabStyle = {
         height: DISATABHEIGHT,
@@ -28,7 +31,7 @@ export const StandardNavbarTab = (props: navbarTabProps) => {
                 onMouseEnter={() => setHovering(true)} onMouseLeave={() => setHovering(false)}>
                 <div className="p-d-flex p-align-center" style={tabStyle}>
                     <img src={(active || hovering) && !props.disabled ? props.selectedIcon.valueOf() : props.deselectedIcon.valueOf()} alt="" />
-                    <span className="navbar-tab-name">{props.name}</span>
+                    <span className="navbar-tab-name">{props.name instanceof Function ? props.name(t) : props.name}</span>
                 </div>
             </div>
         </div>

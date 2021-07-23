@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { LanguageContext } from "../contexts/language";
+import { useTranslation } from "./internationalization/internationalization_hooks";
 
 interface State {
     date: Date;
 }
 
 export const Clock = () => {
-    const langContext = useContext(LanguageContext);
+    const t = useTranslation();
     const [date, setDate] = useState(new Date());
 
     useEffect(() => {
@@ -23,7 +24,7 @@ export const Clock = () => {
 
     return (
         <div className="p-d-flex p-jc-between p-p-3">
-            <div style={{ fontWeight: 500 }}>{langContext?.useCustomTranslation("Date")}:</div>
+            <div style={{ fontWeight: 500 }}>{t("Date")}:</div>
             <div>{dateString}</div>
         </div>
     );

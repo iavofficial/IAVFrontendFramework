@@ -66,9 +66,11 @@ build_package:
 # will fail and the existing package will not be updated.
 publish_package:
   stage: publish
+  variables:
+    SSL_CERT_FILE: $IAV_CA_BUNDLE
   script:
     - ./scripts/ci_cd/setup_npm.sh
-    - export GIT_SSL_NO_VERIFY=1
+#    - export GIT_SSL_NO_VERIFY=1
     - |
       {
         npm run semantic-release --branches develop

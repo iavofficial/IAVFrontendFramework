@@ -75,8 +75,6 @@ publish_package:
         echo "No new version of ${NPM_PACKAGE_NAME} published. This is most likely because version ${NPM_PACKAGE_VERSION} already exists in GitLab's NPM registry."
         exit 1
       }
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "master"'
 
 # Create release so observer of this project will get a notification e-mail.
 create_release:
@@ -89,5 +87,3 @@ create_release:
   release:
     tag_name: ver_$(node -p "require('./package.json').version")
     description: ./scripts/ci_cd/release_notes/$(node -p "require('./package.json').version").md
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "master"'

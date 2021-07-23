@@ -93,6 +93,7 @@ In order to specify the login provider and the login view you can pass it to the
 It is also possible to implement own login providers and login views and pass it to the DisaPage component. Further information about implementing a custom login provider can be found [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/How-to-implement-a-login-provider). Further information about implementing a custom login view can be found [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/How-to-implement-a-login-view).
 
 ### Piecing everything together ###
+**Add missing i18n configuration in DisaPage**
 To render your views and to do configuration you can follow the structure of this code snippet. This could be returned inside the body of the render method of your App.tsx.
 ```javascript
 <AWSLoginProvider apiRoot={config.API_Root}>
@@ -105,6 +106,7 @@ To render your views and to do configuration you can follow the structure of thi
 ```
 
 ### Internationalization ###
+**Add an concrete example on how to setup i18n for a framework user**
 The framework uses I18next for internationalization. It provides a default initialization of I18next which automatically gets executed when the *DisaPage* component mounts. It also provides translations in english and german for texts of framework components. You can provide own translations by defining .json files and defining an object of the following structure:
 ```javascript
 let translations = {

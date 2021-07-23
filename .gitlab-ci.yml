@@ -70,10 +70,9 @@ publish_package:
     SSL_CERT_FILE: $IAV_CA_BUNDLE
   script:
     - ./scripts/ci_cd/setup_npm.sh
-#    - export GIT_SSL_NO_VERIFY=1
     - |
       {
-        npm run semantic-release --branches develop
+        npm run semantic-release
         echo "Successfully published version ${NPM_PACKAGE_VERSION} of ${NPM_PACKAGE_NAME} to GitLab's NPM registry: ${CI_PROJECT_URL}/-/packages"
       } || {
         echo "No new version of ${NPM_PACKAGE_NAME} published. This is most likely because version ${NPM_PACKAGE_VERSION} already exists in GitLab's NPM registry."

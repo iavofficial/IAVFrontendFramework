@@ -16,10 +16,12 @@
     "eject": "react-scripts eject",
     "semantic-release": "semantic-release"
   },
-    "publishConfig": {
+  "publishConfig": {
     "access": "public"
   },
-  "files": [ "./build" ],
+  "files": [
+    "./build"
+  ],
   "eslintConfig": {
     "extends": [
       "react-app",

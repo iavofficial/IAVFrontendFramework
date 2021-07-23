@@ -168,24 +168,3 @@ To render your views and to do configuration you can follow the structure of thi
 ### Ensure a valid authentication when accessing protected resources
 To access protected resources you have to ensure that the user is currently authenticated. For this purpose every login provider has to implement the execIfAuthed method. This method takes a function and tries to execute it. If it fails the method may refresh the session / token and retry the passed function (so does the AWSLoginProvider). The passed function has to return a JavaScript Promise. The execIfAuthed method also returns a Promise.\
 The AWSLoginProvider tries to refresh the access token and retries your method if your method throws an error including the attribute code with it's value being *NotAuthedError*.
-
-
-# Disa Framework (devnotes)
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm devmode`
-
-This command builds the framework to the *build* folder. Tsc and babel will watch files in src/links and src/lib for changes and recompile it if necessary.
-
-### `npm run build-linux`
-
-This command executes the build script for linux environments / the ci / cd pipeline.
-
-## **IMPORTANT: NPM version** ##
-Major release 17 of npm must be installed at least. Otherwise issues with typescript will occur.
-
-## Example project
-To be able to view the results of code changes in the framework live there is an example project in the *example* folder. To develop properly you should use the *npm devmode* command in the frameworks root folder and the *npm start* command in the example project's root folder.

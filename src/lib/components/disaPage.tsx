@@ -17,7 +17,7 @@ import { CookieBanner } from "./cookie/cookieBanner";
 import { DummyLoginProvider } from "./login/dummyLoginProvider";
 import { AuthContext } from "../contexts/auth";
 import { TabAndContentWrapper } from "./navbar/wrapper/tabAndContentWrapper";
-import { LanguageContext, Translations } from "../contexts/language";
+import { Translations } from "../contexts/language";
 import { I18NextLanguageProvider } from "./internationalization/i18NextLanguageProvider";
 
 export interface Props {
@@ -30,7 +30,6 @@ export interface Props {
 
 export const DisaPage = (props: Props) => {
     const authContext = useContext(AuthContext);
-    const languageContext = useContext(LanguageContext);
 
     const LoginProvider = authContext ? React.Fragment : DummyLoginProvider;
     const LoginView = props.loginView ? props.loginView : BasicLoginView;

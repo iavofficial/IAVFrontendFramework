@@ -1,5 +1,6 @@
 import React, { Component, ReactElement } from "react";
 import { Button } from "primereact/button";
+import { WithTranslation, withTranslation } from "react-i18next";
 
 interface State {
     exampleData: string,
@@ -12,15 +13,15 @@ interface ContextType extends State {
 
 export const FirstExampleContext = React.createContext<ContextType | undefined>(undefined);
 
-export class FirstExampleContextComponent extends Component<React.PropsWithChildren<any>, State> {
-    constructor(props: React.PropsWithChildren<any>) {
+class FirstExampleContextComponentUnprocessed extends Component<React.PropsWithChildren<WithTranslation>, State> {
+    constructor(props: React.PropsWithChildren<WithTranslation>) {
         super(props);
         this.state = {
             exampleData: "default",
             contentTabs: [
                 <Button style={{ width: "200px", height: "40px", margin: "5px", alignSelf: "center" }}
-                    onClick={function (this: FirstExampleContextComponent) { this.updateExampleData("changed with global button") }.bind(this)}>
-                    <span>Change <b>global</b> Context</span>
+                    onClick={function (this: FirstExampleContextComponentUnprocessed) { this.updateExampleData(this.props.t("changed_with_global_button")) }.bind(this)}>
+                    <span>{this.props.t("Change_global_context")}</span>
                 </Button>,
                 <div style={{
                     backgroundColor: "#5daedb", color: "white", marginRight: "5px", display: "flex", alignItems: "center",
@@ -45,3 +46,5 @@ export class FirstExampleContextComponent extends Component<React.PropsWithChild
         );
     }
 }
+
+export const FirstExampleContextComponent = withTranslation()(FirstExampleContextComponentUnprocessed);

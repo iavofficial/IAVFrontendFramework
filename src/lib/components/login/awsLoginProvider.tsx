@@ -10,8 +10,9 @@ import { LoginProvider, Credentials, securableFunctionType } from "../../context
 
 export interface Props {
     apiRoot: string;
-    failOnNoLegalGroup?: boolean,
-    legalGroups?: string[]
+    configureAmplify: () => void;
+    failOnNoLegalGroup?: boolean;
+    legalGroups?: string[];
 }
 
 export interface State {
@@ -22,6 +23,7 @@ export interface State {
     appConfig: any;
     userAttributes: any;
     loginError: any;
+    didRender: boolean;
 }
 
 export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, State> implements LoginProvider {
@@ -34,7 +36,8 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
             userData: {},                   // contains user information
             appConfig: {},                  // contains app config data (such as gmaps API-Key)
             userAttributes: {},             // user attributes retrieved from cognito necessary for the completePassword workflow
-            loginError: {}
+            loginError: {},
+            didRender: false
         }
     }
 
@@ -44,6 +47,7 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
     }
 
     componentDidMount() {
+        this.props.configureAmplify();
         this.componentDidRender();
     }
 
@@ -53,9 +57,10 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
 
     // This function is not a react hook. This function was introduced to avoid code duplication.
     componentDidRender = () => {
-        cognitoCheckIsAuthenticated(this.props.failOnNoLegalGroup!, this.props.legalGroups!).then((result) =>
-            this.processSuccessfulAuth(result)
-        ).catch(() => {
+        return cognitoCheckIsAuthenticated(this.props.failOnNoLegalGroup!, this.props.legalGroups!).then((result) => {
+            return this.processSuccessfulAuth(result);
+        }
+        ).catch((err) => {
             if (Object.entries(this.state.userData).length !== 0 || this.state.hasAuthenticated !== false) {
                 this.setState({
                     userData: {},

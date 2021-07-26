@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import i18n from 'i18next';
 import i18next from "i18next";
-import { useTranslation } from "react-i18next";
+import { useTranslation, withTranslation } from "react-i18next";
 
 import translationEN from "./en.json";
 import translationDE from "./de.json";
@@ -67,6 +67,10 @@ export const I18NextLanguageProvider = (props: React.PropsWithChildren<Props>) =
     const selectLanguage = (lang: string) => {
         i18next.changeLanguage(lang);
         setActiveLang(lang);
+    }
+
+    const applyTranslation = (component: React.ComponentType, ...parameters: any) => {
+        return withTranslation(...parameters)(component);
     }
 
     return (

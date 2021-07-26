@@ -8,9 +8,9 @@ export const ThirdExampleComponent = () => {
     const t = useTranslation();
     return (
         <Content contentElements={context ? context.contentTabs : []}>
-            <div>Example data <b>global</b> context: {context ? context.exampleData : ""}</div>
-            <div>Example translation: {t("Imprint")}</div>
-            <div>Example for pluralization and merging translation files: {t("bytes_example", { count: 1024 })}</div>
+            <div>{t("Example_global_context")}: {context ? context.exampleData : ""}</div>
+            <div>{t("Example_translation")}: {t("Imprint")}</div>
+            <div>{t("Example_pluralization_merging")}: {t("bytes_example", { count: 1024 })}</div>
         </Content>
     );
 }

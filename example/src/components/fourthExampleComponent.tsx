@@ -1,19 +1,23 @@
 import React, { Component } from "react";
 import { Content } from "disa-framework/content";
 import { SecondExampleContext } from "../contexts/SecondExampleContext";
+import { WithTranslation, withTranslation } from "react-i18next";
 
-export class FourthExampleComponent extends Component {
-    constructor(props: string) {
+class FourthExampleComponentUnprocessed extends Component<WithTranslation> {
+
+    constructor(props: WithTranslation) {
         super(props);
     }
 
     render() {
         return (
             <Content contentElements={this.context.contentTabs}>
-                <div>This component is deactivated.</div>
+                <div>{this.props.t("component_deactivated")}</div>
             </Content>
         );
     }
 }
 
-FourthExampleComponent.contextType = SecondExampleContext;
+FourthExampleComponentUnprocessed.contextType = SecondExampleContext;
+
+export const FourthExampleComponent = withTranslation()(FourthExampleComponentUnprocessed);

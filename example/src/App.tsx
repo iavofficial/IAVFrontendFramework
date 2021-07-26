@@ -1,8 +1,11 @@
-import React, { Component, useEffect, useContext } from "react";
+import React from "react";
 import Amplify from "@aws-amplify/core";
 import { DisaPage } from 'disa-framework/disaPage';
+import { DisaContexts } from "disa-framework/disaContexts";
 import { AWSLoginProvider } from "disa-framework/awsLoginProvider";
 import { AWSLoginView } from "disa-framework/awsLoginView";
+import { View } from "disa-framework/view";
+import { Group } from "disa-framework/group";
 
 import translationES from "./assets/translations/es.json";
 import translationEN from "./assets/translations/en.json";
@@ -21,15 +24,13 @@ import navFleetDetailDeselected from './assets/nav_fleet_detail_deselected.png';
 import otaLogo from "./assets/ota_logo.png";
 import { FirstExampleContextComponent } from './contexts/FirstExampleContext';
 import { SecondExampleContextComponent } from './contexts/SecondExampleContext';
-import { View } from "disa-framework/view";
-import { Group } from "disa-framework/group";
 import { StandardNavbarTab } from "disa-framework/standardNavbarTab";
 import { GroupCheckedNavbarTab } from "disa-framework/groupCheckedNavbarTab";
 import { FirstExampleComponent } from "./components/firstExampleComponent";
 import { ThirdExampleComponent } from "./components/thirdExampleComponent";
 import { FourthExampleComponent } from "./components/fourthExampleComponent";
 import { SecondExampleComponent } from "./components/secondExampleComponent";
-import { LanguageContext, TranslateFunctionType } from "disa-framework/language";
+import { TranslateFunctionType } from "disa-framework/language";
 
 const authConfig = {
   // REQUIRED - Amazon Cognito Region
@@ -63,12 +64,6 @@ const authConfig = {
 
 function App() {
 
-  useEffect(() => {
-    Amplify.configure(authConfig);
-  }, []);
-
-  const langContext = useContext(LanguageContext);
-
   const views = [
     new View(<StandardNavbarTab name={"Example without Translation"} to="/" disabled={false} selectedIcon={navDashboardSelected}
       deselectedIcon={navDashboardDeselected} />, FirstExampleComponent),
@@ -77,7 +72,7 @@ function App() {
     new View(<GroupCheckedNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/example3" disabled={false} selectedIcon={navDiagnosticsSelected}
       deselectedIcon={navDiagnosticsDeselected} permittedGroups={["USER", "ADMIN"]} />, ThirdExampleComponent),
     new Group(
-      "Test Gruppe", otaLogo,
+      (t: TranslateFunctionType) => t("Test_group"), otaLogo,
       [
         new View(<StandardNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/group-example1" disabled={false} selectedIcon={navFleetSelected}
           deselectedIcon={navFleetDeselected} />, SecondExampleComponent),
@@ -106,12 +101,14 @@ function App() {
   );
 
   return (
-    <AWSLoginProvider apiRoot={config.API_Root}>
-      <FirstExampleContextComponent>
-        <SecondExampleContextComponent>
-          <DisaPage tabAndContentWrappers={views} startingPoint="/" loginView={AWSLoginView} translations={translations} />
-        </SecondExampleContextComponent>
-      </FirstExampleContextComponent>
+    <AWSLoginProvider apiRoot={config.API_Root} configureAmplify={() => { Amplify.configure(authConfig); }}>
+      <DisaContexts translations={translations} >
+        <FirstExampleContextComponent>
+          <SecondExampleContextComponent>
+            <DisaPage tabAndContentWrappers={views} startingPoint="/" loginView={AWSLoginView} />
+          </SecondExampleContextComponent>
+        </FirstExampleContextComponent>
+      </DisaContexts>
     </AWSLoginProvider>
   );
 }

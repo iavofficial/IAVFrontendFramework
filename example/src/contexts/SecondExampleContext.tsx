@@ -1,15 +1,16 @@
 import React, { Component } from "react";
+import { WithTranslation, withTranslation } from "react-i18next";
 
 export const SecondExampleContext = React.createContext({});
 
-export class SecondExampleContextComponent extends Component<React.PropsWithChildren<any>> {
-    constructor(props: React.PropsWithChildren<any>) {
+export class SecondExampleContextComponentUnprocessed extends Component<React.PropsWithChildren<WithTranslation>> {
+    constructor(props: React.PropsWithChildren<WithTranslation>) {
         super(props);
         this.state = {
             exampleData: "default",
             contentTabs: [
                 <div style={{ backgroundColor: "#5daedb", color: "white", padding: "4px", marginRight: "5px", display: "flex", alignItems: "center" }}>
-                    <span>Another <b>global</b> element</span></div>,
+                    <span>{this.props.t("Another_global_element")}</span></div>,
             ]
         }
     }
@@ -22,3 +23,5 @@ export class SecondExampleContextComponent extends Component<React.PropsWithChil
         );
     }
 }
+
+export const SecondExampleContextComponent = withTranslation()(SecondExampleContextComponentUnprocessed);

@@ -1,17 +1,17 @@
-import React, { Component } from "react";
+import React, { Component, ReactElement } from "react";
 
 import { Contentbar } from "./contentbar";
 import { GRAY1 } from "../constants";
 
 export interface Props {
-    contentElements: React.Component[]
+    contentElements: ReactElement[]
 }
 
 export class Content extends Component<React.PropsWithChildren<Props>> {
     constructor(props: Props) {
         super(props);
     }
-
+    
     render() {
         return (
             <div className="p-d-flex p-dir-col" style={{ width: "100%", flexDirection: "column" }}>

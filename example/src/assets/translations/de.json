@@ -1,0 +1,19 @@
+{
+    "option_name": "German",
+    "bytes_example": "{{count}} sind 1KiB",
+    "example_component": "Beispiel {{count}}",
+    "Example_field_local": "Beispielfeld lokales Element {{count}}",
+    "Example_global_context": "Beispieldaten globaler Kontext",
+    "Example_local_context": "Beispieldaten lokaler Kontext",
+    "changed_with_local_element": "Mit lokalem Element geändert",
+    "Change_global_context": "Ändere globalen Kontext",
+    "changed_local_state": "lokalen Status geändert",
+    "Change_local_data": "Ändere lokale Daten",
+    "component_deactivated": "Diese Komponente ist evtl. deaktiviert.",
+    "Example_component": "Dies ist eine Beispielkomponente.",
+    "Example_translation": "Beuspielübersetzung",
+    "Example_pluralization_merging": "Beispiel für Pluralization und das Zusammenführen von Übersetzungsdateien",
+    "changed_with_global_button": "mit globalem Knopf geändert",
+    "Another_global_element": "Ein weiteres globales element",
+    "Test_group": "Test Gruppe"
+}

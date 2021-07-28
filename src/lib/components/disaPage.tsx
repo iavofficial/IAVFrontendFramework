@@ -13,9 +13,7 @@ import { DisaHeader } from "./disaHeader";
 import { Navbar } from "./navbar/navbar";
 import { Imprint } from "./imprint";
 import { CookieBanner } from "./cookie/cookieBanner";
-import { acceptedCookies } from "./cookie/cookieHandler";
-import { DummyLoginProvider } from "./login/dummyLoginProvider";
-import { AuthContext, placeholderContext } from "../contexts/auth";
+import { AuthContext } from "../contexts/auth";
 import { TabAndContentWrapper } from "./navbar/wrapper/tabAndContentWrapper";
 
 export interface Props {
@@ -25,40 +23,31 @@ export interface Props {
 }
 
 export const DisaPage = (props: Props) => {
-    const context = useContext(AuthContext);
-    // Compare references. If the context is still placeholderContext the default DummyLoginProvider should be used.
-    const OptionalDummyLoginProvider = context === placeholderContext ? DummyLoginProvider : React.Fragment;
-    const LoginView = props.loginView !== undefined && props.loginView !== null ? props.loginView : BasicLoginView;
+    const authContext = useContext(AuthContext);
+    const LoginView = props.loginView ? props.loginView : BasicLoginView;
+
     return (
-        <OptionalDummyLoginProvider>
-            {!acceptedCookies() && <CookieBanner />}
-            <AuthContext.Consumer>
-                {(context) => {
-                    if (context.hasAuthenticated()) {
-                        return (
-                            <Router>
-                                <div className={"p-d-flex p-flex-column"} style={{ height: "100%", bottom: "0" }}>
-                                    <DisaHeader />
-                                    <div className="p-d-flex" style={{ height: "100%", margin: "0" }}>
-                                        <Navbar tabAndContentWrappers={props.tabAndContentWrappers} />
-                                        {props.tabAndContentWrappers.map(wrapper => wrapper.getRoutes())}
-                                        <Route exact path="/imprint" component={Imprint} />
-                                        <Redirect exact from="login" to={props.startingPoint.valueOf()} />
-                                    </div>
-                                </div>
-                            </Router>
-                        );
-                    } else {
-                        return (
-                            <Router>
-                                <Route exact path="/login" component={LoginView} />
-                                <Route exact path="/imprint" component={Imprint} />
-                                <Redirect exact from="/" to="/login" />
-                            </Router >
-                        );
-                    }
-                }}
-            </AuthContext.Consumer>
-        </OptionalDummyLoginProvider>
+        <>
+            <CookieBanner />
+            {authContext?.hasAuthenticated() ?
+                <Router>
+                    <div className={"p-d-flex p-flex-column"} style={{ height: "100%", bottom: "0" }}>
+                        <DisaHeader />
+                        <div className="p-d-flex" style={{ height: "100%", margin: "0" }}>
+                            <Navbar tabAndContentWrappers={props.tabAndContentWrappers} />
+                            {props.tabAndContentWrappers.map(wrapper => wrapper.getRoutes())}
+                            <Route exact path="/imprint" component={Imprint} />
+                            <Redirect exact from="login" to={props.startingPoint.valueOf()} />
+                        </div>
+                    </div>
+                </Router>
+                :
+                <Router>
+                    <Route exact path="/login" component={LoginView} />
+                    <Route exact path="/imprint" component={Imprint} />
+                    <Redirect exact from="/" to="/login" />
+                </Router >
+            }
+        </>
     );
 };

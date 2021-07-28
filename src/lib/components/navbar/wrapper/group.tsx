@@ -4,9 +4,10 @@ import { RouteProps } from "react-router-dom";
 
 import { View } from "./view";
 import { TabGroup } from "../tabGroup";
+import { TranslateFunctionType } from "../../../contexts/language";
 
 export class Group {
-    constructor(private _name: string, private _logo: string, private _views: View[]) {
+    constructor(private _name: string | ((t: TranslateFunctionType) => string), private _logo: string, private _views: View[]) {
     }
 
     getRoutes = () => {

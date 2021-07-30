@@ -1,17 +1,18 @@
 import React, { Component } from "react";
-import { FirstExampleContext } from "../contexts/FirstExampleContext";
-import { Content } from "disa-framework/content";
 import { Button } from "primereact/button";
-import { WithTranslation, withTranslation } from "react-i18next";
+import { Content } from "disa-framework/content";
+import { applyTranslation, AppliedTranslationProps } from "disa-framework/applyTranslation";
+
+import { FirstExampleContext } from "../contexts/FirstExampleContext";
 
 interface State {
     localState: String,
     contentTabs: JSX.Element[]
 }
 
-class FirstExampleComponentUnprocessed extends Component<WithTranslation, State> {
+class FirstExampleComponentUnprocessed extends Component<AppliedTranslationProps, State> {
 
-    constructor(props: WithTranslation) {
+    constructor(props: AppliedTranslationProps) {
         super(props);
         this.state = {
             localState: "default",
@@ -46,4 +47,4 @@ class FirstExampleComponentUnprocessed extends Component<WithTranslation, State>
 
 FirstExampleComponentUnprocessed.contextType = FirstExampleContext;
 
-export const FirstExampleComponent = withTranslation()(FirstExampleComponentUnprocessed);
+export const FirstExampleComponent = applyTranslation(FirstExampleComponentUnprocessed);

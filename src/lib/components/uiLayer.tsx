@@ -3,7 +3,7 @@ import "primereact/resources/themes/nova/theme.css";
 import "primereact/resources/primereact.css";
 import "primeicons/primeicons.css";
 import React, { useContext } from "react";
-import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
+import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 
 import "./css/constants.css";
 import "./css/disaPage.css";
@@ -27,28 +27,32 @@ export const UILayer = (props: Props) => {
     const authContext = useContext(AuthContext);
     const LoginView = props.loginView ? props.loginView : BasicLoginView;
 
+    const RSMView = () => (
+        <div className={"p-d-flex p-flex-column"} style={{ height: "100%", bottom: "0" }}>
+            <DisaHeader />
+            <div className="p-d-flex" style={{ height: "100%", margin: "0" }}>
+                <Navbar tabAndContentWrappers={props.tabAndContentWrappers} />
+                {props.tabAndContentWrappers.map(wrapper => wrapper.getRoutes())}
+                <Route exact path="/imprint" component={Imprint} />
+            </div>
+        </div>
+    );
+
     return (
         <>
             <CookieBanner />
-            {authContext?.hasAuthenticated() ?
-                <Router>
-                    <div className={"p-d-flex p-flex-column"} style={{ height: "100%", bottom: "0" }}>
-                        <DisaHeader />
-                        <div className="p-d-flex" style={{ height: "100%", margin: "0" }}>
-                            <Navbar tabAndContentWrappers={props.tabAndContentWrappers} />
-                            {props.tabAndContentWrappers.map(wrapper => wrapper.getRoutes())}
-                            <Route exact path="/imprint" component={Imprint} />
-                            <Redirect exact from="login" to={props.startingPoint.valueOf()} />
-                        </div>
-                    </div>
-                </Router>
-                :
-                <Router>
-                    <Route exact path="/login" component={LoginView} />
-                    <Route exact path="/imprint" component={Imprint} />
-                    <Redirect exact from="/" to="/login" />
-                </Router >
-            }
+            <Router>
+                <Switch>
+                    <Route path="/login" component={LoginView} />
+                    {!authContext?.hasAuthenticated() && <Route path="/imprint" component={Imprint} />}
+                    <Route path="/" component={RSMView} />
+                </Switch>
+                {authContext?.hasAuthenticated() ?
+                    <Redirect to={props.startingPoint.valueOf()} />
+                    :
+                    <Redirect to="/login" />
+                }
+            </Router>
         </>
     );
 };

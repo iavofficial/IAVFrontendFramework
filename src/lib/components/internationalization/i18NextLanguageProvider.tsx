@@ -69,10 +69,6 @@ export const I18NextLanguageProvider = (props: React.PropsWithChildren<Props>) =
         setActiveLang(lang);
     }
 
-    const applyTranslation = (component: React.ComponentType, ...parameters: any) => {
-        return withTranslation(...parameters)(component);
-    }
-
     return (
         <LanguageContext.Provider value={{
             fallbackLang: props.fallbackLang, resources: resources, activeLang: activeLang,

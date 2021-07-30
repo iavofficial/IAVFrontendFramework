@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 import { AuthContext } from "../../../contexts/auth";
-import { getConfig } from "../api";
 import {
     ValidUserInformation, cognitoLogin, cognitoLogout, cognitoCheckIsAuthenticated,
     cognitoCompletePassword, cognitoRefreshAccessToken
@@ -20,7 +19,6 @@ export interface State {
     isNewPasswordRequired: boolean;
     isLoading: boolean;
     userData: any;
-    appConfig: any;
     userAttributes: any;
     loginError: any;
     didRender: boolean;
@@ -34,7 +32,6 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
             isNewPasswordRequired: false,   // true if user logs in for the first time with his temp password and has to set a new one
             isLoading: false,               // true if user is in process of logging in
             userData: {},                   // contains user information
-            appConfig: {},                  // contains app config data (such as gmaps API-Key)
             userAttributes: {},             // user attributes retrieved from cognito necessary for the completePassword workflow
             loginError: {},
             didRender: false
@@ -181,17 +178,6 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
                 isNewPasswordRequired: false,
                 userData: userData,
                 loginError: {}
-            });
-        }
-        if (!this.state.appConfig) {
-            console.log("Requesting app config");
-            getConfig(userData.jwtToken, this.props.apiRoot).then(config => (
-                this.setState({
-                    appConfig: config.config
-                })
-            )).catch(err => {
-                console.log("Failed to retrieve app config. Printing error:");
-                console.log(err);
             });
         }
     }

@@ -1,6 +1,6 @@
 import React, { Component, ReactElement } from "react";
 import { Button } from "primereact/button";
-import { WithTranslation, withTranslation } from "react-i18next";
+import { AppliedTranslationProps, applyTranslation } from "disa-framework/applyTranslation";
 
 interface State {
     exampleData: string,
@@ -13,8 +13,8 @@ interface ContextType extends State {
 
 export const FirstExampleContext = React.createContext<ContextType | undefined>(undefined);
 
-class FirstExampleContextComponentUnprocessed extends Component<React.PropsWithChildren<WithTranslation>, State> {
-    constructor(props: React.PropsWithChildren<WithTranslation>) {
+class FirstExampleContextComponentUnprocessed extends Component<React.PropsWithChildren<AppliedTranslationProps>, State> {
+    constructor(props: React.PropsWithChildren<AppliedTranslationProps>) {
         super(props);
         this.state = {
             exampleData: "default",
@@ -47,4 +47,4 @@ class FirstExampleContextComponentUnprocessed extends Component<React.PropsWithC
     }
 }
 
-export const FirstExampleContextComponent = withTranslation()(FirstExampleContextComponentUnprocessed);
+export const FirstExampleContextComponent = applyTranslation(FirstExampleContextComponentUnprocessed);

@@ -84,7 +84,7 @@ The .json file has to include simple key value pairs like this:
   "promote_programming": "Programming is fun!"
 }
 ```
-The key *option_name* is mandatory. The corresponding value will be listed in the language selection menu.
+The key *option_name* is mandatory. The corresponding value will be listed in the language selection menu. You can find the translation keys used by the framework [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/Internationalization-keys-used-by-the-framework). (You will need these to internationalize certain framework components.)
 
 To get a translation by it's key you should use the *useTranslator* hook from *...disa-framework/translators*. This hook returns a function which generates the translation.\
 An example:

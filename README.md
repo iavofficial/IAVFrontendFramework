@@ -176,18 +176,36 @@ In order to specify the login provider and the login view you can pass it to the
 It is also possible to implement own login providers and login views and pass it to the UILayer component. Further information about implementing a custom login provider can be found [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/How-to-implement-a-login-provider). Further information about implementing a custom login view can be found [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/How-to-implement-a-login-view).
 
 ### Piecing everything together ###
-**Add missing i18n configuration in UILayer**
 To render your views and to do configuration you can follow the structure of this code snippet. This could be returned inside the body of the render method of your App.tsx.
 ```javascript
-<AWSLoginProvider apiRoot={config.API_Root}>
-  <GlobalDataLayer translations={...}>
-    <FirstExampleContextComponent>
-      <SecondExampleContextComponent>
-        <UILayer tabAndContentWrappers={views} startingPoint="/" loginView={AWSLoginView} />
-      </SecondExampleContextComponent>
-    </FirstExampleContextComponent>
-  </GlobalDataLayer>
-</AWSLoginProvider>
+const optionalInitFunction = () => {
+  i18n
+    .use(initReactI18next)
+    .use(LanguageDetector)
+    .init({
+        debug: false,
+        fallbackLng: "en",
+        resources: resources,
+        detection: {
+            caches: ["cookie"],
+            cookieMinutes: 525600
+        }
+    });
+}
+
+render() {
+  return (
+    <AWSLoginProvider apiRoot={config.API_Root}>
+      <GlobalDataLayer translations={...} initI18Next={optionalInitFunction}>
+        <FirstExampleContextComponent>
+          <SecondExampleContextComponent>
+            <UILayer tabAndContentWrappers={views} startingPoint="/" loginView={AWSLoginView} />
+          </SecondExampleContextComponent>
+        </FirstExampleContextComponent>
+      </GlobalDataLayer>
+    </AWSLoginProvider>
+  );
+}
 ```
 
 ### Ensure a valid authentication when accessing protected resources

@@ -92,7 +92,7 @@ An example:
 const t = useTranslator();
 const exampleTranslation = <div>Example translation: {t("Imprint")}</div>;
 ```
-You can also use a HOC for Class Components like this:
+You can also use a HOC (higher order component) for Class Components like this:
 ```javascript
 class FirstExampleComponentUnprocessed extends Component<AppliedTranslationProps, State> {
   // ...

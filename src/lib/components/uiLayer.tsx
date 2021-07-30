@@ -5,6 +5,7 @@ import "primeicons/primeicons.css";
 import React, { useContext } from "react";
 import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 
+import "./css/constants.css";
 import "./css/disaPage.css";
 import "./css/disaFramework.css";
 import "./css/error.css";

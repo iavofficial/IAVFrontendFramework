@@ -35,13 +35,13 @@
 .p-accordion-content .navbar-tab-wrapper {
     border-width: 0px 3px 0px 0px !important;
     border: solid;
-    border-color: #5daedb;
+    border-color: var(--blue_1);
 }
 
 .p-accordion-content .navbar-tab-wrapper.active {
     border-width: 0px 3px 0px 0px !important;
     border: solid;
-    border-color: #5daedb;
+    border-color: var(--blue_1);
 }
 
 /* Anpassen des Akkordion-Styles */
@@ -56,8 +56,8 @@
     border-radius: 0px !important;
     background-color: white !important;
     border-width: 0px 0px 1px 0px !important;
-    border-color: #cdcdcd !important;
-    color: #5daedb !important;
+    border-color: var(--gray_2) !important;
+    color: var(--blue_1) !important;
     outline: 0px !important;
     font-weight: 500 !important;
 }

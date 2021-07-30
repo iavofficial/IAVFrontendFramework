@@ -1,7 +1,7 @@
 import React from "react";
 import Amplify from "@aws-amplify/core";
-import { DisaPage } from 'disa-framework/disaPage';
-import { DisaContexts } from "disa-framework/disaContexts";
+import { UILayer } from 'disa-framework/uiLayer';
+import { GlobalDataLayer } from "disa-framework/globalDataLayer";
 import { AWSLoginProvider } from "disa-framework/awsLoginProvider";
 import { AWSLoginView } from "disa-framework/awsLoginView";
 import { View } from "disa-framework/view";
@@ -24,8 +24,8 @@ import navFleetDetailDeselected from './assets/nav_fleet_detail_deselected.png';
 import otaLogo from "./assets/ota_logo.png";
 import { FirstExampleContextComponent } from './contexts/FirstExampleContext';
 import { SecondExampleContextComponent } from './contexts/SecondExampleContext';
-import { StandardNavbarTab } from "disa-framework/standardNavbarTab";
-import { GroupCheckedNavbarTab } from "disa-framework/groupCheckedNavbarTab";
+import { SimpleNavbarTab } from "disa-framework/simpleNavbarTab";
+import { PrivilegedNavbarTab } from "disa-framework/privilegedNavbarTab";
 import { FirstExampleComponent } from "./components/firstExampleComponent";
 import { ThirdExampleComponent } from "./components/thirdExampleComponent";
 import { FourthExampleComponent } from "./components/fourthExampleComponent";
@@ -65,24 +65,24 @@ const authConfig = {
 function App() {
 
   const views = [
-    new View(<StandardNavbarTab name={"Example without Translation"} to="/" disabled={false} selectedIcon={navDashboardSelected}
+    new View(<SimpleNavbarTab name={"Example without Translation"} to="/" disabled={false} selectedIcon={navDashboardSelected}
       deselectedIcon={navDashboardDeselected} />, FirstExampleComponent),
-    new View(<StandardNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/example2" disabled={false} selectedIcon={navFleetSelected}
+    new View(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/example2" disabled={false} selectedIcon={navFleetSelected}
       deselectedIcon={navFleetDeselected} />, SecondExampleComponent),
-    new View(<GroupCheckedNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/example3" disabled={false} selectedIcon={navDiagnosticsSelected}
+    new View(<PrivilegedNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/example3" disabled={false} selectedIcon={navDiagnosticsSelected}
       deselectedIcon={navDiagnosticsDeselected} permittedGroups={["USER", "ADMIN"]} />, ThirdExampleComponent),
     new Group(
       (t: TranslateFunctionType) => t("Test_group"), otaLogo,
       [
-        new View(<StandardNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/group-example1" disabled={false} selectedIcon={navFleetSelected}
+        new View(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/group-example1" disabled={false} selectedIcon={navFleetSelected}
           deselectedIcon={navFleetDeselected} />, SecondExampleComponent),
-        new View(<StandardNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/group-example2" disabled={true} selectedIcon={navFleetDetailSelected}
+        new View(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/group-example2" disabled={true} selectedIcon={navFleetDetailSelected}
           deselectedIcon={navFleetDetailDeselected} />, FourthExampleComponent)
       ]
     ),
-    new View(<GroupCheckedNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/example4" disabled={true} selectedIcon={navExpertSelected}
+    new View(<PrivilegedNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/example4" disabled={true} selectedIcon={navExpertSelected}
       deselectedIcon={navExpertDeselected} permittedGroups={["ADMIN"]} />, FourthExampleComponent),
-    new View(<StandardNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/example5" disabled={true} selectedIcon={navFleetDetailSelected}
+    new View(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/example5" disabled={true} selectedIcon={navFleetDetailSelected}
       deselectedIcon={navFleetDetailDeselected} />, FourthExampleComponent)
   ];
 
@@ -102,13 +102,13 @@ function App() {
 
   return (
     <AWSLoginProvider apiRoot={config.API_Root} configureAmplify={() => { Amplify.configure(authConfig); }}>
-      <DisaContexts translations={translations} >
+      <GlobalDataLayer translations={translations} >
         <FirstExampleContextComponent>
           <SecondExampleContextComponent>
-            <DisaPage tabAndContentWrappers={views} startingPoint="/" loginView={AWSLoginView} />
+            <UILayer tabAndContentWrappers={views} startingPoint="/" loginView={AWSLoginView} />
           </SecondExampleContextComponent>
         </FirstExampleContextComponent>
-      </DisaContexts>
+      </GlobalDataLayer>
     </AWSLoginProvider>
   );
 }

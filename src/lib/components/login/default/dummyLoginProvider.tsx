@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
-import { AuthContext } from "../../contexts/auth";
-import { LoginProvider, Credentials, securableFunctionType } from "../../contexts/auth";
+import { AuthContext } from "../../../contexts/auth";
+import { LoginProvider, Credentials, securableFunctionType } from "../../../contexts/auth";
 
 export interface State {
     hasAuthenticated: boolean;

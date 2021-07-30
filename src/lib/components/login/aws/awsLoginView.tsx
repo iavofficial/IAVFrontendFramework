@@ -1,10 +1,10 @@
 import React, { Component, FormEvent } from "react";
 import { Link } from "react-router-dom";
 
-import { BLUE4 } from "../constants";
-import AppLogo from "../../assets/app_logo.png";
-import { AuthContext } from "../../contexts/auth";
-import { LoginButtonWithSpinner } from "./loginButtonWithSpinner";
+import { BLUE4 } from "../../../constants";
+import AppLogo from "../../../assets/app_logo.png";
+import { AuthContext } from "../../../contexts/auth";
+import { LoginButtonWithSpinner } from "../loginButtonWithSpinner";
 
 export interface State {
     email: string;

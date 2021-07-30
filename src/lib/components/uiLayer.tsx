@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 import "./css/disaPage.css";
 import "./css/disaFramework.css";
 import "./css/error.css";
-import { BasicLoginView } from "./login/basicLoginView";
+import { BasicLoginView } from "./login/default/basicLoginView";
 import { DisaHeader } from "./disaHeader";
 import { Navbar } from "./navbar/navbar";
 import { Imprint } from "./imprint";
@@ -22,7 +22,7 @@ export interface Props {
     loginView?: React.ComponentType<any>;
 }
 
-export const DisaPage = (props: Props) => {
+export const UILayer = (props: Props) => {
     const authContext = useContext(AuthContext);
     const LoginView = props.loginView ? props.loginView : BasicLoginView;
 

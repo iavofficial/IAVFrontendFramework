@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-import { LanguageContext } from "../contexts/language";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "./internationalization/internationalization_hooks";
 
 interface State {

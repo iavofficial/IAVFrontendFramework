@@ -7,7 +7,7 @@ import translationEN from "./en.json";
 import translationDE from "./de.json";
 import { initI18next } from "./i18n";
 import { useCookiesAccepted } from "../cookie/cookieHooks";
-import { LanguageContext, LanguageProvider, Translations } from "../../contexts/language";
+import { LanguageContext, Translations } from "../../contexts/language";
 
 interface Props {
     fallbackLang: string;

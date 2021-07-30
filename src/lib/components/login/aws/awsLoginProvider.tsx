@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 
-import { AuthContext } from "../../contexts/auth";
-import { getConfig } from "./api";
+import { AuthContext } from "../../../contexts/auth";
+import { getConfig } from "../api";
 import {
     ValidUserInformation, cognitoLogin, cognitoLogout, cognitoCheckIsAuthenticated,
     cognitoCompletePassword, cognitoRefreshAccessToken
-} from "../../services/cognitoService";
-import { LoginProvider, Credentials, securableFunctionType } from "../../contexts/auth";
+} from "../../../services/cognitoService";
+import { LoginProvider, Credentials, securableFunctionType } from "../../../contexts/auth";
 
 export interface Props {
     apiRoot: string;
@@ -48,20 +48,19 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
 
     componentDidMount() {
         this.props.configureAmplify();
-        this.componentDidRender();
+        this.checkIsAuthenticated();
     }
 
     componentDidUpdate() {
-        this.componentDidRender();
+        this.checkIsAuthenticated();
     }
 
-    // This function is not a react hook. This function was introduced to avoid code duplication.
-    componentDidRender = () => {
+    checkIsAuthenticated = () => {
         return cognitoCheckIsAuthenticated(this.props.failOnNoLegalGroup!, this.props.legalGroups!).then((result) => {
             return this.processSuccessfulAuth(result);
         }
         ).catch((err) => {
-            if (Object.entries(this.state.userData).length !== 0 || this.state.hasAuthenticated !== false) {
+            if (Object.entries(this.state.userData).length !== 0 || this.state.hasAuthenticated) {
                 this.setState({
                     userData: {},
                     hasAuthenticated: false
@@ -175,7 +174,7 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
     }
 
     processSuccessfulAuth = (userData: ValidUserInformation) => {
-        if (this.state.hasAuthenticated !== true || this.state.isNewPasswordRequired !== false ||
+        if (!this.state.hasAuthenticated|| this.state.isNewPasswordRequired ||
             Object.entries(this.state.userData).length === 0 || Object.entries(this.state.loginError).length !== 0) {
             this.setState({
                 hasAuthenticated: true,

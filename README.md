@@ -58,8 +58,7 @@ The GlobalDataLayer has the properties:
 2. initI18Next (optional): Custom function for initializing i18next. If the user hasn't accepted cookies, i18next will be initialized by the framework regardless whether this property is specified or not. In case the property is specified the function will be executed when the user accepts cookies.
 
 ### Internationalization ###
-**Add an concrete example on how to setup i18n for a framework user**
-The framework uses I18next for internationalization. It provides a default initialization of I18next which automatically gets executed when the *UILayer* component mounts. It also provides translations in english and german for texts of framework components. To setup i18next with the default implementation of the framework you have to create an object with the following structure and pass it to the *UILayer* component.
+The framework uses I18next for internationalization. It provides a default initialization of I18next which automatically gets executed when the *GlobalDataLayer* component mounts. It also provides translations in english and german for texts of framework components. To setup i18next with the default implementation of the framework you have to create an object with the following structure and pass it to the *GlobalDataLayer* component.
 ```javascript
 let translations = {
   es: {
@@ -73,7 +72,7 @@ let translations = {
 ...
 render() {
   ...
-  <UILayer translations={translations} .../>
+  <GlobalDataLayer translations={translations} .../>
   ...
 }
 ```
@@ -87,14 +86,28 @@ The .json file has to include simple key value pairs like this:
 ```
 The key *option_name* is mandatory. The corresponding value will be listed in the language selection menu.
 
-To get a translation by it's key you should use the *useTranslation* hook from *...disa-framework/internationalization_hooks*. This hook returns a function which generates the translation.\
+To get a translation by it's key you should use the *useTranslator* hook from *...disa-framework/translators*. This hook returns a function which generates the translation.\
 An example:
 ```javascript
-const t = useTranslation();
+const t = useTranslator();
 const exampleTranslation = <div>Example translation: {t("Imprint")}</div>;
 ```
+You can also use a HOC for Class Components like this:
+```javascript
+class FirstExampleComponentUnprocessed extends Component<AppliedTranslationProps, State> {
+  // ...
+  render() {
+    return(
+      <div>Translation: {t("imprint")}</div>
+    );
+  }
+}
 
-If you want to initialize i18next your own way (for example to specify an interpolation function) you can define an initialization function and pass it to the *UILayer* component by using the *initI18Next* property. If the user hasn't accepted cookies, i18next will be initialized by the framework regardless whether this property is specified or not. In case the *initI18Next* property is specified the function will be executed when the user accepts cookies.\
+export const FirstExampleComponent = applyTranslation(FirstExampleComponentUnprocessed);
+```
+By using the *applyTranslation* hook the framework injects the translation function *t*. You may have seen that the component has the interface *AppliedTranslationProps* as it's properties type. This interfaces is provided by the framework. It's mandatory to use this interface in order to ensure that your components takes *t*.
+
+If you want to initialize i18next your own way (for example to specify an interpolation function) you can define an initialization function and pass it to the *GlobalDataLayer* component by using the *initI18Next* property. If the user hasn't accepted cookies, i18next will be initialized by the framework regardless whether this property is specified or not. In case the *initI18Next* property is specified the function will be executed when the user accepts cookies.\
 An example:
 ```javascript
 const initFunction = () => {
@@ -155,11 +168,11 @@ A detailed explanation can be found [here](https://gitlab.iavgroup.local/td-d/ed
 ### Login system
 The login system is seperated into two parts: The so called LoginProvider and the LoginView. The LoginProvider is the component which handles authentication (login, logout, ...). The LoginView is just the view shown to a user when logging in. Because the authentication provider and the view are seperated it's possible to mix login providers and views.
 
-The disa framework already provides two login providers. These are the AWSLoginProvider and the DummyLoginProvider. The AWSLoginProvider uses Amplify and is able to handle authentication with AWS. To use this login provider you have to use Amplify and configure it (further information [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/%5BExample-(TypeScript)%5D-Configuring-Amplify)). You also have to provide the *loginProviderProps* with *apiRoot*. The dummy login provider is the standard login provider (which will get used if nothing is specified) and authenticates every combination of email and password. This login provider is intended to be used while developing.
+The disa framework already provides two login providers. These are the AWSLoginProvider and the DummyLoginProvider. The AWSLoginProvider uses Amplify and is able to handle authentication with AWS. To use this login provider you have to use Amplify and configure it. For configuration you have to define a configuration function and pass it to the *AWSLoginProvider* (further information [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/%5BExample-(TypeScript)%5D-Configuring-Amplify)). The *AWSLoginProvider* then has to wrap the *GlobalDataLayer* component inside your render method (as shown in *Getting started*). The *GlobalDataLayer* component detects that the login provider context has been initialized and will skip the default process. The dummy login provider is the default login provider (which will get used if nothing is specified) and authenticates every combination of email and password. This login provider is intended to be used while developing.
 
 There are also two login views provided. One is the AWSLoginView which should be used with the AWSLoginProvider. There is also the BasicLoginView component which can be used in combination with the dummy login provider. The basic login view is the default login view.
 
-In order to specify the login provider and the login view you can pass it to the UILayer component using the *loginProvider* and *loginView* props.
+In order to specify the login provider and the login view you can pass it to the *UILayer* component using the *loginView* property.
 
 It is also possible to implement own login providers and login views and pass it to the UILayer component. Further information about implementing a custom login provider can be found [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/How-to-implement-a-login-provider). Further information about implementing a custom login view can be found [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/How-to-implement-a-login-view).
 
@@ -168,11 +181,13 @@ It is also possible to implement own login providers and login views and pass it
 To render your views and to do configuration you can follow the structure of this code snippet. This could be returned inside the body of the render method of your App.tsx.
 ```javascript
 <AWSLoginProvider apiRoot={config.API_Root}>
-  <FirstExampleContextComponent>
-    <SecondExampleContextComponent>
-      <UILayer tabAndContentWrappers={views} startingPoint="/" loginView={AWSLoginView} />
-    </SecondExampleContextComponent>
-  </FirstExampleContextComponent>
+  <GlobalDataLayer translations={...}>
+    <FirstExampleContextComponent>
+      <SecondExampleContextComponent>
+        <UILayer tabAndContentWrappers={views} startingPoint="/" loginView={AWSLoginView} />
+      </SecondExampleContextComponent>
+    </FirstExampleContextComponent>
+  </GlobalDataLayer>
 </AWSLoginProvider>
 ```
 

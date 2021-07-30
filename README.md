@@ -129,7 +129,6 @@ const initFunction = () => {
 You can find more information about I18next [here](https://react.i18next.com/).
 
 ### How to specify navigation tabs
-*Please remove if the text fit's the requirements: Try to reduce text by including sample code snippets*\
 To let the developer specify navigation tabs the class View is exported as a module. It encapsulates the element which is rendered in the navigation bar and the component which is rendered in the content section. In order to specify navigation tabs the developer has to **create an array of instances of this class**. The developer is also able to create instances of the class *Group*. This class let's the developer specify groups of navigation tabs with a specified label. The array has to be passed to the UILayer's *views* property. A special property is the *name* property. In order to make internationalization possible you can pass a function besides defining a simple string. This function takes a translation function which can be used to get a translation.\
 An example:
 ```javascript

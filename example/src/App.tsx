@@ -101,7 +101,7 @@ function App() {
   );
 
   return (
-    <AWSLoginProvider apiRoot={config.API_Root} configureAmplify={() => { Amplify.configure(authConfig); }}>
+    <AWSLoginProvider configureAmplify={() => { Amplify.configure(authConfig); }}>
       <GlobalDataLayer translations={translations} >
         <FirstExampleContextComponent>
           <SecondExampleContextComponent>

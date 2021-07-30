@@ -8,7 +8,6 @@ import {
 import { LoginProvider, Credentials, securableFunctionType } from "../../../contexts/auth";
 
 export interface Props {
-    apiRoot: string;
     configureAmplify: () => void;
     failOnNoLegalGroup?: boolean;
     legalGroups?: string[];

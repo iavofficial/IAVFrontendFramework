@@ -43,6 +43,7 @@ The UILayer component has the properties:
 1. tabAndContentWrappers: Array of views and groups (and other wrappers) to provide in order to render tabs in the navigation bar and the associated component.
 2. startingPoint: The "entry URL" of your application. This doesn't mean the login page but the path the user will be redirected after successfull authentication.
 3. loginView (optional): This attribute will get explained later.
+
 The GlobalDataLayer has the properties:
 1. translations (optional): Translations for internationalization
 2. initI18Next (optional): Custom function for initializing i18next. If the user hasn't accepted cookies, i18next will be initialized by the framework regardless whether this property is specified or not. In case the property is specified the function will be executed when the user accepts cookies.

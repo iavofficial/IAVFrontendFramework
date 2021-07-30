@@ -38,13 +38,14 @@ The cookie banner component is **conditionally rendered by the *UILayer* compone
 ![Here should be a diagram describing the layout.](./doc/diagrams/layout.png?raw=true)
 
 ## Getting started
-The main component of this framework is the UILayer component. To do the basic setup you have to render this component in the render method of your application. You will see that this frameworks provides a login system and the basic frame of a disa web application.\
+The main components of this framework are the GlobalDataLayer and UILayer component. To do the basic setup you have to render these components in the render method of your application. You will see that this frameworks provides a login system and the basic frame of a disa web application.\
 The UILayer component has the properties:
-1. views: Array of views (a specific class) to provide in order to render tabs in the navigation bar and the associated component.
+1. tabAndContentWrappers: Array of views and groups (and other wrappers) to provide in order to render tabs in the navigation bar and the associated component.
 2. startingPoint: The "entry URL" of your application. This doesn't mean the login page but the path the user will be redirected after successfull authentication.
-3. loginView (optional): This attribute will get explained later
-4. translations (optional): Translations for internationalization
-5. initI18Next (optional): Custom function for initializing i18next. If the user hasn't accepted cookies, i18next will be initialized by the framework regardless whether this property is specified or not. In case the property is specified the function will be executed when the user accepts cookies.
+3. loginView (optional): This attribute will get explained later.
+The GlobalDataLayer has the properties:
+1. translations (optional): Translations for internationalization
+2. initI18Next (optional): Custom function for initializing i18next. If the user hasn't accepted cookies, i18next will be initialized by the framework regardless whether this property is specified or not. In case the property is specified the function will be executed when the user accepts cookies.
 
 ### Internationalization ###
 **Add an concrete example on how to setup i18n for a framework user**

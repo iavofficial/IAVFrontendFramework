@@ -26,7 +26,7 @@ export interface LanguageContextType {
     resources: Translations;
     activeLang: string;
     selectLanguage: (lang: string) => void;
-    useCustomTranslation: TranslateFunctionType;
+    useTranslationFunction: () => TranslateFunctionType
     [attribute: string]: any;
 }
 

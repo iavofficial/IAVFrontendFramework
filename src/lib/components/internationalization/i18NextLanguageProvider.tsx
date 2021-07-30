@@ -59,9 +59,9 @@ export const I18NextLanguageProvider = (props: React.PropsWithChildren<Props>) =
         }
     }, [props.translations]);
 
-    const useCustomTranslation = (key: string, ...translationParams: any[]) => {
+    const useTranslationFunction = () => {
         const [t, i18n, ready] = useTranslation();
-        return t(key, ...translationParams);
+        return (key: string, ...translationParams: any[]) => t(key, ...translationParams);
     }
 
     const selectLanguage = (lang: string) => {
@@ -72,7 +72,7 @@ export const I18NextLanguageProvider = (props: React.PropsWithChildren<Props>) =
     return (
         <LanguageContext.Provider value={{
             fallbackLang: props.fallbackLang, resources: resources, activeLang: activeLang,
-            selectLanguage: selectLanguage, useCustomTranslation: useCustomTranslation
+            selectLanguage: selectLanguage, useTranslationFunction: useTranslationFunction
         }}>
             {loaded && props.children}
         </LanguageContext.Provider>

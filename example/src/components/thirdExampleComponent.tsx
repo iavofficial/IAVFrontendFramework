@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { FirstExampleContext } from "../contexts/FirstExampleContext";
 import { Content } from "disa-framework/content";
-import { useTranslation } from "disa-framework/internationalization_hooks";
+import { useTranslator } from "disa-framework/internationalization_hooks";
 
 export const ThirdExampleComponent = () => {
     const context = useContext(FirstExampleContext);
-    const t = useTranslation();
+    const t = useTranslator();
     return (
         <Content contentElements={context ? context.contentTabs : []}>
             <div>{t("Example_global_context")}: {context ? context.exampleData : ""}</div>

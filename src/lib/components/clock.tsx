@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useTranslation } from "./internationalization/internationalization_hooks";
+import { useTranslator } from "./internationalization/internationalization_hooks";
 
 interface State {
     date: Date;
 }
 
 export const Clock = () => {
-    const t = useTranslation();
+    const t = useTranslator();
     const [date, setDate] = useState(new Date());
 
     useEffect(() => {

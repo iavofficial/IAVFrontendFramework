@@ -2,7 +2,7 @@ import React from "react";
 import { Accordion, AccordionTab } from 'primereact/accordion';
 
 import { TranslateFunctionType } from "../../../contexts/language";
-import { useTranslation } from "../../internationalization/internationalization_hooks";
+import { useTranslator } from "../../internationalization/internationalization_hooks";
 
 interface Props {
     name: string | ((t: TranslateFunctionType) => string);
@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const TabGroup = (props: React.PropsWithChildren<Props>) => {
-    const t = useTranslation();
+    const t = useTranslator();
 
     const header = (
         <div className="group-wrapper">

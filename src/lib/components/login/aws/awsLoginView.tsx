@@ -7,14 +7,14 @@ import { AuthContext } from "../../../contexts/auth";
 import { LoginButtonWithSpinner } from "../loginButtonWithSpinner";
 import { useState } from "react";
 import { useContext } from "react";
-import { useTranslation } from "../../internationalization/internationalization_hooks";
+import { useTranslator } from "../../internationalization/internationalization_hooks";
 
 export const AWSLoginView = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const authContext = useContext(AuthContext);
-    const t = useTranslation();
+    const t = useTranslator();
 
     const submit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -80,7 +80,7 @@ export const AWSLoginView = () => {
                 <div>
                     <LoginButtonWithSpinner isLoading={authContext?.isLoading} />
                 </div>
-                <div className="invalid">{getErrorText(authContext?.loginError)}</div>
+                <div style={{ marginTop: "20px" }} className="invalid">{getErrorText(authContext?.loginError)}</div>
             </div>
         </form>
     );

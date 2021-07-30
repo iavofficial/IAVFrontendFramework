@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { LanguageContext } from "../../contexts/language";
 
-export function useTranslation() {
+export function useTranslator() {
     const langContext = useContext(LanguageContext);
-    return langContext?.useCustomTranslation? langContext?.useCustomTranslation : (...parameters: any) => "";
+    return langContext?.useTranslationFunction? langContext?.useTranslationFunction() : (...parameters: any) => "";
 }

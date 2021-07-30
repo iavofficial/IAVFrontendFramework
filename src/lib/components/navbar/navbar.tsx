@@ -10,7 +10,7 @@ import { BLUE3, TAB_HEIGHT } from "../../constants";
 import { AuthContext } from "../../contexts/auth";
 import { TabAndContentWrapper } from "./wrapper/tabAndContentWrapper";
 import { SettingsMenu } from "./menu";
-import { useTranslation } from "../internationalization/internationalization_hooks";
+import { useTranslator } from "../internationalization/internationalization_hooks";
 
 interface Props {
     tabAndContentWrappers: TabAndContentWrapper[];
@@ -19,7 +19,7 @@ interface Props {
 export const Navbar = (props: Props) => {
     const menuRef = React.createRef<ContextMenu>();
     const authContext = useContext(AuthContext);
-    const t = useTranslation();
+    const t = useTranslator();
 
     const hideMenu = (e: React.KeyboardEvent) => {
         if (e.key === "Escape") {

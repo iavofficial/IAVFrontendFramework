@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import { BLUE1, GRAY2, TAB_HEIGHT } from "../../../constants";
-import { useTranslation } from "../../internationalization/internationalization_hooks";
+import { useTranslator } from "../../internationalization/internationalization_hooks";
 import { navbarTabProps } from "./navbarTab";
 
 interface State {
@@ -15,7 +15,7 @@ export const SimpleNavbarTab = (props: navbarTabProps) => {
 
     const [hovering, setHovering] = useState(false);
 
-    const t = useTranslation();
+    const t = useTranslator();
 
     const tabStyle = {
         height: TAB_HEIGHT,

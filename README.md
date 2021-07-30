@@ -58,7 +58,7 @@ The GlobalDataLayer has the properties:
 2. initI18Next (optional): Custom function for initializing i18next. If the user hasn't accepted cookies, i18next will be initialized by the framework regardless whether this property is specified or not. In case the property is specified the function will be executed when the user accepts cookies.
 
 ### Internationalization ###
-The framework uses I18next for internationalization. It provides a default initialization of I18next which automatically gets executed when the *GlobalDataLayer* component mounts. It also provides translations in english and german for texts of framework components. To setup i18next with the default implementation of the framework you have to create an object with the following structure and pass it to the *GlobalDataLayer* component.
+The framework uses I18next for internationalization. It provides a default initialization of I18next which automatically gets executed when the *GlobalDataLayer* component mounts. It also provides translations in english and german for texts of framework components. To setup i18next with custom translations and the default implementation of the framework you have to create an object with the following structure and pass it to the *GlobalDataLayer* component.
 ```javascript
 let translations = {
   es: {

@@ -110,20 +110,20 @@ To let the developer specify navigation tabs the class View is exported as a mod
 An example:
 ```javascript
 let views = [
-    new View(<StandardNavbarTab name={"Example without Translation"} to="/" disabled={false} selectedIcon={navDashboardSelected}
+    new View(<SimpleNavbarTab name={"Example without Translation"} to="/" disabled={false} selectedIcon={navDashboardSelected}
       deselectedIcon={navDashboardDeselected} />, FirstExampleComponent),
-    new View(<StandardNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/example2" disabled={false} selectedIcon={navFleetSelected}
+    new View(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/example2" disabled={false} selectedIcon={navFleetSelected}
       deselectedIcon={navFleetDeselected} />, SecondExampleComponent),
     new Group(
       "Test Gruppe", otaLogo,
       [
-        new View(<StandardNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/group-example1" disabled={false} selectedIcon={navFleetSelected}
+        new View(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/group-example1" disabled={false} selectedIcon={navFleetSelected}
           deselectedIcon={navFleetDeselected} />, SecondExampleComponent),
-        new View(<StandardNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/group-example2" disabled={true} selectedIcon={navFleetDetailSelected}
+        new View(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/group-example2" disabled={true} selectedIcon={navFleetDetailSelected}
           deselectedIcon={navFleetDetailDeselected} />, FourthExampleComponent)
       ]
     ),
-    new View(<GroupCheckedNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/example4" disabled={true} selectedIcon={navExpertSelected}
+    new View(<PrivilegedNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/example4" disabled={true} selectedIcon={navExpertSelected}
       deselectedIcon={navExpertDeselected} permittedGroups={["ADMIN"]} />, FourthExampleComponent)
 ];
 ```

@@ -27,19 +27,19 @@ It is recommended to use TypeScript. If you develop own implementations with fra
 ### Imports
 This framework uses ES-6 import/export syntax. All exports are named exports. To import a module just type the name of the npm package and add the component you want to import. For example:
 ```javascript
-import { DisaPage } from "@td-d/disa-framework/disaPage"
+import { UILayer } from "@td-d/disa-framework/uiLayer"
 ```
 
 ### Cookies
 This framework adds a banner for cookies **by itself without any action of the developer**. Cookies have to be accepted for proper functionality. Without accepting the user can't use the web application. When accepting a **cookie with the expiration time of one year will be set** in order to save the decision. If this cookie is found, the cookie banner won't render again.\
-The cookie banner component is **conditionally rendered by the *DisaPage* component**. The code can be found in *src/lib/components/cookie/cookieBanner.tsx* Rendering of the cookie banner doesn't depend on whether the user is logged in or not.
+The cookie banner component is **conditionally rendered by the *UILayer* component**. The code can be found in *src/lib/components/cookie/cookieBanner.tsx* Rendering of the cookie banner doesn't depend on whether the user is logged in or not.
 
 ### Layout
 ![Here should be a diagram describing the layout.](./doc/diagrams/layout.png?raw=true)
 
 ## Getting started
-The main component of this framework is the DisaPage component. To do the basic setup you have to render this component in the render method of your application. You will see that this frameworks provides a login system and the basic frame of a disa web application.\
-The DisaPage component has the properties:
+The main component of this framework is the UILayer component. To do the basic setup you have to render this component in the render method of your application. You will see that this frameworks provides a login system and the basic frame of a disa web application.\
+The UILayer component has the properties:
 1. views: Array of views (a specific class) to provide in order to render tabs in the navigation bar and the associated component.
 2. startingPoint: The "entry URL" of your application. This doesn't mean the login page but the path the user will be redirected after successfull authentication.
 3. loginView (optional): This attribute will get explained later
@@ -48,7 +48,7 @@ The DisaPage component has the properties:
 
 ### Internationalization ###
 **Add an concrete example on how to setup i18n for a framework user**
-The framework uses I18next for internationalization. It provides a default initialization of I18next which automatically gets executed when the *DisaPage* component mounts. It also provides translations in english and german for texts of framework components. To setup i18next with the default implementation of the framework you have to create an object with the following structure and pass it to the *DisaPage* component.
+The framework uses I18next for internationalization. It provides a default initialization of I18next which automatically gets executed when the *UILayer* component mounts. It also provides translations in english and german for texts of framework components. To setup i18next with the default implementation of the framework you have to create an object with the following structure and pass it to the *UILayer* component.
 ```javascript
 let translations = {
   es: {
@@ -62,7 +62,7 @@ let translations = {
 ...
 render() {
   ...
-  <DisaPage translations={translations} .../>
+  <UILayer translations={translations} .../>
   ...
 }
 ```
@@ -83,7 +83,7 @@ const t = useTranslation();
 const exampleTranslation = <div>Example translation: {t("Imprint")}</div>;
 ```
 
-If you want to initialize i18next your own way (for example to specify an interpolation function) you can define an initialization function and pass it to the *DisaPage* component by using the *initI18Next* property. If the user hasn't accepted cookies, i18next will be initialized by the framework regardless whether this property is specified or not. In case the *initI18Next* property is specified the function will be executed when the user accepts cookies.\
+If you want to initialize i18next your own way (for example to specify an interpolation function) you can define an initialization function and pass it to the *UILayer* component by using the *initI18Next* property. If the user hasn't accepted cookies, i18next will be initialized by the framework regardless whether this property is specified or not. In case the *initI18Next* property is specified the function will be executed when the user accepts cookies.\
 An example:
 ```javascript
 const initFunction = () => {
@@ -106,7 +106,7 @@ You can find more information about I18next [here](https://react.i18next.com/).
 
 ### How to specify navigation tabs
 *Please remove if the text fit's the requirements: Try to reduce text by including sample code snippets*\
-To let the developer specify navigation tabs the class View is exported as a module. It encapsulates the element which is rendered in the navigation bar and the component which is rendered in the content section. In order to specify navigation tabs the developer has to **create an array of instances of this class**. The developer is also able to create instances of the class *Group*. This class let's the developer specify groups of navigation tabs with a specified label. The array has to be passed to the DisaPage's *views* property. A special property is the *name* property. In order to make internationalization possible you can pass a function besides defining a simple string. This function takes a translation function which can be used to get a translation.\
+To let the developer specify navigation tabs the class View is exported as a module. It encapsulates the element which is rendered in the navigation bar and the component which is rendered in the content section. In order to specify navigation tabs the developer has to **create an array of instances of this class**. The developer is also able to create instances of the class *Group*. This class let's the developer specify groups of navigation tabs with a specified label. The array has to be passed to the UILayer's *views* property. A special property is the *name* property. In order to make internationalization possible you can pass a function besides defining a simple string. This function takes a translation function which can be used to get a translation.\
 An example:
 ```javascript
 let views = [
@@ -148,18 +148,18 @@ The disa framework already provides two login providers. These are the AWSLoginP
 
 There are also two login views provided. One is the AWSLoginView which should be used with the AWSLoginProvider. There is also the BasicLoginView component which can be used in combination with the dummy login provider. The basic login view is the default login view.
 
-In order to specify the login provider and the login view you can pass it to the DisaPage component using the *loginProvider* and *loginView* props.
+In order to specify the login provider and the login view you can pass it to the UILayer component using the *loginProvider* and *loginView* props.
 
-It is also possible to implement own login providers and login views and pass it to the DisaPage component. Further information about implementing a custom login provider can be found [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/How-to-implement-a-login-provider). Further information about implementing a custom login view can be found [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/How-to-implement-a-login-view).
+It is also possible to implement own login providers and login views and pass it to the UILayer component. Further information about implementing a custom login provider can be found [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/How-to-implement-a-login-provider). Further information about implementing a custom login view can be found [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/How-to-implement-a-login-view).
 
 ### Piecing everything together ###
-**Add missing i18n configuration in DisaPage**
+**Add missing i18n configuration in UILayer**
 To render your views and to do configuration you can follow the structure of this code snippet. This could be returned inside the body of the render method of your App.tsx.
 ```javascript
 <AWSLoginProvider apiRoot={config.API_Root}>
   <FirstExampleContextComponent>
     <SecondExampleContextComponent>
-      <DisaPage tabAndContentWrappers={views} startingPoint="/" loginView={AWSLoginView} />
+      <UILayer tabAndContentWrappers={views} startingPoint="/" loginView={AWSLoginView} />
     </SecondExampleContextComponent>
   </FirstExampleContextComponent>
 </AWSLoginProvider>

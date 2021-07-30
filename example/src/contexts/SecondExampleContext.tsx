@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { AppliedTranslationProps, applyTranslation } from "disa-framework/applyTranslation";
+import { AppliedTranslationProps, applyTranslation } from "disa-framework/translators";
 
 export const SecondExampleContext = React.createContext({});
 

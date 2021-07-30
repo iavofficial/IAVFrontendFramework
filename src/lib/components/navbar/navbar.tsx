@@ -10,7 +10,7 @@ import { BLUE3, TAB_HEIGHT } from "../../constants";
 import { AuthContext } from "../../contexts/auth";
 import { TabAndContentWrapper } from "./wrapper/tabAndContentWrapper";
 import { SettingsMenu } from "./menu";
-import { useTranslator } from "../internationalization/internationalization_hooks";
+import { useTranslator } from "../internationalization/translators";
 
 interface Props {
     tabAndContentWrappers: TabAndContentWrapper[];

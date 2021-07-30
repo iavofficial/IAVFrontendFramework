@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Content } from "disa-framework/content";
 import { SecondExampleContext } from "../contexts/SecondExampleContext";
-import { AppliedTranslationProps, applyTranslation } from "disa-framework/applyTranslation";
+import { applyTranslation, AppliedTranslationProps } from "disa-framework/translators";
 
 class FourthExampleComponentUnprocessed extends Component<AppliedTranslationProps> {
 

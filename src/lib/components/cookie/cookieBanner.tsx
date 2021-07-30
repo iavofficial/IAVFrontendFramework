@@ -6,7 +6,7 @@ import { useCookies } from "react-cookie";
 import { BLUE1 } from "../../constants";
 import { ACCEPTED_COOKIES_NAME } from "../../constants";
 import { useCookiesAccepted } from "./cookieHooks";
-import { useTranslator } from "../internationalization/internationalization_hooks";
+import { useTranslator } from "../internationalization/translators";
 
 export const CookieBanner = (props: any) => {
 

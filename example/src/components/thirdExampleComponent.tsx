@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { FirstExampleContext } from "../contexts/FirstExampleContext";
 import { Content } from "disa-framework/content";
-import { useTranslator } from "disa-framework/internationalization_hooks";
+import { useTranslator } from "disa-framework/translators";
 
 export const ThirdExampleComponent = () => {
     const context = useContext(FirstExampleContext);

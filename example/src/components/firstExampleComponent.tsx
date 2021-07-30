@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button } from "primereact/button";
 import { Content } from "disa-framework/content";
-import { applyTranslation, AppliedTranslationProps } from "disa-framework/applyTranslation";
+import { applyTranslation, AppliedTranslationProps } from "disa-framework/translators";
 
 import { FirstExampleContext } from "../contexts/FirstExampleContext";
 

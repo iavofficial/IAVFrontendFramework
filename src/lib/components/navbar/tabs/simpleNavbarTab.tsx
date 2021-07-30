@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import { BLUE1, GRAY2, TAB_HEIGHT } from "../../../constants";
-import { useTranslator } from "../../internationalization/internationalization_hooks";
+import { useTranslator } from "../../internationalization/translators";
 import { navbarTabProps } from "./navbarTab";
 
 interface State {

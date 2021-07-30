@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useTranslator } from "./internationalization/internationalization_hooks";
+import { useTranslator } from "./internationalization/translators";
 
 export const Imprint = () => {
     const t = useTranslator();

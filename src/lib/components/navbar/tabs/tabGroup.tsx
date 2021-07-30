@@ -2,7 +2,7 @@ import React from "react";
 import { Accordion, AccordionTab } from 'primereact/accordion';
 
 import { TranslateFunctionType } from "../../../contexts/language";
-import { useTranslator } from "../../internationalization/internationalization_hooks";
+import { useTranslator } from "../../internationalization/translators";
 
 interface Props {
     name: string | ((t: TranslateFunctionType) => string);

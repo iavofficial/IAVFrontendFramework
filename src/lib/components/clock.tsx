@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useTranslator } from "./internationalization/internationalization_hooks";
+import { useTranslator } from "./internationalization/translators";
 
 interface State {
     date: Date;

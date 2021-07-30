@@ -7,7 +7,7 @@ import { AuthContext } from "../../../contexts/auth";
 import { LoginButtonWithSpinner } from "../loginButtonWithSpinner";
 import { useState } from "react";
 import { useContext } from "react";
-import { useTranslator } from "../../internationalization/internationalization_hooks";
+import { useTranslator } from "../../internationalization/translators";
 
 export const AWSLoginView = () => {
     const [email, setEmail] = useState("");

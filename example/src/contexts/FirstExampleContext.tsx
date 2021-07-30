@@ -1,6 +1,6 @@
 import React, { Component, ReactElement } from "react";
 import { Button } from "primereact/button";
-import { AppliedTranslationProps, applyTranslation } from "disa-framework/applyTranslation";
+import { AppliedTranslationProps, applyTranslation } from "disa-framework/translators";
 
 interface State {
     exampleData: string,

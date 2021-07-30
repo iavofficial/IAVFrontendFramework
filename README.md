@@ -38,7 +38,16 @@ The cookie banner component is **conditionally rendered by the *UILayer* compone
 ![Here should be a diagram describing the layout.](./doc/diagrams/layout.png?raw=true)
 
 ## Getting started
-The main components of this framework are the GlobalDataLayer and UILayer component. To do the basic setup you have to render these components in the render method of your application. You will see that this frameworks provides a login system and the basic frame of a disa web application.\
+The main components of this framework are the *GlobalDataLayer* and *UILayer* component. To do the basic setup you have to render these components in the render method of your application. The Framework is seperated in two layers in order to allow the developer to use data of the framework's contexts which are included in the *GlobalDataLayer* component.\
+An explanation for using these components:
+```javascript
+// If you don't want to use the default login provider, the login provider would be rendered here. Login providers will get explained later on.
+  <GlobalDataLayer ...properties...>
+    // Your contexts or other components which need data of the framework's contexts go here.
+      <DisaPage ...properties.../>
+  </GlobalDataLayer>
+```
+You will see that this frameworks provides a login system and the basic frame of a disa web application.\
 The UILayer component has the properties:
 1. tabAndContentWrappers: Array of views and groups (and other wrappers) to provide in order to render tabs in the navigation bar and the associated component.
 2. startingPoint: The "entry URL" of your application. This doesn't mean the login page but the path the user will be redirected after successfull authentication.

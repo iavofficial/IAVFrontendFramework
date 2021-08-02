@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { WithTranslation, withTranslation } from "react-i18next";
+import { AppliedTranslationProps, applyTranslation } from "disa-framework/translators";
 
 export const SecondExampleContext = React.createContext({});
 
-export class SecondExampleContextComponentUnprocessed extends Component<React.PropsWithChildren<WithTranslation>> {
-    constructor(props: React.PropsWithChildren<WithTranslation>) {
+export class SecondExampleContextComponentUnprocessed extends Component<React.PropsWithChildren<AppliedTranslationProps>> {
+    constructor(props: React.PropsWithChildren<AppliedTranslationProps>) {
         super(props);
         this.state = {
             exampleData: "default",
@@ -24,4 +24,4 @@ export class SecondExampleContextComponentUnprocessed extends Component<React.Pr
     }
 }
 
-export const SecondExampleContextComponent = withTranslation()(SecondExampleContextComponentUnprocessed);
+export const SecondExampleContextComponent = applyTranslation(SecondExampleContextComponentUnprocessed);

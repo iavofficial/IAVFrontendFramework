@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Content } from "disa-framework/content";
 import { SecondExampleContext } from "../contexts/SecondExampleContext";
-import { WithTranslation, withTranslation } from "react-i18next";
+import { applyTranslation, AppliedTranslationProps } from "disa-framework/translators";
 
-class FourthExampleComponentUnprocessed extends Component<WithTranslation> {
+class FourthExampleComponentUnprocessed extends Component<AppliedTranslationProps> {
 
-    constructor(props: WithTranslation) {
+    constructor(props: AppliedTranslationProps) {
         super(props);
     }
 
@@ -20,4 +20,4 @@ class FourthExampleComponentUnprocessed extends Component<WithTranslation> {
 
 FourthExampleComponentUnprocessed.contextType = SecondExampleContext;
 
-export const FourthExampleComponent = withTranslation()(FourthExampleComponentUnprocessed);
+export const FourthExampleComponent = applyTranslation(FourthExampleComponentUnprocessed);

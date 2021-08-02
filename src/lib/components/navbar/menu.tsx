@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { ContextMenu } from "primereact/contextmenu";
 
 import { AuthContext } from "../../contexts/auth";

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { ContextMenu } from 'primereact/contextmenu';
 
@@ -6,11 +6,11 @@ import "../css/navbar.css";
 import UserPic from "../../assets/user.png";
 import Settings from "../../assets/settings.png";
 import { Clock } from "../clock";
-import { BLUE3, DISATABHEIGHT } from "../constants";
+import { BLUE3, TAB_HEIGHT } from "../../constants";
 import { AuthContext } from "../../contexts/auth";
 import { TabAndContentWrapper } from "./wrapper/tabAndContentWrapper";
 import { SettingsMenu } from "./menu";
-import { useTranslation } from "../internationalization/internationalization_hooks";
+import { useTranslator } from "../internationalization/translators";
 
 interface Props {
     tabAndContentWrappers: TabAndContentWrapper[];
@@ -19,7 +19,7 @@ interface Props {
 export const Navbar = (props: Props) => {
     const menuRef = React.createRef<ContextMenu>();
     const authContext = useContext(AuthContext);
-    const t = useTranslation();
+    const t = useTranslator();
 
     const hideMenu = (e: React.KeyboardEvent) => {
         if (e.key === "Escape") {
@@ -31,7 +31,7 @@ export const Navbar = (props: Props) => {
         <div className="p-d-flex p-dir-col p-lg-2" style={{ "padding": "0px" }}>
 
             <SettingsMenu ref={menuRef} hideMenu={hideMenu} />
-            <div className="p-d-flex p-align-center" style={{ height: DISATABHEIGHT, backgroundColor: BLUE3 }}>
+            <div className="p-d-flex p-align-center" style={{ height: TAB_HEIGHT, backgroundColor: BLUE3 }}>
                 <img src={UserPic} style={{ marginLeft: "5%" }} alt="" />
                 <span style={{ fontWeight: "bold", color: "white", marginLeft: "10px", maxWidth: "60%", textOverflow: "ellipsis", overflow: "hidden" }}>
                     {authContext?.getUsername()}

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import i18n from 'i18next';
 import i18next from "i18next";
-import { useTranslation, withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import translationEN from "./en.json";
 import translationDE from "./de.json";
 import { initI18next } from "./i18n";
 import { useCookiesAccepted } from "../cookie/cookieHooks";
-import { LanguageContext, LanguageProvider, Translations } from "../../contexts/language";
+import { LanguageContext, Translations } from "../../contexts/language";
 
 interface Props {
     fallbackLang: string;
@@ -59,9 +59,9 @@ export const I18NextLanguageProvider = (props: React.PropsWithChildren<Props>) =
         }
     }, [props.translations]);
 
-    const useCustomTranslation = (key: string, ...translationParams: any[]) => {
+    const useTranslationFunction = () => {
         const [t, i18n, ready] = useTranslation();
-        return t(key, ...translationParams);
+        return (key: string, ...translationParams: any[]) => t(key, ...translationParams);
     }
 
     const selectLanguage = (lang: string) => {
@@ -69,14 +69,10 @@ export const I18NextLanguageProvider = (props: React.PropsWithChildren<Props>) =
         setActiveLang(lang);
     }
 
-    const applyTranslation = (component: React.ComponentType, ...parameters: any) => {
-        return withTranslation(...parameters)(component);
-    }
-
     return (
         <LanguageContext.Provider value={{
             fallbackLang: props.fallbackLang, resources: resources, activeLang: activeLang,
-            selectLanguage: selectLanguage, useCustomTranslation: useCustomTranslation
+            selectLanguage: selectLanguage, useTranslationFunction: useTranslationFunction
         }}>
             {loaded && props.children}
         </LanguageContext.Provider>

@@ -1,1 +1,1 @@
-export * from "./lib/components/login/basicLoginView";
+export * from "./lib/components/login/default/basicLoginView";

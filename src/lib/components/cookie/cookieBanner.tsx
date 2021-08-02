@@ -1,18 +1,17 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import { useCookies } from "react-cookie";
 
-import { BLUE1 } from "../constants";
-import { LanguageContext } from "../../contexts/language";
+import { BLUE1 } from "../../constants";
 import { ACCEPTED_COOKIES_NAME } from "../../constants";
 import { useCookiesAccepted } from "./cookieHooks";
-import { useTranslation } from "../internationalization/internationalization_hooks";
+import { useTranslator } from "../internationalization/translators";
 
 export const CookieBanner = (props: any) => {
 
     const [visible, setVisible] = useState(!useCookiesAccepted());
-    const t = useTranslation();
+    const t = useTranslator();
     const [cookies, setCookie, removeCookie] = useCookies([ACCEPTED_COOKIES_NAME]);
 
     const acceptCookies = () => {

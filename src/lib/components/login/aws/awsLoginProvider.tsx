@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 
-import { AuthContext } from "../../contexts/auth";
-import { getConfig } from "./api";
+import { AuthContext } from "../../../contexts/auth";
 import {
     ValidUserInformation, cognitoLogin, cognitoLogout, cognitoCheckIsAuthenticated,
     cognitoCompletePassword, cognitoRefreshAccessToken
-} from "../../services/cognitoService";
-import { LoginProvider, Credentials, securableFunctionType } from "../../contexts/auth";
+} from "../../../services/cognitoService";
+import { LoginProvider, Credentials, securableFunctionType } from "../../../contexts/auth";
 
 export interface Props {
-    apiRoot: string;
     configureAmplify: () => void;
     failOnNoLegalGroup?: boolean;
     legalGroups?: string[];
@@ -20,7 +18,6 @@ export interface State {
     isNewPasswordRequired: boolean;
     isLoading: boolean;
     userData: any;
-    appConfig: any;
     userAttributes: any;
     loginError: any;
     didRender: boolean;
@@ -34,7 +31,6 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
             isNewPasswordRequired: false,   // true if user logs in for the first time with his temp password and has to set a new one
             isLoading: false,               // true if user is in process of logging in
             userData: {},                   // contains user information
-            appConfig: {},                  // contains app config data (such as gmaps API-Key)
             userAttributes: {},             // user attributes retrieved from cognito necessary for the completePassword workflow
             loginError: {},
             didRender: false
@@ -48,20 +44,19 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
 
     componentDidMount() {
         this.props.configureAmplify();
-        this.componentDidRender();
+        this.checkIsAuthenticated();
     }
 
     componentDidUpdate() {
-        this.componentDidRender();
+        this.checkIsAuthenticated();
     }
 
-    // This function is not a react hook. This function was introduced to avoid code duplication.
-    componentDidRender = () => {
+    checkIsAuthenticated = () => {
         return cognitoCheckIsAuthenticated(this.props.failOnNoLegalGroup!, this.props.legalGroups!).then((result) => {
             return this.processSuccessfulAuth(result);
         }
         ).catch((err) => {
-            if (Object.entries(this.state.userData).length !== 0 || this.state.hasAuthenticated !== false) {
+            if (Object.entries(this.state.userData).length !== 0 || this.state.hasAuthenticated) {
                 this.setState({
                     userData: {},
                     hasAuthenticated: false
@@ -175,24 +170,13 @@ export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, 
     }
 
     processSuccessfulAuth = (userData: ValidUserInformation) => {
-        if (this.state.hasAuthenticated !== true || this.state.isNewPasswordRequired !== false ||
+        if (!this.state.hasAuthenticated|| this.state.isNewPasswordRequired ||
             Object.entries(this.state.userData).length === 0 || Object.entries(this.state.loginError).length !== 0) {
             this.setState({
                 hasAuthenticated: true,
                 isNewPasswordRequired: false,
                 userData: userData,
                 loginError: {}
-            });
-        }
-        if (!this.state.appConfig) {
-            console.log("Requesting app config");
-            getConfig(userData.jwtToken, this.props.apiRoot).then(config => (
-                this.setState({
-                    appConfig: config.config
-                })
-            )).catch(err => {
-                console.log("Failed to retrieve app config. Printing error:");
-                console.log(err);
             });
         }
     }

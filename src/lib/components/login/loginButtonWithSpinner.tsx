@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "primereact/button";
 import { ProgressSpinner } from "primereact/progressspinner";
 
-import { BLUE1 } from "../constants";
+import { BLUE1 } from "../../constants";
 
 interface Props {
     isLoading: boolean

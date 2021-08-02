@@ -3,7 +3,7 @@ import { ReactElement } from "react";
 import { RouteProps } from "react-router-dom";
 
 import { View } from "./view";
-import { TabGroup } from "../tabGroup";
+import { TabGroup } from "../tabs/tabGroup";
 import { TranslateFunctionType } from "../../../contexts/language";
 
 export class Group {

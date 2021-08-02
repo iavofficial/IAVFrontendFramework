@@ -14,7 +14,7 @@ export interface Translations {
     [lang: string]: Translation;
 }
 
-export type TranslateFunctionType = (key: string, ...translationParameters: any[]) => string;
+export type TranslateFunctionType = (key: string, ...translationParameters: any) => string;
 
 export interface LanguageProvider {
     useCustomTranslation: TranslateFunctionType;
@@ -26,7 +26,7 @@ export interface LanguageContextType {
     resources: Translations;
     activeLang: string;
     selectLanguage: (lang: string) => void;
-    useCustomTranslation: TranslateFunctionType;
+    useTranslationFunction: () => TranslateFunctionType
     [attribute: string]: any;
 }
 

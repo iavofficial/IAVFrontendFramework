@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 
-import { useTranslation } from "./internationalization/internationalization_hooks";
+import { useTranslator } from "./internationalization/translators";
 
 export const Imprint = () => {
-    const t = useTranslation();
+    const t = useTranslator();
     return (
         <div className="p-d-flex" style={{ height: "100%", width: "100%", justifyContent: "center", alignItems: "center" }}>
             <div style={{ textAlign: "center" }}>

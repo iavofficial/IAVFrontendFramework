@@ -13,5 +13,9 @@
     "Chairman_supervisory_board": "Chairman of the supervisory board",
     "allow_cookies_header": "This website uses cookies.",
     "allow_cookies_disclaimer": "This website needs you to allow cookies for proper functionality.",
-    "allow_cookies_button": "Allow cookies"
+    "allow_cookies_button": "Allow cookies",
+    "invalid_access_configuration": "Invalid access configuration",
+    "invalid_username_or_password": "Invalid username or password",
+    "password_requirements_not_met": "Password did not meet the requirements",
+    "server_error": "Server error"
 }

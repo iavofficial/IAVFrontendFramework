@@ -4,14 +4,14 @@ import { CookiesProvider } from "react-cookie";
 import { AuthContext } from "../contexts/auth";
 import { Translations } from "../contexts/language";
 import { I18NextLanguageProvider } from "./internationalization/i18NextLanguageProvider";
-import { DummyLoginProvider } from "./login/dummyLoginProvider";
+import { DummyLoginProvider } from "./login/default/dummyLoginProvider";
 
 interface Props {
     translations?: Translations;
     initI18Next?: () => void;
 }
 
-export const DisaContexts = (props: PropsWithChildren<Props>) => {
+export const GlobalDataLayer = (props: PropsWithChildren<Props>) => {
     const authContext = useContext(AuthContext);
     const LoginProvider = authContext ? React.Fragment : DummyLoginProvider;
 

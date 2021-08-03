@@ -53,7 +53,7 @@ create_npmrc:
 build_package:
   stage: build
   script:
-    - ./scripts/ci_cd/setup_npm.sh
+    - source ./scripts/ci_cd/setup_npm.sh
     - npm run build-linux
   artifacts:
     paths:
@@ -68,7 +68,7 @@ publish_package:
     SSL_CERT_FILE: ${IAV_CA_BUNDLE}
     NPM_TOKEN: ${CI_JOB_TOKEN}
   script:
-    - ./scripts/ci_cd/setup_npm.sh
+    - source ./scripts/ci_cd/setup_npm.sh
     - git config --global http.sslCAinfo $IAV_CA_BUNDLE
     - |
       {

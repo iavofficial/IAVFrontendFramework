@@ -33,7 +33,6 @@ validate_package_scope:
 create_npmrc:
   stage: validate
   script:
-    - echo ${CI_JOB_TOKEN}
     - |
       if [[ ! -f .npmrc ]]; then
         echo 'No .npmrc found! Creating one now. Please review the following link for more information: https://docs.gitlab.com/ee/user/packages/npm_registry/index.html#authenticating-with-a-ci-job-token'
@@ -50,6 +49,8 @@ create_npmrc:
   artifacts:
     paths:
       - .npmrc
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
 
 # Builds the framework
 build_package:
@@ -71,7 +72,18 @@ publish_package:
     NPM_TOKEN: ${CI_JOB_TOKEN}
     NODE_EXTRA_CA_CERTS: ${IAV_CA_BUNDLE}
   script:
-    - echo ${CI_JOB_TOKEN}
+    - |
+      if [[ ! -f .npmrc ]]; then
+        echo 'No .npmrc found! Creating one now. Please review the following link for more information: https://docs.gitlab.com/ee/user/packages/npm_registry/index.html#authenticating-with-a-ci-job-token'
+        printenv
+        echo here
+        echo ${CI_PROJECT_ROOT_NAMESPACE}
+        {
+          echo @${CI_PROJECT_ROOT_NAMESPACE}:registry=${CI_SERVER_PROTOCOL}://${CI_SERVER_HOST}:${CI_SERVER_PORT}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/
+          echo //${CI_SERVER_HOST}:${CI_SERVER_PORT}/api/v4/packages/npm/:_authToken=${CI_JOB_TOKEN}
+          echo //${CI_SERVER_HOST}:${CI_SERVER_PORT}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}
+        } >> .npmrc
+      fi
     - source ./scripts/ci_cd/setup_npm.sh
     - git config --global http.sslCAinfo $IAV_CA_BUNDLE
     - |

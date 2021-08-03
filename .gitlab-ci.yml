@@ -1,8 +1,9 @@
 default:
   image: node:latest
-  
   before_script:
     - chmod -R +x ./scripts/ci_cd/
+  variables:
+    SSL_CERT_FILE: ${IAV_CA_BUNDLE}
 
 stages:
   - validate
@@ -66,7 +67,6 @@ build_package:
 publish_package:
   stage: publish
   variables:
-    SSL_CERT_FILE: ${IAV_CA_BUNDLE}
     NPM_TOKEN: ${CI_JOB_TOKEN}
   script:
     - ./scripts/ci_cd/setup_npm.sh
@@ -85,8 +85,6 @@ publish_package:
 create_release:
   stage: release
   image: registry.gitlab.com/gitlab-org/release-cli:v0.6.0
-  variables:
-    SSL_CERT_FILE: $IAV_CA_BUNDLE
   script:
     - apk add --update npm
   release:

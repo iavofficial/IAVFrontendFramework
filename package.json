@@ -17,9 +17,6 @@
     "semantic-release": "semantic-release",
     "lint": "eslint"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "files": [
     "./build"
   ],

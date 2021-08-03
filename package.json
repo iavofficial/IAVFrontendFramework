@@ -38,6 +38,9 @@
       "last 1 safari version"
     ]
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "./build/disaPage.js",
   "exports": {
     ".": "./build/components/disaPage.js",

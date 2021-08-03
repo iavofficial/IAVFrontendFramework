@@ -68,7 +68,7 @@ publish_package:
     SSL_CERT_FILE: ${IAV_CA_BUNDLE}
     NPM_TOKEN: ${CI_JOB_TOKEN}
   script:
-    - source ./scripts/ci_cd/init_publish_environment.sh
+    - source ./scripts/ci_cd/setup_npm.sh
     - git config --global http.sslCAinfo $IAV_CA_BUNDLE
     - |
       {

@@ -68,7 +68,7 @@ publish_package:
   variables:
     SSL_CERT_FILE: ${IAV_CA_BUNDLE}
     NPM_TOKEN: ${CI_JOB_TOKEN}
-    GIT_SSL_NO_VERIFY: "true"
+    GIT_SSL_NO_VERIFY: 1
   script:
     - ./scripts/ci_cd/setup_npm.sh
     - echo $SSL_CERT_FILE

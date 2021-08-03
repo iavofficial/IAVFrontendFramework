@@ -68,14 +68,10 @@ publish_package:
   variables:
     SSL_CERT_FILE: ${IAV_CA_BUNDLE}
     NPM_TOKEN: ${CI_JOB_TOKEN}
-    GIT_SSL_NO_VERIFY: 1
   script:
     - ./scripts/ci_cd/setup_npm.sh
-    - echo $SSL_CERT_FILE
     - |
       {
-        echo "IN"
-        echo $SSL_CERT_FILE
         source npm run semantic-release
         echo "Successfully published version ${NPM_PACKAGE_VERSION} of ${NPM_PACKAGE_NAME} to GitLab's NPM registry: ${CI_PROJECT_URL}/-/packages"
       } || {

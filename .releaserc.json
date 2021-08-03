@@ -1,3 +1,4 @@
 {
+    "branches": ["*"],
     "extends": "@semantic-release/gitlab-config"
 }

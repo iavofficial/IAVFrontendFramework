@@ -69,6 +69,7 @@ publish_package:
     NPM_TOKEN: ${CI_JOB_TOKEN}
   script:
     - ./scripts/ci_cd/setup_npm.sh
+    - git config --global http.sslCAinfo $IAV_CA_BUNDLE
     - |
       {
         npm run semantic-release

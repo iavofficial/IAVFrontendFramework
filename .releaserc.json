@@ -1,4 +1,4 @@
 {
-    "branches": ["(\\W|\\w)*"],
+    "branches": ["'(\\W|\\w)*'"],
     "extends": "@semantic-release/gitlab-config"
 }

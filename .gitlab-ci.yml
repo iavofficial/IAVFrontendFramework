@@ -72,8 +72,9 @@ publish_package:
     NPM_TOKEN: ${CI_JOB_TOKEN}
     NODE_EXTRA_CA_CERTS: ${IAV_CA_BUNDLE}
   script:
-    - npm config set "//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken"=${NPM_TOKEN}
-    - npm config set "//gitlab.com/api/v4/packages/npm/:_authToken"=${NPM_TOKEN}
+    - npm config set "@${CI_PROJECT_ROOT_NAMESPACE}:registry"="${CI_SERVER_PROTOCOL}://${CI_SERVER_HOST}:${CI_SERVER_PORT}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/"
+    - npm config set "//${CI_SERVER_HOST}:${CI_SERVER_PORT}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken"=${NPM_TOKEN}
+    - npm config set "//${CI_SERVER_HOST}:${CI_SERVER_PORT}/api/v4/packages/npm/:_authToken"=${NPM_TOKEN}
     - npm config list -l
     - source ./scripts/ci_cd/setup_npm.sh
     - git config --global http.sslCAinfo $IAV_CA_BUNDLE

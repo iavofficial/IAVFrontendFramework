@@ -1,4 +1,3 @@
 {
-    "branches": ["master", "develop"],
     "extends": "@semantic-release/gitlab-config"
 }

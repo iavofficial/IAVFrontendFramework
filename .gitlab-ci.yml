@@ -4,10 +4,6 @@ default:
   before_script:
     - chmod -R +x ./scripts/ci_cd/
 
-# Prevent execution of CI / CD pipeline on creation of tags (are created on releases).
-except:
-  - tags
-
 stages:
   - prepare
   - validate
@@ -23,6 +19,8 @@ generate_env_variables:
   artifacts:
     reports:
       dotenv: build.env
+  except:
+    - tags
 
 # Setting runtime dependend values in package.json (for example scope in name). Preparing build folder with rebuilded package.json.
 generate_package_json_and_build_dir:
@@ -34,6 +32,8 @@ generate_package_json_and_build_dir:
   artifacts:
     paths:
       - ./build
+  except:
+    - tags
 
 # If no release notes for the current version exist and this pipeline was triggered on the main branch the pipeline will be terminated.
 validate_release_notes:
@@ -45,6 +45,8 @@ validate_release_notes:
       fi
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+  except:
+    - tags
 
 # If no .npmrc if included in the repo, generate a temporary one to use during the publish step
 # that is configured to publish to GitLab's NPM registry
@@ -64,6 +66,8 @@ check_and_create_npmrc:
       - .npmrc
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+  except:
+    - tags
 
 # Builds the framework
 install_and_build_package:
@@ -76,6 +80,8 @@ install_and_build_package:
     paths:
       - ./node_modules
       - ./build
+  except:
+    - tags
 
 # Publish the package. If the version in package.json has not yet been published, it will be
 # published to GitLab's NPM registry. If the version already exists, the publish command
@@ -98,6 +104,8 @@ publish_package:
       }
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+  except:
+    - tags
 
 # Create release so observer of this project will get a notification e-mail.
 create_release:
@@ -111,3 +119,5 @@ create_release:
       --tag-name v${NPM_PACKAGE_VERSION}
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+  except:
+    - tags

@@ -22,7 +22,7 @@ generate_package_json:
   stage: prepare
   script:
     - package_json=$(<package.json)
-    - SCOPE=$REPO_ROOT_NAMESPACE echo package_json >> package2.json
+    - SCOPE=$REPO_ROOT_NAMESPACE echo $package_json >> package2.json
   artifacts:
     paths:
       - package2.json

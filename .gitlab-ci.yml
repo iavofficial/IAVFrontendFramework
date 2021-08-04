@@ -72,7 +72,7 @@ publish_package:
     - |
       {
         npm run semantic-release
-        exit $?
+        
       } || {
         echo "No new version of ${NPM_PACKAGE_NAME} published. This is most likely because version ${NPM_PACKAGE_VERSION} already exists in GitLab's NPM registry."
         exit 1

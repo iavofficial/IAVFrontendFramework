@@ -90,6 +90,8 @@ publish_package:
 create_release:
   stage: release
   image: registry.gitlab.com/gitlab-org/release-cli:latest
+  variables:
+    SSL_CERT_FILE: ${IAV_CA_BUNDLE}
   script:
     - >
       release-cli create --description ./scripts/ci_cd/release_notes/${NPM_PACKAGE_VERSION}.md

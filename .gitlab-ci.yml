@@ -38,9 +38,9 @@ create_npmrc:
       if [[ ! -f .npmrc ]]; then
         echo 'No .npmrc found! Creating one now. Please review the following link for more information: https://docs.gitlab.com/ee/user/packages/npm_registry/index.html#authenticating-with-a-ci-job-token'
         {
-          echo "@${CI_PROJECT_ROOT_NAMESPACE}:registry=${CI_SERVER_PROTOCOL}://${CI_SERVER_HOST}:${CI_SERVER_PORT}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/"
+          echo "@${CI_PROJECT_ROOT_NAMESPACE}:registry=${CI_SERVER_PROTOCOL}://${$CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/npm/"
+          echo "${$CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}"
         } >> .npmrc
-
       fi
   artifacts:
     paths:
@@ -64,15 +64,11 @@ publish_package:
   stage: publish
   variables:
     SSL_CERT_FILE: ${IAV_CA_BUNDLE}
-    NPM_TOKEN: ${CI_JOB_TOKEN}
   script:
-    - git config --global http.sslCAinfo $IAV_CA_BUNDLE
     - npm config set cafile $IAV_CA_BUNDLE
-    - npm config set strict-ssl false
     - |
       {
-        npm run semantic-release
-        exit $?
+        npm publish ./build
       } || {
         echo "No new version of ${NPM_PACKAGE_NAME} published. This is most likely because version ${NPM_PACKAGE_VERSION} already exists in GitLab's NPM registry."
         exit 1

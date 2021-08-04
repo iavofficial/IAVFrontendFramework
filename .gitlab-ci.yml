@@ -36,6 +36,17 @@ validate_package_scope:
         exit 1
       fi
 
+# If no release notes for the current version exist and this pipeline was triggered on the main branch the pipeline will be terminated.
+validate_release_notes:
+  stage: validate
+  script:
+    - >
+      if [[ ! -f ./scripts/ci_cd/release_notes/${NPM_PACKAGE_VERSION}.md ]]; then
+          echo "You have to create release notes for version ${NPM_PACKAGE_VERSION}. Otherwise the package won't be published."
+      fi
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "develop"'
+
 # If no .npmrc if included in the repo, generate a temporary one to use during the publish step
 # that is configured to publish to GitLab's NPM registry
 create_npmrc:
@@ -43,7 +54,7 @@ create_npmrc:
   script:
     - >
       if [[ ! -f .npmrc ]]; then
-        echo 'No .npmrc found! Creating one now. Please review the following link for more information: https://docs.gitlab.com/ee/user/packages/npm_registry/index.html#authenticating-with-a-ci-job-token'
+        echo "No .npmrc found! Creating one now."
         {
           echo "@${REPO_ROOT_NAMESPACE}:registry=${REPO_PROTOCOL}://${REPO_URL}/api/v4/projects/${REPO_PROJECT_ID}/packages/npm/"
           echo "//${REPO_URL}/api/v4/projects/${REPO_PROJECT_ID}/packages/npm/:_authToken=${REPO_AUTH_TOKEN}"
@@ -93,6 +104,7 @@ create_release:
   variables:
     SSL_CERT_FILE: ${IAV_CA_BUNDLE}
   script:
+    - printenv
     - >
       release-cli create --description ./scripts/ci_cd/release_notes/${NPM_PACKAGE_VERSION}.md
       --tag-name v${NPM_PACKAGE_VERSION}

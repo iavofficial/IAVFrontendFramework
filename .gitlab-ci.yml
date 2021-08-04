@@ -3,13 +3,21 @@ default:
   before_script:
     - chmod -R +x ./scripts/ci_cd/
     - source ./scripts/ci_cd/configure_npm.sh
-    - source ./scripts/ci_cd/set_package_env_variables.sh
 
 stages:
+  - prepare
   - validate
-  - prepare_and_build
+  - install_and_build
   - publish
   - release
+
+generate_env_variables:
+  stage: prepare
+  script:
+    - ./scripts/ci_cd/generate_package_env_variables.sh
+  artifacts:
+    reports:
+      dotenv: build.env
 
 # Validate that the package name is properly scoped to the project's root namespace.
 # For more information, see https://docs.gitlab.com/ee/user/packages/npm_registry/#package-naming-convention
@@ -48,7 +56,7 @@ create_npmrc:
 
 # Builds the framework
 prepare_and_build_package:
-  stage: prepare_and_build
+  stage: intall_and_build
   script:
     - npm install --only=dev
     - npm run build-linux

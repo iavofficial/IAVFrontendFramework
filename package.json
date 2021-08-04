@@ -1,6 +1,6 @@
 {
   "name": "@td-d/disa-framework",
-  "version": "1.0.4",
+  "version": "1.0.0",
   "private": false,
   "description": "This framework takes care of a DISA application's basic structure.",
   "contributors": [
@@ -10,7 +10,7 @@
     }
   ],
   "scripts": {
-    "devmode": ".\\scripts\\windows\\build_devmode.bat",
+    "devmode": ".\\scripts\\windows\\devmode_build.bat",
     "build-linux": "./scripts/ci_cd/build.sh",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

@@ -68,6 +68,7 @@ publish_package:
   script:
     - git config --global http.sslCAinfo $IAV_CA_BUNDLE
     - npm config set cafile $IAV_CA_BUNDLE
+    - npm config set strict-ssl false
     - |
       {
         npm run semantic-release

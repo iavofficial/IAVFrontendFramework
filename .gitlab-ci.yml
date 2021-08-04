@@ -2,10 +2,12 @@ default:
   image: node:latest
   before_script:
     - chmod -R +x ./scripts/ci_cd/
+    - source ./scripts/ci_cd/configure_npm.sh
+    - source ./scripts/ci_cd/set_npm_env_variables.sh
 
 stages:
   - validate
-  - build
+  - prepare_and_build
   - publish
   - release
 
@@ -14,7 +16,6 @@ stages:
 validate_package_scope:
   stage: validate
   script:
-    - source ./scripts/ci_cd/set_npm_variables.sh
     - |
       if [[ ! -f package.json ]]; then
         echo "No package.json found! A package.json file is required to publish a package to GitLab's NPM registry."
@@ -36,30 +37,27 @@ create_npmrc:
     - |
       if [[ ! -f .npmrc ]]; then
         echo 'No .npmrc found! Creating one now. Please review the following link for more information: https://docs.gitlab.com/ee/user/packages/npm_registry/index.html#authenticating-with-a-ci-job-token'
-        printenv
-        echo here
-        echo ${CI_PROJECT_ROOT_NAMESPACE}
         {
-          echo @${CI_PROJECT_ROOT_NAMESPACE}:registry=${CI_SERVER_PROTOCOL}://${CI_SERVER_HOST}:${CI_SERVER_PORT}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/
-          echo //${CI_SERVER_HOST}:${CI_SERVER_PORT}/api/v4/packages/npm/:_authToken=${NPM_TOKEN}
-          echo //${CI_SERVER_HOST}:${CI_SERVER_PORT}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${NPM_TOKEN}
+          echo "@${CI_PROJECT_ROOT_NAMESPACE}:registry=${CI_SERVER_PROTOCOL}://${CI_SERVER_HOST}:${CI_SERVER_PORT}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/"
+          echo "registry=${CI_SERVER_PROTOCOL}://${CI_SERVER_HOST}:${CI_SERVER_PORT}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/"
         } >> .npmrc
 
       fi
   artifacts:
     paths:
       - .npmrc
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "master"'
 
 # Builds the framework
-build_package:
-  stage: build
+prepare_and_build_package:
+  stage: prepare_and_build
+  variables:
+    NODE_EXTRA_CA_CERTS: ${IAV_CA_BUNDLE}
   script:
-    - source ./scripts/ci_cd/setup_npm.sh
+    - npm install --only=dev
     - npm run build-linux
   artifacts:
     paths:
+      - ./node_modules
       - ./build
 
 # Publish the package. If the version in package.json has not yet been published, it will be
@@ -72,16 +70,10 @@ publish_package:
     NPM_TOKEN: ${CI_JOB_TOKEN}
     NODE_EXTRA_CA_CERTS: ${IAV_CA_BUNDLE}
   script:
-    - npm config --global set "@${CI_PROJECT_ROOT_NAMESPACE}:registry"="${CI_SERVER_PROTOCOL}://${CI_SERVER_HOST}:${CI_SERVER_PORT}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/"
-    - npm config --global set "//${CI_SERVER_HOST}:${CI_SERVER_PORT}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken"=${NPM_TOKEN}
-    - npm config --global set "//${CI_SERVER_HOST}:${CI_SERVER_PORT}/api/v4/packages/npm/:_authToken"=${NPM_TOKEN}
-    - npm config list -l
-    - source ./scripts/ci_cd/setup_npm.sh
-    - git config --global http.sslCAinfo $IAV_CA_BUNDLE
     - |
       {
         npm run semantic-release
-        echo "Successfully published version ${NPM_PACKAGE_VERSION} of ${NPM_PACKAGE_NAME} to GitLab's NPM registry: ${CI_PROJECT_URL}/-/packages"
+        exit $?
       } || {
         echo "No new version of ${NPM_PACKAGE_NAME} published. This is most likely because version ${NPM_PACKAGE_VERSION} already exists in GitLab's NPM registry."
         exit 1

@@ -89,10 +89,6 @@ publish_package:
 # Create release so observer of this project will get a notification e-mail.
 create_release:
   stage: release
-  variables:
-    SSL_CERT_FILE: ${IAV_CA_BUNDLE}
-    HTTP_PROXY: ${HTTP_PROXY}
-    HTTPS_PROXY: ${HTTPS_PROXY}
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   script:
     - >

@@ -18,10 +18,10 @@ If you are using the **external** GitLab the .npmrc file the file should contain
 
 >'//gitlab.iav.com/api/v4/projects/522/packages/npm/:_authToken'="Krqg94VSYzky3qmYiwH7"
 
-After adding this file you are able to install the disa-framework package by using following command:\
-If you are using the **local** GitLab:
+After adding this file you are able to install the disa-framework package by using one of the following commands:\
+If you are using the **local** GitLab use:
 `npm install @td-d/disa-framework`\
-If you are using the **external** GitLab:
+If you are using the **external** GitLab use:
 `npm install @disa/disa-framework`
 
 Congratulations. You have installed the latest disa-framework package.

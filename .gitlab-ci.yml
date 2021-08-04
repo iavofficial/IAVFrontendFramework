@@ -55,7 +55,7 @@ create_npmrc:
       - .npmrc
 
 # Builds the framework
-prepare_and_build_package:
+install_and_build_package:
   stage: intall_and_build
   script:
     - npm install --only=dev

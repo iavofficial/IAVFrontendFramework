@@ -107,6 +107,6 @@ create_release:
     - printenv
     - >
       release-cli create --description ./scripts/ci_cd/release_notes/${NPM_PACKAGE_VERSION}.md
-      --tag-name v${NPM_PACKAGE_VERSION}
+      --tag-name v${NPM_PACKAGE_VERSION} --project-id 9609
   rules:
     - if: '$CI_COMMIT_BRANCH == "develop"'

@@ -31,8 +31,8 @@ validate_package_scope:
         exit 1
       fi
     - |
-      if [[ ! $NPM_PACKAGE_NAME =~ ^@$CI_PROJECT_ROOT_NAMESPACE/ ]]; then
-        echo "Invalid package scope! Packages must be scoped in the root namespace of the project, e.g. \"@${CI_PROJECT_ROOT_NAMESPACE}/${CI_PROJECT_NAME}\""
+      if [[ ! $NPM_PACKAGE_NAME =~ ^@$REPO_ROOT_NAMESPACE/ ]]; then
+        echo "Invalid package scope! Packages must be scoped in the root namespace of the project, e.g. \"@${REPO_ROOT_NAMESPACE}""
         echo 'For more information, see https://docs.gitlab.com/ee/user/packages/npm_registry/#package-naming-convention'
         exit 1
       fi
@@ -70,9 +70,8 @@ install_and_build_package:
 # will fail and the existing package will not be updated.
 publish_package:
   stage: publish
-  variables:
-    SSL_CERT_FILE: ${IAV_CA_BUNDLE}
   script:
+    - npm config set cafile $IAV_CA_BUNDLE
     - |
       {
         npm publish ./build

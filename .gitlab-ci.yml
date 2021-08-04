@@ -45,8 +45,6 @@ validate_release_notes:
       fi
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
-  except:
-    - tags
 
 # If no .npmrc if included in the repo, generate a temporary one to use during the publish step
 # that is configured to publish to GitLab's NPM registry
@@ -66,8 +64,6 @@ check_and_create_npmrc:
       - .npmrc
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
-  except:
-    - tags
 
 # Builds the framework
 install_and_build_package:
@@ -104,8 +100,6 @@ publish_package:
       }
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
-  except:
-    - tags
 
 # Create release so observer of this project will get a notification e-mail.
 create_release:
@@ -119,5 +113,3 @@ create_release:
       --tag-name v${NPM_PACKAGE_VERSION}
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
-  except:
-    - tags

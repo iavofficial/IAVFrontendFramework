@@ -56,9 +56,8 @@ create_npmrc:
 # Builds the framework
 install_and_build_package:
   stage: install_and_build
-  before_script:
-    - source ./scripts/ci_cd/configure_npm.sh
   script:
+    - source ./scripts/ci_cd/configure_npm.sh
     - npm install --only=dev
     - npm run build-linux
   artifacts:
@@ -71,9 +70,8 @@ install_and_build_package:
 # will fail and the existing package will not be updated.
 publish_package:
   stage: publish
-  before_script:
-    - source ./scripts/ci_cd/configure_npm.sh
   script:
+    - source ./scripts/ci_cd/configure_npm.sh
     - npm config set cafile $IAV_CA_BUNDLE
     - |
       {

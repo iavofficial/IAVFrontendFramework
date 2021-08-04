@@ -38,8 +38,8 @@ create_npmrc:
       if [[ ! -f .npmrc ]]; then
         echo 'No .npmrc found! Creating one now. Please review the following link for more information: https://docs.gitlab.com/ee/user/packages/npm_registry/index.html#authenticating-with-a-ci-job-token'
         {
-          echo "@${REPOSITORY_ROOT_NAMESPACE}:registry=${REPOSITORY_URL}"
-          echo "${REPOSITORY_AUTH_TOKEN_URL}:_authToken=${REPOSITORY_AUTH_TOKEN}"
+          echo "@${REPO_ROOT_NAMESPACE}:registry=${REPO_PROTOCOL}://${REPO_URL}/api/v4/projects/${REPO_PROJECT_ID}/packages/npm/"
+          echo "//${REPO_URL}/api/v4/projects/${REPO_PROJECT_ID}/packages/npm/:_authToken=${REPO_AUTH_TOKEN}"
         } >> .npmrc
       fi
   artifacts:

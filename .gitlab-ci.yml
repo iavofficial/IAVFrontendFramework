@@ -18,31 +18,15 @@ generate_env_variables:
     reports:
       dotenv: build.env
 
-generate_package_json:
+generate_package_json_and_build_dir:
   stage: prepare
   script:
+    - mkdir ./build
     - node ./scripts/ci_cd/build_package_json.js
+    - cp package.json ./build
   artifacts:
     paths:
-      - package.json
-      
-# Validate that the package name is properly scoped to the project's root namespace.
-# For more information, see https://docs.gitlab.com/ee/user/packages/npm_registry/#package-naming-convention
-validate_package_scope:
-  stage: validate
-  script:
-    - >
-      if [[ ! -f package.json ]]; then
-        echo "No package.json found! A package.json file is required to publish a package to GitLab's NPM registry."
-        echo 'For more information, see https://docs.gitlab.com/ee/user/packages/npm_registry/#creating-a-project'
-        exit 1
-      fi
-    - >
-      if [[ ! $NPM_PACKAGE_NAME =~ ^@$REPO_ROOT_NAMESPACE/ ]]; then
-        echo "Invalid package scope! Packages must be scoped in the root namespace of the project, e.g. \"@${REPO_ROOT_NAMESPACE}"
-        echo 'For more information, see https://docs.gitlab.com/ee/user/packages/npm_registry/#package-naming-convention'
-        exit 1
-      fi
+      - ./build
 
 # If no release notes for the current version exist and this pipeline was triggered on the main branch the pipeline will be terminated.
 validate_release_notes:
@@ -77,7 +61,7 @@ install_and_build_package:
   stage: install_and_build
   script:
     - source ./scripts/ci_cd/configure_npm.sh
-    - npm install --only=dev
+    - npm install -D
     - npm run build-linux
   artifacts:
     paths:

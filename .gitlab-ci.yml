@@ -21,11 +21,22 @@ generate_env_variables:
 generate_package_json:
   stage: prepare
   script:
-    - package_json=$(<package.json)
-    - SCOPE=$REPO_ROOT_NAMESPACE echo $package_json >> package2.json
+    - >
+      {
+        const fs = require('fs');
+        fs.readFile('./package.json', (err, data) => {
+          if (err) throw err;
+          let packageJsonObj = JSON.parse(data);
+          packageJsonObj.name = "abc/" + packageJsonObj.name;
+          fs.writeFile('./package.json', JSON.stringify(packageJsonObj), (err) => {
+            if (err) throw err;
+            console.log('The file has been saved!');
+          });
+        });
+      }
   artifacts:
     paths:
-      - package2.json
+      - package.json
       
 # Validate that the package name is properly scoped to the project's root namespace.
 # For more information, see https://docs.gitlab.com/ee/user/packages/npm_registry/#package-naming-convention

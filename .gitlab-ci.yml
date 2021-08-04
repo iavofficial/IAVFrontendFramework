@@ -3,7 +3,7 @@ default:
   before_script:
     - chmod -R +x ./scripts/ci_cd/
     - source ./scripts/ci_cd/configure_npm.sh
-    - source ./scripts/ci_cd/set_npm_env_variables.sh
+    - source ./scripts/ci_cd/set_package_env_variables.sh
 
 stages:
   - validate

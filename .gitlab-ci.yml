@@ -105,7 +105,7 @@ create_release:
     SSL_CERT_FILE: ${IAV_CA_BUNDLE}
   script:
     - >
-      release-cli --project-id 9609 --job-token=1v6XTGT7GtmgzsriK4fG create --description "THIS IS A TEST"
+      release-cli --project-id 9609 --job-token=oqaHiwmc3Lx9AHrhHLws create --description "THIS IS A TEST"
       --tag-name v${NPM_PACKAGE_VERSION}
   rules:
     - if: '$CI_COMMIT_BRANCH == "develop"'

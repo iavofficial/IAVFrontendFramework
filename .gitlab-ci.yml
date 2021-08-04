@@ -94,8 +94,6 @@ create_release:
     HTTP_PROXY: ${HTTP_PROXY}
     HTTPS_PROXY: ${HTTPS_PROXY}
   image: registry.gitlab.com/gitlab-org/release-cli:latest
-  script:
-    - apk add --update npm
   release:
     tag_name: v${NPM_PACKAGE_VERSION}
     description: ./scripts/ci_cd/release_notes/${NPM_PACKAGE_VERSION}.md

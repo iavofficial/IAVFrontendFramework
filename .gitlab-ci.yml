@@ -95,7 +95,7 @@ create_release:
   script:
     - apk add --update npm
   release:
-    tag_name: ver_$(node -p "require('./package.json').version")
+    tag_name: v${NPM_PACKAGE_VERSION}
     description: ./scripts/ci_cd/release_notes/$(node -p "require('./package.json').version").md
   rules:
     - if: '$CI_COMMIT_BRANCH == "develop"'

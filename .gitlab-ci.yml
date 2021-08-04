@@ -1,8 +1,10 @@
+# Allow execution of scripts. Prevent execution of CI / CD pipeline on creation of tags (are created on releases).
 default:
   image: node:latest
-  
   before_script:
     - chmod -R +x ./ci_cd/scripts
+  except:
+    - tags
 
 variables:
   NPM_TOKEN: ${CI_JOB_TOKEN}

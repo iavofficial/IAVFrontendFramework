@@ -99,14 +99,13 @@ publish_package:
 
 # Create release so observer of this project will get a notification e-mail.
 create_release:
-  stage: release
+  stage: prepare
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   variables:
     SSL_CERT_FILE: ${IAV_CA_BUNDLE}
   script:
-    - printenv
     - >
-      release-cli create --description ./scripts/ci_cd/release_notes/${NPM_PACKAGE_VERSION}.md
-      --tag-name v${NPM_PACKAGE_VERSION} --project-id 9609
+      release-cli --project-id 9609 create --description ./scripts/ci_cd/release_notes/${NPM_PACKAGE_VERSION}.md
+      --tag-name v${NPM_PACKAGE_VERSION}
   rules:
     - if: '$CI_COMMIT_BRANCH == "develop"'

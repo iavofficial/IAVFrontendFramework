@@ -2,7 +2,6 @@ default:
   image: node:latest
   before_script:
     - chmod -R +x ./scripts/ci_cd/
-    - source ./scripts/ci_cd/configure_npm.sh
 
 stages:
   - prepare
@@ -57,6 +56,8 @@ create_npmrc:
 # Builds the framework
 install_and_build_package:
   stage: install_and_build
+  before_script:
+    - source ./scripts/ci_cd/configure_npm.sh
   script:
     - npm install --only=dev
     - npm run build-linux
@@ -70,6 +71,8 @@ install_and_build_package:
 # will fail and the existing package will not be updated.
 publish_package:
   stage: publish
+  before_script:
+    - source ./scripts/ci_cd/configure_npm.sh
   script:
     - npm config set cafile $IAV_CA_BUNDLE
     - |

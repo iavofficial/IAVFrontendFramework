@@ -20,7 +20,7 @@ If you are using the **external** GitLab the .npmrc file the file should contain
 
 After adding this file you are able to install the disa-framework package by using following command:\
 If you are using the **local** GitLab:
-`npm install @td-d/disa-framework`
+`npm install @td-d/disa-framework`\
 If you are using the **external** GitLab:
 `npm install @disa/disa-framework`
 

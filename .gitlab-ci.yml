@@ -22,7 +22,7 @@ generate_package_json_and_build_dir:
   stage: prepare
   script:
     - mkdir ./build
-    - node ./scripts/ci_cd/build_package_json.js
+    - node ./scripts/ci_cd/rebuild_package_json.js
     - cp package.json ./build
   artifacts:
     paths:

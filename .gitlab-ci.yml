@@ -49,8 +49,6 @@ create_npmrc:
 # Builds the framework
 prepare_and_build_package:
   stage: prepare_and_build
-  variables:
-    NODE_EXTRA_CA_CERTS: ${IAV_CA_BUNDLE}
   script:
     - npm install --only=dev
     - npm run build-linux
@@ -72,7 +70,7 @@ publish_package:
     - |
       {
         npm run semantic-release
-        
+        exit $?
       } || {
         echo "No new version of ${NPM_PACKAGE_NAME} published. This is most likely because version ${NPM_PACKAGE_VERSION} already exists in GitLab's NPM registry."
         exit 1

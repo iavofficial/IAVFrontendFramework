@@ -10,6 +10,7 @@ stages:
   - publish
   - release
 
+# Generate environment variables for package.
 generate_env_variables:
   stage: prepare
   script:
@@ -18,6 +19,7 @@ generate_env_variables:
     reports:
       dotenv: build.env
 
+# Setting runtime dependend values in package.json (for example scope in name). Preparing build folder with rebuilded package.json.
 generate_package_json_and_build_dir:
   stage: prepare
   script:
@@ -37,11 +39,11 @@ validate_release_notes:
           echo "You have to create release notes for version ${NPM_PACKAGE_VERSION}. Otherwise the package won't be published."
       fi
   rules:
-    - if: '$CI_COMMIT_BRANCH == "develop"'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
 
 # If no .npmrc if included in the repo, generate a temporary one to use during the publish step
 # that is configured to publish to GitLab's NPM registry
-create_npmrc:
+check_and_create_npmrc:
   stage: validate
   script:
     - >
@@ -55,6 +57,8 @@ create_npmrc:
   artifacts:
     paths:
       - .npmrc
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
 
 # Builds the framework
 install_and_build_package:
@@ -88,7 +92,7 @@ publish_package:
         fi
       }
   rules:
-    - if: '$CI_COMMIT_BRANCH == "develop"'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
 
 # Create release so observer of this project will get a notification e-mail.
 create_release:
@@ -101,4 +105,4 @@ create_release:
       release-cli create --description ./scripts/ci_cd/release_notes/${NPM_PACKAGE_VERSION}.md
       --tag-name v${NPM_PACKAGE_VERSION}
   rules:
-    - if: '$CI_COMMIT_BRANCH == "develop"'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'

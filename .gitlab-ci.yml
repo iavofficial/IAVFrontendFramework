@@ -1,7 +1,12 @@
+# Allow execution of scripts.
 default:
   image: node:latest
   before_script:
     - chmod -R +x ./scripts/ci_cd/
+
+# Prevent execution of CI / CD pipeline on creation of tags (are created on releases).
+except:
+  - tags
 
 stages:
   - prepare

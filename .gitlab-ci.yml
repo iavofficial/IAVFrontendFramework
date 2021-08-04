@@ -41,7 +41,7 @@ validate_package_scope:
 create_npmrc:
   stage: validate
   script:
-    - |
+    - >
       if [[ ! -f .npmrc ]]; then
         echo 'No .npmrc found! Creating one now. Please review the following link for more information: https://docs.gitlab.com/ee/user/packages/npm_registry/index.html#authenticating-with-a-ci-job-token'
         {
@@ -73,7 +73,7 @@ publish_package:
   script:
     - source ./scripts/ci_cd/configure_npm.sh
     - npm config set cafile $IAV_CA_BUNDLE
-    - |
+    - >
       {
         npm publish ./build
         if [[ $? == 0 ]]; then
@@ -82,7 +82,7 @@ publish_package:
           echo "No new version of ${NPM_PACKAGE_NAME} published. This is most likely because version ${NPM_PACKAGE_VERSION} already exists in GitLab's NPM registry."
           exit $?
         fi
-        }
+      }
   rules:
     - if: '$CI_COMMIT_BRANCH == "develop"'
 
@@ -94,8 +94,9 @@ create_release:
     HTTP_PROXY: ${HTTP_PROXY}
     HTTPS_PROXY: ${HTTPS_PROXY}
   image: registry.gitlab.com/gitlab-org/release-cli:latest
-  release:
-    tag_name: v${NPM_PACKAGE_VERSION}
-    description: ./scripts/ci_cd/release_notes/${NPM_PACKAGE_VERSION}.md
+  script:
+    - >
+      release-cli create --description ./scripts/ci_cd/release_notes/${NPM_PACKAGE_VERSION}.md
+      --tag-name v${NPM_PACKAGE_VERSION}
   rules:
     - if: '$CI_COMMIT_BRANCH == "develop"'

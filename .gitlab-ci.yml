@@ -22,19 +22,6 @@ generate_env_variables:
   except:
     - tags
 
-# Setting runtime dependend values in package.json (for example scope in name). Preparing build folder with rebuilded package.json.
-generate_package_json_and_build_dir:
-  stage: prepare
-  script:
-    - mkdir ./build
-    - node ./scripts/ci_cd/rebuild_package_json.js
-    - cp package.json ./build
-  artifacts:
-    paths:
-      - ./build
-  except:
-    - tags
-
 # If no release notes for the current version exist and this pipeline was triggered on the main branch the pipeline will be terminated.
 validate_release_notes:
   stage: validate
@@ -112,4 +99,4 @@ create_release:
       release-cli create --description ./scripts/ci_cd/release_notes/${NPM_PACKAGE_VERSION}.md
       --tag-name v${NPM_PACKAGE_VERSION}
   rules:
-    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+    - if: '$CI_COMMIT_BRANCH == "develop"'

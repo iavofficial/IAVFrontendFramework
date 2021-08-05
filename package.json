@@ -1,5 +1,5 @@
 {
-  "name": "disa-framework",
+  "name": "@disa/disa-framework",
   "version": "1.0.0",
   "private": false,
   "description": "This framework takes care of a DISA application's basic structure.",

@@ -55,7 +55,7 @@ check_and_create_npmrc:
       if [[ ! -f .npmrc ]]; then
         echo "No .npmrc found! Creating one now."
         {
-          echo "@${REPO_ROOT_NAMESPACE}:registry=${REPO_PROTOCOL}://${REPO_URL}/api/v4/projects/${REPO_PROJECT_ID}/packages/npm/"
+          echo "@disa:registry=${REPO_PROTOCOL}://${REPO_URL}/api/v4/projects/${REPO_PROJECT_ID}/packages/npm/"
           echo "//${REPO_URL}/api/v4/projects/${REPO_PROJECT_ID}/packages/npm/:_authToken=${REPO_AUTH_TOKEN}"
         } >> .npmrc
       fi
@@ -63,7 +63,7 @@ check_and_create_npmrc:
     paths:
       - .npmrc
   rules:
-    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+    - if: '$CI_COMMIT_BRANCH == "develop"'
 
 # Builds the framework
 install_and_build_package:

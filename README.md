@@ -8,7 +8,7 @@ To install this package add a .npmrc file to your project. The content of this f
 
 If you are using the **local GitLab** the .npmrc file the file should contain:
 
->@td-d:registry=https://gitlab.iavgroup.local/api/v4/projects/9609/packages/npm/
+>@disa:registry=https://gitlab.iavgroup.local/api/v4/projects/9609/packages/npm/
 
 >'//gitlab.iavgroup.local/api/v4/projects/9609/packages/npm/:_authToken'="W85cyca3cPZUx9kf9WwZ"
 

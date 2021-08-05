@@ -1,86 +1,102 @@
-# Allow execution of scripts. Prevent execution of CI / CD pipeline on creation of tags (are created on releases).
+# Allow execution of scripts.
 default:
   image: node:latest
   before_script:
-    - chmod -R +x ./ci_cd/scripts
+    - chmod -R +x ./scripts/ci_cd/
+
+stages:
+  - prepare
+  - validate
+  - install_and_build
+  - publish
+  - release
+
+# Generate environment variables for package.
+generate_env_variables:
+  stage: prepare
+  script:
+    - ./scripts/ci_cd/generate_package_env_variables.sh
+  artifacts:
+    reports:
+      dotenv: build.env
   except:
     - tags
 
-variables:
-  NPM_TOKEN: ${CI_JOB_TOKEN}
-
-# Validate that the package name is properly scoped to the project's root namespace.
-# For more information, see https://docs.gitlab.com/ee/user/packages/npm_registry/#package-naming-convention
-validate_package_scope:
-  stage: build
+# If no release notes for the current version exist and this pipeline was triggered on the main branch the pipeline will be terminated.
+validate_release_notes:
+  stage: validate
   script:
-    - source ./ci_cd/scripts/set_npm_variables.sh
-    - |
-      if [[ ! -f package.json ]]; then
-        echo "No package.json found! A package.json file is required to publish a package to GitLab's NPM registry."
-        echo 'For more information, see https://docs.gitlab.com/ee/user/packages/npm_registry/#creating-a-project'
-        exit 1
-      fi
-    - |
-      if [[ ! $NPM_PACKAGE_NAME =~ ^@$CI_PROJECT_ROOT_NAMESPACE/ ]]; then
-        echo "Invalid package scope! Packages must be scoped in the root namespace of the project, e.g. \"@${CI_PROJECT_ROOT_NAMESPACE}/${CI_PROJECT_NAME}\"
-        echo 'For more information, see https://docs.gitlab.com/ee/user/packages/npm_registry/#package-naming-convention'
-        exit 1
+    - >
+      if [[ ! -f ./scripts/ci_cd/release_notes/${NPM_PACKAGE_VERSION}.md ]]; then
+          echo "You have to create release notes for version ${NPM_PACKAGE_VERSION}. Otherwise the package won't be published."
       fi
   rules:
-    - if: '$CI_COMMIT_BRANCH == "master"'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
 
 # If no .npmrc if included in the repo, generate a temporary one to use during the publish step
 # that is configured to publish to GitLab's NPM registry
-create_npmrc:
-  stage: build
+check_and_create_npmrc:
+  stage: validate
   script:
-    - |
+    - >
       if [[ ! -f .npmrc ]]; then
-        echo 'No .npmrc found! Creating one now. Please review the following link for more information: https://docs.gitlab.com/ee/user/packages/npm_registry/index.html#authenticating-with-a-ci-job-token'
-
+        echo "No .npmrc found! Creating one now."
         {
-          echo '@${CI_PROJECT_ROOT_NAMESPACE}:registry=${CI_SERVER_PROTOCOL}://${CI_SERVER_HOST}:${CI_SERVER_PORT}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/'
-          echo '//${CI_SERVER_HOST}:${CI_SERVER_PORT}/api/v4/packages/npm/:_authToken=${CI_JOB_TOKEN}'
-          echo '//${CI_SERVER_HOST}:${CI_SERVER_PORT}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}'
+          echo "@disa:registry=${REPO_PROTOCOL}://${REPO_URL}/api/v4/projects/${REPO_PROJECT_ID}/packages/npm/"
+          echo "//${REPO_URL}/api/v4/projects/${REPO_PROJECT_ID}/packages/npm/:_authToken=${REPO_AUTH_TOKEN}"
         } >> .npmrc
-
       fi
   artifacts:
     paths:
       - .npmrc
   rules:
-    - if: '$CI_COMMIT_BRANCH == "master"'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+
+# Builds the framework
+install_and_build_package:
+  stage: install_and_build
+  script:
+    - source ./scripts/ci_cd/configure_npm.sh
+    - npm install -D
+    - npm run build-linux
+  artifacts:
+    paths:
+      - ./node_modules
+      - ./build
+  except:
+    - tags
 
 # Publish the package. If the version in package.json has not yet been published, it will be
 # published to GitLab's NPM registry. If the version already exists, the publish command
 # will fail and the existing package will not be updated.
 publish_package:
-  stage: deploy
+  stage: publish
+  variables:
+    NODE_EXTRA_CA_CERTS: ${IAV_CA_BUNDLE}
   script:
-    - ./ci_cd/scripts/setup_npm.sh
-    - ./ci_cd/scripts/create_lib.sh
-    - |
+    - source ./scripts/ci_cd/configure_npm.sh
+    - >
       {
-        npm publish &&
-        echo "Successfully published version ${NPM_PACKAGE_VERSION} of ${NPM_PACKAGE_NAME} to GitLab's NPM registry: ${CI_PROJECT_URL}/-/packages"
-      } || {
-        echo "No new version of ${NPM_PACKAGE_NAME} published. This is most likely because version ${NPM_PACKAGE_VERSION} already exists in GitLab's NPM registry."
-        exit 1
+        npm publish ./build
+        if [[ $? == 0 ]]; then
+          echo "Successfully published version ${NPM_PACKAGE_VERSION} of ${NPM_PACKAGE_NAME} to GitLab's NPM registry of project: ${REPO_PROJECT_ID}/-/packages"
+        else
+          echo "No new version of ${NPM_PACKAGE_NAME} published. This is most likely because version ${NPM_PACKAGE_VERSION} already exists in GitLab's NPM registry."
+          exit $?
+        fi
       }
   rules:
-    - if: '$CI_COMMIT_BRANCH == "master"'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
 
 # Create release so observer of this project will get a notification e-mail.
 create_release:
-  stage: .post
+  stage: release
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   variables:
-    SSL_CERT_FILE: $IAV_CA_BUNDLE
+    SSL_CERT_FILE: ${IAV_CA_BUNDLE}
   script:
-    - apk add --update npm
-  release:
-    tag_name: ver_$(node -p "require('./package.json').version")
-    description: ./ci_cd/release_notes/$(node -p "require('./package.json').version").md
+    - >
+      release-cli create --description ./scripts/ci_cd/release_notes/${NPM_PACKAGE_VERSION}.md
+      --tag-name v${NPM_PACKAGE_VERSION}
   rules:
-    - if: '$CI_COMMIT_BRANCH == "master"'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'

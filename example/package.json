@@ -1,0 +1,47 @@
+{
+  "name": "react-framework-example",
+  "version": "0.1.0",
+  "private": true,
+  "contributors": [
+    {
+      "name": "Joerg Jonas Krahn",
+      "email": "joerg.jonas.krahn@iav.de"
+    }
+  ],
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "disa-framework": "file:../build"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.13.14",
+    "@babel/core": "^7.12.3",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/preset-react": "^7.13.13",
+    "@babel/preset-typescript": "^7.12.1",
+    "typescript": "^4.2.4",
+    "web-vitals": "^1.1.1"
+  }
+}

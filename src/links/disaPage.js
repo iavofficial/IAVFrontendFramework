@@ -1,1 +1,0 @@
-export { default as DisaPage } from "./lib/components/disaPage.js";

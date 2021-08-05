@@ -50,7 +50,7 @@ check_and_create_npmrc:
     paths:
       - .npmrc
   rules:
-    - if: '$CI_COMMIT_BRANCH == "develop"'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
 
 # Builds the framework
 install_and_build_package:
@@ -86,7 +86,7 @@ publish_package:
         fi
       }
   rules:
-    - if: '$CI_COMMIT_BRANCH == "develop"'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
 
 # Create release so observer of this project will get a notification e-mail.
 create_release:
@@ -99,4 +99,4 @@ create_release:
       release-cli create --description ./scripts/ci_cd/release_notes/${NPM_PACKAGE_VERSION}.md
       --tag-name v${NPM_PACKAGE_VERSION}
   rules:
-    - if: '$CI_COMMIT_BRANCH == "develop"'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'

@@ -14,7 +14,7 @@ If you are using the **local GitLab** the .npmrc file the file should contain:
 
 If you are using the **external** GitLab the .npmrc file the file should contain:
 
->@td-d:registry=https://gitlab.iav.com/api/v4/projects/522/packages/npm/
+>@disa:registry=https://gitlab.iav.com/api/v4/projects/522/packages/npm/
 
 >'//gitlab.iav.com/api/v4/projects/522/packages/npm/:_authToken'="Krqg94VSYzky3qmYiwH7"
 

@@ -40,7 +40,9 @@ export const I18NextLanguageProvider = (props: React.PropsWithChildren<Props>) =
         } else {
             props.initI18Next();
         }
-        setActiveLang(i18n.language);
+        // Has to replace "-" with "_" because objects can only store language keys with "_".
+        let language = i18n.language.replaceAll("-", "_");
+        selectLanguage(language);
         setLoaded(true);
     }, [props.initI18Next, cookiesAccepted]);
 

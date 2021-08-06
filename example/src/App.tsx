@@ -10,6 +10,7 @@ import { Group } from "disa-framework/group";
 import translationES from "./assets/translations/es.json";
 import translationEN from "./assets/translations/en.json";
 import translationDE from "./assets/translations/de.json";
+import translationDECH from "./assets/translations/de-CH.json";
 import { config } from "./config_disa-framework_test";
 import navDashboardSelected from "./assets/nav_dashboard_selected.png";
 import navDashboardDeselected from "./assets/nav_dashboard_deselected.png";
@@ -96,6 +97,9 @@ function App() {
       },
       de: {
         translation: translationDE
+      },
+      de_CH: {
+        translation: translationDECH 
       }
     }
   );

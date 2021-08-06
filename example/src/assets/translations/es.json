@@ -14,7 +14,16 @@
     "allow_cookies_header": "La aplicación web usas cookies.",
     "allow_cookies_disclaimer": "La aplicación web necesita permiso para usar cookies.",
     "allow_cookies_button": "Permitir cookies",
+    "Email_address": "Dirección de email",
+    "Password": "Contraseña",
+    "New_password": "Nueva contraseña",
     "bytes_example": "{{count}} son 1KiB",
     "example_component": "Ejemplo {{count}}",
-    "Test_group": "Grupo de prueba"
+    "Test_group": "Grupo de prueba",
+    "Language": "Idioma",
+    "replace_temporary_password": "Por favor, sustituya su contraseña temporal por una nueva. Su nueva contraseña tiene que cumplir los siguientes requisitos:",
+    "password_req_8_characters": "Al menos 8 caracteres",
+    "password_req_upper_lower_case": "Letras mayúsculas y minúsculas",
+    "password_req_special_character": "Al menos un carácter especial",
+    "password_req_one_digit": "Al menos un dígito"
 }

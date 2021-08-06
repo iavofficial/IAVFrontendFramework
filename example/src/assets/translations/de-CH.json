@@ -1,5 +1,5 @@
 {
-    "option_name": "German",
+    "option_name": "German (Switzerland)",
     "bytes_example": "{{count}} sind 1KiB",
     "example_component": "Beispiel {{count}}",
     "Example_field_local": "Beispielfeld lokales Element {{count}}",

@@ -2,15 +2,18 @@ import React, { useContext } from "react";
 import { ContextMenu } from "primereact/contextmenu";
 
 import { AuthContext } from "../../contexts/auth";
-import { LanguageContext } from "../../contexts/language";
+import { LanguageContext, Translations } from "../../contexts/language";
+import { useTranslator } from "../internationalization/translators";
 
 interface Props {
     hideMenu: (e: React.KeyboardEvent) => void;
 }
 
 export const SettingsMenu = React.forwardRef<ContextMenu, Props>((props, ref) => {
-    let authContext = useContext(AuthContext);
-    let langContext = useContext(LanguageContext);
+    const authContext = useContext(AuthContext);
+    const langContext = useContext(LanguageContext);
+    const t = useTranslator();
+
     let options = [];
     let notFallbackLang = false;
 
@@ -19,15 +22,20 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>((props, ref) =>
     if (langContext) {
         Object.keys(langContext.resources).forEach(key => {
             if (key !== langContext?.fallbackLang) {
+                // Has to check whether the active language and key are equal or if the "base language" and key are equal but no other keys
+                // which match the "base language" exist.
+                // The "base language" could be "de" and the key could be "de_DE". So it isn't sufficient to check whether the active language is equal to key.
+                let baseLang = langContext?.activeLang.split("_")[0];
+                let active = langContext?.activeLang === key || baseLang === key && !containsMoreThanOneDialectsOf(key, langContext?.resources);
                 options.push(
                     {
                         label: langContext?.resources[key].translation.option_name,
-                        icon: langContext?.activeLang === key ? "pi pi-check" : "",
+                        icon: active ? "pi pi-check" : "",
                         command: () => langContext?.selectLanguage(key)
                     }
                 );
-                if (langContext?.activeLang === key) {
-                    notFallbackLang = true;
+                if (active) {
+                    notFallbackLang = active;
                 }
             }
         });
@@ -45,9 +53,9 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>((props, ref) =>
             <ContextMenu ref={ref} model={
                 [
                     {
-                        label: "Language",
+                        label: t("Language"),
                         icon: 'pi pi-comment',
-                        items: options
+                        items: options.sort((option1, option2) => option1.label === option2.label ? 0 : option1.label < option2.label ? -1 : 1)
                     },
                     {
                         label: "Logout",
@@ -58,4 +66,9 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>((props, ref) =>
             } />
         </div>
     );
-})
+});
+
+function containsMoreThanOneDialectsOf(lang: string, resources: Translations) {
+    let dialects = Object.keys(resources).filter(key => key.split("_")[0] === lang);
+    return dialects.length > 1;
+}

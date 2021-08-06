@@ -98,6 +98,10 @@ The .json file has to include simple key value pairs like this:
 ```
 The key *option_name* is mandatory. The corresponding value will be listed in the language selection menu. You can find the translation keys used by the framework [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/Internationalization-keys-used-by-the-framework). (You will need these to internationalize certain framework components like error messages of the *AWSLoginView*.)
 
+To specify dialects like the german dialect in Switzerland follow the following schema:\
+>Key for german: "de"\
+>Key for german dialect in switzerland: "de_CH"
+
 To get a translation by it's key you should use the *useTranslator* hook from *...disa-framework/translators*. This hook returns a function which generates the translation.\
 An example:
 ```javascript

@@ -33,7 +33,10 @@ export const Navbar = (props: Props) => {
             <SettingsMenu ref={menuRef} hideMenu={hideMenu} />
             <div className="p-d-flex p-align-center" style={{ height: TAB_HEIGHT, backgroundColor: BLUE3 }}>
                 <img src={UserPic} style={{ marginLeft: "5%" }} alt="" />
-                <span style={{ fontWeight: "bold", color: "white", marginLeft: "10px", maxWidth: "60%", textOverflow: "ellipsis", overflow: "hidden" }}>
+                <span style={{
+                    fontWeight: "bold", color: "white", marginLeft: "10px", marginRight: "10px", maxWidth: "60%",
+                    textOverflow: "ellipsis", overflow: "hidden"
+                }}>
                     {authContext?.getUsername()}
                 </span>
                 <a href="#" style={{ marginLeft: "auto", marginRight: "20px", cursor: "pointer" }}

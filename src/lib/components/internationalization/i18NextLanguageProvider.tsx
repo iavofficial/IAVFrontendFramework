@@ -40,12 +40,10 @@ export const I18NextLanguageProvider = (props: React.PropsWithChildren<Props>) =
         } else {
             props.initI18Next();
         }
-        // Has to replace "-" with "_" because objects can only store language keys with "_".
-        let language = i18n.language.replaceAll("-", "_");
-        selectLanguage(language);
+        setActiveLang(i18n.language);
         setLoaded(true);
     }, [props.initI18Next, cookiesAccepted]);
-
+    
     useEffect(() => {
         if (props.translations) {
             Object.keys(props.translations).forEach(key => {

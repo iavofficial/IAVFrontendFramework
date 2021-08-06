@@ -22,16 +22,19 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>((props, ref) =>
     if (langContext) {
         Object.keys(langContext.resources).forEach(key => {
             if (key !== langContext?.fallbackLang) {
-                // Has to check whether the active language and key are equal or if the "base language" and key are equal but no other keys
-                // which match the "base language" exist.
-                // The "base language" could be "de" and the key could be "de_DE". So it isn't sufficient to check whether the active language is equal to key.
-                let baseLang = langContext?.activeLang.split("_")[0];
-                let active = langContext?.activeLang === key || baseLang === key && !containsMoreThanOneDialectsOf(key, langContext?.resources);
+                // Has to check whether the active language and key are equal or if the active language is a dialect of the language of key and the
+                // resources don't contain the active language.
+                // The active language could be "de-De" and the language of key could be "de". So it isn't sufficient to check whether the active
+                // language is equal to key.
+                let activeLang = langContext?.activeLang.replaceAll("-", "_");
+                let active = activeLang === key || isDialectOf(activeLang, key) && !containsLanguage(activeLang, langContext?.resources);
                 options.push(
                     {
                         label: langContext?.resources[key].translation.option_name,
                         icon: active ? "pi pi-check" : "",
-                        command: () => langContext?.selectLanguage(key)
+                        // I18Next must have the representation with "-" instead of "_". "de_DE" will not resolve to "de" which is necessary
+                        // in case translations for "de_DE" don't exist.
+                        command: () => langContext?.selectLanguage(key.replaceAll("_", "-"))
                     }
                 );
                 if (active) {
@@ -68,7 +71,14 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>((props, ref) =>
     );
 });
 
-function containsMoreThanOneDialectsOf(lang: string, resources: Translations) {
-    let dialects = Object.keys(resources).filter(key => key.split("_")[0] === lang);
-    return dialects.length > 1;
+// Checks whether "dialect" is a dialect of "baseLang".
+function isDialectOf(dialect: string, baseLang: string) {
+    let baseLangOfDialect = dialect.split("_")[0];
+    return baseLang === baseLangOfDialect;
+}
+
+// Checks whether "resources" contain the language key "lang".
+function containsLanguage(lang: string, resources: Translations) {
+    let dialects = Object.keys(resources).filter(key => key === lang);
+    return dialects.length === 1;
 }

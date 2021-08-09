@@ -7,7 +7,7 @@ This react framework was created to speed up development in the disa front-end e
 To install this package you can either set the required key value pairs globally (recommended) or you can set the key value pairs in a .npmrc file in the root of your project. The key value pairs differ by whether you are using the **local** or the **external** GitLab.
 
 If you are using the **local GitLab** you should execute these commands to set the config globally:
->npm config --global set @disa:registry https://gitlab.iavgroup.local/api/v4/projects/9609/packages/npm/
+>npm config --global set @disa:registry https://gitlab.iavgroup.local/api/v4/projects/9609/packages/npm/ \
 >npm config --global set //gitlab.iavgroup.local/api/v4/projects/9609/packages/npm/:_authToken <YOUR_TOKEN>
 
 Or if you want to use a project specific .npmrc file you have to set these lines in it:
@@ -15,7 +15,7 @@ Or if you want to use a project specific .npmrc file you have to set these lines
 >'//gitlab.iavgroup.local/api/v4/projects/9609/packages/npm/:_authToken'="<YOUR_TOKEN>"
 
 If you are using the **external** GitLab you should execute these commands to set the config globally:
->npm config --global set @disa:registry https://gitlab.iav.com/api/v4/projects/522/packages/npm/
+>npm config --global set @disa:registry https://gitlab.iav.com/api/v4/projects/522/packages/npm/ \
 >npm config --global set //gitlab.iav.com/api/v4/projects/522/packages/npm/:_authToken <YOUR_TOKEN>
 
 Or if you want to use a project specific .npmrc file you have to set these lines:

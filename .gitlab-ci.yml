@@ -43,7 +43,7 @@ check_and_create_npmrc:
         echo "No .npmrc found! Creating one now."
         {
           echo "@disa:registry=${REPO_PROTOCOL}://${REPO_URL}/api/v4/projects/${REPO_PROJECT_ID}/packages/npm/"
-          echo "//${REPO_URL}/api/v4/projects/${REPO_PROJECT_ID}/packages/npm/:_authToken=${REPO_AUTH_TOKEN}"
+          echo "//${REPO_URL}/api/v4/projects/${REPO_PROJECT_ID}/packages/npm/:_authToken=${REPO_DEPLOY_FRAMEWORK_AUTH_TOKEN}"
         } >> .npmrc
       fi
   artifacts:
@@ -68,7 +68,7 @@ install_and_build_package:
 
 # Publish the package. If the version in package.json has not yet been published, it will be
 # published to GitLab's NPM registry. If the version already exists, the publish command
-# will fail and the existing package will not be updated.
+# will fail. The existing package will not be updated.
 publish_package:
   stage: publish
   variables:

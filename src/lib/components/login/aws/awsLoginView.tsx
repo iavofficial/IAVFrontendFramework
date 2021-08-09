@@ -47,19 +47,19 @@ export const AWSLoginView = () => {
     const NewPasswordForm = (
         <div style={{ width: "85%" }}>
             <div>
-                <p>Please replace your temporary password with a new one. Your new password has to meet the following requirements:</p>
+                <p>{t("replace_temporary_password")}</p>
                 <ul>
-                    <li>At least 8 characters</li>
-                    <li>Upper & lower cases letters</li>
-                    <li>At least one special character</li>
-                    <li>At least one digit</li>
+                    <li>{t("password_req_8_characters")}</li>
+                    <li>{t("password_req_upper_lower_case")}</li>
+                    <li>{t("password_req_special_character")}</li>
+                    <li>{t("password_req_one_digit")}</li>
                 </ul>
             </div>
             <form autoComplete="off" onSubmit={submit}>
                 <div>
-                    <label className={"inputLabel " + (authContext?.loginError.code ? "invalid" : "")}>New password</label>
+                    <label className={"inputLabel " + (authContext?.loginError.code ? "invalid" : "")}>{t("New_password")}</label>
                     <input name="password" type="password" id="inputPassword" style={{ width: "100%", marginTop: "5px", marginBottom: "10px" }}
-                        className={"form-control p-inputtext " + (authContext?.loginError.code ? "invalid" : "")} placeholder="New password"
+                        className={"form-control p-inputtext " + (authContext?.loginError.code ? "invalid" : "")} placeholder={t("New_password")}
                         onChange={(ev) => setPassword(ev.target.value)} required autoFocus />
                     <LoginButtonWithSpinner isLoading={authContext?.isLoading} />
                     <div className="invalid">{getErrorText(authContext?.loginError)}</div>
@@ -71,12 +71,12 @@ export const AWSLoginView = () => {
     const LoginForm = (
         <form style={{ width: "85%", height: "100%" }} className="p-mr-4 p-mt-4" onSubmit={submit}>
             <div className={"p-d-flex p-flex-column"}>
-                <label className="inputLabel">Email address</label>
+                <label className="inputLabel">{t("Email_address")}</label>
                 <input value={email.valueOf()} onChange={(ev) => setEmail(ev.target.value)} name="email" type="email"
-                    className={"p-inputtext"} placeholder="Email address" required style={{ marginBottom: "1rem" }} autoFocus />
-                <label className="inputLabel" >Password</label>
+                    className={"p-inputtext"} placeholder={t("Email_address")} required style={{ marginBottom: "1rem" }} autoFocus />
+                <label className="inputLabel" >{t("Password")}</label>
                 <input value={password.valueOf()} onChange={(ev) => setPassword(ev.target.value)} name="password" type="password"
-                    className={"p-inputtext"} placeholder="Password" required style={{ marginBottom: "1rem" }} />
+                    className={"p-inputtext"} placeholder={t("Password")} required style={{ marginBottom: "1rem" }} />
                 <div>
                     <LoginButtonWithSpinner isLoading={authContext?.isLoading} />
                 </div>
@@ -95,7 +95,7 @@ export const AWSLoginView = () => {
                 <div className="p-d-flex" style={{ justifyContent: "center", marginBottom: "30px" }}>
                     {authContext?.isNewPasswordRequired ? NewPasswordForm : LoginForm}
                 </div>
-                <Link style={{ alignSelf: "center", fontWeight: "bolder", color: "black" }} to="/imprint">Imprint</Link>
+                <Link style={{ alignSelf: "center", fontWeight: "bolder", color: "black" }} to="/imprint">{t("Imprint")}</Link>
                 <span style={{ padding: "10px", alignSelf: "center" }}>&copy; IAV GmbH 2020</span>
             </div>
         </div >

@@ -2,15 +2,18 @@ import React, { useContext } from "react";
 import { ContextMenu } from "primereact/contextmenu";
 
 import { AuthContext } from "../../contexts/auth";
-import { LanguageContext } from "../../contexts/language";
+import { LanguageContext, Translations } from "../../contexts/language";
+import { useTranslator } from "../internationalization/translators";
 
 interface Props {
     hideMenu: (e: React.KeyboardEvent) => void;
 }
 
 export const SettingsMenu = React.forwardRef<ContextMenu, Props>((props, ref) => {
-    let authContext = useContext(AuthContext);
-    let langContext = useContext(LanguageContext);
+    const authContext = useContext(AuthContext);
+    const langContext = useContext(LanguageContext);
+    const t = useTranslator();
+
     let options = [];
     let notFallbackLang = false;
 
@@ -19,15 +22,23 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>((props, ref) =>
     if (langContext) {
         Object.keys(langContext.resources).forEach(key => {
             if (key !== langContext?.fallbackLang) {
+                // Has to check whether the active language and key are equal or if the active language is a dialect of the language of key and the
+                // resources don't contain the active language.
+                // The active language could be "de-De" and the language of key could be "de". So it isn't sufficient to check whether the active
+                // language is equal to key.
+                let activeLang = langContext?.activeLang.replaceAll("-", "_");
+                let active = activeLang === key || isDialectOf(activeLang, key) && !containsLanguage(activeLang, langContext?.resources);
                 options.push(
                     {
                         label: langContext?.resources[key].translation.option_name,
-                        icon: langContext?.activeLang === key ? "pi pi-check" : "",
-                        command: () => langContext?.selectLanguage(key)
+                        icon: active ? "pi pi-check" : "",
+                        // I18Next must have the representation with "-" instead of "_". "de_DE" will not resolve to "de" which is necessary
+                        // in case translations for "de_DE" don't exist.
+                        command: () => langContext?.selectLanguage(key.replaceAll("_", "-"))
                     }
                 );
-                if (langContext?.activeLang === key) {
-                    notFallbackLang = true;
+                if (active) {
+                    notFallbackLang = active;
                 }
             }
         });
@@ -45,9 +56,9 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>((props, ref) =>
             <ContextMenu ref={ref} model={
                 [
                     {
-                        label: "Language",
+                        label: t("Language"),
                         icon: 'pi pi-comment',
-                        items: options
+                        items: options.sort((option1, option2) => option1.label === option2.label ? 0 : option1.label < option2.label ? -1 : 1)
                     },
                     {
                         label: "Logout",
@@ -58,4 +69,16 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>((props, ref) =>
             } />
         </div>
     );
-})
+});
+
+// Checks whether "dialect" is a dialect of "baseLang".
+function isDialectOf(dialect: string, baseLang: string) {
+    let baseLangOfDialect = dialect.split("_")[0];
+    return baseLang === baseLangOfDialect;
+}
+
+// Checks whether "resources" contain the language key "lang".
+function containsLanguage(lang: string, resources: Translations) {
+    let dialects = Object.keys(resources).filter(key => key === lang);
+    return dialects.length === 1;
+}

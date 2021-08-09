@@ -4,24 +4,25 @@
 This react framework was created to speed up development in the disa front-end environment. To use this framework follow these steps and read the wiki pages for further information. You maybe want to inspect examples. For this you can look up the example in the *example* folder of this project.
 
 ## Installation
-To install this package add a .npmrc file to your project. The content of this file depends on which GitLab you are using.
+To install this package you can either set the required key value pairs globally (recommended) or you can set the key value pairs in a .npmrc file in the root of your project. The key value pairs differ by whether you are using the **local** or the **external** GitLab. If you don't own a token for authentication you have to apply for it.
 
-If you are using the **local GitLab** the .npmrc file the file should contain:
+If you are using the **local GitLab** you should execute these commands to set the config globally:
+>npm config --global set @disa:registry https://gitlab.iavgroup.local/api/v4/projects/9609/packages/npm/ \
+>npm config --global set //gitlab.iavgroup.local/api/v4/projects/9609/packages/npm/:_authToken <YOUR_TOKEN>
 
->@disa:registry=https://gitlab.iavgroup.local/api/v4/projects/9609/packages/npm/
+Or if you want to use a project specific .npmrc file you have to set these lines in it:
+>@disa:registry=https://gitlab.iavgroup.local/api/v4/projects/9609/packages/npm/ \
+>'//gitlab.iavgroup.local/api/v4/projects/9609/packages/npm/:_authToken'="<YOUR_TOKEN>"
 
->'//gitlab.iavgroup.local/api/v4/projects/9609/packages/npm/:_authToken'="W85cyca3cPZUx9kf9WwZ"
+If you are using the **external** GitLab you should execute these commands to set the config globally:
+>npm config --global set @disa:registry https://gitlab.iav.com/api/v4/projects/522/packages/npm/ \
+>npm config --global set //gitlab.iav.com/api/v4/projects/522/packages/npm/:_authToken <YOUR_TOKEN>
 
-If you are using the **external** GitLab the .npmrc file the file should contain:
+Or if you want to use a project specific .npmrc file you have to set these lines:
+>@disa:registry=https://gitlab.iav.com/api/v4/projects/522/packages/npm/ \
+>'//gitlab.iav.com/api/v4/projects/522/packages/npm/:_authToken'="<YOUR_TOKEN>"
 
->@disa:registry=https://gitlab.iav.com/api/v4/projects/522/packages/npm/
-
->'//gitlab.iav.com/api/v4/projects/522/packages/npm/:_authToken'="Krqg94VSYzky3qmYiwH7"
-
-After adding this file you are able to install the disa-framework package by using one of the following commands:\
-If you are using the **local** GitLab use:
-`npm install @td-d/disa-framework`\
-If you are using the **external** GitLab use:
+After configuration you are able to install the disa-framework package by using the following command:\
 `npm install @disa/disa-framework`
 
 Congratulations. You have installed the latest disa-framework package.
@@ -97,6 +98,10 @@ The .json file has to include simple key value pairs like this:
 }
 ```
 The key *option_name* is mandatory. The corresponding value will be listed in the language selection menu. You can find the translation keys used by the framework [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/Internationalization-keys-used-by-the-framework). (You will need these to internationalize certain framework components like error messages of the *AWSLoginView*.)
+
+To specify dialects like the german dialect in Switzerland follow the following schema for keys (underscore is important):
+>Key for german: "de"\
+>Key for the german dialect in Switzerland: "de_CH"
 
 To get a translation by it's key you should use the *useTranslator* hook from *...disa-framework/translators*. This hook returns a function which generates the translation.\
 An example:

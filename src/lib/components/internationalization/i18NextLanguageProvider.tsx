@@ -43,7 +43,7 @@ export const I18NextLanguageProvider = (props: React.PropsWithChildren<Props>) =
         setActiveLang(i18n.language);
         setLoaded(true);
     }, [props.initI18Next, cookiesAccepted]);
-
+    
     useEffect(() => {
         if (props.translations) {
             Object.keys(props.translations).forEach(key => {

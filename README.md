@@ -4,24 +4,25 @@
 This react framework was created to speed up development in the disa front-end environment. To use this framework follow these steps and read the wiki pages for further information. You maybe want to inspect examples. For this you can look up the example in the *example* folder of this project.
 
 ## Installation
-To install this package add a .npmrc file to your project. The content of this file depends on which GitLab you are using.
+To install this package you can either set the required key value pairs globally (recommended) or you can set the key value pairs in a .npmrc file in the root of your project. The key value pairs differ by whether you are using the **local** or the **external** GitLab.
 
-If you are using the **local GitLab** the .npmrc file the file should contain:
+If you are using the **local GitLab** you should execute these commands to set the config globally:
+>npm config --global set @disa:registry https://gitlab.iavgroup.local/api/v4/projects/9609/packages/npm/
+>npm config --global set //gitlab.iavgroup.local/api/v4/projects/9609/packages/npm/:_authToken <YOUR_TOKEN>
 
+Or if you want to use a project specific .npmrc file you have to set these lines in it:
 >@disa:registry=https://gitlab.iavgroup.local/api/v4/projects/9609/packages/npm/
+>'//gitlab.iavgroup.local/api/v4/projects/9609/packages/npm/:_authToken'="<YOUR_TOKEN>"
 
->'//gitlab.iavgroup.local/api/v4/projects/9609/packages/npm/:_authToken'="W85cyca3cPZUx9kf9WwZ"
+If you are using the **external** GitLab you should execute these commands to set the config globally:
+>npm config --global set @disa:registry https://gitlab.iav.com/api/v4/projects/522/packages/npm/
+>npm config --global set //gitlab.iav.com/api/v4/projects/522/packages/npm/:_authToken <YOUR_TOKEN>
 
-If you are using the **external** GitLab the .npmrc file the file should contain:
-
+Or if you want to use a project specific .npmrc file you have to set these lines:
 >@disa:registry=https://gitlab.iav.com/api/v4/projects/522/packages/npm/
+>'//gitlab.iav.com/api/v4/projects/522/packages/npm/:_authToken'="<YOUR_TOKEN>"
 
->'//gitlab.iav.com/api/v4/projects/522/packages/npm/:_authToken'="Krqg94VSYzky3qmYiwH7"
-
-After adding this file you are able to install the disa-framework package by using one of the following commands:\
-If you are using the **local** GitLab use:
-`npm install @td-d/disa-framework`\
-If you are using the **external** GitLab use:
+After configuration you are able to install the disa-framework package by using the following command:\
 `npm install @disa/disa-framework`
 
 Congratulations. You have installed the latest disa-framework package.

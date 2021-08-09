@@ -68,7 +68,7 @@ install_and_build_package:
 
 # Publish the package. If the version in package.json has not yet been published, it will be
 # published to GitLab's NPM registry. If the version already exists, the publish command
-# will fail and the existing package will not be updated.
+# will fail. The existing package will not be updated.
 publish_package:
   stage: publish
   variables:

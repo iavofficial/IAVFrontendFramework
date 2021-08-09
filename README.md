@@ -4,7 +4,7 @@
 This react framework was created to speed up development in the disa front-end environment. To use this framework follow these steps and read the wiki pages for further information. You maybe want to inspect examples. For this you can look up the example in the *example* folder of this project.
 
 ## Installation
-To install this package you can either set the required key value pairs globally (recommended) or you can set the key value pairs in a .npmrc file in the root of your project. The key value pairs differ by whether you are using the **local** or the **external** GitLab.
+To install this package you can either set the required key value pairs globally (recommended) or you can set the key value pairs in a .npmrc file in the root of your project. The key value pairs differ by whether you are using the **local** or the **external** GitLab. If you don't own a token for authentication you have to apply for it.
 
 If you are using the **local GitLab** you should execute these commands to set the config globally:
 >npm config --global set @disa:registry https://gitlab.iavgroup.local/api/v4/projects/9609/packages/npm/ \

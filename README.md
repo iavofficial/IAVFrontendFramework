@@ -11,7 +11,7 @@ If you are using the **local GitLab** you should execute these commands to set t
 >npm config --global set //gitlab.iavgroup.local/api/v4/projects/9609/packages/npm/:_authToken <YOUR_TOKEN>
 
 Or if you want to use a project specific .npmrc file you have to set these lines in it:
->@disa:registry=https://gitlab.iavgroup.local/api/v4/projects/9609/packages/npm/\
+>@disa:registry=https://gitlab.iavgroup.local/api/v4/projects/9609/packages/npm/ \
 >'//gitlab.iavgroup.local/api/v4/projects/9609/packages/npm/:_authToken'="<YOUR_TOKEN>"
 
 If you are using the **external** GitLab you should execute these commands to set the config globally:

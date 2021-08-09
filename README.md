@@ -19,7 +19,7 @@ If you are using the **external** GitLab you should execute these commands to se
 >npm config --global set //gitlab.iav.com/api/v4/projects/522/packages/npm/:_authToken <YOUR_TOKEN>
 
 Or if you want to use a project specific .npmrc file you have to set these lines:
->@disa:registry=https://gitlab.iav.com/api/v4/projects/522/packages/npm/
+>@disa:registry=https://gitlab.iav.com/api/v4/projects/522/packages/npm/ \
 >'//gitlab.iav.com/api/v4/projects/522/packages/npm/:_authToken'="<YOUR_TOKEN>"
 
 After configuration you are able to install the disa-framework package by using the following command:\

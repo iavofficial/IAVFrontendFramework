@@ -4,6 +4,7 @@ import "primereact/resources/primereact.css";
 import "primeicons/primeicons.css";
 import React, { useContext } from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
+import { MenuItem } from "primereact/components/menuitem/MenuItem";
 
 import "./css/constants.css";
 import "./css/disaPage.css";
@@ -20,6 +21,7 @@ import { TabAndContentWrapper } from "./navbar/wrapper/tabAndContentWrapper";
 export interface Props {
     tabAndContentWrappers: TabAndContentWrapper[];
     startingPoint: string;
+    settingsMenuItems?: MenuItem[];
     loginView?: React.ComponentType<any>;
 }
 
@@ -31,7 +33,7 @@ export const UILayer = (props: Props) => {
         <div className={"p-d-flex p-flex-column"} style={{ height: "100%", bottom: "0" }}>
             <DisaHeader />
             <div className="p-d-flex" style={{ height: "100%", margin: "0" }}>
-                <Navbar tabAndContentWrappers={props.tabAndContentWrappers} />
+                <Navbar tabAndContentWrappers={props.tabAndContentWrappers} settingsMenuItems={props.settingsMenuItems} />
                 {props.tabAndContentWrappers.map(wrapper => wrapper.getRoutes())}
                 <Route exact path="/imprint" component={Imprint} />
             </div>

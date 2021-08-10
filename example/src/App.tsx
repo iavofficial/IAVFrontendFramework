@@ -1,12 +1,16 @@
+import "primeflex/primeflex.css";
+import "primereact/resources/themes/nova/theme.css";
+import "primereact/resources/primereact.css";
+import "primeicons/primeicons.css";
 import React from "react";
 import Amplify from "@aws-amplify/core";
+import { SelectButton } from 'primereact/selectbutton';
 import { UILayer } from 'disa-framework/uiLayer';
 import { GlobalDataLayer } from "disa-framework/globalDataLayer";
 import { AWSLoginProvider } from "disa-framework/awsLoginProvider";
 import { AWSLoginView } from "disa-framework/awsLoginView";
 import { View } from "disa-framework/view";
 import { Group } from "disa-framework/group";
-
 import translationES from "./assets/translations/es.json";
 import translationEN from "./assets/translations/en.json";
 import translationDE from "./assets/translations/de.json";
@@ -32,6 +36,7 @@ import { ThirdExampleComponent } from "./components/thirdExampleComponent";
 import { FourthExampleComponent } from "./components/fourthExampleComponent";
 import { SecondExampleComponent } from "./components/secondExampleComponent";
 import { TranslateFunctionType } from "disa-framework/language";
+import { useState } from "react";
 
 const authConfig = {
   // REQUIRED - Amazon Cognito Region
@@ -64,6 +69,18 @@ const authConfig = {
 };
 
 function App() {
+
+  const [selectedButtonOption, setSelectedButtonOption] = useState("Simulated");
+
+  const settingsMenuItems = [
+    {
+      template: (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <SelectButton options={["Simulated", "Real"]} value={selectedButtonOption} onChange={(ev) => setSelectedButtonOption(ev.value)} />
+        </div>
+      )
+    }
+  ]
 
   const views = [
     new View(<SimpleNavbarTab name={"Example without Translation"} to="/" disabled={false} selectedIcon={navDashboardSelected}
@@ -99,7 +116,7 @@ function App() {
         translation: translationDE
       },
       de_CH: {
-        translation: translationDECH 
+        translation: translationDECH
       }
     }
   );
@@ -109,7 +126,7 @@ function App() {
       <GlobalDataLayer translations={translations} >
         <FirstExampleContextComponent>
           <SecondExampleContextComponent>
-            <UILayer tabAndContentWrappers={views} startingPoint="/" loginView={AWSLoginView} />
+            <UILayer tabAndContentWrappers={views} startingPoint="/" loginView={AWSLoginView} settingsMenuItems={settingsMenuItems} />
           </SecondExampleContextComponent>
         </FirstExampleContextComponent>
       </GlobalDataLayer>

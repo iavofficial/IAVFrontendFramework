@@ -64,7 +64,8 @@ You will see that this frameworks provides a login system and the basic frame of
 The UILayer component has the properties:
 1. tabAndContentWrappers: Array of views and groups (and other wrappers) to provide in order to render tabs in the navigation bar and the associated component.
 2. startingPoint: The "entry URL" of your application. This doesn't mean the login page but the path the user will be redirected after successfull authentication.
-3. loginView (optional): This attribute will get explained later.
+3. settingsMenuItems (optional): An array of items which will be rendered in the settings menu. You can inspect the example project or the documentation of the [MenuModel API](https://primefaces.org/primereact/showcase/#/menumodel) for further information.
+4. loginView (optional): This attribute will get explained later.
 
 The GlobalDataLayer has the properties:
 1. translations (optional): Translations for internationalization

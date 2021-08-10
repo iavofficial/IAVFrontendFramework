@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { ContextMenu } from 'primereact/contextmenu';
+import { MenuItem } from "primereact/components/menuitem/MenuItem";
 
 import "../css/navbar.css";
 import UserPic from "../../assets/user.png";
@@ -14,6 +15,7 @@ import { useTranslator } from "../internationalization/translators";
 
 interface Props {
     tabAndContentWrappers: TabAndContentWrapper[];
+    settingsMenuItems?: MenuItem[];
 }
 
 export const Navbar = (props: Props) => {
@@ -30,7 +32,7 @@ export const Navbar = (props: Props) => {
     return (
         <div className="p-d-flex p-dir-col p-lg-2" style={{ "padding": "0px" }}>
 
-            <SettingsMenu ref={menuRef} hideMenu={hideMenu} />
+            <SettingsMenu ref={menuRef} hideMenu={hideMenu} settingsMenuItems={props.settingsMenuItems} />
             <div className="p-d-flex p-align-center" style={{ height: TAB_HEIGHT, backgroundColor: BLUE3 }}>
                 <img src={UserPic} style={{ marginLeft: "5%" }} alt="" />
                 <span style={{

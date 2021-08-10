@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { ContextMenu } from "primereact/contextmenu";
+import { MenuItem } from "primereact/components/menuitem/MenuItem";
 
 import { AuthContext } from "../../contexts/auth";
 import { LanguageContext, Translations } from "../../contexts/language";
@@ -7,6 +8,7 @@ import { useTranslator } from "../internationalization/translators";
 
 interface Props {
     hideMenu: (e: React.KeyboardEvent) => void;
+    settingsMenuItems?: MenuItem[];
 }
 
 export const SettingsMenu = React.forwardRef<ContextMenu, Props>((props, ref) => {
@@ -51,22 +53,34 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>((props, ref) =>
         );
     }
 
+    const basicOptions = (
+        [
+            {
+                label: t("Language"),
+                icon: 'pi pi-comment',
+                items: options.sort((option1, option2) => option1.label === option2.label ? 0 : option1.label < option2.label ? -1 : 1)
+            },
+            {
+                label: "Logout",
+                icon: "pi pi-sign-out",
+                command: () => { authContext?.logout() }
+            }
+        ]
+    );
+
+    const model = (
+        props.settingsMenuItems ?
+            [
+                ...props.settingsMenuItems,
+                ...basicOptions
+            ]
+            :
+            basicOptions
+    )
+
     return (
         <div onKeyDown={(e) => props.hideMenu(e)}>
-            <ContextMenu ref={ref} model={
-                [
-                    {
-                        label: t("Language"),
-                        icon: 'pi pi-comment',
-                        items: options.sort((option1, option2) => option1.label === option2.label ? 0 : option1.label < option2.label ? -1 : 1)
-                    },
-                    {
-                        label: "Logout",
-                        icon: "pi pi-sign-out",
-                        command: () => { authContext?.logout() }
-                    }
-                ]
-            } />
+            <ContextMenu ref={ref} model={model} />
         </div>
     );
 });

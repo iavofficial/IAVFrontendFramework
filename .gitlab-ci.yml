@@ -47,26 +47,7 @@ validate_typescript:
     - source ./scripts/ci_cd/configure_npm.sh
     - npm install -D
     - npx tsc
-
-# If no .npmrc if included in the repo, generate a temporary one to use during the publish step
-# that is configured to publish to GitLab's NPM registry
-check_and_create_npmrc:
-  stage: validate
-  script:
-    - >
-      if [[ ! -f .npmrc ]]; then
-        echo "No .npmrc found! Creating one now."
-        {
-          echo "@disa:registry=${REPO_PROTOCOL}://${REPO_URL}/api/v4/projects/${REPO_PROJECT_ID}/packages/npm/"
-          echo "//${REPO_URL}/api/v4/projects/${REPO_PROJECT_ID}/packages/npm/:_authToken=${REPO_DEPLOY_FRAMEWORK_AUTH_TOKEN}"
-        } >> .npmrc
-      fi
-  artifacts:
-    paths:
-      - .npmrc
-  rules:
-    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
-
+    
 # Builds the framework
 build_package:
   stage: build

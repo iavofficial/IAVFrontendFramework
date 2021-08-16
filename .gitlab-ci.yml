@@ -4,10 +4,15 @@ default:
   before_script:
     - chmod -R +x ./scripts/ci_cd/
 
+cache:
+  key: $CI_COMMIT_REF_SLUG
+  paths:
+    - ./node_modules
+
 stages:
   - prepare
   - validate
-  - install_and_build
+  - build
   - publish
   - release
 
@@ -33,6 +38,16 @@ validate_release_notes:
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
 
+# Validates typescript files
+validate_typescript:
+  stage: validate
+  variables:
+    NODE_EXTRA_CA_CERTS: ${IAV_CA_BUNDLE}
+  script:
+    - source ./scripts/ci_cd/configure_npm.sh
+    - npm install -D
+    - npx tsc
+
 # If no .npmrc if included in the repo, generate a temporary one to use during the publish step
 # that is configured to publish to GitLab's NPM registry
 check_and_create_npmrc:
@@ -53,15 +68,14 @@ check_and_create_npmrc:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
 
 # Builds the framework
-install_and_build_package:
-  stage: install_and_build
+build_package:
+  stage: build
   script:
     - source ./scripts/ci_cd/configure_npm.sh
     - npm install -D
     - npm run build-linux
   artifacts:
     paths:
-      - ./node_modules
       - ./build
   except:
     - tags
@@ -75,6 +89,7 @@ publish_package:
     NODE_EXTRA_CA_CERTS: ${IAV_CA_BUNDLE}
   script:
     - source ./scripts/ci_cd/configure_npm.sh
+    - npm install -D
     - >
       {
         npm publish ./build
@@ -87,6 +102,7 @@ publish_package:
       }
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+    - if: '$FORCE_PUBLISH == "true"'
 
 # Create release so observer of this project will get a notification e-mail.
 create_release:
@@ -100,3 +116,4 @@ create_release:
       --tag-name v${NPM_PACKAGE_VERSION}
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+    - if: '$FORCE_PUBLISH == "true"'

@@ -46,7 +46,7 @@ validate_typescript:
   script:
     - source ./scripts/ci_cd/configure_npm.sh
     - npm install -D
-    - npx tsc --noEmit
+    - npx tsc --noEmit --emitDeclarationOnly false
     
 # Builds the framework
 build_package:

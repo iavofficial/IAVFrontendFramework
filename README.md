@@ -1,7 +1,7 @@
 **Important note: Developers which enhance the framework or the example project should read the chapter *Important notes* on [this wiki page](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/Devnotes).**
 
 # Requirements
-- **You should install at least npm version 7.7.5 when using or enhancing the framework.**\
+- **You should install at least npm version 7.7.5 when using or enhancing the framework.**
 
 # Disa Framework (how to use it)
 This react framework was created to speed up development in the disa front-end environment. To use this framework follow these steps and read the wiki pages for further information. You maybe want to inspect examples. For this you can look up the example in the *example* folder of this project.

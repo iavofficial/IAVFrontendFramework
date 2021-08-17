@@ -1,3 +1,4 @@
+**You should install at least npm version 7.7.5 when using or enhancing the framework.**
 **Important note: Developers which enhance the framework or the example project should read the chapter *Important notes* on [this wiki page](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/Devnotes).**
 
 # Disa Framework (how to use it)

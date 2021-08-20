@@ -44,16 +44,16 @@ export const UILayer = (props: Props) => {
         <>
             <CookieBanner />
             <Router>
-                <Switch>
-                    <Route path="/login" component={LoginView} />
-                    {!authContext?.hasAuthenticated() && <Route path="/imprint" component={Imprint} />}
-                    <Route path="/" component={RSMView} />
-                </Switch>
                 {authContext?.hasAuthenticated() ?
                     <Redirect to={props.startingPoint.valueOf()} />
                     :
                     <Redirect to="/login" />
                 }
+                <Switch>
+                    <Route path="/login" component={LoginView} />
+                    {!authContext?.hasAuthenticated() && <Route path="/imprint" component={Imprint} />}
+                    <Route path="/" component={RSMView} />
+                </Switch>
             </Router>
         </>
     );

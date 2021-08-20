@@ -49,5 +49,3 @@ export const BasicLoginView = () => {
         </div >
     );
 };
-
-BasicLoginView.contextType = AuthContext;

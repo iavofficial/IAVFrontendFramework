@@ -17,10 +17,10 @@ class FirstExampleComponentUnprocessed extends Component<AppliedTranslationProps
         this.state = {
             localState: "default",
             contentTabs: [
-                <div style={{ backgroundColor: "#5daedb", color: "white", padding: "4px", marginRight: "5px", display: "flex", alignItems: "center" }}>
+                <div key="example_local1" style={{ backgroundColor: "#5daedb", color: "white", padding: "4px", marginRight: "5px", display: "flex", alignItems: "center" }}>
                     <span>{this.props.t("Example_field_local", { count: 1 })}</span></div>,
-                <div style={{ backgroundColor: "#5daedb", color: "white", padding: "4px", marginRight: "5px", display: "flex", alignItems: "center" }}>
-                    <span>{this.props.t("Example_field_local", { count: 2 })}</span></div>,
+                <div key="example_local2" style={{ backgroundColor: "#5daedb", color: "white", padding: "4px", marginRight: "5px", display: "flex", alignItems: "center" }}>
+                    <span>{this.props.t("Example_field_local", { count: 2 })}</span></div>
             ]
         }
     }

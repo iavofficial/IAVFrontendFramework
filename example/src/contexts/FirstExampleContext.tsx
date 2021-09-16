@@ -19,11 +19,11 @@ class FirstExampleContextComponentUnprocessed extends Component<React.PropsWithC
         this.state = {
             exampleData: "default",
             contentTabs: [
-                <Button style={{ width: "200px", height: "40px", margin: "5px", alignSelf: "center" }}
+                <Button key="example_global1" style={{ width: "200px", height: "40px", margin: "5px", alignSelf: "center" }}
                     onClick={function (this: FirstExampleContextComponentUnprocessed) { this.updateExampleData(this.props.t("changed_with_global_button")) }.bind(this)}>
                     <span>{this.props.t("Change_global_context")}</span>
                 </Button>,
-                <div style={{
+                <div key="example_global2" style={{
                     backgroundColor: "#5daedb", color: "white", marginRight: "5px", display: "flex", alignItems: "center",
                     justifyContent: "center", flexDirection: "column"
                 }}>

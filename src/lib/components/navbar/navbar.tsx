@@ -36,7 +36,7 @@ export const Navbar = (props: Props) => {
             <div className="p-d-flex p-align-center" style={{ height: TAB_HEIGHT, backgroundColor: BLUE3 }}>
                 <img src={UserPic} style={{ marginLeft: "5%" }} alt="" />
                 <span style={{
-                    fontWeight: "bold", color: "white", marginLeft: "10px", marginRight: "10px", maxWidth: "60%",
+                    color: "white", marginLeft: "10px", marginRight: "10px", maxWidth: "60%",
                     textOverflow: "ellipsis", overflow: "hidden"
                 }}>
                     {authContext?.getUsername()}

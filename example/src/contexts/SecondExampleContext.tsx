@@ -9,7 +9,7 @@ export class SecondExampleContextComponentUnprocessed extends Component<React.Pr
         this.state = {
             exampleData: "default",
             contentTabs: [
-                <div style={{ backgroundColor: "#5daedb", color: "white", padding: "4px", marginRight: "5px", display: "flex", alignItems: "center" }}>
+                <div key="example_global3" style={{ backgroundColor: "#5daedb", color: "white", padding: "4px", marginRight: "5px", display: "flex", alignItems: "center" }}>
                     <span>{this.props.t("Another_global_element")}</span></div>,
             ]
         }

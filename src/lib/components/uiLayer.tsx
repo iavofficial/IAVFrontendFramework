@@ -52,7 +52,7 @@ export const UILayer = (props: Props) => {
                 <Switch>
                     <Route path="/login" component={LoginView} />
                     {!authContext?.hasAuthenticated() && <Route path="/imprint" component={Imprint} />}
-                    <Route path="/" component={RSMView} />
+                    {authContext?.hasAuthenticated() && <Route path="/" component={RSMView} />}
                 </Switch>
             </Router>
         </>

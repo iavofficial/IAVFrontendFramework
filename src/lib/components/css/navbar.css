@@ -28,8 +28,9 @@
     margin-left: 5%;
 }
 
-.navbar-tab-name {
+#navbar-tab-name {
     font-weight: bold;
+    margin-left: 10px;
 }
 
 .p-accordion-content .navbar-tab-wrapper {

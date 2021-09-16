@@ -31,7 +31,7 @@ export const SimpleNavbarTab = (props: navbarTabProps) => {
                 onMouseEnter={() => setHovering(true)} onMouseLeave={() => setHovering(false)}>
                 <div className="p-d-flex p-align-center" style={tabStyle}>
                     <img src={(active || hovering) && !props.disabled ? props.selectedIcon.valueOf() : props.deselectedIcon.valueOf()} alt="" />
-                    <span className="navbar-tab-name">{props.name instanceof Function ? props.name(t) : props.name}</span>
+                    <span id="navbar-tab-name">{props.name instanceof Function ? props.name(t) : props.name}</span>
                 </div>
             </div>
         </div>

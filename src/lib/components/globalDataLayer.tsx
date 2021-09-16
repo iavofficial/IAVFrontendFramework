@@ -3,8 +3,8 @@ import { CookiesProvider } from "react-cookie";
 
 import { AuthContext } from "../contexts/auth";
 import { Translations } from "../contexts/language";
-import { I18NextLanguageProvider } from "./internationalization/i18NextLanguageProvider";
-import { DummyLoginProvider } from "./login/default/dummyLoginProvider";
+import { DefaultLanguageProvider } from "./internationalization/defaultLanguageProvider";
+import { DummyAuthenticationProvider } from "./login/default/dummyAuthenticationProvider";
 
 interface Props {
     translations?: Translations;
@@ -13,14 +13,14 @@ interface Props {
 
 export const GlobalDataLayer = (props: PropsWithChildren<Props>) => {
     const authContext = useContext(AuthContext);
-    const LoginProvider = authContext ? React.Fragment : DummyLoginProvider;
+    const LoginProvider = authContext ? React.Fragment : DummyAuthenticationProvider;
 
     return (
         <CookiesProvider>
             <LoginProvider>
-                <I18NextLanguageProvider fallbackLang="en" translations={props.translations} initI18Next={props.initI18Next}>
+                <DefaultLanguageProvider fallbackLang="en" translations={props.translations} initI18Next={props.initI18Next}>
                     {props.children}
-                </I18NextLanguageProvider>
+                </DefaultLanguageProvider>
             </LoginProvider>
         </CookiesProvider>
     )

@@ -10,7 +10,7 @@ import "./css/constants.css";
 import "./css/disaPage.css";
 import "./css/disaFramework.css";
 import "./css/error.css";
-import { BasicLoginView } from "./login/default/basicLoginView";
+import { BasicAuthenticationView } from "./login/default/basicAuthenticationView";
 import { DisaHeader } from "./disaHeader";
 import { Navbar } from "./navbar/navbar";
 import { Imprint } from "./imprint";
@@ -27,7 +27,7 @@ export interface Props {
 
 export const UILayer = (props: Props) => {
     const authContext = useContext(AuthContext);
-    const LoginView = props.loginView ? props.loginView : BasicLoginView;
+    const LoginView = props.loginView ? props.loginView : BasicAuthenticationView;
 
     const RSMView = () => (
         <div className={"p-d-flex p-flex-column"} style={{ height: "100%", bottom: "0" }}>

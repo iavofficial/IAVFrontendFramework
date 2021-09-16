@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 
 import { AuthContext } from "../../../contexts/auth";
-import { LoginProvider, Credentials, securableFunctionType } from "../../../contexts/auth";
+import { AuthenticationProvider, Credentials, securableFunctionType } from "../../../contexts/auth";
 
 export interface State {
     hasAuthenticated: boolean;
     username: string;
 }
 
-export class DummyLoginProvider extends Component<React.PropsWithChildren<any>, State> implements LoginProvider {
+export class DummyAuthenticationProvider extends Component<React.PropsWithChildren<any>, State> implements AuthenticationProvider {
     constructor(props: React.PropsWithChildren<any>) {
         super(props);
         this.state = {

@@ -5,7 +5,7 @@ import {
     ValidUserInformation, cognitoLogin, cognitoLogout, cognitoCheckIsAuthenticated,
     cognitoCompletePassword, cognitoRefreshAccessToken
 } from "../../../services/cognitoService";
-import { LoginProvider, Credentials, securableFunctionType } from "../../../contexts/auth";
+import { AuthenticationProvider, Credentials, securableFunctionType } from "../../../contexts/auth";
 
 export interface Props {
     configureAmplify: () => void;
@@ -23,7 +23,7 @@ export interface State {
     didRender: boolean;
 }
 
-export class AWSLoginProvider extends Component<React.PropsWithChildren<Props>, State> implements LoginProvider {
+export class AWSAuthenticationProvider extends Component<React.PropsWithChildren<Props>, State> implements AuthenticationProvider {
     constructor(props: Props) {
         super(props);
         this.state = {

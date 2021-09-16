@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useContext } from "react";
 import { useTranslator } from "../../internationalization/translators";
 
-export const AWSLoginView = () => {
+export const AWSAuthenticationView = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 

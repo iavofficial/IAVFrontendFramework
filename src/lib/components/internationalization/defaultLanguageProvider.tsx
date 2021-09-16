@@ -15,7 +15,7 @@ interface Props {
     initI18Next?: () => void;
 }
 
-export const I18NextLanguageProvider = (props: React.PropsWithChildren<Props>) => {
+export const DefaultLanguageProvider = (props: React.PropsWithChildren<Props>) => {
 
     const [resources, setResources] = useState({
         en: {

@@ -4,7 +4,7 @@ import { generateHash } from "../../../services/hash";
 import { navbarTabProps } from "../tabs/navbarTab";
 import { TabAndContentWrapper } from "./tabAndContentWrapper";
 
-export class View implements TabAndContentWrapper {
+export class BasicContentWrapper implements TabAndContentWrapper {
     constructor(private _navbarTab: React.ReactElement<navbarTabProps>, private _component: React.ComponentType<any>) {
     }
 

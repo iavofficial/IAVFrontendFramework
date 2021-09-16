@@ -8,7 +8,7 @@ import { LoginButtonWithSpinner } from "../loginButtonWithSpinner";
 import { useContext } from "react";
 import { useTranslator } from "../../internationalization/translators";
 
-export const BasicLoginView = () => {
+export const BasicAuthenticationView = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 

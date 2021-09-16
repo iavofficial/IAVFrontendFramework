@@ -7,7 +7,7 @@ export interface Credentials {
 
 export type securableFunctionType = (...rest: any) => Promise<any>;
 
-export interface LoginProvider {
+export interface AuthenticationProvider {
     login(credentials: Credentials, ...rest: any): any;
     logout(): any;
     hasAuthenticated(): boolean;
@@ -15,7 +15,7 @@ export interface LoginProvider {
     execIfAuthed(func: securableFunctionType): Promise<any>;
 }
 
-export interface LoginContextType {
+export interface AuthContextType {
     login(credentials: Credentials, ...rest: any): any;
     logout(): any;
     hasAuthenticated(): boolean;
@@ -24,4 +24,4 @@ export interface LoginContextType {
     [attribute: string]: any;
 }
 
-export const AuthContext = React.createContext<LoginContextType | undefined>(undefined);
+export const AuthContext = React.createContext<AuthContextType | undefined>(undefined);

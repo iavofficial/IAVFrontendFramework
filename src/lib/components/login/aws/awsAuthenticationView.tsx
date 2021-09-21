@@ -96,7 +96,7 @@ export const AWSAuthenticationView = () => {
                     {authContext?.isNewPasswordRequired ? NewPasswordForm : LoginForm}
                 </div>
                 <Link style={{ alignSelf: "center", fontWeight: "bolder", color: "black" }} to="/imprint">{t("Imprint")}</Link>
-                <span style={{ padding: "10px", alignSelf: "center" }}>&copy; IAV GmbH 2020</span>
+                <span style={{ padding: "10px", alignSelf: "center" }}>&copy; IAV GmbH 2021</span>
             </div>
         </div >
     );

@@ -19,7 +19,7 @@ export interface State {
     isLoading: boolean;
     userData: any;
     userAttributes: any;
-    loginError: any;
+    loginError: undefined | { [key: string]: any } | string;
     didRender: boolean;
 }
 
@@ -32,7 +32,7 @@ export class AWSAuthenticationProvider extends Component<React.PropsWithChildren
             isLoading: false,               // true if user is in process of logging in
             userData: {},                   // contains user information
             userAttributes: {},             // user attributes retrieved from cognito necessary for the completePassword workflow
-            loginError: {},
+            loginError: undefined,
             didRender: false
         }
     }
@@ -48,6 +48,7 @@ export class AWSAuthenticationProvider extends Component<React.PropsWithChildren
     }
 
     componentDidUpdate() {
+        console.log(this.state.hasAuthenticated);
         this.checkIsAuthenticated();
     }
 
@@ -93,7 +94,7 @@ export class AWSAuthenticationProvider extends Component<React.PropsWithChildren
     login = (credentials: Credentials) => {
         this.setState({
             isLoading: true,
-            loginError: {}
+            loginError: undefined
         });
         cognitoLogin(credentials, this.props.failOnNoLegalGroup!, this.props.legalGroups!).then(result => {
             if (result instanceof ValidUserInformation) {
@@ -105,13 +106,13 @@ export class AWSAuthenticationProvider extends Component<React.PropsWithChildren
                     isNewPasswordRequired: true
                 });
             }
-        }).catch(err => (
+        }).catch(err => {
             this.setState({
                 hasAuthenticated: false,
                 userData: {},
                 loginError: err
             })
-        )).then(() => {
+        }).then(() => {
             this.setState({
                 isLoading: false
             });
@@ -127,10 +128,10 @@ export class AWSAuthenticationProvider extends Component<React.PropsWithChildren
                 isLoading: false,
                 hasAuthenticated: false,
                 userData: {},
-                loginError: {}
+                loginError: undefined
             });
         });
-        console.log("logged out")
+        console.log("logged out");
     }
 
     completePassword = (newPassword: String) => {
@@ -170,13 +171,13 @@ export class AWSAuthenticationProvider extends Component<React.PropsWithChildren
     }
 
     processSuccessfulAuth = (userData: ValidUserInformation) => {
-        if (!this.state.hasAuthenticated|| this.state.isNewPasswordRequired ||
-            Object.entries(this.state.userData).length === 0 || Object.entries(this.state.loginError).length !== 0) {
+        if (!this.state.hasAuthenticated || this.state.isNewPasswordRequired ||
+            Object.entries(this.state.userData).length === 0) {
             this.setState({
                 hasAuthenticated: true,
                 isNewPasswordRequired: false,
                 userData: userData,
-                loginError: {}
+                loginError: undefined
             });
         }
     }

@@ -25,20 +25,24 @@ export const AWSAuthenticationView = () => {
         }
     }
 
-    const getErrorText = (error: any) => {
+    const getErrorText = (error: undefined | { [key: string]: any } | string) => {
         if (error) {
-            if (error.code) {
-                if (error.code === "UserGroupError") {
-                    return t("invalid_access_configuration");                      // user was not added to a group
-                } else if (error.code === "NotAuthorizedException") {
-                    return t("invalid_username_or_password");                      // invalid user credentials
-                } else if (error.code === "InvalidPasswordException") {
-                    return t("password_requirements_not_met");            // set password does not conform to password policy
-                } else {
-                    return t("server_error");
+            if (typeof error === "object") {
+                if (error.code) {
+                    if (error.code === "UserGroupError") {
+                        return t("invalid_access_configuration");                      // user was not added to a group
+                    } else if (error.code === "NotAuthorizedException") {
+                        return t("invalid_username_or_password");                      // invalid user credentials
+                    } else if (error.code === "InvalidPasswordException") {
+                        return t("password_requirements_not_met");            // set password does not conform to password policy
+                    } else {
+                        return t("server_error");
+                    }
+                } else if (error.message) {
+                    return error.message;
                 }
             } else {
-                return error.message ? error.message : "";
+                return t("server_error");
             }
         }
         return "";
@@ -57,9 +61,9 @@ export const AWSAuthenticationView = () => {
             </div>
             <form autoComplete="off" onSubmit={submit}>
                 <div>
-                    <label className={"inputLabel " + (authContext?.loginError.code ? "invalid" : "")}>{t("New_password")}</label>
+                    <label className={"inputLabel " + (authContext?.loginError ? "invalid" : "")}>{t("New_password")}</label>
                     <input name="password" type="password" id="inputPassword" style={{ width: "100%", marginTop: "5px", marginBottom: "10px" }}
-                        className={"form-control p-inputtext " + (authContext?.loginError.code ? "invalid" : "")} placeholder={t("New_password")}
+                        className={"form-control p-inputtext " + (authContext?.loginError ? "invalid" : "")} placeholder={t("New_password")}
                         onChange={(ev) => setPassword(ev.target.value)} required autoFocus />
                     <LoginButtonWithSpinner isLoading={authContext?.isLoading} />
                     <div className="invalid">{getErrorText(authContext?.loginError)}</div>
@@ -84,7 +88,7 @@ export const AWSAuthenticationView = () => {
             </div>
         </form>
     );
-
+    
     return (
         <div className="p-d-flex" style={{ height: "100%" }}>
             <div className="p-d-flex p-flex-column p-shadow-10" style={{ width: "500px", margin: "auto" }}>

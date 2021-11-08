@@ -12,11 +12,11 @@
 }
 
 .group-logo {
-    width: 20px;
+    width: 30px;
     /* Calculated from width of navigation logos */
-    margin-left: 15px;
+    margin-left: 10px;
     /* Calculated from width of navigation logos */
-    margin-right: 25px;
+    margin-right: 20px;
 }
 
 .navbar-tab {

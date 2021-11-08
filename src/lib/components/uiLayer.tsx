@@ -4,7 +4,6 @@ import "primereact/resources/primereact.css";
 import "primeicons/primeicons.css";
 import React, { useContext } from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
-import { MenuItem } from "primereact/components/menuitem/MenuItem";
 
 import "./css/constants.css";
 import "./css/disaPage.css";
@@ -17,11 +16,12 @@ import { Imprint } from "./imprint";
 import { CookieBanner } from "./cookie/cookieBanner";
 import { AuthContext } from "../contexts/auth";
 import { TabAndContentWrapper } from "./navbar/wrapper/tabAndContentWrapper";
+import { MenuOptions } from "./navbar/menu";
 
 export interface Props {
     tabAndContentWrappers: TabAndContentWrapper[];
     startingPoint: string;
-    settingsMenuItems?: MenuItem[];
+    menuOptions?: MenuOptions;
     loginView?: React.ComponentType<any>;
 }
 
@@ -33,7 +33,7 @@ export const UILayer = (props: Props) => {
         <div className={"p-d-flex p-flex-column"} style={{ height: "100%", bottom: "0" }}>
             <DisaHeader />
             <div className="p-d-flex" style={{ height: "100%", margin: "0" }}>
-                <Navbar tabAndContentWrappers={props.tabAndContentWrappers} settingsMenuItems={props.settingsMenuItems} />
+                <Navbar tabAndContentWrappers={props.tabAndContentWrappers} menuOptions={props.menuOptions} />
                 {props.tabAndContentWrappers.map(wrapper => wrapper.getRoutes())}
                 <Route exact path="/imprint" component={Imprint} />
             </div>

@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { ContextMenu } from 'primereact/contextmenu';
-import { MenuItem } from "primereact/components/menuitem/MenuItem";
 
 import "../css/navbar.css";
 import UserPic from "../../assets/user.png";
@@ -10,12 +9,12 @@ import { Clock } from "../clock";
 import { BLUE3, TAB_HEIGHT } from "../../constants";
 import { AuthContext } from "../../contexts/auth";
 import { TabAndContentWrapper } from "./wrapper/tabAndContentWrapper";
-import { SettingsMenu } from "./menu";
+import { MenuOptions, SettingsMenu } from "./menu";
 import { useTranslator } from "../internationalization/translators";
 
 interface Props {
     tabAndContentWrappers: TabAndContentWrapper[];
-    settingsMenuItems?: MenuItem[];
+    menuOptions?: MenuOptions;
 }
 
 export const Navbar = (props: Props) => {
@@ -32,7 +31,7 @@ export const Navbar = (props: Props) => {
     return (
         <div className="p-d-flex p-dir-col p-lg-2" style={{ "padding": "0px" }}>
 
-            <SettingsMenu ref={menuRef} hideMenu={hideMenu} settingsMenuItems={props.settingsMenuItems} />
+            <SettingsMenu ref={menuRef} hideMenu={hideMenu} menuOptions={props.menuOptions} />
             <div className="p-d-flex p-align-center" style={{ height: TAB_HEIGHT, backgroundColor: BLUE3 }}>
                 <img src={UserPic} style={{ marginLeft: "5%" }} alt="" />
                 <span style={{

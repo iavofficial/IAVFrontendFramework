@@ -74,7 +74,7 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>((props, ref) =>
     );
 
     let logoutOption = getOptionByIdentifier(props.menuOptions?.options, "logout");
-    if (!logoutOption || (logoutOption && !logoutOption.disabled)) {
+    if (!logoutOption || (logoutOption && !logoutOption.hidden)) {
         basicOptions.push(
             {
                 label: "Logout",

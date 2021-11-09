@@ -85,7 +85,7 @@ function App() {
     options: [
       {
         identifier: "logout",
-        disabled: true
+        hidden: true
       }
     ]
   }

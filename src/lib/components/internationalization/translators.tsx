@@ -12,11 +12,12 @@ export interface AppliedTranslationProps {
     t: TranslateFunctionType;
 }
 
-export function applyTranslation<T>(Component: React.ComponentType<T & AppliedTranslationProps>) {
-    return function (props: T) {
+export function applyTranslation<T extends AppliedTranslationProps>(Component: React.ComponentType<T>) {
+    return function (props: Omit<T, "t">) {
         const t = useTranslator();
+        const extendedProps = { t, ...props } as T;
         return (
-            <Component t={t} {...props} />
+            <Component {...extendedProps} />
         );
     }
 }

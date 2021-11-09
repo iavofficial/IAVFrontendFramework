@@ -1,13 +1,13 @@
 import React from "react";
 import { AppliedTranslationProps, applyTranslation } from "disa-framework/translators";
 
-interface Props {
+interface Props extends AppliedTranslationProps {
     keyOfText: string;
 }
 
-class ExampleInternationalizationClassComponentUnprocessed extends React.Component<Props & AppliedTranslationProps> {
+class ExampleInternationalizationClassComponentUnprocessed extends React.Component<Props> {
 
-    constructor(props: Props & AppliedTranslationProps) {
+    constructor(props: Props) {
         super(props);
     }
 
@@ -20,4 +20,4 @@ class ExampleInternationalizationClassComponentUnprocessed extends React.Compone
     }
 }
 
-export const ExampleInternationalizationClassComponent = applyTranslation<Props>(ExampleInternationalizationClassComponentUnprocessed);
+export const ExampleInternationalizationClassComponent = applyTranslation(ExampleInternationalizationClassComponentUnprocessed);

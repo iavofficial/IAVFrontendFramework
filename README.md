@@ -65,7 +65,7 @@ An explanation for using these components:
 ```
 You will see that this frameworks provides a login system and the basic frame of a disa web application.\
 The UILayer component has the properties:
-1. tabAndContentWrappers: Array of views and groups (and other wrappers) to provide in order to render tabs in the navigation bar and the associated component.
+1. tabAndContentWrappers: Array of BasicContentWrappers and groups (and other wrappers) to provide in order to render tabs in the navigation bar and the associated component.
 2. startingPoint: The "entry URL" of your application. This doesn't mean the login page but the path the user will be redirected after successfull authentication.
 3. menuOptions (optional): An object which contains two arrays to configure the settings menu:
 - additionalItems (optional): An array of items which will be rendered in the settings menu. You can inspect the example project or the documentation of the [MenuModel API](https://primefaces.org/primereact/showcase/#/menumodel) for further information.
@@ -152,24 +152,24 @@ const initFunction = () => {
 You can find more information about I18next [here](https://react.i18next.com/).
 
 ### How to specify navigation tabs
-To let the developer specify navigation tabs the class View is exported as a module. It encapsulates the element which is rendered in the navigation bar and the component which is rendered in the content section. In order to specify navigation tabs the developer has to **create an array of instances of this class**. The developer is also able to create instances of the class *Group*. This class let's the developer specify groups of navigation tabs with a specified label. The array has to be passed to the UILayer's *views* property. A special property is the *name* property. In order to make internationalization possible you can pass a function besides defining a simple string. This function takes a translation function which can be used to get a translation. You are also able to define two booleans which allow you to define whether the UI element for the group is collapsible and whether the group should be collapsed at the beginning.\
+To let the developer specify navigation tabs the class BasicContentWrapper is exported as a module. It encapsulates the element which is rendered in the navigation bar and the component which is rendered in the content section. In order to specify navigation tabs the developer has to **create an array of instances of this class**. The developer is also able to create instances of the class *Group*. This class let's the developer specify groups of navigation tabs with a specified label. The array has to be passed to the UILayer's *tabAndContentWrappers* property. A special property is the *name* property. In order to make internationalization possible you can pass a function besides defining a simple string. This function takes a translation function which can be used to get a translation. You are also able to define two booleans which allow you to define whether the UI element for the group is collapsible and whether the group should be collapsed at the beginning.\
 An example:
 ```javascript
-let views = [
-    new View(<SimpleNavbarTab name={"Example without Translation"} to="/" disabled={false} selectedIcon={navDashboardSelected}
+let wrappers = [
+    new BasicContentWrapper(<SimpleNavbarTab name={"Example without Translation"} to="/" disabled={false} selectedIcon={navDashboardSelected}
       deselectedIcon={navDashboardDeselected} />, FirstExampleComponent),
-    new View(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/example2" disabled={false} selectedIcon={navFleetSelected}
+    new BasicContentWrapper(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/example2" disabled={false} selectedIcon={navFleetSelected}
       deselectedIcon={navFleetDeselected} />, SecondExampleComponent),
     new Group(
       "Test Gruppe", otaLogo, true, false,
       [
-        new View(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/group-example1" disabled={false} selectedIcon={navFleetSelected}
+        new BasicContentWrapper(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/group-example1" disabled={false} selectedIcon={navFleetSelected}
           deselectedIcon={navFleetDeselected} />, SecondExampleComponent),
-        new View(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/group-example2" disabled={true} selectedIcon={navFleetDetailSelected}
+        new BasicContentWrapper(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/group-example2" disabled={true} selectedIcon={navFleetDetailSelected}
           deselectedIcon={navFleetDetailDeselected} />, FourthExampleComponent)
       ]
     ),
-    new View(<PrivilegedNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/example4" disabled={true} selectedIcon={navExpertSelected}
+    new BasicContentWrapper(<PrivilegedNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/example4" disabled={true} selectedIcon={navExpertSelected}
       deselectedIcon={navExpertDeselected} permittedGroups={["ADMIN"]} />, FourthExampleComponent)
 ];
 ```
@@ -177,7 +177,7 @@ You can find a detailed explanation of the attributes [here](https://gitlab.iavg
 
 As you can see there are two types of navigation tabs. However you are free to implement your own. Further information can be found [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/How-to-implement-a-navigation-component).
 
-#### Some notes for implementing a component bound to a view
+#### Some notes for implementing a component bound to a BasicContentWrapper
 The component should have the Content component as the root component in its render method. This component renders the so called *content bar* in the content section. You can pass an array of elements for the content bar using the content's component contentElements property.\
 Example:
 ```javascript
@@ -199,7 +199,7 @@ In order to specify the login provider and the login view you can pass it to the
 It is also possible to implement own login providers and login views and pass it to the UILayer component. Further information about implementing a custom login provider can be found [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/How-to-implement-a-login-provider). Further information about implementing a custom login view can be found [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/How-to-implement-a-login-view).
 
 ### Piecing everything together ###
-To render your views and to do configuration you can follow the structure of this code snippet. This could be returned inside the body of the render method of your App.tsx.
+To render your components and to do configuration you can follow the structure of this code snippet. This could be returned inside the body of the render method of your App.tsx.
 ```javascript
 const optionalInitFunction = () => {
   i18n
@@ -222,7 +222,7 @@ render() {
       <GlobalDataLayer translations={...} initI18Next={optionalInitFunction}>
         <FirstExampleContextComponent>
           <SecondExampleContextComponent>
-            <UILayer tabAndContentWrappers={views} startingPoint="/" loginView={AWSLoginView} />
+            <UILayer tabAndContentWrappers={wrappers} startingPoint="/" loginView={AWSLoginView} />
           </SecondExampleContextComponent>
         </FirstExampleContextComponent>
       </GlobalDataLayer>

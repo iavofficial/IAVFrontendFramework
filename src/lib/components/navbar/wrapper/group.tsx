@@ -9,7 +9,7 @@ import { generateHashForValues } from "../../../services/hash";
 
 export class Group {
     constructor(private _name: string | ((t: TranslateFunctionType) => string), private _logo: string,
-        private _disable: boolean, private _collapse: boolean, private _contentWrappers: BasicContentWrapper[]) {
+        private _collapsible: boolean, private _collapsed: boolean, private _contentWrappers: BasicContentWrapper[]) {
     }
 
     // Generate unique key based on the keys of the views.
@@ -27,7 +27,7 @@ export class Group {
 
     getNavbarComponent = () => {
         return (
-            <TabGroup key={this.getKey()} name={this._name} logo={this._logo} disable={this._disable} collapse={this._collapse}>
+            <TabGroup key={this.getKey()} name={this._name} logo={this._logo} collapsible={this._collapsible} collapsed={this._collapsed}>
                 {this._contentWrappers.map(view => view.getNavbarComponent())}
             </TabGroup>
         );

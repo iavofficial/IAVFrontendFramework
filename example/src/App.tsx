@@ -89,7 +89,7 @@ function App() {
     new BasicContentWrapper(<PrivilegedNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/example3" disabled={false}
       selectedIcon={navDiagnosticsSelected} deselectedIcon={navDiagnosticsDeselected} permittedGroups={["USER", "ADMIN"]} />, ThirdExampleComponent),
     new Group(
-      (t: TranslateFunctionType) => t("Test_group"), groupIcon, false, false,
+      (t: TranslateFunctionType) => t("Test_group"), groupIcon, true, false,
       [
         new BasicContentWrapper(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 3 })} to="/group-example1" disabled={false}
           selectedIcon={navFleetSelected} deselectedIcon={navFleetDeselected} />, SecondExampleComponent),

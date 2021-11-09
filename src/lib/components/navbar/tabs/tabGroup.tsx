@@ -8,12 +8,15 @@ import { useTranslator } from "../../internationalization/translators";
 interface Props {
     name: string | ((t: TranslateFunctionType) => string);
     logo: string;
-    disable?: boolean;
-    collapse?: boolean;
+    collapsible?: boolean;
+    collapsed?: boolean;
 }
 
 export const TabGroup = (props: React.PropsWithChildren<Props>) => {
     const t = useTranslator();
+
+    const collapsible = props.collapsible !== undefined ? props.collapsible : true;
+    const collapsed = props.collapsed !== undefined ? props.collapsed : false;
 
     const header = (
         <div className="group-wrapper">
@@ -24,8 +27,8 @@ export const TabGroup = (props: React.PropsWithChildren<Props>) => {
 
     return (
         <div className="disabledNoOpacity">
-            <Accordion activeIndex={props.collapse ? -1 : 0} expandIcon="pi pi-chevron-left">
-                <AccordionTab disabled={props.disable} headerTemplate={header} >
+            <Accordion activeIndex={props.collapsed ? -1 : 0} expandIcon="pi pi-chevron-left">
+                <AccordionTab disabled={!collapsible} headerTemplate={header}>
                     {props.children}
                 </AccordionTab>
             </Accordion>

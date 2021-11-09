@@ -37,6 +37,7 @@ import { FourthExampleComponent } from "./components/fourthExampleComponent";
 import { SecondExampleComponent } from "./components/secondExampleComponent";
 import { TranslateFunctionType } from "disa-framework/language";
 import { useState } from "react";
+import { ClassComponentContainer } from "./components/classComponentContainer";
 
 const authConfig = {
   // REQUIRED - Amazon Cognito Region
@@ -101,7 +102,9 @@ function App() {
     new BasicContentWrapper(<PrivilegedNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 5 })} to="/example4" disabled={true}
       selectedIcon={navExpertSelected} deselectedIcon={navExpertDeselected} permittedGroups={["ADMIN"]} />, FourthExampleComponent),
     new BasicContentWrapper(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 6 })} to="/example5" disabled={true}
-      selectedIcon={navFleetDetailSelected} deselectedIcon={navFleetDetailDeselected} />, FourthExampleComponent)
+      selectedIcon={navFleetDetailSelected} deselectedIcon={navFleetDetailDeselected} />, FourthExampleComponent),
+    new BasicContentWrapper(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 7 })} to="/example6" disabled={false}
+      selectedIcon={navDashboardSelected} deselectedIcon={navDashboardDeselected} />, ClassComponentContainer),
   ];
 
   const translations = (

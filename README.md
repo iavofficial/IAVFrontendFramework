@@ -173,7 +173,7 @@ let wrappers = [
       deselectedIcon={navExpertDeselected} permittedGroups={["ADMIN"]} />, FourthExampleComponent)
 ];
 ```
-You can find a detailed explanation of the attributes [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/Views-and-Groups-in-Detail).
+You can find a detailed explanation of the attributes [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/BasicContentWrappers-and-Groups-in-Detail).
 
 As you can see there are two types of navigation tabs. However you are free to implement your own. Further information can be found [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/How-to-implement-a-navigation-component).
 
@@ -185,7 +185,7 @@ Example:
      <div>Example data <b>global</b> context: {this.context.exampleData}</div>
 </Content>
 ```
-A detailed explanation can be found [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/How-to-create-a-component-bound-to-a-view). (It is recommended to read this section.)
+A detailed explanation can be found [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/How-to-create-a-component-bound-to-a-BasicContentWrapper). (It is recommended to read this section.)
 
 ### Login system
 The login system is seperated into two parts: The so called LoginProvider and the LoginView. The LoginProvider is the component which handles authentication (login, logout, ...). The LoginView is just the view shown to a user when logging in. Because the authentication provider and the view are seperated it's possible to mix login providers and views.

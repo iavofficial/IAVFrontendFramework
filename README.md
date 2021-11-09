@@ -69,13 +69,7 @@ The UILayer component has the properties:
 2. startingPoint: The "entry URL" of your application. This doesn't mean the login page but the path the user will be redirected after successfull authentication.
 3. menuOptions (optional): An object which contains two arrays to configure the settings menu:
 - additionalItems (optional): An array of items which will be rendered in the settings menu. You can inspect the example project or the documentation of the [MenuModel API](https://primefaces.org/primereact/showcase/#/menumodel) for further information.
-- options: An array of objects which represent options. Options are identified by their identifier attribute. For example there is the option:
-```javascript
-{
-  identifier: "logout",
-  hidden: boolean
-}
-```
+- options: An array of objects which represent options. Options are identified by their identifier attribute. You can find a list of all options [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/List-of-all-options-for-the-settings-menu).
 4. loginView (optional): This attribute will get explained later.
 
 The GlobalDataLayer has the properties:

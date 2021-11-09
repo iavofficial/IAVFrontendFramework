@@ -1,5 +1,5 @@
+import React, { Component } from "react";
 import { useContext } from "react";
-import { withTranslation } from "react-i18next";
 
 import { LanguageContext, TranslateFunctionType } from "../../contexts/language";
 
@@ -9,9 +9,15 @@ export function useTranslator() {
 }
 
 export interface AppliedTranslationProps {
-    t: TranslateFunctionType
+    t: TranslateFunctionType;
 }
 
-export const applyTranslation = (component: React.ComponentType<AppliedTranslationProps>, ...properties: any) => (
-    withTranslation(...properties)(component)
-)
+export function applyTranslation<T extends AppliedTranslationProps>(Component: React.ComponentType<T>) {
+    return function (props: Omit<T, "t">) {
+        const t = useTranslator();
+        const extendedProps = { t, ...props } as T;
+        return (
+            <Component {...extendedProps} />
+        );
+    }
+}

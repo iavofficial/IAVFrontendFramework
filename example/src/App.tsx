@@ -2,7 +2,6 @@ import "primeflex/primeflex.css";
 import "primereact/resources/themes/nova/theme.css";
 import "primereact/resources/primereact.css";
 import "primeicons/primeicons.css";
-import React from "react";
 import Amplify from "@aws-amplify/core";
 import { SelectButton } from 'primereact/selectbutton';
 import { UILayer } from 'disa-framework/uiLayer';
@@ -26,7 +25,7 @@ import navFleetSelected from './assets/nav_fleet_selected.png';
 import navFleetDeselected from './assets/nav_fleet_deselected.png';
 import navFleetDetailSelected from './assets/nav_fleet_detail_selected.png';
 import navFleetDetailDeselected from './assets/nav_fleet_detail_deselected.png';
-import otaLogo from "./assets/ota_logo.png";
+import groupIcon from "./assets/ota_logo.png";
 import { FirstExampleContextComponent } from './contexts/FirstExampleContext';
 import { SecondExampleContextComponent } from './contexts/SecondExampleContext';
 import { SimpleNavbarTab } from "disa-framework/simpleNavbarTab";
@@ -99,7 +98,7 @@ function App() {
     new BasicContentWrapper(<PrivilegedNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/example3" disabled={false}
       selectedIcon={navDiagnosticsSelected} deselectedIcon={navDiagnosticsDeselected} permittedGroups={["USER", "ADMIN"]} />, ThirdExampleComponent),
     new Group(
-      (t: TranslateFunctionType) => t("Test_group"), otaLogo,
+      (t: TranslateFunctionType) => t("Test_group"), groupIcon, true, false,
       [
         new BasicContentWrapper(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 3 })} to="/group-example1" disabled={false}
           selectedIcon={navFleetSelected} deselectedIcon={navFleetDeselected} />, SecondExampleComponent),

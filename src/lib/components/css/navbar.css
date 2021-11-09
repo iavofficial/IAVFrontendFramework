@@ -9,14 +9,19 @@
 
 .group-name {
     text-transform: uppercase;
+    font-size: 1rem !important;
 }
 
 .group-logo {
-    width: 20px;
+    height: 1.2rem;
     /* Calculated from width of navigation logos */
-    margin-left: 15px;
+    margin-left: 10px;
     /* Calculated from width of navigation logos */
-    margin-right: 25px;
+    margin-right: 20px;
+}
+
+#navbar {
+    width: var(--navbar_width);
 }
 
 .navbar-tab {

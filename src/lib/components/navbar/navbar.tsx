@@ -29,7 +29,7 @@ export const Navbar = (props: Props) => {
     }
 
     return (
-        <div className="p-d-flex p-dir-col p-lg-2" style={{ "padding": "0px" }}>
+        <div id="navbar" className="p-d-flex p-dir-col p-col-fixed" style={{ "padding": "0px" }}>
 
             <SettingsMenu ref={menuRef} hideMenu={hideMenu} menuOptions={props.menuOptions} />
             <div className="p-d-flex p-align-center" style={{ height: TAB_HEIGHT, backgroundColor: BLUE3 }}>

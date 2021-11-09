@@ -72,15 +72,23 @@ function App() {
 
   const [selectedButtonOption, setSelectedButtonOption] = useState("Simulated");
 
-  const settingsMenuItems = [
-    {
-      template: (
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <SelectButton options={["Simulated", "Real"]} value={selectedButtonOption} onChange={(ev) => setSelectedButtonOption(ev.value)} />
-        </div>
-      )
-    }
-  ]
+  const menuOptions = {
+    additionalItems: [
+      {
+        template: (
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <SelectButton options={["Simulated", "Real"]} value={selectedButtonOption} onChange={(ev) => setSelectedButtonOption(ev.value)} />
+          </div>
+        )
+      }
+    ],
+    options: [
+      {
+        identifier: "logout",
+        disabled: true
+      }
+    ]
+  }
 
   const views = [
     new BasicContentWrapper(<SimpleNavbarTab name={"Example without Translation"} to="/" disabled={false} selectedIcon={navDashboardSelected}
@@ -126,7 +134,7 @@ function App() {
       <GlobalDataLayer translations={translations} >
         <FirstExampleContextComponent>
           <SecondExampleContextComponent>
-            <UILayer tabAndContentWrappers={views} startingPoint="/" loginView={AWSAuthenticationView} settingsMenuItems={settingsMenuItems} />
+            <UILayer tabAndContentWrappers={views} startingPoint="/" loginView={AWSAuthenticationView} menuOptions={menuOptions} />
           </SecondExampleContextComponent>
         </FirstExampleContextComponent>
       </GlobalDataLayer>

@@ -152,7 +152,7 @@ const initFunction = () => {
 You can find more information about I18next [here](https://react.i18next.com/).
 
 ### How to specify navigation tabs
-To let the developer specify navigation tabs the class View is exported as a module. It encapsulates the element which is rendered in the navigation bar and the component which is rendered in the content section. In order to specify navigation tabs the developer has to **create an array of instances of this class**. The developer is also able to create instances of the class *Group*. This class let's the developer specify groups of navigation tabs with a specified label. The array has to be passed to the UILayer's *views* property. A special property is the *name* property. In order to make internationalization possible you can pass a function besides defining a simple string. This function takes a translation function which can be used to get a translation.\
+To let the developer specify navigation tabs the class View is exported as a module. It encapsulates the element which is rendered in the navigation bar and the component which is rendered in the content section. In order to specify navigation tabs the developer has to **create an array of instances of this class**. The developer is also able to create instances of the class *Group*. This class let's the developer specify groups of navigation tabs with a specified label. The array has to be passed to the UILayer's *views* property. A special property is the *name* property. In order to make internationalization possible you can pass a function besides defining a simple string. This function takes a translation function which can be used to get a translation. You are also able to define two booleans which allow you to define whether the UI element for the group is collapsible and whether the group should be collapsed at the beginning.\
 An example:
 ```javascript
 let views = [
@@ -161,7 +161,7 @@ let views = [
     new View(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/example2" disabled={false} selectedIcon={navFleetSelected}
       deselectedIcon={navFleetDeselected} />, SecondExampleComponent),
     new Group(
-      "Test Gruppe", otaLogo,
+      "Test Gruppe", otaLogo, true, false,
       [
         new View(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/group-example1" disabled={false} selectedIcon={navFleetSelected}
           deselectedIcon={navFleetDeselected} />, SecondExampleComponent),

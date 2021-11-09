@@ -6,9 +6,19 @@ import { AuthContext } from "../../contexts/auth";
 import { LanguageContext, Translations } from "../../contexts/language";
 import { useTranslator } from "../internationalization/translators";
 
+interface SettingsOption {
+    identifier: string;
+    [key: string]: any;
+}
+
+export interface MenuOptions {
+    additionalItems?: MenuItem[];
+    options?: SettingsOption[];
+}
+
 interface Props {
     hideMenu: (e: React.KeyboardEvent) => void;
-    settingsMenuItems?: MenuItem[];
+    menuOptions?: MenuOptions;
 }
 
 export const SettingsMenu = React.forwardRef<ContextMenu, Props>((props, ref) => {
@@ -53,25 +63,31 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>((props, ref) =>
         );
     }
 
-    const basicOptions = (
+    const basicOptions: MenuItem[] = (
         [
             {
                 label: t("Language"),
                 icon: 'pi pi-comment',
                 items: options.sort((option1, option2) => option1.label === option2.label ? 0 : option1.label < option2.label ? -1 : 1)
-            },
+            }
+        ]
+    );
+
+    let logoutOption = getOptionByIdentifier(props.menuOptions?.options, "logout");
+    if (!logoutOption || (logoutOption && !logoutOption.hidden)) {
+        basicOptions.push(
             {
                 label: "Logout",
                 icon: "pi pi-sign-out",
                 command: () => { authContext?.logout() }
             }
-        ]
-    );
+        );
+    }
 
     const model = (
-        props.settingsMenuItems ?
+        props.menuOptions?.additionalItems ?
             [
-                ...props.settingsMenuItems,
+                ...props.menuOptions.additionalItems,
                 ...basicOptions
             ]
             :
@@ -95,4 +111,11 @@ function isDialectOf(dialect: string, baseLang: string) {
 function containsLanguage(lang: string, resources: Translations) {
     let dialects = Object.keys(resources).filter(key => key === lang);
     return dialects.length === 1;
+}
+
+function getOptionByIdentifier(options: SettingsOption[] | undefined, identifier: string) {
+    if (options !== undefined) {
+        return options.find(option => option.identifier === identifier);
+    }
+    return undefined;
 }

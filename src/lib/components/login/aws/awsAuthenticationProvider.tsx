@@ -68,15 +68,23 @@ export class AWSAuthenticationProvider extends Component<React.PropsWithChildren
 
     // Executes func. If it fails and throws NotAuthedError the session will be refreshed and the execution retried.
     // If it fails again the error will not be catched.
-    execIfAuthed(func: securableFunctionType) {
-        return func().then(response => {
-            if (response.status === 401) {
-                return this.refreshSession()
-                    .then(func)
-            } else {
-                return response;
-            }
-        });
+    execIfAuthed(url: string, settings: Object, func: securableFunctionType) {
+        return fetch(url, settings)
+            .then((response) => {
+                if (response.status === 401) {
+                    return this.refreshSession()
+                        .then(() => fetch(url, settings))
+                        .then((responseAfterAuth) => {
+                            if (response.status === 401) {
+                                throw response;
+                            } else {
+                                return func(responseAfterAuth);
+                            }
+                        });
+                } else {
+                    return func(response);
+                }
+            })
     }
 
     hasAuthenticated = () => {

@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 
-import { AuthContext } from "../../../contexts/auth";
+import { AuthContext, SecurableFunctionType } from "../../../contexts/auth";
 import {
     ValidUserInformation, cognitoLogin, cognitoLogout, cognitoCheckIsAuthenticated,
     cognitoCompletePassword, cognitoRefreshAccessToken
 } from "../../../services/cognitoService";
-import { AuthenticationProvider, Credentials, securableFunctionType } from "../../../contexts/auth";
+import { AuthenticationProvider, Credentials } from "../../../contexts/auth";
 
 export interface Props {
     configureAmplify: () => void;
@@ -66,9 +66,9 @@ export class AWSAuthenticationProvider extends Component<React.PropsWithChildren
         });
     }
 
-    // Executes func. If it fails and throws NotAuthedError the session will be refreshed and the execution retried.
-    // If it fails again the error will not be catched.
-    execIfAuthed(url: string, settings: Object, func: securableFunctionType) {
+    // This function tries to fetch the data from the given url and pass it to func. If the response status is 401, this function will try to renew the session.
+    // If the second try to fetch the data fails, this function will throw the response as an error.
+    execIfAuthed = (url: string, func: SecurableFunctionType, settings?: Object) => {
         return fetch(url, settings)
             .then((response) => {
                 if (response.status === 401) {

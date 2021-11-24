@@ -1,1 +1,1 @@
-export * from "./lib/components/login/aws/awsAuthenticationView";
+export * from "./lib/components/authentication/aws/awsAuthenticationView";

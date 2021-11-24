@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
-import { AuthContext } from "../../../contexts/auth";
-import { AuthenticationProvider, Credentials, securableFunctionType } from "../../../contexts/auth";
+import { AuthContext, SecurableFunctionType } from "../../../contexts/auth";
+import { AuthenticationProvider, Credentials } from "../../../contexts/auth";
 
 export interface State {
     hasAuthenticated: boolean;
@@ -17,8 +17,15 @@ export class DummyAuthenticationProvider extends Component<React.PropsWithChildr
         }
     }
 
-    execIfAuthed(func: securableFunctionType) {
-        return func();
+    execIfAuthed = (url: string, func: SecurableFunctionType, settings?: Object) => {
+        return fetch(url, settings)
+            .then((response) => {
+                if (response.status === 401) {
+                    throw response;
+                } else {
+                    return func(response);
+                }
+            });
     }
 
     login = (credentials: Credentials) => {

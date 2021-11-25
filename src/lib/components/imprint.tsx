@@ -6,7 +6,7 @@ export const Imprint = () => {
     return (
         <div className="p-d-flex" style={{ height: "100%", width: "100%", justifyContent: "center", alignItems: "center" }}>
             <div style={{ textAlign: "center" }}>
-                <h5>Impressum</h5>
+                <h5>{t("Imprint")}</h5>
                 <span>IAV GmbH Ingenieurgesellschaft Auto und Verkehr</span><br />
                 <span>Carnotstraße 1</span><br />
                 <span>10587 Berlin</span> <br />

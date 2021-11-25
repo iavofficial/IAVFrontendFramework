@@ -2,7 +2,7 @@ import React, { FormEvent } from "react";
 import { Link } from "react-router-dom";
 
 import { BLUE4 } from "../../../constants";
-import AppLogo from "../../../assets/app_logo.png";
+import AppLogo from "../../../assets/images/app_logo.png";
 import { AuthContext } from "../../../contexts/auth";
 import { LoginButtonWithSpinner } from "../loginButtonWithSpinner";
 import { useState } from "react";

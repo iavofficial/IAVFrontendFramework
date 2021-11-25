@@ -22,12 +22,12 @@ export interface Props {
     tabAndContentWrappers: TabAndContentWrapper[];
     startingPoint: string;
     menuOptions?: MenuOptions;
-    loginView?: React.ComponentType<any>;
+    authenticationView?: React.ComponentType<any>;
 }
 
 export const UILayer = (props: Props) => {
     const authContext = useContext(AuthContext);
-    const LoginView = props.loginView ? props.loginView : BasicAuthenticationView;
+    const AuthenticationView = props.authenticationView ? props.authenticationView : BasicAuthenticationView;
 
     const RSMView = () => (
         <div className={"p-d-flex p-flex-column"} style={{ height: "100%", bottom: "0" }}>
@@ -50,7 +50,7 @@ export const UILayer = (props: Props) => {
                     <Redirect to="/login" />
                 }
                 <Switch>
-                    <Route path="/login" component={LoginView} />
+                    <Route path="/login" component={AuthenticationView} />
                     {!authContext?.hasAuthenticated() && <Route path="/imprint" component={Imprint} />}
                     {authContext?.hasAuthenticated() && <Route path="/" component={RSMView} />}
                 </Switch>

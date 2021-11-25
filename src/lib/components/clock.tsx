@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTranslator } from "./internationalization/translators";
 
-interface State {
-    date: Date;
-}
-
 export const Clock = () => {
     const t = useTranslator();
     const [date, setDate] = useState(new Date());

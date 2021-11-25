@@ -5,10 +5,6 @@ import { BLUE1, GRAY2, TAB_HEIGHT } from "../../../constants";
 import { useTranslator } from "../../internationalization/translators";
 import { navbarTabProps } from "./navbarTab";
 
-interface State {
-    hovering: Boolean
-}
-
 export const SimpleNavbarTab = (props: navbarTabProps) => {
 
     const active = useLocation().pathname === props.to;

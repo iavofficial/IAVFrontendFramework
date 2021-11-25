@@ -136,7 +136,7 @@ function App() {
       <GlobalDataLayer translations={translations} >
         <FirstExampleContextComponent>
           <SecondExampleContextComponent>
-            <UILayer tabAndContentWrappers={views} startingPoint="/" loginView={AWSAuthenticationView} menuOptions={menuOptions} />
+            <UILayer tabAndContentWrappers={views} startingPoint="/" authenticationView={AWSAuthenticationView} menuOptions={menuOptions} />
           </SecondExampleContextComponent>
         </FirstExampleContextComponent>
       </GlobalDataLayer>

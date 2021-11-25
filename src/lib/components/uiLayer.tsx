@@ -9,7 +9,7 @@ import "./css/constants.css";
 import "./css/disaPage.css";
 import "./css/disaFramework.css";
 import "./css/error.css";
-import { BasicAuthenticationView } from "./login/default/basicAuthenticationView";
+import { BasicAuthenticationView } from "./authentication/default/basicAuthenticationView";
 import { DisaHeader } from "./disaHeader";
 import { Navbar } from "./navbar/navbar";
 import { Imprint } from "./imprint";

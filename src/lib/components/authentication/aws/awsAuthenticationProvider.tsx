@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 
-import { AuthContext } from "../../../contexts/auth";
+import { AuthContext, AuthenticationProvider, Credentials } from "../../../contexts/auth";
 import {
     ValidUserInformation, cognitoLogin, cognitoLogout, cognitoCheckIsAuthenticated,
     cognitoCompletePassword, cognitoRefreshAccessToken
 } from "../../../services/cognitoService";
-import { AuthenticationProvider, Credentials, securableFunctionType } from "../../../contexts/auth";
 
 export interface Props {
     configureAmplify: () => void;
@@ -21,6 +20,11 @@ export interface State {
     userAttributes: any;
     loginError: undefined | { [key: string]: any } | string;
     didRender: boolean;
+}
+
+interface FetchSettings {
+    headers?: Headers;
+    [key: string]: any;
 }
 
 export class AWSAuthenticationProvider extends Component<React.PropsWithChildren<Props>, State> implements AuthenticationProvider {
@@ -66,17 +70,46 @@ export class AWSAuthenticationProvider extends Component<React.PropsWithChildren
         });
     }
 
-    // Executes func. If it fails and throws NotAuthedError the session will be refreshed and the execution retried.
-    // If it fails again the error will not be catched.
-    execIfAuthed(func: securableFunctionType) {
-        return func().then(response => {
-            if (response.status === 401) {
-                return this.refreshSession()
-                    .then(func)
+    generateSettingsWithAuthFrom = (settings: FetchSettings | undefined) => {
+        if (settings !== undefined) {
+            if ("headers" in settings) {
+                if (!settings.headers?.has("Authorization")) {
+                    const settingsWithAuth = Object.assign({}, settings);
+                    settingsWithAuth.headers?.set(
+                        "Authorization",
+                        "Bearer " + this.state.userData.jwtToken
+                    );
+                    return settingsWithAuth;
+                }
             } else {
-                return response;
+                return Object.assign(
+                    settings,
+                    {
+                        headers: new Headers({ Authorization: "Bearer " + this.state.userData.jwtToken })
+                    }
+                )
             }
-        });
+        } else {
+            return {
+                headers: new Headers({ Authorization: "Bearer " + this.state.userData.jwtToken })
+            };
+        }
+    }
+
+    // This function tries to fetch the data from the given url. If the response status is 401, this function will try to renew the session.
+    fetchAuthed = (url: string, settings?: FetchSettings) => {
+        return fetch(url, this.generateSettingsWithAuthFrom(settings))
+            .then((response) => {
+                if (response.status === 401) {
+                    return this.refreshSession()
+                        .then(() => fetch(url, this.generateSettingsWithAuthFrom(settings)))
+                        .then((responseAfterAuth) => {
+                            return responseAfterAuth;
+                        });
+                } else {
+                    return response;
+                }
+            })
     }
 
     hasAuthenticated = () => {
@@ -186,7 +219,7 @@ export class AWSAuthenticationProvider extends Component<React.PropsWithChildren
         return (
             <AuthContext.Provider value={{
                 ...this.state, login: this.login, completePassword: this.completePassword, logout: this.logout, getUsername: this.getUsername,
-                getUserGroups: this.getUserGroups, refreshSession: this.refreshSession, hasAuthenticated: this.hasAuthenticated, execIfAuthed: this.execIfAuthed
+                getUserGroups: this.getUserGroups, refreshSession: this.refreshSession, hasAuthenticated: this.hasAuthenticated, fetchAuthed: this.fetchAuthed
             }}>
                 {this.props.children}
             </AuthContext.Provider>

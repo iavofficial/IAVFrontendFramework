@@ -4,7 +4,7 @@ import { CookiesProvider } from "react-cookie";
 import { AuthContext } from "../contexts/auth";
 import { Translations } from "../contexts/language";
 import { DefaultLanguageProvider } from "./internationalization/defaultLanguageProvider";
-import { DummyAuthenticationProvider } from "./login/default/dummyAuthenticationProvider";
+import { DummyAuthenticationProvider } from "./authentication/default/dummyAuthenticationProvider";
 
 interface Props {
     translations?: Translations;

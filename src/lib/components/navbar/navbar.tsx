@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { ContextMenu } from 'primereact/contextmenu';
 
 import "../css/navbar.css";
-import UserPic from "../../assets/user.png";
-import Settings from "../../assets/settings.png";
+import UserPic from "../../assets/images/user.png";
+import Settings from "../../assets/images/settings.png";
 import { Clock } from "../clock";
 import { BLUE3, TAB_HEIGHT } from "../../constants";
 import { AuthContext } from "../../contexts/auth";

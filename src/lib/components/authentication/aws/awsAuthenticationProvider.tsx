@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 
-import { AuthContext, SecurableFunctionType } from "../../../contexts/auth";
+import { AuthContext, SecurableFunctionType, AuthenticationProvider, Credentials } from "../../../contexts/auth";
 import {
     ValidUserInformation, cognitoLogin, cognitoLogout, cognitoCheckIsAuthenticated,
     cognitoCompletePassword, cognitoRefreshAccessToken
 } from "../../../services/cognitoService";
-import { AuthenticationProvider, Credentials } from "../../../contexts/auth";
 
 export interface Props {
     configureAmplify: () => void;

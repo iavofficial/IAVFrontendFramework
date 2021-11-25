@@ -5,15 +5,14 @@ export interface Credentials {
     password: string;
 }
 
-export type EnsureAuthHoF = (url: string, func: SecurableFunctionType, settings?: Object) => Promise<any>;
-export type SecurableFunctionType = (response: Response, ...rest: any) => any;
+type FetchAuthed = (url: string, settings?: Object) => Promise<Response>;
 
 export interface AuthenticationProvider {
     login(credentials: Credentials, ...rest: any): any;
     logout(): any;
     hasAuthenticated(): boolean;
     getUsername(): string;
-    execIfAuthed: EnsureAuthHoF;
+    fetchAuthed: FetchAuthed;
 }
 
 export interface AuthContextType {
@@ -21,7 +20,7 @@ export interface AuthContextType {
     logout(): any;
     hasAuthenticated(): boolean;
     getUsername(): string;
-    execIfAuthed: EnsureAuthHoF;
+    fetchAuthed: FetchAuthed;
     [attribute: string]: any;
 }
 

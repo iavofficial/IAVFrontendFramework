@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { AuthContext, SecurableFunctionType, AuthenticationProvider, Credentials } from "../../../contexts/auth";
+import { AuthContext, AuthenticationProvider, Credentials } from "../../../contexts/auth";
 import {
     ValidUserInformation, cognitoLogin, cognitoLogout, cognitoCheckIsAuthenticated,
     cognitoCompletePassword, cognitoRefreshAccessToken
@@ -20,6 +20,11 @@ export interface State {
     userAttributes: any;
     loginError: undefined | { [key: string]: any } | string;
     didRender: boolean;
+}
+
+interface FetchSettings {
+    headers?: Headers;
+    [key: string]: any;
 }
 
 export class AWSAuthenticationProvider extends Component<React.PropsWithChildren<Props>, State> implements AuthenticationProvider {
@@ -65,23 +70,44 @@ export class AWSAuthenticationProvider extends Component<React.PropsWithChildren
         });
     }
 
-    // This function tries to fetch the data from the given url and pass it to func. If the response status is 401, this function will try to renew the session.
-    // If the second try to fetch the data fails, this function will throw the response as an error.
-    execIfAuthed = (url: string, func: SecurableFunctionType, settings?: Object) => {
-        return fetch(url, settings)
+    generateSettingsWithAuthFrom = (settings: FetchSettings | undefined) => {
+        if (settings !== undefined) {
+            if ("headers" in settings) {
+                if (!settings.headers?.has("Authorization")) {
+                    const settingsWithAuth = Object.assign({}, settings);
+                    settingsWithAuth.headers?.set(
+                        "Authorization",
+                        "Bearer " + this.state.userData.jwtToken
+                    );
+                    return settingsWithAuth;
+                }
+            } else {
+                return Object.assign(
+                    settings,
+                    {
+                        headers: new Headers({ Authorization: "Bearer " + this.state.userData.jwtToken })
+                    }
+                )
+            }
+        } else {
+            return {
+                headers: new Headers({ Authorization: "Bearer " + this.state.userData.jwtToken })
+            };
+        }
+    }
+
+    // This function tries to fetch the data from the given url. If the response status is 401, this function will try to renew the session.
+    fetchAuthed = (url: string, settings?: FetchSettings) => {
+        return fetch(url, this.generateSettingsWithAuthFrom(settings))
             .then((response) => {
                 if (response.status === 401) {
                     return this.refreshSession()
-                        .then(() => fetch(url, settings))
+                        .then(() => fetch(url, this.generateSettingsWithAuthFrom(settings)))
                         .then((responseAfterAuth) => {
-                            if (response.status === 401) {
-                                throw response;
-                            } else {
-                                return func(responseAfterAuth);
-                            }
+                            return responseAfterAuth;
                         });
                 } else {
-                    return func(response);
+                    return response;
                 }
             })
     }
@@ -193,7 +219,7 @@ export class AWSAuthenticationProvider extends Component<React.PropsWithChildren
         return (
             <AuthContext.Provider value={{
                 ...this.state, login: this.login, completePassword: this.completePassword, logout: this.logout, getUsername: this.getUsername,
-                getUserGroups: this.getUserGroups, refreshSession: this.refreshSession, hasAuthenticated: this.hasAuthenticated, execIfAuthed: this.execIfAuthed
+                getUserGroups: this.getUserGroups, refreshSession: this.refreshSession, hasAuthenticated: this.hasAuthenticated, fetchAuthed: this.fetchAuthed
             }}>
                 {this.props.children}
             </AuthContext.Provider>

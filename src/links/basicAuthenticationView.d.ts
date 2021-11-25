@@ -1,1 +1,1 @@
-export * from "./lib/components/login/default/basicAuthenticationView";
+export * from "./lib/components/authentication/default/basicAuthenticationView";

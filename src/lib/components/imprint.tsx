@@ -1,5 +1,4 @@
 import React from "react";
-
 import { useTranslator } from "./internationalization/translators";
 
 export const Imprint = () => {

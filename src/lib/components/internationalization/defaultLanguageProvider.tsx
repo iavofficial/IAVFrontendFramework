@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import i18n from 'i18next';
-import i18next from "i18next";
 import { useTranslation } from "react-i18next";
 
 import translationEN from "../../assets/translations/en.json";
@@ -43,7 +42,7 @@ export const DefaultLanguageProvider = (props: React.PropsWithChildren<Props>) =
         setActiveLang(i18n.language);
         setLoaded(true);
     }, [props.initI18Next, cookiesAccepted]);
-    
+
     useEffect(() => {
         if (props.translations) {
             Object.keys(props.translations).forEach(key => {
@@ -65,7 +64,7 @@ export const DefaultLanguageProvider = (props: React.PropsWithChildren<Props>) =
     }
 
     const selectLanguage = (lang: string) => {
-        i18next.changeLanguage(lang);
+        i18n.changeLanguage(lang);
         setActiveLang(lang);
     }
 

@@ -1,8 +1,8 @@
 import React from "react";
 
 import "./css/disaHeader.css";
-import AppLogo from "../assets/app_logo.png";
-import CompanyLogo from "../assets/company_logo.png";
+import AppLogo from "../assets/images/app_logo.png";
+import CompanyLogo from "../assets/images/company_logo.png";
 import { BLUE4, BLUE5 } from "../constants";
 
 export const DisaHeader = () => (

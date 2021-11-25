@@ -5,14 +5,14 @@ export interface Credentials {
     password: string;
 }
 
-type FetchAuthed = (url: string, settings?: Object) => Promise<Response>;
+export type FetchAuthedFunction = (url: string, settings?: Object) => Promise<Response>;
 
 export interface AuthenticationProvider {
     login(credentials: Credentials, ...rest: any): any;
     logout(): any;
     hasAuthenticated(): boolean;
     getUsername(): string;
-    fetchAuthed: FetchAuthed;
+    fetchAuthed: FetchAuthedFunction;
 }
 
 export interface AuthContextType {
@@ -20,7 +20,7 @@ export interface AuthContextType {
     logout(): any;
     hasAuthenticated(): boolean;
     getUsername(): string;
-    fetchAuthed: FetchAuthed;
+    fetchAuthed: FetchAuthedFunction;
     [attribute: string]: any;
 }
 

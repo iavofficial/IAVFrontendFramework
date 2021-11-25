@@ -16,7 +16,6 @@ export const TabGroup = (props: React.PropsWithChildren<Props>) => {
     const t = useTranslator();
 
     const collapsible = props.collapsible !== undefined ? props.collapsible : true;
-    const collapsed = props.collapsed !== undefined ? props.collapsed : false;
 
     const header = (
         <div className="group-wrapper">

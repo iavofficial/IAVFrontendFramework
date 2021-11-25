@@ -57,20 +57,20 @@ The cookie banner component is **conditionally rendered by the *UILayer* compone
 The main components of this framework are the *GlobalDataLayer* and *UILayer* component. To do the basic setup you have to render these components in the render method of your application. The Framework is seperated in two layers in order to allow the developer to use data of the framework's contexts which are included in the *GlobalDataLayer* component.\
 An explanation for using these components:
 ```javascript
-// If you don't want to use the default login provider, the login provider would be rendered here. Login providers will get explained later on.
+// If you don't want to use the default authentication provider, the authentication provider would be rendered here. Authentication providers will get explained later on.
   <GlobalDataLayer ...properties...>
     // Your contexts or other components which need data of the framework's contexts go here.
       <DisaPage ...properties.../>
   </GlobalDataLayer>
 ```
-You will see that this frameworks provides a login system and the basic frame of a disa web application.\
+You will see that this frameworks provides a authentication system and the basic frame of a disa web application.\
 The UILayer component has the properties:
 1. tabAndContentWrappers: Array of BasicContentWrappers and groups (and other wrappers) to provide in order to render tabs in the navigation bar and the associated component.
-2. startingPoint: The "entry URL" of your application. This doesn't mean the login page but the path the user will be redirected after successfull authentication.
+2. startingPoint: The "entry URL" of your application. This doesn't mean the authentication page but the path the user will be redirected after successfull authentication.
 3. menuOptions (optional): An object which contains two arrays to configure the settings menu:
 - additionalItems (optional): An array of items which will be rendered in the settings menu. You can inspect the example project or the documentation of the [MenuModel API](https://primefaces.org/primereact/showcase/#/menumodel) for further information.
 - options: An array of objects which represent options. Options are identified by their identifier attribute. You can find a list of all options [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/List-of-all-options-for-the-settings-menu).
-4. loginView (optional): This attribute will get explained later.
+4. authenticationView (optional): This attribute will get explained later.
 
 The GlobalDataLayer has the properties:
 1. translations (optional): Translations for internationalization
@@ -103,7 +103,7 @@ The .json file has to include simple key value pairs like this:
   "promote_programming": "Programming is fun!"
 }
 ```
-The key *option_name* is mandatory. The corresponding value will be listed in the language selection menu. You can find the translation keys used by the framework [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/Internationalization-keys-used-by-the-framework). (You will need these to internationalize certain framework components like error messages of the *AWSLoginView*.)
+The key *option_name* is mandatory. The corresponding value will be listed in the language selection menu. You can find the translation keys used by the framework [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/Internationalization-keys-used-by-the-framework). (You will need these to internationalize certain framework components like error messages of the *AWSAuthenticationView*.)
 
 To specify dialects like the german dialect in Switzerland follow the following schema for keys (underscore is important):
 >Key for german: "de"\
@@ -187,16 +187,16 @@ Example:
 ```
 A detailed explanation can be found [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/How-to-create-a-component-bound-to-a-BasicContentWrapper). (It is recommended to read this section.)
 
-### Login system
-The login system is seperated into two parts: The so called LoginProvider and the LoginView. The LoginProvider is the component which handles authentication (login, logout, ...). The LoginView is just the view shown to a user when logging in. Because the authentication provider and the view are seperated it's possible to mix login providers and views.
+### Authentication system
+The authentication system is seperated into two parts: The so called AuthenticationProvider and the AuthenticationView. The AuthenticationProvider is the component which handles authentication (login, logout, ...). The AuthenticationView is just the view shown to a user when logging in. Because the authentication provider and the view are seperated it's possible to mix authentication providers and views.
 
-The disa framework already provides two login providers. These are the AWSLoginProvider and the DummyLoginProvider. The AWSLoginProvider uses Amplify and is able to handle authentication with AWS. To use this login provider you have to use Amplify and configure it. For configuration you have to define a configuration function and pass it to the *AWSLoginProvider* (further information [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/%5BExample-(TypeScript)%5D-Configuring-Amplify)). The *AWSLoginProvider* then has to wrap the *GlobalDataLayer* component inside your render method (as shown in *Getting started*). The *GlobalDataLayer* component detects that the login provider context has been initialized and will skip the default process. The dummy login provider is the default login provider (which will get used if nothing is specified) and authenticates every combination of email and password. This login provider is intended to be used while developing.
+The disa framework already provides two authentication provider. These are the AWSAuthenticationProvider and the DummyAuthenticationProvider. The AWSAuthenticationProvider uses Amplify and is able to handle authentication with AWS. To use this authentication provider you have to use Amplify and configure it. For configuration you have to define a configuration function and pass it to the *AWSAuthenticationProvider* (further information [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/%5BExample-(TypeScript)%5D-Configuring-Amplify)). The *AWSAuthenticationProvider* then has to wrap the *GlobalDataLayer* component inside your render method (as shown in *Getting started*). The *GlobalDataLayer* component detects that the authentication provider context has been initialized and will skip the default process. The dummy authentication provider is the default authentication provider (which will get used if nothing is specified) and authenticates every combination of email and password. This authentication provider is intended to be used while developing.
 
-There are also two login views provided. One is the AWSLoginView which should be used with the AWSLoginProvider. There is also the BasicLoginView component which can be used in combination with the dummy login provider. The basic login view is the default login view.
+There are also two authentiation views provided. One is the AWSAuthenticationView which should be used with the AWSAuthenticationProvider. There is also the BasicAuthenticationView component which can be used in combination with the DummyAuthenticationProvider. The BasicAuthenticationView is the DefaultAuthenticationView.
 
-In order to specify the login provider and the login view you can pass it to the *UILayer* component using the *loginView* property.
+In order to specify the authentication provider and the authentication view you can pass it to the *UILayer* component using the *authenticationView* property.
 
-It is also possible to implement own login providers and login views and pass it to the UILayer component. Further information about implementing a custom login provider can be found [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/How-to-implement-a-login-provider). Further information about implementing a custom login view can be found [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/How-to-implement-a-login-view).
+It is also possible to implement own authentication providers and authentication views and pass it to the UILayer component. Further information about implementing a custom authentication provider can be found [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/How-to-implement-a-login-provider). Further information about implementing a custom authentication view can be found [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/How-to-implement-a-login-view).
 
 ### Piecing everything together ###
 To render your components and to do configuration you can follow the structure of this code snippet. This could be returned inside the body of the render method of your App.tsx.
@@ -218,19 +218,19 @@ const optionalInitFunction = () => {
 
 render() {
   return (
-    <AWSLoginProvider apiRoot={config.API_Root}>
+    <AWSAuthenticationProvider apiRoot={config.API_Root}>
       <GlobalDataLayer translations={...} initI18Next={optionalInitFunction}>
         <FirstExampleContextComponent>
           <SecondExampleContextComponent>
-            <UILayer tabAndContentWrappers={wrappers} startingPoint="/" loginView={AWSLoginView} />
+            <UILayer tabAndContentWrappers={wrappers} startingPoint="/" authenticationView={AWSAuthenticationView} />
           </SecondExampleContextComponent>
         </FirstExampleContextComponent>
       </GlobalDataLayer>
-    </AWSLoginProvider>
+    </AWSAuthenticationProvider>
   );
 }
 ```
 
 ### Ensure a valid authentication when accessing protected resources
-To access protected resources you have to ensure that the user is currently authenticated. For this purpose every login provider has to implement the execIfAuthed method. This method takes a function and tries to execute it. If it fails the method may refresh the session / token and retry the passed function (so does the AWSLoginProvider). The passed function has to return a JavaScript Promise. The execIfAuthed method also returns a Promise.\
-The AWSLoginProvider tries to refresh the access token and retries your method if your method throws an error including the attribute code with it's value being *NotAuthedError*.
+To access protected resources you have to ensure that the user is currently authenticated. For this purpose every authentication provider has to implement the fetchAuthed method. This function takes an url as a mandatory parameter and a settings object as an optional parameter. These parameters are used for a call of the fetch method. It returns a Promise which contains the response. The AWSAuthenticationProvider tries to refresh the access token if the response status is 401.\
+The AWSAuthenticationProvider also adds the "Authorization" header to the request, containing the JWT token. If you want to override this header just specify the "Authorization" header in the headers attribute of your settings object.

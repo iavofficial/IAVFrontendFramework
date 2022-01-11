@@ -37,6 +37,7 @@ import { SecondExampleComponent } from "./components/secondExampleComponent";
 import { TranslateFunctionType } from "disa-framework/language";
 import { useState } from "react";
 import { ClassComponentContainer } from "./components/classComponentContainer";
+import { LegalDocuments } from "./components/legalDocuments";
 
 const authConfig = {
   // REQUIRED - Amazon Cognito Region
@@ -136,7 +137,8 @@ function App() {
       <GlobalDataLayer translations={translations} >
         <FirstExampleContextComponent>
           <SecondExampleContextComponent>
-            <UILayer tabAndContentWrappers={views} startingPoint="/" authenticationView={AWSAuthenticationView} menuOptions={menuOptions} />
+            <UILayer tabAndContentWrappers={views} startingPoint="/" authenticationView={AWSAuthenticationView} menuOptions={menuOptions}
+              documentsLabelKey="Legal_documents" documentsComponent={LegalDocuments} />
           </SecondExampleContextComponent>
         </FirstExampleContextComponent>
       </GlobalDataLayer>

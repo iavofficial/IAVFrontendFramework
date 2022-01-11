@@ -15,6 +15,7 @@ import { useTranslator } from "../internationalization/translators";
 interface Props {
     tabAndContentWrappers: TabAndContentWrapper[];
     menuOptions?: MenuOptions;
+    documentsLabelKey?: string;
 }
 
 export const Navbar = (props: Props) => {
@@ -51,7 +52,7 @@ export const Navbar = (props: Props) => {
 
             <div style={{ marginTop: "auto" }}>
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                    <Link style={{ fontWeight: "bolder", color: "black" }} to="/imprint">{t("Imprint")}</Link>
+                    <Link style={{ fontWeight: "bolder", color: "black" }} to="/documents">{t(props.documentsLabelKey ? props.documentsLabelKey : "Imprint")}</Link>
                 </div>
                 <Clock />
             </div>

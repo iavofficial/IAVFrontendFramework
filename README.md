@@ -71,6 +71,8 @@ The UILayer component has the properties:
 - additionalItems (optional): An array of items which will be rendered in the settings menu. You can inspect the example project or the documentation of the [MenuModel API](https://primefaces.org/primereact/showcase/#/menumodel) for further information.
 - options: An array of objects which represent options. Options are identified by their identifier attribute. You can find a list of all options [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/List-of-all-options-for-the-settings-menu).
 4. authenticationView (optional): This attribute will get explained later.
+5. documentsComponent: By using this property you are able to replace the default imprint with an own component. This allows you to display a customized list of legal documents.
+6. documentsLabelKey: By using this property you are able to replace the "Imprint" text at the bottom of the navigation bar. You have to pass a string which is the key of corresponding translations in your translation files.
 
 The GlobalDataLayer has the properties:
 1. translations (optional): Translations for internationalization
@@ -121,7 +123,7 @@ class FirstExampleComponentUnprocessed extends Component<AppliedTranslationProps
   // ...
   render() {
     return(
-      <div>Translation: {t("imprint")}</div>
+      <div>Translation: {t("Imprint")}</div>
     );
   }
 }

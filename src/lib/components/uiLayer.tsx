@@ -23,19 +23,30 @@ export interface Props {
     startingPoint: string;
     menuOptions?: MenuOptions;
     authenticationView?: React.ComponentType<any>;
+    documentsComponent?: React.ComponentType<any>;
+    documentsLabelKey?: string;
 }
 
 export const UILayer = (props: Props) => {
     const authContext = useContext(AuthContext);
     const AuthenticationView = props.authenticationView ? props.authenticationView : BasicAuthenticationView;
 
+    const DefaultImprint = () => (
+        <div className="p-d-flex" style={{ height: "100%", width: "100%", justifyContent: "center", alignItems: "center" }}>
+            <Imprint />
+        </div>
+    );
+
+    // className="p-d-flex p-flex-column"
     const RSMView = () => (
-        <div className={"p-d-flex p-flex-column"} style={{ height: "100%", bottom: "0" }}>
-            <DisaHeader />
-            <div className="p-d-flex" style={{ height: "100%", margin: "0" }}>
-                <Navbar tabAndContentWrappers={props.tabAndContentWrappers} menuOptions={props.menuOptions} />
+        <div style={{ display: "flex", flexDirection: "column", height: "100%", bottom: "0" }}>
+            <div style={{ flex: "0 0 auto" }}>
+                <DisaHeader />
+            </div>
+            <div style={{ display: "flex", flex: "1 1 auto", overflow: "auto" }}>
+                <Navbar tabAndContentWrappers={props.tabAndContentWrappers} menuOptions={props.menuOptions} documentsLabelKey={props.documentsLabelKey} />
                 {props.tabAndContentWrappers.map(wrapper => wrapper.getRoutes())}
-                <Route exact path="/imprint" component={Imprint} />
+                <Route exact path="/documents" component={props.documentsComponent ? props.documentsComponent : DefaultImprint} />
             </div>
         </div>
     );
@@ -51,7 +62,7 @@ export const UILayer = (props: Props) => {
                 }
                 <Switch>
                     <Route path="/login" component={AuthenticationView} />
-                    {!authContext?.hasAuthenticated() && <Route path="/imprint" component={Imprint} />}
+                    {!authContext?.hasAuthenticated() && <Route path="/documents" component={props.documentsComponent ? props.documentsComponent : DefaultImprint} />}
                     {authContext?.hasAuthenticated() && <Route path="/" component={RSMView} />}
                 </Switch>
             </Router>

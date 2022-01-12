@@ -1,3 +1,4 @@
+import React from "react";
 import { FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -7,8 +8,9 @@ import { AuthContext } from "../../../contexts/auth";
 import { LoginButtonWithSpinner } from "../loginButtonWithSpinner";
 import { useContext } from "react";
 import { useTranslator } from "../../internationalization/translators";
+import { AuthenticationViewProps } from "../aws/authenticationView";
 
-export const BasicAuthenticationView = () => {
+export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -43,7 +45,11 @@ export const BasicAuthenticationView = () => {
                         </div>
                     </form>
                 </div>
-                <Link style={{ alignSelf: "center", fontWeight: "bolder", color: "black" }} to="/imprint">{t("Imprint")}</Link>
+                <Link style={{ alignSelf: "center", fontWeight: "bolder", color: "black" }} to="/documents" target="_blank">
+                    {
+                        t(props.documentsLabelKey ? props.documentsLabelKey : "Imprint")
+                    }
+                </Link>
                 <span style={{ padding: "10px", alignSelf: "center" }}>&copy; IAV GmbH 2021</span>
             </div>
         </div >

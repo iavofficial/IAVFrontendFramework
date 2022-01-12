@@ -8,8 +8,9 @@ import { LoginButtonWithSpinner } from "../loginButtonWithSpinner";
 import { useState } from "react";
 import { useContext } from "react";
 import { useTranslator } from "../../internationalization/translators";
+import { AuthenticationViewProps } from "./authenticationView";
 
-export const AWSAuthenticationView = () => {
+export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -88,7 +89,7 @@ export const AWSAuthenticationView = () => {
             </div>
         </form>
     );
-    
+
     return (
         <div className="p-d-flex" style={{ height: "100%" }}>
             <div className="p-d-flex p-flex-column p-shadow-10" style={{ width: "500px", margin: "auto" }}>
@@ -99,7 +100,11 @@ export const AWSAuthenticationView = () => {
                 <div className="p-d-flex" style={{ justifyContent: "center", marginBottom: "30px" }}>
                     {authContext?.isNewPasswordRequired ? NewPasswordForm : LoginForm}
                 </div>
-                <Link style={{ alignSelf: "center", fontWeight: "bolder", color: "black" }} to="/imprint">{t("Imprint")}</Link>
+                <Link style={{ alignSelf: "center", fontWeight: "bolder", color: "black" }} to="/documents" target="_blank">
+                    {
+                        t(props.documentsLabelKey ? props.documentsLabelKey : "Imprint")
+                    }
+                </Link>
                 <span style={{ padding: "10px", alignSelf: "center" }}>&copy; IAV GmbH 2021</span>
             </div>
         </div >

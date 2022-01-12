@@ -3,7 +3,7 @@ import "primereact/resources/themes/nova/theme.css";
 import "primereact/resources/primereact.css";
 import "primeicons/primeicons.css";
 import React, { useContext } from "react";
-import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Redirect, Route, Switch, useLocation } from "react-router-dom";
 
 import "./css/constants.css";
 import "./css/disaPage.css";
@@ -17,12 +17,13 @@ import { CookieBanner } from "./cookie/cookieBanner";
 import { AuthContext } from "../contexts/auth";
 import { TabAndContentWrapper } from "./navbar/wrapper/tabAndContentWrapper";
 import { MenuOptions } from "./navbar/menu";
+import { AuthenticationViewProps } from "./authentication/aws/authenticationView";
 
 export interface Props {
     tabAndContentWrappers: TabAndContentWrapper[];
     startingPoint: string;
     menuOptions?: MenuOptions;
-    authenticationView?: React.ComponentType<any>;
+    authenticationView?: React.ComponentType<AuthenticationViewProps & any>;
     documentsComponent?: React.ComponentType<any>;
     documentsLabelKey?: string;
 }
@@ -51,17 +52,30 @@ export const UILayer = (props: Props) => {
         </div>
     );
 
+    const Redirector = () => {
+        const location = useLocation();
+
+        if (!authContext?.hasAuthenticated()) {
+            if (location.pathname !== "/documents") {
+                return <Redirect to={"/login"} />
+            }
+            return <></>;
+        }
+
+        if (location.pathname === "/login") {
+            return <Redirect to={props.startingPoint.valueOf()} />;
+        }
+
+        return <></>;
+    }
+
     return (
         <>
             <CookieBanner />
             <Router>
-                {authContext?.hasAuthenticated() ?
-                    <Redirect to={props.startingPoint.valueOf()} />
-                    :
-                    <Redirect to="/login" />
-                }
+                <Redirector />
                 <Switch>
-                    <Route path="/login" component={AuthenticationView} />
+                    <Route path="/login" component={() => <AuthenticationView documentsLabelKey={props.documentsLabelKey} />} />
                     {!authContext?.hasAuthenticated() && <Route path="/documents" component={props.documentsComponent ? props.documentsComponent : DefaultImprint} />}
                     {authContext?.hasAuthenticated() && <Route path="/" component={RSMView} />}
                 </Switch>

@@ -28,7 +28,7 @@ import { FirstExampleContextComponent } from './contexts/FirstExampleContext';
 import { SecondExampleContextComponent } from './contexts/SecondExampleContext';
 import { SimpleNavbarTab } from "disa-framework/simpleNavbarTab";
 import { PrivilegedNavbarTab } from "disa-framework/privilegedNavbarTab";
-import { FirstExampleComponent } from "./components/firstExampleComponent";
+import { LayoutAndContextExampleComponent } from "./components/layoutAndContextExampleComponent";
 import { ThirdExampleComponent } from "./components/thirdExampleComponent";
 import { FourthExampleComponent } from "./components/fourthExampleComponent";
 import { SecondExampleComponent } from "./components/secondExampleComponent";
@@ -61,7 +61,7 @@ function App() {
 
   const views = [
     new BasicContentWrapper(<SimpleNavbarTab name={"Example without Translation"} to="/" disabled={false} selectedIcon={navDashboardSelected}
-      deselectedIcon={navDashboardDeselected} />, FirstExampleComponent),
+      deselectedIcon={navDashboardDeselected} />, LayoutAndContextExampleComponent),
     new BasicContentWrapper(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 1 })} to="/example2" disabled={false}
       selectedIcon={navFleetSelected} deselectedIcon={navFleetDeselected} />, SecondExampleComponent),
     new BasicContentWrapper(<PrivilegedNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/example3" disabled={false}

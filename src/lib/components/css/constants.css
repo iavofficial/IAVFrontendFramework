@@ -1,13 +1,21 @@
 :root {
-    --navbar_width: 271px;
-    --tab_height: 70px;
+    --navbar-width: 271px;
+    --tab-height: 70px;
     
-    --blue_1: #5daedb;
-    --blue_3: #14639e;
-    --blue_4: #0e4a80;
-    --blue_5: #0c3868;
-    --gray_1: #f0f0f0;
-    --gray_2: #cdcdcd;
-    --gray_3: #9a9a9a;
+    --blue-1: #5daedb;
+    --blue-2: #009fca;
+    --blue-3: #14639e;
+    --blue-4: #0e4a80;
+    --blue-5: #0c3868;
+
+    --gray-1: #f0f0f0;
+    --gray-2: #cdcdcd;
+    --gray-3: #9a9a9a;
+    --gray-4: #444444;
+
+    --orange: #e6962c;
+    --green: #91c60e;
     --red: #ce0037;
+
+    --white: #ffffff;
 }

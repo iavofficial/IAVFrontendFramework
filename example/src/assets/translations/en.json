@@ -1,5 +1,7 @@
 {
     "option_name": "English",
+    "Legal_documents": "Legal documents",
+    "Customized_legal_documents": "Customized legal documents",
     "bytes_example": "{{count}} are 1KiB",
     "example_component": "Example {{count}}",
     "Example_field_local": "Example field local element {{count}}",

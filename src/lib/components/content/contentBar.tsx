@@ -6,8 +6,8 @@ interface Props {
     contentElements: ReactElement[]
 }
 
-export const Contentbar = (props: Props) => (
-    <div className="p-d-flex" style={{ height: TAB_HEIGHT }}>
+export const ContentBar = (props: Props) => (
+    <div className="p-d-flex" style={{ height: TAB_HEIGHT, minHeight: TAB_HEIGHT }}>
         {props.contentElements}
     </div>
 );

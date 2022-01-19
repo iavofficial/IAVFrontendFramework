@@ -5,6 +5,7 @@ import { MenuItem } from "primereact/components/menuitem/MenuItem";
 import { AuthContext } from "../../contexts/auth";
 import { LanguageContext, Translations } from "../../contexts/language";
 import { useTranslator } from "../internationalization/translators";
+import { useHistory } from "react-router-dom";
 
 interface SettingsOption {
     identifier: string;
@@ -22,6 +23,8 @@ interface Props {
 }
 
 export const SettingsMenu = React.forwardRef<ContextMenu, Props>((props, ref) => {
+    const history = useHistory();
+
     const authContext = useContext(AuthContext);
     const langContext = useContext(LanguageContext);
     const t = useTranslator();
@@ -79,7 +82,10 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>((props, ref) =>
             {
                 label: "Logout",
                 icon: "pi pi-sign-out",
-                command: () => { authContext?.logout() }
+                command: () => {
+                    history.push("/login");
+                    authContext?.logout();
+                }
             }
         );
     }

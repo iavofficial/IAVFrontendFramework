@@ -1,6 +1,6 @@
 {
   "name": "@disa/disa-framework",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "private": false,
   "description": "This framework takes care of a DISA application's basic structure.",
   "contributors": [
@@ -35,10 +35,6 @@
     ]
   },
   "main": "./build/disaPage.js",
-  "exports": {
-    ".": "./build/components/disaPage.js",
-    "./content": "./build/components/content.js"
-  },
   "keywords": [
     "disa-framework"
   ],
@@ -74,6 +70,6 @@
     "@types/react-router-dom": "^5.1.7",
     "aws-amplify": "^3.3.26",
     "react-scripts": "4.0.3",
-    "typescript": "^4.2.4"
+    "typescript": "^4.5.4"
   }
 }

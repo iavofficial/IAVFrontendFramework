@@ -2,19 +2,17 @@ import "primeflex/primeflex.css";
 import "primereact/resources/themes/nova/theme.css";
 import "primereact/resources/primereact.css";
 import "primeicons/primeicons.css";
-import Amplify from "@aws-amplify/core";
 import { SelectButton } from 'primereact/selectbutton';
 import { UILayer } from 'disa-framework/uiLayer';
 import { GlobalDataLayer } from "disa-framework/globalDataLayer";
-import { AWSAuthenticationProvider } from "disa-framework/awsAuthenticationProvider";
-import { AWSAuthenticationView } from "disa-framework/awsAuthenticationView";
+import { DummyAuthenticationProvider } from "disa-framework/dummyAuthenticationProvider";
+import { BasicAuthenticationView } from "disa-framework/basicAuthenticationView";
 import { BasicContentWrapper } from "disa-framework/basicContentWrapper";
 import { Group } from "disa-framework/group";
 import translationES from "./assets/translations/es.json";
 import translationEN from "./assets/translations/en.json";
 import translationDE from "./assets/translations/de.json";
 import translationDECH from "./assets/translations/de-CH.json";
-import { config } from "./config_disa-framework_test";
 import navDashboardSelected from "./assets/nav_dashboard_selected.png";
 import navDashboardDeselected from "./assets/nav_dashboard_deselected.png";
 import navDiagnosticsSelected from "./assets/nav_diagnostics_selected.png";
@@ -30,43 +28,14 @@ import { FirstExampleContextComponent } from './contexts/FirstExampleContext';
 import { SecondExampleContextComponent } from './contexts/SecondExampleContext';
 import { SimpleNavbarTab } from "disa-framework/simpleNavbarTab";
 import { PrivilegedNavbarTab } from "disa-framework/privilegedNavbarTab";
-import { FirstExampleComponent } from "./components/firstExampleComponent";
+import { LayoutAndContextExampleComponent } from "./components/layoutAndContextExampleComponent";
 import { ThirdExampleComponent } from "./components/thirdExampleComponent";
 import { FourthExampleComponent } from "./components/fourthExampleComponent";
 import { SecondExampleComponent } from "./components/secondExampleComponent";
 import { TranslateFunctionType } from "disa-framework/language";
 import { useState } from "react";
 import { ClassComponentContainer } from "./components/classComponentContainer";
-
-const authConfig = {
-  // REQUIRED - Amazon Cognito Region
-  region: config.REGION,
-
-  // OPTIONAL - Amazon Cognito User Pool ID
-  userPoolId: config.COGNITO_POOL_ID,
-
-  // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
-  userPoolWebClientId: config.COGNITO_APP_CLIENT_ID,
-
-  // OPTIONAL - Configuration for cookie storage
-  // Note: if the secure flag is set to true, then the cookie transmission requires a secure protocol
-  cookieStorage: {
-    // REQUIRED - Cookie domain (only required if cookieStorage is provided)
-    domain: config.DOMAIN,
-    // OPTIONAL - Cookie path
-    path: '/',
-    // OPTIONAL - Cookie expiration in days
-    expires: 365,
-    // OPTIONAL - See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite
-    sameSite: "lax",
-    // OPTIONAL - Cookie secure flag
-    // Either true or false, indicating if the cookie transmission requires a secure protocol (https).
-    secure: config.DOMAIN !== "localhost"
-  },
-
-  // OPTIONAL - Manually set the authentication flow type. Default is 'USER_SRP_AUTH'
-  authenticationFlowType: 'USER_SRP_AUTH',
-};
+import { LegalDocuments } from "./components/legalDocuments";
 
 function App() {
 
@@ -92,7 +61,7 @@ function App() {
 
   const views = [
     new BasicContentWrapper(<SimpleNavbarTab name={"Example without Translation"} to="/" disabled={false} selectedIcon={navDashboardSelected}
-      deselectedIcon={navDashboardDeselected} />, FirstExampleComponent),
+      deselectedIcon={navDashboardDeselected} />, LayoutAndContextExampleComponent),
     new BasicContentWrapper(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 1 })} to="/example2" disabled={false}
       selectedIcon={navFleetSelected} deselectedIcon={navFleetDeselected} />, SecondExampleComponent),
     new BasicContentWrapper(<PrivilegedNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/example3" disabled={false}
@@ -132,15 +101,16 @@ function App() {
   );
 
   return (
-    <AWSAuthenticationProvider configureAmplify={() => { Amplify.configure(authConfig); }}>
+    <DummyAuthenticationProvider additionalContextValues={{ getUserGroups: () => [] }}>
       <GlobalDataLayer translations={translations} >
         <FirstExampleContextComponent>
           <SecondExampleContextComponent>
-            <UILayer tabAndContentWrappers={views} startingPoint="/" authenticationView={AWSAuthenticationView} menuOptions={menuOptions} />
+            <UILayer tabAndContentWrappers={views} startingPoint="/" authenticationView={BasicAuthenticationView} menuOptions={menuOptions}
+              documentsLabelKey="Legal_documents" documentsComponent={LegalDocuments} />
           </SecondExampleContextComponent>
         </FirstExampleContextComponent>
       </GlobalDataLayer>
-    </AWSAuthenticationProvider>
+    </DummyAuthenticationProvider>
   );
 }
 

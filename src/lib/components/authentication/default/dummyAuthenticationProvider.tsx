@@ -3,13 +3,17 @@ import React, { Component } from "react";
 import { AuthContext } from "../../../contexts/auth";
 import { AuthenticationProvider, Credentials } from "../../../contexts/auth";
 
+export interface Props {
+    additionalContextValues?: { [key: string]: any };
+}
+
 export interface State {
     hasAuthenticated: boolean;
     username: string;
 }
 
-export class DummyAuthenticationProvider extends Component<React.PropsWithChildren<any>, State> implements AuthenticationProvider {
-    constructor(props: React.PropsWithChildren<any>) {
+export class DummyAuthenticationProvider extends Component<React.PropsWithChildren<Props>, State> implements AuthenticationProvider {
+    constructor(props: React.PropsWithChildren<Props>) {
         super(props);
         this.state = {
             hasAuthenticated: false,
@@ -45,10 +49,15 @@ export class DummyAuthenticationProvider extends Component<React.PropsWithChildr
 
     render() {
         return (
-            <AuthContext.Provider value={{
-                ...this.state, hasAuthenticated: this.hasAuthenticated,
-                login: this.login, logout: this.logout, getUsername: this.getUsername, fetchAuthed: this.fetchAuthed
-            }}>
+            <AuthContext.Provider value={
+                Object.assign(
+                    {
+                        ...this.state, hasAuthenticated: this.hasAuthenticated, login: this.login, logout: this.logout,
+                        getUsername: this.getUsername, fetchAuthed: this.fetchAuthed
+                    },
+                    this.props.additionalContextValues
+                )
+            }>
                 {this.props.children}
             </AuthContext.Provider>
         );

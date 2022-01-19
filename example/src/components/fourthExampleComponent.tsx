@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { Content } from "disa-framework/content";
-import { SecondExampleContext } from "../contexts/SecondExampleContext";
-import { applyTranslation, AppliedTranslationProps } from "disa-framework/translators";
+import React, {Component} from "react";
+import {Content, LayoutBehaviour} from "disa-framework/content";
+import {SecondExampleContext} from "../contexts/SecondExampleContext";
+import {AppliedTranslationProps, applyTranslation} from "disa-framework/translators";
 
 class FourthExampleComponentUnprocessed extends Component<AppliedTranslationProps> {
 
@@ -11,7 +11,7 @@ class FourthExampleComponentUnprocessed extends Component<AppliedTranslationProp
 
     render() {
         return (
-            <Content contentElements={this.context.contentTabs}>
+            <Content layoutBehaviour={LayoutBehaviour.FLEX} contentElements={this.context.contentTabs}>
                 <div>{this.props.t("component_deactivated")}</div>
             </Content>
         );

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { SecondExampleContext } from "../contexts/SecondExampleContext";
-import { Content } from "disa-framework/content";
+import {Content, LayoutBehaviour} from "disa-framework/content";
 import { applyTranslation, AppliedTranslationProps } from "disa-framework/translators";
 
 class SecondExampleComponentUnprocessed extends Component<AppliedTranslationProps> {
@@ -11,7 +11,7 @@ class SecondExampleComponentUnprocessed extends Component<AppliedTranslationProp
 
     render() {
         return (
-            <Content contentElements={this.context.contentTabs}>
+            <Content layoutBehaviour={LayoutBehaviour.FLEX} contentElements={this.context.contentTabs}>
                 <div>{this.props.t("Example_component")}</div>
             </Content>
         );

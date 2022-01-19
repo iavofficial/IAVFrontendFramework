@@ -21,12 +21,12 @@
 }
 
 #navbar {
-    width: var(--navbar_width);
+    width: var(--navbar-width);
 }
 
 .navbar-tab {
     border-style: solid;
-    border-width: 0px 0px 1px 0px;
+    border-width: 0 0 1px 0;
 }
 
 .navbar-tab img {
@@ -39,15 +39,15 @@
 }
 
 .p-accordion-content .navbar-tab-wrapper {
-    border-width: 0px 3px 0px 0px !important;
+    border-width: 0 3px 0 0 !important;
     border: solid;
-    border-color: var(--blue_1);
+    border-color: var(--blue-1);
 }
 
 .p-accordion-content .navbar-tab-wrapper.active {
-    border-width: 0px 3px 0px 0px !important;
+    border-width: 0 3px 0 0 !important;
     border: solid;
-    border-color: var(--blue_1);
+    border-color: var(--blue-1);
 }
 
 /* Anpassen des Akkordion-Styles */
@@ -58,13 +58,13 @@
 
 .p-accordion-header a {
     height: 100%;
-    padding: 0px !important;
-    border-radius: 0px !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
     background-color: white !important;
-    border-width: 0px 0px 1px 0px !important;
-    border-color: var(--gray_2) !important;
-    color: var(--blue_1) !important;
-    outline: 0px !important;
+    border-width: 0 0 1px 0 !important;
+    border-color: var(--gray-2) !important;
+    color: var(--blue-1) !important;
+    outline: 0 !important;
     font-weight: 500 !important;
 }
 

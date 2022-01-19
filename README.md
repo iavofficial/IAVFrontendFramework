@@ -78,6 +78,29 @@ The GlobalDataLayer has the properties:
 1. translations (optional): Translations for internationalization
 2. initI18Next (optional): Custom function for initializing i18next. If the user hasn't accepted cookies, i18next will be initialized by the framework regardless whether this property is specified or not. In case the property is specified the function will be executed when the user accepts cookies.
 
+### Implementing content views ###
+
+Typically, content views in a DiSA app follow a grid design with a gray background and a content bar with further context information.
+To speed up development the coarse structure is already handled with the Content and the optional ContentCell component.
+The children of the Content component are inserted according to the configured layout behaviour. There are four options to configure:
+1. `NONE` - children of the root element have no specific layout class
+2. `GRID` - parent div is a prime react grid 12 column grid
+3. `FLEX` - parent div is a flexbox
+4. `FLEX_COL` - parent div is a column flexbox
+
+The ContentCell component provides the white cell characteristics with the possibility to configure cell paddings and column width. It should be used inside a 12 column grid.
+
+```javascript
+<Content layoutBehaviour={LayoutBehaviour.GRID} contentElements={[...this.context.contentTabs]}>
+    <ContentCell colWidth={3} paddings={CellPaddings.FULL}>
+        <h1>This is a 3 wide cell with full paddings</h1>
+    </ContentCell>
+    <ContentCell colWidth={9} paddings={CellPaddings.VERT_RIGHT}>
+        <h1>This is a 9 wide cell with vertical and right paddings</h1>
+    </ContentCell>
+</Content>
+```
+
 ### Internationalization ###
 The framework uses I18next for internationalization. It provides a default initialization of I18next which automatically gets executed when the *GlobalDataLayer* component mounts. It also provides translations in english and german for texts of framework components. To setup i18next with custom translations and the default implementation of the framework you have to create an object with the following structure and pass it to the *GlobalDataLayer* component.
 ```javascript
@@ -128,7 +151,7 @@ class FirstExampleComponentUnprocessed extends Component<AppliedTranslationProps
   }
 }
 
-export const FirstExampleComponent = applyTranslation(FirstExampleComponentUnprocessed);
+export const LayoutAndContextExampleComponent = applyTranslation(FirstExampleComponentUnprocessed);
 ```
 By using the *applyTranslation* hook the framework injects the translation function *t*. You may have seen that the component has the interface *AppliedTranslationProps* as it's properties type. This interfaces is provided by the framework. It's mandatory to use this interface in order to ensure that your components takes *t*.
 
@@ -156,23 +179,32 @@ You can find more information about I18next [here](https://react.i18next.com/).
 ### How to specify navigation tabs
 To let the developer specify navigation tabs the class BasicContentWrapper is exported as a module. It encapsulates the element which is rendered in the navigation bar and the component which is rendered in the content section. In order to specify navigation tabs the developer has to **create an array of instances of this class**. The developer is also able to create instances of the class *Group*. This class let's the developer specify groups of navigation tabs with a specified label. The array has to be passed to the UILayer's *tabAndContentWrappers* property. A special property is the *name* property. In order to make internationalization possible you can pass a function besides defining a simple string. This function takes a translation function which can be used to get a translation. You are also able to define two booleans which allow you to define whether the UI element for the group is collapsible and whether the group should be collapsed at the beginning.\
 An example:
+
 ```javascript
 let wrappers = [
-    new BasicContentWrapper(<SimpleNavbarTab name={"Example without Translation"} to="/" disabled={false} selectedIcon={navDashboardSelected}
-      deselectedIcon={navDashboardDeselected} />, FirstExampleComponent),
-    new BasicContentWrapper(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/example2" disabled={false} selectedIcon={navFleetSelected}
-      deselectedIcon={navFleetDeselected} />, SecondExampleComponent),
+    new BasicContentWrapper(<SimpleNavbarTab name={"Example without Translation"} to="/" disabled={false}
+                                             selectedIcon={navDashboardSelected}
+                                             deselectedIcon={navDashboardDeselected}/>, LayoutAndContextExampleComponent),
+    new BasicContentWrapper(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", {count: 2})}
+                                             to="/example2" disabled={false} selectedIcon={navFleetSelected}
+                                             deselectedIcon={navFleetDeselected}/>, SecondExampleComponent),
     new Group(
-      "Test Gruppe", otaLogo, true, false,
-      [
-        new BasicContentWrapper(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/group-example1" disabled={false} selectedIcon={navFleetSelected}
-          deselectedIcon={navFleetDeselected} />, SecondExampleComponent),
-        new BasicContentWrapper(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/group-example2" disabled={true} selectedIcon={navFleetDetailSelected}
-          deselectedIcon={navFleetDetailDeselected} />, FourthExampleComponent)
-      ]
+        "Test Gruppe", otaLogo, true, false,
+        [
+            new BasicContentWrapper(<SimpleNavbarTab
+                name={(t: TranslateFunctionType) => t("example_component", {count: 2})} to="/group-example1"
+                disabled={false} selectedIcon={navFleetSelected}
+                deselectedIcon={navFleetDeselected}/>, SecondExampleComponent),
+            new BasicContentWrapper(<SimpleNavbarTab
+                name={(t: TranslateFunctionType) => t("example_component", {count: 2})} to="/group-example2"
+                disabled={true} selectedIcon={navFleetDetailSelected}
+                deselectedIcon={navFleetDetailDeselected}/>, FourthExampleComponent)
+        ]
     ),
-    new BasicContentWrapper(<PrivilegedNavbarTab name={(t: TranslateFunctionType) => t("example_component", { count: 2 })} to="/example4" disabled={true} selectedIcon={navExpertSelected}
-      deselectedIcon={navExpertDeselected} permittedGroups={["ADMIN"]} />, FourthExampleComponent)
+    new BasicContentWrapper(<PrivilegedNavbarTab name={(t: TranslateFunctionType) => t("example_component", {count: 2})}
+                                                 to="/example4" disabled={true} selectedIcon={navExpertSelected}
+                                                 deselectedIcon={navExpertDeselected}
+                                                 permittedGroups={["ADMIN"]}/>, FourthExampleComponent)
 ];
 ```
 You can find a detailed explanation of the attributes [here](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/BasicContentWrappers-and-Groups-in-Detail).

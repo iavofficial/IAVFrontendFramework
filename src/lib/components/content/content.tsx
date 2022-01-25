@@ -9,7 +9,6 @@ export interface Props {
 }
 
 export const Content = (props: React.PropsWithChildren<Props>) => {
-
     let contentRootClass = "";
     switch (props.layoutBehaviour) {
         case LayoutBehaviour.NONE:

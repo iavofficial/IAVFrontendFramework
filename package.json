@@ -1,6 +1,6 @@
 {
   "name": "@disa/disa-framework",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "private": false,
   "description": "This framework takes care of a DISA application's basic structure.",
   "contributors": [
@@ -42,8 +42,8 @@
     "i18next": "^20.3.5",
     "i18next-browser-languagedetector": "^6.1.2",
     "primeflex": "^2.0.0",
-    "primeicons": "^4.1.0",
-    "primereact": "^6.2.1",
+    "primeicons": "^5.0.0",
+    "primereact": "^7.2.0",
     "react-cookie": "^4.0.3",
     "react-i18next": "^11.11.4"
   },
@@ -59,17 +59,13 @@
     "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@babel/preset-react": "^7.13.13",
     "@babel/preset-typescript": "^7.12.1",
-    "@testing-library/jest-dom": "^5.11.9",
-    "@testing-library/react": "^11.2.5",
-    "@testing-library/user-event": "^12.8.3",
-    "@types/jest": "^26.0.22",
     "@types/lodash": "^4.14.168",
     "@types/node": "^12.20.7",
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.3",
     "@types/react-router-dom": "^5.1.7",
-    "aws-amplify": "^3.3.26",
-    "react-scripts": "4.0.3",
-    "typescript": "^4.5.4"
+    "aws-amplify": "^4.3.12",
+    "react-scripts": "^5.0.0",
+    "typescript": "^4.5.5"
   }
 }

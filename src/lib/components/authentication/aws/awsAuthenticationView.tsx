@@ -1,14 +1,14 @@
-import React, { FormEvent } from "react";
-import { Link } from "react-router-dom";
+import React, {FormEvent} from "react";
+import {Link} from "react-router-dom";
 
-import { BLUE4 } from "../../../constants";
+import {BLUE4} from "../../../constants";
 import AppLogo from "../../../assets/images/app_logo.png";
-import { AuthContext } from "../../../contexts/auth";
-import { LoginButtonWithSpinner } from "../loginButtonWithSpinner";
-import { useState } from "react";
-import { useContext } from "react";
-import { useTranslator } from "../../internationalization/translators";
-import { AuthenticationViewProps } from "./authenticationView";
+import {AuthContext} from "../../../contexts/auth";
+import {LoginButtonWithSpinner} from "../loginButtonWithSpinner";
+import {useState} from "react";
+import {useContext} from "react";
+import {useTranslator} from "../../internationalization/translators";
+import {AuthenticationViewProps} from "./authenticationView";
 
 export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
     const [email, setEmail] = useState("");
@@ -22,7 +22,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
         if (authContext?.isNewPasswordRequired) {
             authContext?.completePassword(password);
         } else {
-            authContext?.login({ email: email, password: password });
+            authContext?.login({email: email, password: password});
         }
     }
 
@@ -40,6 +40,9 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
                         return t("server_error");
                     }
                 } else if (error.message) {
+                    if (error.message === "UserGroupError") {
+                        return t("invalid_access_configuration");
+                    }
                     return error.message;
                 }
             } else {
@@ -50,7 +53,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
     }
 
     const NewPasswordForm = (
-        <div style={{ width: "85%" }}>
+        <div style={{width: "85%"}}>
             <div>
                 <p>{t("replace_temporary_password")}</p>
                 <ul>
@@ -62,11 +65,14 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
             </div>
             <form autoComplete="off" onSubmit={submit}>
                 <div>
-                    <label className={"inputLabel " + (authContext?.loginError ? "invalid" : "")}>{t("New_password")}</label>
-                    <input name="password" type="password" id="inputPassword" style={{ width: "100%", marginTop: "5px", marginBottom: "10px" }}
-                        className={"form-control p-inputtext " + (authContext?.loginError ? "invalid" : "")} placeholder={t("New_password")}
-                        onChange={(ev) => setPassword(ev.target.value)} required autoFocus />
-                    <LoginButtonWithSpinner isLoading={authContext?.isLoading} />
+                    <label
+                        className={"inputLabel " + (authContext?.loginError ? "invalid" : "")}>{t("New_password")}</label>
+                    <input name="password" type="password" id="inputPassword"
+                           style={{width: "100%", marginTop: "5px", marginBottom: "10px"}}
+                           className={"form-control p-inputtext " + (authContext?.loginError ? "invalid" : "")}
+                           placeholder={t("New_password")}
+                           onChange={(ev) => setPassword(ev.target.value)} required autoFocus/>
+                    <LoginButtonWithSpinner isLoading={authContext?.isLoading}/>
                     <div className="invalid">{getErrorText(authContext?.loginError)}</div>
                 </div>
             </form>
@@ -74,39 +80,42 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
     )
 
     const LoginForm = (
-        <form style={{ width: "85%", height: "100%" }} className="p-mr-4 p-mt-4" onSubmit={submit}>
+        <form style={{width: "85%", height: "100%"}} className="p-mr-4 p-mt-4" onSubmit={submit}>
             <div className={"p-d-flex p-flex-column"}>
                 <label className="inputLabel">{t("Email_address")}</label>
                 <input value={email.valueOf()} onChange={(ev) => setEmail(ev.target.value)} name="email" type="email"
-                    className={"p-inputtext"} placeholder={t("Email_address")} required style={{ marginBottom: "1rem" }} autoFocus />
-                <label className="inputLabel" >{t("Password")}</label>
-                <input value={password.valueOf()} onChange={(ev) => setPassword(ev.target.value)} name="password" type="password"
-                    className={"p-inputtext"} placeholder={t("Password")} required style={{ marginBottom: "1rem" }} />
+                       className={"p-inputtext"} placeholder={t("Email_address")} required
+                       style={{marginBottom: "1rem"}} autoFocus/>
+                <label className="inputLabel">{t("Password")}</label>
+                <input value={password.valueOf()} onChange={(ev) => setPassword(ev.target.value)} name="password"
+                       type="password"
+                       className={"p-inputtext"} placeholder={t("Password")} required style={{marginBottom: "1rem"}}/>
                 <div>
-                    <LoginButtonWithSpinner isLoading={authContext?.isLoading} />
+                    <LoginButtonWithSpinner isLoading={authContext?.isLoading}/>
                 </div>
-                <div style={{ marginTop: "20px" }} className="invalid">{getErrorText(authContext?.loginError)}</div>
+                <div style={{marginTop: "20px"}} className="invalid">{getErrorText(authContext?.loginError)}</div>
             </div>
         </form>
     );
 
     return (
-        <div className="p-d-flex" style={{ height: "100%" }}>
-            <div className="p-d-flex p-flex-column p-shadow-10" style={{ width: "500px", margin: "auto" }}>
-                <div className={"p-d-flex"} style={{ backgroundColor: BLUE4, color: "white", alignItems: "center" }}>
-                    <img src={AppLogo} alt={""} />
-                    <span style={{ fontSize: "xx-large", marginLeft: "auto", marginRight: "20px" }}>LOGIN</span>
+        <div className="p-d-flex" style={{height: "100%"}}>
+            <div className="p-d-flex p-flex-column p-shadow-10" style={{width: "500px", margin: "auto"}}>
+                <div className={"p-d-flex"} style={{backgroundColor: BLUE4, color: "white", alignItems: "center"}}>
+                    <img src={AppLogo} alt={""}/>
+                    <span style={{fontSize: "xx-large", marginLeft: "auto", marginRight: "20px"}}>LOGIN</span>
                 </div>
-                <div className="p-d-flex" style={{ justifyContent: "center", marginBottom: "30px" }}>
+                <div className="p-d-flex" style={{justifyContent: "center", marginBottom: "30px"}}>
                     {authContext?.isNewPasswordRequired ? NewPasswordForm : LoginForm}
                 </div>
-                <Link style={{ alignSelf: "center", fontWeight: "bolder", color: "black" }} to="/documents" target="_blank">
+                <Link style={{alignSelf: "center", fontWeight: "bolder", color: "black"}} to="/documents"
+                      target="_blank">
                     {
                         t(props.documentsLabelKey ? props.documentsLabelKey : "Imprint")
                     }
                 </Link>
-                <span style={{ padding: "10px", alignSelf: "center" }}>&copy; IAV GmbH 2021</span>
+                <span style={{padding: "10px", alignSelf: "center"}}>&copy; IAV GmbH 2021</span>
             </div>
-        </div >
+        </div>
     );
 }

@@ -1,6 +1,6 @@
 {
     "option_name": "German",
-    "Legal_documents": "Dokumente",
+    "Legal_documents": "Dokumente plus Text mit Umbruch",
     "Customized_legal_documents": "Angepasste Dokumente",
     "bytes_example": "{{count}} sind 1KiB",
     "example_component": "Beispiel {{count}}",

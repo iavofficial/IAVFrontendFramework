@@ -28,6 +28,9 @@ export interface Props {
     documentsLabelKey?: string;
 }
 
+// TODO: The creation of the components DefaultImprint, RSMView and Redirector inside UILayer may cause a problem.
+// Because the components are recreated every render, the Routes will get new components every render. This may cause a rerender of
+// all components which are encapsulated in this layer.
 export const UILayer = (props: Props) => {
     const authContext = useContext(AuthContext);
     const AuthenticationView = props.authenticationView ? props.authenticationView : BasicAuthenticationView;

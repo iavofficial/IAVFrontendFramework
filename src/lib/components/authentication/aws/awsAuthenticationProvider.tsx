@@ -187,13 +187,9 @@ export class AWSAuthenticationProvider extends Component<React.PropsWithChildren
     }
 
     refreshSession = () => {
-        this.setState({
-            isLoading: true
-        });
         return cognitoRefreshAccessToken().then(result => {
             if (result.getIdToken().getJwtToken()) {
                 this.setState(prevState => ({
-                    isLoading: false,
                     userData: {
                         ...prevState.userData,
                         jwtToken: result.getIdToken().getJwtToken()

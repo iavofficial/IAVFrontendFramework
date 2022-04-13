@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-import {  BLUE3NEW, GRAY2, TAB_HEIGHT } from "../../../constants";
+import { BLUE1, GRAY2, TAB_HEIGHT } from "../../../constants";
 import { useTranslator } from "../../internationalization/translators";
 import { navbarTabProps } from "./navbarTab";
 
@@ -16,7 +16,7 @@ export const SimpleNavbarTab = (props: navbarTabProps) => {
     const tabStyle = {
         height: TAB_HEIGHT,
         cursor: active || props.disabled ? "default" : "pointer",
-        backgroundColor: (active || hovering) && !props.disabled ? BLUE3NEW : "white",
+        backgroundColor: (active || hovering) && !props.disabled ? BLUE1 : "white",
         color: (active || hovering) && !props.disabled ? "white" : "black",
         opacity: props.disabled ? 0.5 : 1
     };

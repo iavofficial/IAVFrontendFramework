@@ -20,7 +20,7 @@ export const Clock = () => {
     });
 
     return (
-        <div className="p-d-flex p-jc-between p-p-3">
+        <div className="p-d-flex p-jc-between p-pl-3 p-pr-3 p-pb-1">
             <div style={{ fontWeight: 500 }}>{t("Date")}:</div>
             <div style={{ color: BLUE2NEW}}>{dateString}</div>
         </div>

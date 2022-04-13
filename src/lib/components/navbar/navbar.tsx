@@ -51,10 +51,11 @@ export const Navbar = (props: Props) => {
             {props.tabAndContentWrappers.map(wrapper => wrapper.getNavbarComponent())}
 
             <div style={{ marginTop: "auto" }}>
-                <div className={"p-px-3 p-text-center"} style={{ display: "flex", justifyContent: "center" }}>
-                    <Link style={{ fontWeight: "bolder", color: "black" }} to="/documents">{t(props.documentsLabelKey ? props.documentsLabelKey : "Imprint")}</Link>
-                </div>
                 <Clock />
+                <div className={"p-px-3 p-text-center"} style={{ display: "flex", justifyContent: "center", marginBottom:"16px"}}>
+                    <Link style={{fontSize: "13px", fontWeight: "bolder", color: "black", textDecoration: "none" }} to="/documents">{t(props.documentsLabelKey ? props.documentsLabelKey : "Imprint")}</Link>
+                </div>
+                
             </div>
 
         </div>

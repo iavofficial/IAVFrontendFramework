@@ -8,7 +8,8 @@ import { GlobalDataLayer } from "disa-framework/globalDataLayer";
 import { DummyAuthenticationProvider } from "disa-framework/dummyAuthenticationProvider";
 import { BasicAuthenticationView } from "disa-framework/basicAuthenticationView";
 import { BasicContentWrapper } from "disa-framework/basicContentWrapper";
-import { Group } from "disa-framework/group";
+import { SimpleNavbarTab } from "disa-framework/simpleNavbarTab";
+import { PrivilegedNavbarTab } from "disa-framework/privilegedNavbarTab";
 import translationES from "./assets/translations/es.json";
 import translationEN from "./assets/translations/en.json";
 import translationDE from "./assets/translations/de.json";
@@ -26,17 +27,15 @@ import navFleetDetailDeselected from './assets/nav_fleet_detail_deselected.png';
 import groupIcon from "./assets/ota_logo.png";
 import { FirstExampleContextComponent } from './contexts/FirstExampleContext';
 import { SecondExampleContextComponent } from './contexts/SecondExampleContext';
-import { SimpleNavbarTab } from "disa-framework/simpleNavbarTab";
-import { PrivilegedNavbarTab } from "disa-framework/privilegedNavbarTab";
+import { Group } from "disa-framework/group";
+import { TranslateFunctionType } from "disa-framework/language";
 import { LayoutAndContextExampleComponent } from "./components/layoutAndContextExampleComponent";
 import { ThirdExampleComponent } from "./components/thirdExampleComponent";
 import { FourthExampleComponent } from "./components/fourthExampleComponent";
 import { SecondExampleComponent } from "./components/secondExampleComponent";
-import { TranslateFunctionType } from "disa-framework/language";
 import { useState } from "react";
 import { ClassComponentContainer } from "./components/classComponentContainer";
 import { LegalDocuments } from "./components/legalDocuments";
-
 
 function App() {
 

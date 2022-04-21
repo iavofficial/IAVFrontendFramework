@@ -1,3 +1,4 @@
+import React from "react";
 import "./css/disaHeader.css";
 import AppLogo from "../assets/images/app_logo.png";
 import CompanyLogo from "../assets/images/company_logo.png";

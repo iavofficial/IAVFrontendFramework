@@ -1,6 +1,6 @@
 {
     "option_name": "German",
-    "Legal_documents": "Dokumente | Verlinkungen | Text ",
+    "Legal_documents": "Angepasste Dokumente",
     "Customized_legal_documents": "Angepasste Dokumente",
     "bytes_example": "{{count}} sind 1KiB",
     "example_component": "Beispiel {{count}}",

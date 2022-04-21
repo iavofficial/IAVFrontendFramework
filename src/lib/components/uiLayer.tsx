@@ -27,8 +27,8 @@ export interface Props {
     documentsComponent?: React.ComponentType<any>;
     documentsLabelKey?: string;
     headerOptions?: {
-        leftSrc?: string;
-        rightSrc?: string;
+        srcLeft?: string;
+        srcRight?: string;
         hideLeft?: boolean;
         hideRight?: boolean;
     }

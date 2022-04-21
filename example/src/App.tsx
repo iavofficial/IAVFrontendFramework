@@ -36,7 +36,7 @@ import { TranslateFunctionType } from "disa-framework/language";
 import { useState } from "react";
 import { ClassComponentContainer } from "./components/classComponentContainer";
 import { LegalDocuments } from "./components/legalDocuments";
-import  Bus  from "./assets/bus.png";
+
 
 function App() {
 
@@ -47,7 +47,7 @@ function App() {
       {
         template: (
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <SelectButton options={["Simulated", "Real"]} value={selectedButtonOption} onChange={(ev) => setSelectedButtonOption(ev.value)} />
+            <SelectButton options={["Simulated", "Real"]} value={selectedButtonOption} onChange={(ev) => setSelectedButtonOption(ev.value)}/>
           </div>
         )
       }
@@ -60,9 +60,6 @@ function App() {
     ]
   }
   
-
-
-
   const views = [
     new BasicContentWrapper(<SimpleNavbarTab name={"Example without Translation"} to="/" disabled={false} selectedIcon={navDashboardSelected}
       deselectedIcon={navDashboardDeselected} />, LayoutAndContextExampleComponent),
@@ -110,7 +107,7 @@ function App() {
         <FirstExampleContextComponent>
           <SecondExampleContextComponent>
             <UILayer tabAndContentWrappers={views} startingPoint="/" authenticationView={BasicAuthenticationView} menuOptions={menuOptions}
-              documentsLabelKey="Legal_documents" documentsComponent={LegalDocuments}  />
+              documentsLabelKey="Legal_documents" documentsComponent={LegalDocuments}/>
           </SecondExampleContextComponent>
         </FirstExampleContextComponent>
       </GlobalDataLayer>

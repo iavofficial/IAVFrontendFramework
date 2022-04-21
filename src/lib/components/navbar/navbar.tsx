@@ -55,9 +55,7 @@ export const Navbar = (props: Props) => {
                 <div className={"p-px-3 p-text-center"} style={{ display: "flex", justifyContent: "center", marginBottom:"8px"}}>
                     <Link style={{fontSize: "13px", fontWeight: "bolder", color: "black", textDecoration: "none" }} to="/documents">{t(props.documentsLabelKey ? props.documentsLabelKey : "Imprint")}</Link>
                 </div>
-                
             </div>
-
         </div>
     );
 };

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useTranslator } from "./internationalization/translators";
 import { BLUE2NEW  } from "../constants";
 
-
 export const Clock = () => {
     const t = useTranslator();
     const [date, setDate] = useState(new Date());

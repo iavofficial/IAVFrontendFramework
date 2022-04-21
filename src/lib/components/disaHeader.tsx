@@ -12,7 +12,6 @@ interface Props {
     }
 }
 
-
 export const DisaHeader = (props: Props) => (
     <div className={"p-d-flex p-jc-between p-align-center"} style={{ backgroundColor: BLUE0NEW }}>
         <img id="iav-logo" src={AppLogo} alt="DISA Logo" style={{ padding: "0px", backgroundColor: BLUE0NEW }} />

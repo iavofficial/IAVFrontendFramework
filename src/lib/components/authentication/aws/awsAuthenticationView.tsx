@@ -1,7 +1,7 @@
 import React, {FormEvent} from "react";
 import {Link} from "react-router-dom";
 
-import {BLUE4} from "../../../constants";
+import {BLUE0NEW} from "../../../constants";
 import AppLogo from "../../../assets/images/app_logo.png";
 import {AuthContext} from "../../../contexts/auth";
 import {LoginButtonWithSpinner} from "../loginButtonWithSpinner";
@@ -101,7 +101,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
     return (
         <div className="p-d-flex" style={{height: "100%"}}>
             <div className="p-d-flex p-flex-column p-shadow-10" style={{width: "500px", margin: "auto"}}>
-                <div className={"p-d-flex"} style={{backgroundColor: BLUE4, color: "white", alignItems: "center"}}>
+                <div className={"p-d-flex"} style={{backgroundColor: BLUE0NEW, color: "white", alignItems: "center"}}>
                     <img src={AppLogo} alt={""}/>
                     <span style={{fontSize: "xx-large", marginLeft: "auto", marginRight: "20px"}}>LOGIN</span>
                 </div>

@@ -6,7 +6,7 @@ import "../css/navbar.css";
 import UserPic from "../../assets/images/user.png";
 import Settings from "../../assets/images/settings.png";
 import { Clock } from "../clock";
-import { BLUE3, TAB_HEIGHT } from "../../constants";
+import { BLUE2NEW, TAB_HEIGHT } from "../../constants";
 import { AuthContext } from "../../contexts/auth";
 import { TabAndContentWrapper } from "./wrapper/tabAndContentWrapper";
 import { MenuOptions, SettingsMenu } from "./menu";
@@ -33,7 +33,7 @@ export const Navbar = (props: Props) => {
         <div id="navbar" className="p-d-flex p-dir-col p-col-fixed" style={{ "padding": "0px" }}>
 
             <SettingsMenu ref={menuRef} hideMenu={hideMenu} menuOptions={props.menuOptions} />
-            <div className="p-d-flex p-align-center" style={{ height: TAB_HEIGHT, backgroundColor: BLUE3 }}>
+            <div className="p-d-flex p-align-center" style={{ height: TAB_HEIGHT, backgroundColor: BLUE2NEW }}>
                 <img src={UserPic} style={{ marginLeft: "5%" }} alt="" />
                 <span style={{
                     color: "white", marginLeft: "10px", marginRight: "10px", maxWidth: "60%",

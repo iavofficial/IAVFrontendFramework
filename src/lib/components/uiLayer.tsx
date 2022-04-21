@@ -26,6 +26,12 @@ export interface Props {
     authenticationView?: React.ComponentType<AuthenticationViewProps & any>;
     documentsComponent?: React.ComponentType<any>;
     documentsLabelKey?: string;
+    headerOptions?: {
+        srcLeft?: string;
+        srcRight?: string;
+        hideLeft?: boolean;
+        hideRight?: boolean;
+    }
 }
 
 // TODO: The creation of the components DefaultImprint, RSMView and Redirector inside UILayer may cause a problem.
@@ -45,7 +51,7 @@ export const UILayer = (props: Props) => {
     const RSMView = () => (
         <div style={{ display: "flex", flexDirection: "column", height: "100%", bottom: "0" }}>
             <div style={{ flex: "0 0 auto" }}>
-                <DisaHeader />
+                <DisaHeader headerOptions={props.headerOptions}/>
             </div>
             <div style={{ display: "flex", flex: "1 1 auto", overflow: "auto" }}>
                 <Navbar tabAndContentWrappers={props.tabAndContentWrappers} menuOptions={props.menuOptions} documentsLabelKey={props.documentsLabelKey} />

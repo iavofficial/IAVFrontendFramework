@@ -73,7 +73,7 @@ The UILayer component has the properties:
 4. authenticationView (optional): This attribute will get explained later.
 5. documentsComponent: By using this property you are able to replace the default imprint with an own component. This allows you to display a customized list of legal documents.
 6. documentsLabelKey: By using this property you are able to replace the "Imprint" text at the bottom of the navigation bar. You have to pass a string which is the key of corresponding translations in your translation files.
-7. headerOptions (optional): Here is the possibility to customize the header section. If you dont use this possibility the default header will be shown. The default header is with the new IAV Logo on the right side and the DISA Logo on the left side with the lettering "Remote Service Monitor". In the object headerOptions there are 5 attributes that you can modify but they are not required. Note, that the same left React element is used in the login screen. You can just set the attributes you need:   
+7. headerOptions (optional): Here is the possibility to customize the header section. If you dont use this possibility the default header will be shown. The default header is with the new IAV Logo on the right side and the DISA Logo on the left side with the lettering "Remote Service Monitor". In the object headerOptions there are 5 attributes that you can modify but they are not required. You can just set the attributes you need:   
 
 ```javascript
 let headerOptions = {

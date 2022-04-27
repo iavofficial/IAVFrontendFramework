@@ -1,8 +1,7 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
-
-import { BLUE4 } from "../../../constants";
+import { BLUE0 } from "../../../constants";
 import AppLogo from "../../../assets/images/app_logo.png";
 import { AuthContext } from "../../../contexts/auth";
 import { LoginButtonWithSpinner } from "../loginButtonWithSpinner";
@@ -10,7 +9,17 @@ import { useContext } from "react";
 import { useTranslator } from "../../internationalization/translators";
 import { AuthenticationViewProps } from "../aws/authenticationView";
 
-export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
+interface Props {
+    headerOptions?: {
+        reactElementRight?: ReactElement;
+        reactElementLeft?: ReactElement;
+        letteringElementLeft?: string;
+        hideLeft?: boolean;
+        hideRight?: boolean;
+    }
+}
+
+export const BasicAuthenticationView = (props: AuthenticationViewProps, propsHeaderOptions: Props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -26,9 +35,14 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
     return (
         <div className="p-d-flex" style={{ height: "100%" }}>
             <div className="p-d-flex p-flex-column p-shadow-10" style={{ width: "500px", margin: "auto" }}>
-                <div className={"p-d-flex"} style={{ backgroundColor: BLUE4, color: "white", alignItems: "center" }}>
-                    <img src={AppLogo} alt={""} />
-                    <span style={{ fontSize: "xx-large", marginLeft: "auto", marginRight: "20px" }}>LOGIN</span>
+                <div className={"p-d-flex"} style={{ backgroundColor: BLUE0, color: "white", alignItems: "center", height: "75px"}}>
+                    <div style={{ display: (propsHeaderOptions.headerOptions?.hideLeft ? "none" : "flex"), alignItems: "center", height: "75px", width: "271px"}}>
+                        <img id="iav-logo" src={AppLogo} alt="DISA Logo" style={{ height: "40px", width: "125px", marginLeft: "16px", marginRight: "8px", backgroundColor: BLUE0 }} /> 
+                        <h5 style={{ color: "white", fontSize: "15px"}}>
+                            {propsHeaderOptions.headerOptions?.letteringElementLeft ? propsHeaderOptions.headerOptions.letteringElementLeft : "Remote Service Monitor"}
+                        </h5> 
+                    </div>
+                    <span style={{ fontSize: "30px", marginLeft: "auto", marginRight: "20px" }}>LOGIN</span>
                 </div>
                 <div className="p-d-flex" style={{ justifyContent: "center", marginBottom: "30px" }}>
                     <form style={{ width: "85%", height: "100%" }} className="p-mr-4 p-mt-4" onSubmit={submit}>

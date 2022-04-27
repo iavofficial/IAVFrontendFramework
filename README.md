@@ -73,15 +73,15 @@ The UILayer component has the properties:
 4. authenticationView (optional): This attribute will get explained later.
 5. documentsComponent: By using this property you are able to replace the default imprint with an own component. This allows you to display a customized list of legal documents.
 6. documentsLabelKey: By using this property you are able to replace the "Imprint" text at the bottom of the navigation bar. You have to pass a string which is the key of corresponding translations in your translation files.
-7. headerOptions (optional): Here is the possibility to customize the header section. If you dont use this possibility the default header will be shown. The default header is with the new IAV Logo on the right side and the DISA Logo on the left side with the lettering "Remote Service Monitor". In the objekt headerOptions there are 5 attributes that you can modify but they are not required. You can just set the attributes you need:   
+7. headerOptions (optional): Here is the possibility to customize the header section. If you dont use this possibility the default header will be shown. The default header is with the new IAV Logo on the right side and the DISA Logo on the left side with the lettering "Remote Service Monitor". In the object headerOptions there are 5 attributes that you can modify but they are not required. You can just set the attributes you need:   
 
 ```javascript
 let headerOptions = {
      reactElementRight: ReactElement; // Here you can set any React element you want to set on the space 300px x 75px on the right sight (its recommended to use the company logo here)
         reactElementLeft: ReactElement; // Here you can set any React element you want to set on the space 271px x 75px on the left sight (its recommended to use the app logo here)
-        letteringElementLeft: string; // here you can set a lettering you want to use with the default app logo (DISA) 
-        hideLeft: boolean; // if you set this boolean to "true" you can hide or show the left React element (default the DISA logo with the Remote Service Monitor lettering)
-        hideRight: boolean; // if you set this boolean to "true" you can hide or show the React element (default the new IAV Logo)
+        letteringElementLeft: string; // Here you can set a lettering you want to use with the default app logo (DISA) 
+        hideLeft: boolean; // If you set this boolean to "true" you can hide or show the left React element (default the DISA logo with the Remote Service Monitor lettering)
+        hideRight: boolean; // If you set this boolean to "true" you can hide or show the React element (default the new IAV Logo)
 }
 
 The GlobalDataLayer has the properties:

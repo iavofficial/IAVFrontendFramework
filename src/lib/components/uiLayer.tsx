@@ -2,7 +2,7 @@ import "primeflex/primeflex.css";
 import "primereact/resources/themes/nova/theme.css";
 import "primereact/resources/primereact.css";
 import "primeicons/primeicons.css";
-import React, { useContext } from "react";
+import React, { useContext, ReactElement } from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch, useLocation } from "react-router-dom";
 
 import "./css/constants.css";
@@ -27,8 +27,9 @@ export interface Props {
     documentsComponent?: React.ComponentType<any>;
     documentsLabelKey?: string;
     headerOptions?: {
-        srcLeft?: string;
-        srcRight?: string;
+        reactElementRight?: ReactElement;
+        reactElementLeft?: ReactElement;
+        letteringElementLeft?: string;
         hideLeft?: boolean;
         hideRight?: boolean;
     }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import "./css/disaHeader.css";
 import AppLogo from "../assets/images/app_logo.png";
 import CompanyLogo from "../assets/images/company_logo.png";
@@ -6,16 +6,34 @@ import { BLUE0NEW } from "../constants";
 
 interface Props {
     headerOptions?: {
-        srcLeft?: string;
-        srcRight?: string;
+        reactElementRight?: ReactElement;
+        reactElementLeft?: ReactElement;
+        letteringElementLeft?: string;
         hideLeft?: boolean;
         hideRight?: boolean;
     }
 }
 
+const companyLogoDefault = (props: Props) => (
+    <img src={ CompanyLogo } alt="Company Logo" style={{ display: (props.headerOptions?.hideRight ? "none" : "flex" ), height: "30px", marginRight: "16px" }}/>
+);
+
+const appLogoDefault = (props: Props)=> (
+    <div style={{ display: (props.headerOptions?.hideLeft ? "none" : "flex"), alignItems: "center", height: "75px"}}>
+          <img id="iav-logo" src={AppLogo} alt="DISA Logo" style={{ height: "45px", width: "125px", marginLeft: "16px", marginRight: "8px", backgroundColor: BLUE0NEW }} /> 
+          <h5 style={{ color: "white", fontSize: "15px"}}>
+              {props.headerOptions?.letteringElementLeft ? props.headerOptions.letteringElementLeft : "Remote Service Monitor"}
+          </h5> 
+    </div>
+);
+
 export const DisaHeader = (props: Props) => (
-    <div className={"p-d-flex p-jc-between p-align-center"} style={{ backgroundColor: BLUE0NEW }}>
-        <img id="iav-logo" src={AppLogo} alt="DISA Logo" style={{ padding: "0px", backgroundColor: BLUE0NEW }} />
-        <img src={ props.headerOptions?.srcRight ? props.headerOptions.srcRight : CompanyLogo  } alt="Company Logo" style={{ display: (props.headerOptions?.hideRight ? "none" : "flex" ) ,width: "104px", height: "75px", marginRight: "16px" }} />
+    <div id="disa-header" className={"p-d-flex p-jc-between p-align-center"} style={{ backgroundColor: BLUE0NEW}}>
+        <div id="left-element" className={"p-d-flex p-align-center"}>
+            {props.headerOptions?.reactElementLeft ? props.headerOptions?.reactElementLeft : appLogoDefault(props)}
+        </div>
+        <div id="right-element" className="p-d-flex p-jc-end p-align-center">
+            { props.headerOptions?.reactElementRight ? props.headerOptions?.reactElementRight : companyLogoDefault(props)}
+        </div>
     </div>
 );

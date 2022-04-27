@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 import "./css/disaHeader.css";
 import AppLogo from "../assets/images/app_logo.png";
 import CompanyLogo from "../assets/images/company_logo.png";
-import { BLUE0NEW } from "../constants";
+import { BLUE0 } from "../constants";
 
 interface Props {
     headerOptions?: {
@@ -15,12 +15,12 @@ interface Props {
 }
 
 const companyLogoDefault = (props: Props) => (
-    <img src={ CompanyLogo } alt="Company Logo" style={{ display: (props.headerOptions?.hideRight ? "none" : "flex" ), height: "30px", marginRight: "16px" }}/>
+    <img src={ CompanyLogo } alt="Company Logo" style={{ display: (props.headerOptions?.hideRight ? "none" : "flex" ), height: "25px", marginRight: "16px" }}/>
 );
 
 const appLogoDefault = (props: Props)=> (
     <div style={{ display: (props.headerOptions?.hideLeft ? "none" : "flex"), alignItems: "center", height: "75px"}}>
-          <img id="iav-logo" src={AppLogo} alt="DISA Logo" style={{ height: "45px", width: "125px", marginLeft: "16px", marginRight: "8px", backgroundColor: BLUE0NEW }} /> 
+          <img id="iav-logo" src={AppLogo} alt="DISA Logo" style={{ height: "40px", width: "125px", marginLeft: "16px", marginRight: "8px", backgroundColor: BLUE0 }} /> 
           <h5 style={{ color: "white", fontSize: "15px"}}>
               {props.headerOptions?.letteringElementLeft ? props.headerOptions.letteringElementLeft : "Remote Service Monitor"}
           </h5> 
@@ -28,7 +28,7 @@ const appLogoDefault = (props: Props)=> (
 );
 
 export const DisaHeader = (props: Props) => (
-    <div id="disa-header" className={"p-d-flex p-jc-between p-align-center"} style={{ backgroundColor: BLUE0NEW}}>
+    <div id="disa-header" className={"p-d-flex p-jc-between p-align-center"} style={{ backgroundColor: BLUE0}}>
         <div id="left-element" className={"p-d-flex p-align-center"}>
             {props.headerOptions?.reactElementLeft ? props.headerOptions?.reactElementLeft : appLogoDefault(props)}
         </div>

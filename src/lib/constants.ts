@@ -21,7 +21,7 @@ export const GRAY2 = "#cdcdcd";
 export const GRAY3 = "#9a9a9a";
 export const GRAY4 = "#444444"
 
-export const GELB = "#ffd800";
+export const YELLOW = "#ffd800";
 export const RED = "#f800000";
 export const GREEN = "#80d800"
 

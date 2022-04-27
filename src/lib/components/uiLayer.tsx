@@ -2,7 +2,7 @@ import "primeflex/primeflex.css";
 import "primereact/resources/themes/nova/theme.css";
 import "primereact/resources/primereact.css";
 import "primeicons/primeicons.css";
-import React, { useContext } from "react";
+import React, { useContext, ReactElement } from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch, useLocation } from "react-router-dom";
 
 import "./css/constants.css";
@@ -26,6 +26,13 @@ export interface Props {
     authenticationView?: React.ComponentType<AuthenticationViewProps & any>;
     documentsComponent?: React.ComponentType<any>;
     documentsLabelKey?: string;
+    headerOptions?: {
+        reactElementRight?: ReactElement;
+        reactElementLeft?: ReactElement;
+        letteringElementLeft?: string;
+        hideLeft?: boolean;
+        hideRight?: boolean;
+    }
 }
 
 // TODO: The creation of the components DefaultImprint, RSMView and Redirector inside UILayer may cause a problem.
@@ -45,7 +52,7 @@ export const UILayer = (props: Props) => {
     const RSMView = () => (
         <div style={{ display: "flex", flexDirection: "column", height: "100%", bottom: "0" }}>
             <div style={{ flex: "0 0 auto" }}>
-                <DisaHeader />
+                <DisaHeader headerOptions={props.headerOptions}/>
             </div>
             <div style={{ display: "flex", flex: "1 1 auto", overflow: "auto" }}>
                 <Navbar tabAndContentWrappers={props.tabAndContentWrappers} menuOptions={props.menuOptions} documentsLabelKey={props.documentsLabelKey} />

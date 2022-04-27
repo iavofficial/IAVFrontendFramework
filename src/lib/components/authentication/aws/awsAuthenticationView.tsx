@@ -114,7 +114,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
                         t(props.documentsLabelKey ? props.documentsLabelKey : "Imprint")
                     }
                 </Link>
-                <span style={{padding: "10px", alignSelf: "center"}}>&copy; IAV GmbH 2021</span>
+                <span style={{padding: "10px", alignSelf: "center"}}>&copy; IAV GmbH 2022</span>
             </div>
         </div>
     );

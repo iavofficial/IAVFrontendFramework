@@ -2,13 +2,14 @@ import "primeflex/primeflex.css";
 import "primereact/resources/themes/nova/theme.css";
 import "primereact/resources/primereact.css";
 import "primeicons/primeicons.css";
-import { SelectButton } from 'primereact/selectbutton';
-import { UILayer } from 'disa-framework/uiLayer';
-import { GlobalDataLayer } from "disa-framework/globalDataLayer";
+import { SelectButton } from 'primereact/selectbutton';import { UILayer } from 'disa-framework/uiLayer';import { GlobalDataLayer } from "disa-framework/globalDataLayer";
 import { DummyAuthenticationProvider } from "disa-framework/dummyAuthenticationProvider";
+import { Group } from "disa-framework/group";
+import { TranslateFunctionType } from "disa-framework/language";
 import { BasicAuthenticationView } from "disa-framework/basicAuthenticationView";
 import { BasicContentWrapper } from "disa-framework/basicContentWrapper";
-import { Group } from "disa-framework/group";
+import { SimpleNavbarTab } from "disa-framework/simpleNavbarTab";
+import { PrivilegedNavbarTab } from "disa-framework/privilegedNavbarTab";
 import translationES from "./assets/translations/es.json";
 import translationEN from "./assets/translations/en.json";
 import translationDE from "./assets/translations/de.json";
@@ -26,13 +27,10 @@ import navFleetDetailDeselected from './assets/nav_fleet_detail_deselected.png';
 import groupIcon from "./assets/ota_logo.png";
 import { FirstExampleContextComponent } from './contexts/FirstExampleContext';
 import { SecondExampleContextComponent } from './contexts/SecondExampleContext';
-import { SimpleNavbarTab } from "disa-framework/simpleNavbarTab";
-import { PrivilegedNavbarTab } from "disa-framework/privilegedNavbarTab";
 import { LayoutAndContextExampleComponent } from "./components/layoutAndContextExampleComponent";
 import { ThirdExampleComponent } from "./components/thirdExampleComponent";
 import { FourthExampleComponent } from "./components/fourthExampleComponent";
 import { SecondExampleComponent } from "./components/secondExampleComponent";
-import { TranslateFunctionType } from "disa-framework/language";
 import { useState } from "react";
 import { ClassComponentContainer } from "./components/classComponentContainer";
 import { LegalDocuments } from "./components/legalDocuments";
@@ -46,7 +44,7 @@ function App() {
       {
         template: (
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <SelectButton options={["Simulated", "Real"]} value={selectedButtonOption} onChange={(ev) => setSelectedButtonOption(ev.value)} />
+            <SelectButton options={["Simulated", "Real"]} value={selectedButtonOption} onChange={(ev) => setSelectedButtonOption(ev.value)}/>
           </div>
         )
       }
@@ -58,7 +56,7 @@ function App() {
       }
     ]
   }
-
+  
   const views = [
     new BasicContentWrapper(<SimpleNavbarTab name={"Example without Translation"} to="/" disabled={false} selectedIcon={navDashboardSelected}
       deselectedIcon={navDashboardDeselected} />, LayoutAndContextExampleComponent),
@@ -106,7 +104,7 @@ function App() {
         <FirstExampleContextComponent>
           <SecondExampleContextComponent>
             <UILayer tabAndContentWrappers={views} startingPoint="/" authenticationView={BasicAuthenticationView} menuOptions={menuOptions}
-              documentsLabelKey="Legal_documents" documentsComponent={LegalDocuments} />
+              documentsLabelKey="Legal_documents" documentsComponent={LegalDocuments}/>
           </SecondExampleContextComponent>
         </FirstExampleContextComponent>
       </GlobalDataLayer>

@@ -34,10 +34,20 @@ import { SecondExampleComponent } from "./components/secondExampleComponent";
 import { useState } from "react";
 import { ClassComponentContainer } from "./components/classComponentContainer";
 import { LegalDocuments } from "./components/legalDocuments";
+import {AWSAuthenticationProvider} from "disa-framework/awsAuthenticationProvider";
+import {AWSAuthenticationView} from "disa-framework/awsAuthenticationView";
 
 function App() {
 
   const [selectedButtonOption, setSelectedButtonOption] = useState("Simulated");
+
+  const test = ()=>(
+    <div>ich funktioniere</div>
+  )
+
+  let headerOptions = {
+    
+  }
 
   const menuOptions = {
     additionalItems: [
@@ -103,8 +113,8 @@ function App() {
       <GlobalDataLayer translations={translations} >
         <FirstExampleContextComponent>
           <SecondExampleContextComponent>
-            <UILayer tabAndContentWrappers={views} startingPoint="/" authenticationView={BasicAuthenticationView} menuOptions={menuOptions}
-              documentsLabelKey="Legal_documents" documentsComponent={LegalDocuments}/>
+            <UILayer tabAndContentWrappers={views} startingPoint="/" authenticationView={AWSAuthenticationView} menuOptions={menuOptions}
+              documentsLabelKey="Legal_documents" documentsComponent={LegalDocuments} headerOptions={headerOptions}/>
           </SecondExampleContextComponent>
         </FirstExampleContextComponent>
       </GlobalDataLayer>

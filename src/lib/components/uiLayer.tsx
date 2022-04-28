@@ -85,7 +85,7 @@ export const UILayer = (props: Props) => {
             <Router>
                 <Redirector />
                 <Switch>
-                    <Route path="/login" component={() => <AuthenticationView documentsLabelKey={props.documentsLabelKey} />} />
+                    <Route path="/login" component={() => <AuthenticationView documentsLabelKey={props.documentsLabelKey} headerOptions={props.headerOptions}/>} />
                     {!authContext?.hasAuthenticated() && <Route path="/documents" component={props.documentsComponent ? props.documentsComponent : DefaultImprint} />}
                     {authContext?.hasAuthenticated() && <Route path="/" component={RSMView} />}
                 </Switch>

@@ -8,6 +8,7 @@ export const BLUE2 = "#1446eb";
 export const BLUE3 = "#0091ff";
 export const BLUE4 = "#52c9ff";
 export const BLUE5 = "#96e7ff";
+export const BLUE6 = "#d2f5ff";
 
 export const MAGENTA1= "#5500b4";
 export const MAGENTA2= "#a200e6";

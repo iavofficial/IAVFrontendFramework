@@ -2,24 +2,29 @@
     --navbar-width: 271px;
     --tab-height: 70px;
     
-    --blue-1: #5daedb;
-    --blue-2: #009fca;
-    --blue-3: #14639e;
-    --blue-4: #0e4a80;
-    --blue-5: #0c3868;
+    --blue-0: #001a54;
+    --blue-1: #041e96;
+    --blue-2: #1446eb;
+    --blue-3: #0091ff;
+    --blue-4: #52c9ff;
+    --blue-5: #96e7ff;
+    --blue-6: #d2f5ff;
 
-    /* new COLOR CONSTANTS */
-
-    --blue3: #0091ff;
+    --magenta-1: #5500b4;
+    --magenta-2: #a200e6;
+    --magenta-3: #dc46f3;
+    --magenta-4: #ff73fa;
+    --magenta-5: #ffafff;
+    --magenta-6: #fddeff;
 
     --gray-1: #f0f0f0;
     --gray-2: #cdcdcd;
     --gray-3: #9a9a9a;
     --gray-4: #444444;
 
-    --orange: #e6962c;
-    --green: #91c60e;
-    --red: #ce0037;
+    --yellow: #ffd800;
+    --green: #80d800;
+    --red: #f80000;
 
     --white: #ffffff;
 }

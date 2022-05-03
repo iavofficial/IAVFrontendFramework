@@ -4,7 +4,6 @@ import "primereact/resources/primereact.css";
 import "primeicons/primeicons.css";
 import React, { useContext, ReactElement } from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch, useLocation } from "react-router-dom";
-
 import "./css/constants.css";
 import "./css/disaPage.css";
 import "./css/disaFramework.css";
@@ -85,7 +84,7 @@ export const UILayer = (props: Props) => {
             <Router>
                 <Redirector />
                 <Switch>
-                    <Route path="/login" component={() => <AuthenticationView documentsLabelKey={props.documentsLabelKey} />} />
+                    <Route path="/login" component={() => <AuthenticationView documentsLabelKey={props.documentsLabelKey} headerOptions={props.headerOptions}/>} />
                     {!authContext?.hasAuthenticated() && <Route path="/documents" component={props.documentsComponent ? props.documentsComponent : DefaultImprint} />}
                     {authContext?.hasAuthenticated() && <Route path="/" component={RSMView} />}
                 </Switch>

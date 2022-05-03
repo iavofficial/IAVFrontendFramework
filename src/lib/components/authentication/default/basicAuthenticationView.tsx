@@ -1,5 +1,4 @@
-import React, { ReactElement } from "react";
-import { FormEvent, useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import { BLUE0 } from "../../../constants";
 import AppLogo from "../../../assets/images/app_logo.png";
@@ -8,18 +7,9 @@ import { LoginButtonWithSpinner } from "../loginButtonWithSpinner";
 import { useContext } from "react";
 import { useTranslator } from "../../internationalization/translators";
 import { AuthenticationViewProps } from "../aws/authenticationView";
+import "../../css/authenticationView.css";
 
-interface Props {
-    headerOptions?: {
-        reactElementRight?: ReactElement;
-        reactElementLeft?: ReactElement;
-        letteringElementLeft?: string;
-        hideLeft?: boolean;
-        hideRight?: boolean;
-    }
-}
-
-export const BasicAuthenticationView = (props: AuthenticationViewProps, propsHeaderOptions: Props) => {
+export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -32,15 +22,21 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps, propsHea
         authContext?.login({ email: email, password: password });
     }
 
+    const appLogoDefault = (props: AuthenticationViewProps)=> (
+        <div style={{ display: (props.headerOptions?.hideLeft ? "none" : "flex"), alignItems: "center", height: "75px"}}>
+              <img id="iav-logo" src={AppLogo} alt="DISA Logo" style={{ height: "40px", width: "125px", marginLeft: "20px", marginRight: "12px", backgroundColor: BLUE0 }} /> 
+              <h5 style={{ color: "white", fontSize: "15px", fontWeight: "lighter" }}>
+                  {props.headerOptions?.letteringElementLeft ? props.headerOptions.letteringElementLeft : "Remote Service Monitor"}
+              </h5> 
+        </div>
+    );
+
     return (
         <div className="p-d-flex" style={{ height: "100%" }}>
             <div className="p-d-flex p-flex-column p-shadow-10" style={{ width: "500px", margin: "auto" }}>
-                <div className={"p-d-flex"} style={{ backgroundColor: BLUE0, color: "white", alignItems: "center", height: "75px"}}>
-                    <div style={{ display: (propsHeaderOptions.headerOptions?.hideLeft ? "none" : "flex"), alignItems: "center", height: "75px", width: "271px"}}>
-                        <img id="iav-logo" src={AppLogo} alt="DISA Logo" style={{ height: "40px", width: "125px", marginLeft: "16px", marginRight: "8px", backgroundColor: BLUE0 }} /> 
-                        <h5 style={{ color: "white", fontSize: "15px"}}>
-                            {propsHeaderOptions.headerOptions?.letteringElementLeft ? propsHeaderOptions.headerOptions.letteringElementLeft : "Remote Service Monitor"}
-                        </h5> 
+            <div className={"p-d-flex"} style={{ backgroundColor: BLUE0, color: "white", alignItems: "center", height: "75px"}}>
+                    <div id="left-element" className={"p-d-flex p-align-center"}>
+                        {props.headerOptions?.reactElementLeft ? props.headerOptions?.reactElementLeft : appLogoDefault(props)}
                     </div>
                     <span style={{ fontSize: "30px", marginLeft: "auto", marginRight: "20px" }}>LOGIN</span>
                 </div>
@@ -59,7 +55,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps, propsHea
                         </div>
                     </form>
                 </div>
-                <Link style={{ alignSelf: "center", fontWeight: "bolder", color: "black" }} to="/documents" target="_blank">
+                <Link style={{ alignSelf: "center", color: "black", textDecoration: "none" }} to="/documents" target="_blank">
                     {
                         t(props.documentsLabelKey ? props.documentsLabelKey : "Imprint")
                     }

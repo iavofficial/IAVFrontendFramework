@@ -4,6 +4,7 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
 import "../../css/tabGroup.css";
 import { TranslateFunctionType } from "../../../contexts/language";
 import { useTranslator } from "../../internationalization/translators";
+import {BLUE3} from "../../../constants";
 
 interface Props {
     name: string | ((t: TranslateFunctionType) => string);
@@ -19,8 +20,8 @@ export const TabGroup = (props: React.PropsWithChildren<Props>) => {
 
     const header = (
         <div className="group-wrapper">
-            <img className="group-logo" src={props.logo} />
-            <span className="group-name">{props.name instanceof Function ? props.name(t) : props.name}</span>
+            <img style={{height: "16px", width: "22px"}} className="group-logo" src={props.logo} />
+            <span style={{color: BLUE3}} className="group-name">{props.name instanceof Function ? props.name(t) : props.name}</span>
         </div>
     );
 

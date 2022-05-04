@@ -100,7 +100,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
 
     const appLogoDefault = (props: AuthenticationViewProps)=> (
         <div style={{ display: (props.headerOptions?.hideLeft ? "none" : "flex"), alignItems: "center", height: "75px"}}>
-              <img id="iav-logo" src={AppLogo} alt="DISA Logo" style={{ height: "40px", width: "125px", marginLeft: "20px", marginRight: "12px", backgroundColor: BLUE0 }} /> 
+              <img id="iav-logo" src={AppLogo} alt="DISA Logo" style={{ height: "40px", width: "125px", marginLeft: "25px", marginRight: "12px", backgroundColor: BLUE0 }} /> 
               <h5 style={{ color: "white", fontSize: "15px", fontWeight: "lighter" }}>
                   {props.headerOptions?.letteringElementLeft ? props.headerOptions.letteringElementLeft : "Remote Service Monitor"}
               </h5> 
@@ -114,7 +114,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
                     <div id="left-element" className={"p-d-flex p-align-center"}>
                         {props.headerOptions?.reactElementLeft ? props.headerOptions?.reactElementLeft : appLogoDefault(props)}
                     </div>
-                    <span style={{ fontSize: "30px", marginLeft: "auto", marginRight: "20px" }}>LOGIN</span>
+                    <span style={{ fontSize: "30px", marginLeft: "auto", marginRight: "25px" }}>LOGIN</span>
                 </div>
                 <div className="p-d-flex" style={{justifyContent: "center", marginBottom: "30px"}}>
                     {authContext?.isNewPasswordRequired ? NewPasswordForm : LoginForm}

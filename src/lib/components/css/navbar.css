@@ -41,13 +41,13 @@
 .p-accordion-content .navbar-tab-wrapper {
     border-width: 0 3px 0 0 !important;
     border: solid;
-    border-color: var(--blue3);
+    border-color: var(--blue-3);
 }
 
 .p-accordion-content .navbar-tab-wrapper.active {
     border-width: 0 3px 0 0 !important;
     border: solid;
-    border-color: var(--blue3);
+    border-color: var(--blue-3);
 }
 
 /* Anpassen des Akkordion-Styles */

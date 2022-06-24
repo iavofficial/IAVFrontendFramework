@@ -29,7 +29,8 @@ export const Content = (props: React.PropsWithChildren<Props>) => {
             <ContentBar contentElements={props.contentElements}/>
             <div className={contentRootClass} style={{
                 height: "100%",
-                backgroundColor: GRAY1
+                backgroundColor: GRAY1,
+                overflow: "auto"
             }}>
                 {props.children}
             </div>

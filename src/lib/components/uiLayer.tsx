@@ -110,9 +110,8 @@ const Redirector = (props: RedirectorProps) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log("effect");
         if (!userIsAuthenticated) {
-            if (currentPath !== "/documents" && currentPath !== "/login") {
+            if (currentPath !== "/documents") {
                 navigate("/login");
             }
         } else {

@@ -5,6 +5,7 @@ import {AppliedTranslationProps, applyTranslation} from "disa-framework/translat
 import {CellPaddings, ContentCell} from "disa-framework/contentCell"
 
 import {FirstExampleContext} from "../contexts/FirstExampleContext";
+import { BLUE3, MAGENTA1, MAGENTA3 } from "disa-framework/constants";
 
 interface State {
     localState: string,
@@ -42,9 +43,9 @@ class LayoutAndContextExampleComponentUnprocessed extends Component<AppliedTrans
 
     render() {
         return (
-            <Content layoutBehaviour={LayoutBehaviour.GRID} contentElements={[...this.context.contentTabs, ...this.state.contentTabs]}>
+            <Content layoutBehaviour={LayoutBehaviour.GRID} backgroundColorContentBar={MAGENTA3} backgroundColorContent={BLUE3} contentElements={[...this.context.contentTabs, ...this.state.contentTabs]}>
                 <div className={"p-col-8 p-grid p-nogutter"}>
-                    <ContentCell colWidth={6} paddings={CellPaddings.FULL}>
+                    <ContentCell colWidth={6} paddings={CellPaddings.FULL} backgroundColor={MAGENTA3} clearStyle={true}>
                         <span>First row left</span>
 
                         <div

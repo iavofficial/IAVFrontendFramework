@@ -2,7 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useTranslator } from './internationalization/translators';
 import { BLUE2 } from '../constants';
 
-export const Clock = () => {
+interface Props{
+  clockColor?: string;
+  dateColor?: string;
+}
+
+
+export const Clock = (props: Props) => {
   const t = useTranslator();
   const [date, setDate] = useState(new Date());
 
@@ -21,8 +27,8 @@ export const Clock = () => {
 
   return (
     <div className='p-d-flex p-jc-between p-pl-3 p-pr-3 p-pb-2'>
-      <div style={{ fontWeight: 500 }}>{t('Date')}:</div>
-      <div style={{ color: BLUE2 }}>{dateString}</div>
+      <div style={{ fontWeight: 500, color: (props.dateColor ? props.dateColor: "black" )}}>{t('Date')}:</div>
+      <div style={{ color: (props.clockColor ? props.clockColor: BLUE2 )}}>{dateString}</div>
     </div>
   );
 };

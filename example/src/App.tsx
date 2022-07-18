@@ -26,6 +26,10 @@ import navFleetSelected from './assets/nav_fleet_selected.png';
 import navFleetDeselected from './assets/nav_fleet_deselected.png';
 import navFleetDetailSelected from './assets/nav_fleet_detail_selected.png';
 import navFleetDetailDeselected from './assets/nav_fleet_detail_deselected.png';
+import deviceOn from './assets/device_on.png'
+import deviceOff from './assets/device_off.png'
+import certificateOn from './assets/certificate_on.png'
+import certificateOff from './assets/certificate_off.png'
 import groupIcon from "./assets/ota_logo.png";
 import {FirstExampleContextComponent} from './contexts/FirstExampleContext';
 import {SecondExampleContextComponent} from './contexts/SecondExampleContext';
@@ -36,10 +40,31 @@ import {SecondExampleComponent} from "./components/secondExampleComponent";
 import {useState} from "react";
 import {ClassComponentContainer} from "./components/classComponentContainer";
 import {LegalDocuments} from "./components/legalDocuments";
+import { BLUE0, GRAY1, GREEN, RED, WHITE } from "disa-framework/constants";
+import {DARK1, DARK2, DARK3, GREY_FRAMEWORK, HIGHTLIGHT} from "./testConstants";
 
 function App() {
 
     const [selectedButtonOption, setSelectedButtonOption] = useState("Simulated");
+
+    const colorOptions = {
+       headerBg: DARK1,
+       navbarColorSettings:{
+            menuSettingsBg: DARK1,
+            clockColor: WHITE,
+            dateLetColor: WHITE,
+            documentsColor: WHITE,
+            navbarBg: DARK2,
+            tabBg: DARK1
+       }
+    }
+
+    const colorTabOptions ={
+        tabTextColor: WHITE,
+        tabTextHoverColor: HIGHTLIGHT,
+        tabHoverBg: DARK3,
+        tabBg: DARK1
+    }
 
     const menuOptions = {
         additionalItems: [
@@ -62,12 +87,14 @@ function App() {
 
     const views = [
         new BasicContentWrapper(<SimpleNavbarTab name={"Example without Translation"} to="/" disabled={false}
-                                                 selectedIcon={navDashboardSelected}
-                                                 deselectedIcon={navDashboardDeselected}/>, LayoutAndContextExampleComponent),
+        colorOptions={colorTabOptions}
+                                                 selectedIcon={deviceOn}
+                                                 deselectedIcon={deviceOff}/>, LayoutAndContextExampleComponent),
         new BasicContentWrapper(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", {count: 1})}
+        colorOptions={colorTabOptions}
                                                  to="/example2" disabled={false}
-                                                 selectedIcon={navFleetSelected}
-                                                 deselectedIcon={navFleetDeselected}/>, SecondExampleComponent),
+                                                 selectedIcon={certificateOn}
+                                                 deselectedIcon={certificateOff}/>, SecondExampleComponent),
         new BasicContentWrapper(<PrivilegedNavbarTab
             name={(t: TranslateFunctionType) => t("example_component", {count: 2})} to="/example3" disabled={false}
             selectedIcon={navDiagnosticsSelected} deselectedIcon={navDiagnosticsDeselected}
@@ -77,10 +104,12 @@ function App() {
             [
                 new BasicContentWrapper(<SimpleNavbarTab
                     name={(t: TranslateFunctionType) => t("example_component", {count: 3})} to="/group-example1"
+                 
                     disabled={false}
                     selectedIcon={navFleetSelected} deselectedIcon={navFleetDeselected}/>, SecondExampleComponent),
                 new BasicContentWrapper(<SimpleNavbarTab
                     name={(t: TranslateFunctionType) => t("example_component", {count: 4})} to="/group-example2"
+                   
                     disabled={true}
                     selectedIcon={navFleetDetailSelected}
                     deselectedIcon={navFleetDetailDeselected}/>, FourthExampleComponent)
@@ -91,10 +120,12 @@ function App() {
             selectedIcon={navExpertSelected} deselectedIcon={navExpertDeselected}
             permittedGroups={["ADMIN"]}/>, FourthExampleComponent),
         new BasicContentWrapper(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", {count: 6})}
-                                                 to="/example5" disabled={true}
+                                               
+                                                 to="/example5" disabled={false}
                                                  selectedIcon={navFleetDetailSelected}
                                                  deselectedIcon={navFleetDetailDeselected}/>, FourthExampleComponent),
         new BasicContentWrapper(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", {count: 7})}
+                                         
                                                  to="/example6" disabled={false}
                                                  selectedIcon={navDashboardSelected}
                                                  deselectedIcon={navDashboardDeselected}/>, ClassComponentContainer),
@@ -116,7 +147,7 @@ function App() {
             }
         }
     );
-
+    
     return (
         <DummyAuthenticationProvider additionalContextValues={{getUserGroups: () => []}}>
             <GlobalDataLayer translations={translations}>
@@ -124,7 +155,8 @@ function App() {
                     <SecondExampleContextComponent>
                         <UILayer tabAndContentWrappers={views} startingPoint="/"
                                  authenticationView={BasicAuthenticationView} menuOptions={menuOptions}
-                                 documentsLabelKey="Legal_documents" documentsComponent={LegalDocuments}/>
+                                 documentsLabelKey="Legal_documents" documentsComponent={LegalDocuments} 
+                                 colorOptions={colorOptions}/>
                     </SecondExampleContextComponent>
                 </FirstExampleContextComponent>
             </GlobalDataLayer>

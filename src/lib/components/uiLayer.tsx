@@ -33,6 +33,18 @@ interface HeaderOptions {
     hideRight?: boolean;
 }
 
+interface Coloroptions {
+    headerBg?: string;
+    navbarColorSettings?:{
+        menuSettingsBg?: string;
+        menuSettingsLet?: string;
+        clockColor?: string;
+        documentsColor?: string;
+        dateLetColor?: string;
+        navbarBg?: string;
+    }
+}
+
 export interface Props {
     tabAndContentWrappers: TabAndContentWrapper[];
     startingPoint: string;
@@ -41,6 +53,7 @@ export interface Props {
     documentsComponent?: React.ComponentType<any>;
     documentsLabelKey?: string;
     headerOptions?: HeaderOptions;
+    colorOptions?: Coloroptions;
 }
 
 // TODO: The creation of the components DefaultImprint, RSMView and Redirector inside UILayer may cause a problem.
@@ -81,6 +94,7 @@ export const UILayer = (props: Props) => {
                     <Route path='/*' element={
                         <RSMView
                             headerOptions={props.headerOptions}
+                            colorOptions={props.colorOptions}
                             tabAndContentWrappers={props.tabAndContentWrappers}
                             menuOptions={props.menuOptions}
                             documentsLabelKey={props.documentsLabelKey}
@@ -130,10 +144,14 @@ interface RSMViewProps {
     documentsComponent?: React.ComponentType<any>;
     documentsLabelKey?: string;
     headerOptions?: HeaderOptions;
+    colorOptions?: Coloroptions;
 }
 
 // className="p-d-flex p-flex-column"
-const RSMView = (props: RSMViewProps) => (
+const RSMView = (props: RSMViewProps) => {
+
+
+return(
     <div style={{
         display: 'flex',
         flexDirection: 'column',
@@ -141,15 +159,17 @@ const RSMView = (props: RSMViewProps) => (
         bottom: '0'
     }}>
         <div style={{flex: '0 0 auto'}}>
-            <DisaHeader headerOptions={props.headerOptions}/>
+            <DisaHeader headerOptions={props.headerOptions} colorOptions={props.colorOptions}/>
         </div>
         <div style={{display: 'flex', flex: '1 1 auto', overflow: 'auto'}}>
             <Navbar
                 tabAndContentWrappers={props.tabAndContentWrappers}
                 menuOptions={props.menuOptions}
                 documentsLabelKey={props.documentsLabelKey}
+                colorOptions={props.colorOptions}
             />
             <Routes>
+                {console.log("hier dein Array", props.tabAndContentWrappers)}
                 {props.tabAndContentWrappers.map((wrapper) => wrapper.getRoutes())}
                 <Route
                     path='/documents'
@@ -163,7 +183,7 @@ const RSMView = (props: RSMViewProps) => (
             </Routes>
         </div>
     </div>
-);
+)};
 
 const DefaultImprint = () => (
     <div

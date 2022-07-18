@@ -9,6 +9,12 @@ export interface navbarTabProps {
     selectedIcon: string;
     deselectedIcon: string;
     active?: boolean;
+    colorOptions?:{
+        tabTextColor: string;
+        tabTextHoverColor: string;
+        tabHoverBg: string;
+        tabBg: string;
+    }
 }
 
-export type navbarTab<additional = {}> = React.ComponentType<navbarTabProps & additional>;
+ export type navbarTab<additional = {}> = React.ComponentType<navbarTabProps & additional>;

@@ -24,8 +24,22 @@ export const GRAY4 = "#444444"
 
 export const YELLOW = "#ffd800";
 export const RED = "#f80000";
-export const GREEN = "#80d800"
+export const GREEN = "#80d800";
 
-export const BLACK = "#000000"
-export const WHITE = "#ffffff"
+export const BLACK = "#000000";
+export const WHITE = "#ffffff";
+
+export const DARK1 = "#162230";
+export const DARK2 = "#273444";
+export const DARK3 = "#455263";
+export const DARK4 = "#637182";
+
+export const LIGHT = "#D3DBE5";
+export const BACKGROUND = "#E6E9F1";
+export const AUSWAHL = "#F2E4C9";
+export const HIGHTLIGHT = "#D4A64E"
+export const HIGHLIGHT_DARK = "#805D1A"
+export const GREY_FRAMEWORK = "#A6A6A6"
+
+
 

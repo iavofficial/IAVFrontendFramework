@@ -14,6 +14,7 @@ export interface Props {
     colWidth?: number,
     clearStyle?: boolean,
     paddings: CellPaddings,
+    backgroundColor?: string;
 }
 
 export function ContentCell(props: PropsWithChildren<Props>) {
@@ -42,9 +43,13 @@ export function ContentCell(props: PropsWithChildren<Props>) {
     let innerDivStyle: CSSProperties = {
         width: "100%"
     };
-    if (!props.clearStyle) {
+    if (!props.clearStyle ) {
         innerDivStyle.backgroundColor = WHITE;
+    }else if(props.backgroundColor){
+        innerDivStyle.backgroundColor = props.backgroundColor
     }
+
+    
     return (
         <div className={columnClass}>
             <div className={"p-d-flex " + paddings} style={{height: "100%"}}>

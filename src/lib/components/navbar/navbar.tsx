@@ -6,7 +6,7 @@ import "../css/navbar.css";
 import UserPic from "../../assets/images/user.png";
 import Settings from "../../assets/images/settings.png";
 import { Clock } from "../clock";
-import { BLUE2, TAB_HEIGHT } from "../../constants";
+import { BLUE2, TAB_HEIGHT, WHITE } from "../../constants";
 import { AuthContext } from "../../contexts/auth";
 import { TabAndContentWrapper } from "./wrapper/tabAndContentWrapper";
 import { MenuOptions, SettingsMenu } from "./menu";
@@ -16,6 +16,16 @@ interface Props {
     tabAndContentWrappers: TabAndContentWrapper[];
     menuOptions?: MenuOptions;
     documentsLabelKey?: string;
+    colorOptions?:{
+        navbarColorSettings?:{
+            menuSettingsBg?: string;
+            menuSettingsLet?: string;
+            clockColor?: string;
+            documentsColor?: string;
+            dateLetColor?: string;
+            navbarBg?: string;
+        }
+    }
 }
 
 export const Navbar = (props: Props) => {
@@ -30,13 +40,13 @@ export const Navbar = (props: Props) => {
     }
 
     return (
-        <div id="navbar" className="p-d-flex p-dir-col p-col-fixed" style={{ "padding": "0px" }}>
+        <div id="navbar" className="p-d-flex p-dir-col p-col-fixed" style={{ "padding": "0px", backgroundColor: (props.colorOptions?.navbarColorSettings?.navbarBg ? props.colorOptions.navbarColorSettings.navbarBg : WHITE) }}>
 
             <SettingsMenu ref={menuRef} hideMenu={hideMenu} menuOptions={props.menuOptions} />
-            <div className="p-d-flex p-align-center" style={{ height: TAB_HEIGHT, backgroundColor: BLUE2 }}>
+            <div className="p-d-flex p-align-center" style={{ height: TAB_HEIGHT, backgroundColor: (props.colorOptions?.navbarColorSettings?.menuSettingsBg ? props.colorOptions?.navbarColorSettings?.menuSettingsBg : BLUE2) }}>
                 <img src={UserPic} style={{ marginLeft: "5%" }} alt="" />
                 <span style={{
-                    color: "white", marginLeft: "10px", marginRight: "10px", maxWidth: "60%",
+                    color: (props.colorOptions?.navbarColorSettings?.menuSettingsLet ? props.colorOptions?.navbarColorSettings?.menuSettingsLet : "white"), marginLeft: "10px", marginRight: "10px", maxWidth: "60%",
                     textOverflow: "ellipsis", overflow: "hidden"
                 }}>
                     {authContext?.getUsername()}
@@ -51,9 +61,9 @@ export const Navbar = (props: Props) => {
             {props.tabAndContentWrappers.map(wrapper => wrapper.getNavbarComponent())}
 
             <div style={{ marginTop: "auto" }}>
-                <Clock />
+                <Clock clockColor={props.colorOptions?.navbarColorSettings?.clockColor} dateColor={props.colorOptions?.navbarColorSettings?.dateLetColor}/>
                 <div className={"p-px-3 p-text-center"} style={{ display: "flex", justifyContent: "center", marginBottom:"16px"}}>
-                    <Link style={{fontSize: "13px", fontWeight: "bolder", color: "black", textDecoration: "none" }} to="/documents">{t(props.documentsLabelKey ? props.documentsLabelKey : "Imprint")}</Link>
+                    <Link style={{fontSize: "13px", fontWeight: "bolder", color: ( props.colorOptions?.navbarColorSettings?.documentsColor ? props.colorOptions?.navbarColorSettings?.documentsColor : "black"), textDecoration: "none" }} to="/documents">{t(props.documentsLabelKey ? props.documentsLabelKey : "Imprint")}</Link>
                 </div>
             </div>
         </div>

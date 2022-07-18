@@ -1,11 +1,13 @@
 import React, {ReactElement} from "react";
 
 import {ContentBar} from "./contentBar";
-import {GRAY1} from "../../constants";
+import {GRAY1, GREEN, RED} from "../../constants";
 
 export interface Props {
     contentElements: ReactElement[]
-    layoutBehaviour?: LayoutBehaviour
+    layoutBehaviour?: LayoutBehaviour;
+    backgroundColorContentBar?: string;
+    backgroundColorContent?: string;
 }
 
 export const Content = (props: React.PropsWithChildren<Props>) => {
@@ -26,10 +28,10 @@ export const Content = (props: React.PropsWithChildren<Props>) => {
 
     return (
         <div className="p-d-flex p-flex-column" style={{width: "100%", overflow: "auto"}}>
-            <ContentBar contentElements={props.contentElements}/>
+            <ContentBar contentElements={props.contentElements} backgroundColorContentBar={props.backgroundColorContentBar}/>
             <div className={contentRootClass} style={{
                 height: "100%",
-                backgroundColor: GRAY1,
+                backgroundColor: (props.backgroundColorContent ? props.backgroundColorContent : GRAY1),
                 overflow: "auto"
             }}>
                 {props.children}

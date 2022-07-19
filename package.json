@@ -34,7 +34,6 @@
       "last 1 safari version"
     ]
   },
-  "main": "./build/disaPage.js",
   "keywords": [
     "disa-framework"
   ],
@@ -67,5 +66,49 @@
     "aws-amplify": "^4.3.12",
     "react-scripts": "^5.0.0",
     "typescript": "^4.5.5"
+  },
+  "exports": {
+    "./auth": "./lib/contexts/auth.js",
+    "./awsAuthenticationProvider": "./lib/components/authentication/aws/awsAuthenticationProvider.js",
+    "./awsAuthenticationView": "./lib/components/authentication/aws/awsAuthenticationView.js",
+    "./basicAuthenticationView": "./lib/components/authentication/default/basicAuthenticationView.js",
+    "./basicContentWrapper": "./lib/components/navbar/wrapper/basicContentWrapper.js",
+    "./constants": "./lib/constants.js",
+    "./content": "./lib/components/content/content.js",
+    "./contentCell": "./lib/components/content/contentCell.js",
+    "./dummyAuthenticationProvider": "./lib/components/authentication/default/dummyAuthenticationProvider.js",
+    "./globalDataLayer": "./lib/components/globalDataLayer.js",
+    "./group": "./lib/components/navbar/wrapper/group.js",
+    "./i18n": "./lib/components/internationalization/i18n.js",
+    "./imprint": "./lib/components/imprint.js",
+    "./language": "./lib/contexts/language.js",
+    "./navbarTab": "./lib/components/navbar/navbarTab.js",
+    "./privilegedNavbarTab": "./lib/components/navbar/tabs/privilegedNavbarTab.js",
+    "./simpleNavbarTab": "./lib/components/navbar/tabs/simpleNavbarTab.js",
+    "./translators": "./lib/components/internationalization/translators.js",
+    "./uiLayer": "./lib/components/uiLayer.js"
+  },
+  "typesVersions": {
+    "*": {
+      "auth": ["./lib/contexts/auth.d.ts"],
+      "awsAuthenticationProvider": ["./lib/components/authentication/aws/awsAuthenticationProvider.d.ts"],
+      "basicAuthenticationView": ["./lib/components/authentication/default/basicAuthenticationView.d.ts"],
+      "awsAuthenticationView": ["./lib/components/authentication/aws/awsAuthenticationView.d.ts"],
+      "basicContentWrapper": ["./lib/components/navbar/wrapper/basicContentWrapper.d.ts"],
+      "constants": ["./lib/constants.d.ts"],
+      "content": ["./lib/components/content/content.d.ts"],
+      "contentCell": ["./lib/components/content/contentCell.d.ts"],
+      "dummyAuthenticationProvider": ["./lib/components/authentication/default/dummyAuthenticationProvider.d.ts"],
+      "globalDataLayer": ["./lib/components/globalDataLayer.d.ts"],
+      "group": ["./lib/components/navbar/wrapper/group.d.ts"],
+      "i18n": ["./lib/components/internationalization/i18n.d.ts"],
+      "imprint": ["./lib/components/imprint.d.ts"],
+      "language": ["./lib/contexts/language.d.ts"],
+      "navbarTab": ["./lib/components/navbar/navbarTab.d.ts"],
+      "privilegedNavbarTab": ["./lib/components/navbar/tabs/privilegedNavbarTab.d.ts"],
+      "simpleNavbarTab": ["./lib/components/navbar/tabs/simpleNavbarTab.d.ts"],
+      "translators": ["./lib/components/internationalization/translators.d.ts"],
+      "uiLayer": ["./lib/components/uiLayer.d.ts"]
+    }
   }
 }

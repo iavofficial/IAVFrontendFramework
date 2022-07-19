@@ -59,7 +59,7 @@ function App() {
        }
     }
 
-    const colorTabOptions ={
+    const colorTabOptions = {
         tabTextColor: WHITE,
         tabTextHoverColor: HIGHTLIGHT,
         tabHoverBg: DARK3,

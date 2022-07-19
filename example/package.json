@@ -33,7 +33,8 @@
     ]
   },
   "dependencies": {
-    "disa-framework": "file:../build"
+    "disa-framework": "file:../build",
+    "webpack": "^5.73.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.13.14",

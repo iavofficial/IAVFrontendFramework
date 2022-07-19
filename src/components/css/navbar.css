@@ -41,13 +41,14 @@
 .p-accordion-content .navbar-tab-wrapper {
     border-width: 0 3px 0 0 !important;
     border: solid;
-    border-color: var(--magenta-3);
+    border-color: var(--borderColor-right, #0091ff);
 }
 
 .p-accordion-content .navbar-tab-wrapper.active {
     border-width: 0 3px 0 0 !important;
     border: solid;
-    border-color: var(--yellow);
+    border-color: var(--borderColor-right-active, #0091ff);
+
 }
 
 /* Anpassen des Akkordion-Styles */
@@ -60,12 +61,12 @@
     height: 100%;
     padding: 0 !important;
     border-radius: 0 !important;
-    background-color: orange!important;
+    background-color: var( --bgColor-accordionHeader, #ffffff) !important;
     border-width: 0 0 1px 0 !important;
-    border-color: var( --green) !important;
-    color: var(--red) !important;
+    border-color: var(--borderColor, #cdcdcd) !important;
     outline: 0 !important;
     font-weight: 500 !important;
+    color: var(--arrow-color, #0091ff) !important;
 }
 
 .p-accordion .p-accordion-header:not(.p-disabled) .p-accordion-header-link:focus {

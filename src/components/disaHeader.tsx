@@ -1,6 +1,7 @@
 import React, { ReactElement } from "react";
 import "./css/disaHeader.css";
 import AppLogo from "../assets/images/app_logo.png";
+import appLogo from "../assets/images/appLogo.png";
 import CompanyLogo from "../assets/images/company_logo.png";
 import { BLUE0, BLUE1 } from "../constants";
 
@@ -8,6 +9,7 @@ interface Props {
     headerOptions?: {
         reactElementRight?: ReactElement;
         reactElementLeft?: ReactElement;
+        reactElementFull?: ReactElement;
         letteringElementLeft?: string;
         hideLeft?: boolean;
         hideRight?: boolean;
@@ -31,8 +33,12 @@ const appLogoDefault = (props: Props)=> (
 );
 
 export const DisaHeader = (props: Props) => {
-
-return (
+const disaHeader = props.headerOptions?.reactElementFull ? 
+(
+    <div id="disa-header" className={"p-d-flex p-jc-center p-align-center"}>
+     {props.headerOptions.reactElementFull}
+    </div>
+):(
     <div id="disa-header" className={"p-d-flex p-jc-between p-align-center"} style={{ backgroundColor: (props.colorOptions?.headerBg ? props.colorOptions?.headerBg : BLUE0 ) }}>
         <div id="left-element" className={"p-d-flex p-align-center"}>
             {props.headerOptions?.reactElementLeft ? props.headerOptions?.reactElementLeft : appLogoDefault(props)}
@@ -41,4 +47,7 @@ return (
             { props.headerOptions?.reactElementRight ? props.headerOptions?.reactElementRight : companyLogoDefault(props)}
         </div>
     </div>
-)};
+)
+
+return disaHeader;
+};

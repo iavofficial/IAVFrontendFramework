@@ -1,6 +1,6 @@
 import React, {FormEvent} from "react";
 import {Link} from "react-router-dom";
-import {BLUE0} from "../../../constants";
+import {BLACK, BLUE0, WHITE} from "../../../constants";
 import AppLogo from "../../../assets/images/app_logo.png";
 import {AuthContext} from "../../../contexts/auth";
 import {LoginButtonWithSpinner} from "../loginButtonWithSpinner";
@@ -72,7 +72,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
                            className={"form-control p-inputtext " + (authContext?.loginError ? "invalid" : "")}
                            placeholder={t("New_password")}
                            onChange={(ev) => setPassword(ev.target.value)} required autoFocus/>
-                    <LoginButtonWithSpinner isLoading={authContext?.isLoading}/>
+                    <LoginButtonWithSpinner isLoading={authContext?.isLoading} backGroundColor={props.colorOptions?.loginBtnBg}/>
                     <div className="invalid">{getErrorText(authContext?.loginError)}</div>
                 </div>
             </form>
@@ -91,7 +91,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
                        type="password"
                        className={"p-inputtext"} placeholder={t("Password")} required style={{marginBottom: "1rem"}}/>
                 <div>
-                    <LoginButtonWithSpinner isLoading={authContext?.isLoading}/>
+                    <LoginButtonWithSpinner isLoading={authContext?.isLoading} backGroundColor={props.colorOptions?.loginBtnBg}/>
                 </div>
                 <div style={{marginTop: "20px"}} className="invalid">{getErrorText(authContext?.loginError)}</div>
             </div>
@@ -101,21 +101,27 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
     const appLogoDefault = (props: AuthenticationViewProps)=> (
         <div style={{ display: (props.headerOptions?.hideLeft ? "none" : "flex"), alignItems: "center", height: "75px"}}>
               <img id="iav-logo" src={AppLogo} alt="DISA Logo" style={{ height: "40px", width: "125px", marginLeft: "25px", marginRight: "12px", backgroundColor: BLUE0 }} /> 
-              <h5 style={{ color: "white", fontSize: "15px", fontWeight: "lighter" }}>
+              <h5 style={{ color: (props.colorOptions?.letteringElementLeftColor ? props.colorOptions?.letteringElementLeftColor : "white"), fontSize: "15px", fontWeight: "lighter" }}>
                   {props.headerOptions?.letteringElementLeft ? props.headerOptions.letteringElementLeft : "Remote Service Monitor"}
               </h5> 
         </div>
     );
 
+    const header = (props: AuthenticationViewProps) =>(
+        <div className={"p-d-flex"} style={{ backgroundColor: (props.colorOptions?.headerBg ? props.colorOptions?.headerBg : BLUE0), color: "white", alignItems: "center", height: "75px"}}>
+        <div id="left-element" className={"p-d-flex p-align-center"}>
+            {props.headerOptions?.reactElementLeft ? props.headerOptions?.reactElementLeft : appLogoDefault(props)}
+        </div>
+        <span style={{ fontSize: "30px", marginLeft: "auto", marginRight: "25px", color: (props.colorOptions?.letteringElementRightColor ? props.colorOptions?.letteringElementRightColor : WHITE) }}>LOGIN</span>
+    </div>
+    );
+
     return (
-        <div className="p-d-flex" style={{height: "100%"}}>
-            <div className="p-d-flex p-flex-column p-shadow-10" style={{width: "500px", margin: "auto"}}>
-                <div className={"p-d-flex"} style={{ backgroundColor: BLUE0, color: "white", alignItems: "center", height: "75px"}}>
-                    <div id="left-element" className={"p-d-flex p-align-center"}>
-                        {props.headerOptions?.reactElementLeft ? props.headerOptions?.reactElementLeft : appLogoDefault(props)}
-                    </div>
-                    <span style={{ fontSize: "30px", marginLeft: "auto", marginRight: "25px" }}>LOGIN</span>
-                </div>
+        <div className="p-d-flex" style={{height: "100%", backgroundColor: (props.colorOptions?.fullBg ? props.colorOptions?.fullBg : WHITE)}}>
+            <div className="p-d-flex p-flex-column p-shadow-10" style={{width: "500px", margin: "auto", backgroundColor: (props.colorOptions?.loginFormBg ? props.colorOptions?.loginFormBg : WHITE)}}>
+                <div>
+                 {props.headerOptions?.reactElementFullAuthenticationHeader ? props.headerOptions.reactElementFullAuthenticationHeader : header(props)}   
+                </div>            
                 <div className="p-d-flex" style={{justifyContent: "center", marginBottom: "30px"}}>
                     {authContext?.isNewPasswordRequired ? NewPasswordForm : LoginForm}
                 </div>
@@ -125,7 +131,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
                         t(props.documentsLabelKey ? props.documentsLabelKey : "Imprint")
                     }
                 </Link>
-                <span style={{padding: "10px", alignSelf: "center"}}>&copy; IAV GmbH 2021</span>
+                <span style={{padding: "10px", alignSelf: "center", color: (props.colorOptions?.companyTextColor ? props.colorOptions.companyTextColor : BLACK)}}>&copy; {props.companyText ? props.companyText : "IAV GmbH 2021"}</span>
             </div>
         </div>
     );

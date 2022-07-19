@@ -28,6 +28,8 @@ import {AuthenticationViewProps} from './authentication/aws/authenticationView';
 interface HeaderOptions {
     reactElementRight?: ReactElement;
     reactElementLeft?: ReactElement;
+    reactElementFull?: ReactElement;
+    reactElementFullAuthenticationHeader?: ReactElement;
     letteringElementLeft?: string;
     hideLeft?: boolean;
     hideRight?: boolean;
@@ -42,6 +44,16 @@ interface Coloroptions {
         documentsColor?: string;
         dateLetColor?: string;
         navbarBg?: string;
+    }
+    authViewColorSettings?:{
+        headerBg?: string;
+        fullBg?: string;
+        loginBg?: string;
+        loginBtnBg?: string;
+        letteringElementLeftColor?: string;
+        letteringElementRightColor?: string;
+        companyTextColor?: string;
+        legalDocumentsColor?: string;  
     }
 }
 
@@ -63,6 +75,7 @@ export const UILayer = (props: Props) => {
     const authContext = useContext(AuthContext);
     const AuthenticationView = props.authenticationView ? props.authenticationView : BasicAuthenticationView;
 
+    
     return (
         <>
             <CookieBanner/>
@@ -77,6 +90,7 @@ export const UILayer = (props: Props) => {
                             <AuthenticationView
                                 documentsLabelKey={props.documentsLabelKey}
                                 headerOptions={props.headerOptions}
+                                colorOptions={props.colorOptions}
                             />
                         }
                     />
@@ -169,7 +183,6 @@ return(
                 colorOptions={props.colorOptions}
             />
             <Routes>
-                {console.log("hier dein Array", props.tabAndContentWrappers)}
                 {props.tabAndContentWrappers.map((wrapper) => wrapper.getRoutes())}
                 <Route
                     path='/documents'

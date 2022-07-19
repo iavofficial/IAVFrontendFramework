@@ -16,6 +16,8 @@ interface Props {
     tabAndContentWrappers: TabAndContentWrapper[];
     menuOptions?: MenuOptions;
     documentsLabelKey?: string;
+    imageLeft?: string;
+    imageRight?: string;
     colorOptions?:{
         navbarColorSettings?:{
             menuSettingsBg?: string;
@@ -44,7 +46,7 @@ export const Navbar = (props: Props) => {
 
             <SettingsMenu ref={menuRef} hideMenu={hideMenu} menuOptions={props.menuOptions} />
             <div className="p-d-flex p-align-center" style={{ height: TAB_HEIGHT, backgroundColor: (props.colorOptions?.navbarColorSettings?.menuSettingsBg ? props.colorOptions?.navbarColorSettings?.menuSettingsBg : BLUE2) }}>
-                <img src={UserPic} style={{ marginLeft: "5%" }} alt="" />
+                <img src={props.imageLeft ? props.imageLeft : UserPic} style={{ marginLeft: "5%" }} alt="" />
                 <span style={{
                     color: (props.colorOptions?.navbarColorSettings?.menuSettingsLet ? props.colorOptions?.navbarColorSettings?.menuSettingsLet : "white"), marginLeft: "10px", marginRight: "10px", maxWidth: "60%",
                     textOverflow: "ellipsis", overflow: "hidden"
@@ -54,7 +56,7 @@ export const Navbar = (props: Props) => {
                 <a href="#" style={{ marginLeft: "auto", marginRight: "20px", cursor: "pointer" }}
                     onClick={(e) => { if (menuRef.current) { menuRef.current.show(e); } }}
                     onKeyDown={(e) => hideMenu(e)}>
-                    <img style={{ verticalAlign: "top" }} src={Settings} alt="" />
+                    <img style={{ verticalAlign: "top" }} src={props.imageRight ? props.imageRight : Settings} alt="" />
                 </a>
             </div>
 

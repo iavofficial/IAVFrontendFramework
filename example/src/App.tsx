@@ -30,6 +30,7 @@ import deviceOn from './assets/device_on.png'
 import deviceOff from './assets/device_off.png'
 import certificateOn from './assets/certificate_on.png'
 import certificateOff from './assets/certificate_off.png'
+import appLogo from './assets/appLogo.png'
 import groupIcon from "./assets/ota_logo.png";
 import {FirstExampleContextComponent} from './contexts/FirstExampleContext';
 import {SecondExampleContextComponent} from './contexts/SecondExampleContext';
@@ -41,11 +42,13 @@ import {useState} from "react";
 import {ClassComponentContainer} from "./components/classComponentContainer";
 import {LegalDocuments} from "./components/legalDocuments";
 import { BLUE0, GRAY1, GREEN, RED, WHITE } from "disa-framework/constants";
-import {DARK1, DARK2, DARK3, GREY_FRAMEWORK, HIGHTLIGHT} from "./testConstants";
+import {DARK1, DARK2, DARK3, GREY_FRAMEWORK, HIGHLIGHT_DARK, HIGHLIGHT} from "./testConstants";
 
 function App() {
 
     const [selectedButtonOption, setSelectedButtonOption] = useState("Simulated");
+
+    
 
     const colorOptions = {
        headerBg: DARK1,
@@ -56,12 +59,26 @@ function App() {
             documentsColor: WHITE,
             navbarBg: DARK2,
             tabBg: DARK1
+       },
+       authViewColorSettings:{
+        loginBtnBg: HIGHLIGHT,
+        fullBg: DARK3
        }
     }
 
+    const header =   <div style={{height: "75px", width: "100%", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: DARK1}}>
+    <img src={appLogo}/>
+    </div>
+
+    const headerOptions ={
+        reactElementFullAuthenticationHeader: header,
+        
+    }
+
+
     const colorTabOptions = {
         tabTextColor: WHITE,
-        tabTextHoverColor: HIGHTLIGHT,
+        tabTextHoverColor: HIGHLIGHT,
         tabHoverBg: DARK3,
         tabBg: DARK1
     }
@@ -95,40 +112,40 @@ function App() {
                                                  to="/example2" disabled={false}
                                                  selectedIcon={certificateOn}
                                                  deselectedIcon={certificateOff}/>, SecondExampleComponent),
-        new BasicContentWrapper(<PrivilegedNavbarTab
-            name={(t: TranslateFunctionType) => t("example_component", {count: 2})} to="/example3" disabled={false}
-            selectedIcon={navDiagnosticsSelected} deselectedIcon={navDiagnosticsDeselected}
-            permittedGroups={["USER", "ADMIN"]}/>, ThirdExampleComponent),
-        new Group(
-            (t: TranslateFunctionType) => t("Test_group"), groupIcon, true, false,
-            [
-                new BasicContentWrapper(<SimpleNavbarTab
-                    name={(t: TranslateFunctionType) => t("example_component", {count: 3})} to="/group-example1"
+        // new BasicContentWrapper(<PrivilegedNavbarTab
+        //     name={(t: TranslateFunctionType) => t("example_component", {count: 2})} to="/example3" disabled={false}
+        //     selectedIcon={navDiagnosticsSelected} deselectedIcon={navDiagnosticsDeselected}
+        //     permittedGroups={["USER", "ADMIN"]}/>, ThirdExampleComponent),
+        // new Group(
+        //     (t: TranslateFunctionType) => t("Test_group"), groupIcon, true, false,
+        //     [
+        //         new BasicContentWrapper(<SimpleNavbarTab
+        //             name={(t: TranslateFunctionType) => t("example_component", {count: 3})} to="/group-example1"
                  
-                    disabled={false}
-                    selectedIcon={navFleetSelected} deselectedIcon={navFleetDeselected}/>, SecondExampleComponent),
-                new BasicContentWrapper(<SimpleNavbarTab
-                    name={(t: TranslateFunctionType) => t("example_component", {count: 4})} to="/group-example2"
+        //             disabled={false}
+        //             selectedIcon={navFleetSelected} deselectedIcon={navFleetDeselected}/>, SecondExampleComponent),
+        //         new BasicContentWrapper(<SimpleNavbarTab
+        //             name={(t: TranslateFunctionType) => t("example_component", {count: 4})} to="/group-example2"
                    
-                    disabled={true}
-                    selectedIcon={navFleetDetailSelected}
-                    deselectedIcon={navFleetDetailDeselected}/>, FourthExampleComponent)
-            ]
-        ),
-        new BasicContentWrapper(<PrivilegedNavbarTab
-            name={(t: TranslateFunctionType) => t("example_component", {count: 5})} to="/example4" disabled={true}
-            selectedIcon={navExpertSelected} deselectedIcon={navExpertDeselected}
-            permittedGroups={["ADMIN"]}/>, FourthExampleComponent),
-        new BasicContentWrapper(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", {count: 6})}
+        //             disabled={true}
+        //             selectedIcon={navFleetDetailSelected}
+        //             deselectedIcon={navFleetDetailDeselected}/>, FourthExampleComponent)
+        //     ]
+        // ),
+        // new BasicContentWrapper(<PrivilegedNavbarTab
+        //     name={(t: TranslateFunctionType) => t("example_component", {count: 5})} to="/example4" disabled={true}
+        //     selectedIcon={navExpertSelected} deselectedIcon={navExpertDeselected}
+        //     permittedGroups={["ADMIN"]}/>, FourthExampleComponent),
+        // new BasicContentWrapper(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", {count: 6})}
                                                
-                                                 to="/example5" disabled={false}
-                                                 selectedIcon={navFleetDetailSelected}
-                                                 deselectedIcon={navFleetDetailDeselected}/>, FourthExampleComponent),
-        new BasicContentWrapper(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", {count: 7})}
+        //                                          to="/example5" disabled={false}
+        //                                          selectedIcon={navFleetDetailSelected}
+        //                                          deselectedIcon={navFleetDetailDeselected}/>, FourthExampleComponent),
+        // new BasicContentWrapper(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", {count: 7})}
                                          
-                                                 to="/example6" disabled={false}
-                                                 selectedIcon={navDashboardSelected}
-                                                 deselectedIcon={navDashboardDeselected}/>, ClassComponentContainer),
+        //                                          to="/example6" disabled={false}
+        //                                          selectedIcon={navDashboardSelected}
+        //                                          deselectedIcon={navDashboardDeselected}/>, ClassComponentContainer),
     ];
 
     const translations = (
@@ -156,7 +173,7 @@ function App() {
                         <UILayer tabAndContentWrappers={views} startingPoint="/"
                                  authenticationView={BasicAuthenticationView} menuOptions={menuOptions}
                                  documentsLabelKey="Legal_documents" documentsComponent={LegalDocuments} 
-                                 colorOptions={colorOptions}/>
+                                 colorOptions={colorOptions} headerOptions={headerOptions}/>
                     </SecondExampleContextComponent>
                 </FirstExampleContextComponent>
             </GlobalDataLayer>

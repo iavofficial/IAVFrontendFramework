@@ -26,11 +26,6 @@ import navFleetSelected from './assets/nav_fleet_selected.png';
 import navFleetDeselected from './assets/nav_fleet_deselected.png';
 import navFleetDetailSelected from './assets/nav_fleet_detail_selected.png';
 import navFleetDetailDeselected from './assets/nav_fleet_detail_deselected.png';
-import deviceOn from './assets/device_on.png'
-import deviceOff from './assets/device_off.png'
-import certificateOn from './assets/certificate_on.png'
-import certificateOff from './assets/certificate_off.png'
-import appLogo from './assets/appLogo.png'
 import groupIcon from "./assets/ota_logo.png";
 import {FirstExampleContextComponent} from './contexts/FirstExampleContext';
 import {SecondExampleContextComponent} from './contexts/SecondExampleContext';
@@ -41,44 +36,10 @@ import {SecondExampleComponent} from "./components/secondExampleComponent";
 import {useState} from "react";
 import {ClassComponentContainer} from "./components/classComponentContainer";
 import {LegalDocuments} from "./components/legalDocuments";
-import { BLUE0, GRAY1, GREEN, RED, WHITE } from "disa-framework/constants";
-import {DARK1, DARK2, DARK3, GREY_FRAMEWORK, HIGHLIGHT_DARK, HIGHLIGHT} from "./testConstants";
 
 function App() {
 
     const [selectedButtonOption, setSelectedButtonOption] = useState("Simulated");
-
-    const colorOptions = {
-       headerBg: DARK1,
-       navbarColorSettings:{
-            menuSettingsBg: DARK1,
-            clockColor: WHITE,
-            dateLetColor: WHITE,
-            documentsColor: WHITE,
-            navbarBg: DARK2,
-            tabBg: DARK1
-       },
-       authViewColorSettings:{
-        loginBtnBg: HIGHLIGHT,
-        fullBg: DARK3
-       }
-    }
-
-    const header =   <div style={{height: "75px", width: "100%", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: DARK1}}>
-    <img src={appLogo}/>
-    </div>
-
-    const headerOptions ={
-        reactElementFullAuthenticationHeader: header,
-        
-    }
-
-    const colorTabOptions = {
-        tabTextColor: WHITE,
-        tabTextHoverColor: HIGHLIGHT,
-        tabHoverBg: DARK3,
-        tabBg: DARK1
-    }
 
     const menuOptions = {
         additionalItems: [
@@ -101,14 +62,14 @@ function App() {
 
     const views = [
         new BasicContentWrapper(<SimpleNavbarTab name={"Example without Translation"} to="/" disabled={false}
-        colorOptions={colorTabOptions}
-                                                 selectedIcon={deviceOn}
-                                                 deselectedIcon={deviceOff}/>, LayoutAndContextExampleComponent),
+
+                                                 selectedIcon={navDashboardDeselected}
+                                                 deselectedIcon={navDashboardDeselected}/>, LayoutAndContextExampleComponent),
         new BasicContentWrapper(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", {count: 1})}
-        colorOptions={colorTabOptions}
+        
                                                  to="/example2" disabled={false}
-                                                 selectedIcon={certificateOn}
-                                                 deselectedIcon={certificateOff}/>, SecondExampleComponent),
+                                                 selectedIcon={navFleetSelected}
+                                                 deselectedIcon={navFleetDeselected}/>, SecondExampleComponent),
         new BasicContentWrapper(<PrivilegedNavbarTab
             name={(t: TranslateFunctionType) => t("example_component", {count: 2})} to="/example3" disabled={false}
             selectedIcon={navDiagnosticsSelected} deselectedIcon={navDiagnosticsDeselected}
@@ -170,7 +131,7 @@ function App() {
                         <UILayer tabAndContentWrappers={views} startingPoint="/"
                                  authenticationView={BasicAuthenticationView} menuOptions={menuOptions}
                                  documentsLabelKey="Legal_documents" documentsComponent={LegalDocuments} 
-                                 colorOptions={colorOptions} headerOptions={headerOptions}/>
+                               />
                     </SecondExampleContextComponent>
                 </FirstExampleContextComponent>
             </GlobalDataLayer>

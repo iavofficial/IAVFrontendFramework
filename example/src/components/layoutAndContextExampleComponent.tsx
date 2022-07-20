@@ -43,9 +43,9 @@ class LayoutAndContextExampleComponentUnprocessed extends Component<AppliedTrans
 
     render() {
         return (
-            <Content layoutBehaviour={LayoutBehaviour.GRID} backgroundColorContentBar={MAGENTA3} backgroundColorContent={BLUE3} contentElements={[...this.context.contentTabs, ...this.state.contentTabs]}>
+            <Content layoutBehaviour={LayoutBehaviour.GRID} contentElements={[...this.context.contentTabs, ...this.state.contentTabs]}>
                 <div className={"p-col-8 p-grid p-nogutter"}>
-                    <ContentCell colWidth={6} paddings={CellPaddings.FULL} backgroundColor={MAGENTA3} clearStyle={true}>
+                    <ContentCell colWidth={6} paddings={CellPaddings.FULL} clearStyle={true}>
                         <span>First row left</span>
 
                         <div

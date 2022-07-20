@@ -12,7 +12,7 @@ class SecondExampleComponentUnprocessed extends Component<AppliedTranslationProp
 
     render() {
         return (
-            <Content layoutBehaviour={LayoutBehaviour.FLEX} backgroundColorContent={DARK2} contentElements={this.context.contentTabs}>
+            <Content layoutBehaviour={LayoutBehaviour.FLEX} contentElements={this.context.contentTabs}>
                 <div>{this.props.t("Example_component")}</div>
             </Content>
         );

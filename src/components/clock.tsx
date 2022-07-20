@@ -7,7 +7,6 @@ interface Props{
   dateColor?: string;
 }
 
-
 export const Clock = (props: Props) => {
   const t = useTranslator();
   const [date, setDate] = useState(new Date());

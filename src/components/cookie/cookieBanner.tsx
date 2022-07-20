@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import { useCookies } from "react-cookie";
-
 import { BLUE1 } from "../../constants";
 import { ACCEPTED_COOKIES_NAME } from "../../constants";
 import { useCookiesAccepted } from "./cookieHooks";

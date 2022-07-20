@@ -10,7 +10,6 @@ import { AuthenticationViewProps } from "../aws/authenticationView";
 import "../../css/authenticationView.css";
 
 export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
-    console.log("ich werde ausgeführt: ", props);
     
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -41,8 +40,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
         <span style={{ fontSize: "30px", marginLeft: "auto", marginRight: "25px", color: (props.colorOptions?.authViewColorSettings?.letteringElementRightColor ? props.colorOptions?.authViewColorSettings?.letteringElementRightColor : WHITE) }}>LOGIN</span>
     </div>
     );
-        console.log("hier der wert für fullbg: ", props.colorOptions?.authViewColorSettings?.loginBtnBg);
-        
+      
     return (
         <div className="p-d-flex" style={{ height: "100%", backgroundColor: props.colorOptions?.authViewColorSettings?.fullBg}}>
             <div className="p-d-flex p-flex-column p-shadow-10" style={{ width: "500px", margin: "auto", backgroundColor: (props.colorOptions?.authViewColorSettings?.loginFormBg ? props.colorOptions?.authViewColorSettings?.loginFormBg : WHITE) }}>

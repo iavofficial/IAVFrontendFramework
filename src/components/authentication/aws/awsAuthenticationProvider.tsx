@@ -52,7 +52,6 @@ export class AWSAuthenticationProvider extends Component<React.PropsWithChildren
     }
 
     componentDidUpdate() {
-        console.log(this.state.hasAuthenticated);
         this.checkIsAuthenticated();
     }
 
@@ -164,7 +163,6 @@ export class AWSAuthenticationProvider extends Component<React.PropsWithChildren
                 loginError: undefined
             });
         });
-        console.log("logged out");
     }
 
     completePassword = (newPassword: String) => {

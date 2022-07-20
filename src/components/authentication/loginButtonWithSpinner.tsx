@@ -1,7 +1,6 @@
 import React from "react";
 import { Button } from "primereact/button";
 import { ProgressSpinner } from "primereact/progressspinner";
-
 import { BLUE3 } from "../../constants";
 
 interface Props {

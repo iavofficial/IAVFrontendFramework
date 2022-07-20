@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-
 import { BLUE3, GRAY2, TAB_HEIGHT } from "../../../constants";
 import { useTranslator } from "../../internationalization/translators";
 import { navbarTabProps } from "./navbarTab";
@@ -29,10 +28,6 @@ export const SimpleNavbarTab = (props: navbarTabProps) => {
         opacity: props.disabled ? 0.5 : 1
     };
 
- 
-    
-
-    
     const tab = (
         <div className={"navbar-tab-wrapper " + (active ? "active" : "")}>
             <div className="navbar-tab" style={{ borderColor: GRAY2 }}

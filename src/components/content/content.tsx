@@ -1,7 +1,7 @@
 import React, {ReactElement} from "react";
 
 import {ContentBar} from "./contentBar";
-import {GRAY1, GREEN, RED} from "../../constants";
+import {GRAY1} from "../../constants";
 
 export interface Props {
     contentElements: ReactElement[]

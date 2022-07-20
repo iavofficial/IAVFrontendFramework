@@ -75,7 +75,6 @@ export const UILayer = (props: Props) => {
     const authContext = useContext(AuthContext);
     const AuthenticationView = props.authenticationView ? props.authenticationView : BasicAuthenticationView;
 
-    
     return (
         <>
             <CookieBanner/>
@@ -163,7 +162,6 @@ interface RSMViewProps {
 
 // className="p-d-flex p-flex-column"
 const RSMView = (props: RSMViewProps) => {
-
 
 return(
     <div style={{

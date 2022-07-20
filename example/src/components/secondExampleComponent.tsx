@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { SecondExampleContext } from "../contexts/SecondExampleContext";
 import {Content, LayoutBehaviour} from "disa-framework/content";
 import { applyTranslation, AppliedTranslationProps } from "disa-framework/translators";
-import { DARK2 } from "../testConstants";
 
 class SecondExampleComponentUnprocessed extends Component<AppliedTranslationProps> {
 

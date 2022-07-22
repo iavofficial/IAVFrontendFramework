@@ -63,7 +63,7 @@ function App() {
     const views = [
         new BasicContentWrapper(<SimpleNavbarTab name={"Example without Translation"} to="/" disabled={false}
 
-                                                 selectedIcon={navDashboardDeselected}
+                                                 selectedIcon={navDashboardSelected}
                                                  deselectedIcon={navDashboardDeselected}/>, LayoutAndContextExampleComponent),
         new BasicContentWrapper(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", {count: 1})}
         

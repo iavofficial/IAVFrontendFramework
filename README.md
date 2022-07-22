@@ -73,16 +73,77 @@ The UILayer component has the properties:
 4. authenticationView (optional): This attribute will get explained later.
 5. documentsComponent: By using this property you are able to replace the default imprint with an own component. This allows you to display a customized list of legal documents.
 6. documentsLabelKey: By using this property you are able to replace the "Imprint" text at the bottom of the navigation bar. You have to pass a string which is the key of corresponding translations in your translation files.
-7. headerOptions (optional): Here is the possibility to customize the header section. If you dont use this possibility the default header will be shown. The default header is with the new IAV Logo on the right side and the DISA Logo on the left side with the lettering "Remote Service Monitor". Note, that the same left React element is used in the login screen. In the object headerOptions there are 5 attributes that you can modify but they are not required. You can just set the attributes you need:   
+7. headerOptions (optional): Here is the possibility to customize the header section. If you dont use this possibility the default header will be shown. The default header is with the new IAV Logo on the right side and the DISA Logo on the left side with the lettering "Remote Service Monitor". Note, that the same left React element is used in the login screen. In the object headerOptions there are 7 attributes that you can modify but they are not required. You can just set the attributes you need:   
+8. colorOptions (optional): Here is the possibility to customize the colorscema of the application. If you dont use this possibility the default disa/iav design scema of blue, white and grey will be shown. Note that let means lettering and bg means background.
 
 ```javascript
 let headerOptions = {
      reactElementRight: ReactElement; // Here you can set any React element you want to set on the space 300px x 75px on the right sight (its recommended to use the company logo here)
-        reactElementLeft: ReactElement; // Here you can set any React element you want to set on the space 271px x 75px on the left sight (its recommended to use the app logo here)
-        letteringElementLeft: string; // Here you can set a lettering you want to use with the default app logo (DISA) 
-        hideLeft: boolean; // If you set this boolean to "true" you can hide or show the left React element (default the DISA logo with the Remote Service Monitor lettering)
-        hideRight: boolean; // If you set this boolean to "true" you can hide or show the React element (default the new IAV Logo)
+      reactElementLeft: ReactElement; // Here you can set any React element you want to set on the space 271px x 75px on the left sight (its recommended to use the app logo here)
+      reactElementFull?: ReactElement;//Here you can set any React element you want to set on the height of 75px and 100% width. Note that this is only for the Application header
+      reactElementFullAuthenticationHeader?: ReactElement; //Here you can set any React element you want to set on the height of 75px and 100% width. Note that this is only for the Authentication header
+      letteringElementLeft: string; // Here you can set a lettering you want to use with the default app logo (DISA) 
+      hideLeft: boolean; // If you set this boolean to "true" you can hide or show the left React element (default the DISA logo with the Remote Service Monitor lettering)
+      hideRight: boolean; // If you set this boolean to "true" you can hide or show the React element (default the new IAV Logo)
 }
+
+let colorOptions {
+    headerBg?: string;//Here you can set the backgroundcolor of the appheader
+    navbarColorSettings?:{//with this JSON you can set individual colors for the navbar
+        menuSettingsBg?: string;//here you can set the settings background
+        menuSettingsLet?: string;//here you can set the letter in the settingssection (usually the email of the loggedInUser)
+        clockColor?: string;//here you can set the color of the clock
+        documentsColor?: string;//here you can set the color of the documents
+        dateLetColor?: string;//here you can set the color of the date text
+        navbarBg?: string;//here you can set the backgroundcolor of the navbar
+    },
+    authViewColorSettings?:{
+        headerBg?: string;//here you can set the backgroundcolor of the header from the authentication form
+        fullBg?: string;//here you can set the backgroundcolor of the window behind the autentication form
+        loginBg?: string;//here you can set the backgroundcolor of the loginform itself
+        loginBtnBg?: string;//here you can set the backgroundcolor of the loginbutton
+        letteringElementLeftColor?: string;//here you can set the color of the text that is in the authenticationheader (leftElement)
+        letteringElementRightColor?: string;//here you can set the color of the text that is in the authenticationheader (rightElement)
+        companyTextColor?: string;//here you can set the color of the text from the company logo
+        legalDocumentsColor?: string;//here you can set the color of the text from the legal documents
+    }
+}
+```
+### Coloroptions ###
+Furthermore there are more possibilities to customize the colorscema of the application as already shown in the UILayer description. In the NavbarTabs you have the possibility to
+set an Colorobject to customize each tab. 
+```javascript
+    colorOptions?:{
+        tabTextColor: string;
+        tabTextHoverColor: string;
+        tabHoverBg: string;
+        tabBg: string;
+    }
+
+```
+To customize the tabGroup you have to import an css or scss file and set the following constants in the css root property with the hexcolorcode you want. If you dont use the possibility the default colors appear.
+
+```javascript
+--borderColor-right-active //here you can set the color of the right border when a tab is active
+--borderColor-right//here you can set the color of the right border when a tab is not active
+--arrow-color//here you can set the color of the dropdown arrow
+--bgColor-accordionHeader//here you can set the color of the background of the accordion header
+--borderColor//here you can set the color between the tabelements
+
+```
+
+To customize the content there are to properties that you can set optionally:
+
+```javascript
+    backgroundColorContentBar?: string;// here you can set the background of the contentbar
+    backgroundColorContent?: string;// here you can set the background of the whole contentElement
+
+```
+You have also the possibilty to change the backgroundcolor of the contentCell: 
+
+```javascript
+  backgroundColor?: string;//here you can set the backgroundColor of the contentCell
+```
 
 The GlobalDataLayer has the properties:
 1. translations (optional): Translations for internationalization

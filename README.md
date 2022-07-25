@@ -121,7 +121,7 @@ set a color object to customize each tab.
     }
 
 ```
-To customize the tabGroup you have to import a css or scss file and set the following constants in the css root property with the hexcolorcode you want. If you dont use this possibility the default colors appear.
+To customize the tabGroup you have to import a css or scss file and set the following constants in the css root property with the hexcolorcode you want. If you don't use this possibility the default colors will appear.
 
 ```javascript
 --borderColor-right-active //here you can set the color of the right border when a tab is active

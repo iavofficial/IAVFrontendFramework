@@ -1,12 +1,15 @@
 {
   "name": "@disa/disa-framework",
-  "version": "5.0.3",
+  "version": "5.1.3",
   "private": false,
   "description": "This framework takes care of a DISA application's basic structure.",
   "contributors": [
     {
       "name": "Joerg Jonas Krahn",
       "email": "joerg.jonas.krahn@iav.de"
+    }, {
+      "name": "Daniel Helfenstein",
+      "email": "daniel.helfenstein@iav.de"
     }
   ],
   "scripts": {
@@ -34,7 +37,6 @@
       "last 1 safari version"
     ]
   },
-  "main": "./build/disaPage.js",
   "keywords": [
     "disa-framework"
   ],
@@ -67,5 +69,49 @@
     "aws-amplify": "^4.3.12",
     "react-scripts": "^5.0.0",
     "typescript": "^4.5.5"
+  },
+  "exports": {
+    "./auth": "./contexts/auth.js",
+    "./awsAuthenticationProvider": "./components/authentication/aws/awsAuthenticationProvider.js",
+    "./awsAuthenticationView": "./components/authentication/aws/awsAuthenticationView.js",
+    "./basicAuthenticationView": "./components/authentication/default/basicAuthenticationView.js",
+    "./basicContentWrapper": "./components/navbar/wrapper/basicContentWrapper.js",
+    "./constants": "./constants.js",
+    "./content": "./components/content/content.js",
+    "./contentCell": "./components/content/contentCell.js",
+    "./dummyAuthenticationProvider": "./components/authentication/default/dummyAuthenticationProvider.js",
+    "./globalDataLayer": "./components/globalDataLayer.js",
+    "./group": "./components/navbar/wrapper/group.js",
+    "./i18n": "./components/internationalization/i18n.js",
+    "./imprint": "./components/imprint.js",
+    "./language": "./contexts/language.js",
+    "./navbarTab": "./components/navbar/navbarTab.js",
+    "./privilegedNavbarTab": "./components/navbar/tabs/privilegedNavbarTab.js",
+    "./simpleNavbarTab": "./components/navbar/tabs/simpleNavbarTab.js",
+    "./translators": "./components/internationalization/translators.js",
+    "./uiLayer": "./components/uiLayer.js"
+  },
+  "typesVersions": {
+    "*": {
+      "auth": ["./contexts/auth.d.ts"],
+      "awsAuthenticationProvider": ["./components/authentication/aws/awsAuthenticationProvider.d.ts"],
+      "basicAuthenticationView": ["./components/authentication/default/basicAuthenticationView.d.ts"],
+      "awsAuthenticationView": ["./components/authentication/aws/awsAuthenticationView.d.ts"],
+      "basicContentWrapper": ["./components/navbar/wrapper/basicContentWrapper.d.ts"],
+      "constants": ["./constants.d.ts"],
+      "content": ["./components/content/content.d.ts"],
+      "contentCell": ["./components/content/contentCell.d.ts"],
+      "dummyAuthenticationProvider": ["./components/authentication/default/dummyAuthenticationProvider.d.ts"],
+      "globalDataLayer": ["./components/globalDataLayer.d.ts"],
+      "group": ["./components/navbar/wrapper/group.d.ts"],
+      "i18n": ["./components/internationalization/i18n.d.ts"],
+      "imprint": ["./components/imprint.d.ts"],
+      "language": ["./contexts/language.d.ts"],
+      "navbarTab": ["./components/navbar/navbarTab.d.ts"],
+      "privilegedNavbarTab": ["./components/navbar/tabs/privilegedNavbarTab.d.ts"],
+      "simpleNavbarTab": ["./components/navbar/tabs/simpleNavbarTab.d.ts"],
+      "translators": ["./components/internationalization/translators.d.ts"],
+      "uiLayer": ["./components/uiLayer.d.ts"]
+    }
   }
 }

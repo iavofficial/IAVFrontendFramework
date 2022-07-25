@@ -33,7 +33,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
     );
 
     const header = (props: AuthenticationViewProps) =>(
-        <div className={"p-d-flex"} style={{ backgroundColor: (props.colorOptions?.authViewColorSettings?.headerBg ? props.colorOptions?.authViewColorSettings?.headerBg : BLUE0), color: "white", alignItems: "center", height: "75px"}}>
+        <div className={"p-d-flex"} style={{ backgroundColor: (props.colorOptions?.authViewColorSettings?.headerBackground ? props.colorOptions?.authViewColorSettings?.headerBackground : BLUE0), color: "white", alignItems: "center", height: "75px"}}>
         <div id="left-element" className={"p-d-flex p-align-center"}>
             {props.headerOptions?.reactElementLeft ? props.headerOptions?.reactElementLeft : appLogoDefault(props)}
         </div>
@@ -42,8 +42,8 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
     );
       
     return (
-        <div className="p-d-flex" style={{ height: "100%", backgroundColor: props.colorOptions?.authViewColorSettings?.fullBg}}>
-            <div className="p-d-flex p-flex-column p-shadow-10" style={{ width: "500px", margin: "auto", backgroundColor: (props.colorOptions?.authViewColorSettings?.loginFormBg ? props.colorOptions?.authViewColorSettings?.loginFormBg : WHITE) }}>
+        <div className="p-d-flex" style={{ height: "100%", backgroundColor: props.colorOptions?.authViewColorSettings?.fullBackground}}>
+            <div className="p-d-flex p-flex-column p-shadow-10" style={{ width: "500px", margin: "auto", backgroundColor: (props.colorOptions?.authViewColorSettings?.loginFormBackground ? props.colorOptions?.authViewColorSettings?.loginFormBackground : WHITE) }}>
                 <div>
                     {props.headerOptions?.reactElementFullAuthenticationHeader ? props.headerOptions?.reactElementFullAuthenticationHeader : header(props)}
                 </div>
@@ -57,7 +57,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                             <input value={password.valueOf()} onChange={(ev) => setPassword(ev.target.value)} name="password" type="password"
                                 className={"p-inputtext"} placeholder={t("Password")} required style={{ marginBottom: "1rem" }} />
                             <div>
-                                <LoginButtonWithSpinner isLoading={authContext?.isLoading} backGroundColor={props.colorOptions?.authViewColorSettings?.loginBtnBg}/>
+                                <LoginButtonWithSpinner isLoading={authContext?.isLoading}  style={{backGroundColor: props.colorOptions?.authViewColorSettings?.loginButtonBackground}}/>
                             </div>
                         </div>
                     </form>

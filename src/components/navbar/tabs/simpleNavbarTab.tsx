@@ -23,7 +23,7 @@ export const SimpleNavbarTab = (props: navbarTabProps) => {
     const tabStyleCustomized = {
         height: TAB_HEIGHT,
         cursor: active || props.disabled ? "default" : "pointer",
-        backgroundColor: (active || hovering) && !props.disabled ? (props.colorOptions?.tabHoverBg) : (props.colorOptions?.tabBg) ,
+        backgroundColor: (active || hovering) && !props.disabled ? (props.colorOptions?.tabHoverBackground) : (props.colorOptions?.tabBackground) ,
         color: (active || hovering) && !props.disabled ? (props.colorOptions?.tabTextHoverColor) : (props.colorOptions?.tabTextColor),
         opacity: props.disabled ? 0.5 : 1
     };

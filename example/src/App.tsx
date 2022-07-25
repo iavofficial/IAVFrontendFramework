@@ -62,11 +62,9 @@ function App() {
 
     const views = [
         new BasicContentWrapper(<SimpleNavbarTab name={"Example without Translation"} to="/" disabled={false}
-
                                                  selectedIcon={navDashboardSelected}
                                                  deselectedIcon={navDashboardDeselected}/>, LayoutAndContextExampleComponent),
         new BasicContentWrapper(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", {count: 1})}
-        
                                                  to="/example2" disabled={false}
                                                  selectedIcon={navFleetSelected}
                                                  deselectedIcon={navFleetDeselected}/>, SecondExampleComponent),
@@ -79,12 +77,10 @@ function App() {
             [
                 new BasicContentWrapper(<SimpleNavbarTab
                     name={(t: TranslateFunctionType) => t("example_component", {count: 3})} to="/group-example1"
-                 
                     disabled={false}
                     selectedIcon={navFleetSelected} deselectedIcon={navFleetDeselected}/>, SecondExampleComponent),
                 new BasicContentWrapper(<SimpleNavbarTab
-                    name={(t: TranslateFunctionType) => t("example_component", {count: 4})} to="/group-example2"
-                   
+                    name={(t: TranslateFunctionType) => t("example_component", {count: 4})} to="/group-example2"  
                     disabled={true}
                     selectedIcon={navFleetDetailSelected}
                     deselectedIcon={navFleetDetailDeselected}/>, FourthExampleComponent)
@@ -94,13 +90,11 @@ function App() {
             name={(t: TranslateFunctionType) => t("example_component", {count: 5})} to="/example4" disabled={true}
             selectedIcon={navExpertSelected} deselectedIcon={navExpertDeselected}
             permittedGroups={["ADMIN"]}/>, FourthExampleComponent),
-        new BasicContentWrapper(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", {count: 6})}
-                                               
+        new BasicContentWrapper(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", {count: 6})}  
                                                  to="/example5" disabled={false}
                                                  selectedIcon={navFleetDetailSelected}
                                                  deselectedIcon={navFleetDetailDeselected}/>, FourthExampleComponent),
         new BasicContentWrapper(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", {count: 7})}
-                                         
                                                  to="/example6" disabled={false}
                                                  selectedIcon={navDashboardSelected}
                                                  deselectedIcon={navDashboardDeselected}/>, ClassComponentContainer),

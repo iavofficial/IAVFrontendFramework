@@ -36,20 +36,20 @@ interface HeaderOptions {
 }
 
 interface Coloroptions {
-    headerBg?: string;
+    headerBackground?: string;
     navbarColorSettings?:{
-        menuSettingsBg?: string;
-        menuSettingsLet?: string;
+        menuSettingsBackground?: string;
+        menuSettingsTextColor?: string;
         clockColor?: string;
         documentsColor?: string;
-        dateLetColor?: string;
-        navbarBg?: string;
+        dateTextColor?: string;
+        navbarBackground?: string;
     }
     authViewColorSettings?:{
-        headerBg?: string;
-        fullBg?: string;
-        loginBg?: string;
-        loginBtnBg?: string;
+        headerBackground?: string;
+        fullBackground?: string;
+        loginBackground?: string;
+        loginBtnBackground?: string;
         letteringElementLeftColor?: string;
         letteringElementRightColor?: string;
         companyTextColor?: string;

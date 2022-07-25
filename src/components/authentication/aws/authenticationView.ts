@@ -10,10 +10,10 @@ export interface AuthenticationViewProps {
     }
     colorOptions?:{
         authViewColorSettings?:{
-        headerBg?: string;
-        fullBg?: string;
-        loginFormBg?: string;
-        loginBtnBg?: string;
+        headerBackground?: string;
+        fullBackground?: string;
+        loginFormBackground?: string;
+        loginButtonBackground?: string;
         letteringElementLeftColor?: string;
         letteringElementRightColor?: string;
         companyTextColor?: string;

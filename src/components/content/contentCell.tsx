@@ -14,7 +14,10 @@ export interface Props {
     colWidth?: number,
     clearStyle?: boolean,
     paddings: CellPaddings,
-    backgroundColor?: string;
+    style:{
+        backgroundColor?: string;
+    }
+    
 }
 
 export function ContentCell(props: PropsWithChildren<Props>) {
@@ -45,10 +48,9 @@ export function ContentCell(props: PropsWithChildren<Props>) {
     };
     if (!props.clearStyle ) {
         innerDivStyle.backgroundColor = WHITE;
-    }else if(props.backgroundColor){
-        innerDivStyle.backgroundColor = props.backgroundColor
+    }else if(props.style.backgroundColor){
+        innerDivStyle.backgroundColor = props.style.backgroundColor
     }
-
     
     return (
         <div className={columnClass}>

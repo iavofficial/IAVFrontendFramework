@@ -61,7 +61,7 @@
     height: 100%;
     padding: 0 !important;
     border-radius: 0 !important;
-    background-color: var( --bgColor-accordionHeader, #ffffff) !important;
+    background-color: var( --backgroundColor-accordionHeader, #ffffff) !important;
     border-width: 0 0 1px 0 !important;
     border-color: var(--borderColor, #cdcdcd) !important;
     outline: 0 !important;

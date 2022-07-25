@@ -12,9 +12,9 @@ export interface navbarTabProps {
     colorOptions?:{
         tabTextColor: string;
         tabTextHoverColor: string;
-        tabHoverBg: string;
-        tabBg: string;
+        tabHoverBackground: string;
+        tabBackground: string;
     }
 }
 
- export type navbarTab<additional = {}> = React.ComponentType<navbarTabProps & additional>;
+export type navbarTab<additional = {}> = React.ComponentType<navbarTabProps & additional>;

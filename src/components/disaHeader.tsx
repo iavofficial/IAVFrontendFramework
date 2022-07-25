@@ -15,7 +15,7 @@ interface Props {
         hideRight?: boolean;
     }
     colorOptions?:{
-        headerBg?: string;
+        headerBackground?: string;
     }
 }
 
@@ -39,7 +39,7 @@ const disaHeader = props.headerOptions?.reactElementFull ?
      {props.headerOptions.reactElementFull}
     </div>
 ):(
-    <div id="disa-header" className={"p-d-flex p-jc-between p-align-center"} style={{ backgroundColor: (props.colorOptions?.headerBg ? props.colorOptions?.headerBg : BLUE0 ) }}>
+    <div id="disa-header" className={"p-d-flex p-jc-between p-align-center"} style={{ backgroundColor: (props.colorOptions?.headerBackground ? props.colorOptions?.headerBackground : BLUE0 ) }}>
         <div id="left-element" className={"p-d-flex p-align-center"}>
             {props.headerOptions?.reactElementLeft ? props.headerOptions?.reactElementLeft : appLogoDefault(props)}
         </div>

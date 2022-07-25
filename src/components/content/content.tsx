@@ -28,7 +28,7 @@ export const Content = (props: React.PropsWithChildren<Props>) => {
 
     return (
         <div className="p-d-flex p-flex-column" style={{width: "100%", overflow: "auto"}}>
-            <ContentBar contentElements={props.contentElements} backgroundColorContentBar={props.backgroundColorContentBar}/>
+            <ContentBar contentElements={props.contentElements} style={{backgroundColor: props.backgroundColorContentBar}}/>
             <div className={contentRootClass} style={{
                 height: "100%",
                 backgroundColor: (props.backgroundColorContent ? props.backgroundColorContent : GRAY1),

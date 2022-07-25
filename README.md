@@ -74,7 +74,7 @@ The UILayer component has the properties:
 5. documentsComponent: By using this property you are able to replace the default imprint with an own component. This allows you to display a customized list of legal documents.
 6. documentsLabelKey: By using this property you are able to replace the "Imprint" text at the bottom of the navigation bar. You have to pass a string which is the key of corresponding translations in your translation files.
 7. headerOptions (optional): Here is the possibility to customize the header section. If you dont use this possibility the default header will be shown. The default header is with the new IAV Logo on the right side and the DISA Logo on the left side with the lettering "Remote Service Monitor". Note, that the same left React element is used in the login screen. In the object headerOptions there are 7 attributes that you can modify but they are not required. You can just set the attributes you need:   
-8. colorOptions (optional): Here is the possibility to customize the colorschema of the application. If you don't use this possibility the default DISA/IAV design schema of blue, white and grey will be shown. 
+8. colorOptions (optional): Here is the possibility to customize the color schema of the application. If you don't use this possibility the default DISA/IAV design schema of blue, white and grey will be shown. 
 
 ```javascript
 let headerOptions = {
@@ -121,7 +121,7 @@ set a color object to customize each tab.
     }
 
 ```
-To customize the tabGroup you have to import a css or scss file and set the following constants in the css root property with the hexcolorcode you want. If you dont use the possibility this default colors appear.
+To customize the tabGroup you have to import a css or scss file and set the following constants in the css root property with the hexcolorcode you want. If you dont use this possibility the default colors appear.
 
 ```javascript
 --borderColor-right-active //here you can set the color of the right border when a tab is active
@@ -139,7 +139,7 @@ To customize the content there are two properties that you can set optionally:
     backgroundColorContent?: string;// here you can set the background of the whole contentElement
 
 ```
-You have also the possibilty to change the background color of the contentCell: 
+You also have the possibilty to change the background color of the contentCell: 
 
 ```javascript
   backgroundColor?: string;//here you can set the backgroundColor of the contentCell

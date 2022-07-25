@@ -3,7 +3,7 @@ import { useTranslator } from './internationalization/translators';
 import { BLUE2 } from '../constants';
 
 interface Props{
-  style:{
+  style?:{
     clockColor?: string;
     dateColor?: string;
   }
@@ -29,8 +29,8 @@ export const Clock = (props: Props) => {
 
   return (
     <div className='p-d-flex p-jc-between p-pl-3 p-pr-3 p-pb-2'>
-      <div style={{ fontWeight: 500, color: (props.style.dateColor ? props.style.dateColor: "black" )}}>{t('Date')}:</div>
-      <div style={{ color: (props.style.clockColor ? props.style.clockColor: BLUE2 )}}>{dateString}</div>
+      <div style={{ fontWeight: 500, color: (props.style?.dateColor ? props.style.dateColor: "black" )}}>{t('Date')}:</div>
+      <div style={{ color: (props.style?.clockColor ? props.style.clockColor: BLUE2 )}}>{dateString}</div>
     </div>
   );
 };

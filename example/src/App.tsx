@@ -80,7 +80,7 @@ function App() {
                     disabled={false}
                     selectedIcon={navFleetSelected} deselectedIcon={navFleetDeselected}/>, SecondExampleComponent),
                 new BasicContentWrapper(<SimpleNavbarTab
-                    name={(t: TranslateFunctionType) => t("example_component", {count: 4})} to="/group-example2"
+                    name={(t: TranslateFunctionType) => t("example_component", {count: 4})} to="/group-example2"  
                     disabled={true}
                     selectedIcon={navFleetDetailSelected}
                     deselectedIcon={navFleetDetailDeselected}/>, FourthExampleComponent)
@@ -90,8 +90,8 @@ function App() {
             name={(t: TranslateFunctionType) => t("example_component", {count: 5})} to="/example4" disabled={true}
             selectedIcon={navExpertSelected} deselectedIcon={navExpertDeselected}
             permittedGroups={["ADMIN"]}/>, FourthExampleComponent),
-        new BasicContentWrapper(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", {count: 6})}
-                                                 to="/example5" disabled={true}
+        new BasicContentWrapper(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", {count: 6})}  
+                                                 to="/example5" disabled={false}
                                                  selectedIcon={navFleetDetailSelected}
                                                  deselectedIcon={navFleetDetailDeselected}/>, FourthExampleComponent),
         new BasicContentWrapper(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", {count: 7})}
@@ -116,7 +116,7 @@ function App() {
             }
         }
     );
-
+    
     return (
         <DummyAuthenticationProvider additionalContextValues={{getUserGroups: () => []}}>
             <GlobalDataLayer translations={translations}>
@@ -124,7 +124,8 @@ function App() {
                     <SecondExampleContextComponent>
                         <UILayer tabAndContentWrappers={views} startingPoint="/"
                                  authenticationView={BasicAuthenticationView} menuOptions={menuOptions}
-                                 documentsLabelKey="Legal_documents" documentsComponent={LegalDocuments}/>
+                                 documentsLabelKey="Legal_documents" documentsComponent={LegalDocuments} 
+                               />
                     </SecondExampleContextComponent>
                 </FirstExampleContextComponent>
             </GlobalDataLayer>

@@ -5,7 +5,7 @@ import { BLUE3 } from "../../constants";
 
 interface Props {
     isLoading: boolean;
-    style: {
+    style?: {
         backGroundColor?: string;
     }
 }
@@ -13,6 +13,6 @@ interface Props {
 export const LoginButtonWithSpinner = (props: Props) => (
     <>
         {props.isLoading && <ProgressSpinner style={{ height: "30px", width: "30px", float: "left" }} />}
-        <Button label="Login" style={{ width: "150px", float: "right", border: "none", backgroundColor: (props.style.backGroundColor ? props.style.backGroundColor : BLUE3) }} />
+        <Button label="Login" style={{ width: "150px", float: "right", border: "none", backgroundColor: (props.style?.backGroundColor ? props.style.backGroundColor : BLUE3) }} />
     </>
 )

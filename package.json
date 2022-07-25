@@ -1,6 +1,6 @@
 {
   "name": "@disa/disa-framework",
-  "version": "5.1.3",
+  "version": "5.1.4",
   "private": false,
   "description": "This framework takes care of a DISA application's basic structure.",
   "contributors": [

@@ -1,6 +1,6 @@
 {
   "name": "@disa/disa-framework",
-  "version": "5.1.5",
+  "version": "5.1.6",
   "private": false,
   "description": "This framework takes care of a DISA application's basic structure.",
   "contributors": [
@@ -92,7 +92,7 @@
     "./uiLayer": "./components/uiLayer.js",
     "./disaHeader": "./components/disaHeader.js",
     "./navbar": "./components/navbar/navbar.js",
-    "./cookieBanner": "./components/cookie/cookiebanner.js",
+    "./cookieBanner": "./components/cookie/cookieBanner.js",
     "./constants.css": "./components/css/constants.css",
     "./disaPage.css": "./components/css/disaPage.css",
     "./disaFramework.css": "./components/css/disaFramework.css"

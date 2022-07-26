@@ -1,6 +1,6 @@
 {
   "name": "@disa/disa-framework",
-  "version": "5.1.4",
+  "version": "5.1.5",
   "private": false,
   "description": "This framework takes care of a DISA application's basic structure.",
   "contributors": [
@@ -89,7 +89,13 @@
     "./privilegedNavbarTab": "./components/navbar/tabs/privilegedNavbarTab.js",
     "./simpleNavbarTab": "./components/navbar/tabs/simpleNavbarTab.js",
     "./translators": "./components/internationalization/translators.js",
-    "./uiLayer": "./components/uiLayer.js"
+    "./uiLayer": "./components/uiLayer.js",
+    "./disaHeader": "./components/disaHeader.js",
+    "./navbar": "./components/navbar/navbar.js",
+    "./cookieBanner": "./components/cookie/cookiebanner.js",
+    "./constants.css": "./components/css/constants.css",
+    "./disaPage.css": "./components/css/disaPage.css",
+    "./disaFramework.css": "./components/css/disaFramework.css"
   },
   "typesVersions": {
     "*": {
@@ -111,7 +117,13 @@
       "privilegedNavbarTab": ["./components/navbar/tabs/privilegedNavbarTab.d.ts"],
       "simpleNavbarTab": ["./components/navbar/tabs/simpleNavbarTab.d.ts"],
       "translators": ["./components/internationalization/translators.d.ts"],
-      "uiLayer": ["./components/uiLayer.d.ts"]
+      "uiLayer": ["./components/uiLayer.d.ts"],
+      "disaHeader": ["./components/disaHeader.d.ts"],
+      "navbar": ["./components/navbar/navbar.d.ts"],
+      "cookieBanner": ["./components/cookie/cookiebanner.d.ts"],
+      "constants.css": ["./components/css/constants.css"],
+      "disaPage.css": [".components/css/disaPage.css"],
+      "disaFramework.css": ["./components/css/disaFramework.css"]
     }
   }
 }

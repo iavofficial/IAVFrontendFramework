@@ -8,7 +8,6 @@ import {
     Route,
     useLocation,
     Routes,
-    Navigate,
     useNavigate
 } from 'react-router-dom';
 import './css/constants.css';

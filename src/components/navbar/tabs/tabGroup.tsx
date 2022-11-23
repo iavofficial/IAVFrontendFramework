@@ -8,10 +8,11 @@ import {BLUE3, GREEN, RED, WHITE} from "../../../constants";
 
 interface Props {
     name: string | ((t: TranslateFunctionType) => string);
-    logo: string;
+    logo?: string;
     collapsible?: boolean;
+    fontWeightBold: boolean;
     collapsed?: boolean;
-    headerTextColor?: string;
+    accordionHeaderTextColor?: string;
 }
 
 export const TabGroup = (props: React.PropsWithChildren<Props>) => {
@@ -20,9 +21,10 @@ export const TabGroup = (props: React.PropsWithChildren<Props>) => {
     const collapsible = props.collapsible !== undefined ? props.collapsible : true;
 
     const header = (
-        <div className="group-wrapper">
-            <img style={{height: "16px", width: "22px"}} className="group-logo" src={props.logo} />
-            <span style={{color: (props.headerTextColor ?  props.headerTextColor : BLUE3)}} className="group-name">{props.name instanceof Function ? props.name(t) : props.name}</span>
+        <div style={{display: "flex", justifyContent: (props.logo ? "": "center"), fontWeight: (props.fontWeightBold ? "bold":"normal")}} className="group-wrapper">
+            {props.logo ? <img style={{height: "16px", width: "22px"}} className="group-logo" src={props.logo} />: null}
+            
+            <span style={{color: (props.accordionHeaderTextColor ?  props.accordionHeaderTextColor : BLUE3)}} className="group-name">{props.name instanceof Function ? props.name(t) : props.name}</span>
         </div>
     );
 

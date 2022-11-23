@@ -7,7 +7,8 @@ import { TranslateFunctionType } from "../../../contexts/language";
 import { generateHashForValues } from "../../../services/hash";
 
 export class Group {
-    constructor(private _name: string | ((t: TranslateFunctionType) => string), private _logo: string,
+    constructor(private _name: string | ((t: TranslateFunctionType) => string), private _logo: string | undefined, 
+    private _accordionHeaderTextColor: string | undefined, private _fontWeightBold: boolean, 
         private _collapsible: boolean, private _collapsed: boolean, private _contentWrappers: BasicContentWrapper[]) {
     }
 
@@ -26,7 +27,7 @@ export class Group {
 
     getNavbarComponent = () => {
         return (
-            <TabGroup key={this.getKey()} name={this._name} logo={this._logo} collapsible={this._collapsible} collapsed={this._collapsed}>
+            <TabGroup key={this.getKey()} name={this._name} logo={this._logo ? this._logo : undefined} collapsible={this._collapsible} accordionHeaderTextColor={ this._accordionHeaderTextColor ? this._accordionHeaderTextColor : undefined} fontWeightBold={this._fontWeightBold}>
                 {this._contentWrappers.map(view => view.getNavbarComponent())}
             </TabGroup>
         );

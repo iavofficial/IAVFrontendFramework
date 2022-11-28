@@ -52,36 +52,41 @@
 
 /* Anpassen des Akkordion-Styles */
 
-.p-accordion-header {
+.accordiontab-style.p-accordion-header {
     height: 35px !important;
 }
 
-.p-accordion-header a {
+.accordiontab-style.p-accordion-header a {
     height: 100%;
     padding: 0 !important;
     border-radius: 0 !important;
-    background-color: var( --backgroundColor-accordionHeader, #ffffff) !important;
+    background-color: var(--backgroundColor-accordionHeader, #ffffff) !important;
     border-width: 0 0 1px 0 !important;
-    border-color: var(--borderColor, #cdcdcd) !important;
+    border-color: var(--borderColor-bottom, #cdcdcd) !important;
     outline: 0 !important;
+    border: 1px solid;
     font-weight: 500 !important;
     color: var(--arrow-color, #0091ff) !important;
 }
 
-.p-accordion .p-accordion-header:not(.p-disabled) .p-accordion-header-link:focus {
+.accordiontab-style.p-accordion .p-accordion-header:not(.p-disabled) .p-accordion-header-link:focus {
     box-shadow: none !important;
 }
 
-.p-accordion-content {
+.accordiontab-style .p-accordion-content {
     padding: 0 !important;
     border: none !important;
 }
 
-.p-accordion-header-link {
+.accordiontab-style .p-accordion-header-link {
     flex-direction: row-reverse !important;
     justify-content: space-between !important;
 }
 
-.p-accordion-header-text {
+.accordiontab-style.p-accordion-header-text {
     width: 100%;
+}
+
+.accordion-style.p-accordion .p-accordion-tab {
+    margin-bottom: 0px;
 }

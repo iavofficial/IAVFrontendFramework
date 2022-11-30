@@ -1,3 +1,34 @@
+:root {
+  --navbar-width: 271px;
+  --tab-height: 70px;
+  
+  --blue-0: #001a54;
+  --blue-1: #041e96;
+  --blue-2: #1446eb;
+  --blue-3: #0091ff;
+  --blue-4: #52c9ff;
+  --blue-5: #96e7ff;
+  --blue-6: #d2f5ff;
+  
+  --magenta-1: #5500b4;
+  --magenta-2: #a200e6;
+  --magenta-3: #dc46f3;
+  --magenta-4: #ff73fa;
+  --magenta-5: #ffafff;
+  --magenta-6: #fddeff;
+
+  --gray-1: #f0f0f0;
+  --gray-2: #cdcdcd;
+  --gray-3: #9a9a9a;
+  --gray-4: #444444;
+
+  --yellow: #ffd800;
+  --green: #80d800;
+  --red: #f80000;
+
+  --white: #ffffff;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

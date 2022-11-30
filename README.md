@@ -128,7 +128,7 @@ To customize the tabGroup you have to import a css or scss file and set the foll
 --borderColor-right//here you can set the color of the right border when a tab is not active
 --arrow-color//here you can set the color of the dropdown arrow
 --backgroundColor-accordionHeader//here you can set the color of the background of the accordion header
---borderColor//here you can set the color between the tabelements
+--borderColor-bottom//here you can set the color between the tabelements accordionelement and the first accordiontabelement
 
 ```
 

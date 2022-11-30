@@ -4,7 +4,7 @@ import "../../css/tabGroup.css";
 
 import { TranslateFunctionType } from "../../../contexts/language";
 import { useTranslator } from "../../internationalization/translators";
-import {BLUE3, GREEN, RED, WHITE} from "../../../constants";
+import {BLUE3} from "../../../constants";
 
 interface Props {
     name: string | ((t: TranslateFunctionType) => string);
@@ -30,8 +30,8 @@ export const TabGroup = (props: React.PropsWithChildren<Props>) => {
 
     return (
         <div className="disabledNoOpacity">
-            <Accordion activeIndex={props.collapsed ? -1 : 0} expandIcon="pi pi-chevron-left">
-                <AccordionTab disabled={!collapsible} headerTemplate={header}>
+            <Accordion className="accordion-style" activeIndex={props.collapsed ? -1 : 0} expandIcon="pi pi-chevron-left">
+                <AccordionTab className="accordiontab-style" disabled={!collapsible} headerTemplate={header}>
                     {props.children}
                 </AccordionTab>
             </Accordion>

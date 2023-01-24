@@ -69,7 +69,7 @@
     color: var(--arrow-color, #0091ff) !important;
 }
 
-.accordiontab-style.p-accordion .p-accordion-header:not(.p-disabled) .p-accordion-header-link:focus {
+.accordiontab-style.p-accordion .p-accordion-header:not(.p-disabled) .p-accordion-header-link {
     box-shadow: none !important;
 }
 

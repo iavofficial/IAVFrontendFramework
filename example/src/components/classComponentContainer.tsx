@@ -1,7 +1,7 @@
-import { ExampleInternationalizationClassComponent } from "./examplenternationalizationClassComponent"
+import { ExampleInternationalizationClassComponent } from './examplenternationalizationClassComponent';
 
 export const ClassComponentContainer = () => {
-    return (
-        <ExampleInternationalizationClassComponent keyOfText="Example_component" />
-    )
-}
+  return (
+    <ExampleInternationalizationClassComponent keyOfText="Example_component" />
+  );
+};

@@ -8,12 +8,12 @@ import { Clock } from '../clock';
 import { BLUE2, TAB_HEIGHT, WHITE } from '../../constants';
 import { AuthContext } from '../../contexts/auth';
 import { TabAndContentWrapper } from './wrapper/tabAndContentWrapper';
-import { MenuOptions, SettingsMenu } from './menu';
+import { MenuSettingsOptions, SettingsMenu } from '../header/SettingsMenu';
 import { useTranslator } from '../internationalization/translators';
 
 interface Props {
   tabAndContentWrappers: TabAndContentWrapper[];
-  menuOptions?: MenuOptions;
+  menuOptions?: MenuSettingsOptions;
   documentsLabelKey?: string;
   imageLeft?: string;
   imageRight?: string;

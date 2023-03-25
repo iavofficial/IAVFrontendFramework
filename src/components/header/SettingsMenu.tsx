@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { ContextMenu } from 'primereact/contextmenu';
 import { AuthContext } from '../../contexts/auth';
 import { LanguageContext, Translations } from '../../contexts/language';
 import { useTranslator } from '../internationalization/translators';
 import { useNavigate } from 'react-router-dom';
+import { RadioButton } from 'primereact/radiobutton';
 
 // ##############################################
 // Notice: The enclosed imports are copied from 'primereact/menuitem/MenuItem' as the path could not be resolved by the gitlab builder
@@ -51,20 +52,21 @@ interface SettingsOption {
   [key: string]: any;
 }
 
-export interface MenuOptions {
+export interface MenuSettingsOptions {
   additionalItems?: MenuItem[];
+  userContextMenu?: boolean;
   options?: SettingsOption[];
 }
 
 interface Props {
   hideMenu: (e: React.KeyboardEvent) => void;
-  menuOptions?: MenuOptions;
+  menuOptions?: MenuSettingsOptions;
 }
 
 export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
   (props, ref) => {
     const navigate = useNavigate();
-
+    const [colorMode, setColorMode] = useState('lightMode');
     const authContext = useContext(AuthContext);
     const langContext = useContext(LanguageContext);
     const t = useTranslator();
@@ -117,23 +119,49 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
             ? 0
             : option1.label < option2.label
             ? -1
-            : 1,
+            : 1
         ),
       },
     ];
 
-    let logoutOption = getOptionByIdentifier(
+    let colorModeToggleOption = getOptionByIdentifier(
       props.menuOptions?.options,
-      'logout',
+      'colormodetoggle'
     );
-    if (!logoutOption || (logoutOption && !logoutOption.hidden)) {
+    //TODO: Implement the Darkmode/Lightmode toggle instead
+    if (
+      !colorModeToggleOption ||
+      (colorModeToggleOption && !colorModeToggleOption.hidden)
+    ) {
       basicOptions.push({
-        label: 'Logout',
-        icon: 'pi pi-sign-out',
-        command: () => {
-          navigate('/login');
-          authContext?.logout();
-        },
+        template: (
+          <div className="flex justify-content-center mt-2 mb-2">
+            <div className="flex align-items-center">
+              <RadioButton
+                inputId="lightMode"
+                name="pizza"
+                value="lightMode"
+                onChange={(e) => setColorMode(e.value)}
+                checked={colorMode === 'lightMode'}
+              />
+              <label htmlFor="ingredient1" className="ml-1 mr-2">
+                Lightmode
+              </label>
+            </div>
+            <div className="flex align-items-center">
+              <RadioButton
+                inputId="darkMode"
+                name="pizza"
+                value="darkMode"
+                onChange={(e) => setColorMode(e.value)}
+                checked={colorMode === 'darkMode'}
+              />
+              <label htmlFor="ingredient2" className="ml-1">
+                Darkmode
+              </label>
+            </div>
+          </div>
+        ),
       });
     }
 
@@ -143,10 +171,14 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
 
     return (
       <div onKeyDown={(e) => props.hideMenu(e)}>
-        <ContextMenu ref={ref} model={model} />
+        <ContextMenu
+          style={{ width: '14.5rem', padding: '0.25rem 1rem 0.25rem 1rem' }}
+          ref={ref}
+          model={model}
+        />
       </div>
     );
-  },
+  }
 );
 
 // Checks whether "dialect" is a dialect of "baseLang".
@@ -163,7 +195,7 @@ function containsLanguage(lang: string, resources: Translations) {
 
 function getOptionByIdentifier(
   options: SettingsOption[] | undefined,
-  identifier: string,
+  identifier: string
 ) {
   if (options !== undefined) {
     return options.find((option) => option.identifier === identifier);

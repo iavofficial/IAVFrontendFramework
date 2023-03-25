@@ -38,12 +38,11 @@ import { SecondExampleComponent } from './components/secondExampleComponent';
 import { useState } from 'react';
 import { ClassComponentContainer } from './components/classComponentContainer';
 import { LegalDocuments } from './components/legalDocuments';
-import { BLACK, MAGENTA1, MAGENTA3 } from 'disa-framework/constants';
 
 function App() {
   const [selectedButtonOption, setSelectedButtonOption] = useState('Simulated');
 
-  const menuOptions = {
+  const menuSettingsOptions = {
     additionalItems: [
       {
         template: (
@@ -60,7 +59,7 @@ function App() {
     options: [
       {
         identifier: 'logout',
-        hidden: true,
+        hidden: false,
       },
     ],
   };
@@ -216,7 +215,7 @@ function App() {
               tabAndContentWrappers={views}
               startingPoint="/"
               authenticationView={BasicAuthenticationView}
-              menuOptions={menuOptions}
+              menuOptions={menuSettingsOptions}
               documentsLabelKey="Legal_documents"
               documentsComponent={LegalDocuments}
             />

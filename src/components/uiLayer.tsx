@@ -15,19 +15,18 @@ import './css/disaPage.css';
 import './css/disaFramework.css';
 import './css/error.css';
 import { BasicAuthenticationView } from './authentication/default/basicAuthenticationView';
-import { DisaHeader } from './disaHeader';
 import { Navbar } from './navbar/navbar';
 import { Imprint } from './imprint';
 import { CookieBanner } from './cookie/cookieBanner';
 import { AuthContext } from '../contexts/auth';
 import { TabAndContentWrapper } from './navbar/wrapper/tabAndContentWrapper';
-import { MenuOptions } from './navbar/menu';
+import { MenuSettingsOptions } from './header/SettingsMenu';
 import { AuthenticationViewProps } from './authentication/aws/authenticationView';
+import { DisaHeader } from './header/disaHeader';
 
 interface HeaderOptions {
   reactElementRight?: ReactElement;
   reactElementLeft?: ReactElement;
-  reactElementFull?: ReactElement;
   reactElementFullAuthenticationHeader?: ReactElement;
   letteringElementLeft?: string;
   hideLeft?: boolean;
@@ -59,7 +58,7 @@ interface Coloroptions {
 export interface Props {
   tabAndContentWrappers: TabAndContentWrapper[];
   startingPoint: string;
-  menuOptions?: MenuOptions;
+  menuOptions?: MenuSettingsOptions;
   authenticationView?: React.ComponentType<AuthenticationViewProps & any>;
   documentsComponent?: React.ComponentType<any>;
   documentsLabelKey?: string;
@@ -156,14 +155,13 @@ const Redirector = (props: RedirectorProps) => {
 
 interface RSMViewProps {
   tabAndContentWrappers: TabAndContentWrapper[];
-  menuOptions?: MenuOptions;
+  menuOptions?: MenuSettingsOptions;
   documentsComponent?: React.ComponentType<any>;
   documentsLabelKey?: string;
   headerOptions?: HeaderOptions;
   colorOptions?: Coloroptions;
 }
 
-// className="p-d-flex p-flex-column"
 const RSMView = (props: RSMViewProps) => {
   return (
     <div
@@ -178,6 +176,7 @@ const RSMView = (props: RSMViewProps) => {
         <DisaHeader
           headerOptions={props.headerOptions}
           colorOptions={props.colorOptions}
+          menuOptions={props.menuOptions}
         />
       </div>
       <div style={{ display: 'flex', flex: '1 1 auto', overflow: 'auto' }}>

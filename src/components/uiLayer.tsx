@@ -22,7 +22,7 @@ import { AuthContext } from '../contexts/auth';
 import { TabAndContentWrapper } from './navbar/wrapper/tabAndContentWrapper';
 import { MenuSettingsOptions } from './header/SettingsMenu';
 import { AuthenticationViewProps } from './authentication/aws/authenticationView';
-import { DisaHeader } from './header/disaHeader';
+import { DisaHeader } from './header/DisaHeader';
 
 interface HeaderOptions {
   reactElementRight?: ReactElement;

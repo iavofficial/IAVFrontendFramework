@@ -23,29 +23,3 @@
 #disa-header {
   height: 56px !important;
 }
-
-#tooltip {
-  cursor: pointer;
-  position: relative;
-  &:hover {
-    #tooltipText {
-      opacity: 1;
-      z-index: 10001;
-      display: flex;
-    }
-  }
-}
-
-#tooltipText {
-  font-size: 14px;
-  position: absolute;
-  transform: translateY(100%) translateX(10%);
-  background-color: var(--magenta-2);
-  color: #fff;
-  opacity: 0;
-  font-weight: bold;
-  display: none;
-  justify-content: center;
-  padding: 0.25rem 1rem 0.25rem 1rem;
-  border-radius: 5px;
-}

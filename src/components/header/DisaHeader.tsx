@@ -7,9 +7,10 @@ import UserPic from '../../assets/images/icon_user.svg';
 import NotificationPic from '../../assets/images/icon-notification.svg';
 import Settings from '../../assets/images/icon_settings.svg';
 import CompanyLogo from '../../assets/images/company_logo.png';
-import { BLUE0, BLUE1 } from '../../constants';
+import { BLUE0, BLUE1, MAGENTA2 } from '../../constants';
 import { MenuSettingsOptions, SettingsMenu } from './SettingsMenu';
-import { AuthContext } from '../../contexts/auth';
+import { Avatar } from 'primereact/avatar';
+import { Badge } from 'primereact/badge';
 import { UserMenu } from './UserMenu';
 
 interface Props {
@@ -67,10 +68,6 @@ const appLogoDefault = (props: Props) => (
 );
 
 export const DisaHeader = (props: Props) => {
-  const authContext = useContext(AuthContext);
-  // const [hideToolTipWithOpenedUserMenu, setHideToolTipWithOpenedUserMenu] =
-  //   useState<boolean>(false);
-  let testboolean = false;
   const menuRef = React.createRef<ContextMenu>();
   const userRef = React.createRef<ContextMenu>();
 
@@ -83,8 +80,6 @@ export const DisaHeader = (props: Props) => {
   const hideUserMenu = (e: React.KeyboardEvent) => {
     if (e.key === 'Escape') {
       console.log('triggerd');
-
-      testboolean = true;
       userRef.current?.hide(e);
     }
   };
@@ -118,10 +113,31 @@ export const DisaHeader = (props: Props) => {
           id="right-element-user-section"
           className={'flex align-items-center justify-content-end'}
         >
-          <img
-            style={{ margin: '0rem 1rem 0rem 0rem' }}
-            src={NotificationPic}
-          />
+          <div
+            className="flex justify-content-center align-items-center"
+            style={{
+              margin: '0rem 1rem 0rem 0rem',
+              position: 'relative',
+              cursor: 'pointer',
+            }}
+          >
+            <img src={NotificationPic} />
+            <div
+              className="flex justify-content-center align-items-center"
+              style={{
+                position: 'absolute',
+                transform: 'translate(18px, -10px)',
+                width: '16px',
+                height: '16px',
+                borderRadius: '100%',
+                backgroundColor: MAGENTA2,
+                color: 'white',
+                fontSize: '12px',
+              }}
+            >
+              3
+            </div>
+          </div>
           <a
             className={'flex align-items-center justify-content-end'}
             href="#"
@@ -138,7 +154,6 @@ export const DisaHeader = (props: Props) => {
           >
             <img src={Settings} />
           </a>
-
           <a
             className={'flex align-items-center justify-content-end'}
             href="#"
@@ -153,14 +168,7 @@ export const DisaHeader = (props: Props) => {
             }}
             onKeyDown={(e) => hideUserMenu(e)}
           >
-            {testboolean ? (
-              <img className="user-logo" src={UserPic} />
-            ) : (
-              <div id="tooltip">
-                <h1 id="tooltipText">{authContext?.getUsername()}</h1>
-                <img className="user-logo" src={UserPic} />
-              </div>
-            )}
+            <img className="user-logo" src={UserPic} />
           </a>
         </div>
         <div

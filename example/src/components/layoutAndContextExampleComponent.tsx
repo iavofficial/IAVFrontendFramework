@@ -6,9 +6,7 @@ import {
   applyTranslation,
 } from 'disa-framework/translators';
 import { CellPaddings, ContentCell } from 'disa-framework/contentCell';
-
 import { FirstExampleContext } from '../contexts/FirstExampleContext';
-import { BLUE3, MAGENTA1, MAGENTA3 } from 'disa-framework/constants';
 
 interface State {
   localState: string;
@@ -19,6 +17,8 @@ class LayoutAndContextExampleComponentUnprocessed extends Component<
   AppliedTranslationProps,
   State
 > {
+  declare context: React.ContextType<typeof FirstExampleContext>;
+
   constructor(props: AppliedTranslationProps) {
     super(props);
     this.state = {
@@ -53,13 +53,12 @@ class LayoutAndContextExampleComponentUnprocessed extends Component<
       ],
     };
   }
-  //Mit jörg besprechen
   render() {
     return (
       <Content
         layoutBehaviour={LayoutBehaviour.GRID}
         contentElements={[
-          ...this.context.contentTabs,
+          ...this.context!.contentTabs,
           ...this.state.contentTabs,
         ]}
       >
@@ -69,7 +68,7 @@ class LayoutAndContextExampleComponentUnprocessed extends Component<
 
             <div className="mt-3">
               {this.props.t('Example_global_context')}:{' '}
-              {this.context.exampleData}
+              {this.context!.exampleData}
             </div>
             <div>
               {this.props.t('Example_local_context')}: {this.state.localState}
@@ -79,7 +78,7 @@ class LayoutAndContextExampleComponentUnprocessed extends Component<
               onClick={function (
                 this: LayoutAndContextExampleComponentUnprocessed
               ) {
-                this.context.updateExampleData(
+                this.context?.updateExampleData(
                   this.props.t('changed_with_local_element')
                 );
               }.bind(this)}

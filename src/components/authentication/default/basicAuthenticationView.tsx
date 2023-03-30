@@ -8,6 +8,7 @@ import { useContext } from 'react';
 import { useTranslator } from '../../internationalization/translators';
 import { AuthenticationViewProps } from '../aws/authenticationView';
 import '../../css/authenticationView.css';
+import { cognitoCompletePassword } from '../../../services/cognitoService';
 
 export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
   const [email, setEmail] = useState('');

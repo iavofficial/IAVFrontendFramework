@@ -47,10 +47,11 @@ export const DefaultLanguageProvider = (
   useEffect(() => {
     if (props.translations) {
       Object.keys(props.translations).forEach((key) => {
+        type keyType = keyof typeof resources;
         if (Object.keys(resources).includes(key)) {
-          // @ts-ignore Bug: Marks props.translations as possibly undfined although it's not.
           Object.assign(
-            resources[key as keyof typeof resources].translation, //takl to jörg about this error and solution
+            resources[key as keyType].translation,
+            // @ts-ignore Bug: Marks props.translations as possibly undfined although it's not.
             props.translations[key].translation
           );
         } else {

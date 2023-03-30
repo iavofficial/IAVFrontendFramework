@@ -1,5 +1,5 @@
-import { Imprint } from 'disa-framework/imprint';
 import { useTranslator } from 'disa-framework/translators';
+import { ImprintText } from 'disa-framework/imprint';
 
 export const LegalDocuments = () => {
   const t = useTranslator();
@@ -20,9 +20,7 @@ export const LegalDocuments = () => {
         >
           {t('Customized_legal_documents')}
         </div>
-        <Imprint />
-        <Imprint />
-        <Imprint />
+        <ImprintText />
       </div>
     </div>
   );

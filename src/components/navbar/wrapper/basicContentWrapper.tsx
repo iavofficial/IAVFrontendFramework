@@ -7,7 +7,7 @@ import { TabAndContentWrapper } from './tabAndContentWrapper';
 export class BasicContentWrapper implements TabAndContentWrapper {
   constructor(
     private _navbarTab: React.ReactElement<navbarTabProps>,
-    private _component: React.ComponentType<any>,
+    private _component: React.ComponentType<any>
   ) {}
 
   // Generate unique key based on the view's url.

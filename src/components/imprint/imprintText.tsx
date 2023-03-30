@@ -1,7 +1,7 @@
 import React from 'react';
-import { useTranslator } from './internationalization/translators';
+import { useTranslator } from '../internationalization/translators';
 
-export const Imprint = () => {
+export const ImprintText = () => {
   const t = useTranslator();
 
   return (

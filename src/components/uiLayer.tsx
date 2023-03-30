@@ -15,16 +15,16 @@ import './css/disaPage.css';
 import './css/disaFramework.css';
 import './css/error.css';
 import { BasicAuthenticationView } from './authentication/default/basicAuthenticationView';
-import { DisaHeader } from './disaHeader';
-import { Navbar } from './navbar/navbar';
-import { Imprint } from './imprint';
 import { CookieBanner } from './cookie/cookieBanner';
 import { AuthContext } from '../contexts/auth';
 import { TabAndContentWrapper } from './navbar/wrapper/tabAndContentWrapper';
 import { MenuOptions } from './navbar/menu';
 import { AuthenticationViewProps } from './authentication/aws/authenticationView';
+import { MainView } from './mainView';
+import { DefaultImprint } from './imprint/defaultImprint';
+import { navbarTabPropsExtended } from './navbar/tabs/navbarTab';
 
-interface HeaderOptions {
+export interface HeaderOptions {
   reactElementRight?: ReactElement;
   reactElementLeft?: ReactElement;
   reactElementFull?: ReactElement;
@@ -34,7 +34,7 @@ interface HeaderOptions {
   hideRight?: boolean;
 }
 
-interface Coloroptions {
+export interface Coloroptions {
   headerBackground?: string;
   navbarColorSettings?: {
     menuSettingsBackground?: string;
@@ -57,19 +57,18 @@ interface Coloroptions {
 }
 
 export interface Props {
-  tabAndContentWrappers: TabAndContentWrapper[];
+  // tabAndContentWrappers: TabAndContentWrapper[];
   startingPoint: string;
+  tabsAndContent: navbarTabPropsExtended[];
   menuOptions?: MenuOptions;
   authenticationView?: React.ComponentType<AuthenticationViewProps & any>;
   documentsComponent?: React.ComponentType<any>;
   documentsLabelKey?: string;
   headerOptions?: HeaderOptions;
   colorOptions?: Coloroptions;
+  collabsible?: boolean;
 }
 
-// TODO: The creation of the components DefaultImprint, RSMView and Redirector inside UILayer may cause a problem.
-// Because the components are recreated every render, the Routes will get new components every render. This may cause a rerender of
-// all components which are encapsulated in this layer.
 export const UILayer = (props: Props) => {
   const authContext = useContext(AuthContext);
   const AuthenticationView = props.authenticationView
@@ -107,13 +106,14 @@ export const UILayer = (props: Props) => {
           <Route
             path="/*"
             element={
-              <RSMView
+              <MainView
                 headerOptions={props.headerOptions}
                 colorOptions={props.colorOptions}
-                tabAndContentWrappers={props.tabAndContentWrappers}
+                collabsible={props.collabsible}
                 menuOptions={props.menuOptions}
                 documentsLabelKey={props.documentsLabelKey}
                 documentsComponent={props.documentsComponent}
+                tabsAndContent={props.tabsAndContent}
               />
             }
           />
@@ -136,12 +136,15 @@ interface RedirectorProps {
 const Redirector = (props: RedirectorProps) => {
   const authContext = useContext(AuthContext);
   const userIsAuthenticated = authContext!.hasAuthenticated();
+
   const currentPath = useLocation().pathname;
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!userIsAuthenticated) {
       if (currentPath !== '/documents') {
+        console.log('triggerd');
+
         navigate('/login');
       }
     } else {
@@ -153,68 +156,3 @@ const Redirector = (props: RedirectorProps) => {
 
   return <React.Fragment />;
 };
-
-interface RSMViewProps {
-  tabAndContentWrappers: TabAndContentWrapper[];
-  menuOptions?: MenuOptions;
-  documentsComponent?: React.ComponentType<any>;
-  documentsLabelKey?: string;
-  headerOptions?: HeaderOptions;
-  colorOptions?: Coloroptions;
-}
-
-// className="p-d-flex p-flex-column"
-const RSMView = (props: RSMViewProps) => {
-  return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100%',
-        bottom: '0',
-      }}
-    >
-      <div style={{ flex: '0 0 auto' }}>
-        <DisaHeader
-          headerOptions={props.headerOptions}
-          colorOptions={props.colorOptions}
-        />
-      </div>
-      <div style={{ display: 'flex', flex: '1 1 auto', overflow: 'auto' }}>
-        <Navbar
-          tabAndContentWrappers={props.tabAndContentWrappers}
-          menuOptions={props.menuOptions}
-          documentsLabelKey={props.documentsLabelKey}
-          colorOptions={props.colorOptions}
-        />
-        <Routes>
-          {props.tabAndContentWrappers.map((wrapper) => wrapper.getRoutes())}
-          <Route
-            path="/documents"
-            element={
-              props.documentsComponent ? (
-                <props.documentsComponent />
-              ) : (
-                <DefaultImprint />
-              )
-            }
-          />
-        </Routes>
-      </div>
-    </div>
-  );
-};
-
-const DefaultImprint = () => (
-  <div
-    className="p-d-flex"
-    style={{
-      height: '100%',
-      width: '100%',
-      justifyContent: 'center',
-      alignItems: 'center',
-    }}
-  >
-    <Imprint />
-  </div>
-);

@@ -1,0 +1,65 @@
+#navbar-tab-name {
+  font-size: 14px;
+  margin-left: 8px;
+}
+
+.navbar-tab-with-childtabs {
+  border-style: solid;
+  border-width: 0 0 1px 0;
+}
+
+#navbartab-general {
+  padding: 0px 16px 0px 16px;
+  img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+  }
+}
+
+#hover-image {
+  .p-tooltip-text {
+    background-color: var(--magenta-2) !important;
+  }
+
+  .p-tooltip-arrow {
+    color: var(--magenta-2) !important;
+  }
+}
+
+#tooltip {
+  position: relative;
+  cursor: pointer;
+
+  img {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  &:hover {
+    #tooltipText {
+      visibility: visible;
+      opacity: 1;
+      z-index: 100000;
+    }
+  }
+}
+
+#tooltipText {
+  position: absolute;
+  left: 50%;
+  transform: translate(22%);
+  background-color: var(--magenta-2);
+  color: #fff;
+  white-space: no wrap;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0, 5s ease;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  border-radius: 2px;
+  font-size: 12px;
+  width: 100px;
+  padding: 2px 4px 2px 4px;
+}

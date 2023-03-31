@@ -89,7 +89,7 @@
     "./language": "./contexts/language.js",
     "./navbarTab": "./components/navbar/navbarTab.js",
     "./privilegedNavbarTab": "./components/navbar/tabs/privilegedNavbarTab.js",
-    "./simpleNavbarTab": "./components/navbar/tabs/simpleNavbarTab.js",
+    "./simpleNavbarTab": "./components/navbar/tabs/firstLayerTabElements.js",
     "./translators": "./components/internationalization/translators.js",
     "./uiLayer": "./components/uiLayer.js",
     "./disaHeader": "./components/disaHeader.js",

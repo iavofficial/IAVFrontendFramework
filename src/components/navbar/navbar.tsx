@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './navbar.scss';
 import { WHITE, BLUE3, GREEN, GRAY1 } from '../../constants';
-import { TabAndContentWrapper } from './wrapper/tabAndContentWrapper';
 import { useTranslator } from '../internationalization/translators';
-import { navbarTabPropsExtended } from './tabs/navbarTab';
-import { SimpleNavbarTab } from './tabs/simpleNavbarTab';
-import { PrivilegedNavbarTab } from './tabs/privilegedNavbarTab';
+import { FirstLayerTabelements } from './tabs/firstLayerTabelements';
 import SimpleBar from 'simplebar-react';
 import 'simplebar-react/dist/simplebar.min.css';
+import {
+  groupPropsBasicFirstLayer,
+  navbarTabProps,
+} from './tabs/navbarTabTypes';
 
 interface Props {
-  // tabAndContentWrappers: TabAndContentWrapper[];
-  tabsAndContent: navbarTabPropsExtended[];
+  tabsAndContent: (navbarTabProps | groupPropsBasicFirstLayer)[];
   documentsLabelKey?: string;
   collabsible?: boolean;
   colorOptions?: {
@@ -43,9 +43,6 @@ export const Navbar = (props: Props) => {
           : WHITE,
       }}
     >
-      {/* {props.tabAndContentWrappers.map((wrapper) =>
-        wrapper.getNavbarComponent()
-      )} */}
       <SimpleBar
         style={{
           width: navbarCollapsed ? '40px' : '240px',
@@ -56,40 +53,15 @@ export const Navbar = (props: Props) => {
         }}
       >
         {props.tabsAndContent.map(
-          (tabAndContentElement: navbarTabPropsExtended) => {
-            if (tabAndContentElement.permittedGroups.length > 0) {
-              return (
-                <PrivilegedNavbarTab
-                  navbarCollabsed={navbarCollapsed}
-                  navbarTabsSecondLayer={
-                    tabAndContentElement.navbarTabsSecondLayer
-                  }
-                  name={tabAndContentElement.name}
-                  to={tabAndContentElement.to}
-                  disabled={tabAndContentElement.disabled}
-                  selectedIcon={tabAndContentElement.selectedIcon}
-                  deselectedIcon={tabAndContentElement.deselectedIcon}
-                  colorOptions={tabAndContentElement.colorOptions}
-                  permittedGroups={tabAndContentElement.permittedGroups}
-                />
-              );
-            } else {
-              return (
-                <SimpleNavbarTab
-                  navbarCollabsed={navbarCollapsed}
-                  name={tabAndContentElement.name}
-                  navbarTabsSecondLayer={
-                    tabAndContentElement.navbarTabsSecondLayer
-                  }
-                  to={tabAndContentElement.to}
-                  disabled={tabAndContentElement.disabled}
-                  selectedIcon={tabAndContentElement.selectedIcon}
-                  deselectedIcon={tabAndContentElement.deselectedIcon}
-                  colorOptions={tabAndContentElement.colorOptions}
-                  permittedGroups={tabAndContentElement.permittedGroups}
-                />
-              );
-            }
+          (
+            tabAndContentElement: navbarTabProps | groupPropsBasicFirstLayer
+          ) => {
+            return (
+              <FirstLayerTabelements
+                navbarCollabsed={navbarCollapsed}
+                tabOrGroupElement={tabAndContentElement}
+              />
+            );
           }
         )}
       </SimpleBar>

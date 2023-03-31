@@ -9,12 +9,21 @@
 }
 
 #navbartab-general {
-  padding: 0px 16px 0px 16px;
+  padding: 0px 16px 0px 2px;
   img {
     width: 24px;
     height: 24px;
     object-fit: contain;
   }
+}
+
+#navbarTab-collabsed-line {
+  height: 40px !important;
+  width: 2px !important;
+}
+
+.generalTab-collabsed {
+  padding: 0px 0px 0px 2px;
 }
 
 #hover-image {

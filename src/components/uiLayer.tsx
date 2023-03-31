@@ -17,12 +17,14 @@ import './css/error.css';
 import { BasicAuthenticationView } from './authentication/default/basicAuthenticationView';
 import { CookieBanner } from './cookie/cookieBanner';
 import { AuthContext } from '../contexts/auth';
-import { TabAndContentWrapper } from './navbar/wrapper/tabAndContentWrapper';
 import { MenuOptions } from './navbar/menu';
 import { AuthenticationViewProps } from './authentication/aws/authenticationView';
 import { MainView } from './mainView';
 import { DefaultImprint } from './imprint/defaultImprint';
-import { navbarTabPropsExtended } from './navbar/tabs/navbarTab';
+import {
+  groupPropsBasicFirstLayer,
+  navbarTabProps,
+} from './navbar/tabs/navbarTabTypes';
 
 export interface HeaderOptions {
   reactElementRight?: ReactElement;
@@ -59,7 +61,7 @@ export interface Coloroptions {
 export interface Props {
   // tabAndContentWrappers: TabAndContentWrapper[];
   startingPoint: string;
-  tabsAndContent: navbarTabPropsExtended[];
+  tabsAndContent: (groupPropsBasicFirstLayer | navbarTabProps)[];
   menuOptions?: MenuOptions;
   authenticationView?: React.ComponentType<AuthenticationViewProps & any>;
   documentsComponent?: React.ComponentType<any>;

@@ -13,12 +13,8 @@ import {
   useNavigate,
   Outlet,
 } from 'react-router-dom';
-import {
-  groupPropsBasicFirstLayer,
-  navbarTabProps,
-  groupPropsBasicSecondLayer,
-} from './navbar/tabs/navbarTabTypes';
 import { generateHashForLength } from '../services/hash';
+import { TabAndContentWrapper } from './navbar/wrapper/tabAndContentWrapper';
 
 interface MainViewProps {
   menuOptions?: MenuOptions;
@@ -27,48 +23,10 @@ interface MainViewProps {
   documentsLabelKey?: string;
   headerOptions?: HeaderOptions;
   colorOptions?: Coloroptions;
-  tabsAndContent: (navbarTabProps | groupPropsBasicFirstLayer)[];
+  tabAndContentWrappers: TabAndContentWrapper[];
 }
 
-//TODO: Refactor MainView
 export const MainView = (props: MainViewProps) => {
-  const filterNavbarTabElementFromArray = (
-    tabsAndContent: (navbarTabProps | groupPropsBasicFirstLayer)[]
-  ) => {
-    let navbarTabElementsOnlyArray: navbarTabProps[] = [];
-    tabsAndContent.map(
-      (tabAndContentElement: navbarTabProps | groupPropsBasicFirstLayer) => {
-        if (isNavbarTabType(tabAndContentElement)) {
-          navbarTabElementsOnlyArray.push(tabAndContentElement);
-        } else {
-          let groupElementFirstLayer =
-            tabAndContentElement as groupPropsBasicFirstLayer;
-
-          groupElementFirstLayer.tabAndContent.map(
-            (
-              tabAndContentSecondLayer:
-                | navbarTabProps
-                | groupPropsBasicFirstLayer
-            ) => {
-              if (isNavbarTabType(tabAndContentSecondLayer)) {
-                navbarTabElementsOnlyArray.push(tabAndContentSecondLayer);
-              } else {
-                let groupElementSecondLayer =
-                  tabAndContentSecondLayer as groupPropsBasicSecondLayer;
-
-                groupElementSecondLayer.tabAndContent.map(
-                  (tabAndContentThirdLayer: navbarTabProps) => {
-                    navbarTabElementsOnlyArray.push(tabAndContentThirdLayer);
-                  }
-                );
-              }
-            }
-          );
-        }
-      }
-    );
-    return navbarTabElementsOnlyArray;
-  };
   return (
     <div
       style={{
@@ -86,47 +44,36 @@ export const MainView = (props: MainViewProps) => {
       </div>
       <div style={{ display: 'flex', flex: '1 1 auto', overflow: 'auto' }}>
         <Navbar
-          tabsAndContent={props.tabsAndContent}
+          tabAndContentWrappers={props.tabAndContentWrappers}
           collabsible={props.collabsible}
           documentsLabelKey={props.documentsLabelKey}
           colorOptions={props.colorOptions}
         />
         <Outlet />
         <Routes>
-          <>
-            {filterNavbarTabElementFromArray(props.tabsAndContent).map(
-              (navbarTabElement: navbarTabProps) => {
-                return (
-                  <Route
-                    path={navbarTabElement.to}
-                    element={navbarTabElement.renderElement}
-                  />
-                );
-              }
-            )}
+          {props.tabAndContentWrappers.map((wrapper) => wrapper.getRoutes())}
 
-            <Route
-              path="/documents"
-              element={
-                props.documentsComponent ? (
-                  <props.documentsComponent />
-                ) : (
-                  <DefaultImprint />
-                )
-              }
-            />
-          </>
+          <Route
+            path="/documents"
+            element={
+              props.documentsComponent ? (
+                <props.documentsComponent />
+              ) : (
+                <DefaultImprint />
+              )
+            }
+          />
         </Routes>
       </div>
     </div>
   );
 };
 
-export function isNavbarTabType(
-  tabAndContentElement: navbarTabProps | groupPropsBasicFirstLayer
-): tabAndContentElement is navbarTabProps {
-  return (tabAndContentElement as navbarTabProps).renderElement !== undefined;
-}
+// export function isNavbarTabType(
+//   tabAndContentElement: navbarTabProps | groupPropsBasicFirstLayer
+// ): tabAndContentElement is navbarTabProps {
+//   return (tabAndContentElement as navbarTabProps).renderElement !== undefined;
+// }
 
 // function isNavbarTabPropsBasicForElement(
 //   tabAndContentElement: navbarTabPropsBasic | groupPropsBasicFirstLayer

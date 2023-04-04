@@ -3,16 +3,13 @@ import { Link } from 'react-router-dom';
 import './navbar.scss';
 import { WHITE, BLUE3, GREEN, GRAY1 } from '../../constants';
 import { useTranslator } from '../internationalization/translators';
-import { FirstLayerTabelements } from './tabs/firstLayerTabelements';
 import SimpleBar from 'simplebar-react';
 import 'simplebar-react/dist/simplebar.min.css';
-import {
-  groupPropsBasicFirstLayer,
-  navbarTabProps,
-} from './tabs/navbarTabTypes';
+import { generateHash, generateHashForLength } from '../../services/hash';
+import { TabAndContentWrapper } from './wrapper/tabAndContentWrapper';
 
 interface Props {
-  tabsAndContent: (navbarTabProps | groupPropsBasicFirstLayer)[];
+  tabAndContentWrappers: TabAndContentWrapper[];
   documentsLabelKey?: string;
   collabsible?: boolean;
   colorOptions?: {
@@ -52,17 +49,8 @@ export const Navbar = (props: Props) => {
           overflowX: 'visible',
         }}
       >
-        {props.tabsAndContent.map(
-          (
-            tabAndContentElement: navbarTabProps | groupPropsBasicFirstLayer
-          ) => {
-            return (
-              <FirstLayerTabelements
-                navbarCollabsed={navbarCollapsed}
-                tabOrGroupElement={tabAndContentElement}
-              />
-            );
-          }
+        {props.tabAndContentWrappers.map((wrapper) =>
+          wrapper.getNavbarComponent(navbarCollapsed)
         )}
       </SimpleBar>
       <div style={{ marginTop: 'auto' }}>

@@ -1,6 +1,6 @@
 export const ACCEPTED_COOKIES_NAME = 'acceptedCookies';
 
-export const TAB_HEIGHT = '40px';
+export const TAB_HEIGHT = '56px';
 
 export const BLUE0 = '#001a54';
 export const BLUE1 = '#041e96';

@@ -17,7 +17,7 @@ export const GlobalDataLayer = (props: PropsWithChildren<Props>) => {
     ? React.Fragment
     : DummyAuthenticationProvider;
 
-  console.log('hier dein loginprovider: ', LoginProvider);
+  // console.log('hier dein loginprovider: ', LoginProvider);
 
   return (
     <CookiesProvider>

@@ -49,6 +49,7 @@
     "primereact": "^9.2.1",
     "react-cookie": "^4.1.1",
     "react-i18next": "^12.2.0",
+    "sass": "^1.60.0",
     "simplebar-react": "^3.2.3"
   },
   "peerDependencies": {
@@ -89,7 +90,7 @@
     "./language": "./contexts/language.js",
     "./navbarTab": "./components/navbar/navbarTab.js",
     "./privilegedNavbarTab": "./components/navbar/tabs/privilegedNavbarTab.js",
-    "./simpleNavbarTab": "./components/navbar/tabs/firstLayerTabElements.js",
+    "./simpleNavbarTab": "./components/navbar/tabs/simpleNavbarTab.js",
     "./translators": "./components/internationalization/translators.js",
     "./uiLayer": "./components/uiLayer.js",
     "./disaHeader": "./components/disaHeader.js",

@@ -23,6 +23,10 @@ import navFleetSelected from './assets/nav_fleet_selected.png';
 import navFleetDeselected from './assets/nav_fleet_deselected.png';
 import infoIconSelected from './assets/infoIcon_selected.svg';
 import infoIconDeselcted from './assets/infoIcon_deselected.svg';
+import { BasicContentWrapper } from 'disa-framework/basicContentWrapper';
+import { PrivilegedNavbarTab } from 'disa-framework/privilegedNavbarTab';
+import { SimpleNavbarTab } from 'disa-framework/simpleNavbarTab';
+import { Group } from 'disa-framework/group';
 import navFleetDetailSelected from './assets/nav_fleet_detail_selected.png';
 import navFleetDetailDeselected from './assets/nav_fleet_detail_deselected.png';
 import groupIcon from './assets/ota_logo.png';
@@ -78,48 +82,153 @@ function App() {
     },
   };
 
-  let test = [
-    {
-      name: 'Example1',
-      to: '/test1',
-      disabled: false,
-      selectedIcon: infoIconSelected,
-      deselectedIcon: infoIconDeselcted,
-      renderElement: <TestComponent />,
-      permittedGroups: [],
-    },
-    {
-      name: 'Example2',
-      selectedIcon: infoIconSelected,
-      deselectedIcon: infoIconDeselcted,
-      tabAndContent: [
-        {
-          name: 'Example21',
-          selectedIcon: infoIconSelected,
-          deselectedIcon: infoIconDeselcted,
-          tabAndContent: [
-            {
-              name: 'Example211',
-              to: '/test123',
-              disabled: false,
-              selectedIcon: infoIconSelected,
-              deselectedIcon: infoIconDeselcted,
-              renderElement: <LayoutAndContextExampleComponent />,
-              permittedGroups: [],
-            },
-          ],
-        },
-        {
-          name: 'Example22',
-          to: '/test',
-          disabled: false,
-          selectedIcon: infoIconSelected,
-          deselectedIcon: infoIconDeselcted,
-          renderElement: <LayoutAndContextExampleComponent />,
-          permittedGroups: [],
-        },
-      ],
-    },
+  const views = [
+    new BasicContentWrapper(
+      (
+        <SimpleNavbarTab
+          name={'Example without Translation'}
+          to="/"
+          disabled={false}
+          selectedIcon={navDashboardSelected}
+          deselectedIcon={navDashboardDeselected}
+        />
+      ),
+      LayoutAndContextExampleComponent
+    ),
+    // new BasicContentWrapper(
+    //   (
+    //     <SimpleNavbarTab
+    //       name={(t: TranslateFunctionType) =>
+    //         t('example_component', { count: 1 })
+    //       }
+    //       to="/example2"
+    //       disabled={false}
+    //       selectedIcon={navFleetSelected}
+    //       deselectedIcon={navFleetDeselected}
+    //     />
+    //   ),
+    //   SecondExampleComponent
+    // ),
+    // new BasicContentWrapper(
+    //   (
+    //     <PrivilegedNavbarTab
+    //       name={(t: TranslateFunctionType) =>
+    //         t('example_component', { count: 2 })
+    //       }
+    //       to="/example3"
+    //       disabled={false}
+    //       selectedIcon={navDiagnosticsSelected}
+    //       deselectedIcon={navDiagnosticsDeselected}
+    //       permittedGroups={['USER', 'ADMIN']}
+    //     />
+    //   ),
+    //   ThirdExampleComponent
+    // ),
+    new Group(
+      (t: TranslateFunctionType) => t('Test_group'),
+      groupIcon,
+      undefined,
+      false,
+      true,
+      false,
+      [
+        new BasicContentWrapper(
+          (
+            <SimpleNavbarTab
+              name={(t: TranslateFunctionType) =>
+                t('example_component', { count: 3 })
+              }
+              to="/group-example1"
+              disabled={false}
+              selectedIcon={navFleetSelected}
+              deselectedIcon={navFleetDeselected}
+            />
+          ),
+          SecondExampleComponent
+        ),
+        new BasicContentWrapper(
+          (
+            <SimpleNavbarTab
+              name={(t: TranslateFunctionType) =>
+                t('example_component', { count: 4 })
+              }
+              to="/group-example2"
+              disabled={false}
+              selectedIcon={navFleetDetailSelected}
+              deselectedIcon={navFleetDetailDeselected}
+            />
+          ),
+          FourthExampleComponent
+        ),
+        new Group(
+          (t: TranslateFunctionType) => t('Test_group'),
+          groupIcon,
+          undefined,
+          false,
+          true,
+          false,
+          [
+            new BasicContentWrapper(
+              (
+                <SimpleNavbarTab
+                  name={(t: TranslateFunctionType) =>
+                    t('example_component', { count: 12 })
+                  }
+                  to="/group-example12"
+                  disabled={false}
+                  selectedIcon={navFleetDetailSelected}
+                  deselectedIcon={navFleetDetailDeselected}
+                />
+              ),
+              ClassComponentContainer
+            ),
+          ]
+        ),
+      ]
+    ),
+    // new BasicContentWrapper(
+    //   (
+    //     <PrivilegedNavbarTab
+    //       name={(t: TranslateFunctionType) =>
+    //         t('example_component', { count: 5 })
+    //       }
+    //       to="/example4"
+    //       disabled={true}
+    //       selectedIcon={navExpertSelected}
+    //       deselectedIcon={navExpertDeselected}
+    //       permittedGroups={['ADMIN']}
+    //     />
+    //   ),
+    //   FourthExampleComponent
+    // ),
+    // new BasicContentWrapper(
+    //   (
+    //     <SimpleNavbarTab
+    //       name={(t: TranslateFunctionType) =>
+    //         t('example_component', { count: 6 })
+    //       }
+    //       to="/example5"
+    //       disabled={false}
+    //       selectedIcon={navFleetDetailSelected}
+    //       deselectedIcon={navFleetDetailDeselected}
+    //     />
+    //   ),
+    //   FourthExampleComponent
+    // ),
+    // new BasicContentWrapper(
+    //   (
+    //     <SimpleNavbarTab
+    //       name={(t: TranslateFunctionType) =>
+    //         t('example_component', { count: 7 })
+    //       }
+    //       to="/example6"
+    //       disabled={false}
+    //       selectedIcon={navDashboardSelected}
+    //       deselectedIcon={navDashboardDeselected}
+    //     />
+    //   ),
+    //   ClassComponentContainer
+    // ),
   ];
 
   return (
@@ -130,7 +239,7 @@ function App() {
         <FirstExampleContextComponent>
           <SecondExampleContextComponent>
             <UILayer
-              tabsAndContent={test}
+              tabAndContentWrappers={views}
               startingPoint="/"
               authenticationView={BasicAuthenticationView}
               menuOptions={menuOptions}

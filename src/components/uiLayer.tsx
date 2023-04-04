@@ -21,10 +21,7 @@ import { MenuOptions } from './navbar/menu';
 import { AuthenticationViewProps } from './authentication/aws/authenticationView';
 import { MainView } from './mainView';
 import { DefaultImprint } from './imprint/defaultImprint';
-import {
-  groupPropsBasicFirstLayer,
-  navbarTabProps,
-} from './navbar/tabs/navbarTabTypes';
+import { TabAndContentWrapper } from './navbar/wrapper/tabAndContentWrapper';
 
 export interface HeaderOptions {
   reactElementRight?: ReactElement;
@@ -59,9 +56,8 @@ export interface Coloroptions {
 }
 
 export interface Props {
-  // tabAndContentWrappers: TabAndContentWrapper[];
+  tabAndContentWrappers: TabAndContentWrapper[];
   startingPoint: string;
-  tabsAndContent: (groupPropsBasicFirstLayer | navbarTabProps)[];
   menuOptions?: MenuOptions;
   authenticationView?: React.ComponentType<AuthenticationViewProps & any>;
   documentsComponent?: React.ComponentType<any>;
@@ -115,7 +111,7 @@ export const UILayer = (props: Props) => {
                 menuOptions={props.menuOptions}
                 documentsLabelKey={props.documentsLabelKey}
                 documentsComponent={props.documentsComponent}
-                tabsAndContent={props.tabsAndContent}
+                tabAndContentWrappers={props.tabAndContentWrappers}
               />
             }
           />
@@ -145,8 +141,6 @@ const Redirector = (props: RedirectorProps) => {
   useEffect(() => {
     if (!userIsAuthenticated) {
       if (currentPath !== '/documents') {
-        console.log('triggerd');
-
         navigate('/login');
       }
     } else {

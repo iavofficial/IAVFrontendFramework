@@ -215,7 +215,6 @@ function App() {
             <UILayer
               tabAndContentWrappers={views}
               startingPoint="/"
-              authenticationView={BasicAuthenticationView}
               menuOptions={menuOptions}
               documentsLabelKey="Legal_documents"
               documentsComponent={LegalDocuments}

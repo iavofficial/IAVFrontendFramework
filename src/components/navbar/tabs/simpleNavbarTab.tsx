@@ -5,9 +5,14 @@ import { BLUE0, GRAY2, GRAY4, TAB_HEIGHT, WHITE } from '../../../constants';
 import { useTranslator } from '../../internationalization/translators';
 import './tabs.scss';
 import { generateHashForLength } from '../../../services/hash';
-import { calculateLineColorForTabs } from '../../../services/calculateLineColor';
+import {
+  calculateLineColorForTabs,
+  calculateLineForFirstTabLayer,
+  calculateLineForTabBottom,
+} from '../../../services/calculateLineColorTab';
 import { SpaceBetweenElement } from './spaceBetweenElement';
 import { navbarTab } from './navbarTab';
+import { LAYER } from './tabLayer';
 
 export interface Props {
   firstLayerCollabsed?: boolean;
@@ -16,59 +21,60 @@ export interface Props {
   lastElementSecondLayer?: boolean;
 }
 
-export const SimpleNavbarTab: navbarTab<Props> = (props, test) => {
+export const SimpleNavbarTab: navbarTab<Props> = (props) => {
   const [hovering, setHovering] = useState(false);
   const t = useTranslator();
   const active = useLocation().pathname === props.to;
 
+  console.log('hier dein layer: ', props.layer);
+
   const styleActiveLineFirstLayerTop = {
     marginRight: '2px',
     marginLeft: '3px',
-    backgroundColor: BLUE0,
+
     width: '2px',
     height: '40px',
-    // backgroundColor: calculateLineColorForTabs(
-    //   hovering,
-    //   active,
-    //   props.firstLayerCollabsed?
-    // )
+    backgroundColor:
+      props.layer === LAYER.ONE
+        ? calculateLineForFirstTabLayer(hovering, active)
+        : BLUE0,
+    // : calculateLineColorForTabs(
+    //     hovering,
+    //     active,
+    //     false,
+    //     props.layer as LAYER
+    //   ),
   };
 
   const styleActiveLineFirstLayerBottom = {
     marginRight: '2px',
     marginLeft: '3px',
-    backgroundColor: BLUE0,
     width: '2px',
     height: '16px',
-    // backgroundColor: calculateLineColorForTabs(
-    //   hovering,
-    //   active,
-    //   props.firstLayerCollabsed?
-    // )
+    backgroundColor: calculateLineForTabBottom(props.layer as LAYER),
   };
 
   const styleActiveLineSecondLayerTop = {
     heigth: '40px',
     width: '2px',
     marginRight: '3px',
-    backgroundColor: BLUE0,
-    // backgroundColor: calculateLineColorForTabs(
-    //   hovering,
-    //   active,
-    //   props.secondLayerCollabsed?
-    // ),
+    backgroundColor:
+      props.layer === LAYER.ONE
+        ? calculateLineForFirstTabLayer(hovering, active)
+        : BLUE0,
+    // : calculateLineColorForTabs(
+    //     hovering,
+    //     active,
+    //     false,
+    //     props.layer as LAYER
+    //   ),
   };
 
   const styleActiveLineSecondLayerBottom = {
     heigth: '16px',
     width: '2px',
     marginRight: '3px',
-    backgroundColor: BLUE0,
-    // backgroundColor: calculateLineColorForTabs(
-    //   hovering,
-    //   active,
-    //   props.secondLayerCollabsed?
-    // ),
+    backgroundColor: calculateLineForTabBottom(props.layer as LAYER),
   };
 
   const tabStyleDefault = {

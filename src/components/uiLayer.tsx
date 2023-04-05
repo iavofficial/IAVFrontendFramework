@@ -22,6 +22,7 @@ import { AuthenticationViewProps } from './authentication/aws/authenticationView
 import { MainView } from './mainView';
 import { DefaultImprint } from './imprint/defaultImprint';
 import { TabAndContentWrapper } from './navbar/wrapper/tabAndContentWrapper';
+import { calculateLayer } from '../services/calculateLayer';
 
 export interface HeaderOptions {
   reactElementRight?: ReactElement;
@@ -111,7 +112,9 @@ export const UILayer = (props: Props) => {
                 menuOptions={props.menuOptions}
                 documentsLabelKey={props.documentsLabelKey}
                 documentsComponent={props.documentsComponent}
-                tabAndContentWrappers={props.tabAndContentWrappers}
+                tabAndContentWrappers={calculateLayer(
+                  props.tabAndContentWrappers
+                )}
               />
             }
           />

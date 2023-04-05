@@ -166,7 +166,7 @@ function App() {
           undefined,
           false,
           true,
-          false,
+          true,
           [
             new BasicContentWrapper(
               (
@@ -186,6 +186,7 @@ function App() {
         ),
       ]
     ),
+
     // new BasicContentWrapper(
     //   (
     //     <PrivilegedNavbarTab

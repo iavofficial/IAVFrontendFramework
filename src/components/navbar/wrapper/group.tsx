@@ -4,8 +4,10 @@ import { TabGroup } from '../tabs/tabGroup';
 import { TranslateFunctionType } from '../../../contexts/language';
 import { generateHashForValues } from '../../../services/hash';
 import { TabAndContentWrapper } from './tabAndContentWrapper';
+import { LAYER } from '../tabs/tabLayer';
 
 export class Group implements TabAndContentWrapper {
+  private layer: number | undefined;
   constructor(
     private _name: string | ((t: TranslateFunctionType) => string),
     private _logo: string | undefined,
@@ -34,6 +36,27 @@ export class Group implements TabAndContentWrapper {
     return routes;
   };
 
+  setLayer = (layer: LAYER) => {
+    this.layer = layer;
+  };
+
+  getChildrenWrapper = () => {
+    return this._contentWrappers;
+  };
+
+  setCollapsed = (collapsed: boolean) => {
+    this._collapsed = collapsed;
+    this.getNavbarComponent(true);
+  };
+
+  // setNavbarCollapsed = (navbarCollapsed: boolean) => {
+  //   this.navbarCollapsed = navbarCollapsed;
+  // }
+
+  // getNavbarCollapsed =()=>{
+  //   return this.navbarCollapsed;
+  // }
+
   getNavbarComponent = (navbarCollapsed: boolean) => {
     return (
       <TabGroup
@@ -43,6 +66,7 @@ export class Group implements TabAndContentWrapper {
         logo={this._logo ? this._logo : undefined}
         collapsible={this._collapsible}
         collapsed={this._collapsed}
+        layer={this.layer}
         accordionHeaderTextColor={
           this._accordionHeaderTextColor
             ? this._accordionHeaderTextColor

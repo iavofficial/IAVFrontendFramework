@@ -5,8 +5,8 @@ import { WHITE, BLUE3, GREEN, GRAY1 } from '../../constants';
 import { useTranslator } from '../internationalization/translators';
 import SimpleBar from 'simplebar-react';
 import 'simplebar-react/dist/simplebar.min.css';
-import { generateHash, generateHashForLength } from '../../services/hash';
 import { TabAndContentWrapper } from './wrapper/tabAndContentWrapper';
+import { LAYER } from './tabs/tabLayer';
 
 interface Props {
   tabAndContentWrappers: TabAndContentWrapper[];
@@ -49,9 +49,11 @@ export const Navbar = (props: Props) => {
           overflowX: 'visible',
         }}
       >
-        {props.tabAndContentWrappers.map((wrapper) =>
-          wrapper.getNavbarComponent(navbarCollapsed)
-        )}
+        <>
+          {props.tabAndContentWrappers.map((wrapper: TabAndContentWrapper) =>
+            wrapper.getNavbarComponent(navbarCollapsed)
+          )}
+        </>
       </SimpleBar>
       <div style={{ marginTop: 'auto' }}>
         <div

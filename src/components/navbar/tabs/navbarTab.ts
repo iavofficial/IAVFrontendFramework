@@ -1,3 +1,4 @@
+import { LAYER } from './tabLayer';
 import React from 'react';
 
 import { TranslateFunctionType } from '../../../contexts/language';
@@ -10,6 +11,7 @@ export interface navbarTabProps {
   deselectedIcon: string;
   navbarCollapsed?: boolean;
   active?: boolean;
+  layer?: LAYER;
   colorOptions?: {
     tabTextColor: string;
     tabTextHoverColor: string;

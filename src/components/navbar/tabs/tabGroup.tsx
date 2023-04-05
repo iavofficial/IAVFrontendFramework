@@ -14,6 +14,8 @@ import {
 } from '../../../constants';
 import { generateHashForLength } from '../../../services/hash';
 import { Tooltip } from 'primereact/tooltip';
+import { LAYER } from './tabLayer';
+import { calculateSecondLineColorGroupTop } from '../../../services/calculateLineColorGroup';
 
 interface Props {
   name: string | ((t: TranslateFunctionType) => string);
@@ -23,12 +25,15 @@ interface Props {
   collapsed?: boolean;
   accordionHeaderTextColor?: string;
   navbarCollapsed: boolean;
+  layer?: LAYER;
 }
 
 export const TabGroup = (props: React.PropsWithChildren<Props>) => {
   const t = useTranslator();
   const [hovering, setHovering] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
+
+  console.log('props collapsed: ', props.collapsed);
 
   const collapsible =
     props.collapsible !== undefined ? props.collapsible : true;
@@ -43,24 +48,12 @@ export const TabGroup = (props: React.PropsWithChildren<Props>) => {
     padding: props.navbarCollapsed ? '0px' : '0px 16px 0px 0px',
   };
 
-  const styleActiveLineSecondLayerBottom = {
-    heigth: '16px',
-    width: '2px',
-    marginRight: '3px',
-    backgroundColor: BLUE0,
-    // backgroundColor: calculateLineColorForTabs(
-    //   hovering,
-    //   active,
-    //   props.secondLayerCollabsed?
-    // ),
-  };
-
   const styleActiveLineFirstLayerTop = {
     marginRight: '2px',
     marginLeft: '3px',
-    backgroundColor: BLUE0,
     width: '2px',
     height: '40px',
+    backgroundColor: BLUE0,
     // backgroundColor: calculateLineColorForTabs(
     //   hovering,
     //   active,
@@ -72,12 +65,10 @@ export const TabGroup = (props: React.PropsWithChildren<Props>) => {
     heigth: '40px',
     width: '2px',
     marginRight: '3px',
-    backgroundColor: BLUE0,
-    // backgroundColor: calculateLineColorForTabs(
-    //   hovering,
-    //   active,
-    //   props.secondLayerCollabsed?
-    // ),
+    backgroundColor: calculateSecondLineColorGroupTop(
+      props.layer as LAYER,
+      hovering
+    ),
   };
 
   const styleActiveLineFirstLayerBottom = {
@@ -91,6 +82,19 @@ export const TabGroup = (props: React.PropsWithChildren<Props>) => {
     //   active,
     //   props.firstLayerCollabsed?
     // )
+  };
+
+  const styleActiveLineSecondLayerBottom = {
+    heigth: '16px',
+    width: '2px',
+    marginRight: '3px',
+
+    backgroundColor: props.layer === LAYER.ONE ? WHITE : BLUE0,
+    // calculateLineColorForTabs(
+    //   hovering,
+    //   active,
+    //   props.secondLayerCollabsed?
+    // ),
   };
 
   const identifier = generateHashForLength(4);

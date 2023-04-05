@@ -25,7 +25,7 @@ export const PrivilegedNavbarTab: navbarTab<Props> = (props) => {
       disabled={props.disabled}
       name={props.name}
       to={props.to}
-      navbarCollabsed={props.navbarCollabsed}
+      navbarCollapsed={props.navbarCollapsed}
       firstLayerCollabsed={props.firstLayerCollabsed}
       secondLayerCollabsed={props.secondLayerCollabsed}
       lastElementFirstLayer={props.lastElementFirstLayer}

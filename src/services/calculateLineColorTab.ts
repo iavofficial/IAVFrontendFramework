@@ -30,9 +30,6 @@ export const calculateFirstLineTabLayerBottom = (
   isLastChildOfLayer: boolean,
   layer: LAYER
 ) => {
-  console.log('hier dein lastelement: ', isLastChildOfLayer);
-  console.log('layer: ', layer);
-
   if (parentCollapsed && !isLastChildOfLayer) {
     return BLUE0;
   } else if (layer === LAYER.THREE && isLastChildOfLayer) {

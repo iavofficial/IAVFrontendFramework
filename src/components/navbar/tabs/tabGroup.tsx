@@ -40,6 +40,12 @@ export const TabGroup = (props: PropsWithNavbarTabChildren<Props>) => {
   const collapsible =
     props.collapsible !== undefined ? props.collapsible : true;
 
+  useEffect(() => {
+    if (!collapsible) {
+      setCollapsed(true);
+    }
+  }, [collapsible]);
+
   const tabStyleDefault = {
     height: '40px',
     width: props.navbarCollapsed ? '40px' : '240px',
@@ -152,7 +158,9 @@ export const TabGroup = (props: PropsWithNavbarTabChildren<Props>) => {
       className="flex align-items-center justify-content-between"
       style={tabStyleDefault}
       onClick={() => {
-        setCollapsed(!collapsed);
+        if (collapsible) {
+          setCollapsed(!collapsed);
+        }
       }}
     >
       <div className="flex" style={{ height: '100%' }}>

@@ -1,6 +1,6 @@
 import React, { FormEvent } from 'react';
 import { Link } from 'react-router-dom';
-import { BLACK, BLUE0, WHITE } from '../../../constants';
+import { BLACK, BLUE0, BLUE3, WHITE } from '../../../constants';
 import AppLogo from '../../../assets/images/app_logo.png';
 import { AuthContext } from '../../../contexts/auth';
 import { LoginButtonWithSpinner } from '../loginButtonWithSpinner';
@@ -9,10 +9,14 @@ import { useContext } from 'react';
 import { useTranslator } from '../../internationalization/translators';
 import { AuthenticationViewProps } from './authenticationView';
 import '../../css/authenticationView.css';
+import companyLogo from '../../../assets/images/company_logo.png';
+import loginBackground from '../../../assets/images/login_background.png';
+import { Dropdown } from 'primereact/dropdown';
 
 export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [darkmode, setDarkmode] = useState(false);
 
   const authContext = useContext(AuthContext);
   const t = useTranslator();
@@ -51,6 +55,18 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
     }
     return '';
   };
+
+  const companyLogoDefault = (props: AuthenticationViewProps) => (
+    <img
+      src={companyLogo}
+      alt="Company Logo"
+      style={{
+        display: props.headerOptions?.hideRight ? 'none' : 'flex',
+        height: '25px',
+        marginRight: '24px',
+      }}
+    />
+  );
 
   const NewPasswordForm = (
     <div style={{ width: '85%' }}>
@@ -102,33 +118,54 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
 
   const LoginForm = (
     <form
-      style={{ width: '85%', height: '100%' }}
-      className="mr-4 mt-4"
+      style={{
+        width: '100%',
+        height: '100%',
+      }}
       onSubmit={submit}
     >
-      <div className={'flex flex-column'}>
-        <label className="inputLabel">{t('Email_address')}</label>
+      <div
+        style={{ margin: '40px 24px 0px 24px' }}
+        className={'flex flex-column'}
+      >
+        <label
+          style={{
+            fontWeight: 'normal',
+            marginBottom: '0px',
+            fontSize: '12px',
+          }}
+          className="inputLabel"
+        >
+          {t('Email_address')}
+        </label>
         <input
           value={email.valueOf()}
           onChange={(ev) => setEmail(ev.target.value)}
           name="email"
           type="email"
           className={'p-inputtext'}
-          placeholder={t('Email_address')}
           required
-          style={{ marginBottom: '1rem' }}
           autoFocus
+          style={{ marginBottom: '40px' }}
         />
-        <label className="inputLabel">{t('Password')}</label>
+        <label
+          style={{
+            fontWeight: 'normal',
+            marginBottom: '0px',
+            fontSize: '12px',
+          }}
+          className="inputLabel"
+        >
+          {t('Password')}
+        </label>
         <input
           value={password.valueOf()}
           onChange={(ev) => setPassword(ev.target.value)}
           name="password"
           type="password"
           className={'p-inputtext'}
-          placeholder={t('Password')}
           required
-          style={{ marginBottom: '1rem' }}
+          style={{ marginBottom: '40px' }}
         />
         <div>
           <LoginButtonWithSpinner
@@ -152,7 +189,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
       style={{
         display: props.headerOptions?.hideLeft ? 'none' : 'flex',
         alignItems: 'center',
-        height: '75px',
+        height: '56px',
       }}
     >
       <img
@@ -175,6 +212,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
                 ?.letteringElementLeftColor
             : 'white',
           fontSize: '15px',
+          width: '150px',
           fontWeight: 'lighter',
         }}
       >
@@ -195,28 +233,25 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
           : BLUE0,
         color: 'white',
         alignItems: 'center',
-        height: '75px',
+        height: '56px',
       }}
     >
-      <div id="left-element" className={'flex align-items-center'}>
+      <div
+        id="left-element-authentication"
+        className={'flex align-items-center'}
+      >
         {props.headerOptions?.reactElementLeft
           ? props.headerOptions?.reactElementLeft
           : appLogoDefault(props)}
       </div>
-      <span
-        style={{
-          fontSize: '30px',
-          marginLeft: 'auto',
-          marginRight: '25px',
-          color: props.colorOptions?.authViewColorSettings
-            ?.letteringElementRightColor
-            ? props.colorOptions?.authViewColorSettings
-                ?.letteringElementRightColor
-            : WHITE,
-        }}
+      <div
+        id="right-element-authentication"
+        className="flex justify-content-end align-items-center"
       >
-        LOGIN
-      </span>
+        {props.headerOptions?.reactElementRight
+          ? props.headerOptions?.reactElementRight
+          : companyLogoDefault(props)}
+      </div>
     </div>
   );
 
@@ -231,11 +266,23 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
           : WHITE,
       }}
     >
+      <img
+        style={{
+          inset: '0px',
+          position: 'absolute',
+          zIndex: '-100',
+          height: '100vh',
+          width: '100vw',
+          objectFit: 'cover',
+        }}
+        src={loginBackground}
+      />
       <div
         className="flex flex-column shadow-6"
         style={{
-          width: '500px',
+          width: '620px',
           margin: 'auto',
+          position: 'relative',
           backgroundColor: props.colorOptions?.authViewColorSettings
             ?.loginFormBackground
             ? props.colorOptions?.authViewColorSettings?.loginFormBackground
@@ -247,34 +294,57 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
             ? props.headerOptions.reactElementFullAuthenticationHeader
             : header(props)}
         </div>
-        <div
-          className="flex"
-          style={{ justifyContent: 'center', marginBottom: '30px' }}
-        >
+        <div className="flex flex-column" style={{ justifyContent: 'center' }}>
+          <div
+            style={{ width: '100%', padding: '24px 24px 0px 0px' }}
+            className="flex align-items-center justify-content-end"
+          >
+            {darkmode ? (
+              <i
+                onClick={() => setDarkmode(!darkmode)}
+                className="pi pi-sun darkmode-logos"
+              />
+            ) : (
+              <i
+                onClick={() => setDarkmode(!darkmode)}
+                className="pi pi-moon darkmode-logos"
+              />
+            )}
+            <Dropdown style={{ width: '160px' }} />
+          </div>
           {authContext?.isNewPasswordRequired ? NewPasswordForm : LoginForm}
         </div>
         <Link
           style={{
-            alignSelf: 'center',
-            fontWeight: 'bolder',
-            color: 'black',
+            position: 'absolute',
+            bottom: '12px',
+            left: '16px',
+            color: props.colorOptions?.authViewColorSettings
+              ?.legalDocumentsColor
+              ? props.colorOptions?.authViewColorSettings?.legalDocumentsColor
+              : 'black',
             textDecoration: 'none',
           }}
           to="/documents"
           target="_blank"
         >
-          {t(props.documentsLabelKey ? props.documentsLabelKey : 'Imprint')}
+          {/* {t(props.documentsLabelKey ? props.documentsLabelKey : 'Imprint')} */}
+          <span
+            className={'pi pi-info-circle'}
+            style={{ fontSize: 'medium', fontWeight: 'bold', color: BLUE3 }}
+          />
         </Link>
         <span
           style={{
-            padding: '10px',
             alignSelf: 'center',
+            padding: '24px',
+            fontSize: '11px',
             color: props.colorOptions?.authViewColorSettings?.companyTextColor
               ? props.colorOptions.authViewColorSettings?.companyTextColor
               : BLACK,
           }}
         >
-          &copy; {props.companyText ? props.companyText : 'IAV GmbH 2021'}
+          &copy; {props.companyText ? props.companyText : 'IAV GmbH 2023'}
         </span>
       </div>
     </div>

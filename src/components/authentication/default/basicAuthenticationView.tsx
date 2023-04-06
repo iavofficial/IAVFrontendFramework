@@ -15,6 +15,7 @@ import { Dropdown } from 'primereact/dropdown';
 export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [darkmode, setDarkmode] = useState(false);
 
   const authContext = useContext(AuthContext);
   const t = useTranslator();
@@ -43,7 +44,6 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
         display: props.headerOptions?.hideLeft ? 'none' : 'flex',
         alignItems: 'center',
         padding: '6px 0px 6px 0px',
-        width: '300px',
       }}
     >
       <img
@@ -138,7 +138,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
         className="flex flex-column shadow-6"
         style={{
           position: 'relative',
-          width: '500px',
+          width: '620px',
           margin: 'auto',
           backgroundColor: props.colorOptions?.authViewColorSettings
             ?.loginFormBackground
@@ -156,10 +156,21 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
           style={{ marginBottom: '30px' }}
         >
           <div
-            style={{ width: '100%', padding: '24px 16px 0px 0px' }}
+            style={{ width: '100%', padding: '24px 24px 0px 0px' }}
             className="flex align-items-center justify-content-end"
           >
-            <Dropdown style={{ width: '150px' }} />
+            {darkmode ? (
+              <i
+                onClick={() => setDarkmode(!darkmode)}
+                className="pi pi-sun darkmode-logos"
+              />
+            ) : (
+              <i
+                onClick={() => setDarkmode(!darkmode)}
+                className="pi pi-moon darkmode-logos"
+              />
+            )}
+            <Dropdown style={{ width: '160px' }} />
           </div>
 
           <form
@@ -170,7 +181,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
             onSubmit={submit}
           >
             <div
-              style={{ margin: '24px 16px 24px 16px' }}
+              style={{ margin: '40px 24px 0px 24px' }}
               className={'flex flex-column'}
             >
               <label
@@ -191,7 +202,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                 className={'p-inputtext'}
                 required
                 autoFocus
-                style={{ marginBottom: '1rem' }}
+                style={{ marginBottom: '40px' }}
               />
               <label
                 style={{
@@ -210,7 +221,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                 type="password"
                 className={'p-inputtext'}
                 required
-                style={{ marginBottom: '1rem' }}
+                style={{ marginBottom: '40px' }}
               />
               <div>
                 <LoginButtonWithSpinner
@@ -229,7 +240,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
         <Link
           style={{
             position: 'absolute',
-            bottom: '10px',
+            bottom: '12px',
             left: '16px',
             color: props.colorOptions?.authViewColorSettings
               ?.legalDocumentsColor
@@ -249,7 +260,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
         <span
           style={{
             alignSelf: 'center',
-            padding: '10px',
+            padding: '24px',
             fontSize: '11px',
             color: props.colorOptions?.authViewColorSettings?.companyTextColor
               ? props.colorOptions.authViewColorSettings?.companyTextColor

@@ -12,6 +12,7 @@ import { AWSAuthenticationProvider } from 'disa-framework/awsAuthenticationProvi
 import { Group } from 'disa-framework/group';
 import { TranslateFunctionType } from 'disa-framework/language';
 import { BasicAuthenticationView } from 'disa-framework/basicAuthenticationView';
+import { AWSAuthenticationView } from 'disa-framework/awsAuthenticationView';
 import { BasicContentWrapper } from 'disa-framework/basicContentWrapper';
 import { SimpleNavbarTab } from 'disa-framework/simpleNavbarTab';
 import { PrivilegedNavbarTab } from 'disa-framework/privilegedNavbarTab';
@@ -215,6 +216,7 @@ function App() {
             <UILayer
               tabAndContentWrappers={views}
               startingPoint="/"
+              authenticationView={AWSAuthenticationView}
               menuOptions={menuOptions}
               documentsLabelKey="Legal_documents"
               documentsComponent={LegalDocuments}

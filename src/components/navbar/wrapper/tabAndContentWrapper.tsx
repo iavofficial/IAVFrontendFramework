@@ -8,4 +8,5 @@ export interface TabAndContentWrapper {
   getKey(): string;
   setLayer(layer: LAYER): void;
   getChildrenWrapper(): TabAndContentWrapper[];
+  setIsLastElementOfLayer(isLastElementOfLayer: boolean): void;
 }

@@ -1,21 +1,20 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import { Accordion, AccordionTab } from 'primereact/accordion';
 import '../../css/tabGroup.css';
 import '../navbar.scss';
 import { TranslateFunctionType } from '../../../contexts/language';
 import { useTranslator } from '../../internationalization/translators';
-import {
-  BLUE0,
-  BLUE3,
-  GRAY2,
-  GRAY4,
-  TAB_HEIGHT,
-  WHITE,
-} from '../../../constants';
+import { BLUE0, GRAY4, WHITE } from '../../../constants';
 import { generateHashForLength } from '../../../services/hash';
 import { Tooltip } from 'primereact/tooltip';
 import { LAYER } from './tabLayer';
-import { calculateSecondLineColorGroupTop } from '../../../services/calculateLineColorGroup';
+import {
+  calculateFirstLineColorGroupTop,
+  calculateSecondLineColorGroupTop,
+  calculateFirstLineColorGroupBottom,
+  revertColor,
+} from '../../../services/calculateLineColorGroup';
+import { navbarTabProps } from './navbarTab';
 
 interface Props {
   name: string | ((t: TranslateFunctionType) => string);
@@ -23,17 +22,20 @@ interface Props {
   collapsible?: boolean;
   fontWeightBold: boolean;
   collapsed?: boolean;
+  isLastElementOfLayer?: boolean;
   accordionHeaderTextColor?: string;
   navbarCollapsed: boolean;
   layer?: LAYER;
 }
 
-export const TabGroup = (props: React.PropsWithChildren<Props>) => {
+type PropsWithNavbarTabChildren<T> = T & {
+  children: ReactElement<navbarTabProps>[];
+};
+
+export const TabGroup = (props: PropsWithNavbarTabChildren<Props>) => {
   const t = useTranslator();
   const [hovering, setHovering] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
-
-  console.log('props collapsed: ', props.collapsed);
 
   const collapsible =
     props.collapsible !== undefined ? props.collapsible : true;
@@ -53,48 +55,66 @@ export const TabGroup = (props: React.PropsWithChildren<Props>) => {
     marginLeft: '3px',
     width: '2px',
     height: '40px',
-    backgroundColor: BLUE0,
-    // backgroundColor: calculateLineColorForTabs(
-    //   hovering,
-    //   active,
-    //   props.firstLayerCollabsed?
-    // )
+    backgroundColor: hovering
+      ? revertColor(
+          calculateFirstLineColorGroupTop(
+            props.layer as LAYER,
+            collapsed,
+            props.collapsed
+          ),
+          BLUE0,
+          WHITE
+        )
+      : calculateFirstLineColorGroupTop(
+          props.layer as LAYER,
+          collapsed,
+          props.collapsed
+        ),
+  };
+
+  const styleActiveLineFirstLayerBottom = {
+    marginRight: '2px',
+    marginLeft: '3px',
+
+    width: '2px',
+    height: '16px',
+    backgroundColor: calculateFirstLineColorGroupBottom(
+      collapsed,
+      props.collapsed as boolean,
+      props.isLastElementOfLayer as boolean
+    ),
   };
 
   const styleActiveLineSecondLayerTop = {
     heigth: '40px',
     width: '2px',
     marginRight: '3px',
-    backgroundColor: calculateSecondLineColorGroupTop(
-      props.layer as LAYER,
-      hovering
-    ),
-  };
-
-  const styleActiveLineFirstLayerBottom = {
-    marginRight: '2px',
-    marginLeft: '3px',
-    backgroundColor: BLUE0,
-    width: '2px',
-    height: '16px',
-    // backgroundColor: calculateLineColorForTabs(
-    //   hovering,
-    //   active,
-    //   props.firstLayerCollabsed?
-    // )
+    backgroundColor: hovering
+      ? revertColor(
+          calculateSecondLineColorGroupTop(
+            props.layer as LAYER,
+            collapsed,
+            props.collapsed
+          ),
+          BLUE0,
+          WHITE
+        )
+      : calculateSecondLineColorGroupTop(
+          props.layer as LAYER,
+          collapsed,
+          props.collapsed
+        ),
   };
 
   const styleActiveLineSecondLayerBottom = {
     heigth: '16px',
     width: '2px',
     marginRight: '3px',
-
-    backgroundColor: props.layer === LAYER.ONE ? WHITE : BLUE0,
-    // calculateLineColorForTabs(
-    //   hovering,
-    //   active,
-    //   props.secondLayerCollabsed?
-    // ),
+    backgroundColor: calculateSecondLineColorGroupTop(
+      props.layer as LAYER,
+      collapsed,
+      props.collapsed
+    ),
   };
 
   const identifier = generateHashForLength(4);
@@ -178,7 +198,16 @@ export const TabGroup = (props: React.PropsWithChildren<Props>) => {
           }}
         />
       </div>
-      {collapsed ? props.children : null}
+      {collapsed ? (
+        props.children.map((child) => {
+          if (React.isValidElement(child)) {
+            return React.cloneElement(child, { collapsed: collapsed });
+          }
+          return child;
+        })
+      ) : (
+        <React.Fragment />
+      )}
     </>
   );
 };

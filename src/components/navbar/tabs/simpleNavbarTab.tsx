@@ -5,14 +5,15 @@ import { BLUE0, GRAY2, GRAY4, TAB_HEIGHT, WHITE } from '../../../constants';
 import { useTranslator } from '../../internationalization/translators';
 import './tabs.scss';
 import { generateHashForLength } from '../../../services/hash';
-import {
-  calculateLineColorForTabs,
-  calculateLineForFirstTabLayer,
-  calculateLineForTabBottom,
-} from '../../../services/calculateLineColorTab';
-import { SpaceBetweenElement } from './spaceBetweenElement';
 import { navbarTab } from './navbarTab';
 import { LAYER } from './tabLayer';
+import {
+  calculateFirstLineTabLayer,
+  calculateFirstLineTabLayerBottom,
+  calculateSecondLineTabLayer,
+  calculateSecondLineTabLayerBottom,
+} from '../../../services/calculateLineColorTab';
+import { revertColor } from '../../../services/calculateLineColorGroup';
 
 export interface Props {
   firstLayerCollabsed?: boolean;
@@ -26,8 +27,6 @@ export const SimpleNavbarTab: navbarTab<Props> = (props) => {
   const t = useTranslator();
   const active = useLocation().pathname === props.to;
 
-  console.log('hier dein layer: ', props.layer);
-
   const styleActiveLineFirstLayerTop = {
     marginRight: '2px',
     marginLeft: '3px',
@@ -35,15 +34,13 @@ export const SimpleNavbarTab: navbarTab<Props> = (props) => {
     width: '2px',
     height: '40px',
     backgroundColor:
-      props.layer === LAYER.ONE
-        ? calculateLineForFirstTabLayer(hovering, active)
-        : BLUE0,
-    // : calculateLineColorForTabs(
-    //     hovering,
-    //     active,
-    //     false,
-    //     props.layer as LAYER
-    //   ),
+      hovering || active
+        ? revertColor(
+            calculateFirstLineTabLayer(props.layer as LAYER, props.collapsed),
+            BLUE0,
+            WHITE
+          )
+        : calculateFirstLineTabLayer(props.layer as LAYER, props.collapsed),
   };
 
   const styleActiveLineFirstLayerBottom = {
@@ -51,7 +48,11 @@ export const SimpleNavbarTab: navbarTab<Props> = (props) => {
     marginLeft: '3px',
     width: '2px',
     height: '16px',
-    backgroundColor: calculateLineForTabBottom(props.layer as LAYER),
+    backgroundColor: calculateFirstLineTabLayerBottom(
+      props.collapsed as boolean,
+      props.isLastElementOfLayer as boolean,
+      props.layer as LAYER
+    ),
   };
 
   const styleActiveLineSecondLayerTop = {
@@ -59,22 +60,24 @@ export const SimpleNavbarTab: navbarTab<Props> = (props) => {
     width: '2px',
     marginRight: '3px',
     backgroundColor:
-      props.layer === LAYER.ONE
-        ? calculateLineForFirstTabLayer(hovering, active)
-        : BLUE0,
-    // : calculateLineColorForTabs(
-    //     hovering,
-    //     active,
-    //     false,
-    //     props.layer as LAYER
-    //   ),
+      hovering || active
+        ? revertColor(
+            calculateSecondLineTabLayer(props.layer as LAYER, props.collapsed),
+            BLUE0,
+            WHITE
+          )
+        : calculateSecondLineTabLayer(props.layer as LAYER, props.collapsed),
   };
 
   const styleActiveLineSecondLayerBottom = {
     heigth: '16px',
     width: '2px',
     marginRight: '3px',
-    backgroundColor: calculateLineForTabBottom(props.layer as LAYER),
+    backgroundColor: calculateSecondLineTabLayerBottom(
+      props.collapsed as boolean,
+      props.isLastElementOfLayer as boolean,
+      props.layer as LAYER
+    ),
   };
 
   const tabStyleDefault = {

@@ -1,51 +1,55 @@
 import { LAYER } from '../components/navbar/tabs/tabLayer';
 import { BLUE0, WHITE } from '../constants';
-export const calculateLineColor = (hovering: boolean, collabsed: boolean) => {
-  if (!hovering && collabsed) {
+
+export const calculateFirstLineTabLayer = (
+  layer: LAYER,
+  parentCollapsed?: boolean
+): string => {
+  if (layer === LAYER.TWO && parentCollapsed) {
     return BLUE0;
-  } else if (hovering && collabsed) {
-    return WHITE;
-  } else if (hovering && !collabsed) {
+  } else if (layer === LAYER.THREE && parentCollapsed) {
     return BLUE0;
   } else {
     return WHITE;
   }
 };
 
-export const calculateLineColorForTabs = (
-  hovering: boolean,
-  active: boolean,
-  collabsed: boolean,
+export const calculateSecondLineTabLayer = (
+  layer: LAYER,
+  parentCollapsed?: boolean
+) => {
+  if (layer === LAYER.THREE && parentCollapsed) {
+    return BLUE0;
+  } else {
+    return WHITE;
+  }
+};
+
+export const calculateFirstLineTabLayerBottom = (
+  parentCollapsed: boolean,
+  isLastChildOfLayer: boolean,
   layer: LAYER
 ) => {
-  if (!hovering && !active && collabsed) {
+  console.log('hier dein lastelement: ', isLastChildOfLayer);
+  console.log('layer: ', layer);
+
+  if (parentCollapsed && !isLastChildOfLayer) {
     return BLUE0;
-  } else if (hovering && !active && !collabsed) {
-    return BLUE0;
-  } else if (!hovering && active && !collabsed) {
-    return BLUE0;
-  } else if (hovering && active && !collabsed) {
+  } else if (layer === LAYER.THREE && isLastChildOfLayer) {
     return BLUE0;
   } else {
     return WHITE;
   }
 };
 
-export const calculateLineForFirstTabLayer = (
-  hovering: boolean,
-  active: boolean
+export const calculateSecondLineTabLayerBottom = (
+  parentCollapsed: boolean,
+  isLastChildOfLayer: boolean,
+  layer: LAYER
 ) => {
-  if (hovering || active) {
+  if (LAYER.THREE === layer && parentCollapsed && !isLastChildOfLayer) {
     return BLUE0;
   } else {
     return WHITE;
-  }
-};
-
-export const calculateLineForTabBottom = (layer: LAYER) => {
-  if (layer === 1) {
-    return WHITE;
-  } else {
-    return BLUE0;
   }
 };

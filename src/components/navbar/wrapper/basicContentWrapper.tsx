@@ -7,10 +7,14 @@ import { TabAndContentWrapper } from './tabAndContentWrapper';
 
 export class BasicContentWrapper implements TabAndContentWrapper {
   private layer: LAYER | undefined = undefined;
+  private isLastElementOfLayer: boolean | undefined;
   constructor(
     private _navbarTab: React.ReactElement<navbarTabProps>,
     private _component: React.ComponentType<any>
   ) {}
+  setIsLastElementOfLayer(isLastElementOfLayer: boolean): void {
+    this.isLastElementOfLayer = isLastElementOfLayer;
+  }
 
   // Generate unique key based on the view's url.
   getKey = () => {
@@ -41,6 +45,7 @@ export class BasicContentWrapper implements TabAndContentWrapper {
       key: this.getKey(),
       navbarCollapsed: navbarCollapsed,
       layer: this.layer,
+      isLastElementOfLayer: this.isLastElementOfLayer,
     });
   };
 }

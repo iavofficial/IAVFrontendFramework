@@ -3,27 +3,55 @@ import {
   LAYER,
   COLLAPSEDLAYERMARKER,
 } from './../components/navbar/tabs/tabLayer';
-export const calculateLineColorGroupBottom = (layer: LAYER) => {
-  if (LAYER.ONE === 1) {
+
+export const calculateSecondLineColorGroupTop = (
+  layer: LAYER,
+  collapsed: boolean,
+  parentCollapsed?: boolean
+) => {
+  if (layer === LAYER.TWO && collapsed) {
+    return BLUE0;
+  } else {
     return WHITE;
   }
 };
 
-// export const calculateFirstLineColorGroupTop = (layer: LAYER, hovering: boolean)=>{
-//   if(layer === LAYER.ONE && !hovering){
-//     return
-//   }
-// }
-
-export const calculateSecondLineColorGroupTop = (
-  layer: LAYER,
-  hovering: boolean
+export const calculateFirstLineColorGroupBottom = (
+  collapsed: boolean,
+  parentCollapsed: boolean,
+  isLastElementOfLayer: boolean
 ) => {
-  if (layer === LAYER.ONE && hovering) {
+  if (collapsed) {
     return BLUE0;
-  } else if (layer === LAYER.TWO) {
+  } else if (parentCollapsed && !isLastElementOfLayer) {
     return BLUE0;
   } else {
     return WHITE;
+  }
+};
+
+export const calculateFirstLineColorGroupTop = (
+  layer: LAYER,
+  collapsed: boolean,
+  parentCollapsed?: boolean
+) => {
+  if (collapsed) {
+    return BLUE0;
+  } else if (layer === LAYER.TWO && parentCollapsed) {
+    return BLUE0;
+  } else {
+    return WHITE;
+  }
+};
+
+export const revertColor = (
+  actualColor: string,
+  color1: string,
+  color2: string
+) => {
+  if (actualColor === color1) {
+    return color2;
+  } else {
+    return color1;
   }
 };

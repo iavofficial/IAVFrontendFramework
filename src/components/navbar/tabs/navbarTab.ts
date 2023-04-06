@@ -9,9 +9,11 @@ export interface navbarTabProps {
   disabled: boolean;
   selectedIcon: string;
   deselectedIcon: string;
+  collapsed?: boolean;
   navbarCollapsed?: boolean;
   active?: boolean;
   layer?: LAYER;
+  isLastElementOfLayer?: boolean;
   colorOptions?: {
     tabTextColor: string;
     tabTextHoverColor: string;

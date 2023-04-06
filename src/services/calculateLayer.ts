@@ -4,18 +4,43 @@ export const calculateLayer = (
   tabAndContentWrapper: TabAndContentWrapper[]
 ) => {
   tabAndContentWrapper.forEach(
-    (wrapperElementFirstLayer: TabAndContentWrapper) => {
+    (
+      wrapperElementFirstLayer: TabAndContentWrapper,
+      indexFirstLayer: number
+    ) => {
       wrapperElementFirstLayer.setLayer(LAYER.ONE);
+      wrapperElementFirstLayer.setIsLastElementOfLayer(
+        tabAndContentWrapper.length - 1 === indexFirstLayer
+      );
       wrapperElementFirstLayer
         .getChildrenWrapper()
-        .forEach((wrapperElementSecondLayer: TabAndContentWrapper) => {
-          wrapperElementSecondLayer.setLayer(LAYER.TWO);
-          wrapperElementSecondLayer
-            .getChildrenWrapper()
-            .forEach((wrapperElementThirdLayer: TabAndContentWrapper) => {
-              wrapperElementThirdLayer.setLayer(LAYER.THREE);
-            });
-        });
+        .forEach(
+          (
+            wrapperElementSecondLayer: TabAndContentWrapper,
+            indexSecondLayer: number
+          ) => {
+            wrapperElementSecondLayer.setLayer(LAYER.TWO);
+            wrapperElementSecondLayer.setIsLastElementOfLayer(
+              wrapperElementFirstLayer.getChildrenWrapper().length - 1 ===
+                indexSecondLayer
+            );
+            wrapperElementSecondLayer
+              .getChildrenWrapper()
+              .forEach(
+                (
+                  wrapperElementThirdLayer: TabAndContentWrapper,
+                  indexThirdLayer: number
+                ) => {
+                  wrapperElementThirdLayer.setLayer(LAYER.THREE);
+                  wrapperElementThirdLayer.setIsLastElementOfLayer(
+                    wrapperElementSecondLayer.getChildrenWrapper().length -
+                      1 ===
+                      indexThirdLayer
+                  );
+                }
+              );
+          }
+        );
     }
   );
 

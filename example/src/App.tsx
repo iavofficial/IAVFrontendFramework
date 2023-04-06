@@ -95,77 +95,46 @@ function App() {
       ),
       LayoutAndContextExampleComponent
     ),
-    // new BasicContentWrapper(
-    //   (
-    //     <SimpleNavbarTab
-    //       name={(t: TranslateFunctionType) =>
-    //         t('example_component', { count: 1 })
-    //       }
-    //       to="/example2"
-    //       disabled={false}
-    //       selectedIcon={navFleetSelected}
-    //       deselectedIcon={navFleetDeselected}
-    //     />
-    //   ),
-    //   SecondExampleComponent
-    // ),
-    // new BasicContentWrapper(
-    //   (
-    //     <PrivilegedNavbarTab
-    //       name={(t: TranslateFunctionType) =>
-    //         t('example_component', { count: 2 })
-    //       }
-    //       to="/example3"
-    //       disabled={false}
-    //       selectedIcon={navDiagnosticsSelected}
-    //       deselectedIcon={navDiagnosticsDeselected}
-    //       permittedGroups={['USER', 'ADMIN']}
-    //     />
-    //   ),
-    //   ThirdExampleComponent
-    // ),
     new Group(
       (t: TranslateFunctionType) => t('Test_group'),
       groupIcon,
       undefined,
       false,
       true,
-      false,
       [
-        new BasicContentWrapper(
-          (
-            <SimpleNavbarTab
-              name={(t: TranslateFunctionType) =>
-                t('example_component', { count: 3 })
-              }
-              to="/group-example1"
-              disabled={false}
-              selectedIcon={navFleetSelected}
-              deselectedIcon={navFleetDeselected}
-            />
-          ),
-          SecondExampleComponent
-        ),
-        new BasicContentWrapper(
-          (
-            <SimpleNavbarTab
-              name={(t: TranslateFunctionType) =>
-                t('example_component', { count: 4 })
-              }
-              to="/group-example2"
-              disabled={false}
-              selectedIcon={navFleetDetailSelected}
-              deselectedIcon={navFleetDetailDeselected}
-            />
-          ),
-          FourthExampleComponent
-        ),
+        // new BasicContentWrapper(
+        //   (
+        //     <SimpleNavbarTab
+        //       name={(t: TranslateFunctionType) =>
+        //         t('example_component', { count: 3 })
+        //       }
+        //       to="/group-example1"
+        //       disabled={false}
+        //       selectedIcon={navFleetSelected}
+        //       deselectedIcon={navFleetDeselected}
+        //     />
+        //   ),
+        //   SecondExampleComponent
+        // ),
+        // new BasicContentWrapper(
+        //   (
+        //     <SimpleNavbarTab
+        //       name={(t: TranslateFunctionType) =>
+        //         t('example_component', { count: 4 })
+        //       }
+        //       to="/group-example2"
+        //       disabled={false}
+        //       selectedIcon={navFleetDetailSelected}
+        //       deselectedIcon={navFleetDetailDeselected}
+        //     />
+        //   ),
+        //   FourthExampleComponent
+        // ),
         new Group(
           (t: TranslateFunctionType) => t('Test_group'),
           groupIcon,
           undefined,
           false,
-          true,
           true,
           [
             new BasicContentWrapper(
@@ -183,6 +152,20 @@ function App() {
               ClassComponentContainer
             ),
           ]
+        ),
+        new BasicContentWrapper(
+          (
+            <SimpleNavbarTab
+              name={(t: TranslateFunctionType) =>
+                t('example_component', { count: 43 })
+              }
+              to="/group-example22"
+              disabled={false}
+              selectedIcon={navFleetDetailSelected}
+              deselectedIcon={navFleetDetailDeselected}
+            />
+          ),
+          FourthExampleComponent
         ),
       ]
     ),

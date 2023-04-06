@@ -8,15 +8,20 @@ import { LAYER } from '../tabs/tabLayer';
 
 export class Group implements TabAndContentWrapper {
   private layer: number | undefined;
+  private isLastElementOfLayer: boolean | undefined;
+
   constructor(
     private _name: string | ((t: TranslateFunctionType) => string),
     private _logo: string | undefined,
     private _accordionHeaderTextColor: string | undefined,
     private _fontWeightBold: boolean,
     private _collapsible: boolean,
-    private _collapsed: boolean,
     private _contentWrappers: TabAndContentWrapper[]
   ) {}
+
+  setIsLastElementOfLayer(isLastElementOfLayer: boolean): void {
+    this.isLastElementOfLayer = isLastElementOfLayer;
+  }
 
   // Generate unique key based on the keys of the views.
   getKey = () => {
@@ -44,19 +49,6 @@ export class Group implements TabAndContentWrapper {
     return this._contentWrappers;
   };
 
-  setCollapsed = (collapsed: boolean) => {
-    this._collapsed = collapsed;
-    this.getNavbarComponent(true);
-  };
-
-  // setNavbarCollapsed = (navbarCollapsed: boolean) => {
-  //   this.navbarCollapsed = navbarCollapsed;
-  // }
-
-  // getNavbarCollapsed =()=>{
-  //   return this.navbarCollapsed;
-  // }
-
   getNavbarComponent = (navbarCollapsed: boolean) => {
     return (
       <TabGroup
@@ -65,8 +57,8 @@ export class Group implements TabAndContentWrapper {
         name={this._name}
         logo={this._logo ? this._logo : undefined}
         collapsible={this._collapsible}
-        collapsed={this._collapsed}
         layer={this.layer}
+        isLastElementOfLayer={this.isLastElementOfLayer}
         accordionHeaderTextColor={
           this._accordionHeaderTextColor
             ? this._accordionHeaderTextColor

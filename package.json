@@ -7,7 +7,8 @@
     {
       "name": "Joerg Jonas Krahn",
       "email": "joerg.jonas.krahn@iav.de"
-    }, {
+    },
+    {
       "name": "Daniel Helfenstein",
       "email": "daniel.helfenstein@iav.de"
     }
@@ -47,15 +48,16 @@
     "primeicons": "^6.0.1",
     "primereact": "^9.2.1",
     "react-cookie": "^4.1.1",
-    "react-i18next": "^12.2.0"
+    "react-i18next": "^12.2.0",
+    "sass": "^1.61.0",
+    "simplebar-react": "^3.2.3"
   },
   "peerDependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router": "^6.9.0",
     "react-router-dom": "^6.9.0",
-    "react-transition-group": "^4.4.5",
-    "sass": "1.60.0"
+    "react-transition-group": "^4.4.5"
   },
   "devDependencies": {
     "@babel/cli": "^7.21.0",
@@ -84,7 +86,7 @@
     "./globalDataLayer": "./components/globalDataLayer.js",
     "./group": "./components/navbar/wrapper/group.js",
     "./i18n": "./components/internationalization/i18n.js",
-    "./imprint": "./components/imprint.js",
+    "./imprint": "./components/imprint/imprintText.js",
     "./language": "./contexts/language.js",
     "./navbarTab": "./components/navbar/navbarTab.js",
     "./privilegedNavbarTab": "./components/navbar/tabs/privilegedNavbarTab.js",
@@ -100,31 +102,81 @@
   },
   "typesVersions": {
     "*": {
-      "auth": ["./contexts/auth.d.ts"],
-      "awsAuthenticationProvider": ["./components/authentication/aws/awsAuthenticationProvider.d.ts"],
-      "basicAuthenticationView": ["./components/authentication/default/basicAuthenticationView.d.ts"],
-      "awsAuthenticationView": ["./components/authentication/aws/awsAuthenticationView.d.ts"],
-      "basicContentWrapper": ["./components/navbar/wrapper/basicContentWrapper.d.ts"],
-      "constants": ["./constants.d.ts"],
-      "content": ["./components/content/content.d.ts"],
-      "contentCell": ["./components/content/contentCell.d.ts"],
-      "dummyAuthenticationProvider": ["./components/authentication/default/dummyAuthenticationProvider.d.ts"],
-      "globalDataLayer": ["./components/globalDataLayer.d.ts"],
-      "group": ["./components/navbar/wrapper/group.d.ts"],
-      "i18n": ["./components/internationalization/i18n.d.ts"],
-      "imprint": ["./components/imprint.d.ts"],
-      "language": ["./contexts/language.d.ts"],
-      "navbarTab": ["./components/navbar/navbarTab.d.ts"],
-      "privilegedNavbarTab": ["./components/navbar/tabs/privilegedNavbarTab.d.ts"],
-      "simpleNavbarTab": ["./components/navbar/tabs/simpleNavbarTab.d.ts"],
-      "translators": ["./components/internationalization/translators.d.ts"],
-      "uiLayer": ["./components/uiLayer.d.ts"],
-      "disaHeader": ["./components/disaHeader.d.ts"],
-      "navbar": ["./components/navbar/navbar.d.ts"],
-      "cookieBanner": ["./components/cookie/cookieBanner.d.ts"],
-      "constants.css": ["./components/css/constants.css"],
-      "disaPage.css": [".components/css/disaPage.css"],
-      "disaFramework.css": ["./components/css/disaFramework.css"]
+      "auth": [
+        "./contexts/auth.d.ts"
+      ],
+      "awsAuthenticationProvider": [
+        "./components/authentication/aws/awsAuthenticationProvider.d.ts"
+      ],
+      "basicAuthenticationView": [
+        "./components/authentication/default/basicAuthenticationView.d.ts"
+      ],
+      "awsAuthenticationView": [
+        "./components/authentication/aws/awsAuthenticationView.d.ts"
+      ],
+      "basicContentWrapper": [
+        "./components/navbar/wrapper/basicContentWrapper.d.ts"
+      ],
+      "constants": [
+        "./constants.d.ts"
+      ],
+      "content": [
+        "./components/content/content.d.ts"
+      ],
+      "contentCell": [
+        "./components/content/contentCell.d.ts"
+      ],
+      "dummyAuthenticationProvider": [
+        "./components/authentication/default/dummyAuthenticationProvider.d.ts"
+      ],
+      "globalDataLayer": [
+        "./components/globalDataLayer.d.ts"
+      ],
+      "group": [
+        "./components/navbar/wrapper/group.d.ts"
+      ],
+      "i18n": [
+        "./components/internationalization/i18n.d.ts"
+      ],
+      "imprint": [
+        "./components/imprint/imprintText.d.ts"
+      ],
+      "language": [
+        "./contexts/language.d.ts"
+      ],
+      "navbarTab": [
+        "./components/navbar/navbarTab.d.ts"
+      ],
+      "privilegedNavbarTab": [
+        "./components/navbar/tabs/privilegedNavbarTab.d.ts"
+      ],
+      "simpleNavbarTab": [
+        "./components/navbar/tabs/simpleNavbarTab.d.ts"
+      ],
+      "translators": [
+        "./components/internationalization/translators.d.ts"
+      ],
+      "uiLayer": [
+        "./components/uiLayer.d.ts"
+      ],
+      "disaHeader": [
+        "./components/disaHeader.d.ts"
+      ],
+      "navbar": [
+        "./components/navbar/navbar.d.ts"
+      ],
+      "cookieBanner": [
+        "./components/cookie/cookieBanner.d.ts"
+      ],
+      "constants.css": [
+        "./components/css/constants.css"
+      ],
+      "disaPage.css": [
+        ".components/css/disaPage.css"
+      ],
+      "disaFramework.css": [
+        "./components/css/disaFramework.css"
+      ]
     }
   }
 }

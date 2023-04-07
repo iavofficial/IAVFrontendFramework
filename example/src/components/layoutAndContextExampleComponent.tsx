@@ -17,7 +17,7 @@ class LayoutAndContextExampleComponentUnprocessed extends Component<
   AppliedTranslationProps,
   State
 > {
-  declare context: React.ContextType<typeof FirstExampleContext>;
+  // declare context: React.ContextType<typeof FirstExampleContext>;
 
   constructor(props: AppliedTranslationProps) {
     super(props);

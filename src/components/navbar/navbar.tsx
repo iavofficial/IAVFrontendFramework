@@ -1,22 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ContextMenu } from 'primereact/contextmenu';
-import '../css/navbar.css';
+import './navbar.scss';
 import UserPic from '../../assets/images/user.png';
 import Settings from '../../assets/images/settings.png';
 import { Clock } from '../clock';
-import { BLUE2, TAB_HEIGHT, WHITE } from '../../constants';
 import { AuthContext } from '../../contexts/auth';
 import { TabAndContentWrapper } from './wrapper/tabAndContentWrapper';
-import { MenuSettingsOptions, SettingsMenu } from '../header/SettingsMenu';
+import { MenuSettingsOptions } from '../header/SettingsMenu';
+import './navbar.scss';
+import { WHITE, BLUE3, GREEN, GRAY1 } from '../../constants';
 import { useTranslator } from '../internationalization/translators';
+import SimpleBar from 'simplebar-react';
+import 'simplebar-react/dist/simplebar.min.css';
 
 interface Props {
   tabAndContentWrappers: TabAndContentWrapper[];
   menuOptions?: MenuSettingsOptions;
   documentsLabelKey?: string;
-  imageLeft?: string;
-  imageRight?: string;
+  collabsible?: boolean;
   colorOptions?: {
     navbarColorSettings?: {
       menuSettingsBackground?: string;
@@ -30,98 +32,44 @@ interface Props {
 }
 
 export const Navbar = (props: Props) => {
-  const menuRef = React.createRef<ContextMenu>();
-  const authContext = useContext(AuthContext);
   const t = useTranslator();
-
-  const hideMenu = (e: React.KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      menuRef.current?.hide(e);
-    }
-  };
+  const [navbarCollapsed, setNavbarCollapsed] = useState<boolean>(false);
 
   return (
     <div
       id="navbar"
       className="flex flex-column"
       style={{
-        padding: '0px',
+        padding: '16px 0px 0px 0px',
         backgroundColor: props.colorOptions?.navbarColorSettings
           ?.navbarBackground
           ? props.colorOptions.navbarColorSettings.navbarBackground
           : WHITE,
       }}
     >
-      <SettingsMenu
-        ref={menuRef}
-        hideMenu={hideMenu}
-        menuOptions={props.menuOptions}
-      />
-      <div
-        className="flex align-items-center"
+      <SimpleBar
         style={{
-          height: TAB_HEIGHT,
-          backgroundColor: props.colorOptions?.navbarColorSettings
-            ?.menuSettingsBackground
-            ? props.colorOptions?.navbarColorSettings?.menuSettingsBackground
-            : BLUE2,
+          width: navbarCollapsed ? '40px' : '240px',
+          height: navbarCollapsed ? '83vh' : '87vh',
+          color: GRAY1,
+          position: 'relative',
+          overflowX: 'visible',
         }}
       >
-        <img
-          src={props.imageLeft ? props.imageLeft : UserPic}
-          style={{ marginLeft: '5%' }}
-          alt=""
-        />
-        <span
-          style={{
-            color: props.colorOptions?.navbarColorSettings
-              ?.menuSettingsTextColor
-              ? props.colorOptions?.navbarColorSettings?.menuSettingsTextColor
-              : 'white',
-            marginLeft: '10px',
-            marginRight: '10px',
-            maxWidth: '60%',
-            textOverflow: 'ellipsis',
-            overflow: 'hidden',
-          }}
-        >
-          {authContext?.getUsername()}
-        </span>
-        <a
-          href="#"
-          style={{ marginLeft: 'auto', marginRight: '20px', cursor: 'pointer' }}
-          onClick={(e) => {
-            if (menuRef.current) {
-              menuRef.current.show(e);
-            }
-          }}
-          onKeyDown={(e) => hideMenu(e)}
-        >
-          <img
-            style={{ verticalAlign: 'top' }}
-            src={props.imageRight ? props.imageRight : Settings}
-            alt=""
-          />
-        </a>
-      </div>
-
-      {props.tabAndContentWrappers.map((wrapper) =>
-        wrapper.getNavbarComponent()
-      )}
-
+        <>
+          {props.tabAndContentWrappers.map((wrapper: TabAndContentWrapper) =>
+            wrapper.getNavbarComponent(navbarCollapsed)
+          )}
+        </>
+      </SimpleBar>
       <div style={{ marginTop: 'auto' }}>
-        <Clock
-          style={{
-            clockColor: props.colorOptions?.navbarColorSettings?.clockColor,
-            dateColor: props.colorOptions?.navbarColorSettings?.dateTextColor,
-          }}
-        />
         <div
-          className={'px-3 text-center'}
+          className={
+            'text-center flex ' + (navbarCollapsed ? 'flex-column' : 'px-3 ')
+          }
           style={{
-            display: 'flex',
-            justifyContent: 'center',
-            marginBottom: '16px',
+            justifyContent: navbarCollapsed ? 'center' : 'space-between',
+            marginBottom: '8px',
           }}
         >
           <Link
@@ -135,8 +83,24 @@ export const Navbar = (props: Props) => {
             }}
             to="/documents"
           >
-            {t(props.documentsLabelKey ? props.documentsLabelKey : 'Imprint')}
+            {/* {t(props.documentsLabelKey ? props.documentsLabelKey : 'Imprint')} */}
+            <i
+              style={{
+                color: BLUE3,
+                marginBottom: navbarCollapsed ? '16px' : '',
+              }}
+              className="pi pi-info-circle"
+            />
           </Link>
+          {props.collabsible && props.collabsible ? (
+            <i
+              onClick={() => setNavbarCollapsed(!navbarCollapsed)}
+              style={{ cursor: 'pointer' }}
+              className={
+                navbarCollapsed ? 'pi pi-chevron-right' : 'pi pi-chevron-left'
+              }
+            />
+          ) : null}
         </div>
       </div>
     </div>

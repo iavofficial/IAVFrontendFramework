@@ -127,11 +127,7 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
 
     let colorModeToggleOption = getOptionByIdentifier(
       props.menuOptions?.options,
-<<<<<<< HEAD:src/components/navbar/menu.tsx
-      'logout'
-=======
       'colormodetoggle'
->>>>>>> feature/TTT5Framework-4:src/components/header/SettingsMenu.tsx
     );
     //TODO: Implement the Darkmode/Lightmode toggle instead
     if (

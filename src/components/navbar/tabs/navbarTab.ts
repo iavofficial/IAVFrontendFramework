@@ -1,20 +1,27 @@
-import React from "react";
+import { LAYER } from './tabLayer';
+import React from 'react';
 
-import { TranslateFunctionType } from "../../../contexts/language";
+import { TranslateFunctionType } from '../../../contexts/language';
 
 export interface navbarTabProps {
-    name: string | ((t: TranslateFunctionType) => string);
-    to: string;
-    disabled: boolean;
-    selectedIcon: string;
-    deselectedIcon: string;
-    active?: boolean;
-    colorOptions?:{
-        tabTextColor: string;
-        tabTextHoverColor: string;
-        tabHoverBackground: string;
-        tabBackground: string;
-    }
+  name: string | ((t: TranslateFunctionType) => string);
+  to: string;
+  disabled: boolean;
+  selectedIcon: string;
+  deselectedIcon: string;
+  collapsed?: boolean;
+  navbarCollapsed?: boolean;
+  active?: boolean;
+  layer?: LAYER;
+  isLastElementOfLayer?: boolean;
+  colorOptions?: {
+    tabTextColor: string;
+    tabTextHoverColor: string;
+    tabHoverBackground: string;
+    tabBackground: string;
+  };
 }
 
-export type navbarTab<additional = {}> = React.ComponentType<navbarTabProps & additional>;
+export type navbarTab<additional = {}> = React.ComponentType<
+  navbarTabProps & additional
+>;

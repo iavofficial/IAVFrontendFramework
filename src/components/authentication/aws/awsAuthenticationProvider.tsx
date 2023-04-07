@@ -59,7 +59,6 @@ export class AWSAuthenticationProvider
 
   componentDidMount() {
     this.props.configureAmplify();
-
     this.checkIsAuthenticated();
   }
 

@@ -8,8 +8,6 @@ import translationES from './assets/translations/es.json';
 import { UILayer } from 'disa-framework/uiLayer';
 import { GlobalDataLayer } from 'disa-framework/globalDataLayer';
 import { DummyAuthenticationProvider } from 'disa-framework/dummyAuthenticationProvider';
-import { AWSAuthenticationProvider } from 'disa-framework/awsAuthenticationProvider';
-import { Group } from 'disa-framework/group';
 import { TranslateFunctionType } from 'disa-framework/language';
 import { BasicAuthenticationView } from 'disa-framework/basicAuthenticationView';
 import { AWSAuthenticationView } from 'disa-framework/awsAuthenticationView';
@@ -27,6 +25,10 @@ import navExpertSelected from './assets/nav_expert_selected.png';
 import navExpertDeselected from './assets/nav_expert_deselected.png';
 import navFleetSelected from './assets/nav_fleet_selected.png';
 import navFleetDeselected from './assets/nav_fleet_deselected.png';
+import infoIconSelected from './assets/infoIcon_selected.svg';
+import infoIconDeselcted from './assets/infoIcon_deselected.svg';
+
+import { Group } from 'disa-framework/group';
 import navFleetDetailSelected from './assets/nav_fleet_detail_selected.png';
 import navFleetDetailDeselected from './assets/nav_fleet_detail_deselected.png';
 import groupIcon from './assets/ota_logo.png';
@@ -39,7 +41,9 @@ import { SecondExampleComponent } from './components/secondExampleComponent';
 import { useState } from 'react';
 import { ClassComponentContainer } from './components/classComponentContainer';
 import { LegalDocuments } from './components/legalDocuments';
+import { TestComponent } from './components/testComponent';
 
+//TODO: Generate unique key for every tabelement
 function App() {
   const [selectedButtonOption, setSelectedButtonOption] = useState('Simulated');
 
@@ -65,6 +69,21 @@ function App() {
     ],
   };
 
+  const translations = {
+    es: {
+      translation: translationES,
+    },
+    en: {
+      translation: translationEN,
+    },
+    de: {
+      translation: translationDE,
+    },
+    de_CH: {
+      translation: translationDECH,
+    },
+  };
+
   const views = [
     new BasicContentWrapper(
       (
@@ -78,65 +97,72 @@ function App() {
       ),
       LayoutAndContextExampleComponent
     ),
-    new BasicContentWrapper(
-      (
-        <SimpleNavbarTab
-          name={(t: TranslateFunctionType) =>
-            t('example_component', { count: 1 })
-          }
-          to="/example2"
-          disabled={false}
-          selectedIcon={navFleetSelected}
-          deselectedIcon={navFleetDeselected}
-        />
-      ),
-      SecondExampleComponent
-    ),
-    new BasicContentWrapper(
-      (
-        <PrivilegedNavbarTab
-          name={(t: TranslateFunctionType) =>
-            t('example_component', { count: 2 })
-          }
-          to="/example3"
-          disabled={false}
-          selectedIcon={navDiagnosticsSelected}
-          deselectedIcon={navDiagnosticsDeselected}
-          permittedGroups={['USER', 'ADMIN']}
-        />
-      ),
-      ThirdExampleComponent
-    ),
     new Group(
       (t: TranslateFunctionType) => t('Test_group'),
       groupIcon,
       undefined,
       false,
-      true,
       false,
       [
+        // new BasicContentWrapper(
+        //   (
+        //     <SimpleNavbarTab
+        //       name={(t: TranslateFunctionType) =>
+        //         t('example_component', { count: 3 })
+        //       }
+        //       to="/group-example1"
+        //       disabled={false}
+        //       selectedIcon={navFleetSelected}
+        //       deselectedIcon={navFleetDeselected}
+        //     />
+        //   ),
+        //   SecondExampleComponent
+        // ),
+        // new BasicContentWrapper(
+        //   (
+        //     <SimpleNavbarTab
+        //       name={(t: TranslateFunctionType) =>
+        //         t('example_component', { count: 4 })
+        //       }
+        //       to="/group-example2"
+        //       disabled={false}
+        //       selectedIcon={navFleetDetailSelected}
+        //       deselectedIcon={navFleetDetailDeselected}
+        //     />
+        //   ),
+        //   FourthExampleComponent
+        // ),
+        // new Group(
+        //   (t: TranslateFunctionType) => t('Test_group'),
+        //   groupIcon,
+        //   undefined,
+        //   false,
+        //   true,
+        //   [
+        //     new BasicContentWrapper(
+        //       (
+        //         <SimpleNavbarTab
+        //           name={(t: TranslateFunctionType) =>
+        //             t('example_component', { count: 12 })
+        //           }
+        //           to="/group-example12"
+        //           disabled={false}
+        //           selectedIcon={navFleetDetailSelected}
+        //           deselectedIcon={navFleetDetailDeselected}
+        //         />
+        //       ),
+        //       ClassComponentContainer
+        //     ),
+        //   ]
+        // ),
         new BasicContentWrapper(
           (
             <SimpleNavbarTab
               name={(t: TranslateFunctionType) =>
-                t('example_component', { count: 3 })
+                t('example_component', { count: 43 })
               }
-              to="/group-example1"
+              to="/group-example22"
               disabled={false}
-              selectedIcon={navFleetSelected}
-              deselectedIcon={navFleetDeselected}
-            />
-          ),
-          SecondExampleComponent
-        ),
-        new BasicContentWrapper(
-          (
-            <SimpleNavbarTab
-              name={(t: TranslateFunctionType) =>
-                t('example_component', { count: 4 })
-              }
-              to="/group-example2"
-              disabled={true}
               selectedIcon={navFleetDetailSelected}
               deselectedIcon={navFleetDetailDeselected}
             />
@@ -145,6 +171,7 @@ function App() {
         ),
       ]
     ),
+
     new BasicContentWrapper(
       (
         <PrivilegedNavbarTab
@@ -174,36 +201,21 @@ function App() {
       ),
       FourthExampleComponent
     ),
-    new BasicContentWrapper(
-      (
-        <SimpleNavbarTab
-          name={(t: TranslateFunctionType) =>
-            t('example_component', { count: 7 })
-          }
-          to="/example6"
-          disabled={false}
-          selectedIcon={navDashboardSelected}
-          deselectedIcon={navDashboardDeselected}
-        />
-      ),
-      ClassComponentContainer
-    ),
+    // new BasicContentWrapper(
+    //   (
+    //     <SimpleNavbarTab
+    //       name={(t: TranslateFunctionType) =>
+    //         t('example_component', { count: 7 })
+    //       }
+    //       to="/example6"
+    //       disabled={false}
+    //       selectedIcon={navDashboardSelected}
+    //       deselectedIcon={navDashboardDeselected}
+    //     />
+    //   ),
+    //   ClassComponentContainer
+    // ),
   ];
-
-  const translations = {
-    es: {
-      translation: translationES,
-    },
-    en: {
-      translation: translationEN,
-    },
-    de: {
-      translation: translationDE,
-    },
-    de_CH: {
-      translation: translationDECH,
-    },
-  };
 
   return (
     <DummyAuthenticationProvider
@@ -217,6 +229,7 @@ function App() {
               startingPoint="/"
               authenticationView={BasicAuthenticationView}
               menuOptions={menuSettingsOptions}
+              collabsible={true}
               documentsLabelKey="Legal_documents"
               documentsComponent={LegalDocuments}
             />

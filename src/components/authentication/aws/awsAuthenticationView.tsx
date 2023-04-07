@@ -1,6 +1,6 @@
-import React, { FormEvent } from 'react';
+import React, { FormEvent, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { BLACK, BLUE0, BLUE3, WHITE } from '../../../constants';
+import { BLACK, BLUE0, BLUE3, RED, WHITE } from '../../../constants';
 import AppLogo from '../../../assets/images/app_logo.png';
 import { AuthContext } from '../../../contexts/auth';
 import { LoginButtonWithSpinner } from '../loginButtonWithSpinner';
@@ -11,12 +11,18 @@ import { AuthenticationViewProps } from './authenticationView';
 import '../../css/authenticationView.css';
 import companyLogo from '../../../assets/images/company_logo.png';
 import loginBackground from '../../../assets/images/login_background.png';
-import { Dropdown } from 'primereact/dropdown';
+import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
+import { LanguageContext } from '../../../contexts/language';
+import {
+  parseActiveLanguageKeyIntoLanguageName,
+  parseLanguageRessourcesIntoDropdownFormat,
+} from '../../../services/parseLanguageRessourcesIntoDropdownFormat';
 
 export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [darkmode, setDarkmode] = useState(false);
+  const langContext = useContext(LanguageContext);
 
   const authContext = useContext(AuthContext);
   const t = useTranslator();
@@ -131,7 +137,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
         <label
           style={{
             fontWeight: 'normal',
-            marginBottom: '0px',
+            marginBottom: '2px',
             fontSize: '12px',
           }}
           className="inputLabel"
@@ -151,7 +157,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
         <label
           style={{
             fontWeight: 'normal',
-            marginBottom: '0px',
+            marginBottom: '2px',
             fontSize: '12px',
           }}
           className="inputLabel"
@@ -255,15 +261,16 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
     </div>
   );
 
+  //TODO: Think of concept how to set backgroundcolor or backgroundimage
+
   return (
     <div
       className="flex"
       style={{
         height: '100%',
-        backgroundColor: props.colorOptions?.authViewColorSettings
-          ?.fullBackground
-          ? props.colorOptions?.authViewColorSettings?.fullBackground
-          : WHITE,
+        background: '',
+        backgroundColor:
+          props.colorOptions?.authViewColorSettings?.fullBackground,
       }}
     >
       <img
@@ -310,7 +317,21 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
                 className="pi pi-moon darkmode-logos"
               />
             )}
-            <Dropdown style={{ width: '160px' }} />
+
+            <Dropdown
+              placeholder={
+                langContext?.resources[langContext.activeLang].translation
+                  .option_name
+              }
+              onChange={function (event: DropdownChangeEvent) {
+                langContext?.selectLanguage(event.value.key);
+              }}
+              options={parseLanguageRessourcesIntoDropdownFormat(
+                langContext?.resources
+              )}
+              optionLabel="label"
+              style={{ width: '160px' }}
+            />
           </div>
           {authContext?.isNewPasswordRequired ? NewPasswordForm : LoginForm}
         </div>

@@ -40,7 +40,8 @@ export const DefaultLanguageProvider = (
     } else {
       props.initI18Next();
     }
-    setActiveLang(i18n.language);
+
+    setActiveLang(i18n.language === 'de-DE' ? 'de' : i18n.language);
     setLoaded(true);
   }, [props.initI18Next, cookiesAccepted]);
 
@@ -51,7 +52,7 @@ export const DefaultLanguageProvider = (
           // @ts-ignore Bug: Marks props.translations as possibly undfined although it's not.
           Object.assign(
             resources[key as keyof typeof resources].translation, //takl to jörg about this error and solution
-            props.translations[key].translation
+            props.translations![key].translation
           );
         } else {
           // @ts-ignore Bug: Marks props.translations as possibly undfined although it's not.

@@ -91,8 +91,9 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
             icon: active ? 'pi pi-check' : '',
             // I18Next must have the representation with "-" instead of "_". "de_DE" will not resolve to "de" which is necessary
             // in case translations for "de_DE" don't exist.
-            command: () =>
-              langContext?.selectLanguage(key.replaceAll('_', '-')),
+            command: () => {
+              langContext?.selectLanguage(key.replaceAll('_', '-'));
+            },
           });
           if (active) {
             notFallbackLang = active;
@@ -117,14 +118,14 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
             ? 0
             : option1.label < option2.label
             ? -1
-            : 1,
+            : 1
         ),
       },
     ];
 
     let logoutOption = getOptionByIdentifier(
       props.menuOptions?.options,
-      'logout',
+      'logout'
     );
     if (!logoutOption || (logoutOption && !logoutOption.hidden)) {
       basicOptions.push({
@@ -146,7 +147,7 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
         <ContextMenu ref={ref} model={model} />
       </div>
     );
-  },
+  }
 );
 
 // Checks whether "dialect" is a dialect of "baseLang".
@@ -163,7 +164,7 @@ function containsLanguage(lang: string, resources: Translations) {
 
 function getOptionByIdentifier(
   options: SettingsOption[] | undefined,
-  identifier: string,
+  identifier: string
 ) {
   if (options !== undefined) {
     return options.find((option) => option.identifier === identifier);

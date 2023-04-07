@@ -10,12 +10,15 @@ import { AuthenticationViewProps } from '../aws/authenticationView';
 import '../../css/authenticationView.css';
 import loginBackground from '../../../assets/images/login_background.png';
 import companyLogo from '../../../assets/images/company_logo.png';
-import { Dropdown } from 'primereact/dropdown';
+import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
+import { LanguageContext } from '../../../contexts/language';
+import { parseLanguageRessourcesIntoDropdownFormat } from '../../../services/parseLanguageRessourcesIntoDropdownFormat';
 
 export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [darkmode, setDarkmode] = useState(false);
+  const langContext = useContext(LanguageContext);
 
   const authContext = useContext(AuthContext);
   const t = useTranslator();
@@ -113,6 +116,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
   );
 
   //TODO clarify how to handle the imprint topic
+  //TODO: Think of concept how to set backgroundcolor or backgroundimage
   return (
     <div
       className="flex"
@@ -170,7 +174,20 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                 className="pi pi-moon darkmode-logos"
               />
             )}
-            <Dropdown style={{ width: '160px' }} />
+            <Dropdown
+              placeholder={
+                langContext?.resources[langContext.activeLang].translation
+                  .option_name
+              }
+              onChange={function (event: DropdownChangeEvent) {
+                langContext?.selectLanguage(event.value.key);
+              }}
+              options={parseLanguageRessourcesIntoDropdownFormat(
+                langContext?.resources
+              )}
+              optionLabel="label"
+              style={{ width: '160px' }}
+            />
           </div>
 
           <form
@@ -187,7 +204,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
               <label
                 style={{
                   fontWeight: 'normal',
-                  marginBottom: '0px',
+                  marginBottom: '2px',
                   fontSize: '12px',
                 }}
                 className="inputLabel"
@@ -207,7 +224,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
               <label
                 style={{
                   fontWeight: 'normal',
-                  marginBottom: '0px',
+                  marginBottom: '2px',
                   fontSize: '12px',
                 }}
                 className="inputLabel"

@@ -79,6 +79,8 @@
     "./awsAuthenticationView": "./components/authentication/aws/awsAuthenticationView.js",
     "./basicAuthenticationView": "./components/authentication/default/basicAuthenticationView.js",
     "./basicContentWrapper": "./components/navbar/wrapper/basicContentWrapper.js",
+    "./customContentbarWrapper": "./components/content/customContentbarWrapper.js",
+    "./basicContentbarWrapper":"./components/content/basicContentbarWrapper.js",
     "./constants": "./constants.js",
     "./content": "./components/content/content.js",
     "./contentCell": "./components/content/contentCell.js",
@@ -117,6 +119,9 @@
       "basicContentWrapper": [
         "./components/navbar/wrapper/basicContentWrapper.d.ts"
       ],
+      "basicContentbarWrapper": [
+        "./components/content/basicContentbarWrapper.d.ts"
+      ],
       "constants": [
         "./constants.d.ts"
       ],
@@ -126,6 +131,8 @@
       "contentCell": [
         "./components/content/contentCell.d.ts"
       ],
+      "customContentbarWrapper": 
+      ["./components/content/customContentbarWrapper.d.ts"],
       "dummyAuthenticationProvider": [
         "./components/authentication/default/dummyAuthenticationProvider.d.ts"
       ],

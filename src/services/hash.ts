@@ -16,7 +16,7 @@ export function generateHashForValues(values: string[]) {
   return generateHash(concatenatedValues);
 }
 
-export function generateHashForLength(length: number) {
+export function generateHashOfLength(length: number) {
   let result: string = '';
   let characters =
     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

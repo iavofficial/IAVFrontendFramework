@@ -7,9 +7,14 @@ import {
 } from 'disa-framework/translators';
 import { CellPaddings, ContentCell } from 'disa-framework/contentCell';
 import { FirstExampleContext } from '../contexts/FirstExampleContext';
+import { BasicContentbarWrapper } from 'disa-framework/basicContentbarWrapper';
+import { CustomContentbarWrapper } from 'disa-framework/customContentbarWrapper';
+import { TestComponent } from './testComponent';
+import { ContentSelectionElement } from './Testcomponent2';
 
 interface State {
   localState: string;
+  selectedId: string;
   contentTabs: JSX.Element[];
 }
 
@@ -17,12 +22,13 @@ class LayoutAndContextExampleComponentUnprocessed extends Component<
   AppliedTranslationProps,
   State
 > {
-  // declare context: React.ContextType<typeof FirstExampleContext>;
+  //declare context: React.ContextType<typeof FirstExampleContext>;
 
   constructor(props: AppliedTranslationProps) {
     super(props);
     this.state = {
       localState: 'default',
+      selectedId: 'test123',
       contentTabs: [
         <div
           key="example_local1"
@@ -58,8 +64,22 @@ class LayoutAndContextExampleComponentUnprocessed extends Component<
       <Content
         layoutBehaviour={LayoutBehaviour.GRID}
         contentElements={[
-          ...this.context!.contentTabs,
-          ...this.state.contentTabs,
+          new BasicContentbarWrapper(
+            'test123',
+            'car123',
+            this.state.selectedId,
+            (value: string) => this.setState({ selectedId: value }),
+            true,
+            () => {}
+          ),
+          new BasicContentbarWrapper(
+            'test124',
+            'car124',
+            this.state.selectedId,
+            (value: string) => this.setState({ selectedId: value }),
+            true,
+            () => {}
+          ),
         ]}
       >
         <div className={'col-8 grid grid-nogutter'}>

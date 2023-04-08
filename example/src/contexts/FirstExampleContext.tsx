@@ -32,7 +32,6 @@ class FirstExampleContextComponentUnprocessed extends Component<
           style={{
             width: '200px',
             height: '40px',
-            margin: '5px',
             alignSelf: 'center',
           }}
           onClick={function (this: FirstExampleContextComponentUnprocessed) {

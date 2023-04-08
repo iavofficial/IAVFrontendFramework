@@ -33,7 +33,7 @@ interface Props {
 
 export const Navbar = (props: Props) => {
   const t = useTranslator();
-  const [navbarCollapsed, setNavbarCollapsed] = useState<boolean>(false);
+  const [navbarCollapsed, setNavbarCollapsed] = useState(false);
 
   return (
     <div

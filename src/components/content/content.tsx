@@ -1,9 +1,11 @@
 import React, { ReactElement } from 'react';
 import { ContentBar } from './contentBar';
 import { GRAY1 } from '../../constants';
+import { BasicContentbarWrapper } from './basicContentbarWrapper';
+import { CustomContentbarWrapper } from './customContentbarWrapper';
 
 export interface Props {
-  contentElements: ReactElement[];
+  contentElements: BasicContentbarWrapper[] | CustomContentbarWrapper[];
   layoutBehaviour?: LayoutBehaviour;
   backgroundColorContentBar?: string;
   backgroundColorContent?: string;
@@ -30,10 +32,15 @@ export const Content = (props: React.PropsWithChildren<Props>) => {
       className="flex flex-column"
       style={{ width: '100%', overflow: 'auto' }}
     >
-      <ContentBar
-        contentElements={props.contentElements}
-        style={{ backgroundColor: props.backgroundColorContentBar }}
-      />
+      {props.contentElements.length < 1 ? (
+        <React.Fragment />
+      ) : (
+        <ContentBar
+          contentElements={props.contentElements}
+          style={{ backgroundColor: props.backgroundColorContentBar }}
+        />
+      )}
+
       <div
         className={contentRootClass}
         style={{

@@ -5,7 +5,7 @@ import '../navbar.scss';
 import { TranslateFunctionType } from '../../../contexts/language';
 import { useTranslator } from '../../internationalization/translators';
 import { BLUE0, GRAY4, WHITE } from '../../../constants';
-import { generateHashForLength } from '../../../services/hash';
+import { generateHashOfLength } from '../../../services/hash';
 import { Tooltip } from 'primereact/tooltip';
 import { LAYER } from './tabLayer';
 import {
@@ -123,7 +123,7 @@ export const TabGroup = (props: PropsWithNavbarTabChildren<Props>) => {
     ),
   };
 
-  const identifier = generateHashForLength(4);
+  const identifier = generateHashOfLength(4);
   const identifierLegal = 'a' + identifier;
   const identifierWithDot = '.' + identifierLegal;
 

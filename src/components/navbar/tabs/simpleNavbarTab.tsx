@@ -4,7 +4,7 @@ import { Tooltip } from 'primereact/tooltip';
 import { BLUE0, GRAY2, GRAY4, TAB_HEIGHT, WHITE } from '../../../constants';
 import { useTranslator } from '../../internationalization/translators';
 import './tabs.scss';
-import { generateHashForLength } from '../../../services/hash';
+import { generateHashOfLength } from '../../../services/hash';
 import { navbarTab } from './navbarTab';
 import { LAYER } from './tabLayer';
 import {
@@ -89,7 +89,7 @@ export const SimpleNavbarTab: navbarTab<Props> = (props) => {
     opacity: props.disabled ? 0.5 : 1,
   };
 
-  const identifier = generateHashForLength(4);
+  const identifier = generateHashOfLength(4);
   const identifierLegal = 'a' + identifier;
   const identifierWithDot = '.' + identifierLegal;
 

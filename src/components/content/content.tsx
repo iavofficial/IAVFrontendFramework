@@ -7,8 +7,10 @@ import { CustomContentbarWrapper } from './customContentbarWrapper';
 export interface Props {
   contentElements: BasicContentbarWrapper[] | CustomContentbarWrapper[];
   layoutBehaviour?: LayoutBehaviour;
+  addable?: boolean;
   backgroundColorContentBar?: string;
   backgroundColorContent?: string;
+  onClickAddButton?: () => any;
 }
 
 export const Content = (props: React.PropsWithChildren<Props>) => {
@@ -36,6 +38,8 @@ export const Content = (props: React.PropsWithChildren<Props>) => {
         <React.Fragment />
       ) : (
         <ContentBar
+          onClickAddButton={props.onClickAddButton}
+          addable={props.addable}
           contentElements={props.contentElements}
           style={{ backgroundColor: props.backgroundColorContentBar }}
         />

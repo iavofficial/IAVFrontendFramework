@@ -15,11 +15,13 @@ export const TestComponent = () => {
   };
 
   let test2 = function () {
-    console.log('das ist ein test');
+    console.log('onclick add function triggerd');
   };
 
   return (
     <Content
+      addable={true}
+      onClickAddButton={test2}
       layoutBehaviour={LayoutBehaviour.GRID}
       contentElements={[
         new BasicContentbarWrapper(
@@ -27,12 +29,52 @@ export const TestComponent = () => {
           'car123',
           selectedId,
           () => test,
-          true,
+          false,
           test2
         ),
         new BasicContentbarWrapper(
           'test123',
           'car124',
+          selectedId,
+          () => test,
+          true,
+          function () {}
+        ),
+        new BasicContentbarWrapper(
+          'test125',
+          'car125',
+          selectedId,
+          () => test,
+          true,
+          function () {}
+        ),
+        new BasicContentbarWrapper(
+          'test126',
+          'car126',
+          selectedId,
+          () => test,
+          true,
+          function () {}
+        ),
+        new BasicContentbarWrapper(
+          'test127',
+          'car127',
+          selectedId,
+          () => test,
+          true,
+          function () {}
+        ),
+        new BasicContentbarWrapper(
+          'test128',
+          'car128',
+          selectedId,
+          () => test,
+          true,
+          function () {}
+        ),
+        new BasicContentbarWrapper(
+          'test129',
+          'car129',
           selectedId,
           () => test,
           true,

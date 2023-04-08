@@ -45,8 +45,6 @@ export const DefaultContentSelectionElement = (props: Props) => {
   const identifierLegal = 'a' + identifier;
   const identifierWithDot = '.' + identifierLegal;
 
-  console.log('referenz: ', () => props.onClose);
-
   return (
     <>
       <div

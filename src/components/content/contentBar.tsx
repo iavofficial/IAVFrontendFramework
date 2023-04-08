@@ -7,6 +7,8 @@ import { CustomContentbarWrapper } from './customContentbarWrapper';
 
 interface Props {
   contentElements: BasicContentbarWrapper[] | CustomContentbarWrapper[];
+  addable?: boolean;
+  onClickAddButton?: () => any;
   style: {
     backgroundColor?: string;
   };
@@ -33,10 +35,41 @@ export const ContentBar = (props: Props) => {
             ? props.style.backgroundColor
             : WHITE,
         }}
-        className="flex"
+        className="flex align-items-center"
       >
+        {props.contentElements.length > 6 ? (
+          <div
+            style={{ height: '40px', width: '40px', cursor: 'pointer' }}
+            className="flex justify-content-center align-items-center"
+          >
+            <i className="pi pi-angle-left" onClick={props.onClickAddButton} />
+          </div>
+        ) : (
+          <></>
+        )}
         {props.contentElements.map((element: ContentbarWrapperInterface) =>
           element.getContentbarComponent()
+        )}
+        {props.addable ? (
+          <div
+            style={{ height: '40px', width: '40px', cursor: 'pointer' }}
+            className="flex justify-content-center align-items-center"
+          >
+            <i className="pi pi-plus" onClick={props.onClickAddButton} />
+          </div>
+        ) : (
+          <></>
+        )}
+
+        {props.contentElements.length > 6 ? (
+          <div
+            style={{ height: '40px', width: '40px', cursor: 'pointer' }}
+            className="flex justify-content-center align-items-center"
+          >
+            <i className="pi pi-angle-right" onClick={props.onClickAddButton} />
+          </div>
+        ) : (
+          <></>
         )}
       </div>
     </div>

@@ -95,7 +95,7 @@ function App() {
           deselectedIcon={navDashboardDeselected}
         />
       ),
-      LayoutAndContextExampleComponent
+      TestComponent
     ),
     // new Group(
     //   (t: TranslateFunctionType) => t('Test_group'),

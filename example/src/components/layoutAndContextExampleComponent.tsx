@@ -65,21 +65,21 @@ class LayoutAndContextExampleComponentUnprocessed extends Component<
         layoutBehaviour={LayoutBehaviour.GRID}
         contentElements={[
           new BasicContentbarWrapper(
-            'test123',
+            'test124',
             'car123',
             this.state.selectedId,
             (value: string) => this.setState({ selectedId: value }),
             true,
             () => {}
           ),
-          new BasicContentbarWrapper(
-            'test124',
-            'car124',
-            this.state.selectedId,
-            (value: string) => this.setState({ selectedId: value }),
-            true,
-            () => {}
-          ),
+          // new BasicContentbarWrapper(
+          //   'test123',
+          //   'car124',
+          //   this.state.selectedId,
+          //   (value: string) => this.setState({ selectedId: value }),
+          //   true,
+          //   () => {}
+          // ),
         ]}
       >
         <div className={'col-8 grid grid-nogutter'}>

@@ -10,11 +10,16 @@ export class BasicContentbarWrapper implements ContentbarWrapperInterface {
     private selectedId: string,
     private onClick: (identifier: string) => any,
     private closable: boolean,
-    private onClose: React.MouseEventHandler<HTMLButtonElement>
+    private onClose: any
   ) {}
 
   getKey() {
     return generateHashOfLength(6);
+  }
+
+  testFunction() {
+    console.log('triggerd ebene 2');
+    this.onClose;
   }
 
   getContentbarComponent() {

@@ -2,7 +2,7 @@
 #restrictDimensions{
   max-width: 280px !important;
   max-height: 40px !important;
-  overflow: hidden !important;
+  overflow-x: hidden !important;
 }
 
 .element-hover {

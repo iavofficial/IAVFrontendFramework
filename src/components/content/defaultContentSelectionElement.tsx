@@ -13,7 +13,7 @@ export interface Props {
   onClick: (identifier: string) => any;
   selected: boolean;
   closable: boolean;
-  onClose: React.MouseEventHandler<HTMLButtonElement>;
+  onClose(): void;
 }
 
 export const DefaultContentSelectionElement = (props: Props) => {
@@ -34,14 +34,18 @@ export const DefaultContentSelectionElement = (props: Props) => {
     marginRight: '8px',
   };
 
-  const closeElement = (e: React.MouseEvent) => {
+  const closeElement = (e: any) => {
+    console.log('triggerd');
+
     e.stopPropagation();
-    props.onClose;
+    props.onClose();
   };
 
   const identifier = generateHashOfLength(4);
   const identifierLegal = 'a' + identifier;
   const identifierWithDot = '.' + identifierLegal;
+
+  console.log('referenz: ', () => props.onClose);
 
   return (
     <>
@@ -50,7 +54,9 @@ export const DefaultContentSelectionElement = (props: Props) => {
         style={tabStyle}
         onMouseEnter={() => setHovering(true)}
         onMouseLeave={() => setHovering(false)}
-        onClick={() => props.onClick(props.id)}
+        onClick={() => {
+          () => props.onClick(props.id);
+        }}
       >
         {props.name.length >= 20 ? (
           <div
@@ -77,7 +83,7 @@ export const DefaultContentSelectionElement = (props: Props) => {
         {props.closable ? (
           <div style={{ position: 'absolute', right: '5px' }}>
             <i
-              onClick={(event) => closeElement(event)}
+              onClick={props.onClose}
               style={closingIconStyle}
               className="pi pi-times tabelements-only"
             />

@@ -7,9 +7,7 @@ import { Coloroptions, HeaderOptions } from './uiLayer';
 import {
   BrowserRouter as Router,
   Route,
-  useLocation,
   Routes,
-  useNavigate,
   Outlet,
 } from 'react-router-dom';
 import { TabAndContentWrapper } from './navbar/wrapper/tabAndContentWrapper';
@@ -66,15 +64,3 @@ export const MainView = (props: MainViewProps) => {
     </div>
   );
 };
-
-// export function isNavbarTabType(
-//   tabAndContentElement: navbarTabProps | groupPropsBasicFirstLayer
-// ): tabAndContentElement is navbarTabProps {
-//   return (tabAndContentElement as navbarTabProps).renderElement !== undefined;
-// }
-
-// function isNavbarTabPropsBasicForElement(
-//   tabAndContentElement: navbarTabPropsBasic | groupPropsBasicFirstLayer
-// ): tabAndContentElement is navbarTabPropsBasic {
-//   return (tabAndContentElement as navbarTabPropsBasic).to !== undefined;
-// }

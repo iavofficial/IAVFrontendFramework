@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ContextMenu } from 'primereact/contextmenu';
-import './navbar.scss';
+import './navbar.css';
 import UserPic from '../../assets/images/user.png';
 import Settings from '../../assets/images/settings.png';
 import { Clock } from '../clock';
 import { AuthContext } from '../../contexts/auth';
 import { TabAndContentWrapper } from './wrapper/tabAndContentWrapper';
 import { MenuSettingsOptions } from '../header/SettingsMenu';
-import './navbar.scss';
 import { WHITE, BLUE3, GREEN, GRAY1 } from '../../constants';
 import { useTranslator } from '../internationalization/translators';
 import SimpleBar from 'simplebar-react';

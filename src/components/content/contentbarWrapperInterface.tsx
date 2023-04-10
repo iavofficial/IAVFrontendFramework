@@ -1,6 +1,8 @@
-import { ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 
 export interface ContentbarWrapperInterface {
-  getContentbarComponent(): ReactElement;
+  getContentbarComponent(
+    defaultContentSelectionElement?: ReactElement
+  ): ReactElement;
   getKey(): string;
 }

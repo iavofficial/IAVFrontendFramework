@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ReactElement, useState } from 'react';
 import React from 'react';
 import { Button } from 'primereact/button';
 import { ContextMenu } from 'primereact/contextmenu';
@@ -8,12 +8,12 @@ import { Tooltip } from 'primereact/tooltip';
 import './contentbar.css';
 
 export interface Props {
-  name: string;
-  id: string;
-  onClick: (identifier: string) => any;
-  selected: boolean;
-  closable: boolean;
-  onClose(): void;
+  name?: string;
+  id?: string;
+  selected?: boolean;
+  closable?: boolean;
+  onClose?: () => void;
+  setSelectedId3: (value: string) => any;
 }
 
 export const DefaultContentSelectionElement = (props: Props) => {
@@ -34,11 +34,17 @@ export const DefaultContentSelectionElement = (props: Props) => {
     marginRight: '8px',
   };
 
-  const closeElement = (e: any) => {
-    console.log('triggerd');
-
+  const handleOnCloseEvent = (e: any) => {
     e.stopPropagation();
-    props.onClose();
+    if (props.onClose) {
+      props.onClose();
+    }
+  };
+
+  const handleOnClickEvent = (value: string) => {
+    if (props.setSelectedId3) {
+      props.setSelectedId3(value);
+    }
   };
 
   const identifier = generateHashOfLength(4);
@@ -52,11 +58,9 @@ export const DefaultContentSelectionElement = (props: Props) => {
         style={tabStyle}
         onMouseEnter={() => setHovering(true)}
         onMouseLeave={() => setHovering(false)}
-        onClick={() => {
-          () => props.onClick(props.id);
-        }}
+        onClick={() => handleOnClickEvent(props.id!)}
       >
-        {props.name.length >= 20 ? (
+        {props.name!.length >= 20 ? (
           <div
             style={{
               width: '100%',
@@ -67,11 +71,11 @@ export const DefaultContentSelectionElement = (props: Props) => {
             className={identifierLegal}
           >
             <span className={'m-auto font-semibold '}>
-              {props.name.slice(0, 20) + '...'}
+              {props.name!.slice(0, 20) + '...'}
             </span>
             <Tooltip
               id="change-color"
-              content={props.name}
+              content={props.name!}
               target={identifierWithDot}
             />
           </div>
@@ -81,7 +85,7 @@ export const DefaultContentSelectionElement = (props: Props) => {
         {props.closable ? (
           <div style={{ position: 'absolute', right: '5px' }}>
             <i
-              onClick={props.onClose}
+              onClick={handleOnCloseEvent}
               style={closingIconStyle}
               className="pi pi-times tabelements-only"
             />

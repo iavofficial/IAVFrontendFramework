@@ -79,7 +79,6 @@ export const DisaHeader = (props: Props) => {
 
   const hideUserMenu = (e: React.KeyboardEvent) => {
     if (e.key === 'Escape') {
-      console.log('triggerd');
       userRef.current?.hide(e);
     }
   };

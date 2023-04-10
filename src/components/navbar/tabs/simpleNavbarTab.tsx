@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Tooltip } from 'primereact/tooltip';
-import { BLUE0, GRAY2, GRAY4, TAB_HEIGHT, WHITE } from '../../../constants';
+import { BLUE0, WHITE } from '../../../constants';
 import { useTranslator } from '../../internationalization/translators';
-import './tabs.scss';
+import './tabs.css';
 import { generateHashOfLength } from '../../../services/hash';
 import { navbarTab } from './navbarTab';
 import { LAYER } from './tabLayer';

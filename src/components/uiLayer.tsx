@@ -13,7 +13,6 @@ import {
 import './css/constants.css';
 import './css/disaPage.css';
 import './css/disaFramework.css';
-import './css/error.css';
 import { BasicAuthenticationView } from './authentication/default/basicAuthenticationView';
 import { Navbar } from './navbar/navbar';
 import { ImprintText } from './imprint/imprintText';

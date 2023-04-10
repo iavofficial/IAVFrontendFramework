@@ -6,7 +6,28 @@
    width: 200px !important;
 }
 
-.darkmode-logos{
+.switch-colormode-logos{
    cursor: pointer;
    margin-right: 16px;
 }
+
+.bg-white{
+   background-color: var(--white);
+}
+
+.bg-gray-4{
+   background-color: var(--gray-4);
+}
+
+.color-white{
+color: var(--white);
+}
+
+.color-black{
+   color: var(--black);
+}
+
+.bg-gray-3{
+   background-color: var(--gray-3);
+}
+

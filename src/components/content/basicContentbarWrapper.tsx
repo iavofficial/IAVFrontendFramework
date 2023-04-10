@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { generateHashOfLength } from '../../services/hash';
 import { ContentbarWrapperInterface } from './contentbarWrapperInterface';
 import { DefaultContentSelectionElement } from './defaultContentSelectionElement';
@@ -22,17 +22,13 @@ export class BasicContentbarWrapper implements ContentbarWrapperInterface {
     this.onClose;
   }
 
-  getContentbarComponent() {
-    return (
-      <DefaultContentSelectionElement
-        name={this.name}
-        id={this.id}
-        key={this.getKey()}
-        selected={this.id === this.selectedId}
-        onClick={this.onClick(this.id)}
-        closable={this.closable}
-        onClose={this.onClose}
-      />
-    );
+  getContentbarComponent(defaultContentSelectionElement: ReactElement) {
+    return React.cloneElement(defaultContentSelectionElement, {
+      key: this.getKey(),
+      name: this.name,
+      id: this.id,
+      closable: this.closable,
+      selected: this.id === this.selectedId,
+    });
   }
 }

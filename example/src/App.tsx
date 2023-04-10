@@ -34,6 +34,8 @@ import navFleetDetailDeselected from './assets/nav_fleet_detail_deselected.png';
 import groupIcon from './assets/ota_logo.png';
 import { FirstExampleContextComponent } from './contexts/FirstExampleContext';
 import { SecondExampleContextComponent } from './contexts/SecondExampleContext';
+import { ColorProvider } from 'disa-framework/colorProvider';
+
 import { LayoutAndContextExampleComponent } from './components/layoutAndContextExampleComponent';
 import { ThirdExampleComponent } from './components/thirdExampleComponent';
 import { FourthExampleComponent } from './components/fourthExampleComponent';
@@ -222,19 +224,21 @@ function App() {
       additionalContextValues={{ getUserGroups: () => [] }}
     >
       <GlobalDataLayer translations={translations}>
-        <FirstExampleContextComponent>
-          <SecondExampleContextComponent>
-            <UILayer
-              tabAndContentWrappers={views}
-              startingPoint="/"
-              authenticationView={BasicAuthenticationView}
-              menuOptions={menuSettingsOptions}
-              collabsible={true}
-              documentsLabelKey="Legal_documents"
-              documentsComponent={LegalDocuments}
-            />
-          </SecondExampleContextComponent>
-        </FirstExampleContextComponent>
+        <ColorProvider>
+          <FirstExampleContextComponent>
+            <SecondExampleContextComponent>
+              <UILayer
+                tabAndContentWrappers={views}
+                startingPoint="/"
+                authenticationView={BasicAuthenticationView}
+                menuOptions={menuSettingsOptions}
+                collabsible={true}
+                documentsLabelKey="Legal_documents"
+                documentsComponent={LegalDocuments}
+              />
+            </SecondExampleContextComponent>
+          </FirstExampleContextComponent>
+        </ColorProvider>
       </GlobalDataLayer>
     </DummyAuthenticationProvider>
   );

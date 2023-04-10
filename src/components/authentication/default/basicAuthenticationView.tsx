@@ -1,10 +1,9 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { BLUE0, WHITE, BLACK, BLUE3 } from '../../../constants';
 import AppLogo from '../../../assets/images/app_logo.png';
 import { AuthContext } from '../../../contexts/auth';
 import { LoginButtonWithSpinner } from '../loginButtonWithSpinner';
-import { useContext } from 'react';
 import { useTranslator } from '../../internationalization/translators';
 import { AuthenticationViewProps } from '../aws/authenticationView';
 import '../../css/authenticationView.css';
@@ -13,11 +12,12 @@ import companyLogo from '../../../assets/images/company_logo.png';
 import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
 import { LanguageContext } from '../../../contexts/language';
 import { parseLanguageRessourcesIntoDropdownFormat } from '../../../services/parseLanguageRessourcesIntoDropdownFormat';
+import { ColorSettingsContext } from '../../../contexts/colorsettings';
 
 export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
+  const colorSettingsContext = useContext(ColorSettingsContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [darkmode, setDarkmode] = useState(false);
   const langContext = useContext(LanguageContext);
 
   const authContext = useContext(AuthContext);
@@ -139,15 +139,16 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
         src={loginBackground}
       />
       <div
-        className="flex flex-column shadow-6"
+        className={
+          (colorSettingsContext?.darkmode ? 'bg-gray-4' : 'bg-white') +
+          ' flex flex-column shadow-6'
+        }
         style={{
           position: 'relative',
           width: '620px',
           margin: 'auto',
-          backgroundColor: props.colorOptions?.authViewColorSettings
-            ?.loginFormBackground
-            ? props.colorOptions?.authViewColorSettings?.loginFormBackground
-            : WHITE,
+          backgroundColor:
+            props.colorOptions?.authViewColorSettings?.loginFormBackground,
         }}
       >
         <div>
@@ -163,15 +164,23 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
             style={{ width: '100%', padding: '24px 24px 0px 0px' }}
             className="flex align-items-center justify-content-end"
           >
-            {darkmode ? (
+            {colorSettingsContext?.darkmode ? (
               <i
-                onClick={() => setDarkmode(!darkmode)}
-                className="pi pi-sun darkmode-logos"
+                onClick={() =>
+                  colorSettingsContext?.setDarkmode(
+                    !colorSettingsContext.darkmode
+                  )
+                }
+                className="pi pi-sun switch-colormode-logos"
               />
             ) : (
               <i
-                onClick={() => setDarkmode(!darkmode)}
-                className="pi pi-moon darkmode-logos"
+                onClick={() =>
+                  colorSettingsContext?.setDarkmode(
+                    !colorSettingsContext.darkmode
+                  )
+                }
+                className="pi pi-moon switch-colormode-logos"
               />
             )}
             <Dropdown
@@ -216,7 +225,11 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                 onChange={(ev) => setEmail(ev.target.value)}
                 name="email"
                 type="email"
-                className={'p-inputtext'}
+                className={
+                  (colorSettingsContext?.darkmode
+                    ? 'bg-gray-4 color-white'
+                    : 'bg-white color-black') + ' p-inputtext'
+                }
                 required
                 autoFocus
                 style={{ marginBottom: '40px' }}

@@ -7,10 +7,13 @@ import { CustomContentbarWrapper } from './customContentbarWrapper';
 export interface Props {
   contentElements: BasicContentbarWrapper[] | CustomContentbarWrapper[];
   layoutBehaviour?: LayoutBehaviour;
+  setSelectedId1: (value: string) => void;
   addable?: boolean;
   backgroundColorContentBar?: string;
   backgroundColorContent?: string;
-  onClickAddButton?: () => any;
+  onClickAddButton: () => any;
+  onClickLeftSlideButton?: () => any;
+  onClickRightSlideButton?: () => any;
 }
 
 export const Content = (props: React.PropsWithChildren<Props>) => {
@@ -35,9 +38,12 @@ export const Content = (props: React.PropsWithChildren<Props>) => {
       style={{ width: '100%', overflow: 'auto' }}
     >
       {props.contentElements.length < 1 ? (
-        <React.Fragment />
+        <></>
       ) : (
         <ContentBar
+          setSelectedId2={props.setSelectedId1}
+          onClickLeftSlideButton={props.onClickLeftSlideButton}
+          onClickRightSlideButton={props.onClickRightSlideButton}
           onClickAddButton={props.onClickAddButton}
           addable={props.addable}
           contentElements={props.contentElements}

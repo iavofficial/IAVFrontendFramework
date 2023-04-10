@@ -81,6 +81,7 @@
     "./basicContentWrapper": "./components/navbar/wrapper/basicContentWrapper.js",
     "./customContentbarWrapper": "./components/content/customContentbarWrapper.js",
     "./basicContentbarWrapper":"./components/content/basicContentbarWrapper.js",
+    "./colorProvider": "./providers/colorProvider.js",
     "./constants": "./constants.js",
     "./content": "./components/content/content.js",
     "./contentCell": "./components/content/contentCell.js",
@@ -121,6 +122,9 @@
       ],
       "basicContentbarWrapper": [
         "./components/content/basicContentbarWrapper.d.ts"
+      ],
+      "/colorProvider": [
+        "./providers/colorProvider.d.ts"
       ],
       "constants": [
         "./constants.d.ts"

@@ -6,37 +6,44 @@ import { BasicContentbarWrapper } from 'disa-framework/basicContentbarWrapper';
 export const TestComponent = () => {
   const [selectedId, setSelectedId] = useState('');
 
-  console.log('hier dein selectedId: ', selectedId);
-
-  const test = (value: string) => {
-    console.log('triggerd test');
-
+  const selectElement = (value: string) => {
     setSelectedId(value);
   };
 
-  let test2 = function () {
+  let test = () => {
     console.log('onclick add function triggerd');
+  };
+
+  let test3 = () => {
+    console.log('onclick left function triggerd');
+  };
+
+  let test4 = () => {
+    console.log('onclick right function triggerd');
   };
 
   return (
     <Content
       addable={true}
-      onClickAddButton={test2}
+      onClickAddButton={test3}
+      onClickLeftSlideButton={test3}
+      onClickRightSlideButton={test4}
+      setSelectedId1={selectElement}
       layoutBehaviour={LayoutBehaviour.GRID}
       contentElements={[
         new BasicContentbarWrapper(
           'test124',
           'car123',
           selectedId,
-          () => test,
-          false,
-          test2
+          () => test3,
+          true,
+          test4
         ),
         new BasicContentbarWrapper(
           'test123',
           'car124',
           selectedId,
-          () => test,
+          function () {},
           true,
           function () {}
         ),
@@ -44,7 +51,7 @@ export const TestComponent = () => {
           'test125',
           'car125',
           selectedId,
-          () => test,
+          function () {},
           true,
           function () {}
         ),

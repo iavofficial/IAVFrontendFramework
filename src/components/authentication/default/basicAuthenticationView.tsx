@@ -1,14 +1,19 @@
 import React, { FormEvent, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { BLUE0, WHITE, BLACK, BLUE3 } from '../../../constants';
-import AppLogo from '../../../assets/images/app_logo.png';
+import AppLogo from '../../../assets/images/Application-Name.svg';
 import { AuthContext } from '../../../contexts/auth';
 import { LoginButtonWithSpinner } from '../loginButtonWithSpinner';
 import { useTranslator } from '../../internationalization/translators';
 import { AuthenticationViewProps } from '../aws/authenticationView';
 import '../../css/authenticationView.css';
-import loginBackground from '../../../assets/images/login_background.png';
-import companyLogo from '../../../assets/images/company_logo.png';
+import '../../css/globalColors.css';
+import loginBackgroundLightMode from '../../../assets/images/login_background_lightMode.png';
+import loginBackgroundDarkMode from '../../../assets/images/login_background_darkMode.png';
+import companyLogoLightMode from '../../../assets/images/company_logo_lightMode.svg';
+import appLogoDarkMode from '../../../assets/images/app_logo_darkMode.svg';
+import appLogoLightMode from '../../../assets/images/app_logo_lightMode.svg';
+import companyLogoDarkMode from '../../../assets/images/company_logo_darkMode.svg';
 import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
 import { LanguageContext } from '../../../contexts/language';
 import { parseLanguageRessourcesIntoDropdownFormat } from '../../../services/parseLanguageRessourcesIntoDropdownFormat';
@@ -31,12 +36,16 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
 
   const companyLogoDefault = (props: AuthenticationViewProps) => (
     <img
-      src={companyLogo}
+      src={
+        colorSettingsContext?.darkmode
+          ? companyLogoDarkMode
+          : companyLogoLightMode
+      }
       alt="Company Logo"
       style={{
         display: props.headerOptions?.hideRight ? 'none' : 'flex',
-        height: '25px',
-        marginRight: '24px',
+        width: '130px',
+        marginRight: '-5px',
       }}
     />
   );
@@ -51,45 +60,28 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
     >
       <img
         id="iav-logo"
-        src={AppLogo}
+        src={
+          colorSettingsContext?.darkmode ? appLogoDarkMode : appLogoLightMode
+        }
         alt="DISA Logo"
         style={{
-          height: '40px',
-          width: '125px',
-          marginLeft: '25px',
-          marginRight: '12px',
-          backgroundColor: BLUE0,
+          width: '420px',
+          marginLeft: '5px',
         }}
       />
-      <h5
-        style={{
-          color: props.colorOptions?.authViewColorSettings
-            ?.letteringElementLeftColor
-            ? props.colorOptions?.authViewColorSettings
-                .letteringElementLeftColor
-            : 'white',
-          fontSize: '15px',
-          width: '150px',
-          height: '40px',
-          fontWeight: 'lighter',
-        }}
-      >
-        {props.headerOptions?.letteringElementLeft
-          ? props.headerOptions.letteringElementLeft
-          : 'Remote Service Monitor'}
-      </h5>
     </div>
   );
 
   //TODO: bring the interface to the app.tsx file (for the rightelement)
   const header = (props: AuthenticationViewProps) => (
     <div
-      className={'flex justify-content-between'}
+      className={
+        (colorSettingsContext?.darkmode ? 'bg-grey-5' : 'bg-blue-0') +
+        ' flex justify-content-between'
+      }
       style={{
-        backgroundColor: props.colorOptions?.authViewColorSettings
-          ?.headerBackground
-          ? props.colorOptions?.authViewColorSettings?.headerBackground
-          : BLUE0,
+        backgroundColor:
+          props.colorOptions?.authViewColorSettings?.headerBackground,
         color: 'white',
         alignItems: 'center',
         height: '56px',
@@ -136,11 +128,15 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
           width: '100vw',
           objectFit: 'cover',
         }}
-        src={loginBackground}
+        src={
+          colorSettingsContext?.darkmode
+            ? loginBackgroundDarkMode
+            : loginBackgroundLightMode
+        }
       />
       <div
         className={
-          (colorSettingsContext?.darkmode ? 'bg-gray-4' : 'bg-white') +
+          (colorSettingsContext?.darkmode ? 'bg-grey-5' : 'bg-white') +
           ' flex flex-column shadow-6'
         }
         style={{
@@ -171,7 +167,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                     !colorSettingsContext.darkmode
                   )
                 }
-                className="pi pi-sun switch-colormode-logos"
+                className={'pi pi-sun switch-colormode-logos color-white'}
               />
             ) : (
               <i
@@ -184,6 +180,12 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
               />
             )}
             <Dropdown
+              id="change-language-dropdown"
+              className={
+                colorSettingsContext?.darkmode
+                  ? 'bg-grey-5 color-white test'
+                  : 'bg-white color-black test1'
+              }
               placeholder={
                 langContext?.resources[langContext.activeLang].translation
                   .option_name
@@ -216,7 +218,11 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                   marginBottom: '2px',
                   fontSize: '12px',
                 }}
-                className="inputLabel"
+                className={
+                  (colorSettingsContext?.darkmode
+                    ? 'color-white'
+                    : 'color-black') + ' inputLabel'
+                }
               >
                 {t('Email_address')}
               </label>
@@ -227,7 +233,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                 type="email"
                 className={
                   (colorSettingsContext?.darkmode
-                    ? 'bg-gray-4 color-white'
+                    ? 'bg-grey-4 color-white'
                     : 'bg-white color-black') + ' p-inputtext'
                 }
                 required
@@ -240,7 +246,11 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                   marginBottom: '2px',
                   fontSize: '12px',
                 }}
-                className="inputLabel"
+                className={
+                  (colorSettingsContext?.darkmode
+                    ? 'color-white'
+                    : 'color-black') + ' inputLabel'
+                }
               >
                 {t('Password')}
               </label>
@@ -249,7 +259,11 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                 onChange={(ev) => setPassword(ev.target.value)}
                 name="password"
                 type="password"
-                className={'p-inputtext'}
+                className={
+                  (colorSettingsContext?.darkmode
+                    ? 'bg-grey-4 color-white'
+                    : 'bg-white color-black') + ' p-inputtext'
+                }
                 required
                 style={{ marginBottom: '40px' }}
               />
@@ -288,13 +302,14 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
           />
         </Link>
         <span
+          className={
+            colorSettingsContext?.darkmode ? 'color-white' : 'color-black'
+          }
           style={{
             alignSelf: 'center',
             padding: '24px',
             fontSize: '11px',
-            color: props.colorOptions?.authViewColorSettings?.companyTextColor
-              ? props.colorOptions.authViewColorSettings?.companyTextColor
-              : BLACK,
+            color: props.colorOptions?.authViewColorSettings?.companyTextColor,
           }}
         >
           &copy; {props.companyText ? props.companyText : 'IAV GmbH 2023'}

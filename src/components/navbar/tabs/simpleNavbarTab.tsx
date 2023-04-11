@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Tooltip } from 'primereact/tooltip';
-import { BLUE0, WHITE } from '../../../constants';
+import { BLACK, BLUE0, GREY3, GREY4, GREY5, WHITE } from '../../../constants';
 import { useTranslator } from '../../internationalization/translators';
 import './tabs.css';
 import { generateHashOfLength } from '../../../services/hash';
@@ -14,6 +14,7 @@ import {
   calculateSecondLineTabLayerBottom,
 } from '../../../services/calculateLineColorTab';
 import { revertColor } from '../../../services/calculateLineColorGroup';
+import { ColorSettingsContext } from '../../../contexts/colorsettings';
 
 export interface Props {
   firstLayerCollabsed?: boolean;
@@ -24,23 +25,40 @@ export interface Props {
 
 export const SimpleNavbarTab: navbarTab<Props> = (props) => {
   const [hovering, setHovering] = useState(false);
+  const colorSettingsContext = useContext(ColorSettingsContext);
   const t = useTranslator();
   const active = useLocation().pathname === props.to;
+
+  //TODO: Add colorSettingsContextColorManagement
+  let highlightColor = colorSettingsContext?.darkmode ? GREY3 : BLUE0;
+  let mainColor = colorSettingsContext?.darkmode ? GREY5 : WHITE;
+
+  let letteringHighlightColor = WHITE;
+  let letteringMainColor = colorSettingsContext?.darkmode ? GREY3 : BLACK;
 
   const styleActiveLineFirstLayerTop = {
     marginRight: '2px',
     marginLeft: '3px',
-
     width: '2px',
     height: '40px',
     backgroundColor:
       hovering || active
         ? revertColor(
-            calculateFirstLineTabLayer(props.layer as LAYER, props.collapsed),
-            BLUE0,
-            WHITE
+            calculateFirstLineTabLayer(
+              highlightColor,
+              mainColor,
+              props.layer as LAYER,
+              props.collapsed
+            ),
+            highlightColor,
+            mainColor
           )
-        : calculateFirstLineTabLayer(props.layer as LAYER, props.collapsed),
+        : calculateFirstLineTabLayer(
+            highlightColor,
+            mainColor,
+            props.layer as LAYER,
+            props.collapsed
+          ),
   };
 
   const styleActiveLineFirstLayerBottom = {
@@ -49,6 +67,8 @@ export const SimpleNavbarTab: navbarTab<Props> = (props) => {
     width: '2px',
     height: '16px',
     backgroundColor: calculateFirstLineTabLayerBottom(
+      highlightColor,
+      mainColor,
       props.collapsed as boolean,
       props.isLastElementOfLayer as boolean,
       props.layer as LAYER
@@ -62,11 +82,21 @@ export const SimpleNavbarTab: navbarTab<Props> = (props) => {
     backgroundColor:
       hovering || active
         ? revertColor(
-            calculateSecondLineTabLayer(props.layer as LAYER, props.collapsed),
-            BLUE0,
-            WHITE
+            calculateSecondLineTabLayer(
+              highlightColor,
+              mainColor,
+              props.layer as LAYER,
+              props.collapsed
+            ),
+            highlightColor,
+            mainColor
           )
-        : calculateSecondLineTabLayer(props.layer as LAYER, props.collapsed),
+        : calculateSecondLineTabLayer(
+            highlightColor,
+            mainColor,
+            props.layer as LAYER,
+            props.collapsed
+          ),
   };
 
   const styleActiveLineSecondLayerBottom = {
@@ -74,6 +104,8 @@ export const SimpleNavbarTab: navbarTab<Props> = (props) => {
     width: '2px',
     marginRight: '3px',
     backgroundColor: calculateSecondLineTabLayerBottom(
+      highlightColor,
+      mainColor,
       props.collapsed as boolean,
       props.isLastElementOfLayer as boolean,
       props.layer as LAYER
@@ -84,8 +116,12 @@ export const SimpleNavbarTab: navbarTab<Props> = (props) => {
     height: '40px',
     width: props.navbarCollapsed ? '40px' : '240px',
     cursor: active || props.disabled ? 'default' : 'pointer',
-    backgroundColor: (active || hovering) && !props.disabled ? BLUE0 : 'white',
-    color: (active || hovering) && !props.disabled ? 'white' : 'black',
+    backgroundColor:
+      (active || hovering) && !props.disabled ? highlightColor : mainColor,
+    color:
+      (active || hovering) && !props.disabled
+        ? letteringHighlightColor
+        : letteringMainColor,
     opacity: props.disabled ? 0.5 : 1,
   };
 

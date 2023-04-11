@@ -1,17 +1,21 @@
 import React, { ReactElement, useContext, useState } from 'react';
-import './disaHeader.scss';
+import './disaHeader.css';
+import '../css/globalColors.css';
 import { ContextMenu } from 'primereact/contextmenu';
-import AppLogo from '../../assets/images/app_logo.png';
-import appLogo from '../assets/images/appLogo.png';
-import UserPic from '../../assets/images/icon_user.svg';
-import NotificationPic from '../../assets/images/icon-notification.svg';
-import Settings from '../../assets/images/icon_settings.svg';
-import CompanyLogo from '../../assets/images/company_logo.png';
+import appLogoLightMode from '../../assets/images/app_logo_lightMode.svg';
+import appLogoDarkMode from '../../assets/images/app_logo_darkMode.svg';
+import userIconLightMode from '../../assets/images/icon_user_lightMode.svg';
+import userIconDarkMode from '../../assets/images/icon_user_darkMode.svg';
+import notificationPicLightMode from '../../assets/images/icon_notification_lightMode.svg';
+import notificationPicDarkMode from '../../assets/images/icon_notification_darkMode.svg';
+import settingsLightMode from '../../assets/images/icon_settings_lightMode.svg';
+import settingsDarkMode from '../../assets/images/icon_settings_darkMode.svg';
+import companyLogoLightMode from '../../assets/images/company_logo_lightMode.svg';
+import companyLogoDarkMode from '../../assets/images/company_logo_darkMode.svg';
 import { BLUE0, BLUE1, MAGENTA2 } from '../../constants';
 import { MenuSettingsOptions, SettingsMenu } from './SettingsMenu';
-import { Avatar } from 'primereact/avatar';
-import { Badge } from 'primereact/badge';
 import { UserMenu } from './UserMenu';
+import { ColorSettingsContext } from '../../contexts/colorsettings';
 
 interface Props {
   headerOptions?: {
@@ -27,49 +31,47 @@ interface Props {
   menuOptions?: MenuSettingsOptions;
 }
 
-const companyLogoDefault = (props: Props) => (
-  <img
-    src={CompanyLogo}
-    alt="Company Logo"
-    style={{
-      display: props.headerOptions?.hideRight ? 'none' : 'flex',
-      height: '25px',
-      marginRight: '24px',
-    }}
-  />
-);
-
-const appLogoDefault = (props: Props) => (
-  <div
-    style={{
-      display: props.headerOptions?.hideLeft ? 'none' : 'flex',
-      alignItems: 'center',
-      height: '75px',
-      width: '271px',
-    }}
-  >
-    <img
-      id="iav-logo"
-      src={AppLogo}
-      alt="DISA Logo"
-      style={{
-        height: '40px',
-        width: '125px',
-        marginLeft: '24px',
-        marginRight: '16px',
-      }}
-    />
-    <h5 style={{ color: 'white', fontSize: '15px', fontWeight: 'lighter' }}>
-      {props.headerOptions?.letteringElementLeft
-        ? props.headerOptions.letteringElementLeft
-        : 'Remote Service Monitor'}
-    </h5>
-  </div>
-);
-
 export const DisaHeader = (props: Props) => {
   const menuRef = React.createRef<ContextMenu>();
   const userRef = React.createRef<ContextMenu>();
+  const colorSettingsContext = useContext(ColorSettingsContext);
+
+  const companyLogoDefault = (props: Props) => (
+    <img
+      src={
+        colorSettingsContext?.darkmode
+          ? companyLogoDarkMode
+          : companyLogoLightMode
+      }
+      alt="Company Logo"
+      style={{
+        display: props.headerOptions?.hideRight ? 'none' : 'flex',
+        width: '130px',
+        marginRight: '-10px',
+      }}
+    />
+  );
+
+  const appLogoDefault = (props: Props) => (
+    <div
+      style={{
+        display: props.headerOptions?.hideLeft ? 'none' : 'flex',
+        alignItems: 'center',
+        width: '420px',
+      }}
+    >
+      <img
+        id="iav-logo"
+        src={
+          colorSettingsContext?.darkmode ? appLogoDarkMode : appLogoLightMode
+        }
+        alt="DISA Logo"
+        style={{
+          width: '420px',
+        }}
+      />
+    </div>
+  );
 
   const hideSettingsMenu = (e: React.KeyboardEvent) => {
     if (e.key === 'Escape') {
@@ -86,11 +88,12 @@ export const DisaHeader = (props: Props) => {
   return (
     <div
       id="disa-header"
-      className={'flex justify-content-between align-items-center'}
+      className={
+        (colorSettingsContext?.darkmode ? 'bg-grey-5' : 'bg-blue-0') +
+        ' flex justify-content-between align-items-center'
+      }
       style={{
-        backgroundColor: props.colorOptions?.headerBackground
-          ? props.colorOptions?.headerBackground
-          : BLUE0,
+        backgroundColor: props.colorOptions?.headerBackground,
       }}
     >
       <div id="left-element" className={'flex'}>
@@ -120,7 +123,13 @@ export const DisaHeader = (props: Props) => {
               cursor: 'pointer',
             }}
           >
-            <img src={NotificationPic} />
+            <img
+              src={
+                colorSettingsContext?.darkmode
+                  ? notificationPicDarkMode
+                  : notificationPicLightMode
+              }
+            />
             <div
               className="flex justify-content-center align-items-center"
               style={{
@@ -151,7 +160,13 @@ export const DisaHeader = (props: Props) => {
             }}
             onKeyDown={(e) => hideSettingsMenu(e)}
           >
-            <img src={Settings} />
+            <img
+              src={
+                colorSettingsContext?.darkmode
+                  ? settingsDarkMode
+                  : settingsLightMode
+              }
+            />
           </a>
           <a
             className={'flex align-items-center justify-content-end'}
@@ -167,7 +182,14 @@ export const DisaHeader = (props: Props) => {
             }}
             onKeyDown={(e) => hideUserMenu(e)}
           >
-            <img className="user-logo" src={UserPic} />
+            <img
+              className="user-logo"
+              src={
+                colorSettingsContext?.darkmode
+                  ? userIconDarkMode
+                  : userIconLightMode
+              }
+            />
           </a>
         </div>
         <div

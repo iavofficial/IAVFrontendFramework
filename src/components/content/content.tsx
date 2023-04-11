@@ -1,8 +1,10 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useContext } from 'react';
+import '../css/globalColors.css';
 import { ContentBar } from './contentBar';
-import { GRAY1 } from '../../constants';
+import { GREY1 } from '../../constants';
 import { BasicContentbarWrapper } from './basicContentbarWrapper';
 import { CustomContentbarWrapper } from './customContentbarWrapper';
+import { ColorSettingsContext } from '../../contexts/colorsettings';
 
 export interface Props {
   contentElements: BasicContentbarWrapper[] | CustomContentbarWrapper[];
@@ -17,6 +19,8 @@ export interface Props {
 }
 
 export const Content = (props: React.PropsWithChildren<Props>) => {
+  const colorSettingsContext = useContext(ColorSettingsContext);
+
   let contentRootClass = '';
   switch (props.layoutBehaviour) {
     case LayoutBehaviour.NONE:
@@ -52,12 +56,13 @@ export const Content = (props: React.PropsWithChildren<Props>) => {
       )}
 
       <div
-        className={contentRootClass}
+        className={
+          contentRootClass +
+          (colorSettingsContext?.darkmode ? ' bg-black' : ' bg-grey-1')
+        }
         style={{
           height: '100%',
-          backgroundColor: props.backgroundColorContent
-            ? props.backgroundColorContent
-            : GRAY1,
+          backgroundColor: props.backgroundColorContent,
           overflow: 'auto',
         }}
       >

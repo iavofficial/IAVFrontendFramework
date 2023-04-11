@@ -1,5 +1,7 @@
-import React, { CSSProperties, PropsWithChildren } from 'react';
+import React, { CSSProperties, PropsWithChildren, useContext } from 'react';
+import '../css/globalColors.css';
 import { WHITE } from '../../constants';
+import { ColorSettingsContext } from '../../contexts/colorsettings';
 
 export enum CellPaddings {
   FULL,
@@ -20,6 +22,7 @@ export interface Props {
 }
 
 export function ContentCell(props: PropsWithChildren<Props>) {
+  const colorSettingsContext = useContext(ColorSettingsContext);
   let paddings = '';
   switch (props.paddings) {
     case CellPaddings.FULL:
@@ -55,7 +58,12 @@ export function ContentCell(props: PropsWithChildren<Props>) {
   return (
     <div className={columnClass}>
       <div className={'flex ' + paddings} style={{ height: '100%' }}>
-        <div style={innerDivStyle}>{props.children}</div>
+        <div
+          className={colorSettingsContext?.darkmode ? 'bg-grey-5' : 'bg-white'}
+          style={innerDivStyle}
+        >
+          {props.children}
+        </div>
       </div>
     </div>
   );

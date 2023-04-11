@@ -1,10 +1,9 @@
-import React, { ReactElement, useEffect, useState } from 'react';
-import { Accordion, AccordionTab } from 'primereact/accordion';
+import React, { ReactElement, useContext, useEffect, useState } from 'react';
 import '../../css/tabGroup.css';
-import '../navbar.scss';
+import '../navbar.css';
 import { TranslateFunctionType } from '../../../contexts/language';
 import { useTranslator } from '../../internationalization/translators';
-import { BLUE0, GRAY4, WHITE } from '../../../constants';
+import { BLACK, BLUE0, GREY3, GREY4, GREY5, WHITE } from '../../../constants';
 import { generateHashOfLength } from '../../../services/hash';
 import { Tooltip } from 'primereact/tooltip';
 import { LAYER } from './tabLayer';
@@ -15,6 +14,7 @@ import {
   revertColor,
 } from '../../../services/calculateLineColorGroup';
 import { navbarTabProps } from './navbarTab';
+import { ColorSettingsContext } from '../../../contexts/colorsettings';
 
 interface Props {
   name: string | ((t: TranslateFunctionType) => string);
@@ -34,8 +34,15 @@ type PropsWithNavbarTabChildren<T> = T & {
 
 export const TabGroup = (props: PropsWithNavbarTabChildren<Props>) => {
   const t = useTranslator();
+  const colorSettingsContext = useContext(ColorSettingsContext);
   const [hovering, setHovering] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
+
+  let highlightColor = colorSettingsContext?.darkmode ? GREY3 : BLUE0;
+  let mainColor = colorSettingsContext?.darkmode ? GREY5 : WHITE;
+
+  let letteringHighlightColor = WHITE;
+  let letteringMainColor = colorSettingsContext?.darkmode ? GREY3 : BLACK;
 
   const collapsible =
     props.collapsible !== undefined ? props.collapsible : true;
@@ -50,8 +57,8 @@ export const TabGroup = (props: PropsWithNavbarTabChildren<Props>) => {
     height: '40px',
     width: props.navbarCollapsed ? '40px' : '240px',
     cursor: 'pointer',
-    backgroundColor: hovering ? BLUE0 : 'white',
-    color: hovering ? 'white' : 'black',
+    backgroundColor: hovering ? highlightColor : mainColor,
+    color: hovering ? 'white' : letteringMainColor,
     opacity: 1,
     padding: props.navbarCollapsed ? '0px' : '0px 16px 0px 0px',
   };
@@ -64,14 +71,18 @@ export const TabGroup = (props: PropsWithNavbarTabChildren<Props>) => {
     backgroundColor: hovering
       ? revertColor(
           calculateFirstLineColorGroupTop(
+            highlightColor,
+            mainColor,
             props.layer as LAYER,
             collapsed,
             props.collapsed
           ),
-          BLUE0,
-          WHITE
+          highlightColor,
+          mainColor
         )
       : calculateFirstLineColorGroupTop(
+          highlightColor,
+          mainColor,
           props.layer as LAYER,
           collapsed,
           props.collapsed
@@ -85,6 +96,8 @@ export const TabGroup = (props: PropsWithNavbarTabChildren<Props>) => {
     width: '2px',
     height: '16px',
     backgroundColor: calculateFirstLineColorGroupBottom(
+      highlightColor,
+      mainColor,
       collapsed,
       props.collapsed as boolean,
       props.isLastElementOfLayer as boolean
@@ -98,14 +111,18 @@ export const TabGroup = (props: PropsWithNavbarTabChildren<Props>) => {
     backgroundColor: hovering
       ? revertColor(
           calculateSecondLineColorGroupTop(
+            highlightColor,
+            mainColor,
             props.layer as LAYER,
             collapsed,
             props.collapsed
           ),
-          BLUE0,
-          WHITE
+          highlightColor,
+          mainColor
         )
       : calculateSecondLineColorGroupTop(
+          highlightColor,
+          mainColor,
           props.layer as LAYER,
           collapsed,
           props.collapsed
@@ -117,6 +134,8 @@ export const TabGroup = (props: PropsWithNavbarTabChildren<Props>) => {
     width: '2px',
     marginRight: '3px',
     backgroundColor: calculateSecondLineColorGroupTop(
+      highlightColor,
+      mainColor,
       props.layer as LAYER,
       collapsed,
       props.collapsed
@@ -181,7 +200,7 @@ export const TabGroup = (props: PropsWithNavbarTabChildren<Props>) => {
         style={{
           cursor: 'pointer',
           fontSize: '15px',
-          color: hovering ? WHITE : GRAY4,
+          color: hovering ? WHITE : GREY3,
         }}
         className={collapsed ? 'pi pi-chevron-down' : 'pi pi-chevron-right'}
       />

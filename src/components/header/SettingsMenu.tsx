@@ -5,6 +5,7 @@ import { LanguageContext, Translations } from '../../contexts/language';
 import { useTranslator } from '../internationalization/translators';
 import { useNavigate } from 'react-router-dom';
 import { RadioButton } from 'primereact/radiobutton';
+import { ColorSettingsContext } from '../../contexts/colorsettings';
 
 // ##############################################
 // Notice: The enclosed imports are copied from 'primereact/menuitem/MenuItem' as the path could not be resolved by the gitlab builder
@@ -66,7 +67,7 @@ interface Props {
 export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
   (props, ref) => {
     const navigate = useNavigate();
-    const [colorMode, setColorMode] = useState('lightMode');
+    const colorSettingsContext = useContext(ColorSettingsContext);
     const authContext = useContext(AuthContext);
     const langContext = useContext(LanguageContext);
     const t = useTranslator();
@@ -140,10 +141,9 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
             <div className="flex align-items-center">
               <RadioButton
                 inputId="lightMode"
-                name="pizza"
-                value="lightMode"
-                onChange={(e) => setColorMode(e.value)}
-                checked={colorMode === 'lightMode'}
+                value={false}
+                onChange={(e) => colorSettingsContext?.setDarkmode(e.value)}
+                checked={!colorSettingsContext?.darkmode}
               />
               <label htmlFor="ingredient1" className="ml-1 mr-2">
                 Lightmode
@@ -152,10 +152,9 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
             <div className="flex align-items-center">
               <RadioButton
                 inputId="darkMode"
-                name="pizza"
-                value="darkMode"
-                onChange={(e) => setColorMode(e.value)}
-                checked={colorMode === 'darkMode'}
+                value={true}
+                onChange={(e) => colorSettingsContext?.setDarkmode(e.value)}
+                checked={colorSettingsContext?.darkmode}
               />
               <label htmlFor="ingredient2" className="ml-1">
                 Darkmode

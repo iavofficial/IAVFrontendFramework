@@ -5,42 +5,48 @@ import {
 } from './../components/navbar/tabs/tabLayer';
 
 export const calculateSecondLineColorGroupTop = (
+  highlightColor: string,
+  mainColor: string,
   layer: LAYER,
   collapsed: boolean,
   parentCollapsed?: boolean
 ) => {
   if (layer === LAYER.TWO && collapsed) {
-    return BLUE0;
+    return highlightColor;
   } else {
-    return WHITE;
+    return mainColor;
   }
 };
 
 export const calculateFirstLineColorGroupBottom = (
+  highlightColor: string,
+  mainColor: string,
   collapsed: boolean,
   parentCollapsed: boolean,
   isLastElementOfLayer: boolean
 ) => {
   if (collapsed) {
-    return BLUE0;
+    return highlightColor;
   } else if (parentCollapsed && !isLastElementOfLayer) {
-    return BLUE0;
+    return highlightColor;
   } else {
-    return WHITE;
+    return mainColor;
   }
 };
 
 export const calculateFirstLineColorGroupTop = (
+  highlightColor: string,
+  mainColor: string,
   layer: LAYER,
   collapsed: boolean,
   parentCollapsed?: boolean
 ) => {
   if (collapsed) {
-    return BLUE0;
+    return highlightColor;
   } else if (layer === LAYER.TWO && parentCollapsed) {
-    return BLUE0;
+    return highlightColor;
   } else {
-    return WHITE;
+    return mainColor;
   }
 };
 

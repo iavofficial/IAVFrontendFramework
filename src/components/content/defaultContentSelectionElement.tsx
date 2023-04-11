@@ -1,11 +1,12 @@
-import { ReactElement, useState } from 'react';
+import { ReactElement, useContext, useState } from 'react';
 import React from 'react';
 import { Button } from 'primereact/button';
 import { ContextMenu } from 'primereact/contextmenu';
-import { BLACK, BLUE0, WHITE } from '../../constants';
+import { BLACK, BLUE0, GREY3, GREY4, GREY5, WHITE } from '../../constants';
 import { generateHashOfLength } from '../../services/hash';
 import { Tooltip } from 'primereact/tooltip';
 import './contentbar.css';
+import { ColorSettingsContext } from '../../contexts/colorsettings';
 
 export interface Props {
   name?: string;
@@ -18,19 +19,30 @@ export interface Props {
 
 export const DefaultContentSelectionElement = (props: Props) => {
   const [hovering, setHovering] = useState(false);
+  const colorSettingsContext = useContext(ColorSettingsContext);
+
+  //TODO: Add colorSettingsContextColorManagement
+  let highlightColor = colorSettingsContext?.darkmode ? GREY3 : BLUE0;
+  let mainColor = colorSettingsContext?.darkmode ? GREY5 : WHITE;
+
+  let letteringHighlightColor = WHITE;
+  let letteringMainColor = colorSettingsContext?.darkmode ? GREY3 : BLACK;
 
   const tabStyle = {
     cursor: props.selected ? 'default' : 'pointer',
-    backgroundColor: props.selected || hovering ? BLUE0 : WHITE,
-    color: props.selected || hovering ? WHITE : BLACK,
+    backgroundColor: props.selected || hovering ? highlightColor : mainColor,
+    color:
+      props.selected || hovering ? letteringHighlightColor : letteringMainColor,
     height: '40px',
     width: '280px',
     alignItems: 'center',
-    borderRight: '1px solid ' + WHITE,
+    borderRight:
+      '1px solid ' + (colorSettingsContext?.darkmode ? GREY5 : WHITE),
   };
 
   const closingIconStyle = {
-    color: props.selected || hovering ? WHITE : BLACK,
+    color:
+      props.selected || hovering ? letteringHighlightColor : letteringMainColor,
     marginRight: '8px',
   };
 

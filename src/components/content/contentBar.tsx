@@ -1,7 +1,17 @@
 import { Button } from 'primereact/button';
-import React, { ReactElement, useState } from 'react';
-
-import { BLUE0, GRAY1, TAB_HEIGHT, WHITE } from '../../constants';
+import React, { ReactElement, useContext, useState } from 'react';
+import '../css/globalColors.css';
+import {
+  BLACK,
+  BLUE0,
+  GREY1,
+  GREY3,
+  GREY4,
+  GREY5,
+  TAB_HEIGHT,
+  WHITE,
+} from '../../constants';
+import { ColorSettingsContext } from '../../contexts/colorsettings';
 import { BasicContentbarWrapper } from './basicContentbarWrapper';
 import { ContentbarWrapperInterface } from './contentbarWrapperInterface';
 import { CustomContentbarWrapper } from './customContentbarWrapper';
@@ -20,11 +30,19 @@ interface Props {
 }
 
 export const ContentBar = (props: Props) => {
+  const colorSettingsContext = useContext(ColorSettingsContext);
   const [addButtonHover, setAddButtonHover] = useState(false);
   const [slideLeftButtonHover, setSlideLeftButtonHover] = useState(false);
   const [slideRightButtonHover, setSlideRightButtonHover] = useState(false);
   const [startRenderElements, setStartRenderElements] = useState(0);
   const [endRenderElements, setEndRenderElements] = useState(5);
+
+  //TODO: implement the opportunity to set an own colorset
+  let highlightColor = colorSettingsContext?.darkmode ? GREY4 : BLUE0;
+  let mainColor = colorSettingsContext?.darkmode ? GREY5 : WHITE;
+
+  let letteringHighlightColor = WHITE;
+  let letteringMainColor = colorSettingsContext?.darkmode ? GREY3 : BLACK;
 
   let renderElementsArray:
     | BasicContentbarWrapper[]
@@ -65,13 +83,14 @@ export const ContentBar = (props: Props) => {
 
   return (
     <div
-      className="flex pt-3 pr-3 pl-3"
+      className={
+        (colorSettingsContext?.darkmode ? 'bg-black' : 'bg-grey-1') +
+        ' flex pt-3 pr-3 pl-3'
+      }
       style={{
         height: '56px',
         minHeight: '56px',
-        backgroundColor: props.style.backgroundColor
-          ? props.style.backgroundColor
-          : GRAY1,
+        backgroundColor: props.style.backgroundColor,
       }}
     >
       <div
@@ -79,91 +98,112 @@ export const ContentBar = (props: Props) => {
           height: '40px',
           minHeight: '40px',
           width: '100%',
-          backgroundColor: props.style.backgroundColor
-            ? props.style.backgroundColor
-            : WHITE,
         }}
-        className="flex align-items-center"
+        className={
+          (colorSettingsContext?.darkmode ? 'bg-grey-5' : 'bg-white') +
+          ' flex align-items-center justify-content-between'
+        }
       >
-        {props.contentElements.length > 5 ? (
-          <div
-            onMouseEnter={() => setSlideLeftButtonHover(true)}
-            onMouseLeave={() => setSlideLeftButtonHover(false)}
-            onClick={handleSlideLeftEvent}
-            style={{
-              height: '40px',
-              width: '40px',
-              cursor: 'pointer',
-              backgroundColor: slideLeftButtonHover ? BLUE0 : WHITE,
-            }}
-            className="flex justify-content-center align-items-center"
-          >
-            <i
-              className="pi pi-angle-left"
-              style={{ color: slideLeftButtonHover ? WHITE : 'black' }}
-            />
-          </div>
-        ) : (
-          <></>
-        )}
-        {props.contentElements.length > 5
-          ? renderElementsArray.map((element) =>
-              element.getContentbarComponent(
-                <DefaultContentSelectionElement
-                  setSelectedId3={props.setSelectedId2}
-                />
-              )
-            )
-          : props.contentElements.map((element) =>
-              element.getContentbarComponent(
-                <DefaultContentSelectionElement
-                  setSelectedId3={props.setSelectedId2}
-                />
-              )
-            )}
-        {props.addable ? (
-          <div
-            onMouseEnter={() => setAddButtonHover(true)}
-            onMouseLeave={() => setAddButtonHover(false)}
-            onClick={handleOnClickAddEvent}
-            style={{
-              height: '40px',
-              width: '40px',
-              cursor: 'pointer',
-              backgroundColor: addButtonHover ? BLUE0 : WHITE,
-            }}
-            className="flex justify-content-center align-items-center"
-          >
-            <i
-              className="pi pi-plus"
-              style={{ color: addButtonHover ? WHITE : 'black' }}
-            />
-          </div>
-        ) : (
-          <></>
-        )}
+        <div className="flex align-items-center">
+          {props.contentElements.length > 5 ? (
+            <div
+              onMouseEnter={() => setSlideLeftButtonHover(true)}
+              onMouseLeave={() => setSlideLeftButtonHover(false)}
+              onClick={handleSlideLeftEvent}
+              style={{
+                height: '40px',
+                width: '40px',
+                cursor: 'pointer',
+                backgroundColor: slideLeftButtonHover
+                  ? highlightColor
+                  : mainColor,
+              }}
+              className="flex justify-content-center align-items-center"
+            >
+              <i
+                className="pi pi-angle-left"
+                style={{
+                  color: slideLeftButtonHover
+                    ? letteringHighlightColor
+                    : letteringMainColor,
+                }}
+              />
+            </div>
+          ) : (
+            <></>
+          )}
 
-        {props.contentElements.length > 5 ? (
-          <div
-            onMouseEnter={() => setSlideRightButtonHover(true)}
-            onMouseLeave={() => setSlideRightButtonHover(false)}
-            onClick={handleSlideRightEvent}
-            style={{
-              height: '40px',
-              width: '40px',
-              cursor: 'pointer',
-              backgroundColor: slideRightButtonHover ? BLUE0 : WHITE,
-            }}
-            className="flex justify-content-center align-items-center"
-          >
-            <i
-              className="pi pi-angle-right"
-              style={{ color: slideRightButtonHover ? WHITE : 'black' }}
-            />
-          </div>
-        ) : (
-          <></>
-        )}
+          {props.contentElements.length > 5
+            ? renderElementsArray.map((element) =>
+                element.getContentbarComponent(
+                  <DefaultContentSelectionElement
+                    setSelectedId3={props.setSelectedId2}
+                  />
+                )
+              )
+            : props.contentElements.map((element) =>
+                element.getContentbarComponent(
+                  <DefaultContentSelectionElement
+                    setSelectedId3={props.setSelectedId2}
+                  />
+                )
+              )}
+        </div>
+        <div className="flex align-items-center">
+          {props.addable ? (
+            <div
+              onMouseEnter={() => setAddButtonHover(true)}
+              onMouseLeave={() => setAddButtonHover(false)}
+              onClick={handleOnClickAddEvent}
+              style={{
+                height: '40px',
+                width: '40px',
+                cursor: 'pointer',
+                backgroundColor: addButtonHover ? highlightColor : mainColor,
+              }}
+              className="flex justify-content-center align-items-center"
+            >
+              <i
+                className="pi pi-plus"
+                style={{
+                  color: addButtonHover
+                    ? letteringHighlightColor
+                    : letteringMainColor,
+                }}
+              />
+            </div>
+          ) : (
+            <></>
+          )}
+
+          {props.contentElements.length > 5 ? (
+            <div
+              onMouseEnter={() => setSlideRightButtonHover(true)}
+              onMouseLeave={() => setSlideRightButtonHover(false)}
+              onClick={handleSlideRightEvent}
+              style={{
+                height: '40px',
+                width: '40px',
+                cursor: 'pointer',
+                backgroundColor: slideRightButtonHover
+                  ? highlightColor
+                  : mainColor,
+              }}
+              className="flex justify-content-center align-items-center"
+            >
+              <i
+                className="pi pi-angle-right"
+                style={{
+                  color: slideRightButtonHover
+                    ? letteringHighlightColor
+                    : letteringMainColor,
+                }}
+              />
+            </div>
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
     </div>
   );

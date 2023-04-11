@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BLUE3, GRAY2, WHITE } from 'disa-framework/constants';
+import { BLUE3, GREY2, WHITE } from 'disa-framework/constants';
 
 interface Props {
   selected: boolean;
@@ -17,7 +17,7 @@ export const ContentSelectionElement = (props: Props) => {
 
   const tabStyle = {
     cursor: props.selected ? 'default' : 'pointer',
-    backgroundColor: props.selected || hovering ? BLUE3 : GRAY2,
+    backgroundColor: props.selected || hovering ? BLUE3 : GREY2,
     color: WHITE,
     height: '40px',
     width: '280px',

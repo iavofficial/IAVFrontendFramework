@@ -101,7 +101,8 @@
     "./cookieBanner": "./components/cookie/cookieBanner.js",
     "./constants.css": "./components/css/constants.css",
     "./disaPage.css": "./components/css/disaPage.css",
-    "./disaFramework.css": "./components/css/disaFramework.css"
+    "./disaFramework.css": "./components/css/disaFramework.css",
+    "./globalColors.css": "./components/css/globalColors.css"
   },
   "typesVersions": {
     "*": {
@@ -187,6 +188,9 @@
       ],
       "disaFramework.css": [
         "./components/css/disaFramework.css"
+      ],
+      "globalColors.css": [
+        "./components/css/globalColors.css"
       ]
     }
   }

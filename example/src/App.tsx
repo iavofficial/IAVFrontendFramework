@@ -99,80 +99,80 @@ function App() {
       ),
       TestComponent
     ),
-    // new Group(
-    //   (t: TranslateFunctionType) => t('Test_group'),
-    //   groupIcon,
-    //   undefined,
-    //   false,
-    //   false,
-    //   [
-    // new BasicContentWrapper(
-    //   (
-    //     <SimpleNavbarTab
-    //       name={(t: TranslateFunctionType) =>
-    //         t('example_component', { count: 3 })
-    //       }
-    //       to="/group-example1"
-    //       disabled={false}
-    //       selectedIcon={navFleetSelected}
-    //       deselectedIcon={navFleetDeselected}
-    //     />
-    //   ),
-    //   SecondExampleComponent
-    // ),
-    // new BasicContentWrapper(
-    //   (
-    //     <SimpleNavbarTab
-    //       name={(t: TranslateFunctionType) =>
-    //         t('example_component', { count: 4 })
-    //       }
-    //       to="/group-example2"
-    //       disabled={false}
-    //       selectedIcon={navFleetDetailSelected}
-    //       deselectedIcon={navFleetDetailDeselected}
-    //     />
-    //   ),
-    //   FourthExampleComponent
-    // ),
-    // new Group(
-    //   (t: TranslateFunctionType) => t('Test_group'),
-    //   groupIcon,
-    //   undefined,
-    //   false,
-    //   true,
-    //   [
-    //     new BasicContentWrapper(
-    //       (
-    //         <SimpleNavbarTab
-    //           name={(t: TranslateFunctionType) =>
-    //             t('example_component', { count: 12 })
-    //           }
-    //           to="/group-example12"
-    //           disabled={false}
-    //           selectedIcon={navFleetDetailSelected}
-    //           deselectedIcon={navFleetDetailDeselected}
-    //         />
-    //       ),
-    //       ClassComponentContainer
-    //     ),
-    //   ]
-    // ),
-    //     new BasicContentWrapper(
-    //       (
-    //         <SimpleNavbarTab
-    //           name={(t: TranslateFunctionType) =>
-    //             t('example_component', { count: 43 })
-    //           }
-    //           to="/group-example22"
-    //           disabled={false}
-    //           selectedIcon={navFleetDetailSelected}
-    //           deselectedIcon={navFleetDetailDeselected}
-    //         />
-    //       ),
-    //       FourthExampleComponent
-    //     ),
-    //   ]
-    // ),
+    new Group(
+      (t: TranslateFunctionType) => t('Test_group'),
+      groupIcon,
+      undefined,
+      false,
+      true,
+      [
+        new BasicContentWrapper(
+          (
+            <SimpleNavbarTab
+              name={(t: TranslateFunctionType) =>
+                t('example_component', { count: 3 })
+              }
+              to="/group-example1"
+              disabled={false}
+              selectedIcon={navFleetSelected}
+              deselectedIcon={navFleetDeselected}
+            />
+          ),
+          SecondExampleComponent
+        ),
+        new BasicContentWrapper(
+          (
+            <SimpleNavbarTab
+              name={(t: TranslateFunctionType) =>
+                t('example_component', { count: 4 })
+              }
+              to="/group-example2"
+              disabled={false}
+              selectedIcon={navFleetDetailSelected}
+              deselectedIcon={navFleetDetailDeselected}
+            />
+          ),
+          FourthExampleComponent
+        ),
+        new Group(
+          (t: TranslateFunctionType) => t('Test_group'),
+          groupIcon,
+          undefined,
+          false,
+          true,
+          [
+            new BasicContentWrapper(
+              (
+                <SimpleNavbarTab
+                  name={(t: TranslateFunctionType) =>
+                    t('example_component', { count: 12 })
+                  }
+                  to="/group-example12"
+                  disabled={false}
+                  selectedIcon={navFleetDetailSelected}
+                  deselectedIcon={navFleetDetailDeselected}
+                />
+              ),
+              ClassComponentContainer
+            ),
+          ]
+        ),
+        new BasicContentWrapper(
+          (
+            <SimpleNavbarTab
+              name={(t: TranslateFunctionType) =>
+                t('example_component', { count: 43 })
+              }
+              to="/group-example22"
+              disabled={false}
+              selectedIcon={navFleetDetailSelected}
+              deselectedIcon={navFleetDetailDeselected}
+            />
+          ),
+          FourthExampleComponent
+        ),
+      ]
+    ),
 
     // new BasicContentWrapper(
     //   (
@@ -230,7 +230,7 @@ function App() {
               <UILayer
                 tabAndContentWrappers={views}
                 startingPoint="/"
-                authenticationView={BasicAuthenticationView}
+                authenticationView={AWSAuthenticationView}
                 menuOptions={menuSettingsOptions}
                 collabsible={true}
                 documentsLabelKey="Legal_documents"

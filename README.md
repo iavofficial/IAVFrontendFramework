@@ -151,7 +151,7 @@ The GlobalDataLayer has the properties:
 
 ### Implementing content views ###
 
-Typically, content views in a DiSA app follow a grid design with a gray background and a content bar with further context information.
+Typically, content views in a DiSA app follow a grid design with a grey background and a content bar with further context information.
 To speed up development the coarse structure is already handled with the Content and the optional ContentCell component.
 The children of the Content component are inserted according to the configured layout behaviour. There are four options to configure:
 1. `NONE` - children of the root element have no specific layout class

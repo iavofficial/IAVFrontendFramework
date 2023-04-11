@@ -382,7 +382,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
               style={{ width: '160px' }}
             />
           </div>
-          {authContext?.isNewPasswordRequired ? LoginForm : NewPasswordForm}
+          {authContext?.isNewPasswordRequired ? NewPasswordForm : LoginForm}
         </div>
         <Link
           style={{

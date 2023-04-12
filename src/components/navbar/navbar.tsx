@@ -12,6 +12,7 @@ import { ColorSettingsContext } from '../../contexts/colorsettings';
 import { calculateNavbarArrowFunctionColor } from '../../services/calculateNavbarArrowColor';
 import { BLUE3, GREY1 } from '../../constants';
 import { generateHashOfLength } from '../../services/hash';
+import { NavbarSettingsContext } from '../../contexts/navbarContext';
 
 interface Props {
   tabAndContentWrappers: TabAndContentWrapper[];
@@ -33,19 +34,7 @@ interface Props {
 export const Navbar = (props: Props) => {
   const t = useTranslator();
   const colorSettingsContext = useContext(ColorSettingsContext);
-  const [navbarCollapsed, setNavbarCollapsed] = useState(() =>
-    localStorage.getItem('navbarCollapsed')
-      ? Boolean(JSON.parse(localStorage.getItem('navbarCollapsed') as string))
-      : false
-  );
-
-  const setNavbarCollapsedValue = (navbarCollapsedValue: boolean): void => {
-    localStorage.setItem(
-      'navbarCollapsed',
-      JSON.stringify(navbarCollapsedValue)
-    );
-    setNavbarCollapsed(navbarCollapsedValue);
-  };
+  const navbarSettingsContext = useContext(NavbarSettingsContext);
 
   const identifier = generateHashOfLength(4);
   const identifierLegal = 'a' + identifier;
@@ -66,8 +55,8 @@ export const Navbar = (props: Props) => {
     >
       <SimpleBar
         style={{
-          width: navbarCollapsed ? '40px' : '240px',
-          height: navbarCollapsed ? '83vh' : '87vh',
+          width: navbarSettingsContext?.navbarCollapsed ? '40px' : '240px',
+          height: navbarSettingsContext?.navbarCollapsed ? '83vh' : '87vh',
           color: GREY1,
           position: 'relative',
           overflowX: 'visible',
@@ -75,17 +64,20 @@ export const Navbar = (props: Props) => {
       >
         <>
           {props.tabAndContentWrappers.map((wrapper: TabAndContentWrapper) =>
-            wrapper.getNavbarComponent(navbarCollapsed)
+            wrapper.getNavbarComponent(navbarSettingsContext?.navbarCollapsed!)
           )}
         </>
       </SimpleBar>
       <div style={{ marginTop: 'auto' }}>
         <div
           className={
-            'text-center flex ' + (navbarCollapsed ? 'flex-column' : 'px-3 ')
+            'text-center flex ' +
+            (navbarSettingsContext?.navbarCollapsed ? 'flex-column' : 'px-3 ')
           }
           style={{
-            justifyContent: navbarCollapsed ? 'center' : 'space-between',
+            justifyContent: navbarSettingsContext?.navbarCollapsed
+              ? 'center'
+              : 'space-between',
             marginBottom: '8px',
           }}
         >
@@ -103,7 +95,9 @@ export const Navbar = (props: Props) => {
             <i
               style={{
                 color: BLUE3,
-                marginBottom: navbarCollapsed ? '16px' : '',
+                marginBottom: navbarSettingsContext?.navbarCollapsed
+                  ? '16px'
+                  : '',
                 fontWeight: 'bold',
               }}
               className={'pi pi-info-circle ' + identifierLegal}
@@ -118,10 +112,14 @@ export const Navbar = (props: Props) => {
           />
           {props.collabsible && props.collabsible ? (
             <i
-              onClick={() => setNavbarCollapsedValue(!navbarCollapsed)}
+              onClick={() =>
+                navbarSettingsContext?.setNavbarCollapsed(
+                  !navbarSettingsContext.navbarCollapsed
+                )
+              }
               style={{ cursor: 'pointer' }}
               className={calculateNavbarArrowFunctionColor(
-                navbarCollapsed,
+                navbarSettingsContext?.navbarCollapsed!,
                 colorSettingsContext?.darkmode as boolean
               )}
             />

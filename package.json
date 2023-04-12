@@ -104,7 +104,8 @@
     "./disaFramework.css": "./components/css/disaFramework.css",
     "./globalColors.css": "./components/css/globalColors.css",
     "./colorSettingsContext": "./contexts/colorsettings.js",
-    "./defaultContentSelectionElement": "./components/content/defaultContentSelectionElement.js"
+    "./defaultContentSelectionElement": "./components/content/defaultContentSelectionElement.js",
+    "./hash": "./services/hash.js"
   },
   "typesVersions": {
     "*": {
@@ -199,7 +200,8 @@
       ],
       "defaultContentSelectionElement":[
         "./components/content/defaultContentSelectionElement.d.ts"
-      ]
+      ],
+      "hash":["./services/hash.d.ts"]
     }
   }
 }

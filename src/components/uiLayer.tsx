@@ -24,6 +24,7 @@ import { MainView } from './mainView';
 import { DefaultImprint } from './imprint/defaultImprint';
 import { TabAndContentWrapper } from './navbar/wrapper/tabAndContentWrapper';
 import { calculateLayer } from '../services/calculateLayer';
+import { NavbarSettingsProvider } from '../providers/navbarProvider';
 
 export interface HeaderOptions {
   reactElementRight?: ReactElement;
@@ -75,7 +76,7 @@ export const UILayer = (props: Props) => {
     : BasicAuthenticationView;
 
   return (
-    <>
+    <NavbarSettingsProvider>
       <CookieBanner />
       <Router>
         <Redirector startingPoint={props.startingPoint} />
@@ -120,7 +121,7 @@ export const UILayer = (props: Props) => {
           />
         </Routes>
       </Router>
-    </>
+    </NavbarSettingsProvider>
   );
 };
 

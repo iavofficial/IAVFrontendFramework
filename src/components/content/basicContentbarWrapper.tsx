@@ -10,19 +10,26 @@ export class BasicContentbarWrapper implements ContentbarWrapperInterface {
     private selectedId: string,
     private onClick: (identifier: string) => any,
     private closable: boolean,
-    private onClose: any
+    private onClose: any,
+    private renderElement: ReactElement
   ) {}
 
   getKey() {
     return generateHashOfLength(6);
   }
 
-  testFunction() {
-    console.log('triggerd ebene 2');
-    this.onClose;
+  getRenderElement() {
+    return React.cloneElement(this.renderElement);
+  }
+
+  getId() {
+    return this.id;
   }
 
   getContentbarComponent(defaultContentSelectionElement: ReactElement) {
+    console.log('hier eigene ids: ', this.id);
+    console.log('hier selected: ', this.selectedId);
+
     return React.cloneElement(defaultContentSelectionElement, {
       key: this.getKey(),
       name: this.name,

@@ -1,5 +1,12 @@
 import { Button } from 'primereact/button';
-import React, { ReactElement, useContext, useState } from 'react';
+import React, {
+  ReactElement,
+  useContext,
+  useEffect,
+  useState,
+  useRef,
+  useLayoutEffect,
+} from 'react';
 import '../css/globalColors.css';
 import {
   BLACK,
@@ -16,6 +23,8 @@ import { BasicContentbarWrapper } from './basicContentbarWrapper';
 import { ContentbarWrapperInterface } from './contentbarWrapperInterface';
 import { CustomContentbarWrapper } from './customContentbarWrapper';
 import { DefaultContentSelectionElement } from './defaultContentSelectionElement';
+import { NavbarSettingsContext } from '../../contexts/navbarContext';
+import { calculateWidth } from '../../services/calculateWidth';
 
 interface Props {
   contentElements: BasicContentbarWrapper[] | CustomContentbarWrapper[];
@@ -31,11 +40,25 @@ interface Props {
 
 export const ContentBar = (props: Props) => {
   const colorSettingsContext = useContext(ColorSettingsContext);
+  const navbarSettingsContext = useContext(NavbarSettingsContext);
+  const contentRef = useRef<HTMLDivElement | null>(null);
   const [addButtonHover, setAddButtonHover] = useState(false);
   const [slideLeftButtonHover, setSlideLeftButtonHover] = useState(false);
   const [slideRightButtonHover, setSlideRightButtonHover] = useState(false);
+  const [width, setWidth] = useState(1880);
   const [startRenderElements, setStartRenderElements] = useState(0);
-  const [endRenderElements, setEndRenderElements] = useState(5);
+  const [amountOfRenderedTabElements, setAmountOfRenderedTabElements] =
+    useState(navbarSettingsContext?.navbarCollapsed === true ? 6 : 5);
+
+  useEffect(() => {
+    if (navbarSettingsContext?.navbarCollapsed === true) {
+      setAmountOfRenderedTabElements(6);
+      handleWindowResize();
+    } else {
+      setAmountOfRenderedTabElements(5);
+      handleWindowResize();
+    }
+  }, [navbarSettingsContext?.navbarCollapsed]);
 
   //TODO: implement the opportunity to set an own colorset
   let highlightColor = colorSettingsContext?.darkmode ? GREY4 : BLUE0;
@@ -48,10 +71,13 @@ export const ContentBar = (props: Props) => {
     | BasicContentbarWrapper[]
     | CustomContentbarWrapper[] = [];
 
-  if (props.contentElements.length > 5) {
+  if (
+    props.contentElements.length >=
+    startRenderElements + amountOfRenderedTabElements
+  ) {
     renderElementsArray = props.contentElements.slice(
       startRenderElements,
-      endRenderElements
+      startRenderElements + amountOfRenderedTabElements
     );
   }
 
@@ -62,18 +88,33 @@ export const ContentBar = (props: Props) => {
       }
 
       setStartRenderElements(startRenderElements - 1);
-      setEndRenderElements(endRenderElements - 1);
     }
   };
 
+  function handleWindowResize() {
+    if (contentRef.current !== null) {
+      setWidth(contentRef.current.clientWidth);
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', handleWindowResize);
+
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
+  }, []);
+
   const handleSlideRightEvent = () => {
-    if (endRenderElements < props.contentElements.length) {
+    if (
+      startRenderElements + amountOfRenderedTabElements <
+      props.contentElements.length
+    ) {
       if (props.onClickRightSlideButton) {
         props.onClickRightSlideButton();
       }
 
       setStartRenderElements(startRenderElements + 1);
-      setEndRenderElements(endRenderElements + 1);
     }
   };
 
@@ -83,6 +124,8 @@ export const ContentBar = (props: Props) => {
 
   return (
     <div
+      ref={contentRef}
+      id="contentbar"
       className={
         (colorSettingsContext?.darkmode ? 'bg-black' : 'bg-grey-1') +
         ' flex pt-3 pr-3 pl-3'
@@ -105,7 +148,7 @@ export const ContentBar = (props: Props) => {
         }
       >
         <div className="flex align-items-center">
-          {props.contentElements.length > 5 ? (
+          {props.contentElements.length > amountOfRenderedTabElements ? (
             <div
               onMouseEnter={() => setSlideLeftButtonHover(true)}
               onMouseLeave={() => setSlideLeftButtonHover(false)}
@@ -133,10 +176,15 @@ export const ContentBar = (props: Props) => {
             <></>
           )}
 
-          {props.contentElements.length > 5
+          {props.contentElements.length > amountOfRenderedTabElements
             ? renderElementsArray.map((element) =>
                 element.getContentbarComponent(
                   <DefaultContentSelectionElement
+                    width={calculateWidth(
+                      navbarSettingsContext?.navbarCollapsed!,
+                      width - (80 + 32),
+                      props.addable as boolean
+                    )}
                     setSelectedId3={props.setSelectedId2}
                   />
                 )
@@ -144,6 +192,11 @@ export const ContentBar = (props: Props) => {
             : props.contentElements.map((element) =>
                 element.getContentbarComponent(
                   <DefaultContentSelectionElement
+                    width={calculateWidth(
+                      navbarSettingsContext?.navbarCollapsed!,
+                      width - (80 + 32),
+                      props.addable as boolean
+                    )}
                     setSelectedId3={props.setSelectedId2}
                   />
                 )
@@ -176,7 +229,7 @@ export const ContentBar = (props: Props) => {
             <></>
           )}
 
-          {props.contentElements.length > 5 ? (
+          {props.contentElements.length > amountOfRenderedTabElements ? (
             <div
               onMouseEnter={() => setSlideRightButtonHover(true)}
               onMouseLeave={() => setSlideRightButtonHover(false)}

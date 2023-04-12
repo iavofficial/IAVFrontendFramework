@@ -1,16 +1,86 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CellPaddings, ContentCell } from 'disa-framework/contentCell';
 import { Content, LayoutBehaviour } from 'disa-framework/content';
+import { generateHashOfLength } from 'disa-framework/hash';
+import { ContentbarExampleWithText } from './ContentbarExample/ContentbarExampleWithText';
 import { BasicContentbarWrapper } from 'disa-framework/basicContentbarWrapper';
 
 export const TestComponent = () => {
-  const [selectedId, setSelectedId] = useState('');
+  const [selectedId, setSelectedId] = useState('test123');
+
+  let exampleArray = [
+    new BasicContentbarWrapper(
+      'test123',
+      'car123',
+      selectedId,
+      () => test3,
+      true,
+      () => test4,
+      <ContentbarExampleWithText emampleText="car123" />
+    ),
+    new BasicContentbarWrapper(
+      'test124',
+      'car124',
+      selectedId,
+      function () {},
+      true,
+      function () {},
+      <ContentbarExampleWithText emampleText="car124" />
+    ),
+    new BasicContentbarWrapper(
+      'test125',
+      'car125',
+      selectedId,
+      function () {},
+      true,
+      function () {},
+      <ContentbarExampleWithText emampleText="car125" />
+    ),
+    new BasicContentbarWrapper(
+      'test126',
+      'car126',
+      selectedId,
+      () => test,
+      true,
+      function () {},
+      <ContentbarExampleWithText emampleText="car126" />
+    ),
+    new BasicContentbarWrapper(
+      'test127',
+      'car127',
+      selectedId,
+      () => test,
+      true,
+      function () {},
+      <ContentbarExampleWithText emampleText="car127" />
+    ),
+    new BasicContentbarWrapper(
+      'test128',
+      'car128',
+      selectedId,
+      () => test,
+      true,
+      function () {},
+      <ContentbarExampleWithText emampleText="car128" />
+    ),
+    new BasicContentbarWrapper(
+      'test129',
+      'car129',
+      selectedId,
+      () => test,
+      true,
+      function () {},
+      <ContentbarExampleWithText emampleText="car129" />
+    ),
+  ];
 
   const selectElement = (value: string) => {
+    console.log('ausgeführt mit:', value);
+
     setSelectedId(value);
   };
 
-  let test = () => {
+  const test = () => {
     console.log('onclick add function triggerd');
   };
 
@@ -21,7 +91,6 @@ export const TestComponent = () => {
   let test4 = () => {
     console.log('onclick right function triggerd');
   };
-
   return (
     <Content
       addable={true}
@@ -30,103 +99,15 @@ export const TestComponent = () => {
       onClickRightSlideButton={test4}
       setSelectedId1={selectElement}
       layoutBehaviour={LayoutBehaviour.GRID}
-      contentElements={[
-        new BasicContentbarWrapper(
-          'test124',
-          'car123',
-          selectedId,
-          () => test3,
-          true,
-          test4
-        ),
-        new BasicContentbarWrapper(
-          'test123',
-          'car124',
-          selectedId,
-          function () {},
-          true,
-          function () {}
-        ),
-        new BasicContentbarWrapper(
-          'test125',
-          'car125',
-          selectedId,
-          function () {},
-          true,
-          function () {}
-        ),
-        new BasicContentbarWrapper(
-          'test126',
-          'car126',
-          selectedId,
-          () => test,
-          true,
-          function () {}
-        ),
-        new BasicContentbarWrapper(
-          'test127',
-          'car127',
-          selectedId,
-          () => test,
-          true,
-          function () {}
-        ),
-        new BasicContentbarWrapper(
-          'test128',
-          'car128',
-          selectedId,
-          () => test,
-          true,
-          function () {}
-        ),
-        new BasicContentbarWrapper(
-          'test129',
-          'car129',
-          selectedId,
-          () => test,
-          true,
-          function () {}
-        ),
-      ]}
+      contentElements={exampleArray}
     >
-      <div className={'col-8 grid grid-nogutter'}>
-        <ContentCell colWidth={6} paddings={CellPaddings.FULL}>
-          <span>First row left</span>
-
-          <div className="mt-3">
-            <h2>layer one</h2>
-          </div>
-          <div></div>
-        </ContentCell>
-        <ContentCell colWidth={6} paddings={CellPaddings.VERT_RIGHT}>
-          <span>First row center</span>
-        </ContentCell>
-        <ContentCell paddings={CellPaddings.BOT_HOR}>
-          <span>Second row left</span>
-        </ContentCell>
-        <ContentCell paddings={CellPaddings.BOT_RIGHT}>
-          <span>Second row center left</span>
-        </ContentCell>
-        <ContentCell paddings={CellPaddings.BOT_RIGHT}>
-          <span>Second row center</span>
-        </ContentCell>
-        <ContentCell paddings={CellPaddings.BOT_RIGHT}>
-          <span>Second row center right</span>
-        </ContentCell>
-        <ContentCell paddings={CellPaddings.BOT_RIGHT}>
-          <span>Second row right</span>
-        </ContentCell>
-        <ContentCell colWidth={12} paddings={CellPaddings.BOT_HOR}>
-          <span>Third row</span>
-        </ContentCell>
-      </div>
-      <ContentCell
-        paddings={CellPaddings.VERT_RIGHT}
-        colWidth={4}
-        clearStyle={true}
-      >
-        <span>Right with cleared style</span>
-      </ContentCell>
+      <>
+        {exampleArray.map((basicContentbarWrapper: BasicContentbarWrapper) => {
+          if (basicContentbarWrapper.getId() === selectedId) {
+            return basicContentbarWrapper.getRenderElement();
+          }
+        })}
+      </>
     </Content>
   );
 };

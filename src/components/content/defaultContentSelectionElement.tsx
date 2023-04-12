@@ -1,4 +1,4 @@
-import { ReactElement, useContext, useState } from 'react';
+import { ReactElement, useCallback, useContext, useState } from 'react';
 import React from 'react';
 import { Button } from 'primereact/button';
 import { ContextMenu } from 'primereact/contextmenu';
@@ -10,6 +10,7 @@ import { ColorSettingsContext } from '../../contexts/colorsettings';
 
 export interface Props {
   name?: string;
+  width: number;
   id?: string;
   selected?: boolean;
   closable?: boolean;
@@ -28,13 +29,14 @@ export const DefaultContentSelectionElement = (props: Props) => {
   let letteringHighlightColor = WHITE;
   let letteringMainColor = colorSettingsContext?.darkmode ? GREY3 : BLACK;
 
+  let widthvalue = props.width.toString() + 'px';
   const tabStyle = {
     cursor: props.selected ? 'default' : 'pointer',
     backgroundColor: props.selected || hovering ? highlightColor : mainColor,
     color:
       props.selected || hovering ? letteringHighlightColor : letteringMainColor,
     height: '40px',
-    width: '280px',
+    width: widthvalue,
     alignItems: 'center',
     borderRight:
       '1px solid ' + (colorSettingsContext?.darkmode ? GREY5 : WHITE),

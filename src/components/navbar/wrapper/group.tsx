@@ -12,7 +12,7 @@ export class Group implements TabAndContentWrapper {
 
   constructor(
     private _name: string | ((t: TranslateFunctionType) => string),
-    private _logo: string | undefined,
+    private _logo: ReactElement | undefined,
     private _accordionHeaderTextColor: string | undefined,
     private _fontWeightBold: boolean,
     private _collapsible: boolean,

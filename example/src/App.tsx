@@ -100,7 +100,7 @@ function App() {
     ),
     new Group(
       (t: TranslateFunctionType) => t('Test_group'),
-      groupIcon,
+      <InfoIcon />,
       undefined,
       false,
       true,
@@ -133,7 +133,7 @@ function App() {
         ),
         new Group(
           (t: TranslateFunctionType) => t('Test_group'),
-          groupIcon,
+          <InfoIcon />,
           undefined,
           false,
           true,

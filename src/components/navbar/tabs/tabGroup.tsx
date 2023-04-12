@@ -15,10 +15,11 @@ import {
 } from '../../../services/calculateLineColorGroup';
 import { navbarTabProps } from './navbarTab';
 import { ColorSettingsContext } from '../../../contexts/colorsettings';
+import { SvgIcon } from './SvgIcon';
 
 interface Props {
   name: string | ((t: TranslateFunctionType) => string);
-  logo?: string;
+  logo?: ReactElement;
   collapsible?: boolean;
   fontWeightBold: boolean;
   collapsed?: boolean;
@@ -43,6 +44,9 @@ export const TabGroup = (props: PropsWithNavbarTabChildren<Props>) => {
 
   let letteringHighlightColor = WHITE;
   let letteringMainColor = colorSettingsContext?.darkmode ? GREY3 : BLACK;
+
+  let iconHighlightColor = WHITE;
+  let iconMainColor = colorSettingsContext?.darkmode ? GREY3 : BLUE0;
 
   const collapsible =
     props.collapsible !== undefined ? props.collapsible : true;
@@ -158,10 +162,9 @@ export const TabGroup = (props: PropsWithNavbarTabChildren<Props>) => {
         <div style={styleActiveLineFirstLayerTop} />
         <div id="secondActiveLine" style={styleActiveLineSecondLayerTop} />
 
-        <img
-          style={{ width: '24px', height: '24px', objectFit: 'contain' }}
-          className={identifierLegal}
-          src={props.logo}
+        <SvgIcon
+          color={hovering ? iconHighlightColor : iconMainColor}
+          element={props.logo}
         />
         <Tooltip
           content={props.name instanceof Function ? props.name(t) : props.name}
@@ -186,10 +189,9 @@ export const TabGroup = (props: PropsWithNavbarTabChildren<Props>) => {
         <div style={styleActiveLineFirstLayerTop} />
         <div style={styleActiveLineSecondLayerTop} />
         <div className="flex align-items-center">
-          <img
-            style={{ width: '24px', height: '24px', objectFit: 'contain' }}
-            src={props.logo}
-            alt=""
+          <SvgIcon
+            color={hovering ? iconHighlightColor : iconMainColor}
+            element={props.logo}
           />
           <span id="navbar-tab-name">
             {props.name instanceof Function ? props.name(t) : props.name}

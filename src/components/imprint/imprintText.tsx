@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ColorSettingsContext } from '../../contexts/colorsettings';
 import { useTranslator } from '../internationalization/translators';
+import '../css/globalColors.css';
 
 export const ImprintText = () => {
   const t = useTranslator();
+  const colorSettingsContext = useContext(ColorSettingsContext);
 
   return (
-    <div>
+    <div
+      className={
+        colorSettingsContext?.darkmode
+          ? 'bg-grey-5 color-white'
+          : 'bg-white color-black'
+      }
+    >
       <p className={'font-bold'}>{t('Imprint')}</p>
       <span>IAV GmbH Ingenieurgesellschaft Auto und Verkehr</span>
       <br />
@@ -18,7 +27,13 @@ export const ImprintText = () => {
       <span>Fax: +49 30 3997-89926</span> <br />
       <span lang="EN-GB">E-Mail: impressum[at]iav.com</span> <br />
       <span>
-        {t('Internet')}: <a href="http://www.iav.com">www.iav.com</a>
+        {t('Internet')}:{' '}
+        <a
+          href="http://www.iav.com"
+          className={colorSettingsContext?.darkmode ? 'color-blue-3' : ''}
+        >
+          www.iav.com
+        </a>
       </span>{' '}
       <br /> <br />
       <span>{t('Headquarter')}: Berlin</span> <br />

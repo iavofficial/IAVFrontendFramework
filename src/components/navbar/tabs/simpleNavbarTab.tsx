@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Tooltip } from 'primereact/tooltip';
-import { BLACK, BLUE0, GREY3, GREY4, GREY5, WHITE } from '../../../constants';
+import { BLACK, BLUE0, GREY3, GREY5, WHITE } from '../../../constants';
 import { useTranslator } from '../../internationalization/translators';
 import './tabs.css';
 import { generateHashOfLength } from '../../../services/hash';
@@ -15,13 +15,9 @@ import {
 } from '../../../services/calculateLineColorTab';
 import { revertColor } from '../../../services/calculateLineColorGroup';
 import { ColorSettingsContext } from '../../../contexts/colorsettings';
+import { SvgIcon } from './SvgIcon';
 
-export interface Props {
-  firstLayerCollabsed?: boolean;
-  secondLayerCollabsed?: boolean;
-  lastElementFirstLayer?: boolean;
-  lastElementSecondLayer?: boolean;
-}
+export interface Props {}
 
 export const SimpleNavbarTab: navbarTab<Props> = (props) => {
   const [hovering, setHovering] = useState(false);
@@ -35,6 +31,9 @@ export const SimpleNavbarTab: navbarTab<Props> = (props) => {
 
   let letteringHighlightColor = WHITE;
   let letteringMainColor = colorSettingsContext?.darkmode ? GREY3 : BLACK;
+
+  let iconHighlightColor = WHITE;
+  let iconMainColor = colorSettingsContext?.darkmode ? GREY3 : BLUE0;
 
   const styleActiveLineFirstLayerTop = {
     marginRight: '2px',
@@ -133,21 +132,20 @@ export const SimpleNavbarTab: navbarTab<Props> = (props) => {
     <div
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
-      className="flex align-items-center"
+      className={'flex align-items-center ' + identifierLegal}
       style={tabStyleDefault}
     >
       <div style={styleActiveLineFirstLayerTop} />
       <div id="secondActiveLine" style={styleActiveLineSecondLayerTop} />
-      <img
-        style={{ width: '24px', height: '24px', objectFit: 'contain' }}
-        className={identifierLegal}
-        src={
-          (active || hovering) && !props.disabled
-            ? props.selectedIcon.valueOf()
-            : props.deselectedIcon.valueOf()
-        }
-      />
 
+      <SvgIcon
+        color={
+          (active || hovering) && !props.disabled
+            ? iconHighlightColor
+            : iconMainColor
+        }
+        element={props.icon}
+      />
       <Tooltip
         content={props.name instanceof Function ? props.name(t) : props.name}
         target={identifierWithDot}
@@ -165,13 +163,13 @@ export const SimpleNavbarTab: navbarTab<Props> = (props) => {
       <div style={styleActiveLineSecondLayerTop} />
 
       <div style={{ width: '228px' }} className="flex align-items-center">
-        <img
-          src={
+        <SvgIcon
+          color={
             (active || hovering) && !props.disabled
-              ? props.selectedIcon.valueOf()
-              : props.deselectedIcon.valueOf()
+              ? iconHighlightColor
+              : iconMainColor
           }
-          style={{ width: '24px', height: '24px', objectFit: 'contain' }}
+          element={props.icon}
         />
         <span id="navbar-tab-name">
           {props.name instanceof Function ? props.name(t) : props.name}

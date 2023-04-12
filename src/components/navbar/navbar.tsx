@@ -1,20 +1,17 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ContextMenu } from 'primereact/contextmenu';
 import './navbar.css';
 import '../css/globalColors.css';
-import UserPic from '../../assets/images/user.png';
-import Settings from '../../assets/images/settings.png';
-import { Clock } from '../clock';
-import { AuthContext } from '../../contexts/auth';
 import { TabAndContentWrapper } from './wrapper/tabAndContentWrapper';
 import { MenuSettingsOptions } from '../header/SettingsMenu';
-import { WHITE, BLUE3, GREEN, GREY1 } from '../../constants';
 import { useTranslator } from '../internationalization/translators';
+import { Tooltip } from 'primereact/tooltip';
 import SimpleBar from 'simplebar-react';
 import 'simplebar-react/dist/simplebar.min.css';
 import { ColorSettingsContext } from '../../contexts/colorsettings';
 import { calculateNavbarArrowFunctionColor } from '../../services/calculateNavbarArrowColor';
+import { BLUE3, GREY1 } from '../../constants';
+import { generateHashOfLength } from '../../services/hash';
 
 interface Props {
   tabAndContentWrappers: TabAndContentWrapper[];
@@ -49,6 +46,10 @@ export const Navbar = (props: Props) => {
     );
     setNavbarCollapsed(navbarCollapsedValue);
   };
+
+  const identifier = generateHashOfLength(4);
+  const identifierLegal = 'a' + identifier;
+  const identifierWithDot = '.' + identifierLegal;
 
   return (
     <div
@@ -99,15 +100,22 @@ export const Navbar = (props: Props) => {
             }}
             to="/documents"
           >
-            {/* {t(props.documentsLabelKey ? props.documentsLabelKey : 'Imprint')} */}
             <i
               style={{
                 color: BLUE3,
                 marginBottom: navbarCollapsed ? '16px' : '',
+                fontWeight: 'bold',
               }}
-              className="pi pi-info-circle"
+              className={'pi pi-info-circle ' + identifierLegal}
             />
           </Link>
+          <Tooltip
+            content={t(
+              props.documentsLabelKey ? props.documentsLabelKey : 'Imprint'
+            )}
+            target={identifierWithDot}
+            id="hover-image"
+          />
           {props.collabsible && props.collabsible ? (
             <i
               onClick={() => setNavbarCollapsedValue(!navbarCollapsed)}
@@ -117,7 +125,9 @@ export const Navbar = (props: Props) => {
                 colorSettingsContext?.darkmode as boolean
               )}
             />
-          ) : null}
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </div>

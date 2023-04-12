@@ -25,7 +25,7 @@ import navExpertSelected from './assets/nav_expert_selected.png';
 import navExpertDeselected from './assets/nav_expert_deselected.png';
 import navFleetSelected from './assets/nav_fleet_selected.png';
 import navFleetDeselected from './assets/nav_fleet_deselected.png';
-import infoIconSelected from './assets/infoIcon_selected.svg';
+import { ReactComponent as InfoIcon } from './assets/infoIcon_selected.svg';
 import infoIconDeselcted from './assets/infoIcon_deselected.svg';
 
 import { Group } from 'disa-framework/group';
@@ -92,9 +92,8 @@ function App() {
         <SimpleNavbarTab
           name={'Example without Translation'}
           to="/"
+          icon={<InfoIcon />}
           disabled={false}
-          selectedIcon={navDashboardSelected}
-          deselectedIcon={navDashboardDeselected}
         />
       ),
       TestComponent
@@ -114,8 +113,7 @@ function App() {
               }
               to="/group-example1"
               disabled={false}
-              selectedIcon={navFleetSelected}
-              deselectedIcon={navFleetDeselected}
+              icon={<InfoIcon />}
             />
           ),
           SecondExampleComponent
@@ -128,8 +126,7 @@ function App() {
               }
               to="/group-example2"
               disabled={false}
-              selectedIcon={navFleetDetailSelected}
-              deselectedIcon={navFleetDetailDeselected}
+              icon={<InfoIcon />}
             />
           ),
           FourthExampleComponent
@@ -149,8 +146,7 @@ function App() {
                   }
                   to="/group-example12"
                   disabled={false}
-                  selectedIcon={navFleetDetailSelected}
-                  deselectedIcon={navFleetDetailDeselected}
+                  icon={<InfoIcon />}
                 />
               ),
               ClassComponentContainer
@@ -165,8 +161,7 @@ function App() {
               }
               to="/group-example22"
               disabled={false}
-              selectedIcon={navFleetDetailSelected}
-              deselectedIcon={navFleetDetailDeselected}
+              icon={<InfoIcon />}
             />
           ),
           FourthExampleComponent
@@ -230,7 +225,7 @@ function App() {
               <UILayer
                 tabAndContentWrappers={views}
                 startingPoint="/"
-                authenticationView={AWSAuthenticationView}
+                authenticationView={BasicAuthenticationView}
                 menuOptions={menuSettingsOptions}
                 collabsible={true}
                 documentsLabelKey="Legal_documents"

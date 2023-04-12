@@ -102,7 +102,9 @@
     "./constants.css": "./components/css/constants.css",
     "./disaPage.css": "./components/css/disaPage.css",
     "./disaFramework.css": "./components/css/disaFramework.css",
-    "./globalColors.css": "./components/css/globalColors.css"
+    "./globalColors.css": "./components/css/globalColors.css",
+    "./colorSettingsContext": "./contexts/colorsettings.js",
+    "./defaultContentSelectionElement": "./components/content/defaultContentSelectionElement.js"
   },
   "typesVersions": {
     "*": {
@@ -124,7 +126,7 @@
       "basicContentbarWrapper": [
         "./components/content/basicContentbarWrapper.d.ts"
       ],
-      "/colorProvider": [
+      "colorProvider": [
         "./providers/colorProvider.d.ts"
       ],
       "constants": [
@@ -191,6 +193,12 @@
       ],
       "globalColors.css": [
         "./components/css/globalColors.css"
+      ],
+      "colorSettingsContext": [
+        "./contexts/colorsettings.d.ts"
+      ],
+      "defaultContentSelectionElement":[
+        "./components/content/defaultContentSelectionElement.d.ts"
       ]
     }
   }

@@ -1,7 +1,6 @@
 import React, { FormEvent, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { BLUE0, WHITE, BLACK, BLUE3 } from '../../../constants';
-import AppLogo from '../../../assets/images/Application-Name.svg';
 import { AuthContext } from '../../../contexts/auth';
 import { LoginButtonWithSpinner } from '../loginButtonWithSpinner';
 import { useTranslator } from '../../internationalization/translators';
@@ -10,14 +9,14 @@ import '../../css/authenticationView.css';
 import '../../css/globalColors.css';
 import loginBackgroundLightMode from '../../../assets/images/login_background_lightMode.png';
 import loginBackgroundDarkMode from '../../../assets/images/login_background_darkMode.png';
-import companyLogoLightMode from '../../../assets/images/company_logo_lightMode.svg';
-import appLogoDarkMode from '../../../assets/images/app_logo_darkMode.svg';
-import appLogoLightMode from '../../../assets/images/app_logo_lightMode.svg';
-import companyLogoDarkMode from '../../../assets/images/company_logo_darkMode.svg';
+import { ReactComponent as CompanyLogo } from '../../../assets/images/company_logo.svg';
+import { ReactComponent as AppLogo } from '../../../assets/images/app_logo.svg';
 import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
 import { LanguageContext } from '../../../contexts/language';
 import { parseLanguageRessourcesIntoDropdownFormat } from '../../../services/parseLanguageRessourcesIntoDropdownFormat';
 import { ColorSettingsContext } from '../../../contexts/colorsettings';
+import { generateHashOfLength } from '../../../services/hash';
+import { Tooltip } from 'primereact/tooltip';
 
 export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
   const colorSettingsContext = useContext(ColorSettingsContext);
@@ -35,19 +34,14 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
   };
 
   const companyLogoDefault = (props: AuthenticationViewProps) => (
-    <img
-      src={
-        colorSettingsContext?.darkmode
-          ? companyLogoDarkMode
-          : companyLogoLightMode
-      }
-      alt="Company Logo"
+    <div
       style={{
         display: props.headerOptions?.hideRight ? 'none' : 'flex',
-        width: '130px',
-        marginRight: '-5px',
+        alignItems: 'center',
       }}
-    />
+    >
+      <CompanyLogo fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE} />
+    </div>
   );
 
   const appLogoDefault = (props: AuthenticationViewProps) => (
@@ -55,20 +49,9 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
       style={{
         display: props.headerOptions?.hideLeft ? 'none' : 'flex',
         alignItems: 'center',
-        padding: '6px 0px 6px 0px',
       }}
     >
-      <img
-        id="iav-logo"
-        src={
-          colorSettingsContext?.darkmode ? appLogoDarkMode : appLogoLightMode
-        }
-        alt="DISA Logo"
-        style={{
-          width: '420px',
-          marginLeft: '5px',
-        }}
-      />
+      <AppLogo fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE} />
     </div>
   );
 
@@ -107,8 +90,11 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
     </div>
   );
 
-  //TODO clarify how to handle the imprint topic
   //TODO: Think of concept how to set backgroundcolor or backgroundimage
+
+  const identifier = generateHashOfLength(4);
+  const identifierLegal = 'a' + identifier;
+  const identifierWithDot = '.' + identifierLegal;
   return (
     <div
       className="flex"
@@ -295,12 +281,18 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
           to="/documents"
           target="_blank"
         >
-          {/* {t(props.documentsLabelKey ? props.documentsLabelKey : 'Imprint')} */}
           <span
-            className={'pi pi-info-circle'}
+            className={'pi pi-info-circle ' + identifierLegal}
             style={{ fontSize: 'medium', fontWeight: 'bold', color: BLUE3 }}
           />
         </Link>
+        <Tooltip
+          content={t(
+            props.documentsLabelKey ? props.documentsLabelKey : 'Imprint'
+          )}
+          target={identifierWithDot}
+          id="hover-image"
+        />
         <span
           className={
             colorSettingsContext?.darkmode ? 'color-white' : 'color-black'

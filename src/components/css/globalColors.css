@@ -44,3 +44,11 @@
   .color-grey-3{
     color: var(--grey-3);
   }
+
+  .color-blue-3{
+    color: var(--blue-3);
+  }
+
+  .color-red{
+    color: var(--red);
+  }

@@ -10,10 +10,8 @@ import { AuthenticationViewProps } from './authenticationView';
 import '../../css/authenticationView.css';
 import '../../css/globalColors.css';
 import '../../css/error.css';
-import companyLogoLightMode from '../../../assets/images/company_logo_lightMode.svg';
-import companyLogoDarkMode from '../../../assets/images/company_logo_darkMode.svg';
-import appLogoDarkMode from '../../../assets/images/app_logo_darkMode.svg';
-import appLogoLightMode from '../../../assets/images/app_logo_lightMode.svg';
+import { ReactComponent as CompanyLogo } from '../../../assets/images/company_logo.svg';
+import { ReactComponent as AppLogo } from '../../../assets/images/app_logo.svg';
 import loginBackgroundLightMode from '../../../assets/images/login_background_lightMode.png';
 import loginBackgroundDarkMode from '../../../assets/images/login_background_darkMode.png';
 import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
@@ -23,6 +21,8 @@ import {
   parseLanguageRessourcesIntoDropdownFormat,
 } from '../../../services/parseLanguageRessourcesIntoDropdownFormat';
 import { ColorSettingsContext } from '../../../contexts/colorsettings';
+import { generateHashOfLength } from '../../../services/hash';
+import { Tooltip } from 'primereact/tooltip';
 
 export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
   const [email, setEmail] = useState('');
@@ -69,19 +69,14 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
   };
 
   const companyLogoDefault = (props: AuthenticationViewProps) => (
-    <img
-      src={
-        colorSettingsContext?.darkmode
-          ? companyLogoDarkMode
-          : companyLogoLightMode
-      }
-      alt="Company Logo"
+    <div
       style={{
         display: props.headerOptions?.hideRight ? 'none' : 'flex',
-        width: '130px',
-        marginRight: '-5px',
+        alignItems: 'center',
       }}
-    />
+    >
+      <CompanyLogo fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE} />
+    </div>
   );
 
   const appLogoDefault = (props: AuthenticationViewProps) => (
@@ -89,20 +84,9 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
       style={{
         display: props.headerOptions?.hideLeft ? 'none' : 'flex',
         alignItems: 'center',
-        padding: '6px 0px 6px 0px',
       }}
     >
-      <img
-        id="iav-logo"
-        src={
-          colorSettingsContext?.darkmode ? appLogoDarkMode : appLogoLightMode
-        }
-        alt="DISA Logo"
-        style={{
-          width: '420px',
-          marginLeft: '5px',
-        }}
-      />
+      <AppLogo fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE} />
     </div>
   );
 
@@ -294,6 +278,9 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
 
   //TODO: Think of concept how to set backgroundcolor or backgroundimage
 
+  const identifier = generateHashOfLength(4);
+  const identifierLegal = 'a' + identifier;
+  const identifierWithDot = '.' + identifierLegal;
   return (
     <div
       className="flex"
@@ -398,12 +385,18 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
           to="/documents"
           target="_blank"
         >
-          {/* {t(props.documentsLabelKey ? props.documentsLabelKey : 'Imprint')} */}
           <span
-            className={'pi pi-info-circle'}
+            className={'pi pi-info-circle ' + identifierLegal}
             style={{ fontSize: 'medium', fontWeight: 'bold', color: BLUE3 }}
           />
         </Link>
+        <Tooltip
+          content={t(
+            props.documentsLabelKey ? props.documentsLabelKey : 'Imprint'
+          )}
+          target={identifierWithDot}
+          id="hover-image"
+        />
         <span
           className={
             colorSettingsContext?.darkmode ? 'color-white' : 'color-black'

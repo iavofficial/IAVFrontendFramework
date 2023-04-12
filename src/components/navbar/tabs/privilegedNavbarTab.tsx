@@ -20,16 +20,12 @@ export const PrivilegedNavbarTab: navbarTab<Props> = (props) => {
   );
   return permitted ? (
     <SimpleNavbarTab
-      deselectedIcon={props.deselectedIcon}
-      selectedIcon={props.selectedIcon}
+      icon={props.icon}
       disabled={props.disabled}
       name={props.name}
       to={props.to}
       navbarCollapsed={props.navbarCollapsed}
-      firstLayerCollabsed={props.firstLayerCollabsed}
-      secondLayerCollabsed={props.secondLayerCollabsed}
-      lastElementFirstLayer={props.lastElementFirstLayer}
-      lastElementSecondLayer={props.lastElementSecondLayer}
+      isLastElementOfLayer={props.isLastElementOfLayer}
     />
   ) : (
     <></>

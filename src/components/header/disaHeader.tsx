@@ -2,17 +2,13 @@ import React, { ReactElement, useContext, useState } from 'react';
 import './disaHeader.css';
 import '../css/globalColors.css';
 import { ContextMenu } from 'primereact/contextmenu';
-import appLogoLightMode from '../../assets/images/app_logo_lightMode.svg';
-import appLogoDarkMode from '../../assets/images/app_logo_darkMode.svg';
-import userIconLightMode from '../../assets/images/icon_user_lightMode.svg';
-import userIconDarkMode from '../../assets/images/icon_user_darkMode.svg';
-import notificationPicLightMode from '../../assets/images/icon_notification_lightMode.svg';
-import notificationPicDarkMode from '../../assets/images/icon_notification_darkMode.svg';
-import settingsLightMode from '../../assets/images/icon_settings_lightMode.svg';
-import settingsDarkMode from '../../assets/images/icon_settings_darkMode.svg';
-import companyLogoLightMode from '../../assets/images/company_logo_lightMode.svg';
-import companyLogoDarkMode from '../../assets/images/company_logo_darkMode.svg';
-import { BLUE0, BLUE1, MAGENTA2 } from '../../constants';
+import { ReactComponent as UserIcon } from '../../assets/images/icon_user.svg';
+import { ReactComponent as NotificationIcon } from '../../assets/images/icon_notification.svg';
+import { ReactComponent as CompanyLogo } from '../../assets/images/company_logo.svg';
+import { ReactComponent as AppLogo } from '../../assets/images/app_logo.svg';
+import { ReactComponent as SettingsIcon } from '../../assets/images/icon_settings.svg';
+
+import { BLUE0, BLUE1, BLUE3, GREY3, MAGENTA2, WHITE } from '../../constants';
 import { MenuSettingsOptions, SettingsMenu } from './SettingsMenu';
 import { UserMenu } from './UserMenu';
 import { ColorSettingsContext } from '../../contexts/colorsettings';
@@ -37,19 +33,7 @@ export const DisaHeader = (props: Props) => {
   const colorSettingsContext = useContext(ColorSettingsContext);
 
   const companyLogoDefault = (props: Props) => (
-    <img
-      src={
-        colorSettingsContext?.darkmode
-          ? companyLogoDarkMode
-          : companyLogoLightMode
-      }
-      alt="Company Logo"
-      style={{
-        display: props.headerOptions?.hideRight ? 'none' : 'flex',
-        width: '130px',
-        marginRight: '-10px',
-      }}
-    />
+    <CompanyLogo fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE} />
   );
 
   const appLogoDefault = (props: Props) => (
@@ -57,19 +41,9 @@ export const DisaHeader = (props: Props) => {
       style={{
         display: props.headerOptions?.hideLeft ? 'none' : 'flex',
         alignItems: 'center',
-        width: '420px',
       }}
     >
-      <img
-        id="iav-logo"
-        src={
-          colorSettingsContext?.darkmode ? appLogoDarkMode : appLogoLightMode
-        }
-        alt="DISA Logo"
-        style={{
-          width: '420px',
-        }}
-      />
+      <AppLogo fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE} />
     </div>
   );
 
@@ -123,12 +97,8 @@ export const DisaHeader = (props: Props) => {
               cursor: 'pointer',
             }}
           >
-            <img
-              src={
-                colorSettingsContext?.darkmode
-                  ? notificationPicDarkMode
-                  : notificationPicLightMode
-              }
+            <NotificationIcon
+              fill={colorSettingsContext?.darkmode ? GREY3 : WHITE}
             />
             <div
               className="flex justify-content-center align-items-center"
@@ -160,12 +130,8 @@ export const DisaHeader = (props: Props) => {
             }}
             onKeyDown={(e) => hideSettingsMenu(e)}
           >
-            <img
-              src={
-                colorSettingsContext?.darkmode
-                  ? settingsDarkMode
-                  : settingsLightMode
-              }
+            <SettingsIcon
+              fill={colorSettingsContext?.darkmode ? GREY3 : WHITE}
             />
           </a>
           <a
@@ -182,14 +148,7 @@ export const DisaHeader = (props: Props) => {
             }}
             onKeyDown={(e) => hideUserMenu(e)}
           >
-            <img
-              className="user-logo"
-              src={
-                colorSettingsContext?.darkmode
-                  ? userIconDarkMode
-                  : userIconLightMode
-              }
-            />
+            <UserIcon fill={colorSettingsContext?.darkmode ? GREY3 : WHITE} />
           </a>
         </div>
         <div

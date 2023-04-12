@@ -23,7 +23,7 @@ export const LoginButtonWithSpinner = (props: Props) => (
         width: '150px',
         float: 'right',
         border: 'none',
-        borderRadius: '10px',
+        borderRadius: '8px',
         backgroundColor: props.style?.backGroundColor
           ? props.style.backGroundColor
           : BLUE3,

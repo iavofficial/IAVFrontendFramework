@@ -18,7 +18,6 @@ interface MainViewProps {
   documentsComponent?: React.ComponentType<any>;
   documentsLabelKey?: string;
   headerOptions?: HeaderOptions;
-  colorOptions?: Coloroptions;
   tabAndContentWrappers: TabAndContentWrapper[];
 }
 
@@ -33,17 +32,13 @@ export const MainView = (props: MainViewProps) => {
       }}
     >
       <div style={{ flex: '0 0 auto' }}>
-        <DisaHeader
-          headerOptions={props.headerOptions}
-          colorOptions={props.colorOptions}
-        />
+        <DisaHeader headerOptions={props.headerOptions} />
       </div>
       <div style={{ display: 'flex', flex: '1 1 auto', overflow: 'auto' }}>
         <Navbar
           tabAndContentWrappers={props.tabAndContentWrappers}
           collabsible={props.collabsible}
           documentsLabelKey={props.documentsLabelKey}
-          colorOptions={props.colorOptions}
         />
         <Outlet />
         <Routes>

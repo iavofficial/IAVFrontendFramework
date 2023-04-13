@@ -1,4 +1,4 @@
-import React, { ReactElement, useContext, useState } from 'react';
+import React, { ReactElement, useContext } from 'react';
 import './disaHeader.css';
 import '../css/globalColors.css';
 import { ContextMenu } from 'primereact/contextmenu';
@@ -7,8 +7,7 @@ import { ReactComponent as NotificationIcon } from '../../assets/images/icon_not
 import { ReactComponent as CompanyLogo } from '../../assets/images/company_logo.svg';
 import { ReactComponent as AppLogo } from '../../assets/images/app_logo.svg';
 import { ReactComponent as SettingsIcon } from '../../assets/images/icon_settings.svg';
-
-import { BLUE0, BLUE1, BLUE3, GREY3, MAGENTA2, WHITE } from '../../constants';
+import { BLUE3, GREY3, MAGENTA2, WHITE } from '../../constants';
 import { MenuSettingsOptions, SettingsMenu } from './SettingsMenu';
 import { UserMenu } from './UserMenu';
 import { ColorSettingsContext } from '../../contexts/colorsettings';
@@ -17,12 +16,8 @@ interface Props {
   headerOptions?: {
     reactElementRight?: ReactElement;
     reactElementLeft?: ReactElement;
-    letteringElementLeft?: string;
     hideLeft?: boolean;
     hideRight?: boolean;
-  };
-  colorOptions?: {
-    headerBackground?: string;
   };
   menuOptions?: MenuSettingsOptions;
 }
@@ -33,7 +28,14 @@ export const DisaHeader = (props: Props) => {
   const colorSettingsContext = useContext(ColorSettingsContext);
 
   const companyLogoDefault = (props: Props) => (
-    <CompanyLogo fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE} />
+    <div
+      style={{
+        display: props.headerOptions?.hideRight ? 'none' : 'flex',
+        alignItems: 'center',
+      }}
+    >
+      <CompanyLogo fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE} />
+    </div>
   );
 
   const appLogoDefault = (props: Props) => (
@@ -67,7 +69,8 @@ export const DisaHeader = (props: Props) => {
         ' flex justify-content-between align-items-center'
       }
       style={{
-        backgroundColor: props.colorOptions?.headerBackground,
+        backgroundColor:
+          colorSettingsContext?.headerColorOptions?.backgroundColor,
       }}
     >
       <div id="left-element" className={'flex'}>
@@ -131,7 +134,13 @@ export const DisaHeader = (props: Props) => {
             onKeyDown={(e) => hideSettingsMenu(e)}
           >
             <SettingsIcon
-              fill={colorSettingsContext?.darkmode ? GREY3 : WHITE}
+              fill={
+                colorSettingsContext?.headerColorOptions?.settingsLogoColor
+                  ? colorSettingsContext?.headerColorOptions?.settingsLogoColor
+                  : colorSettingsContext?.darkmode
+                  ? GREY3
+                  : WHITE
+              }
             />
           </a>
           <a
@@ -148,7 +157,15 @@ export const DisaHeader = (props: Props) => {
             }}
             onKeyDown={(e) => hideUserMenu(e)}
           >
-            <UserIcon fill={colorSettingsContext?.darkmode ? GREY3 : WHITE} />
+            <UserIcon
+              fill={
+                colorSettingsContext?.headerColorOptions?.userLogoColor
+                  ? colorSettingsContext?.headerColorOptions?.userLogoColor
+                  : colorSettingsContext?.darkmode
+                  ? GREY3
+                  : WHITE
+              }
+            />
           </a>
         </div>
         <div

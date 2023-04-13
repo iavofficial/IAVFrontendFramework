@@ -22,12 +22,39 @@ export const DefaultContentSelectionElement = (props: Props) => {
   const [hovering, setHovering] = useState(false);
   const colorSettingsContext = useContext(ColorSettingsContext);
 
-  //TODO: Add colorSettingsContextColorManagement
-  let highlightColor = colorSettingsContext?.darkmode ? GREY3 : BLUE0;
-  let mainColor = colorSettingsContext?.darkmode ? GREY5 : WHITE;
+  let highlightColor = colorSettingsContext?.contentbarTabColorOptions
+    ?.highlightColor
+    ? colorSettingsContext?.contentbarTabColorOptions?.highlightColor
+    : colorSettingsContext?.darkmode
+    ? GREY3
+    : BLUE0;
+  let mainColor = colorSettingsContext?.contentbarTabColorOptions?.mainColor
+    ? colorSettingsContext?.contentbarTabColorOptions?.mainColor
+    : colorSettingsContext?.darkmode
+    ? GREY5
+    : WHITE;
 
-  let letteringHighlightColor = WHITE;
-  let letteringMainColor = colorSettingsContext?.darkmode ? GREY3 : BLACK;
+  let letteringHighlightColor = colorSettingsContext?.contentbarTabColorOptions
+    ?.textHighlightColor
+    ? colorSettingsContext?.contentbarTabColorOptions?.textHighlightColor
+    : WHITE;
+  let letteringMainColor = colorSettingsContext?.contentbarTabColorOptions
+    ?.textMainColor
+    ? colorSettingsContext?.contentbarTabColorOptions?.textMainColor
+    : colorSettingsContext?.darkmode
+    ? GREY3
+    : BLACK;
+
+  let iconHighlightColor = colorSettingsContext?.contentbarTabColorOptions
+    ?.iconHighlightColor
+    ? colorSettingsContext?.contentbarTabColorOptions?.iconHighlightColor
+    : WHITE;
+  let iconMainColor = colorSettingsContext?.contentbarTabColorOptions
+    ?.iconMainColor
+    ? colorSettingsContext?.contentbarTabColorOptions?.iconMainColor
+    : colorSettingsContext?.darkmode
+    ? GREY3
+    : BLACK;
 
   let widthvalue = props.width.toString() + 'px';
   const tabStyle = {
@@ -43,8 +70,7 @@ export const DefaultContentSelectionElement = (props: Props) => {
   };
 
   const closingIconStyle = {
-    color:
-      props.selected || hovering ? letteringHighlightColor : letteringMainColor,
+    color: props.selected || hovering ? iconHighlightColor : iconMainColor,
     marginRight: '8px',
   };
 

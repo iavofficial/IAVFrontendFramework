@@ -36,15 +36,6 @@ export interface HeaderOptions {
 }
 
 export interface Coloroptions {
-  headerBackground?: string;
-  navbarColorSettings?: {
-    menuSettingsBackground?: string;
-    menuSettingsTextColor?: string;
-    clockColor?: string;
-    documentsColor?: string;
-    dateTextColor?: string;
-    navbarBackground?: string;
-  };
   authViewColorSettings?: {
     headerBackground?: string;
     fullBackground?: string;
@@ -65,7 +56,7 @@ export interface Props {
   documentsComponent?: React.ComponentType<any>;
   documentsLabelKey?: string;
   headerOptions?: HeaderOptions;
-  colorOptions?: Coloroptions;
+
   collabsible?: boolean;
 }
 
@@ -87,7 +78,6 @@ export const UILayer = (props: Props) => {
               <AuthenticationView
                 documentsLabelKey={props.documentsLabelKey}
                 headerOptions={props.headerOptions}
-                colorOptions={props.colorOptions}
               />
             }
           />
@@ -108,7 +98,6 @@ export const UILayer = (props: Props) => {
             element={
               <MainView
                 headerOptions={props.headerOptions}
-                colorOptions={props.colorOptions}
                 collabsible={props.collabsible}
                 menuOptions={props.menuOptions}
                 documentsLabelKey={props.documentsLabelKey}

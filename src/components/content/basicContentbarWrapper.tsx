@@ -1,7 +1,6 @@
 import React, { ReactElement } from 'react';
 import { generateHashOfLength } from '../../services/hash';
 import { ContentbarWrapperInterface } from './contentbarWrapperInterface';
-import { DefaultContentSelectionElement } from './defaultContentSelectionElement';
 
 export class BasicContentbarWrapper implements ContentbarWrapperInterface {
   constructor(
@@ -27,9 +26,6 @@ export class BasicContentbarWrapper implements ContentbarWrapperInterface {
   }
 
   getContentbarComponent(defaultContentSelectionElement: ReactElement) {
-    console.log('hier eigene ids: ', this.id);
-    console.log('hier selected: ', this.selectedId);
-
     return React.cloneElement(defaultContentSelectionElement, {
       key: this.getKey(),
       name: this.name,

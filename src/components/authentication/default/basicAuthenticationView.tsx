@@ -64,7 +64,8 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
       }
       style={{
         backgroundColor:
-          props.colorOptions?.authViewColorSettings?.headerBackground,
+          colorSettingsContext?.authenticationColorOptions
+            ?.headerBackgroundColor,
         color: 'white',
         alignItems: 'center',
         height: '56px',
@@ -102,27 +103,34 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
         height: '100%',
         position: 'relative',
         backgroundColor:
-          props.colorOptions?.authViewColorSettings?.fullBackground,
+          colorSettingsContext?.authenticationColorOptions
+            ?.fullScreenBackgroundColor,
       }}
     >
-      <img
-        style={{
-          inset: '0px',
-          position: 'absolute',
-          zIndex: '-100',
-          height: '100vh',
-          width: '100vw',
-          objectFit: 'cover',
-        }}
-        src={
-          colorSettingsContext?.darkmode
-            ? loginBackgroundDarkMode
-            : loginBackgroundLightMode
-        }
-      />
+      {colorSettingsContext?.authenticationColorOptions
+        ?.fullScreenBackgroundColor ? (
+        <></>
+      ) : (
+        <img
+          style={{
+            inset: '0px',
+            position: 'absolute',
+            zIndex: '-100',
+            height: '100vh',
+            width: '100vw',
+            objectFit: 'cover',
+          }}
+          src={
+            colorSettingsContext?.darkmode
+              ? loginBackgroundDarkMode
+              : loginBackgroundLightMode
+          }
+        />
+      )}
+
       <div
         className={
-          (colorSettingsContext?.darkmode ? 'bg-grey-5' : 'bg-white') +
+          (colorSettingsContext?.darkmode ? 'bg-grey-5' : 'bg-white-1') +
           ' flex flex-column shadow-6'
         }
         style={{
@@ -130,7 +138,8 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
           width: '620px',
           margin: 'auto',
           backgroundColor:
-            props.colorOptions?.authViewColorSettings?.loginFormBackground,
+            colorSettingsContext?.authenticationColorOptions
+              ?.loginFormBackgroundColor,
         }}
       >
         <div>
@@ -169,8 +178,8 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
               id="change-language-dropdown"
               className={
                 colorSettingsContext?.darkmode
-                  ? 'bg-grey-5 color-white test'
-                  : 'bg-white color-black test1'
+                  ? 'bg-grey-5 color-white'
+                  : 'bg-white-1 color-black'
               }
               placeholder={
                 langContext?.resources[langContext.activeLang].translation
@@ -203,6 +212,9 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                   fontWeight: 'normal',
                   marginBottom: '2px',
                   fontSize: '12px',
+                  color:
+                    colorSettingsContext?.authenticationColorOptions
+                      ?.inputFieldDescriptionTextColor,
                 }}
                 className={
                   (colorSettingsContext?.darkmode
@@ -220,17 +232,28 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                 className={
                   (colorSettingsContext?.darkmode
                     ? 'bg-grey-4 color-white'
-                    : 'bg-white color-black') + ' p-inputtext'
+                    : 'bg-white-1 color-black') + ' p-inputtext'
                 }
                 required
                 autoFocus
-                style={{ marginBottom: '40px' }}
+                style={{
+                  marginBottom: '40px',
+                  backgroundColor:
+                    colorSettingsContext?.authenticationColorOptions
+                      ?.inputFieldBackgroundColor,
+                  color:
+                    colorSettingsContext?.authenticationColorOptions
+                      ?.inputFieldTextColor,
+                }}
               />
               <label
                 style={{
                   fontWeight: 'normal',
                   marginBottom: '2px',
                   fontSize: '12px',
+                  color:
+                    colorSettingsContext?.authenticationColorOptions
+                      ?.inputFieldDescriptionTextColor,
                 }}
                 className={
                   (colorSettingsContext?.darkmode
@@ -248,20 +271,21 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                 className={
                   (colorSettingsContext?.darkmode
                     ? 'bg-grey-4 color-white'
-                    : 'bg-white color-black') + ' p-inputtext'
+                    : 'bg-white-1 color-black') + ' p-inputtext'
                 }
                 required
-                style={{ marginBottom: '40px' }}
+                style={{
+                  marginBottom: '40px',
+                  backgroundColor:
+                    colorSettingsContext?.authenticationColorOptions
+                      ?.inputFieldBackgroundColor,
+                  color:
+                    colorSettingsContext?.authenticationColorOptions
+                      ?.inputFieldTextColor,
+                }}
               />
               <div>
-                <LoginButtonWithSpinner
-                  isLoading={authContext?.isLoading}
-                  style={{
-                    backGroundColor:
-                      props.colorOptions?.authViewColorSettings
-                        ?.loginButtonBackground,
-                  }}
-                />
+                <LoginButtonWithSpinner isLoading={authContext?.isLoading} />
               </div>
             </div>
           </form>
@@ -283,7 +307,15 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
         >
           <span
             className={'pi pi-info-circle ' + identifierLegal}
-            style={{ fontSize: 'medium', fontWeight: 'bold', color: BLUE3 }}
+            style={{
+              fontSize: 'medium',
+              fontWeight: 'bold',
+              color: colorSettingsContext?.authenticationColorOptions
+                ?.legalNoticeIconColor
+                ? colorSettingsContext?.authenticationColorOptions
+                    ?.legalNoticeIconColor
+                : BLUE3,
+            }}
           />
         </Link>
         <Tooltip
@@ -301,7 +333,9 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
             alignSelf: 'center',
             padding: '24px',
             fontSize: '11px',
-            color: props.colorOptions?.authViewColorSettings?.companyTextColor,
+            color:
+              colorSettingsContext?.authenticationColorOptions
+                ?.companyTextColor,
           }}
         >
           &copy; {props.companyText ? props.companyText : 'IAV GmbH 2023'}

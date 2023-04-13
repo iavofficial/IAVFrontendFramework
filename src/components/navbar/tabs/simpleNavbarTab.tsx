@@ -1,7 +1,15 @@
 import React, { useContext, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Tooltip } from 'primereact/tooltip';
-import { BLACK, BLUE0, GREY3, GREY5, WHITE } from '../../../constants';
+import {
+  BLACK,
+  BLUE0,
+  GREY3,
+  GREY4,
+  GREY5,
+  GREYTEST,
+  WHITE,
+} from '../../../constants';
 import { useTranslator } from '../../internationalization/translators';
 import './tabs.css';
 import { generateHashOfLength } from '../../../services/hash';
@@ -26,14 +34,43 @@ export const SimpleNavbarTab: navbarTab<Props> = (props) => {
   const active = useLocation().pathname === props.to;
 
   //TODO: Add colorSettingsContextColorManagement
-  let highlightColor = colorSettingsContext?.darkmode ? GREY3 : BLUE0;
-  let mainColor = colorSettingsContext?.darkmode ? GREY5 : WHITE;
+  let highlightColor = colorSettingsContext?.navbarColorOptions?.tabColorOptions
+    ?.highlightColor
+    ? colorSettingsContext?.navbarColorOptions?.tabColorOptions?.highlightColor
+    : colorSettingsContext?.darkmode
+    ? GREY3
+    : BLUE0;
+  let mainColor = colorSettingsContext?.navbarColorOptions?.tabColorOptions
+    ?.mainColor
+    ? colorSettingsContext?.navbarColorOptions?.tabColorOptions?.mainColor
+    : colorSettingsContext?.darkmode
+    ? GREY5
+    : WHITE;
 
-  let letteringHighlightColor = WHITE;
-  let letteringMainColor = colorSettingsContext?.darkmode ? GREY3 : BLACK;
+  let letteringHighlightColor = colorSettingsContext?.navbarColorOptions
+    ?.tabColorOptions?.letteringHighlightColor
+    ? colorSettingsContext?.navbarColorOptions?.tabColorOptions
+        ?.letteringHighlightColor
+    : WHITE;
+  let letteringMainColor = colorSettingsContext?.navbarColorOptions
+    ?.tabColorOptions?.letteringMainColor
+    ? colorSettingsContext?.navbarColorOptions?.tabColorOptions
+        ?.letteringMainColor
+    : colorSettingsContext?.darkmode
+    ? GREY3
+    : BLACK;
 
-  let iconHighlightColor = WHITE;
-  let iconMainColor = colorSettingsContext?.darkmode ? GREY3 : BLUE0;
+  let iconHighlightColor = colorSettingsContext?.navbarColorOptions
+    ?.tabColorOptions?.iconHighlightColor
+    ? colorSettingsContext?.navbarColorOptions?.tabColorOptions
+        ?.iconHighlightColor
+    : WHITE;
+  let iconMainColor = colorSettingsContext?.navbarColorOptions?.tabColorOptions
+    ?.iconMainColor
+    ? colorSettingsContext?.navbarColorOptions?.tabColorOptions?.iconMainColor
+    : colorSettingsContext?.darkmode
+    ? GREY3
+    : BLUE0;
 
   const styleActiveLineFirstLayerTop = {
     marginRight: '2px',

@@ -33,9 +33,6 @@ interface Props {
   onClickAddButton?: () => any;
   onClickLeftSlideButton?: () => any;
   onClickRightSlideButton?: () => any;
-  style: {
-    backgroundColor?: string;
-  };
 }
 
 export const ContentBar = (props: Props) => {
@@ -60,12 +57,28 @@ export const ContentBar = (props: Props) => {
     }
   }, [navbarSettingsContext?.navbarCollapsed]);
 
-  //TODO: implement the opportunity to set an own colorset
-  let highlightColor = colorSettingsContext?.darkmode ? GREY4 : BLUE0;
-  let mainColor = colorSettingsContext?.darkmode ? GREY5 : WHITE;
+  let highlightColor = colorSettingsContext?.contentbarColorOptions
+    ?.buttonColorHighlight
+    ? colorSettingsContext?.contentbarColorOptions?.buttonColorHighlight
+    : colorSettingsContext?.darkmode
+    ? GREY4
+    : BLUE0;
+  let mainColor = colorSettingsContext?.contentbarColorOptions?.buttonColorMain
+    ? colorSettingsContext?.contentbarColorOptions?.buttonColorMain
+    : colorSettingsContext?.darkmode
+    ? GREY5
+    : WHITE;
 
-  let letteringHighlightColor = WHITE;
-  let letteringMainColor = colorSettingsContext?.darkmode ? GREY3 : BLACK;
+  let letteringHighlightColor = colorSettingsContext?.contentbarColorOptions
+    ?.iconHighlightColor
+    ? colorSettingsContext?.contentbarColorOptions?.iconHighlightColor
+    : WHITE;
+  let letteringMainColor = colorSettingsContext?.contentbarColorOptions
+    ?.iconMainColor
+    ? colorSettingsContext?.contentbarColorOptions?.iconMainColor
+    : colorSettingsContext?.darkmode
+    ? GREY3
+    : BLACK;
 
   let renderElementsArray:
     | BasicContentbarWrapper[]
@@ -133,7 +146,8 @@ export const ContentBar = (props: Props) => {
       style={{
         height: '56px',
         minHeight: '56px',
-        backgroundColor: props.style.backgroundColor,
+        backgroundColor:
+          colorSettingsContext?.contentColorOptions?.contentBackground,
       }}
     >
       <div
@@ -141,9 +155,11 @@ export const ContentBar = (props: Props) => {
           height: '40px',
           minHeight: '40px',
           width: '100%',
+          backgroundColor:
+            colorSettingsContext?.contentbarColorOptions?.backgroundColor,
         }}
         className={
-          (colorSettingsContext?.darkmode ? 'bg-grey-5' : 'bg-white') +
+          (colorSettingsContext?.darkmode ? 'bg-grey-5' : 'bg-white-1') +
           ' flex align-items-center justify-content-between'
         }
       >

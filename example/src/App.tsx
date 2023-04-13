@@ -26,7 +26,7 @@ import navExpertDeselected from './assets/nav_expert_deselected.png';
 import navFleetSelected from './assets/nav_fleet_selected.png';
 import navFleetDeselected from './assets/nav_fleet_deselected.png';
 import { ReactComponent as InfoIcon } from './assets/infoIcon_selected.svg';
-import infoIconDeselcted from './assets/infoIcon_deselected.svg';
+import applogo from './assets/App-Logo.png';
 
 import { Group } from 'disa-framework/group';
 import navFleetDetailSelected from './assets/nav_fleet_detail_selected.png';
@@ -44,6 +44,7 @@ import { useState } from 'react';
 import { ClassComponentContainer } from './components/classComponentContainer';
 import { LegalDocuments } from './components/legalDocuments';
 import { TestComponent } from './components/testComponent';
+import { BLACK, GREEN, RED, WHITE } from 'disa-framework/constants';
 
 //TODO: Generate unique key for every tabelement
 function App() {
@@ -214,18 +215,84 @@ function App() {
     // ),
   ];
 
+  const LIGHT = '#D3DBE5';
+  const BACKGROUND = '#E6E9F1';
+  const AUSWAHL = '#F2E4C9';
+  const HIGHLIGHT = '#D4A64E';
+  const HIGHLIGHT_DARK = '#805D1A';
+  const DARK1 = '#162230';
+  const DARK2 = '#273444';
+  const DARK3 = '#455263';
+
+  let colorOptions = {
+    headerColorOptions: {
+      backgroundColor: DARK1,
+    },
+    navbarColorOptions: {
+      backgroundColor: DARK1,
+      navbarCollapseArrowColor: WHITE,
+      legalDocumentsIconColor: WHITE,
+      tabColorOptions: {
+        mainColor: DARK1,
+        highlightColor: DARK3,
+        letteringMainColor: LIGHT,
+        letteringHighlightColor: HIGHLIGHT,
+        iconMainColor: LIGHT,
+        iconHighlightColor: HIGHLIGHT,
+      },
+    },
+    contentColorOptions: {
+      // contentBackground: GREEN,
+      // contentCellBackground: RED,
+    },
+    contentbarColorOptions: {
+      // backgroundColor: GREEN,
+      buttonColorMain: LIGHT,
+      buttonColorHighlight: HIGHLIGHT,
+      iconMainColor: BLACK,
+      iconHighlightColor: WHITE,
+    },
+    contentbarTabColorOptions: {
+      highlightColor: HIGHLIGHT,
+      mainColor: LIGHT,
+      textMainColor: BLACK,
+      textHighlightColor: WHITE,
+      iconMainColor: BLACK,
+      iconHighlightColor: WHITE,
+    },
+    authenticationColorOptions: {
+      fullScreenBackgroundColor: WHITE,
+      // loginFormBackgroundColor: GREEN,
+      loginButtonBackgroundColor: HIGHLIGHT,
+      // loginButtonTextColor: GREEN,
+      headerBackgroundColor: DARK1,
+      companyTextColor: DARK1,
+      legalNoticeIconColor: DARK1,
+      // inputFieldDescriptionTextColor: GREEN,
+      // inputFieldBackgroundColor: GREEN,
+      // inputFieldTextColor: WHITE,
+      // passwortRequirementsTextColor: GREEN,
+    },
+  };
+
+  let headerOptions = {
+    hideRight: true,
+    reactElementLeft: <img src={applogo} />,
+  };
+
   return (
     <DummyAuthenticationProvider
       additionalContextValues={{ getUserGroups: () => [] }}
     >
       <GlobalDataLayer translations={translations}>
-        <ColorProvider>
+        <ColorProvider colorOptions={colorOptions}>
           <FirstExampleContextComponent>
             <SecondExampleContextComponent>
               <UILayer
+                headerOptions={headerOptions}
                 tabAndContentWrappers={views}
                 startingPoint="/"
-                authenticationView={BasicAuthenticationView}
+                authenticationView={AWSAuthenticationView}
                 menuOptions={menuSettingsOptions}
                 collabsible={true}
                 documentsLabelKey="Legal_documents"

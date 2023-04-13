@@ -11,8 +11,6 @@ export interface Props {
   layoutBehaviour?: LayoutBehaviour;
   setSelectedId1: (value: string) => void;
   addable?: boolean;
-  backgroundColorContentBar?: string;
-  backgroundColorContent?: string;
   onClickAddButton: () => any;
   onClickLeftSlideButton?: () => any;
   onClickRightSlideButton?: () => any;
@@ -51,7 +49,6 @@ export const Content = (props: React.PropsWithChildren<Props>) => {
           onClickAddButton={props.onClickAddButton}
           addable={props.addable}
           contentElements={props.contentElements}
-          style={{ backgroundColor: props.backgroundColorContentBar }}
         />
       )}
 
@@ -62,7 +59,8 @@ export const Content = (props: React.PropsWithChildren<Props>) => {
         }
         style={{
           height: '100%',
-          backgroundColor: props.backgroundColorContent,
+          backgroundColor:
+            colorSettingsContext?.contentColorOptions?.contentBackground,
           overflow: 'auto',
         }}
       >

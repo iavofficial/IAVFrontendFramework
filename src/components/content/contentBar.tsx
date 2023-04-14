@@ -29,6 +29,7 @@ import { calculateWidth } from '../../services/calculateWidth';
 interface Props {
   contentElements: BasicContentbarWrapper[] | CustomContentbarWrapper[];
   addable?: boolean;
+  onClose2: (value: string) => any;
   setSelectedId2: (value: string) => any;
   onClickAddButton?: () => any;
   onClickLeftSlideButton?: () => any;
@@ -202,6 +203,7 @@ export const ContentBar = (props: Props) => {
                       props.addable as boolean
                     )}
                     setSelectedId3={props.setSelectedId2}
+                    onClose3={props.onClose2}
                   />
                 )
               )
@@ -214,6 +216,7 @@ export const ContentBar = (props: Props) => {
                       props.addable as boolean
                     )}
                     setSelectedId3={props.setSelectedId2}
+                    onClose3={props.onClose2}
                   />
                 )
               )}

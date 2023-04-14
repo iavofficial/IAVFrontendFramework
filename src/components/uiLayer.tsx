@@ -11,11 +11,10 @@ import {
   useNavigate,
 } from 'react-router-dom';
 import './css/constants.css';
+import './css/globalChangesOnPrimeReactComponents.css';
 import './css/disaPage.css';
 import './css/disaFramework.css';
 import { BasicAuthenticationView } from './authentication/default/basicAuthenticationView';
-import { Navbar } from './navbar/navbar';
-import { ImprintText } from './imprint/imprintText';
 import { MenuSettingsOptions } from './header/SettingsMenu';
 import { CookieBanner } from './cookie/cookieBanner';
 import { AuthContext } from '../contexts/auth';
@@ -29,23 +28,16 @@ import { NavbarSettingsProvider } from '../providers/navbarProvider';
 export interface HeaderOptions {
   reactElementRight?: ReactElement;
   reactElementLeft?: ReactElement;
-  reactElementFullAuthenticationHeader?: ReactElement;
   letteringElementLeft?: string;
   hideLeft?: boolean;
   hideRight?: boolean;
 }
 
-export interface Coloroptions {
-  authViewColorSettings?: {
-    headerBackground?: string;
-    fullBackground?: string;
-    loginBackground?: string;
-    loginBtnBackground?: string;
-    letteringElementLeftColor?: string;
-    letteringElementRightColor?: string;
-    companyTextColor?: string;
-    legalDocumentsColor?: string;
-  };
+export interface AuthOptions {
+  backgroundImage?: string;
+  companyText?: string;
+  documentsLabelKey?: string;
+  preventDarkmode?: string;
 }
 
 export interface Props {
@@ -56,7 +48,8 @@ export interface Props {
   documentsComponent?: React.ComponentType<any>;
   documentsLabelKey?: string;
   headerOptions?: HeaderOptions;
-
+  authOptions?: AuthOptions;
+  authBackgroundImage?: string;
   collabsible?: boolean;
 }
 
@@ -76,7 +69,7 @@ export const UILayer = (props: Props) => {
             path="/login"
             element={
               <AuthenticationView
-                documentsLabelKey={props.documentsLabelKey}
+                authOptions={props.authOptions}
                 headerOptions={props.headerOptions}
               />
             }

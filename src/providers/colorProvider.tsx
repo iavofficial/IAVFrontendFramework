@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ColorObject } from '../components/colorObjectType';
+import { BLUE0 } from '../constants';
 import { ColorSettingsContext } from '../contexts/colorsettings';
 
 export interface Props {
@@ -13,9 +14,21 @@ export const ColorProvider = (props: React.PropsWithChildren<Props>) => {
       : false
   );
 
-  const setDarkmodeToLocalStorage = (darkmode: boolean) => {
-    localStorage.setItem('darkmode', JSON.stringify(darkmode));
-    setDarkmode(darkmode);
+  useEffect(() => {
+    if (darkmode) {
+      document.querySelector('body')?.setAttribute('data-theme', 'dark');
+    }
+  }, []);
+
+  const setDarkmodeToLocalStorage = (darkmodeValue: boolean) => {
+    if (darkmodeValue) {
+      document.querySelector('body')?.setAttribute('data-theme', 'dark');
+    } else {
+      document.querySelector('body')?.setAttribute('data-theme', 'light');
+    }
+
+    localStorage.setItem('darkmode', JSON.stringify(darkmodeValue));
+    setDarkmode(darkmodeValue);
   };
 
   let returnObject = {

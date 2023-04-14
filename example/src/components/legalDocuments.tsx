@@ -17,7 +17,7 @@ export const LegalDocuments = () => {
     >
       <div
         className={
-          (colorSettingsContext?.darkmode ? 'bg-grey-5' : 'bg-white') +
+          (colorSettingsContext?.darkmode ? 'bg-grey-5' : 'bg-white-1') +
           ' flex px-3'
         }
         style={{

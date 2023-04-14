@@ -1,9 +1,7 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { ContextMenu } from 'primereact/contextmenu';
-import { AuthContext } from '../../contexts/auth';
 import { LanguageContext, Translations } from '../../contexts/language';
 import { useTranslator } from '../internationalization/translators';
-import { useNavigate } from 'react-router-dom';
 import { RadioButton } from 'primereact/radiobutton';
 import { ColorSettingsContext } from '../../contexts/colorsettings';
 
@@ -66,9 +64,8 @@ interface Props {
 
 export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
   (props, ref) => {
-    const navigate = useNavigate();
     const colorSettingsContext = useContext(ColorSettingsContext);
-    const authContext = useContext(AuthContext);
+
     const langContext = useContext(LanguageContext);
     const t = useTranslator();
 
@@ -130,14 +127,19 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
       props.menuOptions?.options,
       'colormodetoggle'
     );
-    //TODO: Implement the Darkmode/Lightmode toggle instead
+
     if (
       !colorModeToggleOption ||
       (colorModeToggleOption && !colorModeToggleOption.hidden)
     ) {
+      let colorSetting = colorSettingsContext?.darkmode
+        ? 'bg-grey-5 color-white'
+        : ' bg-white-1 color-black';
       basicOptions.push({
         template: (
-          <div className="flex justify-content-center mt-2 mb-2">
+          <div
+            className={colorSetting + ' flex justify-content-center mt-2 mb-2'}
+          >
             <div className="flex align-items-center">
               <RadioButton
                 inputId="lightMode"

@@ -3,7 +3,7 @@ import { DisaHeader } from './header/disaHeader';
 import { Navbar } from './navbar/navbar';
 import { DefaultImprint } from './imprint/defaultImprint';
 import { MenuSettingsOptions } from './header/SettingsMenu';
-import { Coloroptions, HeaderOptions } from './uiLayer';
+import { HeaderOptions } from './uiLayer';
 import {
   BrowserRouter as Router,
   Route,

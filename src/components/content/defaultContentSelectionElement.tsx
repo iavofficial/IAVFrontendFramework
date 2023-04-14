@@ -1,7 +1,4 @@
-import { ReactElement, useCallback, useContext, useState } from 'react';
-import React from 'react';
-import { Button } from 'primereact/button';
-import { ContextMenu } from 'primereact/contextmenu';
+import React, { ReactElement, useCallback, useContext, useState } from 'react';
 import { BLACK, BLUE0, GREY3, GREY4, GREY5, WHITE } from '../../constants';
 import { generateHashOfLength } from '../../services/hash';
 import { Tooltip } from 'primereact/tooltip';
@@ -14,7 +11,7 @@ export interface Props {
   id?: string;
   selected?: boolean;
   closable?: boolean;
-  onClose?: () => void;
+  onClose3: (value: string) => void;
   setSelectedId3: (value: string) => any;
 }
 
@@ -76,8 +73,8 @@ export const DefaultContentSelectionElement = (props: Props) => {
 
   const handleOnCloseEvent = (e: any) => {
     e.stopPropagation();
-    if (props.onClose) {
-      props.onClose();
+    if (props.onClose3) {
+      props.onClose3(props.id!);
     }
   };
 
@@ -125,7 +122,7 @@ export const DefaultContentSelectionElement = (props: Props) => {
         {props.closable ? (
           <div style={{ position: 'absolute', right: '5px' }}>
             <i
-              onClick={handleOnCloseEvent}
+              onClick={() => handleOnCloseEvent(props.id!)}
               style={closingIconStyle}
               className="pi pi-times tabelements-only"
             />

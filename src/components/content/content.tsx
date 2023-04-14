@@ -9,9 +9,10 @@ import { ColorSettingsContext } from '../../contexts/colorsettings';
 export interface Props {
   contentElements: BasicContentbarWrapper[] | CustomContentbarWrapper[];
   layoutBehaviour?: LayoutBehaviour;
-  setSelectedId1: (value: string) => void;
+  setSelectedId1?: (value: string) => void;
+  onClose1?: (value: string) => void;
   addable?: boolean;
-  onClickAddButton: () => any;
+  onClickAddButton?: () => any;
   onClickLeftSlideButton?: () => any;
   onClickRightSlideButton?: () => any;
 }
@@ -43,7 +44,8 @@ export const Content = (props: React.PropsWithChildren<Props>) => {
         <></>
       ) : (
         <ContentBar
-          setSelectedId2={props.setSelectedId1}
+          onClose2={props.onClose1!}
+          setSelectedId2={props.setSelectedId1!}
           onClickLeftSlideButton={props.onClickLeftSlideButton}
           onClickRightSlideButton={props.onClickRightSlideButton}
           onClickAddButton={props.onClickAddButton}

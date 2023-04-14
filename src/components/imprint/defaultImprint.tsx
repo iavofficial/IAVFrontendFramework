@@ -23,7 +23,7 @@ export const DefaultImprint = () => {
         className={
           (colorSettingsContext?.darkmode
             ? 'bg-grey-5 color-white'
-            : 'bg-white color-black') + ' flex p-3'
+            : 'bg-white-1 color-black') + ' flex p-3'
         }
         style={{
           height: '100%',

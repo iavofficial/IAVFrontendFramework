@@ -75,9 +75,13 @@ export const TestComponent = () => {
   ];
 
   const selectElement = (value: string) => {
-    console.log('ausgeführt mit:', value);
+    console.log('Element mit ID: ', value, ' ausgeführt');
 
     setSelectedId(value);
+  };
+
+  const onCloseElement = (value: string) => {
+    console.log('Element mit ID: ', value, ' geschlossen');
   };
 
   const test = () => {
@@ -91,10 +95,12 @@ export const TestComponent = () => {
   let test4 = () => {
     console.log('onclick right function triggerd');
   };
+
   return (
     <Content
       addable={true}
       onClickAddButton={test3}
+      onClose1={onCloseElement}
       onClickLeftSlideButton={test3}
       onClickRightSlideButton={test4}
       setSelectedId1={selectElement}

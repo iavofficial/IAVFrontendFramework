@@ -1,6 +1,12 @@
 :root {
     --navbar-width: 271px;
     --tab-height: 70px;
+
+    /* --contextmenubgmaincolor: green; 
+    --highlightcolor: red;
+    --textAndIconMainColor: yellow;
+    --textAndIconHighlightColor: orange; */
+
     
     --blue-0: #001a54;
     --blue-1: #041e96;
@@ -28,5 +34,20 @@
     --yellow: #ffd800;
     --green: #80d800;
     --red: #f80000;
+    /* fb: FallbackValue */
+    --contextmenubgmaincolorfb: var(--white);
+    --highlightcolorfb: var(--blue-0);
+    --textAndIconMainColorfb: var(--black);
+    --textAndIconHighlightColorfb: var(--white);
+    --dropdownBgfb: var(--white);
+    --dropdownBgHighlightfb: var(--black);
 }
 
+[data-theme="dark"]{
+    --contextmenubgmaincolorfb: var(--grey-5);
+    --highlightcolorfb: var(--grey-3);
+    --textAndIconMainColorfb: var(--white);
+    --textAndIconHighlightColorfb: var(--white);
+    --dropdownBgfb: var(--grey-5);
+    --dropdownBgHighlightfb: var(--white);
+}

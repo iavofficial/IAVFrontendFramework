@@ -55,7 +55,6 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
     </div>
   );
 
-  //TODO: bring the interface to the app.tsx file (for the rightelement)
   const header = (props: AuthenticationViewProps) => (
     <div
       className={
@@ -91,8 +90,6 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
     </div>
   );
 
-  //TODO: Think of concept how to set backgroundcolor or backgroundimage
-
   const identifier = generateHashOfLength(4);
   const identifierLegal = 'a' + identifier;
   const identifierWithDot = '.' + identifierLegal;
@@ -121,7 +118,9 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
             objectFit: 'cover',
           }}
           src={
-            colorSettingsContext?.darkmode
+            props.authOptions?.backgroundImage
+              ? props.authOptions?.backgroundImage
+              : colorSettingsContext?.darkmode
               ? loginBackgroundDarkMode
               : loginBackgroundLightMode
           }
@@ -142,11 +141,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
               ?.loginFormBackgroundColor,
         }}
       >
-        <div>
-          {props.headerOptions?.reactElementFullAuthenticationHeader
-            ? props.headerOptions?.reactElementFullAuthenticationHeader
-            : header(props)}
-        </div>
+        <div>{header(props)}</div>
         <div
           className="flex flex-column justify-content-center align-items-center"
           style={{ marginBottom: '30px' }}
@@ -155,25 +150,32 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
             style={{ width: '100%', padding: '24px 24px 0px 0px' }}
             className="flex align-items-center justify-content-end"
           >
-            {colorSettingsContext?.darkmode ? (
-              <i
-                onClick={() =>
-                  colorSettingsContext?.setDarkmode(
-                    !colorSettingsContext.darkmode
-                  )
-                }
-                className={'pi pi-sun switch-colormode-logos color-white'}
-              />
+            {props.authOptions?.preventDarkmode ? (
+              <>
+                colorSettingsContext?.darkmode ? (
+                <i
+                  onClick={() =>
+                    colorSettingsContext?.setDarkmode(
+                      !colorSettingsContext.darkmode
+                    )
+                  }
+                  className={'pi pi-sun switch-colormode-logos color-white'}
+                />
+                ) : (
+                <i
+                  onClick={() =>
+                    colorSettingsContext?.setDarkmode(
+                      !colorSettingsContext.darkmode
+                    )
+                  }
+                  className="pi pi-moon switch-colormode-logos"
+                />
+                )
+              </>
             ) : (
-              <i
-                onClick={() =>
-                  colorSettingsContext?.setDarkmode(
-                    !colorSettingsContext.darkmode
-                  )
-                }
-                className="pi pi-moon switch-colormode-logos"
-              />
+              <></>
             )}
+
             <Dropdown
               id="change-language-dropdown"
               className={
@@ -296,10 +298,6 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
             position: 'absolute',
             bottom: '12px',
             left: '16px',
-            color: props.colorOptions?.authViewColorSettings
-              ?.legalDocumentsColor
-              ? props.colorOptions?.authViewColorSettings?.legalDocumentsColor
-              : 'black',
             textDecoration: 'none',
           }}
           to="/documents"
@@ -320,7 +318,9 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
         </Link>
         <Tooltip
           content={t(
-            props.documentsLabelKey ? props.documentsLabelKey : 'Imprint'
+            props.authOptions?.documentsLabelKey
+              ? props.authOptions?.documentsLabelKey
+              : 'Imprint'
           )}
           target={identifierWithDot}
           id="hover-image"
@@ -338,7 +338,10 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                 ?.companyTextColor,
           }}
         >
-          &copy; {props.companyText ? props.companyText : 'IAV GmbH 2023'}
+          &copy;{' '}
+          {props.authOptions?.companyText
+            ? props.authOptions?.companyText
+            : 'IAV GmbH 2023'}
         </span>
       </div>
     </div>

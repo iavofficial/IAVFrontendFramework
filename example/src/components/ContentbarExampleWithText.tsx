@@ -12,6 +12,7 @@ export const ContentbarExampleWithText = (props: Props) => {
         <ContentCell colWidth={6} paddings={CellPaddings.FULL}>
           <span>First row left</span>
           <h2>{props.emampleText}</h2>
+          <h3>Contentbar with default tabelements</h3>
           <div></div>
         </ContentCell>
         <ContentCell colWidth={6} paddings={CellPaddings.VERT_RIGHT}>

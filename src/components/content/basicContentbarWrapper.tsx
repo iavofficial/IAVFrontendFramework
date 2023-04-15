@@ -7,9 +7,7 @@ export class BasicContentbarWrapper implements ContentbarWrapperInterface {
     private id: string,
     private name: string,
     private selectedId: string,
-    private onClick: (identifier: string) => any,
     private closable: boolean,
-    private onClose: any,
     private renderElement: ReactElement
   ) {}
 

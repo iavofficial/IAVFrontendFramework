@@ -1,0 +1,11 @@
+import { useTranslator } from 'disa-framework/translators';
+import React from 'react';
+
+export const ExampleComponent4 = () => {
+  const t = useTranslator();
+  return (
+    <div>
+      <span>{t('basic_div_tag_with_text')}</span>
+    </div>
+  );
+};

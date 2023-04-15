@@ -32,7 +32,10 @@ export const MainView = (props: MainViewProps) => {
       }}
     >
       <div style={{ flex: '0 0 auto' }}>
-        <DisaHeader headerOptions={props.headerOptions} />
+        <DisaHeader
+          headerOptions={props.headerOptions}
+          menuOptions={props.menuOptions}
+        />
       </div>
       <div style={{ display: 'flex', flex: '1 1 auto', overflow: 'auto' }}>
         <Navbar

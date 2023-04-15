@@ -12,9 +12,7 @@ export class Group implements TabAndContentWrapper {
 
   constructor(
     private _name: string | ((t: TranslateFunctionType) => string),
-    private _logo: ReactElement | undefined,
-    private _accordionHeaderTextColor: string | undefined,
-    private _fontWeightBold: boolean,
+    private _logo: ReactElement,
     private _collapsible: boolean,
     private _contentWrappers: TabAndContentWrapper[]
   ) {}
@@ -59,12 +57,6 @@ export class Group implements TabAndContentWrapper {
         collapsible={this._collapsible}
         layer={this.layer}
         isLastElementOfLayer={this.isLastElementOfLayer}
-        accordionHeaderTextColor={
-          this._accordionHeaderTextColor
-            ? this._accordionHeaderTextColor
-            : undefined
-        }
-        fontWeightBold={this._fontWeightBold}
       >
         {this._contentWrappers.map((view) =>
           view.getNavbarComponent(navbarCollapsed)

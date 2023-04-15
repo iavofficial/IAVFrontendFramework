@@ -21,10 +21,9 @@ interface Props {
   name: string | ((t: TranslateFunctionType) => string);
   logo?: ReactElement;
   collapsible?: boolean;
-  fontWeightBold: boolean;
   collapsed?: boolean;
   isLastElementOfLayer?: boolean;
-  accordionHeaderTextColor?: string;
+
   navbarCollapsed: boolean;
   layer?: LAYER;
 }

@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { CellPaddings, ContentCell } from 'disa-framework/contentCell';
 import { Content, LayoutBehaviour } from 'disa-framework/content';
 import { generateHashOfLength } from 'disa-framework/hash';
-import { ContentbarExampleWithText } from './ContentbarExample/ContentbarExampleWithText';
+import { ContentbarExampleWithText } from './ContentbarExampleWithText';
 import { BasicContentbarWrapper } from 'disa-framework/basicContentbarWrapper';
 
-export const TestComponent = () => {
+export const ExampleComponent1 = () => {
   const [selectedId, setSelectedId] = useState('test123');
 
   let exampleArray = [
@@ -13,63 +13,49 @@ export const TestComponent = () => {
       'test123',
       'car123',
       selectedId,
-      () => test3,
-      true,
-      () => test4,
+      false,
       <ContentbarExampleWithText emampleText="car123" />
     ),
     new BasicContentbarWrapper(
       'test124',
       'car124',
       selectedId,
-      function () {},
-      true,
-      function () {},
+      false,
       <ContentbarExampleWithText emampleText="car124" />
     ),
     new BasicContentbarWrapper(
       'test125',
       'car125',
       selectedId,
-      function () {},
       true,
-      function () {},
       <ContentbarExampleWithText emampleText="car125" />
     ),
     new BasicContentbarWrapper(
       'test126',
       'car126',
       selectedId,
-      () => test,
       true,
-      function () {},
       <ContentbarExampleWithText emampleText="car126" />
     ),
     new BasicContentbarWrapper(
       'test127',
       'car127',
       selectedId,
-      () => test,
       true,
-      function () {},
       <ContentbarExampleWithText emampleText="car127" />
     ),
     new BasicContentbarWrapper(
       'test128',
       'car128',
       selectedId,
-      () => test,
       true,
-      function () {},
       <ContentbarExampleWithText emampleText="car128" />
     ),
     new BasicContentbarWrapper(
       'test129',
       'car129',
       selectedId,
-      () => test,
       true,
-      function () {},
       <ContentbarExampleWithText emampleText="car129" />
     ),
   ];

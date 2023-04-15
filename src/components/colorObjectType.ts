@@ -1,4 +1,4 @@
-import { AuthenticationColorType } from './../../build/components/authentication/authenticationColorType.d';
+import { AuthenticationColorType } from './authentication/authenticationColorType';
 import {
   ContentColorType,
   ContentbarColorType,

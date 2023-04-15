@@ -1,15 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Tooltip } from 'primereact/tooltip';
-import {
-  BLACK,
-  BLUE0,
-  GREY3,
-  GREY4,
-  GREY5,
-  GREYTEST,
-  WHITE,
-} from '../../../constants';
+import { BLACK, BLUE0, GREY3, GREY4, GREY5, WHITE } from '../../../constants';
 import { useTranslator } from '../../internationalization/translators';
 import './tabs.css';
 import { generateHashOfLength } from '../../../services/hash';
@@ -33,7 +25,6 @@ export const SimpleNavbarTab: navbarTab<Props> = (props) => {
   const t = useTranslator();
   const active = useLocation().pathname === props.to;
 
-  //TODO: Add colorSettingsContextColorManagement
   let highlightColor = colorSettingsContext?.navbarColorOptions?.tabColorOptions
     ?.highlightColor
     ? colorSettingsContext?.navbarColorOptions?.tabColorOptions?.highlightColor
@@ -78,7 +69,7 @@ export const SimpleNavbarTab: navbarTab<Props> = (props) => {
     width: '2px',
     height: '40px',
     backgroundColor:
-      hovering || active
+      (hovering || active) && !props.disabled
         ? revertColor(
             calculateFirstLineTabLayer(
               highlightColor,
@@ -116,7 +107,7 @@ export const SimpleNavbarTab: navbarTab<Props> = (props) => {
     width: '2px',
     marginRight: '3px',
     backgroundColor:
-      hovering || active
+      (hovering || active) && !props.disabled
         ? revertColor(
             calculateSecondLineTabLayer(
               highlightColor,
@@ -226,7 +217,7 @@ export const SimpleNavbarTab: navbarTab<Props> = (props) => {
           >
             <div style={styleActiveLineFirstLayerBottom} />
             <div style={styleActiveLineSecondLayerBottom} />
-            <div style={{ width: '100%' }} />
+            <div style={{ width: '90%' }} />
           </div>
         </>
       ) : (

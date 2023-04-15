@@ -4,50 +4,30 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 
 import { SelectButton } from 'primereact/selectbutton';
+import { useState } from 'react';
 import translationES from './assets/translations/es.json';
 import { UILayer } from 'disa-framework/uiLayer';
 import { GlobalDataLayer } from 'disa-framework/globalDataLayer';
 import { DummyAuthenticationProvider } from 'disa-framework/dummyAuthenticationProvider';
 import { TranslateFunctionType } from 'disa-framework/language';
+import { SimpleNavbarTab } from 'disa-framework/simpleNavbarTab';
+import { PrivilegedNavbarTab } from 'disa-framework/privilegedNavbarTab';
 import { BasicAuthenticationView } from 'disa-framework/basicAuthenticationView';
 import { AWSAuthenticationView } from 'disa-framework/awsAuthenticationView';
 import { BasicContentWrapper } from 'disa-framework/basicContentWrapper';
-import { SimpleNavbarTab } from 'disa-framework/simpleNavbarTab';
-import { PrivilegedNavbarTab } from 'disa-framework/privilegedNavbarTab';
+import { Group } from 'disa-framework/group';
+import { ColorProvider } from 'disa-framework/colorProvider';
 import translationEN from './assets/translations/en.json';
 import translationDE from './assets/translations/de.json';
 import translationDECH from './assets/translations/de-CH.json';
-import navDashboardSelected from './assets/nav_dashboard_selected.png';
-import navDashboardDeselected from './assets/nav_dashboard_deselected.png';
-import navDiagnosticsSelected from './assets/nav_diagnostics_selected.png';
-import navDiagnosticsDeselected from './assets/nav_diagnostics_deselected.png';
-import navExpertSelected from './assets/nav_expert_selected.png';
-import navExpertDeselected from './assets/nav_expert_deselected.png';
-import navFleetSelected from './assets/nav_fleet_selected.png';
-import navFleetDeselected from './assets/nav_fleet_deselected.png';
 import { ReactComponent as InfoIcon } from './assets/infoIcon_selected.svg';
-import applogo from './assets/App-Logo.png';
-
-import { Group } from 'disa-framework/group';
-import navFleetDetailSelected from './assets/nav_fleet_detail_selected.png';
-import navFleetDetailDeselected from './assets/nav_fleet_detail_deselected.png';
-import groupIcon from './assets/ota_logo.png';
-import { FirstExampleContextComponent } from './contexts/FirstExampleContext';
-import { SecondExampleContextComponent } from './contexts/SecondExampleContext';
-import { ColorProvider } from 'disa-framework/colorProvider';
-
-import { LayoutAndContextExampleComponent } from './components/layoutAndContextExampleComponent';
-import { ThirdExampleComponent } from './components/thirdExampleComponent';
-import { FourthExampleComponent } from './components/fourthExampleComponent';
-import { SecondExampleComponent } from './components/secondExampleComponent';
-import { useState } from 'react';
-import { ClassComponentContainer } from './components/classComponentContainer';
 import { LegalDocuments } from './components/legalDocuments';
-import { TestComponent } from './components/testComponent';
-import { BLACK, GREEN, RED, WHITE } from 'disa-framework/constants';
-import { AuthenticationViewProps } from 'disa-framework/components/authentication/aws/authenticationView';
+import { ExampleComponent1 } from './components/exampleComponent1';
+import { ExampleComponent2 } from './components/exampleComponent2';
+import { ExampleComponent3 } from './components/exampleComponent3';
+import { ExampleComponent4 } from './components/exampleComponent4';
+import { ExampleComponent5 } from './components/exampleComponent5';
 
-//TODO: Generate unique key for every tabelement
 function App() {
   const [selectedButtonOption, setSelectedButtonOption] = useState('Simulated');
 
@@ -98,27 +78,39 @@ function App() {
           disabled={false}
         />
       ),
-      TestComponent
+      ExampleComponent1
     ),
     new Group(
-      (t: TranslateFunctionType) => t('Test_group'),
+      (t: TranslateFunctionType) => t('Test_group_not_collapsible'),
       <InfoIcon />,
-      undefined,
       false,
-      true,
       [
         new BasicContentWrapper(
           (
             <SimpleNavbarTab
               name={(t: TranslateFunctionType) =>
-                t('example_component', { count: 3 })
+                t('example_component', { count: 2 })
               }
               to="/group-example1"
               disabled={false}
               icon={<InfoIcon />}
             />
           ),
-          SecondExampleComponent
+          ExampleComponent2
+        ),
+        new BasicContentWrapper(
+          (
+            <PrivilegedNavbarTab
+              name={(t: TranslateFunctionType) =>
+                t('example_component', { count: 3 })
+              }
+              to="/group-example3"
+              disabled={false}
+              permittedGroups={['ADMIN']}
+              icon={<InfoIcon />}
+            />
+          ),
+          ExampleComponent3
         ),
         new BasicContentWrapper(
           (
@@ -126,32 +118,43 @@ function App() {
               name={(t: TranslateFunctionType) =>
                 t('example_component', { count: 4 })
               }
-              to="/group-example2"
+              to="/group-example4"
               disabled={false}
               icon={<InfoIcon />}
             />
           ),
-          FourthExampleComponent
+          ExampleComponent4
         ),
         new Group(
-          (t: TranslateFunctionType) => t('Test_group'),
+          (t: TranslateFunctionType) => t('Test_group_collapsible'),
           <InfoIcon />,
-          undefined,
-          false,
           true,
           [
             new BasicContentWrapper(
               (
                 <SimpleNavbarTab
                   name={(t: TranslateFunctionType) =>
-                    t('example_component', { count: 12 })
+                    t('example_component', { count: 5.1 })
                   }
-                  to="/group-example12"
+                  to="/group-example51"
+                  disabled={true}
+                  icon={<InfoIcon />}
+                />
+              ),
+              ExampleComponent3
+            ),
+            new BasicContentWrapper(
+              (
+                <SimpleNavbarTab
+                  name={(t: TranslateFunctionType) =>
+                    t('example_component', { count: 5.2 })
+                  }
+                  to="/group-example52"
                   disabled={false}
                   icon={<InfoIcon />}
                 />
               ),
-              ClassComponentContainer
+              ExampleComponent4
             ),
           ]
         ),
@@ -159,61 +162,17 @@ function App() {
           (
             <SimpleNavbarTab
               name={(t: TranslateFunctionType) =>
-                t('example_component', { count: 43 })
+                t('example_component', { count: 6 })
               }
-              to="/group-example22"
+              to="/group-example6"
               disabled={false}
               icon={<InfoIcon />}
             />
           ),
-          FourthExampleComponent
+          ExampleComponent5
         ),
       ]
     ),
-
-    // new BasicContentWrapper(
-    //   (
-    //     <PrivilegedNavbarTab
-    //       name={(t: TranslateFunctionType) =>
-    //         t('example_component', { count: 5 })
-    //       }
-    //       to="/example4"
-    //       disabled={true}
-    //       selectedIcon={navExpertSelected}
-    //       deselectedIcon={navExpertDeselected}
-    //       permittedGroups={['ADMIN']}
-    //     />
-    //   ),
-    //   FourthExampleComponent
-    // ),
-    // new BasicContentWrapper(
-    //   (
-    //     <SimpleNavbarTab
-    //       name={(t: TranslateFunctionType) =>
-    //         t('example_component', { count: 6 })
-    //       }
-    //       to="/example5"
-    //       disabled={false}
-    //       selectedIcon={navFleetDetailSelected}
-    //       deselectedIcon={navFleetDetailDeselected}
-    //     />
-    //   ),
-    //   FourthExampleComponent
-    // ),
-    // new BasicContentWrapper(
-    //   (
-    //     <SimpleNavbarTab
-    //       name={(t: TranslateFunctionType) =>
-    //         t('example_component', { count: 7 })
-    //       }
-    //       to="/example6"
-    //       disabled={false}
-    //       selectedIcon={navDashboardSelected}
-    //       deselectedIcon={navDashboardDeselected}
-    //     />
-    //   ),
-    //   ClassComponentContainer
-    // ),
   ];
 
   // const LIGHT = '#D3DBE5';
@@ -287,19 +246,15 @@ function App() {
     >
       <GlobalDataLayer translations={translations}>
         <ColorProvider>
-          <FirstExampleContextComponent>
-            <SecondExampleContextComponent>
-              <UILayer
-                tabAndContentWrappers={views}
-                startingPoint="/"
-                authenticationView={AWSAuthenticationView}
-                menuOptions={menuSettingsOptions}
-                collabsible={true}
-                documentsLabelKey="Legal_documents"
-                documentsComponent={LegalDocuments}
-              />
-            </SecondExampleContextComponent>
-          </FirstExampleContextComponent>
+          <UILayer
+            tabAndContentWrappers={views}
+            startingPoint="/"
+            authenticationView={AWSAuthenticationView}
+            menuOptions={menuSettingsOptions}
+            collabsible={true}
+            documentsLabelKey="Legal_documents"
+            documentsComponent={LegalDocuments}
+          />
         </ColorProvider>
       </GlobalDataLayer>
     </DummyAuthenticationProvider>

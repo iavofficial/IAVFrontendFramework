@@ -5,3 +5,6 @@ npm config set "//${REPO_URL}/api/v4/projects/${REPO_PROJECT_ID}/packages/npm/:_
 
 npm config rm proxy
 npm config rm https-proxy
+
+npm config set fetch-retry-mintimeout 200000
+npm config set fetch-retry-maxtimeout 3200000

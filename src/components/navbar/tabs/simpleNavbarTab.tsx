@@ -15,7 +15,7 @@ import {
 } from '../../../services/calculateLineColorTab';
 import { revertColor } from '../../../services/calculateLineColorGroup';
 import { ColorSettingsContext } from '../../../contexts/colorsettings';
-import { SvgIcon } from './svgIcon';
+import { SvgIcon } from './SvgIcon';
 
 export interface Props {}
 

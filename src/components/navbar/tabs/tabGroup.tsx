@@ -15,7 +15,7 @@ import {
 } from '../../../services/calculateLineColorGroup';
 import { navbarTabProps } from './navbarTab';
 import { ColorSettingsContext } from '../../../contexts/colorsettings';
-import { SvgIcon } from './svgIcon';
+import { SvgIcon } from './SvgIcon';
 
 interface Props {
   name: string | ((t: TranslateFunctionType) => string);

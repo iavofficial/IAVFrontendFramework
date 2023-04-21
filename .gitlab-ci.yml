@@ -45,7 +45,7 @@ validate_typescript:
     NODE_EXTRA_CA_CERTS: ${IAV_CA_BUNDLE}
   script:
     - sh ./scripts/ci_cd/configure_npm.sh
-    - npm ci
+    - npm install -D
     - npx tsc --noEmit --emitDeclarationOnly false
   except:
     - tags

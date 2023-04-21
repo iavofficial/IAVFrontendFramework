@@ -1,6 +1,6 @@
 import React, { FormEvent, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { BLUE0, WHITE, BLACK, BLUE3 } from '../../../constants';
+import { WHITE, BLUE3 } from '../../../constants';
 import { AuthContext } from '../../../contexts/auth';
 import { LoginButtonWithSpinner } from '../loginButtonWithSpinner';
 import { useTranslator } from '../../internationalization/translators';
@@ -54,6 +54,8 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
       <AppLogo fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE} />
     </div>
   );
+
+  console.log('test: ', props.authOptions?.preventDarkmode);
 
   const header = (props: AuthenticationViewProps) => (
     <div
@@ -150,30 +152,30 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
             style={{ width: '100%', padding: '24px 24px 0px 0px' }}
             className="flex align-items-center justify-content-end"
           >
-            {props.authOptions?.preventDarkmode ? (
-              <>
-                colorSettingsContext?.darkmode ? (
-                <i
-                  onClick={() =>
-                    colorSettingsContext?.setDarkmode(
-                      !colorSettingsContext.darkmode
-                    )
-                  }
-                  className={'pi pi-sun switch-colormode-logos color-white'}
-                />
-                ) : (
-                <i
-                  onClick={() =>
-                    colorSettingsContext?.setDarkmode(
-                      !colorSettingsContext.darkmode
-                    )
-                  }
-                  className="pi pi-moon switch-colormode-logos"
-                />
-                )
-              </>
-            ) : (
+            {props.authOptions?.preventDarkmode === true ? (
               <></>
+            ) : (
+              <>
+                {colorSettingsContext?.darkmode ? (
+                  <i
+                    onClick={() =>
+                      colorSettingsContext?.setDarkmode(
+                        !colorSettingsContext.darkmode
+                      )
+                    }
+                    className={'pi pi-sun switch-colormode-logos color-white'}
+                  />
+                ) : (
+                  <i
+                    onClick={() =>
+                      colorSettingsContext?.setDarkmode(
+                        !colorSettingsContext.darkmode
+                      )
+                    }
+                    className="pi pi-moon switch-colormode-logos"
+                  />
+                )}
+              </>
             )}
 
             <Dropdown

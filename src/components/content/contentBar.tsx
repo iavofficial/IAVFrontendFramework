@@ -196,28 +196,20 @@ export const ContentBar = (props: Props) => {
           {props.contentElements.length > amountOfRenderedTabElements
             ? renderElementsArray.map((element) =>
                 element.getContentbarComponent(
-                  <DefaultContentSelectionElement
-                    width={calculateWidth(
-                      navbarSettingsContext?.navbarCollapsed!,
-                      width - (80 + 32),
-                      props.addable as boolean
-                    )}
-                    setSelectedId3={props.setSelectedId2}
-                    onClose3={props.onClose2}
-                  />
+                  calculateWidth(
+                    navbarSettingsContext?.navbarCollapsed!,
+                    width - (80 + 32),
+                    props.addable as boolean
+                  )
                 )
               )
             : props.contentElements.map((element) =>
                 element.getContentbarComponent(
-                  <DefaultContentSelectionElement
-                    width={calculateWidth(
-                      navbarSettingsContext?.navbarCollapsed!,
-                      width - (80 + 32),
-                      props.addable as boolean
-                    )}
-                    setSelectedId3={props.setSelectedId2}
-                    onClose3={props.onClose2}
-                  />
+                  calculateWidth(
+                    navbarSettingsContext?.navbarCollapsed!,
+                    width - (80 + 32),
+                    props.addable as boolean
+                  )
                 )
               )}
         </div>

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { ColorSettingsContext } from '../contexts/colorsettings';
 import { NavbarSettingsContext } from '../contexts/navbarContext';
 
 export const NavbarSettingsProvider = (props: React.PropsWithChildren<{}>) => {

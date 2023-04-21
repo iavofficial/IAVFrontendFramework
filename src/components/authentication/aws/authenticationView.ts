@@ -4,9 +4,8 @@ export interface AuthenticationViewProps {
     backgroundImage?: string;
     companyText?: string;
     documentsLabelKey?: string;
-    preventDarkmode?: string;
+    preventDarkmode?: boolean;
   };
-
   headerOptions?: {
     reactElementLeft?: ReactElement;
     reactElementRight?: ReactElement;

@@ -18,7 +18,7 @@ interface Props {
   tabAndContentWrappers: TabAndContentWrapper[];
   menuOptions?: MenuSettingsOptions;
   documentsLabelKey?: string;
-  collabsible?: boolean;
+  collabsibleNavbar?: boolean;
 }
 
 export const Navbar = (props: Props) => {
@@ -103,7 +103,7 @@ export const Navbar = (props: Props) => {
             target={identifierWithDot}
             id="hover-image"
           />
-          {props.collabsible && props.collabsible ? (
+          {props.collabsibleNavbar && props.collabsibleNavbar ? (
             <i
               onClick={() =>
                 navbarSettingsContext?.setNavbarCollapsed(

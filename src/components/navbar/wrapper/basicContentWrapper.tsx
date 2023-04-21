@@ -12,6 +12,7 @@ export class BasicContentWrapper implements TabAndContentWrapper {
     private _navbarTab: React.ReactElement<navbarTabProps>,
     private _component: React.ComponentType<any>
   ) {}
+
   setIsLastElementOfLayer(isLastElementOfLayer: boolean): void {
     this.isLastElementOfLayer = isLastElementOfLayer;
   }
@@ -26,13 +27,21 @@ export class BasicContentWrapper implements TabAndContentWrapper {
   };
 
   getRoutes = () => {
-    return [
-      <Route
-        key={this.getKey()}
-        path={this._navbarTab.props.to.valueOf()}
-        element={<this._component />}
-      />,
-    ];
+    if (
+      this.layer === LAYER.ONE ||
+      this.layer === LAYER.TWO ||
+      this.layer === LAYER.THREE
+    ) {
+      return [
+        <Route
+          key={this.getKey()}
+          path={this._navbarTab.props.to.valueOf()}
+          element={<this._component />}
+        />,
+      ];
+    } else {
+      return [<></>];
+    }
   };
 
   getChildrenWrapper = () => {
@@ -41,11 +50,19 @@ export class BasicContentWrapper implements TabAndContentWrapper {
   };
 
   getNavbarComponent = (navbarCollapsed: boolean) => {
-    return React.cloneElement(this._navbarTab, {
-      key: this.getKey(),
-      navbarCollapsed: navbarCollapsed,
-      layer: this.layer,
-      isLastElementOfLayer: this.isLastElementOfLayer,
-    });
+    if (
+      this.layer === LAYER.ONE ||
+      this.layer === LAYER.TWO ||
+      this.layer === LAYER.THREE
+    ) {
+      return React.cloneElement(this._navbarTab, {
+        key: this.getKey(),
+        navbarCollapsed: navbarCollapsed,
+        layer: this.layer,
+        isLastElementOfLayer: this.isLastElementOfLayer,
+      });
+    } else {
+      return <></>;
+    }
   };
 }

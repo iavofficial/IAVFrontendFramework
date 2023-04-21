@@ -37,7 +37,7 @@ export interface AuthOptions {
   backgroundImage?: string;
   companyText?: string;
   documentsLabelKey?: string;
-  preventDarkmode?: string;
+  preventDarkmode?: boolean;
 }
 
 export interface Props {
@@ -50,7 +50,7 @@ export interface Props {
   headerOptions?: HeaderOptions;
   authOptions?: AuthOptions;
   authBackgroundImage?: string;
-  collabsible?: boolean;
+  collabsibleNavbar?: boolean;
 }
 
 export const UILayer = (props: Props) => {
@@ -91,7 +91,7 @@ export const UILayer = (props: Props) => {
             element={
               <MainView
                 headerOptions={props.headerOptions}
-                collabsible={props.collabsible}
+                collabsibleNavbar={props.collabsibleNavbar}
                 menuOptions={props.menuOptions}
                 documentsLabelKey={props.documentsLabelKey}
                 documentsComponent={props.documentsComponent}

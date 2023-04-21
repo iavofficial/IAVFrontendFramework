@@ -30,12 +30,13 @@ export class Group implements TabAndContentWrapper {
 
   getRoutes = () => {
     let routes: ReactElement<RouteProps>[] = [];
-    this._contentWrappers.forEach((view) => {
-      view.getRoutes().forEach((route) => {
-        routes.push(route);
+    if (this.layer === LAYER.ONE || this.layer === LAYER.TWO) {
+      this._contentWrappers.forEach((view) => {
+        view.getRoutes().forEach((route) => {
+          routes.push(route);
+        });
       });
-    });
-
+    }
     return routes;
   };
 
@@ -48,21 +49,25 @@ export class Group implements TabAndContentWrapper {
   };
 
   getNavbarComponent = (navbarCollapsed: boolean) => {
-    return (
-      <TabGroup
-        navbarCollapsed={navbarCollapsed}
-        key={this.getKey()}
-        name={this._name}
-        logo={this._logo ? this._logo : undefined}
-        collapsible={this._collapsible}
-        layer={this.layer}
-        isLastElementOfLayer={this.isLastElementOfLayer}
-      >
-        {this._contentWrappers.map((view) =>
-          view.getNavbarComponent(navbarCollapsed)
-        )}
-      </TabGroup>
-    );
+    if (this.layer === LAYER.ONE || this.layer === LAYER.TWO) {
+      return (
+        <TabGroup
+          navbarCollapsed={navbarCollapsed}
+          key={this.getKey()}
+          name={this._name}
+          logo={this._logo ? this._logo : undefined}
+          collapsible={this._collapsible}
+          layer={this.layer}
+          isLastElementOfLayer={this.isLastElementOfLayer}
+        >
+          {this._contentWrappers.map((view) =>
+            view.getNavbarComponent(navbarCollapsed)
+          )}
+        </TabGroup>
+      );
+    } else {
+      return <></>;
+    }
   };
 
   get name() {

@@ -1,6 +1,7 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import { generateHashOfLength } from '../../services/hash';
 import { ContentbarWrapperInterface } from './contentbarWrapperInterface';
+import { DefaultContentSelectionElement } from './defaultContentSelectionElement';
 
 export class BasicContentbarWrapper implements ContentbarWrapperInterface {
   constructor(
@@ -8,28 +9,35 @@ export class BasicContentbarWrapper implements ContentbarWrapperInterface {
     private name: string,
     private selectedId: string,
     private closable: boolean,
-    private renderElement: ReactElement
+    private setSelectedId: (value: string) => any,
+    private onClose: (value: string) => void,
+    private contentAreaElement: React.ReactElement
   ) {}
 
   getKey() {
     return generateHashOfLength(6);
   }
 
-  getRenderElement() {
-    return React.cloneElement(this.renderElement);
-  }
-
   getId() {
     return this.id;
   }
 
-  getContentbarComponent(defaultContentSelectionElement: ReactElement) {
-    return React.cloneElement(defaultContentSelectionElement, {
-      key: this.getKey(),
-      name: this.name,
-      id: this.id,
-      closable: this.closable,
-      selected: this.id === this.selectedId,
-    });
+  getContentAreaElement(): React.ReactElement {
+    return this.contentAreaElement;
+  }
+
+  getContentbarComponent(contentElementWidth: number) {
+    return (
+      <DefaultContentSelectionElement
+        key={this.getKey()}
+        name={this.name}
+        id={this.id}
+        closable={this.closable}
+        selected={this.id === this.selectedId}
+        setSelectedId3={this.setSelectedId}
+        onClose3={this.onClose}
+        width={contentElementWidth}
+      />
+    );
   }
 }

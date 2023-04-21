@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { ColorObject } from '../components/colorObjectType';
-import { BLUE0 } from '../constants';
 import { ColorSettingsContext } from '../contexts/colorsettings';
 
 export interface Props {
@@ -31,7 +30,7 @@ export const ColorProvider = (props: React.PropsWithChildren<Props>) => {
     setDarkmode(darkmodeValue);
   };
 
-  let returnObject = {
+  let colorObject = {
     darkmode: darkmode,
     setDarkmode: setDarkmodeToLocalStorage,
     headerColorOptions: props.colorOptions?.headerColorOptions,
@@ -41,8 +40,9 @@ export const ColorProvider = (props: React.PropsWithChildren<Props>) => {
     contentbarTabColorOptions: props.colorOptions?.contentbarTabColorOptions,
     authenticationColorOptions: props.colorOptions?.authenticationColorOptions,
   };
+
   return (
-    <ColorSettingsContext.Provider value={returnObject}>
+    <ColorSettingsContext.Provider value={colorObject}>
       {props.children}
     </ColorSettingsContext.Provider>
   );

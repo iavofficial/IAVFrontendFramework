@@ -7,6 +7,7 @@ import {
 import { HeaderColorType } from './../components/header/appHeaderColor';
 import React from 'react';
 import { NavbarColorType } from '../components/navbar/navbarColorType';
+
 export interface ColorsettingsType {
   darkmode: boolean;
   setDarkmode: (darkmode: boolean) => void;

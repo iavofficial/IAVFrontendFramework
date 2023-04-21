@@ -92,7 +92,8 @@ export const DisaHeader = (props: Props) => {
           id="right-element-user-section"
           className={'flex align-items-center justify-content-end'}
         >
-          <div
+          {/* TODO: In the next Development step the implementation of the  */}
+          {/* <div
             className="flex justify-content-center align-items-center"
             style={{
               margin: '0rem 1rem 0rem 0rem',
@@ -118,7 +119,7 @@ export const DisaHeader = (props: Props) => {
             >
               3
             </div>
-          </div>
+          </div> */}
           <a
             className={'flex align-items-center justify-content-end'}
             href="#"

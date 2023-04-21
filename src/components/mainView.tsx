@@ -1,20 +1,15 @@
 import React from 'react';
-import { DisaHeader } from './header/disaHeader';
+import { DisaHeader } from './header/DisaHeader';
 import { Navbar } from './navbar/navbar';
 import { DefaultImprint } from './imprint/defaultImprint';
 import { MenuSettingsOptions } from './header/SettingsMenu';
 import { HeaderOptions } from './uiLayer';
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Outlet,
-} from 'react-router-dom';
+import { Route, Routes, Outlet } from 'react-router-dom';
 import { TabAndContentWrapper } from './navbar/wrapper/tabAndContentWrapper';
 
 interface MainViewProps {
   menuOptions?: MenuSettingsOptions;
-  collabsible?: boolean;
+  collabsibleNavbar?: boolean;
   documentsComponent?: React.ComponentType<any>;
   documentsLabelKey?: string;
   headerOptions?: HeaderOptions;
@@ -40,7 +35,7 @@ export const MainView = (props: MainViewProps) => {
       <div style={{ display: 'flex', flex: '1 1 auto', overflow: 'auto' }}>
         <Navbar
           tabAndContentWrappers={props.tabAndContentWrappers}
-          collabsible={props.collabsible}
+          collabsibleNavbar={props.collabsibleNavbar}
           documentsLabelKey={props.documentsLabelKey}
         />
         <Outlet />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { DisaHeader } from './header/DisaHeader';
+import { DisaHeader } from './header/disaHeader';
 import { Navbar } from './navbar/navbar';
 import { DefaultImprint } from './imprint/defaultImprint';
 import { MenuSettingsOptions } from './header/SettingsMenu';

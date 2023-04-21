@@ -7,4 +7,4 @@ npm config rm proxy
 npm config rm https-proxy
 
 npm config set fetch-retry-mintimeout 200000
-npm config set fetch-retry-maxtimeout 3200000
+npm config set fetch-retry-maxtimeout 1000000

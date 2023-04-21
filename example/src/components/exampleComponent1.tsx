@@ -2,11 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { CellPaddings, ContentCell } from 'disa-framework/contentCell';
 import { Content, LayoutBehaviour } from 'disa-framework/content';
 import { generateHashOfLength } from 'disa-framework/hash';
-import { ContentbarExampleWithText } from './ContentbarExampleWithText';
+import { ContentbarExampleWithText } from './contentbarExampleWithText';
 import { BasicContentbarWrapper } from 'disa-framework/basicContentbarWrapper';
 
 export const ExampleComponent1 = () => {
   const [selectedId, setSelectedId] = useState('test123');
+
+  const onCloseElement = (value: string) => {
+    console.log('Element mit ID: ', value, ' geschlossen');
+  };
 
   let exampleArray = [
     new BasicContentbarWrapper(
@@ -14,6 +18,8 @@ export const ExampleComponent1 = () => {
       'car123',
       selectedId,
       false,
+      setSelectedId,
+      onCloseElement,
       <ContentbarExampleWithText emampleText="car123" />
     ),
     new BasicContentbarWrapper(
@@ -21,6 +27,8 @@ export const ExampleComponent1 = () => {
       'car124',
       selectedId,
       false,
+      setSelectedId,
+      onCloseElement,
       <ContentbarExampleWithText emampleText="car124" />
     ),
     new BasicContentbarWrapper(
@@ -28,6 +36,8 @@ export const ExampleComponent1 = () => {
       'car125',
       selectedId,
       true,
+      setSelectedId,
+      onCloseElement,
       <ContentbarExampleWithText emampleText="car125" />
     ),
     new BasicContentbarWrapper(
@@ -35,6 +45,8 @@ export const ExampleComponent1 = () => {
       'car126',
       selectedId,
       true,
+      setSelectedId,
+      onCloseElement,
       <ContentbarExampleWithText emampleText="car126" />
     ),
     new BasicContentbarWrapper(
@@ -42,6 +54,8 @@ export const ExampleComponent1 = () => {
       'car127',
       selectedId,
       true,
+      setSelectedId,
+      onCloseElement,
       <ContentbarExampleWithText emampleText="car127" />
     ),
     new BasicContentbarWrapper(
@@ -49,6 +63,8 @@ export const ExampleComponent1 = () => {
       'car128',
       selectedId,
       true,
+      setSelectedId,
+      onCloseElement,
       <ContentbarExampleWithText emampleText="car128" />
     ),
     new BasicContentbarWrapper(
@@ -56,6 +72,8 @@ export const ExampleComponent1 = () => {
       'car129',
       selectedId,
       true,
+      setSelectedId,
+      onCloseElement,
       <ContentbarExampleWithText emampleText="car129" />
     ),
   ];
@@ -64,10 +82,6 @@ export const ExampleComponent1 = () => {
     console.log('Element mit ID: ', value, ' ausgeführt');
 
     setSelectedId(value);
-  };
-
-  const onCloseElement = (value: string) => {
-    console.log('Element mit ID: ', value, ' geschlossen');
   };
 
   const test = () => {
@@ -96,7 +110,7 @@ export const ExampleComponent1 = () => {
       <>
         {exampleArray.map((basicContentbarWrapper: BasicContentbarWrapper) => {
           if (basicContentbarWrapper.getId() === selectedId) {
-            return basicContentbarWrapper.getRenderElement();
+            return basicContentbarWrapper.getContentAreaElement();
           }
         })}
       </>

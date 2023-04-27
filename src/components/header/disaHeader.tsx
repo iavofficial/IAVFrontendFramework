@@ -92,7 +92,7 @@ export const DisaHeader = (props: Props) => {
           id="right-element-user-section"
           className={'flex align-items-center justify-content-end'}
         >
-          {/* TODO: In the next Development step the implementation of the  */}
+          {/* TODO: In the next Development step the implementation of the notification maybe included  */}
           {/* <div
             className="flex justify-content-center align-items-center"
             style={{

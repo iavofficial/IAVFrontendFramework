@@ -1,5 +1,4 @@
 import React, { ReactElement, useContext, useEffect, useState } from 'react';
-import '../../css/tabGroup.css';
 import '../navbar.css';
 import { TranslateFunctionType } from '../../../contexts/language';
 import { useTranslator } from '../../internationalization/translators';

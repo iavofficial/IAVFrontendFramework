@@ -15,7 +15,7 @@ import './css/globalChangesOnPrimeReactComponents.css';
 import './css/disaPage.css';
 import './css/disaFramework.css';
 import { BasicAuthenticationView } from './authentication/default/basicAuthenticationView';
-import { MenuSettingsOptions } from './header/SettingsMenu';
+import { MenuSettingsOptions } from './header/settingsMenu';
 import { CookieBanner } from './cookie/cookieBanner';
 import { AuthContext } from '../contexts/auth';
 import { AuthenticationViewProps } from './authentication/aws/authenticationView';

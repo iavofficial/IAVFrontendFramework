@@ -3,7 +3,7 @@ import { ContextMenu } from 'primereact/contextmenu';
 import { useTranslator } from '../internationalization/translators';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/auth';
-import { MenuItem } from './SettingsMenu';
+import { MenuItem } from './settingsMenu';
 
 export interface Props {
   hideMenu: (e: React.KeyboardEvent) => void;

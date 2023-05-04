@@ -8,8 +8,8 @@ import { ReactComponent as CompanyLogo } from '../../assets/images/company_logo.
 import { ReactComponent as AppLogo } from '../../assets/images/app_logo.svg';
 import { ReactComponent as SettingsIcon } from '../../assets/images/icon_settings.svg';
 import { BLUE3, GREY3, MAGENTA2, WHITE } from '../../constants';
-import { MenuSettingsOptions, SettingsMenu } from './SettingsMenu';
-import { UserMenu } from './UserMenu';
+import { MenuSettingsOptions, SettingsMenu } from './settingsMenu';
+import { UserMenu } from './userMenu';
 import { ColorSettingsContext } from '../../contexts/colorsettings';
 
 interface Props {

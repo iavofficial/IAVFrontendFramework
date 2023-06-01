@@ -17,10 +17,10 @@
   --magenta-5: #ffafff;
   --magenta-6: #fddeff;
 
-  --gray-1: #f0f0f0;
-  --gray-2: #cdcdcd;
-  --gray-3: #9a9a9a;
-  --gray-4: #444444;
+  --grey-1: #f0f0f0;
+  --grey-2: #cdcdcd;
+  --grey-3: #9a9a9a;
+  --grey-4: #444444;
 
   --yellow: #ffd800;
   --green: #80d800;
@@ -36,6 +36,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
 }
 
 

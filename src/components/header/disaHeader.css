@@ -1,0 +1,25 @@
+#iav-logo {
+  width: var(--navbar-width);
+}
+
+#left-element {
+  width: 400px !important;
+  overflow-x: hidden;
+}
+
+#right-element {
+  width: 450px !important;
+}
+
+#right-element-companylogo {
+  width: 200px !important;
+  overflow-x: hidden;
+}
+
+#right-element-user-section {
+  width: 250px !important;
+}
+
+#disa-header {
+  height: 56px !important;
+}

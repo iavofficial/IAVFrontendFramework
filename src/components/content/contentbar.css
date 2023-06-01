@@ -1,0 +1,18 @@
+
+#restrictDimensions{
+  max-width: 280px !important;
+  max-height: 40px !important;
+  overflow-x: hidden !important;
+}
+
+.element-hover {
+  position: relative;
+}
+
+#change-color .p-tooltip-text {
+    background-color: var(--magenta-2) !important;
+}
+
+#change-color .p-tooltip-arrow {
+  color: var(--magenta-2) !important;
+}

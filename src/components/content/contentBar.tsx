@@ -29,8 +29,8 @@ import { calculateWidth } from '../../services/calculateWidth';
 interface Props {
   contentElements: BasicContentbarWrapper[] | CustomContentbarWrapper[];
   addable?: boolean;
-  onClose2: (value: string) => any;
-  setSelectedId2: (value: string) => any;
+  onClose: (value: string) => any;
+  setSelectedId: (value: string) => any;
   onClickAddButton?: () => any;
   onClickLeftSlideButton?: () => any;
   onClickRightSlideButton?: () => any;

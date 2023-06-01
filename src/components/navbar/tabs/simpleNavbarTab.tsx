@@ -217,7 +217,7 @@ export const SimpleNavbarTab: navbarTab<Props> = (props) => {
           >
             <div style={styleActiveLineFirstLayerBottom} />
             <div style={styleActiveLineSecondLayerBottom} />
-            <div style={{ width: '90%' }} />
+            <div style={{ width: '80%' }} />
           </div>
         </>
       ) : (

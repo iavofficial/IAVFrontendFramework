@@ -55,8 +55,6 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
     </div>
   );
 
-  console.log('test: ', props.authOptions?.preventDarkmode);
-
   const header = (props: AuthenticationViewProps) => (
     <div
       className={
@@ -232,7 +230,6 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                 value={email.valueOf()}
                 onChange={(ev) => setEmail(ev.target.value)}
                 name="email"
-                type="email"
                 className={
                   (colorSettingsContext?.darkmode
                     ? 'bg-grey-4 color-white'

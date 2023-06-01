@@ -16,10 +16,7 @@ import loginBackgroundLightMode from '../../../assets/images/login_background_li
 import loginBackgroundDarkMode from '../../../assets/images/login_background_darkMode.png';
 import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
 import { LanguageContext } from '../../../contexts/language';
-import {
-  parseActiveLanguageKeyIntoLanguageName,
-  parseLanguageRessourcesIntoDropdownFormat,
-} from '../../../services/parseLanguageRessourcesIntoDropdownFormat';
+import { parseLanguageRessourcesIntoDropdownFormat } from '../../../services/parseLanguageRessourcesIntoDropdownFormat';
 import { ColorSettingsContext } from '../../../contexts/colorsettings';
 import { generateHashOfLength } from '../../../services/hash';
 import { Tooltip } from 'primereact/tooltip';
@@ -387,8 +384,8 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
             <Dropdown
               className={
                 colorSettingsContext?.darkmode
-                  ? 'bg-grey-5 color-white test'
-                  : 'bg-white-1 color-black test1'
+                  ? 'bg-grey-5 color-white '
+                  : 'bg-white-1 color-black '
               }
               placeholder={
                 langContext?.resources[langContext.activeLang].translation

@@ -1,13 +1,4 @@
-:root {
-    --navbar-width: 271px;
-    --tab-height: 70px;
-
-    /* --contextmenubgmaincolor: green; 
-    --highlightcolor: red;
-    --textAndIconMainColor: yellow;
-    --textAndIconHighlightColor: orange; */
-
-    
+:root {    
     --blue-0: #001a54;
     --blue-1: #041e96;
     --blue-2: #1446eb;

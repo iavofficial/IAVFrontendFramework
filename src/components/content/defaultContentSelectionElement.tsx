@@ -11,8 +11,8 @@ export interface Props {
   id?: string;
   selected?: boolean;
   closable?: boolean;
-  onClose3: (value: string) => void;
-  setSelectedId3: (value: string) => any;
+  onClose: (value: string) => void;
+  setSelectedId: (value: string) => any;
 }
 
 export const DefaultContentSelectionElement = (props: Props) => {
@@ -73,14 +73,14 @@ export const DefaultContentSelectionElement = (props: Props) => {
 
   const handleOnCloseEvent = (e: any) => {
     e.stopPropagation();
-    if (props.onClose3) {
-      props.onClose3(props.id!);
+    if (props.onClose) {
+      props.onClose(props.id!);
     }
   };
 
   const handleOnClickEvent = (value: string) => {
-    if (props.setSelectedId3) {
-      props.setSelectedId3(value);
+    if (props.setSelectedId) {
+      props.setSelectedId(value);
     }
   };
 

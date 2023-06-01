@@ -34,8 +34,8 @@ export class BasicContentbarWrapper implements ContentbarWrapperInterface {
         id={this.id}
         closable={this.closable}
         selected={this.id === this.selectedId}
-        setSelectedId3={this.setSelectedId}
-        onClose3={this.onClose}
+        setSelectedId={this.setSelectedId}
+        onClose={this.onClose}
         width={contentElementWidth}
       />
     );

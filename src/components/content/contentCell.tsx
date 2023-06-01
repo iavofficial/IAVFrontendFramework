@@ -16,9 +16,6 @@ export interface Props {
   colWidth?: number;
   clearStyle?: boolean;
   paddings: CellPaddings;
-  style?: {
-    backgroundColor?: string;
-  };
 }
 
 export function ContentCell(props: PropsWithChildren<Props>) {

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import './navbar.css';
 import '../css/globalColors.css';
 import { TabAndContentWrapper } from './wrapper/tabAndContentWrapper';
-import { MenuSettingsOptions } from '../header/settingsMenu';
 import { useTranslator } from '../internationalization/translators';
 import { Tooltip } from 'primereact/tooltip';
 import SimpleBar from 'simplebar-react';
@@ -16,7 +15,6 @@ import { NavbarSettingsContext } from '../../contexts/navbarContext';
 
 interface Props {
   tabAndContentWrappers: TabAndContentWrapper[];
-  menuOptions?: MenuSettingsOptions;
   documentsLabelKey?: string;
   collabsibleNavbar?: boolean;
 }

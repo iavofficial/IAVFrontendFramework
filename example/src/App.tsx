@@ -20,13 +20,14 @@ import { ColorProvider } from 'disa-framework/colorProvider';
 import translationEN from './assets/translations/en.json';
 import translationDE from './assets/translations/de.json';
 import translationDECH from './assets/translations/de-CH.json';
-import { ReactComponent as InfoIcon } from './assets/infoIcon_selected.svg';
+import { ReactComponent as InfoIcon } from './assets/infoIcon.svg';
 import { LegalDocuments } from './components/legalDocuments';
 import { ExampleComponent1 } from './components/exampleComponent1';
-import { ExampleComponent2 } from './components/exampleComponent2';
+import { ExampleComponent6 } from './components/exampleComponent6';
 import { ExampleComponent3 } from './components/exampleComponent3';
 import { ExampleComponent4 } from './components/exampleComponent4';
 import { ExampleComponent5 } from './components/exampleComponent5';
+import { ExampleComponent2 } from './components/exampleComponent2';
 
 function App() {
   const [selectedButtonOption, setSelectedButtonOption] = useState('Simulated');
@@ -43,12 +44,6 @@ function App() {
             />
           </div>
         ),
-      },
-    ],
-    options: [
-      {
-        identifier: 'logout',
-        hidden: false,
       },
     ],
   };
@@ -170,6 +165,19 @@ function App() {
             />
           ),
           ExampleComponent5
+        ),
+        new BasicContentWrapper(
+          (
+            <SimpleNavbarTab
+              name={(t: TranslateFunctionType) =>
+                t('example_component', { count: 7 })
+              }
+              to="/group-example7"
+              disabled={false}
+              icon={<InfoIcon />}
+            />
+          ),
+          ExampleComponent6
         ),
       ]
     ),

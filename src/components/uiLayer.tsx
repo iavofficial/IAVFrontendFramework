@@ -12,8 +12,6 @@ import {
 } from 'react-router-dom';
 import './css/constants.css';
 import './css/globalChangesOnPrimeReactComponents.css';
-import './css/disaPage.css';
-import './css/disaFramework.css';
 import { BasicAuthenticationView } from './authentication/default/basicAuthenticationView';
 import { MenuSettingsOptions } from './header/settingsMenu';
 import { CookieBanner } from './cookie/cookieBanner';
@@ -28,7 +26,6 @@ import { NavbarSettingsProvider } from '../providers/navbarProvider';
 export interface HeaderOptions {
   reactElementRight?: ReactElement;
   reactElementLeft?: ReactElement;
-  letteringElementLeft?: string;
   hideLeft?: boolean;
   hideRight?: boolean;
 }
@@ -49,7 +46,6 @@ export interface Props {
   documentsLabelKey?: string;
   headerOptions?: HeaderOptions;
   authOptions?: AuthOptions;
-  authBackgroundImage?: string;
   collabsibleNavbar?: boolean;
 }
 

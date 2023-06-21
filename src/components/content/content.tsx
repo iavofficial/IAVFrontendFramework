@@ -12,6 +12,7 @@ export interface Props {
   setSelectedId?: (value: string) => void;
   onClose?: (value: string) => void;
   addable?: boolean;
+  jumpToEnd?: boolean;
   onClickAddButton?: () => any;
   onClickLeftSlideButton?: () => any;
   onClickRightSlideButton?: () => any;
@@ -50,6 +51,7 @@ export const Content = (props: React.PropsWithChildren<Props>) => {
           onClickRightSlideButton={props.onClickRightSlideButton}
           onClickAddButton={props.onClickAddButton}
           addable={props.addable}
+          jumpToEnd={props.jumpToEnd}
           contentElements={props.contentElements}
         />
       )}

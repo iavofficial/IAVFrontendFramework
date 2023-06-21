@@ -5,7 +5,7 @@ import { AuthContext } from '../../../contexts/auth';
 import { LoginButtonWithSpinner } from '../loginButtonWithSpinner';
 import { useTranslator } from '../../internationalization/translators';
 import { AuthenticationViewProps } from '../aws/authenticationView';
-import '../../css/authenticationView.css';
+import '../authenticationView.css';
 import '../../css/globalColors.css';
 import loginBackgroundLightMode from '../../../assets/images/login_background_lightMode.png';
 import loginBackgroundDarkMode from '../../../assets/images/login_background_darkMode.png';

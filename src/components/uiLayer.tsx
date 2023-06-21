@@ -12,6 +12,7 @@ import {
 } from 'react-router-dom';
 import './css/constants.css';
 import './css/globalChangesOnPrimeReactComponents.css';
+import './css/globalSettings.css';
 import { BasicAuthenticationView } from './authentication/default/basicAuthenticationView';
 import { MenuSettingsOptions } from './header/settingsMenu';
 import { CookieBanner } from './cookie/cookieBanner';

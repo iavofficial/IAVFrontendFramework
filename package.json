@@ -1,6 +1,6 @@
 {
   "name": "@disa/disa-framework",
-  "version": "6.0.1",
+  "version": "6.0.2",
   "private": false,
   "description": "This framework takes care of a DISA application's basic structure.",
   "contributors": [
@@ -50,7 +50,7 @@
     "i18next-browser-languagedetector": "^7.0.1",
     "primeflex": "^3.3.0",
     "primeicons": "^6.0.1",
-    "primereact": "^9.2.1",
+    "primereact": "~9.2.1",
     "react-cookie": "^4.1.1",
     "react-i18next": "^12.2.0",
     "sass": "^1.61.0",

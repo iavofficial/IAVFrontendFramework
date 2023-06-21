@@ -1,137 +1,207 @@
-import "primeflex/primeflex.css";
-import "primereact/resources/themes/nova/theme.css";
-import "primereact/resources/primereact.css";
-import "primeicons/primeicons.css";
-import {SelectButton} from 'primereact/selectbutton';
-import translationES from "./assets/translations/es.json";
-import {UILayer} from 'disa-framework/uiLayer';
-import {GlobalDataLayer} from "disa-framework/globalDataLayer";
-import {DummyAuthenticationProvider} from "disa-framework/dummyAuthenticationProvider";
-import {Group} from "disa-framework/group";
-import {TranslateFunctionType} from "disa-framework/language";
-import {BasicAuthenticationView} from "disa-framework/basicAuthenticationView";
-import {BasicContentWrapper} from "disa-framework/basicContentWrapper";
-import {SimpleNavbarTab} from "disa-framework/simpleNavbarTab";
-import {PrivilegedNavbarTab} from "disa-framework/privilegedNavbarTab"
-import translationEN from "./assets/translations/en.json";
-import translationDE from "./assets/translations/de.json";
-import translationDECH from "./assets/translations/de-CH.json";
-import navDashboardSelected from "./assets/nav_dashboard_selected.png";
-import navDashboardDeselected from "./assets/nav_dashboard_deselected.png";
-import navDiagnosticsSelected from "./assets/nav_diagnostics_selected.png";
-import navDiagnosticsDeselected from "./assets/nav_diagnostics_deselected.png";
-import navExpertSelected from "./assets/nav_expert_selected.png";
-import navExpertDeselected from "./assets/nav_expert_deselected.png";
-import navFleetSelected from './assets/nav_fleet_selected.png';
-import navFleetDeselected from './assets/nav_fleet_deselected.png';
-import navFleetDetailSelected from './assets/nav_fleet_detail_selected.png';
-import navFleetDetailDeselected from './assets/nav_fleet_detail_deselected.png';
-import groupIcon from "./assets/ota_logo.png";
-import {FirstExampleContextComponent} from './contexts/FirstExampleContext';
-import {SecondExampleContextComponent} from './contexts/SecondExampleContext';
-import {LayoutAndContextExampleComponent} from "./components/layoutAndContextExampleComponent";
-import {ThirdExampleComponent} from "./components/thirdExampleComponent";
-import {FourthExampleComponent} from "./components/fourthExampleComponent";
-import {SecondExampleComponent} from "./components/secondExampleComponent";
-import {useState} from "react";
-import {ClassComponentContainer} from "./components/classComponentContainer";
-import {LegalDocuments} from "./components/legalDocuments";
-import { BLACK, MAGENTA1, MAGENTA3 } from "disa-framework/constants";
+import 'primeflex/primeflex.css';
+import 'primereact/resources/themes/lara-light-indigo/theme.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
+
+import { SelectButton } from 'primereact/selectbutton';
+import { useState } from 'react';
+import translationES from './assets/translations/es.json';
+import { UILayer } from 'disa-framework/uiLayer';
+import { GlobalDataLayer } from 'disa-framework/globalDataLayer';
+import { DummyAuthenticationProvider } from 'disa-framework/dummyAuthenticationProvider';
+import { TranslateFunctionType } from 'disa-framework/language';
+import { SimpleNavbarTab } from 'disa-framework/simpleNavbarTab';
+import { PrivilegedNavbarTab } from 'disa-framework/privilegedNavbarTab';
+import { BasicAuthenticationView } from 'disa-framework/basicAuthenticationView';
+import { AWSAuthenticationView } from 'disa-framework/awsAuthenticationView';
+import { BasicContentWrapper } from 'disa-framework/basicContentWrapper';
+import { Group } from 'disa-framework/group';
+import { ColorProvider } from 'disa-framework/colorProvider';
+import translationEN from './assets/translations/en.json';
+import translationDE from './assets/translations/de.json';
+import translationDECH from './assets/translations/de-CH.json';
+import { ReactComponent as InfoIcon } from './assets/infoIcon.svg';
+import { LegalDocuments } from './components/legalDocuments';
+import { ExampleComponent1 } from './components/exampleComponent1';
+import { ExampleComponent6 } from './components/exampleComponent6';
+import { ExampleComponent3 } from './components/exampleComponent3';
+import { ExampleComponent4 } from './components/exampleComponent4';
+import { ExampleComponent5 } from './components/exampleComponent5';
+import { ExampleComponent2 } from './components/exampleComponent2';
 
 function App() {
+  const [selectedButtonOption, setSelectedButtonOption] = useState('Simulated');
 
-    const [selectedButtonOption, setSelectedButtonOption] = useState("Simulated");
-
-    const menuOptions = {
-        additionalItems: [
-            {
-                template: (
-                    <div style={{display: "flex", justifyContent: "center"}}>
-                        <SelectButton options={["Simulated", "Real"]} value={selectedButtonOption}
-                                      onChange={(ev) => setSelectedButtonOption(ev.value)}/>
-                    </div>
-                )
-            }
-        ],
-        options: [
-            {
-                identifier: "logout",
-                hidden: true
-            }
-        ]
-    }
-
-    const views = [
-        new BasicContentWrapper(<SimpleNavbarTab name={"Example without Translation"} to="/" disabled={false}
-                                                 selectedIcon={navDashboardSelected}
-                                                 deselectedIcon={navDashboardDeselected}/>, LayoutAndContextExampleComponent),
-        new BasicContentWrapper(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", {count: 1})}
-                                                 to="/example2" disabled={false}
-                                                 selectedIcon={navFleetSelected}
-                                                 deselectedIcon={navFleetDeselected}/>, SecondExampleComponent),
-        new BasicContentWrapper(<PrivilegedNavbarTab
-            name={(t: TranslateFunctionType) => t("example_component", {count: 2})} to="/example3" disabled={false}
-            selectedIcon={navDiagnosticsSelected} deselectedIcon={navDiagnosticsDeselected}
-            permittedGroups={["USER", "ADMIN"]}/>, ThirdExampleComponent),
-        new Group(
-            (t: TranslateFunctionType) => t("Test_group"), groupIcon, undefined, false, true, false,
-            [
-                new BasicContentWrapper(<SimpleNavbarTab
-                    name={(t: TranslateFunctionType) => t("example_component", {count: 3})} to="/group-example1"
-                    disabled={false}
-                    selectedIcon={navFleetSelected} deselectedIcon={navFleetDeselected}/>, SecondExampleComponent),
-                new BasicContentWrapper(<SimpleNavbarTab
-                    name={(t: TranslateFunctionType) => t("example_component", {count: 4})} to="/group-example2"  
-                    disabled={true}
-                    selectedIcon={navFleetDetailSelected}
-                    deselectedIcon={navFleetDetailDeselected}/>, FourthExampleComponent)
-            ]
+  const menuSettingsOptions = {
+    additionalItems: [
+      {
+        template: (
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <SelectButton
+              options={['Simulated', 'Real']}
+              value={selectedButtonOption}
+              onChange={(ev) => setSelectedButtonOption(ev.value)}
+            />
+          </div>
         ),
-        new BasicContentWrapper(<PrivilegedNavbarTab
-            name={(t: TranslateFunctionType) => t("example_component", {count: 5})} to="/example4" disabled={true}
-            selectedIcon={navExpertSelected} deselectedIcon={navExpertDeselected}
-            permittedGroups={["ADMIN"]}/>, FourthExampleComponent),
-        new BasicContentWrapper(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", {count: 6})}  
-                                                 to="/example5" disabled={false}
-                                                 selectedIcon={navFleetDetailSelected}
-                                                 deselectedIcon={navFleetDetailDeselected}/>, FourthExampleComponent),
-        new BasicContentWrapper(<SimpleNavbarTab name={(t: TranslateFunctionType) => t("example_component", {count: 7})}
-                                                 to="/example6" disabled={false}
-                                                 selectedIcon={navDashboardSelected}
-                                                 deselectedIcon={navDashboardDeselected}/>, ClassComponentContainer),
-    ];
+      },
+    ],
+  };
 
-    const translations = (
-        {
-            es: {
-                translation: translationES
-            },
-            en: {
-                translation: translationEN
-            },
-            de: {
-                translation: translationDE
-            },
-            de_CH: {
-                translation: translationDECH
-            }
-        }
-    );
-    
-    return (
-        <DummyAuthenticationProvider additionalContextValues={{getUserGroups: () => []}}>
-            <GlobalDataLayer translations={translations}>
-                <FirstExampleContextComponent>
-                    <SecondExampleContextComponent>
-                        <UILayer tabAndContentWrappers={views} startingPoint="/"
-                                 authenticationView={BasicAuthenticationView} menuOptions={menuOptions}
-                                 documentsLabelKey="Legal_documents" documentsComponent={LegalDocuments} 
-                               />
-                    </SecondExampleContextComponent>
-                </FirstExampleContextComponent>
-            </GlobalDataLayer>
-        </DummyAuthenticationProvider>
-    );
+  const translations = {
+    es: {
+      translation: translationES,
+    },
+    en: {
+      translation: translationEN,
+    },
+    de: {
+      translation: translationDE,
+    },
+    de_CH: {
+      translation: translationDECH,
+    },
+  };
+
+  const views = [
+    new BasicContentWrapper(
+      (
+        <SimpleNavbarTab
+          name={'Example without Translation'}
+          to="/"
+          icon={<InfoIcon />}
+          disabled={false}
+        />
+      ),
+      ExampleComponent1
+    ),
+    new Group(
+      (t: TranslateFunctionType) => t('Test_group_not_collapsible'),
+      <InfoIcon />,
+      false,
+      [
+        new BasicContentWrapper(
+          (
+            <SimpleNavbarTab
+              name={(t: TranslateFunctionType) =>
+                t('example_component', { count: 2 })
+              }
+              to="/group-example1"
+              disabled={false}
+              icon={<InfoIcon />}
+            />
+          ),
+          ExampleComponent2
+        ),
+        new BasicContentWrapper(
+          (
+            <PrivilegedNavbarTab
+              name={(t: TranslateFunctionType) =>
+                t('example_component', { count: 3 })
+              }
+              to="/group-example3"
+              disabled={false}
+              permittedGroups={['ADMIN']}
+              icon={<InfoIcon />}
+            />
+          ),
+          ExampleComponent3
+        ),
+        new BasicContentWrapper(
+          (
+            <SimpleNavbarTab
+              name={(t: TranslateFunctionType) =>
+                t('example_component', { count: 4 })
+              }
+              to="/group-example4"
+              disabled={false}
+              icon={<InfoIcon />}
+            />
+          ),
+          ExampleComponent4
+        ),
+        new Group(
+          (t: TranslateFunctionType) => t('Test_group_collapsible'),
+          <InfoIcon />,
+          true,
+          [
+            new BasicContentWrapper(
+              (
+                <SimpleNavbarTab
+                  name={(t: TranslateFunctionType) =>
+                    t('example_component', { count: 5.1 })
+                  }
+                  to="/group-example51"
+                  disabled={true}
+                  icon={<InfoIcon />}
+                />
+              ),
+              ExampleComponent3
+            ),
+            new BasicContentWrapper(
+              (
+                <SimpleNavbarTab
+                  name={(t: TranslateFunctionType) =>
+                    t('example_component', { count: 5.2 })
+                  }
+                  to="/group-example52"
+                  disabled={false}
+                  icon={<InfoIcon />}
+                />
+              ),
+              ExampleComponent4
+            ),
+          ]
+        ),
+        new BasicContentWrapper(
+          (
+            <SimpleNavbarTab
+              name={(t: TranslateFunctionType) =>
+                t('example_component', { count: 6 })
+              }
+              to="/group-example6"
+              disabled={false}
+              icon={<InfoIcon />}
+            />
+          ),
+          ExampleComponent5
+        ),
+        new BasicContentWrapper(
+          (
+            <SimpleNavbarTab
+              name={(t: TranslateFunctionType) =>
+                t('example_component', { count: 7 })
+              }
+              to="/group-example7"
+              disabled={false}
+              icon={<InfoIcon />}
+            />
+          ),
+          ExampleComponent6
+        ),
+      ]
+    ),
+  ];
+
+  return (
+    <DummyAuthenticationProvider
+      additionalContextValues={{ getUserGroups: () => [] }}
+    >
+      <GlobalDataLayer translations={translations}>
+        <ColorProvider>
+          <UILayer
+            tabAndContentWrappers={views}
+            startingPoint="/"
+            authenticationView={BasicAuthenticationView}
+            menuOptions={menuSettingsOptions}
+            collabsibleNavbar={true}
+            documentsLabelKey="Legal_documents"
+            documentsComponent={LegalDocuments}
+          />
+        </ColorProvider>
+      </GlobalDataLayer>
+    </DummyAuthenticationProvider>
+  );
 }
 
 export default App;

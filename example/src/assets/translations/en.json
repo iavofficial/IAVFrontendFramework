@@ -12,10 +12,19 @@
     "changed_local_state": "changed local state",
     "Change_local_data": "Change local data",
     "component_deactivated": "This component may be deactivated.",
-    "Example_component": "This is an example component.",
+    "Example_component_with_contentcell": "example component with contentcell",
     "Example_translation": "Example translation",
     "Example_pluralization_merging": "Example for pluralization and merging translation files",
     "changed_with_global_button": "changed with global button",
     "Another_global_element": "Another global element",
-    "Test_group": "Test group"
+    "No_contentbar_elements": "no contentbar elements",
+    "Test_group_collapsible": "Test group collapsible",
+    "Test_group_not_collapsible": "Test group not collapsible",
+    "basic_div_tag_with_text": "basic div tag with text",
+    "i_am_translated": "ich bin nicht übersetzt",
+    "translate": "translate",
+    "reset": "reset",
+    "translation_and_colormode_example": "Translation and colormode example ",
+    "with_applied_dark_and_lightMode": "with applied dark and lightmode",
+    "without_applied_dark_and_lightMode": "without applied dark and lightmode"
 }

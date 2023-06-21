@@ -122,7 +122,7 @@ export const DefaultContentSelectionElement = (props: Props) => {
         {props.closable ? (
           <div style={{ position: 'absolute', right: '5px' }}>
             <i
-              onClick={() => handleOnCloseEvent(props.id!)}
+              onClick={(event) => handleOnCloseEvent(event)}
               style={closingIconStyle}
               className="pi pi-times tabelements-only"
             />

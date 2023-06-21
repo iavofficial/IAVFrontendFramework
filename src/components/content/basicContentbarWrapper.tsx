@@ -22,6 +22,10 @@ export class BasicContentbarWrapper implements ContentbarWrapperInterface {
     return this.id;
   }
 
+  setSelectedIdParentComponent(selectedIdParentComponent: string) {
+    this.selectedId = selectedIdParentComponent;
+  }
+
   getContentAreaElement(): React.ReactElement {
     return this.contentAreaElement;
   }

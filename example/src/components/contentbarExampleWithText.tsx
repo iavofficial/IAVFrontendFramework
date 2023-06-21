@@ -13,6 +13,7 @@ export const ContentbarExampleWithText = (props: Props) => {
           <span>First row left</span>
           <h2>{props.exampleText}</h2>
           <h3>Contentbar with default tabelements</h3>
+          <h3>Advanced useCase</h3>
           <div></div>
         </ContentCell>
         <ContentCell colWidth={6} paddings={CellPaddings.VERT_RIGHT}>

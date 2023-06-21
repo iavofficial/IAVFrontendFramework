@@ -15,7 +15,6 @@ import {
   GREY3,
   GREY4,
   GREY5,
-  TAB_HEIGHT,
   WHITE,
 } from '../../constants';
 import { ColorSettingsContext } from '../../contexts/colorsettings';
@@ -29,6 +28,7 @@ import { calculateWidth } from '../../services/calculateWidth';
 interface Props {
   contentElements: BasicContentbarWrapper[] | CustomContentbarWrapper[];
   addable?: boolean;
+  jumpToEnd?: boolean;
   onClose: (value: string) => any;
   setSelectedId: (value: string) => any;
   onClickAddButton?: () => any;
@@ -42,6 +42,9 @@ export const ContentBar = (props: Props) => {
   const contentRef = useRef<HTMLDivElement | null>(null);
   const [addButtonHover, setAddButtonHover] = useState(false);
   const [slideLeftButtonHover, setSlideLeftButtonHover] = useState(false);
+  const [remeberedArrayLength, setRemeberedArrayLength] = useState(
+    props.contentElements.length
+  );
   const [slideRightButtonHover, setSlideRightButtonHover] = useState(false);
   const [width, setWidth] = useState(1880);
   const [startRenderElements, setStartRenderElements] = useState(0);
@@ -50,6 +53,9 @@ export const ContentBar = (props: Props) => {
 
   useEffect(() => {
     if (navbarSettingsContext?.navbarCollapsed === true) {
+      setStartRenderElements(() =>
+        lastElementIsVisible() ? startRenderElements - 1 : startRenderElements
+      );
       setAmountOfRenderedTabElements(6);
       handleWindowResize();
     } else {
@@ -95,6 +101,14 @@ export const ContentBar = (props: Props) => {
     );
   }
 
+  useEffect(() => {
+    if (remeberedArrayLength > props.contentElements.length) {
+      setStartRenderElements(startRenderElements - 1);
+    }
+
+    setRemeberedArrayLength(props.contentElements.length);
+  }, [props.contentElements.length]);
+
   const handleSlideLeftEvent = () => {
     if (startRenderElements > 0) {
       if (props.onClickLeftSlideButton) {
@@ -102,6 +116,18 @@ export const ContentBar = (props: Props) => {
       }
 
       setStartRenderElements(startRenderElements - 1);
+    }
+  };
+
+  const lastElementIsVisible = () => {
+    if (
+      startRenderElements + amountOfRenderedTabElements ===
+        props.contentElements.length &&
+      props.contentElements.length > amountOfRenderedTabElements
+    ) {
+      return true;
+    } else {
+      return false;
     }
   };
 
@@ -132,8 +158,22 @@ export const ContentBar = (props: Props) => {
     }
   };
 
+  const handleJumpToTheEnd = () => {
+    if (props.contentElements.length >= amountOfRenderedTabElements) {
+      return props.contentElements.length + 1 - amountOfRenderedTabElements;
+    } else {
+      return startRenderElements;
+    }
+  };
+
   const handleOnClickAddEvent = () => {
-    if (props.onClickAddButton) props.onClickAddButton();
+    if (props.jumpToEnd) {
+      setStartRenderElements(handleJumpToTheEnd);
+    }
+
+    if (props.onClickAddButton) {
+      props.onClickAddButton();
+    }
   };
 
   return (

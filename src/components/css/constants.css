@@ -25,7 +25,9 @@
     --yellow: #ffd800;
     --green: #80d800;
     --red: #f80000;
-    /* fb: FallbackValue */
+    /* fb: FallbackValue 
+       bg: Background
+    */
     --contextmenubgmaincolorfb: var(--white);
     --highlightcolorfb: var(--blue-0);
     --textAndIconMainColorfb: var(--black);

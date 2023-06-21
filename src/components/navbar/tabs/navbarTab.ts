@@ -12,12 +12,6 @@ export interface navbarTabProps {
   active?: boolean;
   layer?: LAYER;
   isLastElementOfLayer?: boolean;
-  colorOptions?: {
-    tabTextColor: string;
-    tabTextHoverColor: string;
-    tabHoverBackground: string;
-    tabBackground: string;
-  };
 }
 
 export type navbarTab<additional = {}> = React.ComponentType<

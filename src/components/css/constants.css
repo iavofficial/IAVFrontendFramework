@@ -1,14 +1,11 @@
-:root {
-    --navbar-width: 271px;
-    --tab-height: 70px;
-    
+:root {    
     --blue-0: #001a54;
     --blue-1: #041e96;
     --blue-2: #1446eb;
     --blue-3: #0091ff;
     --blue-4: #52c9ff;
-    --blue-5: #96e7ff;
-    --blue-6: #d2f5ff;
+    --blue-5: #CBE8ff;
+ 
 
     --magenta-1: #5500b4;
     --magenta-2: #a200e6;
@@ -17,14 +14,33 @@
     --magenta-5: #ffafff;
     --magenta-6: #fddeff;
 
-    --gray-1: #f0f0f0;
-    --gray-2: #cdcdcd;
-    --gray-3: #9a9a9a;
-    --gray-4: #444444;
+    --white: #ffffff;
+    --grey-1: #f0f0f0;
+    --grey-2: #DADADA;
+    --grey-3: #808080;
+    --grey-4: #333333;
+    --grey-5: #1A1A1A;
+    --black: #000000;
 
     --yellow: #ffd800;
     --green: #80d800;
     --red: #f80000;
+    /* fb: FallbackValue 
+       bg: Background
+    */
+    --contextmenubgmaincolorfb: var(--white);
+    --highlightcolorfb: var(--blue-0);
+    --textAndIconMainColorfb: var(--black);
+    --textAndIconHighlightColorfb: var(--white);
+    --dropdownBgfb: var(--white);
+    --dropdownBgHighlightfb: var(--black);
+}
 
-    --white: #ffffff;
+[data-theme="dark"]{
+    --contextmenubgmaincolorfb: var(--grey-5);
+    --highlightcolorfb: var(--grey-3);
+    --textAndIconMainColorfb: var(--white);
+    --textAndIconHighlightColorfb: var(--white);
+    --dropdownBgfb: var(--grey-5);
+    --dropdownBgHighlightfb: var(--white);
 }

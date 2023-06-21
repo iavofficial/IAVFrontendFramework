@@ -1,0 +1,22 @@
+#left-element-authentication{
+   width: 420px !important;
+}
+
+#right-element-authentication{
+   width: 200px !important;
+}
+
+.switch-colormode-logos{
+   cursor: pointer;
+   margin-right: 16px;
+}
+
+.inputLabel {
+   font-weight: bold;
+   margin-bottom: 5px;
+}
+
+.invalid {
+   color: var(--red) !important;
+   border-color: var(--red) !important;
+ }

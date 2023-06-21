@@ -12,10 +12,19 @@
     "changed_local_state": "lokalen Status geändert",
     "Change_local_data": "Ändere lokale Daten",
     "component_deactivated": "Diese Komponente ist evtl. deaktiviert.",
-    "Example_component": "Dies ist eine Beispielkomponente.",
+    "Example_component_with_contentcell": "Beispielkomponente mit Contentcell",
     "Example_translation": "Beispielübersetzung",
     "Example_pluralization_merging": "Beispiel für Pluralization und das Zusammenführen von Übersetzungsdateien",
+    "No_contentbar_elements": "keine contentbar elemente",
     "changed_with_global_button": "mit globalem Knopf geändert",
     "Another_global_element": "Ein weiteres globales element",
-    "Test_group": "Test Gruppe"
+    "Test_group_collapsible": "Test Gruppe klappbar",
+    "Test_group_not_collapsible": "Test Gruppe nicht klappbar",
+    "basic_div_tag_with_text": "Normaler Div Tag mit Text",
+    "i_am_translated": "ich bin übersetzt",
+    "translate": "übersetz",
+    "reset": "zurücksetzen",
+    "translation_and_colormode_example": "Übersetzungs und Farbmodi Beispiel",
+    "with_applied_dark_and_lightMode": "Mit angewandtem Dark und Lightmode",
+    "without_applied_dark_and_lightMode": "Ohne angewandten Dark und Lightmode"
 }

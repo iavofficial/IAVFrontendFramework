@@ -1,49 +1,247 @@
-import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { BLUE3, GRAY2, TAB_HEIGHT } from "../../../constants";
-import { useTranslator } from "../../internationalization/translators";
-import { navbarTabProps } from "./navbarTab";
+import React, { useContext, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Tooltip } from 'primereact/tooltip';
+import { BLACK, BLUE0, GREY3, GREY4, GREY5, WHITE } from '../../../constants';
+import { useTranslator } from '../../internationalization/translators';
+import './tabs.css';
+import { generateHashOfLength } from '../../../services/hash';
+import { navbarTab } from './navbarTab';
+import { LAYER } from './tabLayer';
+import {
+  calculateFirstLineTabLayer,
+  calculateFirstLineTabLayerBottom,
+  calculateSecondLineTabLayer,
+  calculateSecondLineTabLayerBottom,
+} from '../../../services/calculateLineColorTab';
+import { revertColor } from '../../../services/calculateLineColorGroup';
+import { ColorSettingsContext } from '../../../contexts/colorsettings';
+import { SvgIcon } from './svgIcon';
 
-export const SimpleNavbarTab = (props: navbarTabProps) => {
+export interface Props {}
 
-    const active = useLocation().pathname === props.to;
+export const SimpleNavbarTab: navbarTab<Props> = (props) => {
+  const [hovering, setHovering] = useState(false);
+  const colorSettingsContext = useContext(ColorSettingsContext);
+  const t = useTranslator();
+  const active = useLocation().pathname === props.to;
 
-    const [hovering, setHovering] = useState(false);
+  let highlightColor = colorSettingsContext?.navbarColorOptions?.tabColorOptions
+    ?.highlightColor
+    ? colorSettingsContext?.navbarColorOptions?.tabColorOptions?.highlightColor
+    : colorSettingsContext?.darkmode
+    ? GREY3
+    : BLUE0;
+  let mainColor = colorSettingsContext?.navbarColorOptions?.tabColorOptions
+    ?.mainColor
+    ? colorSettingsContext?.navbarColorOptions?.tabColorOptions?.mainColor
+    : colorSettingsContext?.darkmode
+    ? GREY5
+    : WHITE;
 
-    const t = useTranslator();
+  let letteringHighlightColor = colorSettingsContext?.navbarColorOptions
+    ?.tabColorOptions?.letteringHighlightColor
+    ? colorSettingsContext?.navbarColorOptions?.tabColorOptions
+        ?.letteringHighlightColor
+    : WHITE;
+  let letteringMainColor = colorSettingsContext?.navbarColorOptions
+    ?.tabColorOptions?.letteringMainColor
+    ? colorSettingsContext?.navbarColorOptions?.tabColorOptions
+        ?.letteringMainColor
+    : colorSettingsContext?.darkmode
+    ? GREY3
+    : BLACK;
 
-    const tabStyleDefault = {
-        height: TAB_HEIGHT,
-        cursor: active || props.disabled ? "default" : "pointer",
-        backgroundColor: (active || hovering) && !props.disabled ? BLUE3 : "white",
-        color: (active || hovering) && !props.disabled ? "white" : "black",
-        opacity: props.disabled ? 0.5 : 1
-    };
+  let iconHighlightColor = colorSettingsContext?.navbarColorOptions
+    ?.tabColorOptions?.iconHighlightColor
+    ? colorSettingsContext?.navbarColorOptions?.tabColorOptions
+        ?.iconHighlightColor
+    : WHITE;
+  let iconMainColor = colorSettingsContext?.navbarColorOptions?.tabColorOptions
+    ?.iconMainColor
+    ? colorSettingsContext?.navbarColorOptions?.tabColorOptions?.iconMainColor
+    : colorSettingsContext?.darkmode
+    ? GREY3
+    : BLUE0;
 
-    const tabStyleCustomized = {
-        height: TAB_HEIGHT,
-        cursor: active || props.disabled ? "default" : "pointer",
-        backgroundColor: (active || hovering) && !props.disabled ? (props.colorOptions?.tabHoverBackground) : (props.colorOptions?.tabBackground) ,
-        color: (active || hovering) && !props.disabled ? (props.colorOptions?.tabTextHoverColor) : (props.colorOptions?.tabTextColor),
-        opacity: props.disabled ? 0.5 : 1
-    };
+  const styleActiveLineFirstLayerTop = {
+    marginRight: '2px',
+    marginLeft: '3px',
+    width: '2px',
+    height: '40px',
+    backgroundColor:
+      (hovering || active) && !props.disabled
+        ? revertColor(
+            calculateFirstLineTabLayer(
+              highlightColor,
+              mainColor,
+              props.layer as LAYER,
+              props.collapsed
+            ),
+            highlightColor,
+            mainColor
+          )
+        : calculateFirstLineTabLayer(
+            highlightColor,
+            mainColor,
+            props.layer as LAYER,
+            props.collapsed
+          ),
+  };
 
-    const tab = (
-        <div className={"navbar-tab-wrapper " + (active ? "active" : "")}>
-            <div className="navbar-tab" style={{ borderColor: GRAY2 }}
-                onMouseEnter={() => setHovering(true)} onMouseLeave={() => setHovering(false)}>
-                <div className="p-d-flex p-align-center" style={ props.colorOptions ? tabStyleCustomized : tabStyleDefault}>
-                    <img src={(active || hovering) && !props.disabled ? props.selectedIcon.valueOf() : props.deselectedIcon.valueOf()} alt="" />
-                    <span id="navbar-tab-name">{props.name instanceof Function ? props.name(t) : props.name}</span>
-                </div>
-            </div>
-        </div>
-    );
+  const styleActiveLineFirstLayerBottom = {
+    marginRight: '2px',
+    marginLeft: '3px',
+    width: '2px',
+    height: '16px',
+    backgroundColor: calculateFirstLineTabLayerBottom(
+      highlightColor,
+      mainColor,
+      props.collapsed as boolean,
+      props.isLastElementOfLayer as boolean,
+      props.layer as LAYER
+    ),
+  };
 
-    return (
-        props.disabled ? tab :
-            <Link style={{ textDecoration: "none" }} to={props.to.valueOf()}>
-                {tab}
-            </Link>
-    );
-}
+  const styleActiveLineSecondLayerTop = {
+    heigth: '40px',
+    width: '2px',
+    marginRight: '3px',
+    backgroundColor:
+      (hovering || active) && !props.disabled
+        ? revertColor(
+            calculateSecondLineTabLayer(
+              highlightColor,
+              mainColor,
+              props.layer as LAYER,
+              props.collapsed
+            ),
+            highlightColor,
+            mainColor
+          )
+        : calculateSecondLineTabLayer(
+            highlightColor,
+            mainColor,
+            props.layer as LAYER,
+            props.collapsed
+          ),
+  };
+
+  const styleActiveLineSecondLayerBottom = {
+    heigth: '16px',
+    width: '2px',
+    marginRight: '3px',
+    backgroundColor: calculateSecondLineTabLayerBottom(
+      highlightColor,
+      mainColor,
+      props.collapsed as boolean,
+      props.isLastElementOfLayer as boolean,
+      props.layer as LAYER
+    ),
+  };
+
+  const tabStyleDefault = {
+    height: '40px',
+    width: props.navbarCollapsed ? '40px' : '240px',
+    cursor: active || props.disabled ? 'default' : 'pointer',
+    backgroundColor:
+      (active || hovering) && !props.disabled ? highlightColor : mainColor,
+    color:
+      (active || hovering) && !props.disabled
+        ? letteringHighlightColor
+        : letteringMainColor,
+    opacity: props.disabled ? 0.5 : 1,
+  };
+
+  const identifier = generateHashOfLength(4);
+  const identifierLegal = 'a' + identifier;
+  const identifierWithDot = '.' + identifierLegal;
+
+  const navbarTab = props.navbarCollapsed ? (
+    <div
+      onMouseEnter={() => setHovering(true)}
+      onMouseLeave={() => setHovering(false)}
+      className={'flex align-items-center ' + identifierLegal}
+      style={tabStyleDefault}
+    >
+      <div style={styleActiveLineFirstLayerTop} />
+      <div id="secondActiveLine" style={styleActiveLineSecondLayerTop} />
+
+      <SvgIcon
+        color={
+          (active || hovering) && !props.disabled
+            ? iconHighlightColor
+            : iconMainColor
+        }
+        element={props.icon}
+      />
+      <Tooltip
+        content={props.name instanceof Function ? props.name(t) : props.name}
+        target={identifierWithDot}
+        id="hover-image"
+      />
+    </div>
+  ) : (
+    <div
+      className="flex "
+      style={tabStyleDefault}
+      onMouseEnter={() => setHovering(true)}
+      onMouseLeave={() => setHovering(false)}
+    >
+      <div style={styleActiveLineFirstLayerTop} />
+      <div style={styleActiveLineSecondLayerTop} />
+
+      <div style={{ width: '228px' }} className="flex align-items-center">
+        <SvgIcon
+          color={
+            (active || hovering) && !props.disabled
+              ? iconHighlightColor
+              : iconMainColor
+          }
+          element={props.icon}
+        />
+        <span id="navbar-tab-name">
+          {props.name instanceof Function ? props.name(t) : props.name}
+        </span>
+      </div>
+    </div>
+  );
+
+  return (
+    <>
+      {props.disabled ? (
+        <>
+          {navbarTab}
+          <div
+            className="flex"
+            style={{ width: props.navbarCollapsed ? '40px' : '240px' }}
+          >
+            <div style={styleActiveLineFirstLayerBottom} />
+            <div style={styleActiveLineSecondLayerBottom} />
+            <div style={{ width: '80%' }} />
+          </div>
+        </>
+      ) : (
+        <>
+          <Link style={{ textDecoration: 'none' }} to={props.to.valueOf()}>
+            {navbarTab}
+          </Link>
+          <div
+            className="flex"
+            style={{
+              width: props.navbarCollapsed ? '40px' : '240px',
+              height: '16px',
+            }}
+          >
+            <div style={styleActiveLineFirstLayerBottom} />
+            <div style={styleActiveLineSecondLayerBottom} />
+            <div
+              style={{
+                width: props.navbarCollapsed ? '28px' : '228px',
+              }}
+            />
+          </div>
+        </>
+      )}
+    </>
+  );
+};

@@ -37,7 +37,11 @@ function App() {
       {
         template: (
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <SelectButton options={['Simulated', 'Real']} />
+            <SelectButton
+              options={['Simulated', 'Real']}
+              value={selectedButtonOption}
+              onChange={(ev) => setSelectedButtonOption(ev.value)}
+            />
           </div>
         ),
       },

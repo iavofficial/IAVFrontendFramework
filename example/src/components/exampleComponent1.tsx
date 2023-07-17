@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useReducer } from 'react';
-import { CellPaddings, ContentCell } from 'disa-framework/contentCell';
+import { useEffect, useReducer } from 'react';
 import { Content, LayoutBehaviour } from 'disa-framework/content';
 import { generateHashOfLength } from 'disa-framework/hash';
 import { ContentbarExampleWithText } from './contentbarExampleWithText';
@@ -34,7 +33,7 @@ function reducer(state: ExampleArrayObject, action: Action) {
       let temporaryExampleArray = [...state.exampleArray!];
       temporaryExampleArray.push(action.payload?.addElement!);
 
-      temporaryExampleArray.forEach((element, index) => {
+      temporaryExampleArray.forEach((element) => {
         element.setSelectedIdParentComponent(
           action.payload?.addElement?.getId()!
         );

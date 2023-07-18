@@ -41,10 +41,10 @@ export interface AuthOptions {
 export interface Props {
   tabAndContentWrappers: TabAndContentWrapper[];
   startingPoint: string;
-  menuOptions?: MenuSettingsOptions;
   authenticationView?: React.ComponentType<AuthenticationViewProps & any>;
   documentsComponent?: React.ComponentType<any>;
   documentsLabelKey?: string;
+  menuOptions?: MenuSettingsOptions;
   headerOptions?: HeaderOptions;
   authOptions?: AuthOptions;
   collabsibleNavbar?: boolean;

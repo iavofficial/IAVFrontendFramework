@@ -69,7 +69,7 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
     const langContext = useContext(LanguageContext);
     const t = useTranslator();
 
-    let options = [];
+    let languageOptions = [];
     let notFallbackLang = false;
 
     // Marking active language in language selection.
@@ -86,7 +86,7 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
             activeLang === key ||
             (isDialectOf(activeLang, key) &&
               !containsLanguage(activeLang, langContext?.resources));
-          options.push({
+          languageOptions.push({
             label: langContext?.resources[key].translation.option_name,
             icon: active ? 'pi pi-check' : '',
             // I18Next must have the representation with "-" instead of "_". "de_DE" will not resolve to "de" which is necessary
@@ -100,7 +100,7 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
           }
         }
       });
-      options.push({
+      languageOptions.push({
         label:
           langContext?.resources[langContext.fallbackLang].translation
             .option_name,
@@ -113,7 +113,7 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
       {
         label: t('Language'),
         icon: 'pi pi-comment',
-        items: options.sort((option1, option2) =>
+        items: languageOptions.sort((option1, option2) =>
           option1.label === option2.label
             ? 0
             : option1.label < option2.label

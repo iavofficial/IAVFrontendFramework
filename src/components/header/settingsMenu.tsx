@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
-import { ContextMenu } from 'primereact/contextmenu';
-import { LanguageContext, Translations } from '../../contexts/language';
-import { useTranslator } from '../internationalization/translators';
-import { RadioButton } from 'primereact/radiobutton';
-import { ColorSettingsContext } from '../../contexts/colorsettings';
+import React, { useContext } from "react";
+import { ContextMenu } from "primereact/contextmenu";
+import { LanguageContext, Translations } from "../../contexts/language";
+import { useTranslator } from "../internationalization/translators";
+import { RadioButton } from "primereact/radiobutton";
+import { ColorSettingsContext } from "../../contexts/colorsettings";
 
 // ##############################################
 // Notice: The enclosed imports are copied from 'primereact/menuitem/MenuItem' as the path could not be resolved by the gitlab builder
@@ -54,6 +54,7 @@ interface SettingsOption {
 export interface MenuSettingsOptions {
   additionalItems?: MenuItem[];
   userContextMenu?: boolean;
+  hideLanguageSelection?: boolean;
   options?: SettingsOption[];
 }
 
@@ -69,63 +70,64 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
     const langContext = useContext(LanguageContext);
     const t = useTranslator();
 
-    let languageOptions = [];
+    const basicOptions: MenuItem[] = [];
     let notFallbackLang = false;
 
-    // Marking active language in language selection.
-    // Check whether translations for the user defined language exist. Otherwise the fallback language is displayed as active.
-    if (langContext) {
-      Object.keys(langContext.resources).forEach((key) => {
-        if (key !== langContext?.fallbackLang) {
-          // Has to check whether the active language and key are equal or if the active language is a dialect of the language of key and the
-          // resources don't contain the active language.
-          // The active language could be "de-De" and the language of key could be "de". So it isn't sufficient to check whether the active
-          // language is equal to key.
-          let activeLang = langContext?.activeLang.replaceAll('-', '_');
-          let active =
-            activeLang === key ||
-            (isDialectOf(activeLang, key) &&
-              !containsLanguage(activeLang, langContext?.resources));
-          languageOptions.push({
-            label: langContext?.resources[key].translation.option_name,
-            icon: active ? 'pi pi-check' : '',
-            // I18Next must have the representation with "-" instead of "_". "de_DE" will not resolve to "de" which is necessary
-            // in case translations for "de_DE" don't exist.
-            command: () => {
-              langContext?.selectLanguage(key.replaceAll('_', '-'));
-            },
-          });
-          if (active) {
-            notFallbackLang = active;
+    if (!props.menuOptions?.hideLanguageSelection) {
+      // Marking active language in language selection.
+      // Check whether translations for the user defined language exist. Otherwise the fallback language is displayed as active.
+      if (langContext) {
+        let languageOptions = [];
+        Object.keys(langContext.resources).forEach((key) => {
+          if (key !== langContext?.fallbackLang) {
+            // Has to check whether the active language and key are equal or if the active language is a dialect of the language of key and the
+            // resources don't contain the active language.
+            // The active language could be "de-De" and the language of key could be "de". So it isn't sufficient to check whether the active
+            // language is equal to key.
+            let activeLang = langContext?.activeLang.replaceAll("-", "_");
+            let active =
+              activeLang === key ||
+              (isDialectOf(activeLang, key) &&
+                !containsLanguage(activeLang, langContext?.resources));
+            languageOptions.push({
+              label: langContext?.resources[key].translation.option_name,
+              icon: active ? "pi pi-check" : "",
+              // I18Next must have the representation with "-" instead of "_". "de_DE" will not resolve to "de" which is necessary
+              // in case translations for "de_DE" don't exist.
+              command: () => {
+                langContext?.selectLanguage(key.replaceAll("_", "-"));
+              },
+            });
+            if (active) {
+              notFallbackLang = active;
+            }
           }
-        }
-      });
-      languageOptions.push({
-        label:
-          langContext?.resources[langContext.fallbackLang].translation
-            .option_name,
-        icon: !notFallbackLang ? 'pi pi-check' : '',
-        command: () => langContext?.selectLanguage(langContext.fallbackLang),
-      });
-    }
+        });
+        languageOptions.push({
+          label:
+            langContext?.resources[langContext.fallbackLang].translation
+              .option_name,
+          icon: !notFallbackLang ? "pi pi-check" : "",
+          command: () => langContext?.selectLanguage(langContext.fallbackLang),
+        });
 
-    const basicOptions: MenuItem[] = [
-      {
-        label: t('Language'),
-        icon: 'pi pi-comment',
-        items: languageOptions.sort((option1, option2) =>
-          option1.label === option2.label
-            ? 0
-            : option1.label < option2.label
-            ? -1
-            : 1
-        ),
-      },
-    ];
+        basicOptions.push({
+          label: t("Language"),
+          icon: "pi pi-comment",
+          items: languageOptions.sort((option1, option2) =>
+            option1.label === option2.label
+              ? 0
+              : option1.label < option2.label
+              ? -1
+              : 1
+          ),
+        });
+      }
+    }
 
     let colorModeToggleOption = getOptionByIdentifier(
       props.menuOptions?.options,
-      'colormodetoggle'
+      "colormodetoggle"
     );
 
     if (
@@ -133,12 +135,12 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
       (colorModeToggleOption && !colorModeToggleOption.hidden)
     ) {
       let colorSetting = colorSettingsContext?.darkmode
-        ? 'bg-grey-5 color-white'
-        : ' bg-white-1 color-black';
+        ? "bg-grey-5 color-white"
+        : " bg-white-1 color-black";
       basicOptions.push({
         template: (
           <div
-            className={colorSetting + ' flex justify-content-center mt-2 mb-2'}
+            className={colorSetting + " flex justify-content-center mt-2 mb-2"}
           >
             <div className="flex align-items-center">
               <RadioButton
@@ -174,7 +176,7 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
     return (
       <div onKeyDown={(e) => props.hideMenu(e)}>
         <ContextMenu
-          style={{ width: '14.5rem', padding: '0.25rem 1rem 0.25rem 1rem' }}
+          style={{ width: "14.5rem", padding: "0.25rem 1rem 0.25rem 1rem" }}
           ref={ref}
           model={model}
         />
@@ -185,7 +187,7 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
 
 // Checks whether "dialect" is a dialect of "baseLang".
 function isDialectOf(dialect: string, baseLang: string) {
-  let baseLangOfDialect = dialect.split('_')[0];
+  let baseLangOfDialect = dialect.split("_")[0];
   return baseLang === baseLangOfDialect;
 }
 

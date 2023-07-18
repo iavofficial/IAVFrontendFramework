@@ -4,47 +4,11 @@ import { LanguageContext, Translations } from '../../contexts/language';
 import { useTranslator } from '../internationalization/translators';
 import { RadioButton } from 'primereact/radiobutton';
 import { ColorSettingsContext } from '../../contexts/colorsettings';
+import { MenuItem } from 'primereact/menuitem';
 
 // ##############################################
 // Notice: The enclosed imports are copied from 'primereact/menuitem/MenuItem' as the path could not be resolved by the gitlab builder
 // although local builds were running fine - this should be removed as soon as a fixed version of primereact is published
-
-interface MenuItemCommandParams {
-  originalEvent: React.SyntheticEvent;
-  item: MenuItem;
-}
-
-interface MenuItemOptions {
-  onClick(event: React.SyntheticEvent): void;
-  className: string;
-  labelClassName: string;
-  iconClassName: string;
-  element: React.ReactNode;
-  props: any;
-  [key: string]: any;
-}
-
-type MenuItemTemplateType =
-  | React.ReactNode
-  | ((item: MenuItem, options: MenuItemOptions) => React.ReactNode);
-
-export interface MenuItem {
-  label?: string;
-  icon?: any;
-  url?: string;
-  items?: MenuItem[] | MenuItem[][];
-  expanded?: boolean;
-  disabled?: boolean;
-  target?: string;
-  separator?: boolean;
-  style?: object;
-  className?: string;
-  command?(e: MenuItemCommandParams): void;
-  template?: MenuItemTemplateType;
-  [key: string]: any;
-}
-
-// ##############################################
 
 interface SettingsOption {
   identifier: string;
@@ -134,9 +98,9 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
     ) {
       let colorSetting = colorSettingsContext?.darkmode
         ? 'bg-grey-5 color-white'
-        : ' bg-white-1 color-black';
+        : 'bg-white-1 color-black';
       basicOptions.push({
-        template: (
+        template: () => (
           <div
             className={colorSetting + ' flex justify-content-center mt-2 mb-2'}
           >
@@ -170,6 +134,8 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
     const model = props.menuOptions?.additionalItems
       ? [...props.menuOptions.additionalItems, ...basicOptions]
       : basicOptions;
+
+console.log(model);
 
     return (
       <div onKeyDown={(e) => props.hideMenu(e)}>

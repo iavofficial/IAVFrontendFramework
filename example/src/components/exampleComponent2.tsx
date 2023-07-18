@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Content, LayoutBehaviour } from 'disa-framework/content';
 import { BasicContentbarWrapper } from 'disa-framework/basicContentbarWrapper';
 import { ContentbarExampleWithContentCell } from './contentbarExampleWithContentCell';

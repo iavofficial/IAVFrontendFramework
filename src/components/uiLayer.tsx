@@ -17,7 +17,7 @@ import { BasicAuthenticationView } from './authentication/default/basicAuthentic
 import { MenuSettingsOptions } from './header/settingsMenu';
 import { CookieBanner } from './cookie/cookieBanner';
 import { AuthContext } from '../contexts/auth';
-import { AuthenticationViewProps } from './authentication/aws/authenticationView';
+import { AuthenticationViewProps } from './authentication/authenticationView';
 import { MainView } from './mainView';
 import { DefaultImprint } from './imprint/defaultImprint';
 import { TabAndContentWrapper } from './navbar/wrapper/tabAndContentWrapper';
@@ -41,10 +41,10 @@ export interface AuthOptions {
 export interface Props {
   tabAndContentWrappers: TabAndContentWrapper[];
   startingPoint: string;
-  menuOptions?: MenuSettingsOptions;
   authenticationView?: React.ComponentType<AuthenticationViewProps & any>;
   documentsComponent?: React.ComponentType<any>;
   documentsLabelKey?: string;
+  menuOptions?: MenuSettingsOptions;
   headerOptions?: HeaderOptions;
   authOptions?: AuthOptions;
   collabsibleNavbar?: boolean;
@@ -67,6 +67,7 @@ export const UILayer = (props: Props) => {
             element={
               <AuthenticationView
                 authOptions={props.authOptions}
+                hideLanguageSelection={props.menuOptions?.hideLanguageSelection}
                 headerOptions={props.headerOptions}
               />
             }

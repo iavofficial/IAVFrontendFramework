@@ -8,9 +8,9 @@ import { Tooltip } from "primereact/tooltip";
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
 import { ColorSettingsContext } from "../../contexts/colorsettings";
-import { calculateNavbarArrowFunctionColor } from "../../services/calculateNavbarArrowColor";
+import { calculateNavbarArrowFunctionColor } from "../../utils/calculateNavbarArrowColor";
 import { BLUE3, GREEN, GREY1 } from "../../constants";
-import { generateHashOfLength } from "../../services/hash";
+import { generateHashOfLength } from "../../utils/hash";
 import { NavbarSettingsContext } from "../../contexts/navbarContext";
 
 interface Props {

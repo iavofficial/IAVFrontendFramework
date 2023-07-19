@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { generateHashOfLength } from '../../services/hash';
+import { generateHashOfLength } from '../../utils/hash';
 import { ContentbarWrapperInterface } from './contentbarWrapperInterface';
 import { DefaultContentSelectionElement } from './defaultContentSelectionElement';
 import './contentbar.css';

@@ -2,7 +2,7 @@
   "name": "@disa/disa-framework",
   "version": "6.0.2",
   "private": false,
-  "description": "This framework takes care of a DISA application's basic structure.",
+  "description": "This framework is the foundation of IAV frontend applications to provide maintainability, expandability, unification and an improved developer experience.",
   "contributors": [
     {
       "name": "Joerg Jonas Krahn",
@@ -106,7 +106,8 @@
     "./globalColors.css": "./components/css/globalColors.css",
     "./colorSettingsContext": "./contexts/colorsettings.js",
     "./defaultContentSelectionElement": "./components/content/defaultContentSelectionElement.js",
-    "./hash": "./services/hash.js"
+    "./hash": "./utils/hash.js",
+    "./translationFunction": "./types/translationFunction.js"
   },
   "typesVersions": {
     "*": {
@@ -184,6 +185,9 @@
       "cookieBanner": [
         "./components/cookie/cookieBanner.d.ts"
       ],
+      "translationFunction": [
+        "./types/translationFunction.d.ts"
+      ],
       "constants.css": [
         "./components/css/constants.css"
       ],
@@ -202,7 +206,7 @@
       "defaultContentSelectionElement":[
         "./components/content/defaultContentSelectionElement.d.ts"
       ],
-      "hash":["./services/hash.d.ts"]
+      "hash":["./utils/hash.d.ts"]
     }
   }
 }

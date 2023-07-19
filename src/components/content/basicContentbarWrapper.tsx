@@ -1,12 +1,13 @@
 import React from 'react';
-import { generateHashOfLength } from '../../services/hash';
+import { generateHashOfLength } from '../../utils/hash';
 import { ContentbarWrapperInterface } from './contentbarWrapperInterface';
 import { DefaultContentSelectionElement } from './defaultContentSelectionElement';
+import { TranslationFunction } from '../../types/translationFunction';
 
 export class BasicContentbarWrapper implements ContentbarWrapperInterface {
   constructor(
     private id: string,
-    private name: string,
+    private displayName: string | TranslationFunction,
     private selectedId: string,
     private closable: boolean,
     private setSelectedId: (value: string) => any,
@@ -34,7 +35,7 @@ export class BasicContentbarWrapper implements ContentbarWrapperInterface {
     return (
       <DefaultContentSelectionElement
         key={this.getKey()}
-        name={this.name}
+        displayName={this.displayName}
         id={this.id}
         closable={this.closable}
         selected={this.id === this.selectedId}

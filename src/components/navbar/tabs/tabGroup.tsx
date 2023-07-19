@@ -1,9 +1,8 @@
 import React, { ReactElement, useContext, useEffect, useState } from 'react';
 import '../navbar.css';
-import { TranslateFunctionType } from '../../../contexts/language';
 import { useTranslator } from '../../internationalization/translators';
 import { BLACK, BLUE0, GREY3, GREY5, WHITE } from '../../../constants';
-import { generateHashOfLength } from '../../../services/hash';
+import { generateHashOfLength } from '../../../utils/hash';
 import { Tooltip } from 'primereact/tooltip';
 import { LAYER } from './tabLayer';
 import {
@@ -11,10 +10,11 @@ import {
   calculateSecondLineColorGroupTop,
   calculateFirstLineColorGroupBottom,
   revertColor,
-} from '../../../services/calculateLineColorGroup';
+} from '../../../utils/calculateLineColorGroup';
 import { navbarTabProps } from './navbarTab';
 import { ColorSettingsContext } from '../../../contexts/colorsettings';
 import { SvgIcon } from './svgIcon';
+import { TranslateFunctionType } from '../../../types/translationFunction';
 
 interface Props {
   name: string | ((t: TranslateFunctionType) => string);

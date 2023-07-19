@@ -14,6 +14,7 @@ interface MainViewProps {
   documentsLabelKey?: string;
   headerOptions?: HeaderOptions;
   tabAndContentWrappers: TabAndContentWrapper[];
+  hideLegalDocuments?: boolean;
 }
 
 export const MainView = (props: MainViewProps) => {
@@ -37,6 +38,7 @@ export const MainView = (props: MainViewProps) => {
           tabAndContentWrappers={props.tabAndContentWrappers}
           collabsibleNavbar={props.collabsibleNavbar}
           documentsLabelKey={props.documentsLabelKey}
+          hideLegalDocuments={props.hideLegalDocuments}
         />
         <Outlet />
         <Routes>

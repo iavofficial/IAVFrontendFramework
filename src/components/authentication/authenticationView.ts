@@ -13,4 +13,5 @@ export interface AuthenticationViewProps {
     hideRight?: boolean;
   };
   hideLanguageSelection?: boolean;
+  hideLegalDocuments?: boolean;
 }

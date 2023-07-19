@@ -294,29 +294,32 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
           </form>
         </div>
 
-        <Link
-          style={{
-            position: "absolute",
-            bottom: "12px",
-            left: "16px",
-            textDecoration: "none",
-          }}
-          to="/documents"
-          target="_blank"
-        >
-          <span
-            className={"pi pi-info-circle " + identifierLegal}
+        {!props.hideLegalDocuments && (
+          <Link
             style={{
-              fontSize: "medium",
-              fontWeight: "bold",
-              color: colorSettingsContext?.authenticationColorOptions
-                ?.legalNoticeIconColor
-                ? colorSettingsContext?.authenticationColorOptions
-                    ?.legalNoticeIconColor
-                : BLUE3,
+              position: "absolute",
+              bottom: "12px",
+              left: "16px",
+              textDecoration: "none",
             }}
-          />
-        </Link>
+            to="/documents"
+            target="_blank"
+          >
+            <span
+              className={"pi pi-info-circle " + identifierLegal}
+              style={{
+                fontSize: "medium",
+                fontWeight: "bold",
+                color: colorSettingsContext?.authenticationColorOptions
+                  ?.legalNoticeIconColor
+                  ? colorSettingsContext?.authenticationColorOptions
+                      ?.legalNoticeIconColor
+                  : BLUE3,
+              }}
+            />
+          </Link>
+        )}
+
         <Tooltip
           content={t(
             props.authOptions?.documentsLabelKey

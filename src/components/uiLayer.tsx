@@ -48,6 +48,7 @@ export interface Props {
   headerOptions?: HeaderOptions;
   authOptions?: AuthOptions;
   collabsibleNavbar?: boolean;
+  hideLegalDocuments?: boolean;
 }
 
 export const UILayer = (props: Props) => {
@@ -69,6 +70,7 @@ export const UILayer = (props: Props) => {
                 authOptions={props.authOptions}
                 hideLanguageSelection={props.menuOptions?.hideLanguageSelection}
                 headerOptions={props.headerOptions}
+                hideLegalDocuments={props.hideLegalDocuments}
               />
             }
           />
@@ -96,6 +98,7 @@ export const UILayer = (props: Props) => {
                 tabAndContentWrappers={calculateLayer(
                   props.tabAndContentWrappers
                 )}
+                hideLegalDocuments={props.hideLegalDocuments}
               />
             }
           />

@@ -15,9 +15,9 @@ import loginBackgroundLightMode from "../../../assets/images/login_background_li
 import loginBackgroundDarkMode from "../../../assets/images/login_background_darkMode.png";
 import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
 import { LanguageContext } from "../../../contexts/language";
-import { parseLanguageRessourcesIntoDropdownFormat } from "../../../services/parseLanguageRessourcesIntoDropdownFormat";
+import { parseLanguageRessourcesIntoDropdownFormat } from "../../../utils/parseLanguageRessourcesIntoDropdownFormat";
 import { ColorSettingsContext } from "../../../contexts/colorsettings";
-import { generateHashOfLength } from "../../../services/hash";
+import { generateHashOfLength } from "../../../utils/hash";
 import { Tooltip } from "primereact/tooltip";
 
 export const AWSAuthenticationView = (props: AuthenticationViewProps) => {

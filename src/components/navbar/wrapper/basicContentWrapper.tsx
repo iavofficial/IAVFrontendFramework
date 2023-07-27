@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router';
-import { generateHash } from '../../../services/hash';
+import { generateHash } from '../../../utils/hash';
 import { navbarTabProps } from '../tabs/navbarTab';
 import { LAYER } from '../tabs/tabLayer';
 import { TabAndContentWrapper } from './tabAndContentWrapper';

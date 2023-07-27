@@ -1,17 +1,13 @@
-import { Button } from 'primereact/button';
-import React, {
-  ReactElement,
+import {
   useContext,
   useEffect,
   useState,
   useRef,
-  useLayoutEffect,
 } from 'react';
 import '../css/globalColors.css';
 import {
   BLACK,
   BLUE0,
-  GREY1,
   GREY3,
   GREY4,
   GREY5,
@@ -19,11 +15,9 @@ import {
 } from '../../constants';
 import { ColorSettingsContext } from '../../contexts/colorsettings';
 import { BasicContentbarWrapper } from './basicContentbarWrapper';
-import { ContentbarWrapperInterface } from './contentbarWrapperInterface';
 import { CustomContentbarWrapper } from './customContentbarWrapper';
-import { DefaultContentSelectionElement } from './defaultContentSelectionElement';
 import { NavbarSettingsContext } from '../../contexts/navbarContext';
-import { calculateWidth } from '../../services/calculateWidth';
+import { calculateWidth } from '../../utils/calculateWidth';
 
 interface Props {
   contentElements: BasicContentbarWrapper[] | CustomContentbarWrapper[];

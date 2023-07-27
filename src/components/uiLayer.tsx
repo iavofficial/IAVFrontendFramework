@@ -21,7 +21,7 @@ import { AuthenticationViewProps } from './authentication/authenticationView';
 import { MainView } from './mainView';
 import { DefaultImprint } from './imprint/defaultImprint';
 import { TabAndContentWrapper } from './navbar/wrapper/tabAndContentWrapper';
-import { calculateLayer } from '../services/calculateLayer';
+import { calculateLayer } from '../utils/calculateLayer';
 import { NavbarSettingsProvider } from '../providers/navbarProvider';
 
 export interface HeaderOptions {

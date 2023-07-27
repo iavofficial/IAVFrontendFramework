@@ -19,7 +19,8 @@
   ],
   "scripts": {
     "devmode": ".\\scripts\\windows\\devmode_build.bat",
-    "build-linux": "./scripts/ci_cd/build.sh"
+    "build-linux": "./scripts/ci_cd/build.sh",
+	"run-example": ".\\scripts\\windows\\setup_and_run_example.bat"
   },
   "eslintConfig": {
     "extends": [

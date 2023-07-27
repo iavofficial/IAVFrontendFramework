@@ -13,7 +13,6 @@ import { TranslateFunctionType } from 'disa-framework/language';
 import { SimpleNavbarTab } from 'disa-framework/simpleNavbarTab';
 import { PrivilegedNavbarTab } from 'disa-framework/privilegedNavbarTab';
 import { BasicAuthenticationView } from 'disa-framework/basicAuthenticationView';
-import { AWSAuthenticationView } from 'disa-framework/awsAuthenticationView';
 import { BasicContentWrapper } from 'disa-framework/basicContentWrapper';
 import { Group } from 'disa-framework/group';
 import { ColorProvider } from 'disa-framework/colorProvider';

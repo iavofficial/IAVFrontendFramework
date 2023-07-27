@@ -1,5 +1,4 @@
 import { CellPaddings, ContentCell } from 'disa-framework/contentCell';
-import React from 'react';
 
 export interface Props {
   exampleText: string;

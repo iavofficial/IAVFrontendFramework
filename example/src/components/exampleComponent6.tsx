@@ -1,7 +1,6 @@
 import { Content, LayoutBehaviour } from 'disa-framework/content';
 import { CellPaddings, ContentCell } from 'disa-framework/contentCell';
 import { useTranslator } from 'disa-framework/translators';
-import React from 'react';
 
 export const ExampleComponent6 = () => {
   const t = useTranslator();

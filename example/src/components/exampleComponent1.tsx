@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useReducer } from 'react';
-import { CellPaddings, ContentCell } from 'disa-framework/contentCell';
+import { useEffect, useReducer } from 'react';
 import { Content, LayoutBehaviour } from 'disa-framework/content';
 import { generateHashOfLength } from 'disa-framework/hash';
 import { ContentbarExampleWithText } from './contentbarExampleWithText';
 import { BasicContentbarWrapper } from 'disa-framework/basicContentbarWrapper';
+import {TranslateFunctionType} from "disa-framework/translationFunction";
 
 const initialState: ExampleArrayObject = {
   exampleArray: [],
@@ -34,7 +34,7 @@ function reducer(state: ExampleArrayObject, action: Action) {
       let temporaryExampleArray = [...state.exampleArray!];
       temporaryExampleArray.push(action.payload?.addElement!);
 
-      temporaryExampleArray.forEach((element, index) => {
+      temporaryExampleArray.forEach((element) => {
         element.setSelectedIdParentComponent(
           action.payload?.addElement?.getId()!
         );
@@ -110,16 +110,15 @@ export const ExampleComponent1 = () => {
     let hashOfFirstElement = generateHashOfLength(6);
 
     for (let index = 0; index < 6; index++) {
-      let nameString = 'car12' + index;
       let hash = index === 0 ? hashOfFirstElement : generateHashOfLength(6);
       let newBasicContentWrapperElement = new BasicContentbarWrapper(
         hash,
-        nameString,
+        (t: TranslateFunctionType) => `${t("car")} ${index}`,
         hashOfFirstElement,
         index < 1 ? false : true,
         selectElement,
         onCloseElement,
-        <ContentbarExampleWithText exampleText={nameString} />
+        <ContentbarExampleWithText exampleText={"car"} />
       );
       temporaryExampleArray.push(newBasicContentWrapperElement);
     }

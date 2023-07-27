@@ -1,4 +1,5 @@
 import React from 'react';
+import { TranslateFunctionType } from '../types/translationFunction';
 
 export interface TranslationKeys extends Object {
   option_name: string;
@@ -13,11 +14,6 @@ export interface Translation {
 export interface Translations {
   [lang: string]: Translation;
 }
-
-export type TranslateFunctionType = (
-  key: string,
-  ...translationParameters: any
-) => string;
 
 export interface LanguageProvider {
   useCustomTranslation: TranslateFunctionType;

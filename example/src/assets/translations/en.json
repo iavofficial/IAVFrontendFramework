@@ -26,5 +26,6 @@
     "reset": "reset",
     "translation_and_colormode_example": "Translation and colormode example ",
     "with_applied_dark_and_lightMode": "with applied dark and lightmode",
-    "without_applied_dark_and_lightMode": "without applied dark and lightmode"
+    "without_applied_dark_and_lightMode": "without applied dark and lightmode",
+    "car": "car"
 }

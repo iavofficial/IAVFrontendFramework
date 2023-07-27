@@ -1,8 +1,8 @@
 {
   "name": "@disa/disa-framework",
-  "version": "6.0.1",
+  "version": "6.1.0",
   "private": false,
-  "description": "This framework takes care of a DISA application's basic structure.",
+  "description": "This framework is the foundation of IAV frontend applications to provide maintainability, expandability, unification and an improved developer experience.",
   "contributors": [
     {
       "name": "Joerg Jonas Krahn",
@@ -20,9 +20,7 @@
   "scripts": {
     "devmode": ".\\scripts\\windows\\devmode_build.bat",
     "build-linux": "./scripts/ci_cd/build.sh",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "lint": "eslint"
+    "run-example": ".\\scripts\\windows\\setup_and_run_example.bat"
   },
   "eslintConfig": {
     "extends": [
@@ -50,7 +48,7 @@
     "i18next-browser-languagedetector": "^7.0.1",
     "primeflex": "^3.3.0",
     "primeicons": "^6.0.1",
-    "primereact": "^9.2.1",
+    "primereact": "~9.2.0",
     "react-cookie": "^4.1.1",
     "react-i18next": "^12.2.0",
     "sass": "^1.61.0",
@@ -109,7 +107,8 @@
     "./globalColors.css": "./components/css/globalColors.css",
     "./colorSettingsContext": "./contexts/colorsettings.js",
     "./defaultContentSelectionElement": "./components/content/defaultContentSelectionElement.js",
-    "./hash": "./services/hash.js"
+    "./hash": "./utils/hash.js",
+    "./translationFunction": "./types/translationFunction.js"
   },
   "typesVersions": {
     "*": {
@@ -187,6 +186,9 @@
       "cookieBanner": [
         "./components/cookie/cookieBanner.d.ts"
       ],
+      "translationFunction": [
+        "./types/translationFunction.d.ts"
+      ],
       "constants.css": [
         "./components/css/constants.css"
       ],
@@ -205,7 +207,7 @@
       "defaultContentSelectionElement":[
         "./components/content/defaultContentSelectionElement.d.ts"
       ],
-      "hash":["./services/hash.d.ts"]
+      "hash":["./utils/hash.d.ts"]
     }
   }
 }

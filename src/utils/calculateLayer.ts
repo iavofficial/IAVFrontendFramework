@@ -1,5 +1,5 @@
 import { LAYER } from '../components/navbar/tabs/tabLayer';
-import { TabAndContentWrapper } from './../components/navbar/wrapper/tabAndContentWrapper';
+import { TabAndContentWrapper } from '../components/navbar/wrapper/tabAndContentWrapper';
 export const calculateLayer = (
   tabAndContentWrapper: TabAndContentWrapper[]
 ) => {

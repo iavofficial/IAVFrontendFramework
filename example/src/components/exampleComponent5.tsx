@@ -1,10 +1,9 @@
-import { ColorSettingsContext } from 'disa-framework/colorSettingsContext';
 import { useTranslator } from 'disa-framework/translators';
 import { BLUE3, WHITE } from 'disa-framework/constants';
 import { Content, LayoutBehaviour } from 'disa-framework/content';
 import { CellPaddings, ContentCell } from 'disa-framework/contentCell';
 import { Button } from 'primereact/button';
-import React, { useContext, useState } from 'react';
+import { useState } from 'react';
 
 export const ExampleComponent5 = () => {
   const [translationString, setTranslationString] = useState('');

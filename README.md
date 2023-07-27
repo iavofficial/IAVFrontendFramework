@@ -1,3 +1,6 @@
+# License
+We are using the Apache-2.0 license. It's included in this project's root.
+
 **Important note: Developers which enhance the framework or the example project should read the chapter *Important notes* on [this wiki page](https://gitlab.iavgroup.local/td-d/educationlab/disa-frontend-framework/disa-framework/-/wikis/Devnotes).**
 
 # Requirements

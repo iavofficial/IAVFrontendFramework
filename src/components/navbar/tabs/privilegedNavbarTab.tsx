@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../../contexts/auth';
-import { containsOneOrMoreGroups } from '../../../services/groupChecker';
+import { containsOneOrMoreGroups } from '../../../utils/groupChecker';
 import { SimpleNavbarTab } from './simpleNavbarTab';
 import { navbarTab } from './navbarTab';
 

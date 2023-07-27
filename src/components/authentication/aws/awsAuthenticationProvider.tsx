@@ -11,7 +11,7 @@ import {
   cognitoCheckIsAuthenticated,
   cognitoCompletePassword,
   cognitoRefreshAccessToken,
-} from '../../../services/cognitoService';
+} from '../../../utils/cognitoService';
 
 export interface Props {
   configureAmplify: () => void;

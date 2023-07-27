@@ -1,6 +1,6 @@
-import { LAYER } from './tabLayer';
 import React, { ReactElement } from 'react';
-import { TranslateFunctionType } from '../../../contexts/language';
+import { TranslateFunctionType } from '../../../types/translationFunction';
+import { LAYER } from './tabLayer';
 
 export interface navbarTabProps {
   name: string | ((t: TranslateFunctionType) => string);

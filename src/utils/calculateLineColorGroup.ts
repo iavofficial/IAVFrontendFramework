@@ -1,8 +1,8 @@
-import { WHITE, BLUE0 } from './../constants';
+import { WHITE, BLUE0 } from '../constants';
 import {
   LAYER,
   COLLAPSEDLAYERMARKER,
-} from './../components/navbar/tabs/tabLayer';
+} from '../components/navbar/tabs/tabLayer';
 
 export const calculateSecondLineColorGroupTop = (
   highlightColor: string,

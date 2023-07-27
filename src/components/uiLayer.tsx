@@ -17,11 +17,11 @@ import { BasicAuthenticationView } from './authentication/default/basicAuthentic
 import { MenuSettingsOptions } from './header/settingsMenu';
 import { CookieBanner } from './cookie/cookieBanner';
 import { AuthContext } from '../contexts/auth';
-import { AuthenticationViewProps } from './authentication/aws/authenticationView';
+import { AuthenticationViewProps } from './authentication/authenticationView';
 import { MainView } from './mainView';
 import { DefaultImprint } from './imprint/defaultImprint';
 import { TabAndContentWrapper } from './navbar/wrapper/tabAndContentWrapper';
-import { calculateLayer } from '../services/calculateLayer';
+import { calculateLayer } from '../utils/calculateLayer';
 import { NavbarSettingsProvider } from '../providers/navbarProvider';
 
 export interface HeaderOptions {
@@ -41,13 +41,14 @@ export interface AuthOptions {
 export interface Props {
   tabAndContentWrappers: TabAndContentWrapper[];
   startingPoint: string;
-  menuOptions?: MenuSettingsOptions;
   authenticationView?: React.ComponentType<AuthenticationViewProps & any>;
   documentsComponent?: React.ComponentType<any>;
   documentsLabelKey?: string;
+  menuOptions?: MenuSettingsOptions;
   headerOptions?: HeaderOptions;
   authOptions?: AuthOptions;
   collabsibleNavbar?: boolean;
+  hideLegalDocuments?: boolean;
 }
 
 export const UILayer = (props: Props) => {
@@ -67,7 +68,9 @@ export const UILayer = (props: Props) => {
             element={
               <AuthenticationView
                 authOptions={props.authOptions}
+                hideLanguageSelection={props.menuOptions?.hideLanguageSelection}
                 headerOptions={props.headerOptions}
+                hideLegalDocuments={props.hideLegalDocuments}
               />
             }
           />
@@ -95,6 +98,7 @@ export const UILayer = (props: Props) => {
                 tabAndContentWrappers={calculateLayer(
                   props.tabAndContentWrappers
                 )}
+                hideLegalDocuments={props.hideLegalDocuments}
               />
             }
           />

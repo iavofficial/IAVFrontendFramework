@@ -4,7 +4,7 @@ import { Tooltip } from 'primereact/tooltip';
 import { BLACK, BLUE0, GREY3, GREY4, GREY5, WHITE } from '../../../constants';
 import { useTranslator } from '../../internationalization/translators';
 import './tabs.css';
-import { generateHashOfLength } from '../../../services/hash';
+import { generateHashOfLength } from '../../../utils/hash';
 import { navbarTab } from './navbarTab';
 import { LAYER } from './tabLayer';
 import {
@@ -12,8 +12,8 @@ import {
   calculateFirstLineTabLayerBottom,
   calculateSecondLineTabLayer,
   calculateSecondLineTabLayerBottom,
-} from '../../../services/calculateLineColorTab';
-import { revertColor } from '../../../services/calculateLineColorGroup';
+} from '../../../utils/calculateLineColorTab';
+import { revertColor } from '../../../utils/calculateLineColorGroup';
 import { ColorSettingsContext } from '../../../contexts/colorsettings';
 import { SvgIcon } from './svgIcon';
 

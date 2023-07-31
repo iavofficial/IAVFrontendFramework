@@ -1,11 +1,11 @@
-import { AuthenticationColorType } from './authentication/authenticationColorType';
+import { AuthenticationColorType } from '../components/authentication/authenticationColorType';
 import {
   ContentColorType,
   ContentbarColorType,
   ContentbarTabColorType,
-} from './content/contentColorType';
-import { HeaderColorType } from './header/appHeaderColor';
-import { NavbarColorType } from './navbar/navbarColorType';
+} from '../components/content/contentColorType';
+import { HeaderColorType } from '../components/header/appHeaderColor';
+import { NavbarColorType } from '../components/navbar/navbarColorType';
 export interface ColorObject {
   headerColorOptions?: HeaderColorType;
   navbarColorOptions?: NavbarColorType;

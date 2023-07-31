@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ColorObject } from '../components/colorObjectType';
+import { ColorObject } from '../types/colorObjectType';
 import { ColorSettingsContext } from '../contexts/colorsettings';
 
 export interface Props {

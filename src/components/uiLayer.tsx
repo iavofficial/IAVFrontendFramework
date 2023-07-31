@@ -24,6 +24,8 @@ import { TabAndContentWrapper } from './navbar/wrapper/tabAndContentWrapper';
 import { calculateLayer } from '../utils/calculateLayer';
 import { NavbarSettingsProvider } from '../providers/navbarProvider';
 
+import "./uiLayer.css";
+
 export interface HeaderOptions {
   reactElementRight?: ReactElement;
   reactElementLeft?: ReactElement;

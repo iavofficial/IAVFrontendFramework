@@ -71,7 +71,7 @@ publish_package:
     NODE_EXTRA_CA_CERTS: ${IAV_CA_BUNDLE}
   script:
     - npm install -D
-    - sh ./scripts/ci_cd/configure_npm.sh
+    - sh ./scripts/ci_cd/configure_npmrc_for_publish.sh
     - npm publish --registry https://artifactory.iav.com/artifactory/npm-iav
   artifacts:
     paths:

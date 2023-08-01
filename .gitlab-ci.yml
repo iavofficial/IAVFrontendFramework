@@ -37,6 +37,7 @@ validate_release_notes:
       fi
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+    - if: '$FORCE_PUBLISH == "true"'
 
 # Validates typescript files
 validate_typescript:

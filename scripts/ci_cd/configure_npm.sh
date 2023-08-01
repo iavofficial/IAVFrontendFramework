@@ -13,4 +13,4 @@
 # Write a new line and the authentication information to the .npmrc file.
 echo $'\n' >> .npmrc
 #curl -u$artifactory_user:$artifactory_apikey https://artifactory.iav.com/artifactory/api/npm/auth >> .npmrc
-curl -s -u$artifactory_user:$artifactory_apikey https://artifactory.iav.com/artifactory/api/npm/auth | awk '{printf "https://artifactory.iav.com/artifactory/api/npm/auth:%s$'\n'", $0}' >> .npmrc
+curl -s -u$artifactory_user:$artifactory_apikey https://artifactory.iav.com/artifactory/api/npm/auth | awk '{printf "https://artifactory.iav.com/artifactory/api/npm/auth:%s\n", $0}' >> .npmrc

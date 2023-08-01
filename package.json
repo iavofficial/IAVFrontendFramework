@@ -1,6 +1,6 @@
 {
   "name": "@disa/disa-framework",
-  "version": "6.1.0",
+  "version": "7.0.0",
   "private": false,
   "description": "This framework is the foundation of IAV frontend applications to provide maintainability, expandability, unification and an improved developer experience.",
   "contributors": [

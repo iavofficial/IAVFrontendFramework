@@ -72,6 +72,7 @@ publish_package:
   script:
     - npm install -D
     - sh ./scripts/ci_cd/configure_npm.sh
+    - npm publish --registry https://artifactory.iav.com/artifactory/npm-iav
   artifacts:
     paths:
       - ./.npmrc

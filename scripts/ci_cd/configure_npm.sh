@@ -11,6 +11,6 @@
 # npm config set fetch-retry-maxtimeout 1000000
 
 # Write a new line and the authentication information to the .npmrc file.
-echo $'\n' > .npmrc
+echo $'\n' >> .npmrc
 #curl -u$artifactory_user:$artifactory_apikey https://artifactory.iav.com/artifactory/api/npm/auth >> .npmrc
-curl -s -u$artifactory_user:$artifactory_apikey https://artifactory.iav.com/artifactory/api/npm/auth | awk '{printf "https://artifactory.iav.com/artifactory/api/npm/auth:%s", $0}' >> output_file.txt
+curl -s -u$artifactory_user:$artifactory_apikey https://artifactory.iav.com/artifactory/api/npm/auth | awk '{printf "https://artifactory.iav.com/artifactory/api/npm/auth:%s", $0}' >> .npmrc

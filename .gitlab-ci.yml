@@ -69,8 +69,8 @@ publish_package:
   variables:
     NODE_EXTRA_CA_CERTS: ${IAV_CA_BUNDLE}
   script:
-    - sh ./scripts/ci_cd/configure_npm.sh
     - npm install -D
+    - sh ./scripts/ci_cd/configure_npm.sh
   artifacts:
     paths:
       - ./.npmrc

@@ -73,16 +73,6 @@ publish_package:
   script:
     - sh ./scripts/ci_cd/configure_npm.sh
     - npm install -D
-    - >
-      {
-        npm publish ./build
-        if [[ $? == 0 ]]; then
-          echo "Successfully published version ${NPM_PACKAGE_VERSION} of ${NPM_PACKAGE_NAME} to GitLab's NPM registry of project: ${REPO_PROJECT_ID}/-/packages"
-        else
-          echo "No new version of ${NPM_PACKAGE_NAME} published. This is most likely because version ${NPM_PACKAGE_VERSION} already exists in GitLab's NPM registry."
-          exit $?
-        fi
-      }
   artifacts:
     paths:
       - ./.npmrc

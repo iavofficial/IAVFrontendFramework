@@ -44,7 +44,6 @@ validate_typescript:
   variables:
     NODE_EXTRA_CA_CERTS: ${IAV_CA_BUNDLE}
   script:
-    - sh ./scripts/ci_cd/configure_npm.sh
     - npm ci
     - npx tsc --noEmit --emitDeclarationOnly false
   except:
@@ -54,7 +53,6 @@ validate_typescript:
 build_package:
   stage: build
   script:
-    - sh ./scripts/ci_cd/configure_npm.sh
     - npm install -D
     - npm run build-linux
   artifacts:

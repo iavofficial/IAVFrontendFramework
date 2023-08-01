@@ -1,5 +1,5 @@
-npm config set "@disa:registry" "${REPO_PROTOCOL}://${REPO_URL}/api/v4/projects/${REPO_PROJECT_ID}/packages/npm/";
-npm config set "//${REPO_URL}/api/v4/projects/${REPO_PROJECT_ID}/packages/npm/:_authToken" "${REPO_DEPLOY_FRAMEWORK_AUTH_TOKEN}";
+npm config set "@iav:registry" "https://artifactory.iav.com/artifactory/npm-iav";
+npm config set "https://artifactory.iav.com/artifactory/npm-iav" "${artifactory_token}";
 
 # npm config set registry="http://registry.npmjs.org/"
 npm config set registry https://artifactory.iavgroup.local/artifactory/api/npm/npm-remote/

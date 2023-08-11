@@ -1,5 +1,5 @@
 {
-  "name": "@iav/iav-frontend-framework",
+  "name": "@npm-iav-frontend/iav-frontend-framework",
   "version": "7.0.0",
   "private": false,
   "description": "This framework is the foundation of IAV frontend applications to provide maintainability, expandability, unification and an improved developer experience.",

@@ -72,9 +72,7 @@ publish_package:
   script:
     - npm install -D
     - sh ./scripts/ci_cd/configure_npmrc_for_publish.sh
-  artifacts:
-    paths:
-      - ./.npmrc
+    - npm publish
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
     - if: '$FORCE_PUBLISH == "true"'

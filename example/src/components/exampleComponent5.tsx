@@ -1,7 +1,7 @@
-import { useTranslator } from 'disa-framework/translators';
-import { BLUE3, WHITE } from 'disa-framework/constants';
-import { Content, LayoutBehaviour } from 'disa-framework/content';
-import { CellPaddings, ContentCell } from 'disa-framework/contentCell';
+import { useTranslator } from 'iav-frontend-framework/translators';
+import { BLUE3, WHITE } from 'iav-frontend-framework/constants';
+import { Content, LayoutBehaviour } from 'iav-frontend-framework/content';
+import { CellPaddings, ContentCell } from 'iav-frontend-framework/contentCell';
 import { Button } from 'primereact/button';
 import { useState } from 'react';
 

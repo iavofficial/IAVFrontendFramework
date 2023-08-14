@@ -33,7 +33,7 @@
     ]
   },
   "dependencies": {
-    "disa-framework": "file:../build"
+    "iav-frontend-framework": "file:../build"
   },
   "devDependencies": {
     "@babel/cli": "^7.21.0",

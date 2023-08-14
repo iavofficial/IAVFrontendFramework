@@ -1,5 +1,5 @@
 import React from 'react';
-import { DisaHeader } from './header/disaHeader';
+import { Header } from './header/header';
 import { Navbar } from './navbar/navbar';
 import { DefaultImprint } from './imprint/defaultImprint';
 import { MenuSettingsOptions } from './header/settingsMenu';
@@ -28,7 +28,7 @@ export const MainView = (props: MainViewProps) => {
       }}
     >
       <div style={{ flex: '0 0 auto' }}>
-        <DisaHeader
+        <Header
           headerOptions={props.headerOptions}
           menuOptions={props.menuOptions}
         />

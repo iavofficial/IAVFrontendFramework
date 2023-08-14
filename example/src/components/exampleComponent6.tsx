@@ -1,6 +1,6 @@
-import { Content, LayoutBehaviour } from 'disa-framework/content';
-import { CellPaddings, ContentCell } from 'disa-framework/contentCell';
-import { useTranslator } from 'disa-framework/translators';
+import { Content, LayoutBehaviour } from 'iav-frontend-framework/content';
+import { CellPaddings, ContentCell } from 'iav-frontend-framework/contentCell';
+import { useTranslator } from 'iav-frontend-framework/translators';
 
 export const ExampleComponent6 = () => {
   const t = useTranslator();

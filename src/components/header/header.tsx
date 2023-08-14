@@ -1,5 +1,5 @@
 import React, { ReactElement, useContext } from 'react';
-import './disaHeader.css';
+import './header.css';
 import '../css/globalColors.css';
 import { ContextMenu } from 'primereact/contextmenu';
 import { ReactComponent as UserIcon } from '../../assets/images/icon_user.svg';
@@ -22,7 +22,7 @@ interface Props {
   menuOptions?: MenuSettingsOptions;
 }
 
-export const DisaHeader = (props: Props) => {
+export const Header = (props: Props) => {
   const menuRef = React.createRef<ContextMenu>();
   const userRef = React.createRef<ContextMenu>();
   const colorSettingsContext = useContext(ColorSettingsContext);
@@ -63,7 +63,7 @@ export const DisaHeader = (props: Props) => {
 
   return (
     <div
-      id="disa-header"
+      id="header"
       className={
         (colorSettingsContext?.darkmode ? 'bg-grey-5' : 'bg-blue-0') +
         ' flex justify-content-between align-items-center'

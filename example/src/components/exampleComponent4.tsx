@@ -1,4 +1,4 @@
-import { useTranslator } from 'disa-framework/translators';
+import { useTranslator } from 'iav-frontend-framework/translators';
 
 export const ExampleComponent4 = () => {
   const t = useTranslator();

@@ -1,5 +1,5 @@
-import React, { ReactElement, useCallback, useContext, useState } from 'react';
-import { BLACK, BLUE0, GREY3, GREY4, GREY5, WHITE } from '../../constants';
+import React, { useContext, useState } from 'react';
+import { BLACK, BLUE0, GREY3, GREY5, WHITE } from '../../constants';
 import { generateHashOfLength } from '../../utils/hash';
 import { Tooltip } from 'primereact/tooltip';
 import './contentbar.css';

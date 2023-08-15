@@ -1,8 +1,8 @@
-import { useTranslator } from 'disa-framework/translators';
-import { ImprintText } from 'disa-framework/imprint';
+import { useTranslator } from 'iav-frontend-framework/translators';
+import { ImprintText } from 'iav-frontend-framework/imprint';
 import { useContext } from 'react';
-import { ColorSettingsContext } from 'disa-framework/colorSettingsContext';
-import 'disa-framework/globalColors.css';
+import { ColorSettingsContext } from 'iav-frontend-framework/colorSettingsContext';
+import 'iav-frontend-framework/globalColors.css';
 
 export const LegalDocuments = () => {
   const t = useTranslator();

@@ -1,6 +1,6 @@
 {
-  "name": "@disa/disa-framework",
-  "version": "7.0.0",
+  "name": "@npm-iav-frontend/iav-frontend-framework",
+  "version": "8.0.0",
   "private": false,
   "description": "This framework is the foundation of IAV frontend applications to provide maintainability, expandability, unification and an improved developer experience.",
   "contributors": [
@@ -41,9 +41,10 @@
     ]
   },
   "keywords": [
-    "disa-framework"
+    "iav-frontend-framework"
   ],
   "dependencies": {
+    "@babel/preset-env": "^7.22.10",
     "i18next": "^22.4.13",
     "i18next-browser-languagedetector": "^7.0.1",
     "primeflex": "^3.3.0",
@@ -63,16 +64,17 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.21.0",
-    "@babel/core": "^7.21.3",
+    "@babel/core": "^7.22.10",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
-    "@babel/preset-react": "^7.18.6",
+    "@babel/preset-react": "^7.22.5",
     "@babel/preset-typescript": "^7.21.0",
+    "@svgr/babel-plugin-transform-svg-component": "^8.0.0",
     "@types/lodash": "^4.14.191",
     "@types/node": "^18.15.5",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "aws-amplify": "^5.0.22",
-    "react-scripts": "^5.0.1",
+    "babel-plugin-inline-react-svg": "^2.0.2",
     "typescript": "^5.0.2"
   },
   "exports": {
@@ -82,7 +84,7 @@
     "./basicAuthenticationView": "./components/authentication/default/basicAuthenticationView.js",
     "./basicContentWrapper": "./components/navbar/wrapper/basicContentWrapper.js",
     "./customContentbarWrapper": "./components/content/customContentbarWrapper.js",
-    "./basicContentbarWrapper":"./components/content/basicContentbarWrapper.js",
+    "./basicContentbarWrapper": "./components/content/basicContentbarWrapper.js",
     "./colorProvider": "./providers/colorProvider.js",
     "./constants": "./constants.js",
     "./content": "./components/content/content.js",
@@ -98,12 +100,12 @@
     "./simpleNavbarTab": "./components/navbar/tabs/simpleNavbarTab.js",
     "./translators": "./components/internationalization/translators.js",
     "./uiLayer": "./components/uiLayer.js",
-    "./disaHeader": "./components/disaHeader.js",
+    "./header": "./components/header.js",
     "./navbar": "./components/navbar/navbar.js",
     "./cookieBanner": "./components/cookie/cookieBanner.js",
     "./constants.css": "./components/css/constants.css",
-    "./disaPage.css": "./components/css/disaPage.css",
-    "./disaFramework.css": "./components/css/disaFramework.css",
+    "./mainPage.css": "./components/css/mainPage.css",
+    "./framework.css": "./components/css/framework.css",
     "./globalColors.css": "./components/css/globalColors.css",
     "./colorSettingsContext": "./contexts/colorsettings.js",
     "./defaultContentSelectionElement": "./components/content/defaultContentSelectionElement.js",
@@ -142,8 +144,9 @@
       "contentCell": [
         "./components/content/contentCell.d.ts"
       ],
-      "customContentbarWrapper": 
-      ["./components/content/customContentbarWrapper.d.ts"],
+      "customContentbarWrapper": [
+        "./components/content/customContentbarWrapper.d.ts"
+      ],
       "dummyAuthenticationProvider": [
         "./components/authentication/default/dummyAuthenticationProvider.d.ts"
       ],
@@ -177,8 +180,8 @@
       "uiLayer": [
         "./components/uiLayer.d.ts"
       ],
-      "disaHeader": [
-        "./components/disaHeader.d.ts"
+      "header": [
+        "./components/header.d.ts"
       ],
       "navbar": [
         "./components/navbar/navbar.d.ts"
@@ -192,11 +195,11 @@
       "constants.css": [
         "./components/css/constants.css"
       ],
-      "disaPage.css": [
-        ".components/css/disaPage.css"
+      "mainPage.css": [
+        ".components/css/mainPage.css"
       ],
-      "disaFramework.css": [
-        "./components/css/disaFramework.css"
+      "framework.css": [
+        "./components/css/framework.css"
       ],
       "globalColors.css": [
         "./components/css/globalColors.css"
@@ -204,10 +207,12 @@
       "colorSettingsContext": [
         "./contexts/colorsettings.d.ts"
       ],
-      "defaultContentSelectionElement":[
+      "defaultContentSelectionElement": [
         "./components/content/defaultContentSelectionElement.d.ts"
       ],
-      "hash":["./utils/hash.d.ts"]
+      "hash": [
+        "./utils/hash.d.ts"
+      ]
     }
   }
 }

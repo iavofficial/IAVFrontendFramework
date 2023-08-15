@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Content, LayoutBehaviour } from 'disa-framework/content';
-import { BasicContentbarWrapper } from 'disa-framework/basicContentbarWrapper';
+import { Content, LayoutBehaviour } from 'iav-frontend-framework/content';
+import { BasicContentbarWrapper } from 'iav-frontend-framework/basicContentbarWrapper';
 import { ContentbarExampleWithContentCell } from './contentbarExampleWithContentCell';
 
 export const ExampleComponent2 = () => {

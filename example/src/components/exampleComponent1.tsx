@@ -1,9 +1,9 @@
 import { useEffect, useReducer } from 'react';
-import { Content, LayoutBehaviour } from 'disa-framework/content';
-import { generateHashOfLength } from 'disa-framework/hash';
+import { Content, LayoutBehaviour } from 'iav-frontend-framework/content';
+import { generateHashOfLength } from 'iav-frontend-framework/hash';
 import { ContentbarExampleWithText } from './contentbarExampleWithText';
-import { BasicContentbarWrapper } from 'disa-framework/basicContentbarWrapper';
-import {TranslateFunctionType} from "disa-framework/translationFunction";
+import { BasicContentbarWrapper } from 'iav-frontend-framework/basicContentbarWrapper';
+import {TranslateFunctionType} from "iav-frontend-framework/translationFunction";
 
 const initialState: ExampleArrayObject = {
   exampleArray: [],

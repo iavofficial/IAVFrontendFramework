@@ -1,12 +1,11 @@
 import React, { ReactElement, useContext } from 'react';
-import './disaHeader.css';
+import './header.css';
 import '../css/globalColors.css';
 import { ContextMenu } from 'primereact/contextmenu';
-import { ReactComponent as UserIcon } from '../../assets/images/icon_user.svg';
-import { ReactComponent as NotificationIcon } from '../../assets/images/icon_notification.svg';
-import { ReactComponent as CompanyLogo } from '../../assets/images/company_logo.svg';
-import { ReactComponent as AppLogo } from '../../assets/images/app_logo.svg';
-import { ReactComponent as SettingsIcon } from '../../assets/images/icon_settings.svg';
+import UserIcon from '../../assets/svg/icon_user.svg';
+import CompanyLogo from '../../assets/svg/company_logo.svg';
+import AppLogo from '../../assets/svg/app_logo.svg';
+import SettingsIcon from '../../assets/svg/icon_settings.svg';
 import { BLUE3, GREY3, WHITE } from '../../constants';
 import { MenuSettingsOptions, SettingsMenu } from './settingsMenu';
 import { UserMenu } from './userMenu';
@@ -22,7 +21,7 @@ interface Props {
   menuOptions?: MenuSettingsOptions;
 }
 
-export const DisaHeader = (props: Props) => {
+export const Header = (props: Props) => {
   const menuRef = React.createRef<ContextMenu>();
   const userRef = React.createRef<ContextMenu>();
   const colorSettingsContext = useContext(ColorSettingsContext);
@@ -63,7 +62,7 @@ export const DisaHeader = (props: Props) => {
 
   return (
     <div
-      id="disa-header"
+      id="header"
       className={
         (colorSettingsContext?.darkmode ? 'bg-grey-5' : 'bg-blue-0') +
         ' flex justify-content-between align-items-center'

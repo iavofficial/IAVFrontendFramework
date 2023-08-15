@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BLUE3, GREY2, WHITE } from 'disa-framework/constants';
+import { BLUE3, GREY2, WHITE } from 'iav-frontend-framework/constants';
 
 interface Props {
   selected: boolean;

@@ -10,6 +10,7 @@
         ]
     ],
     "plugins": [
+        "inline-react-svg",
         "@babel/plugin-proposal-class-properties"
     ],
     "ignore": [

@@ -1,4 +1,4 @@
-import { CellPaddings, ContentCell } from 'disa-framework/contentCell';
+import { CellPaddings, ContentCell } from 'iav-frontend-framework/contentCell';
 
 export interface Props {
   exampleText: string;

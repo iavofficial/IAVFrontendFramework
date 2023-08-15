@@ -2,7 +2,7 @@
   "compilerOptions": {
     "outDir": "build",
     "declaration": true,
-    "emitDeclarationOnly": false,
+    "emitDeclarationOnly": true,
     "isolatedModules": true,
     "target": "es5",
     "lib": [
@@ -24,6 +24,7 @@
     "rootDir": "src",
   },
   "include": [
-   "src"
+   "src",
+   "custom.d.ts"
   ]
 }

@@ -1,7 +1,6 @@
-import React, { ReactElement, useContext } from 'react';
+import React, { useContext } from 'react';
 import '../css/globalColors.css';
 import { ContentBar } from './contentBar';
-import { GREY1 } from '../../constants';
 import { BasicContentbarWrapper } from './basicContentbarWrapper';
 import { CustomContentbarWrapper } from './customContentbarWrapper';
 import { ColorSettingsContext } from '../../contexts/colorsettings';

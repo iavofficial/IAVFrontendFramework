@@ -12,9 +12,9 @@ call npm install
 
 echo [31mFinished installation for the framework. [37m
 
-call npx babel ./src --out-dir ./build --extensions .ts,.tsx --copy-files 
+call npx babel ./src --out-dir ./build --extensions .ts,.tsx,.js --copy-files
 
-call npx babel ./package.json --out-dir ./build --copy-files 
+call npx babel ./package.json --out-dir ./build --copy-files
 
 call npx tsc
 

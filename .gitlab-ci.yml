@@ -74,7 +74,7 @@ publish_package:
     - sh ./scripts/ci_cd/configure_npmrc_for_publish.sh
     - npm publish
   rules:
-    - if: '$CI_SERVER_HOST' == "*.local"'
+    - if: '$CI_SERVER_HOST == "*.local"'
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
     - if: '$FORCE_PUBLISH == "true"'
 

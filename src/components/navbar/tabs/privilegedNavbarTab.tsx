@@ -5,11 +5,6 @@ import { SimpleNavbarTab } from './simpleNavbarTab';
 import { navbarTab } from './navbarTab';
 
 export interface Props {
-  navbarCollabsed?: boolean;
-  firstLayerCollabsed?: boolean;
-  secondLayerCollabsed?: boolean;
-  lastElementFirstLayer?: boolean;
-  lastElementSecondLayer?: boolean;
   permittedGroups: string[];
 }
 export const PrivilegedNavbarTab: navbarTab<Props> = (props) => {

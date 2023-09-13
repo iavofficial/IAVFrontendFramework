@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "outDir": "build",
     "declaration": true,
     "emitDeclarationOnly": true,
     "isolatedModules": true,

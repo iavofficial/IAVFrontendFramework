@@ -9,14 +9,13 @@ import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
 import { ColorSettingsContext } from "../../contexts/colorsettings";
 import { calculateNavbarArrowFunctionColor } from "../../utils/calculateNavbarArrowColor";
-import { BLUE3, GREEN, GREY1 } from "../../constants";
+import { BLUE3, GREY1 } from "../../constants";
 import { generateHashOfLength } from "../../utils/hash";
 import { NavbarSettingsContext } from "../../contexts/navbarContext";
 
 interface Props {
   tabAndContentWrappers: TabAndContentWrapper[];
   documentsLabelKey?: string;
-  collabsibleNavbar?: boolean;
   hideLegalDocuments?: boolean;
 }
 
@@ -105,7 +104,7 @@ export const Navbar = (props: Props) => {
             target={identifierWithDot}
             id="hover-image"
           />
-          {props.collabsibleNavbar && props.collabsibleNavbar ? (
+          {navbarSettingsContext?.collapsible ? (
             <i
               onClick={() =>
                 navbarSettingsContext?.setNavbarCollapsed(

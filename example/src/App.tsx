@@ -27,6 +27,7 @@ import { ExampleComponent3 } from "./components/exampleComponent3";
 import { ExampleComponent4 } from "./components/exampleComponent4";
 import { ExampleComponent5 } from "./components/exampleComponent5";
 import { ExampleComponent2 } from "./components/exampleComponent2";
+import { StaticCollapsedState } from "iav-frontend-framework/navbarSettingsTypes";
 
 function App() {
   const [selectedButtonOption, setSelectedButtonOption] = useState("Simulated");
@@ -192,9 +193,11 @@ function App() {
           startingPoint="/"
           authenticationView={BasicAuthenticationView}
           menuOptions={menuSettingsOptions}
-          collabsibleNavbar={true}
           documentsLabelKey="Legal_documents"
           documentsComponent={LegalDocuments}
+          navbarOptions={{
+            staticCollapsedState: StaticCollapsedState.Unfolded
+          }}
         />
       </GlobalDataLayer>
     </DummyAuthenticationProvider>

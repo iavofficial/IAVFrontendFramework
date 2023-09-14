@@ -33,7 +33,7 @@
     ]
   },
   "dependencies": {
-    "iav-frontend-framework": "file:../build"
+    "iav-frontend-framework": "^8.0.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.21.0",
@@ -54,7 +54,6 @@
     "sass": "^1.60.0",
     "typescript": "^5.0.2",
     "vite": "^4.4.4",
-    "vite-plugin-svgr": "^3.2.0",
-    "vite-tsconfig-paths": "^4.2.0"
+    "vite-plugin-svgr": "^3.2.0"
   }
 }

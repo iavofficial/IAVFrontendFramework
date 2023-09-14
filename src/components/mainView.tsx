@@ -9,7 +9,6 @@ import { TabAndContentWrapper } from './navbar/wrapper/tabAndContentWrapper';
 
 interface MainViewProps {
   menuOptions?: MenuSettingsOptions;
-  collabsibleNavbar?: boolean;
   documentsComponent?: React.ComponentType<any>;
   documentsLabelKey?: string;
   headerOptions?: HeaderOptions;
@@ -36,7 +35,6 @@ export const MainView = (props: MainViewProps) => {
       <div style={{ display: 'flex', flex: '1 1 auto', overflow: 'auto' }}>
         <Navbar
           tabAndContentWrappers={props.tabAndContentWrappers}
-          collabsibleNavbar={props.collabsibleNavbar}
           documentsLabelKey={props.documentsLabelKey}
           hideLegalDocuments={props.hideLegalDocuments}
         />

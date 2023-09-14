@@ -22,7 +22,8 @@ import { MainView } from './mainView';
 import { DefaultImprint } from './imprint/defaultImprint';
 import { TabAndContentWrapper } from './navbar/wrapper/tabAndContentWrapper';
 import { calculateLayer } from '../utils/calculateLayer';
-import { NavbarSettingsProvider } from '../providers/navbarProvider';
+import { NavbarSettingsProvider } from '../providers/navbarSettingsProvider';
+import { StaticCollapsedState } from '../types/navbarSettingsTypes';
 
 import "./uiLayer.css";
 
@@ -40,6 +41,10 @@ export interface AuthOptions {
   preventDarkmode?: boolean;
 }
 
+export interface NavbarOptions {
+  staticCollapsedState?: StaticCollapsedState;
+}
+
 export interface Props {
   tabAndContentWrappers: TabAndContentWrapper[];
   startingPoint: string;
@@ -49,8 +54,8 @@ export interface Props {
   menuOptions?: MenuSettingsOptions;
   headerOptions?: HeaderOptions;
   authOptions?: AuthOptions;
-  collabsibleNavbar?: boolean;
   hideLegalDocuments?: boolean;
+  navbarOptions? : NavbarOptions;
 }
 
 export const UILayer = (props: Props) => {
@@ -60,7 +65,7 @@ export const UILayer = (props: Props) => {
     : BasicAuthenticationView;
 
   return (
-    <NavbarSettingsProvider>
+    <NavbarSettingsProvider staticCollapsedState={props.navbarOptions?.staticCollapsedState}>
       <CookieBanner />
       <Router>
         <Redirector startingPoint={props.startingPoint} />
@@ -93,7 +98,6 @@ export const UILayer = (props: Props) => {
             element={
               <MainView
                 headerOptions={props.headerOptions}
-                collabsibleNavbar={props.collabsibleNavbar}
                 menuOptions={props.menuOptions}
                 documentsLabelKey={props.documentsLabelKey}
                 documentsComponent={props.documentsComponent}

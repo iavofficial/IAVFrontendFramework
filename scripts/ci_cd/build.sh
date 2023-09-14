@@ -1,6 +1,6 @@
 mkdir ./build;
 
-npx tsc;
+npx tsc --outDir ./build;
 
 if [ $? = 0 ]
 then

@@ -44,23 +44,15 @@ export interface MenuItem {
   [key: string]: any;
 }
 
-// ##############################################
-
-interface SettingsOption {
-  identifier: string;
-  [key: string]: any;
-}
-
-export interface MenuSettingsOptions {
+export interface SettingsMenuOptions {
   additionalItems?: MenuItem[];
-  userContextMenu?: boolean;
   hideLanguageSelection?: boolean;
-  options?: SettingsOption[];
+  hideColorThemeToggler?: boolean;
 }
 
 interface Props {
   hideMenu: (e: React.KeyboardEvent) => void;
-  menuOptions?: MenuSettingsOptions;
+  menuOptions?: SettingsMenuOptions;
 }
 
 export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
@@ -125,15 +117,7 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
       }
     }
 
-    let colorModeToggleOption = getOptionByIdentifier(
-      props.menuOptions?.options,
-      "colormodetoggle"
-    );
-
-    if (
-      !colorModeToggleOption ||
-      (colorModeToggleOption && !colorModeToggleOption.hidden)
-    ) {
+    if (!props.menuOptions?.hideColorThemeToggler) {
       let colorSetting = colorSettingsContext?.darkmode
         ? "bg-grey-5 color-white"
         : " bg-white-1 color-black";
@@ -195,14 +179,4 @@ function isDialectOf(dialect: string, baseLang: string) {
 function containsLanguage(lang: string, resources: Translations) {
   let dialects = Object.keys(resources).filter((key) => key === lang);
   return dialects.length === 1;
-}
-
-function getOptionByIdentifier(
-  options: SettingsOption[] | undefined,
-  identifier: string
-) {
-  if (options !== undefined) {
-    return options.find((option) => option.identifier === identifier);
-  }
-  return undefined;
 }

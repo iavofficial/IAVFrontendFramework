@@ -7,7 +7,7 @@ import CompanyLogo from '../../assets/svg/company_logo.svg';
 import AppLogo from '../../assets/svg/app_logo.svg';
 import SettingsIcon from '../../assets/svg/icon_settings.svg';
 import { BLUE3, GREY3, WHITE } from '../../constants';
-import { MenuSettingsOptions, SettingsMenu } from './settingsMenu';
+import { SettingsMenuOptions, SettingsMenu } from './settingsMenu';
 import { UserMenu } from './userMenu';
 import { ColorSettingsContext } from '../../contexts/colorsettings';
 
@@ -18,7 +18,7 @@ interface Props {
     hideLeft?: boolean;
     hideRight?: boolean;
   };
-  menuOptions?: MenuSettingsOptions;
+  menuOptions?: SettingsMenuOptions;
 }
 
 export const Header = (props: Props) => {

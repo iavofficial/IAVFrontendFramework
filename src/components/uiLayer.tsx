@@ -14,7 +14,7 @@ import './css/constants.css';
 import './css/globalChangesOnPrimeReactComponents.css';
 import './css/globalSettings.css';
 import { BasicAuthenticationView } from './authentication/default/basicAuthenticationView';
-import { MenuSettingsOptions } from './header/settingsMenu';
+import { SettingsMenuOptions } from './header/settingsMenu';
 import { CookieBanner } from './cookie/cookieBanner';
 import { AuthContext } from '../contexts/auth';
 import { AuthenticationViewProps } from './authentication/authenticationView';
@@ -37,7 +37,6 @@ export interface HeaderOptions {
 export interface AuthOptions {
   backgroundImage?: string;
   companyText?: string;
-  documentsLabelKey?: string;
   preventDarkmode?: boolean;
 }
 
@@ -51,7 +50,7 @@ export interface Props {
   authenticationView?: React.ComponentType<AuthenticationViewProps & any>;
   documentsComponent?: React.ComponentType<any>;
   documentsLabelKey?: string;
-  menuOptions?: MenuSettingsOptions;
+  menuOptions?: SettingsMenuOptions;
   headerOptions?: HeaderOptions;
   authOptions?: AuthOptions;
   hideLegalDocuments?: boolean;

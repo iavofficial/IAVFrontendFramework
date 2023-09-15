@@ -32,7 +32,7 @@ import { StaticCollapsedState } from "iav-frontend-framework/navbarSettingsTypes
 function App() {
   const [selectedButtonOption, setSelectedButtonOption] = useState("Simulated");
 
-  const menuSettingsOptions = {
+  const settingsMenuOptions = {
     additionalItems: [
       {
         template: (
@@ -192,7 +192,7 @@ function App() {
           tabAndContentWrappers={views}
           startingPoint="/"
           authenticationView={BasicAuthenticationView}
-          menuOptions={menuSettingsOptions}
+          menuOptions={settingsMenuOptions}
           documentsLabelKey="Legal_documents"
           documentsComponent={LegalDocuments}
           navbarOptions={{

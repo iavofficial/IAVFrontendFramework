@@ -10,7 +10,7 @@ import translationES from "./assets/translations/es.json";
 import { UILayer } from "iav-frontend-framework/uiLayer";
 import { GlobalDataLayer } from "iav-frontend-framework/globalDataLayer";
 import { DummyAuthenticationProvider } from "iav-frontend-framework/dummyAuthenticationProvider";
-import { TranslateFunctionType } from "iav-frontend-framework/language";
+import { TranslateFunctionType } from "iav-frontend-framework/translationFunction";
 import { SimpleNavbarTab } from "iav-frontend-framework/simpleNavbarTab";
 import { PrivilegedNavbarTab } from "iav-frontend-framework/privilegedNavbarTab";
 import { BasicAuthenticationView } from "iav-frontend-framework/basicAuthenticationView";

@@ -23,7 +23,7 @@ export class CustomContentbarWrapper implements ContentbarWrapperInterface {
     return this.contentAreaElement;
   }
 
-  getContentbarComponent() {
+  getContentbarElement() {
     return <div id="restrictDimensions">{this.renderElement}</div>;
   }
 }

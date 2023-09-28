@@ -1,12 +1,12 @@
-import { Content, LayoutBehaviour } from 'iav-frontend-framework/content';
 import { CellPaddings, ContentCell } from 'iav-frontend-framework/contentCell';
+import { ContentLayout, LayoutBehaviour } from 'iav-frontend-framework/contentLayout';
 import { useTranslator } from 'iav-frontend-framework/translators';
 
 export const ExampleComponent6 = () => {
   const t = useTranslator();
 
   return (
-    <Content layoutBehaviour={LayoutBehaviour.FLEX} contentElements={[]}>
+    <ContentLayout layoutBehaviour={LayoutBehaviour.FLEX}>
       <div className={'grid grid-nogutter'} style={{ width: '100%' }}>
         <ContentCell colWidth={12} paddings={CellPaddings.FULL}>
           <h3>
@@ -17,6 +17,6 @@ export const ExampleComponent6 = () => {
           </h3>
         </ContentCell>
       </div>
-    </Content>
+    </ContentLayout>
   );
 };

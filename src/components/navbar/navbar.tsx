@@ -104,7 +104,7 @@ export const Navbar = (props: Props) => {
             target={identifierWithDot}
             id="hover-image"
           />
-          {navbarSettingsContext?.collapsible ? (
+          {navbarSettingsContext?.collapsible && (
             <i
               onClick={() =>
                 navbarSettingsContext?.setNavbarCollapsed(
@@ -122,8 +122,6 @@ export const Navbar = (props: Props) => {
                 colorSettingsContext?.darkmode as boolean
               )}
             />
-          ) : (
-            <></>
           )}
         </div>
       </div>

@@ -23,13 +23,14 @@ export const Content = (props: React.PropsWithChildren<Props>) => {
   const colorSettingsContext = useContext(ColorSettingsContext);
 
   const selectedContentWrapper = useMemo(() => {
-    return props.contentWrappers.find(
+    /* TODO: Currently there is a bug in TypeScript which results in a TypeScript error if the find method
+    is called on union types of arrays. Because of this you have to add "as any[]". This addittion should be removed
+    in a future version.*/
+    return (props.contentWrappers as any[]).find(
       (currentWrapper) => currentWrapper.getId() === props.selectedId
     );
   }, [props.contentWrappers, props.selectedId]);
-
-  console.log(selectedContentWrapper?.getContentAreaElement());
-
+  
   return (
     <div
       className="flex flex-column"

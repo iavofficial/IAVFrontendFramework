@@ -8,9 +8,7 @@ export interface Props {
 
 export const ContentbarExampleWithText = (props: Props) => {
   const [counter, setCounter] = useState(0);
-
-  console.log(counter);
-
+  
   return (
     <>
       <div className="col-8 grid grid-nogutter">

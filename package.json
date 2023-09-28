@@ -108,7 +108,9 @@
     "./simpleNavbarTab": "./build/components/navbar/tabs/simpleNavbarTab.js",
     "./translators": "./build/components/internationalization/translators.js",
     "./uiLayer": "./build/components/uiLayer.js",
-    "./header": "./build/components/header.js",
+    "./header": "./build/components/header/header.js",
+    "./settingsMenu": "./build/components/header/settingsMenu.js",
+    "./userMenu": "./build/components/header/userMenu.js",
     "./navbar": "./build/components/navbar/navbar.js",
     "./cookieBanner": "./build/components/cookie/cookieBanner.js",
     "./constants.css": "./build/components/css/constants.css",
@@ -193,7 +195,13 @@
         "./build/components/uiLayer.d.ts"
       ],
       "header": [
-        "./build/components/header.d.ts"
+        "./build/components/header/header.d.ts"
+      ],
+      "settingsMenu": [
+        "./build/components/header/settingsMenu.d.ts"
+      ],
+      "userMenu": [
+        "./build/components/header/userMenu.d.ts"
       ],
       "navbar": [
         "./build/components/navbar/navbar.d.ts"

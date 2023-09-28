@@ -1,47 +1,49 @@
-import React from 'react';
-import { generateHashOfLength } from '../../utils/hash';
-import { ContentbarWrapperInterface } from './contentbarWrapperInterface';
-import { DefaultContentSelectionElement } from './defaultContentSelectionElement';
-import { TranslationFunction } from '../../types/translationFunction';
+import React from "react";
+import { generateHashOfLength } from "../../utils/hash";
+import { ContentbarWrapperInterface } from "./contentbarWrapperInterface";
+import { DefaultContentSelectionElement } from "./defaultContentSelectionElement";
+import { TranslationFunction } from "../../types/translationFunction";
+
+interface ConstructorArgs {
+  id: string;
+  displayName: string | TranslationFunction;
+  selectedId: string;
+  closable: boolean;
+  setSelectedId: (value: string) => any;
+  contentAreaElement: React.ReactElement;
+  onClose?: (value: string) => void;
+}
 
 export class BasicContentbarWrapper implements ContentbarWrapperInterface {
-  constructor(
-    private id: string,
-    private displayName: string | TranslationFunction,
-    private selectedId: string,
-    private closable: boolean,
-    private setSelectedId: (value: string) => any,
-    private onClose: (value: string) => void,
-    private contentAreaElement: React.ReactElement
-  ) {}
+  constructor(private args: ConstructorArgs) {}
 
   getKey() {
     return generateHashOfLength(6);
   }
 
   getId() {
-    return this.id;
+    return this.args.id;
   }
 
   setSelectedIdParentComponent(selectedIdParentComponent: string) {
-    this.selectedId = selectedIdParentComponent;
+    this.args.selectedId = selectedIdParentComponent;
   }
 
   getContentAreaElement(): React.ReactElement {
-    return this.contentAreaElement;
+    return this.args.contentAreaElement;
   }
 
-  getContentbarComponent(contentElementWidth: number) {
+  getContentbarElement(contentElementWidth: number) {
     return (
       <DefaultContentSelectionElement
         key={this.getKey()}
-        displayName={this.displayName}
-        id={this.id}
-        closable={this.closable}
-        selected={this.id === this.selectedId}
-        setSelectedId={this.setSelectedId}
-        onClose={this.onClose}
+        displayName={this.args.displayName}
+        id={this.args.id}
+        closable={this.args.closable}
+        selected={this.args.id === this.args.selectedId}
+        setSelectedId={this.args.setSelectedId}
         width={contentElementWidth}
+        onClose={this.args.onClose}
       />
     );
   }

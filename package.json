@@ -95,6 +95,7 @@
     "./colorProvider": "./build/providers/colorProvider.js",
     "./constants": "./build/constants.js",
     "./content": "./build/components/content/content.js",
+    "./contentLayout": "./build/components/content/contentLayout.js",
     "./contentCell": "./build/components/content/contentCell.js",
     "./dummyAuthenticationProvider": "./build/components/authentication/default/dummyAuthenticationProvider.js",
     "./globalDataLayer": "./build/components/globalDataLayer.js",
@@ -148,6 +149,9 @@
       ],
       "content": [
         "./build/components/content/content.d.ts"
+      ],
+      "contentLayout": [
+        "./build/components/content/contentLayout.d.ts"
       ],
       "contentCell": [
         "./build/components/content/contentCell.d.ts"

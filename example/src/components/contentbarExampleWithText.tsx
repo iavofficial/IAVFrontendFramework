@@ -1,13 +1,19 @@
-import { CellPaddings, ContentCell } from 'iav-frontend-framework/contentCell';
+import { CellPaddings, ContentCell } from "iav-frontend-framework/contentCell";
+import { Button } from "primereact/button";
+import { useState } from "react";
 
 export interface Props {
   exampleText: string;
 }
 
 export const ContentbarExampleWithText = (props: Props) => {
+  const [counter, setCounter] = useState(0);
+
+  console.log(counter);
+
   return (
     <>
-      <div className={'col-8 grid grid-nogutter'}>
+      <div className="col-8 grid grid-nogutter">
         <ContentCell colWidth={6} paddings={CellPaddings.FULL}>
           <span>First row left</span>
           <h2>{props.exampleText}</h2>
@@ -17,6 +23,14 @@ export const ContentbarExampleWithText = (props: Props) => {
         </ContentCell>
         <ContentCell colWidth={6} paddings={CellPaddings.VERT_RIGHT}>
           <span>First row center</span>
+          <div style={{"marginTop": "80px"}}>
+            {counter}
+          </div>
+          <div style={{"marginTop" : "40px"}}>
+            <Button label={"Increment counter"} onClick={() => {
+              setCounter((prevCounter) => prevCounter + 1);
+            }}/>
+          </div>
         </ContentCell>
         <ContentCell paddings={CellPaddings.BOT_HOR}>
           <span>Second row left</span>
@@ -37,6 +51,7 @@ export const ContentbarExampleWithText = (props: Props) => {
           <span>Third row</span>
         </ContentCell>
       </div>
+      
       <ContentCell
         paddings={CellPaddings.VERT_RIGHT}
         colWidth={4}

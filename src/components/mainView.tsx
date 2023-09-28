@@ -1,19 +1,20 @@
-import React from 'react';
-import { Header } from './header/header';
+import React, { ReactElement } from 'react';
+import { Header, HeaderOptions } from './header/header';
 import { Navbar } from './navbar/navbar';
 import { DefaultImprint } from './imprint/defaultImprint';
 import { SettingsMenuOptions } from './header/settingsMenu';
-import { HeaderOptions } from './uiLayer';
 import { Route, Routes, Outlet } from 'react-router-dom';
 import { TabAndContentWrapper } from './navbar/wrapper/tabAndContentWrapper';
+import { UserMenuOptions } from './header/userMenu';
 
 interface MainViewProps {
-  menuOptions?: SettingsMenuOptions;
   documentsComponent?: React.ComponentType<any>;
   documentsLabelKey?: string;
-  headerOptions?: HeaderOptions;
   tabAndContentWrappers: TabAndContentWrapper[];
   hideLegalDocuments?: boolean;
+  headerOptions?: HeaderOptions;
+  settingsMenuOptions?: SettingsMenuOptions;
+  userMenuOptions?: UserMenuOptions;
 }
 
 export const MainView = (props: MainViewProps) => {
@@ -29,7 +30,8 @@ export const MainView = (props: MainViewProps) => {
       <div style={{ flex: '0 0 auto' }}>
         <Header
           headerOptions={props.headerOptions}
-          menuOptions={props.menuOptions}
+          settingsMenuOptions={props.settingsMenuOptions}
+          userMenuOptions={props.userMenuOptions}
         />
       </div>
       <div style={{ display: 'flex', flex: '1 1 auto', overflow: 'auto' }}>

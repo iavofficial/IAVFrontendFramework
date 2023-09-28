@@ -192,7 +192,10 @@ function App() {
           tabAndContentWrappers={views}
           startingPoint="/"
           authenticationView={BasicAuthenticationView}
-          menuOptions={settingsMenuOptions}
+          settingsMenuOptions={settingsMenuOptions}
+          userMenuOptions={{
+            hideLogoutButton: true
+          }}
           documentsLabelKey="Legal_documents"
           documentsComponent={LegalDocuments}
           navbarOptions={{

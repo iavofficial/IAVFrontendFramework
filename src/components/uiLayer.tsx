@@ -26,13 +26,8 @@ import { NavbarSettingsProvider } from '../providers/navbarSettingsProvider';
 import { StaticCollapsedState } from '../types/navbarSettingsTypes';
 
 import "./uiLayer.css";
-
-export interface HeaderOptions {
-  reactElementRight?: ReactElement;
-  reactElementLeft?: ReactElement;
-  hideLeft?: boolean;
-  hideRight?: boolean;
-}
+import { HeaderOptions } from './header/header';
+import { UserMenuOptions } from './header/userMenu';
 
 export interface AuthOptions {
   backgroundImage?: string;
@@ -50,7 +45,8 @@ export interface Props {
   authenticationView?: React.ComponentType<AuthenticationViewProps & any>;
   documentsComponent?: React.ComponentType<any>;
   documentsLabelKey?: string;
-  menuOptions?: SettingsMenuOptions;
+  settingsMenuOptions?: SettingsMenuOptions;
+  userMenuOptions?: UserMenuOptions;
   headerOptions?: HeaderOptions;
   authOptions?: AuthOptions;
   hideLegalDocuments?: boolean;
@@ -74,7 +70,7 @@ export const UILayer = (props: Props) => {
             element={
               <AuthenticationView
                 authOptions={props.authOptions}
-                hideLanguageSelection={props.menuOptions?.hideLanguageSelection}
+                hideLanguageSelection={props.settingsMenuOptions?.hideLanguageSelection}
                 headerOptions={props.headerOptions}
                 hideLegalDocuments={props.hideLegalDocuments}
               />
@@ -97,7 +93,8 @@ export const UILayer = (props: Props) => {
             element={
               <MainView
                 headerOptions={props.headerOptions}
-                menuOptions={props.menuOptions}
+                settingsMenuOptions={props.settingsMenuOptions}
+                userMenuOptions={props.userMenuOptions}
                 documentsLabelKey={props.documentsLabelKey}
                 documentsComponent={props.documentsComponent}
                 tabAndContentWrappers={calculateLayer(

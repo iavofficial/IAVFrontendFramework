@@ -8,8 +8,15 @@ import AppLogo from '../../assets/svg/app_logo.svg';
 import SettingsIcon from '../../assets/svg/icon_settings.svg';
 import { BLUE3, GREY3, WHITE } from '../../constants';
 import { SettingsMenuOptions, SettingsMenu } from './settingsMenu';
-import { UserMenu } from './userMenu';
+import { UserMenu, UserMenuOptions } from './userMenu';
 import { ColorSettingsContext } from '../../contexts/colorsettings';
+
+export interface HeaderOptions {
+  reactElementRight?: ReactElement;
+  reactElementLeft?: ReactElement;
+  hideLeft?: boolean;
+  hideRight?: boolean;
+}
 
 interface Props {
   headerOptions?: {
@@ -18,7 +25,8 @@ interface Props {
     hideLeft?: boolean;
     hideRight?: boolean;
   };
-  menuOptions?: SettingsMenuOptions;
+  settingsMenuOptions?: SettingsMenuOptions;
+  userMenuOptions?: UserMenuOptions;
 }
 
 export const Header = (props: Props) => {
@@ -84,9 +92,9 @@ export const Header = (props: Props) => {
         <SettingsMenu
           ref={menuRef}
           hideMenu={hideSettingsMenu}
-          menuOptions={props.menuOptions}
+          menuOptions={props.settingsMenuOptions}
         />
-        <UserMenu ref={userRef} hideMenu={hideUserMenu} />
+        <UserMenu ref={userRef} hideMenu={hideUserMenu} userMenuOptions={props.userMenuOptions}/>
         <div
           id="right-element-user-section"
           className={'flex align-items-center justify-content-end'}

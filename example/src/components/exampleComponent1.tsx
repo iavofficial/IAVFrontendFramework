@@ -1,5 +1,6 @@
 import { useEffect, useReducer } from 'react';
-import { Content, LayoutBehaviour } from 'iav-frontend-framework/content';
+import { Content } from 'iav-frontend-framework/content';
+import { LayoutBehaviour } from 'iav-frontend-framework/contentLayout';
 import { generateHashOfLength } from 'iav-frontend-framework/hash';
 import { ContentbarExampleWithText } from './contentbarExampleWithText';
 import { BasicContentbarWrapper } from 'iav-frontend-framework/basicContentbarWrapper';
@@ -18,7 +19,7 @@ type ExampleArrayObject = {
 
 interface Action {
   type: 'create' | 'update' | 'delete' | 'initialize';
-  payload?: ExampleArrayObject;
+  payload: ExampleArrayObject;
 }
 
 function reducer(state: ExampleArrayObject, action: Action) {
@@ -27,7 +28,7 @@ function reducer(state: ExampleArrayObject, action: Action) {
       return {
         ...state,
         exampleArray: action.payload?.exampleArray,
-        selectedId: action.payload?.selectedId,
+        selectedId: action.payload.selectedId
       };
     }
     case 'create': {
@@ -43,7 +44,7 @@ function reducer(state: ExampleArrayObject, action: Action) {
       return {
         ...state,
         exampleArray: temporaryExampleArray,
-        selectedId: action.payload?.addElement?.getId(),
+        selectedId: action.payload?.addElement?.getId()
       };
     }
 
@@ -111,15 +112,15 @@ export const ExampleComponent1 = () => {
 
     for (let index = 0; index < 6; index++) {
       let hash = index === 0 ? hashOfFirstElement : generateHashOfLength(6);
-      let newBasicContentWrapperElement = new BasicContentbarWrapper(
-        hash,
-        (t: TranslateFunctionType) => `${t("car")} ${index}`,
-        hashOfFirstElement,
-        index < 1 ? false : true,
-        selectElement,
-        onCloseElement,
-        <ContentbarExampleWithText exampleText={"car"} />
-      );
+      let newBasicContentWrapperElement = new BasicContentbarWrapper({
+        id: hash,
+        displayName: (t: TranslateFunctionType) => `${t("car")} ${index}`,
+        selectedId: hashOfFirstElement,
+        closable: index < 1 ? false : true,
+        setSelectedId: selectElement,
+        onClose: onCloseElement,
+        contentAreaElement: <ContentbarExampleWithText exampleText={"car"} key={hash}/>
+      });
       temporaryExampleArray.push(newBasicContentWrapperElement);
     }
 
@@ -140,15 +141,15 @@ export const ExampleComponent1 = () => {
   const onAddElement = () => {
     let hash = generateHashOfLength(6);
     let name = 'test' + state.exampleArray?.length;
-    let newBasicContentWrapperElement = new BasicContentbarWrapper(
-      hash,
-      name,
-      state.selectedId!,
-      true,
-      selectElement,
-      onCloseElement,
-      <ContentbarExampleWithText exampleText={name} />
-    );
+    let newBasicContentWrapperElement = new BasicContentbarWrapper({
+      id: hash,
+      displayName: name,
+      selectedId: state.selectedId!,
+      closable: true,
+      setSelectedId: selectElement,
+      onClose: onCloseElement,
+      contentAreaElement: <ContentbarExampleWithText exampleText={name} key={hash} />
+    });
     dispatch({
       type: 'create',
       payload: { addElement: newBasicContentWrapperElement },
@@ -159,19 +160,10 @@ export const ExampleComponent1 = () => {
     <Content
       onClickAddButton={onAddElement}
       layoutBehaviour={LayoutBehaviour.GRID}
-      contentElements={state.exampleArray!}
+      contentWrappers={state.exampleArray!}
       jumpToEnd={true}
       addable={true}
-    >
-      <>
-        {state.exampleArray?.map(
-          (basicContentbarWrapper: BasicContentbarWrapper) => {
-            if (basicContentbarWrapper.getId() === state.selectedId) {
-              return basicContentbarWrapper.getContentAreaElement();
-            }
-          }
-        )}
-      </>
-    </Content>
+      selectedId={state.selectedId? state.selectedId : ""}
+      />
   );
 };

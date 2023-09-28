@@ -24,8 +24,8 @@ interface Props {
   contentElements: BasicContentbarWrapper[] | CustomContentbarWrapper[];
   addable?: boolean;
   jumpToEnd?: boolean;
-  onClose: (value: string) => any;
-  setSelectedId: (value: string) => any;
+  onClose?: (value: string) => any;
+  setSelectedId?: (value: string) => any;
   onClickAddButton?: () => any;
   onClickLeftSlideButton?: () => any;
   onClickRightSlideButton?: () => any;
@@ -230,20 +230,20 @@ export const ContentBar = (props: Props) => {
 
           {props.contentElements.length > amountOfRenderedTabElements
             ? renderElementsArray.map((element) =>
-                element.getContentbarComponent(
+                element.getContentbarElement(
                   calculateWidth(
                     navbarSettingsContext?.navbarCollapsed!,
                     width - (80 + 32),
-                    props.addable as boolean
+                    !!props.addable
                   )
                 )
               )
             : props.contentElements.map((element) =>
-                element.getContentbarComponent(
+                element.getContentbarElement(
                   calculateWidth(
                     navbarSettingsContext?.navbarCollapsed!,
                     width - (80 + 32),
-                    props.addable as boolean
+                    !!props.addable
                   )
                 )
               )}

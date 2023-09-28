@@ -1,7 +1,7 @@
 import { useTranslator } from 'iav-frontend-framework/translators';
 import { BLUE3, WHITE } from 'iav-frontend-framework/constants';
-import { Content, LayoutBehaviour } from 'iav-frontend-framework/content';
 import { CellPaddings, ContentCell } from 'iav-frontend-framework/contentCell';
+import { ContentLayout, LayoutBehaviour } from 'iav-frontend-framework/contentLayout';
 import { Button } from 'primereact/button';
 import { useState } from 'react';
 
@@ -10,7 +10,7 @@ export const ExampleComponent5 = () => {
   const t = useTranslator();
 
   return (
-    <Content layoutBehaviour={LayoutBehaviour.FLEX} contentElements={[]}>
+    <ContentLayout layoutBehaviour={LayoutBehaviour.FLEX}>
       <div className={'grid grid-nogutter'} style={{ width: '100%' }}>
         <ContentCell colWidth={12} paddings={CellPaddings.FULL}>
           <h1>{t('translation_and_colormode_example')}</h1>
@@ -48,6 +48,6 @@ export const ExampleComponent5 = () => {
       >
         <h3>{t('without_applied_dark_and_lightMode')}</h3>
       </div>
-    </Content>
+    </ContentLayout>
   );
 };

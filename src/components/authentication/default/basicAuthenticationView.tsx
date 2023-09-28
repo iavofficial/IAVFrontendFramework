@@ -32,7 +32,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
     event.preventDefault();
     authContext?.login({ email: email, password: password });
   };
-
+  
   const companyLogoDefault = (props: AuthenticationViewProps) => (
     <div
       style={{

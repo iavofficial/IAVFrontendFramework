@@ -1,12 +1,14 @@
-import React, { useContext } from 'react';
-import '../css/globalColors.css';
-import { ContentBar } from './contentBar';
-import { BasicContentbarWrapper } from './basicContentbarWrapper';
-import { CustomContentbarWrapper } from './customContentbarWrapper';
-import { ColorSettingsContext } from '../../contexts/colorsettings';
+import React, { useContext, useMemo } from "react";
+import "../css/globalColors.css";
+import { ContentBar } from "./contentBar";
+import { BasicContentbarWrapper } from "./basicContentbarWrapper";
+import { CustomContentbarWrapper } from "./customContentbarWrapper";
+import { ColorSettingsContext } from "../../contexts/colorsettings";
+import { ContentLayout, LayoutBehaviour } from "./contentLayout";
 
 export interface Props {
-  contentElements: BasicContentbarWrapper[] | CustomContentbarWrapper[];
+  contentWrappers: BasicContentbarWrapper[] | CustomContentbarWrapper[];
+  selectedId: string;
   layoutBehaviour?: LayoutBehaviour;
   setSelectedId?: (value: string) => void;
   onClose?: (value: string) => void;
@@ -20,74 +22,52 @@ export interface Props {
 export const Content = (props: React.PropsWithChildren<Props>) => {
   const colorSettingsContext = useContext(ColorSettingsContext);
 
-  let contentRootClass = '';
-  switch (props.layoutBehaviour) {
-    case LayoutBehaviour.NONE:
-      break;
-    case LayoutBehaviour.GRID:
-      contentRootClass = 'grid grid-nogutter';
-      break;
-    case LayoutBehaviour.FLEX:
-      contentRootClass = 'flex';
-      break;
-    case LayoutBehaviour.FLEX_COL:
-      contentRootClass = 'flex flex-column';
-      break;
-  }
-
+  const selectedContentWrapper = useMemo(() => {
+    /* TODO: Currently there is a bug in TypeScript which results in a TypeScript error if the find method
+    is called on union types of arrays. Because of this you have to add "as any[]". This addittion should be removed
+    in a future version.*/
+    return (props.contentWrappers as any[]).find(
+      (currentWrapper) => currentWrapper.getId() === props.selectedId
+    );
+  }, [props.contentWrappers, props.selectedId]);
+  
   return (
     <div
       className="flex flex-column"
-      style={{ width: '100%', overflow: 'auto' }}
+      style={{ width: "100%", overflow: "auto" }}
     >
-      {props.contentElements.length < 1 ? (
-        <></>
-      ) : (
+      {props.contentWrappers.length >= 1 && (
         <ContentBar
-          onClose={props.onClose!}
-          setSelectedId={props.setSelectedId!}
+          onClose={props.onClose}
+          setSelectedId={props.setSelectedId}
           onClickLeftSlideButton={props.onClickLeftSlideButton}
           onClickRightSlideButton={props.onClickRightSlideButton}
           onClickAddButton={props.onClickAddButton}
           addable={props.addable}
           jumpToEnd={props.jumpToEnd}
-          contentElements={props.contentElements}
+          contentElements={props.contentWrappers}
         />
       )}
-
+      
       <div
-        className={
-          contentRootClass +
-          (colorSettingsContext?.darkmode ? ' bg-black' : ' bg-grey-1')
-        }
+        className={`w-full ${
+          colorSettingsContext?.darkmode ? " bg-black" : " bg-grey-1"
+        }`}
         style={{
-          height: '100%',
+          height: "100%",
           backgroundColor:
             colorSettingsContext?.contentColorOptions?.contentBackground,
-          overflow: 'auto',
+          overflow: "auto",
         }}
       >
-        {props.children}
+        {props.layoutBehaviour ? (
+          <ContentLayout layoutBehaviour={props.layoutBehaviour}>
+            {selectedContentWrapper?.getContentAreaElement()}
+          </ContentLayout>
+        ) : (
+          selectedContentWrapper?.getContentAreaElement()
+        )}
       </div>
     </div>
   );
 };
-
-export enum LayoutBehaviour {
-  /**
-   * parent div of content will have no specific layout class
-   */
-  NONE,
-  /**
-   * parent div will be prime react grid
-   */
-  GRID,
-  /**
-   * parent will be flexbox
-   */
-  FLEX,
-  /**
-   * parent will be flexbox column
-   */
-  FLEX_COL,
-}

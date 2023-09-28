@@ -13,7 +13,7 @@ export interface Props {
   id: string;
   selected?: boolean;
   closable?: boolean;
-  onClose: (value: string) => void;
+  onClose?: (value: string) => void;
   setSelectedId: (value: string) => any;
 }
 

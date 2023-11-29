@@ -6,8 +6,7 @@ export const ExampleComponent6 = () => {
   const t = useTranslator();
 
   return (
-    <ContentLayout layoutBehaviour={LayoutBehaviour.FLEX}>
-      <div className={'grid grid-nogutter'} style={{ width: '100%' }}>
+    <ContentLayout layoutBehaviour={LayoutBehaviour.GRID}>
         <ContentCell colWidth={12} paddings={CellPaddings.FULL}>
           <h3>
             {' '}
@@ -16,7 +15,6 @@ export const ExampleComponent6 = () => {
             {t('No_contentbar_elements')}
           </h3>
         </ContentCell>
-      </div>
     </ContentLayout>
   );
 };

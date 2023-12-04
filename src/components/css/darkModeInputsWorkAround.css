@@ -1,0 +1,12 @@
+/* It turns out that the Webkit rendering engine adds a styling using pseudo classes. This styling contains values for "color" and "background-color".
+These settings cannot be overwritten using "color" and "background-color" properties in your CSS files.
+However, there is a work around using Webkit CSS properties. You can overwrite the text color using "-webkit-text-fill-color".
+For the background color there is no webkit CSS property. It can be overwritten by setting an "inset" shadow using the webkit property "-webkit-box-shadow" and adding
+a transition for the background which has a very long duration. By doing this the background color which is automatically set by Webkit will never appear and the shadow will be shown instead. */
+
+[color-theme="dark"] input:-webkit-autofill {
+    -webkit-text-fill-color: var(--white);
+    -webkit-box-shadow: 0 0 0px 1000px var(--grey-4) inset;
+    caret-color: var(--white);
+    transition: background-color 0s 600000s;
+  }

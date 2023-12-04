@@ -32,8 +32,7 @@ export const Navbar = (props: Props) => {
     <div
       id="navbar"
       className={
-        (colorSettingsContext?.darkmode ? "bg-grey-5" : "bg-white-1") +
-        " flex flex-column"
+        (colorSettingsContext?.darkmode ? "bg-grey-5" : "bg-white-1")
       }
       style={{
         padding: "16px 0px 0px 0px",
@@ -41,24 +40,25 @@ export const Navbar = (props: Props) => {
           colorSettingsContext?.navbarColorOptions?.backgroundColor,
       }}
     >
-      <SimpleBar
-        style={{
-          width: navbarSettingsContext?.navbarCollapsed ? "40px" : "240px",
-          height: navbarSettingsContext?.navbarCollapsed ? "83vh" : "87vh",
-          color: colorSettingsContext?.navbarColorOptions?.scrollbarColor
-            ? colorSettingsContext?.navbarColorOptions.scrollbarColor
-            : GREY1,
-          position: "relative",
-          overflowX: "visible",
-        }}
-      >
-        <>
-          {props.tabAndContentWrappers.map((wrapper: TabAndContentWrapper) =>
-            wrapper.getNavbarComponent(navbarSettingsContext?.navbarCollapsed!)
-          )}
-        </>
-      </SimpleBar>
-      <div style={{ marginTop: "auto" }}>
+      <div>
+        <SimpleBar
+          style={{
+            width: navbarSettingsContext?.navbarCollapsed ? "40px" : "240px",
+            color: colorSettingsContext?.navbarColorOptions?.scrollbarColor
+              ? colorSettingsContext?.navbarColorOptions.scrollbarColor
+              : GREY1,
+            position: "relative",
+            overflowX: "visible",
+          }}
+        >
+          <>
+            {props.tabAndContentWrappers.map((wrapper: TabAndContentWrapper) =>
+              wrapper.getNavbarComponent(navbarSettingsContext?.navbarCollapsed!)
+            )}
+          </>
+        </SimpleBar>
+      </div>
+      <div>
         <div
           className={
             "text-center flex " +
@@ -85,7 +85,7 @@ export const Navbar = (props: Props) => {
                   color: colorSettingsContext?.navbarColorOptions
                     ?.legalDocumentsIconColor
                     ? colorSettingsContext?.navbarColorOptions
-                        ?.legalDocumentsIconColor
+                      ?.legalDocumentsIconColor
                     : BLUE3,
                   marginBottom: navbarSettingsContext?.navbarCollapsed
                     ? "16px"

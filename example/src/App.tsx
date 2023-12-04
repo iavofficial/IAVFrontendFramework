@@ -323,7 +323,7 @@ function App() {
           ),
           ExampleComponent6
         ),
-        new BasicContentWrapper(
+        /*new BasicContentWrapper(
           (
             <SimpleNavbarTab
               name={(t: TranslateFunctionType) =>
@@ -426,7 +426,7 @@ function App() {
             />
           ),
           ExampleComponent6
-        ),
+        ),*/
       ]
     ),
   ];
@@ -443,6 +443,9 @@ function App() {
           settingsMenuOptions={settingsMenuOptions}
           documentsLabelKey="Legal_documents"
           documentsComponent={LegalDocuments}
+          navbarOptions={{
+            staticCollapsedState: StaticCollapsedState.Collapsed
+          }}
         />
       </GlobalDataLayer>
     </DummyAuthenticationProvider>

@@ -4,6 +4,10 @@
   justify-content: space-between;
 }
 
+#navbar-bottom-wrapper {
+  margin-bottom: 16px;
+}
+
 .simplebar-scrollbar {
   width: 6px;
   position: absolute !important;

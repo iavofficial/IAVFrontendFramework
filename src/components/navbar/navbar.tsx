@@ -58,72 +58,68 @@ export const Navbar = (props: Props) => {
           </>
         </SimpleBar>
       </div>
-      <div>
-        <div
-          className={
-            "text-center flex " +
-            (navbarSettingsContext?.navbarCollapsed ? "flex-column" : "px-3 ")
-          }
-          style={{
-            justifyContent: navbarSettingsContext?.navbarCollapsed
-              ? "center"
-              : "space-between",
-            marginBottom: "8px",
-          }}
-        >
-          {!props.hideLegalDocuments && (
-            <Link
-              style={{
-                fontSize: "13px",
-                fontWeight: "bolder",
-                textDecoration: "none",
-              }}
-              to="/documents"
-            >
-              <i
-                style={{
-                  color: colorSettingsContext?.navbarColorOptions
-                    ?.legalDocumentsIconColor
-                    ? colorSettingsContext?.navbarColorOptions
-                      ?.legalDocumentsIconColor
-                    : BLUE3,
-                  marginBottom: navbarSettingsContext?.navbarCollapsed
-                    ? "16px"
-                    : "",
-                  fontWeight: "bold",
-                }}
-                className={"pi pi-info-circle " + identifierLegal}
-              />
-            </Link>
-          )}
-
-          <Tooltip
-            content={t(
-              props.documentsLabelKey ? props.documentsLabelKey : "Imprint"
-            )}
-            target={identifierWithDot}
-            id="hover-image"
-          />
-          {navbarSettingsContext?.collapsible && (
+      <div
+        id="navbar-bottom-wrapper"
+        className={
+          "text-center flex " +
+          (navbarSettingsContext?.navbarCollapsed ? "flex-column" : "px-3 ")
+        }
+        style={{
+          justifyContent: navbarSettingsContext?.navbarCollapsed
+            ? "center"
+            : "space-between"
+        }}
+      >
+        {!props.hideLegalDocuments && (
+          <Link
+            style={{
+              fontSize: "13px",
+              fontWeight: "bolder",
+              textDecoration: "none",
+            }}
+            to="/documents"
+          >
             <i
-              onClick={() =>
-                navbarSettingsContext?.setNavbarCollapsed(
-                  !navbarSettingsContext.navbarCollapsed
-                )
-              }
               style={{
-                cursor: "pointer",
-                color:
-                  colorSettingsContext?.navbarColorOptions
-                    ?.navbarCollapseArrowColor,
+                color: colorSettingsContext?.navbarColorOptions
+                  ?.legalDocumentsIconColor
+                  ? colorSettingsContext?.navbarColorOptions
+                    ?.legalDocumentsIconColor
+                  : BLUE3,
+                fontWeight: "bold",
               }}
-              className={calculateNavbarArrowFunctionColor(
-                navbarSettingsContext?.navbarCollapsed!,
-                colorSettingsContext?.darkmode as boolean
-              )}
+              className={"pi pi-info-circle " + identifierLegal}
             />
+          </Link>
+        )}
+
+        <Tooltip
+          content={t(
+            props.documentsLabelKey ? props.documentsLabelKey : "Imprint"
           )}
-        </div>
+          target={identifierWithDot}
+        />
+
+        {navbarSettingsContext?.collapsible && (
+          <i
+            onClick={() =>
+              navbarSettingsContext?.setNavbarCollapsed(
+                !navbarSettingsContext.navbarCollapsed
+              )
+            }
+            style={{
+              cursor: "pointer",
+              color:
+                colorSettingsContext?.navbarColorOptions
+                  ?.navbarCollapseArrowColor,
+              marginTop: navbarSettingsContext.navbarCollapsed ? "8px" : "0px"
+            }}
+            className={calculateNavbarArrowFunctionColor(
+              navbarSettingsContext?.navbarCollapsed!,
+              colorSettingsContext?.darkmode as boolean
+            )}
+          />
+        )}
       </div>
     </div>
   );

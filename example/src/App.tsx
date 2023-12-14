@@ -323,19 +323,6 @@ function App() {
           ),
           ExampleComponent6
         ),
-        /*new BasicContentWrapper(
-          (
-            <SimpleNavbarTab
-              name={(t: TranslateFunctionType) =>
-                t("example_component", { count: 7 })
-              }
-              to="/group-example7"
-              disabled={false}
-              icon={<InfoIcon />}
-            />
-          ),
-          ExampleComponent6
-        ),
         new BasicContentWrapper(
           (
             <SimpleNavbarTab
@@ -426,7 +413,20 @@ function App() {
             />
           ),
           ExampleComponent6
-        ),*/
+        ),
+        new BasicContentWrapper(
+          (
+            <SimpleNavbarTab
+              name={(t: TranslateFunctionType) =>
+                t("example_component", { count: 7 })
+              }
+              to="/group-example7"
+              disabled={false}
+              icon={<InfoIcon />}
+            />
+          ),
+          ExampleComponent6
+        ),
       ]
     ),
   ];

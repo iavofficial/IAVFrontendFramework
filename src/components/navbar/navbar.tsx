@@ -40,24 +40,26 @@ export const Navbar = (props: Props) => {
           colorSettingsContext?.navbarColorOptions?.backgroundColor,
       }}
     >
-      <div>
-        <SimpleBar
-          style={{
-            width: navbarSettingsContext?.navbarCollapsed ? "40px" : "240px",
-            color: colorSettingsContext?.navbarColorOptions?.scrollbarColor
-              ? colorSettingsContext?.navbarColorOptions.scrollbarColor
-              : GREY1,
-            position: "relative",
-            overflowX: "visible",
-          }}
-        >
-          <>
-            {props.tabAndContentWrappers.map((wrapper: TabAndContentWrapper) =>
-              wrapper.getNavbarComponent(navbarSettingsContext?.navbarCollapsed!)
-            )}
-          </>
-        </SimpleBar>
-      </div>
+
+      <SimpleBar
+        style={{
+          width: navbarSettingsContext?.navbarCollapsed ? "40px" : "240px",
+          color: colorSettingsContext?.navbarColorOptions?.scrollbarColor
+            ? colorSettingsContext?.navbarColorOptions.scrollbarColor
+            : GREY1,
+          position: "relative",
+          overflowX: "visible",
+          marginBottom: "30px",
+          flex: "0 1 auto",
+          overflow: "clip"
+        }}
+      >
+        <>
+          {props.tabAndContentWrappers.map((wrapper: TabAndContentWrapper) =>
+            wrapper.getNavbarComponent(navbarSettingsContext?.navbarCollapsed!)
+          )}
+        </>
+      </SimpleBar>
       <div
         id="navbar-bottom-wrapper"
         className={

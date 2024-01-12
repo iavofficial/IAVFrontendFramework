@@ -1,15 +1,15 @@
-import React, { ReactElement, useContext } from 'react';
-import './header.css';
-import '../css/globalColors.css';
-import { ContextMenu } from 'primereact/contextmenu';
-import UserIcon from '../../assets/svg/icon_user.svg';
-import CompanyLogo from '../../assets/svg/company_logo.svg';
-import AppLogo from '../../assets/svg/app_logo.svg';
-import SettingsIcon from '../../assets/svg/icon_settings.svg';
-import { BLUE3, GREY3, WHITE } from '../../constants';
-import { SettingsMenuOptions, SettingsMenu } from './settingsMenu';
-import { UserMenu, UserMenuOptions } from './userMenu';
-import { ColorSettingsContext } from '../../contexts/colorsettings';
+import React, { ReactElement, useContext } from "react";
+import "./header.css";
+import "../css/globalColors.css";
+import { ContextMenu } from "primereact/contextmenu";
+import UserIcon from "../../assets/svg/icon_user.svg";
+import CompanyLogo from "../../assets/svg/company_logo.svg";
+import AppLogo from "../../assets/svg/app_logo.svg";
+import SettingsIcon from "../../assets/svg/icon_settings.svg";
+import { BLUE3, GREY3, WHITE } from "../../constants";
+import { SettingsMenuOptions, SettingsMenu } from "./settingsMenu";
+import { UserMenu, UserMenuOptions } from "./userMenu";
+import { ColorSettingsContext } from "../../contexts/colorsettings";
 
 export interface HeaderOptions {
   reactElementRight?: ReactElement;
@@ -18,13 +18,16 @@ export interface HeaderOptions {
   hideRight?: boolean;
 }
 
+export interface HeaderOptions {
+  reactElementRight?: ReactElement;
+  reactElementLeft?: ReactElement;
+  hideLeft?: boolean;
+  hideRight?: boolean;
+  hideUserIcon?: boolean;
+}
+
 interface Props {
-  headerOptions?: {
-    reactElementRight?: ReactElement;
-    reactElementLeft?: ReactElement;
-    hideLeft?: boolean;
-    hideRight?: boolean;
-  };
+  headerOptions?: HeaderOptions;
   settingsMenuOptions?: SettingsMenuOptions;
   userMenuOptions?: UserMenuOptions;
 }
@@ -37,8 +40,8 @@ export const Header = (props: Props) => {
   const companyLogoDefault = (props: Props) => (
     <div
       style={{
-        display: props.headerOptions?.hideRight ? 'none' : 'flex',
-        alignItems: 'center',
+        display: props.headerOptions?.hideRight ? "none" : "flex",
+        alignItems: "center",
       }}
     >
       <CompanyLogo fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE} />
@@ -48,8 +51,8 @@ export const Header = (props: Props) => {
   const appLogoDefault = (props: Props) => (
     <div
       style={{
-        display: props.headerOptions?.hideLeft ? 'none' : 'flex',
-        alignItems: 'center',
+        display: props.headerOptions?.hideLeft ? "none" : "flex",
+        alignItems: "center",
       }}
     >
       <AppLogo fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE} />
@@ -57,13 +60,13 @@ export const Header = (props: Props) => {
   );
 
   const hideSettingsMenu = (e: React.KeyboardEvent) => {
-    if (e.key === 'Escape') {
+    if (e.key === "Escape") {
       menuRef.current?.hide(e);
     }
   };
 
   const hideUserMenu = (e: React.KeyboardEvent) => {
-    if (e.key === 'Escape') {
+    if (e.key === "Escape") {
       userRef.current?.hide(e);
     }
   };
@@ -72,19 +75,20 @@ export const Header = (props: Props) => {
     <div
       id="header"
       className={
-        (colorSettingsContext?.darkmode ? 'bg-grey-5' : 'bg-blue-0') +
-        ' flex justify-content-between align-items-center'
+        (colorSettingsContext?.darkmode ? "bg-grey-5" : "bg-blue-0") +
+        " flex justify-content-between align-items-center"
       }
       style={{
         backgroundColor:
           colorSettingsContext?.headerColorOptions?.backgroundColor,
       }}
     >
-      <div id="left-element" className={'flex'}>
+      <div id="left-element" className={"flex"}>
         {props.headerOptions?.reactElementLeft
           ? props.headerOptions?.reactElementLeft
           : appLogoDefault(props)}
       </div>
+
       <div
         className="flex justify-content-between align-items-center"
         id="right-element"
@@ -94,45 +98,21 @@ export const Header = (props: Props) => {
           hideMenu={hideSettingsMenu}
           menuOptions={props.settingsMenuOptions}
         />
-        <UserMenu ref={userRef} hideMenu={hideUserMenu} userMenuOptions={props.userMenuOptions}/>
+        <UserMenu
+          ref={userRef}
+          hideMenu={hideUserMenu}
+          userMenuOptions={props.userMenuOptions}
+        />
         <div
           id="right-element-user-section"
-          className={'flex align-items-center justify-content-end'}
+          className={"flex align-items-center justify-content-end"}
         >
-          {/* TODO: In the next Development step the implementation of the notification maybe included  */}
-          {/* <div
-            className="flex justify-content-center align-items-center"
-            style={{
-              margin: '0rem 1rem 0rem 0rem',
-              position: 'relative',
-              cursor: 'pointer',
-            }}
-          >
-            <NotificationIcon
-              fill={colorSettingsContext?.darkmode ? GREY3 : WHITE}
-            />
-            <div
-              className="flex justify-content-center align-items-center"
-              style={{
-                position: 'absolute',
-                transform: 'translate(18px, -10px)',
-                width: '16px',
-                height: '16px',
-                borderRadius: '100%',
-                backgroundColor: MAGENTA2,
-                color: 'white',
-                fontSize: '12px',
-              }}
-            >
-              3
-            </div>
-          </div> */}
           <a
-            className={'flex align-items-center justify-content-end'}
+            className={"flex align-items-center justify-content-end"}
             href="#"
             style={{
-              margin: '0rem 1rem 0rem 1rem',
-              cursor: 'pointer',
+              margin: "0rem 1rem 0rem 1rem",
+              cursor: "pointer",
             }}
             onClick={(e) => {
               if (menuRef.current) {
@@ -152,11 +132,11 @@ export const Header = (props: Props) => {
             />
           </a>
           <a
-            className={'flex align-items-center justify-content-end'}
+            className={"flex align-items-center justify-content-end"}
             href="#"
             style={{
-              margin: '0rem 0rem 0rem 1rem',
-              cursor: 'pointer',
+              margin: "0rem 0rem 0rem 1rem",
+              cursor: "pointer",
             }}
             onClick={(e) => {
               if (userRef.current) {
@@ -165,15 +145,17 @@ export const Header = (props: Props) => {
             }}
             onKeyDown={(e) => hideUserMenu(e)}
           >
-            <UserIcon
-              fill={
-                colorSettingsContext?.headerColorOptions?.userLogoColor
-                  ? colorSettingsContext?.headerColorOptions?.userLogoColor
-                  : colorSettingsContext?.darkmode
-                  ? GREY3
-                  : WHITE
-              }
-            />
+            {!props.headerOptions?.hideUserIcon && (
+              <UserIcon
+                fill={
+                  colorSettingsContext?.headerColorOptions?.userLogoColor
+                    ? colorSettingsContext?.headerColorOptions?.userLogoColor
+                    : colorSettingsContext?.darkmode
+                    ? GREY3
+                    : WHITE
+                }
+              />
+            )}
           </a>
         </div>
         <div

@@ -193,9 +193,6 @@ function App() {
           startingPoint="/"
           authenticationView={BasicAuthenticationView}
           settingsMenuOptions={settingsMenuOptions}
-          userMenuOptions={{
-            hideLogoutButton: true
-          }}
           documentsLabelKey="Legal_documents"
           documentsComponent={LegalDocuments}
           navbarOptions={{

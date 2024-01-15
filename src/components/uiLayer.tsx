@@ -2,7 +2,7 @@ import 'primeflex/primeflex.css';
 import 'primereact/resources/themes/nova/theme.css';
 import 'primereact/resources/primereact.css';
 import 'primeicons/primeicons.css';
-import React, { useContext, ReactElement, useEffect, useRef } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -26,9 +26,12 @@ import { NavbarSettingsProvider } from '../providers/navbarSettingsProvider';
 import { StaticCollapsedState } from '../types/navbarSettingsTypes';
 
 import "./uiLayer.css";
-import "./css/darkModeInputsWorkAround.css"
-import { HeaderOptions } from './header/header';
-import { UserMenuOptions } from './header/userMenu';
+import "./css/darkModeInputsWorkAround.css";
+import { HeaderOptions } from "./header/header";
+import { UserMenuOptions } from "./header/userMenu";
+import { setAcceptCookies } from "../utils/setAcceptCookies";
+import { useCookies } from "react-cookie";
+import { ACCEPTED_COOKIES_NAME } from "../constants";
 
 export interface AuthOptions {
   backgroundImage?: string;
@@ -43,6 +46,8 @@ export interface NavbarOptions {
 export interface Props {
   tabAndContentWrappers: TabAndContentWrapper[];
   startingPoint: string;
+  disableLogin?: boolean;
+  disableCookieBanner?: boolean;
   authenticationView?: React.ComponentType<AuthenticationViewProps & any>;
   documentsComponent?: React.ComponentType<any>;
   documentsLabelKey?: string;
@@ -56,13 +61,29 @@ export interface Props {
 
 export const UILayer = (props: Props) => {
   const authContext = useContext(AuthContext);
+
+  const [, setCookie,] = useCookies([
+    ACCEPTED_COOKIES_NAME,
+  ]);
+
   const AuthenticationView = props.authenticationView
     ? props.authenticationView
     : BasicAuthenticationView;
 
+  useEffect(() => {
+    if(props.disableCookieBanner) {
+      setAcceptCookies(setCookie);
+    }
+  }, [props.disableCookieBanner]);
+
   return (
-    <NavbarSettingsProvider staticCollapsedState={props.navbarOptions?.staticCollapsedState}>
-      <CookieBanner />
+    <NavbarSettingsProvider
+      staticCollapsedState={props.navbarOptions?.staticCollapsedState}
+    >
+      {
+        !props.disableCookieBanner &&
+        <CookieBanner />
+      }
       <Router>
         <Redirector startingPoint={props.startingPoint} />
         <Routes>

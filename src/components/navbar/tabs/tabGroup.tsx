@@ -4,13 +4,6 @@ import { useTranslator } from '../../internationalization/translators';
 import { BLACK, BLUE0, GREY3, GREY5, WHITE } from '../../../constants';
 import { generateHashOfLength } from '../../../utils/hash';
 import { Tooltip } from 'primereact/tooltip';
-import { LAYER } from './tabLayer';
-import {
-  calculateFirstLineColorGroupTop,
-  calculateSecondLineColorGroupTop,
-  calculateFirstLineColorGroupBottom,
-  revertColor,
-} from '../../../utils/calculateLineColorGroup';
 import { navbarTabProps } from './navbarTab';
 import { ColorSettingsContext } from '../../../contexts/colorsettings';
 import { SvgIcon } from './svgIcon';
@@ -21,10 +14,8 @@ interface Props {
   logo?: ReactElement;
   collapsible?: boolean;
   collapsed?: boolean;
-  isLastElementOfLayer?: boolean;
 
   navbarCollapsed: boolean;
-  layer?: LAYER;
 }
 
 type PropsWithNavbarTabChildren<T> = T & {
@@ -104,85 +95,6 @@ export const TabGroup = (props: PropsWithNavbarTabChildren<Props>) => {
     padding: props.navbarCollapsed ? '0px' : '0px 16px 0px 0px',
   };
 
-  const styleActiveLineFirstLayerTop = {
-    marginRight: '2px',
-    marginLeft: '3px',
-    width: '2px',
-    height: '40px',
-    backgroundColor: hovering
-      ? revertColor(
-          calculateFirstLineColorGroupTop(
-            highlightColor,
-            mainColor,
-            props.layer as LAYER,
-            collapsed,
-            props.collapsed
-          ),
-          highlightColor,
-          mainColor
-        )
-      : calculateFirstLineColorGroupTop(
-          highlightColor,
-          mainColor,
-          props.layer as LAYER,
-          collapsed,
-          props.collapsed
-        ),
-  };
-
-  const styleActiveLineFirstLayerBottom = {
-    marginRight: '2px',
-    marginLeft: '3px',
-
-    width: '2px',
-    height: '16px',
-    backgroundColor: calculateFirstLineColorGroupBottom(
-      highlightColor,
-      mainColor,
-      collapsed,
-      props.collapsed as boolean,
-      props.isLastElementOfLayer as boolean
-    ),
-  };
-
-  const styleActiveLineSecondLayerTop = {
-    heigth: '40px',
-    width: '2px',
-    marginRight: '3px',
-    backgroundColor: hovering
-      ? revertColor(
-          calculateSecondLineColorGroupTop(
-            highlightColor,
-            mainColor,
-            props.layer as LAYER,
-            collapsed,
-            props.collapsed
-          ),
-          highlightColor,
-          mainColor
-        )
-      : calculateSecondLineColorGroupTop(
-          highlightColor,
-          mainColor,
-          props.layer as LAYER,
-          collapsed,
-          props.collapsed
-        ),
-  };
-
-  const styleActiveLineSecondLayerBottom = {
-    heigth: '16px',
-    width: '2px',
-    marginRight: '3px',
-    backgroundColor: calculateSecondLineColorGroupTop(
-      highlightColor,
-      mainColor,
-      props.layer as LAYER,
-      collapsed,
-      props.collapsed
-    ),
-  };
-
   const identifier = generateHashOfLength(4);
   const identifierLegal = 'a' + identifier;
   const identifierWithDot = '.' + identifierLegal;
@@ -196,9 +108,6 @@ export const TabGroup = (props: PropsWithNavbarTabChildren<Props>) => {
         onMouseEnter={() => setHovering(true)}
         onMouseLeave={() => setHovering(false)}
       >
-        <div style={styleActiveLineFirstLayerTop} />
-        <div id="secondActiveLine" style={styleActiveLineSecondLayerTop} />
-
         <SvgIcon
           color={hovering ? iconHighlightColor : iconMainColor}
           element={props.logo}
@@ -214,7 +123,7 @@ export const TabGroup = (props: PropsWithNavbarTabChildren<Props>) => {
     <div
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
-      className="flex align-items-center justify-content-between"
+      className="flex align-items-center justify-content-between navbar-tab-space"
       style={tabStyleDefault}
       onClick={() => {
         if (collapsible) {
@@ -223,8 +132,6 @@ export const TabGroup = (props: PropsWithNavbarTabChildren<Props>) => {
       }}
     >
       <div className="flex" style={{ height: '100%' }}>
-        <div style={styleActiveLineFirstLayerTop} />
-        <div style={styleActiveLineSecondLayerTop} />
         <div className="flex align-items-center">
           <SvgIcon
             color={hovering ? iconHighlightColor : iconMainColor}
@@ -241,7 +148,7 @@ export const TabGroup = (props: PropsWithNavbarTabChildren<Props>) => {
           fontSize: '15px',
           color: hovering ? arrowHighlightColor : arrowMainColor,
         }}
-        className={collapsed ? 'pi pi-chevron-down' : 'pi pi-chevron-right'}
+        className={collapsed ? 'pi pi-chevron-down' : 'pi pi-chevron-left'}
       />
     </div>
   );
@@ -249,21 +156,6 @@ export const TabGroup = (props: PropsWithNavbarTabChildren<Props>) => {
   return (
     <>
       {groupElement}
-      <div
-        className="flex"
-        style={{
-          width: props.navbarCollapsed ? '40px' : '240px',
-          height: '16px',
-        }}
-      >
-        <div style={styleActiveLineFirstLayerBottom} />
-        <div style={styleActiveLineSecondLayerBottom} />
-        <div
-          style={{
-            width: props.navbarCollapsed ? '28px' : '228px',
-          }}
-        />
-      </div>
       {collapsed ? (
         props.children.map((child) => {
           if (React.isValidElement(child)) {

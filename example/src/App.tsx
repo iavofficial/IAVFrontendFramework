@@ -443,9 +443,6 @@ function App() {
           settingsMenuOptions={settingsMenuOptions}
           documentsLabelKey="Legal_documents"
           documentsComponent={LegalDocuments}
-          navbarOptions={{
-            staticCollapsedState: StaticCollapsedState.Collapsed
-          }}
         />
       </GlobalDataLayer>
     </DummyAuthenticationProvider>

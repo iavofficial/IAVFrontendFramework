@@ -7,11 +7,6 @@
   padding: 0px 16px 0px 2px;
 }
 
-#navbarTab-collabsed-line {
-  height: 56px !important;
-  width: 2px !important;
-}
-
 #hover-image .p-tooltip-text {
   background-color: var(--magenta-2) !important;
 }
@@ -20,10 +15,7 @@
   color: var(--magenta-2) !important;
 }
 
-#secondActiveLine {
-  width: 2px !important;
-  height: 40px !important;
+.navbar-tab-space {
+  margin-left: 12px;
+  margin-bottom: 12px;
 }
-
-
-

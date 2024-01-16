@@ -20,7 +20,6 @@ export const PrivilegedNavbarTab: navbarTab<Props> = (props) => {
       name={props.name}
       to={props.to}
       navbarCollapsed={props.navbarCollapsed}
-      isLastElementOfLayer={props.isLastElementOfLayer}
     />
   ) : (
     <></>

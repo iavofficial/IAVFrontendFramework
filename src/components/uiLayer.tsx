@@ -21,7 +21,6 @@ import { AuthenticationViewProps } from "./authentication/authenticationView";
 import { MainView } from "./mainView";
 import { DefaultImprint } from "./imprint/defaultImprint";
 import { TabAndContentWrapper } from "./navbar/wrapper/tabAndContentWrapper";
-import { calculateLayer } from "../utils/calculateLayer";
 import { NavbarSettingsProvider } from "../providers/navbarSettingsProvider";
 import { StaticCollapsedState } from "../types/navbarSettingsTypes";
 
@@ -129,9 +128,7 @@ export const UILayer = (props: Props) => {
                 userMenuOptions={userMenuOptions}
                 documentsLabelKey={props.documentsLabelKey}
                 documentsComponent={props.documentsComponent}
-                tabAndContentWrappers={calculateLayer(
-                  props.tabAndContentWrappers
-                )}
+                tabAndContentWrappers={props.tabAndContentWrappers}
                 hideLegalDocuments={props.hideLegalDocuments}
               />
             }

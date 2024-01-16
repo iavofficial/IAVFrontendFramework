@@ -6,14 +6,6 @@ import { useTranslator } from '../../internationalization/translators';
 import './tabs.css';
 import { generateHashOfLength } from '../../../utils/hash';
 import { navbarTab } from './navbarTab';
-import { LAYER } from './tabLayer';
-import {
-  calculateFirstLineTabLayer,
-  calculateFirstLineTabLayerBottom,
-  calculateSecondLineTabLayer,
-  calculateSecondLineTabLayerBottom,
-} from '../../../utils/calculateLineColorTab';
-import { revertColor } from '../../../utils/calculateLineColorGroup';
 import { ColorSettingsContext } from '../../../contexts/colorsettings';
 import { SvgIcon } from './svgIcon';
 
@@ -63,82 +55,6 @@ export const SimpleNavbarTab: navbarTab<Props> = (props) => {
     ? GREY3
     : BLUE0;
 
-  const styleActiveLineFirstLayerTop = {
-    marginRight: '2px',
-    marginLeft: '3px',
-    width: '2px',
-    height: '40px',
-    backgroundColor:
-      (hovering || active) && !props.disabled
-        ? revertColor(
-            calculateFirstLineTabLayer(
-              highlightColor,
-              mainColor,
-              props.layer as LAYER,
-              props.collapsed
-            ),
-            highlightColor,
-            mainColor
-          )
-        : calculateFirstLineTabLayer(
-            highlightColor,
-            mainColor,
-            props.layer as LAYER,
-            props.collapsed
-          ),
-  };
-
-  const styleActiveLineFirstLayerBottom = {
-    marginRight: '2px',
-    marginLeft: '3px',
-    width: '2px',
-    height: '16px',
-    backgroundColor: calculateFirstLineTabLayerBottom(
-      highlightColor,
-      mainColor,
-      props.collapsed as boolean,
-      props.isLastElementOfLayer as boolean,
-      props.layer as LAYER
-    ),
-  };
-
-  const styleActiveLineSecondLayerTop = {
-    heigth: '40px',
-    width: '2px',
-    marginRight: '3px',
-    backgroundColor:
-      (hovering || active) && !props.disabled
-        ? revertColor(
-            calculateSecondLineTabLayer(
-              highlightColor,
-              mainColor,
-              props.layer as LAYER,
-              props.collapsed
-            ),
-            highlightColor,
-            mainColor
-          )
-        : calculateSecondLineTabLayer(
-            highlightColor,
-            mainColor,
-            props.layer as LAYER,
-            props.collapsed
-          ),
-  };
-
-  const styleActiveLineSecondLayerBottom = {
-    heigth: '16px',
-    width: '2px',
-    marginRight: '3px',
-    backgroundColor: calculateSecondLineTabLayerBottom(
-      highlightColor,
-      mainColor,
-      props.collapsed as boolean,
-      props.isLastElementOfLayer as boolean,
-      props.layer as LAYER
-    ),
-  };
-
   const tabStyleDefault = {
     height: '40px',
     width: props.navbarCollapsed ? '40px' : '240px',
@@ -163,8 +79,6 @@ export const SimpleNavbarTab: navbarTab<Props> = (props) => {
       className={'flex align-items-center ' + identifierLegal}
       style={tabStyleDefault}
     >
-      <div style={styleActiveLineFirstLayerTop} />
-      <div id="secondActiveLine" style={styleActiveLineSecondLayerTop} />
 
       <SvgIcon
         color={
@@ -187,8 +101,6 @@ export const SimpleNavbarTab: navbarTab<Props> = (props) => {
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
     >
-      <div style={styleActiveLineFirstLayerTop} />
-      <div style={styleActiveLineSecondLayerTop} />
 
       <div style={{ width: '228px' }} className="flex align-items-center">
         <SvgIcon
@@ -207,7 +119,7 @@ export const SimpleNavbarTab: navbarTab<Props> = (props) => {
   );
 
   return (
-    <>
+    <div className="navbar-tab-space">
       {props.disabled ? (
         <>
           {navbarTab}
@@ -215,8 +127,6 @@ export const SimpleNavbarTab: navbarTab<Props> = (props) => {
             className="flex"
             style={{ width: props.navbarCollapsed ? '40px' : '240px' }}
           >
-            <div style={styleActiveLineFirstLayerBottom} />
-            <div style={styleActiveLineSecondLayerBottom} />
             <div style={{ width: '80%' }} />
           </div>
         </>
@@ -225,23 +135,8 @@ export const SimpleNavbarTab: navbarTab<Props> = (props) => {
           <Link style={{ textDecoration: 'none' }} to={props.to.valueOf()}>
             {navbarTab}
           </Link>
-          <div
-            className="flex"
-            style={{
-              width: props.navbarCollapsed ? '40px' : '240px',
-              height: '16px',
-            }}
-          >
-            <div style={styleActiveLineFirstLayerBottom} />
-            <div style={styleActiveLineSecondLayerBottom} />
-            <div
-              style={{
-                width: props.navbarCollapsed ? '28px' : '228px',
-              }}
-            />
-          </div>
         </>
       )}
-    </>
+    </div>
   );
 };

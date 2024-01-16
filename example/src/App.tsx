@@ -179,6 +179,254 @@ function App() {
           ),
           ExampleComponent6
         ),
+
+        new BasicContentWrapper(
+          (
+            <SimpleNavbarTab
+              name={(t: TranslateFunctionType) =>
+                t("example_component", { count: 7 })
+              }
+              to="/group-example7"
+              disabled={false}
+              icon={<InfoIcon />}
+            />
+          ),
+          ExampleComponent6
+        ),
+        new BasicContentWrapper(
+          (
+            <SimpleNavbarTab
+              name={(t: TranslateFunctionType) =>
+                t("example_component", { count: 7 })
+              }
+              to="/group-example7"
+              disabled={false}
+              icon={<InfoIcon />}
+            />
+          ),
+          ExampleComponent6
+        ),
+        new BasicContentWrapper(
+          (
+            <SimpleNavbarTab
+              name={(t: TranslateFunctionType) =>
+                t("example_component", { count: 7 })
+              }
+              to="/group-example7"
+              disabled={false}
+              icon={<InfoIcon />}
+            />
+          ),
+          ExampleComponent6
+        ),
+        new BasicContentWrapper(
+          (
+            <SimpleNavbarTab
+              name={(t: TranslateFunctionType) =>
+                t("example_component", { count: 7 })
+              }
+              to="/group-example7"
+              disabled={false}
+              icon={<InfoIcon />}
+            />
+          ),
+          ExampleComponent6
+        ),
+        new BasicContentWrapper(
+          (
+            <SimpleNavbarTab
+              name={(t: TranslateFunctionType) =>
+                t("example_component", { count: 7 })
+              }
+              to="/group-example7"
+              disabled={false}
+              icon={<InfoIcon />}
+            />
+          ),
+          ExampleComponent6
+        ),
+        new BasicContentWrapper(
+          (
+            <SimpleNavbarTab
+              name={(t: TranslateFunctionType) =>
+                t("example_component", { count: 7 })
+              }
+              to="/group-example7"
+              disabled={false}
+              icon={<InfoIcon />}
+            />
+          ),
+          ExampleComponent6
+        ),
+        new BasicContentWrapper(
+          (
+            <SimpleNavbarTab
+              name={(t: TranslateFunctionType) =>
+                t("example_component", { count: 7 })
+              }
+              to="/group-example7"
+              disabled={false}
+              icon={<InfoIcon />}
+            />
+          ),
+          ExampleComponent6
+        ),
+        new BasicContentWrapper(
+          (
+            <SimpleNavbarTab
+              name={(t: TranslateFunctionType) =>
+                t("example_component", { count: 7 })
+              }
+              to="/group-example7"
+              disabled={false}
+              icon={<InfoIcon />}
+            />
+          ),
+          ExampleComponent6
+        ),
+        new BasicContentWrapper(
+          (
+            <SimpleNavbarTab
+              name={(t: TranslateFunctionType) =>
+                t("example_component", { count: 7 })
+              }
+              to="/group-example7"
+              disabled={false}
+              icon={<InfoIcon />}
+            />
+          ),
+          ExampleComponent6
+        ),
+        new BasicContentWrapper(
+          (
+            <SimpleNavbarTab
+              name={(t: TranslateFunctionType) =>
+                t("example_component", { count: 7 })
+              }
+              to="/group-example7"
+              disabled={false}
+              icon={<InfoIcon />}
+            />
+          ),
+          ExampleComponent6
+        ),
+        new BasicContentWrapper(
+          (
+            <SimpleNavbarTab
+              name={(t: TranslateFunctionType) =>
+                t("example_component", { count: 7 })
+              }
+              to="/group-example7"
+              disabled={false}
+              icon={<InfoIcon />}
+            />
+          ),
+          ExampleComponent6
+        ),
+        new BasicContentWrapper(
+          (
+            <SimpleNavbarTab
+              name={(t: TranslateFunctionType) =>
+                t("example_component", { count: 7 })
+              }
+              to="/group-example7"
+              disabled={false}
+              icon={<InfoIcon />}
+            />
+          ),
+          ExampleComponent6
+        ),
+        new BasicContentWrapper(
+          (
+            <SimpleNavbarTab
+              name={(t: TranslateFunctionType) =>
+                t("example_component", { count: 7 })
+              }
+              to="/group-example7"
+              disabled={false}
+              icon={<InfoIcon />}
+            />
+          ),
+          ExampleComponent6
+        ),
+        new BasicContentWrapper(
+          (
+            <SimpleNavbarTab
+              name={(t: TranslateFunctionType) =>
+                t("example_component", { count: 7 })
+              }
+              to="/group-example7"
+              disabled={false}
+              icon={<InfoIcon />}
+            />
+          ),
+          ExampleComponent6
+        ),
+        new BasicContentWrapper(
+          (
+            <SimpleNavbarTab
+              name={(t: TranslateFunctionType) =>
+                t("example_component", { count: 7 })
+              }
+              to="/group-example7"
+              disabled={false}
+              icon={<InfoIcon />}
+            />
+          ),
+          ExampleComponent6
+        ),
+        new BasicContentWrapper(
+          (
+            <SimpleNavbarTab
+              name={(t: TranslateFunctionType) =>
+                t("example_component", { count: 7 })
+              }
+              to="/group-example7"
+              disabled={false}
+              icon={<InfoIcon />}
+            />
+          ),
+          ExampleComponent6
+        ),
+        new BasicContentWrapper(
+          (
+            <SimpleNavbarTab
+              name={(t: TranslateFunctionType) =>
+                t("example_component", { count: 7 })
+              }
+              to="/group-example7"
+              disabled={false}
+              icon={<InfoIcon />}
+            />
+          ),
+          ExampleComponent6
+        ),
+        new BasicContentWrapper(
+          (
+            <SimpleNavbarTab
+              name={(t: TranslateFunctionType) =>
+                t("example_component", { count: 7 })
+              }
+              to="/group-example7"
+              disabled={false}
+              icon={<InfoIcon />}
+            />
+          ),
+          ExampleComponent6
+        ),
+        new BasicContentWrapper(
+          (
+            <SimpleNavbarTab
+              name={(t: TranslateFunctionType) =>
+                t("example_component", { count: 7 })
+              }
+              to="/group-example7"
+              disabled={false}
+              icon={<InfoIcon />}
+            />
+          ),
+          ExampleComponent6
+        ),
       ]
     ),
   ];
@@ -193,13 +441,10 @@ function App() {
           startingPoint="/"
           authenticationView={BasicAuthenticationView}
           settingsMenuOptions={settingsMenuOptions}
-          userMenuOptions={{
-            hideLogoutButton: true
-          }}
           documentsLabelKey="Legal_documents"
           documentsComponent={LegalDocuments}
           navbarOptions={{
-            staticCollapsedState: StaticCollapsedState.Unfolded
+            staticCollapsedState: StaticCollapsedState.Collapsed
           }}
         />
       </GlobalDataLayer>

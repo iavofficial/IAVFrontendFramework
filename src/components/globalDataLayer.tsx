@@ -5,7 +5,7 @@ import { AuthContext } from "../contexts/auth";
 import { Translations } from "../contexts/language";
 import { DefaultLanguageProvider } from "./internationalization/defaultLanguageProvider";
 import { DummyAuthenticationProvider } from "./authentication/default/dummyAuthenticationProvider";
-import { ColorProvider } from "../providers/colorProvider";
+import { ColorProvider } from "../providers/colors/colorProvider";
 import { ColorObject } from "../types/colorObjectType";
 
 interface Props {

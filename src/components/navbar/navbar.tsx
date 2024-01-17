@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./navbar.css";
 import "../css/globalColors.css";
@@ -9,7 +9,6 @@ import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
 import { ColorSettingsContext } from "../../contexts/colorsettings";
 import { calculateNavbarArrowFunctionColor } from "../../utils/calculateNavbarArrowColor";
-import { BLUE3, GREY1 } from "../../constants";
 import { generateHashOfLength } from "../../utils/hash";
 import { NavbarSettingsContext } from "../../contexts/navbarContext";
 
@@ -31,27 +30,20 @@ export const Navbar = (props: Props) => {
   return (
     <div
       id="navbar"
-      className={
-        (colorSettingsContext?.darkmode ? "bg-grey-5" : "bg-white-1")
-      }
       style={{
         padding: "16px 0px 0px 0px",
-        backgroundColor:
-          colorSettingsContext?.navbarColorOptions?.backgroundColor,
+        backgroundColor: colorSettingsContext.currentColors.navbarColors.backgroundColor
       }}
     >
-
       <SimpleBar
         style={{
           width: navbarSettingsContext?.navbarCollapsed ? "40px" : "240px",
-          color: colorSettingsContext?.navbarColorOptions?.scrollbarColor
-            ? colorSettingsContext?.navbarColorOptions.scrollbarColor
-            : GREY1,
+          color: colorSettingsContext.currentColors.navbarColors.scrollbarColor,
           position: "relative",
           overflowX: "visible",
           marginBottom: "30px",
           flex: "0 1 auto",
-          overflow: "clip"
+          overflow: "clip",
         }}
       >
         <>
@@ -69,7 +61,7 @@ export const Navbar = (props: Props) => {
         style={{
           justifyContent: navbarSettingsContext?.navbarCollapsed
             ? "center"
-            : "space-between"
+            : "space-between",
         }}
       >
         {!props.hideLegalDocuments && (
@@ -83,11 +75,9 @@ export const Navbar = (props: Props) => {
           >
             <i
               style={{
-                color: colorSettingsContext?.navbarColorOptions
-                  ?.legalDocumentsIconColor
-                  ? colorSettingsContext?.navbarColorOptions
-                    ?.legalDocumentsIconColor
-                  : BLUE3,
+                color:
+                  colorSettingsContext.currentColors.navbarColors
+                    .legalDocumentsIconColor,
                 fontWeight: "bold",
               }}
               className={"pi pi-info-circle " + identifierLegal}
@@ -112,13 +102,12 @@ export const Navbar = (props: Props) => {
             style={{
               cursor: "pointer",
               color:
-                colorSettingsContext?.navbarColorOptions
-                  ?.navbarCollapseArrowColor,
-              marginTop: navbarSettingsContext.navbarCollapsed ? "8px" : "0px"
+                colorSettingsContext.currentColors.navbarColors
+                  .navbarCollapseArrowColor,
+              marginTop: navbarSettingsContext.navbarCollapsed ? "8px" : "0px",
             }}
             className={calculateNavbarArrowFunctionColor(
-              navbarSettingsContext?.navbarCollapsed!,
-              colorSettingsContext?.darkmode as boolean
+              navbarSettingsContext?.navbarCollapsed!
             )}
           />
         )}

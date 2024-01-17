@@ -1,13 +1,13 @@
-import React, { ReactElement, useContext, useEffect, useState } from 'react';
-import '../navbar.css';
-import { useTranslator } from '../../internationalization/translators';
-import { BLACK, BLUE0, GREY3, GREY5, WHITE } from '../../../constants';
-import { generateHashOfLength } from '../../../utils/hash';
-import { Tooltip } from 'primereact/tooltip';
-import { navbarTabProps } from './navbarTab';
-import { ColorSettingsContext } from '../../../contexts/colorsettings';
-import { SvgIcon } from './svgIcon';
-import { TranslateFunctionType } from '../../../types/translationFunction';
+import React, { ReactElement, useContext, useEffect, useState } from "react";
+import "../navbar.css";
+import { useTranslator } from "../../internationalization/translators";
+import { BLACK, BLUE0, GREY3, GREY5, WHITE } from "../../../constants";
+import { generateHashOfLength } from "../../../utils/hash";
+import { Tooltip } from "primereact/tooltip";
+import { navbarTabProps } from "./navbarTab";
+import { ColorSettingsContext } from "../../../contexts/colorsettings";
+import { SvgIcon } from "./svgIcon";
+import { TranslateFunctionType } from "../../../types/translationFunction";
 
 interface Props {
   name: string | ((t: TranslateFunctionType) => string);
@@ -28,53 +28,29 @@ export const TabGroup = (props: PropsWithNavbarTabChildren<Props>) => {
   const [hovering, setHovering] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
 
-  let highlightColor = colorSettingsContext?.navbarColorOptions?.tabColorOptions
-    ?.highlightColor
-    ? colorSettingsContext?.navbarColorOptions?.tabColorOptions?.highlightColor
-    : colorSettingsContext?.darkmode
-    ? GREY3
-    : BLUE0;
-  let mainColor = colorSettingsContext?.navbarColorOptions?.tabColorOptions
-    ?.mainColor
-    ? colorSettingsContext?.navbarColorOptions?.tabColorOptions?.mainColor
-    : colorSettingsContext?.darkmode
-    ? GREY5
-    : WHITE;
+  let highlightColor =
+    colorSettingsContext.currentColors.navbarColors.tabColors.highlightColor;
+  let mainColor =
+    colorSettingsContext?.currentColors.navbarColors.tabColors.mainColor;
 
-  let letteringHighlightColor = colorSettingsContext?.navbarColorOptions
-    ?.tabColorOptions?.letteringHighlightColor
-    ? colorSettingsContext?.navbarColorOptions?.tabColorOptions
-        ?.letteringHighlightColor
-    : WHITE;
-  let letteringMainColor = colorSettingsContext?.navbarColorOptions
-    ?.tabColorOptions?.letteringMainColor
-    ? colorSettingsContext?.navbarColorOptions?.tabColorOptions
-        ?.letteringMainColor
-    : colorSettingsContext?.darkmode
-    ? GREY3
-    : BLACK;
+  let letteringHighlightColor =
+    colorSettingsContext.currentColors.navbarColors.tabColors
+      .letteringHighlightColor;
+  let letteringMainColor =
+    colorSettingsContext.currentColors.navbarColors.tabColors
+      .letteringMainColor;
 
-  let iconHighlightColor = colorSettingsContext?.navbarColorOptions
-    ?.tabColorOptions?.iconHighlightColor
-    ? colorSettingsContext?.navbarColorOptions?.tabColorOptions
-        ?.iconHighlightColor
-    : WHITE;
-  let iconMainColor = colorSettingsContext?.navbarColorOptions?.tabColorOptions
-    ?.iconMainColor
-    ? colorSettingsContext?.navbarColorOptions?.tabColorOptions?.iconMainColor
-    : colorSettingsContext?.darkmode
-    ? GREY3
-    : BLUE0;
+  let iconHighlightColor =
+    colorSettingsContext.currentColors.navbarColors.tabColors
+      .iconHighlightColor;
+  let iconMainColor =
+    colorSettingsContext.currentColors.navbarColors.tabColors.iconMainColor;
 
-  let arrowMainColor = colorSettingsContext?.navbarColorOptions?.tabColorOptions
-    ?.arrowMainColor
-    ? colorSettingsContext?.navbarColorOptions?.tabColorOptions?.arrowMainColor
-    : GREY3;
-  let arrowHighlightColor = colorSettingsContext?.navbarColorOptions
-    ?.tabColorOptions?.arrowHighlightColor
-    ? colorSettingsContext?.navbarColorOptions?.tabColorOptions
-        ?.arrowHighlightColor
-    : WHITE;
+  let arrowMainColor =
+    colorSettingsContext.currentColors.navbarColors.tabColors.arrowMainColor;
+  let arrowHighlightColor =
+    colorSettingsContext.currentColors.navbarColors.tabColors
+      .arrowHighlightColor;
 
   const collapsible =
     props.collapsible !== undefined ? props.collapsible : true;
@@ -86,23 +62,23 @@ export const TabGroup = (props: PropsWithNavbarTabChildren<Props>) => {
   }, [collapsible]);
 
   const tabStyleDefault = {
-    height: '40px',
-    width: props.navbarCollapsed ? '40px' : '240px',
-    cursor: 'pointer',
+    height: "40px",
+    width: props.navbarCollapsed ? "40px" : "240px",
+    cursor: "pointer",
     backgroundColor: hovering ? highlightColor : mainColor,
     color: hovering ? letteringHighlightColor : letteringMainColor,
     opacity: 1,
-    padding: props.navbarCollapsed ? '0px' : '0px 16px 0px 0px',
+    padding: props.navbarCollapsed ? "0px" : "0px 16px 0px 0px",
   };
 
   const identifier = generateHashOfLength(4);
-  const identifierLegal = 'a' + identifier;
-  const identifierWithDot = '.' + identifierLegal;
+  const identifierLegal = "a" + identifier;
+  const identifierWithDot = "." + identifierLegal;
 
   const groupElement = props.navbarCollapsed ? (
     <>
       <div
-        className={'flex align-items-center ' + identifierLegal}
+        className={"flex align-items-center " + identifierLegal}
         style={tabStyleDefault}
         id="navbartab-general"
         onMouseEnter={() => setHovering(true)}
@@ -131,7 +107,7 @@ export const TabGroup = (props: PropsWithNavbarTabChildren<Props>) => {
         }
       }}
     >
-      <div className="flex" style={{ height: '100%' }}>
+      <div className="flex" style={{ height: "100%" }}>
         <div className="flex align-items-center">
           <SvgIcon
             color={hovering ? iconHighlightColor : iconMainColor}
@@ -144,11 +120,11 @@ export const TabGroup = (props: PropsWithNavbarTabChildren<Props>) => {
       </div>
       <i
         style={{
-          cursor: 'pointer',
-          fontSize: '15px',
+          cursor: "pointer",
+          fontSize: "15px",
           color: hovering ? arrowHighlightColor : arrowMainColor,
         }}
-        className={collapsed ? 'pi pi-chevron-down' : 'pi pi-chevron-left'}
+        className={collapsed ? "pi pi-chevron-down" : "pi pi-chevron-left"}
       />
     </div>
   );

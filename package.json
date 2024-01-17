@@ -92,7 +92,7 @@
     "./basicContentWrapper": "./build/components/navbar/wrapper/basicContentWrapper.js",
     "./customContentbarWrapper": "./build/components/content/customContentbarWrapper.js",
     "./basicContentbarWrapper": "./build/components/content/basicContentbarWrapper.js",
-    "./colorProvider": "./build/providers/colorProvider.js",
+    "./colorProvider": "./build/providers/colors/colorProvider.js",
     "./constants": "./build/constants.js",
     "./content": "./build/components/content/content.js",
     "./contentLayout": "./build/components/content/contentLayout.js",

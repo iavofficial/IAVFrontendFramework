@@ -9,7 +9,9 @@ import { navbarTab } from './navbarTab';
 import { ColorSettingsContext } from '../../../contexts/colorsettings';
 import { SvgIcon } from './svgIcon';
 
-export interface Props {}
+export interface Props {
+  
+}
 
 export const SimpleNavbarTab: navbarTab<Props> = (props) => {
   const [hovering, setHovering] = useState(false);
@@ -17,46 +19,45 @@ export const SimpleNavbarTab: navbarTab<Props> = (props) => {
   const t = useTranslator();
   const active = useLocation().pathname === props.to;
 
-  let highlightColor = colorSettingsContext?.navbarColorOptions?.tabColorOptions
+  let highlightColor = colorSettingsContext?.colorOptions.navbarColorOptions?.tabColorOptions
     ?.highlightColor
-    ? colorSettingsContext?.navbarColorOptions?.tabColorOptions?.highlightColor
+    ? colorSettingsContext?.colorOptions.navbarColorOptions?.tabColorOptions?.highlightColor
     : colorSettingsContext?.darkmode
     ? GREY3
     : BLUE0;
-  let mainColor = colorSettingsContext?.navbarColorOptions?.tabColorOptions
+  let mainColor = colorSettingsContext?.colorOptions.navbarColorOptions?.tabColorOptions
     ?.mainColor
-    ? colorSettingsContext?.navbarColorOptions?.tabColorOptions?.mainColor
+    ? colorSettingsContext?.colorOptions.navbarColorOptions?.tabColorOptions?.mainColor
     : colorSettingsContext?.darkmode
     ? GREY5
     : WHITE;
 
-  let letteringHighlightColor = colorSettingsContext?.navbarColorOptions
+  let letteringHighlightColor = colorSettingsContext?.colorOptions.navbarColorOptions
     ?.tabColorOptions?.letteringHighlightColor
-    ? colorSettingsContext?.navbarColorOptions?.tabColorOptions
+    ? colorSettingsContext?.colorOptions.navbarColorOptions?.tabColorOptions
         ?.letteringHighlightColor
     : WHITE;
-  let letteringMainColor = colorSettingsContext?.navbarColorOptions
+  let letteringMainColor = colorSettingsContext?.colorOptions.navbarColorOptions
     ?.tabColorOptions?.letteringMainColor
-    ? colorSettingsContext?.navbarColorOptions?.tabColorOptions
+    ? colorSettingsContext?.colorOptions.navbarColorOptions?.tabColorOptions
         ?.letteringMainColor
     : colorSettingsContext?.darkmode
     ? GREY3
     : BLACK;
 
-  let iconHighlightColor = colorSettingsContext?.navbarColorOptions
+  let iconHighlightColor = colorSettingsContext?.colorOptions.navbarColorOptions
     ?.tabColorOptions?.iconHighlightColor
-    ? colorSettingsContext?.navbarColorOptions?.tabColorOptions
+    ? colorSettingsContext?.colorOptions.navbarColorOptions?.tabColorOptions
         ?.iconHighlightColor
     : WHITE;
-  let iconMainColor = colorSettingsContext?.navbarColorOptions?.tabColorOptions
+  let iconMainColor = colorSettingsContext?.colorOptions.navbarColorOptions?.tabColorOptions
     ?.iconMainColor
-    ? colorSettingsContext?.navbarColorOptions?.tabColorOptions?.iconMainColor
+    ? colorSettingsContext?.colorOptions.navbarColorOptions?.tabColorOptions?.iconMainColor
     : colorSettingsContext?.darkmode
     ? GREY3
     : BLUE0;
 
   const tabStyleDefault = {
-    height: '40px',
     width: props.navbarCollapsed ? '40px' : '240px',
     cursor: active || props.disabled ? 'default' : 'pointer',
     backgroundColor:
@@ -76,7 +77,7 @@ export const SimpleNavbarTab: navbarTab<Props> = (props) => {
     <div
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
-      className={'flex align-items-center ' + identifierLegal}
+      className={'default-general-navbar-style flex align-items-center ' + identifierLegal}
       style={tabStyleDefault}
     >
 
@@ -96,7 +97,7 @@ export const SimpleNavbarTab: navbarTab<Props> = (props) => {
     </div>
   ) : (
     <div
-      className="flex "
+      className="default-general-navbar-style flex "
       style={tabStyleDefault}
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}

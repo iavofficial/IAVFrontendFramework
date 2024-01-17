@@ -7,6 +7,7 @@ export interface TabColorType {
   iconHighlightColor?: string;
   arrowHighlightColor?: string;
   arrowMainColor?: string;
+  groupedTabsBackgroundColor?: string;
 }
 
 export interface CurrentColosTabColorType {
@@ -18,4 +19,5 @@ export interface CurrentColosTabColorType {
   iconHighlightColor: string;
   arrowHighlightColor: string;
   arrowMainColor: string;
+  groupedTabsBackgroundColor: string;
 }

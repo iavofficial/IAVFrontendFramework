@@ -24,36 +24,36 @@ export const DefaultContentSelectionElement = (props: Props) => {
 
   const name = typeof props.displayName === "string"? props.displayName : props.displayName(translationFunction);
 
-  let highlightColor = colorSettingsContext?.contentbarTabColorOptions
+  let highlightColor = colorSettingsContext?.colorOptions.contentbarTabColorOptions
     ?.highlightColor
-    ? colorSettingsContext?.contentbarTabColorOptions?.highlightColor
+    ? colorSettingsContext?.colorOptions.contentbarTabColorOptions?.highlightColor
     : colorSettingsContext?.darkmode
     ? GREY3
     : BLUE0;
-  let mainColor = colorSettingsContext?.contentbarTabColorOptions?.mainColor
-    ? colorSettingsContext?.contentbarTabColorOptions?.mainColor
+  let mainColor = colorSettingsContext?.colorOptions.contentbarTabColorOptions?.mainColor
+    ? colorSettingsContext?.colorOptions.contentbarTabColorOptions?.mainColor
     : colorSettingsContext?.darkmode
     ? GREY5
     : WHITE;
 
-  let letteringHighlightColor = colorSettingsContext?.contentbarTabColorOptions
+  let letteringHighlightColor = colorSettingsContext?.colorOptions.contentbarTabColorOptions
     ?.textHighlightColor
-    ? colorSettingsContext?.contentbarTabColorOptions?.textHighlightColor
+    ? colorSettingsContext?.colorOptions.contentbarTabColorOptions?.textHighlightColor
     : WHITE;
-  let letteringMainColor = colorSettingsContext?.contentbarTabColorOptions
+  let letteringMainColor = colorSettingsContext?.colorOptions.contentbarTabColorOptions
     ?.textMainColor
-    ? colorSettingsContext?.contentbarTabColorOptions?.textMainColor
+    ? colorSettingsContext?.colorOptions.contentbarTabColorOptions?.textMainColor
     : colorSettingsContext?.darkmode
     ? GREY3
     : BLACK;
 
-  let iconHighlightColor = colorSettingsContext?.contentbarTabColorOptions
+  let iconHighlightColor = colorSettingsContext?.colorOptions.contentbarTabColorOptions
     ?.iconHighlightColor
-    ? colorSettingsContext?.contentbarTabColorOptions?.iconHighlightColor
+    ? colorSettingsContext?.colorOptions.contentbarTabColorOptions?.iconHighlightColor
     : WHITE;
-  let iconMainColor = colorSettingsContext?.contentbarTabColorOptions
+  let iconMainColor = colorSettingsContext?.colorOptions.contentbarTabColorOptions
     ?.iconMainColor
-    ? colorSettingsContext?.contentbarTabColorOptions?.iconMainColor
+    ? colorSettingsContext?.colorOptions.contentbarTabColorOptions?.iconMainColor
     : colorSettingsContext?.darkmode
     ? GREY3
     : BLACK;

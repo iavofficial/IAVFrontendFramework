@@ -80,7 +80,7 @@ export const Header = (props: Props) => {
       }
       style={{
         backgroundColor:
-          colorSettingsContext?.headerColorOptions?.backgroundColor,
+          colorSettingsContext?.colorOptions.headerColorOptions?.backgroundColor,
       }}
     >
       <div id="left-element" className={"flex"}>
@@ -123,8 +123,8 @@ export const Header = (props: Props) => {
           >
             <SettingsIcon
               fill={
-                colorSettingsContext?.headerColorOptions?.settingsLogoColor
-                  ? colorSettingsContext?.headerColorOptions?.settingsLogoColor
+                colorSettingsContext?.colorOptions.headerColorOptions?.settingsLogoColor
+                  ? colorSettingsContext?.colorOptions.headerColorOptions?.settingsLogoColor
                   : colorSettingsContext?.darkmode
                   ? GREY3
                   : WHITE
@@ -148,8 +148,8 @@ export const Header = (props: Props) => {
             {!props.headerOptions?.hideUserIcon && (
               <UserIcon
                 fill={
-                  colorSettingsContext?.headerColorOptions?.userLogoColor
-                    ? colorSettingsContext?.headerColorOptions?.userLogoColor
+                  colorSettingsContext?.colorOptions.headerColorOptions?.userLogoColor
+                    ? colorSettingsContext?.colorOptions.headerColorOptions?.userLogoColor
                     : colorSettingsContext?.darkmode
                     ? GREY3
                     : WHITE

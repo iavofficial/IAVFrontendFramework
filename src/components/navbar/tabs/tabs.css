@@ -1,3 +1,10 @@
+.default-general-navbar-style {
+  font-weight: 500;
+  opacity: 1;
+  cursor: pointer;
+  height: 40px;
+}
+
 #navbar-tab-name {
   font-size: 14px;
   margin-left: 8px;

@@ -63,7 +63,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
       }
       style={{
         backgroundColor:
-          colorSettingsContext?.authenticationColorOptions
+          colorSettingsContext?.colorOptions.authenticationColorOptions
             ?.headerBackgroundColor,
         color: "white",
         alignItems: "center",
@@ -100,11 +100,11 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
         height: "100%",
         position: "relative",
         backgroundColor:
-          colorSettingsContext?.authenticationColorOptions
+          colorSettingsContext?.colorOptions.authenticationColorOptions
             ?.fullScreenBackgroundColor,
       }}
     >
-      {colorSettingsContext?.authenticationColorOptions
+      {colorSettingsContext?.colorOptions.authenticationColorOptions
         ?.fullScreenBackgroundColor ? (
         <></>
       ) : (
@@ -137,7 +137,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
           width: "620px",
           margin: "auto",
           backgroundColor:
-            colorSettingsContext?.authenticationColorOptions
+            colorSettingsContext?.colorOptions.authenticationColorOptions
               ?.loginFormBackgroundColor,
         }}
       >
@@ -217,7 +217,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                   marginBottom: "2px",
                   fontSize: "12px",
                   color:
-                    colorSettingsContext?.authenticationColorOptions
+                    colorSettingsContext?.colorOptions.authenticationColorOptions
                       ?.inputFieldDescriptionTextColor,
                 }}
                 className={
@@ -242,10 +242,10 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                 style={{
                   marginBottom: "40px",
                   backgroundColor:
-                    colorSettingsContext?.authenticationColorOptions
+                    colorSettingsContext?.colorOptions.authenticationColorOptions
                       ?.inputFieldBackgroundColor,
                   color:
-                    colorSettingsContext?.authenticationColorOptions
+                    colorSettingsContext?.colorOptions.authenticationColorOptions
                       ?.inputFieldTextColor,
                 }}
               />
@@ -255,7 +255,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                   marginBottom: "2px",
                   fontSize: "12px",
                   color:
-                    colorSettingsContext?.authenticationColorOptions
+                    colorSettingsContext?.colorOptions.authenticationColorOptions
                       ?.inputFieldDescriptionTextColor,
                 }}
                 className={
@@ -280,10 +280,10 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                 style={{
                   marginBottom: "40px",
                   backgroundColor:
-                    colorSettingsContext?.authenticationColorOptions
+                    colorSettingsContext?.colorOptions.authenticationColorOptions
                       ?.inputFieldBackgroundColor,
                   color:
-                    colorSettingsContext?.authenticationColorOptions
+                    colorSettingsContext?.colorOptions.authenticationColorOptions
                       ?.inputFieldTextColor,
                 }}
               />
@@ -310,9 +310,9 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
               style={{
                 fontSize: "medium",
                 fontWeight: "bold",
-                color: colorSettingsContext?.authenticationColorOptions
+                color: colorSettingsContext?.colorOptions.authenticationColorOptions
                   ?.legalNoticeIconColor
-                  ? colorSettingsContext?.authenticationColorOptions
+                  ? colorSettingsContext?.colorOptions.authenticationColorOptions
                       ?.legalNoticeIconColor
                   : BLUE3,
               }}
@@ -338,7 +338,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
             padding: "24px",
             fontSize: "11px",
             color:
-              colorSettingsContext?.authenticationColorOptions
+              colorSettingsContext?.colorOptions.authenticationColorOptions
                 ?.companyTextColor,
           }}
         >

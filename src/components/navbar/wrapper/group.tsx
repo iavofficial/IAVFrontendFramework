@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import { RouteProps } from "react-router-dom";
-import { TabGroup } from "../tabs/tabGroup";
+import { TabGroup } from "../tabs/tabGroup/tabGroup";
 import { generateHashForValues } from "../../../utils/hash";
 import { TabAndContentWrapper } from "./tabAndContentWrapper";
 import { TranslateFunctionType } from "../../../types/translationFunction";

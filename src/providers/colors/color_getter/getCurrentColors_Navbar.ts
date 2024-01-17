@@ -24,6 +24,8 @@ import {
   LIGHT_NAVBAR_ICON_HIGHLIGHT_COLOR,
   LIGHT_NAVBAR_ARROW_HIGHLIGHT_COLOR,
   LIGHT_NAVBAR_ARROW_MAIN_COLOR,
+  DARK_NAVBAR_GROUPED_TABS_BACKGROUND_COLOR,
+  LIGHT_NAVBAR_GROUPED_TABS_BACKGROUND_COLOR,
 } from "../defaultColors";
 
 export const getCurrentColors_Navbar = (
@@ -46,7 +48,8 @@ export const getCurrentColors_Navbar = (
         iconHighlightColor: DARK_NAVBAR_ICON_HIGHLIGHT_COLOR,
         arrowHighlightColor: DARK_NAVBAR_ARROW_HIGHLIGHT_COLOR,
         arrowMainColor: DARK_NAVBAR_ARROW_MAIN_COLOR,
-      },
+        groupedTabsBackgroundColor: DARK_NAVBAR_GROUPED_TABS_BACKGROUND_COLOR,
+      }
     };
   } else {
     currentColors = {
@@ -60,7 +63,7 @@ export const getCurrentColors_Navbar = (
         LIGHT_NAVBAR_COLLAPSE_ARROW_COLOR,
       scrollbarColor:
         navbarColorOptions.scrollbarColor ?? LIGHT_NAVBAR_SCROLLBAR_COLOR,
-        tabColors: {
+      tabColors: {
         mainColor:
           navbarColorOptions.tabColorOptions?.mainColor ??
           LIGHT_NAVBAR_MAIN_COLOR,
@@ -85,6 +88,9 @@ export const getCurrentColors_Navbar = (
         arrowMainColor:
           navbarColorOptions.tabColorOptions?.arrowMainColor ??
           LIGHT_NAVBAR_ARROW_MAIN_COLOR,
+        groupedTabsBackgroundColor:
+          navbarColorOptions.tabColorOptions?.groupedTabsBackgroundColor ??
+          LIGHT_NAVBAR_GROUPED_TABS_BACKGROUND_COLOR
       },
     };
   }

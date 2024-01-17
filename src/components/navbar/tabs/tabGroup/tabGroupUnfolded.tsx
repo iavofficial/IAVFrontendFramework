@@ -1,0 +1,61 @@
+import React, { useContext, useId } from "react";
+import { GroupTabProps } from "./groupTabTypes";
+import { SvgIcon } from "../svgIcon";
+import { ColorSettingsContext } from "../../../../contexts/colorsettings";
+
+interface Props {
+    collapsible: boolean;
+    groupTabCollapsed: boolean;
+    setGroupTabCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const TabGroupUnfolded = (props: GroupTabProps & Props) => {
+  // This id is needed for PrimeReact. It has to begin with a letter.
+  const id = "a" + useId();
+
+  const colorSettingsContext = useContext(ColorSettingsContext);
+
+  const iconHighlightColor =
+    colorSettingsContext.currentColors.navbarColors.tabColors
+      .iconHighlightColor;
+  const iconMainColor =
+    colorSettingsContext.currentColors.navbarColors.tabColors.iconMainColor;
+
+  const arrowMainColor =
+    colorSettingsContext.currentColors.navbarColors.tabColors.arrowMainColor;
+  const arrowHighlightColor =
+    colorSettingsContext.currentColors.navbarColors.tabColors
+      .arrowHighlightColor;
+
+  return (
+    <div
+      onMouseEnter={() => props.setHovering(true)}
+      onMouseLeave={() => props.setHovering(false)}
+      className="default-general-navbar-style flex align-items-center justify-content-between navbar-tab-space"
+      style={props.style}
+      onClick={() => {
+        if (props.collapsible) {
+            props.setGroupTabCollapsed((prevGroupTabCollapsed: boolean) => !prevGroupTabCollapsed);
+        }
+      }}
+    >
+      <div className="flex" style={{ height: "100%" }}>
+        <div className="flex align-items-center">
+          <SvgIcon
+            color={props.hovering ? iconHighlightColor : iconMainColor}
+            element={props.logo}
+          />
+          <span id="navbar-tab-name">{props.name}</span>
+        </div>
+      </div>
+      <i
+        style={{
+          cursor: "pointer",
+          fontSize: "15px",
+          color: props.hovering ? arrowHighlightColor : arrowMainColor,
+        }}
+        className={props.groupTabCollapsed ? "pi pi-chevron-down" : "pi pi-chevron-left"}
+      />
+    </div>
+  );
+};

@@ -50,9 +50,9 @@ export function ContentCell(props: PropsWithChildren<Props>) {
       ? GREY5
       : WHITE;
   }
-  if (colorSettingsContext?.contentColorOptions?.contentCellBackground) {
+  if (colorSettingsContext?.colorOptions.contentColorOptions?.contentCellBackground) {
     innerDivStyle.backgroundColor =
-      colorSettingsContext?.contentColorOptions?.contentCellBackground;
+      colorSettingsContext?.colorOptions.contentColorOptions?.contentCellBackground;
   }
 
   return (

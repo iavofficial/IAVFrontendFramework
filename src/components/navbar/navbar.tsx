@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./navbar.css";
 import "../css/globalColors.css";
@@ -32,7 +32,8 @@ export const Navbar = (props: Props) => {
       id="navbar"
       style={{
         padding: "16px 0px 0px 0px",
-        backgroundColor: colorSettingsContext.currentColors.navbarColors.backgroundColor
+        backgroundColor:
+          colorSettingsContext.currentColors.navbarColors.backgroundColor,
       }}
     >
       <SimpleBar

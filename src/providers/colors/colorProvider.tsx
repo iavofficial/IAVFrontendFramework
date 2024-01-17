@@ -47,7 +47,7 @@ export const ColorProvider = (props: React.PropsWithChildren<Props>) => {
     localStorage.setItem("darkmode", JSON.stringify(darkmodeValue));
     setDarkmode(darkmodeValue);
   };
-
+    
   // TODO: For navbar colors the currently selected colors are provided. For other options this may be added in the future.
   return (
     <ColorSettingsContext.Provider

@@ -27,7 +27,7 @@ import { ExampleComponent3 } from "./components/exampleComponent3";
 import { ExampleComponent4 } from "./components/exampleComponent4";
 import { ExampleComponent5 } from "./components/exampleComponent5";
 import { ExampleComponent2 } from "./components/exampleComponent2";
-import { StaticCollapsedState } from "iav-frontend-framework/navbarSettingsTypes";
+import { GroupableContentWrapper } from "iav-frontend-framework/groupableContentWrapper";
 
 function App() {
   const [selectedButtonOption, setSelectedButtonOption] = useState("Simulated");
@@ -80,7 +80,7 @@ function App() {
       <InfoIcon />,
       false,
       [
-        new BasicContentWrapper(
+        new GroupableContentWrapper(
           (
             <SimpleNavbarTab
               name={(t: TranslateFunctionType) =>
@@ -93,7 +93,7 @@ function App() {
           ),
           ExampleComponent2
         ),
-        new BasicContentWrapper(
+        new GroupableContentWrapper(
           (
             <PrivilegedNavbarTab
               name={(t: TranslateFunctionType) =>
@@ -107,7 +107,7 @@ function App() {
           ),
           ExampleComponent3
         ),
-        new BasicContentWrapper(
+        new GroupableContentWrapper(
           (
             <SimpleNavbarTab
               name={(t: TranslateFunctionType) =>
@@ -125,7 +125,7 @@ function App() {
           <InfoIcon />,
           true,
           [
-            new BasicContentWrapper(
+            new GroupableContentWrapper(
               (
                 <SimpleNavbarTab
                   name={(t: TranslateFunctionType) =>
@@ -138,7 +138,7 @@ function App() {
               ),
               ExampleComponent3
             ),
-            new BasicContentWrapper(
+            new GroupableContentWrapper(
               (
                 <SimpleNavbarTab
                   name={(t: TranslateFunctionType) =>
@@ -153,7 +153,7 @@ function App() {
             ),
           ]
         ),
-        new BasicContentWrapper(
+        new GroupableContentWrapper(
           (
             <SimpleNavbarTab
               name={(t: TranslateFunctionType) =>
@@ -166,7 +166,7 @@ function App() {
           ),
           ExampleComponent5
         ),
-        new BasicContentWrapper(
+        new GroupableContentWrapper(
           (
             <SimpleNavbarTab
               name={(t: TranslateFunctionType) =>
@@ -180,7 +180,7 @@ function App() {
           ExampleComponent6
         ),
 
-        new BasicContentWrapper(
+        new GroupableContentWrapper(
           (
             <SimpleNavbarTab
               name={(t: TranslateFunctionType) =>
@@ -193,7 +193,7 @@ function App() {
           ),
           ExampleComponent6
         ),
-        new BasicContentWrapper(
+        new GroupableContentWrapper(
           (
             <SimpleNavbarTab
               name={(t: TranslateFunctionType) =>
@@ -206,7 +206,7 @@ function App() {
           ),
           ExampleComponent6
         ),
-        new BasicContentWrapper(
+        new GroupableContentWrapper(
           (
             <SimpleNavbarTab
               name={(t: TranslateFunctionType) =>
@@ -219,7 +219,7 @@ function App() {
           ),
           ExampleComponent6
         ),
-        new BasicContentWrapper(
+        new GroupableContentWrapper(
           (
             <SimpleNavbarTab
               name={(t: TranslateFunctionType) =>
@@ -232,7 +232,7 @@ function App() {
           ),
           ExampleComponent6
         ),
-        new BasicContentWrapper(
+        new GroupableContentWrapper(
           (
             <SimpleNavbarTab
               name={(t: TranslateFunctionType) =>
@@ -245,7 +245,7 @@ function App() {
           ),
           ExampleComponent6
         ),
-        new BasicContentWrapper(
+        new GroupableContentWrapper(
           (
             <SimpleNavbarTab
               name={(t: TranslateFunctionType) =>
@@ -258,7 +258,7 @@ function App() {
           ),
           ExampleComponent6
         ),
-        new BasicContentWrapper(
+        new GroupableContentWrapper(
           (
             <SimpleNavbarTab
               name={(t: TranslateFunctionType) =>
@@ -271,7 +271,7 @@ function App() {
           ),
           ExampleComponent6
         ),
-        new BasicContentWrapper(
+        new GroupableContentWrapper(
           (
             <SimpleNavbarTab
               name={(t: TranslateFunctionType) =>
@@ -284,7 +284,7 @@ function App() {
           ),
           ExampleComponent6
         ),
-        new BasicContentWrapper(
+        new GroupableContentWrapper(
           (
             <SimpleNavbarTab
               name={(t: TranslateFunctionType) =>
@@ -297,7 +297,7 @@ function App() {
           ),
           ExampleComponent6
         ),
-        new BasicContentWrapper(
+        new GroupableContentWrapper(
           (
             <SimpleNavbarTab
               name={(t: TranslateFunctionType) =>
@@ -310,7 +310,7 @@ function App() {
           ),
           ExampleComponent6
         ),
-        new BasicContentWrapper(
+        new GroupableContentWrapper(
           (
             <SimpleNavbarTab
               name={(t: TranslateFunctionType) =>
@@ -323,7 +323,7 @@ function App() {
           ),
           ExampleComponent6
         ),
-        new BasicContentWrapper(
+        new GroupableContentWrapper(
           (
             <SimpleNavbarTab
               name={(t: TranslateFunctionType) =>
@@ -336,7 +336,7 @@ function App() {
           ),
           ExampleComponent6
         ),
-        new BasicContentWrapper(
+        new GroupableContentWrapper(
           (
             <SimpleNavbarTab
               name={(t: TranslateFunctionType) =>
@@ -349,7 +349,7 @@ function App() {
           ),
           ExampleComponent6
         ),
-        new BasicContentWrapper(
+        new GroupableContentWrapper(
           (
             <SimpleNavbarTab
               name={(t: TranslateFunctionType) =>
@@ -362,7 +362,7 @@ function App() {
           ),
           ExampleComponent6
         ),
-        new BasicContentWrapper(
+        new GroupableContentWrapper(
           (
             <SimpleNavbarTab
               name={(t: TranslateFunctionType) =>
@@ -375,7 +375,7 @@ function App() {
           ),
           ExampleComponent6
         ),
-        new BasicContentWrapper(
+        new GroupableContentWrapper(
           (
             <SimpleNavbarTab
               name={(t: TranslateFunctionType) =>
@@ -388,7 +388,7 @@ function App() {
           ),
           ExampleComponent6
         ),
-        new BasicContentWrapper(
+        new GroupableContentWrapper(
           (
             <SimpleNavbarTab
               name={(t: TranslateFunctionType) =>
@@ -401,7 +401,7 @@ function App() {
           ),
           ExampleComponent6
         ),
-        new BasicContentWrapper(
+        new GroupableContentWrapper(
           (
             <SimpleNavbarTab
               name={(t: TranslateFunctionType) =>
@@ -414,7 +414,7 @@ function App() {
           ),
           ExampleComponent6
         ),
-        new BasicContentWrapper(
+        new GroupableContentWrapper(
           (
             <SimpleNavbarTab
               name={(t: TranslateFunctionType) =>

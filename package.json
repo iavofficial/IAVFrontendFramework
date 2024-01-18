@@ -90,6 +90,7 @@
     "./awsAuthenticationView": "./build/components/authentication/aws/awsAuthenticationView.js",
     "./basicAuthenticationView": "./build/components/authentication/default/basicAuthenticationView.js",
     "./basicContentWrapper": "./build/components/navbar/wrapper/basicContentWrapper.js",
+    "./groupableContentWrapper": "./build/components/navbar/wrapper/groupableContentWrapper.js",
     "./customContentbarWrapper": "./build/components/content/customContentbarWrapper.js",
     "./basicContentbarWrapper": "./build/components/content/basicContentbarWrapper.js",
     "./colorProvider": "./build/providers/colors/colorProvider.js",

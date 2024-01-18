@@ -6,7 +6,6 @@ import { ColorSettingsContext } from "../../../../contexts/colorsettings";
 import { TranslateFunctionType } from "../../../../types/translationFunction";
 import { TabGroupCollapsed } from "./tabGroupCollapsed";
 import { TabGroupUnfolded } from "./tabGroupUnfolded";
-import { groupCollapsed } from "console";
 
 interface Props {
   name: string | ((t: TranslateFunctionType) => string);

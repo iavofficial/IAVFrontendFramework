@@ -2,16 +2,23 @@ import React, { ReactElement } from "react";
 import { RouteProps } from "react-router-dom";
 import { TabGroup } from "../tabs/tabGroup/tabGroup";
 import { generateHashForValues } from "../../../utils/hash";
-import { TabAndContentWrapper } from "./tabAndContentWrapper";
 import { TranslateFunctionType } from "../../../types/translationFunction";
+import { GroupableTabAndContentWrapper } from "./groupableTabAndContentWrapper";
 
-export class Group implements TabAndContentWrapper {
+export class Group implements GroupableTabAndContentWrapper {
+  private _insideGroup = false;
+
   constructor(
     private _name: string | ((t: TranslateFunctionType) => string),
     private _logo: ReactElement,
     private _collapsible: boolean,
-    private _contentWrappers: TabAndContentWrapper[]
-  ) {}
+    private _contentWrappers: GroupableTabAndContentWrapper[]
+  ) {
+
+    _contentWrappers.forEach((contentWrapper) => {
+      contentWrapper.setInsideGroup(true);
+    });
+  }
 
   // Generate unique key based on the keys of the views.
   getKey = () => {
@@ -52,5 +59,13 @@ export class Group implements TabAndContentWrapper {
 
   get name() {
     return this._name;
+  }
+
+  getInsideGroup() {
+    return this._insideGroup;
+  }
+
+  setInsideGroup(insideGroup: boolean) {
+    this._insideGroup = insideGroup;
   }
 }

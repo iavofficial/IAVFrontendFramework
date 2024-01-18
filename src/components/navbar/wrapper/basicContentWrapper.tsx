@@ -1,13 +1,15 @@
 import React from "react";
 import { Route } from "react-router";
 import { generateHash } from "../../../utils/hash";
-import { navbarTabProps } from "../tabs/navbarTab";
+import { groupableNavbarTabProps, navbarTabProps } from "../tabs/navbarTab";
 import { TabAndContentWrapper } from "./tabAndContentWrapper";
 
 export class BasicContentWrapper implements TabAndContentWrapper {
   constructor(
-    private _navbarTab: React.ReactElement<navbarTabProps>,
-    private _component: React.ComponentType<any>
+    protected _navbarTab: React.ReactElement<
+      navbarTabProps | groupableNavbarTabProps
+    >,
+    protected _component: React.ComponentType<any>
   ) {}
 
   // Generate unique key based on the view's url.

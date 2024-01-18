@@ -2,10 +2,10 @@ import React, { useContext, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useTranslator } from "../../internationalization/translators";
 import "./tabs.css";
-import { groupableNavbarTab } from "./navbarTab";
+import { groupableNavbarTab } from "./navbarTabTypes";
 import { ColorSettingsContext } from "../../../contexts/colorsettings";
-import { SimpleNavbarTabCollapsed } from "../navbarTabs/simpleNavbarTabCollapsed";
-import { SimpleNavbarTabUnfolded } from "../navbarTabs/simpleNavbarTabUnfolded";
+import { SimpleNavbarTabCollapsed } from "./simpleNavbarTabCollapsed";
+import { SimpleNavbarTabUnfolded } from "./simpleNavbarTabUnfolded";
 
 export const SimpleNavbarTab: groupableNavbarTab = (props) => {
   const [hovering, setHovering] = useState(false);

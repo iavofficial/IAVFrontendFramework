@@ -1,6 +1,6 @@
 import React, { useContext, useId } from "react";
 import { ColorSettingsContext } from "../../../contexts/colorsettings";
-import { SvgIcon } from "../tabs/svgIcon";
+import { SvgIcon } from "./svgIcon";
 import { Tooltip } from "primereact/tooltip";
 import { SimpleNavbarTabProps } from "./simpleNavbarTabTypes";
 

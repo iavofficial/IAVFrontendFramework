@@ -1,7 +1,7 @@
 import React, { ReactElement, useContext, useEffect, useState } from "react";
 import "../../navbar.css";
 import { useTranslator } from "../../../internationalization/translators";
-import { navbarTabProps } from "../navbarTab";
+import { navbarTabProps } from "../navbarTabTypes";
 import { ColorSettingsContext } from "../../../../contexts/colorsettings";
 import { TranslateFunctionType } from "../../../../types/translationFunction";
 import { TabGroupCollapsed } from "./tabGroupCollapsed";

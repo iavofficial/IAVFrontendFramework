@@ -3,7 +3,8 @@ import { RouteProps } from "react-router-dom";
 import { TabGroup } from "../tabs/tabGroup/tabGroup";
 import { generateHashForValues } from "../../../utils/hash";
 import { TranslateFunctionType } from "../../../types/translationFunction";
-import { GroupableTabAndContentWrapper } from "./groupableTabAndContentWrapper";
+import { groupableNavbarTabPropsFrameworkInjectedOptions } from "../tabs/navbarTabTypes";
+import { GroupableTabAndContentWrapper } from "./tabAndContentWrapperTypes";
 
 export class Group implements GroupableTabAndContentWrapper {
   private _insideGroup = false;
@@ -37,21 +38,17 @@ export class Group implements GroupableTabAndContentWrapper {
     return routes;
   };
 
-  getChildrenWrapper = () => {
-    return this._contentWrappers;
-  };
-
-  getNavbarComponent = (navbarCollapsed: boolean) => {
+  getNavbarComponent = (frameworkInjectedOptions: groupableNavbarTabPropsFrameworkInjectedOptions) => {
     return (
       <TabGroup
-        navbarCollapsed={navbarCollapsed}
+        navbarCollapsed={frameworkInjectedOptions.navbarCollapsed}
         key={this.getKey()}
         name={this._name}
         logo={this._logo ? this._logo : undefined}
         collapsible={this._collapsible}
       >
         {this._contentWrappers.map((view) =>
-          view.getNavbarComponent(navbarCollapsed)
+          view.getNavbarComponent(frameworkInjectedOptions)
         )}
       </TabGroup>
     );

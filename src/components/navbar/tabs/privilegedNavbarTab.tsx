@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../../contexts/auth';
 import { containsOneOrMoreGroups } from '../../../utils/groupChecker';
 import { SimpleNavbarTab } from './simpleNavbarTab';
-import { navbarTab } from './navbarTab';
+import { navbarTab } from './navbarTabTypes';
 
 export interface Props {
   permittedGroups: string[];

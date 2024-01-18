@@ -155,14 +155,15 @@ function App() {
         ),
         new GroupableContentWrapper(
           (
-            <SimpleNavbarTab
+            (options) => (            <SimpleNavbarTab
               name={(t: TranslateFunctionType) =>
                 t("example_component", { count: 6 })
               }
               to="/group-example6"
               disabled={false}
               icon={<InfoIcon />}
-            />
+              options={options}
+            />)
           ),
           ExampleComponent5
         ),

@@ -20,7 +20,7 @@ import { AuthContext } from "../contexts/auth";
 import { AuthenticationViewProps } from "./authentication/authenticationView";
 import { MainView } from "./mainView";
 import { DefaultImprint } from "./imprint/defaultImprint";
-import { TabAndContentWrapper } from "./navbar/wrapper/tabAndContentWrapper";
+import { TabAndContentWrapper } from "./navbar/wrapper/tabAndContentWrapperTypes";
 import { NavbarSettingsProvider } from "../providers/navbarSettingsProvider";
 import { StaticCollapsedState } from "../types/navbarSettingsTypes";
 

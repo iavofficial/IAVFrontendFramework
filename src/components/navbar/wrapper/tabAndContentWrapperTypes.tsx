@@ -1,4 +1,11 @@
-import { TabAndContentWrapper } from "./tabAndContentWrapper";
+import React, { ReactElement } from "react";
+import { RouteProps } from "react-router-dom";
+
+export interface TabAndContentWrapper {
+  getRoutes(): ReactElement<RouteProps>[];
+  getNavbarComponent(frameworkInjectedOptions: object): ReactElement;
+  getKey(): string;
+}
 
 export type GroupableTabAndContentWrapper = TabAndContentWrapper & {
   getInsideGroup(): boolean;

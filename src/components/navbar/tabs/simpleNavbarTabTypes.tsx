@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 
-export interface simpleNavbarTabProps {
+export interface SimpleNavbarTabProps {
   style: { [key: string]: string | number };
   setHovering: (hovering: boolean) => void;
   hovering: boolean;

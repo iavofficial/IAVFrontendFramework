@@ -2,21 +2,22 @@ import React, { ReactElement } from "react";
 import { TranslateFunctionType } from "../../../types/translationFunction";
 
 export interface basicNavbarTabFrameworkInjectedOptions {
+  path: string;
   navbarCollapsed: boolean;
 }
 
 export type groupableNavbarTabPropsFrameworkInjectedOptions = basicNavbarTabFrameworkInjectedOptions & {
-  insideGroup?: boolean;
-  groupActive?: boolean;
+  insideGroup: boolean;
+  groupActive: boolean;
 };
 
 export interface defaultNavbarTabProps<optionType> {
   name: string | ((t: TranslateFunctionType) => string);
   disabled: boolean;
+  frameworkInjectedOptions: optionType;
   icon?: ReactElement;
   collapsed?: boolean;
   active?: boolean;
-  frameworkInjectedOptions?: optionType;
 }
 
 export type navbarTabProps = defaultNavbarTabProps<basicNavbarTabFrameworkInjectedOptions>;

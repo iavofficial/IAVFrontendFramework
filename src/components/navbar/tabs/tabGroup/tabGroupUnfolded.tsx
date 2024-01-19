@@ -1,5 +1,5 @@
 import React, { useContext, useId } from "react";
-import { GroupTabProps } from "./groupTabTypes";
+import { GroupTabProps } from "./typesGroupTab";
 import { SvgIcon } from "../svgIcon";
 import { ColorSettingsContext } from "../../../../contexts/colorsettings";
 

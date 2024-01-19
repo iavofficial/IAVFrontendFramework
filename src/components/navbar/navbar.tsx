@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./navbar.css";
 import "../css/globalColors.css";
-import { TabAndContentWrapper } from "./wrapper/tabAndContentWrapperTypes";
+import { TabAndContentWrapper } from "./wrapper/typesTabAndContentWrapper";
 import { useTranslator } from "../internationalization/translators";
 import { Tooltip } from "primereact/tooltip";
 import SimpleBar from "simplebar-react";
@@ -38,7 +38,7 @@ export const Navbar = (props: Props) => {
     >
       <SimpleBar
         style={{
-          width: navbarSettingsContext?.navbarCollapsed ? "40px" : "240px",
+          width: navbarSettingsContext.navbarCollapsed ? "40px" : "240px",
           color: colorSettingsContext.currentColors.navbarColors.scrollbarColor,
           position: "relative",
           overflowX: "visible",
@@ -49,7 +49,9 @@ export const Navbar = (props: Props) => {
       >
         <>
           {props.tabAndContentWrappers.map((wrapper: TabAndContentWrapper) =>
-            wrapper.getNavbarComponent(navbarSettingsContext?.navbarCollapsed!)
+            wrapper.getNavbarComponent({
+              navbarCollapsed: navbarSettingsContext.navbarCollapsed
+            })
           )}
         </>
       </SimpleBar>
@@ -57,10 +59,10 @@ export const Navbar = (props: Props) => {
         id="navbar-bottom-wrapper"
         className={
           "text-center flex " +
-          (navbarSettingsContext?.navbarCollapsed ? "flex-column" : "px-3 ")
+          (navbarSettingsContext.navbarCollapsed ? "flex-column" : "px-3 ")
         }
         style={{
-          justifyContent: navbarSettingsContext?.navbarCollapsed
+          justifyContent: navbarSettingsContext.navbarCollapsed
             ? "center"
             : "space-between",
         }}
@@ -93,10 +95,10 @@ export const Navbar = (props: Props) => {
           target={identifierWithDot}
         />
 
-        {navbarSettingsContext?.collapsible && (
+        {navbarSettingsContext.collapsible && (
           <i
             onClick={() =>
-              navbarSettingsContext?.setNavbarCollapsed(
+              navbarSettingsContext.setNavbarCollapsed(
                 !navbarSettingsContext.navbarCollapsed
               )
             }
@@ -108,7 +110,7 @@ export const Navbar = (props: Props) => {
               marginTop: navbarSettingsContext.navbarCollapsed ? "8px" : "0px",
             }}
             className={calculateNavbarArrowFunctionColor(
-              navbarSettingsContext?.navbarCollapsed!
+              navbarSettingsContext.navbarCollapsed!
             )}
           />
         )}

@@ -1,4 +1,4 @@
-import { NavbarColorType } from "../../../components/navbar/navbarColorType";
+import { NavbarColorType } from "../../../components/navbar/typesNavbarColor";
 import {
   DARK_LEGAL_DOCS_ICON_COLOR,
   DARK_NAVBAR_BACKGROUND_COLOR,

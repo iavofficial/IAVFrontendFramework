@@ -1,7 +1,7 @@
 import { useContext, useId } from "react";
 import { ColorSettingsContext } from "../../../contexts/colorsettings";
 import { SvgIcon } from "./svgIcon";
-import { SimpleNavbarTabProps } from "./simpleNavbarTabTypes";
+import { SimpleNavbarTabProps } from "./typesSimpleNavbarTab";
 
 export const SimpleNavbarTabUnfolded = (props: SimpleNavbarTabProps) => {
   // This id is needed for PrimeReact. It has to begin with a letter.

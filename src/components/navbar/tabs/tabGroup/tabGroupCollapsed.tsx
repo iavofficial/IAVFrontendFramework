@@ -2,7 +2,7 @@ import React, { useContext, useId } from "react";
 import { ColorSettingsContext } from "../../../../contexts/colorsettings";
 import { SvgIcon } from "../svgIcon";
 import { Tooltip } from "primereact/tooltip";
-import { GroupTabProps } from "./groupTabTypes";
+import { GroupTabProps } from "./typesGroupTab";
 
 export const TabGroupCollapsed = (props: GroupTabProps) => {
   // This id is needed for PrimeReact. It has to begin with a letter.

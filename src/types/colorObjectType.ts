@@ -5,7 +5,7 @@ import {
   ContentbarTabColorType,
 } from '../components/content/contentColorType';
 import { HeaderColorType } from '../components/header/appHeaderColor';
-import { NavbarColorType } from '../components/navbar/navbarColorType';
+import { NavbarColorType } from '../components/navbar/typesNavbarColor';
 export interface ColorObject {
   headerColorOptions?: HeaderColorType;
   navbarColorOptions?: NavbarColorType;

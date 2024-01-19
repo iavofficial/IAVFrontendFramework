@@ -4,7 +4,7 @@ import { Navbar } from './navbar/navbar';
 import { DefaultImprint } from './imprint/defaultImprint';
 import { SettingsMenuOptions } from './header/settingsMenu';
 import { Route, Routes, Outlet } from 'react-router-dom';
-import { TabAndContentWrapper } from './navbar/wrapper/tabAndContentWrapperTypes';
+import { TabAndContentWrapper } from './navbar/wrapper/typesTabAndContentWrapper';
 import { UserMenuOptions } from './header/userMenu';
 
 interface MainViewProps {

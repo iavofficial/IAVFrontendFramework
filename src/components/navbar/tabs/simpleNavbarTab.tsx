@@ -2,16 +2,19 @@ import React, { useContext, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useTranslator } from "../../internationalization/translators";
 import "./tabs.css";
-import { groupableNavbarTab } from "./navbarTabTypes";
+import { groupableNavbarTab } from "./typesNavbarTab";
 import { ColorSettingsContext } from "../../../contexts/colorsettings";
 import { SimpleNavbarTabCollapsed } from "./simpleNavbarTabCollapsed";
 import { SimpleNavbarTabUnfolded } from "./simpleNavbarTabUnfolded";
 
 export const SimpleNavbarTab: groupableNavbarTab = (props) => {
+  const navbarCollapsed = props.frameworkInjectedOptions.navbarCollapsed;
+  const path = props.frameworkInjectedOptions.path;
+
   const [hovering, setHovering] = useState(false);
   const colorSettingsContext = useContext(ColorSettingsContext);
   const t = useTranslator();
-  const active = useLocation().pathname === props.to;
+  const active = useLocation().pathname === path;
 
   let highlightColor =
     colorSettingsContext.currentColors.navbarColors.tabColors.highlightColor;
@@ -26,7 +29,7 @@ export const SimpleNavbarTab: groupableNavbarTab = (props) => {
       .letteringMainColor;
       
   const tabStyleDefault = {
-    width: props.navbarCollapsed ? "40px" : "240px",
+    width: navbarCollapsed ? "40px" : "240px",
     cursor: active || props.disabled ? "default" : "pointer",
     backgroundColor:
       (active || hovering) && !props.disabled ? highlightColor : mainColor,
@@ -37,7 +40,7 @@ export const SimpleNavbarTab: groupableNavbarTab = (props) => {
     opacity: props.disabled ? 0.5 : 1,
   };
 
-  const navbarTab = props.navbarCollapsed ? (
+  const navbarTab = navbarCollapsed ? (
     <SimpleNavbarTabCollapsed
       style={tabStyleDefault}
       setHovering={setHovering}
@@ -66,14 +69,14 @@ export const SimpleNavbarTab: groupableNavbarTab = (props) => {
           {navbarTab}
           <div
             className="flex"
-            style={{ width: props.navbarCollapsed ? "40px" : "240px" }}
+            style={{ width: navbarCollapsed ? "40px" : "240px" }}
           >
             <div style={{ width: "80%" }} />
           </div>
         </>
       ) : (
         <>
-          <Link style={{ textDecoration: "none" }} to={props.to.valueOf()}>
+          <Link style={{ textDecoration: "none" }} to={path}>
             {navbarTab}
           </Link>
         </>

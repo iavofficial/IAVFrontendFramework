@@ -1,9 +1,10 @@
 import React, { ReactElement } from "react";
 import { RouteProps } from "react-router-dom";
+import { navbarInjectedOptions } from "../typesNavbar";
 
 export interface TabAndContentWrapper {
   getRoutes(): ReactElement<RouteProps>[];
-  getNavbarComponent(frameworkInjectedOptions: object): ReactElement;
+  getNavbarComponent(navbarInjectedOptions: navbarInjectedOptions): ReactElement;
   getKey(): string;
 }
 

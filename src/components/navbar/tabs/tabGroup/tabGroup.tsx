@@ -1,24 +1,25 @@
 import React, { ReactElement, useContext, useEffect, useState } from "react";
 import "../../navbar.css";
 import { useTranslator } from "../../../internationalization/translators";
-import { navbarTabProps } from "../navbarTabTypes";
+import { groupableNavbarTab, groupableNavbarTabPropsFrameworkInjectedOptions, navbarTabProps } from "../typesNavbarTab";
 import { ColorSettingsContext } from "../../../../contexts/colorsettings";
 import { TranslateFunctionType } from "../../../../types/translationFunction";
 import { TabGroupCollapsed } from "./tabGroupCollapsed";
 import { TabGroupUnfolded } from "./tabGroupUnfolded";
+import { TabAndContentWrapper } from "../../wrapper/typesTabAndContentWrapper";
+import { GroupableContentWrapper } from "../../wrapper/groupableContentWrapper";
+import { groupCollapsed } from "console";
 
 interface Props {
   name: string | ((t: TranslateFunctionType) => string);
   navbarCollapsed: boolean;
+  wrappers: GroupableContentWrapper[];
+  frameworkInjectedOptions: groupableNavbarTabPropsFrameworkInjectedOptions;
   logo?: ReactElement;
   collapsible?: boolean;
 }
 
-type PropsWithNavbarTabChildren<T> = T & {
-  children: ReactElement<navbarTabProps>[];
-};
-
-export const TabGroup = (props: PropsWithNavbarTabChildren<Props>) => {
+export const TabGroup = (props: Props) => {
   const t = useTranslator();
   const colorSettingsContext = useContext(ColorSettingsContext);
   const [hovering, setHovering] = useState(false);
@@ -77,12 +78,13 @@ export const TabGroup = (props: PropsWithNavbarTabChildren<Props>) => {
     <>
       {groupElement}
       {groupTabCollapsed ? (
-        props.children.map((child) => {
-          if (React.isValidElement(child)) {
-            return React.cloneElement(child, { collapsed: groupTabCollapsed });
-          }
-          return child;
-        })
+        props.wrappers.map(wrapper => (
+          wrapper.getNavbarComponent({
+            path: props.frameworkInjectedOptions.path,
+            groupActive: !groupTabCollapsed,
+            navbarCollapsed: props.frameworkInjectedOptions.navbarCollapsed
+          })
+        ))
       ) : (
         <React.Fragment />
       )}

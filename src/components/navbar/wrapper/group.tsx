@@ -3,8 +3,8 @@ import { RouteProps } from "react-router-dom";
 import { TabGroup } from "../tabs/tabGroup/tabGroup";
 import { generateHashForValues } from "../../../utils/hash";
 import { TranslateFunctionType } from "../../../types/translationFunction";
-import { groupableNavbarTabPropsFrameworkInjectedOptions } from "../tabs/navbarTabTypes";
-import { GroupableTabAndContentWrapper } from "./tabAndContentWrapperTypes";
+import { groupableNavbarTabPropsFrameworkInjectedOptions } from "../tabs/typesNavbarTab";
+import { GroupableTabAndContentWrapper } from "./typesTabAndContentWrapper";
 
 export class Group implements GroupableTabAndContentWrapper {
   private _insideGroup = false;

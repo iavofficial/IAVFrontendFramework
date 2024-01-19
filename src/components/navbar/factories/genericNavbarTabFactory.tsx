@@ -1,4 +1,4 @@
-import { SimpleNavbarTabProps } from "../tabs/simpleNavbarTabTypes";
+import { SimpleNavbarTabProps } from "../tabs/typesSimpleNavbarTab";
 import { SimpleNavbarTab } from "../tabs/simpleNavbarTab";
 
 type OptionsProp<OptionType> = {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ColorObject } from "../../types/colorObjectType";
 import { ColorSettingsContext } from "../../contexts/colorsettings";
 import { getCurrentColors_Navbar } from "./color_getter/getCurrentColors_Navbar";
-import { CurrentColosTabColorType } from "../../components/navbar/tabs/tabColorType";
+import { CurrentColosTabColorType } from "../../components/navbar/tabs/typesTabColor";
 
 export interface Props {
   colorOptions?: ColorObject;

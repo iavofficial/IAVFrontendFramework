@@ -1,4 +1,4 @@
-import { TabColorType } from './tabs/tabColorType';
+import { TabColorType } from './tabs/typesTabColor';
 
 export interface NavbarColorType {
   backgroundColor?: string;

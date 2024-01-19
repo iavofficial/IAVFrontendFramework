@@ -1,15 +1,9 @@
 import { Route } from "react-router";
 import { generateHash } from "../../../utils/hash";
-import { TabAndContentWrapper } from "./tabAndContentWrapperTypes";
 
-export class GenericContentWrapper<OptionType extends object>
-  implements TabAndContentWrapper
-{
+export class ContentWrapperGeneralization {
   constructor(
     protected _path: string,
-    protected _navbarTab: React.ComponentType<{
-      frameworkInjectedOptions: OptionType;
-    }>,
     protected _component: React.ComponentType<any>
   ) {}
 
@@ -26,15 +20,5 @@ export class GenericContentWrapper<OptionType extends object>
         element={<this._component />}
       />,
     ];
-  };
-
-  getNavbarComponent = (frameworkInjectedOptions: OptionType) => {
-    const NavbarElement = this._navbarTab;
-    return (
-      <NavbarElement
-        key={this.getKey()}
-        frameworkInjectedOptions={frameworkInjectedOptions}
-      />
-    );
   };
 }

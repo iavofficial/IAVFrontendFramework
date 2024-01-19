@@ -5,6 +5,7 @@ import { generateHashForValues } from "../../../utils/hash";
 import { TranslateFunctionType } from "../../../types/translationFunction";
 import { groupableNavbarTabPropsFrameworkInjectedOptions } from "../tabs/typesNavbarTab";
 import { GroupableTabAndContentWrapper } from "./typesTabAndContentWrapper";
+import { navbarInjectedOptions } from "../typesNavbar";
 
 export class Group implements GroupableTabAndContentWrapper {
   private _insideGroup = false;
@@ -15,7 +16,6 @@ export class Group implements GroupableTabAndContentWrapper {
     private _collapsible: boolean,
     private _contentWrappers: GroupableTabAndContentWrapper[]
   ) {
-
     _contentWrappers.forEach((contentWrapper) => {
       contentWrapper.setInsideGroup(true);
     });
@@ -38,7 +38,20 @@ export class Group implements GroupableTabAndContentWrapper {
     return routes;
   };
 
-  getNavbarComponent = (frameworkInjectedOptions: groupableNavbarTabPropsFrameworkInjectedOptions) => {
+  getNavbarComponent = (
+    frameworkInjectedOptions:
+      | navbarInjectedOptions
+      | groupableNavbarTabPropsFrameworkInjectedOptions
+  ) => {
+    const injectedProperties = {
+      navbarCollapsed: frameworkInjectedOptions.navbarCollapsed,
+      insideGroup: this.getInsideGroup(),
+      groupActive:
+        "groupActive" in frameworkInjectedOptions
+          ? frameworkInjectedOptions.groupActive
+          : false,
+    };
+
     return (
       <TabGroup
         navbarCollapsed={frameworkInjectedOptions.navbarCollapsed}
@@ -46,11 +59,9 @@ export class Group implements GroupableTabAndContentWrapper {
         name={this._name}
         logo={this._logo ? this._logo : undefined}
         collapsible={this._collapsible}
-      >
-        {this._contentWrappers.map((view) =>
-          view.getNavbarComponent(frameworkInjectedOptions)
-        )}
-      </TabGroup>
+        frameworkInjectedOptions={injectedProperties}
+        wrappers={this._contentWrappers}
+      />
     );
   };
 

@@ -1,5 +1,6 @@
 import { ReactElement } from "react";
 import { basicNavbarTabFrameworkInjectedOptions } from "../typesNavbarTab";
+import { navbarInjectedOptions } from "../../typesNavbar";
 
 export interface GroupTabProps {
     style: {[key: string]: string | number};
@@ -9,6 +10,6 @@ export interface GroupTabProps {
     name: string
 }
 
-export type GroupInjectedOptions = basicNavbarTabFrameworkInjectedOptions & {
+export type GroupInjectedOptions = navbarInjectedOptions & {
     groupActive: boolean;
 }

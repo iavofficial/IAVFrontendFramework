@@ -1,4 +1,21 @@
+import React from "react";
+import { PrivilegedNavbarTab } from "../tabs/privilegedNavbarTab";
 import { groupableNavbarTabPropsFrameworkInjectedOptions } from "../tabs/typesNavbarTab";
-import { genericNavbarTabFactory } from "./genericNavbarTabFactory";
 
-export const PrivilegedNavbarTabFactory = genericNavbarTabFactory<groupableNavbarTabPropsFrameworkInjectedOptions>;
+export const privilegedNavbarTabFactory = (
+  tabProps: Omit<
+    React.ComponentProps<typeof PrivilegedNavbarTab>,
+    "frameworkInjectedOptions"
+  >
+) => {
+  return (props: {
+    frameworkInjectedOptions: groupableNavbarTabPropsFrameworkInjectedOptions;
+  }) => {
+    return (
+      <PrivilegedNavbarTab
+        frameworkInjectedOptions={props.frameworkInjectedOptions}
+        {...tabProps}
+      />
+    );
+  };
+};

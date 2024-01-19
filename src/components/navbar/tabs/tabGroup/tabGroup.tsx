@@ -1,20 +1,19 @@
 import React, { ReactElement, useContext, useEffect, useState } from "react";
 import "../../navbar.css";
 import { useTranslator } from "../../../internationalization/translators";
-import { groupableNavbarTab, groupableNavbarTabPropsFrameworkInjectedOptions, navbarTabProps } from "../typesNavbarTab";
+import { groupableNavbarTabPropsFrameworkInjectedOptions } from "../typesNavbarTab";
 import { ColorSettingsContext } from "../../../../contexts/colorsettings";
 import { TranslateFunctionType } from "../../../../types/translationFunction";
 import { TabGroupCollapsed } from "./tabGroupCollapsed";
 import { TabGroupUnfolded } from "./tabGroupUnfolded";
-import { TabAndContentWrapper } from "../../wrapper/typesTabAndContentWrapper";
-import { GroupableContentWrapper } from "../../wrapper/groupableContentWrapper";
-import { groupCollapsed } from "console";
+import { GroupableTabAndContentWrapper } from "../../wrapper/typesTabAndContentWrapper";
+import { GroupInjectedOptions } from "./typesGroupTab";
 
 interface Props {
   name: string | ((t: TranslateFunctionType) => string);
   navbarCollapsed: boolean;
-  wrappers: GroupableContentWrapper[];
-  frameworkInjectedOptions: groupableNavbarTabPropsFrameworkInjectedOptions;
+  wrappers: GroupableTabAndContentWrapper[];
+  frameworkInjectedOptions: GroupInjectedOptions;
   logo?: ReactElement;
   collapsible?: boolean;
 }
@@ -80,7 +79,6 @@ export const TabGroup = (props: Props) => {
       {groupTabCollapsed ? (
         props.wrappers.map(wrapper => (
           wrapper.getNavbarComponent({
-            path: props.frameworkInjectedOptions.path,
             groupActive: !groupTabCollapsed,
             navbarCollapsed: props.frameworkInjectedOptions.navbarCollapsed
           })

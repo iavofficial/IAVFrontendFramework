@@ -1,3 +1,4 @@
+import React from "react";
 import { useContext, useId } from "react";
 import { ColorSettingsContext } from "../../../contexts/colorsettings";
 import { SvgIcon } from "./svgIcon";

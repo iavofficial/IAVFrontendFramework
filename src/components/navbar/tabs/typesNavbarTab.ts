@@ -1,33 +1,27 @@
 import React, { ReactElement } from "react";
 import { TranslateFunctionType } from "../../../types/translationFunction";
+import { navbarInjectedOptions } from "../typesNavbar";
+import { GroupInjectedOptions } from "./tabGroup/typesGroupTab";
 
-export interface basicNavbarTabFrameworkInjectedOptions {
+export type basicNavbarTabFrameworkInjectedOptions = navbarInjectedOptions & {
   path: string;
-  navbarCollapsed: boolean;
-}
-
-export type groupableNavbarTabPropsFrameworkInjectedOptions = basicNavbarTabFrameworkInjectedOptions & {
-  insideGroup: boolean;
-  groupActive: boolean;
 };
 
-export interface defaultNavbarTabProps<optionType> {
+export type groupableNavbarTabPropsFrameworkInjectedOptions =
+  basicNavbarTabFrameworkInjectedOptions &
+    GroupInjectedOptions & {
+      insideGroup: boolean;
+    };
+
+export interface NavbarTabProps<OptionType> {
   name: string | ((t: TranslateFunctionType) => string);
   disabled: boolean;
-  frameworkInjectedOptions: optionType;
+  frameworkInjectedOptions: OptionType;
   icon?: ReactElement;
   collapsed?: boolean;
   active?: boolean;
 }
 
-export type navbarTabProps = defaultNavbarTabProps<basicNavbarTabFrameworkInjectedOptions>;
-
-export type groupableNavbarTabProps = defaultNavbarTabProps<groupableNavbarTabPropsFrameworkInjectedOptions>;
-
-export type navbarTab<additional = {}> = React.ComponentType<
-  navbarTabProps & additional
->;
-
-export type groupableNavbarTab<additional = {}> = React.ComponentType<
-  groupableNavbarTabProps & additional
+export type groupableNavbarTab<additional = {}> = React.FunctionComponent<
+  NavbarTabProps<groupableNavbarTabPropsFrameworkInjectedOptions> & additional
 >;

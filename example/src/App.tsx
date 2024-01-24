@@ -1,8 +1,3 @@
-import "primeflex/primeflex.css";
-import "primereact/resources/themes/lara-light-indigo/theme.css";
-import "primereact/resources/primereact.min.css";
-import "primeicons/primeicons.css";
-
 import React from "react";
 import { SelectButton } from "primereact/selectbutton";
 import { useState } from "react";
@@ -27,7 +22,6 @@ import { ExampleComponent3 } from "./components/exampleComponent3";
 import { ExampleComponent4 } from "./components/exampleComponent4";
 import { ExampleComponent5 } from "./components/exampleComponent5";
 import { ExampleComponent2 } from "./components/exampleComponent2";
-import { StaticCollapsedState } from "iav-frontend-framework/navbarSettingsTypes";
 
 function App() {
   const [selectedButtonOption, setSelectedButtonOption] = useState("Simulated");
@@ -46,6 +40,7 @@ function App() {
         ),
       },
     ],
+    hideLanguageSelection: true
   };
 
   const translations = {
@@ -179,254 +174,6 @@ function App() {
           ),
           ExampleComponent6
         ),
-
-        new BasicContentWrapper(
-          (
-            <SimpleNavbarTab
-              name={(t: TranslateFunctionType) =>
-                t("example_component", { count: 7 })
-              }
-              to="/group-example7"
-              disabled={false}
-              icon={<InfoIcon />}
-            />
-          ),
-          ExampleComponent6
-        ),
-        new BasicContentWrapper(
-          (
-            <SimpleNavbarTab
-              name={(t: TranslateFunctionType) =>
-                t("example_component", { count: 7 })
-              }
-              to="/group-example7"
-              disabled={false}
-              icon={<InfoIcon />}
-            />
-          ),
-          ExampleComponent6
-        ),
-        new BasicContentWrapper(
-          (
-            <SimpleNavbarTab
-              name={(t: TranslateFunctionType) =>
-                t("example_component", { count: 7 })
-              }
-              to="/group-example7"
-              disabled={false}
-              icon={<InfoIcon />}
-            />
-          ),
-          ExampleComponent6
-        ),
-        new BasicContentWrapper(
-          (
-            <SimpleNavbarTab
-              name={(t: TranslateFunctionType) =>
-                t("example_component", { count: 7 })
-              }
-              to="/group-example7"
-              disabled={false}
-              icon={<InfoIcon />}
-            />
-          ),
-          ExampleComponent6
-        ),
-        new BasicContentWrapper(
-          (
-            <SimpleNavbarTab
-              name={(t: TranslateFunctionType) =>
-                t("example_component", { count: 7 })
-              }
-              to="/group-example7"
-              disabled={false}
-              icon={<InfoIcon />}
-            />
-          ),
-          ExampleComponent6
-        ),
-        new BasicContentWrapper(
-          (
-            <SimpleNavbarTab
-              name={(t: TranslateFunctionType) =>
-                t("example_component", { count: 7 })
-              }
-              to="/group-example7"
-              disabled={false}
-              icon={<InfoIcon />}
-            />
-          ),
-          ExampleComponent6
-        ),
-        new BasicContentWrapper(
-          (
-            <SimpleNavbarTab
-              name={(t: TranslateFunctionType) =>
-                t("example_component", { count: 7 })
-              }
-              to="/group-example7"
-              disabled={false}
-              icon={<InfoIcon />}
-            />
-          ),
-          ExampleComponent6
-        ),
-        new BasicContentWrapper(
-          (
-            <SimpleNavbarTab
-              name={(t: TranslateFunctionType) =>
-                t("example_component", { count: 7 })
-              }
-              to="/group-example7"
-              disabled={false}
-              icon={<InfoIcon />}
-            />
-          ),
-          ExampleComponent6
-        ),
-        new BasicContentWrapper(
-          (
-            <SimpleNavbarTab
-              name={(t: TranslateFunctionType) =>
-                t("example_component", { count: 7 })
-              }
-              to="/group-example7"
-              disabled={false}
-              icon={<InfoIcon />}
-            />
-          ),
-          ExampleComponent6
-        ),
-        new BasicContentWrapper(
-          (
-            <SimpleNavbarTab
-              name={(t: TranslateFunctionType) =>
-                t("example_component", { count: 7 })
-              }
-              to="/group-example7"
-              disabled={false}
-              icon={<InfoIcon />}
-            />
-          ),
-          ExampleComponent6
-        ),
-        new BasicContentWrapper(
-          (
-            <SimpleNavbarTab
-              name={(t: TranslateFunctionType) =>
-                t("example_component", { count: 7 })
-              }
-              to="/group-example7"
-              disabled={false}
-              icon={<InfoIcon />}
-            />
-          ),
-          ExampleComponent6
-        ),
-        new BasicContentWrapper(
-          (
-            <SimpleNavbarTab
-              name={(t: TranslateFunctionType) =>
-                t("example_component", { count: 7 })
-              }
-              to="/group-example7"
-              disabled={false}
-              icon={<InfoIcon />}
-            />
-          ),
-          ExampleComponent6
-        ),
-        new BasicContentWrapper(
-          (
-            <SimpleNavbarTab
-              name={(t: TranslateFunctionType) =>
-                t("example_component", { count: 7 })
-              }
-              to="/group-example7"
-              disabled={false}
-              icon={<InfoIcon />}
-            />
-          ),
-          ExampleComponent6
-        ),
-        new BasicContentWrapper(
-          (
-            <SimpleNavbarTab
-              name={(t: TranslateFunctionType) =>
-                t("example_component", { count: 7 })
-              }
-              to="/group-example7"
-              disabled={false}
-              icon={<InfoIcon />}
-            />
-          ),
-          ExampleComponent6
-        ),
-        new BasicContentWrapper(
-          (
-            <SimpleNavbarTab
-              name={(t: TranslateFunctionType) =>
-                t("example_component", { count: 7 })
-              }
-              to="/group-example7"
-              disabled={false}
-              icon={<InfoIcon />}
-            />
-          ),
-          ExampleComponent6
-        ),
-        new BasicContentWrapper(
-          (
-            <SimpleNavbarTab
-              name={(t: TranslateFunctionType) =>
-                t("example_component", { count: 7 })
-              }
-              to="/group-example7"
-              disabled={false}
-              icon={<InfoIcon />}
-            />
-          ),
-          ExampleComponent6
-        ),
-        new BasicContentWrapper(
-          (
-            <SimpleNavbarTab
-              name={(t: TranslateFunctionType) =>
-                t("example_component", { count: 7 })
-              }
-              to="/group-example7"
-              disabled={false}
-              icon={<InfoIcon />}
-            />
-          ),
-          ExampleComponent6
-        ),
-        new BasicContentWrapper(
-          (
-            <SimpleNavbarTab
-              name={(t: TranslateFunctionType) =>
-                t("example_component", { count: 7 })
-              }
-              to="/group-example7"
-              disabled={false}
-              icon={<InfoIcon />}
-            />
-          ),
-          ExampleComponent6
-        ),
-        new BasicContentWrapper(
-          (
-            <SimpleNavbarTab
-              name={(t: TranslateFunctionType) =>
-                t("example_component", { count: 7 })
-              }
-              to="/group-example7"
-              disabled={false}
-              icon={<InfoIcon />}
-            />
-          ),
-          ExampleComponent6
-        ),
       ]
     ),
   ];
@@ -435,7 +182,13 @@ function App() {
     <DummyAuthenticationProvider
       additionalContextValues={{ getUserGroups: () => [] }}
     >
-      <GlobalDataLayer translations={translations}>
+      <GlobalDataLayer
+        translations={translations}
+        languageOptions={{
+          fallbackLang: "de",
+          initialLang: "es"
+        }}
+      >
         <UILayer
           tabAndContentWrappers={views}
           startingPoint="/"
@@ -443,9 +196,6 @@ function App() {
           settingsMenuOptions={settingsMenuOptions}
           documentsLabelKey="Legal_documents"
           documentsComponent={LegalDocuments}
-          navbarOptions={{
-            staticCollapsedState: StaticCollapsedState.Collapsed
-          }}
         />
       </GlobalDataLayer>
     </DummyAuthenticationProvider>

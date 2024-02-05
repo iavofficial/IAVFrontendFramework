@@ -3,9 +3,11 @@ import { RouteProps } from "react-router-dom";
 import { TabGroup } from "../tabs/tabGroup/tabGroup";
 import { generateHashForValues } from "../../../utils/hash";
 import { TranslateFunctionType } from "../../../types/translationFunction";
-import { groupableNavbarTabPropsFrameworkInjectedOptions } from "../tabs/typesNavbarTab";
-import { GroupableTabAndContentWrapper } from "./typesTabAndContentWrapper";
-import { navbarInjectedOptions } from "../typesNavbar";
+import { GroupableTabAndContentWrapper } from "./typesWrappers";
+import {
+  InjectedOptionsByGroupToWrapper,
+  InjectedOptionsByNavbarToWrapper,
+} from "../types/typesInjectedOptions";
 
 export class Group implements GroupableTabAndContentWrapper {
   private _insideGroup = false;
@@ -38,18 +40,23 @@ export class Group implements GroupableTabAndContentWrapper {
     return routes;
   };
 
+  // If this wrapper is located at the top of a group hierarchie (meaning without a parent group)
+  // the options will be injected directly by the navbar component. Because of this frameworkInjectedOptions
+  // can be of type InjectedOptionsByNavbarToWrapper.
   getNavbarComponent = (
     frameworkInjectedOptions:
-      | navbarInjectedOptions
-      | groupableNavbarTabPropsFrameworkInjectedOptions
+      | InjectedOptionsByNavbarToWrapper
+      | InjectedOptionsByGroupToWrapper
   ) => {
     const injectedProperties = {
       navbarCollapsed: frameworkInjectedOptions.navbarCollapsed,
       insideGroup: this.getInsideGroup(),
-      groupActive:
-        "groupActive" in frameworkInjectedOptions
-          ? frameworkInjectedOptions.groupActive
-          : false,
+      // As the options origin can be the navbar component itself it has to be checked whether this
+      // wrapper is located inside a group.
+      groupActive: this.getInsideGroup()
+        ? // @ts-ignore If insideGroup is true groupActive will be contained.
+          frameworkInjectedOptions.groupActive
+        : false,
     };
 
     return (

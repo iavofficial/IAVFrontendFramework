@@ -1,13 +1,13 @@
 import React, { useContext, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { useTranslator } from "../../internationalization/translators";
+import { useTranslator } from "../../../internationalization/translators";
 import "./tabs.css";
-import { groupableNavbarTab } from "./typesNavbarTab";
-import { ColorSettingsContext } from "../../../contexts/colorsettings";
+import { GroupableNavbarTab } from "../typesNavbarTab";
+import { ColorSettingsContext } from "../../../../contexts/colorsettings";
 import { SimpleNavbarTabCollapsed } from "./simpleNavbarTabCollapsed";
 import { SimpleNavbarTabUnfolded } from "./simpleNavbarTabUnfolded";
 
-export const SimpleNavbarTab: groupableNavbarTab = (props) => {
+export const SimpleNavbarTab: GroupableNavbarTab = (props) => {
   const navbarCollapsed = props.frameworkInjectedOptions.navbarCollapsed;
   const path = props.frameworkInjectedOptions.path;
 

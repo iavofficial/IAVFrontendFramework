@@ -4,13 +4,13 @@ import { Navbar } from './navbar/navbar';
 import { DefaultImprint } from './imprint/defaultImprint';
 import { SettingsMenuOptions } from './header/settingsMenu';
 import { Route, Routes, Outlet } from 'react-router-dom';
-import { TabAndContentWrapper } from './navbar/wrapper/typesTabAndContentWrapper';
+import { TabAndContentWrapper } from './navbar/wrappers/typesWrappers';
 import { UserMenuOptions } from './header/userMenu';
 
 interface MainViewProps {
+  tabAndContentWrappers: TabAndContentWrapper[];
   documentsComponent?: React.ComponentType<any>;
   documentsLabelKey?: string;
-  tabAndContentWrappers: TabAndContentWrapper[];
   hideLegalDocuments?: boolean;
   headerOptions?: HeaderOptions;
   settingsMenuOptions?: SettingsMenuOptions;

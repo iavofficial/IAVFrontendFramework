@@ -1,6 +1,6 @@
 import React from "react";
 import { PrivilegedNavbarTab } from "../tabs/privilegedNavbarTab";
-import { groupableNavbarTabPropsFrameworkInjectedOptions } from "../tabs/typesNavbarTab";
+import { InjectedOptionsGroupableByWrapperToTab } from "../types/typesInjectedOptions";
 
 export const privilegedNavbarTabFactory = (
   tabProps: Omit<
@@ -9,7 +9,7 @@ export const privilegedNavbarTabFactory = (
   >
 ) => {
   return (props: {
-    frameworkInjectedOptions: groupableNavbarTabPropsFrameworkInjectedOptions;
+    frameworkInjectedOptions: InjectedOptionsGroupableByWrapperToTab;
   }) => {
     return (
       <PrivilegedNavbarTab

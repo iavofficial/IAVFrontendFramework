@@ -1,6 +1,6 @@
 import React from "react";
-import { SimpleNavbarTab } from "../tabs/simpleNavbarTab";
-import { groupableNavbarTabPropsFrameworkInjectedOptions } from "../tabs/typesNavbarTab";
+import { SimpleNavbarTab } from "../tabs/simpleNavbarTab/simpleNavbarTab";
+import { InjectedOptionsGroupableByWrapperToTab } from "../types/typesInjectedOptions";
 
 export const simpleNavbarTabFactory = (
   tabProps: Omit<
@@ -9,7 +9,7 @@ export const simpleNavbarTabFactory = (
   >
 ) => {
   return (props: {
-    frameworkInjectedOptions: groupableNavbarTabPropsFrameworkInjectedOptions;
+    frameworkInjectedOptions: InjectedOptionsGroupableByWrapperToTab;
   }) => {
     return (
       <SimpleNavbarTab

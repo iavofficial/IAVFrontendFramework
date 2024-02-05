@@ -1,12 +1,11 @@
-import React, { useContext, useId } from "react";
+import React, { useContext, useId, useRef } from "react";
 import { ColorSettingsContext } from "../../../../contexts/colorsettings";
 import { SvgIcon } from "../svgIcon";
 import { Tooltip } from "primereact/tooltip";
-import { GroupTabProps } from "./typesGroupTab";
+import { PropsGroupTab } from "./typesTabGroup";
 
-export const TabGroupCollapsed = (props: GroupTabProps) => {
-  // This id is needed for PrimeReact. It has to begin with a letter.
-  const id = "a" + useId();
+export const TabGroupCollapsed = (props: PropsGroupTab) => {
+  const ref = useRef<HTMLDivElement>(null);
 
   const colorSettingsContext = useContext(ColorSettingsContext);
 
@@ -18,7 +17,8 @@ export const TabGroupCollapsed = (props: GroupTabProps) => {
 
   return (
     <div
-      className={"default-general-navbar-style flex align-items-center " + id}
+      ref={ref}
+      className={"default-general-navbar-style flex align-items-center "}
       style={props.style}
       id="navbartab-general"
       onMouseEnter={() => props.setHovering(true)}
@@ -28,7 +28,7 @@ export const TabGroupCollapsed = (props: GroupTabProps) => {
         color={props.hovering ? iconHighlightColor : iconMainColor}
         element={props.logo}
       />
-      <Tooltip content={props.name} target={`.${id}`} id="hover-image" />
+      <Tooltip content={props.name} target={ref} id="hover-image" />
     </div>
   );
 };

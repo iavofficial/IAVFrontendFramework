@@ -1,5 +1,5 @@
 import React, { useContext, useId } from "react";
-import { GroupTabProps } from "./typesGroupTab";
+import { PropsGroupTab } from "./typesTabGroup";
 import { SvgIcon } from "../svgIcon";
 import { ColorSettingsContext } from "../../../../contexts/colorsettings";
 
@@ -9,9 +9,9 @@ interface Props {
     setGroupTabCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const TabGroupUnfolded = (props: GroupTabProps & Props) => {
+export const TabGroupUnfolded = (props: PropsGroupTab & Props) => {
   // This id is needed for PrimeReact. It has to begin with a letter.
-  const id = "a" + useId();
+  // TODO: const id = "a" + useId();
 
   const colorSettingsContext = useContext(ColorSettingsContext);
 

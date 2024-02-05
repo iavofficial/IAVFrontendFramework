@@ -1,19 +1,19 @@
 import React, { ReactElement, useContext, useEffect, useState } from "react";
 import "../../navbar.css";
 import { useTranslator } from "../../../internationalization/translators";
-import { groupableNavbarTabPropsFrameworkInjectedOptions } from "../typesNavbarTab";
+import { InjectedOptionsGroupableByWrapperToTab } from "../../types/typesInjectedOptions";
 import { ColorSettingsContext } from "../../../../contexts/colorsettings";
 import { TranslateFunctionType } from "../../../../types/translationFunction";
 import { TabGroupCollapsed } from "./tabGroupCollapsed";
 import { TabGroupUnfolded } from "./tabGroupUnfolded";
-import { GroupableTabAndContentWrapper } from "../../wrapper/typesTabAndContentWrapper";
-import { GroupInjectedOptions } from "./typesGroupTab";
+import { GroupableTabAndContentWrapper } from "../../wrappers/typesWrappers";
+import { InjectedOptionsByGroupToWrapper } from "../../types/typesInjectedOptions";
 
 interface Props {
   name: string | ((t: TranslateFunctionType) => string);
   navbarCollapsed: boolean;
   wrappers: GroupableTabAndContentWrapper[];
-  frameworkInjectedOptions: GroupInjectedOptions;
+  frameworkInjectedOptions: InjectedOptionsByGroupToWrapper;
   logo?: ReactElement;
   collapsible?: boolean;
 }

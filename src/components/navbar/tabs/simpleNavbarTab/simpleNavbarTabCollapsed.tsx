@@ -1,12 +1,11 @@
-import React, { useContext, useId } from "react";
-import { ColorSettingsContext } from "../../../contexts/colorsettings";
-import { SvgIcon } from "./svgIcon";
+import React, { useContext, useRef } from "react";
+import { ColorSettingsContext } from "../../../../contexts/colorsettings";
+import { SvgIcon } from "../svgIcon";
 import { Tooltip } from "primereact/tooltip";
 import { SimpleNavbarTabProps } from "./typesSimpleNavbarTab";
 
 export const SimpleNavbarTabCollapsed = (props: SimpleNavbarTabProps) => {
-  // This id is needed for PrimeReact. It has to begin with a letter.
-  const id = "a" + useId();
+  const ref = useRef<HTMLDivElement>(null);
 
   const colorSettingsContext = useContext(ColorSettingsContext);
 
@@ -18,11 +17,10 @@ export const SimpleNavbarTabCollapsed = (props: SimpleNavbarTabProps) => {
 
   return (
     <div
+      ref={ref}
       onMouseEnter={() => props.setHovering(true)}
       onMouseLeave={() => props.setHovering(false)}
-      className={
-        "default-general-navbar-style flex align-items-center " + id
-      }
+      className={"default-general-navbar-style flex align-items-center "}
       style={props.style}
     >
       <SvgIcon
@@ -33,11 +31,7 @@ export const SimpleNavbarTabCollapsed = (props: SimpleNavbarTabProps) => {
         }
         element={props.icon}
       />
-      <Tooltip
-        content={props.name}
-        target={`.${id}`}
-        id="hover-image"
-      />
+      <Tooltip content={props.name} target={ref} id="hover-image" />
     </div>
   );
 };

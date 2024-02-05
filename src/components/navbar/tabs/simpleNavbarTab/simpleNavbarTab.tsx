@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useTranslator } from "../../../internationalization/translators";
-import "./tabs.css";
+import "../tabs.css";
 import { GroupableNavbarTab } from "../typesNavbarTab";
 import { ColorSettingsContext } from "../../../../contexts/colorsettings";
 import { SimpleNavbarTabCollapsed } from "./simpleNavbarTabCollapsed";

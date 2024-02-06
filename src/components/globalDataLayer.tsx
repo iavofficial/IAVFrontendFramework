@@ -35,6 +35,8 @@ export const GlobalDataLayer = (props: PropsWithChildren<Props>) => {
     fallbackLang: fallbackLang
   };
 
+  // Add language options properties to the languageOptions object taking into account
+  // that the fallbackLang attribute should not be overriden by the properties.
   if (props.languageOptions) {
     const { fallbackLang: _, ...rest } = props.languageOptions;
     languageOptions = {...languageOptions, ...rest};

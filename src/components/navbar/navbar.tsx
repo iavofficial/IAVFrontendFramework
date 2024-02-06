@@ -31,9 +31,8 @@ export const Navbar = (props: Props) => {
     <div
       id="navbar"
       style={{
-        padding: "16px 0px 0px 0px",
         backgroundColor:
-          colorSettingsContext.currentColors.navbarColors.backgroundColor,
+          colorSettingsContext.currentColors.navbarColors.backgroundColor
       }}
     >
       <SimpleBar

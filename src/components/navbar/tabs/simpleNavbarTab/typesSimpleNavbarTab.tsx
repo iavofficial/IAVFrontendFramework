@@ -5,7 +5,8 @@ export interface SimpleNavbarTabProps {
   setHovering: (hovering: boolean) => void;
   hovering: boolean;
   active: boolean;
-  icon?: ReactElement;
   name: string;
   disabled: boolean;
+  icon?: ReactElement;
+  additionalClassNames?: string;
 }

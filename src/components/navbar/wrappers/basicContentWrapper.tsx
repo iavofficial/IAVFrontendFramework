@@ -33,7 +33,7 @@ export class BasicContentWrapper
   ) => {
     const NavbarElement = this._navbarTab;
 
-    const injectedProperties: InjectedOptionsGroupableByWrapperToTab = {
+    const injectedOptions: InjectedOptionsGroupableByWrapperToTab = {
       insideGroup: this.getInsideGroup(),
       path: this._path,
       navbarCollapsed: navbarInjectedOptions.navbarCollapsed,
@@ -46,7 +46,7 @@ export class BasicContentWrapper
     return (
       <NavbarElement
         key={this.getKey()}
-        frameworkInjectedOptions={injectedProperties}
+        frameworkInjectedOptions={injectedOptions}
       />
     );
   };

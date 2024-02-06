@@ -1,8 +1,9 @@
-.default-general-navbar-style {
+.default-tab-style {
   font-weight: 500;
   opacity: 1;
   cursor: pointer;
   height: 40px;
+  padding: 0px 16px 0px 8px;
 }
 
 #navbar-tab-name {
@@ -23,6 +24,5 @@
 }
 
 .navbar-tab-space {
-  margin-left: 12px;
-  margin-bottom: 12px;
+  margin-top: 4px;
 }

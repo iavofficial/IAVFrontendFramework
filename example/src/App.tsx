@@ -77,7 +77,7 @@ function App() {
       false,
       [
         new BasicContentWrapper(
-          "/group-example1",
+          "/group-example2",
           simpleNavbarTabFactory({
             name: (t: TranslateFunctionType) =>
               t("example_component", { count: 2 }),
@@ -86,29 +86,36 @@ function App() {
           }),
           ExampleComponent2
         ),
-        new BasicContentWrapper(
-          "/group-example3",
-          privilegedNavbarTabFactory({
-            name: (t: TranslateFunctionType) =>
-              t("example_component", { count: 3 }),
-            disabled: false,
-            permittedGroups: ["ADMIN"],
-            icon: <InfoIcon />,
-          }),
-          ExampleComponent3
-        ),
-        new BasicContentWrapper(
-          "/group-example4",
-          simpleNavbarTabFactory({
-            name: (t: TranslateFunctionType) =>
-              t("example_component", { count: 4 }),
-            disabled: false,
-            icon: <InfoIcon />,
-          }),
-          ExampleComponent4
-        ),
+      ]
+    ),
+    new BasicContentWrapper(
+      "/group-example3",
+      privilegedNavbarTabFactory({
+        name: (t: TranslateFunctionType) =>
+          t("example_component", { count: 3 }),
+        disabled: false,
+        permittedGroups: ["ADMIN"],
+        icon: <InfoIcon />,
+      }),
+      ExampleComponent3
+    ),
+    new BasicContentWrapper(
+      "/group-example4",
+      simpleNavbarTabFactory({
+        name: (t: TranslateFunctionType) =>
+          t("example_component", { count: 4 }),
+        disabled: false,
+        icon: <InfoIcon />,
+      }),
+      ExampleComponent4
+    ),
+    new Group(
+      (t: TranslateFunctionType) => t("Test_group_collapsible"),
+      <InfoIcon />,
+      true,
+      [
         new Group(
-          (t: TranslateFunctionType) => t("Test_group_collapsible"),
+          "Untergruppe",
           <InfoIcon />,
           true,
           [
@@ -117,44 +124,54 @@ function App() {
               simpleNavbarTabFactory({
                 name: (t: TranslateFunctionType) =>
                   t("example_component", { count: 5.1 }),
-                disabled: true,
+                disabled: false,
                 icon: <InfoIcon />,
               }),
               ExampleComponent3
-            ),
-            new BasicContentWrapper(
-              "/group-example52",
-              simpleNavbarTabFactory({
-                name: (t: TranslateFunctionType) =>
-                  t("example_component", { count: 5.2 }),
-                disabled: false,
-                icon: <InfoIcon />
-              }),
-              ExampleComponent4
-            ),
+            )
           ]
         ),
         new BasicContentWrapper(
-          "/group-example6",
+          "/group-example52",
           simpleNavbarTabFactory({
             name: (t: TranslateFunctionType) =>
-              t("example_component", { count: 6 }),
+              t("example_component", { count: 5.2 }),
             disabled: false,
-            icon: <InfoIcon />
+            icon: <InfoIcon />,
           }),
-          ExampleComponent5
+          ExampleComponent4
         ),
         new BasicContentWrapper(
-          "/group-example7",
+          "/group-example53",
           simpleNavbarTabFactory({
             name: (t: TranslateFunctionType) =>
-              t("example_component", { count: 7 }),
-            disabled: false,
-            icon: <InfoIcon />
+              t("example_component", { count: 5.3 }),
+            disabled: true,
+            icon: <InfoIcon />,
           }),
-          ExampleComponent6
-        )
+          ExampleComponent3
+        ),
       ]
+    ),
+    new BasicContentWrapper(
+      "/group-example6",
+      simpleNavbarTabFactory({
+        name: (t: TranslateFunctionType) =>
+          t("example_component", { count: 6 }),
+        disabled: false,
+        icon: <InfoIcon />,
+      }),
+      ExampleComponent5
+    ),
+    new BasicContentWrapper(
+      "/group-example7",
+      simpleNavbarTabFactory({
+        name: (t: TranslateFunctionType) =>
+          t("example_component", { count: 7 }),
+        disabled: false,
+        icon: <InfoIcon />,
+      }),
+      ExampleComponent6
     ),
   ];
 

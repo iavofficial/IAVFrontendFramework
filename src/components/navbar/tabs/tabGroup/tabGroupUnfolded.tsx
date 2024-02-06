@@ -4,9 +4,9 @@ import { SvgIcon } from "../svgIcon";
 import { ColorSettingsContext } from "../../../../contexts/colorsettings";
 
 interface Props {
-    collapsible: boolean;
-    groupTabCollapsed: boolean;
-    setGroupTabCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
+  collapsible: boolean;
+  groupTabCollapsed: boolean;
+  setGroupTabCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const TabGroupUnfolded = (props: PropsGroupTab & Props) => {
@@ -27,15 +27,23 @@ export const TabGroupUnfolded = (props: PropsGroupTab & Props) => {
     colorSettingsContext.currentColors.navbarColors.tabColors
       .arrowHighlightColor;
 
+  let className = "default-tab-style flex align-items-center justify-content-between ";
+
+  if (props.additionalClassNames) {
+    className += props.additionalClassNames;
+  }
+
   return (
     <div
       onMouseEnter={() => props.setHovering(true)}
       onMouseLeave={() => props.setHovering(false)}
-      className="default-general-navbar-style flex align-items-center justify-content-between navbar-tab-space"
+      className={className}
       style={props.style}
       onClick={() => {
         if (props.collapsible) {
-            props.setGroupTabCollapsed((prevGroupTabCollapsed: boolean) => !prevGroupTabCollapsed);
+          props.setGroupTabCollapsed(
+            (prevGroupTabCollapsed: boolean) => !prevGroupTabCollapsed
+          );
         }
       }}
     >
@@ -54,7 +62,9 @@ export const TabGroupUnfolded = (props: PropsGroupTab & Props) => {
           fontSize: "15px",
           color: props.hovering ? arrowHighlightColor : arrowMainColor,
         }}
-        className={props.groupTabCollapsed ? "pi pi-chevron-down" : "pi pi-chevron-left"}
+        className={
+          props.groupTabCollapsed ? "pi pi-chevron-left" : "pi pi-chevron-down"
+        }
       />
     </div>
   );

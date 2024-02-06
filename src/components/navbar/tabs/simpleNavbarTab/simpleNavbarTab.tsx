@@ -10,6 +10,7 @@ import { SimpleNavbarTabUnfolded } from "./simpleNavbarTabUnfolded";
 export const SimpleNavbarTab: GroupableNavbarTab = (props) => {
   const navbarCollapsed = props.frameworkInjectedOptions.navbarCollapsed;
   const path = props.frameworkInjectedOptions.path;
+  const insideActiveGroup = props.frameworkInjectedOptions.groupActive;
 
   const [hovering, setHovering] = useState(false);
   const colorSettingsContext = useContext(ColorSettingsContext);
@@ -17,28 +18,38 @@ export const SimpleNavbarTab: GroupableNavbarTab = (props) => {
   const active = useLocation().pathname === path;
 
   let highlightColor =
-    colorSettingsContext.currentColors.navbarColors.tabColors.highlightColor;
+    colorSettingsContext.currentColors.navbarColors.tabColors.tabHighlightColor;
   let mainColor =
     colorSettingsContext.currentColors.navbarColors.tabColors.mainColor;
+  const insideActiveGroupColor =
+    colorSettingsContext.currentColors.navbarColors.tabColors
+      .tabInsideActiveGroupColor;
 
-  let letteringHighlightColor =
+  let backgroundColor = mainColor;
+  if ((active || hovering) && !props.disabled) {
+    backgroundColor = highlightColor;
+  } else if (insideActiveGroup) {
+    backgroundColor = insideActiveGroupColor;
+  }
+
+  let fontHighlightColor =
     colorSettingsContext.currentColors.navbarColors.tabColors
-      .letteringHighlightColor;
-  let letteringMainColor =
-    colorSettingsContext.currentColors.navbarColors.tabColors
-      .letteringMainColor;
-      
+      .tabFontHighlightColor;
+  let fontMainColor =
+    colorSettingsContext.currentColors.navbarColors.tabColors.tabFontMainColor;
+
   const tabStyleDefault = {
     width: navbarCollapsed ? "40px" : "240px",
     cursor: active || props.disabled ? "default" : "pointer",
-    backgroundColor:
-      (active || hovering) && !props.disabled ? highlightColor : mainColor,
+    backgroundColor: backgroundColor,
     color:
       (active || hovering) && !props.disabled
-        ? letteringHighlightColor
-        : letteringMainColor,
-    opacity: props.disabled ? 0.5 : 1,
+        ? fontHighlightColor
+        : fontMainColor,
+    opacity: props.disabled ? 0.5 : 1
   };
+
+  const additionalClassNames = !insideActiveGroup ? "navbar-tab-space" : "";
 
   const navbarTab = navbarCollapsed ? (
     <SimpleNavbarTabCollapsed
@@ -49,6 +60,7 @@ export const SimpleNavbarTab: GroupableNavbarTab = (props) => {
       icon={props.icon}
       name={props.name instanceof Function ? props.name(t) : props.name}
       disabled={props.disabled}
+      additionalClassNames={additionalClassNames}
     />
   ) : (
     <SimpleNavbarTabUnfolded
@@ -59,28 +71,25 @@ export const SimpleNavbarTab: GroupableNavbarTab = (props) => {
       icon={props.icon}
       name={props.name instanceof Function ? props.name(t) : props.name}
       disabled={props.disabled}
+      additionalClassNames={additionalClassNames}
     />
   );
 
-  return (
-    <div className="navbar-tab-space">
-      {props.disabled ? (
-        <>
-          {navbarTab}
-          <div
-            className="flex"
-            style={{ width: navbarCollapsed ? "40px" : "240px" }}
-          >
-            <div style={{ width: "80%" }} />
-          </div>
-        </>
-      ) : (
-        <>
-          <Link style={{ textDecoration: "none" }} to={path}>
-            {navbarTab}
-          </Link>
-        </>
-      )}
-    </div>
+  return props.disabled ? (
+    <>
+      {navbarTab}
+      <div
+        className="flex"
+        style={{ width: navbarCollapsed ? "40px" : "240px" }}
+      >
+        <div style={{ width: "80%" }} />
+      </div>
+    </>
+  ) : (
+    <>
+      <Link style={{ textDecoration: "none" }} to={path}>
+        {navbarTab}
+      </Link>
+    </>
   );
 };

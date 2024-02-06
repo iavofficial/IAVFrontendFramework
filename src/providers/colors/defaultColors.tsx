@@ -1,4 +1,4 @@
-import { BLACK, BLUE0, BLUE1, BLUE2, BLUE3, BLUE4, GREY1, GREY2, GREY3, GREY5, RED, WHITE } from "../../constants";
+import { BLACK, BLUE0, BLUE1, BLUE2, BLUE3, BLUE4, BLUE5, GREY1, GREY2, GREY3, GREY5, RED, WHITE } from "../../constants";
 
 export const LIGHT_NAVBAR_BACKGROUND_COLOR = WHITE;
 export const DARK_NAVBAR_BACKGROUND_COLOR = GREY5;
@@ -18,17 +18,25 @@ export const DARK_NAVBAR_SCROLLBAR_COLOR = GREY1;
 export const LIGHT_NAVBAR_MAIN_COLOR = WHITE;
 export const DARK_NAVBAR_MAIN_COLOR = "";
 
-// Color for group tabs.
-export const LIGHT_NAVBAR_HIGHLIGHT_COLOR = GREY2;
-export const DARK_NAVBAR_HIGHLIGHT_COLOR = "";
+// Highlight color for group tabs.
+export const LIGHT_NAVBAR_GROUP_HIGHLIGHT_COLOR = GREY2;
+export const DARK_NAVBAR_GROUP_HIGHLIGHT_COLOR = "";
+
+// Highlight color for navigation tabs.
+export const LIGHT_NAVBAR_TAB_HIGHLIGHT_COLOR = BLUE0;
+export const DARK_NAVBAR_TAB_HIGHLIGHT_COLOR = "";
 
 // Color for group tab text.
-export const LIGHT_NAVBAR_LETTERING_MAIN_COLOR = BLUE1;
-export const DARK_NAVBAR_LETTERING_MAIN_COLOR = GREY3;
+export const LIGHT_NAVBAR_FONT_MAIN_COLOR = BLUE1;
+export const DARK_NAVBAR_FONT_MAIN_COLOR = GREY3;
 
-// Color for group tab text.
-export const LIGHT_NAVBAR_LETTERING_HIGHLIGHT_COLOR = BLUE1;
-export const DARK_NAVBAR_LETTERING_HIGHLIGHT_COLOR = WHITE;
+// Color for group tab text when selected.
+export const LIGHT_NAVBAR_GROUP_FONT_HIGHLIGHT_COLOR = BLUE1;
+export const DARK_NAVBAR_GROUP_FONT_HIGHLIGHT_COLOR = WHITE;
+
+// Color for navigation tab text when selected.
+export const LIGHT_NAVBAR_TAB_FONT_HIGHLIGHT_COLOR = WHITE;
+export const DARK_NAVBAR_TAB_FONT_HIGHLIGHT_COLOR = WHITE;
 
 export const LIGHT_NAVBAR_ICON_MAIN_COLOR = BLUE1;
 export const DARK_NAVBAR_ICON_MAIN_COLOR = GREY3;
@@ -44,3 +52,6 @@ export const DARK_NAVBAR_ARROW_MAIN_COLOR = GREY3;
 
 export const LIGHT_NAVBAR_GROUPED_TABS_BACKGROUND_COLOR = GREY1;
 export const DARK_NAVBAR_GROUPED_TABS_BACKGROUND_COLOR = GREY3;
+
+export const LIGHT_NAVBAR_TAB_INSIDE_ACTIVE_GROUP_COLOR = GREY1;
+export const DARK_NAVBAR_TAB_INSIDE_ACTIVE_GROUP_COLOR = "";

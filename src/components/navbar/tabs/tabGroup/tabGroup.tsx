@@ -22,35 +22,49 @@ export const TabGroup = (props: Props) => {
   const t = useTranslator();
   const colorSettingsContext = useContext(ColorSettingsContext);
   const [hovering, setHovering] = useState(false);
-  const [groupTabCollapsed, setGroupTabCollapsed] = useState(false);
+  const [groupTabCollapsed, setGroupTabCollapsed] = useState(true);
+
+  const insideActiveGroup = props.frameworkInjectedOptions.groupActive;
 
   const highlightColor =
-    colorSettingsContext.currentColors.navbarColors.tabColors.highlightColor;
+    colorSettingsContext.currentColors.navbarColors.tabColors
+      .groupHighlightColor;
   const mainColor =
     colorSettingsContext?.currentColors.navbarColors.tabColors.mainColor;
+  const insideActiveGroupColor =
+    colorSettingsContext.currentColors.navbarColors.tabColors
+      .tabInsideActiveGroupColor;
 
-  const letteringHighlightColor =
+  let backgroundColor = mainColor;
+  if (hovering || !groupTabCollapsed) {
+    backgroundColor = highlightColor;
+  } else if (insideActiveGroup) {
+    backgroundColor = insideActiveGroupColor;
+  }
+
+  const fontHighlightColor =
     colorSettingsContext.currentColors.navbarColors.tabColors
-      .letteringHighlightColor;
-  const letteringMainColor =
+      .groupFontHighlightColor;
+  const fontMainColor =
     colorSettingsContext.currentColors.navbarColors.tabColors
-      .letteringMainColor;
+      .groupFontMainColor;
 
   const collapsible =
     props.collapsible !== undefined ? props.collapsible : true;
 
   useEffect(() => {
     if (!collapsible) {
-      setGroupTabCollapsed(true);
+      setGroupTabCollapsed(false);
     }
   }, [collapsible]);
 
   const tabStyleDefault = {
     width: props.navbarCollapsed ? "40px" : "240px",
-    backgroundColor: (hovering || groupTabCollapsed) ? highlightColor : mainColor,
-    color: hovering ? letteringHighlightColor : letteringMainColor,
-    padding: props.navbarCollapsed ? "0px" : "0px 16px 0px 0px"
+    backgroundColor: backgroundColor,
+    color: hovering ? fontHighlightColor : fontMainColor,
   };
+
+  const additionalClassNames = !insideActiveGroup ? "navbar-tab-space" : "";
 
   const groupElement = props.navbarCollapsed ? (
     <TabGroupCollapsed
@@ -59,6 +73,7 @@ export const TabGroup = (props: Props) => {
       setHovering={setHovering}
       hovering={hovering}
       logo={props.logo}
+      additionalClassNames={additionalClassNames}
     />
   ) : (
     <TabGroupUnfolded
@@ -70,19 +85,20 @@ export const TabGroup = (props: Props) => {
       collapsible={!!props.collapsible}
       groupTabCollapsed={groupTabCollapsed}
       setGroupTabCollapsed={setGroupTabCollapsed}
+      additionalClassNames={additionalClassNames}
     />
   );
 
   return (
     <>
       {groupElement}
-      {groupTabCollapsed ? (
-        props.wrappers.map(wrapper => (
+      {!groupTabCollapsed ? (
+        props.wrappers.map((wrapper) =>
           wrapper.getNavbarComponent({
             groupActive: !groupTabCollapsed,
-            navbarCollapsed: props.frameworkInjectedOptions.navbarCollapsed
+            navbarCollapsed: props.frameworkInjectedOptions.navbarCollapsed,
           })
-        ))
+        )
       ) : (
         <React.Fragment />
       )}

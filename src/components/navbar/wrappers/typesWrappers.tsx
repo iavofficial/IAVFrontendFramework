@@ -14,5 +14,5 @@ export type GroupableTabAndContentWrapper = TabAndContentWrapper & {
   // Allow any return value to allow for feedback if
   // necessary while using the framework and developing custom TabAndContentWrappers.
   setInsideGroup(insideGroup: boolean): any;
-  getNavbarComponent(navbarInjectedOptions: InjectedOptionsByGroupToWrapper): ReactElement;
+  getNavbarComponent(navbarInjectedOptions: InjectedOptionsByNavbarToWrapper | InjectedOptionsByGroupToWrapper): ReactElement;
 };

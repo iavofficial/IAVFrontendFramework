@@ -1,5 +1,5 @@
 import React from "react";
-import { useContext, useId } from "react";
+import { useContext } from "react";
 import { ColorSettingsContext } from "../../../../contexts/colorsettings";
 import { SvgIcon } from "../svgIcon";
 import { SimpleNavbarTabProps } from "./typesSimpleNavbarTab";
@@ -16,9 +16,15 @@ export const SimpleNavbarTabUnfolded = (props: SimpleNavbarTabProps) => {
   const iconMainColor =
     colorSettingsContext.currentColors.navbarColors.tabColors.iconMainColor;
 
+  let className = "default-tab-style flex ";
+
+  if (props.additionalClassNames) {
+    className += props.additionalClassNames;
+  }
+
   return (
     <div
-      className="default-general-navbar-style flex "
+      className={className}
       style={props.style}
       onMouseEnter={() => props.setHovering(true)}
       onMouseLeave={() => props.setHovering(false)}

@@ -5,7 +5,7 @@ import { InjectedOptionsByNavbarToWrapper } from "../types/typesInjectedOptions"
 import { ContentWrapperGeneralization } from "./contentWrapperGeneralization";
 import { GroupableTabAndContentWrapper } from "./typesWrappers";
 import { ComponentTypeMinProps } from "../../../types/typesReact";
-import { InjectedOptionsObject } from "../typesNavbar";
+import { InjectedOptionsObject } from "../types/typesInjectedOptions";
 
 export class BasicContentWrapper
   extends ContentWrapperGeneralization

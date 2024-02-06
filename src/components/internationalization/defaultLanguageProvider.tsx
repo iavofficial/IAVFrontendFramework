@@ -1,15 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import i18n from 'i18next';
-import { useTranslation } from 'react-i18next';
+import React, { useEffect, useState } from "react";
+import i18n from "i18next";
+import { useTranslation } from "react-i18next";
 
-import translationEN from '../../assets/translations/en.json';
-import translationDE from '../../assets/translations/de.json';
-import { initI18next } from './i18n';
-import { useCookiesAccepted } from '../cookie/cookieHooks';
-import { LanguageContext, Translations } from '../../contexts/language';
+import translationEN from "../../assets/translations/en.json";
+import translationDE from "../../assets/translations/de.json";
+import { initI18next } from "./i18n";
+import { useCookiesAccepted } from "../cookie/cookieHooks";
+import { LanguageContext, Translations } from "../../contexts/language";
+
+export interface LanguageOptions {
+  fallbackLang: string;
+  initialLang?: string;
+}
 
 interface Props {
-  fallbackLang: string;
+  languageOptions: LanguageOptions;
   translations?: Translations;
   initI18Next?: () => void;
 }
@@ -17,6 +22,8 @@ interface Props {
 export const DefaultLanguageProvider = (
   props: React.PropsWithChildren<Props>
 ) => {
+  const {fallbackLang, initialLang} = props.languageOptions;
+
   const [resources, setResources] = useState({
     en: {
       translation: translationEN,
@@ -26,7 +33,7 @@ export const DefaultLanguageProvider = (
     },
   });
 
-  const [activeLang, setActiveLang] = useState(props.fallbackLang);
+  const [activeLang, setActiveLang] = useState(initialLang ?? fallbackLang);
 
   const [loaded, setLoaded] = useState(false);
 
@@ -34,16 +41,21 @@ export const DefaultLanguageProvider = (
 
   useEffect(() => {
     if (!cookiesAccepted) {
-      initI18next(resources, cookiesAccepted);
+      initI18next(resources, cookiesAccepted, fallbackLang);
     } else if (!props.initI18Next) {
-      initI18next(resources, cookiesAccepted);
+      initI18next(resources, cookiesAccepted, fallbackLang);
     } else {
       props.initI18Next();
     }
 
-    setActiveLang(i18n.language === 'de-DE' ? 'de' : i18n.language);
+    if(initialLang) {
+      selectLanguage(initialLang);
+    }else{
+      setActiveLang(i18n.language === "de-DE" ? "de" : i18n.language);
+    }
+
     setLoaded(true);
-  }, [props.initI18Next, cookiesAccepted]);
+  }, [props.initI18Next, fallbackLang, initialLang, cookiesAccepted]);
 
   useEffect(() => {
     if (props.translations) {
@@ -79,7 +91,7 @@ export const DefaultLanguageProvider = (
   return (
     <LanguageContext.Provider
       value={{
-        fallbackLang: props.fallbackLang,
+        fallbackLang: fallbackLang,
         resources: resources,
         activeLang: activeLang,
         selectLanguage: selectLanguage,

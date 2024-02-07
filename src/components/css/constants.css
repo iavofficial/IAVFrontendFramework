@@ -6,7 +6,6 @@
     --blue-4: #52c9ff;
     --blue-5: #CBE8ff;
  
-
     --magenta-1: #5500b4;
     --magenta-2: #a200e6;
     --magenta-3: #dc46f3;
@@ -14,12 +13,13 @@
     --magenta-5: #ffafff;
     --magenta-6: #fddeff;
 
-    --white: #ffffff;
     --grey-1: #f0f0f0;
     --grey-2: #DADADA;
     --grey-3: #808080;
     --grey-4: #333333;
     --grey-5: #1A1A1A;
+
+    --white: #ffffff;
     --black: #000000;
 
     --yellow: #ffd800;
@@ -36,7 +36,7 @@
     --dropdownBgHighlightfb: var(--black);
 }
 
-[data-theme="dark"]{
+[color-theme="dark"]{
     --contextmenubgmaincolorfb: var(--grey-5);
     --highlightcolorfb: var(--grey-3);
     --textAndIconMainColorfb: var(--white);

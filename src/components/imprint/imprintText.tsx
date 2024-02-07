@@ -12,7 +12,7 @@ export const ImprintText = () => {
       className={
         colorSettingsContext?.darkmode
           ? 'bg-grey-5 color-white'
-          : 'bg-white color-black'
+          : 'bg-white-1 color-black'
       }
     >
       <p className={'font-bold'}>{t('Imprint')}</p>
@@ -38,11 +38,12 @@ export const ImprintText = () => {
       <br /> <br />
       <span>{t('Headquarter')}: Berlin</span> <br />
       <span>{t('Register_court')}: Amtsgericht Charlottenburg</span> <br />
-      <span>{t('Registration_number')}: HRB 21 280</span> <br />
+      <span>{t('Registration_number')}: HRB 21 280 B</span> <br />
       <span>{t('USt_Ident_Number')}: DE 136647090</span> <br /> <br />
       <span>{t('Managing_directors')}</span> <br />
-      <span>Dr. Uwe Horn</span> <br />
+      <span>Joerg Astalosch</span> <br />
       <span>Martin Mahlke</span> <br />
+      <span>Dr. Uwe Horn</span> <br />
       <span>{t('Chairman_supervisory_board')}</span> <br />
       <span>Dr. Nikolai Ardey</span> <br />
     </div>

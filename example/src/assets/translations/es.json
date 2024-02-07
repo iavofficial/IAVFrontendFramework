@@ -16,7 +16,7 @@
     "allow_cookies_header": "La aplicación web usas cookies.",
     "allow_cookies_disclaimer": "La aplicación web necesita permiso para usar cookies.",
     "allow_cookies_button": "Permitir cookies",
-    "Email_address": "Dirección de email",
+
     "Password": "Contraseña",
     "New_password": "Nueva contraseña",
     "bytes_example": "{{count}} son 1KiB",

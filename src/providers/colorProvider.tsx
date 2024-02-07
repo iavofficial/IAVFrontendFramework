@@ -15,15 +15,21 @@ export const ColorProvider = (props: React.PropsWithChildren<Props>) => {
 
   useEffect(() => {
     if (darkmode) {
+      // TODO: Remove line for data-theme in the next major version as it is deprecated.
       document.querySelector('body')?.setAttribute('data-theme', 'dark');
+      document.querySelector('body')?.setAttribute('color-theme', 'dark');
     }
   }, []);
 
   const setDarkmodeToLocalStorage = (darkmodeValue: boolean) => {
     if (darkmodeValue) {
+      // TODO: Remove line for data-theme in the next major version as it is deprecated.
       document.querySelector('body')?.setAttribute('data-theme', 'dark');
+      document.querySelector('body')?.setAttribute('color-theme', 'dark');
     } else {
+      // TODO: Remove line for data-theme in the next major version as it is deprecated.
       document.querySelector('body')?.setAttribute('data-theme', 'light');
+      document.querySelector('body')?.setAttribute('color-theme', 'light');
     }
 
     localStorage.setItem('darkmode', JSON.stringify(darkmodeValue));

@@ -32,8 +32,7 @@ export const Navbar = (props: Props) => {
     <div
       id="navbar"
       className={
-        (colorSettingsContext?.darkmode ? "bg-grey-5" : "bg-white-1") +
-        " flex flex-column"
+        (colorSettingsContext?.darkmode ? "bg-grey-5" : "bg-white-1")
       }
       style={{
         padding: "16px 0px 0px 0px",
@@ -41,15 +40,18 @@ export const Navbar = (props: Props) => {
           colorSettingsContext?.navbarColorOptions?.backgroundColor,
       }}
     >
+
       <SimpleBar
         style={{
           width: navbarSettingsContext?.navbarCollapsed ? "40px" : "240px",
-          height: navbarSettingsContext?.navbarCollapsed ? "83vh" : "87vh",
           color: colorSettingsContext?.navbarColorOptions?.scrollbarColor
             ? colorSettingsContext?.navbarColorOptions.scrollbarColor
             : GREY1,
           position: "relative",
           overflowX: "visible",
+          marginBottom: "30px",
+          flex: "0 1 auto",
+          overflow: "clip"
         }}
       >
         <>
@@ -58,72 +60,68 @@ export const Navbar = (props: Props) => {
           )}
         </>
       </SimpleBar>
-      <div style={{ marginTop: "auto" }}>
-        <div
-          className={
-            "text-center flex " +
-            (navbarSettingsContext?.navbarCollapsed ? "flex-column" : "px-3 ")
-          }
-          style={{
-            justifyContent: navbarSettingsContext?.navbarCollapsed
-              ? "center"
-              : "space-between",
-            marginBottom: "8px",
-          }}
-        >
-          {!props.hideLegalDocuments && (
-            <Link
-              style={{
-                fontSize: "13px",
-                fontWeight: "bolder",
-                textDecoration: "none",
-              }}
-              to="/documents"
-            >
-              <i
-                style={{
-                  color: colorSettingsContext?.navbarColorOptions
-                    ?.legalDocumentsIconColor
-                    ? colorSettingsContext?.navbarColorOptions
-                        ?.legalDocumentsIconColor
-                    : BLUE3,
-                  marginBottom: navbarSettingsContext?.navbarCollapsed
-                    ? "16px"
-                    : "",
-                  fontWeight: "bold",
-                }}
-                className={"pi pi-info-circle " + identifierLegal}
-              />
-            </Link>
-          )}
-
-          <Tooltip
-            content={t(
-              props.documentsLabelKey ? props.documentsLabelKey : "Imprint"
-            )}
-            target={identifierWithDot}
-            id="hover-image"
-          />
-          {navbarSettingsContext?.collapsible && (
+      <div
+        id="navbar-bottom-wrapper"
+        className={
+          "text-center flex " +
+          (navbarSettingsContext?.navbarCollapsed ? "flex-column" : "px-3 ")
+        }
+        style={{
+          justifyContent: navbarSettingsContext?.navbarCollapsed
+            ? "center"
+            : "space-between"
+        }}
+      >
+        {!props.hideLegalDocuments && (
+          <Link
+            style={{
+              fontSize: "13px",
+              fontWeight: "bolder",
+              textDecoration: "none",
+            }}
+            to="/documents"
+          >
             <i
-              onClick={() =>
-                navbarSettingsContext?.setNavbarCollapsed(
-                  !navbarSettingsContext.navbarCollapsed
-                )
-              }
               style={{
-                cursor: "pointer",
-                color:
-                  colorSettingsContext?.navbarColorOptions
-                    ?.navbarCollapseArrowColor,
+                color: colorSettingsContext?.navbarColorOptions
+                  ?.legalDocumentsIconColor
+                  ? colorSettingsContext?.navbarColorOptions
+                    ?.legalDocumentsIconColor
+                  : BLUE3,
+                fontWeight: "bold",
               }}
-              className={calculateNavbarArrowFunctionColor(
-                navbarSettingsContext?.navbarCollapsed!,
-                colorSettingsContext?.darkmode as boolean
-              )}
+              className={"pi pi-info-circle " + identifierLegal}
             />
+          </Link>
+        )}
+
+        <Tooltip
+          content={t(
+            props.documentsLabelKey ? props.documentsLabelKey : "Imprint"
           )}
-        </div>
+          target={identifierWithDot}
+        />
+
+        {navbarSettingsContext?.collapsible && (
+          <i
+            onClick={() =>
+              navbarSettingsContext?.setNavbarCollapsed(
+                !navbarSettingsContext.navbarCollapsed
+              )
+            }
+            style={{
+              cursor: "pointer",
+              color:
+                colorSettingsContext?.navbarColorOptions
+                  ?.navbarCollapseArrowColor,
+              marginTop: navbarSettingsContext.navbarCollapsed ? "8px" : "0px"
+            }}
+            className={calculateNavbarArrowFunctionColor(
+              navbarSettingsContext?.navbarCollapsed!,
+              colorSettingsContext?.darkmode as boolean
+            )}
+          />
+        )}
       </div>
     </div>
   );

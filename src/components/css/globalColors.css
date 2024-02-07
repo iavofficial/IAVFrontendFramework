@@ -1,6 +1,12 @@
 /* BACKGROUND CLASSES*/
+
+/* This class is not named bg-white because of name conflicts with PrimeReact. */
 .bg-white-1{
   background-color: var(--white);
+}
+
+.bg-black{
+  background-color: var(--black);
 }
 
 .bg-grey-1{
@@ -22,11 +28,6 @@
 .bg-grey-5{
   background-color: var(--grey-5);
 }
-
-.bg-black{
-  background-color: var(--black);
-}
-
 
 
 .bg-blue-0{
@@ -96,6 +97,10 @@
 .color-white{
   color: var(--white);
 }
+
+.color-black{
+  color: var(--black);
+}
   
 .color-grey-1{
   color: var(--grey-1);
@@ -117,10 +122,9 @@
   color: var(--grey-5);
 }
 
-.color-black{
-  color: var(--black);
+.color-blue-0{
+  color: var(--blue-0);
 }
-
 
 .color-blue-1{
   color: var(--blue-1);

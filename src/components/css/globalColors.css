@@ -1,11 +1,7 @@
 /* BACKGROUND CLASSES*/
 
-/* TODO: Deprecation: Should be removed in 12.0.0 */
+/* This class is not named bg-white because of name conflicts with PrimeReact. */
 .bg-white-1{
-  background-color: var(--white);
-}
-
-.bg-white{
   background-color: var(--white);
 }
 

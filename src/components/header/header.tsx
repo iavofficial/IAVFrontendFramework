@@ -16,13 +16,6 @@ export interface HeaderOptions {
   reactElementLeft?: ReactElement;
   hideLeft?: boolean;
   hideRight?: boolean;
-}
-
-export interface HeaderOptions {
-  reactElementRight?: ReactElement;
-  reactElementLeft?: ReactElement;
-  hideLeft?: boolean;
-  hideRight?: boolean;
   hideUserIcon?: boolean;
 }
 

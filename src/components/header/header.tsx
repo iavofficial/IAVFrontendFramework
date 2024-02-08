@@ -10,6 +10,7 @@ import { BLUE3, GREY3, WHITE } from "../../constants";
 import { SettingsMenuOptions, SettingsMenu } from "./settingsMenu";
 import { UserMenu, UserMenuOptions } from "./userMenu";
 import { ColorSettingsContext } from "../../contexts/colorsettings";
+import { AppLogoPlaceholder } from "../appLogoPlaceholder";
 
 export interface HeaderOptions {
   reactElementRight?: ReactElement;
@@ -41,17 +42,6 @@ export const Header = (props: Props) => {
     </div>
   );
 
-  const appLogoDefault = (props: Props) => (
-    <div
-      style={{
-        display: props.headerOptions?.hideLeft ? "none" : "flex",
-        alignItems: "center",
-      }}
-    >
-      <AppLogo fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE} />
-    </div>
-  );
-
   const hideSettingsMenu = (e: React.KeyboardEvent) => {
     if (e.key === "Escape") {
       menuRef.current?.hide(e);
@@ -76,10 +66,12 @@ export const Header = (props: Props) => {
           colorSettingsContext?.headerColorOptions?.backgroundColor,
       }}
     >
-      <div id="left-element" className={"flex"}>
-        {props.headerOptions?.reactElementLeft
-          ? props.headerOptions?.reactElementLeft
-          : appLogoDefault(props)}
+      <div id="left-element" className="flex default-app-logo-text-style">
+        {props.headerOptions?.reactElementLeft ? (
+          props.headerOptions?.reactElementLeft
+        ) : (
+          <AppLogoPlaceholder />
+        )}
       </div>
 
       <div

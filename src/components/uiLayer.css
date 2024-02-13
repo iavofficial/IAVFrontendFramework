@@ -9,3 +9,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
   position: relative;
 }
+
+.default-app-logo-text-style {
+  font-size: 24px;
+  font-family: "Roboto";
+  color: white;
+}
+
+[color-theme="dark"] .default-app-logo-text-style {
+  color: var(--blue-3);
+}

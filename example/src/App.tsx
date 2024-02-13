@@ -39,8 +39,7 @@ function App() {
           </div>
         ),
       },
-    ],
-    hideLanguageSelection: true
+    ]
   };
 
   const translations = {
@@ -178,16 +177,16 @@ function App() {
     ),
   ];
 
+  const appLogo = (
+    <span className="ml-3">Example application</span>
+  );
+
   return (
     <DummyAuthenticationProvider
       additionalContextValues={{ getUserGroups: () => [] }}
     >
       <GlobalDataLayer
         translations={translations}
-        languageOptions={{
-          fallbackLang: "de",
-          initialLang: "es"
-        }}
       >
         <UILayer
           tabAndContentWrappers={views}
@@ -196,6 +195,9 @@ function App() {
           settingsMenuOptions={settingsMenuOptions}
           documentsLabelKey="Legal_documents"
           documentsComponent={LegalDocuments}
+          headerOptions={{
+            reactElementLeft: appLogo
+          }}
         />
       </GlobalDataLayer>
     </DummyAuthenticationProvider>

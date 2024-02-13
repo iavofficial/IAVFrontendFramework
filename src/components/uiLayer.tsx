@@ -26,6 +26,7 @@ import { NavbarSettingsProvider } from "../providers/navbarSettingsProvider";
 import { StaticCollapsedState } from "../types/navbarSettingsTypes";
 
 import "./uiLayer.css";
+import "./fonts.css";
 import "./css/darkModeInputsWorkAround.css";
 import { HeaderOptions } from "./header/header";
 import { UserMenuOptions } from "./header/userMenu";

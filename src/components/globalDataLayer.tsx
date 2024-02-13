@@ -31,17 +31,12 @@ export const GlobalDataLayer = (props: PropsWithChildren<Props>) => {
     : DummyAuthenticationProvider;
 
   const fallbackLang = props.languageOptions?.fallbackLang ?? DEFAULT_FALLBACK_LANGUAGE;
+  const initialLang = props.languageOptions?.initialLang ?? DEFAULT_FALLBACK_LANGUAGE;
   let languageOptions = {
-    fallbackLang: fallbackLang
+    fallbackLang: fallbackLang,
+    initialLang: initialLang
   };
-
-  // Add language options properties to the languageOptions object taking into account
-  // that the fallbackLang attribute should not be overriden by the properties.
-  if (props.languageOptions) {
-    const { fallbackLang: _, ...rest } = props.languageOptions;
-    languageOptions = {...languageOptions, ...rest};
-  }
-
+  
   return (
     <CookiesProvider>
       <AuthenticationProvider>

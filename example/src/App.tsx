@@ -39,8 +39,7 @@ function App() {
           </div>
         ),
       },
-    ],
-    hideLanguageSelection: true
+    ]
   };
 
   const translations = {
@@ -188,10 +187,6 @@ function App() {
     >
       <GlobalDataLayer
         translations={translations}
-        languageOptions={{
-          fallbackLang: "de",
-          initialLang: "es"
-        }}
       >
         <UILayer
           tabAndContentWrappers={views}

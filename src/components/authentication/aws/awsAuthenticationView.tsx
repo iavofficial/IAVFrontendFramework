@@ -10,7 +10,6 @@ import { AuthenticationViewProps } from "../authenticationView";
 import "../authenticationView.css";
 import "../../css/globalColors.css";
 import CompanyLogo from '../../../assets/svg/company_logo.svg';
-import AppLogo from "../../../assets/svg/app_logo.svg";
 import loginBackgroundLightMode from "../../../assets/png/login_background_lightMode.png";
 import loginBackgroundDarkMode from "../../../assets/png/login_background_darkMode.png";
 import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
@@ -19,6 +18,7 @@ import { parseLanguageRessourcesIntoDropdownFormat } from "../../../utils/parseL
 import { ColorSettingsContext } from "../../../contexts/colorsettings";
 import { generateHashOfLength } from "../../../utils/hash";
 import { Tooltip } from "primereact/tooltip";
+import { AppLogoPlaceholder } from "../../appLogoPlaceholder";
 
 export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
   const [email, setEmail] = useState("");
@@ -74,18 +74,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
       <CompanyLogo fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE} />
     </div>
   );
-
-  const appLogoDefault = (props: AuthenticationViewProps) => (
-    <div
-      style={{
-        display: props.headerOptions?.hideLeft ? "none" : "flex",
-        alignItems: "center",
-      }}
-    >
-      <AppLogo fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE} />
-    </div>
-  );
-
+  
   const NewPasswordForm = (
     <div style={{ width: "100%", height: "100%" }}>
       <div
@@ -285,11 +274,11 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
       >
         {props.headerOptions?.reactElementLeft
           ? props.headerOptions?.reactElementLeft
-          : appLogoDefault(props)}
+          : <AppLogoPlaceholder/>}
       </div>
       <div
         id="right-element-authentication"
-        className="flex justify-content-end align-items-center"
+        className="flex justify-content-end align-items-center default-app-logo-text-style"
       >
         {props.headerOptions?.reactElementRight
           ? props.headerOptions?.reactElementRight

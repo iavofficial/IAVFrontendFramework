@@ -12,7 +12,7 @@ export const ImprintText = () => {
       className={
         colorSettingsContext?.darkmode
           ? 'bg-grey-5 color-white'
-          : 'bg-white color-black'
+          : 'bg-white-1 color-black'
       }
     >
       <p className={'font-bold'}>{t('Imprint')}</p>

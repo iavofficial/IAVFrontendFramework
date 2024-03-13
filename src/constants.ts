@@ -1,4 +1,7 @@
-export const ACCEPTED_COOKIES_NAME = 'acceptedCookies';
+export const APPLICATION_LOGO_PLACEHOLDER = "APPLICATION NAME";
+
+export const ACCEPTED_COOKIES_NAME = "acceptedCookies";
+export const DEFAULT_FALLBACK_LANGUAGE = "en";
 
 export const TAB_HEIGHT = '56px';
 

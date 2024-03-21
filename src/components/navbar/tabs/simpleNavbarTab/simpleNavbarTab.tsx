@@ -46,7 +46,7 @@ export const SimpleNavbarTab: GroupableNavbarTab = (props) => {
       (active || hovering) && !props.disabled
         ? fontHighlightColor
         : fontMainColor,
-    opacity: props.disabled ? 0.5 : 1
+    opacity: props.disabled ? 0.5 : 1,
   };
 
   const additionalClassNames = !insideActiveGroup ? "navbar-tab-space" : "";
@@ -76,15 +76,7 @@ export const SimpleNavbarTab: GroupableNavbarTab = (props) => {
   );
 
   return props.disabled ? (
-    <>
-      {navbarTab}
-      <div
-        className="flex"
-        style={{ width: navbarCollapsed ? "40px" : "240px" }}
-      >
-        <div style={{ width: "80%" }} />
-      </div>
-    </>
+    <>{navbarTab}</>
   ) : (
     <>
       <Link style={{ textDecoration: "none" }} to={path}>

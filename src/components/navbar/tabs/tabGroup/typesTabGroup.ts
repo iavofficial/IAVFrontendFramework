@@ -1,10 +1,14 @@
 import { ReactElement } from "react";
 
 export interface PropsGroupTab {
-    style: {[key: string]: string | number};
-    setHovering: (hovering: boolean) => void;
     hovering: boolean;
     name: string
+    groupTabCollapsed: boolean;
+    colors: {
+        iconHighlightColor: string;
+        iconMainColor: string;
+        arrowHighlightColor: string;
+        arrowMainColor: string;
+    }
     logo?: ReactElement;
-    additionalClassNames?: string;
 }

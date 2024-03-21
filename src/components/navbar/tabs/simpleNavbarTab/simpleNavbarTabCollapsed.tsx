@@ -15,7 +15,7 @@ export const SimpleNavbarTabCollapsed = (props: SimpleNavbarTabProps) => {
   const iconMainColor =
     colorSettingsContext.currentColors.navbarColors.tabColors.iconMainColor;
 
-  let className = "default-tab-style flex align-items-center ";
+  let className = "default-nav-element-collapsed default-tab-collapsed flex align-items-center ";
 
   if (props.additionalClassNames) {
     className += props.additionalClassNames;

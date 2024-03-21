@@ -35,6 +35,18 @@ export const TabGroup = (props: Props) => {
     colorSettingsContext.currentColors.navbarColors.tabColors
       .tabInsideActiveGroupColor;
 
+  const iconHighlightColor =
+    colorSettingsContext.currentColors.navbarColors.tabColors
+      .iconHighlightColor;
+  const iconMainColor =
+    colorSettingsContext.currentColors.navbarColors.tabColors.iconMainColor;
+
+  const arrowMainColor =
+    colorSettingsContext.currentColors.navbarColors.tabColors.arrowMainColor;
+  const arrowHighlightColor =
+    colorSettingsContext.currentColors.navbarColors.tabColors
+      .arrowHighlightColor;
+
   let backgroundColor = mainColor;
   if (hovering || !groupTabCollapsed) {
     backgroundColor = highlightColor;
@@ -64,34 +76,49 @@ export const TabGroup = (props: Props) => {
     color: hovering ? fontHighlightColor : fontMainColor,
   };
 
-  const additionalClassNames = !insideActiveGroup ? "navbar-tab-space" : "";
+  let className =
+    "default-nav-element-wrapper flex align-items-center";
+
+  if (!insideActiveGroup) {
+    className += " navbar-tab-space";
+  }
+
+  const tabComponentProperties = {
+    name: props.name instanceof Function ? props.name(t) : props.name,
+    hovering: hovering,
+    logo: props.logo,
+    groupTabCollapsed: groupTabCollapsed,
+    colors: {
+      iconMainColor,
+      iconHighlightColor,
+      arrowMainColor,
+      arrowHighlightColor,
+    },
+  };
 
   const groupElement = props.navbarCollapsed ? (
-    <TabGroupCollapsed
-      name={props.name instanceof Function ? props.name(t) : props.name}
-      style={tabStyleDefault}
-      setHovering={setHovering}
-      hovering={hovering}
-      logo={props.logo}
-      additionalClassNames={additionalClassNames}
-    />
+    <TabGroupCollapsed {...tabComponentProperties} />
   ) : (
-    <TabGroupUnfolded
-      name={props.name instanceof Function ? props.name(t) : props.name}
-      style={tabStyleDefault}
-      setHovering={setHovering}
-      hovering={hovering}
-      logo={props.logo}
-      collapsible={!!props.collapsible}
-      groupTabCollapsed={groupTabCollapsed}
-      setGroupTabCollapsed={setGroupTabCollapsed}
-      additionalClassNames={additionalClassNames}
-    />
+    <TabGroupUnfolded {...tabComponentProperties} />
   );
 
   return (
     <>
-      {groupElement}
+      <div
+        onMouseEnter={() => setHovering(true)}
+        onMouseLeave={() => setHovering(false)}
+        className={className}
+        style={tabStyleDefault}
+        onClick={() => {
+          if (props.collapsible) {
+            setGroupTabCollapsed(
+              (prevGroupTabCollapsed: boolean) => !prevGroupTabCollapsed
+            );
+          }
+        }}
+      >
+        {groupElement}
+      </div>
       {!groupTabCollapsed ? (
         props.wrappers.map((wrapper) =>
           wrapper.getNavbarComponent({

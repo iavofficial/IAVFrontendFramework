@@ -16,7 +16,7 @@ export const SimpleNavbarTabUnfolded = (props: SimpleNavbarTabProps) => {
   const iconMainColor =
     colorSettingsContext.currentColors.navbarColors.tabColors.iconMainColor;
 
-  let className = "default-tab-style flex ";
+  let className = "default-nav-element-unfolded default-tab-unfolded flex ";
 
   if (props.additionalClassNames) {
     className += props.additionalClassNames;

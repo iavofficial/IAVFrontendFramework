@@ -2,19 +2,19 @@ import React, { useEffect, useState } from "react";
 import { ColorObject } from "../../types/colorObjectType";
 import { ColorSettingsContext } from "../../contexts/colorsettings";
 import { getCurrentColors_Navbar } from "./color_getter/getCurrentColors_Navbar";
-import { CurrentColosTabColorType } from "../../components/navbar/tabs/typesTabColor";
+import { CurrentColorsTabColorType } from "../../components/navbar/tabs/typesTabColor";
 
 export interface Props {
   colorOptions?: ColorObject;
 }
 
 export interface CurrentColorsType {
-  navbarColors: {
+  navbar: {
     backgroundColor: string;
     legalDocumentsIconColor: string;
     navbarCollapseArrowColor: string;
     scrollbarColor: string;
-    tabColors: CurrentColosTabColorType;
+    content: CurrentColorsTabColorType;
   }
 }
 
@@ -50,7 +50,7 @@ export const ColorProvider = (props: React.PropsWithChildren<Props>) => {
         setDarkmode: setDarkmodeToLocalStorage,
         colorOptions: props.colorOptions ?? {},
         currentColors: {
-          navbarColors: getCurrentColors_Navbar(
+          navbar: getCurrentColors_Navbar(
             darkmode,
             props.colorOptions?.navbarColorOptions ?? {}
           ),

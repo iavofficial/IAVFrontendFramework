@@ -1,121 +1,180 @@
 import { NavbarColorType } from "../../../components/navbar/typesNavbarColor";
 import {
-  DARK_LEGAL_DOCS_ICON_COLOR,
-  DARK_NAVBAR_BACKGROUND_COLOR,
-  DARK_NAVBAR_COLLAPSE_ARROW_COLOR,
-  DARK_NAVBAR_GROUP_HIGHLIGHT_COLOR,
-  DARK_NAVBAR_SCROLLBAR_COLOR,
-  DARK_NAVBAR_ARROW_HIGHLIGHT_COLOR,
-  DARK_NAVBAR_ARROW_MAIN_COLOR,
-  DARK_NAVBAR_ICON_HIGHLIGHT_COLOR,
-  DARK_NAVBAR_ICON_MAIN_COLOR,
-  DARK_NAVBAR_GROUP_FONT_HIGHLIGHT_COLOR,
-  DARK_NAVBAR_FONT_MAIN_COLOR,
-  DARK_NAVBAR_MAIN_COLOR,
-  LIGHT_NAVBAR_BACKGROUND_COLOR,
-  LIGHT_LEGAL_DOCS_ICON_COLOR,
-  LIGHT_NAVBAR_COLLAPSE_ARROW_COLOR,
-  LIGHT_NAVBAR_SCROLLBAR_COLOR,
-  LIGHT_NAVBAR_MAIN_COLOR,
-  LIGHT_NAVBAR_GROUP_HIGHLIGHT_COLOR,
-  LIGHT_NAVBAR_FONT_MAIN_COLOR,
-  LIGHT_NAVBAR_GROUP_FONT_HIGHLIGHT_COLOR,
-  LIGHT_NAVBAR_ICON_MAIN_COLOR,
-  LIGHT_NAVBAR_ICON_HIGHLIGHT_COLOR,
-  LIGHT_NAVBAR_ARROW_HIGHLIGHT_COLOR,
-  LIGHT_NAVBAR_ARROW_MAIN_COLOR,
-  DARK_NAVBAR_GROUPED_TABS_BACKGROUND_COLOR,
-  LIGHT_NAVBAR_GROUPED_TABS_BACKGROUND_COLOR,
-  DARK_NAVBAR_TAB_HIGHLIGHT_COLOR,
-  LIGHT_NAVBAR_TAB_HIGHLIGHT_COLOR,
-  LIGHT_NAVBAR_TAB_FONT_HIGHLIGHT_COLOR,
-  DARK_NAVBAR_TAB_FONT_HIGHLIGHT_COLOR,
-  DARK_NAVBAR_TAB_INSIDE_ACTIVE_GROUP_COLOR,
-  LIGHT_NAVBAR_TAB_INSIDE_ACTIVE_GROUP_COLOR,
+  DARK_NAVBAR_BACKGROUND_INSIDE_ACTIVE_GROUP_COLOR,
+  DARK_NAV_GROUP_ARROW_ACTIVE_COLOR,
+  DARK_NAV_GROUP_ARROW_HOVER_COLOR,
+  DARK_NAV_GROUP_BACKGROUND_ACTIVE_COLOR,
+  DARK_NAV_GROUP_BACKGROUND_HOVER_COLOR,
+  DARK_NAV_GROUP_BACKGROUND_MAIN_COLOR,
+  DARK_NAV_GROUP_FONT_ACTIVE_COLOR,
+  DARK_NAV_GROUP_FONT_HOVER_COLOR,
+  DARK_NAV_GROUP_FONT_MAIN_COLOR,
+  DARK_NAV_GROUP_ICON_ACTIVE_COLOR,
+  DARK_NAV_GROUP_ICON_HOVER_COLOR,
+  DARK_NAV_GROUP_ICON_MAIN_COLOR,
+  DARK_NAV_TAB_BACKGROUND_ACTIVE_COLOR,
+  DARK_NAV_TAB_BACKGROUND_HOVER_COLOR,
+  DARK_NAV_TAB_BACKGROUND_MAIN_COLOR,
+  DARK_NAV_TAB_FONT_ACTIVE_COLOR,
+  DARK_NAV_TAB_FONT_HOVER_COLOR,
+  DARK_NAV_TAB_FONT_MAIN_COLOR,
+  DARK_NAV_TAB_ICON_ACTIVE_COLOR,
+  DARK_NAV_TAB_ICON_HOVER_COLOR,
+  DARK_NAV_TAB_ICON_MAIN_COLOR,
+  LIGHT_NAV_BACKGROUND_INSIDE_ACTIVE_GROUP_COLOR,
+  LIGHT_NAV_GROUP_ARROW_ACTIVE_COLOR,
+  LIGHT_NAV_GROUP_ARROW_HOVER_COLOR,
+  LIGHT_NAV_GROUP_BACKGROUND_ACTIVE_COLOR,
+  LIGHT_NAV_GROUP_BACKGROUND_HOVER_COLOR,
+  LIGHT_NAV_GROUP_BACKGROUND_MAIN_COLOR,
+  LIGHT_NAV_GROUP_FONT_ACTIVE_COLOR,
+  LIGHT_NAV_GROUP_FONT_HOVER_COLOR,
+  LIGHT_NAV_GROUP_FONT_MAIN_COLOR,
+  LIGHT_NAV_GROUP_ICON_ACTIVE_COLOR,
+  LIGHT_NAV_GROUP_ICON_HOVER_COLOR,
+  LIGHT_NAV_GROUP_ICON_MAIN_COLOR,
+  LIGHT_NAV_TAB_BACKGROUND_ACTIVE_COLOR,
+  LIGHT_NAV_TAB_BACKGROUND_HOVER_COLOR,
+  LIGHT_NAV_TAB_BACKGROUND_MAIN_COLOR,
+  LIGHT_NAV_TAB_FONT_ACTIVE_COLOR,
+  LIGHT_NAV_TAB_FONT_HOVER_COLOR,
+  LIGHT_NAV_TAB_FONT_MAIN_COLOR,
+  LIGHT_NAV_TAB_ICON_ACTIVE_COLOR,
+  LIGHT_NAV_TAB_ICON_HOVER_COLOR,
+  LIGHT_NAV_TAB_ICON_MAIN_COLOR,
 } from "../defaultColors";
 
 export const getCurrentColors_Navbar = (
   darkmodeIsEnabled: boolean,
   navbarColorOptions: NavbarColorType
 ) => {
-  let currentColors;
-  if (darkmodeIsEnabled) {
-    currentColors = {
-      backgroundColor: DARK_NAVBAR_BACKGROUND_COLOR,
-      legalDocumentsIconColor: DARK_LEGAL_DOCS_ICON_COLOR,
-      navbarCollapseArrowColor: DARK_NAVBAR_COLLAPSE_ARROW_COLOR,
-      scrollbarColor: DARK_NAVBAR_SCROLLBAR_COLOR,
-      tabColors: {
-        mainColor: DARK_NAVBAR_MAIN_COLOR,
-        groupHighlightColor: DARK_NAVBAR_GROUP_HIGHLIGHT_COLOR,
-        tabHighlightColor: DARK_NAVBAR_TAB_HIGHLIGHT_COLOR,
-        groupFontMainColor: DARK_NAVBAR_FONT_MAIN_COLOR,
-        tabFontMainColor: DARK_NAVBAR_FONT_MAIN_COLOR,
-        groupFontHighlightColor: DARK_NAVBAR_GROUP_FONT_HIGHLIGHT_COLOR,
-        tabFontHighlightColor: DARK_NAVBAR_TAB_FONT_HIGHLIGHT_COLOR,
-        iconMainColor: DARK_NAVBAR_ICON_MAIN_COLOR,
-        iconHighlightColor: DARK_NAVBAR_ICON_HIGHLIGHT_COLOR,
-        arrowHighlightColor: DARK_NAVBAR_ARROW_HIGHLIGHT_COLOR,
-        arrowMainColor: DARK_NAVBAR_ARROW_MAIN_COLOR,
-        groupedTabsBackgroundColor: DARK_NAVBAR_GROUPED_TABS_BACKGROUND_COLOR,
-        tabInsideActiveGroupColor: DARK_NAVBAR_TAB_INSIDE_ACTIVE_GROUP_COLOR,
-      },
-    };
-  } else {
-    currentColors = {
-      backgroundColor:
-        navbarColorOptions.backgroundColor ?? LIGHT_NAVBAR_BACKGROUND_COLOR,
-      legalDocumentsIconColor:
-        navbarColorOptions.legalDocumentsIconColor ??
-        LIGHT_LEGAL_DOCS_ICON_COLOR,
-      navbarCollapseArrowColor:
-        navbarColorOptions.navbarCollapseArrowColor ??
-        LIGHT_NAVBAR_COLLAPSE_ARROW_COLOR,
-      scrollbarColor:
-        navbarColorOptions.scrollbarColor ?? LIGHT_NAVBAR_SCROLLBAR_COLOR,
-      tabColors: {
-        mainColor:
-          navbarColorOptions.tabColorOptions?.mainColor ??
-          LIGHT_NAVBAR_MAIN_COLOR,
-        groupHighlightColor:
-          navbarColorOptions.tabColorOptions?.groupHighlightColor ??
-          LIGHT_NAVBAR_GROUP_HIGHLIGHT_COLOR,
-        tabHighlightColor:
-          navbarColorOptions.tabColorOptions?.tabHighlightColor ??
-          LIGHT_NAVBAR_TAB_HIGHLIGHT_COLOR,
-        groupFontMainColor:
-          navbarColorOptions.tabColorOptions?.groupFontMainColor ??
-          LIGHT_NAVBAR_FONT_MAIN_COLOR,
-        tabFontMainColor:
-          navbarColorOptions.tabColorOptions?.tabFontMainColor ??
-          LIGHT_NAVBAR_FONT_MAIN_COLOR,
-        groupFontHighlightColor:
-          navbarColorOptions.tabColorOptions?.groupFontHighlightColor ??
-          LIGHT_NAVBAR_GROUP_FONT_HIGHLIGHT_COLOR,
-        tabFontHighlightColor:
-          navbarColorOptions.tabColorOptions?.tabFontHighlightColor ??
-          LIGHT_NAVBAR_TAB_FONT_HIGHLIGHT_COLOR,
-        iconMainColor:
-          navbarColorOptions.tabColorOptions?.iconMainColor ??
-          LIGHT_NAVBAR_ICON_MAIN_COLOR,
-        iconHighlightColor:
-          navbarColorOptions.tabColorOptions?.iconHighlightColor ??
-          LIGHT_NAVBAR_ICON_HIGHLIGHT_COLOR,
-        arrowHighlightColor:
-          navbarColorOptions.tabColorOptions?.arrowHighlightColor ??
-          LIGHT_NAVBAR_ARROW_HIGHLIGHT_COLOR,
-        arrowMainColor:
-          navbarColorOptions.tabColorOptions?.arrowMainColor ??
-          LIGHT_NAVBAR_ARROW_MAIN_COLOR,
-        groupedTabsBackgroundColor:
-          navbarColorOptions.tabColorOptions?.groupedTabsBackgroundColor ??
-          LIGHT_NAVBAR_GROUPED_TABS_BACKGROUND_COLOR,
-        tabInsideActiveGroupColor:
-          navbarColorOptions.tabColorOptions?.tabInsideActiveGroupColor ??
-          LIGHT_NAVBAR_TAB_INSIDE_ACTIVE_GROUP_COLOR
-      },
-    };
-  }
+  // This function returns the color to be used.
+  const calcColor = (lightDef: string, darkDef: string, custom?: string) => {
+    if (custom) {
+      return custom;
+    }
+    if (darkmodeIsEnabled) {
+      return darkDef;
+    }
+    return lightDef;
+  };
 
-  return currentColors;
+  return {
+    main: {
+      tabBackgroundMainColor: calcColor(
+        LIGHT_NAV_TAB_BACKGROUND_MAIN_COLOR,
+        DARK_NAV_TAB_BACKGROUND_MAIN_COLOR,
+        navbarColorOptions.content?.main?.tabBackgroundMainColor
+      ),
+      tabFontMainColor: calcColor(
+        LIGHT_NAV_TAB_FONT_MAIN_COLOR,
+        DARK_NAV_TAB_FONT_MAIN_COLOR,
+        navbarColorOptions.content?.main?.tabFontMainColor
+      ),
+      tabIconMainColor: calcColor(
+        LIGHT_NAV_TAB_ICON_MAIN_COLOR,
+        DARK_NAV_TAB_ICON_MAIN_COLOR,
+        navbarColorOptions.content?.main?.tabIconMainColor
+      ),
+      groupBackgroundMainColor: calcColor(
+        LIGHT_NAV_GROUP_BACKGROUND_MAIN_COLOR,
+        DARK_NAV_GROUP_BACKGROUND_MAIN_COLOR,
+        navbarColorOptions.content?.main?.groupBackgroundMainColor
+      ),
+      groupFontMainColor: calcColor(
+        LIGHT_NAV_GROUP_FONT_MAIN_COLOR,
+        DARK_NAV_GROUP_FONT_MAIN_COLOR,
+        navbarColorOptions.content?.main?.groupFontMainColor
+      ),
+      groupIconMainColor: calcColor(
+        LIGHT_NAV_GROUP_ICON_MAIN_COLOR,
+        DARK_NAV_GROUP_ICON_MAIN_COLOR,
+        navbarColorOptions.content?.main?.groupIconMainColor
+      ),
+      groupArrowMainColor: calcColor(
+        LIGHT_NAV_BACKGROUND_INSIDE_ACTIVE_GROUP_COLOR,
+        DARK_NAVBAR_BACKGROUND_INSIDE_ACTIVE_GROUP_COLOR,
+        navbarColorOptions.content?.insideActiveGroupColor
+      ),
+    },
+    hover: {
+      tabBackgroundHoverColor: calcColor(
+        LIGHT_NAV_TAB_BACKGROUND_HOVER_COLOR,
+        DARK_NAV_TAB_BACKGROUND_HOVER_COLOR,
+        navbarColorOptions.content?.hover?.tabBackgroundHoverColor
+      ),
+      tabFontHoverColor: calcColor(
+        LIGHT_NAV_TAB_FONT_HOVER_COLOR,
+        DARK_NAV_TAB_FONT_HOVER_COLOR,
+        navbarColorOptions.content?.hover?.tabBackgroundHoverColor
+      ),
+      tabIconHoverColor: calcColor(
+        LIGHT_NAV_TAB_ICON_HOVER_COLOR,
+        DARK_NAV_TAB_ICON_HOVER_COLOR,
+        navbarColorOptions.content?.hover?.tabIconHoverColor
+      ),
+      groupBackgroundHoverColor: calcColor(
+        LIGHT_NAV_GROUP_BACKGROUND_HOVER_COLOR,
+        DARK_NAV_GROUP_BACKGROUND_HOVER_COLOR,
+        navbarColorOptions.content?.hover?.tabBackgroundHoverColor
+      ),
+      groupFontHoverColor: calcColor(
+        LIGHT_NAV_GROUP_FONT_HOVER_COLOR,
+        DARK_NAV_GROUP_FONT_HOVER_COLOR,
+        navbarColorOptions.content?.hover?.tabBackgroundHoverColor
+      ),
+      groupIconHoverColor: calcColor(
+        LIGHT_NAV_GROUP_ICON_HOVER_COLOR,
+        DARK_NAV_GROUP_ICON_HOVER_COLOR,
+        navbarColorOptions.content?.hover?.groupIconHoverColor
+      ),
+      groupArrowHoverColor: calcColor(
+        LIGHT_NAV_GROUP_ARROW_HOVER_COLOR,
+        DARK_NAV_GROUP_ARROW_HOVER_COLOR,
+        navbarColorOptions.content?.hover?.groupArrowHoverColor
+      ),
+    },
+    active: {
+      tabBackgroundActiveColor: calcColor(
+        LIGHT_NAV_TAB_BACKGROUND_ACTIVE_COLOR,
+        DARK_NAV_TAB_BACKGROUND_ACTIVE_COLOR,
+        navbarColorOptions.content?.hover?.tabBackgroundHoverColor
+      ),
+      tabFontActiveColor: calcColor(
+        LIGHT_NAV_TAB_FONT_ACTIVE_COLOR,
+        DARK_NAV_TAB_FONT_ACTIVE_COLOR,
+        navbarColorOptions.content?.hover?.tabBackgroundHoverColor
+      ),
+      tabIconActiveColor: calcColor(
+        LIGHT_NAV_TAB_ICON_ACTIVE_COLOR,
+        DARK_NAV_TAB_ICON_ACTIVE_COLOR,
+        navbarColorOptions.content?.hover?.tabIconHoverColor
+      ),
+      groupBackgroundActiveColor: calcColor(
+        LIGHT_NAV_GROUP_BACKGROUND_ACTIVE_COLOR,
+        DARK_NAV_GROUP_BACKGROUND_ACTIVE_COLOR,
+        navbarColorOptions.content?.hover?.tabBackgroundHoverColor
+      ),
+      groupFontActiveColor: calcColor(
+        LIGHT_NAV_GROUP_FONT_ACTIVE_COLOR,
+        DARK_NAV_GROUP_FONT_ACTIVE_COLOR,
+        navbarColorOptions.content?.hover?.tabBackgroundHoverColor
+      ),
+      groupIconActiveColor: calcColor(
+        LIGHT_NAV_GROUP_ICON_ACTIVE_COLOR,
+        DARK_NAV_GROUP_ICON_ACTIVE_COLOR,
+        navbarColorOptions.content?.hover?.groupIconHoverColor
+      ),
+      groupArrowActiveColor: calcColor(
+        LIGHT_NAV_GROUP_ARROW_ACTIVE_COLOR,
+        DARK_NAV_GROUP_ARROW_ACTIVE_COLOR,
+        navbarColorOptions.content?.hover?.groupArrowHoverColor
+      ),
+    },
+    insideActiveGroupColor: calcColor(
+      LIGHT_NAV_BACKGROUND_INSIDE_ACTIVE_GROUP_COLOR,
+      DARK_NAVBAR_BACKGROUND_INSIDE_ACTIVE_GROUP_COLOR,
+      navbarColorOptions.content?.insideActiveGroupColor
+    ),
+  };
 };

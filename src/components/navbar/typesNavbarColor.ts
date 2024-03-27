@@ -1,9 +1,9 @@
 import { TabColorType } from './tabs/typesTabColor';
 
 export interface NavbarColorType {
-  backgroundColor?: string;
-  legalDocumentsIconColor?: string;
+  navbarBackgroundColor?: string;
   navbarCollapseArrowColor?: string;
+  legalDocumentsIconColor?: string;
   scrollbarColor?: string;
-  tabColorOptions?: TabColorType;
+  content?: TabColorType;
 }

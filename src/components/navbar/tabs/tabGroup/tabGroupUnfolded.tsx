@@ -2,10 +2,12 @@ import React from "react";
 import { PropsGroupTab } from "./typesTabGroup";
 import { SvgIcon } from "../svgIcon";
 
+import "./tabGroupUnfolded.css";
+
 export const TabGroupUnfolded = (props: PropsGroupTab) => {
   return (
-    <div className="default-nav-element-unfolded default-nav-group-unfolded flex h-full">
-      <div className="flex align-items-center w-full">
+    <div className="default-nav-element-unfolded default-nav-group-unfolded flex h-full w-full">
+      <div className="unfolded-group-wrapper">
         <SvgIcon
           color={
             props.hovering
@@ -14,7 +16,7 @@ export const TabGroupUnfolded = (props: PropsGroupTab) => {
           }
           element={props.logo}
         />
-        <div className="w-full">
+        <div className="unfolded-group-name-arrow-wrapper">
           <span id="navbar-tab-name">{props.name}</span>
           <i
             style={{

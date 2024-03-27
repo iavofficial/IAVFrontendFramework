@@ -61,6 +61,16 @@ export const TabGroup = (props: Props) => {
     colorSettingsContext.currentColors.navbarColors.tabColors
       .groupFontMainColor;
 
+  const groupBackgroundMainColor =
+    colorSettingsContext.currentColors.navbarColors.tabColors
+      .groupBackgroundMainColor;
+  const groupBackgroundHoverColor =
+    colorSettingsContext.currentColors.navbarColors.tabColors
+      .groupBackgroundHoverColor;
+  const groupBackgroundActiveColor =
+    colorSettingsContext.currentColors.navbarColors.tabColors
+      .groupBackgroundActiveColor;
+
   const collapsible =
     props.collapsible !== undefined ? props.collapsible : true;
 
@@ -72,12 +82,15 @@ export const TabGroup = (props: Props) => {
 
   const tabStyleDefault = {
     width: props.navbarCollapsed ? "40px" : "240px",
-    backgroundColor: backgroundColor,
+    backgroundColor: hovering
+      ? groupBackgroundHoverColor
+      : !groupTabCollapsed
+      ? groupBackgroundActiveColor
+      : groupBackgroundMainColor,
     color: hovering ? fontHighlightColor : fontMainColor,
   };
 
-  let className =
-    "default-nav-element-wrapper flex align-items-center";
+  let className = "default-nav-element-wrapper flex align-items-center";
 
   if (!insideActiveGroup) {
     className += " navbar-tab-space";

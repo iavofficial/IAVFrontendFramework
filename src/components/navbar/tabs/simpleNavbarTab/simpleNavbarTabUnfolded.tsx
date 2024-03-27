@@ -5,9 +5,6 @@ import { SvgIcon } from "../svgIcon";
 import { SimpleNavbarTabProps } from "./typesSimpleNavbarTab";
 
 export const SimpleNavbarTabUnfolded = (props: SimpleNavbarTabProps) => {
-  // This id is needed for PrimeReact. It has to begin with a letter.
-  // TODO: const id = "a" + useId();
-
   const colorSettingsContext = useContext(ColorSettingsContext);
 
   const iconHighlightColor =

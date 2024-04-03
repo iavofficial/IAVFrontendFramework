@@ -1,19 +1,22 @@
 import React from "react";
-import { PropsGroupTab } from "./typesTabGroup";
+import { GeneralGroupTabProps } from "./typesTabGroup";
 import { SvgIcon } from "../svgIcon";
 
 import "./tabGroupUnfolded.css";
 
-export const TabGroupUnfolded = (props: PropsGroupTab) => {
+interface AdditionalProps {
+  colors: {
+    iconColor: string;
+    arrowColor: string;
+  }
+}
+
+export const TabGroupUnfolded = (props: GeneralGroupTabProps & AdditionalProps) => {
   return (
     <div className="default-nav-element-unfolded default-nav-group-unfolded flex h-full w-full">
       <div className="unfolded-group-wrapper">
         <SvgIcon
-          color={
-            props.hovering
-              ? props.colors.iconHighlightColor
-              : props.colors.iconMainColor
-          }
+          color={props.colors.iconColor}
           element={props.logo}
         />
         <div className="unfolded-group-name-arrow-wrapper">
@@ -22,9 +25,7 @@ export const TabGroupUnfolded = (props: PropsGroupTab) => {
             style={{
               cursor: "pointer",
               fontSize: "16px",
-              color: props.hovering
-                ? props.colors.arrowHighlightColor
-                : props.colors.arrowMainColor,
+              color: props.colors.arrowColor
             }}
             className={
               props.groupTabCollapsed

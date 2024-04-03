@@ -22,6 +22,7 @@ import { ExampleComponent5 } from "./components/exampleComponent5";
 import { simpleNavbarTabFactory } from "iav-frontend-framework/simpleNavbarTabFactory";
 import { privilegedNavbarTabFactory } from "iav-frontend-framework/privilegedNavbarTabFactory";
 import { ExampleComponent2 } from "./components/exampleComponent2";
+import { RED } from "iav-frontend-framework/constants";
 
 function App() {
   const [selectedButtonOption, setSelectedButtonOption] = useState("Simulated");
@@ -39,7 +40,7 @@ function App() {
           </div>
         ),
       },
-    ]
+    ],
   };
 
   const translations = {
@@ -109,23 +110,18 @@ function App() {
       <InfoIcon />,
       true,
       [
-        new Group(
-          "Untergruppe",
-          <InfoIcon />,
-          true,
-          [
-            new BasicContentWrapper(
-              "/group-example51",
-              simpleNavbarTabFactory({
-                name: (t: TranslateFunctionType) =>
-                  t("example_component", { count: 5.1 }),
-                disabled: false,
-                icon: <InfoIcon />,
-              }),
-              ExampleComponent3
-            )
-          ]
-        ),
+        new Group("Untergruppe", <InfoIcon />, true, [
+          new BasicContentWrapper(
+            "/group-example51",
+            simpleNavbarTabFactory({
+              name: (t: TranslateFunctionType) =>
+                t("example_component", { count: 5.1 }),
+              disabled: false,
+              icon: <InfoIcon />,
+            }),
+            ExampleComponent3
+          ),
+        ]),
         new BasicContentWrapper(
           "/group-example52",
           simpleNavbarTabFactory({
@@ -170,17 +166,26 @@ function App() {
     ),
   ];
 
-  const appLogo = (
-    <span className="ml-3">Example application</span>
-  );
+  const appLogo = <span className="ml-3">Example application</span>;
 
   return (
     <DummyAuthenticationProvider
       additionalContextValues={{ getUserGroups: () => [] }}
     >
-      <GlobalDataLayer
-        translations={translations}
-      >
+      <GlobalDataLayer translations={translations}
+      colorSettings={{
+        disableCustomColorsForLightMode: true,
+        disableCustomColorsForDarkMode: true,
+        colorOptions: {
+          navbarColorOptions: {
+            content: {
+              default: {
+                tabBackgroundDefaultColor: RED
+              }
+            }
+          }
+        }
+      }}>
         <UILayer
           tabAndContentWrappers={views}
           startingPoint="/"
@@ -188,6 +193,9 @@ function App() {
           settingsMenuOptions={settingsMenuOptions}
           documentsLabelKey="Legal_documents"
           documentsComponent={LegalDocuments}
+          headerOptions={{
+            reactElementLeft: appLogo
+          }}
         />
       </GlobalDataLayer>
     </DummyAuthenticationProvider>

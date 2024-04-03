@@ -1,8 +1,14 @@
 import React, { useRef } from "react";
 import { Tooltip } from "primereact/tooltip";
-import { PropsGroupTab } from "./typesTabGroup";
+import { GeneralGroupTabProps } from "./typesTabGroup";
 
-export const TabGroupCollapsed = (props: PropsGroupTab) => {
+interface AdditionalProps {
+  colors: {
+    arrowColor: string;
+  }
+}
+
+export const TabGroupCollapsed = (props: GeneralGroupTabProps & AdditionalProps) => {
   const ref = useRef<HTMLDivElement>(null);
 
   return (
@@ -15,9 +21,7 @@ export const TabGroupCollapsed = (props: PropsGroupTab) => {
         style={{
           cursor: "pointer",
           fontSize: "16px",
-          color: props.hovering
-            ? props.colors.arrowHighlightColor
-            : props.colors.arrowMainColor,
+          color: props.colors.arrowColor
         }}
         className={
           props.groupTabCollapsed ? "pi pi-chevron-left" : "pi pi-chevron-down"

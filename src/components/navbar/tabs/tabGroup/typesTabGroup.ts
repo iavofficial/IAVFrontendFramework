@@ -1,14 +1,8 @@
 import { ReactElement } from "react";
 
-export interface PropsGroupTab {
+export interface GeneralGroupTabProps {
     hovering: boolean;
     name: string
     groupTabCollapsed: boolean;
-    colors: {
-        iconHighlightColor: string;
-        iconMainColor: string;
-        arrowHighlightColor: string;
-        arrowMainColor: string;
-    }
     logo?: ReactElement;
 }

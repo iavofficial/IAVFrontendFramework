@@ -27,6 +27,7 @@ export const GREY4 = '#696969';
 export const GREY5 = '#333333';
 export const GREY6 = '#1A1A1A';
 export const BLACK = '#000000';
+export const GREY_MENU_SPECIAL_1 = "#D6D9DE";
 
 export const YELLOW = '#ffd800';
 export const RED = '#f80000';

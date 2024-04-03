@@ -1,18 +1,8 @@
 import React from "react";
-import { useContext } from "react";
-import { ColorSettingsContext } from "../../../../contexts/colorsettings";
 import { SvgIcon } from "../svgIcon";
-import { SimpleNavbarTabProps } from "./typesSimpleNavbarTab";
+import { NestedNavbarTabProps } from "./simpleNavbarTab";
 
-export const SimpleNavbarTabUnfolded = (props: SimpleNavbarTabProps) => {
-  const colorSettingsContext = useContext(ColorSettingsContext);
-
-  const iconHighlightColor =
-    colorSettingsContext.currentColors.navbarColors.tabColors
-      .iconHighlightColor;
-  const iconMainColor =
-    colorSettingsContext.currentColors.navbarColors.tabColors.iconMainColor;
-
+export const SimpleNavbarTabUnfolded = (props: NestedNavbarTabProps) => {
   let className = "default-nav-element-unfolded default-tab-unfolded flex ";
 
   if (props.additionalClassNames) {
@@ -28,11 +18,7 @@ export const SimpleNavbarTabUnfolded = (props: SimpleNavbarTabProps) => {
     >
       <div style={{ width: "228px" }} className="flex align-items-center">
         <SvgIcon
-          color={
-            (props.active || props.hovering) && !props.disabled
-              ? iconHighlightColor
-              : iconMainColor
-          }
+          color={props.iconColor}
           element={props.icon}
         />
         <span id="navbar-tab-name">{props.name}</span>

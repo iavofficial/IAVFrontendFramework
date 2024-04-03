@@ -1,13 +1,16 @@
 import React, { ReactElement, useContext, useEffect, useState } from "react";
 import "../../navbar.css";
 import { useTranslator } from "../../../internationalization/translators";
-import { InjectedOptionsGroupableByWrapperToTab } from "../../types/typesInjectedOptions";
 import { ColorSettingsContext } from "../../../../contexts/colorsettings";
 import { TranslateFunctionType } from "../../../../types/translationFunction";
 import { TabGroupCollapsed } from "./tabGroupCollapsed";
 import { TabGroupUnfolded } from "./tabGroupUnfolded";
 import { GroupableTabAndContentWrapper } from "../../wrappers/typesWrappers";
 import { InjectedOptionsByGroupToWrapper } from "../../types/typesInjectedOptions";
+import {
+  determineCurrentColor,
+  determineCurrentColorInsideGroup,
+} from "../../../../utils/determineCurrentColor";
 
 interface Props {
   name: string | ((t: TranslateFunctionType) => string);
@@ -26,50 +29,78 @@ export const TabGroup = (props: Props) => {
 
   const insideActiveGroup = props.frameworkInjectedOptions.groupActive;
 
-  const highlightColor =
-    colorSettingsContext.currentColors.navbarColors.tabColors
-      .groupHighlightColor;
-  const mainColor =
-    colorSettingsContext?.currentColors.navbarColors.tabColors.mainColor;
   const insideActiveGroupColor =
-    colorSettingsContext.currentColors.navbarColors.tabColors
-      .tabInsideActiveGroupColor;
+    colorSettingsContext.currentColors.navbar.content.insideActiveGroupColor;
 
-  const iconHighlightColor =
-    colorSettingsContext.currentColors.navbarColors.tabColors
-      .iconHighlightColor;
-  const iconMainColor =
-    colorSettingsContext.currentColors.navbarColors.tabColors.iconMainColor;
-
-  const arrowMainColor =
-    colorSettingsContext.currentColors.navbarColors.tabColors.arrowMainColor;
-  const arrowHighlightColor =
-    colorSettingsContext.currentColors.navbarColors.tabColors
-      .arrowHighlightColor;
-
-  let backgroundColor = mainColor;
-  if (hovering || !groupTabCollapsed) {
-    backgroundColor = highlightColor;
-  } else if (insideActiveGroup) {
-    backgroundColor = insideActiveGroupColor;
-  }
-
-  const fontHighlightColor =
-    colorSettingsContext.currentColors.navbarColors.tabColors
-      .groupFontHighlightColor;
-  const fontMainColor =
-    colorSettingsContext.currentColors.navbarColors.tabColors
-      .groupFontMainColor;
-
-  const groupBackgroundMainColor =
-    colorSettingsContext.currentColors.navbarColors.tabColors
-      .groupBackgroundMainColor;
+  const groupBackgroundDefaultColor =
+    colorSettingsContext.currentColors.navbar.content.default
+      .groupBackgroundDefaultColor;
   const groupBackgroundHoverColor =
-    colorSettingsContext.currentColors.navbarColors.tabColors
+    colorSettingsContext.currentColors.navbar.content.hover
       .groupBackgroundHoverColor;
   const groupBackgroundActiveColor =
-    colorSettingsContext.currentColors.navbarColors.tabColors
+    colorSettingsContext.currentColors.navbar.content.active
       .groupBackgroundActiveColor;
+
+  const groupIconDefaultColor =
+    colorSettingsContext.currentColors.navbar.content.default
+      .groupIconDefaultColor;
+  const groupIconHoverColor =
+    colorSettingsContext.currentColors.navbar.content.hover.groupIconHoverColor;
+  const groupIconActiveColor =
+    colorSettingsContext.currentColors.navbar.content.active
+      .groupIconActiveColor;
+
+  const groupArrowDefaultColor =
+    colorSettingsContext.currentColors.navbar.content.default
+      .groupArrowDefaultColor;
+  const groupArrowHoverColor =
+    colorSettingsContext.currentColors.navbar.content.hover
+      .groupArrowHoverColor;
+  const groupArrowActiveColor =
+    colorSettingsContext.currentColors.navbar.content.active
+      .groupArrowActiveColor;
+
+  const groupFontDefaultColor =
+    colorSettingsContext.currentColors.navbar.content.default
+      .groupFontDefaultColor;
+  const groupFontHoverColor =
+    colorSettingsContext.currentColors.navbar.content.hover.groupFontHoverColor;
+  const groupFontActiveColor =
+    colorSettingsContext.currentColors.navbar.content.active
+      .groupFontActiveColor;
+
+  const groupState = {
+    isActive: !groupTabCollapsed,
+    isHovering: hovering,
+    isDisabled: false,
+    isInsideActiveGroup: insideActiveGroup,
+  };
+
+  const backgroundColor = determineCurrentColorInsideGroup(groupState, {
+    defaultColor: groupBackgroundDefaultColor,
+    hoverColor: groupBackgroundHoverColor,
+    activeColor: groupBackgroundActiveColor,
+    insideActiveGroupColor: insideActiveGroupColor
+  });
+
+  const iconColor = determineCurrentColor(groupState, {
+    defaultColor: groupIconDefaultColor,
+    hoverColor: groupIconHoverColor,
+    activeColor: groupIconActiveColor,
+  });
+
+  const arrowColor = determineCurrentColor(groupState, {
+    defaultColor: groupArrowDefaultColor,
+    hoverColor: groupArrowHoverColor,
+    activeColor: groupArrowActiveColor,
+  });
+
+  const fontColor = determineCurrentColor(groupState, {
+    defaultColor: groupFontDefaultColor,
+    hoverColor: groupFontHoverColor,
+    activeColor: groupFontActiveColor,
+  });
 
   const collapsible =
     props.collapsible !== undefined ? props.collapsible : true;
@@ -82,12 +113,8 @@ export const TabGroup = (props: Props) => {
 
   const tabStyleDefault = {
     width: props.navbarCollapsed ? "40px" : "240px",
-    backgroundColor: hovering
-      ? groupBackgroundHoverColor
-      : !groupTabCollapsed
-      ? groupBackgroundActiveColor
-      : groupBackgroundMainColor,
-    color: hovering ? fontHighlightColor : fontMainColor,
+    backgroundColor: backgroundColor,
+    color: fontColor,
   };
 
   let className = "default-nav-element-wrapper flex align-items-center";
@@ -102,10 +129,8 @@ export const TabGroup = (props: Props) => {
     logo: props.logo,
     groupTabCollapsed: groupTabCollapsed,
     colors: {
-      iconMainColor,
-      iconHighlightColor,
-      arrowMainColor,
-      arrowHighlightColor,
+      iconColor,
+      arrowColor,
     },
   };
 

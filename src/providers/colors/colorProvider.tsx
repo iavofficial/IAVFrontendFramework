@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { ColorSettingsContext } from "../../contexts/colorsettings";
-import { getCurrentColors_Navbar } from "./color_getter/getCurrentColors_Navbar";
-import { ColorOptions } from "../../components/navbar/typesNavbarColor";
+import { getCurrentColorsNavbar } from "./colorSelectors/getCurrentColorsNavbar";
+import { getCurrentColorsHeader } from "./colorSelectors/getCurrentColorsHeader";
+import { getCurrentColorsContentArea } from "./colorSelectors/getCurrentColorsContentArea";
+import { getCurrentColorsContentbar } from "./colorSelectors/getCurrentColorsContentbar";
+import { getCurrentColorsContentCell } from "./colorSelectors/getCurrentColorsContentCell";
+import { getCurrentColorsAuthenticationView } from "./colorSelectors/getCurrentColorsAuthenticationView";
+import { ColorOptions } from "./colorOptionTypes";
 
 export interface ColorProviderProps {
   colorOptions?: ColorOptions;
@@ -45,10 +50,35 @@ export const ColorProvider = (props: React.PropsWithChildren<ColorProviderProps>
         setDarkmode: setDarkmodeToLocalStorage,
         colorOptions: props.colorOptions ?? {},
         currentColors: {
-          navbar: getCurrentColors_Navbar(
+          header: getCurrentColorsHeader(
             darkmode,
             customColorsDisabledInCurrentMode,
-            props.colorOptions?.navbarColorOptions ?? {}
+            props.colorOptions?.header ?? {}
+          ),
+          navbar: getCurrentColorsNavbar(
+            darkmode,
+            customColorsDisabledInCurrentMode,
+            props.colorOptions?.navbar ?? {}
+          ),
+          contentArea: getCurrentColorsContentArea(
+            darkmode,
+            customColorsDisabledInCurrentMode,
+            props.colorOptions?.contentArea ?? {}
+          ),
+          contentbar: getCurrentColorsContentbar(
+            darkmode,
+            customColorsDisabledInCurrentMode,
+            props.colorOptions?.contentbar ?? {}
+          ),
+          contentCell: getCurrentColorsContentCell(
+            darkmode,
+            customColorsDisabledInCurrentMode,
+            props.colorOptions?.contentCell ?? {}
+          ),
+          authenticationView: getCurrentColorsAuthenticationView(
+            darkmode,
+            customColorsDisabledInCurrentMode,
+            props.colorOptions?.authenticationView ?? {}
           ),
         },
       }}

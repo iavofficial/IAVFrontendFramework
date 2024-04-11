@@ -9,7 +9,7 @@ import { useTranslator } from "../../internationalization/translators";
 import { AuthenticationViewProps } from "../authenticationView";
 import "../authenticationView.css";
 import "../../css/globalColors.css";
-import CompanyLogo from '../../../assets/svg/company_logo.svg';
+import CompanyLogo from "../../../assets/svg/company_logo.svg";
 import loginBackgroundLightMode from "../../../assets/png/login_background_lightMode.png";
 import loginBackgroundDarkMode from "../../../assets/png/login_background_darkMode.png";
 import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
@@ -28,6 +28,30 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
 
   const authContext = useContext(AuthContext);
   const t = useTranslator();
+
+  const passwortRequirementsTextColor =
+    colorSettingsContext.currentColors.authenticationView
+      .passwortRequirementsTextColor;
+  const inputFieldDescriptionTextColor =
+    colorSettingsContext.currentColors.authenticationView
+      .inputFieldDescriptionTextColor;
+  const inputFieldBackgroundColor =
+    colorSettingsContext.currentColors.authenticationView
+      .inputFieldBackgroundColor;
+  const inputFieldTextColor =
+    colorSettingsContext.currentColors.authenticationView.inputFieldTextColor;
+  const headerBackgroundColor =
+    colorSettingsContext.currentColors.authenticationView.headerBackgroundColor;
+  const fullScreenBackgroundColor =
+    colorSettingsContext.currentColors.authenticationView
+      .fullScreenBackgroundColor;
+  const loginFormBackgroundColor =
+    colorSettingsContext.currentColors.authenticationView
+      .loginFormBackgroundColor;
+  const legalNoticeIconColor =
+    colorSettingsContext.currentColors.authenticationView.legalNoticeIconColor;
+  const companyTextColor =
+    colorSettingsContext.currentColors.authenticationView.companyTextColor;
 
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -74,7 +98,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
       <CompanyLogo fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE} />
     </div>
   );
-  
+
   const NewPasswordForm = (
     <div style={{ width: "100%", height: "100%" }}>
       <div
@@ -86,9 +110,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
             colorSettingsContext?.darkmode ? "color-white" : "color-black"
           }
           style={{
-            color:
-              colorSettingsContext?.colorOptions.authenticationColorOptions
-                ?.passwortRequirementsTextColor,
+            color: passwortRequirementsTextColor,
           }}
         >
           <p>{t("replace_temporary_password")}</p>
@@ -106,9 +128,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
                 fontWeight: "normal",
                 marginBottom: "2px",
                 fontSize: "12px",
-                color:
-                  colorSettingsContext?.colorOptions.authenticationColorOptions
-                    ?.inputFieldDescriptionTextColor,
+                color: inputFieldDescriptionTextColor,
               }}
               className={
                 (colorSettingsContext?.darkmode
@@ -127,12 +147,8 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
               style={{
                 marginBottom: "40px",
                 width: "100%",
-                backgroundColor:
-                  colorSettingsContext?.colorOptions.authenticationColorOptions
-                    ?.inputFieldBackgroundColor,
-                color:
-                  colorSettingsContext?.colorOptions.authenticationColorOptions
-                    ?.inputFieldTextColor,
+                backgroundColor: inputFieldBackgroundColor,
+                color: inputFieldTextColor,
               }}
               className={
                 (colorSettingsContext?.darkmode
@@ -173,9 +189,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
             fontWeight: "normal",
             marginBottom: "2px",
             fontSize: "12px",
-            color:
-              colorSettingsContext?.colorOptions.authenticationColorOptions
-                ?.inputFieldDescriptionTextColor,
+            color: inputFieldDescriptionTextColor,
           }}
           className={
             (colorSettingsContext?.darkmode ? "color-white" : "color-black") +
@@ -198,12 +212,8 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
           autoFocus
           style={{
             marginBottom: "40px",
-            backgroundColor:
-              colorSettingsContext?.colorOptions.authenticationColorOptions
-                ?.inputFieldBackgroundColor,
-            color:
-              colorSettingsContext?.colorOptions.authenticationColorOptions
-                ?.inputFieldTextColor,
+            backgroundColor: inputFieldBackgroundColor,
+            color: inputFieldTextColor,
           }}
         />
         <label
@@ -211,9 +221,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
             fontWeight: "normal",
             marginBottom: "2px",
             fontSize: "12px",
-            color:
-              colorSettingsContext?.colorOptions.authenticationColorOptions
-                ?.inputFieldDescriptionTextColor,
+            color: inputFieldDescriptionTextColor,
           }}
           className={
             (colorSettingsContext?.darkmode ? "color-white" : "color-black") +
@@ -235,12 +243,8 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
           required
           style={{
             marginBottom: "40px",
-            backgroundColor:
-              colorSettingsContext?.colorOptions.authenticationColorOptions
-                ?.inputFieldBackgroundColor,
-            color:
-              colorSettingsContext?.colorOptions.authenticationColorOptions
-                ?.inputFieldTextColor,
+            backgroundColor: inputFieldBackgroundColor,
+            color: inputFieldTextColor,
           }}
         />
         <div>
@@ -260,9 +264,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
         " flex justify-content-between"
       }
       style={{
-        backgroundColor:
-          colorSettingsContext?.colorOptions.authenticationColorOptions
-            ?.headerBackgroundColor,
+        backgroundColor: headerBackgroundColor,
         color: "white",
         alignItems: "center",
         height: "56px",
@@ -272,9 +274,11 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
         id="left-element-authentication"
         className={"flex align-items-center"}
       >
-        {props.headerOptions?.reactElementLeft
-          ? props.headerOptions?.reactElementLeft
-          : <AppLogoPlaceholder/>}
+        {props.headerOptions?.reactElementLeft ? (
+          props.headerOptions?.reactElementLeft
+        ) : (
+          <AppLogoPlaceholder />
+        )}
       </div>
       <div
         id="right-element-authentication"
@@ -296,12 +300,10 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
       style={{
         height: "100%",
         background: "",
-        backgroundColor:
-          colorSettingsContext?.colorOptions.authenticationColorOptions
-            ?.fullScreenBackgroundColor,
+        backgroundColor: fullScreenBackgroundColor,
       }}
     >
-      {colorSettingsContext?.colorOptions.authenticationColorOptions
+      {colorSettingsContext?.colorOptions.authenticationView
         ?.fullScreenBackgroundColor ? (
         <></>
       ) : (
@@ -332,9 +334,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
           width: "620px",
           margin: "auto",
           position: "relative",
-          backgroundColor:
-            colorSettingsContext?.colorOptions.authenticationColorOptions
-              ?.loginFormBackgroundColor,
+          backgroundColor: loginFormBackgroundColor,
         }}
       >
         <div>{header(props)}</div>
@@ -410,11 +410,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
               style={{
                 fontSize: "medium",
                 fontWeight: "bold",
-                color: colorSettingsContext?.colorOptions.authenticationColorOptions
-                  ?.legalNoticeIconColor
-                  ? colorSettingsContext?.colorOptions.authenticationColorOptions
-                      ?.legalNoticeIconColor
-                  : BLUE3,
+                color: legalNoticeIconColor,
               }}
             />
           </Link>
@@ -437,9 +433,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
             alignSelf: "center",
             padding: "24px",
             fontSize: "11px",
-            color:
-              colorSettingsContext?.colorOptions.authenticationColorOptions
-                ?.companyTextColor,
+            color: companyTextColor,
           }}
         >
           &copy;{" "}

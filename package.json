@@ -121,7 +121,7 @@
 
     "./constants": "./build/constants.js",
 
-    "./content": "./build/components/content/content.js",
+    "./contentArea": "./build/components/content/contentArea.js",
     "./contentLayout": "./build/components/content/contentLayout.js",
     "./contentCell": "./build/components/content/contentCell.js",
 

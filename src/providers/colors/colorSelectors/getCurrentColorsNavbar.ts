@@ -1,4 +1,4 @@
-import { NavbarColorOptions } from "../../../components/navbar/typesNavbarColor";
+import { NavbarColorOptions } from "../../../components/navbar/typesColorOptionsAndSelected";
 import {
   DARK_NAVBAR_BACKGROUND_INSIDE_ACTIVE_GROUP_COLOR,
   DARK_NAV_BACKGROUND_COLOR,
@@ -53,28 +53,20 @@ import {
   LIGHT_NAV_GROUP_ARROW_DEFAULT_COLOR,
   DARK_NAV_GROUP_ARROW_DEFAULT_COLOR,
 } from "../defaultColors";
+import { determineSelectedColorHOF } from "./determineSelectedColor";
 
-export const getCurrentColors_Navbar = (
+export const getCurrentColorsNavbar = (
   darkmodeIsEnabled: boolean,
   customColorsDisabledInCurrentMode: boolean,
   navbarColorOptions: NavbarColorOptions
 ) => {
-  // This function returns the color to be used.
-  const determineColor = (lightDef: string, darkDef: string, custom?: string) => {
-    if (custom && !customColorsDisabledInCurrentMode) {
-      return custom;
-    }
-    if (darkmodeIsEnabled) {
-      return darkDef;
-    }
-    return lightDef;
-  };
+  const determineColor = determineSelectedColorHOF(darkmodeIsEnabled, customColorsDisabledInCurrentMode);
 
   return {
     backgroundColor: determineColor(
       LIGHT_NAV_BACKGROUND_COLOR,
       DARK_NAV_BACKGROUND_COLOR,
-      navbarColorOptions.navbarBackgroundColor
+      navbarColorOptions.backgroundColor
     ),
     legalDocumentsIconColor: determineColor(
       LIGHT_NAV_LEGAL_DOCS_ICON_COLOR,

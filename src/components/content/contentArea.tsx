@@ -19,8 +19,10 @@ export interface Props {
   onClickRightSlideButton?: () => any;
 }
 
-export const Content = (props: React.PropsWithChildren<Props>) => {
+export const ContentArea = (props: React.PropsWithChildren<Props>) => {
   const colorSettingsContext = useContext(ColorSettingsContext);
+
+  const backgroundColor = colorSettingsContext.currentColors.contentArea.backgroundColor;
 
   const selectedContentWrapper = useMemo(() => {
     /* TODO: Currently there is a bug in TypeScript which results in a TypeScript error if the find method
@@ -55,8 +57,7 @@ export const Content = (props: React.PropsWithChildren<Props>) => {
         }`}
         style={{
           height: "100%",
-          backgroundColor:
-            colorSettingsContext?.colorOptions.contentColorOptions?.contentBackground,
+          backgroundColor: backgroundColor,
           overflow: "auto",
         }}
       >

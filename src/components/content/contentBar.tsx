@@ -1,27 +1,15 @@
 import React from "react";
-import {
-  useContext,
-  useEffect,
-  useState,
-  useRef,
-} from 'react';
-import '../css/globalColors.css';
-import {
-  BLACK,
-  BLUE0,
-  GREY3,
-  GREY4,
-  GREY5,
-  WHITE,
-} from '../../constants';
-import { ColorSettingsContext } from '../../contexts/colorsettings';
-import { BasicContentbarWrapper } from './basicContentbarWrapper';
-import { CustomContentbarWrapper } from './customContentbarWrapper';
-import { NavbarSettingsContext } from '../../contexts/navbarContext';
-import { calculateWidth } from '../../utils/calculateWidth';
+import { useContext, useEffect, useState, useRef } from "react";
+import "../css/globalColors.css";
+import { ColorSettingsContext } from "../../contexts/colorsettings";
+import { BasicContentbarWrapper } from "./basicContentbarWrapper";
+import { CustomContentbarWrapper } from "./customContentbarWrapper";
+import { NavbarSettingsContext } from "../../contexts/navbarContext";
+import { calculateWidth } from "../../utils/calculateWidth";
 
 interface Props {
   contentElements: BasicContentbarWrapper[] | CustomContentbarWrapper[];
+  disableStyling?: boolean;
   addable?: boolean;
   jumpToEnd?: boolean;
   onClose?: (value: string) => any;
@@ -46,6 +34,19 @@ export const ContentBar = (props: Props) => {
   const [amountOfRenderedTabElements, setAmountOfRenderedTabElements] =
     useState(navbarSettingsContext?.navbarCollapsed === true ? 6 : 5);
 
+  const contentAreaBackgroundColor =
+    colorSettingsContext.currentColors.contentArea.backgroundColor;
+  const contentbarBackgroundColor =
+    colorSettingsContext.currentColors.contentbar.backgroundColor;
+  const buttonDefaultColor =
+    colorSettingsContext.currentColors.contentbar.buttonDefaultColor;
+  const buttonHoverColor =
+    colorSettingsContext.currentColors.contentbar.buttonHoverColor;
+  const iconDefaultColor =
+    colorSettingsContext.currentColors.contentbar.iconDefaultColor;
+  const iconHoverColor =
+    colorSettingsContext.currentColors.contentbar.iconHoverColor;
+
   useEffect(() => {
     if (navbarSettingsContext?.navbarCollapsed === true) {
       setStartRenderElements(() =>
@@ -58,29 +59,6 @@ export const ContentBar = (props: Props) => {
       handleWindowResize();
     }
   }, [navbarSettingsContext?.navbarCollapsed]);
-
-  let highlightColor = colorSettingsContext?.colorOptions.contentbarColorOptions
-    ?.buttonColorHighlight
-    ? colorSettingsContext?.colorOptions.contentbarColorOptions?.buttonColorHighlight
-    : colorSettingsContext?.darkmode
-    ? GREY4
-    : BLUE0;
-  let mainColor = colorSettingsContext?.colorOptions.contentbarColorOptions?.buttonColorMain
-    ? colorSettingsContext?.colorOptions.contentbarColorOptions?.buttonColorMain
-    : colorSettingsContext?.darkmode
-    ? GREY5
-    : WHITE;
-
-  let letteringHighlightColor = colorSettingsContext?.colorOptions.contentbarColorOptions
-    ?.iconHighlightColor
-    ? colorSettingsContext?.colorOptions.contentbarColorOptions?.iconHighlightColor
-    : WHITE;
-  let letteringMainColor = colorSettingsContext?.colorOptions.contentbarColorOptions
-    ?.iconMainColor
-    ? colorSettingsContext?.colorOptions.contentbarColorOptions?.iconMainColor
-    : colorSettingsContext?.darkmode
-    ? GREY3
-    : BLACK;
 
   let renderElementsArray:
     | BasicContentbarWrapper[]
@@ -133,10 +111,10 @@ export const ContentBar = (props: Props) => {
   }
 
   useEffect(() => {
-    window.addEventListener('resize', handleWindowResize);
+    window.addEventListener("resize", handleWindowResize);
 
     return () => {
-      window.removeEventListener('resize', handleWindowResize);
+      window.removeEventListener("resize", handleWindowResize);
     };
   }, []);
 
@@ -175,29 +153,23 @@ export const ContentBar = (props: Props) => {
     <div
       ref={contentRef}
       id="contentbar"
-      className={
-        (colorSettingsContext?.darkmode ? 'bg-black' : 'bg-grey-1') +
-        ' flex pt-3 pr-3 pl-3'
-      }
+      className="flex pt-3 pr-3 pl-3"
       style={{
-        height: '56px',
-        minHeight: '56px',
-        backgroundColor:
-          colorSettingsContext?.colorOptions.contentColorOptions?.contentBackground,
+        height: "56px",
+        minHeight: "56px",
+        backgroundColor: props.disableStyling
+          ? "inherit"
+          : contentAreaBackgroundColor,
       }}
     >
       <div
         style={{
-          height: '40px',
-          minHeight: '40px',
-          width: '100%',
-          backgroundColor:
-            colorSettingsContext?.colorOptions.contentbarColorOptions?.backgroundColor,
+          height: "40px",
+          minHeight: "40px",
+          width: "100%",
+          backgroundColor: contentbarBackgroundColor,
         }}
-        className={
-          (colorSettingsContext?.darkmode ? 'bg-grey-5' : 'bg-white-1') +
-          ' flex align-items-center justify-content-between'
-        }
+        className="flex align-items-center justify-content-between"
       >
         <div className="flex align-items-center">
           {props.contentElements.length > amountOfRenderedTabElements ? (
@@ -206,12 +178,12 @@ export const ContentBar = (props: Props) => {
               onMouseLeave={() => setSlideLeftButtonHover(false)}
               onClick={handleSlideLeftEvent}
               style={{
-                height: '40px',
-                width: '40px',
-                cursor: 'pointer',
+                height: "40px",
+                width: "40px",
+                cursor: "pointer",
                 backgroundColor: slideLeftButtonHover
-                  ? highlightColor
-                  : mainColor,
+                  ? buttonHoverColor
+                  : buttonDefaultColor,
               }}
               className="flex justify-content-center align-items-center"
             >
@@ -219,8 +191,8 @@ export const ContentBar = (props: Props) => {
                 className="pi pi-angle-left"
                 style={{
                   color: slideLeftButtonHover
-                    ? letteringHighlightColor
-                    : letteringMainColor,
+                    ? iconHoverColor
+                    : iconDefaultColor,
                 }}
               />
             </div>
@@ -255,19 +227,19 @@ export const ContentBar = (props: Props) => {
               onMouseLeave={() => setAddButtonHover(false)}
               onClick={handleOnClickAddEvent}
               style={{
-                height: '40px',
-                width: '40px',
-                cursor: 'pointer',
-                backgroundColor: addButtonHover ? highlightColor : mainColor,
+                height: "40px",
+                width: "40px",
+                cursor: "pointer",
+                backgroundColor: addButtonHover
+                  ? buttonHoverColor
+                  : buttonDefaultColor,
               }}
               className="flex justify-content-center align-items-center"
             >
               <i
                 className="pi pi-plus"
                 style={{
-                  color: addButtonHover
-                    ? letteringHighlightColor
-                    : letteringMainColor,
+                  color: addButtonHover ? iconHoverColor : iconDefaultColor,
                 }}
               />
             </div>
@@ -281,12 +253,12 @@ export const ContentBar = (props: Props) => {
               onMouseLeave={() => setSlideRightButtonHover(false)}
               onClick={handleSlideRightEvent}
               style={{
-                height: '40px',
-                width: '40px',
-                cursor: 'pointer',
+                height: "40px",
+                width: "40px",
+                cursor: "pointer",
                 backgroundColor: slideRightButtonHover
-                  ? highlightColor
-                  : mainColor,
+                  ? buttonHoverColor
+                  : buttonDefaultColor,
               }}
               className="flex justify-content-center align-items-center"
             >
@@ -294,8 +266,8 @@ export const ContentBar = (props: Props) => {
                 className="pi pi-angle-right"
                 style={{
                   color: slideRightButtonHover
-                    ? letteringHighlightColor
-                    : letteringMainColor,
+                    ? iconHoverColor
+                    : iconDefaultColor,
                 }}
               />
             </div>

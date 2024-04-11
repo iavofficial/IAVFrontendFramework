@@ -103,26 +103,25 @@
     "./tabGroup": "./build/components/navbar/tabs/tabGroup/tabGroup.js",
     "./simpleNavbarTabFactory": "./build/components/navbar/factories/simpleNavbarTabFactory.js",
     "./privilegedNavbarTabFactory": "./build/components/navbar/factories/privilegedNavbarTabFactory.js",
-    "./navbarTabTypes": "./build/components/navbar/navbarTabTypes.js",
     "./typesTabFactories": "./build/components/navbar/factories/typesFactories.js",
     "./typesSimpleNavbarTab": "./build/components/navbar/tabs/simpleNavbarTab/typesSimpleNavbarTab.js",
     "./typesTabGroup": "./build/components/navbar/tabs/tabGroup/typesTabGroup.js",
     "./typesNavbarTab": "./build/components/navbar/tabs/typesNavbarTab.js",
-    "./typesTabColor": "./build/components/navbar/tabs/typesTabColor.js",
     "./typesInjectedOptions": "./build/components/navbar/types/typesInjectedOptions.js",
     "./typesWrappers": "./build/components/navbar/wrappers/typesWrappers.js",
-    "./typesNavbarColor": "./build/components/navbar/typesNavbarColor.js",
 
     "./customContentbarWrapper": "./build/components/content/customContentbarWrapper.js",
     "./basicContentbarWrapper": "./build/components/content/basicContentbarWrapper.js",
 
     "./colorProvider": "./build/providers/colors/colorProvider.js",
     "./colorSettingsContext": "./build/contexts/colorsettings.js",
+    "./colorOptionTypes": "./build/providers/colors/colorOptionTypes.js",
 
     "./constants": "./build/constants.js",
 
-    "./contentArea": "./build/components/content/contentArea.js",
+    "./contentWithBar": "./build/components/content/contentWithBar.js",
     "./contentLayout": "./build/components/content/contentLayout.js",
+    "./contentStyle": "./build/components/content/contentStyle.js",
     "./contentCell": "./build/components/content/contentCell.js",
 
     "./header": "./build/components/header/header.js",
@@ -165,26 +164,25 @@
       "./tabGroup": "./build/components/navbar/tabs/tabGroup/tabGroup.d.ts",
       "./simpleNavbarTabFactory": "./build/components/navbar/factories/simpleNavbarTabFactory.d.ts",
       "./privilegedNavbarTabFactory": "./build/components/navbar/factories/privilegedNavbarTabFactory.d.ts",
-      "./navbarTabTypes": "./build/components/navbar/navbarTabTypes.d.ts",
       "./typesTabFactories": "./build/components/navbar/factories/typesFactories.d.ts",
       "./typesSimpleNavbarTab": "./build/components/navbar/tabs/simpleNavbarTab/typesSimpleNavbarTab.d.ts",
       "./typesTabGroup": "./build/components/navbar/tabs/tabGroup/typesTabGroup.d.ts",
       "./typesNavbarTab": "./build/components/navbar/tabs/typesNavbarTab.d.ts",
-      "./typesTabColor": "./build/components/navbar/tabs/typesTabColor.d.ts",
       "./typesInjectedOptions": "./build/components/navbar/types/typesInjectedOptions.d.ts",
       "./typesWrappers": "./build/components/navbar/wrappers/typesWrappers.d.ts",
-      "./typesNavbarColor": "./build/components/navbar/typesNavbarColor.d.ts",
   
       "./customContentbarWrapper": "./build/components/content/customContentbarWrapper.d.ts",
       "./basicContentbarWrapper": "./build/components/content/basicContentbarWrapper.d.ts",
   
       "./colorProvider": "./build/providers/colors/colorProvider.d.ts",
       "./colorSettingsContext": "./build/contexts/colorsettings.d.ts",
+      "./colorOptionTypes": "./build/providers/colors/colorOptionTypes.d.ts",
   
       "./constants": "./build/constants.d.ts",
   
-      "./content": "./build/components/content/content.d.ts",
+      "./contentWithBar": "./build/components/content/contentWithBar.d.ts",
       "./contentLayout": "./build/components/content/contentLayout.d.ts",
+      "./contentStyle": "./build/components/content/contentStyle.d.ts",
       "./contentCell": "./build/components/content/contentCell.d.ts",
   
       "./header": "./build/components/header/header.d.ts",

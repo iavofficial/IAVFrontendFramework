@@ -59,10 +59,8 @@ export interface ContentbarColorOptions {
   backgroundColor?: string;
   iconDefaultColor?: string;
   iconHoverColor?: string;
-  iconActiveColor?: string;
   buttonDefaultColor?: string;
   buttonHoverColor?: string;
-  buttonActiveColor?: string;
   tabs?: ContentbarTabColorType;
 }
 
@@ -96,6 +94,7 @@ export interface AuthenticationViewColorOptions {
   inputFieldBackgroundColor?: string;
   inputFieldTextColor?: string;
   passwortRequirementsTextColor?: string;
+  themeTogglerColor?: string;
 }
 
 //# Aggregated color options

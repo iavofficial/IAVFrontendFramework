@@ -1,6 +1,5 @@
 import React, { CSSProperties, PropsWithChildren, useContext } from 'react';
 import '../css/globalColors.css';
-import { GREY5, WHITE } from '../../constants';
 import { ColorSettingsContext } from '../../contexts/colorsettings';
 
 import "./contentCell.css";

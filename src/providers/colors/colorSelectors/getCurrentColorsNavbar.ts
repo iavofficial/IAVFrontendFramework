@@ -1,4 +1,4 @@
-import { NavbarColorOptions } from "../../../components/navbar/typesColorOptionsAndSelected";
+import { NavbarColorOptions } from "../colorOptionTypes";
 import {
   DARK_NAVBAR_BACKGROUND_INSIDE_ACTIVE_GROUP_COLOR,
   DARK_NAV_BACKGROUND_COLOR,

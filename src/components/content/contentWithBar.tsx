@@ -1,15 +1,13 @@
-import React, { useContext, useMemo } from "react";
+import React, { useMemo } from "react";
 import "../css/globalColors.css";
 import { ContentBar } from "./contentBar";
 import { BasicContentbarWrapper } from "./basicContentbarWrapper";
 import { CustomContentbarWrapper } from "./customContentbarWrapper";
-import { ColorSettingsContext } from "../../contexts/colorsettings";
-import { ContentLayout, LayoutBehaviour } from "./contentLayout";
+import { ContentLayout, ContentLayoutProps } from "./contentLayout";
 
-export interface Props {
+export type Props = ContentLayoutProps & {
   contentWrappers: BasicContentbarWrapper[] | CustomContentbarWrapper[];
   selectedId: string;
-  layoutBehaviour?: LayoutBehaviour;
   setSelectedId?: (value: string) => void;
   onClose?: (value: string) => void;
   addable?: boolean;
@@ -19,9 +17,7 @@ export interface Props {
   onClickRightSlideButton?: () => any;
 }
 
-export const Content = (props: React.PropsWithChildren<Props>) => {
-  const colorSettingsContext = useContext(ColorSettingsContext);
-
+export const ContentWithBar = (props: React.PropsWithChildren<Props>) => {
   const selectedContentWrapper = useMemo(() => {
     /* TODO: Currently there is a bug in TypeScript which results in a TypeScript error if the find method
     is called on union types of arrays. Because of this you have to add "as any[]". This addittion should be removed
@@ -30,7 +26,7 @@ export const Content = (props: React.PropsWithChildren<Props>) => {
       (currentWrapper) => currentWrapper.getId() === props.selectedId
     );
   }, [props.contentWrappers, props.selectedId]);
-  
+
   return (
     <div
       className="flex flex-column"
@@ -46,27 +42,20 @@ export const Content = (props: React.PropsWithChildren<Props>) => {
           addable={props.addable}
           jumpToEnd={props.jumpToEnd}
           contentElements={props.contentWrappers}
+          disableStyling={!!props.disableStyling}
         />
       )}
-      
+
       <div
-        className={`w-full ${
-          colorSettingsContext?.darkmode ? " bg-black" : " bg-grey-1"
-        }`}
+        className="w-full"
         style={{
           height: "100%",
-          backgroundColor:
-            colorSettingsContext?.colorOptions.contentColorOptions?.contentBackground,
           overflow: "auto",
         }}
       >
-        {props.layoutBehaviour ? (
-          <ContentLayout layoutBehaviour={props.layoutBehaviour}>
-            {selectedContentWrapper?.getContentAreaElement()}
-          </ContentLayout>
-        ) : (
-          selectedContentWrapper?.getContentAreaElement()
-        )}
+        <ContentLayout layoutBehaviour={props.layoutBehaviour} disableStyling={!!props.disableStyling}>
+          {selectedContentWrapper?.getContentAreaElement()}
+        </ContentLayout>
       </div>
     </div>
   );

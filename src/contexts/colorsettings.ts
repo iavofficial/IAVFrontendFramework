@@ -1,5 +1,5 @@
 import React from 'react';
-import { ColorOptions, SelectedColors } from '../components/navbar/typesNavbarColor';
+import { ColorOptions, SelectedColors } from '../providers/colors/colorOptionTypes';
 
 export interface ColorsettingsType {
   darkmode: boolean;

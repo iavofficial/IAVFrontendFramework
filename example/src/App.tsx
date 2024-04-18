@@ -23,6 +23,7 @@ import { simpleNavbarTabFactory } from "iav-frontend-framework/simpleNavbarTabFa
 import { privilegedNavbarTabFactory } from "iav-frontend-framework/privilegedNavbarTabFactory";
 import { ExampleComponent2 } from "./components/exampleComponent2";
 import { RED } from "iav-frontend-framework/constants";
+import { AWSAuthenticationView } from "iav-frontend-framework/awsAuthenticationView";
 
 function App() {
   const [selectedButtonOption, setSelectedButtonOption] = useState("Simulated");
@@ -177,7 +178,7 @@ function App() {
         disableCustomColorsForLightMode: true,
         disableCustomColorsForDarkMode: true,
         colorOptions: {
-          navbarColorOptions: {
+          navbar: {
             content: {
               default: {
                 tabBackgroundDefaultColor: RED

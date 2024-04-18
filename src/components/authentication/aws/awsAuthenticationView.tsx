@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect } from "react";
+import React, { FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { BLUE3, WHITE } from "../../../constants";
 import { AuthContext } from "../../../contexts/auth";
@@ -9,7 +9,7 @@ import { useTranslator } from "../../internationalization/translators";
 import { AuthenticationViewProps } from "../authenticationView";
 import "../authenticationView.css";
 import "../../css/globalColors.css";
-import CompanyLogo from '../../../assets/svg/company_logo.svg';
+import CompanyLogo from "../../../assets/svg/company_logo.svg";
 import loginBackgroundLightMode from "../../../assets/png/login_background_lightMode.png";
 import loginBackgroundDarkMode from "../../../assets/png/login_background_darkMode.png";
 import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
@@ -28,6 +28,32 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
 
   const authContext = useContext(AuthContext);
   const t = useTranslator();
+
+  const passwortRequirementsTextColor =
+    colorSettingsContext.currentColors.authenticationView
+      .passwortRequirementsTextColor;
+  const inputFieldDescriptionTextColor =
+    colorSettingsContext.currentColors.authenticationView
+      .inputFieldDescriptionTextColor;
+  const inputFieldBackgroundColor =
+    colorSettingsContext.currentColors.authenticationView
+      .inputFieldBackgroundColor;
+  const inputFieldTextColor =
+    colorSettingsContext.currentColors.authenticationView.inputFieldTextColor;
+  const headerBackgroundColor =
+    colorSettingsContext.currentColors.authenticationView.headerBackgroundColor;
+  const fullScreenBackgroundColor =
+    colorSettingsContext.currentColors.authenticationView
+      .fullScreenBackgroundColor;
+  const loginFormBackgroundColor =
+    colorSettingsContext.currentColors.authenticationView
+      .loginFormBackgroundColor;
+  const legalNoticeIconColor =
+    colorSettingsContext.currentColors.authenticationView.legalNoticeIconColor;
+  const companyTextColor =
+    colorSettingsContext.currentColors.authenticationView.companyTextColor;
+  const themeTogglerColor =
+    colorSettingsContext.currentColors.authenticationView.themeTogglerColor;
 
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -74,7 +100,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
       <CompanyLogo fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE} />
     </div>
   );
-  
+
   const NewPasswordForm = (
     <div style={{ width: "100%", height: "100%" }}>
       <div
@@ -82,13 +108,8 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
         className={"flex flex-column"}
       >
         <div
-          className={
-            colorSettingsContext?.darkmode ? "color-white" : "color-black"
-          }
           style={{
-            color:
-              colorSettingsContext?.colorOptions.authenticationColorOptions
-                ?.passwortRequirementsTextColor,
+            color: passwortRequirementsTextColor,
           }}
         >
           <p>{t("replace_temporary_password")}</p>
@@ -106,16 +127,10 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
                 fontWeight: "normal",
                 marginBottom: "2px",
                 fontSize: "12px",
-                color:
-                  colorSettingsContext?.colorOptions.authenticationColorOptions
-                    ?.inputFieldDescriptionTextColor,
+                color: inputFieldDescriptionTextColor,
               }}
               className={
-                (colorSettingsContext?.darkmode
-                  ? "color-white"
-                  : "color-black") +
-                " inputLabel " +
-                (authContext?.loginError ? "invalid" : "")
+                "inputLabel " + (authContext?.loginError ? "invalid" : "")
               }
             >
               {t("New_password")}
@@ -127,17 +142,10 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
               style={{
                 marginBottom: "40px",
                 width: "100%",
-                backgroundColor:
-                  colorSettingsContext?.colorOptions.authenticationColorOptions
-                    ?.inputFieldBackgroundColor,
-                color:
-                  colorSettingsContext?.colorOptions.authenticationColorOptions
-                    ?.inputFieldTextColor,
+                backgroundColor: inputFieldBackgroundColor,
+                color: inputFieldTextColor,
               }}
               className={
-                (colorSettingsContext?.darkmode
-                  ? "bg-grey-4 color-white"
-                  : "bg-white-1 color-black") +
                 "form-control p-inputtext " +
                 (authContext?.loginError ? "invalid" : "")
               }
@@ -173,14 +181,9 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
             fontWeight: "normal",
             marginBottom: "2px",
             fontSize: "12px",
-            color:
-              colorSettingsContext?.colorOptions.authenticationColorOptions
-                ?.inputFieldDescriptionTextColor,
+            color: inputFieldDescriptionTextColor,
           }}
-          className={
-            (colorSettingsContext?.darkmode ? "color-white" : "color-black") +
-            " inputLabel"
-          }
+          className="inputLabel"
         >
           {t("Email_address")}
         </label>
@@ -189,21 +192,13 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
           onChange={(ev) => setEmail(ev.target.value)}
           name="email"
           type="email"
-          className={
-            (colorSettingsContext?.darkmode
-              ? "bg-grey-4 color-white"
-              : "bg-white-1 color-black") + " p-inputtext"
-          }
+          className="p-inputtext"
           required
           autoFocus
           style={{
             marginBottom: "40px",
-            backgroundColor:
-              colorSettingsContext?.colorOptions.authenticationColorOptions
-                ?.inputFieldBackgroundColor,
-            color:
-              colorSettingsContext?.colorOptions.authenticationColorOptions
-                ?.inputFieldTextColor,
+            backgroundColor: inputFieldBackgroundColor,
+            color: inputFieldTextColor,
           }}
         />
         <label
@@ -211,14 +206,9 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
             fontWeight: "normal",
             marginBottom: "2px",
             fontSize: "12px",
-            color:
-              colorSettingsContext?.colorOptions.authenticationColorOptions
-                ?.inputFieldDescriptionTextColor,
+            color: inputFieldDescriptionTextColor,
           }}
-          className={
-            (colorSettingsContext?.darkmode ? "color-white" : "color-black") +
-            " inputLabel"
-          }
+          className="inputLabel"
         >
           {t("Password")}
         </label>
@@ -227,20 +217,12 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
           onChange={(ev) => setPassword(ev.target.value)}
           name="password"
           type="password"
-          className={
-            (colorSettingsContext?.darkmode
-              ? "bg-grey-4 color-white"
-              : "bg-white-1 color-black") + " p-inputtext"
-          }
+          className="p-inputtext"
           required
           style={{
             marginBottom: "40px",
-            backgroundColor:
-              colorSettingsContext?.colorOptions.authenticationColorOptions
-                ?.inputFieldBackgroundColor,
-            color:
-              colorSettingsContext?.colorOptions.authenticationColorOptions
-                ?.inputFieldTextColor,
+            backgroundColor: inputFieldBackgroundColor,
+            color: inputFieldTextColor,
           }}
         />
         <div>
@@ -255,14 +237,9 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
 
   const header = (props: AuthenticationViewProps) => (
     <div
-      className={
-        (colorSettingsContext?.darkmode ? "bg-grey-5" : "bg-blue-0") +
-        " flex justify-content-between"
-      }
+      className="flex justify-content-between"
       style={{
-        backgroundColor:
-          colorSettingsContext?.colorOptions.authenticationColorOptions
-            ?.headerBackgroundColor,
+        backgroundColor: headerBackgroundColor,
         color: "white",
         alignItems: "center",
         height: "56px",
@@ -270,11 +247,13 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
     >
       <div
         id="left-element-authentication"
-        className={"flex align-items-center"}
+        className="flex align-items-center default-app-logo-text-style"
       >
-        {props.headerOptions?.reactElementLeft
-          ? props.headerOptions?.reactElementLeft
-          : <AppLogoPlaceholder/>}
+        {props.headerOptions?.reactElementLeft ? (
+          props.headerOptions?.reactElementLeft
+        ) : (
+          <AppLogoPlaceholder />
+        )}
       </div>
       <div
         id="right-element-authentication"
@@ -296,12 +275,10 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
       style={{
         height: "100%",
         background: "",
-        backgroundColor:
-          colorSettingsContext?.colorOptions.authenticationColorOptions
-            ?.fullScreenBackgroundColor,
+        backgroundColor: fullScreenBackgroundColor,
       }}
     >
-      {colorSettingsContext?.colorOptions.authenticationColorOptions
+      {colorSettingsContext?.colorOptions.authenticationView
         ?.fullScreenBackgroundColor ? (
         <></>
       ) : (
@@ -324,17 +301,12 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
         />
       )}
       <div
-        className={
-          (colorSettingsContext?.darkmode ? "bg-grey-5" : "bg-white-1") +
-          " flex flex-column shadow-6"
-        }
+        className="flex flex-column shadow-6"
         style={{
           width: "620px",
           margin: "auto",
           position: "relative",
-          backgroundColor:
-            colorSettingsContext?.colorOptions.authenticationColorOptions
-              ?.loginFormBackgroundColor,
+          backgroundColor: loginFormBackgroundColor,
         }}
       >
         <div>{header(props)}</div>
@@ -347,35 +319,30 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
               <></>
             ) : (
               <>
-                {colorSettingsContext?.darkmode ? (
-                  <i
-                    onClick={() =>
-                      colorSettingsContext?.setDarkmode(
-                        !colorSettingsContext.darkmode
-                      )
-                    }
-                    className={"pi pi-sun switch-colormode-logos color-white"}
-                  />
-                ) : (
-                  <i
-                    onClick={() =>
-                      colorSettingsContext?.setDarkmode(
-                        !colorSettingsContext.darkmode
-                      )
-                    }
-                    className="pi pi-moon switch-colormode-logos"
-                  />
-                )}
+                <i
+                  onClick={() =>
+                    colorSettingsContext?.setDarkmode(
+                      !colorSettingsContext.darkmode
+                    )
+                  }
+                  style={{
+                    color: themeTogglerColor,
+                  }}
+                  className={`switch-colormode-logos pi ${
+                    colorSettingsContext.darkmode ? "pi-moon" : "pi-sun"
+                  }`}
+                  pi-moon
+                />
               </>
             )}
 
             {!props.hideLanguageSelection && (
               <Dropdown
-                className={
-                  colorSettingsContext?.darkmode
-                    ? "bg-grey-5 color-white "
-                    : "bg-white-1 color-black "
-                }
+                style={{
+                  width: "160px",
+                  backgroundColor: inputFieldBackgroundColor,
+                  color: inputFieldTextColor,
+                }}
                 placeholder={
                   langContext?.resources[langContext.activeLang].translation
                     .option_name
@@ -387,7 +354,6 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
                   langContext?.resources
                 )}
                 optionLabel="label"
-                style={{ width: "160px" }}
               />
             )}
           </div>
@@ -410,11 +376,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
               style={{
                 fontSize: "medium",
                 fontWeight: "bold",
-                color: colorSettingsContext?.colorOptions.authenticationColorOptions
-                  ?.legalNoticeIconColor
-                  ? colorSettingsContext?.colorOptions.authenticationColorOptions
-                      ?.legalNoticeIconColor
-                  : BLUE3,
+                color: legalNoticeIconColor,
               }}
             />
           </Link>
@@ -430,16 +392,11 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
           id="hover-image"
         />
         <span
-          className={
-            colorSettingsContext?.darkmode ? "color-white" : "color-black"
-          }
           style={{
             alignSelf: "center",
             padding: "24px",
             fontSize: "11px",
-            color:
-              colorSettingsContext?.colorOptions.authenticationColorOptions
-                ?.companyTextColor,
+            color: companyTextColor,
           }}
         >
           &copy;{" "}

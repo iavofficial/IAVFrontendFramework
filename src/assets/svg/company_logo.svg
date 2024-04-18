@@ -1,17 +1,17 @@
 <svg id="IAV-Logo" xmlns="http://www.w3.org/2000/svg" width="104" height="56" viewBox="0 0 104 56">
-  <g id="Gruppe_49" data-name="Gruppe 49" transform="translate(17.246 18.422)">
-    <g id="Gruppe_48" data-name="Gruppe 48" transform="translate(0 0.428)">
-      <g id="Gruppe_47" data-name="Gruppe 47">
-        <rect id="Rechteck_130" data-name="Rechteck 130" width="2.571" height="18.686" fill="current"/>
+  <g id="Gruppe_49" transform="translate(17.246 18.422)">
+    <g id="Gruppe_48" transform="translate(0 0.428)">
+      <g id="Gruppe_47">
+        <rect id="Rechteck_130" width="2.571" height="18.686" fill="current"/>
       </g>
     </g>
-    <path id="Pfad_19" data-name="Pfad 19" d="M1832.875,24.565c-5.308,0-13.568,15.044-15.71,19.091h2.856c4.9-9.331,10.832-16.472,12.854-16.472s7.95,7.141,12.854,16.472h2.857C1846.444,39.609,1838.184,24.565,1832.875,24.565Z" transform="translate(-1810.38 -24.565)" fill="current"/>
-    <path id="Pfad_20" data-name="Pfad 20" d="M1873,44.1c5.308,0,13.235-14.854,15.377-18.924h-2.857c-4.9,9.331-10.5,16.306-12.521,16.306s-7.617-6.975-12.522-16.306h-2.856C1859.76,29.222,1867.711,44.1,1873,44.1Z" transform="translate(-1820.888 -24.724)" fill="current"/>
+    <path id="Pfad_19" d="M1832.875,24.565c-5.308,0-13.568,15.044-15.71,19.091h2.856c4.9-9.331,10.832-16.472,12.854-16.472s7.95,7.141,12.854,16.472h2.857C1846.444,39.609,1838.184,24.565,1832.875,24.565Z" transform="translate(-1810.38 -24.565)" fill="current"/>
+    <path id="Pfad_20" d="M1873,44.1c5.308,0,13.235-14.854,15.377-18.924h-2.857c-4.9,9.331-10.5,16.306-12.521,16.306s-7.617-6.975-12.522-16.306h-2.856C1859.76,29.222,1867.711,44.1,1873,44.1Z" transform="translate(-1820.888 -24.724)" fill="current"/>
   </g>
-  <g id="Gruppe_592" data-name="Gruppe 592" transform="translate(-0.14)">
-    <rect id="Rechteck_312" data-name="Rechteck 312" width="19" height="19" transform="translate(0.14 19)" fill="none"/>
-    <rect id="Rechteck_313" data-name="Rechteck 313" width="19" height="19" transform="translate(18.14)" fill="none"/>
-    <rect id="Rechteck_314" data-name="Rechteck 314" width="19" height="19" transform="translate(18.14 37)" fill="none"/>
-    <rect id="Rechteck_315" data-name="Rechteck 315" width="19" height="19" transform="translate(85.14 19)" fill="none"/>
+  <g id="Gruppe_592" transform="translate(-0.14)">
+    <rect id="Rechteck_312" width="19" height="19" transform="translate(0.14 19)" fill="none"/>
+    <rect id="Rechteck_313" width="19" height="19" transform="translate(18.14)" fill="none"/>
+    <rect id="Rechteck_314" width="19" height="19" transform="translate(18.14 37)" fill="none"/>
+    <rect id="Rechteck_315" width="19" height="19" transform="translate(85.14 19)" fill="none"/>
   </g>
 </svg>

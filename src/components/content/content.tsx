@@ -56,7 +56,7 @@ export const Content = (props: React.PropsWithChildren<Props>) => {
         style={{
           height: "100%",
           backgroundColor:
-            colorSettingsContext?.contentColorOptions?.contentBackground,
+            colorSettingsContext?.colorOptions.contentColorOptions?.contentBackground,
           overflow: "auto",
         }}
       >

@@ -59,25 +59,25 @@ export const ContentBar = (props: Props) => {
     }
   }, [navbarSettingsContext?.navbarCollapsed]);
 
-  let highlightColor = colorSettingsContext?.contentbarColorOptions
+  let highlightColor = colorSettingsContext?.colorOptions.contentbarColorOptions
     ?.buttonColorHighlight
-    ? colorSettingsContext?.contentbarColorOptions?.buttonColorHighlight
+    ? colorSettingsContext?.colorOptions.contentbarColorOptions?.buttonColorHighlight
     : colorSettingsContext?.darkmode
     ? GREY4
     : BLUE0;
-  let mainColor = colorSettingsContext?.contentbarColorOptions?.buttonColorMain
-    ? colorSettingsContext?.contentbarColorOptions?.buttonColorMain
+  let mainColor = colorSettingsContext?.colorOptions.contentbarColorOptions?.buttonColorMain
+    ? colorSettingsContext?.colorOptions.contentbarColorOptions?.buttonColorMain
     : colorSettingsContext?.darkmode
     ? GREY5
     : WHITE;
 
-  let letteringHighlightColor = colorSettingsContext?.contentbarColorOptions
+  let letteringHighlightColor = colorSettingsContext?.colorOptions.contentbarColorOptions
     ?.iconHighlightColor
-    ? colorSettingsContext?.contentbarColorOptions?.iconHighlightColor
+    ? colorSettingsContext?.colorOptions.contentbarColorOptions?.iconHighlightColor
     : WHITE;
-  let letteringMainColor = colorSettingsContext?.contentbarColorOptions
+  let letteringMainColor = colorSettingsContext?.colorOptions.contentbarColorOptions
     ?.iconMainColor
-    ? colorSettingsContext?.contentbarColorOptions?.iconMainColor
+    ? colorSettingsContext?.colorOptions.contentbarColorOptions?.iconMainColor
     : colorSettingsContext?.darkmode
     ? GREY3
     : BLACK;
@@ -183,7 +183,7 @@ export const ContentBar = (props: Props) => {
         height: '56px',
         minHeight: '56px',
         backgroundColor:
-          colorSettingsContext?.contentColorOptions?.contentBackground,
+          colorSettingsContext?.colorOptions.contentColorOptions?.contentBackground,
       }}
     >
       <div
@@ -192,7 +192,7 @@ export const ContentBar = (props: Props) => {
           minHeight: '40px',
           width: '100%',
           backgroundColor:
-            colorSettingsContext?.contentbarColorOptions?.backgroundColor,
+            colorSettingsContext?.colorOptions.contentbarColorOptions?.backgroundColor,
         }}
         className={
           (colorSettingsContext?.darkmode ? 'bg-grey-5' : 'bg-white-1') +

@@ -87,7 +87,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
           }
           style={{
             color:
-              colorSettingsContext?.authenticationColorOptions
+              colorSettingsContext?.colorOptions.authenticationColorOptions
                 ?.passwortRequirementsTextColor,
           }}
         >
@@ -107,7 +107,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
                 marginBottom: "2px",
                 fontSize: "12px",
                 color:
-                  colorSettingsContext?.authenticationColorOptions
+                  colorSettingsContext?.colorOptions.authenticationColorOptions
                     ?.inputFieldDescriptionTextColor,
               }}
               className={
@@ -128,10 +128,10 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
                 marginBottom: "40px",
                 width: "100%",
                 backgroundColor:
-                  colorSettingsContext?.authenticationColorOptions
+                  colorSettingsContext?.colorOptions.authenticationColorOptions
                     ?.inputFieldBackgroundColor,
                 color:
-                  colorSettingsContext?.authenticationColorOptions
+                  colorSettingsContext?.colorOptions.authenticationColorOptions
                     ?.inputFieldTextColor,
               }}
               className={
@@ -174,7 +174,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
             marginBottom: "2px",
             fontSize: "12px",
             color:
-              colorSettingsContext?.authenticationColorOptions
+              colorSettingsContext?.colorOptions.authenticationColorOptions
                 ?.inputFieldDescriptionTextColor,
           }}
           className={
@@ -199,10 +199,10 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
           style={{
             marginBottom: "40px",
             backgroundColor:
-              colorSettingsContext?.authenticationColorOptions
+              colorSettingsContext?.colorOptions.authenticationColorOptions
                 ?.inputFieldBackgroundColor,
             color:
-              colorSettingsContext?.authenticationColorOptions
+              colorSettingsContext?.colorOptions.authenticationColorOptions
                 ?.inputFieldTextColor,
           }}
         />
@@ -212,7 +212,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
             marginBottom: "2px",
             fontSize: "12px",
             color:
-              colorSettingsContext?.authenticationColorOptions
+              colorSettingsContext?.colorOptions.authenticationColorOptions
                 ?.inputFieldDescriptionTextColor,
           }}
           className={
@@ -236,10 +236,10 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
           style={{
             marginBottom: "40px",
             backgroundColor:
-              colorSettingsContext?.authenticationColorOptions
+              colorSettingsContext?.colorOptions.authenticationColorOptions
                 ?.inputFieldBackgroundColor,
             color:
-              colorSettingsContext?.authenticationColorOptions
+              colorSettingsContext?.colorOptions.authenticationColorOptions
                 ?.inputFieldTextColor,
           }}
         />
@@ -261,7 +261,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
       }
       style={{
         backgroundColor:
-          colorSettingsContext?.authenticationColorOptions
+          colorSettingsContext?.colorOptions.authenticationColorOptions
             ?.headerBackgroundColor,
         color: "white",
         alignItems: "center",
@@ -297,11 +297,11 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
         height: "100%",
         background: "",
         backgroundColor:
-          colorSettingsContext?.authenticationColorOptions
+          colorSettingsContext?.colorOptions.authenticationColorOptions
             ?.fullScreenBackgroundColor,
       }}
     >
-      {colorSettingsContext?.authenticationColorOptions
+      {colorSettingsContext?.colorOptions.authenticationColorOptions
         ?.fullScreenBackgroundColor ? (
         <></>
       ) : (
@@ -333,7 +333,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
           margin: "auto",
           position: "relative",
           backgroundColor:
-            colorSettingsContext?.authenticationColorOptions
+            colorSettingsContext?.colorOptions.authenticationColorOptions
               ?.loginFormBackgroundColor,
         }}
       >
@@ -410,9 +410,9 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
               style={{
                 fontSize: "medium",
                 fontWeight: "bold",
-                color: colorSettingsContext?.authenticationColorOptions
+                color: colorSettingsContext?.colorOptions.authenticationColorOptions
                   ?.legalNoticeIconColor
-                  ? colorSettingsContext?.authenticationColorOptions
+                  ? colorSettingsContext?.colorOptions.authenticationColorOptions
                       ?.legalNoticeIconColor
                   : BLUE3,
               }}
@@ -438,7 +438,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
             padding: "24px",
             fontSize: "11px",
             color:
-              colorSettingsContext?.authenticationColorOptions
+              colorSettingsContext?.colorOptions.authenticationColorOptions
                 ?.companyTextColor,
           }}
         >

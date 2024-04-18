@@ -25,14 +25,14 @@ export const LoginButtonWithSpinner = (props: Props) => {
           float: 'right',
           border: 'none',
           borderRadius: '8px',
-          color: colorSettingsContext?.authenticationColorOptions
+          color: colorSettingsContext?.colorOptions.authenticationColorOptions
             ?.loginButtonTextColor
-            ? colorSettingsContext?.authenticationColorOptions
+            ? colorSettingsContext?.colorOptions.authenticationColorOptions
                 ?.loginButtonTextColor
             : WHITE,
-          backgroundColor: colorSettingsContext?.authenticationColorOptions
+          backgroundColor: colorSettingsContext?.colorOptions.authenticationColorOptions
             ?.loginButtonBackgroundColor
-            ? colorSettingsContext?.authenticationColorOptions
+            ? colorSettingsContext?.colorOptions.authenticationColorOptions
                 ?.loginButtonBackgroundColor
             : BLUE3,
         }}

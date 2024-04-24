@@ -1,6 +1,5 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { ContextMenu } from "primereact/contextmenu";
-import { useTranslator } from "../internationalization/translators";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/auth";
 import { MenuItem } from "./settingsMenu";

@@ -8,8 +8,7 @@ import {
   LanguageOptions,
 } from "./internationalization/defaultLanguageProvider";
 import { DummyAuthenticationProvider } from "./authentication/default/dummyAuthenticationProvider";
-import { ColorProvider } from "../providers/colorProvider";
-import { ColorObject } from "../types/colorObjectType";
+import { ColorProvider, ColorProviderProps } from "../providers/colors/colorProvider";
 import { DEFAULT_FALLBACK_LANGUAGE } from "../constants";
 
 // Create this type to make fallbackLang optional for the user.
@@ -21,7 +20,7 @@ interface Props {
   languageOptions?: GlobalDataLayerLanguageOptions;
   translations?: Translations;
   initI18Next?: () => void;
-  colorOptions?: ColorObject;
+  colorSettings?: ColorProviderProps
 }
 
 export const GlobalDataLayer = (props: PropsWithChildren<Props>) => {
@@ -45,7 +44,7 @@ export const GlobalDataLayer = (props: PropsWithChildren<Props>) => {
           translations={props.translations}
           initI18Next={props.initI18Next}
         >
-          <ColorProvider colorOptions={props.colorOptions}>
+          <ColorProvider {...props.colorSettings}>
             {props.children}
           </ColorProvider>
         </DefaultLanguageProvider>

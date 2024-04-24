@@ -1,15 +1,41 @@
+.default-nav-element-wrapper {
+  height: 40px;
+}
+
+.default-nav-element-collapsed {
+  height: 40px;
+  font-weight: 500;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.default-nav-element-unfolded {
+  height: 40px;
+  font-weight: 500;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.default-tab-collapsed {
+  padding: 0px 8px 0px 8px;
+}
+
+.default-tab-unfolded {
+  padding: 0px 16px 0px 8px;
+}
+
+.default-nav-group-collapsed {
+  padding: 0px 12px 0px 12px;
+}
+
+.default-nav-group-unfolded {
+  padding-left: 8px;
+  padding-right: 16px;
+}
+
 #navbar-tab-name {
   font-size: 14px;
   margin-left: 8px;
-}
-
-#navbartab-general {
-  padding: 0px 16px 0px 2px;
-}
-
-#navbarTab-collabsed-line {
-  height: 56px !important;
-  width: 2px !important;
 }
 
 #hover-image .p-tooltip-text {
@@ -20,10 +46,6 @@
   color: var(--magenta-2) !important;
 }
 
-#secondActiveLine {
-  width: 2px !important;
-  height: 40px !important;
+.navbar-tab-space {
+  margin-top: 4px;
 }
-
-
-

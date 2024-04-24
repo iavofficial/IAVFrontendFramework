@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Content } from 'iav-frontend-framework/content';
+import { ContentWithBar } from 'iav-frontend-framework/contentWithBar';
 import { LayoutBehaviour } from 'iav-frontend-framework/contentLayout';
 import { BasicContentbarWrapper } from 'iav-frontend-framework/basicContentbarWrapper';
 import { ContentbarExampleWithContentCell } from './contentbarExampleWithContentCell';
@@ -45,19 +45,11 @@ export const ExampleComponent2 = () => {
   };
 
   return (
-    <Content
+    <ContentWithBar
       setSelectedId={selectElement}
       layoutBehaviour={LayoutBehaviour.GRID}
       selectedId={selectedId}
       contentWrappers={exampleArray}
-    >
-      <>
-        {exampleArray.map((basicContentbarWrapper: BasicContentbarWrapper) => {
-          if (basicContentbarWrapper.getId() === selectedId) {
-            return basicContentbarWrapper.getContentAreaElement();
-          }
-        })}
-      </>
-    </Content>
+    />
   );
 };

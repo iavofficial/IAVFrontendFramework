@@ -4,7 +4,6 @@ import "../css/globalColors.css";
 import { ContextMenu } from "primereact/contextmenu";
 import UserIcon from "../../assets/svg/icon_user.svg";
 import CompanyLogo from "../../assets/svg/company_logo.svg";
-import AppLogo from "../../assets/svg/app_logo.svg";
 import SettingsIcon from "../../assets/svg/icon_settings.svg";
 import { BLUE3, GREY3, WHITE } from "../../constants";
 import { SettingsMenuOptions, SettingsMenu } from "./settingsMenu";
@@ -30,6 +29,10 @@ export const Header = (props: Props) => {
   const menuRef = React.createRef<ContextMenu>();
   const userRef = React.createRef<ContextMenu>();
   const colorSettingsContext = useContext(ColorSettingsContext);
+
+  const headerBackgroundColor = colorSettingsContext.currentColors.header.backgroundColor;
+  const settingsIconColor = colorSettingsContext.currentColors.header.settingsIconColor;
+  const userIconColor = colorSettingsContext.currentColors.header.userIconColor;
 
   const companyLogoDefault = (props: Props) => (
     <div
@@ -62,8 +65,7 @@ export const Header = (props: Props) => {
         " flex justify-content-between align-items-center"
       }
       style={{
-        backgroundColor:
-          colorSettingsContext?.headerColorOptions?.backgroundColor,
+        backgroundColor: headerBackgroundColor,
       }}
     >
       <div id="left-element" className="flex default-app-logo-text-style">
@@ -107,13 +109,7 @@ export const Header = (props: Props) => {
             onKeyDown={(e) => hideSettingsMenu(e)}
           >
             <SettingsIcon
-              fill={
-                colorSettingsContext?.headerColorOptions?.settingsLogoColor
-                  ? colorSettingsContext?.headerColorOptions?.settingsLogoColor
-                  : colorSettingsContext?.darkmode
-                  ? GREY3
-                  : WHITE
-              }
+              fill={settingsIconColor}
             />
           </a>
           <a
@@ -132,13 +128,7 @@ export const Header = (props: Props) => {
           >
             {!props.headerOptions?.hideUserIcon && (
               <UserIcon
-                fill={
-                  colorSettingsContext?.headerColorOptions?.userLogoColor
-                    ? colorSettingsContext?.headerColorOptions?.userLogoColor
-                    : colorSettingsContext?.darkmode
-                    ? GREY3
-                    : WHITE
-                }
+                fill={userIconColor}
               />
             )}
           </a>

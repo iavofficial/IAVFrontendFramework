@@ -20,8 +20,7 @@ import { AuthContext } from "../contexts/auth";
 import { AuthenticationViewProps } from "./authentication/authenticationView";
 import { MainView } from "./mainView";
 import { DefaultImprint } from "./imprint/defaultImprint";
-import { TabAndContentWrapper } from "./navbar/wrapper/tabAndContentWrapper";
-import { calculateLayer } from "../utils/calculateLayer";
+import { TabAndContentWrapper } from "./navbar/wrappers/typesWrappers";
 import { NavbarSettingsProvider } from "../providers/navbarSettingsProvider";
 import { StaticCollapsedState } from "../types/navbarSettingsTypes";
 
@@ -45,6 +44,7 @@ export interface NavbarOptions {
 }
 
 export interface Props {
+  // This indicates that the passed objects should have the type's properties at least.
   tabAndContentWrappers: TabAndContentWrapper[];
   startingPoint: string;
   disableLogin?: boolean;
@@ -130,9 +130,7 @@ export const UILayer = (props: Props) => {
                 userMenuOptions={userMenuOptions}
                 documentsLabelKey={props.documentsLabelKey}
                 documentsComponent={props.documentsComponent}
-                tabAndContentWrappers={calculateLayer(
-                  props.tabAndContentWrappers
-                )}
+                tabAndContentWrappers={props.tabAndContentWrappers}
                 hideLegalDocuments={props.hideLegalDocuments}
               />
             }

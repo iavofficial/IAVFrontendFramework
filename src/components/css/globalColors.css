@@ -29,6 +29,14 @@
   background-color: var(--grey-5);
 }
 
+.bg-grey-6{
+  background-color: var(--grey-6);
+}
+
+.bg-grey-menu-special-1{
+  background-color: var(--grey-menu-special-1);
+}
+
 
 .bg-blue-0{
   background-color: var(--blue-0);
@@ -122,6 +130,14 @@
   color: var(--grey-5);
 }
 
+.color-grey-6{
+  color: var(--grey-6);
+}
+
+.color-grey-menu-special-1{
+  color: var(--grey-menu-special-1);
+}
+
 .color-blue-0{
   color: var(--blue-0);
 }
@@ -170,7 +186,6 @@
 .color-magenta-6{
   color: var(--magenta-6);
 }
-
 
 .color-red{
   color: var(--red);

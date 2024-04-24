@@ -1,5 +1,5 @@
 import { useEffect, useReducer } from 'react';
-import { Content } from 'iav-frontend-framework/content';
+import { ContentWithBar } from 'iav-frontend-framework/contentWithBar';
 import { LayoutBehaviour } from 'iav-frontend-framework/contentLayout';
 import { generateHashOfLength } from 'iav-frontend-framework/hash';
 import { ContentbarExampleWithText } from './contentbarExampleWithText';
@@ -157,7 +157,7 @@ export const ExampleComponent1 = () => {
   };
 
   return (
-    <Content
+    <ContentWithBar
       onClickAddButton={onAddElement}
       layoutBehaviour={LayoutBehaviour.GRID}
       contentWrappers={state.exampleArray!}

@@ -1,11 +1,12 @@
-import React, { useContext, useState } from 'react';
-import { BLACK, BLUE0, GREY3, GREY5, WHITE } from '../../constants';
-import { generateHashOfLength } from '../../utils/hash';
-import { Tooltip } from 'primereact/tooltip';
-import './contentbar.css';
-import { ColorSettingsContext } from '../../contexts/colorsettings';
-import { TranslationFunction } from '../../types/translationFunction';
-import { useTranslator } from '../internationalization/translators';
+import React, { useContext, useState } from "react";
+import { BLACK, BLUE0, GREY3, GREY5, WHITE } from "../../constants";
+import { generateHashOfLength } from "../../utils/hash";
+import { Tooltip } from "primereact/tooltip";
+import "./contentbar.css";
+import { ColorSettingsContext } from "../../contexts/colorsettings";
+import { TranslationFunction } from "../../types/translationFunction";
+import { useTranslator } from "../internationalization/translators";
+import { determineCurrentColor } from "../../utils/determineCurrentColor";
 
 export interface Props {
   displayName: string | TranslationFunction;
@@ -22,58 +23,63 @@ export const DefaultContentSelectionElement = (props: Props) => {
   const translationFunction = useTranslator();
   const colorSettingsContext = useContext(ColorSettingsContext);
 
-  const name = typeof props.displayName === "string"? props.displayName : props.displayName(translationFunction);
+  const tabBackgroundDefaultColor =
+    colorSettingsContext.currentColors.contentbar.tabs.backgroundDefaultColor;
+  const tabBackgroundHoverColor =
+    colorSettingsContext.currentColors.contentbar.tabs.backgroundHoverColor;
+  const tabBackgroundActiveColor =
+    colorSettingsContext.currentColors.contentbar.tabs.backgroundActiveColor;
+  const textDefaultColor =
+    colorSettingsContext.currentColors.contentbar.tabs.textDefaultColor;
+  const textHoverColor =
+    colorSettingsContext.currentColors.contentbar.tabs.textHoverColor;
+  const textActiveColor =
+    colorSettingsContext.currentColors.contentbar.tabs.textActiveColor;
+  const iconDefaultColor =
+    colorSettingsContext.currentColors.contentbar.tabs.iconDefaultColor;
+  const iconHoverColor =
+    colorSettingsContext.currentColors.contentbar.tabs.iconHoverColor;
+  const iconActiveColor =
+    colorSettingsContext.currentColors.contentbar.tabs.iconActiveColor;
 
-  let highlightColor = colorSettingsContext?.contentbarTabColorOptions
-    ?.highlightColor
-    ? colorSettingsContext?.contentbarTabColorOptions?.highlightColor
-    : colorSettingsContext?.darkmode
-    ? GREY3
-    : BLUE0;
-  let mainColor = colorSettingsContext?.contentbarTabColorOptions?.mainColor
-    ? colorSettingsContext?.contentbarTabColorOptions?.mainColor
-    : colorSettingsContext?.darkmode
-    ? GREY5
-    : WHITE;
+  const tabState = {
+    isActive: !!props.selected,
+    isHovering: hovering,
+    isDisabled: false,
+  };
 
-  let letteringHighlightColor = colorSettingsContext?.contentbarTabColorOptions
-    ?.textHighlightColor
-    ? colorSettingsContext?.contentbarTabColorOptions?.textHighlightColor
-    : WHITE;
-  let letteringMainColor = colorSettingsContext?.contentbarTabColorOptions
-    ?.textMainColor
-    ? colorSettingsContext?.contentbarTabColorOptions?.textMainColor
-    : colorSettingsContext?.darkmode
-    ? GREY3
-    : BLACK;
+  const name =
+    typeof props.displayName === "string"
+      ? props.displayName
+      : props.displayName(translationFunction);
 
-  let iconHighlightColor = colorSettingsContext?.contentbarTabColorOptions
-    ?.iconHighlightColor
-    ? colorSettingsContext?.contentbarTabColorOptions?.iconHighlightColor
-    : WHITE;
-  let iconMainColor = colorSettingsContext?.contentbarTabColorOptions
-    ?.iconMainColor
-    ? colorSettingsContext?.contentbarTabColorOptions?.iconMainColor
-    : colorSettingsContext?.darkmode
-    ? GREY3
-    : BLACK;
-
-  let widthvalue = props.width.toString() + 'px';
+  let widthvalue = props.width.toString() + "px";
   const tabStyle = {
-    cursor: props.selected ? 'default' : 'pointer',
-    backgroundColor: props.selected || hovering ? highlightColor : mainColor,
-    color:
-      props.selected || hovering ? letteringHighlightColor : letteringMainColor,
-    height: '40px',
+    cursor: props.selected ? "default" : "pointer",
+    backgroundColor: determineCurrentColor(tabState, {
+      defaultColor: tabBackgroundDefaultColor,
+      hoverColor: tabBackgroundHoverColor,
+      activeColor: tabBackgroundActiveColor,
+    }),
+    color: determineCurrentColor(tabState, {
+      defaultColor: textDefaultColor,
+      hoverColor: textHoverColor,
+      activeColor: textActiveColor,
+    }),
+    height: "40px",
     width: widthvalue,
-    alignItems: 'center',
+    alignItems: "center",
     borderRight:
-      '1px solid ' + (colorSettingsContext?.darkmode ? GREY5 : WHITE),
+      "1px solid " + (colorSettingsContext?.darkmode ? GREY5 : WHITE),
   };
 
   const closingIconStyle = {
-    color: props.selected || hovering ? iconHighlightColor : iconMainColor,
-    marginRight: '8px',
+    color: determineCurrentColor(tabState, {
+      defaultColor: iconDefaultColor,
+      hoverColor: iconHoverColor,
+      activeColor: iconActiveColor,
+    }),
+    marginRight: "8px",
   };
 
   const handleOnCloseEvent = (e: any) => {
@@ -90,13 +96,13 @@ export const DefaultContentSelectionElement = (props: Props) => {
   };
 
   const identifier = generateHashOfLength(4);
-  const identifierLegal = 'a' + identifier;
-  const identifierWithDot = '.' + identifierLegal;
+  const identifierLegal = "a" + identifier;
+  const identifierWithDot = "." + identifierLegal;
 
   return (
     <>
       <div
-        className={'flex align-items-center element-hover'}
+        className={"flex align-items-center element-hover"}
         style={tabStyle}
         onMouseEnter={() => setHovering(true)}
         onMouseLeave={() => setHovering(false)}
@@ -105,15 +111,15 @@ export const DefaultContentSelectionElement = (props: Props) => {
         {props.displayName.length >= 20 ? (
           <div
             style={{
-              width: '100%',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
             }}
             className={identifierLegal}
           >
-            <span className={'m-auto font-semibold '}>
-              {name.slice(0, 20) + '...'}
+            <span className={"m-auto font-semibold "}>
+              {name.slice(0, 20) + "..."}
             </span>
             <Tooltip
               id="change-color"
@@ -122,10 +128,10 @@ export const DefaultContentSelectionElement = (props: Props) => {
             />
           </div>
         ) : (
-          <div className={'m-auto font-semibold '}>{name}</div>
+          <div className={"m-auto font-semibold "}>{name}</div>
         )}
         {props.closable ? (
-          <div style={{ position: 'absolute', right: '5px' }}>
+          <div style={{ position: "absolute", right: "5px" }}>
             <i
               onClick={(event) => handleOnCloseEvent(event)}
               style={closingIconStyle}

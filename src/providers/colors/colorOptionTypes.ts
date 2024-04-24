@@ -105,6 +105,6 @@ export interface ColorOptions {
     contentbar?: ContentbarColorOptions;
     contentCell?: ContentCellColorOptions;
     authenticationView?: AuthenticationViewColorOptions;
-  }
+}
   
   export type SelectedColors = DeepRequired<ColorOptions>;

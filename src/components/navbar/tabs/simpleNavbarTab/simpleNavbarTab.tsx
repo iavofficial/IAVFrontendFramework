@@ -1,4 +1,4 @@
-import React, { ReactElement, useContext, useState } from "react";
+import React, { ReactElement, useContext, useMemo, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useTranslator } from "../../../internationalization/translators";
 import "../tabs.css";
@@ -28,7 +28,18 @@ export const SimpleNavbarTab: GroupableNavbarTab = (props) => {
   const [hovering, setHovering] = useState(false);
   const colorSettingsContext = useContext(ColorSettingsContext);
   const t = useTranslator();
-  const active = useLocation().pathname === path;
+
+  // Use useMemo to improve performance.
+  const regex = useMemo(() => {
+    let regexString = path;
+    // Escape all slashes
+    regexString = regexString.replaceAll("/", "\\/");
+    // Add ^ to match the beginning of the path. Add * for allowing other characters.
+    regexString = `^${regexString}.*`;
+    return new RegExp(regexString);
+  }, [path]);
+
+  const active = regex.test(useLocation().pathname);
 
   const tabBackgroundDefaultColor =
     colorSettingsContext.currentColors.navbar.content.default

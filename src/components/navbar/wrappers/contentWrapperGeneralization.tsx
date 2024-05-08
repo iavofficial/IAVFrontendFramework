@@ -20,7 +20,7 @@ export class ContentWrapperGeneralization {
     return [
       <Route
         key={this.getKey()}
-        path={this._path}
+        path={`${this._path}*`}
         element={<this._component />}
       />,
     ];

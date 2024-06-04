@@ -1,6 +1,6 @@
 {
   "name": "@npm-iav-frontend/iav-frontend-framework",
-  "version": "12.0.1",
+  "version": "12.0.2",
   "private": false,
   "description": "This framework is the foundation of IAV frontend applications to provide maintainability, expandability, unification and an improved developer experience.",
   "contributors": [
@@ -73,7 +73,7 @@
     "@types/node": "^18.15.5",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
-    "aws-amplify": "^5.0.22",
+    "aws-amplify": "^6.3.4",
     "babel-plugin-inline-react-svg": "^2.0.2",
     "typescript": "^5.0.2"
   },
@@ -87,13 +87,11 @@
   "exports": {
     "./uiLayer": "./build/components/uiLayer.js",
     "./globalDataLayer": "./build/components/globalDataLayer.js",
-
     "./auth": "./build/contexts/auth.js",
     "./dummyAuthenticationProvider": "./build/components/authentication/default/dummyAuthenticationProvider.js",
     "./awsAuthenticationProvider": "./build/components/authentication/aws/awsAuthenticationProvider.js",
     "./awsAuthenticationView": "./build/components/authentication/aws/awsAuthenticationView.js",
     "./basicAuthenticationView": "./build/components/authentication/default/basicAuthenticationView.js",
-
     "./navbar": "./build/components/navbar/navbar.js",
     "./basicContentWrapper": "./build/components/navbar/wrappers/basicContentWrapper.js",
     "./group": "./build/components/navbar/wrappers/groupContentWrapper.js",
@@ -109,36 +107,28 @@
     "./typesNavbarTab": "./build/components/navbar/tabs/typesNavbarTab.js",
     "./typesInjectedOptions": "./build/components/navbar/types/typesInjectedOptions.js",
     "./typesWrappers": "./build/components/navbar/wrappers/typesWrappers.js",
-
     "./customContentbarWrapper": "./build/components/content/customContentbarWrapper.js",
     "./basicContentbarWrapper": "./build/components/content/basicContentbarWrapper.js",
-
     "./colorProvider": "./build/providers/colors/colorProvider.js",
     "./colorSettingsContext": "./build/contexts/colorsettings.js",
     "./colorOptionTypes": "./build/providers/colors/colorOptionTypes.js",
-
     "./constants": "./build/constants.js",
-
     "./contentWithBar": "./build/components/content/contentWithBar.js",
     "./contentLayout": "./build/components/content/contentLayout.js",
     "./contentStyle": "./build/components/content/contentStyle.js",
     "./contentCell": "./build/components/content/contentCell.js",
-
     "./header": "./build/components/header/header.js",
     "./settingsMenu": "./build/components/header/settingsMenu.js",
     "./userMenu": "./build/components/header/userMenu.js",
     "./cookieBanner": "./build/components/cookie/cookieBanner.js",
     "./defaultContentSelectionElement": "./build/components/content/defaultContentSelectionElement.js",
     "./hash": "./build/utils/hash.js",
-
     "./navbarSettingsTypes": "./build/types/navbarSettingsTypes.js",
     "./i18n": "./build/components/internationalization/i18n.js",
     "./language": "./build/contexts/language.js",
     "./translators": "./build/components/internationalization/translators.js",
     "./translationFunction": "./build/types/translationFunction.js",
-
     "./imprint": "./build/components/imprint/imprintText.js",
-
     "./constants.css": "./build/components/css/constants.css",
     "./mainPage.css": "./build/components/css/mainPage.css",
     "./framework.css": "./build/components/css/framework.css",
@@ -148,13 +138,11 @@
     "*": {
       "./uiLayer": "./build/components/uiLayer.d.ts",
       "./globalDataLayer": "./build/components/globalDataLayer.d.ts",
-  
       "./auth": "./build/contexts/auth.d.ts",
       "./dummyAuthenticationProvider": "./build/components/authentication/default/dummyAuthenticationProvider.d.ts",
       "./awsAuthenticationProvider": "./build/components/authentication/aws/awsAuthenticationProvider.d.ts",
       "./awsAuthenticationView": "./build/components/authentication/aws/awsAuthenticationView.d.ts",
       "./basicAuthenticationView": "./build/components/authentication/default/basicAuthenticationView.d.ts",
-  
       "./navbar": "./build/components/navbar/navbar.d.ts",
       "./basicContentWrapper": "./build/components/navbar/wrappers/basicContentWrapper.d.ts",
       "./group": "./build/components/navbar/wrappers/groupContentWrapper.d.ts",
@@ -170,36 +158,28 @@
       "./typesNavbarTab": "./build/components/navbar/tabs/typesNavbarTab.d.ts",
       "./typesInjectedOptions": "./build/components/navbar/types/typesInjectedOptions.d.ts",
       "./typesWrappers": "./build/components/navbar/wrappers/typesWrappers.d.ts",
-  
       "./customContentbarWrapper": "./build/components/content/customContentbarWrapper.d.ts",
       "./basicContentbarWrapper": "./build/components/content/basicContentbarWrapper.d.ts",
-  
       "./colorProvider": "./build/providers/colors/colorProvider.d.ts",
       "./colorSettingsContext": "./build/contexts/colorsettings.d.ts",
       "./colorOptionTypes": "./build/providers/colors/colorOptionTypes.d.ts",
-  
       "./constants": "./build/constants.d.ts",
-  
       "./contentWithBar": "./build/components/content/contentWithBar.d.ts",
       "./contentLayout": "./build/components/content/contentLayout.d.ts",
       "./contentStyle": "./build/components/content/contentStyle.d.ts",
       "./contentCell": "./build/components/content/contentCell.d.ts",
-  
       "./header": "./build/components/header/header.d.ts",
       "./settingsMenu": "./build/components/header/settingsMenu.d.ts",
       "./userMenu": "./build/components/header/userMenu.d.ts",
       "./cookieBanner": "./build/components/cookie/cookieBanner.d.ts",
       "./defaultContentSelectionElement": "./build/components/content/defaultContentSelectionElement.d.ts",
       "./hash": "./build/utils/hash.d.ts",
-  
       "./navbarSettingsTypes": "./build/types/navbarSettingsTypes.d.ts",
       "./i18n": "./build/components/internationalization/i18n.d.ts",
       "./language": "./build/contexts/language.d.ts",
       "./translators": "./build/components/internationalization/translators.d.ts",
       "./translationFunction": "./build/types/translationFunction.d.ts",
-  
       "./imprint": "./build/components/imprint/imprintText.d.ts",
-  
       "./constants.css": "./build/components/css/constants.css",
       "./mainPage.css": "./build/components/css/mainPage.css",
       "./framework.css": "./build/components/css/framework.css",

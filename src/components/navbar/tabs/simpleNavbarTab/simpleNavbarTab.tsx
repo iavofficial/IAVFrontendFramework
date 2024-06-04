@@ -41,6 +41,7 @@ export const SimpleNavbarTab: GroupableNavbarTab = (props) => {
 
   const active = regex.test(useLocation().pathname);
 
+
   const tabBackgroundDefaultColor =
     colorSettingsContext.currentColors.navbar.content.default
       .tabBackgroundDefaultColor;

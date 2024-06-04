@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { ContextMenu } from "primereact/contextmenu";
-import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/auth";
 import { MenuItem } from "./settingsMenu";
 
@@ -14,7 +13,6 @@ export interface UserMenuOptions {
 }
 
 export const UserMenu = React.forwardRef<ContextMenu, Props>((props, ref) => {
-  const navigate = useNavigate();
   const authContext = useContext(AuthContext);
   const basicOptions: MenuItem[] = [];
 
@@ -23,7 +21,6 @@ export const UserMenu = React.forwardRef<ContextMenu, Props>((props, ref) => {
       label: "Logout",
       icon: "pi pi-sign-out",
       command: () => {
-        navigate("/login");
         authContext?.logout();
       },
     });

@@ -1,27 +1,37 @@
+import { JWT } from "aws-amplify/auth";
 import React from "react";
 
 export interface Credentials {
-    email: string;
-    password: string;
+  email: string;
+  password: string;
 }
 
-export type FetchAuthedFunction = (url: string, settings?: Object) => Promise<Response>;
+export type FetchAuthedFunction = (
+  url: string,
+  token: JWT,
+  settings?: Object
+) => Promise<Response>;
+
+export interface UserData {
+  idToken: JWT;
+  accessToken: JWT;
+  username: string;
+  groups: string[];
+  [attribute: string]: any;
+}
 
 export interface AuthenticationProvider {
-    login(credentials: Credentials, ...rest: any): any;
-    logout(): any;
-    hasAuthenticated(): boolean;
-    getUsername(): string;
-    fetchAuthed: FetchAuthedFunction;
+  login(credentials: Credentials, ...rest: any): any;
+  logout(): any;
+  hasAuthenticated(): boolean;
+  getUserData(): UserData;
+  fetchAuthed: FetchAuthedFunction;
 }
 
-export interface AuthContextType {
-    login(credentials: Credentials, ...rest: any): any;
-    logout(): any;
-    hasAuthenticated(): boolean;
-    getUsername(): string;
-    fetchAuthed: FetchAuthedFunction;
-    [attribute: string]: any;
+export interface AuthContextType extends AuthenticationProvider {
+  [attribute: string]: any;
 }
 
-export const AuthContext = React.createContext<AuthContextType | undefined>(undefined);
+export const AuthContext = React.createContext<AuthContextType | undefined>(
+  undefined
+);

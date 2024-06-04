@@ -331,7 +331,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
                   className={`switch-colormode-logos pi ${
                     colorSettingsContext.darkmode ? "pi-moon" : "pi-sun"
                   }`}
-                  pi-moon
+              
                 />
               </>
             )}
@@ -402,7 +402,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
           &copy;{" "}
           {props.authOptions?.companyText
             ? props.authOptions?.companyText
-            : "IAV GmbH 2023"}
+            : "IAV GmbH 2024"}
         </span>
       </div>
     </div>

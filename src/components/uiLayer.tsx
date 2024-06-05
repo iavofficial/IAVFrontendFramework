@@ -1,8 +1,8 @@
-import 'primeflex/primeflex.css';
-import 'primereact/resources/themes/nova/theme.css';
-import 'primereact/resources/primereact.css';
-import 'primeicons/primeicons.css';
-import React, { useContext, useEffect, useState } from 'react';
+import "primeflex/primeflex.css";
+import "primereact/resources/themes/nova/theme.css";
+import "primereact/resources/primereact.css";
+import "primeicons/primeicons.css";
+import React, { useContext, useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -63,22 +63,20 @@ export interface Props {
 export const UILayer = (props: Props) => {
   const authContext = useContext(AuthContext);
 
-  const [, setCookie,] = useCookies([
-    ACCEPTED_COOKIES_NAME,
-  ]);
+  const [, setCookie] = useCookies([ACCEPTED_COOKIES_NAME]);
 
   const AuthenticationView = props.authenticationView
     ? props.authenticationView
     : BasicAuthenticationView;
-  
+
   // If the login is disabled, the user should not be able to log out.
-  const userMenuOptions = {...props.userMenuOptions};
-  if(props.disableLogin) {
+  const userMenuOptions = { ...props.userMenuOptions };
+  if (props.disableLogin) {
     userMenuOptions.hideLogoutButton = true;
   }
 
   useEffect(() => {
-    if(props.disableCookieBanner) {
+    if (props.disableCookieBanner) {
       setAcceptCookies(setCookie);
     }
   }, [props.disableCookieBanner]);
@@ -87,12 +85,12 @@ export const UILayer = (props: Props) => {
     <NavbarSettingsProvider
       staticCollapsedState={props.navbarOptions?.staticCollapsedState}
     >
-      {
-        !props.disableCookieBanner &&
-        <CookieBanner />
-      }
+      {!props.disableCookieBanner && <CookieBanner />}
       <Router>
-        <Redirector startingPoint={props.startingPoint} disableLogin={props.disableLogin}/>
+        <Redirector
+          startingPoint={props.startingPoint}
+          disableLogin={props.disableLogin}
+        />
         <Routes>
           {!props.disableLogin && (
             <Route
@@ -165,16 +163,16 @@ const Redirector = (props: RedirectorProps) => {
 
   useEffect(() => {
     // Case: Login is disabled.
-    if(disableLogin) {
+    if (disableLogin) {
       setIntialNavigationDone((prevState) => {
-        if(!prevState) {
+        if (!prevState) {
           navigate(props.startingPoint.valueOf());
         }
         // At this point the state should always be true.
         return true;
-      })
+      });
       return;
-    };
+    }
 
     // Case: Login is enabled.
     if (!userIsAuthenticated) {

@@ -20,7 +20,7 @@ export const ExampleComponent6 = () => {
   const testFunction = async () => {
     let response = await auth?.fetchAuthed(
       "https://av1wsatvsh.execute-api.eu-central-1.amazonaws.com/dev/test/",
-      auth.getUserData().idToken
+      auth.getUserData()?.idToken!
     );
 
     let responseAsJSON = await response?.json();

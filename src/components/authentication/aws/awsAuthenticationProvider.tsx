@@ -3,14 +3,15 @@ import {
   AuthContext,
   AuthenticationProvider,
   Credentials,
+  UserData,
 } from "../../../contexts/auth";
 import {
-  ValidUserInfo,
   cognitoLogin,
   cognitoLogout,
   cognitoCheckIsAuthenticated,
   cognitoCompletePassword,
   cognitoRefreshToken,
+  ValidUserInformation,
 } from "../../../utils/cognitoService";
 import { Amplify } from "aws-amplify";
 import { JWT } from "aws-amplify/auth";
@@ -25,9 +26,8 @@ export interface State {
   hasAuthenticated: boolean;
   isNewPasswordRequired: boolean;
   isLoading: boolean;
-  userData: any;
+  userData: UserData | undefined;
   loginError: undefined | { [key: string]: any } | string;
-  didRender: boolean;
 }
 
 interface FetchSettings {
@@ -41,14 +41,13 @@ export class AWSAuthenticationProvider
 {
   constructor(props: Props) {
     super(props);
-    //TODO: add Typing for userdata
+
     this.state = {
       hasAuthenticated: false, // true if user is authenticated
       isNewPasswordRequired: false, // true if user logs in for the first time with his temp password and has to set a new one
       isLoading: false, // true if user is in process of logging in
-      userData: {}, // contains user information
+      userData: undefined, // contains user information
       loginError: undefined,
-      didRender: false,
     };
   }
 
@@ -77,61 +76,67 @@ export class AWSAuthenticationProvider
 
   checkIsAuthenticated = async () => {
     try {
-      let result: ValidUserInfo | undefined = await cognitoCheckIsAuthenticated(
-        this.props.failOnNoLegalGroup!,
-        this.props.legalGroups!
-      );
+      let result: ValidUserInformation | undefined =
+        await cognitoCheckIsAuthenticated(
+          this.props.failOnNoLegalGroup,
+          this.props.legalGroups
+        );
 
-      this.processSuccessfulAuth(result as ValidUserInfo);
+      this.processSuccessfulAuth(result!);
     } catch (error: any) {
       this.logout();
     }
   };
 
-  generateSettingsWithAuthFrom = (
-    token: JWT,
-    settings: FetchSettings | undefined
-  ) => {
+  generateSettingsWithAuthFrom = (token?: JWT, settings?: FetchSettings) => {
     if (settings !== undefined) {
       if ("headers" in settings) {
         if (!settings.headers?.has("Authorization")) {
           const settingsWithAuth = Object.assign({}, settings);
-          settingsWithAuth.headers?.set("Authorization", "Bearer " + token);
+          settingsWithAuth.headers?.set(
+            "Authorization",
+            "Bearer " +
+              (token ? token : this.state.userData?.idToken.toString())
+          );
           return settingsWithAuth;
         }
       } else {
         return Object.assign(settings, {
           headers: new Headers({
-            Authorization: "Bearer " + token,
+            Authorization:
+              "Bearer " + (token ? token : this.state.userData?.idToken),
           }),
         });
       }
     } else {
       return {
         headers: new Headers({
-          Authorization: "Bearer " + token.toString(),
+          Authorization:
+            "Bearer " + (token ? token : this.state.userData?.idToken),
         }),
       };
     }
   };
 
-  // This function tries to fetch the data from the given url. If the response status is 401, this function will try to renew the session.
-  fetchAuthed = (url: string, token: JWT, settings?: FetchSettings) => {
-    return fetch(url, this.generateSettingsWithAuthFrom(token, settings)).then(
-      (response) => {
-        if (response.status === 401) {
-          return this.refreshSession()
-            .then(() =>
-              fetch(url, this.generateSettingsWithAuthFrom(token, settings))
-            )
-            .then((responseAfterAuth) => {
-              return responseAfterAuth;
-            });
-        } else {
-          return response;
-        }
-      }
-    );
+  //In Amplify 6 the fetchAuthedSession Function handles the renewing of sessions
+  fetchAuthed = (url: string, token?: JWT, settings?: FetchSettings) => {
+    try {
+      this.checkIsAuthenticated();
+
+      return fetch(
+        url,
+        this.generateSettingsWithAuthFrom(token, settings)
+      ).then((response) => {
+        return response;
+      });
+    } catch (error) {
+      this.logout();
+      return new Promise<Response>((resolve) => {
+        resolve(
+          new Response(null, { status: 401, statusText: "Unauthorized" })
+        );
+      });
+    }
   };
 
   hasAuthenticated = () => {
@@ -143,7 +148,7 @@ export class AWSAuthenticationProvider
   };
 
   getUserGroups = () => {
-    return this.state.userData.groups ? this.state.userData.groups : [];
+    return this.state.userData ? this.state.userData.groups : [];
   };
 
   login = async (credentials: Credentials) => {
@@ -152,13 +157,13 @@ export class AWSAuthenticationProvider
       loginError: undefined,
     });
     try {
-      let result: ValidUserInfo | {} = await cognitoLogin(
+      let result: ValidUserInformation | {} = await cognitoLogin(
         credentials,
-        this.props.failOnNoLegalGroup!,
-        this.props.legalGroups!
+        this.props.failOnNoLegalGroup,
+        this.props.legalGroups
       );
-      if ("accessToken" in result && "idToken" in result) {
-        this.processSuccessfulAuth(result as ValidUserInfo);
+      if (result instanceof ValidUserInformation) {
+        this.processSuccessfulAuth(result);
       } else {
         this.setState({
           hasAuthenticated: false,
@@ -174,7 +179,7 @@ export class AWSAuthenticationProvider
     }
   };
 
-  processSuccessfulAuth = (userData: ValidUserInfo) => {
+  processSuccessfulAuth = (userData: ValidUserInformation) => {
     if (!this.state.hasAuthenticated || this.state.isNewPasswordRequired) {
       this.setState({
         hasAuthenticated: true,
@@ -191,14 +196,6 @@ export class AWSAuthenticationProvider
     });
 
     cognitoLogout()
-      .then(() => {
-        this.setState({
-          isLoading: false,
-          hasAuthenticated: false,
-          userData: {},
-          loginError: undefined,
-        });
-      })
       .catch((err: any) => {
         console.log("error signing out: ", err);
       })
@@ -206,7 +203,7 @@ export class AWSAuthenticationProvider
         this.setState({
           isLoading: false,
           hasAuthenticated: false,
-          userData: {},
+          userData: undefined,
           loginError: error ? error : undefined,
         });
       });
@@ -232,16 +229,13 @@ export class AWSAuthenticationProvider
 
   refreshSession = async () => {
     try {
-      let response = await cognitoRefreshToken();
+      let response = await cognitoRefreshToken(
+        this.props.failOnNoLegalGroup,
+        this.props.legalGroups
+      );
 
-      if (response.tokens) {
-        this.setState((prevState) => ({
-          userData: {
-            ...prevState.userData,
-            accessToken: response.tokens?.accessToken,
-            idToken: response.tokens?.idToken,
-          },
-        }));
+      if (response instanceof ValidUserInformation) {
+        this.processSuccessfulAuth(response);
       }
     } catch (error) {
       this.logout(error);

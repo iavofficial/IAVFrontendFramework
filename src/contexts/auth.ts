@@ -24,7 +24,7 @@ export interface AuthenticationProvider {
   login(credentials: Credentials, ...rest: any): any;
   logout(): any;
   hasAuthenticated(): boolean;
-  getUserData(): UserData;
+  getUserData(): UserData | undefined;
   fetchAuthed: FetchAuthedFunction;
 }
 

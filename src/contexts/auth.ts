@@ -13,11 +13,14 @@ export type FetchAuthedFunction = (
 ) => Promise<Response>;
 
 export interface UserData {
+  username: string;
+  [attribute: string]: any;
+}
+
+export interface AWSUserData extends UserData {
   idToken: JWT;
   accessToken: JWT;
-  username: string;
   groups: string[];
-  [attribute: string]: any;
 }
 
 export interface AuthenticationProvider {
@@ -26,6 +29,10 @@ export interface AuthenticationProvider {
   hasAuthenticated(): boolean;
   getUserData(): UserData | undefined;
   fetchAuthed: FetchAuthedFunction;
+}
+
+export interface AWSAuthenticationProviderType extends AuthenticationProvider {
+  getUserData(): AWSUserData | undefined;
 }
 
 export interface AuthContextType extends AuthenticationProvider {

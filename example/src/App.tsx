@@ -4,9 +4,9 @@ import { useState } from "react";
 import translationES from "./assets/translations/es.json";
 import { UILayer } from "iav-frontend-framework/uiLayer";
 import { GlobalDataLayer } from "iav-frontend-framework/globalDataLayer";
-import { AWSAuthenticationProvider } from "iav-frontend-framework/awsAuthenticationProvider";
+import { DummyAuthenticationProvider } from "iav-frontend-framework/dummyAuthenticationProvider";
 import { TranslateFunctionType } from "iav-frontend-framework/translationFunction";
-import { AWSAuthenticationView } from "iav-frontend-framework/awsAuthenticationView";
+import { BasicAuthenticationView } from "iav-frontend-framework/basicAuthenticationView";
 import { BasicContentWrapper } from "iav-frontend-framework/basicContentWrapper";
 import { Group } from "iav-frontend-framework/group";
 import translationEN from "./assets/translations/en.json";
@@ -178,9 +178,8 @@ function App() {
   const appLogo = <span className="ml-3">Example application</span>;
 
   return (
-    <AWSAuthenticationProvider
-      configureAmplify={() => {}}
-      failOnNoLegalGroup={false}
+    <DummyAuthenticationProvider
+      additionalContextValues={{ getUserGroups: () => [] }}
     >
       <GlobalDataLayer
         translations={translations}
@@ -191,7 +190,7 @@ function App() {
         <UILayer
           tabAndContentWrappers={views}
           startingPoint="/"
-          authenticationView={AWSAuthenticationView}
+          authenticationView={BasicAuthenticationView}
           settingsMenuOptions={settingsMenuOptions}
           documentsLabelKey="Legal_documents"
           documentsComponent={LegalDocuments}
@@ -200,7 +199,7 @@ function App() {
           }}
         />
       </GlobalDataLayer>
-    </AWSAuthenticationProvider>
+    </DummyAuthenticationProvider>
   );
 }
 

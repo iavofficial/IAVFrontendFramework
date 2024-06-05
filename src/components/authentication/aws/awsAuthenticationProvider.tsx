@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import {
+  AWSUserData,
   AuthContext,
-  AuthenticationProvider,
   Credentials,
-  UserData,
+  AWSAuthenticationProviderType,
 } from "../../../contexts/auth";
 import {
   cognitoLogin,
@@ -13,7 +13,6 @@ import {
   cognitoRefreshToken,
   ValidUserInformation,
 } from "../../../utils/cognitoService";
-import { Amplify } from "aws-amplify";
 import { JWT } from "aws-amplify/auth";
 
 export interface Props {
@@ -26,7 +25,7 @@ export interface State {
   hasAuthenticated: boolean;
   isNewPasswordRequired: boolean;
   isLoading: boolean;
-  userData: UserData | undefined;
+  userData: AWSUserData | undefined;
   loginError: undefined | { [key: string]: any } | string;
 }
 
@@ -37,7 +36,7 @@ interface FetchSettings {
 
 export class AWSAuthenticationProvider
   extends Component<React.PropsWithChildren<Props>, State>
-  implements AuthenticationProvider
+  implements AWSAuthenticationProviderType
 {
   constructor(props: Props) {
     super(props);
@@ -57,16 +56,7 @@ export class AWSAuthenticationProvider
   };
 
   componentDidMount() {
-    Amplify.configure({
-      Auth: {
-        Cognito: {
-          userPoolClientId: "3nh3h9av47ki8rif689ju5p9qm",
-          userPoolId: "eu-central-1_W3WR4Ef6Q",
-        },
-      },
-    });
-    //TODO uncomment this line of code
-    //this.props.configureAmplify();
+    this.props.configureAmplify();
     this.checkIsAuthenticated();
   }
 

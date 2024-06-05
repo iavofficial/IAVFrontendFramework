@@ -41,7 +41,6 @@ export const SimpleNavbarTab: GroupableNavbarTab = (props) => {
 
   const active = regex.test(useLocation().pathname);
 
-
   const tabBackgroundDefaultColor =
     colorSettingsContext.currentColors.navbar.content.default
       .tabBackgroundDefaultColor;
@@ -97,7 +96,7 @@ export const SimpleNavbarTab: GroupableNavbarTab = (props) => {
   });
 
   const tabStyleDefault = {
-    width: navbarCollapsed ? "40px" : "240px",
+    width: navbarCollapsed ? "40px" : "232px",
     cursor: active || props.disabled ? "default" : "pointer",
     backgroundColor: backgroundColor,
     color: fontColor,

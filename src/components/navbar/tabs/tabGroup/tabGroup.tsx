@@ -81,7 +81,7 @@ export const TabGroup = (props: Props) => {
     defaultColor: groupBackgroundDefaultColor,
     hoverColor: groupBackgroundHoverColor,
     activeColor: groupBackgroundActiveColor,
-    insideActiveGroupColor: insideActiveGroupColor
+    insideActiveGroupColor: insideActiveGroupColor,
   });
 
   const iconColor = determineCurrentColor(groupState, {
@@ -112,7 +112,7 @@ export const TabGroup = (props: Props) => {
   }, [collapsible]);
 
   const tabStyleDefault = {
-    width: props.navbarCollapsed ? "40px" : "240px",
+    width: props.navbarCollapsed ? "40px" : "232px",
     backgroundColor: backgroundColor,
     color: fontColor,
   };

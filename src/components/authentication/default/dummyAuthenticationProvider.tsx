@@ -1,8 +1,6 @@
-//@ts-nocheck
-//TODO refine typing
 import React, { Component } from "react";
 
-import { AuthContext } from "../../../contexts/auth";
+import { AuthContext, UserData } from "../../../contexts/auth";
 import { AuthenticationProvider, Credentials } from "../../../contexts/auth";
 
 export interface Props {
@@ -11,9 +9,7 @@ export interface Props {
 
 export interface State {
   hasAuthenticated: boolean;
-  userData: {
-    username: string;
-  };
+  userData: UserData | undefined;
 }
 
 export class DummyAuthenticationProvider
@@ -24,9 +20,7 @@ export class DummyAuthenticationProvider
     super(props);
     this.state = {
       hasAuthenticated: false,
-      userData: {
-        username: "",
-      },
+      userData: undefined,
     };
   }
 
@@ -44,7 +38,7 @@ export class DummyAuthenticationProvider
   logout = () => {
     this.setState({
       hasAuthenticated: false,
-      userData: {},
+      userData: undefined,
     });
   };
 
@@ -53,7 +47,7 @@ export class DummyAuthenticationProvider
   };
 
   getUserData = () => {
-    return this.state.userData;
+    return this.state.userData?.groups;
   };
 
   render() {

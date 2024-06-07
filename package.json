@@ -20,6 +20,7 @@
   "scripts": {
     "devmode": ".\\scripts\\windows\\devmode_build.bat",
     "build-linux": "./scripts/ci_cd/build.sh",
+    "test": ".\\scripts\\ci_cd\\generate_package_env_variables.sh",
     "run-example": ".\\scripts\\windows\\setup_and_run_example.bat"
   },
   "eslintConfig": {

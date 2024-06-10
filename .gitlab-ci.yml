@@ -36,7 +36,7 @@ validate_release_notes:
           echo "You have to create release notes for version ${NPM_PACKAGE_VERSION}. Otherwise the package won't be published."
       fi
   rules:
-    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+    - if: "$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH"
     - if: '$FORCE_PUBLISH == "true"'
 
 # Validates typescript files
@@ -45,6 +45,7 @@ validate_typescript:
   variables:
     NODE_EXTRA_CA_CERTS: ${IAV_CA_BUNDLE}
   script:
+    - npm config set registry https://artifactory.iav.com/artifactory/api/npm/npm/
     - npm ci
     - npx tsc --noEmit --emitDeclarationOnly false
   except:
@@ -75,7 +76,7 @@ publish_package:
     - npm publish
   rules:
     - if: '$CI_SERVER_HOST == "*.local"'
-    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+    - if: "$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH"
     - if: '$FORCE_PUBLISH == "true"'
 
 # Create release so observer of this project will get a notification e-mail.
@@ -89,5 +90,5 @@ create_release:
       release-cli create --description ./scripts/ci_cd/release_notes/${NPM_PACKAGE_VERSION}.md
       --tag-name v${NPM_PACKAGE_VERSION}
   rules:
-    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+    - if: "$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH"
     - if: '$FORCE_PUBLISH == "true"'

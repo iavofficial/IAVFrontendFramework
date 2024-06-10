@@ -3,9 +3,9 @@ import "./header.css";
 import "../css/globalColors.css";
 import { ContextMenu } from "primereact/contextmenu";
 import UserIcon from "../../assets/svg/icon_user.svg";
-import CompanyLogo from "../../assets/svg/company_logo.svg";
+import CompanyLogo from "../../assets/svg/company_logo_neutral.svg";
 import SettingsIcon from "../../assets/svg/icon_settings.svg";
-import { BLUE3, GREY3, WHITE } from "../../constants";
+import { BLUE3, WHITE } from "../../constants";
 import { SettingsMenuOptions, SettingsMenu } from "./settingsMenu";
 import { UserMenu, UserMenuOptions } from "./userMenu";
 import { ColorSettingsContext } from "../../contexts/colorsettings";
@@ -30,8 +30,10 @@ export const Header = (props: Props) => {
   const userRef = React.createRef<ContextMenu>();
   const colorSettingsContext = useContext(ColorSettingsContext);
 
-  const headerBackgroundColor = colorSettingsContext.currentColors.header.backgroundColor;
-  const settingsIconColor = colorSettingsContext.currentColors.header.settingsIconColor;
+  const headerBackgroundColor =
+    colorSettingsContext.currentColors.header.backgroundColor;
+  const settingsIconColor =
+    colorSettingsContext.currentColors.header.settingsIconColor;
   const userIconColor = colorSettingsContext.currentColors.header.userIconColor;
 
   const companyLogoDefault = (props: Props) => (
@@ -41,7 +43,7 @@ export const Header = (props: Props) => {
         alignItems: "center",
       }}
     >
-      <CompanyLogo fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE} />
+      <CompanyLogo />
     </div>
   );
 
@@ -108,9 +110,7 @@ export const Header = (props: Props) => {
             }}
             onKeyDown={(e) => hideSettingsMenu(e)}
           >
-            <SettingsIcon
-              fill={settingsIconColor}
-            />
+            <SettingsIcon fill={settingsIconColor} />
           </a>
           <a
             className={"flex align-items-center justify-content-end"}
@@ -127,9 +127,7 @@ export const Header = (props: Props) => {
             onKeyDown={(e) => hideUserMenu(e)}
           >
             {!props.headerOptions?.hideUserIcon && (
-              <UserIcon
-                fill={userIconColor}
-              />
+              <UserIcon fill={userIconColor} />
             )}
           </a>
         </div>

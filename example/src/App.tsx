@@ -1,4 +1,3 @@
-import React from "react";
 import { SelectButton } from "primereact/selectbutton";
 import { useState } from "react";
 import translationES from "./assets/translations/es.json";

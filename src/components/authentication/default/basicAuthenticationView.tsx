@@ -9,7 +9,6 @@ import "../authenticationView.css";
 import "../../css/globalColors.css";
 import loginBackgroundLightMode from "../../../assets/png/login_background_lightMode.png";
 import loginBackgroundDarkMode from "../../../assets/png/login_background_darkMode.png";
-import CompanyLogo from "../../../assets/svg/company_logo.svg";
 import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
 import { LanguageContext } from "../../../contexts/language";
 import { parseLanguageRessourcesIntoDropdownFormat } from "../../../utils/parseLanguageRessourcesIntoDropdownFormat";
@@ -56,16 +55,23 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
     authContext?.login({ email: email, password: password });
   };
 
-  const companyLogoDefault = (props: AuthenticationViewProps) => (
-    <div
-      style={{
-        display: props.headerOptions?.hideRight ? "none" : "flex",
-        alignItems: "center",
-      }}
-    >
-      <CompanyLogo fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE} />
-    </div>
-  );
+  const companyLogoDefault = (props: AuthenticationViewProps) => {
+    return (
+      <div
+        style={{
+          display: props.headerOptions?.hideRight ? "none" : "flex",
+          alignItems: "center",
+          justifyContent: "flex-end",
+          color: colorSettingsContext?.darkmode ? BLUE3 : WHITE,
+          width: "100%",
+          fontSize: "32px",
+          paddingRight: "16px",
+        }}
+      >
+        LOGO
+      </div>
+    );
+  };
 
   const header = (props: AuthenticationViewProps) => (
     <div

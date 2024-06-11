@@ -9,7 +9,6 @@ import { useTranslator } from "../../internationalization/translators";
 import { AuthenticationViewProps } from "../authenticationView";
 import "../authenticationView.css";
 import "../../css/globalColors.css";
-import CompanyLogo from "../../../assets/svg/company_logo.svg";
 import loginBackgroundLightMode from "../../../assets/png/login_background_lightMode.png";
 import loginBackgroundDarkMode from "../../../assets/png/login_background_darkMode.png";
 import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
@@ -90,16 +89,23 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
     return "";
   };
 
-  const companyLogoDefault = (props: AuthenticationViewProps) => (
-    <div
-      style={{
-        display: props.headerOptions?.hideRight ? "none" : "flex",
-        alignItems: "center",
-      }}
-    >
-      <CompanyLogo fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE} />
-    </div>
-  );
+  const companyLogoDefault = (props: AuthenticationViewProps) => {
+    return (
+      <div
+        style={{
+          display: props.headerOptions?.hideRight ? "none" : "flex",
+          alignItems: "center",
+          justifyContent: "flex-end",
+          color: colorSettingsContext?.darkmode ? BLUE3 : WHITE,
+          width: "100%",
+          fontSize: "32px",
+          paddingRight: "16px",
+        }}
+      >
+        LOGO
+      </div>
+    );
+  };
 
   const NewPasswordForm = (
     <div style={{ width: "100%", height: "100%" }}>
@@ -331,7 +337,6 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
                   className={`switch-colormode-logos pi ${
                     colorSettingsContext.darkmode ? "pi-moon" : "pi-sun"
                   }`}
-              
                 />
               </>
             )}

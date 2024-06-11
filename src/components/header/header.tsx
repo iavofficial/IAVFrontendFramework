@@ -3,7 +3,8 @@ import "./header.css";
 import "../css/globalColors.css";
 import { ContextMenu } from "primereact/contextmenu";
 import UserIcon from "../../assets/svg/icon_user.svg";
-import CompanyLogo from "../../assets/svg/company_logo_neutral.svg";
+import CompanyLogo from "../../assets/svg/company_logo.svg";
+import TestLogo from "../../assets/svg/company_logo_neutral.svg";
 import SettingsIcon from "../../assets/svg/icon_settings.svg";
 import { BLUE3, WHITE } from "../../constants";
 import { SettingsMenuOptions, SettingsMenu } from "./settingsMenu";
@@ -36,16 +37,23 @@ export const Header = (props: Props) => {
     colorSettingsContext.currentColors.header.settingsIconColor;
   const userIconColor = colorSettingsContext.currentColors.header.userIconColor;
 
-  const companyLogoDefault = (props: Props) => (
-    <div
-      style={{
-        display: props.headerOptions?.hideRight ? "none" : "flex",
-        alignItems: "center",
-      }}
-    >
-      <CompanyLogo />
-    </div>
-  );
+  const companyLogoDefault = (props: Props) => {
+    return (
+      <div
+        style={{
+          display: props.headerOptions?.hideRight ? "none" : "flex",
+          alignItems: "center",
+          justifyContent: "flex-end",
+          color: colorSettingsContext?.darkmode ? BLUE3 : WHITE,
+          width: "100%",
+          fontSize: "32px",
+          paddingRight: "16px",
+        }}
+      >
+        LOGO
+      </div>
+    );
+  };
 
   const hideSettingsMenu = (e: React.KeyboardEvent) => {
     if (e.key === "Escape") {

@@ -4,10 +4,10 @@ default:
   before_script:
     - chmod -R +x ./scripts/ci_cd/
 
-cache:
-  key: $CI_COMMIT_REF_SLUG
-  paths:
-    - ./node_modules
+# cache:
+#   key: $CI_COMMIT_REF_SLUG
+#   paths:
+#     - ./node_modules
 
 stages:
   - prepare
@@ -45,7 +45,6 @@ validate_typescript:
   variables:
     NODE_EXTRA_CA_CERTS: ${IAV_CA_BUNDLE}
   script:
-    - npm config set registry https://artifactory.iav.com/artifactory/api/npm/npm/
     - npm ci
     - npx tsc --noEmit --emitDeclarationOnly false
   except:

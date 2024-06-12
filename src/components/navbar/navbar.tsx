@@ -43,7 +43,7 @@ export const Navbar = (props: Props) => {
       <div id="navbar" className="h-full">
         <SimpleBar
           style={{
-            width: navbarSettingsContext.navbarCollapsed ? "40px" : "240px",
+            width: navbarSettingsContext.navbarCollapsed ? "40px" : "236px",
             color: scrollbarColor,
             position: "relative",
             overflowX: "visible",
@@ -96,6 +96,7 @@ export const Navbar = (props: Props) => {
               props.documentsLabelKey ? props.documentsLabelKey : "Imprint"
             )}
             target={identifierWithDot}
+            id="hover-image"
           />
 
           {navbarSettingsContext.collapsible && (

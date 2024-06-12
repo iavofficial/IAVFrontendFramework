@@ -1,4 +1,3 @@
-import React from "react";
 import { SelectButton } from "primereact/selectbutton";
 import { useState } from "react";
 import translationES from "./assets/translations/es.json";
@@ -22,7 +21,6 @@ import { ExampleComponent5 } from "./components/exampleComponent5";
 import { simpleNavbarTabFactory } from "iav-frontend-framework/simpleNavbarTabFactory";
 import { privilegedNavbarTabFactory } from "iav-frontend-framework/privilegedNavbarTabFactory";
 import { ExampleComponent2 } from "./components/exampleComponent2";
-import { RED } from "iav-frontend-framework/constants";
 
 function App() {
   const [selectedButtonOption, setSelectedButtonOption] = useState("Simulated");
@@ -60,7 +58,7 @@ function App() {
 
   const views = [
     new BasicContentWrapper(
-      "/example1",
+      "/example1/",
       simpleNavbarTabFactory({
         disabled: false,
         name: "Example without Translation",
@@ -73,7 +71,7 @@ function App() {
       false,
       [
         new BasicContentWrapper(
-          "/group-example2",
+          "/group-example2/",
           simpleNavbarTabFactory({
             name: (t: TranslateFunctionType) =>
               t("example_component", { count: 2 }),
@@ -85,7 +83,7 @@ function App() {
       ]
     ),
     new BasicContentWrapper(
-      "/group-example3",
+      "/group-example3/",
       privilegedNavbarTabFactory({
         name: (t: TranslateFunctionType) =>
           t("example_component", { count: 3 }),
@@ -96,7 +94,7 @@ function App() {
       ExampleComponent3
     ),
     new BasicContentWrapper(
-      "/group-example4",
+      "/group-example4/",
       simpleNavbarTabFactory({
         name: (t: TranslateFunctionType) =>
           t("example_component", { count: 4 }),
@@ -112,7 +110,7 @@ function App() {
       [
         new Group("Untergruppe", <InfoIcon />, true, [
           new BasicContentWrapper(
-            "/group-example51",
+            "/group-example51/",
             simpleNavbarTabFactory({
               name: (t: TranslateFunctionType) =>
                 t("example_component", { count: 5.1 }),
@@ -123,7 +121,7 @@ function App() {
           ),
         ]),
         new BasicContentWrapper(
-          "/group-example52",
+          "/group-example52/",
           simpleNavbarTabFactory({
             name: (t: TranslateFunctionType) =>
               t("example_component", { count: 5.2 }),
@@ -133,7 +131,7 @@ function App() {
           ExampleComponent4
         ),
         new BasicContentWrapper(
-          "/group-example53",
+          "/group-example53/",
           simpleNavbarTabFactory({
             name: (t: TranslateFunctionType) =>
               t("example_component", { count: 5.3 }),
@@ -145,7 +143,7 @@ function App() {
       ]
     ),
     new BasicContentWrapper(
-      "/group-example6",
+      "/group-example6/",
       simpleNavbarTabFactory({
         name: (t: TranslateFunctionType) =>
           t("example_component", { count: 6 }),
@@ -155,7 +153,7 @@ function App() {
       ExampleComponent5
     ),
     new BasicContentWrapper(
-      "/group-example7",
+      "/group-example7/",
       simpleNavbarTabFactory({
         name: (t: TranslateFunctionType) =>
           t("example_component", { count: 7 }),
@@ -165,7 +163,7 @@ function App() {
       ExampleComponent6
     ),
     new BasicContentWrapper(
-      "/nested-route-example",
+      "/nested-route-example/",
       simpleNavbarTabFactory({
         name: (t: TranslateFunctionType) =>
           t("example_component", { count: 8 }),
@@ -182,29 +180,21 @@ function App() {
     <DummyAuthenticationProvider
       additionalContextValues={{ getUserGroups: () => [] }}
     >
-      <GlobalDataLayer translations={translations}
-      colorSettings={{
-        disableCustomColorsForLightMode: true,
-        disableCustomColorsForDarkMode: true,
-        colorOptions: {
-          navbar: {
-            content: {
-              default: {
-                tabBackgroundDefaultColor: RED
-              }
-            }
-          }
-        }
-      }}>
+      <GlobalDataLayer
+        translations={translations}
+        colorSettings={{
+          colorOptions: {},
+        }}
+      >
         <UILayer
           tabAndContentWrappers={views}
-          startingPoint="/nested-route-example/test"
+          startingPoint="/example1/"
           authenticationView={BasicAuthenticationView}
           settingsMenuOptions={settingsMenuOptions}
           documentsLabelKey="Legal_documents"
           documentsComponent={LegalDocuments}
           headerOptions={{
-            reactElementLeft: appLogo
+            reactElementLeft: appLogo,
           }}
         />
       </GlobalDataLayer>

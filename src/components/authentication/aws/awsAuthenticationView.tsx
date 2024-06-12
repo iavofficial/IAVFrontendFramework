@@ -9,7 +9,6 @@ import { useTranslator } from "../../internationalization/translators";
 import { AuthenticationViewProps } from "../authenticationView";
 import "../authenticationView.css";
 import "../../css/globalColors.css";
-import CompanyLogo from "../../../assets/svg/company_logo.svg";
 import loginBackgroundLightMode from "../../../assets/png/login_background_lightMode.png";
 import loginBackgroundDarkMode from "../../../assets/png/login_background_darkMode.png";
 import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
@@ -19,6 +18,7 @@ import { ColorSettingsContext } from "../../../contexts/colorsettings";
 import { generateHashOfLength } from "../../../utils/hash";
 import { Tooltip } from "primereact/tooltip";
 import { AppLogoPlaceholder } from "../../appLogoPlaceholder";
+import CompanyLogo from "../../../assets/svg/company_logo_neutral.svg";
 
 export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
   const [email, setEmail] = useState("");
@@ -295,8 +295,8 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
             props.authOptions?.backgroundImage
               ? props.authOptions?.backgroundImage
               : colorSettingsContext?.darkmode
-              ? loginBackgroundDarkMode
-              : loginBackgroundLightMode
+                ? loginBackgroundDarkMode
+                : loginBackgroundLightMode
           }
         />
       )}
@@ -331,7 +331,6 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
                   className={`switch-colormode-logos pi ${
                     colorSettingsContext.darkmode ? "pi-moon" : "pi-sun"
                   }`}
-                  pi-moon
                 />
               </>
             )}
@@ -402,7 +401,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
           &copy;{" "}
           {props.authOptions?.companyText
             ? props.authOptions?.companyText
-            : "IAV GmbH 2023"}
+            : "IAV GmbH 2024"}
         </span>
       </div>
     </div>

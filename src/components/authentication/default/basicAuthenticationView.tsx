@@ -9,7 +9,6 @@ import "../authenticationView.css";
 import "../../css/globalColors.css";
 import loginBackgroundLightMode from "../../../assets/png/login_background_lightMode.png";
 import loginBackgroundDarkMode from "../../../assets/png/login_background_darkMode.png";
-import CompanyLogo from "../../../assets/svg/company_logo.svg";
 import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
 import { LanguageContext } from "../../../contexts/language";
 import { parseLanguageRessourcesIntoDropdownFormat } from "../../../utils/parseLanguageRessourcesIntoDropdownFormat";
@@ -17,6 +16,7 @@ import { ColorSettingsContext } from "../../../contexts/colorsettings";
 import { generateHashOfLength } from "../../../utils/hash";
 import { Tooltip } from "primereact/tooltip";
 import { AppLogoPlaceholder } from "../../appLogoPlaceholder";
+import CompanyLogo from "../../../assets/svg/company_logo_neutral.svg";
 
 export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
   const colorSettingsContext = useContext(ColorSettingsContext);
@@ -61,6 +61,8 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
       style={{
         display: props.headerOptions?.hideRight ? "none" : "flex",
         alignItems: "center",
+        justifyContent: "center",
+        paddingRight: "16px",
       }}
     >
       <CompanyLogo fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE} />
@@ -128,8 +130,8 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
             props.authOptions?.backgroundImage
               ? props.authOptions?.backgroundImage
               : colorSettingsContext?.darkmode
-              ? loginBackgroundDarkMode
-              : loginBackgroundLightMode
+                ? loginBackgroundDarkMode
+                : loginBackgroundLightMode
           }
         />
       )}
@@ -303,7 +305,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
           &copy;{" "}
           {props.authOptions?.companyText
             ? props.authOptions?.companyText
-            : "IAV GmbH 2023"}
+            : "IAV GmbH 2024"}
         </span>
       </div>
     </div>

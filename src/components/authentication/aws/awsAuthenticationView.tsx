@@ -18,6 +18,7 @@ import { ColorSettingsContext } from "../../../contexts/colorsettings";
 import { generateHashOfLength } from "../../../utils/hash";
 import { Tooltip } from "primereact/tooltip";
 import { AppLogoPlaceholder } from "../../appLogoPlaceholder";
+import CompanyLogo from "../../../assets/svg/company_logo_neutral.svg";
 
 export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
   const [email, setEmail] = useState("");
@@ -89,23 +90,16 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
     return "";
   };
 
-  const companyLogoDefault = (props: AuthenticationViewProps) => {
-    return (
-      <div
-        style={{
-          display: props.headerOptions?.hideRight ? "none" : "flex",
-          alignItems: "center",
-          justifyContent: "flex-end",
-          color: colorSettingsContext?.darkmode ? BLUE3 : WHITE,
-          width: "100%",
-          fontSize: "32px",
-          paddingRight: "16px",
-        }}
-      >
-        LOGO
-      </div>
-    );
-  };
+  const companyLogoDefault = (props: AuthenticationViewProps) => (
+    <div
+      style={{
+        display: props.headerOptions?.hideRight ? "none" : "flex",
+        alignItems: "center",
+      }}
+    >
+      <CompanyLogo fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE} />
+    </div>
+  );
 
   const NewPasswordForm = (
     <div style={{ width: "100%", height: "100%" }}>
@@ -301,8 +295,8 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
             props.authOptions?.backgroundImage
               ? props.authOptions?.backgroundImage
               : colorSettingsContext?.darkmode
-              ? loginBackgroundDarkMode
-              : loginBackgroundLightMode
+                ? loginBackgroundDarkMode
+                : loginBackgroundLightMode
           }
         />
       )}

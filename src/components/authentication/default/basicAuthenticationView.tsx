@@ -16,6 +16,7 @@ import { ColorSettingsContext } from "../../../contexts/colorsettings";
 import { generateHashOfLength } from "../../../utils/hash";
 import { Tooltip } from "primereact/tooltip";
 import { AppLogoPlaceholder } from "../../appLogoPlaceholder";
+import CompanyLogo from "../../../assets/svg/company_logo_neutral.svg";
 
 export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
   const colorSettingsContext = useContext(ColorSettingsContext);
@@ -55,23 +56,18 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
     authContext?.login({ email: email, password: password });
   };
 
-  const companyLogoDefault = (props: AuthenticationViewProps) => {
-    return (
-      <div
-        style={{
-          display: props.headerOptions?.hideRight ? "none" : "flex",
-          alignItems: "center",
-          justifyContent: "flex-end",
-          color: colorSettingsContext?.darkmode ? BLUE3 : WHITE,
-          width: "100%",
-          fontSize: "32px",
-          paddingRight: "16px",
-        }}
-      >
-        LOGO
-      </div>
-    );
-  };
+  const companyLogoDefault = (props: AuthenticationViewProps) => (
+    <div
+      style={{
+        display: props.headerOptions?.hideRight ? "none" : "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        paddingRight: "16px",
+      }}
+    >
+      <CompanyLogo fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE} />
+    </div>
+  );
 
   const header = (props: AuthenticationViewProps) => (
     <div
@@ -134,8 +130,8 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
             props.authOptions?.backgroundImage
               ? props.authOptions?.backgroundImage
               : colorSettingsContext?.darkmode
-              ? loginBackgroundDarkMode
-              : loginBackgroundLightMode
+                ? loginBackgroundDarkMode
+                : loginBackgroundLightMode
           }
         />
       )}

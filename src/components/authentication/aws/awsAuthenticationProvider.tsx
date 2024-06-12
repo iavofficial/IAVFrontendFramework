@@ -45,7 +45,7 @@ export class AWSAuthenticationProvider
       hasAuthenticated: false, // true if user is authenticated
       isNewPasswordRequired: false, // true if user logs in for the first time with his temp password and has to set a new one
       isLoading: false, // true if user is in process of logging in
-      userData: undefined, // contains user information
+      userData: undefined, // contains user information; undefined if no user is logged in
       loginError: undefined,
     };
   }
@@ -61,7 +61,9 @@ export class AWSAuthenticationProvider
   }
 
   componentDidUpdate() {
-    if (this.state.hasAuthenticated) this.checkIsAuthenticated();
+    if (this.state.hasAuthenticated) {
+      this.checkIsAuthenticated();
+    }
   }
 
   checkIsAuthenticated = async () => {

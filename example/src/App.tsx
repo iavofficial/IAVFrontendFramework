@@ -188,7 +188,7 @@ function App() {
       >
         <UILayer
           tabAndContentWrappers={views}
-          startingPoint="/"
+          startingPoint="/example1/"
           authenticationView={BasicAuthenticationView}
           settingsMenuOptions={settingsMenuOptions}
           documentsLabelKey="Legal_documents"

@@ -163,7 +163,7 @@ function App() {
       ExampleComponent6
     ),
     new BasicContentWrapper(
-      "/nested-route-example/",
+      "/nested-route/example1/",
       simpleNavbarTabFactory({
         name: (t: TranslateFunctionType) =>
           t("example_component", { count: 8 }),

@@ -43,7 +43,10 @@ export const Navbar = (props: Props) => {
       <div id="navbar" className="h-full">
         <SimpleBar
           style={{
-            width: navbarSettingsContext.navbarCollapsed ? "40px" : "236px",
+            width: navbarSettingsContext.navbarCollapsed ? "44px" : "240px",
+            padding: navbarSettingsContext.navbarCollapsed
+              ? "0px 2px 0px 2px"
+              : "0px 4px 0px 4px",
             color: scrollbarColor,
             position: "relative",
             overflowX: "visible",
@@ -62,15 +65,19 @@ export const Navbar = (props: Props) => {
         </SimpleBar>
         <div
           id="navbar-bottom-wrapper"
-          className={
-            "text-center flex " +
-            (navbarSettingsContext.navbarCollapsed ? "flex-column" : "px-3 ")
+          className={"text-center flex "}
+          style={
+            navbarSettingsContext.navbarCollapsed
+              ? {
+                  justifyContent: "center",
+                  flexDirection: "column",
+                }
+              : {
+                  justifyContent: "space-between",
+
+                  paddingLeft: "16px",
+                }
           }
-          style={{
-            justifyContent: navbarSettingsContext.navbarCollapsed
-              ? "center"
-              : "space-between",
-          }}
         >
           {!props.hideLegalDocuments && (
             <Link
@@ -109,9 +116,10 @@ export const Navbar = (props: Props) => {
               style={{
                 cursor: "pointer",
                 color: navbarCollapseArrowColor,
-                marginTop: navbarSettingsContext.navbarCollapsed
-                  ? "8px"
-                  : "0px",
+
+                margin: navbarSettingsContext.navbarCollapsed
+                  ? " 8px 0px 0px 0px"
+                  : " 0px 16px 0px 0px",
               }}
               className={calculateNavbarArrowFunctionColor(
                 navbarSettingsContext.navbarCollapsed!

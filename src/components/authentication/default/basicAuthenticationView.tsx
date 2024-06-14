@@ -61,7 +61,6 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
       style={{
         display: props.headerOptions?.hideRight ? "none" : "flex",
         alignItems: "center",
-        justifyContent: "center",
         paddingRight: "16px",
       }}
     >

@@ -95,6 +95,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
       style={{
         display: props.headerOptions?.hideRight ? "none" : "flex",
         alignItems: "center",
+        paddingRight: "16px",
       }}
     >
       <CompanyLogo fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE} />

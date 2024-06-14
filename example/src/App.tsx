@@ -58,7 +58,7 @@ function App() {
 
   const views = [
     new BasicContentWrapper(
-      "/example1/",
+      "/",
       simpleNavbarTabFactory({
         disabled: false,
         name: "Example without Translation",
@@ -163,7 +163,7 @@ function App() {
       ExampleComponent6
     ),
     new BasicContentWrapper(
-      "/nested-route-example/",
+      "/nested-route/example1/",
       simpleNavbarTabFactory({
         name: (t: TranslateFunctionType) =>
           t("example_component", { count: 8 }),
@@ -188,7 +188,7 @@ function App() {
       >
         <UILayer
           tabAndContentWrappers={views}
-          startingPoint="/example1/"
+          startingPoint="/"
           authenticationView={BasicAuthenticationView}
           settingsMenuOptions={settingsMenuOptions}
           documentsLabelKey="Legal_documents"

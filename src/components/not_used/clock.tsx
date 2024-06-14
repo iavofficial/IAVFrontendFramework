@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { useTranslator } from './internationalization/translators';
-import { BLUE2 } from '../constants';
+import React, { useEffect, useState } from "react";
+import { useTranslator } from "../internationalization/translators";
+import { BLUE2 } from "../../constants";
 
 interface Props {
   style?: {
@@ -9,6 +9,10 @@ interface Props {
   };
 }
 
+/**
+ * this component was used in former framework versions
+ * but due to possible use cases in future this component was not removed
+ */
 export const Clock = (props: Props) => {
   const t = useTranslator();
   const [date, setDate] = useState(new Date());
@@ -18,12 +22,12 @@ export const Clock = (props: Props) => {
     return () => clearInterval(timer);
   }, []);
 
-  const dateString = date.toLocaleDateString('de-DE', {
-    year: '2-digit',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
+  const dateString = date.toLocaleDateString("de-DE", {
+    year: "2-digit",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
   });
 
   return (
@@ -31,10 +35,10 @@ export const Clock = (props: Props) => {
       <div
         style={{
           fontWeight: 500,
-          color: props.style?.dateColor ? props.style.dateColor : 'black',
+          color: props.style?.dateColor ? props.style.dateColor : "black",
         }}
       >
-        {t('Date')}:
+        {t("Date")}:
       </div>
       <div
         style={{

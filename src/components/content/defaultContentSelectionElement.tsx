@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { BLACK, BLUE0, GREY3, GREY5, WHITE } from "../../constants";
+import { GREY5, WHITE } from "../../constants";
 import { generateHashOfLength } from "../../utils/hash";
 import { Tooltip } from "primereact/tooltip";
 import "./contentbar.css";
@@ -15,7 +15,7 @@ export interface Props {
   selected?: boolean;
   closable?: boolean;
   onClose?: (value: string) => void;
-  setSelectedId: (value: string) => any;
+  onClick: (value: string) => any;
 }
 
 export const DefaultContentSelectionElement = (props: Props) => {
@@ -90,8 +90,8 @@ export const DefaultContentSelectionElement = (props: Props) => {
   };
 
   const handleOnClickEvent = (value: string) => {
-    if (props.setSelectedId) {
-      props.setSelectedId(value);
+    if (props.onClick) {
+      props.onClick(value);
     }
   };
 

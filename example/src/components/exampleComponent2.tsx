@@ -1,55 +1,74 @@
-import { useState } from 'react';
-import { ContentWithBar } from 'iav-frontend-framework/contentWithBar';
-import { LayoutBehaviour } from 'iav-frontend-framework/contentLayout';
-import { BasicContentbarWrapper } from 'iav-frontend-framework/basicContentbarWrapper';
-import { ContentbarExampleWithContentCell } from './contentbarExampleWithContentCell';
+import { useState } from "react";
+import { ContentWithBar } from "iav-frontend-framework/contentWithBar";
+import { LayoutBehaviour } from "iav-frontend-framework/contentLayout";
+import { BasicContentbarWrapper } from "iav-frontend-framework/basicContentbarWrapper";
+import { ContentbarExampleWithContentCell } from "./contentbarExampleWithContentCell";
 
-enum ExampleObjectIds {
-  Test123= "test123",
-  Test124= "test124",
-  Test125= "test125"
-}
+import { generateHashOfLength } from "iav-frontend-framework/hash";
 
 export const ExampleComponent2 = () => {
-  const [selectedId, setSelectedId] = useState<string>(ExampleObjectIds.Test123);
+  const [selectedId, setSelectedId] = useState("j§n3K?");
+  const [contentTabs, setContentTabs] = useState([
+    new BasicContentbarWrapper({
+      id: "j§n3K?",
+      displayName: "test" + 0,
+      closable: false,
+      onClick: setSelectedId,
+      contentAreaElement: (
+        <ContentbarExampleWithContentCell
+          exampleText={`test${0}`}
+          onAddTab={onAddTab}
+          key={generateHashOfLength(6)}
+        />
+      ),
+    }),
+  ]);
 
-  let exampleArray = [
-    new BasicContentbarWrapper({
-      id: ExampleObjectIds.Test123,
-      displayName: 'car123',
-      selectedId: selectedId,
-      closable: false,
-      setSelectedId: setSelectedId,
-      contentAreaElement: <ContentbarExampleWithContentCell exampleText="car123" key={ExampleObjectIds.Test123}/>
-    }),
-    new BasicContentbarWrapper({
-      id: ExampleObjectIds.Test124,
-      displayName: 'car124',
-      selectedId: selectedId,
-      closable: false,
-      setSelectedId: setSelectedId,
-      contentAreaElement: <ContentbarExampleWithContentCell exampleText="car124" key={ExampleObjectIds.Test124}/>
-    }),
-    new BasicContentbarWrapper({
-      id: ExampleObjectIds.Test125,
-      displayName: 'car125',
-      selectedId: selectedId,
-      closable: false,
-      setSelectedId: setSelectedId,
-      contentAreaElement: <ContentbarExampleWithContentCell exampleText="car125" key={ExampleObjectIds.Test125}/>
-    }),
-  ];
+  function onAddTab() {
+    let tempArray = contentTabs;
+    let newHash = generateHashOfLength(6);
+    let tabElement = new BasicContentbarWrapper({
+      id: newHash,
+      displayName: "test" + tempArray.length,
+      closable: true,
+      onClose: deleteTab,
+      onClick: setSelectedId,
+      contentAreaElement: (
+        <ContentbarExampleWithContentCell
+          exampleText={"test" + tempArray.length}
+          onAddTab={onAddTab}
+          key={newHash}
+        />
+      ),
+    });
+    tempArray.push(tabElement);
 
-  const selectElement = (value: string) => {
-    setSelectedId(value);
-  };
+    setContentTabs(tempArray);
+    setSelectedId(() => newHash);
+  }
+
+  function deleteTab(IdToDelete: string) {
+    let tempArray = contentTabs;
+
+    tempArray.forEach((element, index) => {
+      if (element.getId() === IdToDelete) {
+        tempArray.splice(index, 1);
+      }
+    });
+
+    setSelectedId(
+      selectedId === IdToDelete ? tempArray[0].getId() : selectedId
+    );
+
+    setContentTabs([...tempArray]);
+  }
 
   return (
     <ContentWithBar
-      setSelectedId={selectElement}
       layoutBehaviour={LayoutBehaviour.GRID}
       selectedId={selectedId}
-      contentWrappers={exampleArray}
+      contentWrappers={contentTabs}
+      jumpToEndOfContentBar={true}
     />
   );
 };

@@ -11,9 +11,8 @@ interface Props {
   contentElements: BasicContentbarWrapper[] | CustomContentbarWrapper[];
   disableStyling?: boolean;
   addable?: boolean;
-  jumpToEnd?: boolean;
-  onClose?: (value: string) => any;
-  setSelectedId?: (value: string) => any;
+  jumpToEndOfContentBar?: boolean;
+  selectedId: string;
   onClickAddButton?: () => any;
   onClickLeftSlideButton?: () => any;
   onClickRightSlideButton?: () => any;
@@ -24,10 +23,9 @@ export const ContentBar = (props: Props) => {
   const navbarSettingsContext = useContext(NavbarSettingsContext);
   const contentRef = useRef<HTMLDivElement | null>(null);
   const [addButtonHover, setAddButtonHover] = useState(false);
+  const [preventInitialJumpToEnd, setPreventInitialJumpToEnd] = useState(true);
   const [slideLeftButtonHover, setSlideLeftButtonHover] = useState(false);
-  const [remeberedArrayLength, setRemeberedArrayLength] = useState(
-    props.contentElements.length
-  );
+
   const [slideRightButtonHover, setSlideRightButtonHover] = useState(false);
   const [width, setWidth] = useState(1880);
   const [startRenderElements, setStartRenderElements] = useState(0);
@@ -48,39 +46,32 @@ export const ContentBar = (props: Props) => {
     colorSettingsContext.currentColors.contentbar.iconHoverColor;
 
   useEffect(() => {
+    if (props.jumpToEndOfContentBar) {
+      setStartRenderElements(handleJumpToEnd);
+      setPreventInitialJumpToEnd(false);
+    }
+  }, [props.contentElements.length]);
+
+  useEffect(() => {
+    window.addEventListener("resize", handleDivResize);
+
+    return () => {
+      window.removeEventListener("resize", handleDivResize);
+    };
+  }, []);
+
+  useEffect(() => {
     if (navbarSettingsContext?.navbarCollapsed === true) {
-      setStartRenderElements(() =>
+      setStartRenderElements((startRenderElements) =>
         lastElementIsVisible() ? startRenderElements - 1 : startRenderElements
       );
       setAmountOfRenderedTabElements(6);
-      handleWindowResize();
+      handleDivResize();
     } else {
       setAmountOfRenderedTabElements(5);
-      handleWindowResize();
+      handleDivResize();
     }
   }, [navbarSettingsContext?.navbarCollapsed]);
-
-  let renderElementsArray:
-    | BasicContentbarWrapper[]
-    | CustomContentbarWrapper[] = [];
-
-  if (
-    props.contentElements.length >=
-    startRenderElements + amountOfRenderedTabElements
-  ) {
-    renderElementsArray = props.contentElements.slice(
-      startRenderElements,
-      startRenderElements + amountOfRenderedTabElements
-    );
-  }
-
-  useEffect(() => {
-    if (remeberedArrayLength > props.contentElements.length) {
-      setStartRenderElements(startRenderElements - 1);
-    }
-
-    setRemeberedArrayLength(props.contentElements.length);
-  }, [props.contentElements.length]);
 
   const handleSlideLeftEvent = () => {
     if (startRenderElements > 0) {
@@ -88,7 +79,13 @@ export const ContentBar = (props: Props) => {
         props.onClickLeftSlideButton();
       }
 
-      setStartRenderElements(startRenderElements - 1);
+      setStartRenderElements((startRenderElements) => startRenderElements - 1);
+    }
+  };
+
+  const handleOnClickAddEvent = () => {
+    if (props.onClickAddButton) {
+      props.onClickAddButton();
     }
   };
 
@@ -104,19 +101,11 @@ export const ContentBar = (props: Props) => {
     }
   };
 
-  function handleWindowResize() {
+  function handleDivResize() {
     if (contentRef.current !== null) {
       setWidth(contentRef.current.clientWidth);
     }
   }
-
-  useEffect(() => {
-    window.addEventListener("resize", handleWindowResize);
-
-    return () => {
-      window.removeEventListener("resize", handleWindowResize);
-    };
-  }, []);
 
   const handleSlideRightEvent = () => {
     if (
@@ -127,25 +116,18 @@ export const ContentBar = (props: Props) => {
         props.onClickRightSlideButton();
       }
 
-      setStartRenderElements(startRenderElements + 1);
+      setStartRenderElements((startRenderElements) => startRenderElements + 1);
     }
   };
 
-  const handleJumpToTheEnd = () => {
-    if (props.contentElements.length >= amountOfRenderedTabElements) {
-      return props.contentElements.length + 1 - amountOfRenderedTabElements;
+  const handleJumpToEnd = () => {
+    if (
+      props.contentElements.length > amountOfRenderedTabElements &&
+      !preventInitialJumpToEnd
+    ) {
+      return props.contentElements.length - amountOfRenderedTabElements;
     } else {
       return startRenderElements;
-    }
-  };
-
-  const handleOnClickAddEvent = () => {
-    if (props.jumpToEnd) {
-      setStartRenderElements(handleJumpToTheEnd);
-    }
-
-    if (props.onClickAddButton) {
-      props.onClickAddButton();
     }
   };
 
@@ -201,22 +183,29 @@ export const ContentBar = (props: Props) => {
           )}
 
           {props.contentElements.length > amountOfRenderedTabElements
-            ? renderElementsArray.map((element) =>
-                element.getContentbarElement(
-                  calculateWidth(
-                    navbarSettingsContext?.navbarCollapsed!,
-                    width - (80 + 32),
-                    !!props.addable
+            ? props.contentElements
+                .slice(
+                  startRenderElements,
+                  startRenderElements + amountOfRenderedTabElements
+                )
+                .map((element) =>
+                  element.getContentbarElement(
+                    calculateWidth(
+                      navbarSettingsContext?.navbarCollapsed!,
+                      width - (80 + 32),
+                      !!props.addable
+                    ),
+                    props.selectedId
                   )
                 )
-              )
             : props.contentElements.map((element) =>
                 element.getContentbarElement(
                   calculateWidth(
                     navbarSettingsContext?.navbarCollapsed!,
                     width - (80 + 32),
                     !!props.addable
-                  )
+                  ),
+                  props.selectedId
                 )
               )}
         </div>

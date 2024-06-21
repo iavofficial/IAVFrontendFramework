@@ -54,6 +54,7 @@ export const DefaultContentSelectionElement = (props: Props) => {
       : props.displayName(translationFunction);
 
   let widthvalue = props.width.toString() + "px";
+  console.log("widthvalue: ", widthvalue);
   const tabStyle = {
     cursor: props.selected ? "default" : "pointer",
     backgroundColor: determineCurrentColor(tabState, {

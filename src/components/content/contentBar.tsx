@@ -27,7 +27,7 @@ export const ContentBar = (props: Props) => {
   const [slideLeftButtonHover, setSlideLeftButtonHover] = useState(false);
 
   const [slideRightButtonHover, setSlideRightButtonHover] = useState(false);
-  const [width, setWidth] = useState(1880);
+  const [width, setWidth] = useState(1648);
   const [startRenderElements, setStartRenderElements] = useState(0);
   const [amountOfRenderedTabElements, setAmountOfRenderedTabElements] =
     useState(navbarSettingsContext?.navbarCollapsed === true ? 6 : 5);
@@ -193,7 +193,8 @@ export const ContentBar = (props: Props) => {
                     calculateWidth(
                       navbarSettingsContext?.navbarCollapsed!,
                       width - (80 + 32),
-                      !!props.addable
+                      !!props.addable,
+                      props.contentElements.length > amountOfRenderedTabElements
                     ),
                     props.selectedId
                   )
@@ -203,7 +204,8 @@ export const ContentBar = (props: Props) => {
                   calculateWidth(
                     navbarSettingsContext?.navbarCollapsed!,
                     width - (80 + 32),
-                    !!props.addable
+                    !!props.addable,
+                    props.contentElements.length > amountOfRenderedTabElements
                   ),
                   props.selectedId
                 )

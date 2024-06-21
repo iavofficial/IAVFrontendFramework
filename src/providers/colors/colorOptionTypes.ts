@@ -99,12 +99,12 @@ export interface AuthenticationViewColorOptions {
 
 //# Aggregated color options
 export interface ColorOptions {
-    header?: HeaderColorOptions;
-    navbar?: NavbarColorOptions;
-    contentArea?: ContentAreaColorOptions;
-    contentbar?: ContentbarColorOptions;
-    contentCell?: ContentCellColorOptions;
-    authenticationView?: AuthenticationViewColorOptions;
+  header?: HeaderColorOptions;
+  navbar?: NavbarColorOptions;
+  contentArea?: ContentAreaColorOptions;
+  contentbar?: ContentbarColorOptions;
+  contentCell?: ContentCellColorOptions;
+  authenticationView?: AuthenticationViewColorOptions;
 }
-  
-  export type SelectedColors = DeepRequired<ColorOptions>;
+
+export type SelectedColors = DeepRequired<ColorOptions>;

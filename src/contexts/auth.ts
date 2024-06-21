@@ -12,12 +12,12 @@ export type FetchAuthedFunction = (
   settings?: Object
 ) => Promise<Response>;
 
-export interface UserData {
+export interface UserDataBasic {
   username: string;
   [attribute: string]: any;
 }
 
-export interface AWSUserData extends UserData {
+export interface AWSUserData extends UserDataBasic {
   idToken: JWT;
   accessToken: JWT;
   groups: string[];
@@ -27,7 +27,7 @@ export interface AuthenticationProvider {
   login(credentials: Credentials, ...rest: any): any;
   logout(): any;
   hasAuthenticated(): boolean;
-  getUserData(): UserData | undefined;
+  getUserData(): UserDataBasic | undefined;
   fetchAuthed: FetchAuthedFunction;
 }
 

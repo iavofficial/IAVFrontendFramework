@@ -12,14 +12,14 @@ export function generateHash(value: string) {
 }
 
 export function generateHashForValues(values: string[]) {
-  const concatenatedValues = values.join('');
+  const concatenatedValues = values.join("");
   return generateHash(concatenatedValues);
 }
 
 export function generateHashOfLength(length: number) {
-  let result: string = '';
+  let result: string = "";
   let characters =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   var charactersLength = characters.length;
   for (var i = 0; i < length; i++) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));

@@ -1,5 +1,5 @@
-import React from 'react';
-import { TranslateFunctionType } from '../types/translationFunction';
+import React from "react";
+import { TranslateFunctionType } from "../types/translationFunction";
 
 export interface TranslationKeys extends Object {
   option_name: string;

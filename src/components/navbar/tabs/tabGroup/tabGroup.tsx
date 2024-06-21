@@ -11,6 +11,10 @@ import {
   determineCurrentColor,
   determineCurrentColorInsideGroup,
 } from "../../../../utils/determineCurrentColor";
+import {
+  DEFAULT_ELEMENTSIZE,
+  NAVBAR_WIDTH_UNFOLDED,
+} from "../../../../constants";
 
 interface Props {
   name: string | ((t: TranslateFunctionType) => string);
@@ -112,7 +116,9 @@ export const TabGroup = (props: Props) => {
   }, [collapsible]);
 
   const tabStyleDefault = {
-    width: props.navbarCollapsed ? "40px" : "232px",
+    width: props.navbarCollapsed
+      ? `${DEFAULT_ELEMENTSIZE}`
+      : `${NAVBAR_WIDTH_UNFOLDED - 8}px`,
     backgroundColor: backgroundColor,
     color: fontColor,
   };

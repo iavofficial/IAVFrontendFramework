@@ -14,7 +14,9 @@ export interface ColorProviderProps {
   disableCustomColorsForDarkMode?: boolean;
 }
 
-export const ColorProvider = (props: React.PropsWithChildren<ColorProviderProps>) => {
+export const ColorProvider = (
+  props: React.PropsWithChildren<ColorProviderProps>
+) => {
   const [darkmode, setDarkmode] = useState(() =>
     localStorage.getItem("darkmode")
       ? Boolean(JSON.parse(localStorage.getItem("darkmode") as string))

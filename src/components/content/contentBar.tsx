@@ -1,11 +1,12 @@
-import React from "react";
-import { useContext, useEffect, useState, useRef } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import "../css/globalColors.css";
 import { ColorSettingsContext } from "../../contexts/colorsettings";
 import { BasicContentbarWrapper } from "./basicContentbarWrapper";
 import { CustomContentbarWrapper } from "./customContentbarWrapper";
 import { NavbarSettingsContext } from "../../contexts/navbarContext";
 import { calculateWidth } from "../../utils/calculateWidth";
+import { ContentBarButtonElement } from "./contentBarButtonElement";
+import { DEFAULT_ELEMENTSIZE, PADDING_GAB } from "../../constants";
 
 interface Props {
   contentElements: BasicContentbarWrapper[] | CustomContentbarWrapper[];
@@ -22,11 +23,9 @@ export const ContentBar = (props: Props) => {
   const colorSettingsContext = useContext(ColorSettingsContext);
   const navbarSettingsContext = useContext(NavbarSettingsContext);
   const contentRef = useRef<HTMLDivElement | null>(null);
-  const [addButtonHover, setAddButtonHover] = useState(false);
-  const [preventInitialJumpToEnd, setPreventInitialJumpToEnd] = useState(true);
-  const [slideLeftButtonHover, setSlideLeftButtonHover] = useState(false);
 
-  const [slideRightButtonHover, setSlideRightButtonHover] = useState(false);
+  const [preventInitialJumpToEnd, setPreventInitialJumpToEnd] = useState(true);
+
   const [width, setWidth] = useState(1648);
   const [startRenderElements, setStartRenderElements] = useState(0);
   const [amountOfRenderedTabElements, setAmountOfRenderedTabElements] =
@@ -36,14 +35,6 @@ export const ContentBar = (props: Props) => {
     colorSettingsContext.currentColors.contentArea.backgroundColor;
   const contentbarBackgroundColor =
     colorSettingsContext.currentColors.contentbar.backgroundColor;
-  const buttonDefaultColor =
-    colorSettingsContext.currentColors.contentbar.buttonDefaultColor;
-  const buttonHoverColor =
-    colorSettingsContext.currentColors.contentbar.buttonHoverColor;
-  const iconDefaultColor =
-    colorSettingsContext.currentColors.contentbar.iconDefaultColor;
-  const iconHoverColor =
-    colorSettingsContext.currentColors.contentbar.iconHoverColor;
 
   useEffect(() => {
     if (props.jumpToEndOfContentBar) {
@@ -146,42 +137,20 @@ export const ContentBar = (props: Props) => {
     >
       <div
         style={{
-          height: "40px",
-          minHeight: "40px",
+          height: `${DEFAULT_ELEMENTSIZE}px`,
           width: "100%",
           backgroundColor: contentbarBackgroundColor,
         }}
         className="flex align-items-center justify-content-between"
       >
         <div className="flex align-items-center">
-          {props.contentElements.length > amountOfRenderedTabElements ? (
-            <div
-              onMouseEnter={() => setSlideLeftButtonHover(true)}
-              onMouseLeave={() => setSlideLeftButtonHover(false)}
-              onClick={handleSlideLeftEvent}
-              style={{
-                height: "40px",
-                width: "40px",
-                cursor: "pointer",
-                backgroundColor: slideLeftButtonHover
-                  ? buttonHoverColor
-                  : buttonDefaultColor,
-              }}
-              className="flex justify-content-center align-items-center"
-            >
-              <i
-                className="pi pi-angle-left"
-                style={{
-                  color: slideLeftButtonHover
-                    ? iconHoverColor
-                    : iconDefaultColor,
-                }}
-              />
-            </div>
-          ) : (
-            <></>
-          )}
-
+          <ContentBarButtonElement
+            handleOnClickEvent={handleSlideLeftEvent}
+            icon={"pi pi-angle-left"}
+            isVisible={
+              props.contentElements.length > amountOfRenderedTabElements
+            }
+          />
           {props.contentElements.length > amountOfRenderedTabElements
             ? props.contentElements
                 .slice(
@@ -192,7 +161,7 @@ export const ContentBar = (props: Props) => {
                   element.getContentbarElement(
                     calculateWidth(
                       navbarSettingsContext?.navbarCollapsed!,
-                      width - (80 + 32),
+                      width - (2 * DEFAULT_ELEMENTSIZE + 2 * PADDING_GAB),
                       !!props.addable,
                       props.contentElements.length > amountOfRenderedTabElements
                     ),
@@ -203,7 +172,7 @@ export const ContentBar = (props: Props) => {
                 element.getContentbarElement(
                   calculateWidth(
                     navbarSettingsContext?.navbarCollapsed!,
-                    width - (80 + 32),
+                    width - (2 * DEFAULT_ELEMENTSIZE + 2 * PADDING_GAB),
                     !!props.addable,
                     props.contentElements.length > amountOfRenderedTabElements
                   ),
@@ -212,59 +181,18 @@ export const ContentBar = (props: Props) => {
               )}
         </div>
         <div className="flex align-items-center">
-          {props.addable ? (
-            <div
-              onMouseEnter={() => setAddButtonHover(true)}
-              onMouseLeave={() => setAddButtonHover(false)}
-              onClick={handleOnClickAddEvent}
-              style={{
-                height: "40px",
-                width: "40px",
-                cursor: "pointer",
-                backgroundColor: addButtonHover
-                  ? buttonHoverColor
-                  : buttonDefaultColor,
-              }}
-              className="flex justify-content-center align-items-center"
-            >
-              <i
-                className="pi pi-plus"
-                style={{
-                  color: addButtonHover ? iconHoverColor : iconDefaultColor,
-                }}
-              />
-            </div>
-          ) : (
-            <></>
-          )}
-
-          {props.contentElements.length > amountOfRenderedTabElements ? (
-            <div
-              onMouseEnter={() => setSlideRightButtonHover(true)}
-              onMouseLeave={() => setSlideRightButtonHover(false)}
-              onClick={handleSlideRightEvent}
-              style={{
-                height: "40px",
-                width: "40px",
-                cursor: "pointer",
-                backgroundColor: slideRightButtonHover
-                  ? buttonHoverColor
-                  : buttonDefaultColor,
-              }}
-              className="flex justify-content-center align-items-center"
-            >
-              <i
-                className="pi pi-angle-right"
-                style={{
-                  color: slideRightButtonHover
-                    ? iconHoverColor
-                    : iconDefaultColor,
-                }}
-              />
-            </div>
-          ) : (
-            <></>
-          )}
+          <ContentBarButtonElement
+            handleOnClickEvent={handleOnClickAddEvent}
+            icon={"pi pi-plus"}
+            isVisible={props.addable}
+          />
+          <ContentBarButtonElement
+            handleOnClickEvent={handleSlideRightEvent}
+            icon={"pi pi-angle-right"}
+            isVisible={
+              props.contentElements.length > amountOfRenderedTabElements
+            }
+          />
         </div>
       </div>
     </div>

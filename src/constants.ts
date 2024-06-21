@@ -3,8 +3,7 @@ export const APPLICATION_LOGO_PLACEHOLDER = "APPLICATION NAME";
 export const ACCEPTED_COOKIES_NAME = "acceptedCookies";
 export const DEFAULT_FALLBACK_LANGUAGE = "en";
 
-export const TAB_HEIGHT = "56px";
-
+//The following constants are colors
 export const BLUE0 = "#001a54";
 export const BLUE1 = "#041e96";
 export const BLUE2 = "#1446eb";
@@ -33,6 +32,10 @@ export const YELLOW = "#ffd800";
 export const RED = "#f80000";
 export const GREEN = "#80d800";
 
-export const PADDINGGAB = 16;
-export const ELEMENTSIZE = 40;
-export const DEFAULTWIDTHCONTENTSECTIONELEMENT = 300;
+//The following constants are constants regarding the layout
+export const PADDING_GAB = 16;
+export const DEFAULT_ELEMENTSIZE = 40;
+export const DEFAULT_WIDTH_CONTENTSECTIONELEMENT = 300;
+export const NAVBAR_WIDTH_UNFOLDED = 240;
+export const GAB_NAVBAR_COLLAPSED = 2;
+export const GAB_NAVBAR_UNFOLDED = 4;

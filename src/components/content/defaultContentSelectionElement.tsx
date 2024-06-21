@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { GREY5, WHITE } from "../../constants";
+import { DEFAULT_ELEMENTSIZE, GREY5, WHITE } from "../../constants";
 import { generateHashOfLength } from "../../utils/hash";
 import { Tooltip } from "primereact/tooltip";
 import "./contentbar.css";
@@ -67,7 +67,7 @@ export const DefaultContentSelectionElement = (props: Props) => {
       hoverColor: textHoverColor,
       activeColor: textActiveColor,
     }),
-    height: "40px",
+    height: `${DEFAULT_ELEMENTSIZE}px`,
     width: widthvalue,
     alignItems: "center",
     borderRight:

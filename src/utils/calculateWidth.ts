@@ -1,4 +1,7 @@
-import { DEFAULTWIDTHCONTENTSECTIONELEMENT } from "../constants";
+import {
+  DEFAULT_ELEMENTSIZE,
+  DEFAULT_WIDTH_CONTENTSECTIONELEMENT,
+} from "../constants";
 
 export function calculateWidth(
   navbarCollapsed: boolean,
@@ -7,11 +10,11 @@ export function calculateWidth(
   overflow: boolean
 ): number {
   if (!overflow) {
-    return DEFAULTWIDTHCONTENTSECTIONELEMENT;
+    return DEFAULT_WIDTH_CONTENTSECTIONELEMENT;
   }
 
   if (addable) {
-    width = width - 40;
+    width = width - DEFAULT_ELEMENTSIZE;
   }
 
   return width / (navbarCollapsed ? 6 : 5);

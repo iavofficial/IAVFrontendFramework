@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { NavbarSettingsContext } from "../contexts/navbarContext";
 import { StaticCollapsedState } from "../types/navbarSettingsTypes";
 

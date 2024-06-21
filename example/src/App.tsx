@@ -62,6 +62,7 @@ function App() {
       simpleNavbarTabFactory({
         disabled: false,
         name: "Example without Translation",
+        icon: <InfoIcon />,
       }),
       ExampleComponent1
     ),
@@ -73,8 +74,7 @@ function App() {
         new BasicContentWrapper(
           "/group-example2/",
           simpleNavbarTabFactory({
-            name: (t: TranslateFunctionType) =>
-              t("example_component", { count: 2 }),
+            name: (t: TranslateFunctionType) => t("without_logo"),
             disabled: false,
             icon: <InfoIcon />,
           }),

@@ -1,6 +1,6 @@
 import React, { FormEvent, useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { WHITE, BLUE3 } from "../../../constants";
+import { WHITE, BLUE3, PADDING_GAB } from "../../../constants";
 import { AuthContext } from "../../../contexts/auth";
 import { LoginButtonWithSpinner } from "../loginButtonWithSpinner";
 import { useTranslator } from "../../internationalization/translators";
@@ -61,7 +61,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
       style={{
         display: props.headerOptions?.hideRight ? "none" : "flex",
         alignItems: "center",
-        paddingRight: "16px",
+        paddingRight: `${PADDING_GAB}px`,
       }}
     >
       <CompanyLogo fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE} />
@@ -267,7 +267,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
             style={{
               position: "absolute",
               bottom: "12px",
-              left: "16px",
+              left: `${PADDING_GAB}px`,
               textDecoration: "none",
             }}
             to="/documents"

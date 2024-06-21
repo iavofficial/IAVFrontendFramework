@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-
-import { AuthContext, UserData } from "../../../contexts/auth";
+import { AuthContext, UserDataBasic } from "../../../contexts/auth";
 import { AuthenticationProvider, Credentials } from "../../../contexts/auth";
 
 export interface Props {
@@ -9,7 +8,7 @@ export interface Props {
 
 export interface State {
   hasAuthenticated: boolean;
-  userData: UserData | undefined;
+  userData: UserDataBasic | undefined;
 }
 
 export class DummyAuthenticationProvider

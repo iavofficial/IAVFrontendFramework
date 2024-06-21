@@ -4,7 +4,7 @@ import { WHITE, BLUE3, PADDING_GAB } from "../../../constants";
 import { AuthContext } from "../../../contexts/auth";
 import { LoginButtonWithSpinner } from "../loginButtonWithSpinner";
 import { useTranslator } from "../../internationalization/translators";
-import { AuthenticationViewProps } from "../authenticationView";
+import { AuthenticationViewProps } from "../authenticationViewProps";
 import "../authenticationView.css";
 import "../../css/globalColors.css";
 import loginBackgroundLightMode from "../../../assets/png/login_background_lightMode.png";

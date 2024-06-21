@@ -117,7 +117,7 @@ export const TabGroup = (props: Props) => {
 
   const tabStyleDefault = {
     width: props.navbarCollapsed
-      ? `${DEFAULT_ELEMENTSIZE}`
+      ? `${DEFAULT_ELEMENTSIZE}px`
       : `${NAVBAR_WIDTH_UNFOLDED - 8}px`,
     backgroundColor: backgroundColor,
     color: fontColor,

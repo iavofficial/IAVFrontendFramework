@@ -8,10 +8,7 @@ import {
   LanguageOptions,
 } from "./internationalization/defaultLanguageProvider";
 import { DummyAuthenticationProvider } from "./authentication/default/dummyAuthenticationProvider";
-import {
-  ColorProvider,
-  ColorProviderProps,
-} from "../providers/colors/colorProvider";
+import { ColorProvider, ColorProviderProps } from "../coloring/colorProvider";
 import { DEFAULT_FALLBACK_LANGUAGE } from "../constants";
 
 // Create this type to make fallbackLang optional for the user.

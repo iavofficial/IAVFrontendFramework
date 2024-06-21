@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { SvgIcon } from "../svgIcon";
 import { Tooltip } from "primereact/tooltip";
 import { NestedNavbarTabProps } from "./simpleNavbarTab";
+import "../tabs.css";
 
 export const SimpleNavbarTabCollapsed = (props: NestedNavbarTabProps) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -21,10 +22,7 @@ export const SimpleNavbarTabCollapsed = (props: NestedNavbarTabProps) => {
       className={className}
       style={props.style}
     >
-      <SvgIcon
-        color={props.iconColor}
-        element={props.icon}
-      />
+      <SvgIcon color={props.iconColor} element={props.icon} />
       <Tooltip content={props.name} target={ref} id="hover-image" />
     </div>
   );

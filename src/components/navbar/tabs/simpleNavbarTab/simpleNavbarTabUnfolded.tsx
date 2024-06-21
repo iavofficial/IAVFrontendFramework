@@ -1,6 +1,7 @@
 import React from "react";
 import { SvgIcon } from "../svgIcon";
 import { NestedNavbarTabProps } from "./simpleNavbarTab";
+import "../tabs.css";
 
 export const SimpleNavbarTabUnfolded = (props: NestedNavbarTabProps) => {
   let className = "default-nav-element-unfolded default-tab-unfolded flex ";
@@ -17,10 +18,7 @@ export const SimpleNavbarTabUnfolded = (props: NestedNavbarTabProps) => {
       onMouseLeave={() => props.setHovering(false)}
     >
       <div style={{ width: "228px" }} className="flex align-items-center">
-        <SvgIcon
-          color={props.iconColor}
-          element={props.icon}
-        />
+        <SvgIcon color={props.iconColor} element={props.icon} />
         <span id="navbar-tab-name">{props.name}</span>
       </div>
     </div>

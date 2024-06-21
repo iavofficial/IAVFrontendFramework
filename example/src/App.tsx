@@ -74,7 +74,8 @@ function App() {
         new BasicContentWrapper(
           "/group-example2/",
           simpleNavbarTabFactory({
-            name: (t: TranslateFunctionType) => t("without_logo"),
+            name: (t: TranslateFunctionType) =>
+              t("example_component", { count: 2 }),
             disabled: false,
             icon: <InfoIcon />,
           }),

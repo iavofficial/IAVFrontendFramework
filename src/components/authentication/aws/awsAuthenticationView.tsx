@@ -6,7 +6,7 @@ import { LoginButtonWithSpinner } from "../loginButtonWithSpinner";
 import { useState } from "react";
 import { useContext } from "react";
 import { useTranslator } from "../../internationalization/translators";
-import { AuthenticationViewProps } from "../authenticationView";
+import { AuthenticationViewProps } from "../authenticationViewProps";
 import "../authenticationView.css";
 import "../../css/globalColors.css";
 import loginBackgroundLightMode from "../../../assets/png/login_background_lightMode.png";

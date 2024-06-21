@@ -103,7 +103,7 @@ export const SimpleNavbarTab: GroupableNavbarTab = (props) => {
   const tabStyleDefault = {
     width: navbarCollapsed
       ? `${DEFAULT_ELEMENTSIZE}px`
-      : `${NAVBAR_WIDTH_UNFOLDED - 2 * GAB_NAVBAR_UNFOLDED}`,
+      : `${NAVBAR_WIDTH_UNFOLDED - 2 * GAB_NAVBAR_UNFOLDED}px`,
     cursor: active || props.disabled ? "default" : "pointer",
     backgroundColor: backgroundColor,
     color: fontColor,

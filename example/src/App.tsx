@@ -11,7 +11,7 @@ import { Group } from "iav-frontend-framework/group";
 import translationEN from "./assets/translations/en.json";
 import translationDE from "./assets/translations/de.json";
 import translationDECH from "./assets/translations/de-CH.json";
-import { ReactComponent as InfoIcon } from "./assets/infoIcon.svg";
+import InfoIcon from "./assets/infoIcon.svg?react";
 import { LegalDocuments } from "./components/legalDocuments";
 import { ExampleComponent1 } from "./components/exampleComponent1";
 import { ExampleComponent6 } from "./components/exampleComponent6";

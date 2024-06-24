@@ -1,66 +1,66 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ContentWithBar } from "iav-frontend-framework/contentWithBar";
 import { LayoutBehaviour } from "iav-frontend-framework/contentLayout";
 import { BasicContentbarWrapper } from "iav-frontend-framework/basicContentbarWrapper";
 import { ContentbarExampleWithContentCell } from "./contentbarExampleWithContentCell";
-
 import { generateHashOfLength } from "iav-frontend-framework/hash";
 
 export const ExampleComponent2 = () => {
-  const [selectedId, setSelectedId] = useState("j§n3K?");
-  const [contentTabs, setContentTabs] = useState([
-    new BasicContentbarWrapper({
-      id: "j§n3K?",
-      displayName: "test" + 0,
-      closable: false,
-      onClick: setSelectedId,
-      contentAreaElement: (
-        <ContentbarExampleWithContentCell
-          exampleText={`test${0}`}
-          onAddTab={onAddTab}
-          key={generateHashOfLength(6)}
-        />
-      ),
-    }),
-  ]);
+  const [selectedId, setSelectedId] = useState("");
+  const [contentTabs, setContentTabs] = useState<BasicContentbarWrapper[]>([]);
+
+  useEffect(() => {
+    let id = generateHashOfLength(6);
+    let initialTab = [
+      new BasicContentbarWrapper({
+        id: generateHashOfLength(6),
+        displayName: "test " + id,
+        onClick: setSelectedId,
+        contentAreaElement: (
+          <ContentbarExampleWithContentCell
+            exampleText={`test ${id}`}
+            onAddTab={onAddTab}
+            key={id}
+          />
+        ),
+      }),
+    ];
+
+    setSelectedId(initialTab[0].getId());
+    setContentTabs(initialTab);
+  }, []);
 
   function onAddTab() {
-    let tempArray = contentTabs;
-    let newHash = generateHashOfLength(6);
-    let tabElement = new BasicContentbarWrapper({
-      id: newHash,
-      displayName: "test" + tempArray.length,
+    let id = generateHashOfLength(6);
+    let newTabElement = new BasicContentbarWrapper({
+      id: id,
+      displayName: "test " + id,
       closable: true,
       onClose: deleteTab,
       onClick: setSelectedId,
       contentAreaElement: (
         <ContentbarExampleWithContentCell
-          exampleText={"test" + tempArray.length}
+          exampleText={"test " + id}
           onAddTab={onAddTab}
-          key={newHash}
+          key={generateHashOfLength(6)}
         />
       ),
     });
-    tempArray.push(tabElement);
 
-    setContentTabs(tempArray);
-    setSelectedId(() => newHash);
+    setContentTabs((contentTabs) => [...contentTabs, newTabElement]);
+    setSelectedId(newTabElement.getId());
   }
 
-  function deleteTab(IdToDelete: string) {
-    let tempArray = contentTabs;
-
-    tempArray.forEach((element, index) => {
-      if (element.getId() === IdToDelete) {
-        tempArray.splice(index, 1);
-      }
-    });
-
-    setSelectedId(
-      selectedId === IdToDelete ? tempArray[0].getId() : selectedId
+  function deleteTab(idToDelete: string, idOfFirstElement: string) {
+    setContentTabs((contentTabs) =>
+      contentTabs.filter(
+        (contentTabElement) => contentTabElement.getId() !== idToDelete
+      )
     );
 
-    setContentTabs([...tempArray]);
+    setSelectedId((selectedId) =>
+      selectedId === idToDelete ? idOfFirstElement : selectedId
+    );
   }
 
   return (

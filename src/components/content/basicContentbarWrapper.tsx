@@ -7,10 +7,10 @@ import { TranslationFunction } from "../../types/translationFunction";
 interface ConstructorArgs {
   id: string;
   displayName: string | TranslationFunction;
-  onClick: (value: string) => any;
+  onClick: (id: string) => any;
   contentAreaElement: React.ReactElement;
   closable?: boolean;
-  onClose?: (value: string) => void;
+  onClose?: (id: string) => void;
 }
 
 export class BasicContentbarWrapper implements ContentbarWrapperInterface {
@@ -28,7 +28,11 @@ export class BasicContentbarWrapper implements ContentbarWrapperInterface {
     return this.args.contentAreaElement;
   }
 
-  getContentbarElement(contentElementWidth: number, selectedId: string) {
+  getContentbarElement(
+    contentElementWidth: number,
+    selectedId: string,
+    idOfFirstElement: string
+  ) {
     return (
       <DefaultContentSelectionElement
         key={this.getKey()}
@@ -39,6 +43,7 @@ export class BasicContentbarWrapper implements ContentbarWrapperInterface {
         onClick={this.args.onClick}
         width={contentElementWidth}
         onClose={this.args.onClose}
+        idOfFirstElement={idOfFirstElement}
       />
     );
   }

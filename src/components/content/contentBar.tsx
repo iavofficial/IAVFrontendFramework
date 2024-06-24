@@ -165,7 +165,8 @@ export const ContentBar = (props: Props) => {
                       !!props.addable,
                       props.contentElements.length > amountOfRenderedTabElements
                     ),
-                    props.selectedId
+                    props.selectedId,
+                    props.contentElements[0].getId()
                   )
                 )
             : props.contentElements.map((element) =>
@@ -176,7 +177,8 @@ export const ContentBar = (props: Props) => {
                     !!props.addable,
                     props.contentElements.length > amountOfRenderedTabElements
                   ),
-                  props.selectedId
+                  props.selectedId,
+                  props.contentElements[0].getId()
                 )
               )}
         </div>

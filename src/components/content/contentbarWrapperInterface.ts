@@ -3,7 +3,8 @@ import React, { ReactElement } from "react";
 export interface ContentbarWrapperInterface {
   getContentbarElement(
     contentElementWidth: number,
-    selectedId: string
+    selectedId: string,
+    idOfFirstElement: string
   ): ReactElement;
   getKey(): string;
   getId(): string;

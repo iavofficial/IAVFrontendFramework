@@ -17,7 +17,7 @@ export const SimpleNavbarTabUnfolded = (props: NestedNavbarTabProps) => {
       onMouseEnter={() => props.setHovering(true)}
       onMouseLeave={() => props.setHovering(false)}
     >
-      <div style={{ width: "228px" }} className="flex align-items-center">
+      <div className="flex align-items-center">
         <SvgIcon color={props.iconColor} element={props.icon} />
         <span id="navbar-tab-name">{props.name}</span>
       </div>

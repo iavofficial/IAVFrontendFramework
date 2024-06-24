@@ -8,7 +8,7 @@ export const SimpleNavbarTabCollapsed = (props: NestedNavbarTabProps) => {
   const ref = useRef<HTMLDivElement>(null);
 
   let className =
-    "default-nav-element-collapsed default-tab-collapsed flex align-items-center ";
+    "default-nav-element-collapsed default-tab-collapsed flex align-items-center justify-content-center";
 
   if (props.additionalClassNames) {
     className += props.additionalClassNames;

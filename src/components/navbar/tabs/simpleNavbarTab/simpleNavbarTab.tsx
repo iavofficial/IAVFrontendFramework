@@ -131,7 +131,12 @@ export const SimpleNavbarTab: GroupableNavbarTab = (props) => {
     <>{navbarTab}</>
   ) : (
     <>
-      <Link style={{ textDecoration: "none" }} to={path}>
+      <Link
+        style={{
+          textDecoration: "none",
+        }}
+        to={path}
+      >
         {navbarTab}
       </Link>
     </>

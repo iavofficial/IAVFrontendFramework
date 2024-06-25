@@ -51,7 +51,7 @@ export const ExampleComponent2 = () => {
     setSelectedId(newTabElement.getId());
   }
 
-  function deleteTab(idToDelete: string, idOfFirstElement: string | undefined) {
+  function deleteTab(idToDelete: string, idOfFirstElement?: string) {
     setContentTabs((contentTabs) =>
       contentTabs.filter(
         (contentTabElement) => contentTabElement.getId() !== idToDelete

@@ -10,7 +10,7 @@ interface ConstructorArgs {
   onClick: (id: string) => any;
   contentAreaElement: React.ReactElement;
   closable?: boolean;
-  onClose?: (id: string) => void;
+  onClose?: (id: string, idOfFirstElement?: string) => void;
 }
 
 export class BasicContentbarWrapper implements ContentbarWrapperInterface {

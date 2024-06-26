@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { BLACK, BLUE0, GREY3, GREY5, WHITE } from "../../constants";
+import { DEFAULT_ELEMENTSIZE, GREY5, WHITE } from "../../constants";
 import { generateHashOfLength } from "../../utils/hash";
 import { Tooltip } from "primereact/tooltip";
 import "./contentbar.css";
@@ -14,8 +14,9 @@ export interface Props {
   id: string;
   selected?: boolean;
   closable?: boolean;
-  onClose?: (value: string) => void;
-  setSelectedId: (value: string) => any;
+  onClose?: (id: string, idOfFirstElement: string) => void;
+  onClick: (id: string) => any;
+  idOfFirstElement: string;
 }
 
 export const DefaultContentSelectionElement = (props: Props) => {
@@ -53,7 +54,6 @@ export const DefaultContentSelectionElement = (props: Props) => {
       ? props.displayName
       : props.displayName(translationFunction);
 
-  let widthvalue = props.width.toString() + "px";
   const tabStyle = {
     cursor: props.selected ? "default" : "pointer",
     backgroundColor: determineCurrentColor(tabState, {
@@ -66,8 +66,8 @@ export const DefaultContentSelectionElement = (props: Props) => {
       hoverColor: textHoverColor,
       activeColor: textActiveColor,
     }),
-    height: "40px",
-    width: widthvalue,
+    height: `${DEFAULT_ELEMENTSIZE}px`,
+    width: `${props.width}px`,
     alignItems: "center",
     borderRight:
       "1px solid " + (colorSettingsContext?.darkmode ? GREY5 : WHITE),
@@ -85,13 +85,13 @@ export const DefaultContentSelectionElement = (props: Props) => {
   const handleOnCloseEvent = (e: any) => {
     e.stopPropagation();
     if (props.onClose) {
-      props.onClose(props.id!);
+      props.onClose(props.id, props.idOfFirstElement);
     }
   };
 
-  const handleOnClickEvent = (value: string) => {
-    if (props.setSelectedId) {
-      props.setSelectedId(value);
+  const handleOnClickEvent = () => {
+    if (props.onClick) {
+      props.onClick(props.id);
     }
   };
 
@@ -106,7 +106,7 @@ export const DefaultContentSelectionElement = (props: Props) => {
         style={tabStyle}
         onMouseEnter={() => setHovering(true)}
         onMouseLeave={() => setHovering(false)}
-        onClick={() => handleOnClickEvent(props.id!)}
+        onClick={handleOnClickEvent}
       >
         {props.displayName.length >= 20 ? (
           <div
@@ -130,7 +130,7 @@ export const DefaultContentSelectionElement = (props: Props) => {
         ) : (
           <div className={"m-auto font-semibold "}>{name}</div>
         )}
-        {props.closable ? (
+        {props.closable === true ? (
           <div style={{ position: "absolute", right: "5px" }}>
             <i
               onClick={(event) => handleOnCloseEvent(event)}

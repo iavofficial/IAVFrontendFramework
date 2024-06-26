@@ -11,6 +11,12 @@ import { ColorSettingsContext } from "../../contexts/colorsettings";
 import { calculateNavbarArrowFunctionColor } from "../../utils/calculateNavbarArrowColor";
 import { generateHashOfLength } from "../../utils/hash";
 import { NavbarSettingsContext } from "../../contexts/navbarContext";
+import {
+  DEFAULT_ELEMENTSIZE,
+  GAB_NAVBAR_COLLAPSED,
+  NAVBAR_WIDTH_UNFOLDED,
+  PADDING_GAB,
+} from "../../constants";
 
 interface Props {
   tabAndContentWrappers: TabAndContentWrapper[];
@@ -43,7 +49,9 @@ export const Navbar = (props: Props) => {
       <div id="navbar" className="h-full">
         <SimpleBar
           style={{
-            width: navbarSettingsContext.navbarCollapsed ? "44px" : "240px",
+            width: navbarSettingsContext.navbarCollapsed
+              ? `${DEFAULT_ELEMENTSIZE + 2 * GAB_NAVBAR_COLLAPSED}px`
+              : `${NAVBAR_WIDTH_UNFOLDED}px`,
             padding: navbarSettingsContext.navbarCollapsed
               ? "0px 2px 0px 2px"
               : "0px 4px 0px 4px",
@@ -75,7 +83,7 @@ export const Navbar = (props: Props) => {
               : {
                   justifyContent: "space-between",
 
-                  paddingLeft: "16px",
+                  paddingLeft: `${PADDING_GAB}px`,
                 }
           }
         >
@@ -119,7 +127,7 @@ export const Navbar = (props: Props) => {
 
                 margin: navbarSettingsContext.navbarCollapsed
                   ? " 8px 0px 0px 0px"
-                  : " 0px 16px 0px 0px",
+                  : ` 0px ${PADDING_GAB}px 0px 0px`,
               }}
               className={calculateNavbarArrowFunctionColor(
                 navbarSettingsContext.navbarCollapsed!

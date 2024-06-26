@@ -1,4 +1,4 @@
-import { DeepRequired } from "../../types/requiredMutable";
+import { DeepRequired } from "../types/requiredMutable";
 
 //# Header color options
 export interface HeaderColorOptions {
@@ -99,12 +99,12 @@ export interface AuthenticationViewColorOptions {
 
 //# Aggregated color options
 export interface ColorOptions {
-    header?: HeaderColorOptions;
-    navbar?: NavbarColorOptions;
-    contentArea?: ContentAreaColorOptions;
-    contentbar?: ContentbarColorOptions;
-    contentCell?: ContentCellColorOptions;
-    authenticationView?: AuthenticationViewColorOptions;
+  header?: HeaderColorOptions;
+  navbar?: NavbarColorOptions;
+  contentArea?: ContentAreaColorOptions;
+  contentbar?: ContentbarColorOptions;
+  contentCell?: ContentCellColorOptions;
+  authenticationView?: AuthenticationViewColorOptions;
 }
-  
-  export type SelectedColors = DeepRequired<ColorOptions>;
+
+export type SelectedColors = DeepRequired<ColorOptions>;

@@ -14,7 +14,7 @@ export enum LayoutBehaviour {
 
 export type ContentLayoutProps = ContentStyleProps & {
   layoutBehaviour?: LayoutBehaviour;
-}
+};
 
 const DEFAULT_LAYOUT_BEHAVIOUR = LayoutBehaviour.NONE;
 
@@ -23,9 +23,7 @@ export const ContentLayout = (props: PropsWithChildren<ContentLayoutProps>) => {
 
   return (
     <ContentStyle disableStyling={!!props.disableStyling}>
-      <div className={`h-full w-full ${layoutBehaviour}`}>
-        {props.children}
-      </div>
+      <div className={`h-full w-full ${layoutBehaviour}`}>{props.children}</div>
     </ContentStyle>
   );
 };

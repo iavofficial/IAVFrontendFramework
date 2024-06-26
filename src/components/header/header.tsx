@@ -5,7 +5,7 @@ import { ContextMenu } from "primereact/contextmenu";
 import UserIcon from "../../assets/svg/icon_user.svg";
 import CompanyLogo from "../../assets/svg/company_logo_neutral.svg";
 import SettingsIcon from "../../assets/svg/icon_settings.svg";
-import { BLUE3, WHITE } from "../../constants";
+import { BLUE3, PADDING_GAB, WHITE } from "../../constants";
 import { SettingsMenuOptions, SettingsMenu } from "./settingsMenu";
 import { UserMenu, UserMenuOptions } from "./userMenu";
 import { ColorSettingsContext } from "../../contexts/colorsettings";
@@ -41,7 +41,7 @@ export const Header = (props: Props) => {
       style={{
         display: props.headerOptions?.hideRight ? "none" : "flex",
         alignItems: "center",
-        paddingRight: "16px",
+        paddingRight: `${PADDING_GAB}px`,
       }}
     >
       <CompanyLogo fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE} />

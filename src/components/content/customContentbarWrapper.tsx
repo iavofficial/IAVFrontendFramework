@@ -1,8 +1,7 @@
-import React, { ReactElement } from 'react';
-import { generateHashOfLength } from '../../utils/hash';
-import { ContentbarWrapperInterface } from './contentbarWrapperInterface';
-import { DefaultContentSelectionElement } from './defaultContentSelectionElement';
-import './contentbar.css';
+import React, { ReactElement } from "react";
+import { generateHashOfLength } from "../../utils/hash";
+import { ContentbarWrapperInterface } from "./contentbarWrapperInterface";
+import "./contentbar.css";
 
 export class CustomContentbarWrapper implements ContentbarWrapperInterface {
   constructor(

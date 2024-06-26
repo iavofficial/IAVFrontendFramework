@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ColorSettingsContext } from "../../contexts/colorsettings";
+import { ColorSettingsContext } from "../contexts/colorsettings";
 import { getCurrentColorsNavbar } from "./colorSelectors/getCurrentColorsNavbar";
 import { getCurrentColorsHeader } from "./colorSelectors/getCurrentColorsHeader";
 import { getCurrentColorsContentArea } from "./colorSelectors/getCurrentColorsContentArea";
@@ -14,7 +14,9 @@ export interface ColorProviderProps {
   disableCustomColorsForDarkMode?: boolean;
 }
 
-export const ColorProvider = (props: React.PropsWithChildren<ColorProviderProps>) => {
+export const ColorProvider = (
+  props: React.PropsWithChildren<ColorProviderProps>
+) => {
   const [darkmode, setDarkmode] = useState(() =>
     localStorage.getItem("darkmode")
       ? Boolean(JSON.parse(localStorage.getItem("darkmode") as string))

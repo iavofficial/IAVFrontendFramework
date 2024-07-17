@@ -10,6 +10,7 @@ export interface Props {
 
 export interface UserMenuOptions {
   hideLogoutButton?: boolean;
+  additionalItems?: MenuItem[];
 }
 
 export const UserMenu = React.forwardRef<ContextMenu, Props>((props, ref) => {
@@ -25,10 +26,14 @@ export const UserMenu = React.forwardRef<ContextMenu, Props>((props, ref) => {
       },
     });
   }
+  
+  const model = props.userMenuOptions?.additionalItems
+  ? [...props.userMenuOptions.additionalItems, ...basicOptions]
+  : basicOptions;
 
   return basicOptions.length > 0 ? (
     <div onKeyDown={(e) => props.hideMenu(e)}>
-      <ContextMenu ref={ref} model={basicOptions} />
+      <ContextMenu ref={ref} model={model} />
     </div>
   ) : (
     <React.Fragment />

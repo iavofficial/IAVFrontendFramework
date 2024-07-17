@@ -127,18 +127,24 @@ export const SimpleNavbarTab: GroupableNavbarTab = (props) => {
     <SimpleNavbarTabUnfolded {...nestedProps} />
   );
 
-  return props.disabled ? (
-    <>{navbarTab}</>
-  ) : (
-    <>
-      <Link
-        style={{
-          textDecoration: "none",
-        }}
-        to={path}
-      >
-        {navbarTab}
-      </Link>
-    </>
-  );
+  const styleHidden = !!props.hidden? {display: "none"} : {};
+
+  return (
+    <div style={styleHidden}>
+    {
+      props.disabled ? (
+        <>{navbarTab}</>
+      ) : (
+          <Link
+            style={{
+              textDecoration: "none",
+            }}
+            to={path}
+          >
+            {navbarTab}
+          </Link>
+      )
+    }
+  </div>
+  )
 };

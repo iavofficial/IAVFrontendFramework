@@ -11,6 +11,7 @@ export interface NavbarTabProps<OptionType> {
   name: string | ((t: TranslateFunctionType) => string);
   disabled: boolean;
   frameworkInjectedOptions: OptionType;
+  hidden?: boolean;
   icon?: ReactElement;
   collapsed?: boolean;
   active?: boolean;

@@ -87,4 +87,7 @@ All changes will be released under the same licence.
 
 ### Reviews of Contribution
 Each pull request will be reviewed by the project maintainers. Please cooperate with the reviewers for the integration of feedback and suggestions. 
-In the end, the verified pull request will be merged into the development branch. 
+In the end, the verified pull request will be merged into the development branch.
+
+### GitHub Pages
+For documentation see the [GitHub Pages](https://iavofficial.github.io/IAVFrontendFramework/) of the project.

@@ -11,43 +11,43 @@ import {BrowserRouter} from "react-router-dom";
 
 // Create this type to make fallbackLang optional for the user.
 type GlobalDataLayerLanguageOptions = Omit<LanguageOptions, "fallbackLang"> & {
-    fallbackLang?: string;
+  fallbackLang?: string;
 };
 
 interface Props {
-    languageOptions?: GlobalDataLayerLanguageOptions;
-    translations?: Translations;
-    initI18Next?: () => void;
-    colorSettings?: ColorProviderProps;
+  languageOptions?: GlobalDataLayerLanguageOptions;
+  translations?: Translations;
+  initI18Next?: () => void;
+  colorSettings?: ColorProviderProps;
 }
 
 export const GlobalDataLayer = (props: PropsWithChildren<Props>) => {
-    const authContext = useContext(AuthContext);
-    const AuthenticationProvider = authContext
-        ? React.Fragment
-        : DummyAuthenticationProvider;
+  const authContext = useContext(AuthContext);
+  const AuthenticationProvider = authContext
+    ? React.Fragment
+    : DummyAuthenticationProvider;
 
-    const fallbackLang = props.languageOptions?.fallbackLang ?? DEFAULT_FALLBACK_LANGUAGE;
-    const initialLang = props.languageOptions?.initialLang ?? DEFAULT_FALLBACK_LANGUAGE;
-    let languageOptions = {
-        fallbackLang: fallbackLang,
-        initialLang: initialLang,
-    };
-    return (
-        <CookiesProvider>
-            <AuthenticationProvider>
-                <DefaultLanguageProvider
-                    languageOptions={languageOptions}
-                    translations={props.translations}
-                    initI18Next={props.initI18Next}
-                >
-                    <ColorProvider {...props.colorSettings}>
-                        <BrowserRouter>
-                            {props.children}
-                        </BrowserRouter>
-                    </ColorProvider>
-                </DefaultLanguageProvider>
-            </AuthenticationProvider>
-        </CookiesProvider>
-    );
+  const fallbackLang = props.languageOptions?.fallbackLang ?? DEFAULT_FALLBACK_LANGUAGE;
+  const initialLang = props.languageOptions?.initialLang ?? DEFAULT_FALLBACK_LANGUAGE;
+  let languageOptions = {
+    fallbackLang: fallbackLang,
+    initialLang: initialLang,
+  };
+  return (
+    <CookiesProvider>
+      <AuthenticationProvider>
+        <DefaultLanguageProvider
+          languageOptions={languageOptions}
+          translations={props.translations}
+          initI18Next={props.initI18Next}
+        >
+          <ColorProvider {...props.colorSettings}>
+            <BrowserRouter>
+              {props.children}
+            </BrowserRouter>
+          </ColorProvider>
+        </DefaultLanguageProvider>
+      </AuthenticationProvider>
+    </CookiesProvider>
+  );
 };

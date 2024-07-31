@@ -3,13 +3,7 @@ import "primereact/resources/themes/nova/theme.css";
 import "primereact/resources/primereact.css";
 import "primeicons/primeicons.css";
 import React, { useContext, useEffect, useState } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  useLocation,
-  Routes,
-  useNavigate,
-} from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import "./css/constants.css";
 import "./css/globalChangesOnPrimeReactComponents.css";
 import "./css/globalSettings.css";
@@ -86,55 +80,53 @@ export const UILayer = (props: Props) => {
       staticCollapsedState={props.navbarOptions?.staticCollapsedState}
     >
       {!props.disableCookieBanner && <CookieBanner />}
-      <Router>
-        <Redirector
-          startingPoint={props.startingPoint}
-          disableLogin={props.disableLogin}
-        />
-        <Routes>
-          {!props.disableLogin && (
-            <Route
-              path="/login"
-              element={
-                <AuthenticationView
-                  authOptions={props.authOptions}
-                  hideLanguageSelection={
-                    props.settingsMenuOptions?.hideLanguageSelection
-                  }
-                  headerOptions={props.headerOptions}
-                  hideLegalDocuments={props.hideLegalDocuments}
-                />
-              }
-            />
-          )}
-          {!props.disableLogin && !authContext?.hasAuthenticated() && (
-            <Route
-              path="/documents"
-              element={
-                props.documentsComponent ? (
-                  <props.documentsComponent />
-                ) : (
-                  <DefaultImprint />
-                )
-              }
-            />
-          )}
+      <Redirector
+        startingPoint={props.startingPoint}
+        disableLogin={props.disableLogin}
+      />
+      <Routes>
+        {!props.disableLogin && (
           <Route
-            path="/*"
+            path="/login"
             element={
-              <MainView
+              <AuthenticationView
+                authOptions={props.authOptions}
+                hideLanguageSelection={
+                  props.settingsMenuOptions?.hideLanguageSelection
+                }
                 headerOptions={props.headerOptions}
-                settingsMenuOptions={props.settingsMenuOptions}
-                userMenuOptions={userMenuOptions}
-                documentsLabelKey={props.documentsLabelKey}
-                documentsComponent={props.documentsComponent}
-                tabAndContentWrappers={props.tabAndContentWrappers}
                 hideLegalDocuments={props.hideLegalDocuments}
               />
             }
           />
-        </Routes>
-      </Router>
+        )}
+        {!props.disableLogin && !authContext?.hasAuthenticated() && (
+          <Route
+            path="/documents"
+            element={
+              props.documentsComponent ? (
+                <props.documentsComponent />
+              ) : (
+                <DefaultImprint />
+              )
+            }
+          />
+        )}
+        <Route
+          path="/*"
+          element={
+            <MainView
+              headerOptions={props.headerOptions}
+              settingsMenuOptions={props.settingsMenuOptions}
+              userMenuOptions={userMenuOptions}
+              documentsLabelKey={props.documentsLabelKey}
+              documentsComponent={props.documentsComponent}
+              tabAndContentWrappers={props.tabAndContentWrappers}
+              hideLegalDocuments={props.hideLegalDocuments}
+            />
+          }
+        />
+      </Routes>
     </NavbarSettingsProvider>
   );
 };

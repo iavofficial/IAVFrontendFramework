@@ -11,7 +11,7 @@ import { BasicAuthenticationView } from "./authentication/default/basicAuthentic
 import { SettingsMenuOptions } from "./header/settingsMenu";
 import { CookieBanner } from "./cookie/cookieBanner";
 import { AuthContext } from "../contexts/auth";
-import { AuthenticationViewProps } from "./authentication/authenticationView";
+import { AuthenticationViewProps } from "./authentication/authenticationViewProps";
 import { MainView } from "./mainView";
 import { DefaultImprint } from "./imprint/defaultImprint";
 import { TabAndContentWrapper } from "./navbar/wrappers/typesWrappers";

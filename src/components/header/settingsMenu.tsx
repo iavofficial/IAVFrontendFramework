@@ -110,8 +110,8 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
             option1.label === option2.label
               ? 0
               : option1.label < option2.label
-              ? -1
-              : 1
+                ? -1
+                : 1
           ),
         });
       }

@@ -10,6 +10,11 @@ import {
   determineCurrentColor,
   determineCurrentColorInsideGroup,
 } from "../../../../utils/determineCurrentColor";
+import {
+  DEFAULT_ELEMENTSIZE,
+  GAB_NAVBAR_UNFOLDED,
+  NAVBAR_WIDTH_UNFOLDED,
+} from "../../../../constants";
 
 export interface NestedNavbarTabProps {
   additionalClassNames: string;
@@ -96,7 +101,9 @@ export const SimpleNavbarTab: GroupableNavbarTab = (props) => {
   });
 
   const tabStyleDefault = {
-    width: navbarCollapsed ? "40px" : "232px",
+    width: navbarCollapsed
+      ? `${DEFAULT_ELEMENTSIZE}px`
+      : `${NAVBAR_WIDTH_UNFOLDED - 2 * GAB_NAVBAR_UNFOLDED}px`,
     cursor: active || props.disabled ? "default" : "pointer",
     backgroundColor: backgroundColor,
     color: fontColor,
@@ -120,13 +127,24 @@ export const SimpleNavbarTab: GroupableNavbarTab = (props) => {
     <SimpleNavbarTabUnfolded {...nestedProps} />
   );
 
-  return props.disabled ? (
-    <>{navbarTab}</>
-  ) : (
-    <>
-      <Link style={{ textDecoration: "none" }} to={path}>
-        {navbarTab}
-      </Link>
-    </>
-  );
+  const styleHidden = !!props.hidden? {display: "none"} : {};
+
+  return (
+    <div style={styleHidden}>
+    {
+      props.disabled ? (
+        <>{navbarTab}</>
+      ) : (
+          <Link
+            style={{
+              textDecoration: "none",
+            }}
+            to={path}
+          >
+            {navbarTab}
+          </Link>
+      )
+    }
+  </div>
+  )
 };

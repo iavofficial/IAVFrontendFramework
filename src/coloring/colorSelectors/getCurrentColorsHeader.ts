@@ -34,6 +34,6 @@ export const getCurrentColorsHeader = (
       LIGHT_HEADER_USER_ICON_COLOR,
       DARK_HEADER_USER_ICON_COLOR,
       headerColorOptions.userIconColor
-    )
+    ),
   };
 };

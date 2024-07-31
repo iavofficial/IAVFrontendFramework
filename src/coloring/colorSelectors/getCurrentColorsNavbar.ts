@@ -60,7 +60,10 @@ export const getCurrentColorsNavbar = (
   customColorsDisabledInCurrentMode: boolean,
   navbarColorOptions: NavbarColorOptions
 ) => {
-  const determineColor = determineSelectedColorHOF(darkmodeIsEnabled, customColorsDisabledInCurrentMode);
+  const determineColor = determineSelectedColorHOF(
+    darkmodeIsEnabled,
+    customColorsDisabledInCurrentMode
+  );
 
   return {
     backgroundColor: determineColor(
@@ -199,7 +202,7 @@ export const getCurrentColorsNavbar = (
           DARK_NAV_GROUP_ARROW_ACTIVE_COLOR,
           navbarColorOptions.content?.active?.groupArrowActiveColor
         ),
-      }
+      },
     },
   };
 };

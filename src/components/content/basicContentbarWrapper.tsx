@@ -7,11 +7,10 @@ import { TranslationFunction } from "../../types/translationFunction";
 interface ConstructorArgs {
   id: string;
   displayName: string | TranslationFunction;
-  selectedId: string;
-  closable: boolean;
-  setSelectedId: (value: string) => any;
+  onClick: (id: string) => any;
   contentAreaElement: React.ReactElement;
-  onClose?: (value: string) => void;
+  closable?: boolean;
+  onClose?: (id: string, idOfFirstElement?: string) => void;
 }
 
 export class BasicContentbarWrapper implements ContentbarWrapperInterface {
@@ -25,25 +24,26 @@ export class BasicContentbarWrapper implements ContentbarWrapperInterface {
     return this.args.id;
   }
 
-  setSelectedIdParentComponent(selectedIdParentComponent: string) {
-    this.args.selectedId = selectedIdParentComponent;
-  }
-
   getContentAreaElement(): React.ReactElement {
     return this.args.contentAreaElement;
   }
 
-  getContentbarElement(contentElementWidth: number) {
+  getContentbarElement(
+    contentElementWidth: number,
+    selectedId: string,
+    idOfFirstElement: string
+  ) {
     return (
       <DefaultContentSelectionElement
         key={this.getKey()}
         displayName={this.args.displayName}
         id={this.args.id}
         closable={this.args.closable}
-        selected={this.args.id === this.args.selectedId}
-        setSelectedId={this.args.setSelectedId}
+        selected={this.args.id === selectedId}
+        onClick={this.args.onClick}
         width={contentElementWidth}
         onClose={this.args.onClose}
+        idOfFirstElement={idOfFirstElement}
       />
     );
   }

@@ -22,7 +22,7 @@ interface Props {
 export const DefaultLanguageProvider = (
   props: React.PropsWithChildren<Props>
 ) => {
-  const {fallbackLang, initialLang} = props.languageOptions;
+  const { fallbackLang, initialLang } = props.languageOptions;
 
   const [resources, setResources] = useState({
     en: {
@@ -48,9 +48,9 @@ export const DefaultLanguageProvider = (
       props.initI18Next();
     }
 
-    if(initialLang) {
+    if (initialLang) {
       selectLanguage(initialLang);
-    }else{
+    } else {
       setActiveLang(i18n.language === "de-DE" ? "de" : i18n.language);
     }
 

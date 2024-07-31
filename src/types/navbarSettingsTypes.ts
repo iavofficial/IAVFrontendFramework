@@ -1,4 +1,4 @@
 export enum StaticCollapsedState {
-    Collapsed,
-    Unfolded
+  Collapsed,
+  Unfolded,
 }

@@ -1,5 +1,5 @@
 import {SelectButton} from "primereact/selectbutton";
-import {useState} from "react";
+import {useMemo, useState} from "react";
 import {UILayer} from "iav-frontend-framework/uiLayer";
 import {TranslateFunctionType} from "iav-frontend-framework/translationFunction";
 import {BasicAuthenticationView} from "iav-frontend-framework/basicAuthenticationView";
@@ -15,6 +15,8 @@ import {ExampleComponent5} from "./components/exampleComponent5";
 import {simpleNavbarTabFactory} from "iav-frontend-framework/simpleNavbarTabFactory";
 import {privilegedNavbarTabFactory} from "iav-frontend-framework/privilegedNavbarTabFactory";
 import {ExampleComponent2} from "./components/exampleComponent2";
+import {PrimeIcons} from "primereact/api";
+import {HeaderElement} from "iav-frontend-framework/header";
 
 function Layout() {
     const [selectedButtonOption, setSelectedButtonOption] = useState("Simulated");
@@ -154,6 +156,27 @@ function Layout() {
         ),
     ];
 
+    const headerElements: HeaderElement[] = useMemo(() => {
+        return [
+            {
+                icon: PrimeIcons.BELL,
+                model: [
+                    {
+                        template: ExampleComponent4
+                    }
+                ]
+            },
+            {
+                icon: PrimeIcons.ANGLE_RIGHT,
+                model: [
+                    {
+                        template: ExampleComponent4
+                    }
+                ]
+            }
+        ]
+    }, [])
+
     const appLogo = <span className="ml-3">Example application</span>;
 
     return (
@@ -166,6 +189,7 @@ function Layout() {
                     documentsComponent={LegalDocuments}
                     headerOptions={{
                         reactElementLeft: appLogo,
+                        headerElements: headerElements,
                     }}
                 />
     );

@@ -1,25 +1,28 @@
-import React, { FormEvent, useState, useContext } from "react";
-import { Link } from "react-router-dom";
-import { WHITE, BLUE3, PADDING_GAB } from "../../../constants";
-import { AuthContext } from "../../../contexts/auth";
-import { LoginButtonWithSpinner } from "../loginButtonWithSpinner";
-import { useTranslator } from "../../internationalization/translators";
-import { AuthenticationViewProps } from "../authenticationViewProps";
+import React, {FormEvent, useContext, useState} from "react";
+import {Link} from "react-router-dom";
+import {BLUE3, PADDING_GAB, WHITE} from "../../../constants";
+import {AuthContext} from "../../../contexts/auth";
+import {LoginButtonWithSpinner} from "../loginButtonWithSpinner";
+import {useTranslator} from "../../internationalization/translators";
+import {AuthenticationViewProps} from "../authenticationViewProps";
 import "../authenticationView.css";
 import "../../css/globalColors.css";
 import loginBackgroundLightMode from "../../../assets/png/login_background_lightMode.png";
 import loginBackgroundDarkMode from "../../../assets/png/login_background_darkMode.png";
-import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
-import { LanguageContext } from "../../../contexts/language";
-import { parseLanguageRessourcesIntoDropdownFormat } from "../../../utils/parseLanguageRessourcesIntoDropdownFormat";
-import { ColorSettingsContext } from "../../../contexts/colorsettings";
-import { generateHashOfLength } from "../../../utils/hash";
-import { Tooltip } from "primereact/tooltip";
-import { AppLogoPlaceholder } from "../../appLogoPlaceholder";
+import {Dropdown, DropdownChangeEvent} from "primereact/dropdown";
+import {LanguageContext} from "../../../contexts/language";
+import {parseLanguageRessourcesIntoDropdownFormat} from "../../../utils/parseLanguageRessourcesIntoDropdownFormat";
+import {ColorSettingsContext} from "../../../contexts/colorsettings";
+import {generateHashOfLength} from "../../../utils/hash";
+import {Tooltip} from "primereact/tooltip";
+import {AppLogoPlaceholder} from "../../appLogoPlaceholder";
 import CompanyLogo from "../../../assets/svg/company_logo_neutral.svg";
+import TextField from "../../helper/textfield/TextField";
 
 export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
   const colorSettingsContext = useContext(ColorSettingsContext);
+
+  const [triedToSubmit, setTriedToSubmit] = useState<boolean>(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const langContext = useContext(LanguageContext);
@@ -52,6 +55,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
 
   // These two functions life on the class instance not on the prototype thanks to @babel/plugin-proposal-class-properties.
   const submit = (event: FormEvent<HTMLFormElement>) => {
+    setTriedToSubmit(true);
     event.preventDefault();
     authContext?.login({ email: email, password: password });
   };
@@ -207,53 +211,30 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
               style={{ margin: "40px 24px 0px 24px" }}
               className={"flex flex-column"}
             >
-              <label
-                className="inputLabel"
-                style={{
-                  fontWeight: "normal",
-                  marginBottom: "2px",
-                  fontSize: "12px",
-                  color: inputFieldDescriptionTextColor,
-                }}
-              >
-                {t("Email_address")}
-              </label>
-              <input
-                value={email.valueOf()}
-                onChange={(ev) => setEmail(ev.target.value)}
-                name="email"
-                className="p-inputtext"
-                required
-                autoFocus
-                style={{
-                  marginBottom: "40px",
-                  backgroundColor: inputFieldBackgroundColor,
-                  color: inputFieldTextColor,
-                }}
+                <TextField
+                  style={{
+                      marginBottom: "30px",
+                      backgroundColor: inputFieldBackgroundColor,
+                      color: inputFieldTextColor,
+                  }}
+                  label={t("Email_address")}
+                  id="email"
+                  name="email"
+                  required={true}
+                  autoFocus={true}
+                  value={email.valueOf()}
+                  onChange={(event) => setEmail(event.target.value)}
               />
-              <label
-                className="inputLabel"
-                style={{
-                  fontWeight: "normal",
-                  marginBottom: "2px",
-                  fontSize: "12px",
-                  color: inputFieldDescriptionTextColor,
-                }}
-              >
-                {t("Password")}
-              </label>
-              <input
-                value={password.valueOf()}
-                onChange={(ev) => setPassword(ev.target.value)}
+              <TextField
+                label={t("Password")}
+                id="password"
                 name="password"
                 type="password"
-                className="p-inputtext"
-                required
-                style={{
-                  marginBottom: "40px",
-                  backgroundColor: inputFieldBackgroundColor,
-                  color: inputFieldTextColor,
-                }}
+                required={true}
+                error={triedToSubmit && !authContext?.hasAuthenticated()}
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                helperText={t("login.wrong")}
               />
               <div>
                 <LoginButtonWithSpinner isLoading={authContext?.isLoading} />

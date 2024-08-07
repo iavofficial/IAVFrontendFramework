@@ -1,6 +1,5 @@
-import React, { Component } from "react";
-import { AuthContext, UserDataBasic } from "../../../contexts/auth";
-import { AuthenticationProvider, Credentials } from "../../../contexts/auth";
+import React, {Component} from "react";
+import {AuthContext, AuthenticationProvider, Credentials, UserDataBasic} from "../../../contexts/auth";
 
 export interface Props {
   additionalContextValues?: { [key: string]: any };

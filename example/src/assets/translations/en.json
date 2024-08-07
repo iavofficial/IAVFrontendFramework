@@ -27,5 +27,8 @@
     "translation_and_colormode_example": "Translation and colormode example ",
     "with_applied_dark_and_lightMode": "with applied dark and lightmode",
     "without_applied_dark_and_lightMode": "without applied dark and lightmode",
-    "car": "car"
+    "car": "car",
+    "login": {
+        "wrong": "The username or password is incorrect. Please try again."
+    }
 }

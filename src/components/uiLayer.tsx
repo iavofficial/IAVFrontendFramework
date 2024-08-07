@@ -172,7 +172,7 @@ const Redirector = (props: RedirectorProps) => {
         navigate("/login");
       }
     } else {
-      if (currentPath === "/login") {
+      if (currentPath === "/login" || currentPath === "/") {
         navigate(props.startingPoint.valueOf());
       }
     }

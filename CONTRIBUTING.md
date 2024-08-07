@@ -14,7 +14,7 @@ contribution valuable and transparent for the project community.
 You have an idea on how to improve the framework? The idea is as of yet neither documented as [issue](https://github.com/iavofficial/IAVFrontendFramework/issues) 
 nor [discussed](https://github.com/iavofficial/IAVFrontendFramework/discussions)? Then, please open a new [discussion](https://github.com/iavofficial/IAVFrontendFramework/discussions) 
 to propose your idea. The discussion will allow for reasoning if the idea fits to the project scope and, furthermore, to 
-improve the idea. For the discussed ideas to be integrated in the framework, a new [issue](https://github.com/iavofficial/IAVFrontendFramework/issues)
+improve the idea. Further information about our discussion section can be found [here](https://github.com/iavofficial/IAVFrontendFramework/discussions/1). For the discussed ideas to be integrated in the framework, a new [issue](https://github.com/iavofficial/IAVFrontendFramework/issues)
 has to be created and linked to the discussion. The issue description has to be clear, concise as well as meaningful and
 should provide a use case to show the relevance of the idea to be realized.    
 
@@ -32,7 +32,7 @@ to be realized. We refer to the described [process](#process-for-code-contributi
 
 - **Discussions -**
 You have a new idea, want to provide feedback to an ongoing discussion or just have questions? Then, please open 
-a new thread in the [discussions](https://github.com/iavofficial/IAVFrontendFramework/discussions) section.
+a new thread in the [discussions](https://github.com/iavofficial/IAVFrontendFramework/discussions) section. Further information about the section can be found [here](https://github.com/iavofficial/IAVFrontendFramework/discussions/1).
 
 ## Contact
 

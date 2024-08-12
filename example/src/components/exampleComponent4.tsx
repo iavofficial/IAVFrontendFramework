@@ -1,15 +1,15 @@
 import { WHITE } from "iav-frontend-framework/constants";
-import { ContentStyle } from "iav-frontend-framework/contentStyle";
+import { ContentStyle, ContentStyleTemplates } from "iav-frontend-framework/contentStyle";
 import { useTranslator } from "iav-frontend-framework/translators";
 
 export const ExampleComponent4 = () => {
   const t = useTranslator();
   return (
-    <ContentStyle>
+    <ContentStyle appliedStyles={ContentStyleTemplates.DEFAULT}>
       <div
         style={{
-          height: "80px",
-          width: "200px",
+          height: "100%",
+          width: "100%",
           backgroundColor: WHITE,
         }}
       >

@@ -7,22 +7,50 @@ import { NavbarSettingsContext } from "../../contexts/navbarContext";
 import { calculateWidth } from "../../utils/calculateWidth";
 import { ContentBarButtonElement } from "./contentBarButtonElement";
 import { DEFAULT_ELEMENTSIZE, PADDING_GAB } from "../../constants";
+import { useStyleMap } from "./style_options/useStyleMap";
+import { StyleProps, StylesArray } from "./style_options/styleTypes";
 
-interface Props {
+export const ContentBarStyles = {
+  SPACING: "SPACING",
+  SET_SPACING_COLOR: "SET_SPACING_COLOR",
+};
+
+export type ContentBarStylesArray =
+  (typeof ContentBarStyles)[keyof typeof ContentBarStyles][];
+
+export type ContentStyleStylesArray = StylesArray<typeof ContentBarStyles>;
+
+export type PropsContentBar = StyleProps<typeof ContentBarStyles> & {
   contentElements: BasicContentbarWrapper[] | CustomContentbarWrapper[];
-  disableStyling?: boolean;
   addable?: boolean;
   jumpToEndOfContentBar?: boolean;
   selectedId: string;
   onClickAddButton?: () => any;
   onClickLeftSlideButton?: () => any;
   onClickRightSlideButton?: () => any;
-}
+};
 
-export const ContentBar = (props: Props) => {
+export const ContentBar = (props: PropsContentBar) => {
   const colorSettingsContext = useContext(ColorSettingsContext);
   const navbarSettingsContext = useContext(NavbarSettingsContext);
   const contentRef = useRef<HTMLDivElement | null>(null);
+
+  // Get styles using style options
+  const backgroundColor =
+    colorSettingsContext.currentColors.contentArea.backgroundColor;
+  const classesMap = {
+    [ContentBarStyles.SPACING]: "p-3",
+  };
+  const stylesMap = {
+    [ContentBarStyles.SET_SPACING_COLOR]: { backgroundColor },
+  };
+  const [classNames, styles] = useStyleMap(
+    ContentBarStyles,
+    classesMap,
+    stylesMap,
+    props.appliedStyles,
+    props.applyAllStyles
+  );
 
   const [preventInitialJumpToEnd, setPreventInitialJumpToEnd] = useState(true);
 
@@ -126,13 +154,11 @@ export const ContentBar = (props: Props) => {
     <div
       ref={contentRef}
       id="contentbar"
-      className="flex pt-3 pr-3 pl-3"
+      className={`flex pt-3 pr-3 pl-3 ${classNames}`}
       style={{
         height: "56px",
         minHeight: "56px",
-        backgroundColor: props.disableStyling
-          ? "inherit"
-          : contentAreaBackgroundColor,
+        ...styles,
       }}
     >
       <div

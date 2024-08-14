@@ -25,14 +25,14 @@ import {
   LIGHT_AUTH_PW_REQUIREMENTS_COLOR,
   LIGHT_AUTH_THEME_TOGGLER_COLOR,
 } from "../defaultColors";
-import { determineSelectedColorHOF } from "./determineSelectedColor";
+import { determineSelectedColorHof } from "./determineSelectedColor";
 
 export const getCurrentColorsAuthenticationView = (
   darkmodeIsEnabled: boolean,
   customColorsDisabledInCurrentMode: boolean,
   authViewColorOptions: AuthenticationViewColorOptions
 ) => {
-  const determineColor = determineSelectedColorHOF(
+  const determineColor = determineSelectedColorHof(
     darkmodeIsEnabled,
     customColorsDisabledInCurrentMode
   );

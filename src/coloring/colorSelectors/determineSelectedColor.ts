@@ -1,8 +1,8 @@
-// This function returns the color to be used.
-export const determineSelectedColorHOF = (
+export const determineSelectedColorHof = (
   darkmodeIsEnabled: boolean,
   customColorsDisabledInCurrentMode: boolean
 ) => {
+  // The returned function returns the color to be used.
   return (lightDef: string, darkDef: string, custom?: string) => {
     if (custom && !customColorsDisabledInCurrentMode) {
       return custom;

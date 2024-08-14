@@ -3,14 +3,14 @@ import {
   DARK_CONTENT_CELL_BACKGROUND_COLOR,
   LIGHT_CONTENT_CELL_BACKGROUND_COLOR,
 } from "../defaultColors";
-import { determineSelectedColorHOF } from "./determineSelectedColor";
+import { determineSelectedColorHof } from "./determineSelectedColor";
 
 export const getCurrentColorsContentCell = (
   darkmodeIsEnabled: boolean,
   customColorsDisabledInCurrentMode: boolean,
   contentCellColorOptions: ContentCellColorOptions
 ) => {
-  const determineColor = determineSelectedColorHOF(
+  const determineColor = determineSelectedColorHof(
     darkmodeIsEnabled,
     customColorsDisabledInCurrentMode
   );
@@ -20,6 +20,6 @@ export const getCurrentColorsContentCell = (
       LIGHT_CONTENT_CELL_BACKGROUND_COLOR,
       DARK_CONTENT_CELL_BACKGROUND_COLOR,
       contentCellColorOptions.backgroundColor
-    ),
+    )
   };
 };

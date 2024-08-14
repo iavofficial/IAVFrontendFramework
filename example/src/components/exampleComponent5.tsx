@@ -7,13 +7,14 @@ import {
 } from "iav-frontend-framework/contentLayout";
 import { Button } from "primereact/button";
 import { useState } from "react";
+import { ContentStyleTemplates } from "iav-frontend-framework/contentStyle";
 
 export const ExampleComponent5 = () => {
   const [translationString, setTranslationString] = useState("");
   const t = useTranslator();
 
   return (
-    <ContentLayout layoutBehaviour={LayoutBehaviour.FLEX}>
+    <ContentLayout layoutBehaviour={LayoutBehaviour.FLEX} contentStyle={{appliedStyles: ContentStyleTemplates.CONTENT_CELLS}}>
       <ContentCell colWidth={6} paddings={CellPaddings.FULL}>
         <h1>{t("translation_and_colormode_example")}</h1>
         <h3>{t("with_applied_dark_and_lightMode")}</h3>

@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import { ContentWithBar } from "iav-frontend-framework/contentWithBar";
 import { LayoutBehaviour } from "iav-frontend-framework/contentLayout";
 import { BasicContentbarWrapper } from "iav-frontend-framework/basicContentbarWrapper";
-import { ContentbarExampleWithContentCell } from "./contentbarExampleWithContentCell";
+import { ContentbarExample } from "./contentbarExample";
 import { generateHashOfLength } from "iav-frontend-framework/hash";
+import {
+  ContentStyleTemplates,
+} from "iav-frontend-framework/contentStyle";
 
 export const ExampleComponent2 = () => {
   const [selectedId, setSelectedId] = useState("");
@@ -17,7 +20,7 @@ export const ExampleComponent2 = () => {
         displayName: "test " + id,
         onClick: setSelectedId,
         contentAreaElement: (
-          <ContentbarExampleWithContentCell
+          <ContentbarExample
             exampleText={`test ${id}`}
             onAddTab={onAddTab}
             key={id}
@@ -39,7 +42,7 @@ export const ExampleComponent2 = () => {
       onClose: deleteTab,
       onClick: setSelectedId,
       contentAreaElement: (
-        <ContentbarExampleWithContentCell
+        <ContentbarExample
           exampleText={"test " + id}
           onAddTab={onAddTab}
           key={generateHashOfLength(6)}
@@ -69,6 +72,7 @@ export const ExampleComponent2 = () => {
       selectedId={selectedId}
       contentWrappers={contentTabs}
       jumpToEndOfContentBar={true}
+      contentStyle={{ appliedStyles: ContentStyleTemplates.DEFAULT }}
     />
   );
 };

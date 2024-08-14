@@ -5,6 +5,9 @@ import { generateHashOfLength } from "iav-frontend-framework/hash";
 import { ContentbarExampleWithText } from "./contentbarExampleWithText";
 import { BasicContentbarWrapper } from "iav-frontend-framework/basicContentbarWrapper";
 import { TranslateFunctionType } from "iav-frontend-framework/translationFunction";
+import {
+  ContentStyleTemplates,
+} from "iav-frontend-framework/contentStyle";
 
 const initialState: ExampleArrayObject = {
   exampleArray: [],
@@ -146,6 +149,7 @@ export const ExampleComponent1 = () => {
       jumpToEndOfContentBar={true}
       addable={true}
       selectedId={state.selectedId ? state.selectedId : ""}
+      contentStyle={{ appliedStyles: ContentStyleTemplates.CONTENT_CELLS }}
     />
   );
 };

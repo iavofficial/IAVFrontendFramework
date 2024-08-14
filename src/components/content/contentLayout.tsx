@@ -12,17 +12,21 @@ export enum LayoutBehaviour {
   FLEX_COL = "flex flex-column",
 }
 
-export type ContentLayoutProps = ContentStyleProps & {
+export interface ContentLayoutProps {
   layoutBehaviour?: LayoutBehaviour;
 };
 
+export type ContentLayoutAndStyleProps = ContentLayoutProps & {
+  contentStyle?: ContentStyleProps;
+}
+
 const DEFAULT_LAYOUT_BEHAVIOUR = LayoutBehaviour.NONE;
 
-export const ContentLayout = (props: PropsWithChildren<ContentLayoutProps>) => {
+export const ContentLayout = (props: PropsWithChildren<ContentLayoutAndStyleProps>) => {
   const layoutBehaviour = props.layoutBehaviour ?? DEFAULT_LAYOUT_BEHAVIOUR;
 
   return (
-    <ContentStyle disableStyling={!!props.disableStyling}>
+    <ContentStyle {...props.contentStyle}>
       <div className={`h-full w-full ${layoutBehaviour}`}>{props.children}</div>
     </ContentStyle>
   );

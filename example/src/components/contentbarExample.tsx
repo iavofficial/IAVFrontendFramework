@@ -1,4 +1,4 @@
-import { CellPaddings, ContentCell } from "iav-frontend-framework/contentCell";
+import { WHITE } from "iav-frontend-framework/constants";
 import { Button } from "primereact/button";
 
 export interface Props {
@@ -6,12 +6,12 @@ export interface Props {
   onAddTab: () => void;
 }
 
-export const ContentbarExampleWithContentCell = (props: Props) => {
+export const ContentbarExample = (props: Props) => {
   return (
-    <ContentCell colWidth={12} paddings={CellPaddings.FULL}>
+    <div className="w-full" style={{ backgroundColor: WHITE }}>
       <h2>{props.exampleText}</h2>
       <h3>Normal useCase Contentbar</h3>
       <Button onClick={props.onAddTab}>Add Tab</Button>
-    </ContentCell>
+    </div>
   );
 };

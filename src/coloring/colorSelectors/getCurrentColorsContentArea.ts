@@ -3,14 +3,14 @@ import {
   DARK_CONTENT_AREA_BACKGROUND_COLOR,
   LIGHT_CONTENT_AREA_BACKGROUND_COLOR,
 } from "../defaultColors";
-import { determineSelectedColorHOF } from "./determineSelectedColor";
+import { determineSelectedColorHof } from "./determineSelectedColor";
 
 export const getCurrentColorsContentArea = (
   darkmodeIsEnabled: boolean,
   customColorsDisabledInCurrentMode: boolean,
   contentAreaColorOptions: ContentAreaColorOptions
 ) => {
-  const determineColor = determineSelectedColorHOF(
+  const determineColor = determineSelectedColorHof(
     darkmodeIsEnabled,
     customColorsDisabledInCurrentMode
   );

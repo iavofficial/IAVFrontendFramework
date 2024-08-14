@@ -1,26 +1,60 @@
 import React from "react";
 import { PropsWithChildren, useContext } from "react";
+import { useStyleMap } from "./style_options/useStyleMap";
 import { ColorSettingsContext } from "../../contexts/colorsettings";
+import { StyleProps, StylesArray } from "./style_options/styleTypes";
 
-export interface ContentStyleProps {
-  disableStyling?: boolean;
-}
+export const ContentStyleStyles = {
+  WRAPPER_FULL_WIDTH: "WRAPPER_FULL_WIDTH",
+  WRAPPER_FULL_HEIGHT: "WRAPPER_FULL_HEIGHT",
+  SPACING: "SPACING",
+  SET_SPACING_COLOR: "SET_SPACING_COLOR",
+};
+
+export type ContentStyleStylesArray = StylesArray<typeof ContentStyleStyles>;
+
+export type ContentStyleProps = StyleProps<typeof ContentStyleStyles>;
+
+export const ContentStyleTemplates = {
+  DEFAULT: [
+    ContentStyleStyles.WRAPPER_FULL_WIDTH,
+    ContentStyleStyles.WRAPPER_FULL_HEIGHT,
+    ContentStyleStyles.SPACING,
+    ContentStyleStyles.SET_SPACING_COLOR,
+  ],
+  CONTENT_CELLS: [
+    ContentStyleStyles.WRAPPER_FULL_WIDTH,
+    ContentStyleStyles.WRAPPER_FULL_HEIGHT,
+    ContentStyleStyles.SET_SPACING_COLOR,
+  ],
+};
 
 export const ContentStyle = (props: PropsWithChildren<ContentStyleProps>) => {
   const colorSettingsContext = useContext(ColorSettingsContext);
 
-  const backgroundColor =
+  const contentAreaBackgroundColor =
     colorSettingsContext.currentColors.contentArea.backgroundColor;
 
-  return props.disableStyling ? (
-    props.children
-  ) : (
-    <div
-      className="w-full h-full"
-      style={{
-        backgroundColor: backgroundColor,
-      }}
-    >
+  const classesMap = {
+    [ContentStyleStyles.WRAPPER_FULL_WIDTH]: "w-full",
+    [ContentStyleStyles.WRAPPER_FULL_HEIGHT]: "h-full",
+    [ContentStyleStyles.SPACING]: "p-3",
+  };
+
+  const stylesMap = {
+    [ContentStyleStyles.SET_SPACING_COLOR]: {
+      backgroundColor: contentAreaBackgroundColor,
+    },
+  };
+
+  const [classNames, styles] = useStyleMap(
+    classesMap,
+    stylesMap,
+    props.appliedStyles
+  );
+
+  return (
+    <div className={classNames} style={styles}>
       {props.children}
     </div>
   );

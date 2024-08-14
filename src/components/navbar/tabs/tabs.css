@@ -46,6 +46,7 @@
   color: var(--magenta-2) !important;
 }
 
-.navbar-tab-space {
+.navbar-tab-space,
+.justify-content-centernavbar-tab-space {
   margin-top: 4px;
 }

@@ -35,21 +35,28 @@ export const ContentBar = (props: PropsContentBar) => {
   const navbarSettingsContext = useContext(NavbarSettingsContext);
   const contentRef = useRef<HTMLDivElement | null>(null);
 
-  // Get styles using style options
-  const backgroundColor =
+  const contentAreaBackgroundColor =
     colorSettingsContext.currentColors.contentArea.backgroundColor;
+  const contentbarBackgroundColor =
+    colorSettingsContext.currentColors.contentbar.backgroundColor;
+
+  // Get styles using style options
   const classesMap = {
-    [ContentBarStyles.SPACING]: "p-3",
+    [ContentBarStyles.SPACING]: "pt-3 pr-3 pl-3",
   };
   const stylesMap = {
-    [ContentBarStyles.SET_SPACING_COLOR]: { backgroundColor },
+    [ContentBarStyles.SET_SPACING_COLOR]: {
+      backgroundColor: contentAreaBackgroundColor,
+    },
+  };
+  const styleDependencies = {
+    [ContentBarStyles.SET_SPACING_COLOR]: [ContentBarStyles.SPACING],
   };
   const [classNames, styles] = useStyleMap(
-    ContentBarStyles,
     classesMap,
     stylesMap,
     props.appliedStyles,
-    props.applyAllStyles
+    styleDependencies
   );
 
   const [preventInitialJumpToEnd, setPreventInitialJumpToEnd] = useState(true);
@@ -58,11 +65,6 @@ export const ContentBar = (props: PropsContentBar) => {
   const [startRenderElements, setStartRenderElements] = useState(0);
   const [amountOfRenderedTabElements, setAmountOfRenderedTabElements] =
     useState(navbarSettingsContext?.navbarCollapsed === true ? 6 : 5);
-
-  const contentAreaBackgroundColor =
-    colorSettingsContext.currentColors.contentArea.backgroundColor;
-  const contentbarBackgroundColor =
-    colorSettingsContext.currentColors.contentbar.backgroundColor;
 
   useEffect(() => {
     if (props.jumpToEndOfContentBar) {
@@ -154,7 +156,7 @@ export const ContentBar = (props: PropsContentBar) => {
     <div
       ref={contentRef}
       id="contentbar"
-      className={`flex pt-3 pr-3 pl-3 ${classNames}`}
+      className={`flex ${classNames}`}
       style={{
         height: "56px",
         minHeight: "56px",

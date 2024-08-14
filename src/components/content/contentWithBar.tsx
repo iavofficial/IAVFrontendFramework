@@ -3,8 +3,7 @@ import "../css/globalColors.css";
 import { ContentBar, ContentBarStyles, ContentBarStylesArray } from "./contentBar";
 import { BasicContentbarWrapper } from "./basicContentbarWrapper";
 import { CustomContentbarWrapper } from "./customContentbarWrapper";
-import { ContentLayout, ContentLayoutAndStyleProps, ContentLayoutProps } from "./contentLayout";
-import { ContentStyleStyles } from "./contentStyle";
+import { ContentLayout, ContentLayoutAndStyleProps } from "./contentLayout";
 
 export type ContentWithBarProps = {
   contentWrappers: BasicContentbarWrapper[] | CustomContentbarWrapper[];
@@ -29,7 +28,10 @@ export const ContentWithBar = (props: React.PropsWithChildren<ContentLayoutAndSt
     let tempContentbarStyles: ContentBarStylesArray = [];
     Object.values(ContentBarStyles).forEach(contentBarStyle => {
       if(props.contentStyle?.appliedStyles?.includes(contentBarStyle)) {
-        tempContentbarStyles = [...tempContentbarStyles, contentBarStyle];
+        tempContentbarStyles.push(contentBarStyle);
+        if(contentBarStyle === ContentBarStyles.SET_SPACING_COLOR) {
+          tempContentbarStyles.push(ContentBarStyles.SPACING)
+        }
       }
     });
     return tempContentbarStyles;
@@ -50,7 +52,6 @@ export const ContentWithBar = (props: React.PropsWithChildren<ContentLayoutAndSt
           jumpToEndOfContentBar={props.jumpToEndOfContentBar}
           contentElements={props.contentWrappers}
           appliedStyles={contentBarStyles}
-          applyAllStyles={props.contentStyle?.applyAllStyles}
         />
       )}
 

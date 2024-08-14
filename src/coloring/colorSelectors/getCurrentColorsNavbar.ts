@@ -53,14 +53,14 @@ import {
   LIGHT_NAV_GROUP_ARROW_DEFAULT_COLOR,
   DARK_NAV_GROUP_ARROW_DEFAULT_COLOR,
 } from "../defaultColors";
-import { determineSelectedColorHOF } from "./determineSelectedColor";
+import { determineSelectedColorHof } from "./determineSelectedColor";
 
 export const getCurrentColorsNavbar = (
   darkmodeIsEnabled: boolean,
   customColorsDisabledInCurrentMode: boolean,
   navbarColorOptions: NavbarColorOptions
 ) => {
-  const determineColor = determineSelectedColorHOF(
+  const determineColor = determineSelectedColorHof(
     darkmodeIsEnabled,
     customColorsDisabledInCurrentMode
   );

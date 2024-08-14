@@ -8,7 +8,7 @@ export interface Props {
 
 export const ContentbarExampleWithText = (props: Props) => {
   const [counter, setCounter] = useState(0);
-  
+
   return (
     <>
       <div className="col-8 grid grid-nogutter">
@@ -21,13 +21,14 @@ export const ContentbarExampleWithText = (props: Props) => {
         </ContentCell>
         <ContentCell colWidth={6} paddings={CellPaddings.VERT_RIGHT}>
           <span>First row center</span>
-          <div style={{"marginTop": "80px"}}>
-            {counter}
-          </div>
-          <div style={{"marginTop" : "40px"}}>
-            <Button label={"Increment counter"} onClick={() => {
-              setCounter((prevCounter) => prevCounter + 1);
-            }}/>
+          <div style={{ marginTop: "80px" }}>{counter}</div>
+          <div style={{ marginTop: "40px" }}>
+            <Button
+              label={"Increment counter"}
+              onClick={() => {
+                setCounter((prevCounter) => prevCounter + 1);
+              }}
+            />
           </div>
         </ContentCell>
         <ContentCell paddings={CellPaddings.BOT_HOR}>
@@ -49,7 +50,7 @@ export const ContentbarExampleWithText = (props: Props) => {
           <span>Third row</span>
         </ContentCell>
       </div>
-      
+
       <ContentCell
         paddings={CellPaddings.VERT_RIGHT}
         colWidth={4}

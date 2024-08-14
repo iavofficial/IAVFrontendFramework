@@ -29,14 +29,14 @@ import {
   LIGHT_CONTENT_TAB_TEXT_DEFAULT_COLOR,
   LIGHT_CONTENT_TAB_TEXT_HOVER_COLOR,
 } from "../defaultColors";
-import { determineSelectedColorHOF } from "./determineSelectedColor";
+import { determineSelectedColorHof } from "./determineSelectedColor";
 
 export const getCurrentColorsContentbar = (
   darkmodeIsEnabled: boolean,
   customColorsDisabledInCurrentMode: boolean,
   contentBarColorOptions: ContentbarColorOptions
 ) => {
-  const determineColor = determineSelectedColorHOF(
+  const determineColor = determineSelectedColorHof(
     darkmodeIsEnabled,
     customColorsDisabledInCurrentMode
   );

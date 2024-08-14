@@ -25,13 +25,14 @@ export const ContentStyleTemplates = {
   CONTENT_CELLS: [
     ContentStyleStyles.WRAPPER_FULL_WIDTH,
     ContentStyleStyles.WRAPPER_FULL_HEIGHT,
+    ContentStyleStyles.SET_SPACING_COLOR,
   ],
 };
 
 export const ContentStyle = (props: PropsWithChildren<ContentStyleProps>) => {
   const colorSettingsContext = useContext(ColorSettingsContext);
 
-  const backgroundColor =
+  const contentAreaBackgroundColor =
     colorSettingsContext.currentColors.contentArea.backgroundColor;
 
   const classesMap = {
@@ -41,15 +42,15 @@ export const ContentStyle = (props: PropsWithChildren<ContentStyleProps>) => {
   };
 
   const stylesMap = {
-    [ContentStyleStyles.SET_SPACING_COLOR]: { backgroundColor },
+    [ContentStyleStyles.SET_SPACING_COLOR]: {
+      backgroundColor: contentAreaBackgroundColor,
+    },
   };
 
   const [classNames, styles] = useStyleMap(
-    ContentStyleStyles,
     classesMap,
     stylesMap,
-    props.appliedStyles,
-    props.applyAllStyles
+    props.appliedStyles
   );
 
   return (

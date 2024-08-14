@@ -46,6 +46,7 @@ export function ContentCell(props: PropsWithChildren<Props>) {
   let innerDivStyle: CSSProperties = {
     width: "100%",
   };
+
   if (!props.clearStyle) {
     innerDivStyle.backgroundColor =
       colorSettingsContext.currentColors.contentCell.backgroundColor;

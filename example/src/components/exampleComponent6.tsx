@@ -1,16 +1,18 @@
-import { CellPaddings, ContentCell } from "iav-frontend-framework/contentCell";
 import {
   ContentLayout,
   LayoutBehaviour,
 } from "iav-frontend-framework/contentLayout";
-import { useTranslator } from "iav-frontend-framework/translators";
+import { ContentStyleTemplates } from "iav-frontend-framework/contentStyle";
 
 export const ExampleComponent6 = () => {
-  const t = useTranslator();
-
   return (
-    <ContentLayout layoutBehaviour={LayoutBehaviour.FLEX}>
-      <ContentCell colWidth={12} paddings={CellPaddings.FULL}></ContentCell>
+    <ContentLayout
+      layoutBehaviour={LayoutBehaviour.FLEX}
+      contentStyle={{ appliedStyles: ContentStyleTemplates.DEFAULT }}
+    >
+      <div className="w-full" style={{ backgroundColor: "white" }}>
+        Example component 6
+      </div>
     </ContentLayout>
   );
 };

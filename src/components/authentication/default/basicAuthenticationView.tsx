@@ -11,7 +11,7 @@ import loginBackgroundLightMode from "../../../assets/png/login_background_light
 import loginBackgroundDarkMode from "../../../assets/png/login_background_darkMode.png";
 import {Dropdown, DropdownChangeEvent} from "primereact/dropdown";
 import {LanguageContext} from "../../../contexts/language";
-import {parseLanguageRessourcesIntoDropdownFormat} from "../../../utils/parseLanguageRessourcesIntoDropdownFormat";
+import {parseLanguageResourcesIntoDropdownFormat} from "../../../utils/parseLanguageResourcesIntoDropdownFormat";
 import {ColorSettingsContext} from "../../../contexts/colorsettings";
 import {generateHashOfLength} from "../../../utils/hash";
 import {Tooltip} from "primereact/tooltip";
@@ -38,9 +38,6 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
   const loginFormBackgroundColor =
     colorSettingsContext.currentColors.authenticationView
       .loginFormBackgroundColor;
-  const inputFieldDescriptionTextColor =
-    colorSettingsContext.currentColors.authenticationView
-      .inputFieldDescriptionTextColor;
   const inputFieldBackgroundColor =
     colorSettingsContext.currentColors.authenticationView
       .inputFieldBackgroundColor;
@@ -192,7 +189,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                 onChange={function (event: DropdownChangeEvent) {
                   langContext?.selectLanguage(event.value.key);
                 }}
-                options={parseLanguageRessourcesIntoDropdownFormat(
+                options={parseLanguageResourcesIntoDropdownFormat(
                   langContext?.resources
                 )}
                 optionLabel="label"

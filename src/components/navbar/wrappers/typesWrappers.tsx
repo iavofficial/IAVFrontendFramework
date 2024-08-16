@@ -1,7 +1,6 @@
-import React, { ReactElement } from "react";
-import { RouteProps } from "react-router-dom";
-import { InjectedOptionsByNavbarToWrapper } from "../types/typesInjectedOptions";
-import { InjectedOptionsByGroupToWrapper } from "../types/typesInjectedOptions";
+import {ReactElement} from "react";
+import {RouteProps} from "react-router-dom";
+import {InjectedOptionsByGroupToWrapper, InjectedOptionsByNavbarToWrapper} from "../types/typesInjectedOptions";
 
 export interface TabAndContentWrapper {
   getRoutes(): ReactElement<RouteProps>[];

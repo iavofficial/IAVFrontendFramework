@@ -2,30 +2,30 @@ import "primeflex/primeflex.css";
 import "primereact/resources/themes/nova/theme.css";
 import "primereact/resources/primereact.css";
 import "primeicons/primeicons.css";
-import React, { useContext, useEffect, useState } from "react";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import React, {useContext, useEffect, useState} from "react";
+import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import "./css/constants.css";
 import "./css/globalChangesOnPrimeReactComponents.css";
 import "./css/globalSettings.css";
-import { BasicAuthenticationView } from "./authentication/default/basicAuthenticationView";
-import { SettingsMenuOptions } from "./header/settingsMenu";
-import { CookieBanner } from "./cookie/cookieBanner";
-import { AuthContext } from "../contexts/auth";
-import { AuthenticationViewProps } from "./authentication/authenticationViewProps";
-import { MainView } from "./mainView";
-import { DefaultImprint } from "./imprint/defaultImprint";
-import { TabAndContentWrapper } from "./navbar/wrappers/typesWrappers";
-import { NavbarSettingsProvider } from "../providers/navbarSettingsProvider";
-import { StaticCollapsedState } from "../types/navbarSettingsTypes";
+import {BasicAuthenticationView} from "./authentication/default/basicAuthenticationView";
+import {SettingsMenuOptions} from "./header/settingsMenu";
+import {CookieBanner} from "./cookie/cookieBanner";
+import {AuthContext} from "../contexts/auth";
+import {AuthenticationViewProps} from "./authentication/authenticationViewProps";
+import {MainView} from "./mainView";
+import {DefaultImprint} from "./imprint/defaultImprint";
+import {TabAndContentWrapper} from "./navbar/wrappers/typesWrappers";
+import {NavbarSettingsProvider} from "../providers/navbarSettingsProvider";
+import {StaticCollapsedState} from "../types/navbarSettingsTypes";
 
 import "./uiLayer.css";
 import "./css/fonts.css";
 import "./css/darkModeInputsWorkAround.css";
-import { HeaderOptions } from "./header/header";
-import { UserMenuOptions } from "./header/userMenu";
-import { setAcceptCookies } from "../utils/setAcceptCookies";
-import { useCookies } from "react-cookie";
-import { ACCEPTED_COOKIES_NAME } from "../constants";
+import {HeaderOptions} from "./header/header";
+import {UserMenuOptions} from "./header/userMenu";
+import {setAcceptCookies} from "../utils/setAcceptCookies";
+import {useCookies} from "react-cookie";
+import {ACCEPTED_COOKIES_NAME} from "../constants";
 
 export interface AuthOptions {
   backgroundImage?: string;
@@ -73,7 +73,7 @@ export const UILayer = (props: Props) => {
     if (props.disableCookieBanner) {
       setAcceptCookies(setCookie);
     }
-  }, [props.disableCookieBanner]);
+  }, [props.disableCookieBanner, setCookie]);
 
   return (
     <NavbarSettingsProvider
@@ -176,7 +176,7 @@ const Redirector = (props: RedirectorProps) => {
         navigate(props.startingPoint.valueOf());
       }
     }
-  }, [disableLogin, currentPath, userIsAuthenticated, navigate]);
+  }, [disableLogin, currentPath, userIsAuthenticated, navigate, props.startingPoint]);
 
   return <React.Fragment />;
 };

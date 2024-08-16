@@ -1,14 +1,11 @@
 import React, {PropsWithChildren, useContext} from "react";
 import {CookiesProvider} from "react-cookie";
-import { AuthContext } from "../contexts/auth";
-import { Translations } from "../contexts/language";
-import {
-  DefaultLanguageProvider,
-  LanguageOptions,
-} from "./internationalization/defaultLanguageProvider";
-import { DummyAuthenticationProvider } from "./authentication/default/dummyAuthenticationProvider";
-import { ColorProvider, ColorProviderProps } from "../coloring/colorProvider";
-import { DEFAULT_FALLBACK_LANGUAGE } from "../constants";
+import {AuthContext} from "../contexts/auth";
+import {Translations} from "../contexts/language";
+import {DefaultLanguageProvider, LanguageOptions,} from "./internationalization/defaultLanguageProvider";
+import {DummyAuthenticationProvider} from "./authentication/default/dummyAuthenticationProvider";
+import {ColorProvider, ColorProviderProps} from "../coloring/colorProvider";
+import {DEFAULT_FALLBACK_LANGUAGE} from "../constants";
 import {BrowserRouter} from "react-router-dom";
 
 // Create this type to make fallbackLang optional for the user.
@@ -33,7 +30,7 @@ export const GlobalDataLayer = (props: PropsWithChildren<Props>) => {
     props.languageOptions?.fallbackLang ?? DEFAULT_FALLBACK_LANGUAGE;
   const initialLang =
     props.languageOptions?.initialLang ?? DEFAULT_FALLBACK_LANGUAGE;
-  let languageOptions = {
+  const languageOptions = {
     fallbackLang: fallbackLang,
     initialLang: initialLang,
   };

@@ -1,20 +1,13 @@
-import React, { ReactElement, useContext, useMemo, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { useTranslator } from "../../../internationalization/translators";
+import React, {ReactElement, useContext, useMemo, useState} from "react";
+import {Link, useLocation} from "react-router-dom";
+import {useTranslator} from "../../../internationalization/translators";
 import "../tabs.css";
-import { GroupableNavbarTab } from "../typesNavbarTab";
-import { ColorSettingsContext } from "../../../../contexts/colorsettings";
-import { SimpleNavbarTabCollapsed } from "./simpleNavbarTabCollapsed";
-import { SimpleNavbarTabUnfolded } from "./simpleNavbarTabUnfolded";
-import {
-  determineCurrentColor,
-  determineCurrentColorInsideGroup,
-} from "../../../../utils/determineCurrentColor";
-import {
-  DEFAULT_ELEMENTSIZE,
-  GAB_NAVBAR_UNFOLDED,
-  NAVBAR_WIDTH_UNFOLDED,
-} from "../../../../constants";
+import {GroupableNavbarTab} from "../typesNavbarTab";
+import {ColorSettingsContext} from "../../../../contexts/colorsettings";
+import {SimpleNavbarTabCollapsed} from "./simpleNavbarTabCollapsed";
+import {SimpleNavbarTabUnfolded} from "./simpleNavbarTabUnfolded";
+import {determineCurrentColor, determineCurrentColorInsideGroup,} from "../../../../utils/determineCurrentColor";
+import {DEFAULT_ELEMENTSIZE, GAB_NAVBAR_UNFOLDED, NAVBAR_WIDTH_UNFOLDED,} from "../../../../constants";
 
 export interface NestedNavbarTabProps {
   additionalClassNames: string;
@@ -26,6 +19,7 @@ export interface NestedNavbarTabProps {
 }
 
 export const SimpleNavbarTab: GroupableNavbarTab = (props) => {
+
   const navbarCollapsed = props.frameworkInjectedOptions.navbarCollapsed;
   const path = props.frameworkInjectedOptions.path;
   const insideActiveGroup = props.frameworkInjectedOptions.groupActive;
@@ -127,7 +121,7 @@ export const SimpleNavbarTab: GroupableNavbarTab = (props) => {
     <SimpleNavbarTabUnfolded {...nestedProps} />
   );
 
-  const styleHidden = !!props.hidden? {display: "none"} : {};
+  const styleHidden = props.hidden? {display: "none"} : {};
 
   return (
     <div style={styleHidden}>

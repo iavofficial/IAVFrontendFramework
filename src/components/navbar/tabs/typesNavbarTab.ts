@@ -1,6 +1,6 @@
-import React, { ReactElement } from "react";
-import { TranslateFunctionType } from "../../../types/translationFunction";
-import { InjectedOptionsGroupableByWrapperToTab } from "../types/typesInjectedOptions";
+import React, {ReactElement} from "react";
+import {TranslateFunctionType} from "../../../types/translationFunction";
+import {InjectedOptionsGroupableByWrapperToTab} from "../types/typesInjectedOptions";
 
 /**
  * This interface contains the properties which have to be passed to a navigation tab.
@@ -20,6 +20,7 @@ export interface NavbarTabProps<OptionType> {
 /**
  * This type defines the structure which groupable navbar tab components have to obey.
  */
+//eslint-disable-next-line
 export type GroupableNavbarTab<additional = {}> = React.FunctionComponent<
   NavbarTabProps<InjectedOptionsGroupableByWrapperToTab> & additional
 >;

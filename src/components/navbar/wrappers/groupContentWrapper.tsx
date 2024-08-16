@@ -1,13 +1,10 @@
-import React, { ReactElement } from "react";
-import { RouteProps } from "react-router-dom";
-import { TabGroup } from "../tabs/tabGroup/tabGroup";
-import { generateHashForValues } from "../../../utils/hash";
-import { TranslateFunctionType } from "../../../types/translationFunction";
-import { GroupableTabAndContentWrapper } from "./typesWrappers";
-import {
-  InjectedOptionsByGroupToWrapper,
-  InjectedOptionsByNavbarToWrapper,
-} from "../types/typesInjectedOptions";
+import React, {ReactElement} from "react";
+import {RouteProps} from "react-router-dom";
+import {TabGroup} from "../tabs/tabGroup/tabGroup";
+import {generateHashForValues} from "../../../utils/hash";
+import {TranslateFunctionType} from "../../../types/translationFunction";
+import {GroupableTabAndContentWrapper} from "./typesWrappers";
+import {InjectedOptionsByGroupToWrapper, InjectedOptionsByNavbarToWrapper,} from "../types/typesInjectedOptions";
 
 export class Group implements GroupableTabAndContentWrapper {
   private _insideGroup = false;
@@ -31,7 +28,7 @@ export class Group implements GroupableTabAndContentWrapper {
   };
 
   getRoutes = () => {
-    let routes: ReactElement<RouteProps>[] = [];
+    const routes: ReactElement<RouteProps>[] = [];
     this._contentWrappers.forEach((view) => {
       view.getRoutes().forEach((route) => {
         routes.push(route);

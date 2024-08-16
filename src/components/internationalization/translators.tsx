@@ -1,12 +1,12 @@
-import React from "react";
-import { useContext } from "react";
-import { LanguageContext } from "../../contexts/language";
-import { TranslateFunctionType } from "../../types/translationFunction";
+import React, {useContext} from "react";
+import {LanguageContext} from "../../contexts/language";
+import {TranslateFunctionType} from "../../types/translationFunction";
 
 export function useTranslator() {
   const langContext = useContext(LanguageContext);
   return langContext?.useTranslationFunction
     ? langContext?.useTranslationFunction()
+    //eslint-disable-next-line
     : (...parameters: any) => "";
 }
 

@@ -10,4 +10,4 @@ export type DeepRequired<T> = {
       : NonNullable<T[K]>;
 };
 
-interface DeepRequiredArray<T> extends Array<DeepRequired<T>> {}
+type DeepRequiredArray<T> = DeepRequired<T>[];

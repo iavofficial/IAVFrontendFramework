@@ -1,6 +1,6 @@
-import React, { CSSProperties, PropsWithChildren, useContext } from "react";
+import React, {CSSProperties, PropsWithChildren, useContext} from "react";
 import "../css/globalColors.css";
-import { ColorSettingsContext } from "../../contexts/colorsettings";
+import {ColorSettingsContext} from "../../contexts/colorsettings";
 
 import "./contentCell.css";
 
@@ -43,7 +43,7 @@ export function ContentCell(props: PropsWithChildren<Props>) {
     columnClass = "col";
   }
 
-  let innerDivStyle: CSSProperties = {
+  const innerDivStyle: CSSProperties = {
     width: "100%",
   };
 

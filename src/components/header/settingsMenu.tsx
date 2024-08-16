@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
-import { ContextMenu } from "primereact/contextmenu";
-import { LanguageContext, Translations } from "../../contexts/language";
-import { useTranslator } from "../internationalization/translators";
-import { RadioButton } from "primereact/radiobutton";
-import { ColorSettingsContext } from "../../contexts/colorsettings";
+import React, {useContext} from "react";
+import {ContextMenu} from "primereact/contextmenu";
+import {LanguageContext, Translations} from "../../contexts/language";
+import {useTranslator} from "../internationalization/translators";
+import {RadioButton} from "primereact/radiobutton";
+import {ColorSettingsContext} from "../../contexts/colorsettings";
 
 // ##############################################
 // Notice: The enclosed imports are copied from 'primereact/menuitem/MenuItem' as the path could not be resolved by the gitlab builder
@@ -69,15 +69,15 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
       // Marking active language in language selection.
       // Check whether translations for the user defined language exist. Otherwise the fallback language is displayed as active.
       if (langContext) {
-        let languageOptions = [];
+        const languageOptions = [];
         Object.keys(langContext.resources).forEach((key) => {
           if (key !== langContext?.fallbackLang) {
             // Has to check whether the active language and key are equal or if the active language is a dialect of the language of key and the
             // resources don't contain the active language.
             // The active language could be "de-De" and the language of key could be "de". So it isn't sufficient to check whether the active
             // language is equal to key.
-            let activeLang = langContext?.activeLang.replaceAll("-", "_");
-            let active =
+            const activeLang = langContext?.activeLang.replaceAll("-", "_");
+            const active =
               activeLang === key ||
               (isDialectOf(activeLang, key) &&
                 !containsLanguage(activeLang, langContext?.resources));
@@ -118,7 +118,7 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
     }
 
     if (!props.menuOptions?.hideColorThemeToggler) {
-      let colorSetting = colorSettingsContext?.darkmode
+      const colorSetting = colorSettingsContext?.darkmode
         ? "bg-grey-5 color-white"
         : " bg-white-1 color-black";
       basicOptions.push({
@@ -171,12 +171,12 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
 
 // Checks whether "dialect" is a dialect of "baseLang".
 function isDialectOf(dialect: string, baseLang: string) {
-  let baseLangOfDialect = dialect.split("_")[0];
+  const baseLangOfDialect = dialect.split("_")[0];
   return baseLang === baseLangOfDialect;
 }
 
 // Checks whether "resources" contain the language key "lang".
 function containsLanguage(lang: string, resources: Translations) {
-  let dialects = Object.keys(resources).filter((key) => key === lang);
+  const dialects = Object.keys(resources).filter((key) => key === lang);
   return dialects.length === 1;
 }

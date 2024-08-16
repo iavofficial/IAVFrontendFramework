@@ -1,4 +1,4 @@
-import { JWT } from "aws-amplify/auth";
+import {JWT} from "aws-amplify/auth";
 import React from "react";
 
 export interface Credentials {
@@ -9,6 +9,7 @@ export interface Credentials {
 export type FetchAuthedFunction = (
   url: string,
   token: JWT,
+  //eslint-disable-next-line
   settings?: Object
 ) => Promise<Response>;
 

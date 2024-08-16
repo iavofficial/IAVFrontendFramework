@@ -1,6 +1,7 @@
-import { ComponentTypeMinProps } from "../../../types/typesReact";
-import { SimpleNavbarTab } from "../tabs/simpleNavbarTab/simpleNavbarTab";
-import { InjectedOptionsObject } from "../types/typesInjectedOptions";
+import React from "react";
+import {ComponentTypeMinProps} from "../../../types/typesReact";
+import {SimpleNavbarTab} from "../tabs/simpleNavbarTab/simpleNavbarTab";
+import {InjectedOptionsObject} from "../types/typesInjectedOptions";
 
 export const generalizedTabFactoryFactory = <OptionType,>(
   NavbarTabComponent: ComponentTypeMinProps<InjectedOptionsObject<OptionType>>

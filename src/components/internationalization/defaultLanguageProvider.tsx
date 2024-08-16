@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import i18n from "i18next";
-import { useTranslation } from "react-i18next";
+import {useTranslation} from "react-i18next";
 
 import translationEN from "../../assets/translations/en.json";
 import translationDE from "../../assets/translations/de.json";
-import { initI18next } from "./i18n";
-import { useCookiesAccepted } from "../cookie/cookieHooks";
-import { LanguageContext, Translations } from "../../contexts/language";
+import {initI18next} from "./i18n";
+import {useCookiesAccepted} from "../cookie/cookieHooks";
+import {LanguageContext, Translations} from "../../contexts/language";
 
 export interface LanguageOptions {
   fallbackLang: string;
@@ -55,7 +55,7 @@ export const DefaultLanguageProvider = (
     }
 
     setLoaded(true);
-  }, [props.initI18Next, fallbackLang, initialLang, cookiesAccepted]);
+  }, [props.initI18Next, fallbackLang, initialLang, cookiesAccepted, props, resources]);
 
   useEffect(() => {
     if (props.translations) {
@@ -74,10 +74,10 @@ export const DefaultLanguageProvider = (
       });
       setResources(resources);
     }
-  }, [props.translations]);
+  }, [props.translations, resources]);
 
   const useTranslationFunction = () => {
-    const [t, i18n, ready] = useTranslation();
+    const [t] = useTranslation();
     return function (key: string, ...translationParams: any[]) {
       return t(key, ...(translationParams as []));
     };

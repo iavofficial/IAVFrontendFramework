@@ -1,14 +1,6 @@
-import {
-  signIn,
-  signOut,
-  fetchAuthSession,
-  confirmSignIn,
-  JWT,
-  getCurrentUser,
-  AuthError,
-} from "aws-amplify/auth";
-import { Credentials } from "../contexts/auth";
-import { containsOneOrMoreGroups } from "./groupChecker";
+import {AuthError, confirmSignIn, fetchAuthSession, getCurrentUser, JWT, signIn, signOut,} from "aws-amplify/auth";
+import {Credentials} from "../contexts/auth";
+import {containsOneOrMoreGroups} from "./groupChecker";
 
 export async function cognitoLogin(
   credentials: Credentials,
@@ -47,7 +39,7 @@ export async function cognitoCheckIsAuthenticated(
   legalGroups?: string[]
 ) {
   try {
-    let response = await getCurrentUser();
+    const response = await getCurrentUser();
 
     if (response.username) {
       return await handleSessionResult(failOnNoLegalGroup, legalGroups);
@@ -62,7 +54,7 @@ export async function cognitoCompletePassword(
   legalGroups?: string[]
 ) {
   try {
-    let response = await confirmSignIn({ challengeResponse: newPassword });
+    const response = await confirmSignIn({ challengeResponse: newPassword });
 
     if (response.isSignedIn && response.nextStep.signInStep === "DONE")
       return handleSessionResult(failOnNoLegalGroup, legalGroups);
@@ -88,11 +80,11 @@ async function handleSessionResult(
   forceRefresh?: boolean
 ) {
   try {
-    let { tokens } = await fetchAuthSession({ forceRefresh: forceRefresh });
-    let idToken = tokens?.idToken;
-    let accessToken = tokens?.accessToken;
+    const { tokens } = await fetchAuthSession({ forceRefresh: forceRefresh });
+    const idToken = tokens?.idToken;
+    const accessToken = tokens?.accessToken;
     const groups = idToken?.payload["cognito:groups"];
-    let username = idToken?.payload["cognito:username"];
+    const username = idToken?.payload["cognito:username"];
 
     if (failOnNoLegalGroup) {
       if (!groups || !legalGroups) throw new Error("UserGroupError"); // throw invalid user error (user is valid and authorized, but is not assigned any legal groups)

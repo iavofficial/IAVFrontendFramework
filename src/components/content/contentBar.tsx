@@ -1,14 +1,14 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+import React, {useCallback, useContext, useEffect, useRef, useState} from "react";
 import "../css/globalColors.css";
-import { ColorSettingsContext } from "../../contexts/colorsettings";
-import { BasicContentbarWrapper } from "./basicContentbarWrapper";
-import { CustomContentbarWrapper } from "./customContentbarWrapper";
-import { NavbarSettingsContext } from "../../contexts/navbarContext";
-import { calculateWidth } from "../../utils/calculateWidth";
-import { ContentBarButtonElement } from "./contentBarButtonElement";
-import { DEFAULT_ELEMENTSIZE, PADDING_GAB } from "../../constants";
-import { useStyleMap } from "./style_options/useStyleMap";
-import { StyleProps, StylesArray } from "./style_options/styleTypes";
+import {ColorSettingsContext} from "../../contexts/colorsettings";
+import {BasicContentbarWrapper} from "./basicContentbarWrapper";
+import {CustomContentbarWrapper} from "./customContentbarWrapper";
+import {NavbarSettingsContext} from "../../contexts/navbarContext";
+import {calculateWidth} from "../../utils/calculateWidth";
+import {ContentBarButtonElement} from "./contentBarButtonElement";
+import {DEFAULT_ELEMENTSIZE, PADDING_GAB} from "../../constants";
+import {useStyleMap} from "./style_options/useStyleMap";
+import {StyleProps, StylesArray} from "./style_options/styleTypes";
 
 export const ContentBarStyles = {
   SPACING: "SPACING",
@@ -66,12 +66,23 @@ export const ContentBar = (props: PropsContentBar) => {
   const [amountOfRenderedTabElements, setAmountOfRenderedTabElements] =
     useState(navbarSettingsContext?.navbarCollapsed === true ? 6 : 5);
 
+  const handleJumpToEnd = useCallback(() => {
+    if (
+        props.contentElements.length > amountOfRenderedTabElements &&
+        !preventInitialJumpToEnd
+    ) {
+      return props.contentElements.length - amountOfRenderedTabElements;
+    } else {
+      return startRenderElements;
+    }
+  }, [amountOfRenderedTabElements, preventInitialJumpToEnd, props.contentElements.length, startRenderElements]);
+
   useEffect(() => {
     if (props.jumpToEndOfContentBar) {
       setStartRenderElements(handleJumpToEnd);
       setPreventInitialJumpToEnd(false);
     }
-  }, [props.contentElements.length]);
+  }, [handleJumpToEnd, props.contentElements.length, props.jumpToEndOfContentBar]);
 
   useEffect(() => {
     window.addEventListener("resize", handleDivResize);
@@ -80,6 +91,12 @@ export const ContentBar = (props: PropsContentBar) => {
       window.removeEventListener("resize", handleDivResize);
     };
   }, []);
+
+  const lastElementIsVisible = useCallback(() => {
+    return startRenderElements + amountOfRenderedTabElements ===
+        props.contentElements.length &&
+        props.contentElements.length > amountOfRenderedTabElements;
+  }, [amountOfRenderedTabElements, props.contentElements.length, startRenderElements]);
 
   useEffect(() => {
     if (navbarSettingsContext?.navbarCollapsed === true) {
@@ -92,7 +109,7 @@ export const ContentBar = (props: PropsContentBar) => {
       setAmountOfRenderedTabElements(5);
       handleDivResize();
     }
-  }, [navbarSettingsContext?.navbarCollapsed]);
+  }, [lastElementIsVisible, navbarSettingsContext?.navbarCollapsed]);
 
   const handleSlideLeftEvent = () => {
     if (startRenderElements > 0) {
@@ -107,18 +124,6 @@ export const ContentBar = (props: PropsContentBar) => {
   const handleOnClickAddEvent = () => {
     if (props.onClickAddButton) {
       props.onClickAddButton();
-    }
-  };
-
-  const lastElementIsVisible = () => {
-    if (
-      startRenderElements + amountOfRenderedTabElements ===
-        props.contentElements.length &&
-      props.contentElements.length > amountOfRenderedTabElements
-    ) {
-      return true;
-    } else {
-      return false;
     }
   };
 
@@ -138,17 +143,6 @@ export const ContentBar = (props: PropsContentBar) => {
       }
 
       setStartRenderElements((startRenderElements) => startRenderElements + 1);
-    }
-  };
-
-  const handleJumpToEnd = () => {
-    if (
-      props.contentElements.length > amountOfRenderedTabElements &&
-      !preventInitialJumpToEnd
-    ) {
-      return props.contentElements.length - amountOfRenderedTabElements;
-    } else {
-      return startRenderElements;
     }
   };
 

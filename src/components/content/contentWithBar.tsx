@@ -1,9 +1,9 @@
-import React, { useMemo } from "react";
+import React, {useMemo} from "react";
 import "../css/globalColors.css";
-import { ContentBar, ContentBarStyles, ContentBarStylesArray } from "./contentBar";
-import { BasicContentbarWrapper } from "./basicContentbarWrapper";
-import { CustomContentbarWrapper } from "./customContentbarWrapper";
-import { ContentLayout, ContentLayoutAndStyleProps } from "./contentLayout";
+import {ContentBar, ContentBarStyles, ContentBarStylesArray} from "./contentBar";
+import {BasicContentbarWrapper} from "./basicContentbarWrapper";
+import {CustomContentbarWrapper} from "./customContentbarWrapper";
+import {ContentLayout, ContentLayoutAndStyleProps} from "./contentLayout";
 
 export type ContentWithBarProps = {
   contentWrappers: BasicContentbarWrapper[] | CustomContentbarWrapper[];
@@ -25,7 +25,7 @@ export const ContentWithBar = (props: React.PropsWithChildren<ContentLayoutAndSt
   }, [props.contentWrappers, props.selectedId]);
 
   const contentBarStyles = useMemo(() => {
-    let tempContentbarStyles: ContentBarStylesArray = [];
+    const tempContentbarStyles: ContentBarStylesArray = [];
     Object.values(ContentBarStyles).forEach(contentBarStyle => {
       if(props.contentStyle?.appliedStyles?.includes(contentBarStyle)) {
         tempContentbarStyles.push(contentBarStyle);

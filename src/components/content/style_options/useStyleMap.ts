@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import {useMemo} from "react";
 
 /**
  * This hook takes in an array of styles which should be applied and generates an array of classes and styles
@@ -44,7 +44,7 @@ export const useStyleMap = <T extends { [key: string]: string }>(
       }
     });
     return classNames;
-  }, [finalAppliedStyles]);
+  }, [classesMap, finalAppliedStyles]);
 
   const styles = useMemo(() => {
     let styles = {};
@@ -56,7 +56,7 @@ export const useStyleMap = <T extends { [key: string]: string }>(
       }
     });
     return styles;
-  }, [finalAppliedStyles]);
+  }, [finalAppliedStyles, stylesMap]);
 
   return [classNames, styles] as [string, object];
 };

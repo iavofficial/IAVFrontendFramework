@@ -18,20 +18,14 @@
 
 import React, { Component } from "react";
 import {
-  AWSUserData,
-  AuthContext,
-  Credentials,
-  AWSAuthenticationProviderType,
-} from "../../../contexts/auth";
-import {
-  cognitoLogin,
-  cognitoLogout,
   cognitoCheckIsAuthenticated,
   cognitoCompletePassword,
+  cognitoLogin,
+  cognitoLogout,
   cognitoRefreshToken,
   ValidUserInformation,
 } from "../../../utils/cognitoService";
-import { JWT } from "aws-amplify/auth";
+import {JWT} from "aws-amplify/auth";
 
 export interface Props {
   configureAmplify: () => void;

@@ -137,7 +137,9 @@
     "./constants.css": "./build/components/css/constants.css",
     "./mainPage.css": "./build/components/css/mainPage.css",
     "./framework.css": "./build/components/css/framework.css",
-    "./globalColors.css": "./build/components/css/globalColors.css"
+    "./globalColors.css": "./build/components/css/globalColors.css",
+    "./headerPanelElement": "./build/components/header/headerPanelElement.js",
+    "./headerMenuElement": "./build/components/header/headerMenuElement.js"
   },
   "typesVersions": {
     "*": {
@@ -188,7 +190,9 @@
       "./constants.css": "./build/components/css/constants.css",
       "./mainPage.css": "./build/components/css/mainPage.css",
       "./framework.css": "./build/components/css/framework.css",
-      "./globalColors.css": "./build/components/css/globalColors.css"
+      "./globalColors.css": "./build/components/css/globalColors.css",
+      "./headerPanelElement": "./build/components/header/headerPanelElement.d.ts",
+      "./headerMenuElement": "./build/components/header/headerMenuElement.d.ts"
     }
   }
 }

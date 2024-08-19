@@ -47,6 +47,7 @@ export interface AuthenticationProvider {
   hasAuthenticated(): boolean;
   getUserData(): UserDataBasic | undefined;
   fetchAuthed: FetchAuthedFunction;
+  isRefreshing?(): boolean;
 }
 
 export interface AWSAuthenticationProviderType extends AuthenticationProvider {

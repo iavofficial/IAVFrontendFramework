@@ -180,18 +180,18 @@ function Layout() {
     const appLogo = <span className="ml-3">Example application</span>;
 
     return (
-                <UILayer
-                    tabAndContentWrappers={views}
-                    startingPoint="/example1/"
-                    authenticationView={BasicAuthenticationView}
-                    settingsMenuOptions={settingsMenuOptions}
-                    documentsLabelKey="Legal_documents"
-                    documentsComponent={LegalDocuments}
-                    headerOptions={{
-                        reactElementLeft: appLogo,
-                        headerElements: headerElements,
-                    }}
-                />
+        <UILayer
+            tabAndContentWrappers={views}
+            startingPoint="/example1/"
+            authenticationView={BasicAuthenticationView}
+            settingsMenuOptions={settingsMenuOptions}
+            documentsLabelKey="Legal_documents"
+            documentsComponent={LegalDocuments}
+            headerOptions={{
+                reactElementLeft: appLogo,
+                headerElements: headerElements,
+            }}
+        />
     );
 }
 

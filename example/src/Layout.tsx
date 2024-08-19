@@ -1,5 +1,5 @@
 import {SelectButton} from "primereact/selectbutton";
-import {useMemo, useState} from "react";
+import {useState} from "react";
 import {UILayer} from "iav-frontend-framework/uiLayer";
 import {TranslateFunctionType} from "iav-frontend-framework/translationFunction";
 import {BasicAuthenticationView} from "iav-frontend-framework/basicAuthenticationView";
@@ -15,8 +15,10 @@ import {ExampleComponent5} from "./components/exampleComponent5";
 import {simpleNavbarTabFactory} from "iav-frontend-framework/simpleNavbarTabFactory";
 import {privilegedNavbarTabFactory} from "iav-frontend-framework/privilegedNavbarTabFactory";
 import {ExampleComponent2} from "./components/exampleComponent2";
+import {HeaderPanelElement} from "../../src/components/header/headerPanelElement.tsx";
 import {PrimeIcons} from "primereact/api";
-import {HeaderElement} from "iav-frontend-framework/header";
+import {WHITE} from "iav-frontend-framework/constants";
+import {HeaderMenuElement} from "../../src/components/header/headerMenuElement.tsx";
 
 function Layout() {
     const [selectedButtonOption, setSelectedButtonOption] = useState("Simulated");
@@ -25,7 +27,7 @@ function Layout() {
         additionalItems: [
             {
                 template: (
-                    <div style={{ display: "flex", justifyContent: "center" }}>
+                    <div style={{display: "flex", justifyContent: "center"}}>
                         <SelectButton
                             options={["Simulated", "Real"]}
                             value={selectedButtonOption}
@@ -43,22 +45,22 @@ function Layout() {
             simpleNavbarTabFactory({
                 disabled: false,
                 name: "Example without Translation",
-                icon: <InfoIcon />,
+                icon: <InfoIcon/>,
             }),
             ExampleComponent1
         ),
         new Group(
             (t: TranslateFunctionType) => t("Test_group_not_collapsible"),
-            <InfoIcon />,
+            <InfoIcon/>,
             false,
             [
                 new BasicContentWrapper(
                     "/group-example2/",
                     simpleNavbarTabFactory({
                         name: (t: TranslateFunctionType) =>
-                            t("example_component", { count: 2 }),
+                            t("example_component", {count: 2}),
                         disabled: false,
-                        icon: <InfoIcon />,
+                        icon: <InfoIcon/>,
                     }),
                     ExampleComponent2
                 ),
@@ -68,10 +70,10 @@ function Layout() {
             "/group-example3/",
             privilegedNavbarTabFactory({
                 name: (t: TranslateFunctionType) =>
-                    t("example_component", { count: 3 }),
+                    t("example_component", {count: 3}),
                 disabled: false,
                 permittedGroups: ["ADMIN"],
-                icon: <InfoIcon />,
+                icon: <InfoIcon/>,
             }),
             ExampleComponent3
         ),
@@ -79,25 +81,25 @@ function Layout() {
             "/group-example4/",
             simpleNavbarTabFactory({
                 name: (t: TranslateFunctionType) =>
-                    t("example_component", { count: 4 }),
+                    t("example_component", {count: 4}),
                 disabled: false,
-                icon: <InfoIcon />,
+                icon: <InfoIcon/>,
             }),
             ExampleComponent4
         ),
         new Group(
             (t: TranslateFunctionType) => t("Test_group_collapsible"),
-            <InfoIcon />,
+            <InfoIcon/>,
             true,
             [
-                new Group("Untergruppe", <InfoIcon />, true, [
+                new Group("Untergruppe", <InfoIcon/>, true, [
                     new BasicContentWrapper(
                         "/group-example51/",
                         simpleNavbarTabFactory({
                             name: (t: TranslateFunctionType) =>
-                                t("example_component", { count: 5.1 }),
+                                t("example_component", {count: 5.1}),
                             disabled: false,
-                            icon: <InfoIcon />,
+                            icon: <InfoIcon/>,
                         }),
                         ExampleComponent3
                     ),
@@ -106,9 +108,9 @@ function Layout() {
                     "/group-example52/",
                     simpleNavbarTabFactory({
                         name: (t: TranslateFunctionType) =>
-                            t("example_component", { count: 5.2 }),
+                            t("example_component", {count: 5.2}),
                         disabled: false,
-                        icon: <InfoIcon />,
+                        icon: <InfoIcon/>,
                     }),
                     ExampleComponent4
                 ),
@@ -116,9 +118,9 @@ function Layout() {
                     "/group-example53/",
                     simpleNavbarTabFactory({
                         name: (t: TranslateFunctionType) =>
-                            t("example_component", { count: 5.3 }),
+                            t("example_component", {count: 5.3}),
                         disabled: true,
-                        icon: <InfoIcon />,
+                        icon: <InfoIcon/>,
                     }),
                     ExampleComponent3
                 ),
@@ -128,9 +130,9 @@ function Layout() {
             "/group-example6/",
             simpleNavbarTabFactory({
                 name: (t: TranslateFunctionType) =>
-                    t("example_component", { count: 6 }),
+                    t("example_component", {count: 6}),
                 disabled: false,
-                icon: <InfoIcon />,
+                icon: <InfoIcon/>,
             }),
             ExampleComponent5
         ),
@@ -138,9 +140,9 @@ function Layout() {
             "/group-example7/",
             simpleNavbarTabFactory({
                 name: (t: TranslateFunctionType) =>
-                    t("example_component", { count: 7 }),
+                    t("example_component", {count: 7}),
                 disabled: false,
-                icon: <InfoIcon />,
+                icon: <InfoIcon/>,
             }),
             ExampleComponent6
         ),
@@ -148,50 +150,74 @@ function Layout() {
             "/nested-route/example1/",
             simpleNavbarTabFactory({
                 name: (t: TranslateFunctionType) =>
-                    t("example_component", { count: 8 }),
+                    t("example_component", {count: 8}),
                 disabled: false,
-                icon: <InfoIcon />,
+                icon: <InfoIcon/>,
             }),
             ExampleComponent6
         ),
     ];
 
-    const headerElements: HeaderElement[] = useMemo(() => {
-        return [
-            {
-                icon: PrimeIcons.BELL,
-                model: [
-                    {
-                        template: ExampleComponent4
-                    }
-                ]
-            },
-            {
-                icon: PrimeIcons.ANGLE_RIGHT,
-                model: [
-                    {
-                        template: ExampleComponent4
-                    }
-                ]
-            }
-        ]
-    }, [])
+    const items = [
+        {
+            label: 'Translate',
+            icon: 'pi pi-language'
+        },
+        {
+            label: 'Speech',
+            icon: 'pi pi-volume-up',
+            items: [
+                {
+                    label: 'Start',
+                    icon: 'pi pi-caret-right'
+                },
+                {
+                    label: 'Stop',
+                    icon: 'pi pi-pause'
+                }
+            ]
+        },
+        {
+            separator: true
+        },
+        {
+            label: 'Print',
+            icon: 'pi pi-print'
+        }
+    ];
+
+    const headerElements = [
+        (
+            <HeaderPanelElement
+                icon={PrimeIcons.BELL}
+                iconStyle={{color: WHITE}}>
+                <ExampleComponent4/>
+            </HeaderPanelElement>
+        ),
+        (
+            <HeaderMenuElement
+                icon={PrimeIcons.HEART}
+                model={items}
+                iconStyle={{color: WHITE}}
+            />
+        )
+    ];
 
     const appLogo = <span className="ml-3">Example application</span>;
 
     return (
-                <UILayer
-                    tabAndContentWrappers={views}
-                    startingPoint="/example1/"
-                    authenticationView={BasicAuthenticationView}
-                    settingsMenuOptions={settingsMenuOptions}
-                    documentsLabelKey="Legal_documents"
-                    documentsComponent={LegalDocuments}
-                    headerOptions={{
-                        reactElementLeft: appLogo,
-                        headerElements: headerElements,
-                    }}
-                />
+        <UILayer
+            tabAndContentWrappers={views}
+            startingPoint="/example1/"
+            authenticationView={BasicAuthenticationView}
+            settingsMenuOptions={settingsMenuOptions}
+            documentsLabelKey="Legal_documents"
+            documentsComponent={LegalDocuments}
+            headerOptions={{
+                reactElementLeft: appLogo,
+                headerElements: headerElements,
+            }}
+        />
     );
 }
 

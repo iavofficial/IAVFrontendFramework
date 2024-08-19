@@ -1,20 +1,29 @@
-import { WHITE } from "iav-frontend-framework/constants";
-import { ContentStyle, ContentStyleTemplates } from "iav-frontend-framework/contentStyle";
-import { useTranslator } from "iav-frontend-framework/translators";
+import {DataTable} from "primereact/datatable";
+import {Column} from "primereact/column";
 
 export const ExampleComponent4 = () => {
-  const t = useTranslator();
-  return (
-    <ContentStyle appliedStyles={ContentStyleTemplates.DEFAULT}>
-      <div
-        style={{
-          height: "100%",
-          width: "100%",
-          backgroundColor: WHITE,
-        }}
-      >
-        <span>{t("basic_div_tag_with_text")}</span>
-      </div>
-    </ContentStyle>
-  );
+
+    return (
+        <div style={{
+            display: "flex", gap: "40px", flexDirection: "column", maxHeight: "90vh", overflow: "auto",
+            paddingRight: "10px", paddingLeft: "10px"
+        }}>
+            <div>
+                <DataTable value={[]}>
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+            </div>
+            <div>
+                <DataTable value={[]}>
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+            </div>
+        </div>
+    );
 };

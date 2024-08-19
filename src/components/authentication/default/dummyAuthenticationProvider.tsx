@@ -26,6 +26,7 @@ export interface Props {
 export interface State {
   hasAuthenticated: boolean;
   userData: UserDataBasic | undefined;
+  isRefreshing: boolean
 }
 
 export class DummyAuthenticationProvider
@@ -37,6 +38,7 @@ export class DummyAuthenticationProvider
     this.state = {
       hasAuthenticated: false,
       userData: undefined,
+      isRefreshing: false,
     };
   }
 
@@ -45,14 +47,16 @@ export class DummyAuthenticationProvider
   };
 
   login = (credentials: Credentials) => {
-    this.setState({
-      hasAuthenticated: true,
-      userData: { username: credentials.email },
-    });
+      this.setState({
+          isRefreshing: true,
+          hasAuthenticated: true,
+          userData: { username: credentials.email },
+      });
   };
 
   logout = () => {
     this.setState({
+      isRefreshing: false,
       hasAuthenticated: false,
       userData: undefined,
     });
@@ -66,23 +70,28 @@ export class DummyAuthenticationProvider
     return this.state.userData?.groups;
   };
 
+  isRefreshing = () => {
+      return this.state.isRefreshing;
+  };
+
   render() {
     return (
-      <AuthContext.Provider
-        value={Object.assign(
-          {
-            ...this.state,
-            hasAuthenticated: this.hasAuthenticated,
-            login: this.login,
-            logout: this.logout,
-            getUserData: this.getUserData,
-            fetchAuthed: this.fetchAuthed,
-          },
-          this.props.additionalContextValues
-        )}
-      >
-        {this.props.children}
-      </AuthContext.Provider>
+        <AuthContext.Provider
+            value={Object.assign(
+                {
+                  ...this.state,
+                  hasAuthenticated: this.hasAuthenticated,
+                  login: this.login,
+                  logout: this.logout,
+                  getUserData: this.getUserData,
+                  fetchAuthed: this.fetchAuthed,
+                  isRefreshing: this.isRefreshing,
+                },
+                this.props.additionalContextValues
+            )}
+        >
+          {this.props.children}
+        </AuthContext.Provider>
     );
   }
 }

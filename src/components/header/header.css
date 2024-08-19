@@ -41,3 +41,13 @@
 #header {
   height: 56px !important;
 }
+
+.p-overlaypanel {
+  &:before {
+    content:none;
+  }
+
+  &:after {
+    content:none;
+  }
+}

@@ -1,34 +1,15 @@
-/**
- * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- * http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * 
- * SPDX-License-Identifier: Apache-2.0
- */
-
-import React, {createRef, ReactElement, useContext} from "react";
+import React, { ReactElement, useContext } from "react";
 import "./header.css";
 import "../css/globalColors.css";
-import {ContextMenu} from "primereact/contextmenu";
+import { ContextMenu } from "primereact/contextmenu";
 import UserIcon from "../../assets/svg/icon_user.svg";
 import CompanyLogo from "../../assets/svg/company_logo_neutral.svg";
 import SettingsIcon from "../../assets/svg/icon_settings.svg";
-import {BLUE3, PADDING_GAB, WHITE} from "../../constants";
-import {SettingsMenu, SettingsMenuOptions} from "./settingsMenu";
-import {UserMenu, UserMenuOptions} from "./userMenu";
-import {ColorSettingsContext} from "../../contexts/colorsettings";
-import {AppLogoPlaceholder} from "../appLogoPlaceholder";
-import {MenuItem} from "primereact/menuitem";
+import { BLUE3, PADDING_GAB, WHITE } from "../../constants";
+import { SettingsMenu, SettingsMenuOptions } from "./settingsMenu";
+import { UserMenu, UserMenuOptions } from "./userMenu";
+import { ColorSettingsContext } from "../../contexts/colorsettings";
+import { AppLogoPlaceholder } from "../appLogoPlaceholder";
 
 export interface HeaderOptions {
   reactElementRight?: ReactElement;
@@ -36,13 +17,7 @@ export interface HeaderOptions {
   hideLeft?: boolean;
   hideRight?: boolean;
   hideUserIcon?: boolean;
-  headerElements?: HeaderElement[];
-}
-
-export interface HeaderElement {
-  icon: string;
-  onClick?: (event: React.MouseEvent) => void;
-  model: MenuItem[];
+  headerElements?: ReactElement[];
 }
 
 interface Props {
@@ -123,24 +98,9 @@ export const Header = (props: Props) => {
           id="right-element-user-section"
           className={"flex align-items-center justify-content-end"}
         >
-          {
-            props.headerOptions?.headerElements?.map(headerElement => {
-              const ref = createRef<ContextMenu>();
-              return (
-                <>
-                  <i
-                      style={{color: settingsIconColor, fontSize: 19, margin: "0 1rem", cursor: "pointer"}}
-                      className={headerElement.icon}
-                      onClick={(event) => ref.current?.show(event)}
-                  />
-                  <ContextMenu
-                      ref={ref}
-                      model={headerElement.model}
-                  />
-                </>
-              );
-            })
-          }
+          {props.headerOptions?.headerElements?.map((headerElement) => {
+            return <>{headerElement}</>;
+          })}
           <a
             className={"flex align-items-center justify-content-end"}
             href="#"

@@ -125,6 +125,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
   const identifier = generateHashOfLength(4);
   const identifierLegal = "a" + identifier;
   const identifierWithDot = "." + identifierLegal;
+
   return (
     <div
       className="flex"
@@ -249,10 +250,10 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                 name="password"
                 type="password"
                 required={true}
-                error={triedToSubmit && !authContext?.hasAuthenticated()}
+                error={triedToSubmit && (authContext?.isRefreshing ? !authContext.isRefreshing() : false)}
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
-                helperText={t("login.wrong")}
+                helperText={t("wrong_password")}
               />
               <div>
                 <LoginButtonWithSpinner isLoading={authContext?.isLoading} />

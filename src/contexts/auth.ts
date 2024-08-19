@@ -1,4 +1,4 @@
-import { JWT } from "aws-amplify/auth";
+import {JWT} from "aws-amplify/auth";
 import React from "react";
 
 export interface Credentials {
@@ -29,6 +29,7 @@ export interface AuthenticationProvider {
   hasAuthenticated(): boolean;
   getUserData(): UserDataBasic | undefined;
   fetchAuthed: FetchAuthedFunction;
+  isRefreshing?(): boolean;
 }
 
 export interface AWSAuthenticationProviderType extends AuthenticationProvider {

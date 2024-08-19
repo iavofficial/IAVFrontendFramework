@@ -39,7 +39,5 @@
     "with_applied_dark_and_lightMode": "Con aplicado Modo de color",
     "without_applied_dark_and_lightMode": "Sin aplicado Modo de color",
     "car": "coche",
-    "login": {
-        "wrong": "El nombre de usuario o la contraseña son incorrectos. Por favor, inténtelo de nuevo."
-    }
+    "wrong_password": "El nombre de usuario o la contraseña son incorrectos. Por favor, inténtelo de nuevo."
 }

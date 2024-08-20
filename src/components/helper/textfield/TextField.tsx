@@ -50,7 +50,7 @@ const TextField: React.FC<Props> = (props) => {
         onChange,
         error,
         helperText,
-        autoFocus
+        autoFocus,
     } = props;
 
     const errorMessage = useMemo(() => {
@@ -63,6 +63,8 @@ const TextField: React.FC<Props> = (props) => {
         return colorSettingsContext.currentColors.authenticationView
             .inputFieldDescriptionTextColor;
     }, [colorSettingsContext]);
+
+    const autoComplete = type === "password" ? "current-password" : "";
 
     return (
         <div
@@ -86,6 +88,7 @@ const TextField: React.FC<Props> = (props) => {
                 value={value}
                 onChange={onChange}
                 autoFocus={autoFocus}
+                autoComplete={autoComplete}
             />
             <small
                 id={`${id}-help`}

@@ -1,42 +1,40 @@
 /**
  * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { FormEvent } from "react";
-import { Link } from "react-router-dom";
-import { BLUE3, PADDING_GAB, WHITE } from "../../../constants";
-import { AuthContext } from "../../../contexts/auth";
-import { LoginButtonWithSpinner } from "../loginButtonWithSpinner";
-import { useState } from "react";
-import { useContext } from "react";
-import { useTranslator } from "../../internationalization/translators";
-import { AuthenticationViewProps } from "../authenticationViewProps";
+import React, {FormEvent, useContext, useState} from "react";
+import {Link} from "react-router-dom";
+import {BLUE3, PADDING_GAB, WHITE} from "../../../constants";
+import {AuthContext} from "../../../contexts/auth";
+import {LoginButtonWithSpinner} from "../loginButtonWithSpinner";
+import {useTranslator} from "../../internationalization/translators";
+import {AuthenticationViewProps} from "../authenticationViewProps";
 import "../authenticationView.css";
 import "../../css/globalColors.css";
 import loginBackgroundLightMode from "../../../assets/png/login_background_lightMode.png";
 import loginBackgroundDarkMode from "../../../assets/png/login_background_darkMode.png";
-import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
-import { LanguageContext } from "../../../contexts/language";
-import { parseLanguageRessourcesIntoDropdownFormat } from "../../../utils/parseLanguageRessourcesIntoDropdownFormat";
-import { ColorSettingsContext } from "../../../contexts/colorsettings";
-import { generateHashOfLength } from "../../../utils/hash";
-import { Tooltip } from "primereact/tooltip";
-import { AppLogoPlaceholder } from "../../appLogoPlaceholder";
-import CompanyLogo from "../../../assets/svg/company_logo_neutral.svg";
+import {Dropdown, DropdownChangeEvent} from "primereact/dropdown";
+import {LanguageContext} from "../../../contexts/language";
+import {parseLanguageRessourcesIntoDropdownFormat} from "../../../utils/parseLanguageRessourcesIntoDropdownFormat";
+import {ColorSettingsContext} from "../../../contexts/colorsettings";
+import {generateHashOfLength} from "../../../utils/hash";
+import {Tooltip} from "primereact/tooltip";
+import {AppLogoPlaceholder} from "../../appLogoPlaceholder";
+import CompanyLogo from "../../../assets/svg/companyLogo";
 
 export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
   const [email, setEmail] = useState("");

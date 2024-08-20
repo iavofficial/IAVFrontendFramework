@@ -1,22 +1,28 @@
 /**
  * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useContext, useEffect, useState, useRef } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import "../css/globalColors.css";
 import { ColorSettingsContext } from "../../contexts/colorsettings";
 import { BasicContentbarWrapper } from "./basicContentbarWrapper";
@@ -84,12 +90,32 @@ export const ContentBar = (props: PropsContentBar) => {
   const [amountOfRenderedTabElements, setAmountOfRenderedTabElements] =
     useState(navbarSettingsContext?.navbarCollapsed === true ? 6 : 5);
 
+  const handleJumpToEnd = useCallback(() => {
+    if (
+      props.contentElements.length > amountOfRenderedTabElements &&
+      !preventInitialJumpToEnd
+    ) {
+      return props.contentElements.length - amountOfRenderedTabElements;
+    } else {
+      return startRenderElements;
+    }
+  }, [
+    amountOfRenderedTabElements,
+    preventInitialJumpToEnd,
+    props.contentElements.length,
+    startRenderElements,
+  ]);
+
   useEffect(() => {
     if (props.jumpToEndOfContentBar) {
       setStartRenderElements(handleJumpToEnd);
       setPreventInitialJumpToEnd(false);
     }
-  }, [props.contentElements.length]);
+  }, [
+    handleJumpToEnd,
+    props.contentElements.length,
+    props.jumpToEndOfContentBar,
+  ]);
 
   useEffect(() => {
     window.addEventListener("resize", handleDivResize);
@@ -98,6 +124,18 @@ export const ContentBar = (props: PropsContentBar) => {
       window.removeEventListener("resize", handleDivResize);
     };
   }, []);
+
+  const lastElementIsVisible = useCallback(() => {
+    return (
+      startRenderElements + amountOfRenderedTabElements ===
+        props.contentElements.length &&
+      props.contentElements.length > amountOfRenderedTabElements
+    );
+  }, [
+    amountOfRenderedTabElements,
+    props.contentElements.length,
+    startRenderElements,
+  ]);
 
   useEffect(() => {
     if (navbarSettingsContext?.navbarCollapsed === true) {
@@ -110,7 +148,7 @@ export const ContentBar = (props: PropsContentBar) => {
       setAmountOfRenderedTabElements(5);
       handleDivResize();
     }
-  }, [navbarSettingsContext?.navbarCollapsed]);
+  }, [lastElementIsVisible, navbarSettingsContext?.navbarCollapsed]);
 
   const handleSlideLeftEvent = () => {
     if (startRenderElements > 0) {
@@ -125,18 +163,6 @@ export const ContentBar = (props: PropsContentBar) => {
   const handleOnClickAddEvent = () => {
     if (props.onClickAddButton) {
       props.onClickAddButton();
-    }
-  };
-
-  const lastElementIsVisible = () => {
-    if (
-      startRenderElements + amountOfRenderedTabElements ===
-        props.contentElements.length &&
-      props.contentElements.length > amountOfRenderedTabElements
-    ) {
-      return true;
-    } else {
-      return false;
     }
   };
 
@@ -156,17 +182,6 @@ export const ContentBar = (props: PropsContentBar) => {
       }
 
       setStartRenderElements((startRenderElements) => startRenderElements + 1);
-    }
-  };
-
-  const handleJumpToEnd = () => {
-    if (
-      props.contentElements.length > amountOfRenderedTabElements &&
-      !preventInitialJumpToEnd
-    ) {
-      return props.contentElements.length - amountOfRenderedTabElements;
-    } else {
-      return startRenderElements;
     }
   };
 

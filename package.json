@@ -21,7 +21,8 @@
     "devmode": ".\\scripts\\windows\\devmode_build.bat",
     "build-linux": "./scripts/ci_cd/build.sh",
     "test": ".\\scripts\\ci_cd\\generate_package_env_variables.sh",
-    "run-example": ".\\scripts\\windows\\setup_and_run_example.bat"
+    "run-example": ".\\scripts\\windows\\setup_and_run_example.bat",
+    "lint": "eslint 'src/**/*.{js,ts,tsx}'"
   },
   "eslintConfig": {
     "extends": [
@@ -57,7 +58,12 @@
     "react-cookie": "^4.1.1",
     "react-i18next": "^12.2.0",
     "simplebar-react": "^3.2.3",
-    "tss-react": "^4.9.12"
+    "tss-react": "^4.9.12",
+    "@typescript-eslint/eslint-plugin": "^8.1.0",
+    "@typescript-eslint/parser": "^8.1.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.35.0",
+    "eslint-plugin-react-hooks": "^4.6.2"
   },
   "peerDependencies": {
     "react": "^18.2.0",

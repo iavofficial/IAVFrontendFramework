@@ -16,24 +16,24 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, {FormEvent, useContext, useState} from "react";
-import {Link} from "react-router-dom";
-import {BLUE3, PADDING_GAB, WHITE} from "../../../constants";
-import {AuthContext} from "../../../contexts/auth";
-import {LoginButtonWithSpinner} from "../loginButtonWithSpinner";
-import {useTranslator} from "../../internationalization/translators";
-import {AuthenticationViewProps} from "../authenticationViewProps";
+import React, { FormEvent, useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import { BLUE3, PADDING_GAB, WHITE } from "../../../constants";
+import { AuthContext } from "../../../contexts/auth";
+import { LoginButtonWithSpinner } from "../loginButtonWithSpinner";
+import { useTranslator } from "../../internationalization/translators";
+import { AuthenticationViewProps } from "../authenticationViewProps";
 import "../authenticationView.css";
 import "../../css/globalColors.css";
 import loginBackgroundLightMode from "../../../assets/png/login_background_lightMode.png";
 import loginBackgroundDarkMode from "../../../assets/png/login_background_darkMode.png";
-import {Dropdown, DropdownChangeEvent} from "primereact/dropdown";
-import {LanguageContext} from "../../../contexts/language";
-import {parseLanguageRessourcesIntoDropdownFormat} from "../../../utils/parseLanguageRessourcesIntoDropdownFormat";
-import {ColorSettingsContext} from "../../../contexts/colorsettings";
-import {generateHashOfLength} from "../../../utils/hash";
-import {Tooltip} from "primereact/tooltip";
-import {AppLogoPlaceholder} from "../../appLogoPlaceholder";
+import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
+import { LanguageContext } from "../../../contexts/language";
+import { parseLanguageResourcesIntoDropdownFormat } from "../../../utils/parseLanguageResourcesIntoDropdownFormat";
+import { ColorSettingsContext } from "../../../contexts/colorsettings";
+import { generateHashOfLength } from "../../../utils/hash";
+import { Tooltip } from "primereact/tooltip";
+import { AppLogoPlaceholder } from "../../appLogoPlaceholder";
 import CompanyLogo from "../../../assets/svg/companyLogo";
 
 export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
@@ -366,7 +366,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
                 onChange={function (event: DropdownChangeEvent) {
                   langContext?.selectLanguage(event.value.key);
                 }}
-                options={parseLanguageRessourcesIntoDropdownFormat(
+                options={parseLanguageResourcesIntoDropdownFormat(
                   langContext?.resources
                 )}
                 optionLabel="label"

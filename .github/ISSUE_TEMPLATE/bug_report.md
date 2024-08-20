@@ -1,38 +1,27 @@
 ---
 name: Bug report
-about: Create a report to help us improve
-title: ''
+about: Create a report to help us improving the Frontend Framework
+title: '[Bug] '
 labels: ''
 assignees: ''
 
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+**Summary**
+(Summarize the encountered bug concisely)
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+** Steps to reproduce**
+(How can one reproduce the issue - this is very important)
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+**What is the current bug behavior?**
+(A clear and concise description of what has happen)
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+**What is the expected correct behavior?**
+(A clear and concise description of what you expected to happen)
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
-
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
+**Relevant logs and/or screenshots**
+(Paste any relevant logs and screenshots - use code blocks (```) to format console output, logs, and code, as
+it's very hard to read otherwise)
 
 **Additional context**
-Add any other context about the problem here.
+(Add any other context about the problem here)

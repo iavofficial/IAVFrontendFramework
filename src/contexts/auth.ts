@@ -27,6 +27,7 @@ export interface Credentials {
 export type FetchAuthedFunction = (
   url: string,
   token: JWT,
+  //eslint-disable-next-line
   settings?: Object
 ) => Promise<Response>;
 

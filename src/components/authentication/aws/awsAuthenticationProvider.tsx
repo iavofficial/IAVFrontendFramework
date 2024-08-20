@@ -23,6 +23,13 @@ import {
   AWSUserData,
   Credentials,
 } from "../../../contexts/auth";
+import React, { Component } from "react";
+import {
+  AuthContext,
+  AWSAuthenticationProviderType,
+  AWSUserData,
+  Credentials,
+} from "../../../contexts/auth";
 import {
   cognitoCheckIsAuthenticated,
   cognitoCompletePassword,
@@ -86,7 +93,7 @@ export class AWSAuthenticationProvider
 
   checkIsAuthenticated = async () => {
     try {
-      let result: ValidUserInformation | undefined =
+      const result: ValidUserInformation | undefined =
         await cognitoCheckIsAuthenticated(
           this.props.failOnNoLegalGroup,
           this.props.legalGroups
@@ -167,7 +174,7 @@ export class AWSAuthenticationProvider
       loginError: undefined,
     });
     try {
-      let result: ValidUserInformation | {} = await cognitoLogin(
+      const result: ValidUserInformation | object = await cognitoLogin(
         credentials,
         this.props.failOnNoLegalGroup,
         this.props.legalGroups
@@ -181,7 +188,7 @@ export class AWSAuthenticationProvider
         });
       }
     } catch (error: any) {
-      this.logout(error);
+      await this.logout(error);
     } finally {
       this.setState({
         isLoading: false,
@@ -239,7 +246,7 @@ export class AWSAuthenticationProvider
 
   refreshSession = async () => {
     try {
-      let response = await cognitoRefreshToken(
+      const response = await cognitoRefreshToken(
         this.props.failOnNoLegalGroup,
         this.props.legalGroups
       );

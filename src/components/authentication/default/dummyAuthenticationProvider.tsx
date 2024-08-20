@@ -42,7 +42,7 @@ export class DummyAuthenticationProvider
     };
   }
 
-  fetchAuthed = (url: string, settings?: Object) => {
+  fetchAuthed = (url: string, settings?: object) => {
     return fetch(url, settings);
   };
 

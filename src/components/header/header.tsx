@@ -20,14 +20,16 @@ import React, { ReactElement, useContext } from "react";
 import "./header.css";
 import "../css/globalColors.css";
 import { ContextMenu } from "primereact/contextmenu";
-import UserIcon from "../../assets/svg/icon_user.svg";
-import CompanyLogo from "../../assets/svg/company_logo_neutral.svg";
-import SettingsIcon from "../../assets/svg/icon_settings.svg";
+import UserIcon from "../../assets/svg/userIcon";
+import CompanyLogo from "../../assets/svg/companyLogo";
+import SettingsIcon from "../../assets/svg/settingsIcon";
 import { BLUE3, PADDING_GAB, WHITE } from "../../constants";
 import { SettingsMenu, SettingsMenuOptions } from "./settingsMenu";
 import { UserMenu, UserMenuOptions } from "./userMenu";
 import { ColorSettingsContext } from "../../contexts/colorsettings";
 import { AppLogoPlaceholder } from "../appLogoPlaceholder";
+import { MenuItem } from "primereact/menuitem";
+import HeaderIcon from "./headerIcon";
 
 export interface HeaderOptions {
   reactElementRight?: ReactElement;
@@ -119,40 +121,28 @@ export const Header = (props: Props) => {
           {props.headerOptions?.headerElements?.map((headerElement) => {
             return <>{headerElement}</>;
           })}
-          <a
-            className={"flex align-items-center justify-content-end"}
-            href="#"
-            style={{
-              margin: "0rem 1rem 0rem 1rem",
-              cursor: "pointer",
-            }}
-            onClick={(e) => {
-              if (menuRef.current) {
-                menuRef.current.show(e);
-              }
-            }}
-            onKeyDown={(e) => hideSettingsMenu(e)}
-          >
-            <SettingsIcon fill={settingsIconColor} />
-          </a>
-          <a
-            className={"flex align-items-center justify-content-end"}
-            href="#"
-            style={{
-              margin: "0rem 0rem 0rem 1rem",
-              cursor: "pointer",
-            }}
+            <HeaderIcon
+                style={{margin: "0rem 1rem 0rem 1rem"}}
+                onClick={(e) => {
+                    if (menuRef.current) {
+                        menuRef.current.show(e);
+                    }}}
+                onKeyDown={(e) => hideSettingsMenu(e)}
+            >
+                <SettingsIcon fill={settingsIconColor} />
+            </HeaderIcon>
+          <HeaderIcon
+            style={{margin: "0rem 0rem 0rem 1rem",}}
             onClick={(e) => {
               if (userRef.current) {
                 userRef.current.show(e);
               }
             }}
-            onKeyDown={(e) => hideUserMenu(e)}
-          >
+            onKeyDown={(e) => hideUserMenu(e)}>
             {!props.headerOptions?.hideUserIcon && (
               <UserIcon fill={userIconColor} />
             )}
-          </a>
+          </HeaderIcon>
         </div>
         <div
           id="right-element-companylogo"

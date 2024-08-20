@@ -23,13 +23,6 @@ import {
   AWSUserData,
   Credentials,
 } from "../../../contexts/auth";
-import React, { Component } from "react";
-import {
-  AuthContext,
-  AWSAuthenticationProviderType,
-  AWSUserData,
-  Credentials,
-} from "../../../contexts/auth";
 import {
   cognitoCheckIsAuthenticated,
   cognitoCompletePassword,

@@ -34,7 +34,7 @@ import { ColorSettingsContext } from "../../../contexts/colorsettings";
 import { generateHashOfLength } from "../../../utils/hash";
 import { Tooltip } from "primereact/tooltip";
 import { AppLogoPlaceholder } from "../../appLogoPlaceholder";
-import CompanyLogo from "../../../assets/svg/company_logo_neutral.svg";
+import CompanyLogo from "../../../assets/svg/companyLogo";
 
 export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
   const [email, setEmail] = useState("");

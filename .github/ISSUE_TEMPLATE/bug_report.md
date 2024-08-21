@@ -2,7 +2,7 @@
 name: Bug report
 about: Create a report to help us improving the Frontend Framework
 title: '[Bug] '
-labels: ''
+labels: 'bug'
 assignees: ''
 
 ---

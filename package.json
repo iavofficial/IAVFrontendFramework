@@ -1,6 +1,6 @@
 {
   "name": "@npm-iav-frontend/iav-frontend-framework",
-  "version": "14.0.0",
+  "version": "14.1.0",
   "private": false,
   "description": "This framework is the foundation of IAV frontend applications to provide maintainability, expandability, unification and an improved developer experience.",
   "contributors": [
@@ -15,6 +15,10 @@
     {
       "name": "Christian Becke",
       "email": "christian.becke@iav.de"
+    },
+    {
+      "name": "Mike Wegele",
+      "email": "mike.wegele@iav.de"
     }
   ],
   "scripts": {
@@ -46,10 +50,6 @@
     "iav-frontend-framework"
   ],
   "dependencies": {
-    "@babel/preset-env": "^7.22.10",
-    "@emotion/react": "^11.13.0",
-    "@emotion/styled": "^11.13.0",
-    "@mui/material": "^5.16.7",
     "i18next": "^22.4.13",
     "i18next-browser-languagedetector": "^7.0.1",
     "primeflex": "^3.3.0",
@@ -57,13 +57,7 @@
     "primereact": "^10.3.3",
     "react-cookie": "^4.1.1",
     "react-i18next": "^12.2.0",
-    "simplebar-react": "^3.2.3",
-    "tss-react": "^4.9.12",
-    "@typescript-eslint/eslint-plugin": "^8.1.0",
-    "@typescript-eslint/parser": "^8.1.0",
-    "eslint": "^8.57.0",
-    "eslint-plugin-react": "^7.35.0",
-    "eslint-plugin-react-hooks": "^4.6.2"
+    "simplebar-react": "^3.2.3"
   },
   "peerDependencies": {
     "react": "^18.2.0",
@@ -76,6 +70,7 @@
     "@babel/cli": "^7.21.0",
     "@babel/core": "^7.22.10",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/preset-env": "^7.25.4",
     "@babel/preset-react": "^7.22.5",
     "@babel/preset-typescript": "^7.21.0",
     "@svgr/babel-plugin-transform-svg-component": "^8.0.0",
@@ -83,8 +78,12 @@
     "@types/node": "^18.15.5",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
+    "@typescript-eslint/eslint-plugin": "^8.2.0",
+    "@typescript-eslint/parser": "^8.2.0",
     "aws-amplify": "^6.3.4",
     "babel-plugin-inline-react-svg": "^2.0.2",
+    "eslint": "^9.9.1",
+    "eslint-plugin-react": "^7.35.0",
     "prettier": "^3.3.2",
     "typescript": "^5.0.2"
   },

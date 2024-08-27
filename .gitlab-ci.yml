@@ -1,0 +1,93 @@
+# Allow execution of scripts.
+default:
+  image: node:latest
+  before_script:
+    - chmod -R +x ./scripts/ci_cd/
+
+cache:
+  key: $CI_COMMIT_REF_SLUG
+  paths:
+    - ./node_modules
+
+stages:
+  - prepare
+  - validate
+  - build
+  - publish
+  - release
+
+# Generate environment variables for package.
+generate_env_variables:
+  stage: prepare
+  script:
+    - ./scripts/ci_cd/generate_package_env_variables.sh
+  artifacts:
+    reports:
+      dotenv: build.env
+  except:
+    - tags
+
+# If no release notes for the current version exist and this pipeline was triggered on the main branch the pipeline will be terminated.
+validate_release_notes:
+  stage: validate
+  script:
+    - >
+      if [[ ! -f ./scripts/ci_cd/release_notes/${NPM_PACKAGE_VERSION}.md ]]; then
+          echo "You have to create release notes for version ${NPM_PACKAGE_VERSION}. Otherwise the package won't be published."
+      fi
+  rules:
+    - if: "$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH"
+    - if: '$FORCE_PUBLISH == "true"'
+
+# Validates typescript files
+validate_typescript:
+  stage: validate
+  variables:
+    NODE_EXTRA_CA_CERTS: ${IAV_CA_BUNDLE}
+  script:
+    - npm ci
+    - npx tsc --noEmit --emitDeclarationOnly false
+  except:
+    - tags
+
+# Builds the framework
+build_package:
+  stage: build
+  script:
+    - npm install -D
+    - npm run build-linux
+  artifacts:
+    paths:
+      - ./build
+  except:
+    - tags
+
+# Publish the package. If the version in package.json has not yet been published, it will be
+# published to GitLab's NPM registry. If the version already exists, the publish command
+# will fail. The existing package will not be updated.
+publish_package:
+  stage: publish
+  variables:
+    NODE_EXTRA_CA_CERTS: ${IAV_CA_BUNDLE}
+  script:
+    - npm install -D
+    - sh ./scripts/ci_cd/configure_npmrc_for_publish.sh
+    - npm publish
+  rules:
+    - if: '$CI_SERVER_HOST == "*.local"'
+    - if: "$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH"
+    - if: '$FORCE_PUBLISH == "true"'
+
+# Create release so observer of this project will get a notification e-mail.
+create_release:
+  stage: release
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  variables:
+    SSL_CERT_FILE: ${IAV_CA_BUNDLE}
+  script:
+    - >
+      release-cli create --description ./scripts/ci_cd/release_notes/${NPM_PACKAGE_VERSION}.md
+      --tag-name v${NPM_PACKAGE_VERSION}
+  rules:
+    - if: "$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH"
+    - if: '$FORCE_PUBLISH == "true"'

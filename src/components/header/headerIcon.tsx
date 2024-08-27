@@ -1,11 +1,12 @@
 import React, {PropsWithChildren} from "react";
-import {makeStyles} from "tss-react/mui";
+import makeStyles from "../content/style_options/makeStyles";
+import {classNames} from "primereact/utils";
 
-const useStyles = makeStyles()({
+const useStyles = makeStyles(() => ({
     wrapper: {
         cursor: "pointer",
-    }
-})
+    },
+}));
 
 interface Props {
     onClick?: (event: React.SyntheticEvent) => void;
@@ -22,11 +23,11 @@ const HeaderIcon: React.FC<PropsWithChildren<Props>> = props => {
         children
     } = props;
 
-    const {classes, cx} = useStyles()
+    const {classes} = useStyles()
 
     return (
         <div
-            className={cx("flex align-items-center justify-content-end", classes.wrapper)}
+            className={classNames("flex align-items-center justify-content-end", classes.wrapper)}
             style={style}
             onClick={onClick}
             onKeyDown={onKeyDown}>

@@ -16,23 +16,17 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, {useCallback, useContext, useEffect, useRef, useState,} from "react";
 import "../css/globalColors.css";
-import { ColorSettingsContext } from "../../contexts/colorsettings";
-import { BasicContentbarWrapper } from "./basicContentbarWrapper";
-import { CustomContentbarWrapper } from "./customContentbarWrapper";
-import { NavbarSettingsContext } from "../../contexts/navbarContext";
-import { calculateWidth } from "../../utils/calculateWidth";
-import { ContentBarButtonElement } from "./contentBarButtonElement";
-import { DEFAULT_ELEMENTSIZE, PADDING_GAB } from "../../constants";
-import { useStyleMap } from "./style_options/useStyleMap";
-import { StyleProps, StylesArray } from "./style_options/styleTypes";
+import {ColorSettingsContext} from "../../contexts/colorsettings";
+import {BasicContentbarWrapper} from "./basicContentbarWrapper";
+import {CustomContentbarWrapper} from "./customContentbarWrapper";
+import {NavbarSettingsContext} from "../../contexts/navbarContext";
+import {calculateWidth} from "../../utils/calculateWidth";
+import {ContentBarButtonElement} from "./contentBarButtonElement";
+import {DEFAULT_ELEMENTSIZE, PADDING_GAB} from "../../constants";
+import {useStyleMap} from "./style_options/useStyleMap";
+import {StyleProps, StylesArray} from "./style_options/styleTypes";
 
 export const ContentBarStyles = {
   SPACING: "SPACING",
@@ -111,11 +105,8 @@ export const ContentBar = (props: PropsContentBar) => {
       setStartRenderElements(handleJumpToEnd);
       setPreventInitialJumpToEnd(false);
     }
-  }, [
-    handleJumpToEnd,
-    props.contentElements.length,
-    props.jumpToEndOfContentBar,
-  ]);
+    //eslint-disable-next-line
+  }, [props.contentElements.length]);
 
   useEffect(() => {
     window.addEventListener("resize", handleDivResize);

@@ -24,30 +24,28 @@ import {ACCEPTED_COOKIES_NAME, BLACK, BLUE1, GREY1, GREY2, GREY5, GREY6, WHITE} 
 import {useCookiesAccepted} from "./cookieHooks";
 import {useTranslator} from "../internationalization/translators";
 import {setAcceptCookies} from "../../utils/setAcceptCookies";
-import {makeStyles} from "tss-react/mui";
 import {ColorSettingsContext} from "../../contexts/colorsettings";
+import makeStyles from "../content/style_options/makeStyles";
 
-const useStyles = makeStyles<{ darkMode: boolean }>()(
-  (_, {darkMode}) => ({
-    dialog: {
-      borderRadius: "4px",
-      border: `1px solid ${darkMode ? GREY5 : GREY2}`,
-      "& .p-dialog-header": {
-        backgroundColor: darkMode ? BLACK  : GREY1,
-        color: darkMode ? GREY1 : GREY5,
-        borderBottom: `1px solid ${darkMode ? GREY5 : GREY2}`,
-      },
-      "& .p-dialog-content": {
-        backgroundColor: darkMode ? GREY6 : WHITE,
-        color: darkMode ? GREY1 : GREY5,
-      },
-      "& .p-dialog-footer": {
-        backgroundColor: darkMode ? BLACK : GREY1,
-        borderTop: `1px solid ${darkMode ? GREY5 : GREY2}`,
-      }
-    }
-  })
-);
+const useStyles = makeStyles(({ darkMode }: { darkMode: boolean }) => ({
+  dialog: {
+    borderRadius: "4px",
+    border: `1px solid ${darkMode ? GREY5 : GREY2}`,
+    "& .p-dialog-header": {
+      backgroundColor: darkMode ? BLACK : GREY1,
+      color: darkMode ? GREY1 : GREY5,
+      borderBottom: `1px solid ${darkMode ? GREY5 : GREY2}`,
+    },
+    "& .p-dialog-content": {
+      backgroundColor: darkMode ? GREY6 : WHITE,
+      color: darkMode ? GREY1 : GREY5,
+    },
+    "& .p-dialog-footer": {
+      backgroundColor: darkMode ? BLACK : GREY1,
+      borderTop: `1px solid ${darkMode ? GREY5 : GREY2}`,
+    },
+  },
+}));
 
 export const CookieBanner = () => {
 

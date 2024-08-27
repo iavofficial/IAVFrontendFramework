@@ -1,14 +1,42 @@
-# License
-This project is published using the **Apache-2.0** license. It's included in this project's root.
+# IAV Frontend Framework
 
-# Requirements
-- **You should install at least npm version 7.7.5 when using or enhancing the framework.**
+[![npm version](https://img.shields.io/npm/v/your-package-name)](https://www.npmjs.com/package/your-package-name)
+[![license](https://img.shields.io/badge/license-Apache--2.0-blue)](./LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/your-github-username/your-repo-name)](https://github.com/your-github-username/your-repo-name/issues)
+[![GitHub discussions](https://img.shields.io/github/discussions/your-github-username/your-repo-name)](https://github.com/your-github-username/your-repo-name/discussions)
 
-# Purpose of the framework
-Imagine developing three seperate IAV frontend applications from scratch. You will encounter several problems:
-- A lack of maintainability: IAV decided to introduce a new style guide in 2022. As a consequence of this all three applications would have to be adapted. Kind of laborious and expensive, isn't it? There are many other examples for a lack of maintanability. Another example is the adaptation of imprints. Does the CEO of IAV change? You would have to adapt the imprints of all three frontend applications seperately.
-- A lack of extendability: You want to add a new feature which is potentially of intrerest for all IAV frontend applications? Without a mechanism to distribute this feature centrally you will have to implement / copy and paste it several times. Futhermore, if there are necessay changes to the feature you will have to implement them in every application seperately.
-- A higher risk for faults: What is the disadvantage of implementing the same functionality more than once? Every implementation process has the chance to introduce new faults. Hence, you minimze the risk for faults by implementing the feature only once and distributing it centrally.
-- A lower developer experience: Does it make fun to implement the same functionality in many projects and to maintain it consequently? The answer is pretty obvious: NO!
+## Getting Started
 
-The IAV frontend framework was created to solve these issues. To get more information take a look at the documentation which can be found [here]().
+To quickly get started and see the framework in action, visit the [GitHub Pages](https://your-github-username.github.io/your-repo-name/).
+
+## Description
+
+The IAV Frontend Framework was created to address common challenges in developing multiple IAV frontend applications:
+
+- **Lack of Maintainability**: Imagine IAV introduces a new style guide in 2022. All three applications would need to be updated, which is labor-intensive and costly. A centralized framework solves this problem by allowing for centralized maintenance and distribution.
+
+- **Lack of Extendability**: Want to add a new feature that might be of interest to all IAV frontend applications? Without a mechanism for centralized distribution, you'd have to implement it multiple times. The framework allows for the central implementation and distribution of new features across all applications.
+
+- **Higher Risk of Faults**: Implementing the same functionality multiple times increases the risk of introducing errors. By implementing a feature once and distributing it centrally, you minimize this risk.
+
+- **Lower Developer Experience**: It's not enjoyable to repeatedly implement the same functionality across multiple projects. The framework enhances developer experience by reducing redundant work.
+
+For more information, please refer to the [documentation](https://your-github-username.github.io/your-repo-name/docs).
+
+## Layout
+
+Here's a quick look at the layout:
+
+![Layout Screenshot](src/assets/png/layout.png)
+
+## License
+
+This project is licensed under the **Apache-2.0** license. The full license text is included in the [root of the repository](./LICENSE).
+
+## Contributing
+
+Contributions are welcome! Please read the [contributing guidelines](./CONTRIBUTING.md) before submitting a pull request.
+
+## Discussions and Issues
+
+If you have questions or want to start a discussion, please visit the [Discussions](https://github.com/your-github-username/your-repo-name/discussions) section on GitHub. If you've found an issue, report it in the [Issues](https://github.com/your-github-username/your-repo-name/issues) section.

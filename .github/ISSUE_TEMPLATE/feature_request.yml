@@ -1,0 +1,59 @@
+name: 🚀 Feature Request
+description: Suggest an idea to improve the Frontend Framework.
+title: "[FR]: "
+labels: ["enhancement"]
+body:
+  - type: checkboxes
+    id: precheck
+    attributes:
+      label: Prerequisite Checklist
+      description: The following prerequisites have to be confirmed for suggesting an idea
+      options:
+        - label: I have read the [Contributing Guidelines](https://github.com/iavofficial/IAVFrontendFramework/blob/main/CONTRIBUTING.md). 
+          required: true
+        - label: I have searched for a [feature request](https://github.com/iavofficial/IAVFrontendFramework/issues) that matches the one I want to file, without success.
+          required: true
+        - label: I have opened a [discussion](https://github.com/iavofficial/IAVFrontendFramework/discussions) about the idea to be defined as feature request and the idea was accepted.
+          required: true
+  - type: input
+    id: discussion
+    attributes:
+      label: Link to discussion
+      description: Please provide the link to the discussion thread related to the feature request to be filed.
+    validations:
+      required: true
+  - type: textarea
+    id: featureDesc
+    attributes:
+      label: Feature description
+      description: A clear and concise description of what the feature should solve/improve.
+    validations:
+      required: true  
+  - type: textarea
+    id: usecase
+    attributes:
+      label: Use case
+      description: A short reasoning why the feature is required in the Frontend Framework.
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Solution
+      description: A short and concise description of the solution.
+    validations:
+      required: true  
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives
+      description: A clear and concise description of considered alternative solutions. 
+    validations:
+      required: false  
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional information
+      description: Add any other information with respect to the feature here.
+    validations:
+      required: false

@@ -1,9 +1,14 @@
-# IAV Frontend Framework
+# IAVFrontendFramework
 
 [![npm version](https://img.shields.io/npm/v/your-package-name)](https://www.npmjs.com/package/your-package-name)
 [![license](https://img.shields.io/badge/license-Apache--2.0-blue)](./LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues/your-github-username/your-repo-name)](https://github.com/your-github-username/your-repo-name/issues)
 [![GitHub discussions](https://img.shields.io/github/discussions/your-github-username/your-repo-name)](https://github.com/your-github-username/your-repo-name/discussions)
+
+## About the Project
+For information about the project see [GitHub Pages](https://iavofficial.github.io/IAVFrontendFramework/).
+
+You have a new idea, want to provide feedback to an ongoing discussion or just have questions? Then, please open a new thread in the [discussions section](https://github.com/iavofficial/IAVFrontendFramework/discussions). Further information about the section can be found [here](https://github.com/iavofficial/IAVFrontendFramework/discussions/1).
 
 ## Getting Started
 

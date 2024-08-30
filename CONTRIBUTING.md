@@ -23,7 +23,7 @@ Please follow these guidelines to ensure your contributions are valuable and tra
 ***If you don't have Git installed on your machine, [install it](https://help.github.com/articles/set-up-git/).***
 
 **1.** Fork [this repository](https://github.com/iavofficial/IAVFrontendFramework).  
-Click on the <a href="https://github.com/iavofficial/IAVFrontendFramework"><img src="https://user-images.githubusercontent.com/17777237/54873012-40fa5b00-4dd6-11e9-98e0-cc436426c720.png"></a> symbol at the top right corner of the page.
+Click on the <a href="https://github.com/iavofficial/IAVFrontendFramework"><img src="https://img.icons8.com/ios/24/000000/code-fork.png"></a> symbol at the top right corner of the page.
 
 **2.** Clone the forked repository.
 

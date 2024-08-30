@@ -1,8 +1,13 @@
 # Contributing to This Project
 
-We appreciate your interest in the project! Whether you’ve found a bug, have a feature idea, want to contribute, or just have questions, we welcome your input.
+We are happy about your interest in the project. Did you encounter a bug, do you have a feature idea to improve the framework, do you want to participate in the development or do you just have questions about the project?
 
-Please follow these guidelines to ensure your contributions are valuable and transparent for the community.
+We appreciate any contribution to improve the project. Please adhere to the following guidelines. The guidelines apply to all contributors, i.e., also to the project maintainers, to make the contribution valuable and transparent for the project community.
+
+## Contact
+
+In addition to the [discussions](https://github.com/iavofficial/IAVFrontendFramework/discussions) section,
+you can contact the project maintainers via [mail](mailto:frontendframework@iav.de).
 
 ## How to Contribute
 
@@ -86,11 +91,6 @@ test:  add unit tests for user service
 ```
 
 For more detailed reference to the above points, refer <a href="https://www.conventionalcommits.org/en/v1.0.0/">here</a>.
-
-## Contact
-
-In addition to the [discussions](https://github.com/iavofficial/IAVFrontendFramework/discussions) section,
-you can contact the project maintainers via [mail](mailto:frontendframework@iav.de).
 
 ## GitHub Pages
 For documentation see the [GitHub Pages](https://iavofficial.github.io/IAVFrontendFramework/) of the project.

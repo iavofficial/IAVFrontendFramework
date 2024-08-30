@@ -1,53 +1,93 @@
-# Contributing to IAV Frontend Framework :repeat:
+# Contributing to the IAV Frontend Framework
 
-We appreciate your interest in contributing to the IAV Frontend Framework! Whether you're reporting a bug, suggesting a feature, or submitting a pull request, your contributions help improve the project for everyone. Below you'll find guidelines and best practices for contributing.
+We are happy about your interest in the project. Did you encounter a bug, do you have
+a feature idea to improve the framework, do you want to participate in the development
+or do you just have questions about the project?
 
-## Table of Contents
+We appreciate any contribution to improve the project. Please adhere to the following guidelines.
+The guidelines apply to all contributors, i.e., also to the project maintainers, to make the
+contribution valuable and transparent for the project community.
 
-- [Code of Conduct](#code-of-conduct)
-- [How to Contribute](#how-to-contribute)
-    - [Reporting Bugs](#reporting-bugs)
-    - [Suggesting Features](#suggesting-features)
-    - [Submitting Pull Requests](#submitting-pull-requests)
-- [Development Setup](#development-setup)
-- [Style Guide](#style-guide)
-- [License](#license)
+### Types of Contribution
 
-## Code of Conduct :repeat:
+- **Feature Requests -**
+  You have an idea on how to improve the framework? The idea is as of yet neither documented as [issue](https://github.com/iavofficial/IAVFrontendFramework/issues)
+  nor [discussed](https://github.com/iavofficial/IAVFrontendFramework/discussions)? Then, please open a new [discussion](https://github.com/iavofficial/IAVFrontendFramework/discussions)
+  to propose your idea. The discussion will allow for reasoning if the idea fits to the project scope and, furthermore, to
+  improve the idea. Further information about our discussion section can be found [here](https://github.com/iavofficial/IAVFrontendFramework/discussions/1). For the discussed ideas to be integrated in the framework, a new [issue](https://github.com/iavofficial/IAVFrontendFramework/issues)
+  has to be created and linked to the discussion. The issue description has to be clear, concise as well as meaningful and
+  should provide a use case to show the relevance of the idea to be realized.
 
-By participating in this project, you agree to abide by our [Code of Conduct](./CODE_OF_CONDUCT.md). Please be respectful and considerate of others to ensure a welcoming environment for everyone.
+- **Bug Reports -**
+  You have encountered a bug? The bug is not yet [reported](https://github.com/iavofficial/IAVFrontendFramework/issues)?
+  Then, please open a new [issue](https://github.com/iavofficial/IAVFrontendFramework/issues) to report the bug based
+  on the defined [template](https://github.com/iavofficial/IAVFrontendFramework/issues/new/choose). The template supports the provision
+  of the required information to reproduce as well as locate and, in the end, to fix the bug.
 
-## How to Contribute :repeat:
+- **Code Contributions -**
+  We welcome code contributions to improve the frontend framework. For code contributions, a respective
+  [issue](https://github.com/iavofficial/IAVFrontendFramework/issues) has to be filed and discussed.
+  Independently of the issue type (bug/feature request), you should comment on the issue that it is selected by you
+  to be realized. We refer to the described [process](#process-for-code-contributions) for code contributions.
 
-### Reporting Bugs :repeat:
+- **Discussions -**
+  You have a new idea, want to provide feedback to an ongoing discussion or just have questions? Then, please open
+  a new thread in the [discussions](https://github.com/iavofficial/IAVFrontendFramework/discussions) section. Further information about the section can be found [here](https://github.com/iavofficial/IAVFrontendFramework/discussions/1).
 
-If you find a bug, please report it by following these steps:
+## Contact
 
-1. **Check for existing issues**: Before opening a new issue, please check if it has already been reported in the [Issues](https://github.com/your-github-username/your-repo-name/issues) section.
-2. **Create a detailed issue**: If no existing issue matches your bug, create a new one with a clear title and detailed description. Include steps to reproduce, screenshots, and any relevant information about your environment.
+In addition to the [discussions](https://github.com/iavofficial/IAVFrontendFramework/discussions) section,
+you can contact the project maintainers via [mail](mailto:frontendframework@iav.de).
 
-### Suggesting Features :repeat:
+## Process for Code Contributions
 
-We welcome suggestions for new features! If you have an idea that could improve the framework:
+### Preconditions
 
-1. **Check for existing discussions**: See if your idea has already been discussed in the [Discussions](https://github.com/your-github-username/your-repo-name/discussions) section.
-2. **Start a new discussion**: If your suggestion is new, start a discussion with a detailed explanation of your idea and its potential benefits.
+- For a more efficient way of providing patches, we suggest potential contributors to have a [GitHub account](https://github.com/signup/free).
+- For a code contributions, a respective [issue](https://github.com/iavofficial/IAVFrontendFramework/issues) has been filed and assigned.
+- The IAV Frontend Framework is licensed under [Apache 2.0](https://github.com/iavofficial/IAVFrontendFramework/blob/main/LICENSE).
+  All changes will be released under the same licence.
+- Your changes should comply with the existing coding style for consistency.
+- We recommend to apply the provided [Prettier configuration](https://github.com/iavofficial/IAVFrontendFramework)
 
-### Submitting Pull Requests :repeat:
+### Implement Code Contribution
 
-If you'd like to contribute code, follow these steps to submit a pull request (PR):
+1. Please [fork](https://help.github.com/articles/fork-a-repo/) the development branch to your account and clone your new repository.
+    - The development branch represents the latest and verified development version of the IAV Frontend Framework.
+    - The name of the forked repository should contain the issue number the contribution will be made for.
+    - Each forked repository should be linked to just one issue to allow for separation of concerns.
+    - To prevent from later merge conflicts, the forked repository ahould be synchronised
+      ([Git-Rebase](https://docs.github.com/de/get-started/using-git/about-git-rebase)) with the development branch on a regular basis.
 
-1. **Fork the repository**: Click the "Fork" button on the repository page to create your own copy.
-2. **Create a new branch**: Make your changes in a new branch based on the `main` branch. Use a descriptive name for your branch (e.g., `feature/add-new-component`).
-3. **Commit your changes**: Write clear, concise commit messages explaining your changes.
-4. **Test your changes**: Ensure that your changes don't break any existing functionality. Include tests if applicable.
-5. **Submit a PR**: Push your changes to your forked repository and submit a pull request to the `main` branch of this repository. Provide a clear and detailed description of your changes.
+2. For setting up the development environment, we refer to the install section of the [Readme](https://github.com/iavofficial/IAVFrontendFramework/blob/main/README.md).
 
-## Development Setup :repeat:
+3. Implement your changes in your forked repository.
+    - The changes should be minimal and focussed on the linked issue.
+    - Each commit and its contained changes represents a logical unit. No mixture of different topics to be addressed.
+    - Each commit message contains the linked issue number, is meaningful and lists its changes in a comprehensible way.
+      We refer to https://www.conventionalcommits.org/en/v1.0.0/ as guideline to write commit messages.
 
-To set up the development environment:
+4. Test your changes and their integration.
+    - All tests must be documented and pushed to the forked repository.
+    - All new as well as regression tests must be executed successfully.
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/your-github-username/your-repo-name.git
-   cd your-repo-name
+### Submit Code Contribution
+
+###### Preconditions
+- All changes are pushed to forked repository.
+- Forked repository is rebased to the development branch to reduce potential merge conflicts.
+- All test are executed successfully.
+
+###### Process
+1. Submit a [pull request](https://help.github.com/articles/about-pull-requests/).
+    - Check the list of changes to comprise solely source files and their code changes, but no build artifacts.
+2. Link the submitted pull request to the issue the contribution is made for.
+3. Provide a comprehensive change description in the pull request summary to improve the understanding of the changes for the reviewers.
+4. The test result should be provided as screenshot to the pull request to support the validiation of the code contribution.
+
+### Reviews of Contribution
+Each pull request will be reviewed by the project maintainers. Please cooperate with the reviewers for the integration of feedback and suggestions.
+In the end, the verified pull request will be merged into the development branch.
+
+### GitHub Pages
+For documentation see the [GitHub Pages](https://iavofficial.github.io/IAVFrontendFramework/) of the project.

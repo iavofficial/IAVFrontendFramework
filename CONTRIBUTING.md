@@ -64,14 +64,14 @@ git push origin <branchName>
 
 ### Here's a list of some good to have points, that can add more value to your contribution logs.
 
-| **Type**            | **Description**                                                                                     | **Example Commit Message**                           |
-|---------------------|-----------------------------------------------------------------------------------------------------|------------------------------------------------------|
-| **fix:**            | Patches a bug in the codebase (PATCH in semantic versioning).                                        | `fix: resolve issue with user authentication`        |
-| **feat:**           | Introduces a new feature to the codebase (MINOR in semantic versioning).                             | `feat: add user profile management feature`          |
-| **docs:**           | Documentation only changes.                                                                         | `docs: update README with new setup instructions`    |
-| **style:**          | Changes that do not affect the meaning of the code (white-space, formatting, etc.).                 | `style: format code according to ESLint rules`       |
-| **refactor:**       | Code change that neither fixes a bug nor adds a feature.                                             | `refactor: optimize user service class structure`    |
-| **test:**           | Adding or correcting tests.                                                                         | `test: add unit tests for user service`              |
+| **Type**      | **Description**                                                                                     | **Example Commit Message**                           |
+|---------------|-----------------------------------------------------------------------------------------------------|------------------------------------------------------|
+| **fix**       | Patches a bug in the codebase (PATCH in semantic versioning).                                        | `fix: resolve issue with user authentication`        |
+| **feat**      | Introduces a new feature to the codebase (MINOR in semantic versioning).                             | `feat: add user profile management feature`          |
+| **docs**      | Documentation only changes.                                                                         | `docs: update README with new setup instructions`    |
+| **style**     | Changes that do not affect the meaning of the code (white-space, formatting, etc.).                 | `style: format code according to ESLint rules`       |
+| **refactor**  | Code change that neither fixes a bug nor adds a feature.                                             | `refactor: optimize user service class structure`    |
+| **test**      | Adding or correcting tests.                                                                         | `test: add unit tests for user service`              |
 
 
 **Commit Message Format:**

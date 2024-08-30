@@ -74,7 +74,7 @@ git push origin <branchName>
 | **test**      | Adding or correcting tests.                                                                         | `test: add unit tests for user service`              |
 
 
-**Commit Message Format:**
+**Commit Message Format**
 
 ```
 test:  add unit tests for user service

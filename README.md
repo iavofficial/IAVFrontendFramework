@@ -30,7 +30,7 @@ For more information, please refer to the [documentation](https://your-github-us
 
 ## Layout
 
-Here's a quick look at the layout:
+Here's a quick look of an example of the IAV Frontend Framework:
 
 ![Layout Screenshot](src/assets/png/layout.png)
 

@@ -108,12 +108,12 @@ For more detailed reference to the above points, refer <a href="https://www.conv
 
 ## Submit Code Contribution
 
-##### Preconditions
+### Preconditions
 - All changes are pushed to forked repository.
 - Forked repository is rebased to the development branch to reduce potential merge conflicts.
 - All test are executed successfully. 
 
-##### Process
+### Process
 1. Submit a [pull request](https://help.github.com/articles/about-pull-requests/).
    - Check the list of changes to comprise solely source files and their code changes, but no build artifacts. 
 2. Link the submitted pull request to the issue the contribution is made for.

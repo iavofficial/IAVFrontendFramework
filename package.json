@@ -24,6 +24,7 @@
   "scripts": {
     "devmode": "./scripts/windows/devmode_build.bat",
     "build-linux": "./scripts/ci_cd/build.sh",
+    "build": "tsc --build --clean && tsc --build && npx babel ./src --out-dir ./build --extensions .ts,.tsx --copy-files",
     "test": "./scripts/ci_cd/generate_package_env_variables.sh",
     "run-example": "./scripts/windows/setup_and_run_example.bat",
     "lint": "eslint 'src/**/*.{js,ts,tsx}'"

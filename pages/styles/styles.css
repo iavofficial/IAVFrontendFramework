@@ -1,0 +1,187 @@
+/* Farben */
+:root {
+    --primary-color: #2b2d42; /* Dunkles Blau für Titel und Überschriften */
+    --secondary-color: #8d99ae; /* Dezenter Grau-Blau für sekundäre Elemente */
+    --accent-color: #ef233c; /* Akzentfarbe für Buttons oder hervorgehobene Inhalte */
+    --background-color: #f8f9fa; /* Sehr helles Grau für den Hintergrund */
+    --text-color: #2b2d42; /* Textfarbe */
+    --muted-text-color: #6c757d; /* Abgeschwächter Text */
+    --border-color: #dee2e6; /* Für Tabellen und Eingaben */
+}
+
+/* Allgemeine Einstellungen */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+
+
+    padding: 20px;
+    margin: 20px auto; /* Centers the content horizontally */
+    width: 60%;
+    text-align: justify; /* Adds block justification */
+}
+
+/* Überschriften */
+h1, h2, h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.75em;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.75rem;
+}
+
+/* Text */
+p {
+    margin-bottom: 1em;
+    color: var(--text-color);
+}
+
+strong {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+
+pre, code {
+    overflow-x: scroll;
+    background-color: #f0f0f0;
+    padding: 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* Listen */
+ul {
+    margin-left: 20px;
+    list-style-type: disc;
+}
+
+li {
+    margin-bottom: 0.5em;
+}
+
+/* Tabellen */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5em;
+}
+
+thead {
+    background-color: var(--secondary-color);
+    color: #fff;
+}
+
+tbody {
+    background-color: #fff;
+}
+
+th, td {
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    text-align: left;
+}
+
+/* Formularelemente */
+input, button {
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    margin-bottom: 1em;
+    font-size: 1rem;
+}
+
+input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: var(--accent-color);
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Span */
+span {
+    color: var(--muted-text-color);
+}
+
+/* Weitere Einstellungen */
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/** DRAWER **/
+
+/* Basis-Stil für den Drawer */
+/* Basis-Stil für den Drawer */
+.drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #ffffff;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    padding: 20px;
+    font-size: 0.875rem; /* Kleinere Schriftgröße für den Drawer */
+}
+
+/* Überschriften im Drawer */
+.drawer h1 {
+    font-size: 1.5rem; /* Kleinere Schriftgröße für h1 */
+    margin-bottom: 1em;
+}
+
+.drawer h2 {
+    font-size: 1.25rem; /* Kleinere Schriftgröße für h2 */
+    margin-bottom: 0.75em;
+}
+
+/* Stil für die Links im Drawer */
+.drawer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.drawer li {
+    margin-bottom: 8px; /* Etwas weniger Abstand zwischen den Listenelementen */
+    border-radius: 4px; /* Border-Radius für die Listenelemente */
+    transition: background-color 0.3s ease; /* Sanfte Übergänge für den Hintergrund */
+}
+
+.drawer li:hover {
+    background-color: #333; /* Dunkelgrauer Hintergrund bei Hover */
+}
+
+.drawer a {
+    display: block;
+    text-decoration: none;
+    color: var(--primary-color);
+    padding: 8px; /* Etwas Padding für besseren Textabstand */
+    border-radius: 4px; /* Gleicher Border-Radius wie li für einheitliches Design */
+}
+
+.drawer a:hover {
+    color: #fff; /* Weiße Textfarbe bei Hover für besseren Kontrast */
+}

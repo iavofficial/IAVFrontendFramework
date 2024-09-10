@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Components</title>
+    <script src="./script/nav.js" type="application/javascript"></script>
+    <link rel="stylesheet" href="./styles/styles.css"> <!-- Stylesheet Link -->
+</head>
+<body>
+<nav id="nav-placeholder"></nav>
+
+<p>Important hint: If you haven&#39;t added the ca file of IAV in npm yet, you will have to read the guide &quot;Error:
+    Self signed certificate in chain&quot; in FAQ first.</p>
+<p>If you want to play with the framework and the contained example project, you have to clone the framework&#39;s Git
+    repository first. The Git repository can be found here. If you just want to use the framework this page isn&#39;t of
+    interest for you.</p>
+<p>As mentioned, the repository contains the framework and an example project. As the framework isn&#39;t a UI by
+    itself, you cannot see the consequences of framework changes without a project using the framework. This is were the
+    example project comes into use. The example project uses the locally build framework as a file dependency in order
+    to visualize the consequences of framework changes.</p>
+<p>To start the example project you have to execute npm run setup_and_build inside the root folder of the <strong>repository</strong>.
+    This will setup the environment and start the development server at port 3000.</p>
+<p>If you want to make changes to the framework and see the consequences of these changes in real time you have to
+    execute the following steps by yourself:</p>
+<p>Execute npm install inside the <strong>repository&#39;s</strong> root folder.
+    Execute npm run devmode inside the <strong>repository&#39;s</strong> root folder. The script will watch for files
+    changes of the framework&#39;s source code and recompile if needed.
+    Open another terminal inside the <strong>example project&#39;s (example folder)</strong> folder.
+    Execute npm install inside the <strong>example project&#39;s (example folder)</strong> folder.
+    Execute npm run dev inside the <strong>example project&#39;s (example folder)</strong> folder.</p>
+</body>
+</html>

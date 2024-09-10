@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Installation Guide</title>
+    <script src="./script/nav.js" type="application/javascript"></script>
+    <script src="./script/search.js" type="application/javascript"></script>
+    <link rel="stylesheet" href="./styles/styles.css">
+</head>
+<body>
+<nav id="nav-placeholder"></nav>
+
+<h1>Installation Guide</h1>
+
+<h2>Installation for a project created on your own</h2>
+<p>The framework is provided using <a href="https://jfrog.com/de/artifactory/" target="_blank">Artifactory</a>. To
+    install the framework, you have to explicitly associate the registry with the <code>@npm-iav-frontend</code> scope
+    or just use Artifactory as the registry for all npm packages (recommended). You can do this by creating a <code>.npmrc</code>
+    file with the following content:</p>
+
+<h3>.npmrc</h3>
+<pre><code>registry=https://artifactory.iav.com/artifactory/api/npm/npm/</code></pre>
+
+<p>Now you are able to install the framework by executing the following instruction inside the root folder of your
+    project.</p>
+
+<h3>npm install</h3>
+<pre><code>npm install @npm-iav-frontend/iav-frontend-framework</code></pre>
+
+<h2>Add the framework to a new React application</h2>
+<p>If you want to add the framework by creating a new React app with <code>create-react-app</code> or using
+    <code>vite</code>, it works too. Just paste the following code snippets into the <code>App.tsx</code> file.</p>
+
+<p><strong>NOTE:</strong> If you use <code>vite</code> to create a new React app, the webview may look broken. After
+    clearing the <code>index.css</code> file, the problem is solved.</p>
+
+<h3>Codesnippet App.tsx</h3>
+<pre>
+<code>import { GlobalDataLayer } from '@npm-iav-frontend/iav-frontend-framework/globalDataLayer';
+import { UILayer } from '@npm-iav-frontend/iav-frontend-framework/uiLayer';
+
+const App: React.FC = () => {
+    return (
+        <GlobalDataLayer>
+            <UILayer startingPoint="/" tabAndContentWrappers={[]}/>
+        </GlobalDataLayer>
+    );
+}
+
+export default App;</code></pre>
+
+<script src="scripts/main.js"></script> <!-- optional JS -->
+</body>
+</html>

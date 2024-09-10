@@ -1,22 +1,39 @@
 # Contributing to This Project
 
-We appreciate your interest in the project! Whether you’ve found a bug, have a feature idea, want to contribute, or just have questions, we welcome your input.
+We are happy about your interest in the project. Did you encounter a bug, do you have a feature idea to improve the framework, do you want to participate in the development or do you just have questions about the project?
 
-Please follow these guidelines to ensure your contributions are valuable and transparent for the community.
+We appreciate any contribution to improve the project. Please adhere to the following guidelines. The guidelines apply to all contributors, i.e., also to the project maintainers, to make the contribution valuable and transparent for the project community.
 
 ## How to Contribute
 
-- **Feature Requests**  
-  Got an idea to improve the framework? Check if it’s already [documented](https://github.com/iavofficial/IAVFrontendFramework/issues) or [discussed](https://github.com/iavofficial/IAVFrontendFramework/discussions). If not, start a new [discussion](https://github.com/iavofficial/IAVFrontendFramework/discussions). Once discussed, create a new [issue](https://github.com/iavofficial/IAVFrontendFramework/issues) linking to the discussion, with a clear and concise description and use case.
+- **Feature Requests -**
+You have an idea on how to improve the framework? The idea is as of yet neither documented as [issue](https://github.com/iavofficial/IAVFrontendFramework/issues) 
+nor [discussed](https://github.com/iavofficial/IAVFrontendFramework/discussions)? Then, please open a new [discussion](https://github.com/iavofficial/IAVFrontendFramework/discussions) 
+to propose your idea. The discussion will allow for reasoning if the idea fits to the project scope and, furthermore, to 
+improve the idea. Further information about our discussion section can be found [here](https://github.com/iavofficial/IAVFrontendFramework/discussions/1). For the discussed ideas to be integrated in the framework, a new [issue](https://github.com/iavofficial/IAVFrontendFramework/issues)
+has to be created and linked to the discussion. The issue description has to be clear, concise as well as meaningful and
+should provide a use case to show the relevance of the idea to be realized.    
 
-- **Bug Reports**  
-  Encountered a bug? Check if it’s already [reported](https://github.com/iavofficial/IAVFrontendFramework/issues). If not, open a new [issue](https://github.com/iavofficial/IAVFrontendFramework/issues) using the [template](https://github.com/iavofficial/IAVFrontendFramework/issues/new/choose) to provide necessary details for reproduction and fixing.
+- **Bug Reports -**
+You have encountered a bug? The bug is not yet [reported](https://github.com/iavofficial/IAVFrontendFramework/issues)?
+Then, please open a new [issue](https://github.com/iavofficial/IAVFrontendFramework/issues) to report the bug based 
+on the defined [template](https://github.com/iavofficial/IAVFrontendFramework/issues/new/choose). The template supports the provision 
+of the required information to reproduce as well as locate and, in the end, to fix the bug.
 
-- **Code Contributions**  
-  Want to contribute code? First, file and discuss a [related issue](https://github.com/iavofficial/IAVFrontendFramework/issues). Comment on the issue to claim it, and follow the [process](#process-for-code-contributions) for submitting your code.
+- **Code Contributions -**
+We welcome code contributions to improve the frontend framework. For code contributions, a respective 
+[issue](https://github.com/iavofficial/IAVFrontendFramework/issues) has to be filed and discussed. 
+Independently of the issue type (bug/feature request), you should comment on the issue that it is selected by you 
+to be realized. We refer to the described [process](#process-for-code-contributions) for code contributions. 
 
-- **Discussions**  
-  Have a new idea or feedback? Start a new thread in the [discussions](https://github.com/iavofficial/IAVFrontendFramework/discussions). More details are [here](https://github.com/iavofficial/IAVFrontendFramework/discussions/1).
+- **Discussions -**
+You have a new idea, want to provide feedback to an ongoing discussion or just have questions? Then, please open 
+a new thread in the [discussions](https://github.com/iavofficial/IAVFrontendFramework/discussions) section. Further information about the section can be found [here](https://github.com/iavofficial/IAVFrontendFramework/discussions/1).
+
+## Contact
+
+In addition to the [discussions](https://github.com/iavofficial/IAVFrontendFramework/discussions) section,
+you can contact the project maintainers via [mail](mailto:frontendframework@iav.de).
 
 ## How to Make a Pull Request
 
@@ -58,7 +75,9 @@ git commit -m "<commitMessage>"
 git push origin <branchName>
 ```
 
-**9.** Create a [Pull Request](https://github.com/iavofficial/IAVFrontendFramework/pulls).
+**9.** Create a [Pull Request](https://github.com/iavofficial/IAVFrontendFramework/pulls). For details on how to create a Pull Request, please refer to the [Submit Code Contribution](#submit-code-contribution) section.
+
+
 
 ## Style Guides for Git Commit Messages
 
@@ -87,10 +106,23 @@ test:  add unit tests for user service
 
 For more detailed reference to the above points, refer <a href="https://www.conventionalcommits.org/en/v1.0.0/">here</a>.
 
-## Contact
+## Submit Code Contribution
 
-In addition to the [discussions](https://github.com/iavofficial/IAVFrontendFramework/discussions) section,
-you can contact the project maintainers via [mail](mailto:frontendframework@iav.de).
+### Preconditions
+- All changes are pushed to forked repository.
+- Forked repository is rebased to the development branch to reduce potential merge conflicts.
+- All test are executed successfully. 
+
+### Process
+1. Submit a [pull request](https://help.github.com/articles/about-pull-requests/).
+   - Check the list of changes to comprise solely source files and their code changes, but no build artifacts. 
+2. Link the submitted pull request to the issue the contribution is made for.
+3. Provide a comprehensive change description in the pull request summary to improve the understanding of the changes for the reviewers. 
+4. The test result should be provided as screenshot to the pull request to support the validiation of the code contribution.  
+
+### Reviews of Contribution
+Each pull request will be reviewed by the project maintainers. Please cooperate with the reviewers for the integration of feedback and suggestions. 
+In the end, the verified pull request will be merged into the development branch.
 
 ## GitHub Pages
 For documentation see the [GitHub Pages](https://iavofficial.github.io/IAVFrontendFramework/) of the project.

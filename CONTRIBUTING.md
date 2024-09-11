@@ -147,5 +147,4 @@ In the end, the verified pull request will be merged into the development branch
 
 ## GitHub Pages
 
-For documentation see the [GitHub Pages](https://iavofficial.github.io/IAVFrontendFramework/) of the project.
-<a href="./docs/index.html">Home</a>
+For documentation see the [GitHub Pages](https://iavofficial.github.io/IAVFrontendFramework/docs) of the project.

@@ -1,5 +1,5 @@
 function loadNav() {
-  fetch('./html/nav.html')
+  fetch('./pages/html/nav.html')
     .then(response => {
       return response.text()
     })

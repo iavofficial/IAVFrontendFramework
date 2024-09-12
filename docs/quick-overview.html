@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Overview</title>
+    <script src="./pages/script/nav.js" type="application/javascript"></script>
+    <script src="./pages/script/search.js" type="application/javascript"></script>
+    <link rel="stylesheet" href="./pages/styles/styles.css">
+</head>
+<body>
+<nav id="nav-placeholder"></nav>
+<div id="header-container"></div>
+
+<div id="container">
+    <h1>Quick Overview</h1>
+    <p>Imagine developing three separate IAV frontend applications from scratch. You will encounter several
+        problems:</p>
+    <ul>
+        <li><strong>A lack of maintainability</strong>: IAV decided to introduce a new style guide in 2022. As a
+            consequence
+            of this, all three applications would have to be adapted. Kind of laborious and expensive, isn&#39;t it?
+            There
+            are many other examples of a lack of maintainability. Another example is the adaptation of imprints. Does
+            the
+            CEO of IAV change? You would have to adapt the imprints of all three frontend applications separately.
+        </li>
+        <li><strong>A lack of extendability</strong>: You want to add a new feature that is potentially of interest to
+            all
+            IAV frontend applications? Without a mechanism to distribute this feature centrally, you will have to
+            implement/copy and paste it several times. Furthermore, if there are necessary changes to the feature, you
+            will
+            have to implement them in every application separately.
+        </li>
+        <li><strong>A higher risk for faults</strong>: What is the disadvantage of implementing the same functionality
+            more
+            than once? Every implementation process has the chance to introduce new faults. Hence, you minimize the risk
+            for
+            faults by implementing the feature only once and distributing it centrally.
+        </li>
+        <li><strong>A lower developer experience</strong>: Does it make sense to implement the same functionality in
+            many
+            projects and to maintain it consequently? The answer is pretty obvious: NO!
+        </li>
+    </ul>
+    <p>This is the official documentation of the IAV frontend framework. The job of the framework is to make your life
+        way
+        more <strong>easier</strong>. It achieves maintainability, extendability, a lower risk of faults, and a greater
+        developer experience by generalization. You want to maximize the speed of your development process? Just have a
+        look.</p>
+    <p><strong>Important note:</strong> This documentation often states that there are tutorial videos regarding
+        specific
+        topics. However, these videos are still in production and will be released incrementally.</p>
+    <h1 id="overview">Overview</h1>
+    <h2 id="technical-overview">Technical Overview</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Key</th>
+            <th>Value</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><strong>Key dependencies</strong></td>
+            <td>React 18, ReactDOM 18, Typescript 5, AWS Amplify 6</td>
+        </tr>
+        <tr>
+            <td><strong>UI-Component libraries</strong></td>
+            <td>PrimeReact, PrimeIcons</td>
+        </tr>
+        <tr>
+            <td><strong>Requirements</strong></td>
+            <td>at least npm version 8 and node version 16</td>
+        </tr>
+        <tr>
+            <td><strong>Examples of dependents</strong></td>
+            <td>Streetscooter (MoSy), Showcase Zukunftswerkstatt, Smart Tooling Hub (in cooperation with Digital
+                Lights),
+                Acoustic Diagnosis, Compass
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <h2 id="contributors">Contributors</h2>
+    <ul>
+        <li><strong>Developers</strong>
+            <ul>
+                <li>Joerg Jonas Krahn</li>
+                <li>Daniel Helfenstein</li>
+                <li>Mike Wegele</li>
+            </ul>
+        </li>
+        <li><strong>Head of Department</strong>
+            <ul>
+                <li>Dr. Thorsten Schroeder</li>
+            </ul>
+        </li>
+        <li><strong>UI/UX Designer</strong>
+            <ul>
+                <li>Christian Becke</li>
+            </ul>
+        </li>
+        <li><strong>Team Lead</strong>
+            <ul>
+                <li>Lars Grotehenne</li>
+            </ul>
+        </li>
+        <li><strong>Solutions Architect</strong>
+            <ul>
+                <li>Oliver Tuerk</li>
+            </ul>
+        </li>
+    </ul>
+    <h2 id="key-features">Key features</h2>
+    <ul>
+        <li>Standardized frontend layout (see more in the following general layout section)</li>
+        <li>Authentication service for AWS Cognito (other authentication services are possible)</li>
+        <li>Authorization with AWS</li>
+        <li>Default cookie banner</li>
+        <li>IAV corporate design by Christian Becke</li>
+        <li>Internationalization (different languages can be configured)</li>
+        <li>Navigation bar and &quot;content bar&quot; to navigate inside a navigation entry</li>
+        <li>IAV corporate imprint</li>
+        <li>Individual coloring of components possible</li>
+        <li>Dark mode</li>
+        <li>Pre-created components for different use cases</li>
+        <li>Cookie banner for accepting the use of cookies</li>
+    </ul>
+    <h2 id="constant-maintenance-and-support">Constant maintenance and support</h2>
+    <p>To handle bug reports and support requests we use GitLab Issues. If you encounter a bug or need support, please
+        take
+        a look at already created (and also at closed) issues. We might have solved your problem already. We also
+        include
+        issues of public interest inside the FAQ.</p>
+    <p>However, if this is not the case, please contact us by one of the following methods:</p>
+    <ol>
+        <li><strong>Contact us using GitLab Issues (recommended):</strong> You can report bugs and create support
+            requests
+            by creating an issue in the frameworks repository. There are already description templates for issues to
+            ensure
+            we collect the relevant information.
+        </li>
+        <li><strong>E-Mail support:</strong> We aim to provide an E-Mail address for support. However, this contact
+            method
+            does not exist yet.
+        </li>
+    </ol>
+    <h2 id="layout">Layout</h2>
+    <h3 id="images-framework">Images Framework</h3>
+    <p>For further impressions visit the images subpage or the showcase that implements this framework. </p>
+    <p>For the showcase: Ask Tuerk, Oliver for access; he will provide credentials for you. Find the showcase <a
+            href="https://rsm.iav-disa.de/">here</a>.</p>
+    <h1 id="further-information">Further information</h1>
+    <p>Furthermore, there are video tutorials that can be found on a subpage.</p>
+</div>
+</body>
+</html>

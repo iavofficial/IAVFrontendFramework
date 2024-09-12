@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Components</title>
+    <script src="./pages/script/nav.js" type="application/javascript"></script>
+    <script src="./pages/script/search.js" type="application/javascript"></script>
+    <link rel="stylesheet" href="./pages/styles/styles.css">
+</head>
+<body>
+<nav id="nav-placeholder"></nav>
+<div id="header-container"></div>
+
+<div id="container">
+    <h1>Main Components</h1>
+
+    <p>The framework's main interfaces are the components <code>GlobalDataLayer</code> and <code>UILayer</code>. <code>GlobalDataLayer</code>
+        contains all React contexts of the framework to share data across the whole component tree. The
+        <code>UILayer</code>
+        component contains the components which actually render the UI.</p>
+
+    <p>The reason for the separation into two layers can be understood by the following example: Imagine developing a
+        React
+        context which needs the authentication information. The authentication information is stored inside the <code>GlobalDataLayer</code>.
+        Where to put your React context's provider? To pass your context to the <code>UILayer</code> and then rendering
+        the
+        Provider seems inappropriate. Instead, you put the Provider between the <code>GlobalDataLayer</code> and <code>UILayer</code>
+        yourself. By doing this, your React context has access to all of the framework's contexts, and the
+        <code>UILayer</code> additionally has access to your context.</p>
+
+    <h2>An example for this situation:</h2>
+    <pre><code>...
+return (
+// If you don't want to use the default authentication provider, you would have to render another authentication provider at this position. Authentication providers will be explained later on.
+    &lt;GlobalDataLayer ...properties...&gt;
+    // Your react contexts go here.
+        &lt;UILayer ...properties... /&gt;
+    &lt;/GlobalDataLayer&gt;
+);
+...
+</code></pre>
+</div>
+</body>
+</html>

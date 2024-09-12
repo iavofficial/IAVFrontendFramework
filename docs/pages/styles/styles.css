@@ -1,29 +1,28 @@
 /* Farben */
 :root {
-    --primary-color: #2b2d42; /* Dunkles Blau für Titel und Überschriften */
-    --secondary-color: #8d99ae; /* Dezenter Grau-Blau für sekundäre Elemente */
-    --accent-color: #ef233c; /* Akzentfarbe für Buttons oder hervorgehobene Inhalte */
-    --background-color: #f8f9fa; /* Sehr helles Grau für den Hintergrund */
-    --text-color: #2b2d42; /* Textfarbe */
-    --muted-text-color: #6c757d; /* Abgeschwächter Text */
-    --border-color: #dee2e6; /* Für Tabellen und Eingaben */
+    --primary-color: black;
+    --secondary-color: #0091ff;
+    --accent-color: #0091ff;
+    --background-color: #f8f9fa;
+    --muted-text-color: #6c757d;
+    --border-color: #dee2e6;
 }
 
-/* Allgemeine Einstellungen */
+#container {
+    margin-top: 60px;
+}
+
 body {
     font-family: 'Arial', sans-serif;
     background-color: var(--background-color);
     color: var(--text-color);
     line-height: 1.6;
-
-
     padding: 20px;
-    margin: 20px auto; /* Centers the content horizontally */
+    margin: 20px auto;
     width: 60%;
-    text-align: justify; /* Adds block justification */
+    text-align: justify;
 }
 
-/* Überschriften */
 h1, h2, h3 {
     color: var(--primary-color);
     margin-bottom: 0.75em;
@@ -41,7 +40,6 @@ h3 {
     font-size: 1rem;
 }
 
-/* Text */
 p {
     margin-bottom: 1em;
     color: var(--text-color);
@@ -51,7 +49,6 @@ strong {
     font-weight: bold;
     color: var(--primary-color);
 }
-
 
 pre, code {
     overflow-x: scroll;
@@ -135,12 +132,12 @@ a:hover {
 /* Basis-Stil für den Drawer */
 .drawer {
     position: fixed;
-    top: 0;
+    top: 50px;
     left: 0;
-    width: 250px;
+    width: 200px;
     height: 100%;
     background-color: #ffffff;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+    border-right: 1px solid lightgray;
     z-index: 1000;
     padding: 20px;
     font-size: 0.875rem; /* Kleinere Schriftgröße für den Drawer */
@@ -148,12 +145,12 @@ a:hover {
 
 /* Überschriften im Drawer */
 .drawer h1 {
-    font-size: 1.5rem; /* Kleinere Schriftgröße für h1 */
+    font-size: 1.25rem; /* Kleinere Schriftgröße für h1 */
     margin-bottom: 1em;
 }
 
 .drawer h2 {
-    font-size: 1.25rem; /* Kleinere Schriftgröße für h2 */
+    font-size: 1rem; /* Kleinere Schriftgröße für h2 */
     margin-bottom: 0.75em;
 }
 
@@ -171,7 +168,7 @@ a:hover {
 }
 
 .drawer li:hover {
-    background-color: #333; /* Dunkelgrauer Hintergrund bei Hover */
+    background-color: #333 /* Dunkelgrauer Hintergrund bei Hover */
 }
 
 .drawer a {
@@ -182,6 +179,45 @@ a:hover {
     border-radius: 4px; /* Gleicher Border-Radius wie li für einheitliches Design */
 }
 
+.drawer a.active {
+    background-color: lightgray;
+}
+
 .drawer a:hover {
     color: #fff; /* Weiße Textfarbe bei Hover für besseren Kontrast */
+}
+
+/* Basis-Stil für den Header */
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; /* Header streckt sich über die gesamte Breite */
+    height: 40px; /* Festgelegte Höhe für den Header */
+    background-color: #ffffff;
+    border-bottom: 1px solid lightgray; /* Border unten */
+    z-index: 1000;
+    padding: 10px 20px;
+}
+
+/* Inhalt des Headers */
+.header-content {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    max-width: 1200px;
+    height: 100%; /* Inhalt füllt die Höhe des Headers */
+}
+
+/* Stil für den Titel im Header */
+.header-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Stil für die Version im Header */
+.header-version {
+    margin-left: 16px;
+    font-size: 1rem;
 }

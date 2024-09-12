@@ -20,17 +20,17 @@
 <pre><code class="lang-typescript">export <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Props</span> {</span>
 <span class="hljs-symbol">    tabAndContentWrappers:</span> TabAndContentWrapper[]; <span class="hljs-comment">// Mandatory: Array of BasicContentWrappers and groups (or other wrappers) to provide in order to render tabs in the navigation bar and the associated component. This is explained in the following sections.</span>
 <span class="hljs-symbol">    startingPoint:</span> string; <span class="hljs-comment">// Mandatory: This is the "entry URL" of your application. The user will be redirected to this URL after successful authentication.</span>
-    settingsMenuOptions?: SettingsMenuOptions; <span class="hljs-comment">// Optional object to configure the settings menu. The object will be explained later in this chapter.</span>
-    userMenuOptions?: <span class="hljs-comment">// Optional object to configure the user menu. The object will be explained later in this chapter.</span>
-    authenticationView?: React.ComponentType&lt;AuthenticationViewProps &amp; any&gt;; <span class="hljs-comment">// Optional property to set a custom authentication view.</span>
-    documentsComponent?: React.ComponentType&lt;any&gt;; <span class="hljs-comment">// Optional property to replace the default imprint with a custom component. This allows you to display a customized list of legal documents.</span>
-    headerOptions?: HeaderOptions; <span class="hljs-comment">// Optional property to customize the header of the main view and the authentication view. The object will be explained later in this chapter.</span>
-    authOptions?: AuthOptions;  <span class="hljs-comment">// Optional property to customize the authentication view. The object will be explained later in this chapter.</span>
-    documentsLabelKey?: string; <span class="hljs-comment">// Optional parameter to replace the text for the legal documents which is shown when hovering over the info icon inside the authentication view and at the bottom of the navigation bar. You have to pass a string which is the key of corresponding translations in your translation files.</span>
-    hideLegalDocuments?: <span class="hljs-keyword">boolean</span>; <span class="hljs-comment">// Option to hide the link for the legal documents. This could be of use if you develop a desktop application like electron.</span>
-    navbarOptions?: NavbarOptions; <span class="hljs-comment">// Option to configure the navigation bar. This is explained later.</span>
-    disableCookieBanner?: <span class="hljs-keyword">boolean</span>; <span class="hljs-comment">// Option to disable / hide the provided cookie banner / disclaimer.</span>
-    disableLogin?: <span class="hljs-keyword">boolean</span>; <span class="hljs-comment">// Option to disable the login and logout.</span>
+<span class="hljs-symbol">    settingsMenuOptions?:</span> SettingsMenuOptions; <span class="hljs-comment">// Optional object to configure the settings menu. The object will be explained later in this chapter.</span>
+<span class="hljs-symbol">    userMenuOptions?:</span> <span class="hljs-comment">// Optional object to configure the user menu. The object will be explained later in this chapter.</span>
+<span class="hljs-symbol">    authenticationView?:</span> React.ComponentType&lt;AuthenticationViewProps &amp; any&gt;; <span class="hljs-comment">// Optional property to set a custom authentication view.</span>
+<span class="hljs-symbol">    documentsComponent?:</span> React.ComponentType&lt;any&gt;; <span class="hljs-comment">// Optional property to replace the default imprint with a custom component. This allows you to display a customized list of legal documents.</span>
+<span class="hljs-symbol">    headerOptions?:</span> HeaderOptions; <span class="hljs-comment">// Optional property to customize the header of the main view and the authentication view. The object will be explained later in this chapter.</span>
+<span class="hljs-symbol">    authOptions?:</span> AuthOptions;  <span class="hljs-comment">// Optional property to customize the authentication view. The object will be explained later in this chapter.</span>
+<span class="hljs-symbol">    documentsLabelKey?:</span> string; <span class="hljs-comment">// Optional parameter to replace the text for the legal documents which is shown when hovering over the info icon inside the authentication view and at the bottom of the navigation bar. You have to pass a string which is the key of corresponding translations in your translation files.</span>
+<span class="hljs-symbol">    hideLegalDocuments?:</span> <span class="hljs-keyword">boolean</span>; <span class="hljs-comment">// Option to hide the link for the legal documents. This could be of use if you develop a desktop application like electron.</span>
+<span class="hljs-symbol">    navbarOptions?:</span> NavbarOptions; <span class="hljs-comment">// Option to configure the navigation bar. This is explained later.</span>
+<span class="hljs-symbol">    disableCookieBanner?:</span> <span class="hljs-keyword">boolean</span>; <span class="hljs-comment">// Option to disable / hide the provided cookie banner / disclaimer.</span>
+<span class="hljs-symbol">    disableLogin?:</span> <span class="hljs-keyword">boolean</span>; <span class="hljs-comment">// Option to disable the login and logout.</span>
 }
 </code></pre>
 <h2 id="tabandcontentwrappers-navigation-tabs-and-content">TabAndContentWrappers: Navigation tabs and content</h2>

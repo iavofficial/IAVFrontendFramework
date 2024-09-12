@@ -50,12 +50,48 @@ strong {
     color: var(--primary-color);
 }
 
+img {
+    max-height: 100vh;
+    max-width: 100%;
+}
+
+/* CODE */
+
 pre, code {
     overflow-x: scroll;
     background-color: #f0f0f0;
     padding: 6px;
     border-radius: 4px;
     font-family: 'Courier New', Courier, monospace;
+}
+
+.pl-v {
+    color: #953800;
+}
+
+.pl-k, .hljs-keyword {
+    color: #cf222e;
+}
+
+.pl-s, .hljs-string, .hljs-number {
+    color: #0a3069;
+}
+
+.pl-c {
+    color: #59636e;
+}
+
+.pl-c1, .hljs-attr, .hljs-symbol, .hljs-literal {
+    color: #0550ae;
+}
+
+.pl-en {
+    color: #6639ba;
+}
+
+.hljs-title, .hljs-type, .hljs-selector-class, .hljs-params,
+.xml, .hljs-name, .hljs-selector-attr, .hljs-attribute {
+    color: black;
 }
 
 /* Listen */

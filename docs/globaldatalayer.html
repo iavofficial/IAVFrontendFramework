@@ -23,30 +23,30 @@
         by providing translations with the translation keys used by the framework&#39;s components.</p>
     <p>The GlobalDataLayer component provides the following interface for internationalization:</p>
     <p><strong>Interface GlobalDataLayer</strong></p>
-    <pre><code class="lang-typescript"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span
+    <pre><code><span class="hljs-class"><span class="pl-k">interface</span> <span
             class="hljs-title">Props</span> {</span>
-  languageOptions?: GlobalDataLayerLanguageOptions;
-  translations?: Translations;
-  initI18Next?: () =&gt; <span class="hljs-keyword">void</span>;
-  colorSettings?: ColorProviderProps;
+  <span class="pl-c1">languageOptions?</span>: GlobalDataLayerLanguageOptions;
+  <span class="pl-c1">translations</span>?: Translations;
+  <span class="pl-c1">initI18Next</span>?: () <span class="pl-c1">=&gt;</span> <span class="pl-k">void</span>;
+  <span class="pl-c1">colorSettings</span>?: ColorProviderProps;
 }
 </code></pre>
     <p>To define and use custom translations you have to define an object of the structure seen in the following code
         snippet. After defining the object you have to pass it to GlobalDataLayer.</p>
     <p><strong>Internationalization Example</strong></p>
-    <pre><code class="lang-typescript">const translations = {
-<span class="hljs-symbol">    en:</span> {
-<span class="hljs-symbol">        translation:</span> importedJsonFileEnglish
+    <pre><code>const <span class="pl-k">translations</span> = {
+ <span class="pl-c1">    en:</span> {
+ <span class="pl-c1">        translation:</span> importedJsonFileEnglish
     },
-<span class="hljs-symbol">    de:</span> {
-<span class="hljs-symbol">        translation:</span> importedJsonFileGerman
+ <span class="pl-c1">    de:</span> {
+ <span class="pl-c1">        translation:</span> importedJsonFileGerman
      }
 }
 
 ...
-return (
+<span class="pl-k">return</span> (
     ...
-    <span class="hljs-params">&lt;GlobalDataLayer translations={translations}/&gt;</span>
+    &lt;GlobalDataLayer translations={translations}/&gt;
     ...
 )
 </code></pre>
@@ -106,10 +106,8 @@ return (
     <p>To specify dialects like the german dialect in Switzerland use the following name schema for the translations
         object
         (underscore is important):</p>
-    <pre><code>Key <span class="hljs-keyword">for</span> <span class="hljs-string">german:</span> <span
-            class="hljs-string">"de"</span>
-Key <span class="hljs-keyword">for</span> the german dialect <span class="hljs-keyword">in</span> <span
-                class="hljs-string">Switzerland:</span> <span class="hljs-string">"de_CH"</span>
+    <pre><code>Key for german: "de"
+Key for the german dialect in Switzerland: "de_CH"
 </code></pre>
     <p>To get a translation by it&#39;s key you should use the useTranslator hook from
         .../iav-frontend-framework/translators. This hook returns a function which generates the translation by passing
@@ -123,7 +121,7 @@ Key <span class="hljs-keyword">for</span> the german dialect <span class="hljs-k
     <pre><code class="lang-typescript"><span class="hljs-keyword">const</span> t = useTranslator();
 ...
 <span class="hljs-keyword">return</span> (
-   &lt;<span class="hljs-keyword">div</span>&gt;<span class="hljs-type">Example</span> translation: {t(<span
+   &lt;<span class="hljs-keyword">div</span>&gt;Example translation: {t(<span
                 class="hljs-string">"company.imprint"</span>)}&lt;/<span class="hljs-keyword">div</span>&gt;
 );
 </code></pre>
@@ -137,7 +135,7 @@ Key <span class="hljs-keyword">for</span> the german dialect <span class="hljs-k
     <span class="hljs-comment">// ...</span>
     render() {
         <span class="hljs-keyword">return</span>(
-            &lt;div&gt;<span class="hljs-type">Translation</span>: {t(<span class="hljs-string">"company.imprint"</span>)}&lt;/div&gt;
+            &lt;div&gt;Translation: {t(<span class="hljs-string">"company.imprint"</span>)}&lt;/div&gt;
         );
     }
 }

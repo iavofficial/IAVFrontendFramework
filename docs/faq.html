@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Components</title>
+    <script src="./pages/script/nav.js" type="application/javascript"></script>
+    <script src="./pages/script/search.js" type="application/javascript"></script>
+    <link rel="stylesheet" href="./pages/styles/styles.css">
+</head>
+<body>
+<nav id="nav-placeholder"></nav>
+<div id="header-container"></div>
+
+<div id="container">
+
+    <h1>FAQ</h1>
+    
+    <p>As mentioned in the beginning of this documentation, bug reports and support requests are created using GitLab
+        Issues
+        or by writing an E-Mail to the official support address. This page lists common questions and problems and links
+        corresponding issues.</p>
+    <h2 id="general-problems-when-downloading-npm-packages-or-the-framework">General problems when downloading npm
+        packages
+        or the framework</h2>
+    <p>If you have any problems with downloading the framework or any other npm package you should check your .npmrc
+        file
+        which should have the following </p>
+    <pre><code class="lang-typescript">registry=https:<span class="hljs-regexp">//</span>artifactory.iav.com<span
+            class="hljs-regexp">/artifactory/</span>api<span class="hljs-regexp">/npm/</span>npm<span
+            class="hljs-regexp">/</span>
+</code></pre>
+    <h2 id="problems-using-the-svg-format-as-react-component-with-vite">Problems using the SVG format as React Component
+        with Vite</h2>
+    <p>In a few senarios the framework require the use of SVG Files (e.g. Icons). To be able to set the color of the SVG
+        inside the Framework the Icons must be importet as React Components.</p>
+    <p>Use the following steps to be able to solve issues regarding the SVG import as React Components:</p>
+    <p>Install the vite-plugin-svgr with the command &quot;npm i vite-plugin-svgr&quot; and configure it the way shown
+        <a
+                href="https://www.npmjs.com/package/vite-plugin-svgr">here</a>.
+        If this doesnt help further possible solutions can be found <a
+                href="https://stackoverflow.com/questions/74720726/type-definition-for-vite-plugin-svgr">here</a>.</p>
+</div>
+</body>
+</html>

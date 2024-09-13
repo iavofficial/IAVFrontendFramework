@@ -1,0 +1,259 @@
+/* Farben */
+:root {
+    --primary-color: black;
+    --secondary-color: #0091ff;
+    --accent-color: #0091ff;
+    --background-color: #f8f9fa;
+    --muted-text-color: #6c757d;
+    --border-color: #dee2e6;
+}
+
+#container {
+    margin-top: 60px;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 20px;
+    margin: 20px auto;
+    width: 60%;
+    text-align: justify;
+}
+
+h1, h2, h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.75em;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1rem;
+}
+
+p {
+    margin-bottom: 1em;
+    color: var(--text-color);
+}
+
+strong {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+img {
+    max-height: 100vh;
+    max-width: 100%;
+}
+
+/* CODE */
+
+pre, code {
+    overflow-x: scroll;
+    background-color: #f0f0f0;
+    padding: 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.pl-v {
+    color: #953800;
+}
+
+.pl-k, .hljs-keyword {
+    color: #cf222e;
+}
+
+.pl-s, .hljs-string, .hljs-number {
+    color: #0a3069;
+}
+
+.pl-c {
+    color: #59636e;
+}
+
+.pl-c1, .hljs-attr, .hljs-symbol, .hljs-literal {
+    color: #0550ae;
+}
+
+.pl-en {
+    color: #6639ba;
+}
+
+.hljs-title, .hljs-type, .hljs-selector-class, .hljs-params,
+.xml, .hljs-name, .hljs-selector-attr, .hljs-attribute {
+    color: black;
+}
+
+/* Listen */
+ul {
+    margin-left: 20px;
+    list-style-type: disc;
+}
+
+li {
+    margin-bottom: 0.5em;
+}
+
+/* Tabellen */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5em;
+}
+
+thead {
+    background-color: var(--secondary-color);
+    color: #fff;
+}
+
+tbody {
+    background-color: #fff;
+}
+
+th, td {
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    text-align: left;
+}
+
+/* Formularelemente */
+input, button {
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    margin-bottom: 1em;
+    font-size: 1rem;
+}
+
+input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: var(--accent-color);
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Span */
+span {
+    color: var(--muted-text-color);
+}
+
+/* Weitere Einstellungen */
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/** DRAWER **/
+
+/* Basis-Stil für den Drawer */
+/* Basis-Stil für den Drawer */
+.drawer {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    background-color: #ffffff;
+    border-right: 1px solid lightgray;
+    z-index: 1000;
+    padding: 20px;
+    font-size: 0.875rem; /* Kleinere Schriftgröße für den Drawer */
+}
+
+/* Überschriften im Drawer */
+.drawer h1 {
+    font-size: 1.25rem; /* Kleinere Schriftgröße für h1 */
+    margin-bottom: 1em;
+}
+
+.drawer h2 {
+    font-size: 1rem; /* Kleinere Schriftgröße für h2 */
+    margin-bottom: 0.75em;
+}
+
+/* Stil für die Links im Drawer */
+.drawer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.drawer li {
+    margin-bottom: 8px; /* Etwas weniger Abstand zwischen den Listenelementen */
+    border-radius: 4px; /* Border-Radius für die Listenelemente */
+    transition: background-color 0.3s ease; /* Sanfte Übergänge für den Hintergrund */
+}
+
+.drawer li:hover {
+    background-color: #333 /* Dunkelgrauer Hintergrund bei Hover */
+}
+
+.drawer a {
+    display: block;
+    text-decoration: none;
+    color: var(--primary-color);
+    padding: 8px; /* Etwas Padding für besseren Textabstand */
+    border-radius: 4px; /* Gleicher Border-Radius wie li für einheitliches Design */
+}
+
+.drawer a.active {
+    background-color: lightgray;
+}
+
+.drawer a:hover {
+    color: #fff; /* Weiße Textfarbe bei Hover für besseren Kontrast */
+}
+
+/* Basis-Stil für den Header */
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; /* Header streckt sich über die gesamte Breite */
+    height: 40px; /* Festgelegte Höhe für den Header */
+    background-color: #ffffff;
+    border-bottom: 1px solid lightgray; /* Border unten */
+    z-index: 1000;
+    padding: 10px 20px;
+}
+
+/* Inhalt des Headers */
+.header-content {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    max-width: 1200px;
+    height: 100%; /* Inhalt füllt die Höhe des Headers */
+}
+
+/* Stil für den Titel im Header */
+.header-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Stil für die Version im Header */
+.header-version {
+    margin-left: 16px;
+    font-size: 1rem;
+}

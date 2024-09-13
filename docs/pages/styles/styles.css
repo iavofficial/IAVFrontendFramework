@@ -8,40 +8,56 @@
     --border-color: #dee2e6;
 }
 
-#container {
-    margin-top: 60px;
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Stellt sicher, dass der Container mindestens die Höhe des Viewports hat */
 }
 
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: var(--background-color);
-    color: var(--text-color);
-    line-height: 1.6;
+#container {
+    flex: 1;
     padding: 20px;
-    margin: 20px auto;
+    margin: 60px auto 20px auto;
     width: 60%;
     text-align: justify;
 }
 
+body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
 h1, h2, h3 {
     color: var(--primary-color);
-    margin-bottom: 0.75em;
 }
 
 h1 {
     font-size: 2rem;
+    margin-top: 2rem;
 }
 
 h2 {
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
     font-size: 1.5rem;
 }
 
 h3 {
-    font-size: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 0.2rem;
+}
+
+ul {
+    margin: 0rem;
 }
 
 p {
-    margin-bottom: 1em;
+    margin: 0;
+    padding-bottom: 1rem;
     color: var(--text-color);
 }
 
@@ -223,7 +239,6 @@ a:hover {
     color: #fff; /* Weiße Textfarbe bei Hover für besseren Kontrast */
 }
 
-/* Basis-Stil für den Header */
 .main-header {
     position: fixed;
     top: 0;
@@ -233,27 +248,79 @@ a:hover {
     background-color: #ffffff;
     border-bottom: 1px solid lightgray; /* Border unten */
     z-index: 1000;
-    padding: 10px 20px;
+    padding: 10px 0px 10px 20px;
 }
 
-/* Inhalt des Headers */
 .header-content {
+    width: 100%;
     display: flex;
     justify-content: left;
     align-items: center;
-    max-width: 1200px;
     height: 100%; /* Inhalt füllt die Höhe des Headers */
 }
 
-/* Stil für den Titel im Header */
 .header-title {
     font-size: 1.5rem;
     font-weight: bold;
     color: #333;
+    padding-left: 4px;
 }
 
-/* Stil für die Version im Header */
 .header-version {
     margin-left: 16px;
     font-size: 1rem;
 }
+
+
+.main-footer {
+    width: 100%; /* Footer streckt sich über die gesamte Breite */
+    padding: 16px 0;
+    background-color: #ffffff;
+    border-top: 1px solid lightgray; /* Border oben */
+    display: flex;
+    justify-content: center; /* Link zentrieren */
+    align-items: center; /* Vertikale Zentrierung */
+}
+
+/* Stil für den Link im Footer */
+.footer-link {
+    font-size: 1rem;
+    font-weight: normal;
+    text-decoration: underline;
+    color: #333;
+    cursor: pointer;
+}
+
+/* Basisstil für das Impressum */
+.imprint-container {
+    max-width: 600px;
+    margin: 50px auto; /* Zentriert das Impressum */
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.imprint-container h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #0056b3; /* IAV-Farbschema */
+}
+
+.imprint-container p {
+    line-height: 1.6;
+    margin: 10px 0;
+}
+
+.imprint-container a {
+    color: #0056b3; /* Linkfarbe passend zum IAV-Design */
+    text-decoration: none;
+}
+
+.imprint-container a:hover {
+    text-decoration: underline;
+}
+

@@ -4,9 +4,11 @@ on:
     branches-ignore:
       - 'main'
       - 'releases/**'
+      - 'develop'
     paths-ignore:
       - 'SBOM.json'
       - '*.md'
+      - '.github/**/*'
 jobs:
   build:
 

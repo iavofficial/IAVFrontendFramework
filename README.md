@@ -14,7 +14,7 @@ information about the section can be found [here](https://github.com/iavofficial
 
 The IAV Frontend Framework was created to address common challenges in developing multiple IAV frontend applications:
 
-- **Lack of Maintainability**: Imagine IAV introduces a new style guide in 2022. All three applications would need to be
+- **Lack of Maintainability**: Imagine IAV introduces a new style guide. All three applications would need to be
   updated, which is labor-intensive and costly. A centralized framework solves this problem by allowing for centralized
   maintenance and distribution.
 

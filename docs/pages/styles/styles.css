@@ -1,4 +1,3 @@
-/* Farben */
 :root {
     --primary-color: black;
     --secondary-color: #0091ff;
@@ -6,20 +5,6 @@
     --background-color: #f8f9fa;
     --muted-text-color: #6c757d;
     --border-color: #dee2e6;
-}
-
-.page-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Stellt sicher, dass der Container mindestens die Höhe des Viewports hat */
-}
-
-#container {
-    flex: 1;
-    padding: 20px;
-    margin: 60px auto 20px auto;
-    width: 60%;
-    text-align: justify;
 }
 
 body {
@@ -31,118 +16,6 @@ body {
     line-height: 1.6;
 }
 
-h1, h2, h3 {
-    color: var(--primary-color);
-}
-
-h1 {
-    font-size: 2rem;
-    margin-top: 2rem;
-}
-
-h2 {
-    margin-top: 2rem;
-    margin-bottom: 0.5rem;
-    font-size: 1.5rem;
-}
-
-h3 {
-    margin-top: 1rem;
-    margin-bottom: 0.2rem;
-}
-
-ul {
-    margin: 0rem;
-}
-
-p {
-    margin: 0;
-    padding-bottom: 1rem;
-    color: var(--text-color);
-}
-
-strong {
-    font-weight: bold;
-    color: var(--primary-color);
-}
-
-img {
-    max-height: 100vh;
-    max-width: 100%;
-}
-
-/* CODE */
-
-pre, code {
-    overflow-x: scroll;
-    background-color: #f0f0f0;
-    padding: 6px;
-    border-radius: 4px;
-    font-family: 'Courier New', Courier, monospace;
-}
-
-.pl-v {
-    color: #953800;
-}
-
-.pl-k, .hljs-keyword {
-    color: #cf222e;
-}
-
-.pl-s, .hljs-string, .hljs-number {
-    color: #0a3069;
-}
-
-.pl-c {
-    color: #59636e;
-}
-
-.pl-c1, .hljs-attr, .hljs-symbol, .hljs-literal {
-    color: #0550ae;
-}
-
-.pl-en {
-    color: #6639ba;
-}
-
-.hljs-title, .hljs-type, .hljs-selector-class, .hljs-params,
-.xml, .hljs-name, .hljs-selector-attr, .hljs-attribute {
-    color: black;
-}
-
-/* Listen */
-ul {
-    margin-left: 20px;
-    list-style-type: disc;
-}
-
-li {
-    margin-bottom: 0.5em;
-}
-
-/* Tabellen */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 1.5em;
-}
-
-thead {
-    background-color: var(--secondary-color);
-    color: #fff;
-}
-
-tbody {
-    background-color: #fff;
-}
-
-th, td {
-    border: 1px solid var(--border-color);
-    padding: 10px;
-    text-align: left;
-}
-
-/* Formularelemente */
 input, button {
     padding: 10px;
     border: 1px solid var(--border-color);
@@ -161,21 +34,6 @@ button {
     color: #fff;
     cursor: pointer;
     transition: background-color 0.3s ease;
-}
-
-/* Span */
-span {
-    color: var(--muted-text-color);
-}
-
-/* Weitere Einstellungen */
-a {
-    color: var(--accent-color);
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
 }
 
 /** DRAWER **/

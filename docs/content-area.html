@@ -7,6 +7,7 @@
     <script src="./pages/script/nav.js" type="application/javascript"></script>
     <script src="./pages/script/search.js" type="application/javascript"></script>
     <link href="./pages/styles/styles.css" rel="stylesheet">
+    <link href="./pages/styles/pages.css" rel="stylesheet">
 </head>
 <body>
 <div class="page-container">
@@ -16,58 +17,63 @@
     <div id="container">
         <h1>Content Area</h1>
         <h2 id="style-layout-and-embedding-the-content-bar">Style, Layout and embedding the Content Bar</h2>
-        <p>As shown in UILayer you are free to pass every component for the content area. However, the framework
-            provides
-            three higher order components for your content area components. Their purposes are styling (ContentStyle),
-            layout (ContentLayout) and embedding the content bar (ContentWithBar). If you use ContentLayout,
-            ContentStyle
-            will be applied automatically. If you use ContentWithBar, ContentLayout (and because of this also
-            ContentStyle)
-            will be applied.</p>
-        <h3 id="the-contentstyle-component">The ContentStyle component</h3>
-        <p>The ContentStyle components adds the current background color and other styles to your content area
-            component.
-            This allows you to easily embed a frame (in light mode it is grey, as shown in some screenshots in this
-            documentation) for your content area component. ContentStyle has the following properties:</p>
-        <pre><code class="lang-typescript"><span class="hljs-keyword">export</span> <span
+        <p class="cell">
+            As shown in UILayer you are free to pass every component for the content area. However, the framework
+            provides three higher order components for your content area components. Their purposes are styling
+            (ContentStyle), layout (ContentLayout) and embedding the content bar (ContentWithBar). If you use
+            ContentLayout, ContentStyle will be applied automatically. If you use ContentWithBar, ContentLayout (and
+            because of this also ContentStyle) will be applied.
+        </p>
+        <h3>The ContentStyle component</h3>
+        <p class="cell">
+            The ContentStyle components adds the current background color and other styles to your content area
+            component. This allows you to easily embed a frame (in light mode it is grey, as shown in some screenshots
+            in this documentation) for your content area component. ContentStyle has the following properties:
+        </p>
+        <pre class="cell"><code class="lang-typescript"><span class="hljs-keyword">export</span> <span
                 class="hljs-keyword">interface</span> ContentStyleProps {
     appliedStyles?: StylesArray&lt;<span class="hljs-keyword">typeof</span> ContentStyleStyles&gt;;
 }
 </code></pre>
-        <p>This means that you are able to pass an array of predefined styles to the component which should be
-            activated.
-            The predefined styles are the following:</p>
-        <pre><code class="lang-typescript">export const ContentStyleStyles = {
+        <p class="cell">
+            This means that you are able to pass an array of predefined styles to the component which should be
+            activated. The predefined styles are the following:
+        </p>
+        <pre class="cell"><code class="lang-typescript">export const ContentStyleStyles = {
 <span class="hljs-symbol">    WRAPPER_FULL_WIDTH:</span> <span class="hljs-string">"WRAPPER_FULL_WIDTH"</span>,
 <span class="hljs-symbol">    WRAPPER_FULL_HEIGHT:</span> <span class="hljs-string">"WRAPPER_FULL_HEIGHT"</span>,
 <span class="hljs-symbol">    SPACING:</span> <span class="hljs-string">"SPACING"</span>,
 <span class="hljs-symbol">    SET_SPACING_COLOR:</span> <span class="hljs-string">"SET_SPACING_COLOR"</span>,
 };
 </code></pre>
-        <p>The framework also exports templates. These are just predefined arrays of styles. These are the
-            following:</p>
-        <ul>
+        <p class="cell">
+            The framework also exports templates. These are just predefined arrays of styles. These are the following:
+        </p>
+        <ul class="cell">
             <li>DEFAULT: This template should be used for simple content areas (for example it sets a colored gap).</li>
             <li>CONTENT_CELLS: This template should be used if you want to use the ContentCell component.</li>
         </ul>
-        <p><strong>Examples</strong></p>
-        <pre><code class="lang-typescript">&lt;ContentStyle
+        <p class="cell">
+            <strong>Examples</strong>
+        </p>
+        <pre class="cell"><code class="lang-typescript">&lt;ContentStyle
     appliedStyles={[ContentStyleStyles<span class="hljs-selector-class">.FULL_WIDTH</span>, ContentStyleStyles<span
                     class="hljs-selector-class">.SPACING</span>, ContentStyleStyles.SET_SPACING_COLOR]}
 /&gt;
 </code></pre>
-        <pre><code class="lang-typescript"><span class="xml"><span class="hljs-tag">&lt;<span
+        <pre class="cell"><code class="lang-typescript"><span class="xml"><span class="hljs-tag">&lt;<span
                 class="hljs-name">ContentStyle</span>
     <span class="hljs-attr">appliedStyles</span>=</span></span><span class="hljs-template-variable">{ContentStyleTemplates.<span
                 class="hljs-keyword">DEFAULT</span>}</span><span class="xml"><span class="hljs-tag">
 /&gt;</span></span>
 </code></pre>
-        <h3 id="the-contentlayout-component">The ContentLayout component</h3>
-        <p>Using the ContentLayout component you are able to specify a content layout for your content area component.
+        <h3>The ContentLayout component</h3>
+        <p class="cell">
+            Using the ContentLayout component you are able to specify a content layout for your content area component.
             Furthermore, the ContentLayout component uses the ContentStyle component. To use ContentStyle with
-            ContentLayout
-            you have to pass an object containing the appliedStyles array to ContentLayout.</p>
-        <pre><code class="lang-typescript">interface Props {
+            ContentLayout you have to pass an object containing the appliedStyles array to ContentLayout.
+        </p>
+        <pre class="cell"><code class="lang-typescript">interface Props {
     <span class="hljs-symbol">contentStyle?:</span> ContentStyleProps; <span
                     class="hljs-regexp">//</span> An object of the following format: {appliedStyles: [...]}
     <span class="hljs-symbol">layoutBehaviour?:</span> LayoutBehaviour; <span class="hljs-regexp">//</span> Option to specify the layout which is one option <span
@@ -75,8 +81,11 @@
                     class="hljs-keyword">enum</span>.</span>
 }
 </code></pre>
-        <p>The LayoutBehaviour enum is defined like this:</p>
-        <pre><code class="lang-typescript">export <span class="hljs-class"><span class="hljs-keyword">enum</span> <span
+        <p class="cell">
+            The LayoutBehaviour enum is defined like this:
+        </p>
+        <pre class="cell"><code class="lang-typescript">export <span class="hljs-class"><span
+                class="hljs-keyword">enum</span> <span
                 class="hljs-title">LayoutBehaviour</span> </span>{
     <span class="hljs-comment">// Parent div of content will have no specific layout class</span>
     NONE = <span class="hljs-string">""</span>,
@@ -88,8 +97,10 @@
     FLEX_COL = <span class="hljs-string">"flex flex-column"</span>,
 }
 </code></pre>
-        <p>The following code block shows an example of using ContentLayout:</p>
-        <pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { CellPaddings, ContentCell } <span
+        <p class="cell">
+            The following code block shows an example of using ContentLayout:
+        </p>
+        <pre class="cell"><code class="lang-typescript"><span class="hljs-keyword">import</span> { CellPaddings, ContentCell } <span
                 class="hljs-keyword">from</span> <span class="hljs-string">'@npm-iav-frontend/iav-frontend-framework/contentCell'</span>;
 <span class="hljs-keyword">import</span> { ContentLayout, LayoutBehaviour } <span class="hljs-keyword">from</span> <span
                     class="hljs-string">'@npm-iav-frontend/iav-frontend-framework/contentLayout'</span>;
@@ -112,35 +123,38 @@
   );
 };
 </code></pre>
-        <p>The ContentCell component will be explained later on.</p>
-        <h3 id="the-contentwithbar-component">The ContentWithBar component</h3>
-        <p>This HOC can be used for implementing a content area component containing a Content Bar. To embed the Content
-            Bar
-            you just have to pass a wrapper array containing your components to the ContentWithBar component using it`s
-            &quot;contentWrappers&quot; property. The ContentWithBar component will render the Content Bar and
-            underneath it
-            will render your content area UI which is the child of this component.</p>
-        <p>To define the tabs for the Content Bar and the corresponding components which will be shown inside the
-            content
-            area, you have to define a wrapper object array similarily to the array for the navigation bar. This time
-            you
-            have to create an array of instances of the class BasicContentbarWrapper or CustomContentbarWrapper.
-            BasicContentbarWrapper renders the simplest and mainly used content tab. CustomContentbarWrapper allows you
-            to
-            define a custom component which will be rendered inside the content bar. The array is then passed to the
-            Content
-            component using the contentWrappers property.</p>
-        <p>Furthermore, the framework will render buttons for sliding to the left and right inside the content bar.
-            While
-            the navigation bar isn&#39;t collapsed, this will happen if there are more than 5 elements inside the
-            content
-            bar. If the navigation bar is collapsed, the buttons will render if there are more than 6 elements in the
-            content bar.</p>
-        <p>ContentWithBar uses ContentLayout and ContentStyle. Because of this the funcitonality of these components
-            will be
-            added by default. The following code snippet shows the properties of the Content component.</p>
-        <p><strong>Interface Content</strong></p>
-        <pre><code class="lang-typescript">export <span class="hljs-class"><span
+        <p class="cell">
+            The ContentCell component will be explained later on.
+        </p>
+        <h3>The ContentWithBar component</h3>
+        <p class="cell">
+            This HOC can be used for implementing a content area component containing a Content Bar. To embed the
+            Content Bar you just have to pass a wrapper array containing your components to the ContentWithBar component
+            using it`s &quot;contentWrappers&quot; property. The ContentWithBar component will render the Content Bar
+            and underneath it will render your content area UI which is the child of this component.
+        </p>
+        <p class="cell">
+            To define the tabs for the Content Bar and the corresponding components which will be shown inside the
+            content area, you have to define a wrapper object array similarily to the array for the navigation bar. This
+            time you have to create an array of instances of the class BasicContentbarWrapper or
+            CustomContentbarWrapper. BasicContentbarWrapper renders the simplest and mainly used content tab.
+            CustomContentbarWrapper allows you to define a custom component which will be rendered inside the content
+            bar. The array is then passed to the Content component using the contentWrappers property.
+        </p>
+        <p class="cell">
+            Furthermore, the framework will render buttons for sliding to the left and right inside the content bar.
+            While the navigation bar isn&#39;t collapsed, this will happen if there are more than 5 elements inside the
+            content bar. If the navigation bar is collapsed, the buttons will render if there are more than 6 elements
+            in the content bar.
+        </p>
+        <p class="cell">
+            ContentWithBar uses ContentLayout and ContentStyle. Because of this the funcitonality of these components
+            will be added by default. The following code snippet shows the properties of the Content component.
+        </p>
+        <p class="cell">
+            <strong>Interface Content</strong>
+        </p>
+        <pre class="cell"><code class="lang-typescript">export <span class="hljs-class"><span
                 class="hljs-keyword">interface</span> <span
                 class="hljs-title">Props</span> {</span>
     contentStyle?: ContentStyleProps; <span class="hljs-comment">// An object of the following format: {appliedStyles: [...]} </span>
@@ -155,9 +169,13 @@
     onClickRightSlideButton?: () =&gt; any;<span class="hljs-comment">// Using this property you can pass a function that will be triggerd if the slide right Button is clicked.</span>
 }
 </code></pre>
-        <p>The following code snippet shows the attributes of the BasicContentbarWrapper class:</p>
-        <p><strong>Constructor BasicContentbarWrapper</strong></p>
-        <pre><code class="lang-typescript"><span class="hljs-function"><span
+        <p class="cell">
+            The following code snippet shows the attributes of the BasicContentbarWrapper class:
+        </p>
+        <p class="cell">
+            <strong>Constructor BasicContentbarWrapper</strong>
+        </p>
+        <pre class="cell"><code class="lang-typescript"><span class="hljs-function"><span
                 class="hljs-keyword">constructor</span><span
                 class="hljs-params">({
     id: <span class="hljs-keyword">string</span>, // Identifier <span class="hljs-keyword">of</span> the tab element.
@@ -170,9 +188,13 @@
     closable?: boolean, <span class="hljs-comment">// Property to define if a closing icon will be rendered.</span>
 }) <span class="hljs-comment">{}</span>
 </code></pre>
-        <p>The following code snippet shows the attributes of the CustomContentbarWrapper class:</p>
-        <p><strong>Constructor CustomContentbarWrapper</strong></p>
-        <pre><code class="lang-typescript"><span class="hljs-function"><span
+        <p class="cell">
+            The following code snippet shows the attributes of the CustomContentbarWrapper class:
+        </p>
+        <p class="cell">
+            <strong>Constructor CustomContentbarWrapper</strong>
+        </p>
+        <pre class="cell"><code class="lang-typescript"><span class="hljs-function"><span
                 class="hljs-keyword">constructor</span><span
                 class="hljs-params">({
   id: <span class="hljs-keyword">string</span>, // Identifier <span class="hljs-keyword">of</span> the tab element
@@ -180,9 +202,14 @@
   contentAreaElement: React.ReactElement // Defines which custom component should be rendered when selecting a content bar tab.
 })</span> <span class="hljs-comment">{}</span></span>
 </code></pre>
-        <p>The following code snippet shows an example for creating a component containing a content bar:</p>
-        <p><strong>Example Content Component Implementation</strong></p>
-        <pre><code class="lang-typescript">export const ExampleComponent1 = <span class="hljs-function"><span
+        <p class="cell">
+            The following code snippet shows an example for creating a component containing a content bar:
+        </p>
+        <p class="cell">
+            <strong>Example Content Component Implementation</strong>
+        </p>
+        <pre class="cell"><code class="lang-typescript">export const ExampleComponent1 = <span
+                class="hljs-function"><span
                 class="hljs-params">()</span> =&gt;</span> {
   const [selectedId, setSelectedId] = useState&lt;string&gt;(WrapperIds.Test1);
 
@@ -242,17 +269,22 @@
   );
 };
 </code></pre>
-        <p><strong>Hint:</strong> see further integration with different usecases and React State Management hooks in
-            the
-            Example-Project and TemplateProject </p>
-        <h2 id="contentcell">ContentCell</h2>
-        <p>The framework provides a grid system to structure the content area. For this purpose the framework provides
-            the
-            ContentCell component. The component has to be embeded inside ContentLayout (or ContentWithBar as it uses
-            ContentLayout) with your desired content area layout. The following code snippet shows it&#39;s
-            properties.</p>
-        <p><strong>Interface ContentCell and CellPaddings ENUM</strong></p>
-        <pre><code class="lang-typescript">export <span class="hljs-class"><span class="hljs-keyword">enum</span> <span
+        <p class="cell">
+            <strong>Hint:</strong> see further integration with different usecases and React State Management hooks in
+            the Example-Project and TemplateProject
+        </p>
+        <h2>ContentCell</h2>
+        <p class="cell">
+            The framework provides a grid system to structure the content area. For this purpose the framework provides
+            the ContentCell component. The component has to be embeded inside ContentLayout (or ContentWithBar as it
+            uses ContentLayout) with your desired content area layout. The following code snippet shows it&#39;s
+            properties.
+        </p>
+        <p class="cell">
+            <strong>Interface ContentCell and CellPaddings ENUM</strong>
+        </p>
+        <pre class="cell"><code class="lang-typescript">export <span class="hljs-class"><span
+                class="hljs-keyword">enum</span> <span
                 class="hljs-title">CellPaddings</span> {</span>
   FULL,
   VERT_RIGHT,
@@ -271,12 +303,17 @@ export interface Props {
                     class="hljs-keyword">of</span> the element<span class="hljs-string">'s padding.
 }</span>
 </code></pre>
-        <p>The following code snippet shows an example implementation of a content area using the grid system.</p>
-        <p><strong>Important hint:</strong> This component has to be embedded inside ContentLayout (or ContentWithBar)
-            with
-            the layout set to GRID.</p>
-        <p><strong>Example implementation with the ContentCell components</strong></p>
-        <pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { ContentCell } <span
+        <p class="cell">
+            The following code snippet shows an example implementation of a content area using the grid system.
+        </p>
+        <p class="cell">
+            <strong>Important hint:</strong> This component has to be embedded inside ContentLayout (or ContentWithBar)
+            with the layout set to GRID.
+        </p>
+        <p class="cell">
+            <strong>Example implementation with the ContentCell components</strong>
+        </p>
+        <pre class="cell"><code class="lang-typescript"><span class="hljs-keyword">import</span> { ContentCell } <span
                 class="hljs-keyword">from</span> <span class="hljs-string">'@npm-iav-frontend/iav-frontend-framework/contentCell'</span>;
 <span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span
                     class="hljs-string">'react'</span>;
@@ -355,8 +392,12 @@ export interface Props {
   );
 };</span>
 </code></pre>
-        <p>The resulting content area looks like this:</p>
-        <p><img alt="Content_Area" src="./assets/content-area/content-area.png"></p>
+        <p class="cell">
+            The resulting content area looks like this:
+        </p>
+        <p class="cell">
+            <img alt="Content_Area" src="./assets/content-area/content-area.png">
+        </p>
     </div>
 
     <div id="footer-container"></div>

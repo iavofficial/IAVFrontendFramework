@@ -7,6 +7,7 @@
     <script src="./pages/script/nav.js" type="application/javascript"></script>
     <script src="./pages/script/search.js" type="application/javascript"></script>
     <link href="./pages/styles/styles.css" rel="stylesheet">
+    <link href="./pages/styles/pages.css" rel="stylesheet">
 </head>
 <body>
 <div class="page-container">
@@ -16,41 +17,45 @@
 
         <h1>Play with the Framework</h1>
 
-        <p>Important hint: If you haven&#39;t added the ca file of IAV in npm yet, you will have to read the guide
-            &quot;Error:
-            Self signed certificate in chain&quot; in FAQ first.</p>
+        <p class="cell">
+            Important hint: If you haven&#39;t added the ca file of IAV in npm yet, you will have to read the guide
+            &quot;Error: Self signed certificate in chain&quot; in FAQ first.
+        </p>
 
         <h3>Cloning the Repository</h3>
-        <p>If you want to play with the framework and the contained example project, you have to clone the framework&#39;s
+        <p class="cell">
+            If you want to play with the framework and the contained example project, you have to clone the framework&#39;s
             Git repository first. The Git repository can be found here. If you just want to use the framework, this page
-            isn&#39;t
-            of interest for you.</p>
+            isn&#39;t of interest for you.
+        </p>
 
         <h3>The Example Project</h3>
-        <p>As mentioned, the repository contains the framework and an example project. As the framework isn&#39;t a UI
-            by
-            itself, you cannot see the consequences of framework changes without a project using the framework. This is
-            where
-            the example project comes into use. The example project uses the locally built framework as a file
-            dependency in
-            order to visualize the consequences of framework changes.</p>
+        <p class="cell">
+            As mentioned, the repository contains the framework and an example project. As the framework isn&#39;t a UI
+            by itself, you cannot see the consequences of framework changes without a project using the framework. This
+            is where the example project comes into use. The example project uses the locally built framework as a file
+            dependency in order to visualize the consequences of framework changes.
+        </p>
 
         <h3>Setting Up and Running the Example Project</h3>
-        <p>To start the example project you have to execute npm run setup_and_build inside the root folder of the
-            <strong>repository</strong>.
-            This will setup the environment and start the development server at port 3000.</p>
+        <p class="cell">To start the example project you have to execute npm run setup_and_build inside the root folder
+            of the<strong>repository</strong>. This will setup the environment and start the development server at port
+            3000.
+        </p>
 
         <h3>Making Real-Time Changes to the Framework</h3>
-        <p>If you want to make changes to the framework and see the consequences of these changes in real time you have
-            to
-            execute the following steps by yourself:</p>
-        <p>1. Execute npm install inside the <strong>repository&#39;s</strong> root folder.<br>
+        <p class="cell">
+            If you want to make changes to the framework and see the consequences of these changes in real time you have
+            to execute the following steps by yourself:
+        </p>
+        <p class="cell">
+            1. Execute npm install inside the <strong>repository&#39;s</strong> root folder.<br>
             2. Execute npm run devmode inside the <strong>repository&#39;s</strong> root folder. The script will watch
-            for
-            file changes of the framework&#39;s source code and recompile if needed.<br>
+            for file changes of the framework&#39;s source code and recompile if needed.<br>
             3. Open another terminal inside the <strong>example project&#39;s (example folder)</strong> folder.<br>
             4. Execute npm install inside the <strong>example project&#39;s (example folder)</strong> folder.<br>
-            5. Execute npm run dev inside the <strong>example project&#39;s (example folder)</strong> folder.</p>
+            5. Execute npm run dev inside the <strong>example project&#39;s (example folder)</strong> folder.
+        </p>
 
     </div>
 

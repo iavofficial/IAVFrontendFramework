@@ -7,6 +7,7 @@
     <script src="./pages/script/nav.js" type="application/javascript"></script>
     <script src="./pages/script/search.js" type="application/javascript"></script>
     <link href="./pages/styles/styles.css" rel="stylesheet">
+    <link href="./pages/styles/pages.css" rel="stylesheet">
 </head>
 <body>
 <div class="page-container">
@@ -17,35 +18,35 @@
         <h1>Installation Guide</h1>
 
         <h2>Installation for a project created on your own</h2>
-        <p>The framework is provided using <a href="https://jfrog.com/de/artifactory/" target="_blank">Artifactory</a>.
-            To
-            install the framework, you have to explicitly associate the registry with the <code>@npm-iav-frontend</code>
-            scope
-            or just use Artifactory as the registry for all npm packages (recommended). You can do this by creating a
-            <code>.npmrc</code>
-            file with the following content:</p>
+        <p class="cell">
+            The framework is provided using <a href="https://jfrog.com/de/artifactory/" target="_blank">Artifactory</a>.
+            To install the framework, you have to explicitly associate the registry with the
+            <code>@npm-iav-frontend</code>scope or just use Artifactory as the registry for all npm packages
+            (recommended). You can do this by creating a <code>.npmrc</code> file with the following content:</p>
 
         <h3>.npmrc</h3>
-        <pre><code>registry=https://artifactory.iav.com/artifactory/api/npm/npm/</code></pre>
+        <pre class="cell"><code>registry=https://artifactory.iav.com/artifactory/api/npm/npm/</code></pre>
 
-        <p>Now you are able to install the framework by executing the following instruction inside the root folder of
-            your
-            project.</p>
+        <p class="cell">
+            Now you are able to install the framework by executing the following instruction inside the root folder of
+            your project.
+        </p>
 
         <h3>npm install</h3>
-        <pre><code>npm install @npm-iav-frontend/iav-frontend-framework</code></pre>
+        <pre class="cell"><code>npm install @npm-iav-frontend/iav-frontend-framework</code></pre>
 
         <h2>Add the framework to a new React application</h2>
-        <p>If you want to add the framework by creating a new React app with <code>create-react-app</code> or using
+        <p class="cell">
+            If you want to add the framework by creating a new React app with <code>create-react-app</code> or using
             <code>vite</code>, it works too. Just paste the following code snippets into the <code>App.tsx</code> file.
         </p>
 
-        <p><strong>NOTE:</strong> If you use <code>vite</code> to create a new React app, the webview may look broken.
-            After
-            clearing the <code>index.css</code> file, the problem is solved.</p>
+        <p class="cell"><strong>NOTE:</strong> If you use <code>vite</code> to create a new React app, the webview may
+            look broken. After clearing the <code>index.css</code> file, the problem is solved.
+        </p>
 
         <h3>Codesnippet App.tsx</h3>
-        <pre>
+        <pre class="cell">
 <code><span class="pl-k">import</span> { GlobalDataLayer } <span class="pl-k">from</span> <span class="pl-s">'@npm-iav-frontend/iav-frontend-framework/globalDataLayer';</span>
 <span class="pl-k">import</span> { UILayer } <span class="pl-k">from</span> <span class="pl-s">'@npm-iav-frontend/iav-frontend-framework/uiLayer';</span>
 

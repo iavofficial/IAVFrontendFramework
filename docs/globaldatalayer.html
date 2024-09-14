@@ -210,8 +210,9 @@ export const <span class="hljs-type">LayoutAndContextExampleComponent</span> = a
         <h3>GlobalDataLayerLanguageOptions</h3>
         <pre class="cell"><code class="lang-typescript"><span class="hljs-keyword">interface</span> <span
                 class="hljs-title">GlobalDataLayerLanguageOptions</span> {
-    fallbackLang?: <span class="hljs-keyword">string</span>; <span class="hljs-comment">// The key of the language which will be used for translations where no translation is defined. The default is en for english.</span>
-    initialLang?: <span class="hljs-keyword">string</span>; <span class="hljs-comment">// The key of the language which will be initially used if no language cookie is set yet. For example this option can be used to define the used language when the language selection is hidden.</span>
+    <span class="hljs-symbol">fallbackLang?:</span> <span class="hljs-keyword">string</span>; <span
+                    class="hljs-comment">// The key of the language which will be used for translations where no translation is defined. The default is en for english.</span>
+    <span class="hljs-symbol">initialLang?:</span> <span class="hljs-keyword">string</span>; <span class="hljs-comment">// The key of the language which will be initially used if no language cookie is set yet. For example this option can be used to define the used language when the language selection is hidden.</span>
 }
 </code></pre>
         <h2 id="authentication-system">Authentication System</h2>
@@ -246,7 +247,8 @@ export const <span class="hljs-type">LayoutAndContextExampleComponent</span> = a
         </p>
         <pre class="cell"><code class="lang-typescript"><span class="hljs-keyword">export</span> <span
                 class="hljs-keyword">interface</span> Props {
-    additionalContextValues?: { [key: <span class="hljs-built_in">string</span>]: <span class="hljs-built_in">any</span> }; <span
+    <span class="hljs-symbol">additionalContextValues?</span>: { [key: <span class="hljs-built_in">string</span>]: <span
+                    class="hljs-built_in">any</span> }; <span
                     class="hljs-comment">// Optional object to share values and function via the context of the DummyAuthenticationProvider</span>
 }
 </code></pre>
@@ -262,13 +264,15 @@ export const <span class="hljs-type">LayoutAndContextExampleComponent</span> = a
         <p class="cell">
             <strong>Interface AWSAuthenticationProvider</strong>
         </p>
-        <pre class="cell"><code class="lang-typescript">export <span class="hljs-class"><span
-                class="hljs-keyword">interface</span> <span
+        <pre class="cell"><code class="lang-typescript"><span class="hljs-class"><span
+                class="hljs-keyword">export interface</span> <span
                 class="hljs-title">Props</span> {</span>
 <span class="hljs-symbol">    configureAmplify:</span> () =&gt; <span class="hljs-keyword">void</span>; <span
                     class="hljs-comment">// Mandatory function to configure Amplify</span>
-    failOnNoLegalGroup?: <span class="hljs-keyword">boolean</span>; <span class="hljs-comment">// (Optional) Fail authentication if the user is valid and authorized but is not assigned to a legal group yet.</span>
-    legalGroups?: string[]; <span class="hljs-comment">// Optional parameter to define the legal groups</span>
+    <span class="hljs-symbol">failOnNoLegalGroup?:</span> <span class="hljs-keyword">boolean</span>; <span
+                    class="hljs-comment">// (Optional) Fail authentication if the user is valid and authorized but is not assigned to a legal group yet.</span>
+    <span class="hljs-symbol">legalGroups?:</span> string[]; <span
+                    class="hljs-comment">// Optional parameter to define the legal groups</span>
 }
 </code></pre>
         <p class="cell">
@@ -395,17 +399,17 @@ function App  {
 <span class="hljs-keyword">import</span> AppLogo from <span class="hljs-string">"../../assets/app_logo.png"</span>;
 <span class="hljs-keyword">import</span> { AuthContext } from <span class="hljs-string">"../../contexts/auth"</span>;
 <span class="hljs-keyword">import</span> { LoginButtonWithSpinner } from <span class="hljs-string">"./loginButtonWithSpinner"</span>;
-
-export <span class="hljs-class"><span class="hljs-keyword">interface</span> <span
+            <span class="hljs-class">
+<span class="hljs-keyword">export interface</span> <span
                     class="hljs-title">State</span> </span>{
-    email: string;
-    password: string;
+    <span class="hljs-symbol">email:</span> string;
+    <span class="hljs-symbol">password:</span> string;
 }
 
-export <span class="hljs-class"><span class="hljs-keyword">class</span> <span
-                    class="hljs-title">BasicLoginView</span> <span class="hljs-title">extends</span> <span
-                    class="hljs-title">Component</span>&lt;<span
-                    class="hljs-type">any, State</span>&gt; </span>{
+<span class="hljs-class"><span class="hljs-keyword">export class</span> <span
+        class="hljs-title">BasicLoginView</span> <span class="hljs-title">extends</span> <span
+        class="hljs-title">Component</span>&lt;<span
+        class="hljs-type">any, State</span>&gt; </span>{
     <span class="hljs-keyword">constructor</span>(props: any) {
         <span class="hljs-keyword">super</span>(props);
         <span class="hljs-keyword">this</span>.state = {

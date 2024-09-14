@@ -40,7 +40,7 @@
             This means that you are able to pass an array of predefined styles to the component which should be
             activated. The predefined styles are the following:
         </p>
-        <pre class="cell"><code class="lang-typescript">export const ContentStyleStyles = {
+        <pre class="cell"><code class="lang-typescript"><span class="hljs-keyword">export const</span> ContentStyleStyles = {
 <span class="hljs-symbol">    WRAPPER_FULL_WIDTH:</span> <span class="hljs-string">"WRAPPER_FULL_WIDTH"</span>,
 <span class="hljs-symbol">    WRAPPER_FULL_HEIGHT:</span> <span class="hljs-string">"WRAPPER_FULL_HEIGHT"</span>,
 <span class="hljs-symbol">    SPACING:</span> <span class="hljs-string">"SPACING"</span>,
@@ -64,7 +64,8 @@
 </code></pre>
         <pre class="cell"><code class="lang-typescript"><span class="xml"><span class="hljs-tag">&lt;<span
                 class="hljs-name">ContentStyle</span>
-    <span class="hljs-attr">appliedStyles</span>=</span></span><span class="hljs-template-variable">{ContentStyleTemplates.<span
+    <span class="xml">appliedStyles</span>=</span></span><span
+                class="xml">{ContentStyleTemplates.<span
                 class="hljs-keyword">DEFAULT</span>}</span><span class="xml"><span class="hljs-tag">
 /&gt;</span></span>
 </code></pre>
@@ -74,19 +75,17 @@
             Furthermore, the ContentLayout component uses the ContentStyle component. To use ContentStyle with
             ContentLayout you have to pass an object containing the appliedStyles array to ContentLayout.
         </p>
-        <pre class="cell"><code class="lang-typescript">interface Props {
+        <pre class="cell"><code class="lang-typescript"><span class="hljs-keyword">interface</span> Props {
     <span class="hljs-symbol">contentStyle?:</span> ContentStyleProps; <span
-                    class="hljs-regexp">//</span> An object of the following format: {appliedStyles: [...]}
-    <span class="hljs-symbol">layoutBehaviour?:</span> LayoutBehaviour; <span class="hljs-regexp">//</span> Option to specify the layout which is one option <span
-                    class="hljs-keyword">of</span> the following <span class="hljs-class"><span
-                    class="hljs-keyword">enum</span>.</span>
+                    class="hljs-regexp">// An object of the following format: {appliedStyles: [...]}</span>
+    <span class="hljs-symbol">layoutBehaviour?:</span> LayoutBehaviour; <span class="hljs-regexp">// Option to specify the layout which is one option of the following enum.</span>
 }
 </code></pre>
         <p class="cell">
             The LayoutBehaviour enum is defined like this:
         </p>
-        <pre class="cell"><code class="lang-typescript">export <span class="hljs-class"><span
-                class="hljs-keyword">enum</span> <span
+        <pre class="cell"><code class="lang-typescript"><span class="hljs-class"><span
+                class="hljs-keyword">export enum</span> <span
                 class="hljs-title">LayoutBehaviour</span> </span>{
     <span class="hljs-comment">// Parent div of content will have no specific layout class</span>
     NONE = <span class="hljs-string">""</span>,
@@ -155,19 +154,20 @@
         <p class="cell">
             <strong>Interface Content</strong>
         </p>
-        <pre class="cell"><code class="lang-typescript">export <span class="hljs-class"><span
-                class="hljs-keyword">interface</span> <span
+        <pre class="cell"><code class="lang-typescript"><span class="hljs-class"><span
+                class="hljs-keyword">export interface</span> <span
                 class="hljs-title">Props</span> {</span>
-    contentStyle?: ContentStyleProps; <span class="hljs-comment">// An object of the following format: {appliedStyles: [...]} </span>
-    layoutBehaviour?: LayoutBehaviour; <span class="hljs-comment">// Option to specify the layout which is one option of the following enum.</span>
+    <span class="hljs-symbol">contentStyle?:</span> ContentStyleProps; <span class="hljs-comment">// An object of the following format: {appliedStyles: [...]} </span>
+    <span class="hljs-symbol">layoutBehaviour?:</span> LayoutBehaviour; <span class="hljs-comment">// Option to specify the layout which is one option of the following enum.</span>
 <span class="hljs-symbol">    contentWrappers:</span> BasicContentbarWrapper[] | CustomContentbarWrapper[]; <span
                     class="hljs-comment">// Array of elements to show inside the content bar.</span>
 <span class="hljs-symbol">    selectedId:</span> string; <span class="hljs-comment">// The id of the currently selected content area component.</span>
-    addable?: <span class="hljs-keyword">boolean</span>; <span class="hljs-comment">// This optional property defines if the add button will be rendered.</span>
-    jumpToEndOfBar?: <span class="hljs-keyword">boolean</span>; <span class="hljs-comment">// Determines if the content bar should set a newly created tab to active.</span>
-    onClickAddButton?: () =&gt; any; <span class="hljs-comment">// Using this optional property you can pass a function that will be triggerd if the add button is clicked.</span>
-    onClickLeftSlideButton?: () =&gt; any; <span class="hljs-comment">// Using this property you cann pass a function that will be triggerd if the slide left Button is clicked.</span>
-    onClickRightSlideButton?: () =&gt; any;<span class="hljs-comment">// Using this property you can pass a function that will be triggerd if the slide right Button is clicked.</span>
+    <span class="hljs-symbol">addable?:</span> <span class="hljs-keyword">boolean</span>; <span class="hljs-comment">// This optional property defines if the add button will be rendered.</span>
+    <span class="hljs-symbol">jumpToEndOfBar?:</span> <span class="hljs-keyword">boolean</span>; <span
+                    class="hljs-comment">// Determines if the content bar should set a newly created tab to active.</span>
+    <span class="hljs-symbol">onClickAddButton?:</span> () =&gt; any; <span class="hljs-comment">// Using this optional property you can pass a function that will be triggerd if the add button is clicked.</span>
+    <span class="hljs-symbol">onClickLeftSlideButton?:</span> () =&gt; any; <span class="hljs-comment">// Using this property you cann pass a function that will be triggerd if the slide left Button is clicked.</span>
+    <span class="hljs-symbol">onClickRightSlideButton?:</span> () =&gt; any;<span class="hljs-comment">// Using this property you can pass a function that will be triggerd if the slide right Button is clicked.</span>
 }
 </code></pre>
         <p class="cell">
@@ -179,14 +179,18 @@
         <pre class="cell"><code class="lang-typescript"><span class="hljs-function"><span
                 class="hljs-keyword">constructor</span><span
                 class="hljs-params">({
-    id: <span class="hljs-keyword">string</span>, // Identifier <span class="hljs-keyword">of</span> the tab element.
-    displayName: <span class="hljs-keyword">string</span> | TranslationFunction, // Display <span class="hljs-keyword">name</span> <span
+    <span class="hljs-symbol">id:</span> <span class="hljs-keyword">string</span>, // Identifier <span
                     class="hljs-keyword">of</span> the tab element.
-    onClick: (id: <span class="hljs-keyword">string</span>)</span> =&gt; <span class="hljs-title">any</span>, <span
+    <span class="hljs-symbol">displayName:</span> <span class="hljs-keyword">string</span> | TranslationFunction, // Display <span
+                    class="hljs-keyword">name</span> <span
+                    class="hljs-keyword">of</span> the tab element.
+   <span class="hljs-symbol"> onClick:</span> (id: <span class="hljs-keyword">string</span>)</span> =&gt; <span
+                class="hljs-title">any</span>, <span
                 class="hljs-comment">// Function to set the id of the clicked element.</span>
-    <span class="hljs-title">contentAreaElement</span>:</span> React.ReactElement <span class="hljs-comment">// Defines which custom component should be connected with the content bar tab element.</span>
-    onClose?: (id: <span class="hljs-keyword">string</span>) =&gt; void, <span class="hljs-comment">// Optional function to handle the deletion of a content tab / contentbar wrapper.</span>
-    closable?: boolean, <span class="hljs-comment">// Property to define if a closing icon will be rendered.</span>
+    <span class="hljs-symbol">contentAreaElement</span>:</span> React.ReactElement <span class="hljs-comment">// Defines which custom component should be connected with the content bar tab element.</span>
+    <span class="hljs-symbol">onClose?:</span> (id: <span class="hljs-keyword">string</span>) =&gt; void, <span
+                    class="hljs-comment">// Optional function to handle the deletion of a content tab / contentbar wrapper.</span>
+    <span class="hljs-symbol">closable?:</span> boolean, <span class="hljs-comment">// Property to define if a closing icon will be rendered.</span>
 }) <span class="hljs-comment">{}</span>
 </code></pre>
         <p class="cell">
@@ -198,9 +202,10 @@
         <pre class="cell"><code class="lang-typescript"><span class="hljs-function"><span
                 class="hljs-keyword">constructor</span><span
                 class="hljs-params">({
-  id: <span class="hljs-keyword">string</span>, // Identifier <span class="hljs-keyword">of</span> the tab element
-  renderElement: ReactElement, // The custom tab element that should be rendered within the content bar.
-  contentAreaElement: React.ReactElement // Defines which custom component should be rendered when selecting a content bar tab.
+  <span class="hljs-symbol">id:</span> <span class="hljs-keyword">string</span>, // Identifier <span
+                    class="hljs-keyword">of</span> the tab element
+  <span class="hljs-symbol">renderElement:</span> ReactElement, // The custom tab element that should be rendered within the content bar.
+  <span class="hljs-symbol">contentAreaElement:</span> React.ReactElement // Defines which custom component should be rendered when selecting a content bar tab.
 })</span> <span class="hljs-comment">{}</span></span>
 </code></pre>
         <p class="cell">
@@ -284,8 +289,8 @@
         <p class="cell">
             <strong>Interface ContentCell and CellPaddings ENUM</strong>
         </p>
-        <pre class="cell"><code class="lang-typescript">export <span class="hljs-class"><span
-                class="hljs-keyword">enum</span> <span
+        <pre class="cell"><code class="lang-typescript"><span class="hljs-class"><span
+                class="hljs-keyword">export enum</span> <span
                 class="hljs-title">CellPaddings</span> {</span>
   FULL,
   VERT_RIGHT,
@@ -294,7 +299,7 @@
   NONE,
 }
 
-export interface Props {
+<span class="hljs-keyword">export interface</span> Props {
   <span class="hljs-symbol">colWidth?:</span> number; <span
                     class="hljs-regexp">//</span> Set the column width between <span class="hljs-number">1</span>-<span
                     class="hljs-number">12</span> based on PrimeFlex (spacing <span class="hljs-keyword">of</span> PrimeReact).

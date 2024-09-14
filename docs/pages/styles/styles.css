@@ -72,9 +72,9 @@ button {
 }
 
 .drawer li {
-    margin-bottom: 8px; /* Etwas weniger Abstand zwischen den Listenelementen */
-    border-radius: 4px; /* Border-Radius für die Listenelemente */
-    transition: background-color 0.3s ease; /* Sanfte Übergänge für den Hintergrund */
+    margin-bottom: 8px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
 }
 
 .drawer li:hover {
@@ -96,6 +96,51 @@ button {
 .drawer a:hover {
     color: #fff; /* Weiße Textfarbe bei Hover für besseren Kontrast */
 }
+
+.page-nav {
+    position: fixed;
+    top: 50px;
+    right: 0;
+    width: 200px;
+    height: 100%;
+    background-color: #ffffff;
+    border-left: 1px solid lightgray;
+    z-index: 1000;
+    padding: 20px;
+    font-size: 0.875rem;
+    overflow-y: auto; /* Falls es zu viele Einträge gibt */
+}
+
+.page-nav h3 {
+    font-size: 1.25rem;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.page-nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.page-nav li {
+    border-radius: 4px;
+    padding: 0px 10px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 8px;
+}
+
+.page-nav li:hover {
+    background: lightgray;
+}
+
+.page-nav a:hover {
+    text-decoration: none;
+}
+
+.page-nav li.h2 {
+    margin-left: 20px;
+}
+
 
 .main-header {
     position: fixed;

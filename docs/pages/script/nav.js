@@ -38,3 +38,26 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetch('./pages/html/page-nav.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('page-placeholder').innerHTML = data;
+
+            const navList = document.getElementById('nav-list');
+            const headers = document.querySelectorAll('h1, h2');
+
+            headers.forEach(header => {
+                const listItem = document.createElement('li');
+                listItem.classList.add(header.tagName.toLowerCase());
+                const link = document.createElement('a');
+                link.textContent = header.textContent;
+                link.href = `#${header.id || header.textContent.replace(/\s+/g, '-').toLowerCase()}`;
+
+                listItem.appendChild(link);
+                navList.appendChild(listItem);
+            });
+        });
+
+});

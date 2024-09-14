@@ -223,3 +223,45 @@ button {
     text-decoration: underline;
 }
 
+.version-dropdown {
+    position: relative;
+    display: inline-block;
+    font-family: Arial, sans-serif;
+}
+
+.header-version {
+    appearance: none;
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 10px 40px 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.header-version:hover {
+    background-color: #e0e0e0;
+}
+
+.header-version:focus {
+    border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.version-dropdown::after {
+    content: '\25BC'; /* Unicode for down arrow */
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #333;
+    font-size: 12px;
+}
+
+.header-version option {
+    padding: 10px;
+}

@@ -129,12 +129,8 @@ button {
     margin-bottom: 8px;
 }
 
-.page-nav li:hover {
-    background: lightgray;
-}
-
 .page-nav a:hover {
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 .page-nav li.h2 {

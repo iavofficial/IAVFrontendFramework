@@ -16,9 +16,9 @@
     <div id="header-container"></div>
 
     <div id="container">
-        <h1>Color Settings and Dark Mode</h1>
+        <h1 id="color-settings-and-dark-mode">Color Settings and Dark Mode</h1>
 
-        <h2 id="introduction">Color Settings and Dark Mode</h2>
+        <h2 id="introduction">Introduction</h2>
         <p class="cell">
             Color and theme (dark / light mode) information is stored and provided by the React context called <strong>ColorSettings</strong>
             context. The ColorSettings context`s provider component is embedded inside the ColorProvider component. The
@@ -42,8 +42,8 @@
                 class="hljs-keyword">from</span> <span
                 class="hljs-string">"@npm-iav-frontend/iav-frontend-framework/constants"</span>;
 </code></pre>
-        <h1>Overwrite default colors</h1>
-        <h2>CSS</h2>
+        <h1 id="overwrite-default-colors">Overwrite default colors</h1>
+        <h2 id="css">CSS</h2>
         <p class="cell">
             Besides providing the colors as JS constants, all colors are defined as CSS constants within the root and
             can be used within the css files of the project. The following code snippet shows you how to use these
@@ -90,7 +90,7 @@
                     class="hljs-number">-0</span>);
 }
 </code></pre>
-        <h2>colorSettings property of GlobalDataLayer</h2>
+        <h2 id="colorsettings-property-of-globaldatalayer">colorSettings property of GlobalDataLayer</h2>
         <p class="cell">
             Using the colorSettings property you can pass an object of the following structure:
         </p>
@@ -274,7 +274,7 @@
     passwortRequirementsTextColor?: <span class="hljs-built_in">string</span>; <span class="hljs-comment">// Defines the color of the text for the requirements to set a new password of the AWS authentication view.</span>
 }
 </code></pre>
-        <h1>Other color options</h1>
+        <h1 id="other-color-options">Other color options</h1>
         <p class="cell">
             To change the color of the PrimeReact components DropDown and ContextMenu you have to overwrite the
             following css variables:
@@ -354,7 +354,7 @@
             (light mode is activated). If the color-theme is set to &quot;dark&quot; (dark mode is activated) it will
             set the background to black.
         </p>
-        <h1>How to disable the dark mode</h1>
+        <h1 id="how-to-disable-the-dark-mode">How to disable the dark mode</h1>
         <p class="cell">
             To disable the dark mode use the <em>hideColorThemeToggler</em> option inside <em>settingsMenuOptions</em>
             of the UILayer component. This will prevent the user from changing the theme.

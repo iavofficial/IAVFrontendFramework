@@ -9,6 +9,7 @@ on:
       - 'SBOM.json'
       - '*.md'
       - '.github/**/*'
+      - 'docs/**/*'
 jobs:
   build:
 

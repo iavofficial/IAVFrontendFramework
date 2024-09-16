@@ -25,7 +25,7 @@ information about the section can be found [here](https://github.com/iavofficial
 
 Here's a quick look of an example of the IAV Frontend Framework:
 
-![Layout Screenshot](src/assets/png/layout.png)
+![Layout Screenshot](docs/assets/index/login.png)
 
 ## License
 

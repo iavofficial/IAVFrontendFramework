@@ -98,46 +98,6 @@ you can contact the project maintainers via [mail](mailto:frontendframework@iav.
 
 ##### Process
 
-1. Submit a [pull request](https://help.github.com/articles/about-pull-requests/).
-
-- Check the list of changes to comprise solely source files and their code changes, but no build artifacts.
-- Check [how to make a Pull Request](#how-to-make-a-pull-request) here.
-
-2. Link the submitted pull request to the issue the contribution is made for.
-3. Provide a comprehensive change description in the pull request summary to improve the understanding of the changes
-   for the reviewers.
-4. The test result should be provided as screenshot to the pull request to support the validiation of the code
-   contribution.
-
-##### Style Guides for Git Commit Messages
-
-Here's a list of some good to have points, that can add more value to your contribution logs.
-
-| **Type**     | **Description**                                                                     | **Example Commit Message**                        |
-|--------------|-------------------------------------------------------------------------------------|---------------------------------------------------|
-| **fix**      | Patches a bug in the codebase (PATCH in semantic versioning).                       | `fix: resolve issue with user authentication`     |
-| **feat**     | Introduces a new feature to the codebase (MINOR in semantic versioning).            | `feat: add user profile management feature`       |
-| **docs**     | Documentation only changes.                                                         | `docs: update README with new setup instructions` |
-| **style**    | Changes that do not affect the meaning of the code (white-space, formatting, etc.). | `style: format code according to ESLint rules`    |
-| **refactor** | Code change that neither fixes a bug nor adds a feature.                            | `refactor: optimize user service class structure` |
-| **test**     | Adding or correcting tests.                                                         | `test: add unit tests for user service`           |
-
-**Commit Message Format**
-
-```
-test:  add unit tests for user service
-^--^  ^------------^
-|     |
-|     +-> Summary in present tense.
-|
-+-------> Type: fix, feat, docs, style, refactor or test.
-```
-
-For more detailed reference to the above points, refer <a href="https://www.conventionalcommits.org/en/v1.0.0/">
-here</a>.
-
-#### How to Make a Pull Request
-
 *If you don't have Git installed on your machine, [install it](https://help.github.com/articles/set-up-git/).*
 
 **1.** Fork [this repository](https://github.com/iavofficial/IAVFrontendFramework).  
@@ -182,7 +142,43 @@ git push origin <branchName>
 ```
 
 **9.** Create a [Pull Request](https://github.com/iavofficial/IAVFrontendFramework/pulls). For details on how to create
-a Pull Request, please refer to the [Submit Code Contribution](#submit-code-contribution) section.
+a Pull Request, please refer to the [article from GitHub](https://help.github.com/articles/about-pull-requests/).
+
+- Check the list of changes to comprise solely source files and their code changes, but no build artifacts.
+
+**10.** Link the submitted pull request to the issue the contribution is made for.
+
+**11.** Provide a comprehensive change description in the pull request summary to improve the understanding of the
+changes
+for the reviewers.
+
+**12.** The test result should be provided as screenshot to the pull request to support the validiation of the code
+contribution.
+
+##### Style Guides for Git Commit Messages
+
+| **Type**     | **Description**                                                                     | **Example Commit Message**                        |
+|--------------|-------------------------------------------------------------------------------------|---------------------------------------------------|
+| **fix**      | Patches a bug in the codebase (PATCH in semantic versioning).                       | `fix: resolve issue with user authentication`     |
+| **feat**     | Introduces a new feature to the codebase (MINOR in semantic versioning).            | `feat: add user profile management feature`       |
+| **docs**     | Documentation only changes.                                                         | `docs: update README with new setup instructions` |
+| **style**    | Changes that do not affect the meaning of the code (white-space, formatting, etc.). | `style: format code according to ESLint rules`    |
+| **refactor** | Code change that neither fixes a bug nor adds a feature.                            | `refactor: optimize user service class structure` |
+| **test**     | Adding or correcting tests.                                                         | `test: add unit tests for user service`           |
+
+**Commit Message Format**
+
+```
+test:  add unit tests for user service
+^--^  ^------------^
+|     |
+|     +-> Summary in present tense.
+|
++-------> Type: fix, feat, docs, style, refactor or test.
+```
+
+For more detailed reference to the above points, refer <a href="https://www.conventionalcommits.org/en/v1.0.0/">
+here</a>.
 
 ### Reviews of Contribution
 

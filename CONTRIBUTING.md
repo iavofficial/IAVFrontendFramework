@@ -90,13 +90,13 @@ you can contact the project maintainers via [mail](mailto:frontendframework@iav.
 
 ### Submit Code Contribution
 
-###### Preconditions
+##### Preconditions
 
 - All changes are pushed to forked repository.
 - Forked repository is rebased to the development branch to reduce potential merge conflicts.
 - All test are executed successfully.
 
-###### Process
+##### Process
 
 1. Submit a [pull request](https://help.github.com/articles/about-pull-requests/).
 
@@ -108,7 +108,7 @@ you can contact the project maintainers via [mail](mailto:frontendframework@iav.
 4. The test result should be provided as screenshot to the pull request to support the validiation of the code
    contribution.
 
-###### Style Guides for Git Commit Messages
+##### Style Guides for Git Commit Messages
 
 Here's a list of some good to have points, that can add more value to your contribution logs.
 
@@ -135,7 +135,7 @@ test:  add unit tests for user service
 For more detailed reference to the above points, refer <a href="https://www.conventionalcommits.org/en/v1.0.0/">
 here</a>.
 
-##### How to Make a Pull Request
+#### How to Make a Pull Request
 
 *If you don't have Git installed on your machine, [install it](https://help.github.com/articles/set-up-git/).*
 

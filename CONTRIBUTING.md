@@ -101,6 +101,7 @@ you can contact the project maintainers via [mail](mailto:frontendframework@iav.
 1. Submit a [pull request](https://help.github.com/articles/about-pull-requests/).
 
 - Check the list of changes to comprise solely source files and their code changes, but no build artifacts.
+- Check [how to make a Pull Request](#how-to-make-a-pull-request) here.
 
 2. Link the submitted pull request to the issue the contribution is made for.
 3. Provide a comprehensive change description in the pull request summary to improve the understanding of the changes

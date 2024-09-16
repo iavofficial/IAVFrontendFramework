@@ -4,31 +4,22 @@
 
 ## About the Project
 
-For information about the project see [GitHub Pages](https://iavofficial.github.io/IAVFrontendFramework/).
+The IAV Frontend Framework is designed to simplify the development of modern, scalable, and reusable frontend
+applications. It provides developers with a solid foundation of consistent, pre-built components and flexible
+customization options, significantly speeding up the development process. Whether you're just starting out or are an
+experienced developer, this framework is built to offer a seamless and efficient development experience.
+
+## Getting Started
+
+To get started with the framework, please visit
+our [GitHub Pages site](https://iavofficial.github.io/IAVFrontendFramework/) where you will find all the relevant
+information.
+
+## Feedback and Ideas
 
 You have a new idea, want to provide feedback to an ongoing discussion or just have questions? Then, please open a new
 thread in the [discussions section](https://github.com/iavofficial/IAVFrontendFramework/discussions). Further
 information about the section can be found [here](https://github.com/iavofficial/IAVFrontendFramework/discussions/1).
-
-## Description
-
-The IAV Frontend Framework was created to address common challenges in developing multiple IAV frontend applications:
-
-- **Lack of Maintainability**: Imagine IAV introduces a new style guide. All three applications would need to be
-  updated, which is labor-intensive and costly. A centralized framework solves this problem by allowing for centralized
-  maintenance and distribution.
-
-- **Lack of Extendability**: Want to add a new feature that might be of interest to all IAV frontend applications?
-  Without a mechanism for centralized distribution, you'd have to implement it multiple times. The framework allows for
-  the central implementation and distribution of new features across all applications.
-
-- **Higher Risk of Faults**: Implementing the same functionality multiple times increases the risk of introducing
-  errors. By implementing a feature once and distributing it centrally, you minimize this risk.
-
-- **Lower Developer Experience**: It's not enjoyable to repeatedly implement the same functionality across multiple
-  projects. The framework enhances developer experience by reducing redundant work.
-
-For more information, please refer to the [documentation](https://iavofficial.github.io/IAVFrontendFramework/).
 
 ## Layout
 

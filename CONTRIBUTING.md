@@ -52,8 +52,8 @@ you can contact the project maintainers via [mail](mailto:frontendframework@iav.
 ### Preconditions
 
 - For a more efficient way of providing patches, we suggest potential contributors to have
-  a [GitHub account](https://github.com/signup/free).
-- For a code contributions, a respective [issue](https://github.com/iavofficial/IAVFrontendFramework/issues) has been
+  a [GitHub account](https://github.com/signup/free) and to have [Git installed](https://help.github.com/articles/set-up-git/).
+- For code contributions, a respective [issue](https://github.com/iavofficial/IAVFrontendFramework/issues) has been
   filed and assigned.
 - The IAV Frontend Framework is licensed
   under [Apache 2.0](https://github.com/iavofficial/IAVFrontendFramework/blob/main/LICENSE).
@@ -65,28 +65,61 @@ you can contact the project maintainers via [mail](mailto:frontendframework@iav.
 
 1. Please [fork](https://help.github.com/articles/fork-a-repo/) the development branch to your account and clone your
    new repository.
-
-- The development branch represents the latest and verified development version of the IAV Frontend Framework.
-- The name of the forked repository should contain the issue number the contribution will be made for.
-- Each forked repository should be linked to just one issue to allow for separation of concerns.
-- To prevent from later merge conflicts, the forked repository ahould be synchronised
+   - The development branch represents the latest and verified development version of the IAV Frontend Framework.
+   - The name of the forked repository should contain the issue number the contribution will be made for.
+   - Each forked repository should be linked to just one issue to allow for separation of concerns.
+   - To prevent from later merge conflicts, the forked repository ahould be synchronised
   ([Git-Rebase](https://docs.github.com/de/get-started/using-git/about-git-rebase)) with the development branch on a
   regular basis.
 
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--> Fork [this repository](https://github.com/iavofficial/IAVFrontendFramework) by clicking on the 
+  <a href="https://github.com/iavofficial/IAVFrontendFramework"><img src="https://img.icons8.com/ios/24/000000/code-fork.png"></a> 
+  symbol at the top right corner of the page.
+  
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--> Clone the forked repository.
+
+  ```bash
+git clone https://github.com/iavofficial/IAVFrontendFramework.git
+```
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--> Navigate to the project directory.
+
+```bash
+cd IAVFrontendFramework
+```
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--> Create a new branch.
+
+```bash
+git checkout -b <branchName>
+```
+
 2. For setting up the development environment, we refer to the install section of
-   the [Readme](https://github.com/iavofficial/IAVFrontendFramework/blob/main/README.md).
+   the [GitHub Pages](https://iavofficial.github.io/IAVFrontendFramework/installation-guide.html).
 
 3. Implement your changes in your forked repository.
+   - The changes should be minimal and focussed on the linked issue.
+   - Each commit and its contained changes represents a logical unit. No mixture of different topics to be addressed.
+   - Each commit message contains the linked issue number, is meaningful and lists its changes in a comprehensible way. We refer to the [style guide](#style-guides-for-git-commit-messages) as guideline to write commit messages. 
 
-- The changes should be minimal and focussed on the linked issue.
-- Each commit and its contained changes represents a logical unit. No mixture of different topics to be addressed.
-- Each commit message contains the linked issue number, is meaningful and lists its changes in a comprehensible way.
-  We refer to https://www.conventionalcommits.org/en/v1.0.0/ as guideline to write commit messages.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--> Stage your changes and commit.
+
+```bash
+git add <file1,file2....>
+```
+
+```bash
+git commit -m "<commitMessage>"
+```
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--> Push your local commits to the remote repository.
+
+```bash
+git push origin <branchName>
+```
 
 4. Test your changes and their integration.
-
-- All tests must be documented and pushed to the forked repository.
-- All new as well as regression tests must be executed successfully.
+   - All tests must be documented and pushed to the forked repository.
+   - All new as well as regression tests must be executed successfully.
 
 ### Submit Code Contribution
 
@@ -98,64 +131,29 @@ you can contact the project maintainers via [mail](mailto:frontendframework@iav.
 
 ##### Process
 
-*If you don't have Git installed on your machine, [install it](https://help.github.com/articles/set-up-git/).*
-
-**1.** Fork [this repository](https://github.com/iavofficial/IAVFrontendFramework).  
-Click on
-the <a href="https://github.com/iavofficial/IAVFrontendFramework"><img src="https://img.icons8.com/ios/24/000000/code-fork.png"></a>
-symbol at the top right corner of the page.
-
-**2.** Clone the forked repository.
-
-```bash
-git clone https://github.com/iavofficial/IAVFrontendFramework.git
-```
-
-**3.** Navigate to the project directory.
-
-```bash
-cd IAVFrontendFramework
-```
-
-**5.** Create a new branch:
-
-```bash
-git checkout -b <branchName>
-```
-
-**6.** Make changes in source code.
-
-**7.** Stage your changes and commit
-
-```bash
-git add <file1,file2....>
-```
-
-```bash
-git commit -m "<commitMessage>"
-```
-
-**8.** Push your local commits to the remote repo.
-
-```bash
-git push origin <branchName>
-```
-
-**9.** Create a [Pull Request](https://github.com/iavofficial/IAVFrontendFramework/pulls). For details on how to create
+1. Create a [Pull Request](https://github.com/iavofficial/IAVFrontendFramework/pulls). For details on how to create
 a Pull Request, please refer to the [article from GitHub](https://help.github.com/articles/about-pull-requests/).
+   - Check the list of changes to comprise solely source files and their code changes, but no build artifacts.
 
-- Check the list of changes to comprise solely source files and their code changes, but no build artifacts.
+2. Link the submitted pull request to the issue the contribution is made for.
 
-**10.** Link the submitted pull request to the issue the contribution is made for.
+3. Provide a comprehensive change description in the pull request summary to improve the understanding of the
+changes for the reviewers.
 
-**11.** Provide a comprehensive change description in the pull request summary to improve the understanding of the
-changes
-for the reviewers.
-
-**12.** The test result should be provided as screenshot to the pull request to support the validiation of the code
+4. The test result should be provided as screenshot to the pull request to support the validiation of the code
 contribution.
 
-##### Style Guides for Git Commit Messages
+### Reviews of Contribution
+
+Each pull request will be reviewed by the project maintainers. Please cooperate with the reviewers for the integration
+of feedback and suggestions.
+In the end, the verified pull request will be merged into the development branch.
+
+### GitHub Pages
+
+For the documentation, we refer to the [GitHub Pages](https://iavofficial.github.io/IAVFrontendFramework/) of the project.
+
+### Style Guides for Git Commit Messages
 
 | **Type**     | **Description**                                                                     | **Example Commit Message**                        |
 |--------------|-------------------------------------------------------------------------------------|---------------------------------------------------|
@@ -176,16 +174,4 @@ test:  add unit tests for user service
 |
 +-------> Type: fix, feat, docs, style, refactor or test.
 ```
-
-For more detailed reference to the above points, refer <a href="https://www.conventionalcommits.org/en/v1.0.0/">
-here</a>.
-
-### Reviews of Contribution
-
-Each pull request will be reviewed by the project maintainers. Please cooperate with the reviewers for the integration
-of feedback and suggestions.
-In the end, the verified pull request will be merged into the development branch.
-
-### GitHub Pages
-
-For documentation see the [GitHub Pages](https://iavofficial.github.io/IAVFrontendFramework/) of the project.
+For more detailed reference to the above points, we refer to https://www.conventionalcommits.org/en/v1.0.0/.

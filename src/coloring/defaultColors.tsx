@@ -1,36 +1,26 @@
 /**
  * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {
-  BLACK,
-  BLUE0,
-  BLUE3,
-  GREY1,
-  GREY4,
-  GREY5,
-  GREY6,
-  GREY_MENU_SPECIAL_1,
-  WHITE,
-} from "../constants";
+import {BLACK, BLUE0, BLUE3, GREY1, GREY4, GREY5, GREY6, GREY_MENU_SPECIAL_1, WHITE,} from "../constants";
 
 //. Header
 export const LIGHT_HEADER_BACKGROUND_COLOR = BLUE0;
-export const DARK_HEADER_BACKGROUND_COLOR = GREY5;
+export const DARK_HEADER_BACKGROUND_COLOR = GREY6;
 
 export const LIGHT_HEADER_SETTINGS_ICON_COLOR = WHITE;
 export const DARK_HEADER_SETTINGS_ICON_COLOR = WHITE;
@@ -185,7 +175,7 @@ export const DARK_CONTENT_TAB_ICON_ACTIVE_COLOR = WHITE;
 
 //. Content cell
 export const LIGHT_CONTENT_CELL_BACKGROUND_COLOR = WHITE;
-export const DARK_CONTENT_CELL_BACKGROUND_COLOR = GREY5;
+export const DARK_CONTENT_CELL_BACKGROUND_COLOR = GREY6;
 
 //. Authentication view
 export const LIGHT_AUTH_HEADER_BACKGROUND_COLOR = BLUE0;

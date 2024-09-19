@@ -210,6 +210,9 @@
       "./headerMenuElement": "./build/components/header/headerMenuElement.d.ts"
     }
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "release": {
     "branches": [
       "main",

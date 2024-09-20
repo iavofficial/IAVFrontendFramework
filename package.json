@@ -23,11 +23,11 @@
     }
   ],
   "scripts": {
-    "devmode": ".\\scripts\\windows\\devmode_build.bat",
+    "devmode": "./scripts/windows/devmode_build.bat",
     "build-linux": "./scripts/ci_cd/build.sh",
     "build": "tsc --build --clean && tsc --build && npx babel ./src --out-dir ./build --extensions .ts,.tsx --copy-files",
     "test": "jest --passWithNoTests",
-    "run-example": ".\\scripts\\windows\\setup_and_run_example.bat",
+    "run-example": "./scripts/windows/setup_and_run_example.bat",
     "lint": "eslint src/**/*.{js,ts,tsx}",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json}\"",
     "release": "semantic-release"

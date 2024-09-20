@@ -34,7 +34,7 @@ export class Group implements GroupableTabAndContentWrapper {
     private _name: string | ((t: TranslateFunctionType) => string),
     private _logo: ReactElement,
     private _collapsible: boolean,
-    private _contentWrappers: GroupableTabAndContentWrapper[]
+    private _contentWrappers: GroupableTabAndContentWrapper[],
   ) {
     _contentWrappers.forEach((contentWrapper) => {
       contentWrapper.setInsideGroup(true);
@@ -44,7 +44,7 @@ export class Group implements GroupableTabAndContentWrapper {
   // Generate unique key based on the keys of the views.
   getKey = () => {
     return generateHashForValues(
-      this._contentWrappers.map((view) => view.getKey())
+      this._contentWrappers.map((view) => view.getKey()),
     );
   };
 
@@ -64,7 +64,7 @@ export class Group implements GroupableTabAndContentWrapper {
   getNavbarComponent = (
     frameworkInjectedOptions:
       | InjectedOptionsByNavbarToWrapper
-      | InjectedOptionsByGroupToWrapper
+      | InjectedOptionsByGroupToWrapper,
   ) => {
     const injectedProperties = {
       navbarCollapsed: frameworkInjectedOptions.navbarCollapsed,

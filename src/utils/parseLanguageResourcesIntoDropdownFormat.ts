@@ -1,6 +1,4 @@
-export function parseLanguageResourcesIntoDropdownFormat(
-  resourcesObject: any
-) {
+export function parseLanguageResourcesIntoDropdownFormat(resourcesObject: any) {
   const resourcesObjectArray: any[] = [];
   Object.keys(resourcesObject).forEach((key: string) => {
     const resourceElementWithKey: any = {
@@ -20,7 +18,7 @@ export function parseLanguageResourcesIntoDropdownFormat(
 
 export function parseActiveLanguageKeyIntoLanguageName(
   key: string,
-  resourceObject: any
+  resourceObject: any,
 ) {
   const resourceElementWithKey: any = {
     key: key,

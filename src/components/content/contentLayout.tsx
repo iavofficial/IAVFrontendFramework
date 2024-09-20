@@ -41,7 +41,7 @@ export type ContentLayoutAndStyleProps = ContentLayoutProps & {
 const DEFAULT_LAYOUT_BEHAVIOUR = LayoutBehaviour.NONE;
 
 export const ContentLayout = (
-  props: PropsWithChildren<ContentLayoutAndStyleProps>
+  props: PropsWithChildren<ContentLayoutAndStyleProps>,
 ) => {
   const layoutBehaviour = props.layoutBehaviour ?? DEFAULT_LAYOUT_BEHAVIOUR;
 

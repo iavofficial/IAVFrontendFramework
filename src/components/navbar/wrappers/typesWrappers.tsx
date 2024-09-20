@@ -26,7 +26,7 @@ import {
 export interface TabAndContentWrapper {
   getRoutes(): ReactElement<RouteProps>[];
   getNavbarComponent(
-    navbarInjectedOptions: InjectedOptionsByNavbarToWrapper
+    navbarInjectedOptions: InjectedOptionsByNavbarToWrapper,
   ): ReactElement;
   getKey(): string;
 }
@@ -39,6 +39,6 @@ export type GroupableTabAndContentWrapper = TabAndContentWrapper & {
   getNavbarComponent(
     navbarInjectedOptions:
       | InjectedOptionsByNavbarToWrapper
-      | InjectedOptionsByGroupToWrapper
+      | InjectedOptionsByGroupToWrapper,
   ): ReactElement;
 };

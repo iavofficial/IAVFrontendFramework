@@ -16,43 +16,56 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React from 'react';
+import React from "react";
 
-const generateClassName = (prefix: string): string => `${prefix}-${Math.random().toString(36).substr(2, 9)}`;
+const generateClassName = (prefix: string): string =>
+  `${prefix}-${Math.random().toString(36).substr(2, 9)}`;
 
 const createCSS = (styles: React.CSSProperties): string =>
-    Object.entries(styles)
-        .map(([key, value]) => {
-            if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
-                return `${key} { ${createCSS(value as React.CSSProperties)} }`;
-            }
-            return `${key.replace(/([A-Z])/g, '-$1').toLowerCase()}:${value};`;
-        })
-        .join('');
+  Object.entries(styles)
+    .map(([key, value]) => {
+      if (
+        typeof value === "object" &&
+        value !== null &&
+        !Array.isArray(value)
+      ) {
+        return `${key} { ${createCSS(value as React.CSSProperties)} }`;
+      }
+      return `${key.replace(/([A-Z])/g, "-$1").toLowerCase()}:${value};`;
+    })
+    .join("");
 
-const makeStyles = <T extends Record<string, React.CSSProperties | ((props?: any) => React.CSSProperties)>>(
-    styles: (props?: any) => T
+const makeStyles = <
+  T extends Record<
+    string,
+    React.CSSProperties | ((props?: any) => React.CSSProperties)
+  >,
+>(
+  styles: (props?: any) => T,
 ) => {
-    return (props?: any) => {
-        const classes = {} as Record<keyof T, string>;
-        const stylesObj = styles(props || {});
+  return (props?: any) => {
+    const classes = {} as Record<keyof T, string>;
+    const stylesObj = styles(props || {});
 
-        for (const key in stylesObj) {
-            const className = generateClassName(key);
-            const styleDefinition = stylesObj[key];
-            const styleWithDynamicValues = typeof styleDefinition === 'function'
-                ? styleDefinition(props || {})
-                : styleDefinition;
+    for (const key in stylesObj) {
+      const className = generateClassName(key);
+      const styleDefinition = stylesObj[key];
+      const styleWithDynamicValues =
+        typeof styleDefinition === "function"
+          ? styleDefinition(props || {})
+          : styleDefinition;
 
-            const styleString = createCSS(styleWithDynamicValues as React.CSSProperties);
-            const styleElement = document.createElement('style');
-            styleElement.textContent = `.${className} { ${styleString} }`;
-            document.head.appendChild(styleElement);
-            classes[key] = className;
-        }
+      const styleString = createCSS(
+        styleWithDynamicValues as React.CSSProperties,
+      );
+      const styleElement = document.createElement("style");
+      styleElement.textContent = `.${className} { ${styleString} }`;
+      document.head.appendChild(styleElement);
+      classes[key] = className;
+    }
 
-        return { classes };
-    };
+    return { classes };
+  };
 };
 
 export default makeStyles;

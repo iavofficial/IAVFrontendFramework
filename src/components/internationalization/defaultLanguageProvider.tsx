@@ -38,7 +38,7 @@ interface Props {
 }
 
 export const DefaultLanguageProvider = (
-  props: React.PropsWithChildren<Props>
+  props: React.PropsWithChildren<Props>,
 ) => {
   const { fallbackLang, initialLang } = props.languageOptions;
 
@@ -90,7 +90,7 @@ export const DefaultLanguageProvider = (
           Object.assign(
             resources[key as keyType].translation,
             // @ts-ignore Bug: Marks props.translations as possibly undfined although it's not.
-            props.translations[key].translation
+            props.translations[key].translation,
           );
         } else {
           // @ts-ignore Bug: Marks props.translations as possibly undfined although it's not.

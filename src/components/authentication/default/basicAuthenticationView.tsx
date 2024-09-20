@@ -1,39 +1,39 @@
 /**
  * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, {FormEvent, useContext, useState} from "react";
-import {Link} from "react-router-dom";
-import {BLUE3, PADDING_GAB, WHITE} from "../../../constants";
-import {AuthContext} from "../../../contexts/auth";
-import {LoginButtonWithSpinner} from "../loginButtonWithSpinner";
-import {useTranslator} from "../../internationalization/translators";
-import {AuthenticationViewProps} from "../authenticationViewProps";
+import React, { FormEvent, useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import { BLUE3, PADDING_GAB, WHITE } from "../../../constants";
+import { AuthContext } from "../../../contexts/auth";
+import { LoginButtonWithSpinner } from "../loginButtonWithSpinner";
+import { useTranslator } from "../../internationalization/translators";
+import { AuthenticationViewProps } from "../authenticationViewProps";
 import "../authenticationView.css";
 import "../../css/globalColors.css";
 import loginBackgroundLightMode from "../../../assets/png/login_background_lightMode.png";
 import loginBackgroundDarkMode from "../../../assets/png/login_background_darkMode.png";
-import {Dropdown, DropdownChangeEvent} from "primereact/dropdown";
-import {LanguageContext} from "../../../contexts/language";
-import {parseLanguageResourcesIntoDropdownFormat} from "../../../utils/parseLanguageResourcesIntoDropdownFormat";
-import {ColorSettingsContext} from "../../../contexts/colorsettings";
-import {generateHashOfLength} from "../../../utils/hash";
-import {Tooltip} from "primereact/tooltip";
-import {AppLogoPlaceholder} from "../../appLogoPlaceholder";
+import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
+import { LanguageContext } from "../../../contexts/language";
+import { parseLanguageResourcesIntoDropdownFormat } from "../../../utils/parseLanguageResourcesIntoDropdownFormat";
+import { ColorSettingsContext } from "../../../contexts/colorsettings";
+import { generateHashOfLength } from "../../../utils/hash";
+import { Tooltip } from "primereact/tooltip";
+import { AppLogoPlaceholder } from "../../appLogoPlaceholder";
 import CompanyLogo from "../../../assets/svg/companyLogo";
 import TextField from "../../helper/textfield/TextField";
 
@@ -180,7 +180,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                 <i
                   onClick={() =>
                     colorSettingsContext?.setDarkmode(
-                      !colorSettingsContext.darkmode
+                      !colorSettingsContext.darkmode,
                     )
                   }
                   style={{
@@ -209,7 +209,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                   langContext?.selectLanguage(event.value.key);
                 }}
                 options={parseLanguageResourcesIntoDropdownFormat(
-                  langContext?.resources
+                  langContext?.resources,
                 )}
                 optionLabel="label"
               />
@@ -227,19 +227,19 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
               style={{ margin: "40px 24px 0px 24px" }}
               className={"flex flex-column"}
             >
-                <TextField
-                  style={{
-                      marginBottom: "30px",
-                      backgroundColor: inputFieldBackgroundColor,
-                      color: inputFieldTextColor,
-                  }}
-                  label={t("Email_address")}
-                  id="email"
-                  name="email"
-                  required={true}
-                  autoFocus={true}
-                  value={email.valueOf()}
-                  onChange={(event) => setEmail(event.target.value)}
+              <TextField
+                style={{
+                  marginBottom: "30px",
+                  backgroundColor: inputFieldBackgroundColor,
+                  color: inputFieldTextColor,
+                }}
+                label={t("Email_address")}
+                id="email"
+                name="email"
+                required={true}
+                autoFocus={true}
+                value={email.valueOf()}
+                onChange={(event) => setEmail(event.target.value)}
               />
               <TextField
                 label={t("Password")}
@@ -247,7 +247,12 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                 name="password"
                 type="password"
                 required={true}
-                error={triedToSubmit && (authContext?.isRefreshing ? !authContext.isRefreshing() : false)}
+                error={
+                  triedToSubmit &&
+                  (authContext?.isRefreshing
+                    ? !authContext.isRefreshing()
+                    : false)
+                }
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 helperText={t("wrong_password")}
@@ -285,7 +290,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
           content={t(
             props.authOptions?.documentsLabelKey
               ? props.authOptions?.documentsLabelKey
-              : "Imprint"
+              : "Imprint",
           )}
           target={identifierWithDot}
           id="hover-image"

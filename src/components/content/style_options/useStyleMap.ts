@@ -34,7 +34,7 @@ export const useStyleMap = <T extends { [key: string]: string }>(
   classesMap?: Partial<Record<keyof T, string | number>>,
   stylesMap?: Partial<Record<keyof T, object>>,
   appliedStyles?: T[keyof T][],
-  styleDependencies?: { [key: string]: T[keyof T][] }
+  styleDependencies?: { [key: string]: T[keyof T][] },
 ) => {
   const finalAppliedStyles = useMemo(() => {
     let tempAppliedStyles: T[keyof T][] = appliedStyles ?? [];

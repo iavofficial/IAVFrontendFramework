@@ -33,7 +33,7 @@ export interface AppliedTranslationProps {
 }
 
 export function applyTranslation<T extends AppliedTranslationProps>(
-  Component: React.ComponentType<T>
+  Component: React.ComponentType<T>,
 ) {
   return function (props: Omit<T, "t">) {
     const t = useTranslator();

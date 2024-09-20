@@ -23,7 +23,7 @@ import {containsOneOrMoreGroups} from "./groupChecker";
 export async function cognitoLogin(
     credentials: Credentials,
     failOnNoLegalGroup?: boolean,
-    legalGroups?: string[]
+    legalGroups?: string[],
 ) {
     try {
         const response = await signIn({
@@ -54,7 +54,7 @@ export async function cognitoLogout() {
 
 export async function cognitoCheckIsAuthenticated(
     failOnNoLegalGroup?: boolean,
-    legalGroups?: string[]
+    legalGroups?: string[],
 ) {
     try {
         const response = await getCurrentUser();
@@ -70,7 +70,7 @@ export async function cognitoCheckIsAuthenticated(
 export async function cognitoCompletePassword(
     newPassword: string,
     failOnNoLegalGroup?: boolean,
-    legalGroups?: string[]
+    legalGroups?: string[],
 ) {
     try {
         const response = await confirmSignIn({challengeResponse: newPassword});
@@ -84,7 +84,7 @@ export async function cognitoCompletePassword(
 
 export async function cognitoRefreshToken(
     failOnNoLegalGroup?: boolean,
-    legalGroups?: string[]
+    legalGroups?: string[],
 ) {
     try {
         return await handleSessionResult(failOnNoLegalGroup, legalGroups);
@@ -96,7 +96,7 @@ export async function cognitoRefreshToken(
 async function handleSessionResult(
     failOnNoLegalGroup?: boolean,
     legalGroups?: string[],
-    forceRefresh?: boolean
+    forceRefresh?: boolean,
 ) {
     try {
         const {tokens} = await fetchAuthSession({forceRefresh: forceRefresh});
@@ -112,12 +112,11 @@ async function handleSessionResult(
                 throw new Error("UserGroupError"); // throw invalid user error (user is valid and authorized, but is not assigned any legal groups)
         }
 
-
         return new ValidUserInformation(
             idToken!,
             accessToken!,
             username.toString(),
-            groups as string[]
+            groups as string[],
         );
     } catch (error: any) {
         throw new AuthError(error);
@@ -129,7 +128,7 @@ export class ValidUserInformation {
         public idToken: JWT,
         public accessToken: JWT,
         public username: string,
-        public groups: string[]
+        public groups: string[],
     ) {
     }
 }

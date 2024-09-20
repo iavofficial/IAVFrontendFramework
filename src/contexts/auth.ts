@@ -28,7 +28,7 @@ export type FetchAuthedFunction = (
   url: string,
   token: JWT,
   //eslint-disable-next-line
-  settings?: Object
+  settings?: Object,
 ) => Promise<Response>;
 
 export interface UserDataBasic {
@@ -60,5 +60,5 @@ export interface AuthContextType extends AuthenticationProvider {
 }
 
 export const AuthContext = React.createContext<AuthContextType | undefined>(
-  undefined
+  undefined,
 );

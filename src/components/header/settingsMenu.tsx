@@ -129,7 +129,7 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
               ? 0
               : option1.label < option2.label
                 ? -1
-                : 1
+                : 1,
           ),
         });
       }
@@ -184,7 +184,7 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
         />
       </div>
     );
-  }
+  },
 );
 
 // Checks whether "dialect" is a dialect of "baseLang".

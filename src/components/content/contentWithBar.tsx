@@ -41,11 +41,11 @@ export type ContentLayoutAndStyleAndWithBarProps = ContentLayoutAndStyleProps &
   ContentWithBarProps;
 
 export const ContentWithBar = (
-  props: React.PropsWithChildren<ContentLayoutAndStyleAndWithBarProps>
+  props: React.PropsWithChildren<ContentLayoutAndStyleAndWithBarProps>,
 ) => {
   const selectedContentWrapper = useMemo(() => {
     return props.contentWrappers.find(
-      (currentWrapper) => currentWrapper.getId() === props.selectedId
+      (currentWrapper) => currentWrapper.getId() === props.selectedId,
     );
   }, [props.contentWrappers, props.selectedId]);
 

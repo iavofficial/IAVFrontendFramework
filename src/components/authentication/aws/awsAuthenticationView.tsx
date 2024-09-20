@@ -339,7 +339,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
                 <i
                   onClick={() =>
                     colorSettingsContext?.setDarkmode(
-                      !colorSettingsContext.darkmode
+                      !colorSettingsContext.darkmode,
                     )
                   }
                   style={{
@@ -367,7 +367,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
                   langContext?.selectLanguage(event.value.key);
                 }}
                 options={parseLanguageResourcesIntoDropdownFormat(
-                  langContext?.resources
+                  langContext?.resources,
                 )}
                 optionLabel="label"
               />
@@ -402,7 +402,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
           content={t(
             props.authOptions?.documentsLabelKey
               ? props.authOptions?.documentsLabelKey
-              : "Imprint"
+              : "Imprint",
           )}
           target={identifierWithDot}
           id="hover-image"

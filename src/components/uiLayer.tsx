@@ -1,18 +1,18 @@
 /**
  * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -20,30 +20,30 @@ import "primeflex/primeflex.css";
 import "primereact/resources/themes/nova/theme.css";
 import "primereact/resources/primereact.css";
 import "primeicons/primeicons.css";
-import React, {useContext, useEffect, useState} from "react";
-import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import "./css/constants.css";
 import "./css/globalChangesOnPrimeReactComponents.css";
 import "./css/globalSettings.css";
-import {BasicAuthenticationView} from "./authentication/default/basicAuthenticationView";
-import {SettingsMenuOptions} from "./header/settingsMenu";
-import {CookieBanner} from "./cookie/cookieBanner";
-import {AuthContext} from "../contexts/auth";
-import {AuthenticationViewProps} from "./authentication/authenticationViewProps";
-import {MainView} from "./mainView";
-import {DefaultImprint} from "./imprint/defaultImprint";
-import {TabAndContentWrapper} from "./navbar/wrappers/typesWrappers";
-import {NavbarSettingsProvider} from "../providers/navbarSettingsProvider";
-import {StaticCollapsedState} from "../types/navbarSettingsTypes";
+import { BasicAuthenticationView } from "./authentication/default/basicAuthenticationView";
+import { SettingsMenuOptions } from "./header/settingsMenu";
+import { CookieBanner } from "./cookie/cookieBanner";
+import { AuthContext } from "../contexts/auth";
+import { AuthenticationViewProps } from "./authentication/authenticationViewProps";
+import { MainView } from "./mainView";
+import { DefaultImprint } from "./imprint/defaultImprint";
+import { TabAndContentWrapper } from "./navbar/wrappers/typesWrappers";
+import { NavbarSettingsProvider } from "../providers/navbarSettingsProvider";
+import { StaticCollapsedState } from "../types/navbarSettingsTypes";
 
 import "./uiLayer.css";
 import "./css/fonts.css";
 import "./css/darkModeInputsWorkAround.css";
-import {HeaderOptions} from "./header/header";
-import {UserMenuOptions} from "./header/userMenu";
-import {setAcceptCookies} from "../utils/setAcceptCookies";
-import {useCookies} from "react-cookie";
-import {ACCEPTED_COOKIES_NAME} from "../constants";
+import { HeaderOptions } from "./header/header";
+import { UserMenuOptions } from "./header/userMenu";
+import { setAcceptCookies } from "../utils/setAcceptCookies";
+import { useCookies } from "react-cookie";
+import { ACCEPTED_COOKIES_NAME } from "../constants";
 
 export interface AuthOptions {
   backgroundImage?: string;
@@ -194,7 +194,13 @@ const Redirector = (props: RedirectorProps) => {
         navigate(props.startingPoint.valueOf());
       }
     }
-  }, [disableLogin, currentPath, userIsAuthenticated, navigate, props.startingPoint]);
+  }, [
+    disableLogin,
+    currentPath,
+    userIsAuthenticated,
+    navigate,
+    props.startingPoint,
+  ]);
 
   return <React.Fragment />;
 };

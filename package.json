@@ -29,6 +29,7 @@
     "test": "jest --passWithNoTests",
     "run-example": "./scripts/windows/setup_and_run_example.bat",
     "lint": "eslint src/**/*.{js,ts,tsx}",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json}\"",
     "release": "semantic-release"
   },
   "eslintConfig": {

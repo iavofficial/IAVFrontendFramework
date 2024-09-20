@@ -16,9 +16,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from "react";
-import { NavbarSettingsContext } from "../contexts/navbarContext";
-import { StaticCollapsedState } from "../types/navbarSettingsTypes";
+import React, {useState} from "react";
+import {NavbarSettingsContext} from "../contexts/navbarContext";
+import {StaticCollapsedState} from "../types/navbarSettingsTypes";
 
 interface Props {
   staticCollapsedState?: StaticCollapsedState;

@@ -16,12 +16,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useContext } from "react";
-import { AuthContext } from "../../../contexts/auth";
-import { containsOneOrMoreGroups } from "../../../utils/groupChecker";
-import { SimpleNavbarTab } from "./simpleNavbarTab/simpleNavbarTab";
-import { GroupableNavbarTab, NavbarTabProps } from "./typesNavbarTab";
-import { InjectedOptionsGroupableByWrapperToTab } from "../types/typesInjectedOptions";
+import React, {useContext} from "react";
+import {AuthContext} from "../../../contexts/auth";
+import {containsOneOrMoreGroups} from "../../../utils/groupChecker";
+import {SimpleNavbarTab} from "./simpleNavbarTab/simpleNavbarTab";
+import {GroupableNavbarTab, NavbarTabProps} from "./typesNavbarTab";
+import {InjectedOptionsGroupableByWrapperToTab} from "../types/typesInjectedOptions";
 
 export interface Props {
   permittedGroups: string[];

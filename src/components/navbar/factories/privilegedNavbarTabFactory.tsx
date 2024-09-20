@@ -17,8 +17,8 @@
  */
 
 import React from "react";
-import { PrivilegedNavbarTab } from "../tabs/privilegedNavbarTab";
-import { InjectedOptionsGroupableByWrapperToTab } from "../types/typesInjectedOptions";
+import {PrivilegedNavbarTab} from "../tabs/privilegedNavbarTab";
+import {InjectedOptionsGroupableByWrapperToTab} from "../types/typesInjectedOptions";
 
 export const privilegedNavbarTabFactory = (
   tabProps: Omit<

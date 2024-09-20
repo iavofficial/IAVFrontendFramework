@@ -16,12 +16,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { ReactElement } from "react";
-import { RouteProps } from "react-router-dom";
-import { TabGroup } from "../tabs/tabGroup/tabGroup";
-import { generateHashForValues } from "../../../utils/hash";
-import { TranslateFunctionType } from "../../../types/translationFunction";
-import { GroupableTabAndContentWrapper } from "./typesWrappers";
+import React, {ReactElement} from "react";
+import {RouteProps} from "react-router-dom";
+import {TabGroup} from "../tabs/tabGroup/tabGroup";
+import {generateHashForValues} from "../../../utils/hash";
+import {TranslateFunctionType} from "../../../types/translationFunction";
+import {GroupableTabAndContentWrapper} from "./typesWrappers";
 import {
   InjectedOptionsByGroupToWrapper,
   InjectedOptionsByNavbarToWrapper,

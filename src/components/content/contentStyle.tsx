@@ -17,10 +17,10 @@
  */
 
 import React from "react";
-import { PropsWithChildren, useContext } from "react";
-import { useStyleMap } from "./style_options/useStyleMap";
-import { ColorSettingsContext } from "../../contexts/colorsettings";
-import { StyleProps, StylesArray } from "./style_options/styleTypes";
+import {PropsWithChildren, useContext} from "react";
+import {useStyleMap} from "./style_options/useStyleMap";
+import {ColorSettingsContext} from "../../contexts/colorsettings";
+import {StyleProps, StylesArray} from "./style_options/styleTypes";
 
 export const ContentStyleStyles = {
   WRAPPER_FULL_WIDTH: "WRAPPER_FULL_WIDTH",

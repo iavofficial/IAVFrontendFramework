@@ -16,9 +16,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useRef } from "react";
-import { Tooltip } from "primereact/tooltip";
-import { GeneralGroupTabProps } from "./typesTabGroup";
+import React, {useRef} from "react";
+import {Tooltip} from "primereact/tooltip";
+import {GeneralGroupTabProps} from "./typesTabGroup";
 
 interface AdditionalProps {
   colors: {
@@ -35,7 +35,7 @@ export const TabGroupCollapsed = (
     <div
       ref={ref}
       className="default-nav-element-collapsed default-nav-group-collapsed w-full flex align-items-center"
-      style={{ width: "100%" }}
+      style={{width: "100%"}}
     >
       <i
         style={{

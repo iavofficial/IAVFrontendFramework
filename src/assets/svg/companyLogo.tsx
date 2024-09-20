@@ -23,7 +23,7 @@ interface Props {
 }
 
 const CompanyLogo: React.FC<Props> = (props) => {
-  const { fill } = props;
+  const {fill} = props;
 
   return (
     <svg

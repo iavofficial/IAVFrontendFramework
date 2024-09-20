@@ -23,7 +23,7 @@ interface Props {
 }
 
 const UserIcon: React.FC<Props> = (props) => {
-  const { fill } = props;
+  const {fill} = props;
 
   return (
     <svg

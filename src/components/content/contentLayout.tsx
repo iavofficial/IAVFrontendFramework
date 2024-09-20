@@ -16,8 +16,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { PropsWithChildren } from "react";
-import { ContentStyle, ContentStyleProps } from "./contentStyle";
+import React, {PropsWithChildren} from "react";
+import {ContentStyle, ContentStyleProps} from "./contentStyle";
 
 export enum LayoutBehaviour {
   // Parent div of content will have no specific layout class

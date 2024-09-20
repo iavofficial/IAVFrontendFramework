@@ -16,10 +16,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useContext } from "react";
-import { ContextMenu } from "primereact/contextmenu";
-import { AuthContext } from "../../contexts/auth";
-import { MenuItem } from "./settingsMenu";
+import React, {useContext} from "react";
+import {ContextMenu} from "primereact/contextmenu";
+import {AuthContext} from "../../contexts/auth";
+import {MenuItem} from "./settingsMenu";
 
 export interface Props {
   hideMenu: (e: React.KeyboardEvent) => void;

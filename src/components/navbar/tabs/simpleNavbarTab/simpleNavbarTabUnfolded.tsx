@@ -17,8 +17,8 @@
  */
 
 import React from "react";
-import { SvgIcon } from "../svgIcon";
-import { NestedNavbarTabProps } from "./simpleNavbarTab";
+import {SvgIcon} from "../svgIcon";
+import {NestedNavbarTabProps} from "./simpleNavbarTab";
 import "../tabs.css";
 
 export const SimpleNavbarTabUnfolded = (props: NestedNavbarTabProps) => {

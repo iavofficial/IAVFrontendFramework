@@ -17,13 +17,13 @@
  */
 
 import React from "react";
-import { Header, HeaderOptions } from "./header/header";
-import { Navbar } from "./navbar/navbar";
-import { DefaultImprint } from "./imprint/defaultImprint";
-import { SettingsMenuOptions } from "./header/settingsMenu";
-import { Outlet, Route, Routes } from "react-router-dom";
-import { TabAndContentWrapper } from "./navbar/wrappers/typesWrappers";
-import { UserMenuOptions } from "./header/userMenu";
+import {Header, HeaderOptions} from "./header/header";
+import {Navbar} from "./navbar/navbar";
+import {DefaultImprint} from "./imprint/defaultImprint";
+import {SettingsMenuOptions} from "./header/settingsMenu";
+import {Outlet, Route, Routes} from "react-router-dom";
+import {TabAndContentWrapper} from "./navbar/wrappers/typesWrappers";
+import {UserMenuOptions} from "./header/userMenu";
 
 interface MainViewProps {
   tabAndContentWrappers: TabAndContentWrapper[];
@@ -45,14 +45,14 @@ export const MainView = (props: MainViewProps) => {
         bottom: "0",
       }}
     >
-      <div style={{ flex: "0 0 auto" }}>
+      <div style={{flex: "0 0 auto"}}>
         <Header
           headerOptions={props.headerOptions}
           settingsMenuOptions={props.settingsMenuOptions}
           userMenuOptions={props.userMenuOptions}
         />
       </div>
-      <div style={{ display: "flex", flex: "1 1 auto", overflow: "auto" }}>
+      <div style={{display: "flex", flex: "1 1 auto", overflow: "auto"}}>
         <Navbar
           tabAndContentWrappers={props.tabAndContentWrappers}
           documentsLabelKey={props.documentsLabelKey}

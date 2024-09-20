@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { Component } from "react";
+import React, {Component} from "react";
 import {
   AuthContext,
   AWSAuthenticationProviderType,
@@ -31,7 +31,7 @@ import {
   cognitoRefreshToken,
   ValidUserInformation,
 } from "../../../utils/cognitoService";
-import { JWT } from "aws-amplify/auth";
+import {JWT} from "aws-amplify/auth";
 
 export interface Props {
   configureAmplify: () => void;
@@ -44,7 +44,7 @@ export interface State {
   isNewPasswordRequired: boolean;
   isLoading: boolean;
   userData: AWSUserData | undefined;
-  loginError: undefined | { [key: string]: any } | string;
+  loginError: undefined | {[key: string]: any} | string;
 }
 
 interface FetchSettings {
@@ -145,9 +145,7 @@ export class AWSAuthenticationProvider
     } catch (error) {
       this.logout();
       return new Promise<Response>((resolve) => {
-        resolve(
-          new Response(null, { status: 401, statusText: "Unauthorized" }),
-        );
+        resolve(new Response(null, {status: 401, statusText: "Unauthorized"}));
       });
     }
   };

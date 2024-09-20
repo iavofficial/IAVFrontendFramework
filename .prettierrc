@@ -6,7 +6,7 @@
   "printWidth": 80,
   "tabWidth": 2,
   "useTabs": false,
-  "bracketSpacing": true,
+  "bracketSpacing": false,
   "arrowParens": "always",
   "endOfLine": "auto",
   "quoteProps": "as-needed",

@@ -17,8 +17,8 @@
  */
 
 import React from "react";
-import { GeneralGroupTabProps } from "./typesTabGroup";
-import { SvgIcon } from "../svgIcon";
+import {GeneralGroupTabProps} from "./typesTabGroup";
+import {SvgIcon} from "../svgIcon";
 
 import "./tabGroupUnfolded.css";
 

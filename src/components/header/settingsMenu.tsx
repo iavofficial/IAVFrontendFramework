@@ -16,12 +16,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useContext } from "react";
-import { ContextMenu } from "primereact/contextmenu";
-import { LanguageContext, Translations } from "../../contexts/language";
-import { useTranslator } from "../internationalization/translators";
-import { RadioButton } from "primereact/radiobutton";
-import { ColorSettingsContext } from "../../contexts/colorsettings";
+import React, {useContext} from "react";
+import {ContextMenu} from "primereact/contextmenu";
+import {LanguageContext, Translations} from "../../contexts/language";
+import {useTranslator} from "../internationalization/translators";
+import {RadioButton} from "primereact/radiobutton";
+import {ColorSettingsContext} from "../../contexts/colorsettings";
 
 // ##############################################
 // Notice: The enclosed imports are copied from 'primereact/menuitem/MenuItem' as the path could not be resolved by the gitlab builder
@@ -178,7 +178,7 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
     return (
       <div onKeyDown={(e) => props.hideMenu(e)}>
         <ContextMenu
-          style={{ width: "14.5rem", padding: "0.25rem 1rem 0.25rem 1rem" }}
+          style={{width: "14.5rem", padding: "0.25rem 1rem 0.25rem 1rem"}}
           ref={ref}
           model={model}
         />

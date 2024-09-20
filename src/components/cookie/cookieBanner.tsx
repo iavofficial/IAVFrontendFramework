@@ -16,10 +16,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useContext, useState } from "react";
-import { Dialog } from "primereact/dialog";
-import { Button } from "primereact/button";
-import { useCookies } from "react-cookie";
+import React, {useContext, useState} from "react";
+import {Dialog} from "primereact/dialog";
+import {Button} from "primereact/button";
+import {useCookies} from "react-cookie";
 import {
   ACCEPTED_COOKIES_NAME,
   BLACK,
@@ -30,13 +30,13 @@ import {
   GREY6,
   WHITE,
 } from "../../constants";
-import { useCookiesAccepted } from "./cookieHooks";
-import { useTranslator } from "../internationalization/translators";
-import { setAcceptCookies } from "../../utils/setAcceptCookies";
-import { ColorSettingsContext } from "../../contexts/colorsettings";
+import {useCookiesAccepted} from "./cookieHooks";
+import {useTranslator} from "../internationalization/translators";
+import {setAcceptCookies} from "../../utils/setAcceptCookies";
+import {ColorSettingsContext} from "../../contexts/colorsettings";
 import makeStyles from "../content/style_options/makeStyles";
 
-const useStyles = makeStyles(({ darkMode }: { darkMode: boolean }) => ({
+const useStyles = makeStyles(({darkMode}: {darkMode: boolean}) => ({
   dialog: {
     borderRadius: "4px",
     border: `1px solid ${darkMode ? GREY5 : GREY2}`,
@@ -59,7 +59,7 @@ const useStyles = makeStyles(({ darkMode }: { darkMode: boolean }) => ({
 export const CookieBanner = () => {
   const colorContext = useContext(ColorSettingsContext);
 
-  const { classes } = useStyles({ darkMode: colorContext.darkmode });
+  const {classes} = useStyles({darkMode: colorContext.darkmode});
 
   const [visible, setVisible] = useState(!useCookiesAccepted());
 
@@ -83,20 +83,20 @@ export const CookieBanner = () => {
       closable={false}
       onHide={() => ""}
       footer={
-        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+        <div style={{display: "flex", justifyContent: "flex-end"}}>
           <Button
             icon="pi pi-check"
             label={t("allow_cookies_button")}
             onClick={acceptCookies}
-            style={{ backgroundColor: BLUE1, border: "none" }}
+            style={{backgroundColor: BLUE1, border: "none"}}
           />
         </div>
       }
     >
-      <div style={{ display: "flex", alignItems: "center" }}>
+      <div style={{display: "flex", alignItems: "center"}}>
         <span
           className={"pi pi-info-circle"}
-          style={{ marginRight: "10px", fontSize: "xx-large" }}
+          style={{marginRight: "10px", fontSize: "xx-large"}}
         />
         <span>{t("allow_cookies_disclaimer")}</span>
       </div>

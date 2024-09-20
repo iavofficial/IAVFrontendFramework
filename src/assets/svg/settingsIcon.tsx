@@ -23,7 +23,7 @@ interface Props {
 }
 
 const SettingsIcon: React.FC<Props> = (props) => {
-  const { fill } = props;
+  const {fill} = props;
 
   return (
     <svg

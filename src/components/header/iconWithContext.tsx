@@ -1,5 +1,5 @@
-import React, { PropsWithChildren } from "react";
-import { classNames } from "primereact/utils";
+import React, {PropsWithChildren} from "react";
+import {classNames} from "primereact/utils";
 
 interface Props {
   icon: string;
@@ -9,12 +9,12 @@ interface Props {
 }
 
 export const IconWithContext: React.FC<PropsWithChildren<Props>> = (props) => {
-  const { icon, iconClassName, style, onClick, children } = props;
+  const {icon, iconClassName, style, onClick, children} = props;
 
   return (
     <>
       <i
-        style={{ ...style, fontSize: 19, margin: "0 1rem", cursor: "pointer" }}
+        style={{...style, fontSize: 19, margin: "0 1rem", cursor: "pointer"}}
         className={classNames(icon, iconClassName)}
         onClick={onClick}
       />

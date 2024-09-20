@@ -16,10 +16,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useContext } from "react";
-import { Button } from "primereact/button";
-import { ProgressSpinner } from "primereact/progressspinner";
-import { ColorSettingsContext } from "../../contexts/colorsettings";
+import React, {useContext} from "react";
+import {Button} from "primereact/button";
+import {ProgressSpinner} from "primereact/progressspinner";
+import {ColorSettingsContext} from "../../contexts/colorsettings";
 
 interface Props {
   isLoading: boolean;
@@ -38,7 +38,7 @@ export const LoginButtonWithSpinner = (props: Props) => {
     <>
       {props.isLoading && (
         <ProgressSpinner
-          style={{ height: "30px", width: "30px", float: "left" }}
+          style={{height: "30px", width: "30px", float: "left"}}
         />
       )}
       <Button

@@ -16,9 +16,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useContext } from "react";
-import { ColorSettingsContext } from "../../contexts/colorsettings";
-import { ImprintText } from "./imprintText";
+import React, {useContext} from "react";
+import {ColorSettingsContext} from "../../contexts/colorsettings";
+import {ImprintText} from "./imprintText";
 import "../css/globalColors.css";
 
 export const DefaultImprint = () => {

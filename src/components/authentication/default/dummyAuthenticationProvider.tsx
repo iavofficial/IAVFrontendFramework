@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { Component } from "react";
+import React, {Component} from "react";
 import {
   AuthContext,
   AuthenticationProvider,
@@ -25,7 +25,7 @@ import {
 } from "../../../contexts/auth";
 
 export interface Props {
-  additionalContextValues?: { [key: string]: any };
+  additionalContextValues?: {[key: string]: any};
 }
 
 export interface State {
@@ -55,7 +55,7 @@ export class DummyAuthenticationProvider
     this.setState({
       isRefreshing: true,
       hasAuthenticated: true,
-      userData: { username: credentials.email },
+      userData: {username: credentials.email},
     });
   };
 

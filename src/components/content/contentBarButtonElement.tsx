@@ -16,9 +16,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useContext, useState } from "react";
-import { ColorSettingsContext } from "../../contexts/colorsettings";
-import { DEFAULT_ELEMENTSIZE } from "../../constants";
+import React, {useContext, useState} from "react";
+import {ColorSettingsContext} from "../../contexts/colorsettings";
+import {DEFAULT_ELEMENTSIZE} from "../../constants";
 
 export interface Props {
   handleOnClickEvent: () => void;

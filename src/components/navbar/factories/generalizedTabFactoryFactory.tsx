@@ -17,9 +17,9 @@ import React from "react";
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { ComponentTypeMinProps } from "../../../types/typesReact";
-import { SimpleNavbarTab } from "../tabs/simpleNavbarTab/simpleNavbarTab";
-import { InjectedOptionsObject } from "../types/typesInjectedOptions";
+import {ComponentTypeMinProps} from "../../../types/typesReact";
+import {SimpleNavbarTab} from "../tabs/simpleNavbarTab/simpleNavbarTab";
+import {InjectedOptionsObject} from "../types/typesInjectedOptions";
 
 export const generalizedTabFactoryFactory = <OptionType,>(
   NavbarTabComponent: ComponentTypeMinProps<InjectedOptionsObject<OptionType>>,
@@ -30,7 +30,7 @@ export const generalizedTabFactoryFactory = <OptionType,>(
       "frameworkInjectedOptions"
     >,
   ) => {
-    return (props: { frameworkInjectedOptions: OptionType }) => {
+    return (props: {frameworkInjectedOptions: OptionType}) => {
       return (
         <NavbarTabComponent
           frameworkInjectedOptions={props.frameworkInjectedOptions}

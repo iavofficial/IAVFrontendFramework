@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { AuthenticationViewColorOptions } from "../colorOptionTypes";
+import {AuthenticationViewColorOptions} from "../colorOptionTypes";
 import {
   DARK_AUTH_COMPANY_TEXT_COLOR,
   DARK_AUTH_FULL_SCREEN_BACKGROUND_COLOR,
@@ -43,7 +43,7 @@ import {
   LIGHT_AUTH_PW_REQUIREMENTS_COLOR,
   LIGHT_AUTH_THEME_TOGGLER_COLOR,
 } from "../defaultColors";
-import { determineSelectedColorHof } from "./determineSelectedColor";
+import {determineSelectedColorHof} from "./determineSelectedColor";
 
 export const getCurrentColorsAuthenticationView = (
   darkmodeIsEnabled: boolean,

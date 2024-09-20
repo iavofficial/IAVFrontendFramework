@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { HeaderColorOptions } from "../colorOptionTypes";
+import {HeaderColorOptions} from "../colorOptionTypes";
 import {
   DARK_HEADER_BACKGROUND_COLOR,
   DARK_HEADER_SETTINGS_ICON_COLOR,
@@ -25,7 +25,7 @@ import {
   LIGHT_HEADER_SETTINGS_ICON_COLOR,
   LIGHT_HEADER_USER_ICON_COLOR,
 } from "../defaultColors";
-import { determineSelectedColorHof } from "./determineSelectedColor";
+import {determineSelectedColorHof} from "./determineSelectedColor";
 
 export const getCurrentColorsHeader = (
   darkmodeIsEnabled: boolean,

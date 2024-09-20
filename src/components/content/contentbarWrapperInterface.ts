@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { ReactElement } from "react";
+import React, {ReactElement} from "react";
 
 export interface ContentbarWrapperInterface {
   getContentbarElement(

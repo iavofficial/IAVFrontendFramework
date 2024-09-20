@@ -16,9 +16,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { ReactElement } from "react";
-import { generateHashOfLength } from "../../utils/hash";
-import { ContentbarWrapperInterface } from "./contentbarWrapperInterface";
+import React, {ReactElement} from "react";
+import {generateHashOfLength} from "../../utils/hash";
+import {ContentbarWrapperInterface} from "./contentbarWrapperInterface";
 import "./contentbar.css";
 
 export class CustomContentbarWrapper implements ContentbarWrapperInterface {

@@ -17,7 +17,7 @@
  */
 
 import React from "react";
-import { TranslateFunctionType } from "../types/translationFunction";
+import {TranslateFunctionType} from "../types/translationFunction";
 
 //eslint-disable-next-line
 export interface TranslationKeys extends Object {

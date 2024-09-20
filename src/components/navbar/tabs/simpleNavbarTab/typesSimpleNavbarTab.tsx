@@ -16,10 +16,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { ReactElement } from "react";
+import {ReactElement} from "react";
 
 export interface SimpleNavbarTabProps {
-  style: { [key: string]: string | number };
+  style: {[key: string]: string | number};
   setHovering: (hovering: boolean) => void;
   hovering: boolean;
   active: boolean;

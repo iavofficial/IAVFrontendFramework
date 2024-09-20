@@ -16,15 +16,15 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useContext, useState } from "react";
-import { DEFAULT_ELEMENTSIZE, GREY5, WHITE } from "../../constants";
-import { generateHashOfLength } from "../../utils/hash";
-import { Tooltip } from "primereact/tooltip";
+import React, {useContext, useState} from "react";
+import {DEFAULT_ELEMENTSIZE, GREY5, WHITE} from "../../constants";
+import {generateHashOfLength} from "../../utils/hash";
+import {Tooltip} from "primereact/tooltip";
 import "./contentbar.css";
-import { ColorSettingsContext } from "../../contexts/colorsettings";
-import { TranslationFunction } from "../../types/translationFunction";
-import { useTranslator } from "../internationalization/translators";
-import { determineCurrentColor } from "../../utils/determineCurrentColor";
+import {ColorSettingsContext} from "../../contexts/colorsettings";
+import {TranslationFunction} from "../../types/translationFunction";
+import {useTranslator} from "../internationalization/translators";
+import {determineCurrentColor} from "../../utils/determineCurrentColor";
 
 export interface Props {
   displayName: string | TranslationFunction;
@@ -149,7 +149,7 @@ export const DefaultContentSelectionElement = (props: Props) => {
           <div className={"m-auto font-semibold "}>{name}</div>
         )}
         {props.closable === true ? (
-          <div style={{ position: "absolute", right: "5px" }}>
+          <div style={{position: "absolute", right: "5px"}}>
             <i
               onClick={(event) => handleOnCloseEvent(event)}
               style={closingIconStyle}

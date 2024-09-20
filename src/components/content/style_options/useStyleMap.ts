@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useMemo } from "react";
+import {useMemo} from "react";
 
 /**
  * This hook takes in an array of styles which should be applied and generates an array of classes and styles
@@ -30,11 +30,11 @@ import { useMemo } from "react";
  * @returns
  */
 // The generic type T (all the styles) should have string keys a only with strings as it`s value
-export const useStyleMap = <T extends { [key: string]: string }>(
+export const useStyleMap = <T extends {[key: string]: string}>(
   classesMap?: Partial<Record<keyof T, string | number>>,
   stylesMap?: Partial<Record<keyof T, object>>,
   appliedStyles?: T[keyof T][],
-  styleDependencies?: { [key: string]: T[keyof T][] },
+  styleDependencies?: {[key: string]: T[keyof T][]},
 ) => {
   const finalAppliedStyles = useMemo(() => {
     let tempAppliedStyles: T[keyof T][] = appliedStyles ?? [];
@@ -70,7 +70,7 @@ export const useStyleMap = <T extends { [key: string]: string }>(
       if (stylesMap?.hasOwnProperty(styleOption)) {
         // @ts-ignore styleOption has to be a key of the object since this is the condition.
         const style = stylesMap[styleOption];
-        styles = { ...styles, ...style };
+        styles = {...styles, ...style};
       }
     });
     return styles;

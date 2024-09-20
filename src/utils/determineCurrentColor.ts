@@ -30,8 +30,8 @@ export const determineCurrentColorInsideGroup = (
     insideActiveGroupColor: string;
   },
 ) => {
-  const { isActive, isHovering, isDisabled, isInsideActiveGroup } = state;
-  const { activeColor, hoverColor, defaultColor, insideActiveGroupColor } =
+  const {isActive, isHovering, isDisabled, isInsideActiveGroup} = state;
+  const {activeColor, hoverColor, defaultColor, insideActiveGroupColor} =
     colors;
 
   if (isActive && !isDisabled) {

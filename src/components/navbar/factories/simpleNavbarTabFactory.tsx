@@ -17,8 +17,8 @@
  */
 
 import React from "react";
-import { SimpleNavbarTab } from "../tabs/simpleNavbarTab/simpleNavbarTab";
-import { InjectedOptionsGroupableByWrapperToTab } from "../types/typesInjectedOptions";
+import {SimpleNavbarTab} from "../tabs/simpleNavbarTab/simpleNavbarTab";
+import {InjectedOptionsGroupableByWrapperToTab} from "../types/typesInjectedOptions";
 
 export const simpleNavbarTabFactory = (
   tabProps: Omit<

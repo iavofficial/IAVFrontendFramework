@@ -16,12 +16,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { ContentAreaColorOptions } from "../colorOptionTypes";
+import {ContentAreaColorOptions} from "../colorOptionTypes";
 import {
   DARK_CONTENT_AREA_BACKGROUND_COLOR,
   LIGHT_CONTENT_AREA_BACKGROUND_COLOR,
 } from "../defaultColors";
-import { determineSelectedColorHof } from "./determineSelectedColor";
+import {determineSelectedColorHof} from "./determineSelectedColor";
 
 export const getCurrentColorsContentArea = (
   darkmodeIsEnabled: boolean,

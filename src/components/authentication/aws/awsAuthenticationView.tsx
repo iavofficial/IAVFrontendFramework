@@ -16,24 +16,24 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { FormEvent, useContext, useState } from "react";
-import { Link } from "react-router-dom";
-import { BLUE3, PADDING_GAB, WHITE } from "../../../constants";
-import { AuthContext } from "../../../contexts/auth";
-import { LoginButtonWithSpinner } from "../loginButtonWithSpinner";
-import { useTranslator } from "../../internationalization/translators";
-import { AuthenticationViewProps } from "../authenticationViewProps";
+import React, {FormEvent, useContext, useState} from "react";
+import {Link} from "react-router-dom";
+import {BLUE3, PADDING_GAB, WHITE} from "../../../constants";
+import {AuthContext} from "../../../contexts/auth";
+import {LoginButtonWithSpinner} from "../loginButtonWithSpinner";
+import {useTranslator} from "../../internationalization/translators";
+import {AuthenticationViewProps} from "../authenticationViewProps";
 import "../authenticationView.css";
 import "../../css/globalColors.css";
 import loginBackgroundLightMode from "../../../assets/png/login_background_lightMode.png";
 import loginBackgroundDarkMode from "../../../assets/png/login_background_darkMode.png";
-import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
-import { LanguageContext } from "../../../contexts/language";
-import { parseLanguageResourcesIntoDropdownFormat } from "../../../utils/parseLanguageResourcesIntoDropdownFormat";
-import { ColorSettingsContext } from "../../../contexts/colorsettings";
-import { generateHashOfLength } from "../../../utils/hash";
-import { Tooltip } from "primereact/tooltip";
-import { AppLogoPlaceholder } from "../../appLogoPlaceholder";
+import {Dropdown, DropdownChangeEvent} from "primereact/dropdown";
+import {LanguageContext} from "../../../contexts/language";
+import {parseLanguageResourcesIntoDropdownFormat} from "../../../utils/parseLanguageResourcesIntoDropdownFormat";
+import {ColorSettingsContext} from "../../../contexts/colorsettings";
+import {generateHashOfLength} from "../../../utils/hash";
+import {Tooltip} from "primereact/tooltip";
+import {AppLogoPlaceholder} from "../../appLogoPlaceholder";
 import CompanyLogo from "../../../assets/svg/companyLogo";
 
 export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
@@ -76,11 +76,11 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
     if (authContext?.isNewPasswordRequired) {
       authContext?.completePassword(password);
     } else {
-      authContext?.login({ email: email, password: password });
+      authContext?.login({email: email, password: password});
     }
   };
 
-  const getErrorText = (error: undefined | { [key: string]: any } | string) => {
+  const getErrorText = (error: undefined | {[key: string]: any} | string) => {
     if (error) {
       if (typeof error === "object") {
         if (error.code) {
@@ -119,11 +119,8 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
   );
 
   const NewPasswordForm = (
-    <div style={{ width: "100%", height: "100%" }}>
-      <div
-        style={{ margin: "0px 24px 0px 24px" }}
-        className={"flex flex-column"}
-      >
+    <div style={{width: "100%", height: "100%"}}>
+      <div style={{margin: "0px 24px 0px 24px"}} className={"flex flex-column"}>
         <div
           style={{
             color: passwortRequirementsTextColor,
@@ -190,7 +187,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
       onSubmit={submit}
     >
       <div
-        style={{ margin: "40px 24px 0px 24px" }}
+        style={{margin: "40px 24px 0px 24px"}}
         className={"flex flex-column"}
       >
         <label
@@ -245,7 +242,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
         <div>
           <LoginButtonWithSpinner isLoading={authContext?.isLoading} />
         </div>
-        <div style={{ marginTop: "20px" }} className="invalid">
+        <div style={{marginTop: "20px"}} className="invalid">
           {getErrorText(authContext?.loginError)}
         </div>
       </div>
@@ -327,9 +324,9 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
         }}
       >
         <div>{header(props)}</div>
-        <div className="flex flex-column" style={{ justifyContent: "center" }}>
+        <div className="flex flex-column" style={{justifyContent: "center"}}>
           <div
-            style={{ width: "100%", padding: "24px 24px 0px 0px" }}
+            style={{width: "100%", padding: "24px 24px 0px 0px"}}
             className="flex align-items-center justify-content-end"
           >
             {props.authOptions?.preventDarkmode === true ? (

@@ -16,24 +16,24 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { FormEvent, useContext, useState } from "react";
-import { Link } from "react-router-dom";
-import { BLUE3, PADDING_GAB, WHITE } from "../../../constants";
-import { AuthContext } from "../../../contexts/auth";
-import { LoginButtonWithSpinner } from "../loginButtonWithSpinner";
-import { useTranslator } from "../../internationalization/translators";
-import { AuthenticationViewProps } from "../authenticationViewProps";
+import React, {FormEvent, useContext, useState} from "react";
+import {Link} from "react-router-dom";
+import {BLUE3, PADDING_GAB, WHITE} from "../../../constants";
+import {AuthContext} from "../../../contexts/auth";
+import {LoginButtonWithSpinner} from "../loginButtonWithSpinner";
+import {useTranslator} from "../../internationalization/translators";
+import {AuthenticationViewProps} from "../authenticationViewProps";
 import "../authenticationView.css";
 import "../../css/globalColors.css";
 import loginBackgroundLightMode from "../../../assets/png/login_background_lightMode.png";
 import loginBackgroundDarkMode from "../../../assets/png/login_background_darkMode.png";
-import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
-import { LanguageContext } from "../../../contexts/language";
-import { parseLanguageResourcesIntoDropdownFormat } from "../../../utils/parseLanguageResourcesIntoDropdownFormat";
-import { ColorSettingsContext } from "../../../contexts/colorsettings";
-import { generateHashOfLength } from "../../../utils/hash";
-import { Tooltip } from "primereact/tooltip";
-import { AppLogoPlaceholder } from "../../appLogoPlaceholder";
+import {Dropdown, DropdownChangeEvent} from "primereact/dropdown";
+import {LanguageContext} from "../../../contexts/language";
+import {parseLanguageResourcesIntoDropdownFormat} from "../../../utils/parseLanguageResourcesIntoDropdownFormat";
+import {ColorSettingsContext} from "../../../contexts/colorsettings";
+import {generateHashOfLength} from "../../../utils/hash";
+import {Tooltip} from "primereact/tooltip";
+import {AppLogoPlaceholder} from "../../appLogoPlaceholder";
 import CompanyLogo from "../../../assets/svg/companyLogo";
 import TextField from "../../helper/textfield/TextField";
 
@@ -72,7 +72,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
   const submit = (event: FormEvent<HTMLFormElement>) => {
     setTriedToSubmit(true);
     event.preventDefault();
-    authContext?.login({ email: email, password: password });
+    authContext?.login({email: email, password: password});
   };
 
   const companyLogoDefault = (props: AuthenticationViewProps) => (
@@ -167,10 +167,10 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
         <div>{header(props)}</div>
         <div
           className="flex flex-column justify-content-center align-items-center"
-          style={{ marginBottom: "30px" }}
+          style={{marginBottom: "30px"}}
         >
           <div
-            style={{ width: "100%", padding: "24px 24px 0px 0px" }}
+            style={{width: "100%", padding: "24px 24px 0px 0px"}}
             className="flex align-items-center justify-content-end"
           >
             {props.authOptions?.preventDarkmode === true ? (
@@ -224,7 +224,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
             onSubmit={submit}
           >
             <div
-              style={{ margin: "40px 24px 0px 24px" }}
+              style={{margin: "40px 24px 0px 24px"}}
               className={"flex flex-column"}
             >
               <TextField

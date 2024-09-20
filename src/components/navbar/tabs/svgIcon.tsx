@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { ReactNode } from "react";
+import React, {ReactNode} from "react";
 
 export interface Props {
   element: ReactNode;

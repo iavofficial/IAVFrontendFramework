@@ -16,9 +16,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { CSSProperties, PropsWithChildren, useContext } from "react";
+import React, {CSSProperties, PropsWithChildren, useContext} from "react";
 import "../css/globalColors.css";
-import { ColorSettingsContext } from "../../contexts/colorsettings";
+import {ColorSettingsContext} from "../../contexts/colorsettings";
 
 import "./contentCell.css";
 
@@ -72,7 +72,7 @@ export function ContentCell(props: PropsWithChildren<Props>) {
 
   return (
     <div className={`content-cell ${columnClass}`}>
-      <div className={"flex " + paddings} style={{ height: "100%" }}>
+      <div className={"flex " + paddings} style={{height: "100%"}}>
         <div
           style={innerDivStyle}
           className={

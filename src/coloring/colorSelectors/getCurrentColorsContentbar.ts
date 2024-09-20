@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { ContentbarColorOptions } from "../colorOptionTypes";
+import {ContentbarColorOptions} from "../colorOptionTypes";
 import {
   DARK_CONTENT_BAR_BACKGROUND_COLOR,
   DARK_CONTENT_BAR_BUTTON_DEFAULT_COLOR,
@@ -47,7 +47,7 @@ import {
   LIGHT_CONTENT_TAB_TEXT_DEFAULT_COLOR,
   LIGHT_CONTENT_TAB_TEXT_HOVER_COLOR,
 } from "../defaultColors";
-import { determineSelectedColorHof } from "./determineSelectedColor";
+import {determineSelectedColorHof} from "./determineSelectedColor";
 
 export const getCurrentColorsContentbar = (
   darkmodeIsEnabled: boolean,

@@ -16,14 +16,14 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { PropsWithChildren } from "react";
+import React, {PropsWithChildren} from "react";
 
 interface Props {
   condition: boolean | undefined;
 }
 
 const If: React.FC<PropsWithChildren<Props>> = (props) => {
-  const { condition, children } = props;
+  const {condition, children} = props;
 
   return <>{condition ? children : null}</>;
 };

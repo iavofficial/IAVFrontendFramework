@@ -1,6 +1,6 @@
-import React, { PropsWithChildren } from "react";
+import React, {PropsWithChildren} from "react";
 import makeStyles from "../content/style_options/makeStyles";
-import { classNames } from "primereact/utils";
+import {classNames} from "primereact/utils";
 
 const useStyles = makeStyles(() => ({
   wrapper: {
@@ -15,9 +15,9 @@ interface Props {
 }
 
 const HeaderIcon: React.FC<PropsWithChildren<Props>> = (props) => {
-  const { onClick, onKeyDown, style, children } = props;
+  const {onClick, onKeyDown, style, children} = props;
 
-  const { classes } = useStyles();
+  const {classes} = useStyles();
 
   return (
     <div

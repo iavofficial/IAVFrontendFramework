@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { ReactElement } from "react";
+import {ReactElement} from "react";
 
 export type NavbarTabFactory<OptionType> = (
   frameworkInjectedOptions: OptionType,

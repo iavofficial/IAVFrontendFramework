@@ -17,7 +17,7 @@
  */
 
 import React from "react";
-import { ColorOptions, SelectedColors } from "../coloring/colorOptionTypes";
+import {ColorOptions, SelectedColors} from "../coloring/colorOptionTypes";
 
 export interface ColorsettingsType {
   darkmode: boolean;

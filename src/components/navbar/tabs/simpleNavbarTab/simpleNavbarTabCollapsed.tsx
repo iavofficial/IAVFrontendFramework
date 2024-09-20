@@ -16,10 +16,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useRef } from "react";
-import { SvgIcon } from "../svgIcon";
-import { Tooltip } from "primereact/tooltip";
-import { NestedNavbarTabProps } from "./simpleNavbarTab";
+import React, {useRef} from "react";
+import {SvgIcon} from "../svgIcon";
+import {Tooltip} from "primereact/tooltip";
+import {NestedNavbarTabProps} from "./simpleNavbarTab";
 import "../tabs.css";
 
 export const SimpleNavbarTabCollapsed = (props: NestedNavbarTabProps) => {

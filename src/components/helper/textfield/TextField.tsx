@@ -22,9 +22,9 @@ import React, {
   useContext,
   useMemo,
 } from "react";
-import { InputText } from "primereact/inputtext";
-import { ColorSettingsContext } from "../../../contexts/colorsettings";
-import { RED } from "../../../constants";
+import {InputText} from "primereact/inputtext";
+import {ColorSettingsContext} from "../../../contexts/colorsettings";
+import {RED} from "../../../constants";
 
 interface Props {
   className?: string | undefined;
@@ -93,7 +93,7 @@ const TextField: React.FC<Props> = (props) => {
         autoFocus={autoFocus}
         autoComplete={autoComplete}
       />
-      <small id={`${id}-help`} style={{ height: "17px", color: RED }}>
+      <small id={`${id}-help`} style={{height: "17px", color: RED}}>
         {errorMessage}
       </small>
     </div>

@@ -30,51 +30,53 @@ import {useMemo} from "react";
  * @returns
  */
 // The generic type T (all the styles) should have string keys a only with strings as it`s value
-export const useStyleMap = <T extends {[key: string]: string}>(
-  classesMap?: Partial<Record<keyof T, string | number>>,
-  stylesMap?: Partial<Record<keyof T, object>>,
-  appliedStyles?: T[keyof T][],
-  styleDependencies?: {[key: string]: T[keyof T][]},
+export const useStyleMap = <T extends { [key: string]: string }>(
+    classesMap?: Partial<Record<keyof T, string | number>>,
+    stylesMap?: Partial<Record<keyof T, object>>,
+    appliedStyles?: T[keyof T][],
+    styleDependencies?: { [key: string]: T[keyof T][] },
 ) => {
-  const finalAppliedStyles = useMemo(() => {
-    let tempAppliedStyles: T[keyof T][] = appliedStyles ?? [];
+    const finalAppliedStyles = useMemo(() => {
+        let tempAppliedStyles: T[keyof T][] = appliedStyles ?? [];
 
-    if (!appliedStyles || !styleDependencies) {
-      return tempAppliedStyles;
-    }
+        if (!appliedStyles || !styleDependencies) {
+            return tempAppliedStyles;
+        }
 
-    Object.keys(styleDependencies).forEach((key) => {
-      if (tempAppliedStyles.includes(key as T[keyof T])) {
-        tempAppliedStyles = [...tempAppliedStyles, ...styleDependencies[key]];
-      }
-    });
+        Object.keys(styleDependencies).forEach((key) => {
+            if (tempAppliedStyles.includes(key as T[keyof T])) {
+                tempAppliedStyles = [...tempAppliedStyles, ...styleDependencies[key]];
+            }
+        });
 
-    return tempAppliedStyles;
-  }, [appliedStyles, styleDependencies]);
+        return tempAppliedStyles;
+    }, [appliedStyles, styleDependencies]);
 
-  const classNames = useMemo(() => {
-    let classNames = "";
-    finalAppliedStyles.forEach((styleOption) => {
-      if (classesMap?.hasOwnProperty(styleOption)) {
-        // @ts-ignore styleOption has to be a key of the object since this is the condition.
-        const className = classesMap[styleOption];
-        classNames = `${classNames} ${className}`;
-      }
-    });
-    return classNames;
-  }, [classesMap, finalAppliedStyles]);
+    const classNames = useMemo(() => {
+        let classNames = "";
+        finalAppliedStyles.forEach((styleOption) => {
+            //eslint-disable-next-line
+            if (classesMap?.hasOwnProperty(styleOption)) {
+                // @ts-ignore styleOption has to be a key of the object since this is the condition.
+                const className = classesMap[styleOption];
+                classNames = `${classNames} ${className}`;
+            }
+        });
+        return classNames;
+    }, [classesMap, finalAppliedStyles]);
 
-  const styles = useMemo(() => {
-    let styles = {};
-    finalAppliedStyles.forEach((styleOption) => {
-      if (stylesMap?.hasOwnProperty(styleOption)) {
-        // @ts-ignore styleOption has to be a key of the object since this is the condition.
-        const style = stylesMap[styleOption];
-        styles = {...styles, ...style};
-      }
-    });
-    return styles;
-  }, [finalAppliedStyles, stylesMap]);
+    const styles = useMemo(() => {
+        let styles = {};
+        finalAppliedStyles.forEach((styleOption) => {
+            //eslint-disable-next-line
+            if (stylesMap?.hasOwnProperty(styleOption)) {
+                // @ts-ignore styleOption has to be a key of the object since this is the condition.
+                const style = stylesMap[styleOption];
+                styles = {...styles, ...style};
+            }
+        });
+        return styles;
+    }, [finalAppliedStyles, stylesMap]);
 
-  return [classNames, styles] as [string, object];
+    return [classNames, styles] as [string, object];
 };

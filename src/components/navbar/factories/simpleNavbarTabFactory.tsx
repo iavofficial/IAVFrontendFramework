@@ -21,19 +21,20 @@ import {SimpleNavbarTab} from "../tabs/simpleNavbarTab/simpleNavbarTab";
 import {InjectedOptionsGroupableByWrapperToTab} from "../types/typesInjectedOptions";
 
 export const simpleNavbarTabFactory = (
-  tabProps: Omit<
-    React.ComponentProps<typeof SimpleNavbarTab>,
-    "frameworkInjectedOptions"
-  >,
+    tabProps: Omit<
+        React.ComponentProps<typeof SimpleNavbarTab>,
+        "frameworkInjectedOptions"
+    >,
 ) => {
-  return (props: {
-    frameworkInjectedOptions: InjectedOptionsGroupableByWrapperToTab;
-  }) => {
-    return (
-      <SimpleNavbarTab
-        frameworkInjectedOptions={props.frameworkInjectedOptions}
-        {...tabProps}
-      />
-    );
-  };
+    //eslint-disable-next-line
+    return (props: {
+        frameworkInjectedOptions: InjectedOptionsGroupableByWrapperToTab;
+    }) => {
+        return (
+            <SimpleNavbarTab
+                frameworkInjectedOptions={props.frameworkInjectedOptions}
+                {...tabProps}
+            />
+        );
+    };
 };

@@ -23,9 +23,14 @@ interface Props {
 }
 
 const If: React.FC<PropsWithChildren<Props>> = (props) => {
-  const {condition, children} = props;
 
-  return <>{condition ? children : null}</>;
+    const {condition, children} = props;
+
+    return (
+        <>
+            {condition ? children : null}
+        </>
+    );
 };
 
 export default If;

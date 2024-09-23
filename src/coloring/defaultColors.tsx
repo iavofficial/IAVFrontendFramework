@@ -16,21 +16,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {
-  BLACK,
-  BLUE0,
-  BLUE3,
-  GREY1,
-  GREY4,
-  GREY5,
-  GREY6,
-  GREY_MENU_SPECIAL_1,
-  WHITE,
-} from "../constants";
+import {BLACK, BLUE0, BLUE3, GREY1, GREY4, GREY5, GREY6, GREY_MENU_SPECIAL_1, WHITE,} from "../constants";
 
 //. Header
 export const LIGHT_HEADER_BACKGROUND_COLOR = BLUE0;
-export const DARK_HEADER_BACKGROUND_COLOR = GREY5;
+export const DARK_HEADER_BACKGROUND_COLOR = GREY6;
 
 export const LIGHT_HEADER_SETTINGS_ICON_COLOR = WHITE;
 export const DARK_HEADER_SETTINGS_ICON_COLOR = WHITE;
@@ -185,7 +175,7 @@ export const DARK_CONTENT_TAB_ICON_ACTIVE_COLOR = WHITE;
 
 //. Content cell
 export const LIGHT_CONTENT_CELL_BACKGROUND_COLOR = WHITE;
-export const DARK_CONTENT_CELL_BACKGROUND_COLOR = GREY5;
+export const DARK_CONTENT_CELL_BACKGROUND_COLOR = GREY6;
 
 //. Authentication view
 export const LIGHT_AUTH_HEADER_BACKGROUND_COLOR = BLUE0;

@@ -16,7 +16,17 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {BLACK, BLUE0, BLUE3, GREY1, GREY4, GREY5, GREY6, GREY_MENU_SPECIAL_1, WHITE,} from "../constants";
+import {
+  BLACK,
+  BLUE0,
+  BLUE3,
+  GREY1,
+  GREY4,
+  GREY5,
+  GREY6,
+  GREY_MENU_SPECIAL_1,
+  WHITE,
+} from "../constants";
 
 //. Header
 export const LIGHT_HEADER_BACKGROUND_COLOR = BLUE0;

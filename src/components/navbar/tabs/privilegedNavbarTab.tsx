@@ -16,30 +16,33 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, {useContext} from 'react';
-import {AuthContext} from '../../../contexts/auth';
-import {containsOneOrMoreGroups} from '../../../utils/groupChecker';
-import {SimpleNavbarTab} from './simpleNavbarTab/simpleNavbarTab';
-import {GroupableNavbarTab} from './typesNavbarTab';
+import React, {useContext} from "react";
+import {AuthContext} from "../../../contexts/auth";
+import {containsOneOrMoreGroups} from "../../../utils/groupChecker";
+import {SimpleNavbarTab} from "./simpleNavbarTab/simpleNavbarTab";
+import {GroupableNavbarTab, NavbarTabProps} from "./typesNavbarTab";
+import {InjectedOptionsGroupableByWrapperToTab} from "../types/typesInjectedOptions";
 
 export interface Props {
-    permittedGroups: string[];
+  permittedGroups: string[];
 }
 
-export const PrivilegedNavbarTab: GroupableNavbarTab<Props> = (props) => {
-    const authContext = useContext(AuthContext);
-    const permitted = containsOneOrMoreGroups(
-        authContext?.getUserGroups(),
-        props.permittedGroups
-    );
-    return permitted ? (
-        <SimpleNavbarTab
-            icon={props.icon}
-            disabled={props.disabled}
-            name={props.name}
-            frameworkInjectedOptions={props.frameworkInjectedOptions}
-        />
-    ) : (
-        <></>
-    );
+export const PrivilegedNavbarTab: GroupableNavbarTab<Props> = (
+  props: NavbarTabProps<InjectedOptionsGroupableByWrapperToTab> & Props,
+) => {
+  const authContext = useContext(AuthContext);
+  const permitted = containsOneOrMoreGroups(
+    authContext?.getUserGroups(),
+    props.permittedGroups,
+  );
+  return permitted ? (
+    <SimpleNavbarTab
+      icon={props.icon}
+      disabled={props.disabled}
+      name={props.name}
+      frameworkInjectedOptions={props.frameworkInjectedOptions}
+    />
+  ) : (
+    <></>
+  );
 };

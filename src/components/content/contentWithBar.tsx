@@ -16,16 +16,16 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useMemo } from "react";
+import React, {useMemo} from "react";
 import "../css/globalColors.css";
 import {
   ContentBar,
   ContentBarStyles,
   ContentBarStylesArray,
 } from "./contentBar";
-import { BasicContentbarWrapper } from "./basicContentbarWrapper";
-import { CustomContentbarWrapper } from "./customContentbarWrapper";
-import { ContentLayout, ContentLayoutAndStyleProps } from "./contentLayout";
+import {BasicContentbarWrapper} from "./basicContentbarWrapper";
+import {CustomContentbarWrapper} from "./customContentbarWrapper";
+import {ContentLayout, ContentLayoutAndStyleProps} from "./contentLayout";
 
 export type ContentWithBarProps = {
   contentWrappers: BasicContentbarWrapper[] | CustomContentbarWrapper[];
@@ -41,11 +41,11 @@ export type ContentLayoutAndStyleAndWithBarProps = ContentLayoutAndStyleProps &
   ContentWithBarProps;
 
 export const ContentWithBar = (
-  props: React.PropsWithChildren<ContentLayoutAndStyleAndWithBarProps>
+  props: React.PropsWithChildren<ContentLayoutAndStyleAndWithBarProps>,
 ) => {
   const selectedContentWrapper = useMemo(() => {
     return props.contentWrappers.find(
-      (currentWrapper) => currentWrapper.getId() === props.selectedId
+      (currentWrapper) => currentWrapper.getId() === props.selectedId,
     );
   }, [props.contentWrappers, props.selectedId]);
 
@@ -63,10 +63,7 @@ export const ContentWithBar = (
   }, [props.contentStyle]);
 
   return (
-    <div
-      className="flex flex-column"
-      style={{ width: "100%", overflow: "auto" }}
-    >
+    <div className="flex flex-column" style={{width: "100%", overflow: "auto"}}>
       {props.contentWrappers.length >= 1 && (
         <ContentBar
           selectedId={props.selectedId}

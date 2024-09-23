@@ -16,9 +16,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { ReactElement } from "react";
-import { TranslateFunctionType } from "../../../types/translationFunction";
-import { InjectedOptionsGroupableByWrapperToTab } from "../types/typesInjectedOptions";
+import React, {ReactElement} from "react";
+import {TranslateFunctionType} from "../../../types/translationFunction";
+import {InjectedOptionsGroupableByWrapperToTab} from "../types/typesInjectedOptions";
 
 /**
  * This interface contains the properties which have to be passed to a navigation tab.

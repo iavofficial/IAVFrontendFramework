@@ -16,7 +16,13 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, {useCallback, useContext, useEffect, useRef, useState,} from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import "../css/globalColors.css";
 import {ColorSettingsContext} from "../../contexts/colorsettings";
 import {BasicContentbarWrapper} from "./basicContentbarWrapper";
@@ -49,6 +55,17 @@ export type PropsContentBar = StyleProps<typeof ContentBarStyles> & {
 };
 
 export const ContentBar = (props: PropsContentBar) => {
+  const {
+    contentElements,
+    addable,
+    jumpToEndOfContentBar,
+    selectedId,
+    onClickAddButton,
+    onClickLeftSlideButton,
+    onClickRightSlideButton,
+    appliedStyles,
+  } = props;
+
   const colorSettingsContext = useContext(ColorSettingsContext);
   const navbarSettingsContext = useContext(NavbarSettingsContext);
   const contentRef = useRef<HTMLDivElement | null>(null);
@@ -70,11 +87,12 @@ export const ContentBar = (props: PropsContentBar) => {
   const styleDependencies = {
     [ContentBarStyles.SET_SPACING_COLOR]: [ContentBarStyles.SPACING],
   };
+  //@ts-ignore
   const [classNames, styles] = useStyleMap(
     classesMap,
     stylesMap,
-    props.appliedStyles,
-    styleDependencies
+    appliedStyles,
+    styleDependencies,
   );
 
   const [preventInitialJumpToEnd, setPreventInitialJumpToEnd] = useState(true);
@@ -86,27 +104,27 @@ export const ContentBar = (props: PropsContentBar) => {
 
   const handleJumpToEnd = useCallback(() => {
     if (
-      props.contentElements.length > amountOfRenderedTabElements &&
+      contentElements.length > amountOfRenderedTabElements &&
       !preventInitialJumpToEnd
     ) {
-      return props.contentElements.length - amountOfRenderedTabElements;
+      return contentElements.length - amountOfRenderedTabElements;
     } else {
       return startRenderElements;
     }
   }, [
     amountOfRenderedTabElements,
     preventInitialJumpToEnd,
-    props.contentElements.length,
+    contentElements.length,
     startRenderElements,
   ]);
 
   useEffect(() => {
-    if (props.jumpToEndOfContentBar) {
+    if (jumpToEndOfContentBar) {
       setStartRenderElements(handleJumpToEnd);
       setPreventInitialJumpToEnd(false);
     }
     //eslint-disable-next-line
-  }, [props.contentElements.length]);
+  }, [contentElements.length]);
 
   useEffect(() => {
     window.addEventListener("resize", handleDivResize);
@@ -114,24 +132,32 @@ export const ContentBar = (props: PropsContentBar) => {
     return () => {
       window.removeEventListener("resize", handleDivResize);
     };
+    //eslint-disable-next-line
   }, []);
 
   const lastElementIsVisible = useCallback(() => {
     return (
       startRenderElements + amountOfRenderedTabElements ===
-        props.contentElements.length &&
-      props.contentElements.length > amountOfRenderedTabElements
+        contentElements.length &&
+      contentElements.length > amountOfRenderedTabElements
     );
   }, [
     amountOfRenderedTabElements,
-    props.contentElements.length,
+    contentElements.length,
     startRenderElements,
   ]);
+
+  const handleDivResize = useCallback(() => {
+    const currentContentRef = contentRef.current;
+    if (currentContentRef) {
+      setWidth(currentContentRef.clientWidth);
+    }
+  }, [contentRef]);
 
   useEffect(() => {
     if (navbarSettingsContext?.navbarCollapsed === true) {
       setStartRenderElements((startRenderElements) =>
-        lastElementIsVisible() ? startRenderElements - 1 : startRenderElements
+        lastElementIsVisible() ? startRenderElements - 1 : startRenderElements,
       );
       setAmountOfRenderedTabElements(6);
       handleDivResize();
@@ -139,42 +165,46 @@ export const ContentBar = (props: PropsContentBar) => {
       setAmountOfRenderedTabElements(5);
       handleDivResize();
     }
-  }, [lastElementIsVisible, navbarSettingsContext?.navbarCollapsed]);
+  }, [
+    handleDivResize,
+    lastElementIsVisible,
+    navbarSettingsContext?.navbarCollapsed,
+  ]);
 
-  const handleSlideLeftEvent = () => {
+  const handleSlideLeftEvent = useCallback(() => {
     if (startRenderElements > 0) {
-      if (props.onClickLeftSlideButton) {
-        props.onClickLeftSlideButton();
+      if (onClickLeftSlideButton) {
+        onClickLeftSlideButton();
       }
 
       setStartRenderElements((startRenderElements) => startRenderElements - 1);
     }
-  };
+  }, [startRenderElements, onClickLeftSlideButton]);
 
-  const handleOnClickAddEvent = () => {
-    if (props.onClickAddButton) {
-      props.onClickAddButton();
+  const handleOnClickAddEvent = useCallback(() => {
+    if (onClickAddButton) {
+      onClickAddButton();
     }
-  };
+  }, [onClickAddButton]);
 
-  function handleDivResize() {
-    if (contentRef.current !== null) {
-      setWidth(contentRef.current.clientWidth);
-    }
-  }
-
-  const handleSlideRightEvent = () => {
+  const handleSlideRightEvent = useCallback(() => {
     if (
       startRenderElements + amountOfRenderedTabElements <
-      props.contentElements.length
+      contentElements.length
     ) {
-      if (props.onClickRightSlideButton) {
-        props.onClickRightSlideButton();
+      if (onClickRightSlideButton) {
+        onClickRightSlideButton();
       }
-
       setStartRenderElements((startRenderElements) => startRenderElements + 1);
     }
-  };
+  }, [
+    amountOfRenderedTabElements,
+    contentElements.length,
+    onClickRightSlideButton,
+    startRenderElements,
+  ]);
+
+  const isNavbarCollapsed = navbarSettingsContext?.navbarCollapsed ?? false;
 
   return (
     <div
@@ -199,53 +229,49 @@ export const ContentBar = (props: PropsContentBar) => {
           <ContentBarButtonElement
             handleOnClickEvent={handleSlideLeftEvent}
             icon={"pi pi-angle-left"}
-            isVisible={
-              props.contentElements.length > amountOfRenderedTabElements
-            }
+            isVisible={contentElements.length > amountOfRenderedTabElements}
           />
-          {props.contentElements.length > amountOfRenderedTabElements
-            ? props.contentElements
+          {contentElements.length > amountOfRenderedTabElements
+            ? contentElements
                 .slice(
                   startRenderElements,
-                  startRenderElements + amountOfRenderedTabElements
+                  startRenderElements + amountOfRenderedTabElements,
                 )
                 .map((element) =>
                   element.getContentbarElement(
                     calculateWidth(
-                      navbarSettingsContext?.navbarCollapsed!,
+                      isNavbarCollapsed,
                       width - (2 * DEFAULT_ELEMENTSIZE + 2 * PADDING_GAB),
-                      !!props.addable,
-                      props.contentElements.length > amountOfRenderedTabElements
+                      !!addable,
+                      contentElements.length > amountOfRenderedTabElements,
                     ),
-                    props.selectedId,
-                    props.contentElements[0].getId()
-                  )
+                    selectedId,
+                    contentElements[0].getId(),
+                  ),
                 )
-            : props.contentElements.map((element) =>
+            : contentElements.map((element) =>
                 element.getContentbarElement(
                   calculateWidth(
-                    navbarSettingsContext?.navbarCollapsed!,
+                    isNavbarCollapsed,
                     width - (2 * DEFAULT_ELEMENTSIZE + 2 * PADDING_GAB),
-                    !!props.addable,
-                    props.contentElements.length > amountOfRenderedTabElements
+                    !!addable,
+                    contentElements.length > amountOfRenderedTabElements,
                   ),
-                  props.selectedId,
-                  props.contentElements[0].getId()
-                )
+                  selectedId,
+                  contentElements[0].getId(),
+                ),
               )}
         </div>
         <div className="flex align-items-center">
           <ContentBarButtonElement
             handleOnClickEvent={handleOnClickAddEvent}
             icon={"pi pi-plus"}
-            isVisible={props.addable}
+            isVisible={addable}
           />
           <ContentBarButtonElement
             handleOnClickEvent={handleSlideRightEvent}
             icon={"pi pi-angle-right"}
-            isVisible={
-              props.contentElements.length > amountOfRenderedTabElements
-            }
+            isVisible={contentElements.length > amountOfRenderedTabElements}
           />
         </div>
       </div>

@@ -1,30 +1,30 @@
 /**
  * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { ReactElement, useContext, useEffect, useState } from "react";
+import React, {ReactElement, useContext, useEffect, useState} from "react";
 import "../../navbar.css";
-import { useTranslator } from "../../../internationalization/translators";
-import { ColorSettingsContext } from "../../../../contexts/colorsettings";
-import { TranslateFunctionType } from "../../../../types/translationFunction";
-import { TabGroupCollapsed } from "./tabGroupCollapsed";
-import { TabGroupUnfolded } from "./tabGroupUnfolded";
-import { GroupableTabAndContentWrapper } from "../../wrappers/typesWrappers";
-import { InjectedOptionsByGroupToWrapper } from "../../types/typesInjectedOptions";
+import {useTranslator} from "../../../internationalization/translators";
+import {ColorSettingsContext} from "../../../../contexts/colorsettings";
+import {TranslateFunctionType} from "../../../../types/translationFunction";
+import {TabGroupCollapsed} from "./tabGroupCollapsed";
+import {TabGroupUnfolded} from "./tabGroupUnfolded";
+import {GroupableTabAndContentWrapper} from "../../wrappers/typesWrappers";
+import {InjectedOptionsByGroupToWrapper} from "../../types/typesInjectedOptions";
 import {
   determineCurrentColor,
   determineCurrentColorInsideGroup,
@@ -174,7 +174,7 @@ export const TabGroup = (props: Props) => {
         onClick={() => {
           if (props.collapsible) {
             setGroupTabCollapsed(
-              (prevGroupTabCollapsed: boolean) => !prevGroupTabCollapsed
+              (prevGroupTabCollapsed: boolean) => !prevGroupTabCollapsed,
             );
           }
         }}
@@ -186,7 +186,7 @@ export const TabGroup = (props: Props) => {
           wrapper.getNavbarComponent({
             groupActive: !groupTabCollapsed,
             navbarCollapsed: props.frameworkInjectedOptions.navbarCollapsed,
-          })
+          }),
         )
       ) : (
         <React.Fragment />

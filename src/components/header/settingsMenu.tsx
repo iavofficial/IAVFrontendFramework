@@ -16,12 +16,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useContext } from "react";
-import { ContextMenu } from "primereact/contextmenu";
-import { LanguageContext, Translations } from "../../contexts/language";
-import { useTranslator } from "../internationalization/translators";
-import { RadioButton } from "primereact/radiobutton";
-import { ColorSettingsContext } from "../../contexts/colorsettings";
+import React, {useContext} from "react";
+import {ContextMenu} from "primereact/contextmenu";
+import {LanguageContext, Translations} from "../../contexts/language";
+import {useTranslator} from "../internationalization/translators";
+import {RadioButton} from "primereact/radiobutton";
+import {ColorSettingsContext} from "../../contexts/colorsettings";
 
 // ##############################################
 // Notice: The enclosed imports are copied from 'primereact/menuitem/MenuItem' as the path could not be resolved by the gitlab builder
@@ -33,12 +33,14 @@ interface MenuItemCommandParams {
 }
 
 interface MenuItemOptions {
-  onClick(event: React.SyntheticEvent): void;
   className: string;
   labelClassName: string;
   iconClassName: string;
   element: React.ReactNode;
   props: any;
+
+  onClick(event: React.SyntheticEvent): void;
+
   [key: string]: any;
 }
 
@@ -57,8 +59,10 @@ export interface MenuItem {
   separator?: boolean;
   style?: object;
   className?: string;
-  command?(e: MenuItemCommandParams): void;
   template?: MenuItemTemplateType;
+
+  command?(e: MenuItemCommandParams): void;
+
   [key: string]: any;
 }
 
@@ -73,6 +77,7 @@ interface Props {
   menuOptions?: SettingsMenuOptions;
 }
 
+//eslint-disable-next-line
 export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
   (props, ref) => {
     const colorSettingsContext = useContext(ColorSettingsContext);
@@ -129,7 +134,7 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
               ? 0
               : option1.label < option2.label
                 ? -1
-                : 1
+                : 1,
           ),
         });
       }
@@ -178,13 +183,13 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
     return (
       <div onKeyDown={(e) => props.hideMenu(e)}>
         <ContextMenu
-          style={{ width: "14.5rem", padding: "0.25rem 1rem 0.25rem 1rem" }}
+          style={{width: "14.5rem", padding: "0.25rem 1rem 0.25rem 1rem"}}
           ref={ref}
           model={model}
         />
       </div>
     );
-  }
+  },
 );
 
 // Checks whether "dialect" is a dialect of "baseLang".

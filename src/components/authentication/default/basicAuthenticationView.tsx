@@ -1,18 +1,18 @@
 /**
  * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -72,7 +72,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
   const submit = (event: FormEvent<HTMLFormElement>) => {
     setTriedToSubmit(true);
     event.preventDefault();
-    authContext?.login({ email: email, password: password });
+    authContext?.login({email: email, password: password});
   };
 
   const companyLogoDefault = (props: AuthenticationViewProps) => (
@@ -167,10 +167,10 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
         <div>{header(props)}</div>
         <div
           className="flex flex-column justify-content-center align-items-center"
-          style={{ marginBottom: "30px" }}
+          style={{marginBottom: "30px"}}
         >
           <div
-            style={{ width: "100%", padding: "24px 24px 0px 0px" }}
+            style={{width: "100%", padding: "24px 24px 0px 0px"}}
             className="flex align-items-center justify-content-end"
           >
             {props.authOptions?.preventDarkmode === true ? (
@@ -180,7 +180,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                 <i
                   onClick={() =>
                     colorSettingsContext?.setDarkmode(
-                      !colorSettingsContext.darkmode
+                      !colorSettingsContext.darkmode,
                     )
                   }
                   style={{
@@ -209,7 +209,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                   langContext?.selectLanguage(event.value.key);
                 }}
                 options={parseLanguageResourcesIntoDropdownFormat(
-                  langContext?.resources
+                  langContext?.resources,
                 )}
                 optionLabel="label"
               />
@@ -224,22 +224,22 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
             onSubmit={submit}
           >
             <div
-              style={{ margin: "40px 24px 0px 24px" }}
+              style={{margin: "40px 24px 0px 24px"}}
               className={"flex flex-column"}
             >
-                <TextField
-                  style={{
-                      marginBottom: "30px",
-                      backgroundColor: inputFieldBackgroundColor,
-                      color: inputFieldTextColor,
-                  }}
-                  label={t("Email_address")}
-                  id="email"
-                  name="email"
-                  required={true}
-                  autoFocus={true}
-                  value={email.valueOf()}
-                  onChange={(event) => setEmail(event.target.value)}
+              <TextField
+                style={{
+                  marginBottom: "30px",
+                  backgroundColor: inputFieldBackgroundColor,
+                  color: inputFieldTextColor,
+                }}
+                label={t("Email_address")}
+                id="email"
+                name="email"
+                required={true}
+                autoFocus={true}
+                value={email.valueOf()}
+                onChange={(event) => setEmail(event.target.value)}
               />
               <TextField
                 label={t("Password")}
@@ -247,7 +247,12 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                 name="password"
                 type="password"
                 required={true}
-                error={triedToSubmit && (authContext?.isRefreshing ? !authContext.isRefreshing() : false)}
+                error={
+                  triedToSubmit &&
+                  (authContext?.isRefreshing
+                    ? !authContext.isRefreshing()
+                    : false)
+                }
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 helperText={t("wrong_password")}
@@ -285,7 +290,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
           content={t(
             props.authOptions?.documentsLabelKey
               ? props.authOptions?.documentsLabelKey
-              : "Imprint"
+              : "Imprint",
           )}
           target={identifierWithDot}
           id="hover-image"

@@ -52,7 +52,8 @@ you can contact the project maintainers via [mail](mailto:frontendframework@iav.
 ### Preconditions
 
 - For a more efficient way of providing patches, we suggest potential contributors to have
-  a [GitHub account](https://github.com/signup/free) and to have [Git installed](https://help.github.com/articles/set-up-git/).
+  a [GitHub account](https://github.com/signup/free) and to
+  have [Git installed](https://help.github.com/articles/set-up-git/).
 - For code contributions, a respective [issue](https://github.com/iavofficial/IAVFrontendFramework/issues) has been
   filed and assigned.
 - The IAV Frontend Framework is licensed
@@ -65,22 +66,24 @@ you can contact the project maintainers via [mail](mailto:frontendframework@iav.
 
 1. Please [fork](https://help.github.com/articles/fork-a-repo/) the development branch to your account and clone your
    new repository.
-   - The development branch represents the latest and verified development version of the IAV Frontend Framework.
-   - The name of the forked repository should contain the issue number the contribution will be made for.
-   - Each forked repository should be linked to just one issue to allow for separation of concerns.
-   - To prevent from later merge conflicts, the forked repository ahould be synchronised
-  ([Git-Rebase](https://docs.github.com/de/get-started/using-git/about-git-rebase)) with the development branch on a
-  regular basis.
+    - The development branch represents the latest and verified development version of the IAV Frontend Framework.
+    - The name of the forked repository should contain the issue number the contribution will be made for.
+    - Each forked repository should be linked to just one issue to allow for separation of concerns.
+    - To prevent from later merge conflicts, the forked repository ahould be synchronised
+      ([Git-Rebase](https://docs.github.com/de/get-started/using-git/about-git-rebase)) with the development branch on a
+      regular basis.
 
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--> Fork [this repository](https://github.com/iavofficial/IAVFrontendFramework) by clicking on the 
-  <a href="https://github.com/iavofficial/IAVFrontendFramework"><img src="https://img.icons8.com/ios/24/000000/code-fork.png"></a> 
-  symbol at the top right corner of the page.
-  
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--> Clone the forked repository.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+Fork [this repository](https://github.com/iavofficial/IAVFrontendFramework) by clicking on the
+<a href="https://github.com/iavofficial/IAVFrontendFramework"><img src="https://img.icons8.com/ios/24/000000/code-fork.png"></a>
+symbol at the top right corner of the page.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--> Clone the forked repository.
 
   ```bash
 git clone https://github.com/iavofficial/IAVFrontendFramework.git
 ```
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--> Navigate to the project directory.
 
 ```bash
@@ -94,12 +97,13 @@ git checkout -b <branchName>
 ```
 
 2. For setting up the development environment, we refer to the install section of
-   the [GitHub Pages](https://iavofficial.github.io/IAVFrontendFramework/installation-guide.html).
+   the [GitHub Pages](https://glowing-disco-ozrjjm1.pages.github.io/installation-guide.html).
 
 3. Implement your changes in your forked repository.
-   - The changes should be minimal and focussed on the linked issue.
-   - Each commit and its contained changes represents a logical unit. No mixture of different topics to be addressed.
-   - Each commit message contains the linked issue number, is meaningful and lists its changes in a comprehensible way. We refer to the [style guide](#style-guides-for-git-commit-messages) as guideline to write commit messages. 
+    - The changes should be minimal and focussed on the linked issue.
+    - Each commit and its contained changes represents a logical unit. No mixture of different topics to be addressed.
+    - Each commit message contains the linked issue number, is meaningful and lists its changes in a comprehensible way.
+      We refer to the [style guide](#style-guides-for-git-commit-messages) as guideline to write commit messages.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--> Stage your changes and commit.
 
@@ -118,8 +122,8 @@ git push origin <branchName>
 ```
 
 4. Test your changes and their integration.
-   - All tests must be documented and pushed to the forked repository.
-   - All new as well as regression tests must be executed successfully.
+    - All tests must be documented and pushed to the forked repository.
+    - All new as well as regression tests must be executed successfully.
 
 ### Submit Code Contribution
 
@@ -132,16 +136,16 @@ git push origin <branchName>
 ##### Process
 
 1. Create a [Pull Request](https://github.com/iavofficial/IAVFrontendFramework/pulls). For details on how to create
-a Pull Request, please refer to the [article from GitHub](https://help.github.com/articles/about-pull-requests/).
-   - Check the list of changes to comprise solely source files and their code changes, but no build artifacts.
+   a Pull Request, please refer to the [article from GitHub](https://help.github.com/articles/about-pull-requests/).
+    - Check the list of changes to comprise solely source files and their code changes, but no build artifacts.
 
 2. Link the submitted pull request to the issue the contribution is made for.
 
 3. Provide a comprehensive change description in the pull request summary to improve the understanding of the
-changes for the reviewers.
+   changes for the reviewers.
 
 4. The test result should be provided as screenshot to the pull request to support the validiation of the code
-contribution.
+   contribution.
 
 ### Reviews of Contribution
 
@@ -151,7 +155,7 @@ In the end, the verified pull request will be merged into the development branch
 
 ### GitHub Pages
 
-For the documentation, we refer to the [GitHub Pages](https://iavofficial.github.io/IAVFrontendFramework/) of the project.
+For the documentation, we refer to the [GitHub Pages](https://glowing-disco-ozrjjm1.pages.github.io/) of the project.
 
 ### Style Guides for Git Commit Messages
 
@@ -174,4 +178,5 @@ test:  add unit tests for user service
 |
 +-------> Type: fix, feat, docs, style, refactor or test.
 ```
+
 For more detailed reference to the above points, we refer to https://www.conventionalcommits.org/en/v1.0.0/.

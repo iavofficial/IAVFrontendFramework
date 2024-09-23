@@ -24,7 +24,7 @@ import {GroupableNavbarTab, NavbarTabProps} from "./typesNavbarTab";
 import {InjectedOptionsGroupableByWrapperToTab} from "../types/typesInjectedOptions";
 
 export interface Props {
-    permittedGroups: string[];
+  permittedGroups: string[];
 }
 
 export const PrivilegedNavbarTab: GroupableNavbarTab<Props> = (

@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { Component } from "react";
+import React, {Component} from "react";
 import {
   AuthContext,
   AWSAuthenticationProviderType,
@@ -31,7 +31,7 @@ import {
   cognitoRefreshToken,
   ValidUserInformation,
 } from "../../../utils/cognitoService";
-import { JWT } from "aws-amplify/auth";
+import {JWT} from "aws-amplify/auth";
 
 export interface Props {
   configureAmplify: () => void;
@@ -44,11 +44,12 @@ export interface State {
   isNewPasswordRequired: boolean;
   isLoading: boolean;
   userData: AWSUserData | undefined;
-  loginError: undefined | { [key: string]: any } | string;
+  loginError: undefined | {[key: string]: any} | string;
 }
 
 interface FetchSettings {
   headers?: Headers;
+
   [key: string]: any;
 }
 
@@ -56,6 +57,11 @@ export class AWSAuthenticationProvider
   extends Component<React.PropsWithChildren<Props>, State>
   implements AWSAuthenticationProviderType
 {
+  static defaultProps = {
+    failOnNoLegalGroup: false,
+    legalGroups: [],
+  };
+
   constructor(props: Props) {
     super(props);
 
@@ -67,11 +73,6 @@ export class AWSAuthenticationProvider
       loginError: undefined,
     };
   }
-
-  static defaultProps = {
-    failOnNoLegalGroup: false,
-    legalGroups: [],
-  };
 
   componentDidMount() {
     this.props.configureAmplify();
@@ -89,10 +90,11 @@ export class AWSAuthenticationProvider
       const result: ValidUserInformation | undefined =
         await cognitoCheckIsAuthenticated(
           this.props.failOnNoLegalGroup,
-          this.props.legalGroups
+          this.props.legalGroups,
         );
 
       this.processSuccessfulAuth(result!);
+      //eslint-disable-next-line
     } catch (error: any) {
       this.logout();
     }
@@ -106,7 +108,7 @@ export class AWSAuthenticationProvider
           settingsWithAuth.headers?.set(
             "Authorization",
             "Bearer " +
-              (token ? token : this.state.userData?.idToken.toString())
+              (token ? token : this.state.userData?.idToken.toString()),
           );
           return settingsWithAuth;
         }
@@ -135,16 +137,15 @@ export class AWSAuthenticationProvider
 
       return fetch(
         url,
-        this.generateSettingsWithAuthFrom(token, settings)
+        this.generateSettingsWithAuthFrom(token, settings),
       ).then((response) => {
         return response;
       });
+      //eslint-disable-next-line
     } catch (error) {
       this.logout();
       return new Promise<Response>((resolve) => {
-        resolve(
-          new Response(null, { status: 401, statusText: "Unauthorized" })
-        );
+        resolve(new Response(null, {status: 401, statusText: "Unauthorized"}));
       });
     }
   };
@@ -170,7 +171,7 @@ export class AWSAuthenticationProvider
       const result: ValidUserInformation | object = await cognitoLogin(
         credentials,
         this.props.failOnNoLegalGroup,
-        this.props.legalGroups
+        this.props.legalGroups,
       );
       if (result instanceof ValidUserInformation) {
         this.processSuccessfulAuth(result);
@@ -226,7 +227,7 @@ export class AWSAuthenticationProvider
     cognitoCompletePassword(
       newPassword,
       this.props.failOnNoLegalGroup as boolean,
-      this.props.legalGroups as string[]
+      this.props.legalGroups as string[],
     )
       .then((result: any) => this.processSuccessfulAuth(result))
       .catch((error: any) => this.logout(error))
@@ -241,7 +242,7 @@ export class AWSAuthenticationProvider
     try {
       const response = await cognitoRefreshToken(
         this.props.failOnNoLegalGroup,
-        this.props.legalGroups
+        this.props.legalGroups,
       );
 
       if (response instanceof ValidUserInformation) {

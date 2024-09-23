@@ -16,9 +16,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useContext } from "react";
-import { LanguageContext } from "../../contexts/language";
-import { TranslateFunctionType } from "../../types/translationFunction";
+import React, {useContext} from "react";
+import {LanguageContext} from "../../contexts/language";
+import {TranslateFunctionType} from "../../types/translationFunction";
 
 export function useTranslator() {
   const langContext = useContext(LanguageContext);
@@ -33,11 +33,12 @@ export interface AppliedTranslationProps {
 }
 
 export function applyTranslation<T extends AppliedTranslationProps>(
-  Component: React.ComponentType<T>
+  Component: React.ComponentType<T>,
 ) {
+  //eslint-disable-next-line
   return function (props: Omit<T, "t">) {
     const t = useTranslator();
-    const extendedProps = { t, ...props } as T;
+    const extendedProps = {t, ...props} as T;
     return <Component {...extendedProps} />;
   };
 }

@@ -16,9 +16,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useCookies } from "react-cookie";
+import {useCookies} from "react-cookie";
 
-import { ACCEPTED_COOKIES_NAME } from "../../constants";
+import {ACCEPTED_COOKIES_NAME} from "../../constants";
 
 export function useCookiesAccepted() {
   const [cookies] = useCookies([ACCEPTED_COOKIES_NAME]);

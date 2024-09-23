@@ -16,15 +16,15 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import i18n from "i18next";
-import { useTranslation } from "react-i18next";
+import {useTranslation} from "react-i18next";
 
 import translationEN from "../../assets/translations/en.json";
 import translationDE from "../../assets/translations/de.json";
-import { initI18next } from "./i18n";
-import { useCookiesAccepted } from "../cookie/cookieHooks";
-import { LanguageContext, Translations } from "../../contexts/language";
+import {initI18next} from "./i18n";
+import {useCookiesAccepted} from "../cookie/cookieHooks";
+import {LanguageContext, Translations} from "../../contexts/language";
 
 export interface LanguageOptions {
   fallbackLang: string;
@@ -38,9 +38,9 @@ interface Props {
 }
 
 export const DefaultLanguageProvider = (
-  props: React.PropsWithChildren<Props>
+  props: React.PropsWithChildren<Props>,
 ) => {
-  const { fallbackLang, initialLang } = props.languageOptions;
+  const {fallbackLang, initialLang} = props.languageOptions;
 
   const [resources, setResources] = useState({
     en: {
@@ -90,7 +90,7 @@ export const DefaultLanguageProvider = (
           Object.assign(
             resources[key as keyType].translation,
             // @ts-ignore Bug: Marks props.translations as possibly undfined although it's not.
-            props.translations[key].translation
+            props.translations[key].translation,
           );
         } else {
           // @ts-ignore Bug: Marks props.translations as possibly undfined although it's not.

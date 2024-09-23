@@ -1,34 +1,34 @@
 /**
  * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import React, {useContext} from "react";
+import {Link} from "react-router-dom";
 import "./navbar.css";
 import "../css/globalColors.css";
-import { TabAndContentWrapper } from "./wrappers/typesWrappers";
-import { useTranslator } from "../internationalization/translators";
-import { Tooltip } from "primereact/tooltip";
+import {TabAndContentWrapper} from "./wrappers/typesWrappers";
+import {useTranslator} from "../internationalization/translators";
+import {Tooltip} from "primereact/tooltip";
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
-import { ColorSettingsContext } from "../../contexts/colorsettings";
-import { calculateNavbarArrowFunctionColor } from "../../utils/calculateNavbarArrowColor";
-import { generateHashOfLength } from "../../utils/hash";
-import { NavbarSettingsContext } from "../../contexts/navbarContext";
+import {ColorSettingsContext} from "../../contexts/colorsettings";
+import {calculateNavbarArrowFunctionColor} from "../../utils/calculateNavbarArrowColor";
+import {generateHashOfLength} from "../../utils/hash";
+import {NavbarSettingsContext} from "../../contexts/navbarContext";
 import {
   DEFAULT_ELEMENTSIZE,
   GAB_NAVBAR_COLLAPSED,
@@ -63,7 +63,7 @@ export const Navbar = (props: Props) => {
   const identifierWithDot = "." + identifierLegal;
 
   return (
-    <div className="h-full" style={{ backgroundColor: navbarColor }}>
+    <div className="h-full" style={{backgroundColor: navbarColor}}>
       <div id="navbar" className="h-full">
         <SimpleBar
           style={{
@@ -85,7 +85,7 @@ export const Navbar = (props: Props) => {
             {props.tabAndContentWrappers.map((wrapper: TabAndContentWrapper) =>
               wrapper.getNavbarComponent({
                 navbarCollapsed: navbarSettingsContext.navbarCollapsed,
-              })
+              }),
             )}
           </>
         </SimpleBar>
@@ -126,7 +126,7 @@ export const Navbar = (props: Props) => {
 
           <Tooltip
             content={t(
-              props.documentsLabelKey ? props.documentsLabelKey : "Imprint"
+              props.documentsLabelKey ? props.documentsLabelKey : "Imprint",
             )}
             target={identifierWithDot}
             id="hover-image"
@@ -136,7 +136,7 @@ export const Navbar = (props: Props) => {
             <i
               onClick={() =>
                 navbarSettingsContext.setNavbarCollapsed(
-                  !navbarSettingsContext.navbarCollapsed
+                  !navbarSettingsContext.navbarCollapsed,
                 )
               }
               style={{
@@ -148,7 +148,7 @@ export const Navbar = (props: Props) => {
                   : ` 0px ${PADDING_GAB}px 0px 0px`,
               }}
               className={calculateNavbarArrowFunctionColor(
-                navbarSettingsContext.navbarCollapsed!
+                navbarSettingsContext.navbarCollapsed!,
               )}
             />
           )}

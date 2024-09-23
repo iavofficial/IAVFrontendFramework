@@ -16,15 +16,15 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useEffect, useState } from "react";
-import { ColorSettingsContext } from "../contexts/colorsettings";
-import { getCurrentColorsNavbar } from "./colorSelectors/getCurrentColorsNavbar";
-import { getCurrentColorsHeader } from "./colorSelectors/getCurrentColorsHeader";
-import { getCurrentColorsContentArea } from "./colorSelectors/getCurrentColorsContentArea";
-import { getCurrentColorsContentbar } from "./colorSelectors/getCurrentColorsContentbar";
-import { getCurrentColorsContentCell } from "./colorSelectors/getCurrentColorsContentCell";
-import { getCurrentColorsAuthenticationView } from "./colorSelectors/getCurrentColorsAuthenticationView";
-import { ColorOptions } from "./colorOptionTypes";
+import React, {useEffect, useState} from "react";
+import {ColorSettingsContext} from "../contexts/colorsettings";
+import {getCurrentColorsNavbar} from "./colorSelectors/getCurrentColorsNavbar";
+import {getCurrentColorsHeader} from "./colorSelectors/getCurrentColorsHeader";
+import {getCurrentColorsContentArea} from "./colorSelectors/getCurrentColorsContentArea";
+import {getCurrentColorsContentbar} from "./colorSelectors/getCurrentColorsContentbar";
+import {getCurrentColorsContentCell} from "./colorSelectors/getCurrentColorsContentCell";
+import {getCurrentColorsAuthenticationView} from "./colorSelectors/getCurrentColorsAuthenticationView";
+import {ColorOptions} from "./colorOptionTypes";
 
 export interface ColorProviderProps {
   colorOptions?: ColorOptions;
@@ -33,12 +33,12 @@ export interface ColorProviderProps {
 }
 
 export const ColorProvider = (
-  props: React.PropsWithChildren<ColorProviderProps>
+  props: React.PropsWithChildren<ColorProviderProps>,
 ) => {
   const [darkmode, setDarkmode] = useState(() =>
     localStorage.getItem("darkmode")
       ? Boolean(JSON.parse(localStorage.getItem("darkmode") as string))
-      : false
+      : false,
   );
 
   useEffect(() => {
@@ -73,32 +73,32 @@ export const ColorProvider = (
           header: getCurrentColorsHeader(
             darkmode,
             customColorsDisabledInCurrentMode,
-            props.colorOptions?.header ?? {}
+            props.colorOptions?.header ?? {},
           ),
           navbar: getCurrentColorsNavbar(
             darkmode,
             customColorsDisabledInCurrentMode,
-            props.colorOptions?.navbar ?? {}
+            props.colorOptions?.navbar ?? {},
           ),
           contentArea: getCurrentColorsContentArea(
             darkmode,
             customColorsDisabledInCurrentMode,
-            props.colorOptions?.contentArea ?? {}
+            props.colorOptions?.contentArea ?? {},
           ),
           contentbar: getCurrentColorsContentbar(
             darkmode,
             customColorsDisabledInCurrentMode,
-            props.colorOptions?.contentbar ?? {}
+            props.colorOptions?.contentbar ?? {},
           ),
           contentCell: getCurrentColorsContentCell(
             darkmode,
             customColorsDisabledInCurrentMode,
-            props.colorOptions?.contentCell ?? {}
+            props.colorOptions?.contentCell ?? {},
           ),
           authenticationView: getCurrentColorsAuthenticationView(
             darkmode,
             customColorsDisabledInCurrentMode,
-            props.colorOptions?.authenticationView ?? {}
+            props.colorOptions?.authenticationView ?? {},
           ),
         },
       }}

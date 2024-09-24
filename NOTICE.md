@@ -24,7 +24,7 @@ The project maintains the following source code repositories:
 
 ## Open Source Software Projects
 
-For the list of open source software projects the IAV Frontend Framework leverages, we refer to the package.json as well as SBOM.spdx in the root directory.
+For the list of open source software projects the IAV Frontend Framework leverages, we refer to the [package.json](./package.json) as well as [SBOM.spdx](./SBOM.spdx) in the root directory.
 
 The framework applies the open source component caniuse-lite in version 1.0.30001632 with CC-BY-4.0 licence. 
 The component is dynamically linked with its binary form. The main homepage is https://caniuse.com/, whereas the source code can be found at https://github.com/browserslist/caniuse-lite.

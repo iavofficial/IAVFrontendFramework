@@ -60,7 +60,7 @@ you can contact the project maintainers via [mail](mailto:frontendframework@iav.
   under [Apache 2.0](https://github.com/iavofficial/IAVFrontendFramework/blob/main/LICENSE).
   All changes will be released under the same licence.
 - Your changes should comply with the existing coding style for consistency.
-- We recommend to apply the provided [Prettier configuration](https://github.com/iavofficial/IAVFrontendFramework)
+- We recommend to apply the provided [Prettier configuration](https://github.com/iavofficial/IAVFrontendFramework/blob/main/.prettierrc)
 
 ### Implement Code Contribution
 

@@ -30,7 +30,7 @@ experienced developer, this framework is built to offer a seamless and efficient
 ## Getting Started
 
 To get started with the framework, please visit
-our [GitHub Pages site](https://glowing-disco-ozrjjm1.pages.github.io/) where you will find all the relevant
+our [GitHub Pages site](https://iavofficial.github.io/IAVFrontendFramework/) where you will find all the relevant
 information.
 
 ## Feedback and Ideas

@@ -66,12 +66,12 @@ you can contact the project maintainers via [mail](mailto:frontendframework@iav.
 
 1. Please [fork](https://help.github.com/articles/fork-a-repo/) the development branch to your account and clone your
    new repository.
-    - The development branch represents the latest and verified development version of the IAV Frontend Framework.
-    - The name of the forked repository should contain the issue number the contribution will be made for.
-    - Each forked repository should be linked to just one issue to allow for separation of concerns.
-    - To prevent from later merge conflicts, the forked repository ahould be synchronised
-      ([Git-Rebase](https://docs.github.com/de/get-started/using-git/about-git-rebase)) with the development branch on a
-      regular basis.
+   - The development branch represents the latest and verified development version of the IAV Frontend Framework.
+   - The name of the forked repository should contain the issue number the contribution will be made for.
+   - Each forked repository should be linked to just one issue to allow for separation of concerns.
+   - To prevent from later merge conflicts, the forked repository ahould be synchronised
+     ([Git-Rebase](https://docs.github.com/de/get-started/using-git/about-git-rebase)) with the development branch on a
+     regular basis.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
 Fork [this repository](https://github.com/iavofficial/IAVFrontendFramework) by clicking on the
@@ -80,7 +80,7 @@ symbol at the top right corner of the page.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--> Clone the forked repository.
 
-  ```bash
+```bash
 git clone https://github.com/iavofficial/IAVFrontendFramework.git
 ```
 
@@ -97,13 +97,13 @@ git checkout -b <branchName>
 ```
 
 2. For setting up the development environment, we refer to the install section of
-   the [GitHub Pages](https://glowing-disco-ozrjjm1.pages.github.io/installation-guide.html).
+   the [GitHub Pages](https://iavofficial.github.io/IAVFrontendFramework/installation-guide.html).
 
 3. Implement your changes in your forked repository.
-    - The changes should be minimal and focussed on the linked issue.
-    - Each commit and its contained changes represents a logical unit. No mixture of different topics to be addressed.
-    - Each commit message contains the linked issue number, is meaningful and lists its changes in a comprehensible way.
-      We refer to the [style guide](#style-guides-for-git-commit-messages) as guideline to write commit messages.
+   - The changes should be minimal and focussed on the linked issue.
+   - Each commit and its contained changes represents a logical unit. No mixture of different topics to be addressed.
+   - Each commit message contains the linked issue number, is meaningful and lists its changes in a comprehensible way.
+     We refer to the [style guide](#style-guides-for-git-commit-messages) as guideline to write commit messages.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--> Stage your changes and commit.
 
@@ -122,8 +122,8 @@ git push origin <branchName>
 ```
 
 4. Test your changes and their integration.
-    - All tests must be documented and pushed to the forked repository.
-    - All new as well as regression tests must be executed successfully.
+   - All tests must be documented and pushed to the forked repository.
+   - All new as well as regression tests must be executed successfully.
 
 ### Submit Code Contribution
 
@@ -137,7 +137,8 @@ git push origin <branchName>
 
 1. Create a [Pull Request](https://github.com/iavofficial/IAVFrontendFramework/pulls). For details on how to create
    a Pull Request, please refer to the [article from GitHub](https://help.github.com/articles/about-pull-requests/).
-    - Check the list of changes to comprise solely source files and their code changes, but no build artifacts.
+
+   - Check the list of changes to comprise solely source files and their code changes, but no build artifacts.
 
 2. Link the submitted pull request to the issue the contribution is made for.
 
@@ -155,12 +156,12 @@ In the end, the verified pull request will be merged into the development branch
 
 ### GitHub Pages
 
-For the documentation, we refer to the [GitHub Pages](https://glowing-disco-ozrjjm1.pages.github.io/) of the project.
+For the documentation, we refer to the [GitHub Pages](https://iavofficial.github.io/IAVFrontendFramework/) of the project.
 
 ### Style Guides for Git Commit Messages
 
 | **Type**     | **Description**                                                                     | **Example Commit Message**                        |
-|--------------|-------------------------------------------------------------------------------------|---------------------------------------------------|
+| ------------ | ----------------------------------------------------------------------------------- | ------------------------------------------------- |
 | **fix**      | Patches a bug in the codebase (PATCH in semantic versioning).                       | `fix: resolve issue with user authentication`     |
 | **feat**     | Introduces a new feature to the codebase (MINOR in semantic versioning).            | `feat: add user profile management feature`       |
 | **docs**     | Documentation only changes.                                                         | `docs: update README with new setup instructions` |

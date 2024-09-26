@@ -1,0 +1,22 @@
+<!--
+ Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ 
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ 
+ http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ 
+ SPDX-License-Identifier: Apache-2.0
+-->
+
+<svg id="B-icon-notification" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <rect id="Rechteck_309" width="24" height="24" fill="none"/>
+  <path id="notifications_FILL1_wght300_GRAD0_opsz24" d="M4.25,18.875v-1.5h2v-7.25A5.583,5.583,0,0,1,7.513,6.512,5.664,5.664,0,0,1,10.75,4.5V3.8a1.25,1.25,0,1,1,2.5,0v.7a5.669,5.669,0,0,1,3.238,2.012,5.585,5.585,0,0,1,1.262,3.613v7.25h2v1.5ZM12,21.8A1.793,1.793,0,0,1,10.2,20h3.6A1.793,1.793,0,0,1,12,21.8Z" transform="translate(0 -0.3)" fill="current"/>
+</svg>

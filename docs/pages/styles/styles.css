@@ -184,6 +184,15 @@ button {
     padding-left: 4px;
 }
 
+.header-subtitle {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #696969;
+    margin-top: 6px;
+    padding-left: 12px;
+}
+
+
 .header-version {
     margin-left: 16px;
     font-size: 1rem;

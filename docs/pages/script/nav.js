@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
             fetch("../../package.json")
                 .then(response => response.json())
                 .then(packageData => {
-                        document.getElementById("framework-version-value").innerHTML = packageData.version;
+                        document.getElementById("framework-version-value").innerHTML = `v.${packageData.version}`;
                     }
                 )
         });

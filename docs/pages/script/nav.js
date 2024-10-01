@@ -78,3 +78,16 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetch('./pages/html/header.html')
+        .then(response => response.text())
+        .then(data => {
+            fetch("../../package.json")
+                .then(response => response.json())
+                .then(packageData => {
+                        document.getElementById("framework-version-value").innerHTML = packageData.version;
+                    }
+                )
+        });
+})

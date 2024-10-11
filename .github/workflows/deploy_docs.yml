@@ -1,0 +1,73 @@
+name: Deploy Docs on Release
+
+on:
+  push:
+    branches:
+      - main
+  release:
+    types: [ published ]
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  deploy-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up Git user
+        run: |
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          git config --global user.name "${{ github.actor }}"
+
+      - name: Get package version
+        id: version
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "PACKAGE_VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Switch to gh-pages branch
+        run: |
+          git fetch origin
+          if git rev-parse --verify origin/gh-pages; then
+            git checkout gh-pages
+          else
+            git checkout --orphan gh-pages
+            git rm -rf .
+            echo "Initialized gh-pages branch" > README.md
+            git add README.md
+            git commit -m "Initialize gh-pages branch"
+            git push origin gh-pages
+          fi
+
+      - name: Create a new version folder in gh-pages
+        run: |
+          mkdir -p $PACKAGE_VERSION
+          git add $PACKAGE_VERSION
+
+      - name: Copy /docs content to version folder
+        run: |
+          git checkout main -- docs/
+          cp -r docs/* $PACKAGE_VERSION/
+          git add $PACKAGE_VERSION
+
+      - name: Move index, nav.js, pages.css, and styles.css to root
+        run: |
+          mv $PACKAGE_VERSION/index.html index.html
+          mv $PACKAGE_VERSION/pages/script/nav.js nav.js
+          mv $PACKAGE_VERSION/pages/styles/pages.css pages.css
+          mv $PACKAGE_VERSION/pages/styles/styles.css styles.css
+          git add index.html nav.js pages.css styles.css
+
+      - name: Append current version to version-list.md
+        run: |
+          echo -e "\n$PACKAGE_VERSION" >> version-list.md
+          git add version-list.md
+          git commit -m "Append version $PACKAGE_VERSION to version-list.md"
+          git push origin gh-pages

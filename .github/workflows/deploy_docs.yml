@@ -10,7 +10,7 @@ on:
       - main
 
 permissions:
-  contents: write  # Erlaubt das Pushen von Commits
+  contents: write
 
 jobs:
   deploy-docs:
@@ -19,7 +19,7 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0 # Ensures we have access to all branches
+          fetch-depth: 0
 
       - name: Set up Git user
         run: |

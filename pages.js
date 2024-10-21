@@ -27,6 +27,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
     const newestVersion = await getNewestVersion();
     if (newestVersion) {
-        window.location.href = `/iav-test/${newestVersion}/index.html`;
+        window.location.href = `/IAVFrontendFramework/${newestVersion}/index.html`;
     }
 });

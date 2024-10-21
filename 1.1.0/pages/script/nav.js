@@ -16,65 +16,167 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-document.addEventListener('DOMContentLoaded', () => {
-    fetch('./pages/html/nav.html')
-        .then(response => {
-            return response.text()
-        })
-        .then(data => {
-            document.getElementById('nav-placeholder').innerHTML = data;
-        });
+let basePath = '/IAVFrontendFramework';
+
+document.addEventListener('DOMContentLoaded', async () => {
+    const newestVersion = await getNewestVersion();
+    const response = await fetch(`${basePath}/${newestVersion}/index.html`)
+    const indexHTML = await response.text();
+    document.open();
+    document.write(indexHTML);
+    document.close();
+    document.getElementById('header-container').innerHTML = await fetchData(`${basePath}/${newestVersion}/pages/html/header.html`);
+    document.getElementById('footer-container').innerHTML = await fetchData(`${basePath}/${newestVersion}/pages/html/imprint-footer.html`);
+    document.getElementById('nav-placeholder').innerHTML = await fetchData(`${basePath}/${newestVersion}/pages/html/nav.html`);
+    let fileName = extractFileNameFromURL(window.location.href)
+    if (fileName === "index.html") {
+        fileName = "overview.html"
+        pushWindowState(`${basePath}/${newestVersion}/${fileName}`)
+        await loadPage(fileName)
+    }
+    await loadVersionDropdown(window.location.href);
+    await loadPage(fileName)
+    await loadPageNav();
+    await loadVersionBanner();
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    fetch('./pages/html/header.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('header-container').innerHTML = data;
-        });
-});
+const getOptionalVersionList = async () => {
+    const response = await fetch("../version-list.md");
+    if (response.ok) {
+        const data = await response.text();
+        const versions = data.trim().split('\n');
+        return versions[versions.length - 1];
+    } else {
+        return "docs";
+    }
+};
 
-document.addEventListener('DOMContentLoaded', () => {
-    fetch('./pages/html/imprint-footer.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('footer-container').innerHTML = data;
-        });
-});
+const getNewestVersion = async () => {
+    return await getOptionalVersionList();
+};
 
-document.addEventListener('DOMContentLoaded', function () {
-    fetch('./pages/html/nav.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('drawer').innerHTML = data;
-            const currentPath = window.location.pathname.split('/').pop();
-            const links = document.querySelectorAll('.drawer a');
-            links.forEach(link => {
-                if (link.getAttribute('href') === currentPath) {
-                    link.classList.add('active');
-                }
-            });
-        });
-});
+const getSelectedVersion = () => {
+    const versionDropdown = document.getElementById('versionDropdown');
+    return versionDropdown.value;
+}
 
-document.addEventListener('DOMContentLoaded', () => {
-    fetch('./pages/html/page-nav.html')
+const pushWindowState = (path) => {
+    window.history.pushState({}, '', path);
+}
+
+const navigate = async (url, version = null) => {
+    const currentVersion = version || await getSelectedVersion();
+    const expectedPath = `${basePath}/${currentVersion}/${url}`;
+    const currentPath = window.location.pathname;
+    if (currentPath !== expectedPath) {
+        window.history.pushState({}, '', expectedPath);
+    }
+    document.getElementById('container').innerHTML = await fetchData(expectedPath);
+    createPageNavigation();
+}
+
+const fetchData = async (path) => {
+    const response = await fetch(path);
+    return response.text();
+}
+
+const extractFileNameFromURL = (url) => {
+    const urlObj = new URL(url);
+    const pathSegments = urlObj.pathname.split('/');
+    return pathSegments[pathSegments.length - 1];
+}
+
+const extractVersionFromURL = (url) => {
+    const urlObj = new URL(url);
+    const pathSegments = urlObj.pathname.split('/');
+    return pathSegments[pathSegments.length - 2];
+}
+
+
+const loadPage = async (url) => {
+    document.getElementById('container').innerHTML = await fetchData(`${url}`);
+}
+
+const loadPageNav = async () => {
+    const version = getSelectedVersion();
+    fetch(`${basePath}/${version}/pages/html/page-nav.html`)
         .then(response => response.text())
         .then(data => {
             document.getElementById('page-placeholder').innerHTML = data;
-
             const navList = document.getElementById('nav-list');
             const headers = document.querySelectorAll('h1, h2');
-
             headers.forEach(header => {
                 const listItem = document.createElement('li');
                 listItem.classList.add(header.tagName.toLowerCase());
                 const link = document.createElement('a');
                 link.textContent = header.textContent;
                 link.href = `#${header.id || header.textContent.replace(/\s+/g, '-').toLowerCase()}`;
-
                 listItem.appendChild(link);
                 navList.appendChild(listItem);
             });
         });
-});
+}
+
+const createPageNavigation = () => {
+    document.getElementById('nav-list').innerHTML = '';
+    const container = document.getElementById('container');
+    const pagePlaceholder = document.getElementById('nav-list');
+    const navList = document.createElement('ul');
+    const headers = container.querySelectorAll('h1, h2');
+    headers.forEach((header) => {
+        const listItem = document.createElement('li');
+        listItem.classList.add(header.tagName.toLowerCase());
+        const link = document.createElement('a');
+        link.textContent = header.textContent;
+        link.href = `#${header.id || header.textContent.replace(/\s+/g, '-').toLowerCase()}`;
+        listItem.appendChild(link);
+        navList.appendChild(listItem);
+    });
+    pagePlaceholder.appendChild(navList);
+}
+
+const loadVersionDropdown = async (url) => {
+    const versionDropdown = document.getElementById('versionDropdown');
+    const versionResponse = await fetch("../version-list.md");
+    if (versionResponse.ok) {
+        const currentVersion = extractVersionFromURL(url);
+        const versionText = await versionResponse.text();
+        const versions = versionText.split('\n')
+            .map(line => line.trim())
+            .filter(line => line !== '' && line !== currentVersion)
+            .reverse();
+        versions.unshift(currentVersion);
+        versions.forEach(version => {
+            const option = document.createElement('option');
+            option.value = version;
+            option.textContent = version;
+            versionDropdown.appendChild(option);
+        });
+    } else {
+        const version = "docs"
+        const option = document.createElement('option');
+        option.value = version;
+        option.textContent = version;
+        versionDropdown.appendChild(option);
+    }
+    versionDropdown.addEventListener('change', () => {
+        const selectedVersion = this.value;
+        navigate(extractFileNameFromURL(window.location.href), selectedVersion);
+        loadVersionBanner()
+    });
+}
+
+const loadVersionBanner = async () => {
+    const versionBanner = document.getElementById('versionBanner');
+    const newestVersion = await getNewestVersion();
+    const selectedVersion = await getSelectedVersion();
+    if (newestVersion !== selectedVersion) {
+        versionBanner.innerHTML = `
+            <div class="version-banner">
+                Version ${newestVersion} is out now!
+            </div>
+        `;
+    } else {
+        versionBanner.innerHTML = "";
+    }
+};

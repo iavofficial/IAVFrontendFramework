@@ -16,7 +16,6 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-
 :root {
     --primary-color: black;
     --secondary-color: #0091ff;
@@ -24,6 +23,7 @@
     --background-color: #f8f9fa;
     --muted-text-color: #6c757d;
     --border-color: #dee2e6;
+    --blue-6: #d2f5ff
 }
 
 body {
@@ -283,4 +283,17 @@ button {
 
 .header-version option {
     padding: 10px;
+}
+
+#versionBanner {
+    margin-left: auto;
+    margin-right: 40px;
+}
+
+.version-banner {
+    background: var(--blue-6);
+    color: var(--secondary-color);
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-size: 1em;
 }

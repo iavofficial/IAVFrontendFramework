@@ -27,29 +27,23 @@
     <link href="./pages/styles/pages.css" rel="stylesheet">
 </head>
 <body>
-<div class="page-container">
-    <nav id="nav-placeholder"></nav>
-    <nav id="page-placeholder"></nav>
-    <div id="header-container"></div>
+<h1 id="installation-guide">Installation Guide</h1>
 
-    <div id="container">
-        <h1 id="installation-guide">Installation Guide</h1>
+<h3 id="npm-install">npm install</h3>
+<pre class="cell"><code>npm install @iavofficial/frontend-framework</code></pre>
 
-        <h3 id="npm-install">npm install</h3>
-        <pre class="cell"><code>npm install @iavofficial/frontend-framework</code></pre>
+<h2 id="add-the-framework-to-a-new-react-application">Add the framework to a new React application</h2>
+<p class="cell">
+    If you want to add the framework by creating a new React app with <code>create-react-app</code> or using
+    <code>vite</code>, it works too. Just paste the following code snippets into the <code>App.tsx</code> file.
+</p>
 
-        <h2 id="add-the-framework-to-a-new-react-application">Add the framework to a new React application</h2>
-        <p class="cell">
-            If you want to add the framework by creating a new React app with <code>create-react-app</code> or using
-            <code>vite</code>, it works too. Just paste the following code snippets into the <code>App.tsx</code> file.
-        </p>
+<p class="cell"><strong>NOTE:</strong> If you use <code>vite</code> to create a new React app, the webview may
+    look broken. After clearing the <code>index.css</code> file, the problem is solved.
+</p>
 
-        <p class="cell"><strong>NOTE:</strong> If you use <code>vite</code> to create a new React app, the webview may
-            look broken. After clearing the <code>index.css</code> file, the problem is solved.
-        </p>
-
-        <h3 id="codesnippet-app-tsx">Codesnippet App.tsx</h3>
-        <pre class="cell">
+<h3 id="codesnippet-app-tsx">Codesnippet App.tsx</h3>
+<pre class="cell">
 <code><span class="pl-k">import</span> { GlobalDataLayer } <span class="pl-k">from</span> <span class="pl-s">'@iavofficial/frontend-framework/globalDataLayer';</span>
 <span class="pl-k">import</span> { UILayer } <span class="pl-k">from</span> <span class="pl-s">'@iavofficial/frontend-framework/uiLayer';</span>
 
@@ -62,10 +56,5 @@
 }
 
 <span class="pl-k">export default</span> App;</code></pre>
-
-    </div>
-
-    <div id="footer-container"></div>
-</div>
 </body>
 </html>

@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-let basePath = '/iav-test';
+let basePath = '/IAVFrontendFramework';
 
 document.addEventListener('DOMContentLoaded', async () => {
     const newestVersion = await getNewestVersion();

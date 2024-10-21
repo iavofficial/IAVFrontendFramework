@@ -16,16 +16,44 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-const basePath = '/iav-test';
+let basePath = '/iav-test';
+
+document.addEventListener('DOMContentLoaded', async () => {
+    const newestVersion = await getNewestVersion();
+    const response = await fetch(`${basePath}/${newestVersion}/index.html`)
+    const indexHTML = await response.text();
+    document.open();
+    document.write(indexHTML);
+    document.close();
+    document.getElementById('header-container').innerHTML = await fetchData(`${basePath}/${newestVersion}/pages/html/header.html`);
+    document.getElementById('footer-container').innerHTML = await fetchData(`${basePath}/${newestVersion}/pages/html/imprint-footer.html`);
+    document.getElementById('nav-placeholder').innerHTML = await fetchData(`${basePath}/${newestVersion}/pages/html/nav.html`);
+    let fileName = extractFileNameFromURL(window.location.href)
+    if (fileName === "index.html") {
+        fileName = "overview.html"
+        pushWindowState(`${basePath}/${newestVersion}/${fileName}`)
+        await loadPage(fileName)
+    }
+    await loadVersionDropdown(window.location.href);
+    await loadPage(fileName)
+    await loadPageNav();
+    await loadVersionBanner();
+});
+
+const getOptionalVersionList = async () => {
+    const response = await fetch("../version-list.md");
+    if (response.ok) {
+        const data = await response.text();
+        const versions = data.trim().split('\n');
+        return versions[versions.length - 1];
+    } else {
+        return "docs";
+    }
+};
 
 const getNewestVersion = async () => {
-    return await fetch("./version-list.md")
-        .then(response => response.text())
-        .then(data => {
-            const versions = ["1.9.0", "1.8.0"]
-            return versions[0];
-        });
-}
+    return await getOptionalVersionList();
+};
 
 const getSelectedVersion = () => {
     const versionDropdown = document.getElementById('versionDropdown');
@@ -44,7 +72,7 @@ const navigate = async (url, version = null) => {
         window.history.pushState({}, '', expectedPath);
     }
     document.getElementById('container').innerHTML = await fetchData(expectedPath);
-    generatePageNavigation();
+    createPageNavigation();
 }
 
 const fetchData = async (path) => {
@@ -52,38 +80,26 @@ const fetchData = async (path) => {
     return response.text();
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
-    const newestVersion = await getNewestVersion();
-    document.getElementById('header-container').innerHTML = await fetchData(`${newestVersion}/pages/html/header.html`);
-    document.getElementById('footer-container').innerHTML = await fetchData(`${newestVersion}/pages/html/imprint-footer.html`);
-    document.getElementById('nav-placeholder').innerHTML = await fetchData(`${newestVersion}/pages/html/nav.html`);
-    pushWindowState(`${basePath}/${newestVersion}/overview.html`)
-    await loadInitial()
-});
-
-document.addEventListener('DOMContentLoaded', async function () {
-    const currentVersion = await getNewestVersion();
-    const data = await fetchData(`${currentVersion}/pages/html/nav.html`)
-    document.getElementById('drawer').innerHTML = data;
-    const currentPath = window.location.pathname.split('/').pop();
-    const links = document.querySelectorAll('.drawer a');
-    links.forEach(link => {
-        if (link.getAttribute('href') === currentPath) {
-            link.classList.add('active');
-        }
-    });
-});
-
-const loadInitial = async () => {
-    const startUrl = "overview.html";
-    const data = await fetchData(`${startUrl}`);
-    document.getElementById('container').innerHTML = data;
-    generatePageNavigation();
+const extractFileNameFromURL = (url) => {
+    const urlObj = new URL(url);
+    const pathSegments = urlObj.pathname.split('/');
+    return pathSegments[pathSegments.length - 1];
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
-    const currentVersion = await getNewestVersion();
-    fetch(`${currentVersion}/pages/html/page-nav.html`)
+const extractVersionFromURL = (url) => {
+    const urlObj = new URL(url);
+    const pathSegments = urlObj.pathname.split('/');
+    return pathSegments[pathSegments.length - 2];
+}
+
+
+const loadPage = async (url) => {
+    document.getElementById('container').innerHTML = await fetchData(`${url}`);
+}
+
+const loadPageNav = async () => {
+    const version = getSelectedVersion();
+    fetch(`${basePath}/${version}/pages/html/page-nav.html`)
         .then(response => response.text())
         .then(data => {
             document.getElementById('page-placeholder').innerHTML = data;
@@ -99,9 +115,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 navList.appendChild(listItem);
             });
         });
-});
+}
 
-function generatePageNavigation() {
+const createPageNavigation = () => {
     document.getElementById('nav-list').innerHTML = '';
     const container = document.getElementById('container');
     const pagePlaceholder = document.getElementById('nav-list');
@@ -119,26 +135,48 @@ function generatePageNavigation() {
     pagePlaceholder.appendChild(navList);
 }
 
-const loadVersionDropdown = async () => {
-    const versionResponse = await fetch("version-list.md");
-    const versionText = await versionResponse.text();
+const loadVersionDropdown = async (url) => {
     const versionDropdown = document.getElementById('versionDropdown');
-    const versions = versionText.split('\n').filter(line => line.trim() !== '');
-    versions.forEach(version => {
+    const versionResponse = await fetch("../version-list.md");
+    if (versionResponse.ok) {
+        const currentVersion = extractVersionFromURL(url);
+        const versionText = await versionResponse.text();
+        const versions = versionText.split('\n')
+            .map(line => line.trim())
+            .filter(line => line !== '' && line !== currentVersion)
+            .reverse();
+        versions.unshift(currentVersion);
+        versions.forEach(version => {
+            const option = document.createElement('option');
+            option.value = version;
+            option.textContent = version;
+            versionDropdown.appendChild(option);
+        });
+    } else {
+        const version = "docs"
         const option = document.createElement('option');
         option.value = version;
         option.textContent = version;
         versionDropdown.appendChild(option);
-    });
-    versionDropdown.addEventListener('change', function () {
+    }
+    versionDropdown.addEventListener('change', () => {
         const selectedVersion = this.value;
-        navigate("overview.html", selectedVersion)
+        navigate(extractFileNameFromURL(window.location.href), selectedVersion);
+        loadVersionBanner()
     });
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
-    const currentVersion = await getNewestVersion();
-    const response = await fetch(`${currentVersion}/pages/html/header.html`)
-    document.getElementById('header-container').innerHTML = await response.text();
-    await loadVersionDropdown();
-});
+const loadVersionBanner = async () => {
+    const versionBanner = document.getElementById('versionBanner');
+    const newestVersion = await getNewestVersion();
+    const selectedVersion = await getSelectedVersion();
+    if (newestVersion !== selectedVersion) {
+        versionBanner.innerHTML = `
+            <div class="version-banner">
+                Version ${newestVersion} is out now!
+            </div>
+        `;
+    } else {
+        versionBanner.innerHTML = "";
+    }
+};

@@ -1,43 +1,67 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+name: Deploy Docs on Release
 
 on:
-  # Runs on pushes targeting the default branch
   push:
-    branches: ["develop"]
+    branches:
+      - main
+  release:
+    types: [ published ]
+    branches:
+      - main
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  contents: write  # Erlaubt das Pushen von Commits
 
 jobs:
-  # Single deploy job since we're just deploying
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  deploy-docs:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Checkout the repository
+        uses: actions/checkout@v3
         with:
-          # Upload entire repository
-          path: './docs'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          fetch-depth: 0 # Ensures we have access to all branches
+
+      - name: Set up Git user
+        run: |
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          git config --global user.name "${{ github.actor }}"
+
+      - name: Get package version
+        id: version
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "PACKAGE_VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Switch to gh-pages branch
+        run: |
+          git fetch origin
+          if git rev-parse --verify origin/gh-pages; then
+            git checkout gh-pages
+          else
+            git checkout --orphan gh-pages
+            git rm -rf .
+            echo "Initialized gh-pages branch" > README.md
+            git add README.md
+            git commit -m "Initialize gh-pages branch"
+            git push origin gh-pages
+          fi
+
+      - name: Create a new version folder in gh-pages
+        run: |
+          mkdir -p $PACKAGE_VERSION
+          git add $PACKAGE_VERSION
+
+      - name: Copy /docs content to version folder
+        run: |
+          git checkout main -- docs/
+          cp -r docs/* $PACKAGE_VERSION/
+          git add $PACKAGE_VERSION
+
+      - name: Append current version to version-list.md
+        run: |
+          echo -e "\n$PACKAGE_VERSION" >> version-list.md
+          git add version-list.md
+          rm -rf docs/*
+          git add .
+          git commit -m "Append version $PACKAGE_VERSION to version-list.md"
+          git push origin gh-pages

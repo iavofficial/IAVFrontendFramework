@@ -46,6 +46,13 @@ jobs:
             git push origin gh-pages
           fi
 
+      - name: Remove existing version folder if it exists
+        run: |
+          if [ -d "$PACKAGE_VERSION" ]; then
+            rm -rf $PACKAGE_VERSION
+            echo "Deleted existing folder for version $PACKAGE_VERSION"
+          fi
+
       - name: Create a new version folder in gh-pages
         run: |
           mkdir -p $PACKAGE_VERSION
@@ -57,11 +64,15 @@ jobs:
           cp -r docs/* $PACKAGE_VERSION/
           git add $PACKAGE_VERSION
 
-      - name: Append current version to version-list.md
+      - name: Remove docs folder content only if not empty
         run: |
-          echo -e "\n$PACKAGE_VERSION" >> version-list.md
-          git add version-list.md
-          rm -rf docs/*
-          git add .
-          git commit -m "Append version $PACKAGE_VERSION to version-list.md"
+          if [ -n "$(ls -A docs/ 2>/dev/null)" ]; then
+            rm -rf docs/*
+            git add docs/
+            echo "Removed old docs content"
+          fi
+
+      - name: Commit and push changes
+        run: |
+          git commit -m "Deploy docs for version $PACKAGE_VERSION" || echo "No changes to commit"
           git push origin gh-pages

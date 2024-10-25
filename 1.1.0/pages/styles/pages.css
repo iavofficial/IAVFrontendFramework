@@ -71,10 +71,13 @@ img {
     max-width: 100%;
 }
 
+pre {
+    padding: 6px;
+}
+
 pre, code {
     overflow-x: scroll;
     background-color: #f0f0f0;
-    padding: 6px;
     border-radius: 4px;
     font-family: 'Courier New', Courier, monospace;
 }

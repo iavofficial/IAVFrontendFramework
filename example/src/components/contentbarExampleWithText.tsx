@@ -30,7 +30,7 @@ export const ContentbarExampleWithText = (props: Props) => {
     return (
         <>
             <div className="col-8 grid grid-nogutter">
-                <ContentCell container style={{padding: "8px"}}>
+                <ContentCell container>
                     <ContentCell size={6}>
                         <span>First row left</span>
                         <h2>{props.exampleText}</h2>

@@ -7,32 +7,28 @@ import If from "../helper/If";
 interface Props {
     container?: boolean;
     size?: number | 'auto' | 'grow';
-    spacing?: number;
-    rowSpacing?: number;
     className?: string;
     style?: React.CSSProperties;
 }
 
 const useStyles = makeStyles(({props, darkMode}: { props: Props, darkMode: boolean }) => ({
-    gridContainer: {
+    contentCellContainer: {
         width: "100%",
         display: 'flex',
         flexFlow: "wrap",
         minWidth: "0px",
         boxSizing: "border-box",
-        gap: props.spacing || 0,
-        ...(props.style || {}),
-    },
-    gridItem: {
-        flexGrow: 1,
-        width: props.size === 'grow' ? '100%' : props.size ? `${((props.size / 12) * 100)}%` : 'auto ',
         padding: "8px",
-        ...(props.style || {}),
+    },
+    contentCellItem: {
+        flex: props.size ? `0 0 ${((props.size / 12) * 100)}%` : '1 1 0',
+        padding: "8px",
     },
     content: {
         height: "100%",
         width: "100%",
-        background: darkMode ? "black" : "white"
+        background: darkMode ? "black" : "white",
+        ...(props.style || {}),
     }
 }));
 
@@ -50,7 +46,7 @@ export const ContentCell: React.FC<PropsWithChildren<Props>> = (props) => {
 
     return (
         <div
-            className={classNames(className, container ? classes.gridContainer : classes.gridItem)}>
+            className={classNames(className, container ? classes.contentCellContainer : classes.contentCellItem)}>
             <If condition={container}>
                 {children}
             </If>

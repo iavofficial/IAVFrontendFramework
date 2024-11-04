@@ -1,87 +1,64 @@
-/**
- * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * SPDX-License-Identifier: Apache-2.0
- */
-
-import React, {CSSProperties, PropsWithChildren, useContext} from "react";
-import "../css/globalColors.css";
+import React, {PropsWithChildren, useContext} from 'react';
+import makeStyles from "./style_options/makeStyles";
+import {classNames} from "primereact/utils";
 import {ColorSettingsContext} from "../../contexts/colorsettings";
+import If from "../helper/If";
 
-import "./contentCell.css";
-
-export enum CellPaddings {
-  FULL,
-  VERT_RIGHT,
-  BOT_HOR,
-  BOT_RIGHT,
-  NONE,
+interface Props {
+    container?: boolean;
+    size?: number | 'auto' | 'grow';
+    spacing?: number;
+    rowSpacing?: number;
+    className?: string;
+    style?: React.CSSProperties;
 }
 
-export interface Props {
-  height?: string;
-  colWidth?: number;
-  clearStyle?: boolean;
-  paddings: CellPaddings;
-}
+const useStyles = makeStyles(({props, darkMode}: { props: Props, darkMode: boolean }) => ({
+    gridContainer: {
+        width: "100%",
+        display: 'flex',
+        flexFlow: "wrap",
+        minWidth: "0px",
+        boxSizing: "border-box",
+        gap: props.spacing || 0,
+        ...(props.style || {}),
+    },
+    gridItem: {
+        flexGrow: 1,
+        width: props.size === 'grow' ? '100%' : props.size ? `${((props.size / 12) * 100)}%` : 'auto ',
+        padding: "8px",
+        ...(props.style || {}),
+    },
+    content: {
+        height: "100%",
+        width: "100%",
+        background: darkMode ? "black" : "white"
+    }
+}));
 
-export function ContentCell(props: PropsWithChildren<Props>) {
-  const colorSettingsContext = useContext(ColorSettingsContext);
-  let paddings = "";
-  switch (props.paddings) {
-    case CellPaddings.FULL:
-      paddings = "p-3";
-      break;
-    case CellPaddings.VERT_RIGHT:
-      paddings = "py-3 pr-3";
-      break;
-    case CellPaddings.BOT_HOR:
-      paddings = "pb-3 px-3";
-      break;
-    case CellPaddings.BOT_RIGHT:
-      paddings = "pb-3 pr-3";
-      break;
-  }
-  let columnClass: string;
-  if (props.colWidth) {
-    columnClass = "col-" + props.colWidth;
-  } else {
-    columnClass = "col";
-  }
+export const ContentCell: React.FC<PropsWithChildren<Props>> = (props) => {
 
-  const innerDivStyle: CSSProperties = {
-    width: "100%",
-  };
+    const colorSettingsContext = useContext(ColorSettingsContext);
 
-  if (!props.clearStyle) {
-    innerDivStyle.backgroundColor =
-      colorSettingsContext.currentColors.contentCell.backgroundColor;
-  }
+    const {
+        container,
+        className,
+        children,
+    } = props;
 
-  return (
-    <div className={`content-cell ${columnClass}`}>
-      <div className={"flex " + paddings} style={{height: "100%"}}>
+    const {classes} = useStyles({props: props, darkMode: colorSettingsContext.darkmode});
+
+    return (
         <div
-          style={innerDivStyle}
-          className={
-            colorSettingsContext?.darkmode ? "color-white" : "color-black"
-          }
-        >
-          {props.children}
+            className={classNames(className, container ? classes.gridContainer : classes.gridItem)}>
+            <If condition={container}>
+                {children}
+            </If>
+            <If condition={!container}>
+                <div className={classNames(classes.content)}>
+                    {children}
+                </div>
+            </If>
         </div>
-      </div>
-    </div>
-  );
-}
+    );
+};

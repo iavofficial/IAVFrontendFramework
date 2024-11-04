@@ -23,7 +23,7 @@
     }
   ],
   "scripts": {
-    "devmode": "./scripts/windows/devmode_build.bat",
+    "devmode": ".\\scripts\\windows\\devmode_build.bat",
     "build": "tsc --build --clean && tsc --build && npx babel ./src --out-dir ./build --extensions .ts,.tsx --copy-files",
     "test": "jest --passWithNoTests",
     "run-example": "./scripts/windows/setup_and_run_example.bat",

@@ -50,7 +50,7 @@ export const ContentbarExampleWithText = (props: Props) => {
                             />
                         </div>
                     </ContentCell>
-                    <ContentCell>
+                    <ContentCell style={{width: "300px"}}>
                         <span>Second row left</span>
                     </ContentCell>
                     <ContentCell>

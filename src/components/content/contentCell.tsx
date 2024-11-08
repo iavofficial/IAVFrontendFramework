@@ -6,7 +6,7 @@ import If from "../helper/If";
 
 interface Props {
     container?: boolean;
-    size?: number | 'auto' | 'grow';
+    size?: number;
     className?: string;
     style?: React.CSSProperties;
 }

@@ -46,112 +46,114 @@ import {useCookies} from "react-cookie";
 import {ACCEPTED_COOKIES_NAME} from "../constants";
 
 export interface AuthOptions {
-  backgroundImage?: string;
-  companyText?: string;
-  preventDarkmode?: boolean;
+    backgroundImage?: string;
+    companyText?: string;
+    preventDarkmode?: boolean;
 }
 
 export interface NavbarOptions {
-  staticCollapsedState?: StaticCollapsedState;
+    staticCollapsedState?: StaticCollapsedState;
 }
 
 export interface Props {
-  // This indicates that the passed objects should have the type's properties at least.
-  tabAndContentWrappers: TabAndContentWrapper[];
-  startingPoint: string;
-  disableLogin?: boolean;
-  disableCookieBanner?: boolean;
-  authenticationView?: React.ComponentType<AuthenticationViewProps & any>;
-  documentsComponent?: React.ComponentType<any>;
-  documentsLabelKey?: string;
-  settingsMenuOptions?: SettingsMenuOptions;
-  userMenuOptions?: UserMenuOptions;
-  headerOptions?: HeaderOptions;
-  authOptions?: AuthOptions;
-  hideLegalDocuments?: boolean;
-  navbarOptions?: NavbarOptions;
+    // This indicates that the passed objects should have the type's properties at least.
+    tabAndContentWrappers: TabAndContentWrapper[];
+    startingPoint: string;
+    disableLogin?: boolean;
+    disableCookieBanner?: boolean;
+    authenticationView?: React.ComponentType<AuthenticationViewProps & any>;
+    documentsComponent?: React.ComponentType<any>;
+    documentsLabelKey?: string;
+    settingsMenuOptions?: SettingsMenuOptions;
+    userMenuOptions?: UserMenuOptions;
+    headerOptions?: HeaderOptions;
+    authOptions?: AuthOptions;
+    hideLegalDocuments?: boolean;
+    navbarOptions?: NavbarOptions;
 }
 
 export const UILayer = (props: Props) => {
-  const authContext = useContext(AuthContext);
+    const authContext = useContext(AuthContext);
 
-  const [, setCookie] = useCookies([ACCEPTED_COOKIES_NAME]);
+    const [, setCookie] = useCookies([ACCEPTED_COOKIES_NAME]);
 
-  const AuthenticationView = props.authenticationView
-    ? props.authenticationView
-    : BasicAuthenticationView;
+    const AuthenticationView = props.authenticationView
+        ? props.authenticationView
+        : BasicAuthenticationView;
 
-  // If the login is disabled, the user should not be able to log out.
-  const userMenuOptions = {...props.userMenuOptions};
-  if (props.disableLogin) {
-    userMenuOptions.hideLogoutButton = true;
-  }
-
-  useEffect(() => {
-    if (props.disableCookieBanner) {
-      setAcceptCookies(setCookie);
+    // If the login is disabled, the user should not be able to log out.
+    const userMenuOptions = {...props.userMenuOptions};
+    if (props.disableLogin) {
+        userMenuOptions.hideLogoutButton = true;
     }
-  }, [props.disableCookieBanner, setCookie]);
 
-  return (
-    <NavbarSettingsProvider
-      staticCollapsedState={props.navbarOptions?.staticCollapsedState}
-    >
-      {!props.disableCookieBanner && <CookieBanner />}
-      <Redirector
-        startingPoint={props.startingPoint}
-        disableLogin={props.disableLogin}
-      />
-      <Routes>
-        {!props.disableLogin && (
-          <Route
-            path="/login"
-            element={
-              <AuthenticationView
-                authOptions={props.authOptions}
-                hideLanguageSelection={
-                  props.settingsMenuOptions?.hideLanguageSelection
-                }
-                headerOptions={props.headerOptions}
-                hideLegalDocuments={props.hideLegalDocuments}
-              />
-            }
-          />
-        )}
-        {!props.disableLogin && !authContext?.hasAuthenticated() && (
-          <Route
-            path="/documents"
-            element={
-              props.documentsComponent ? (
-                <props.documentsComponent />
-              ) : (
-                <DefaultImprint />
-              )
-            }
-          />
-        )}
-        <Route
-          path="/*"
-          element={
-            <MainView
-              headerOptions={props.headerOptions}
-              settingsMenuOptions={props.settingsMenuOptions}
-              userMenuOptions={userMenuOptions}
-              documentsLabelKey={props.documentsLabelKey}
-              documentsComponent={props.documentsComponent}
-              tabAndContentWrappers={props.tabAndContentWrappers}
-              hideLegalDocuments={props.hideLegalDocuments}
-            />
-          }
-        />
-      </Routes>
-    </NavbarSettingsProvider>
-  );
+    useEffect(() => {
+        if (props.disableCookieBanner) {
+            setAcceptCookies(setCookie);
+        }
+    }, [props.disableCookieBanner, setCookie]);
+
+    return (
+        <NavbarSettingsProvider staticCollapsedState={props.navbarOptions?.staticCollapsedState}>
+            {!props.disableCookieBanner && <CookieBanner/>}
+            <Redirector startingPoint={props.startingPoint} disableLogin={props.disableLogin}/>
+
+            <Routes>
+                {!props.disableLogin && (
+                    <Route
+                        path="/login"
+                        element={
+                            <AuthenticationView
+                                authOptions={props.authOptions}
+                                hideLanguageSelection={props.settingsMenuOptions?.hideLanguageSelection}
+                                headerOptions={props.headerOptions}
+                                hideLegalDocuments={props.hideLegalDocuments}
+                            />
+                        }
+                    />
+                )}
+
+                {!props.disableLogin && !authContext?.hasAuthenticated() && (
+                    <Route
+                        path="/documents"
+                        element={
+                            props.documentsComponent ? (
+                                <props.documentsComponent/>
+                            ) : (
+                                <DefaultImprint/>
+                            )
+                        }
+                    />
+                )}
+
+                {!authContext?.hasAuthenticated() ? (
+                    <Route path="/*" element={<></>}/>
+                ) : (
+                    <>
+                        <Route
+                            path="/*"
+                            element={
+                                <MainView
+                                    headerOptions={props.headerOptions}
+                                    settingsMenuOptions={props.settingsMenuOptions}
+                                    userMenuOptions={userMenuOptions}
+                                    documentsLabelKey={props.documentsLabelKey}
+                                    documentsComponent={props.documentsComponent}
+                                    tabAndContentWrappers={props.tabAndContentWrappers}
+                                    hideLegalDocuments={props.hideLegalDocuments}
+                                />
+                            }
+                        />
+                    </>
+                )}
+            </Routes>
+        </NavbarSettingsProvider>
+    );
 };
 
 interface RedirectorProps {
-  startingPoint: string;
-  disableLogin?: boolean;
+    startingPoint: string;
+    disableLogin?: boolean;
 }
 
 /**
@@ -161,46 +163,46 @@ interface RedirectorProps {
  * @constructor
  */
 const Redirector = (props: RedirectorProps) => {
-  const disableLogin = props.disableLogin;
+    const disableLogin = props.disableLogin;
 
-  const [, setIntialNavigationDone] = useState(false);
+    const [, setIntialNavigationDone] = useState(false);
 
-  const authContext = useContext(AuthContext);
-  const userIsAuthenticated = authContext!.hasAuthenticated();
+    const authContext = useContext(AuthContext);
+    const userIsAuthenticated = authContext!.hasAuthenticated();
 
-  const currentPath = useLocation().pathname;
-  const navigate = useNavigate();
+    const currentPath = useLocation().pathname;
+    const navigate = useNavigate();
 
-  useEffect(() => {
-    // Case: Login is disabled.
-    if (disableLogin) {
-      setIntialNavigationDone((prevState) => {
-        if (!prevState) {
-          navigate(props.startingPoint.valueOf());
+    useEffect(() => {
+        // Case: Login is disabled.
+        if (disableLogin) {
+            setIntialNavigationDone((prevState) => {
+                if (!prevState) {
+                    navigate(props.startingPoint.valueOf());
+                }
+                // At this point the state should always be true.
+                return true;
+            });
+            return;
         }
-        // At this point the state should always be true.
-        return true;
-      });
-      return;
-    }
 
-    // Case: Login is enabled.
-    if (!userIsAuthenticated) {
-      if (currentPath !== "/documents") {
-        navigate("/login");
-      }
-    } else {
-      if (currentPath === "/login" || currentPath === "/") {
-        navigate(props.startingPoint.valueOf());
-      }
-    }
-  }, [
-    disableLogin,
-    currentPath,
-    userIsAuthenticated,
-    navigate,
-    props.startingPoint,
-  ]);
+        // Case: Login is enabled.
+        if (!userIsAuthenticated) {
+            if (currentPath !== "/documents") {
+                navigate("/login");
+            }
+        } else {
+            if (currentPath === "/login" || currentPath === "/") {
+                navigate(props.startingPoint.valueOf());
+            }
+        }
+    }, [
+        disableLogin,
+        currentPath,
+        userIsAuthenticated,
+        navigate,
+        props.startingPoint,
+    ]);
 
-  return <React.Fragment />;
+    return <React.Fragment/>;
 };

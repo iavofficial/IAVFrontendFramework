@@ -55,13 +55,12 @@ export const SimpleNavbarTab: GroupableNavbarTab = (
   const colorSettingsContext = useContext(ColorSettingsContext);
   const t = useTranslator();
 
-  // Use useMemo to improve performance.
   const regex = useMemo(() => {
     let regexString = path;
-    // Escape all slashes
+    // Escape slashes
     regexString = regexString.replaceAll("/", "\\/");
-    // Add ^ to match the beginning of the path. Add * for allowing other characters.
-    regexString = `^${regexString}.*`;
+    // Add start (^) and boundary condition with trailing /.*
+    regexString = `^${regexString}(\\/.*)?$`;
     return new RegExp(regexString);
   }, [path]);
 

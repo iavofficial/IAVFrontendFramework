@@ -1,3 +1,9 @@
+## [1.1.1-dev.1](https://github.com/iavofficial/IAVFrontendFramework/compare/v1.1.0...v1.1.1-dev.1) (2024-12-04)
+
+### Bug Fixes
+
+* **home-page:** new regex function ([#28](https://github.com/iavofficial/IAVFrontendFramework/issues/28)) ([f5b5090](https://github.com/iavofficial/IAVFrontendFramework/commit/f5b5090b73e64d8b8dea83465577a2e3508d981e))
+
 ## [1.1.0](https://github.com/iavofficial/IAVFrontendFramework/compare/v1.0.0...v1.1.0) (2024-09-30)
 
 ### Features

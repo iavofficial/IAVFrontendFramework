@@ -1,3 +1,9 @@
+## [1.1.1-dev.2](https://github.com/iavofficial/IAVFrontendFramework/compare/v1.1.1-dev.1...v1.1.1-dev.2) (2024-12-04)
+
+### Bug Fixes
+
+* **login-page:** flickering on login removed ([#26](https://github.com/iavofficial/IAVFrontendFramework/issues/26)) ([0746a67](https://github.com/iavofficial/IAVFrontendFramework/commit/0746a6740f641e20db84a46824535051ce5d557d))
+
 ## [1.1.1-dev.1](https://github.com/iavofficial/IAVFrontendFramework/compare/v1.1.0...v1.1.1-dev.1) (2024-12-04)
 
 ### Bug Fixes

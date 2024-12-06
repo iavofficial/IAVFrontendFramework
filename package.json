@@ -59,7 +59,7 @@
     "primeflex": "^3.3.0",
     "primeicons": "^6.0.1",
     "primereact": "^10.3.3",
-    "react-cookie": "^4.1.1",
+    "react-cookie": "^7.2.1",
     "react-i18next": "^12.2.0",
     "simplebar-react": "^3.2.3"
   },

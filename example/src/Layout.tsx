@@ -59,7 +59,7 @@ function Layout() {
 
     const views = [
         new BasicContentWrapper(
-            "/example1/",
+            "/",
             simpleNavbarTabFactory({
                 disabled: false,
                 name: "Example without Translation",
@@ -226,7 +226,7 @@ function Layout() {
     return (
         <UILayer
             tabAndContentWrappers={views}
-            startingPoint="/example1/"
+            startingPoint="/"
             authenticationView={BasicAuthenticationView}
             settingsMenuOptions={settingsMenuOptions}
             documentsLabelKey="Legal_documents"

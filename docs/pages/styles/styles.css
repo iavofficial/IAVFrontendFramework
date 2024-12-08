@@ -16,7 +16,6 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-
 :root {
     --primary-color: black;
     --secondary-color: #0091ff;
@@ -24,6 +23,7 @@
     --background-color: #f8f9fa;
     --muted-text-color: #6c757d;
     --border-color: #dee2e6;
+    --blue-6: #d2f5ff
 }
 
 body {
@@ -55,10 +55,6 @@ button {
     transition: background-color 0.3s ease;
 }
 
-/** DRAWER **/
-
-/* Basis-Stil für den Drawer */
-/* Basis-Stil für den Drawer */
 .drawer {
     position: fixed;
     top: 50px;
@@ -69,21 +65,19 @@ button {
     border-right: 1px solid lightgray;
     z-index: 1000;
     padding: 20px;
-    font-size: 0.875rem; /* Kleinere Schriftgröße für den Drawer */
+    font-size: 0.875rem;
 }
 
-/* Überschriften im Drawer */
 .drawer h1 {
-    font-size: 1.25rem; /* Kleinere Schriftgröße für h1 */
+    font-size: 1.25rem;
     margin-bottom: 1em;
 }
 
 .drawer h2 {
-    font-size: 1rem; /* Kleinere Schriftgröße für h2 */
+    font-size: 1rem;
     margin-bottom: 0.75em;
 }
 
-/* Stil für die Links im Drawer */
 .drawer ul {
     list-style: none;
     padding: 0;
@@ -97,15 +91,16 @@ button {
 }
 
 .drawer li:hover {
-    background-color: #333 /* Dunkelgrauer Hintergrund bei Hover */
+    background-color: #333
 }
 
 .drawer a {
+    cursor: pointer;
     display: block;
     text-decoration: none;
     color: var(--primary-color);
-    padding: 8px; /* Etwas Padding für besseren Textabstand */
-    border-radius: 4px; /* Gleicher Border-Radius wie li für einheitliches Design */
+    padding: 8px;
+    border-radius: 4px;
 }
 
 .drawer a.active {
@@ -113,7 +108,7 @@ button {
 }
 
 .drawer a:hover {
-    color: #fff; /* Weiße Textfarbe bei Hover für besseren Kontrast */
+    color: #fff;
 }
 
 .page-nav {
@@ -127,7 +122,7 @@ button {
     z-index: 1000;
     padding: 20px;
     font-size: 0.875rem;
-    overflow-y: auto; /* Falls es zu viele Einträge gibt */
+    overflow-y: auto;
 }
 
 .page-nav h3 {
@@ -161,10 +156,10 @@ button {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%; /* Header streckt sich über die gesamte Breite */
-    height: 40px; /* Festgelegte Höhe für den Header */
+    width: 100%;
+    height: 40px;
     background-color: #ffffff;
-    border-bottom: 1px solid lightgray; /* Border unten */
+    border-bottom: 1px solid lightgray;
     z-index: 1000;
     padding: 10px 0px 10px 20px;
 }
@@ -174,7 +169,7 @@ button {
     display: flex;
     justify-content: left;
     align-items: center;
-    height: 100%; /* Inhalt füllt die Höhe des Headers */
+    height: 100%;
 }
 
 .header-title {
@@ -191,16 +186,15 @@ button {
 
 
 .main-footer {
-    width: 100%; /* Footer streckt sich über die gesamte Breite */
+    width: 100%;
     padding: 16px 0;
     background-color: #ffffff;
-    border-top: 1px solid lightgray; /* Border oben */
+    border-top: 1px solid lightgray;
     display: flex;
-    justify-content: center; /* Link zentrieren */
-    align-items: center; /* Vertikale Zentrierung */
+    justify-content: center;
+    align-items: center;
 }
 
-/* Stil für den Link im Footer */
 .footer-link {
     font-size: 1rem;
     font-weight: normal;
@@ -209,10 +203,9 @@ button {
     cursor: pointer;
 }
 
-/* Basisstil für das Impressum */
 .imprint-container {
     max-width: 600px;
-    margin: 50px auto; /* Zentriert das Impressum */
+    margin: 50px auto;
     padding: 20px;
     background-color: #f9f9f9;
     border: 1px solid #ddd;
@@ -225,7 +218,7 @@ button {
     text-align: center;
     font-size: 1.8rem;
     margin-bottom: 20px;
-    color: #0056b3; /* IAV-Farbschema */
+    color: #0056b3;
 }
 
 .imprint-container p {
@@ -234,7 +227,7 @@ button {
 }
 
 .imprint-container a {
-    color: #0056b3; /* Linkfarbe passend zum IAV-Design */
+    color: #0056b3;
     text-decoration: none;
 }
 
@@ -271,7 +264,7 @@ button {
 }
 
 .version-dropdown::after {
-    content: '\25BC'; /* Unicode for down arrow */
+    content: '\25BC';
     position: absolute;
     top: 50%;
     right: 15px;
@@ -283,4 +276,17 @@ button {
 
 .header-version option {
     padding: 10px;
+}
+
+#versionBanner {
+    margin-left: auto;
+    margin-right: 40px;
+}
+
+.version-banner {
+    background: var(--blue-6);
+    color: var(--secondary-color);
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-size: 1em;
 }

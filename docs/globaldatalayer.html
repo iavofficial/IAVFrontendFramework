@@ -308,18 +308,22 @@ export const <span class="hljs-type">LayoutAndContextExampleComponent</span> = a
     {this<span class="hljs-selector-class">.props</span><span class="hljs-selector-class">.children</span>}
 &lt;/AuthContext.Provider&gt;
 </code></pre>
-<p class="cell">
-    <strong>Note:</strong> The userData - object containts the access- and IdToken needed to execute custom
-    authenticated API calls
-</p>
-<p class="cell">
-    ExampleConfiguration of AWS Amplify:
-</p>
-<p class="cell">
-    <strong>Example Configuration of Amplify</strong>
-</p>
-<pre class="cell"><code class="lang-typescript"><span
-        class="hljs-comment">//example configuration for amplify 6</span>
+        <p class="cell">
+            <strong>Note:</strong> The userData - object containts the access- and IdToken needed to execute custom
+            authenticated API calls
+        </p>
+
+        <p class="cell">
+            <strong>Example Configuration of Amplify</strong>
+        </p>
+
+        <p class="cell">
+            <strong>Note:</strong> The IAV Frontend Framework is compatible with AWS Amplify, but you need to install it
+            separately. You have to install at least the version 6.5.2.
+        </p>
+
+        <pre class="cell"><code class="lang-typescript"><span
+                class="hljs-comment">//example configuration for amplify 6</span>
 Amplify.configure({
 <span class="hljs-symbol">      Auth:</span> {
 <span class="hljs-symbol">        Cognito:</span> {

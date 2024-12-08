@@ -102,6 +102,7 @@ export const UILayer = (props: Props) => {
         startingPoint={props.startingPoint}
         disableLogin={props.disableLogin}
       />
+
       <Routes>
         {!props.disableLogin && (
           <Route
@@ -118,6 +119,7 @@ export const UILayer = (props: Props) => {
             }
           />
         )}
+
         {!props.disableLogin && !authContext?.hasAuthenticated() && (
           <Route
             path="/documents"
@@ -130,20 +132,27 @@ export const UILayer = (props: Props) => {
             }
           />
         )}
-        <Route
-          path="/*"
-          element={
-            <MainView
-              headerOptions={props.headerOptions}
-              settingsMenuOptions={props.settingsMenuOptions}
-              userMenuOptions={userMenuOptions}
-              documentsLabelKey={props.documentsLabelKey}
-              documentsComponent={props.documentsComponent}
-              tabAndContentWrappers={props.tabAndContentWrappers}
-              hideLegalDocuments={props.hideLegalDocuments}
+
+        {!authContext?.hasAuthenticated() ? (
+          <Route path="/*" element={<></>} />
+        ) : (
+          <>
+            <Route
+              path="/*"
+              element={
+                <MainView
+                  headerOptions={props.headerOptions}
+                  settingsMenuOptions={props.settingsMenuOptions}
+                  userMenuOptions={userMenuOptions}
+                  documentsLabelKey={props.documentsLabelKey}
+                  documentsComponent={props.documentsComponent}
+                  tabAndContentWrappers={props.tabAndContentWrappers}
+                  hideLegalDocuments={props.hideLegalDocuments}
+                />
+              }
             />
-          }
-        />
+          </>
+        )}
       </Routes>
     </NavbarSettingsProvider>
   );

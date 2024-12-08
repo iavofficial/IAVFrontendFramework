@@ -1,6 +1,6 @@
 {
   "name": "@iavofficial/frontend-framework",
-  "version": "1.1.0",
+  "version": "1.1.1-dev.2",
   "private": false,
   "license": "Apache-2.0",
   "description": "This framework is the foundation of IAV frontend applications to provide maintainability, expandability, unification and an improved developer experience.",
@@ -24,6 +24,7 @@
   ],
   "scripts": {
     "devmode": "./scripts/windows/devmode_build.bat",
+    "devmode:windows": ".\\scripts\\windows\\devmode_build.bat",
     "build": "tsc --build --clean && tsc --build && npx babel ./src --out-dir ./build --extensions .ts,.tsx --copy-files",
     "test": "jest --passWithNoTests",
     "run-example": "./scripts/windows/setup_and_run_example.bat",
@@ -58,7 +59,7 @@
     "primeflex": "^3.3.0",
     "primeicons": "^6.0.1",
     "primereact": "^10.3.3",
-    "react-cookie": "^4.1.1",
+    "react-cookie": "^7.2.1",
     "react-i18next": "^12.2.0",
     "simplebar-react": "^3.2.3"
   },

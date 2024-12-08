@@ -26,12 +26,33 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+/**
+ * Props for the HeaderIcon component.
+ */
 interface Props {
+  /**
+   * Callback triggered when the element is clicked.
+   */
   onClick?: (event: React.SyntheticEvent) => void;
+
+  /**
+   * Callback triggered when a key is pressed.
+   */
   onKeyDown?: (event: React.KeyboardEvent) => void;
+
+  /**
+   * Inline styles to customize the component.
+   */
   style?: React.CSSProperties;
 }
 
+/**
+ * HeaderIcon Component
+ *
+ * A flexible component for rendering an icon or any content that responds to click
+ * or keyboard events. It supports custom styling and provides a standardized structure
+ * for icon-based headers.
+ */
 const HeaderIcon: React.FC<PropsWithChildren<Props>> = (props) => {
   const {onClick, onKeyDown, style, children} = props;
 

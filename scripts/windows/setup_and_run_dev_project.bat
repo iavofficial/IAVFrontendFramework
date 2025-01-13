@@ -24,19 +24,21 @@ mkdir build
 
 echo [31mBeginning to install all dependencies of the framework. [37m
 
-call npm install
+cd ./packages/core
+
+call npm run install-in-root
 
 echo [31mBeginning to build the framework. [37m
 
-call npx babel ./src --out-dir ./build/build --extensions .ts,.tsx --copy-files
+call npx babel ./src --out-dir ../../build/build --extensions .ts,.tsx --copy-files
 
-call npx babel ./package.json --out-dir ./build --copy-files
+call npx babel ./package.json --out-dir ../../build --copy-files
 
-call npx tsc --outDir ./build/build
+call npx tsc --outDir ../../build/build
 
 echo [31mBeginning to install all dependencies of the example project. [37m
 
-call cd .\example
+cd ../../apps/dev_project
 
 call npm install
 

@@ -33,7 +33,13 @@
     ]
   },
   "dependencies": {
-    "iav-frontend-framework": "file:../build"
+    "iav-frontend-framework": "file:../../build",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router": "^6.9.0",
+    "react-router-dom": "^6.9.0",
+    "react-transition-group": "^4.4.5",
+    "primereact": "^10.3.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.21.0",

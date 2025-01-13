@@ -17,8 +17,12 @@ rem SPDX-License-Identifier: Apache-2.0
 rmdir /S /q build
 mkdir build
 
-start /b npx babel ./src --out-dir ./build/build --extensions .ts,.tsx --watch --copy-files
+cd ./packages/core
 
-start /b npx babel ./package.json --out-dir ./build --watch --copy-files
+rem Using this expression to start the asynchronous tasks after package installation.
 
-start /b npx tsc --watch --outDir ./build/build
+call npm run install-in-root && (
+start /b npx babel ./src --out-dir ../../build/build --extensions .ts,.tsx --watch --copy-files
+start /b npx babel ./package.json --out-dir ../../build --watch --copy-files
+start /b npx tsc --watch --outDir ../../build/build
+)

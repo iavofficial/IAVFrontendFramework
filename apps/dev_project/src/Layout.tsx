@@ -33,10 +33,10 @@ import {ExampleComponent5} from "./components/exampleComponent5";
 import {simpleNavbarTabFactory} from "iav-frontend-framework/simpleNavbarTabFactory";
 import {privilegedNavbarTabFactory} from "iav-frontend-framework/privilegedNavbarTabFactory";
 import {ExampleComponent2} from "./components/exampleComponent2";
-import {HeaderPanelElement} from "../../src/components/header/headerPanelElement.tsx";
+import {HeaderPanelElement} from "iav-frontend-framework/headerPanelElement";
 import {PrimeIcons} from "primereact/api";
 import {WHITE} from "iav-frontend-framework/constants";
-import {HeaderMenuElement} from "../../src/components/header/headerMenuElement.tsx";
+import {HeaderMenuElement} from "iav-frontend-framework/headerMenuElement";
 
 function Layout() {
     const [selectedButtonOption, setSelectedButtonOption] = useState("Simulated");

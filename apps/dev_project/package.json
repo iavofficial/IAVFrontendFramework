@@ -31,7 +31,7 @@
     ]
   },
   "dependencies": {
-    "@iavofficial/frontend-framework": "*",
+    "@work-test/frontend-framework": "*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router": "^6.9.0",

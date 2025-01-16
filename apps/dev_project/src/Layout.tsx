@@ -18,11 +18,11 @@
 
 import {SelectButton} from "primereact/selectbutton";
 import {useState} from "react";
-import {UILayer} from "@iavofficial/frontend-framework/uiLayer";
-import {TranslateFunctionType} from "@iavofficial/frontend-framework/translationFunction";
-import {BasicAuthenticationView} from "@iavofficial/frontend-framework/basicAuthenticationView";
-import {BasicContentWrapper} from "@iavofficial/frontend-framework/basicContentWrapper";
-import {Group} from "@iavofficial/frontend-framework/group";
+import {UILayer} from "@work-test/frontend-framework/uiLayer";
+import {TranslateFunctionType} from "@work-test/frontend-framework/translationFunction";
+import {BasicAuthenticationView} from "@work-test/frontend-framework/basicAuthenticationView";
+import {BasicContentWrapper} from "@work-test/frontend-framework/basicContentWrapper";
+import {Group} from "@work-test/frontend-framework/group";
 import InfoIcon from "./assets/infoIcon.svg?react";
 import {LegalDocuments} from "./components/legalDocuments";
 import {ExampleComponent1} from "./components/exampleComponent1";
@@ -30,13 +30,13 @@ import {ExampleComponent6} from "./components/exampleComponent6";
 import {ExampleComponent3} from "./components/exampleComponent3";
 import {ExampleComponent4} from "./components/exampleComponent4";
 import {ExampleComponent5} from "./components/exampleComponent5";
-import {simpleNavbarTabFactory} from "@iavofficial/frontend-framework/simpleNavbarTabFactory";
-import {privilegedNavbarTabFactory} from "@iavofficial/frontend-framework/privilegedNavbarTabFactory";
+import {simpleNavbarTabFactory} from "@work-test/frontend-framework/simpleNavbarTabFactory";
+import {privilegedNavbarTabFactory} from "@work-test/frontend-framework/privilegedNavbarTabFactory";
 import {ExampleComponent2} from "./components/exampleComponent2";
-import {HeaderPanelElement} from "@iavofficial/frontend-framework/headerPanelElement";
+import {HeaderPanelElement} from "@work-test/frontend-framework/headerPanelElement";
 import {PrimeIcons} from "primereact/api";
-import {WHITE} from "@iavofficial/frontend-framework/constants";
-import {HeaderMenuElement} from "@iavofficial/frontend-framework/headerMenuElement";
+import {WHITE} from "@work-test/frontend-framework/constants";
+import {HeaderMenuElement} from "@work-test/frontend-framework/headerMenuElement";
 
 function Layout() {
     const [selectedButtonOption, setSelectedButtonOption] = useState("Simulated");

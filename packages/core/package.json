@@ -11,7 +11,7 @@
     "test": "jest --passWithNoTests",
     "lint": "eslint src/**/*.{js,ts,tsx}",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json}\" && prettier --write \"docs/*\"",
-    "release": "npm run semantic-release"
+    "release": "npx semantic-release"
   },
   "eslintConfig": {
     "extends": [

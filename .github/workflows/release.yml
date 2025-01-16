@@ -23,7 +23,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22.x'
-      
+          
+      # Install Turborepo
       - run: npm i
 
       - name: Build all packages and release them

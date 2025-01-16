@@ -4,7 +4,6 @@ on:
     branches-ignore:
       - 'main'
       - 'releases/**'
-      - 'develop'
     paths-ignore:
       - 'SBOM.json'
       - '*.md'
@@ -26,6 +25,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-          
+
+      # Install Turborepo
       - run: npm i
       - run: npm run test

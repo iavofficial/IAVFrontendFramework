@@ -21,11 +21,27 @@
       "email": "mike.wegele@iav.de"
     }
   ],
-  "scripts": {
-    "devmode": ".\\scripts\\windows\\devmode_build.bat",
-    "run-dev-project": ".\\scripts\\windows\\setup_and_run_dev_project.bat"
+  "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^13.0.0",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^10.3.3",
+    "semantic-release": "^24.2.1",
+    "semantic-release-monorepo": "^8.0.2",
+    "cross-env": "^7.0.3",
+    "turbo": "^2.3.3"
   },
-  "dependencies": {
-    "@iavofficial/frontend-framework": "file:packages/core"
-  }
+  "scripts": {
+    "setup:root": "npm i",
+    "dev": "turbo run dev build-live",
+    "test": "turbo run test",
+    "build": "turbo run build",
+    "release": "turbo run release"
+  },
+  
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "packageManager": "npm@11.0.0"
 }

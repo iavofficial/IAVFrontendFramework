@@ -9,10 +9,8 @@
     }
   ],
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "setup": "npm i",
+    "dev": "vite"
   },
   "eslintConfig": {
     "extends": [
@@ -33,7 +31,7 @@
     ]
   },
   "dependencies": {
-    "iav-frontend-framework": "file:../../build",
+    "@iavofficial/frontend-framework": "*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router": "^6.9.0",

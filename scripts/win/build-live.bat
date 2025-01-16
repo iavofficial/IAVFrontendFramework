@@ -14,15 +14,13 @@ rem limitations under the License.
 rem 
 rem SPDX-License-Identifier: Apache-2.0
 
-rmdir /S /q build
-mkdir build
-
-cd ./packages/core
+rmdir /S /q dist
+mkdir dist
 
 rem Using this expression to start the asynchronous tasks after package installation.
 
-call npm run install-in-root && (
-start /b npx babel ./src --out-dir ../../build/build --extensions .ts,.tsx --watch --copy-files
-start /b npx babel ./package.json --out-dir ../../build --watch --copy-files
-start /b npx tsc --watch --outDir ../../build/build
+call npm i && (
+start /b npx babel ./src --out-dir ./dist --extensions .ts,.tsx --watch --copy-files
+start /b npx babel ./package.json --out-dir ./dist --watch --copy-files
+start /b npx tsc --watch --outDir ./dist
 )

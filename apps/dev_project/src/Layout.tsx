@@ -18,11 +18,11 @@
 
 import {SelectButton} from "primereact/selectbutton";
 import {useState} from "react";
-import {UILayer} from "iav-frontend-framework/uiLayer";
-import {TranslateFunctionType} from "iav-frontend-framework/translationFunction";
-import {BasicAuthenticationView} from "iav-frontend-framework/basicAuthenticationView";
-import {BasicContentWrapper} from "iav-frontend-framework/basicContentWrapper";
-import {Group} from "iav-frontend-framework/group";
+import {UILayer} from "@iavofficial/frontend-framework/uiLayer";
+import {TranslateFunctionType} from "@iavofficial/frontend-framework/translationFunction";
+import {BasicAuthenticationView} from "@iavofficial/frontend-framework/basicAuthenticationView";
+import {BasicContentWrapper} from "@iavofficial/frontend-framework/basicContentWrapper";
+import {Group} from "@iavofficial/frontend-framework/group";
 import InfoIcon from "./assets/infoIcon.svg?react";
 import {LegalDocuments} from "./components/legalDocuments";
 import {ExampleComponent1} from "./components/exampleComponent1";
@@ -30,13 +30,13 @@ import {ExampleComponent6} from "./components/exampleComponent6";
 import {ExampleComponent3} from "./components/exampleComponent3";
 import {ExampleComponent4} from "./components/exampleComponent4";
 import {ExampleComponent5} from "./components/exampleComponent5";
-import {simpleNavbarTabFactory} from "iav-frontend-framework/simpleNavbarTabFactory";
-import {privilegedNavbarTabFactory} from "iav-frontend-framework/privilegedNavbarTabFactory";
+import {simpleNavbarTabFactory} from "@iavofficial/frontend-framework/simpleNavbarTabFactory";
+import {privilegedNavbarTabFactory} from "@iavofficial/frontend-framework/privilegedNavbarTabFactory";
 import {ExampleComponent2} from "./components/exampleComponent2";
-import {HeaderPanelElement} from "iav-frontend-framework/headerPanelElement";
+import {HeaderPanelElement} from "@iavofficial/frontend-framework/headerPanelElement";
 import {PrimeIcons} from "primereact/api";
-import {WHITE} from "iav-frontend-framework/constants";
-import {HeaderMenuElement} from "iav-frontend-framework/headerMenuElement";
+import {WHITE} from "@iavofficial/frontend-framework/constants";
+import {HeaderMenuElement} from "@iavofficial/frontend-framework/headerMenuElement";
 
 function Layout() {
     const [selectedButtonOption, setSelectedButtonOption] = useState("Simulated");

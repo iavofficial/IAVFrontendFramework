@@ -1,0 +1,218 @@
+/**
+ * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/* BACKGROUND CLASSES*/
+
+/* This class is not named bg-white because of name conflicts with PrimeReact. */
+.bg-white-1{
+  background-color: var(--white);
+}
+
+.bg-black{
+  background-color: var(--black);
+}
+
+.bg-grey-1{
+  background-color: var(--grey-1);
+}
+
+.bg-grey-2{
+  background-color: var(--grey-2);
+}
+
+.bg-grey-3{
+  background-color: var(--grey-3);
+}
+
+.bg-grey-4{
+  background-color: var(--grey-4);
+}
+
+.bg-grey-5{
+  background-color: var(--grey-5);
+}
+
+.bg-grey-6{
+  background-color: var(--grey-6);
+}
+
+.bg-grey-menu-special-1{
+  background-color: var(--grey-menu-special-1);
+}
+
+
+.bg-blue-0{
+  background-color: var(--blue-0);
+}
+
+.bg-blue-1{
+  background-color: var(--blue-1);
+}
+
+.bg-blue-2{
+  background-color: var(--blue-2);
+}
+
+.bg-blue-3{
+  background-color: var(--blue-3);
+}
+
+.bg-blue-4{
+  background-color: var(--blue-4);
+}
+
+.bg-blue-5{
+  background-color: var(--blue-5);
+}
+
+
+.bg-magenta-1{
+  background-color: var(--magenta-1);
+}
+
+.bg-magenta-2{
+  background-color: var(--magenta-2);
+}
+
+.bg-magenta-3{
+  background-color: var(--magenta-3);
+}
+
+.bg-magenta-4{
+  background-color: var(--magenta-4);
+}
+
+.bg-magenta-5{
+  background-color: var(--magenta-5);
+}
+
+.bg-magenta-6{
+  background-color: var(--magenta-6);
+}
+
+
+.bg-yellow{
+  background-color: var(--yellow);
+}
+
+.bg-red{
+  background-color: var(--red);
+}
+
+.bg-green{
+  background-color: var(--green);
+}
+
+
+/* COLOR CLASSES*/
+.color-white{
+  color: var(--white);
+}
+
+.color-black{
+  color: var(--black);
+}
+  
+.color-grey-1{
+  color: var(--grey-1);
+}
+
+.color-grey-2{
+  color: var(--grey-2);
+}
+
+.color-grey-3{
+  color: var(--grey-3);
+}
+
+.color-grey-4{
+  color: var(--grey-4);
+}
+
+.color-grey-5{
+  color: var(--grey-5);
+}
+
+.color-grey-6{
+  color: var(--grey-6);
+}
+
+.color-grey-menu-special-1{
+  color: var(--grey-menu-special-1);
+}
+
+.color-blue-0{
+  color: var(--blue-0);
+}
+
+.color-blue-1{
+  color: var(--blue-1);
+}
+
+.color-blue-2{
+  color: var(--blue-2);
+}
+
+.color-blue-3{
+  color: var(--blue-3);
+}
+
+.color-blue-4{
+  color: var(--blue-4);
+}
+
+.color-blue-5{
+  color: var(--blue-5);
+}
+
+
+.color-magenta-1{
+  color: var(--magenta-1);
+}
+
+.color-magenta-2{
+  color: var(--magenta-2);
+}
+
+.color-magenta-3{
+  color: var(--magenta-3);
+}
+
+.color-magenta-4{
+  color: var(--magenta-4);
+}
+
+.color-magenta-5{
+  color: var(--magenta-5);
+}
+
+.color-magenta-6{
+  color: var(--magenta-6);
+}
+
+.color-red{
+  color: var(--red);
+}
+
+.color-green{
+  color: var(--green);
+}
+
+.color-yellow{
+  color: var(--yellow);
+}

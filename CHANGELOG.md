@@ -1,3 +1,14 @@
+## [1.2.0](https://github.com/iavofficial/IAVFrontendFramework/compare/v1.1.0...v1.2.0) (2025-01-16)
+
+### Features
+
+* Test Release ([540aedc](https://github.com/iavofficial/IAVFrontendFramework/commit/540aedc07d06da0902d085a14d7f918f67980016))
+
+### Bug Fixes
+
+* **home-page:** new regex function ([#28](https://github.com/iavofficial/IAVFrontendFramework/issues/28)) ([f5b5090](https://github.com/iavofficial/IAVFrontendFramework/commit/f5b5090b73e64d8b8dea83465577a2e3508d981e))
+* **login-page:** flickering on login removed ([#26](https://github.com/iavofficial/IAVFrontendFramework/issues/26)) ([0746a67](https://github.com/iavofficial/IAVFrontendFramework/commit/0746a6740f641e20db84a46824535051ce5d557d))
+
 ## [1.1.1-dev.2](https://github.com/iavofficial/IAVFrontendFramework/compare/v1.1.1-dev.1...v1.1.1-dev.2) (2024-12-04)
 
 ### Bug Fixes

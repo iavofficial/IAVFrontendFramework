@@ -24,6 +24,9 @@ export interface AuthenticationViewProps {
         companyText?: string;
         documentsLabelKey?: string;
         preventDarkmode?: boolean;
+        errorMessages?: {
+            passwordErrorMessage?: string;
+        };
     };
     headerOptions?: {
         reactElementLeft?: ReactElement;
@@ -33,7 +36,4 @@ export interface AuthenticationViewProps {
     };
     hideLanguageSelection?: boolean;
     hideLegalDocuments?: boolean;
-    errorMessages?: {
-        passwordErrorMessage?: string;
-    }
 }

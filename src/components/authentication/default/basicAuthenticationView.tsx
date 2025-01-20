@@ -68,7 +68,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
     const themeTogglerColor =
         colorSettingsContext.currentColors.authenticationView.themeTogglerColor;
 
-    const {passwordErrorMessage} = props.errorMessages;
+    const {passwordErrorMessage} = props.authOptions?.errorMessages || {};
 
     // These two functions life on the class instance not on the prototype thanks to @babel/plugin-proposal-class-properties.
     const submit = (event: FormEvent<HTMLFormElement>) => {

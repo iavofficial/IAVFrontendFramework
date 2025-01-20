@@ -20,6 +20,28 @@ import React, {PropsWithChildren} from "react";
 import {classNames} from "primereact/utils";
 import {Badge} from "primereact/badge";
 import If from "../helper/If";
+import makeStyles from "../content/style_options/makeStyles";
+
+const useStyles = makeStyles(() => ({
+    container: {
+        position: "relative",
+        display: "inline-block"
+    },
+    icon: {
+        fontSize: 19,
+        margin: "0 1rem",
+        cursor: "pointer"
+    },
+    badge: {
+        position: "absolute",
+        top: "-10px",
+        right: "4px",
+        fontSize: "0.7rem",
+        height: "20px",
+        minWidth: "20px",
+        lineHeight: "20px",
+    }
+}));
 
 interface Props {
     icon: string;
@@ -35,23 +57,34 @@ interface Props {
 }
 
 export const IconWithContext: React.FC<PropsWithChildren<Props>> = (props) => {
-    const {icon, iconClassName, style, onClick, children, badge} = props;
+
+    const {
+        icon,
+        iconClassName,
+        style,
+        onClick,
+        children,
+        badge
+    } = props;
+
+    const {classes} = useStyles();
 
     return (
-        <>
+        <div className={classes.container}>
             <i
-                style={{...style, fontSize: 19, margin: "0 1rem", cursor: "pointer"}}
-                className={classNames(icon, iconClassName, badge && "p-overlay-badge")}
+                style={{...style}}
+                className={classNames(icon, iconClassName, classes.icon)}
                 onClick={onClick}
             />
             <If condition={badge?.active}>
                 <Badge
-                    style={{...badge?.style}}
+                    className={classes.badge}
+                    style={{...badge?.style,}}
                     value={badge?.value}
                     severity={badge?.severity}
                 />
             </If>
             {children}
-        </>
+        </div>
     );
 };

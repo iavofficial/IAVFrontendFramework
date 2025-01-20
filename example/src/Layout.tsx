@@ -208,6 +208,10 @@ function Layout() {
         (
             <HeaderPanelElement
                 icon={PrimeIcons.BELL}
+                badge={{
+                    active: true,
+                    value: 5
+                }}
                 iconstyle={{color: WHITE}}>
                 <ExampleComponent4/>
             </HeaderPanelElement>
@@ -217,6 +221,7 @@ function Layout() {
                 icon={PrimeIcons.HEART}
                 model={items}
                 iconstyle={{color: WHITE}}
+
             />
         )
     ];

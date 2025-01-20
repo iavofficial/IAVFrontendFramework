@@ -225,6 +225,11 @@ function Layout() {
 
     return (
         <UILayer
+            authOptions={{
+                errorMessages: {
+                    passwordErrorMessage: "Invalid password. Please try again."
+                },
+            }}
             tabAndContentWrappers={views}
             startingPoint="/"
             authenticationView={BasicAuthenticationView}

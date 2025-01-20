@@ -18,25 +18,40 @@
 
 import React, {PropsWithChildren} from "react";
 import {classNames} from "primereact/utils";
+import {Badge} from "primereact/badge";
+import If from "../helper/If";
 
 interface Props {
-  icon: string;
-  iconClassName?: string;
-  style?: React.CSSProperties;
-  onClick: (event: React.MouseEvent) => void;
+    icon: string;
+    iconClassName?: string;
+    style?: React.CSSProperties;
+    onClick: (event: React.MouseEvent) => void;
+    badge?: {
+        active: boolean;
+        value?: any | null | undefined;
+        severity?: 'success' | 'info' | 'warning' | 'danger' | 'secondary' | 'contrast' | null | undefined;
+        style?: React.CSSProperties
+    }
 }
 
 export const IconWithContext: React.FC<PropsWithChildren<Props>> = (props) => {
-  const {icon, iconClassName, style, onClick, children} = props;
+    const {icon, iconClassName, style, onClick, children, badge} = props;
 
-  return (
-    <>
-      <i
-        style={{...style, fontSize: 19, margin: "0 1rem", cursor: "pointer"}}
-        className={classNames(icon, iconClassName)}
-        onClick={onClick}
-      />
-      {children}
-    </>
-  );
+    return (
+        <>
+            <i
+                style={{...style, fontSize: 19, margin: "0 1rem", cursor: "pointer"}}
+                className={classNames(icon, iconClassName, badge && "p-overlay-badge")}
+                onClick={onClick}
+            />
+            <If condition={badge?.active}>
+                <Badge
+                    style={{...badge?.style}}
+                    value={badge?.value}
+                    severity={badge?.severity}
+                />
+            </If>
+            {children}
+        </>
+    );
 };

@@ -21,6 +21,7 @@ import {classNames} from "primereact/utils";
 import {Badge} from "primereact/badge";
 import If from "../helper/If";
 import makeStyles from "../content/style_options/makeStyles";
+import {BLUE3} from "../../constants";
 
 const useStyles = makeStyles(() => ({
     container: {
@@ -33,6 +34,7 @@ const useStyles = makeStyles(() => ({
         cursor: "pointer"
     },
     badge: {
+        background: BLUE3,
         position: "absolute",
         top: "-10px",
         right: "4px",

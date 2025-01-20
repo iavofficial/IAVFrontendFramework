@@ -21,38 +21,46 @@ import {ContextMenu, ContextMenuProps} from "primereact/contextmenu";
 import {IconWithContext} from "./iconWithContext";
 
 interface Props extends ContextMenuProps {
-    icon: string;
-    iconClassName?: string;
-    iconstyle?: React.CSSProperties;
-    menuClassName?: string;
-    badge?: {
-        active: boolean;
-        value?: any | null | undefined;
-        severity?: 'success' | 'info' | 'warning' | 'danger' | 'secondary' | 'contrast' | null | undefined;
-        style?: React.CSSProperties
-    }
+  icon: string;
+  iconClassName?: string;
+  iconstyle?: React.CSSProperties;
+  menuClassName?: string;
+  badge?: {
+    active: boolean;
+    value?: any | null | undefined;
+    severity?:
+      | "success"
+      | "info"
+      | "warning"
+      | "danger"
+      | "secondary"
+      | "contrast"
+      | null
+      | undefined;
+    style?: React.CSSProperties;
+  };
 }
 
 export const HeaderMenuElement: React.FC<Props> = (props) => {
-    const {icon, iconClassName, iconstyle, menuClassName, badge} = props;
+  const {icon, iconClassName, iconstyle, menuClassName, badge} = props;
 
-    const ref = useRef<ContextMenu>(null);
+  const ref = useRef<ContextMenu>(null);
 
-    return (
-        <>
-            <IconWithContext
-                icon={icon}
-                iconClassName={iconClassName}
-                style={iconstyle}
-                onClick={(event) => ref.current?.show(event)}
-                badge={badge}
-            >
-                <ContextMenu
-                    {...props}
-                    className={menuClassName}
-                    ref={ref}
-                ></ContextMenu>
-            </IconWithContext>
-        </>
-    );
+  return (
+    <>
+      <IconWithContext
+        icon={icon}
+        iconClassName={iconClassName}
+        style={iconstyle}
+        onClick={(event) => ref.current?.show(event)}
+        badge={badge}
+      >
+        <ContextMenu
+          {...props}
+          className={menuClassName}
+          ref={ref}
+        ></ContextMenu>
+      </IconWithContext>
+    </>
+  );
 };

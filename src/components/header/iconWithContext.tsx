@@ -24,69 +24,69 @@ import makeStyles from "../content/style_options/makeStyles";
 import {BLUE3} from "../../constants";
 
 const useStyles = makeStyles(() => ({
-    container: {
-        position: "relative",
-        display: "inline-block"
-    },
-    icon: {
-        fontSize: 19,
-        margin: "0 1rem",
-        cursor: "pointer"
-    },
-    badge: {
-        background: BLUE3,
-        position: "absolute",
-        top: "-10px",
-        right: "4px",
-        fontSize: "0.7rem",
-        height: "20px",
-        minWidth: "20px",
-        lineHeight: "20px",
-    }
+  container: {
+    position: "relative",
+    display: "inline-block",
+  },
+  icon: {
+    fontSize: 19,
+    margin: "0 1rem",
+    cursor: "pointer",
+  },
+  badge: {
+    background: BLUE3,
+    position: "absolute",
+    top: "-10px",
+    right: "4px",
+    fontSize: "0.7rem",
+    height: "20px",
+    minWidth: "20px",
+    lineHeight: "20px",
+  },
 }));
 
 interface Props {
-    icon: string;
-    iconClassName?: string;
+  icon: string;
+  iconClassName?: string;
+  style?: React.CSSProperties;
+  onClick: (event: React.MouseEvent) => void;
+  badge?: {
+    active: boolean;
+    value?: any | null | undefined;
+    severity?:
+      | "success"
+      | "info"
+      | "warning"
+      | "danger"
+      | "secondary"
+      | "contrast"
+      | null
+      | undefined;
     style?: React.CSSProperties;
-    onClick: (event: React.MouseEvent) => void;
-    badge?: {
-        active: boolean;
-        value?: any | null | undefined;
-        severity?: 'success' | 'info' | 'warning' | 'danger' | 'secondary' | 'contrast' | null | undefined;
-        style?: React.CSSProperties
-    }
+  };
 }
 
 export const IconWithContext: React.FC<PropsWithChildren<Props>> = (props) => {
+  const {icon, iconClassName, style, onClick, children, badge} = props;
 
-    const {
-        icon,
-        iconClassName,
-        style,
-        onClick,
-        children,
-        badge
-    } = props;
+  const {classes} = useStyles();
 
-    const {classes} = useStyles();
-
-    return (
-        <div className={classes.container}>
-            <i
-                style={{...style}}
-                className={classNames(icon, iconClassName, classes.icon)}
-                onClick={onClick}
-            />
-            <If condition={badge?.active}>
-                <Badge
-                    className={classes.badge}
-                    style={{...badge?.style,}}
-                    value={badge?.value}
-                    severity={badge?.severity}
-                />
-            </If>
-            {children}
-        </div>
-    );
+  return (
+    <div className={classes.container}>
+      <i
+        style={{...style}}
+        className={classNames(icon, iconClassName, classes.icon)}
+        onClick={onClick}
+      />
+      <If condition={badge?.active}>
+        <Badge
+          className={classes.badge}
+          style={{...badge?.style}}
+          value={badge?.value}
+          severity={badge?.severity}
+        />
+      </If>
+      {children}
+    </div>
+  );
 };

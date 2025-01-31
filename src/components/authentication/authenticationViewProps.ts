@@ -17,12 +17,16 @@
  */
 
 import {ReactElement} from "react";
+
 export interface AuthenticationViewProps {
   authOptions?: {
     backgroundImage?: string;
     companyText?: string;
     documentsLabelKey?: string;
     preventDarkmode?: boolean;
+    errorMessages?: {
+      passwordErrorMessage?: string;
+    };
   };
   headerOptions?: {
     reactElementLeft?: ReactElement;

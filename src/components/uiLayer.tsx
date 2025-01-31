@@ -49,6 +49,9 @@ export interface AuthOptions {
   backgroundImage?: string;
   companyText?: string;
   preventDarkmode?: boolean;
+  errorMessages?: {
+    passwordErrorMessage?: string;
+  };
 }
 
 export interface NavbarOptions {

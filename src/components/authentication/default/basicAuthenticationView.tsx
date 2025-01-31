@@ -68,6 +68,8 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
   const themeTogglerColor =
     colorSettingsContext.currentColors.authenticationView.themeTogglerColor;
 
+  const {passwordErrorMessage} = props.authOptions?.errorMessages || {};
+
   // These two functions life on the class instance not on the prototype thanks to @babel/plugin-proposal-class-properties.
   const submit = (event: FormEvent<HTMLFormElement>) => {
     setTriedToSubmit(true);
@@ -255,7 +257,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                 }
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
-                helperText={t("wrong_password")}
+                helperText={passwordErrorMessage || t("wrong_password")}
               />
               <div>
                 <LoginButtonWithSpinner isLoading={authContext?.isLoading} />

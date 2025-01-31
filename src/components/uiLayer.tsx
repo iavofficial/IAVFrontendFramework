@@ -133,7 +133,7 @@ export const UILayer = (props: Props) => {
           />
         )}
 
-        {!authContext?.hasAuthenticated() ? (
+        {!props.disableLogin && !authContext?.hasAuthenticated() ? (
           <Route path="/*" element={<></>} />
         ) : (
           <>

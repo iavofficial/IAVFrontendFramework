@@ -1,3 +1,9 @@
+## [1.2.1-dev.2](https://github.com/iavofficial/IAVFrontendFramework/compare/v1.2.1-dev.1...v1.2.1-dev.2) (2025-01-31)
+
+### Bug Fixes
+
+* add flag to uiLayer ([8513ab7](https://github.com/iavofficial/IAVFrontendFramework/commit/8513ab72be63d246b69afd10f6524db0178b5232))
+
 ## [1.2.1-dev.1](https://github.com/iavofficial/IAVFrontendFramework/compare/v1.2.0...v1.2.1-dev.1) (2025-01-31)
 
 ### Bug Fixes

@@ -1,3 +1,16 @@
+## [1.2.1-dev.2](https://github.com/iavofficial/IAVFrontendFramework/compare/v1.2.1-dev.1...v1.2.1-dev.2) (2025-01-31)
+
+### Bug Fixes
+
+* add flag to uiLayer ([8513ab7](https://github.com/iavofficial/IAVFrontendFramework/commit/8513ab72be63d246b69afd10f6524db0178b5232))
+
+## [1.2.1-dev.1](https://github.com/iavofficial/IAVFrontendFramework/compare/v1.2.0...v1.2.1-dev.1) (2025-01-31)
+
+### Bug Fixes
+
+* cookie hooks ([43498dc](https://github.com/iavofficial/IAVFrontendFramework/commit/43498dc434dd2d7f1e98609cd60ce9396396f335))
+* **cookies-hooks:** add another condition ([#41](https://github.com/iavofficial/IAVFrontendFramework/issues/41)) ([d8a139e](https://github.com/iavofficial/IAVFrontendFramework/commit/d8a139e9662e9e29e0c35c7d09d2a3556f604c6e))
+
 ## [1.2.0](https://github.com/iavofficial/IAVFrontendFramework/compare/v1.1.0...v1.2.0) (2025-01-16)
 
 ### Features

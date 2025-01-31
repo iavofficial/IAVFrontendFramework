@@ -24,6 +24,7 @@ export function useCookiesAccepted() {
   const [cookies] = useCookies([ACCEPTED_COOKIES_NAME]);
   return (
     cookies[ACCEPTED_COOKIES_NAME] !== undefined &&
-    cookies[ACCEPTED_COOKIES_NAME] === "true"
+    (cookies[ACCEPTED_COOKIES_NAME] === "true" ||
+      cookies[ACCEPTED_COOKIES_NAME] === true)
   );
 }

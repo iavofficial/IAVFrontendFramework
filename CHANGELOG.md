@@ -1,3 +1,10 @@
+## [1.2.1-dev.1](https://github.com/iavofficial/IAVFrontendFramework/compare/v1.2.0...v1.2.1-dev.1) (2025-01-31)
+
+### Bug Fixes
+
+* cookie hooks ([43498dc](https://github.com/iavofficial/IAVFrontendFramework/commit/43498dc434dd2d7f1e98609cd60ce9396396f335))
+* **cookies-hooks:** add another condition ([#41](https://github.com/iavofficial/IAVFrontendFramework/issues/41)) ([d8a139e](https://github.com/iavofficial/IAVFrontendFramework/commit/d8a139e9662e9e29e0c35c7d09d2a3556f604c6e))
+
 ## [1.2.0](https://github.com/iavofficial/IAVFrontendFramework/compare/v1.1.0...v1.2.0) (2025-01-16)
 
 ### Features

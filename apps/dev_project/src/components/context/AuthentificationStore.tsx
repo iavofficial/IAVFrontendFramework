@@ -1,5 +1,5 @@
 /**
- * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,8 @@
  */
 
 import {PropsWithChildren, useCallback, useState} from "react";
-import {State} from "@iavofficial/frontend-framework/dummyAuthenticationProvider";
-import {AuthContext, Credentials} from "@iavofficial/frontend-framework/auth";
+import {State} from "iav-frontend-framework/dummyAuthenticationProvider";
+import {AuthContext, Credentials} from "iav-frontend-framework/auth";
 
 interface Props {
     additionalContextValues?: { [key: string]: any };

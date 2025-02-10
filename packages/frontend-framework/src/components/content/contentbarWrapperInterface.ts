@@ -1,5 +1,5 @@
 /**
- * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,10 @@ export interface ContentbarWrapperInterface {
     selectedId: string,
     idOfFirstElement: string,
   ): ReactElement;
+
   getKey(): string;
+
   getId(): string;
+
   getContentAreaElement(): React.ReactElement;
 }

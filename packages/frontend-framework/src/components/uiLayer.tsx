@@ -1,5 +1,5 @@
 /**
- * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,6 +49,9 @@ export interface AuthOptions {
   backgroundImage?: string;
   companyText?: string;
   preventDarkmode?: boolean;
+  errorMessages?: {
+    passwordErrorMessage?: string;
+  };
 }
 
 export interface NavbarOptions {
@@ -70,6 +73,7 @@ export interface Props {
   authOptions?: AuthOptions;
   hideLegalDocuments?: boolean;
   navbarOptions?: NavbarOptions;
+  hideNavbar?: boolean;
 }
 
 export const UILayer = (props: Props) => {
@@ -133,7 +137,7 @@ export const UILayer = (props: Props) => {
           />
         )}
 
-        {!authContext?.hasAuthenticated() ? (
+        {!props.disableLogin && !authContext?.hasAuthenticated() ? (
           <Route path="/*" element={<></>} />
         ) : (
           <>
@@ -148,6 +152,7 @@ export const UILayer = (props: Props) => {
                   documentsComponent={props.documentsComponent}
                   tabAndContentWrappers={props.tabAndContentWrappers}
                   hideLegalDocuments={props.hideLegalDocuments}
+                  hideNavbar={props.hideNavbar}
                 />
               }
             />

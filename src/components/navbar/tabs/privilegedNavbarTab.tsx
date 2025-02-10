@@ -1,5 +1,5 @@
 /**
- * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,25 +24,25 @@ import {GroupableNavbarTab, NavbarTabProps} from "./typesNavbarTab";
 import {InjectedOptionsGroupableByWrapperToTab} from "../types/typesInjectedOptions";
 
 export interface Props {
-  permittedGroups: string[];
+    permittedGroups: string[];
 }
 
 export const PrivilegedNavbarTab: GroupableNavbarTab<Props> = (
-  props: NavbarTabProps<InjectedOptionsGroupableByWrapperToTab> & Props,
+    props: NavbarTabProps<InjectedOptionsGroupableByWrapperToTab> & Props,
 ) => {
-  const authContext = useContext(AuthContext);
-  const permitted = containsOneOrMoreGroups(
-    authContext?.getUserGroups(),
-    props.permittedGroups,
-  );
-  return permitted ? (
-    <SimpleNavbarTab
-      icon={props.icon}
-      disabled={props.disabled}
-      name={props.name}
-      frameworkInjectedOptions={props.frameworkInjectedOptions}
-    />
-  ) : (
-    <></>
-  );
+    const authContext = useContext(AuthContext);
+    const permitted = containsOneOrMoreGroups(
+        authContext?.getUserGroups(),
+        props.permittedGroups,
+    );
+    return permitted ? (
+        <SimpleNavbarTab
+            icon={props.icon}
+            disabled={props.disabled}
+            name={props.name}
+            frameworkInjectedOptions={props.frameworkInjectedOptions}
+        />
+    ) : (
+        <></>
+    );
 };

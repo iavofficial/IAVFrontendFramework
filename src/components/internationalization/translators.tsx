@@ -1,5 +1,5 @@
 /**
- * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,24 +21,24 @@ import {LanguageContext} from "../../contexts/language";
 import {TranslateFunctionType} from "../../types/translationFunction";
 
 export function useTranslator() {
-  const langContext = useContext(LanguageContext);
-  return langContext?.useTranslationFunction
-    ? langContext?.useTranslationFunction()
-    : //eslint-disable-next-line
-      (...parameters: any) => "";
+    const langContext = useContext(LanguageContext);
+    return langContext?.useTranslationFunction
+        ? langContext?.useTranslationFunction()
+        : //eslint-disable-next-line
+        (...parameters: any) => "";
 }
 
 export interface AppliedTranslationProps {
-  t: TranslateFunctionType;
+    t: TranslateFunctionType;
 }
 
 export function applyTranslation<T extends AppliedTranslationProps>(
-  Component: React.ComponentType<T>,
+    Component: React.ComponentType<T>,
 ) {
-  //eslint-disable-next-line
-  return function (props: Omit<T, "t">) {
-    const t = useTranslator();
-    const extendedProps = {t, ...props} as T;
-    return <Component {...extendedProps} />;
-  };
+    //eslint-disable-next-line
+    return function (props: Omit<T, "t">) {
+        const t = useTranslator();
+        const extendedProps = {t, ...props} as T;
+        return <Component {...extendedProps} />;
+    };
 }

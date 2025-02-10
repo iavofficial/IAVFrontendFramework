@@ -1,5 +1,5 @@
 /**
- * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +19,9 @@
 import {ACCEPTED_COOKIES_NAME} from "../constants";
 
 export const setAcceptCookies = (
-  setCookie: (name: "acceptedCookies", value: any, options?: any) => void,
+    setCookie: (name: "acceptedCookies", value: any, options?: any) => void,
 ) => {
-  const exprireDate = new Date();
-  exprireDate.setUTCFullYear(exprireDate.getUTCFullYear() + 1);
-  setCookie(ACCEPTED_COOKIES_NAME, "true", {expires: exprireDate});
+    const exprireDate = new Date();
+    exprireDate.setUTCFullYear(exprireDate.getUTCFullYear() + 1);
+    setCookie(ACCEPTED_COOKIES_NAME, "true", {expires: exprireDate});
 };

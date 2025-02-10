@@ -1,5 +1,5 @@
 /**
- * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,23 +21,23 @@ import {ComponentTypeMinProps} from "../../../types/typesReact";
 import {SimpleNavbarTab} from "../tabs/simpleNavbarTab/simpleNavbarTab";
 import {InjectedOptionsObject} from "../types/typesInjectedOptions";
 
-export const generalizedTabFactoryFactory = <OptionType,>(
-  NavbarTabComponent: ComponentTypeMinProps<InjectedOptionsObject<OptionType>>,
+export const generalizedTabFactoryFactory = <OptionType, >(
+    NavbarTabComponent: ComponentTypeMinProps<InjectedOptionsObject<OptionType>>,
 ) => {
-  return (
-    tabProps: Omit<
-      React.ComponentProps<typeof SimpleNavbarTab>,
-      "frameworkInjectedOptions"
-    >,
-  ) => {
-    //eslint-disable-next-line
-    return (props: {frameworkInjectedOptions: OptionType}) => {
-      return (
-        <NavbarTabComponent
-          frameworkInjectedOptions={props.frameworkInjectedOptions}
-          {...tabProps}
-        />
-      );
+    return (
+        tabProps: Omit<
+            React.ComponentProps<typeof SimpleNavbarTab>,
+            "frameworkInjectedOptions"
+        >,
+    ) => {
+        //eslint-disable-next-line
+        return (props: { frameworkInjectedOptions: OptionType }) => {
+            return (
+                <NavbarTabComponent
+                    frameworkInjectedOptions={props.frameworkInjectedOptions}
+                    {...tabProps}
+                />
+            );
+        };
     };
-  };
 };

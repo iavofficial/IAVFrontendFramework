@@ -1,5 +1,5 @@
 /**
- * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,42 +16,42 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-.p-dropdown-panel .p-dropdown-items .p-dropdown-item{
-  background-color: var(--dropdownBg, var(--dropdownBgfb));
-  color: var(--dropdownBgHighlight, var(--dropdownBgHighlightfb))
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+    background-color: var(--dropdownBg, var(--dropdownBgfb));
+    color: var(--dropdownBgHighlight, var(--dropdownBgHighlightfb))
 }
 
 
-.p-contextmenu{
-  background-color: var(--contextmenubgmaincolor, var(--contextmenubgmaincolorfb));
- 
+.p-contextmenu {
+    background-color: var(--contextmenubgmaincolor, var(--contextmenubgmaincolorfb));
+
 }
 
-.p-menuitem{
-  background-color: var(--contextmenubgmaincolor, var(--contextmenubgmaincolorfb));
+.p-menuitem {
+    background-color: var(--contextmenubgmaincolor, var(--contextmenubgmaincolorfb));
 }
 
-.p-contextmenu .p-menuitem.p-menuitem-active > .p-menuitem-link{
-  background-color:  var( --highlightcolor ,var(--highlightcolorfb));
+.p-contextmenu .p-menuitem.p-menuitem-active > .p-menuitem-link {
+    background-color: var(--highlightcolor, var(--highlightcolorfb));
 }
 
-.p-contextmenu .p-menuitem.p-menuitem-active > .p-menuitem-link .p-menuitem-icon, .p-contextmenu .p-menuitem.p-menuitem-active > .p-menuitem-link .p-submenu-icon{
-  color: var(--textAndIconHighlightColorfb, var(--textAndIconHighlightColorfb));
+.p-contextmenu .p-menuitem.p-menuitem-active > .p-menuitem-link .p-menuitem-icon, .p-contextmenu .p-menuitem.p-menuitem-active > .p-menuitem-link .p-submenu-icon {
+    color: var(--textAndIconHighlightColorfb, var(--textAndIconHighlightColorfb));
 }
 
-.p-contextmenu .p-menuitem.p-menuitem-active > .p-menuitem-link .p-menuitem-icon, .p-contextmenu .p-menuitem.p-menuitem-active > .p-menuitem-link .p-submenu-icon{
-  color: var(--textAndIconHighlightColorfb, var(--textAndIconHighlightColorfb));
+.p-contextmenu .p-menuitem.p-menuitem-active > .p-menuitem-link .p-menuitem-icon, .p-contextmenu .p-menuitem.p-menuitem-active > .p-menuitem-link .p-submenu-icon {
+    color: var(--textAndIconHighlightColorfb, var(--textAndIconHighlightColorfb));
 }
 
-.p-contextmenu .p-menuitem.p-menuitem-active > .p-menuitem-link .p-menuitem-text{
-  color: var(--textAndIconHighlightColorfb, var(--textAndIconHighlightColorfb));
+.p-contextmenu .p-menuitem.p-menuitem-active > .p-menuitem-link .p-menuitem-text {
+    color: var(--textAndIconHighlightColorfb, var(--textAndIconHighlightColorfb));
 }
 
 
-.p-contextmenu .p-menuitem-link .p-menuitem-text{
-  color: var(--textAndIconMainColor, var(--textAndIconMainColorfb));
+.p-contextmenu .p-menuitem-link .p-menuitem-text {
+    color: var(--textAndIconMainColor, var(--textAndIconMainColorfb));
 }
 
-.p-contextmenu .p-menuitem-link .p-menuitem-icon{
-  color: var(--textAndIconMainColor, var(--textAndIconMainColorfb));
+.p-contextmenu .p-menuitem-link .p-menuitem-icon {
+    color: var(--textAndIconMainColor, var(--textAndIconMainColorfb));
 } 

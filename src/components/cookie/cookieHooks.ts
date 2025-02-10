@@ -1,5 +1,5 @@
 /**
- * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,10 +21,10 @@ import {useCookies} from "react-cookie";
 import {ACCEPTED_COOKIES_NAME} from "../../constants";
 
 export function useCookiesAccepted() {
-  const [cookies] = useCookies([ACCEPTED_COOKIES_NAME]);
-  return (
-    cookies[ACCEPTED_COOKIES_NAME] !== undefined &&
-    (cookies[ACCEPTED_COOKIES_NAME] === "true" ||
-      cookies[ACCEPTED_COOKIES_NAME] === true)
-  );
+    const [cookies] = useCookies([ACCEPTED_COOKIES_NAME]);
+    return (
+        cookies[ACCEPTED_COOKIES_NAME] !== undefined &&
+        (cookies[ACCEPTED_COOKIES_NAME] === "true" ||
+            cookies[ACCEPTED_COOKIES_NAME] === true)
+    );
 }

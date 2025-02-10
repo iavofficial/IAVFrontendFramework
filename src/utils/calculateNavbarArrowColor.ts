@@ -1,5 +1,5 @@
 /**
- * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,12 +17,12 @@
  */
 
 export function calculateNavbarArrowFunctionColor(navbarCollapsed: boolean) {
-  let returnValue = "";
-  if (navbarCollapsed) {
-    returnValue = "pi pi-chevron-right";
-  } else {
-    returnValue = "pi pi-chevron-left";
-  }
+    let returnValue = "";
+    if (navbarCollapsed) {
+        returnValue = "pi pi-chevron-right";
+    } else {
+        returnValue = "pi pi-chevron-left";
+    }
 
-  return returnValue;
+    return returnValue;
 }

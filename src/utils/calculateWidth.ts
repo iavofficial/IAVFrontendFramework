@@ -1,5 +1,5 @@
 /**
- * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,23 +17,23 @@
  */
 
 import {
-  DEFAULT_ELEMENTSIZE,
-  DEFAULT_WIDTH_CONTENTSECTIONELEMENT,
+    DEFAULT_ELEMENTSIZE,
+    DEFAULT_WIDTH_CONTENTSECTIONELEMENT,
 } from "../constants";
 
 export function calculateWidth(
-  navbarCollapsed: boolean,
-  width: number,
-  addable: boolean,
-  overflow: boolean,
+    navbarCollapsed: boolean,
+    width: number,
+    addable: boolean,
+    overflow: boolean,
 ): number {
-  if (!overflow) {
-    return DEFAULT_WIDTH_CONTENTSECTIONELEMENT;
-  }
+    if (!overflow) {
+        return DEFAULT_WIDTH_CONTENTSECTIONELEMENT;
+    }
 
-  if (addable) {
-    width = width - DEFAULT_ELEMENTSIZE;
-  }
+    if (addable) {
+        width = width - DEFAULT_ELEMENTSIZE;
+    }
 
-  return width / (navbarCollapsed ? 6 : 5);
+    return width / (navbarCollapsed ? 6 : 5);
 }

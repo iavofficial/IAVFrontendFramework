@@ -1,5 +1,5 @@
 /**
- * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,20 +21,20 @@ import {PrivilegedNavbarTab} from "../tabs/privilegedNavbarTab";
 import {InjectedOptionsGroupableByWrapperToTab} from "../types/typesInjectedOptions";
 
 export const privilegedNavbarTabFactory = (
-  tabProps: Omit<
-    React.ComponentProps<typeof PrivilegedNavbarTab>,
-    "frameworkInjectedOptions"
-  >,
+    tabProps: Omit<
+        React.ComponentProps<typeof PrivilegedNavbarTab>,
+        "frameworkInjectedOptions"
+    >,
 ) => {
-  //eslint-disable-next-line
-  return (props: {
-    frameworkInjectedOptions: InjectedOptionsGroupableByWrapperToTab;
-  }) => {
-    return (
-      <PrivilegedNavbarTab
-        frameworkInjectedOptions={props.frameworkInjectedOptions}
-        {...tabProps}
-      />
-    );
-  };
+    //eslint-disable-next-line
+    return (props: {
+        frameworkInjectedOptions: InjectedOptionsGroupableByWrapperToTab;
+    }) => {
+        return (
+            <PrivilegedNavbarTab
+                frameworkInjectedOptions={props.frameworkInjectedOptions}
+                {...tabProps}
+            />
+        );
+    };
 };

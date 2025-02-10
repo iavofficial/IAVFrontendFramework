@@ -1,5 +1,5 @@
 /**
- * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,44 +21,44 @@ import {NavbarSettingsContext} from "../contexts/navbarContext";
 import {StaticCollapsedState} from "../types/navbarSettingsTypes";
 
 interface Props {
-  staticCollapsedState?: StaticCollapsedState;
+    staticCollapsedState?: StaticCollapsedState;
 }
 
 export const NavbarSettingsProvider = (
-  props: React.PropsWithChildren<Props>,
+    props: React.PropsWithChildren<Props>,
 ) => {
-  const [navbarCollapsed, setNavbarCollapsed] = useState(() => {
-    let state = false;
+    const [navbarCollapsed, setNavbarCollapsed] = useState(() => {
+        let state = false;
 
-    if (props.staticCollapsedState !== undefined) {
-      if (props.staticCollapsedState === StaticCollapsedState.Collapsed) {
-        state = true;
-      }
-      if (props.staticCollapsedState === StaticCollapsedState.Unfolded) {
-        state = false;
-      }
-    } else {
-      const storedState = localStorage.getItem("navbarCollapsed");
-      state = storedState ? Boolean(JSON.parse(storedState as string)) : false;
-    }
+        if (props.staticCollapsedState !== undefined) {
+            if (props.staticCollapsedState === StaticCollapsedState.Collapsed) {
+                state = true;
+            }
+            if (props.staticCollapsedState === StaticCollapsedState.Unfolded) {
+                state = false;
+            }
+        } else {
+            const storedState = localStorage.getItem("navbarCollapsed");
+            state = storedState ? Boolean(JSON.parse(storedState as string)) : false;
+        }
 
-    return state;
-  });
+        return state;
+    });
 
-  const setNavbarCollapsedToLocalStorage = (navbarCollapsed: boolean) => {
-    localStorage.setItem("navbarCollapsed", JSON.stringify(navbarCollapsed));
-    setNavbarCollapsed(navbarCollapsed);
-  };
+    const setNavbarCollapsedToLocalStorage = (navbarCollapsed: boolean) => {
+        localStorage.setItem("navbarCollapsed", JSON.stringify(navbarCollapsed));
+        setNavbarCollapsed(navbarCollapsed);
+    };
 
-  return (
-    <NavbarSettingsContext.Provider
-      value={{
-        collapsible: props.staticCollapsedState === undefined,
-        navbarCollapsed: navbarCollapsed,
-        setNavbarCollapsed: setNavbarCollapsedToLocalStorage,
-      }}
-    >
-      {props.children}
-    </NavbarSettingsContext.Provider>
-  );
+    return (
+        <NavbarSettingsContext.Provider
+            value={{
+                collapsible: props.staticCollapsedState === undefined,
+                navbarCollapsed: navbarCollapsed,
+                setNavbarCollapsed: setNavbarCollapsedToLocalStorage,
+            }}
+        >
+            {props.children}
+        </NavbarSettingsContext.Provider>
+    );
 };

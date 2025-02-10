@@ -1,5 +1,5 @@
 /**
- * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,34 +22,34 @@ import {ImprintText} from "./imprintText";
 import "../css/globalColors.css";
 
 export const DefaultImprint = () => {
-  const colorSettingsContext = useContext(ColorSettingsContext);
+    const colorSettingsContext = useContext(ColorSettingsContext);
 
-  return (
-    <div
-      className={
-        (colorSettingsContext?.darkmode ? "bg-black" : "bg-grey-1") +
-        " flex p-3"
-      }
-      style={{
-        height: "100%",
-        width: "100%",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <div
-        className={
-          (colorSettingsContext?.darkmode
-            ? "bg-grey-5 color-white"
-            : "bg-white-1 color-black") + " flex p-3"
-        }
-        style={{
-          height: "100%",
-          width: "100%",
-        }}
-      >
-        <ImprintText />
-      </div>
-    </div>
-  );
+    return (
+        <div
+            className={
+                (colorSettingsContext?.darkmode ? "bg-black" : "bg-grey-1") +
+                " flex p-3"
+            }
+            style={{
+                height: "100%",
+                width: "100%",
+                justifyContent: "center",
+                alignItems: "center",
+            }}
+        >
+            <div
+                className={
+                    (colorSettingsContext?.darkmode
+                        ? "bg-grey-5 color-white"
+                        : "bg-white-1 color-black") + " flex p-3"
+                }
+                style={{
+                    height: "100%",
+                    width: "100%",
+                }}
+            >
+                <ImprintText/>
+            </div>
+        </div>
+    );
 };

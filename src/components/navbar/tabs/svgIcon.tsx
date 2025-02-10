@@ -1,5 +1,5 @@
 /**
- * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,14 +19,14 @@
 import React, {ReactNode} from "react";
 
 export interface Props {
-  element: ReactNode;
-  color: string;
+    element: ReactNode;
+    color: string;
 }
 
 export const SvgIcon = (props: Props) => {
-  return (
-    <svg width={"24px"} height="24px" fill={props.color}>
-      {props.element}
-    </svg>
-  );
+    return (
+        <svg width={"24px"} height="24px" fill={props.color}>
+            {props.element}
+        </svg>
+    );
 };

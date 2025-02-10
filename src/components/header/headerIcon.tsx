@@ -1,5 +1,5 @@
 /**
- * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,29 +21,29 @@ import makeStyles from "../content/style_options/makeStyles";
 import {classNames} from "primereact/utils";
 
 const useStyles = makeStyles(() => ({
-  wrapper: {
-    cursor: "pointer",
-  },
+    wrapper: {
+        cursor: "pointer",
+    },
 }));
 
 /**
  * Props for the HeaderIcon component.
  */
 interface Props {
-  /**
-   * Callback triggered when the element is clicked.
-   */
-  onClick?: (event: React.SyntheticEvent) => void;
+    /**
+     * Callback triggered when the element is clicked.
+     */
+    onClick?: (event: React.SyntheticEvent) => void;
 
-  /**
-   * Callback triggered when a key is pressed.
-   */
-  onKeyDown?: (event: React.KeyboardEvent) => void;
+    /**
+     * Callback triggered when a key is pressed.
+     */
+    onKeyDown?: (event: React.KeyboardEvent) => void;
 
-  /**
-   * Inline styles to customize the component.
-   */
-  style?: React.CSSProperties;
+    /**
+     * Inline styles to customize the component.
+     */
+    style?: React.CSSProperties;
 }
 
 /**
@@ -54,23 +54,23 @@ interface Props {
  * for icon-based headers.
  */
 const HeaderIcon: React.FC<PropsWithChildren<Props>> = (props) => {
-  const {onClick, onKeyDown, style, children} = props;
+    const {onClick, onKeyDown, style, children} = props;
 
-  const {classes} = useStyles();
+    const {classes} = useStyles();
 
-  return (
-    <div
-      className={classNames(
-        "flex align-items-center justify-content-end",
-        classes.wrapper,
-      )}
-      style={style}
-      onClick={onClick}
-      onKeyDown={onKeyDown}
-    >
-      {children}
-    </div>
-  );
+    return (
+        <div
+            className={classNames(
+                "flex align-items-center justify-content-end",
+                classes.wrapper,
+            )}
+            style={style}
+            onClick={onClick}
+            onKeyDown={onKeyDown}
+        >
+            {children}
+        </div>
+    );
 };
 
 export default HeaderIcon;

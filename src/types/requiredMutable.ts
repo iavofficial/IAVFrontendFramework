@@ -1,5 +1,5 @@
 /**
- * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,15 +17,15 @@
  */
 
 export type RequiredMutable<T> = {
-  -readonly [K in keyof T]-?: NonNullable<T[K]>;
+    -readonly [K in keyof T]-?: NonNullable<T[K]>;
 };
 
 export type DeepRequired<T> = {
-  [K in keyof T]-?: NonNullable<T[K]> extends (infer U)[]
-    ? DeepRequiredArray<U>
-    : NonNullable<T[K]> extends object
-      ? DeepRequired<NonNullable<T[K]>>
-      : NonNullable<T[K]>;
+    [K in keyof T]-?: NonNullable<T[K]> extends (infer U)[]
+        ? DeepRequiredArray<U>
+        : NonNullable<T[K]> extends object
+            ? DeepRequired<NonNullable<T[K]>>
+            : NonNullable<T[K]>;
 };
 
 type DeepRequiredArray<T> = DeepRequired<T>[];

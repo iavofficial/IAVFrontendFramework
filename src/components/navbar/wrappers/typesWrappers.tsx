@@ -1,5 +1,5 @@
 /**
- * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,26 +19,28 @@
 import {ReactElement} from "react";
 import {RouteProps} from "react-router-dom";
 import {
-  InjectedOptionsByGroupToWrapper,
-  InjectedOptionsByNavbarToWrapper,
+    InjectedOptionsByGroupToWrapper,
+    InjectedOptionsByNavbarToWrapper,
 } from "../types/typesInjectedOptions";
 
 export interface TabAndContentWrapper {
-  getRoutes(): ReactElement<RouteProps>[];
-  getNavbarComponent(
-    navbarInjectedOptions: InjectedOptionsByNavbarToWrapper,
-  ): ReactElement;
-  getKey(): string;
+    getRoutes(): ReactElement<RouteProps>[];
+
+    getNavbarComponent(
+        navbarInjectedOptions: InjectedOptionsByNavbarToWrapper,
+    ): ReactElement;
+
+    getKey(): string;
 }
 
 export type GroupableTabAndContentWrapper = TabAndContentWrapper & {
-  getInsideGroup(): boolean;
-  // Allow any return value to allow for feedback if
-  // necessary while using the framework and developing custom TabAndContentWrappers.
-  setInsideGroup(insideGroup: boolean): any;
-  getNavbarComponent(
-    navbarInjectedOptions:
-      | InjectedOptionsByNavbarToWrapper
-      | InjectedOptionsByGroupToWrapper,
-  ): ReactElement;
+    getInsideGroup(): boolean;
+    // Allow any return value to allow for feedback if
+    // necessary while using the framework and developing custom TabAndContentWrappers.
+    setInsideGroup(insideGroup: boolean): any;
+    getNavbarComponent(
+        navbarInjectedOptions:
+            | InjectedOptionsByNavbarToWrapper
+            | InjectedOptionsByGroupToWrapper,
+    ): ReactElement;
 };

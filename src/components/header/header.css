@@ -1,5 +1,5 @@
 /**
- * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,37 +17,37 @@
  */
 
 #iav-logo {
-  width: var(--navbar-width);
+    width: var(--navbar-width);
 }
 
 #left-element {
-  width: 420px !important;
-  overflow-x: hidden;
+    width: 420px !important;
+    overflow-x: hidden;
 }
 
 #right-element {
-  width: 450px !important;
+    width: 450px !important;
 }
 
 #right-element-companylogo {
-  width: 200px !important;
-  overflow-x: hidden;
+    width: 200px !important;
+    overflow-x: hidden;
 }
 
 #right-element-user-section {
-  width: 250px !important;
+    width: 250px !important;
 }
 
 #header {
-  height: 56px !important;
+    height: 56px !important;
 }
 
 .p-overlaypanel {
-  &:before {
-    content:none;
-  }
+    &:before {
+        content: none;
+    }
 
-  &:after {
-    content:none;
-  }
+    &:after {
+        content: none;
+    }
 }

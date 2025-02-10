@@ -1,5 +1,5 @@
 /**
- * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,13 +26,13 @@ import {InjectedOptionsGroupableByWrapperToTab} from "../types/typesInjectedOpti
  * can be groupable or not.
  */
 export interface NavbarTabProps<OptionType> {
-  name: string | ((t: TranslateFunctionType) => string);
-  disabled: boolean;
-  frameworkInjectedOptions: OptionType;
-  hidden?: boolean;
-  icon?: ReactElement;
-  collapsed?: boolean;
-  active?: boolean;
+    name: string | ((t: TranslateFunctionType) => string);
+    disabled: boolean;
+    frameworkInjectedOptions: OptionType;
+    hidden?: boolean;
+    icon?: ReactElement;
+    collapsed?: boolean;
+    active?: boolean;
 }
 
 /**
@@ -40,5 +40,5 @@ export interface NavbarTabProps<OptionType> {
  */
 //eslint-disable-next-line
 export type GroupableNavbarTab<additional = {}> = React.FunctionComponent<
-  NavbarTabProps<InjectedOptionsGroupableByWrapperToTab> & additional
+    NavbarTabProps<InjectedOptionsGroupableByWrapperToTab> & additional
 >;

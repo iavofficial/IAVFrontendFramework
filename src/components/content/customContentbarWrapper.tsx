@@ -1,5 +1,5 @@
 /**
- * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,25 +22,26 @@ import {ContentbarWrapperInterface} from "./contentbarWrapperInterface";
 import "./contentbar.css";
 
 export class CustomContentbarWrapper implements ContentbarWrapperInterface {
-  constructor(
-    private id: string,
-    private renderElement: ReactElement,
-    private contentAreaElement: React.ReactElement,
-  ) {}
+    constructor(
+        private id: string,
+        private renderElement: ReactElement,
+        private contentAreaElement: React.ReactElement,
+    ) {
+    }
 
-  getKey() {
-    return generateHashOfLength(6);
-  }
+    getKey() {
+        return generateHashOfLength(6);
+    }
 
-  getId() {
-    return this.id;
-  }
+    getId() {
+        return this.id;
+    }
 
-  getContentAreaElement(): React.ReactElement {
-    return this.contentAreaElement;
-  }
+    getContentAreaElement(): React.ReactElement {
+        return this.contentAreaElement;
+    }
 
-  getContentbarElement() {
-    return <div id="restrictDimensions">{this.renderElement}</div>;
-  }
+    getContentbarElement() {
+        return <div id="restrictDimensions">{this.renderElement}</div>;
+    }
 }

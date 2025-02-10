@@ -1,5 +1,5 @@
 /**
- * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,26 +18,26 @@
 
 import {ContentAreaColorOptions} from "../colorOptionTypes";
 import {
-  DARK_CONTENT_AREA_BACKGROUND_COLOR,
-  LIGHT_CONTENT_AREA_BACKGROUND_COLOR,
+    DARK_CONTENT_AREA_BACKGROUND_COLOR,
+    LIGHT_CONTENT_AREA_BACKGROUND_COLOR,
 } from "../defaultColors";
 import {determineSelectedColorHof} from "./determineSelectedColor";
 
 export const getCurrentColorsContentArea = (
-  darkmodeIsEnabled: boolean,
-  customColorsDisabledInCurrentMode: boolean,
-  contentAreaColorOptions: ContentAreaColorOptions,
+    darkmodeIsEnabled: boolean,
+    customColorsDisabledInCurrentMode: boolean,
+    contentAreaColorOptions: ContentAreaColorOptions,
 ) => {
-  const determineColor = determineSelectedColorHof(
-    darkmodeIsEnabled,
-    customColorsDisabledInCurrentMode,
-  );
+    const determineColor = determineSelectedColorHof(
+        darkmodeIsEnabled,
+        customColorsDisabledInCurrentMode,
+    );
 
-  return {
-    backgroundColor: determineColor(
-      LIGHT_CONTENT_AREA_BACKGROUND_COLOR,
-      DARK_CONTENT_AREA_BACKGROUND_COLOR,
-      contentAreaColorOptions.backgroundColor,
-    ),
-  };
+    return {
+        backgroundColor: determineColor(
+            LIGHT_CONTENT_AREA_BACKGROUND_COLOR,
+            DARK_CONTENT_AREA_BACKGROUND_COLOR,
+            contentAreaColorOptions.backgroundColor,
+        ),
+    };
 };

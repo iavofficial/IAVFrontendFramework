@@ -1,5 +1,5 @@
 /**
- * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,25 +23,25 @@ import {NestedNavbarTabProps} from "./simpleNavbarTab";
 import "../tabs.css";
 
 export const SimpleNavbarTabCollapsed = (props: NestedNavbarTabProps) => {
-  const ref = useRef<HTMLDivElement>(null);
+    const ref = useRef<HTMLDivElement>(null);
 
-  let className =
-    "default-nav-element-collapsed default-tab-collapsed flex align-items-center justify-content-center";
+    let className =
+        "default-nav-element-collapsed default-tab-collapsed flex align-items-center justify-content-center";
 
-  if (props.additionalClassNames) {
-    className += props.additionalClassNames;
-  }
+    if (props.additionalClassNames) {
+        className += props.additionalClassNames;
+    }
 
-  return (
-    <div
-      ref={ref}
-      onMouseEnter={() => props.setHovering(true)}
-      onMouseLeave={() => props.setHovering(false)}
-      className={className}
-      style={props.style}
-    >
-      <SvgIcon color={props.iconColor} element={props.icon} />
-      <Tooltip content={props.name} target={ref} id="hover-image" />
-    </div>
-  );
+    return (
+        <div
+            ref={ref}
+            onMouseEnter={() => props.setHovering(true)}
+            onMouseLeave={() => props.setHovering(false)}
+            className={className}
+            style={props.style}
+        >
+            <SvgIcon color={props.iconColor} element={props.icon}/>
+            <Tooltip content={props.name} target={ref} id="hover-image"/>
+        </div>
+    );
 };

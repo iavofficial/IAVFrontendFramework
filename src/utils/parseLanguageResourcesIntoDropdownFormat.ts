@@ -17,36 +17,36 @@
  */
 
 export function parseLanguageResourcesIntoDropdownFormat(resourcesObject: any) {
-    const resourcesObjectArray: any[] = [];
-    Object.keys(resourcesObject).forEach((key: string) => {
-        const resourceElementWithKey: any = {
-            key: key,
-            element: resourcesObject[key],
-        };
+  const resourcesObjectArray: any[] = [];
+  Object.keys(resourcesObject).forEach((key: string) => {
+    const resourceElementWithKey: any = {
+      key: key,
+      element: resourcesObject[key],
+    };
 
-        const resourceObject = {
-            label: resourcesObject[key].translation.option_name,
-            value: resourceElementWithKey,
-        };
-        resourcesObjectArray.push(resourceObject);
-    });
+    const resourceObject = {
+      label: resourcesObject[key].translation.option_name,
+      value: resourceElementWithKey,
+    };
+    resourcesObjectArray.push(resourceObject);
+  });
 
-    return resourcesObjectArray;
+  return resourcesObjectArray;
 }
 
 export function parseActiveLanguageKeyIntoLanguageName(
-    key: string,
-    resourceObject: any,
+  key: string,
+  resourceObject: any,
 ) {
-    const resourceElementWithKey: any = {
-        key: key,
-        element: resourceObject[key],
-    };
+  const resourceElementWithKey: any = {
+    key: key,
+    element: resourceObject[key],
+  };
 
-    const returnResourceObject = {
-        label: resourceObject[key].translation.option_name,
-        value: resourceElementWithKey,
-    };
+  const returnResourceObject = {
+    label: resourceObject[key].translation.option_name,
+    value: resourceElementWithKey,
+  };
 
-    return returnResourceObject;
+  return returnResourceObject;
 }

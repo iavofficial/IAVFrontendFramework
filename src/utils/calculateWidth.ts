@@ -17,23 +17,23 @@
  */
 
 import {
-    DEFAULT_ELEMENTSIZE,
-    DEFAULT_WIDTH_CONTENTSECTIONELEMENT,
+  DEFAULT_ELEMENTSIZE,
+  DEFAULT_WIDTH_CONTENTSECTIONELEMENT,
 } from "../constants";
 
 export function calculateWidth(
-    navbarCollapsed: boolean,
-    width: number,
-    addable: boolean,
-    overflow: boolean,
+  navbarCollapsed: boolean,
+  width: number,
+  addable: boolean,
+  overflow: boolean,
 ): number {
-    if (!overflow) {
-        return DEFAULT_WIDTH_CONTENTSECTIONELEMENT;
-    }
+  if (!overflow) {
+    return DEFAULT_WIDTH_CONTENTSECTIONELEMENT;
+  }
 
-    if (addable) {
-        width = width - DEFAULT_ELEMENTSIZE;
-    }
+  if (addable) {
+    width = width - DEFAULT_ELEMENTSIZE;
+  }
 
-    return width / (navbarCollapsed ? 6 : 5);
+  return width / (navbarCollapsed ? 6 : 5);
 }

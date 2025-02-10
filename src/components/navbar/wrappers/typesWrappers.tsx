@@ -19,28 +19,28 @@
 import {ReactElement} from "react";
 import {RouteProps} from "react-router-dom";
 import {
-    InjectedOptionsByGroupToWrapper,
-    InjectedOptionsByNavbarToWrapper,
+  InjectedOptionsByGroupToWrapper,
+  InjectedOptionsByNavbarToWrapper,
 } from "../types/typesInjectedOptions";
 
 export interface TabAndContentWrapper {
-    getRoutes(): ReactElement<RouteProps>[];
+  getRoutes(): ReactElement<RouteProps>[];
 
-    getNavbarComponent(
-        navbarInjectedOptions: InjectedOptionsByNavbarToWrapper,
-    ): ReactElement;
+  getNavbarComponent(
+    navbarInjectedOptions: InjectedOptionsByNavbarToWrapper,
+  ): ReactElement;
 
-    getKey(): string;
+  getKey(): string;
 }
 
 export type GroupableTabAndContentWrapper = TabAndContentWrapper & {
-    getInsideGroup(): boolean;
-    // Allow any return value to allow for feedback if
-    // necessary while using the framework and developing custom TabAndContentWrappers.
-    setInsideGroup(insideGroup: boolean): any;
-    getNavbarComponent(
-        navbarInjectedOptions:
-            | InjectedOptionsByNavbarToWrapper
-            | InjectedOptionsByGroupToWrapper,
-    ): ReactElement;
+  getInsideGroup(): boolean;
+  // Allow any return value to allow for feedback if
+  // necessary while using the framework and developing custom TabAndContentWrappers.
+  setInsideGroup(insideGroup: boolean): any;
+  getNavbarComponent(
+    navbarInjectedOptions:
+      | InjectedOptionsByNavbarToWrapper
+      | InjectedOptionsByGroupToWrapper,
+  ): ReactElement;
 };

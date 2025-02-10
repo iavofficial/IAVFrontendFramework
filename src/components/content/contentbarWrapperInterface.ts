@@ -19,15 +19,15 @@
 import React, {ReactElement} from "react";
 
 export interface ContentbarWrapperInterface {
-    getContentbarElement(
-        contentElementWidth: number,
-        selectedId: string,
-        idOfFirstElement: string,
-    ): ReactElement;
+  getContentbarElement(
+    contentElementWidth: number,
+    selectedId: string,
+    idOfFirstElement: string,
+  ): ReactElement;
 
-    getKey(): string;
+  getKey(): string;
 
-    getId(): string;
+  getId(): string;
 
-    getContentAreaElement(): React.ReactElement;
+  getContentAreaElement(): React.ReactElement;
 }

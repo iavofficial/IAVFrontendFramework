@@ -26,53 +26,54 @@ import {ComponentTypeMinProps} from "../../../types/typesReact";
 import {InjectedOptionsObject} from "../types/typesInjectedOptions";
 
 export class BasicContentWrapper
-    extends ContentWrapperGeneralization
-    implements GroupableTabAndContentWrapper {
-    private _insideGroup = false;
+  extends ContentWrapperGeneralization
+  implements GroupableTabAndContentWrapper
+{
+  private _insideGroup = false;
 
-    constructor(
-        protected _path: string,
-        protected _navbarTab: ComponentTypeMinProps<
-            InjectedOptionsObject<InjectedOptionsGroupableByWrapperToTab>
-        >,
-        protected _component: React.ComponentType,
-    ) {
-        super(_path, _component);
-    }
+  constructor(
+    protected _path: string,
+    protected _navbarTab: ComponentTypeMinProps<
+      InjectedOptionsObject<InjectedOptionsGroupableByWrapperToTab>
+    >,
+    protected _component: React.ComponentType,
+  ) {
+    super(_path, _component);
+  }
 
-    // As this wrapper can be used inside a group but doesn't have to be located
-    // inside a group, it has to take the options of the navbar component and
-    // the options of groups.
-    getNavbarComponent = (
-        navbarInjectedOptions:
-            | InjectedOptionsByNavbarToWrapper
-            | InjectedOptionsByGroupToWrapper,
-    ) => {
-        const NavbarElement = this._navbarTab;
+  // As this wrapper can be used inside a group but doesn't have to be located
+  // inside a group, it has to take the options of the navbar component and
+  // the options of groups.
+  getNavbarComponent = (
+    navbarInjectedOptions:
+      | InjectedOptionsByNavbarToWrapper
+      | InjectedOptionsByGroupToWrapper,
+  ) => {
+    const NavbarElement = this._navbarTab;
 
-        const injectedOptions: InjectedOptionsGroupableByWrapperToTab = {
-            insideGroup: this.getInsideGroup(),
-            path: this._path,
-            navbarCollapsed: navbarInjectedOptions.navbarCollapsed,
-            groupActive: this.getInsideGroup()
-                ? // @ts-ignore If insideGroup is true groupActive will be contained.
-                navbarInjectedOptions.groupActive
-                : false,
-        };
-
-        return (
-            <NavbarElement
-                key={this.getKey()}
-                frameworkInjectedOptions={injectedOptions}
-            />
-        );
+    const injectedOptions: InjectedOptionsGroupableByWrapperToTab = {
+      insideGroup: this.getInsideGroup(),
+      path: this._path,
+      navbarCollapsed: navbarInjectedOptions.navbarCollapsed,
+      groupActive: this.getInsideGroup()
+        ? // @ts-ignore If insideGroup is true groupActive will be contained.
+          navbarInjectedOptions.groupActive
+        : false,
     };
 
-    getInsideGroup = () => {
-        return this._insideGroup;
-    };
+    return (
+      <NavbarElement
+        key={this.getKey()}
+        frameworkInjectedOptions={injectedOptions}
+      />
+    );
+  };
 
-    setInsideGroup = (insideGroup: boolean) => {
-        this._insideGroup = insideGroup;
-    };
+  getInsideGroup = () => {
+    return this._insideGroup;
+  };
+
+  setInsideGroup = (insideGroup: boolean) => {
+    this._insideGroup = insideGroup;
+  };
 }

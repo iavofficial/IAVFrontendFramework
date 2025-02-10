@@ -20,8 +20,8 @@
  * This type describes the translation function of react-i18next.
  */
 export type TranslateFunctionType = (
-    key: string,
-    ...translationParameters: any
+  key: string,
+  ...translationParameters: any
 ) => string;
 
 /**

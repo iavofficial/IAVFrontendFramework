@@ -21,36 +21,36 @@ import {TranslateFunctionType} from "../types/translationFunction";
 
 //eslint-disable-next-line
 export interface TranslationKeys extends Object {
-    option_name: string;
+  option_name: string;
 
-    [key: string]: any;
+  [key: string]: any;
 }
 
 export interface Translation {
-    translation: TranslationKeys;
+  translation: TranslationKeys;
 
-    [translation: string]: any;
+  [translation: string]: any;
 }
 
 export interface Translations {
-    [lang: string]: Translation;
+  [lang: string]: Translation;
 }
 
 export interface LanguageProvider {
-    useCustomTranslation: TranslateFunctionType;
-    selectLanguage: (lang: string) => void;
+  useCustomTranslation: TranslateFunctionType;
+  selectLanguage: (lang: string) => void;
 }
 
 export interface LanguageContextType {
-    fallbackLang: string;
-    resources: Translations;
-    activeLang: string;
-    selectLanguage: (lang: string) => void;
-    useTranslationFunction: () => TranslateFunctionType;
+  fallbackLang: string;
+  resources: Translations;
+  activeLang: string;
+  selectLanguage: (lang: string) => void;
+  useTranslationFunction: () => TranslateFunctionType;
 
-    [attribute: string]: any;
+  [attribute: string]: any;
 }
 
 export const LanguageContext = React.createContext<
-    LanguageContextType | undefined
+  LanguageContextType | undefined
 >(undefined);

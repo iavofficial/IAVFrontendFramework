@@ -24,25 +24,25 @@ import {GroupableNavbarTab, NavbarTabProps} from "./typesNavbarTab";
 import {InjectedOptionsGroupableByWrapperToTab} from "../types/typesInjectedOptions";
 
 export interface Props {
-    permittedGroups: string[];
+  permittedGroups: string[];
 }
 
 export const PrivilegedNavbarTab: GroupableNavbarTab<Props> = (
-    props: NavbarTabProps<InjectedOptionsGroupableByWrapperToTab> & Props,
+  props: NavbarTabProps<InjectedOptionsGroupableByWrapperToTab> & Props,
 ) => {
-    const authContext = useContext(AuthContext);
-    const permitted = containsOneOrMoreGroups(
-        authContext?.getUserGroups(),
-        props.permittedGroups,
-    );
-    return permitted ? (
-        <SimpleNavbarTab
-            icon={props.icon}
-            disabled={props.disabled}
-            name={props.name}
-            frameworkInjectedOptions={props.frameworkInjectedOptions}
-        />
-    ) : (
-        <></>
-    );
+  const authContext = useContext(AuthContext);
+  const permitted = containsOneOrMoreGroups(
+    authContext?.getUserGroups(),
+    props.permittedGroups,
+  );
+  return permitted ? (
+    <SimpleNavbarTab
+      icon={props.icon}
+      disabled={props.disabled}
+      name={props.name}
+      frameworkInjectedOptions={props.frameworkInjectedOptions}
+    />
+  ) : (
+    <></>
+  );
 };

@@ -19,11 +19,11 @@
 import React from "react";
 
 interface NavbarSettingsType {
-    collapsible: boolean;
-    navbarCollapsed: boolean;
-    setNavbarCollapsed: (navbarCollapsed: boolean) => void;
+  collapsible: boolean;
+  navbarCollapsed: boolean;
+  setNavbarCollapsed: (navbarCollapsed: boolean) => void;
 }
 
 export const NavbarSettingsContext = React.createContext<NavbarSettingsType>(
-    {} as NavbarSettingsType,
+  {} as NavbarSettingsType,
 );

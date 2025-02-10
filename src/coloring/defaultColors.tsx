@@ -17,15 +17,15 @@
  */
 
 import {
-    BLACK,
-    BLUE0,
-    BLUE3,
-    GREY1,
-    GREY4,
-    GREY5,
-    GREY6,
-    GREY_MENU_SPECIAL_1,
-    WHITE,
+  BLACK,
+  BLUE0,
+  BLUE3,
+  GREY1,
+  GREY4,
+  GREY5,
+  GREY6,
+  GREY_MENU_SPECIAL_1,
+  WHITE,
 } from "../constants";
 
 //. Header

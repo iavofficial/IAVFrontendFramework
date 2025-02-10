@@ -23,25 +23,25 @@ import {NestedNavbarTabProps} from "./simpleNavbarTab";
 import "../tabs.css";
 
 export const SimpleNavbarTabCollapsed = (props: NestedNavbarTabProps) => {
-    const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
-    let className =
-        "default-nav-element-collapsed default-tab-collapsed flex align-items-center justify-content-center";
+  let className =
+    "default-nav-element-collapsed default-tab-collapsed flex align-items-center justify-content-center";
 
-    if (props.additionalClassNames) {
-        className += props.additionalClassNames;
-    }
+  if (props.additionalClassNames) {
+    className += props.additionalClassNames;
+  }
 
-    return (
-        <div
-            ref={ref}
-            onMouseEnter={() => props.setHovering(true)}
-            onMouseLeave={() => props.setHovering(false)}
-            className={className}
-            style={props.style}
-        >
-            <SvgIcon color={props.iconColor} element={props.icon}/>
-            <Tooltip content={props.name} target={ref} id="hover-image"/>
-        </div>
-    );
+  return (
+    <div
+      ref={ref}
+      onMouseEnter={() => props.setHovering(true)}
+      onMouseLeave={() => props.setHovering(false)}
+      className={className}
+      style={props.style}
+    >
+      <SvgIcon color={props.iconColor} element={props.icon} />
+      <Tooltip content={props.name} target={ref} id="hover-image" />
+    </div>
+  );
 };

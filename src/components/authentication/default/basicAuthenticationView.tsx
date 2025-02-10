@@ -308,7 +308,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
           &copy;{" "}
                     {props.authOptions?.companyText
                         ? props.authOptions?.companyText
-                        : "Your Company 2025"}
+                        : "Company 2025"}
         </span>
             </div>
         </div>

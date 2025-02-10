@@ -34,36 +34,37 @@ export const ImprintText = () => {
             }
         >
             <p className={"font-bold"}>{t("Imprint")}</p>
-            <span>IAV GmbH Ingenieurgesellschaft Auto und Verkehr</span>
+            <span>Max Mustermann, Musterunternehmen</span>
             <br/>
-            <span>Carnotstraße 1</span>
+            <span>Musterstraße 1</span>
             <br/>
-            <span>10587 Berlin</span> <br/>
+            <span>12345 Musterstadt</span> <br/>
             <span>{t("Germany")}</span> <br/>
             <br/>
-            <span>Tel.: +49 30 3997-80</span> <br/>
-            <span>Fax: +49 30 3997-89926</span> <br/>
-            <span lang="EN-GB">E-Mail: impressum[at]iav.com</span> <br/>
+            <span>Tel.: +49 123 456789</span> <br/>
+            <span>Fax: +49 123 456789-99</span> <br/>
+            <span lang="EN-GB">E-Mail: kontakt[at]musterunternehmen.com</span> <br/>
             <span>
-        {t("Internet")}:{" "}
+        {t("Internet")}: {" "}
                 <a
-                    href="http://www.iav.com"
+                    href="http://www.musterunternehmen.com"
                     className={colorSettingsContext?.darkmode ? "color-blue-3" : ""}
                 >
-          www.iav.com
+          www.musterunternehmen.com
         </a>
       </span>{" "}
             <br/> <br/>
-            <span>{t("Headquarter")}: Berlin</span> <br/>
-            <span>{t("Register_court")}: Amtsgericht Charlottenburg</span> <br/>
-            <span>{t("Registration_number")}: HRB 21 280 B</span> <br/>
-            <span>{t("USt_Ident_Number")}: DE 136647090</span> <br/> <br/>
+            <span>{t("Headquarter")}: Musterstadt</span> <br/>
+            <span>{t("Register_court")}: Amtsgericht Musterstadt</span> <br/>
+            <span>{t("Registration_number")}: HRB 123456</span> <br/>
+            <span>{t("USt_Ident_Number")}: DE 123456789</span> <br/> <br/>
             <span>{t("Managing_directors")}</span> <br/>
-            <span>Jörg Astalosch ({t("Chairman")})</span> <br/>
-            <span>Martin Mahlke</span> <br/>
-            <span>Jens Pfitzinger</span> <br/>
+            <span>Max Mustermann ({t("Chairman")})</span> <br/>
+            <span>Erika Mustermann</span> <br/>
+            <span>Hans Beispiel</span> <br/>
             <span>{t("Chairman_supervisory_board")}</span> <br/>
-            <span>Dr. Nikolai Ardey</span> <br/>
+            <span>Dr. Johann Muster</span> <br/>
         </div>
     );
 };
+

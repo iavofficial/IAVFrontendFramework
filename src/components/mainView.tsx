@@ -24,6 +24,7 @@ import {SettingsMenuOptions} from "./header/settingsMenu";
 import {Outlet, Route, Routes} from "react-router-dom";
 import {TabAndContentWrapper} from "./navbar/wrappers/typesWrappers";
 import {UserMenuOptions} from "./header/userMenu";
+import If from "./helper/If";
 
 interface MainViewProps {
     tabAndContentWrappers: TabAndContentWrapper[];
@@ -33,6 +34,7 @@ interface MainViewProps {
     headerOptions?: HeaderOptions;
     settingsMenuOptions?: SettingsMenuOptions;
     userMenuOptions?: UserMenuOptions;
+    hideNavbar?: boolean;
 }
 
 export const MainView = (props: MainViewProps) => {
@@ -53,11 +55,13 @@ export const MainView = (props: MainViewProps) => {
                 />
             </div>
             <div style={{display: "flex", flex: "1 1 auto", overflow: "auto"}}>
-                <Navbar
-                    tabAndContentWrappers={props.tabAndContentWrappers}
-                    documentsLabelKey={props.documentsLabelKey}
-                    hideLegalDocuments={props.hideLegalDocuments}
-                />
+                <If condition={!props.hideNavbar}>
+                    <Navbar
+                        tabAndContentWrappers={props.tabAndContentWrappers}
+                        documentsLabelKey={props.documentsLabelKey}
+                        hideLegalDocuments={props.hideLegalDocuments}
+                    />
+                </If>
                 <Outlet/>
                 <Routes>
                     {props.tabAndContentWrappers.map((wrapper) => wrapper.getRoutes())}

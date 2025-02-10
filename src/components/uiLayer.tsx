@@ -73,6 +73,7 @@ export interface Props {
     authOptions?: AuthOptions;
     hideLegalDocuments?: boolean;
     navbarOptions?: NavbarOptions;
+    hideNavbar?: boolean;
 }
 
 export const UILayer = (props: Props) => {
@@ -151,6 +152,7 @@ export const UILayer = (props: Props) => {
                                     documentsComponent={props.documentsComponent}
                                     tabAndContentWrappers={props.tabAndContentWrappers}
                                     hideLegalDocuments={props.hideLegalDocuments}
+                                    hideNavbar={props.hideNavbar}
                                 />
                             }
                         />

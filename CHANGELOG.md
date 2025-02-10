@@ -1,3 +1,9 @@
+## [1.3.0-dev.2](https://github.com/iavofficial/IAVFrontendFramework/compare/v1.3.0-dev.1...v1.3.0-dev.2) (2025-02-10)
+
+### Features
+
+* add hide navbar ([6920f5e](https://github.com/iavofficial/IAVFrontendFramework/commit/6920f5e773d6329ba2d1e3669c246dec0d7ef03f))
+
 ## [1.3.0-dev.1](https://github.com/iavofficial/IAVFrontendFramework/compare/v1.2.1-dev.2...v1.3.0-dev.1) (2025-02-10)
 
 ### Features

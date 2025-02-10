@@ -3,7 +3,7 @@
   "version": "1.3.0-dev.1",
   "private": false,
   "license": "Apache-2.0",
-  "description": "This framework is the foundation of IAV frontend applications to provide maintainability, expandability, unification and an improved developer experience.",
+  "description": "This framework is the foundation of frontend applications to provide maintainability, expandability, unification and an improved developer experience.",
   "contributors": [
     {
       "name": "Joerg Jonas Krahn",

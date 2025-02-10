@@ -1,5 +1,5 @@
 /**
- * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -308,7 +308,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
           &copy;{" "}
           {props.authOptions?.companyText
             ? props.authOptions?.companyText
-            : "IAV GmbH 2024"}
+            : "Company 2025"}
         </span>
       </div>
     </div>

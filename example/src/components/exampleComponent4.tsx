@@ -1,5 +1,5 @@
 /**
- * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,38 +16,38 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { DataTable } from "primereact/datatable";
-import { Column } from "primereact/column";
+import {DataTable} from "primereact/datatable";
+import {Column} from "primereact/column";
 
 export const ExampleComponent4 = () => {
-  return (
-    <div
-      style={{
-        display: "flex",
-        gap: "40px",
-        flexDirection: "column",
-        maxHeight: "90vh",
-        overflow: "auto",
-        paddingRight: "10px",
-        paddingLeft: "10px",
-      }}
-    >
-      <div>
-        <DataTable value={[]}>
-          <Column field="code" header="Code"></Column>
-          <Column field="name" header="Name"></Column>
-          <Column field="category" header="Category"></Column>
-          <Column field="quantity" header="Quantity"></Column>
-        </DataTable>
-      </div>
-      <div>
-        <DataTable value={[]}>
-          <Column field="code" header="Code"></Column>
-          <Column field="name" header="Name"></Column>
-          <Column field="category" header="Category"></Column>
-          <Column field="quantity" header="Quantity"></Column>
-        </DataTable>
-      </div>
-    </div>
-  );
+    return (
+        <div
+            style={{
+                display: "flex",
+                gap: "40px",
+                flexDirection: "column",
+                maxHeight: "90vh",
+                overflow: "auto",
+                paddingRight: "10px",
+                paddingLeft: "10px",
+            }}
+        >
+            <div>
+                <DataTable value={[]}>
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+            </div>
+            <div>
+                <DataTable value={[]}>
+                    <Column field="code" header="Code"></Column>
+                    <Column field="name" header="Name"></Column>
+                    <Column field="category" header="Category"></Column>
+                    <Column field="quantity" header="Quantity"></Column>
+                </DataTable>
+            </div>
+        </div>
+    );
 };

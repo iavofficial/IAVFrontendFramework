@@ -1,5 +1,5 @@
 /**
- * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,6 +33,7 @@ export type FetchAuthedFunction = (
 
 export interface UserDataBasic {
   username: string;
+
   [attribute: string]: any;
 }
 
@@ -43,11 +44,16 @@ export interface AWSUserData extends UserDataBasic {
 }
 
 export interface AuthenticationProvider {
-  login(credentials: Credentials, ...rest: any): any;
-  logout(): any;
-  hasAuthenticated(): boolean;
-  getUserData(): UserDataBasic | undefined;
   fetchAuthed: FetchAuthedFunction;
+
+  login(credentials: Credentials, ...rest: any): any;
+
+  logout(): any;
+
+  hasAuthenticated(): boolean;
+
+  getUserData(): UserDataBasic | undefined;
+
   isRefreshing?(): boolean;
 }
 

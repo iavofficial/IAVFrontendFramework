@@ -1,5 +1,5 @@
 /**
- * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,54 +17,54 @@
  */
 
 .default-nav-element-wrapper {
-  height: 40px;
+    height: 40px;
 }
 
 .default-nav-element-collapsed {
-  height: 40px;
-  font-weight: 500;
-  opacity: 1;
-  cursor: pointer;
+    height: 40px;
+    font-weight: 500;
+    opacity: 1;
+    cursor: pointer;
 }
 
 .default-nav-element-unfolded {
-  height: 40px;
-  font-weight: 500;
-  opacity: 1;
-  cursor: pointer;
+    height: 40px;
+    font-weight: 500;
+    opacity: 1;
+    cursor: pointer;
 }
 
 .default-tab-collapsed {
-  padding: 0px 8px 0px 8px;
+    padding: 0px 8px 0px 8px;
 }
 
 .default-tab-unfolded {
-  padding: 0px 16px 0px 8px;
+    padding: 0px 16px 0px 8px;
 }
 
 .default-nav-group-collapsed {
-  padding: 0px 12px 0px 12px;
+    padding: 0px 12px 0px 12px;
 }
 
 .default-nav-group-unfolded {
-  padding-left: 8px;
-  padding-right: 16px;
+    padding-left: 8px;
+    padding-right: 16px;
 }
 
 #navbar-tab-name {
-  font-size: 14px;
-  margin-left: 8px;
+    font-size: 14px;
+    margin-left: 8px;
 }
 
 #hover-image .p-tooltip-text {
-  background-color: var(--magenta-2) !important;
+    background-color: var(--magenta-2) !important;
 }
 
 #hover-image .p-tooltip-arrow {
-  color: var(--magenta-2) !important;
+    color: var(--magenta-2) !important;
 }
 
 .navbar-tab-space,
 .justify-content-centernavbar-tab-space {
-  margin-top: 4px;
+    margin-top: 4px;
 }

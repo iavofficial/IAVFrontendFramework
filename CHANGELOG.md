@@ -1,3 +1,34 @@
+## [1.3.0-dev.2](https://github.com/iavofficial/IAVFrontendFramework/compare/v1.3.0-dev.1...v1.3.0-dev.2) (2025-02-10)
+
+### Features
+
+* add hide navbar ([6920f5e](https://github.com/iavofficial/IAVFrontendFramework/commit/6920f5e773d6329ba2d1e3669c246dec0d7ef03f))
+
+## [1.3.0-dev.1](https://github.com/iavofficial/IAVFrontendFramework/compare/v1.2.1-dev.2...v1.3.0-dev.1) (2025-02-10)
+
+### Features
+
+* update minor version ([ca61df5](https://github.com/iavofficial/IAVFrontendFramework/commit/ca61df5f7e97e97ddbfa1f3b45dbf384fdc69416))
+
+### Bug Fixes
+
+* add width 100% ([6021d9a](https://github.com/iavofficial/IAVFrontendFramework/commit/6021d9afd76a7b07e3b0ee52f2600ce11bb15875))
+* adjust state handling ([f164337](https://github.com/iavofficial/IAVFrontendFramework/commit/f164337099999096953920d9484f2973e5a9eb35))
+* **contentBarWrapper:** save elements in DOM ([#45](https://github.com/iavofficial/IAVFrontendFramework/issues/45)) ([4974b84](https://github.com/iavofficial/IAVFrontendFramework/commit/4974b84f4cc524312b3cf239bf42bc32d9ca7698))
+
+## [1.2.1-dev.2](https://github.com/iavofficial/IAVFrontendFramework/compare/v1.2.1-dev.1...v1.2.1-dev.2) (2025-01-31)
+
+### Bug Fixes
+
+* add flag to uiLayer ([8513ab7](https://github.com/iavofficial/IAVFrontendFramework/commit/8513ab72be63d246b69afd10f6524db0178b5232))
+
+## [1.2.1-dev.1](https://github.com/iavofficial/IAVFrontendFramework/compare/v1.2.0...v1.2.1-dev.1) (2025-01-31)
+
+### Bug Fixes
+
+* cookie hooks ([43498dc](https://github.com/iavofficial/IAVFrontendFramework/commit/43498dc434dd2d7f1e98609cd60ce9396396f335))
+* **cookies-hooks:** add another condition ([#41](https://github.com/iavofficial/IAVFrontendFramework/issues/41)) ([d8a139e](https://github.com/iavofficial/IAVFrontendFramework/commit/d8a139e9662e9e29e0c35c7d09d2a3556f604c6e))
+
 ## [1.2.0](https://github.com/iavofficial/IAVFrontendFramework/compare/v1.1.0...v1.2.0) (2025-01-16)
 
 ### Features

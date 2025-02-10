@@ -1,5 +1,5 @@
 /**
- * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -67,6 +67,8 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
     colorSettingsContext.currentColors.authenticationView.companyTextColor;
   const themeTogglerColor =
     colorSettingsContext.currentColors.authenticationView.themeTogglerColor;
+
+  const {passwordErrorMessage} = props.authOptions?.errorMessages || {};
 
   // These two functions life on the class instance not on the prototype thanks to @babel/plugin-proposal-class-properties.
   const submit = (event: FormEvent<HTMLFormElement>) => {
@@ -255,7 +257,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                 }
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
-                helperText={t("wrong_password")}
+                helperText={passwordErrorMessage || t("wrong_password")}
               />
               <div>
                 <LoginButtonWithSpinner isLoading={authContext?.isLoading} />
@@ -306,7 +308,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
           &copy;{" "}
           {props.authOptions?.companyText
             ? props.authOptions?.companyText
-            : "IAV GmbH 2024"}
+            : "Company 2025"}
         </span>
       </div>
     </div>

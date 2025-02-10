@@ -1,5 +1,5 @@
 /**
- * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,14 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-:root {    
+:root {
     --blue-0: #001a54;
     --blue-1: #041e96;
     --blue-2: #1446eb;
     --blue-3: #0091ff;
     --blue-4: #52c9ff;
     --blue-5: #CBE8ff;
- 
+
     --magenta-1: #5500b4;
     --magenta-2: #a200e6;
     --magenta-3: #dc46f3;
@@ -56,7 +56,7 @@
     --dropdownBgHighlightfb: var(--black);
 }
 
-[color-theme="dark"]{
+[color-theme="dark"] {
     --contextmenubgmaincolorfb: var(--grey-5);
     --highlightcolorfb: var(--grey-3);
     --textAndIconMainColorfb: var(--white);

@@ -1,5 +1,5 @@
 /**
- * Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,12 +43,6 @@ export type ContentLayoutAndStyleAndWithBarProps = ContentLayoutAndStyleProps &
 export const ContentWithBar = (
   props: React.PropsWithChildren<ContentLayoutAndStyleAndWithBarProps>,
 ) => {
-  const selectedContentWrapper = useMemo(() => {
-    return props.contentWrappers.find(
-      (currentWrapper) => currentWrapper.getId() === props.selectedId,
-    );
-  }, [props.contentWrappers, props.selectedId]);
-
   const contentBarStyles = useMemo(() => {
     const tempContentbarStyles: ContentBarStylesArray = [];
     Object.values(ContentBarStyles).forEach((contentBarStyle) => {
@@ -88,7 +82,18 @@ export const ContentWithBar = (
           layoutBehaviour={props.layoutBehaviour}
           contentStyle={props.contentStyle}
         >
-          {selectedContentWrapper?.getContentAreaElement()}
+          {props.contentWrappers.map((tab) => (
+            <div
+              key={tab.getId()}
+              style={{
+                height: "100%",
+                width: "100%",
+                display: props.selectedId === tab.getId() ? "flex" : "none",
+              }}
+            >
+              {tab.getContentAreaElement()}
+            </div>
+          ))}
         </ContentLayout>
       </div>
     </div>

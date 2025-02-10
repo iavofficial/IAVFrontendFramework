@@ -16,7 +16,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-let basePath = '/IAVFrontendFramework';
+let basePath = '/IAVFrontendFramework/packages/core';
+const localVersion = "docs-version"
 
 document.addEventListener('DOMContentLoaded', async () => {
     const newestVersion = await getNewestVersion();
@@ -47,7 +48,7 @@ const getOptionalVersionList = async () => {
         const versions = data.trim().split('\n');
         return versions[versions.length - 1];
     } else {
-        return "docs";
+        return localVersion;
     }
 };
 
@@ -153,7 +154,7 @@ const loadVersionDropdown = async (url) => {
             versionDropdown.appendChild(option);
         });
     } else {
-        const version = "docs"
+        const version = localVersion
         const option = document.createElement('option');
         option.value = version;
         option.textContent = version;

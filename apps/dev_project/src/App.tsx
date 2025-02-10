@@ -17,8 +17,8 @@
  */
 
 import translationES from "./assets/translations/es.json";
-import {GlobalDataLayer} from "@iavofficial/core/globalDataLayer";
-import {DummyAuthenticationProvider} from "@iavofficial/core/dummyAuthenticationProvider";
+import {GlobalDataLayer} from "@iavofficial/frontend-framework/globalDataLayer";
+import {DummyAuthenticationProvider} from "@iavofficial/frontend-framework/dummyAuthenticationProvider";
 import translationEN from "./assets/translations/en.json";
 import translationDE from "./assets/translations/de.json";
 import translationDECH from "./assets/translations/de-CH.json";

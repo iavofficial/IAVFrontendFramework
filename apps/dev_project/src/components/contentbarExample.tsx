@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { WHITE } from "@iavofficial/core/constants";
+import { WHITE } from "@iavofficial/frontend-framework/constants";
 import { Button } from "primereact/button";
 
 export interface Props {

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "release": {
+      "dependsOn": [],
+      "cache": false,
+      "env": ["GITHUB_TOKEN", "NPM_TOKEN"]
+    },
+    "test": {
+      "dependsOn": ["build"],
+      "cache": false
+    },
+    "dev": {
+      "dependsOn": ["setup"],
+      "persistent": true,
+      "cache": false
+    },
+    "build-live": {
+      "dependsOn": ["setup"],
+      "persistent": true,
+      "cache": false
+    },
+    "build": {
+      "dependsOn": ["setup", "^build"],
+      "outputs": ["dist/**"]
+    },
+    "setup": {
+      "dependsOn": ["//#setup:root"],
+      "cache": false
+    },
+    "//#setup:root": {
+      "cache": false
+    },
+    "generate-docs": {
+      "dependsOn": ["//#checkout-docs:root"],
+      "cache": false
+    },
+    "//#checkout-docs:root": {
+      "cache": false
+    }
+  }
+}

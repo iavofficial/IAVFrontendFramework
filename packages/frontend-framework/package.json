@@ -35,6 +35,9 @@
     "iav-core"
   ],
   "dependencies": {
+    "@iavofficial/frontend-framework-shared-types": "*",
+    "@iavofficial/frontend-framework-shared-utils": "*",
+    "@reduxjs/toolkit": "^2.5.1",
     "i18next": "^22.4.13",
     "i18next-browser-languagedetector": "^7.0.1",
     "primeflex": "^3.3.0",
@@ -42,6 +45,7 @@
     "primereact": "^10.3.3",
     "react-cookie": "^7.2.1",
     "react-i18next": "^12.2.0",
+    "react-redux": "^9.2.0",
     "simplebar-react": "^3.2.3"
   },
   "peerDependencies": {
@@ -63,7 +67,6 @@
     "@types/node": "^18.15.5",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
-    "aws-amplify": "^6.3.4",
     "babel-plugin-inline-react-svg": "^2.0.2",
     "conventional-changelog-conventionalcommits": "^8.0.0",
     "jest": "^29.7.0",
@@ -82,8 +85,6 @@
     "./globalDataLayer": "./dist/components/globalDataLayer.js",
     "./auth": "./dist/contexts/auth.js",
     "./dummyAuthenticationProvider": "./dist/components/authentication/default/dummyAuthenticationProvider.js",
-    "./awsAuthenticationProvider": "./dist/components/authentication/aws/awsAuthenticationProvider.js",
-    "./awsAuthenticationView": "./dist/components/authentication/aws/awsAuthenticationView.js",
     "./basicAuthenticationView": "./dist/components/authentication/default/basicAuthenticationView.js",
     "./navbar": "./dist/components/navbar/navbar.js",
     "./basicContentWrapper": "./dist/components/navbar/wrappers/basicContentWrapper.js",
@@ -136,8 +137,6 @@
       "./globalDataLayer": "./dist/components/globalDataLayer.d.ts",
       "./auth": "./dist/contexts/auth.d.ts",
       "./dummyAuthenticationProvider": "./dist/components/authentication/default/dummyAuthenticationProvider.d.ts",
-      "./awsAuthenticationProvider": "./dist/components/authentication/aws/awsAuthenticationProvider.d.ts",
-      "./awsAuthenticationView": "./dist/components/authentication/aws/awsAuthenticationView.d.ts",
       "./basicAuthenticationView": "./dist/components/authentication/default/basicAuthenticationView.d.ts",
       "./navbar": "./dist/components/navbar/navbar.d.ts",
       "./basicContentWrapper": "./dist/components/navbar/wrappers/basicContentWrapper.d.ts",

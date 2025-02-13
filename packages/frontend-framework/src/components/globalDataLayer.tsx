@@ -28,6 +28,7 @@ import {DummyAuthenticationProvider} from "./authentication/default/dummyAuthent
 import {ColorProvider, ColorProviderProps} from "../coloring/colorProvider";
 import {DEFAULT_FALLBACK_LANGUAGE} from "../constants";
 import {BrowserRouter} from "react-router-dom";
+import { combineReducers, configureStore, createStore } from "@reduxjs/toolkit";
 
 // Create this type to make fallbackLang optional for the user.
 type GlobalDataLayerLanguageOptions = Omit<LanguageOptions, "fallbackLang"> & {
@@ -39,9 +40,13 @@ interface Props {
   translations?: Translations;
   initI18Next?: () => void;
   colorSettings?: ColorProviderProps;
+  authModule?: any;
 }
 
 export const GlobalDataLayer = (props: PropsWithChildren<Props>) => {
+  // TODO
+  const authModule = props.authModule ?? props.authModule;
+
   const authContext = useContext(AuthContext);
   const AuthenticationProvider = authContext
     ? React.Fragment

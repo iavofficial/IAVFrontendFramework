@@ -18,7 +18,7 @@
 
 import React, {useContext} from "react";
 import {AuthContext} from "../../../contexts/auth";
-import {containsOneOrMoreGroups} from "../../../utils/groupChecker";
+import {containsOneOrMoreGroups} from "@iavofficial/frontend-framework-shared-utils/containsOneOrMoreGroups";
 import {SimpleNavbarTab} from "./simpleNavbarTab/simpleNavbarTab";
 import {GroupableNavbarTab, NavbarTabProps} from "./typesNavbarTab";
 import {InjectedOptionsGroupableByWrapperToTab} from "../types/typesInjectedOptions";

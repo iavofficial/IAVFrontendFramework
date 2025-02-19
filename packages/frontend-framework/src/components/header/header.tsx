@@ -32,148 +32,147 @@ import HeaderIcon from "./headerIcon";
 import makeStyles from "../content/style_options/makeStyles";
 
 const useStyles = makeStyles(() => ({
-    wrapper: {
-        width: 31.666,
-        height: 31.666,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center"
-    }
+  wrapper: {
+    width: 31.666,
+    height: 31.666,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
 }));
 
 export interface HeaderOptions {
-    reactElementRight?: ReactElement;
-    reactElementLeft?: ReactElement;
-    hideLeft?: boolean;
-    hideRight?: boolean;
-    userIcon: ReactElement;
-    hideUserIcon?: boolean;
-    headerElements?: ReactElement[];
+  reactElementRight?: ReactElement;
+  reactElementLeft?: ReactElement;
+  hideLeft?: boolean;
+  hideRight?: boolean;
+  userIcon: ReactElement;
+  hideUserIcon?: boolean;
+  headerElements?: ReactElement[];
 }
 
 interface Props {
-    headerOptions?: HeaderOptions;
-    settingsMenuOptions?: SettingsMenuOptions;
-    userMenuOptions?: UserMenuOptions;
+  headerOptions?: HeaderOptions;
+  settingsMenuOptions?: SettingsMenuOptions;
+  userMenuOptions?: UserMenuOptions;
 }
 
 export const Header = (props: Props) => {
-    const menuRef = React.createRef<ContextMenu>();
-    const userRef = React.createRef<ContextMenu>();
-    const colorSettingsContext = useContext(ColorSettingsContext);
+  const menuRef = React.createRef<ContextMenu>();
+  const userRef = React.createRef<ContextMenu>();
+  const colorSettingsContext = useContext(ColorSettingsContext);
 
-    const {classes} = useStyles();
+  const {classes} = useStyles();
 
-    const headerBackgroundColor =
-        colorSettingsContext.currentColors.header.backgroundColor;
-    const settingsIconColor =
-        colorSettingsContext.currentColors.header.settingsIconColor;
-    const userIconColor = colorSettingsContext.currentColors.header.userIconColor;
+  const headerBackgroundColor =
+    colorSettingsContext.currentColors.header.backgroundColor;
+  const settingsIconColor =
+    colorSettingsContext.currentColors.header.settingsIconColor;
+  const userIconColor = colorSettingsContext.currentColors.header.userIconColor;
 
-    const companyLogoDefault = (props: Props) => (
+  const companyLogoDefault = (props: Props) => (
+    <div
+      style={{
+        display: props.headerOptions?.hideRight ? "none" : "flex",
+        alignItems: "center",
+        paddingRight: `${PADDING_GAB}px`,
+      }}
+    >
+      <CompanyLogo fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE} />
+    </div>
+  );
+
+  const hideSettingsMenu = (e: React.KeyboardEvent) => {
+    if (e.key === "Escape") {
+      menuRef.current?.hide(e);
+    }
+  };
+
+  const hideUserMenu = (e: React.KeyboardEvent) => {
+    if (e.key === "Escape") {
+      userRef.current?.hide(e);
+    }
+  };
+
+  return (
+    <div
+      id="header"
+      className={
+        (colorSettingsContext?.darkmode ? "bg-grey-5" : "bg-blue-0") +
+        " flex justify-content-between align-items-center"
+      }
+      style={{
+        backgroundColor: headerBackgroundColor,
+      }}
+    >
+      <div id="left-element" className="flex default-app-logo-text-style">
+        {props.headerOptions?.reactElementLeft ? (
+          props.headerOptions?.reactElementLeft
+        ) : (
+          <AppLogoPlaceholder />
+        )}
+      </div>
+
+      <div
+        className="flex justify-content-between align-items-center"
+        id="right-element"
+      >
+        <SettingsMenu
+          ref={menuRef}
+          hideMenu={hideSettingsMenu}
+          menuOptions={props.settingsMenuOptions}
+        />
+        <UserMenu
+          ref={userRef}
+          hideMenu={hideUserMenu}
+          userMenuOptions={props.userMenuOptions}
+        />
         <div
-            style={{
-                display: props.headerOptions?.hideRight ? "none" : "flex",
-                alignItems: "center",
-                paddingRight: `${PADDING_GAB}px`,
-            }}
+          id="right-element-user-section"
+          className={"flex align-items-center justify-content-end"}
         >
-            <CompanyLogo fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE}/>
+          {props.headerOptions?.headerElements?.map((headerElement, index) => {
+            return <React.Fragment key={index}>{headerElement}</React.Fragment>;
+          })}
+          <HeaderIcon
+            style={{margin: "0rem 1rem 0rem 1rem"}}
+            onClick={(e) => {
+              if (menuRef.current) {
+                menuRef.current.show(e);
+              }
+            }}
+            onKeyDown={(e) => hideSettingsMenu(e)}
+          >
+            <SettingsIcon fill={settingsIconColor} />
+          </HeaderIcon>
+          <HeaderIcon
+            style={{margin: "0rem 0rem 0rem 1rem"}}
+            onClick={(e) => {
+              if (userRef.current) {
+                userRef.current.show(e);
+              }
+            }}
+            onKeyDown={(e) => hideUserMenu(e)}
+          >
+            {!props.headerOptions?.hideUserIcon &&
+              (props.headerOptions?.userIcon ? (
+                <div className={classes.wrapper}>
+                  {props.headerOptions.userIcon}
+                </div>
+              ) : (
+                <UserIcon fill={userIconColor} />
+              ))}
+          </HeaderIcon>
         </div>
-    );
-
-    const hideSettingsMenu = (e: React.KeyboardEvent) => {
-        if (e.key === "Escape") {
-            menuRef.current?.hide(e);
-        }
-    };
-
-    const hideUserMenu = (e: React.KeyboardEvent) => {
-        if (e.key === "Escape") {
-            userRef.current?.hide(e);
-        }
-    };
-
-    return (
         <div
-            id="header"
-            className={
-                (colorSettingsContext?.darkmode ? "bg-grey-5" : "bg-blue-0") +
-                " flex justify-content-between align-items-center"
-            }
-            style={{
-                backgroundColor: headerBackgroundColor,
-            }}
+          id="right-element-companylogo"
+          className="flex justify-content-end align-items-center"
         >
-            <div id="left-element" className="flex default-app-logo-text-style">
-                {props.headerOptions?.reactElementLeft ? (
-                    props.headerOptions?.reactElementLeft
-                ) : (
-                    <AppLogoPlaceholder/>
-                )}
-            </div>
-
-            <div
-                className="flex justify-content-between align-items-center"
-                id="right-element"
-            >
-                <SettingsMenu
-                    ref={menuRef}
-                    hideMenu={hideSettingsMenu}
-                    menuOptions={props.settingsMenuOptions}
-                />
-                <UserMenu
-                    ref={userRef}
-                    hideMenu={hideUserMenu}
-                    userMenuOptions={props.userMenuOptions}
-                />
-                <div
-                    id="right-element-user-section"
-                    className={"flex align-items-center justify-content-end"}
-                >
-                    {props.headerOptions?.headerElements?.map((headerElement, index) => {
-                        return <React.Fragment key={index}>{headerElement}</React.Fragment>;
-                    })}
-                    <HeaderIcon
-                        style={{margin: "0rem 1rem 0rem 1rem"}}
-                        onClick={(e) => {
-                            if (menuRef.current) {
-                                menuRef.current.show(e);
-                            }
-                        }}
-                        onKeyDown={(e) => hideSettingsMenu(e)}
-                    >
-                        <SettingsIcon fill={settingsIconColor}/>
-                    </HeaderIcon>
-                    <HeaderIcon
-                        style={{margin: "0rem 0rem 0rem 1rem"}}
-                        onClick={(e) => {
-                            if (userRef.current) {
-                                userRef.current.show(e);
-                            }
-                        }}
-                        onKeyDown={(e) => hideUserMenu(e)}
-                    >
-                        {!props.headerOptions?.hideUserIcon && (
-                            props.headerOptions?.userIcon ? (
-                                <div className={classes.wrapper}>
-                                    {props.headerOptions.userIcon}
-                                </div>
-                            ) : (
-                                <UserIcon fill={userIconColor}/>
-                            )
-                        )}
-                    </HeaderIcon>
-                </div>
-                <div
-                    id="right-element-companylogo"
-                    className="flex justify-content-end align-items-center"
-                >
-                    {props.headerOptions?.reactElementRight
-                        ? props.headerOptions?.reactElementRight
-                        : companyLogoDefault(props)}
-                </div>
-            </div>
+          {props.headerOptions?.reactElementRight
+            ? props.headerOptions?.reactElementRight
+            : companyLogoDefault(props)}
         </div>
-    );
+      </div>
+    </div>
+  );
 };

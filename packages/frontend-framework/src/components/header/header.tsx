@@ -29,6 +29,17 @@ import {UserMenu, UserMenuOptions} from "./userMenu";
 import {ColorSettingsContext} from "../../contexts/colorsettings";
 import {AppLogoPlaceholder} from "../appLogoPlaceholder";
 import HeaderIcon from "./headerIcon";
+import makeStyles from "../content/style_options/makeStyles";
+
+const useStyles = makeStyles(() => ({
+    wrapper: {
+        width: 31.666,
+        height: 31.666,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
+    }
+}));
 
 export interface HeaderOptions {
     reactElementRight?: ReactElement;
@@ -50,6 +61,8 @@ export const Header = (props: Props) => {
     const menuRef = React.createRef<ContextMenu>();
     const userRef = React.createRef<ContextMenu>();
     const colorSettingsContext = useContext(ColorSettingsContext);
+
+    const {classes} = useStyles();
 
     const headerBackgroundColor =
         colorSettingsContext.currentColors.header.backgroundColor;
@@ -143,7 +156,7 @@ export const Header = (props: Props) => {
                     >
                         {!props.headerOptions?.hideUserIcon && (
                             props.headerOptions?.userIcon ? (
-                                <div style={{width: 31.666, height: 31.666}}>
+                                <div className={classes.wrapper}>
                                     {props.headerOptions.userIcon}
                                 </div>
                             ) : (

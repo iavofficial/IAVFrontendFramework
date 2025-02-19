@@ -22,25 +22,27 @@ import {classNames} from "primereact/utils";
 import {PrimeIcons} from "primereact/api";
 
 const useStyles = makeStyles(() => ({
-    icon: {
-        fontSize: "larger",
-        width: "24px",
-        height: "24px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center"
-    }
+  icon: {
+    fontSize: "larger",
+    width: "24px",
+    height: "24px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
 }));
 
 export interface Props {
-    color: string;
+  color: string;
 }
 
 export const DefaultIcon = (props: Props) => {
+  const {classes} = useStyles();
 
-    const {classes} = useStyles();
-
-    return (
-        <i className={classNames(classes.icon, PrimeIcons.CIRCLE)} color={props.color}/>
-    );
+  return (
+    <i
+      className={classNames(classes.icon, PrimeIcons.CIRCLE)}
+      color={props.color}
+    />
+  );
 };

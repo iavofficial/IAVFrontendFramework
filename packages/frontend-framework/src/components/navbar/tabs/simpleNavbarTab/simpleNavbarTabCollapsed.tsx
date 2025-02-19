@@ -24,38 +24,38 @@ import "../tabs.css";
 import makeStyles from "../../../content/style_options/makeStyles";
 import {DefaultIcon} from "../defaultIcon";
 
-const useStyles = makeStyles(({
-                                  iconColor
-                              }) => ({
-    icon: {
-        color: iconColor
-    }
+const useStyles = makeStyles(({iconColor}) => ({
+  icon: {
+    color: iconColor,
+  },
 }));
 
 export const SimpleNavbarTabCollapsed = (props: NestedNavbarTabProps) => {
-    const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
-    const {classes} = useStyles({iconColor: props.iconColor})
+  const {classes} = useStyles({iconColor: props.iconColor});
 
-    let className =
-        "default-nav-element-collapsed default-tab-collapsed flex align-items-center justify-content-center";
+  let className =
+    "default-nav-element-collapsed default-tab-collapsed flex align-items-center justify-content-center";
 
-    if (props.additionalClassNames) {
-        className += props.additionalClassNames;
-    }
+  if (props.additionalClassNames) {
+    className += props.additionalClassNames;
+  }
 
-    return (
-        <div
-            ref={ref}
-            onMouseEnter={() => props.setHovering(true)}
-            onMouseLeave={() => props.setHovering(false)}
-            className={className}
-            style={props.style}
-        >
-            {props.icon
-                ? <SvgIcon color={props.iconColor} element={props.icon}/>
-                : <DefaultIcon color={props.iconColor}/>}
-            <Tooltip content={props.name} target={ref} id="hover-image"/>
-        </div>
-    );
+  return (
+    <div
+      ref={ref}
+      onMouseEnter={() => props.setHovering(true)}
+      onMouseLeave={() => props.setHovering(false)}
+      className={className}
+      style={props.style}
+    >
+      {props.icon ? (
+        <SvgIcon color={props.iconColor} element={props.icon} />
+      ) : (
+        <DefaultIcon color={props.iconColor} />
+      )}
+      <Tooltip content={props.name} target={ref} id="hover-image" />
+    </div>
+  );
 };

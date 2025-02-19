@@ -142,9 +142,13 @@ export const Header = (props: Props) => {
                         onKeyDown={(e) => hideUserMenu(e)}
                     >
                         {!props.headerOptions?.hideUserIcon && (
-                            props.headerOptions?.userIcon ?
-                                props.headerOptions.userIcon :
+                            props.headerOptions?.userIcon ? (
+                                <div style={{width: 31.666, height: 31.666}}>
+                                    {props.headerOptions.userIcon}
+                                </div>
+                            ) : (
                                 <UserIcon fill={userIconColor}/>
+                            )
                         )}
                     </HeaderIcon>
                 </div>

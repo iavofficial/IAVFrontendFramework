@@ -36,6 +36,7 @@
     "aws authenticator"
   ],
   "dependencies": {
+    "@reduxjs/toolkit": "^2.5.1"
   },
   "peerDependencies": {
     "react": "^18.2.0",
@@ -63,11 +64,13 @@
     "./dist"
   ],
   "exports": {
-    "./authenticationProvider": "./dist/auth/authenticationProvider.js"
+    "./authenticationProvider": "./dist/auth/authenticationProvider.js",
+        "./module": "./dist/module.js"
   },
   "typesVersions": {
     "*": {
-      "./authenticationProvider": "./dist/auth/authenticationProvider.d.ts"
+      "./authenticationProvider": ["./dist/auth/authenticationProvider.d.ts"],
+      "./module": ["./dist/module.d.ts"]
     }
   },
   "publishConfig": {

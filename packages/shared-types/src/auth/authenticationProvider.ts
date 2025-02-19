@@ -1,31 +1,33 @@
-export interface AuthenticationProvider {
-  fetchAuthed: FetchAuthedFunction;
+import {Slice} from "@reduxjs/toolkit";
+import {FFModule, ModuleLifecycleHook} from "../module";
+import { AsyncThunk} from '@reduxjs/toolkit';
 
-  login(credentials: Credentials, ...rest: any): any;
 
-  logout(): any;
+export type UserData = {username: string} & Record<string, any>;
 
-  hasAuthenticated(): boolean;
+export type AuthState = {
+  hasAuthenticated: boolean; // true if user is authenticated
+  isLoading: boolean; // true if user is in process of logging in
+  userData: UserData | undefined; // contains user information; undefined if no user is logged in
+  [auth: string]: any;
+};
 
-  getUserData(): UserDataBasic | undefined;
+export type AuthSlice<TState extends AuthState> = Slice<TState>;
 
-  isRefreshing?(): boolean;
-}
-
-export type FetchAuthedFunction = (
+export type FetchAuthedFunctionArgs = {
   url: string,
-  token: object,
-  //eslint-disable-next-line
-  settings?: object,
-) => Promise<Response>;
-
-export interface UserDataBasic {
-  username: string;
-
-  [attribute: string]: any;
+  token?: object,
+  settings?: object
 }
 
 export interface Credentials {
   email: string;
   password: string;
+}
+
+export interface AuthModule<TState extends AuthState> extends FFModule{
+  slice: AuthSlice<TState>;
+  fetchAuthed: AsyncThunk<Response, FetchAuthedFunctionArgs, any>;
+  login: AsyncThunk<void, {credentials: Credentials}, any>;
+  logout: AsyncThunk<void, {error?: any} | undefined, any>;
 }

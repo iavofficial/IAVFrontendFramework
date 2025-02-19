@@ -1,6 +1,11 @@
 import {useEffect} from "react";
 import {AWSAuthenticationView} from "./components/awsAuthenticationView";
-import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {
+  createAsyncThunk,
+  createSlice,
+  PayloadAction,
+  Slice,
+} from "@reduxjs/toolkit";
 import {
   cognitoCheckIsAuthenticated,
   cognitoCompletePassword,
@@ -10,9 +15,12 @@ import {
   ValidUserInformation,
 } from "./cognitoService";
 import {useDispatch, useSelector} from "react-redux";
-import { JWT } from "aws-amplify/auth";
-import { Credentials } from "@iavofficial/frontend-framework-shared-types/authenticationProvider";
-import { AWSUserData } from "./awsAuthenticationProviderTypes";
+import {JWT} from "@aws-amplify/auth";
+import {Credentials} from "@iavofficial/frontend-framework-shared-types/authenticationProvider";
+import {
+  AWSAuthenticatorModule,
+  AWSUserData,
+} from "./awsAuthenticationProviderTypes";
 
 export {AWSAuthenticationView};
 
@@ -20,7 +28,6 @@ const AUTHENTICATION_SLICE_NAME = "auth";
 
 interface FetchSettings {
   headers?: Headers;
-
   [key: string]: any;
 }
 
@@ -46,18 +53,19 @@ const initialState: State = {
   loginError: undefined,
 };
 
-export class AWSAuthenticator {
+export class AWSAuthenticator implements AWSAuthenticatorModule<State> {
   private failOnNoLegalGroup: boolean;
   private legalGroups: string[];
   private configureAmplify: any;
 
-  public slice: any;
-  public checkIsAuthenticated: any;
-  public fetchAuthed: any;
-  public login: any;
-  public logout: any;
-  public completePassword: any;
-  public refreshSession: any;
+  public slice: Slice<State>;
+  public fetchAuthed;
+  public login;
+  public logout;
+  public completePassword;
+  public refreshSession;
+
+  private checkIsAuthenticated;
 
   constructor({
     configureAmplify,
@@ -113,7 +121,7 @@ export class AWSAuthenticator {
       setNewPasswordRequired,
       setLoading,
       logout,
-    } = this.authenticationSlice.actions;
+    } = this.slice.actions;
 
     // Side effect functions
     this.checkIsAuthenticated = createAsyncThunk(
@@ -127,29 +135,36 @@ export class AWSAuthenticator {
             );
           dispatch(processSuccessfulAuth(result!));
           //eslint-disable-next-line
-        } catch (error: any) {
-          this.logout();
+        } catch (error: unknown) {
+          dispatch(this.logout({error}));
         }
       },
     );
 
     //In Amplify 6 the fetchAuthedSession Function handles the renewing of sessions
-    this.fetchAuthed = createAsyncThunk(
+    this.fetchAuthed = createAsyncThunk<
+      Response,
+      {url: string; token?: JWT; settings?: FetchSettings},
+      {state: {[AUTHENTICATION_SLICE_NAME]: State}}
+    >(
       AUTHENTICATION_SLICE_NAME + "/fetchAuthed",
       async (
-        {url, token, settings}: {url: string; token?: JWT; settings?: FetchSettings},
+        {
+          url,
+          token,
+          settings,
+        }: {url: string; token?: JWT; settings?: FetchSettings},
         {dispatch, getState},
       ) => {
         try {
           dispatch(this.checkIsAuthenticated()).unwrap();
           const response = await fetch(
             url,
-            generateSettingsWithAuthFrom(getState(), token, settings),
+            generateSettingsWithAuthFrom(getState().auth, token, settings),
           );
 
           return response;
-          //eslint-disable-next-line
-        } catch (error) {
+        } catch (error: unknown) {
           dispatch(this.logout());
           return new Promise<Response>((resolve) => {
             resolve(
@@ -165,32 +180,31 @@ export class AWSAuthenticator {
       async ({credentials}: {credentials: Credentials}, {dispatch}) => {
         dispatch(setLoadingForLogin(true));
         try {
-          const result: ValidUserInformation | object =
-            await cognitoLogin(
-              credentials,
-              this.failOnNoLegalGroup,
-              this.legalGroups,
-            );
+          const result: ValidUserInformation | object = await cognitoLogin(
+            credentials,
+            this.failOnNoLegalGroup,
+            this.legalGroups,
+          );
           if (result instanceof ValidUserInformation) {
             dispatch(processSuccessfulAuth(result));
           } else {
-            dispatch(setNewPasswordRequired());
+            dispatch(setNewPasswordRequired({}));
           }
-        } catch (error: any) {
-          await this.logout(error);
+        } catch (error: unknown) {
+          await this.logout({error});
         } finally {
           dispatch(setLoadingForLogin(false));
         }
       },
     );
 
-    this.logout = createAsyncThunk(
+    this.logout = createAsyncThunk<void, {error?: unknown} | undefined, {}>(
       AUTHENTICATION_SLICE_NAME + "/logout",
-      async ({error}: {error?: any}, {dispatch}) => {
+      async ({error}: {error?: unknown} = {}, {dispatch}) => {
         dispatch(setLoading(true));
         try {
           await cognitoLogout();
-        } catch (err: any) {
+        } catch (err: unknown) {
           console.log("error signing out: ", err);
         } finally {
           dispatch(logout(error));
@@ -209,7 +223,7 @@ export class AWSAuthenticator {
             this.legalGroups,
           );
           dispatch(processSuccessfulAuth(result));
-        } catch (error: any) {
+        } catch (error: unknown) {
           // Dispatch the logout thunk with the error
           dispatch(this.logout({error}));
         } finally {
@@ -230,8 +244,8 @@ export class AWSAuthenticator {
           if (response instanceof ValidUserInformation) {
             dispatch(processSuccessfulAuth(response));
           }
-        } catch (error) {
-          dispatch(this.logout(error));
+        } catch (error: unknown) {
+          dispatch(this.logout({error}));
         }
       },
     );
@@ -291,19 +305,4 @@ const generateSettingsWithAuthFrom = (
       }),
     };
   }
-};
-
-/*
-  REMOVE
-  hasAuthenticated = () => {
-    return this.state.hasAuthenticated;
-  };
-
-  getUserData = () => {
-    return this.state.userData;
-  };
-  */
-
-const getUserGroups = () => {
-  return this.state.userData ? this.state.userData.groups : [];
 };

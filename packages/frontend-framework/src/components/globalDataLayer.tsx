@@ -28,7 +28,9 @@ import {DummyAuthenticationProvider} from "./authentication/default/dummyAuthent
 import {ColorProvider, ColorProviderProps} from "../coloring/colorProvider";
 import {DEFAULT_FALLBACK_LANGUAGE} from "../constants";
 import {BrowserRouter} from "react-router-dom";
-import { combineReducers, configureStore, createStore } from "@reduxjs/toolkit";
+import {combineReducers, configureStore, createStore} from "@reduxjs/toolkit";
+import {Provider} from "react-redux";
+import { store } from "../store";
 
 // Create this type to make fallbackLang optional for the user.
 type GlobalDataLayerLanguageOptions = Omit<LanguageOptions, "fallbackLang"> & {
@@ -47,6 +49,8 @@ export const GlobalDataLayer = (props: PropsWithChildren<Props>) => {
   // TODO
   const authModule = props.authModule ?? props.authModule;
 
+  
+
   const authContext = useContext(AuthContext);
   const AuthenticationProvider = authContext
     ? React.Fragment
@@ -62,18 +66,20 @@ export const GlobalDataLayer = (props: PropsWithChildren<Props>) => {
   };
 
   return (
-    <CookiesProvider>
-      <AuthenticationProvider>
-        <DefaultLanguageProvider
-          languageOptions={languageOptions}
-          translations={props.translations}
-          initI18Next={props.initI18Next}
-        >
-          <ColorProvider {...props.colorSettings}>
-            <BrowserRouter>{props.children}</BrowserRouter>
-          </ColorProvider>
-        </DefaultLanguageProvider>
-      </AuthenticationProvider>
-    </CookiesProvider>
+    <Provider store={store}>
+      <CookiesProvider>
+        <AuthenticationProvider>
+          <DefaultLanguageProvider
+            languageOptions={languageOptions}
+            translations={props.translations}
+            initI18Next={props.initI18Next}
+          >
+            <ColorProvider {...props.colorSettings}>
+              <BrowserRouter>{props.children}</BrowserRouter>
+            </ColorProvider>
+          </DefaultLanguageProvider>
+        </AuthenticationProvider>
+      </CookiesProvider>
+    </Provider>
   );
 };

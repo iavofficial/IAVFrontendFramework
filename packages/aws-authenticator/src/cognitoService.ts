@@ -26,7 +26,7 @@ import {
   JWT,
   signIn,
   signOut,
-} from "aws-amplify/auth";
+} from "@aws-amplify/auth";
 
 export async function cognitoLogin(
   credentials: Credentials,
@@ -47,7 +47,7 @@ export async function cognitoLogin(
     } else {
       return handleSessionResult(failOnNoLegalGroup, legalGroups);
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     throw new AuthError(error);
   }
 }
@@ -55,7 +55,7 @@ export async function cognitoLogin(
 export async function cognitoLogout() {
   try {
     return await signOut();
-  } catch (error: any) {
+  } catch (error: unknown) {
     throw new AuthError(error);
   }
 }
@@ -70,7 +70,7 @@ export async function cognitoCheckIsAuthenticated(
     if (response.username) {
       return await handleSessionResult(failOnNoLegalGroup, legalGroups);
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     throw new AuthError(error);
   }
 }
@@ -85,7 +85,7 @@ export async function cognitoCompletePassword(
 
     if (response.isSignedIn && response.nextStep.signInStep === "DONE")
       return handleSessionResult(failOnNoLegalGroup, legalGroups);
-  } catch (error: any) {
+  } catch (error: unknown) {
     throw new AuthError(error);
   }
 }
@@ -96,7 +96,7 @@ export async function cognitoRefreshToken(
 ) {
   try {
     return await handleSessionResult(failOnNoLegalGroup, legalGroups);
-  } catch (error: any) {
+  } catch (error: unknown) {
     throw new AuthError(error);
   }
 }
@@ -126,7 +126,7 @@ async function handleSessionResult(
       username.toString(),
       groups as string[],
     );
-  } catch (error: any) {
+  } catch (error: unknown) {
     throw new AuthError(error);
   }
 }

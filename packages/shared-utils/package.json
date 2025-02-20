@@ -66,11 +66,19 @@
     "./dist"
   ],
   "exports": {
-    "./containsOneOrMoreGroups": "./dist/auth/containsOneOrMoreGroups.js"
+    "./containsOneOrMoreGroups": "./dist/auth/containsOneOrMoreGroups.js",
+
+    "./parseLanguageResourcesIntoDropdownFormat": "./dist/internationalization/parseLanguageResourcesIntoDropdownFormat.js",
+
+    "./hash": "./dist/hash.js"
   },
   "typesVersions": {
     "*": {
-      "./containsOneOrMoreGroups": ["./dist/auth/containsOneOrMoreGroups.d.ts"]
+      "./containsOneOrMoreGroups": ["./dist/auth/containsOneOrMoreGroups.d.ts"],
+
+      "./parseLanguageResourcesIntoDropdownFormat": ["./dist/internationalization/parseLanguageResourcesIntoDropdownFormat.d.ts"],
+
+      "./hash": ["./dist/hash.d.ts"]
     }
   },
   "publishConfig": {

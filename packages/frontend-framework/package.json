@@ -35,6 +35,7 @@
     "iav-core"
   ],
   "dependencies": {
+    "@iavofficial/frontend-framework-shared-react-common": "*",
     "@iavofficial/frontend-framework-shared-types": "*",
     "@iavofficial/frontend-framework-shared-utils": "*",
     "@reduxjs/toolkit": "^2.5.1",

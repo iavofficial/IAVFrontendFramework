@@ -17,10 +17,15 @@
  */
 
 import React from "react";
-import {APPLICATION_LOGO_PLACEHOLDER} from "../constants";
+import {ColorOptions, SelectedColors} from "@iavofficial/frontend-framework-shared-types/colorOptionTypes";
 
-export const AppLogoPlaceholder = () => {
-  return (
-    <span style={{marginLeft: "20px"}}>{APPLICATION_LOGO_PLACEHOLDER}</span>
-  );
-};
+export interface ColorsettingsType {
+  darkmode: boolean;
+  setDarkmode: (darkmode: boolean) => void;
+  colorOptions: ColorOptions;
+  currentColors: SelectedColors;
+}
+
+export const ColorSettingsContext = React.createContext<ColorsettingsType>(
+  {} as ColorsettingsType,
+);

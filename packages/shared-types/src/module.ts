@@ -5,10 +5,11 @@ export type ModuleLifecycleHook = () => {renderChildren: boolean} & Record<
   any
 >;
 
-export type FFModule = Partial<{
+export type FFStoreModule = Partial<{
   slice: Slice;
-  useModuleLifecycle: ModuleLifecycleHook;
   middleware: Middleware[];
   enhancers: StoreEnhancer[];
   additional: Record<string, unknown>;
+  // TODO: What to do with this? --> Maybe decide when implementing routing.
+  //  useModuleLifecycle: ModuleLifecycleHook;
 }>;

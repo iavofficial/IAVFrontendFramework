@@ -1,10 +1,11 @@
 import {useEffect} from "react";
-import {AWSAuthenticationView} from "./components/awsAuthenticationView";
 import {
+  Action,
   createAsyncThunk,
   createSlice,
   PayloadAction,
   Slice,
+  ThunkDispatch,
 } from "@reduxjs/toolkit";
 import {
   cognitoCheckIsAuthenticated,
@@ -20,18 +21,15 @@ import {Credentials} from "@iavofficial/frontend-framework-shared-types/authenti
 import {
   AWSAuthenticatorModule,
   AWSUserData,
-} from "./awsAuthenticationProviderTypes";
+} from "./awsAuthenticatorTypes";
+import { AUTHENTICATION_SLICE_NAME } from "@iavofficial/frontend-framework/constants";
 
-export {AWSAuthenticationView};
-
-const AUTHENTICATION_SLICE_NAME = "auth";
-
-interface FetchSettings {
+export interface FetchSettings {
   headers?: Headers;
   [key: string]: any;
 }
 
-interface State {
+export interface AWSAuthenticatorState {
   hasAuthenticated: boolean; // true if user is authenticated
   isNewPasswordRequired: boolean; // true if user logs in for the first time with his temp password and has to set a new one
   isLoading: boolean; // true if user is in process of logging in
@@ -39,13 +37,19 @@ interface State {
   loginError: {[key: string]: any} | string | undefined;
 }
 
-interface Parameters {
+export interface AWSAuthenticatorStoreState {
+  [AUTHENTICATION_SLICE_NAME]: AWSAuthenticatorState
+}
+
+export interface AWSAuthenticatorParameters {
   failOnNoLegalGroup: boolean;
   legalGroups: string[];
   configureAmplify: () => void;
 }
 
-const initialState: State = {
+export type AWSAuthenticatorAuthDispatch = ThunkDispatch<AWSAuthenticatorStoreState, unknown, Action<string>>;
+
+const initialState: AWSAuthenticatorState = {
   hasAuthenticated: false,
   isNewPasswordRequired: false,
   isLoading: false,
@@ -53,12 +57,12 @@ const initialState: State = {
   loginError: undefined,
 };
 
-export class AWSAuthenticator implements AWSAuthenticatorModule<State> {
+export class AWSAuthenticator implements AWSAuthenticatorModule<AWSAuthenticatorState> {
   private failOnNoLegalGroup: boolean;
   private legalGroups: string[];
-  private configureAmplify: any;
+  private configureAmplify: () => void;
 
-  public slice: Slice<State>;
+  public slice: Slice<AWSAuthenticatorState>;
   public fetchAuthed;
   public login;
   public logout;
@@ -71,7 +75,7 @@ export class AWSAuthenticator implements AWSAuthenticatorModule<State> {
     configureAmplify,
     failOnNoLegalGroup = false,
     legalGroups = [],
-  }: Parameters) {
+  }: AWSAuthenticatorParameters) {
     this.failOnNoLegalGroup = failOnNoLegalGroup;
     this.legalGroups = legalGroups;
     this.configureAmplify = configureAmplify;
@@ -87,8 +91,6 @@ export class AWSAuthenticator implements AWSAuthenticatorModule<State> {
           if (!state.hasAuthenticated || state.isNewPasswordRequired) {
             state.hasAuthenticated = true;
             state.isNewPasswordRequired = false;
-            // @ts-ignore The types from the immer library in combination with the JWT
-            // type cause problems.
             state.userData = action.payload;
             state.loginError = undefined;
           }
@@ -145,7 +147,7 @@ export class AWSAuthenticator implements AWSAuthenticatorModule<State> {
     this.fetchAuthed = createAsyncThunk<
       Response,
       {url: string; token?: JWT; settings?: FetchSettings},
-      {state: {[AUTHENTICATION_SLICE_NAME]: State}}
+      {state: {[AUTHENTICATION_SLICE_NAME]: AWSAuthenticatorState}}
     >(
       AUTHENTICATION_SLICE_NAME + "/fetchAuthed",
       async (
@@ -153,7 +155,7 @@ export class AWSAuthenticator implements AWSAuthenticatorModule<State> {
           url,
           token,
           settings,
-        }: {url: string; token?: JWT; settings?: FetchSettings},
+        },
         {dispatch, getState},
       ) => {
         try {
@@ -252,8 +254,8 @@ export class AWSAuthenticator implements AWSAuthenticatorModule<State> {
   }
 
   public useModuleLifecycle() {
-    const dispatch = useDispatch();
-    const hasAuthenticated = useSelector<{[AUTHENTICATION_SLICE_NAME]: State}>(
+    const dispatch = useDispatch<AWSAuthenticatorAuthDispatch>();
+    const hasAuthenticated = useSelector<AWSAuthenticatorStoreState>(
       (state) => state.auth.hasAuthenticated,
     );
 
@@ -277,7 +279,7 @@ export class AWSAuthenticator implements AWSAuthenticatorModule<State> {
 
 // Utility functions
 const generateSettingsWithAuthFrom = (
-  state: State,
+  state: AWSAuthenticatorState,
   token?: JWT,
   settings?: FetchSettings,
 ) => {

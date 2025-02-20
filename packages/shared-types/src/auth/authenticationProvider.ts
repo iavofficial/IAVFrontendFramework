@@ -1,5 +1,5 @@
 import {Slice} from "@reduxjs/toolkit";
-import {FFModule, ModuleLifecycleHook} from "../module";
+import {FFStoreModule, ModuleLifecycleHook} from "../module";
 import { AsyncThunk} from '@reduxjs/toolkit';
 
 
@@ -25,7 +25,7 @@ export interface Credentials {
   password: string;
 }
 
-export interface AuthModule<TState extends AuthState> extends FFModule{
+export interface AuthModule<TState extends AuthState> extends FFStoreModule{
   slice: AuthSlice<TState>;
   fetchAuthed: AsyncThunk<Response, FetchAuthedFunctionArgs, any>;
   login: AsyncThunk<void, {credentials: Credentials}, any>;

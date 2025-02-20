@@ -18,31 +18,56 @@
 
 import React, {FormEvent, useContext, useState} from "react";
 import {Link} from "react-router-dom";
-import {BLUE3, PADDING_GAB, WHITE} from "../../../constants";
-import {AuthContext} from "../../../contexts/auth";
-import {LoginButtonWithSpinner} from "../loginButtonWithSpinner";
-import {useTranslator} from "../../internationalization/translators";
-import {AuthenticationViewProps} from "../authenticationViewProps";
+import {
+  APPLICATION_LOGO_PLACEHOLDER,
+  AUTHENTICATION_SLICE_NAME,
+  BLUE3,
+  PADDING_GAB,
+  WHITE,
+} from "@iavofficial/frontend-framework/constants";
+import {LoginButtonWithSpinner} from "@iavofficial/frontend-framework-shared-react-common/loginButtonWithSpinner";
+import {useTranslator} from "@iavofficial/frontend-framework/translators";
+import {AuthenticationViewProps} from "@iavofficial/frontend-framework-shared-types/authenticationViewProps";
 import "../authenticationView.css";
 import "../../css/globalColors.css";
 import loginBackgroundLightMode from "../../../assets/png/login_background_lightMode.png";
 import loginBackgroundDarkMode from "../../../assets/png/login_background_darkMode.png";
 import {Dropdown, DropdownChangeEvent} from "primereact/dropdown";
-import {LanguageContext} from "../../../contexts/language";
-import {parseLanguageResourcesIntoDropdownFormat} from "../../../utils/parseLanguageResourcesIntoDropdownFormat";
-import {ColorSettingsContext} from "../../../contexts/colorsettings";
-import {generateHashOfLength} from "../../../utils/hash";
+import {LanguageContext} from "@iavofficial/frontend-framework/language";
+import {parseLanguageResourcesIntoDropdownFormat} from "@iavofficial/frontend-framework-shared-utils/parseLanguageResourcesIntoDropdownFormat";
+import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared-react-common/colorSettingsContext";
+import {generateHashOfLength} from "@iavofficial/frontend-framework-shared-utils/hash";
 import {Tooltip} from "primereact/tooltip";
-import {AppLogoPlaceholder} from "../../appLogoPlaceholder";
-import CompanyLogo from "../../../assets/svg/companyLogo";
+import {AppLogoPlaceholder} from "@iavofficial/frontend-framework-shared-react-common/appLogoPlaceholder";
+import CompanyLogo from "../assets/svg/companyLogo";
+import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
+import {AWSAuthenticatorAuthDispatch, AWSAuthenticator, AWSAuthenticatorStoreState} from "../module";
 
-export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
+interface AWSAuthenticationViewProps extends AuthenticationViewProps {
+  module: AWSAuthenticator;
+}
+
+export const AWSAuthenticationViewFactory = (module: AWSAuthenticator) => {
+  return (props: AuthenticationViewProps) => (
+    <AWSAuthenticationView module={module} {...props} />
+  );
+};
+
+const AWSAuthenticationView = (props: AWSAuthenticationViewProps) => {
+  const {module} = props;
+
+  const dispatch = useDispatch<AWSAuthenticatorAuthDispatch>();
+  const useAuthSelector: TypedUseSelectorHook<AWSAuthenticatorStoreState> = useSelector;
+
+  const isNewPasswordRequired = useAuthSelector(state => state[AUTHENTICATION_SLICE_NAME].isNewPasswordRequired);
+  const loginError = useAuthSelector(state => state[AUTHENTICATION_SLICE_NAME].loginError);
+  const isLoading = useAuthSelector(state => state[AUTHENTICATION_SLICE_NAME].isLoading);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const langContext = useContext(LanguageContext);
   const colorSettingsContext = useContext(ColorSettingsContext);
 
-  const authContext = useContext(AuthContext);
   const t = useTranslator();
 
   const passwortRequirementsTextColor =
@@ -73,10 +98,10 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
 
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (authContext?.isNewPasswordRequired) {
-      authContext?.completePassword(password);
+    if (isNewPasswordRequired) {
+      dispatch(module.completePassword({newPassword: password}));
     } else {
-      authContext?.login({email: email, password: password});
+      dispatch(module.login({credentials: {email: email, password: password}}));
     }
   };
 
@@ -144,7 +169,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
                 color: inputFieldDescriptionTextColor,
               }}
               className={
-                "inputLabel " + (authContext?.loginError ? "invalid" : "")
+                "inputLabel " + (loginError ? "invalid" : "")
               }
             >
               {t("New_password")}
@@ -161,16 +186,16 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
               }}
               className={
                 "form-control p-inputtext " +
-                (authContext?.loginError ? "invalid" : "")
+                (loginError ? "invalid" : "")
               }
               onChange={(ev) => setPassword(ev.target.value)}
               required
               autoFocus
             />
 
-            <LoginButtonWithSpinner isLoading={authContext?.isLoading} />
+            <LoginButtonWithSpinner isLoading={isLoading} />
             <div className="invalid">
-              {getErrorText(authContext?.loginError)}
+              {getErrorText(loginError)}
             </div>
           </div>
         </form>
@@ -240,10 +265,10 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
           }}
         />
         <div>
-          <LoginButtonWithSpinner isLoading={authContext?.isLoading} />
+          <LoginButtonWithSpinner isLoading={isLoading} />
         </div>
         <div style={{marginTop: "20px"}} className="invalid">
-          {getErrorText(authContext?.loginError)}
+          {getErrorText(loginError)}
         </div>
       </div>
     </form>
@@ -266,7 +291,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
         {props.headerOptions?.reactElementLeft ? (
           props.headerOptions?.reactElementLeft
         ) : (
-          <AppLogoPlaceholder />
+          <AppLogoPlaceholder appLogoPlaceholder={APPLICATION_LOGO_PLACEHOLDER} />
         )}
       </div>
       <div
@@ -370,7 +395,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
               />
             )}
           </div>
-          {authContext?.isNewPasswordRequired ? NewPasswordForm : LoginForm}
+          {isNewPasswordRequired ? NewPasswordForm : LoginForm}
         </div>
 
         {!props.hideLegalDocuments && (

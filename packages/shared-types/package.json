@@ -65,11 +65,17 @@
   ],
   "exports": {
     "./authenticationProvider": "./dist/auth/authenticationProvider.js",
-        "./module": "./dist/module.js"
+    "./authenticationViewProps": "./dist/auth/authenticationViewProps.js",
+
+    "./colorOptionTypes": "./dist/colorOptionTypes.js",
+    "./module": "./dist/module.js"
   },
   "typesVersions": {
     "*": {
       "./authenticationProvider": ["./dist/auth/authenticationProvider.d.ts"],
+      "./authenticationViewProps": ["./dist/auth/authenticationViewProps.d.ts"],
+
+      "./colorOptionTypes": ["./dist/colorOptionTypes.d.ts"],
       "./module": ["./dist/module.d.ts"]
     }
   },

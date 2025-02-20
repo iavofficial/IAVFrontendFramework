@@ -19,7 +19,7 @@
 import React, {useContext} from "react";
 import {Button} from "primereact/button";
 import {ProgressSpinner} from "primereact/progressspinner";
-import {ColorSettingsContext} from "../../contexts/colorsettings";
+import {ColorSettingsContext} from "../contexts/colorSettingsContext";
 
 interface Props {
   isLoading: boolean;

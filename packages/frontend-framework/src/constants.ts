@@ -57,3 +57,6 @@ export const DEFAULT_WIDTH_CONTENTSECTIONELEMENT = 300;
 export const NAVBAR_WIDTH_UNFOLDED = 240;
 export const GAB_NAVBAR_COLLAPSED = 2;
 export const GAB_NAVBAR_UNFOLDED = 4;
+
+// Slice names
+export const AUTHENTICATION_SLICE_NAME = "auth";

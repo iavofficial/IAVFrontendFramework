@@ -1,9 +1,9 @@
 {
-  "name": "@iavofficial/frontend-framework-aws-authenticator",
+  "name": "@iavofficial/frontend-framework-shared-react-common",
   "version": "1.0.0",
   "private": false,
   "license": "Apache-2.0",
-  "description": "This package provides AWS authentication using AWS Cognito.",
+  "description": "This package provides react components, contexts etc. for use in multiple frontend framework packages.",
   "scripts": {
     "setup": "npm i",
     "build": "npx babel ./src --out-dir ./dist --extensions .ts,.tsx --copy-files && npx babel ./package.json --out-dir ./dist --copy-files && npx tsc --outDir ./dist",
@@ -36,13 +36,8 @@
     "aws authenticator"
   ],
   "dependencies": {
-    "@iavofficial/frontend-framework": "*",
     "@iavofficial/frontend-framework-shared-types": "*",
-    "@iavofficial/frontend-framework-shared-utils": "*",
-    "@iavofficial/frontend-framework-shared-react-common": "*",
-    "@aws-amplify/auth": "6.5.5",
-    "@reduxjs/toolkit": "^2.5.1",
-    "react-redux": "^9.2.0"
+    "@reduxjs/toolkit": "^2.5.1"
   },
   "peerDependencies": {
     "react": "^18.2.0",
@@ -69,9 +64,17 @@
     "./package.json",
     "./dist"
   ],
-  "exports": {},
+  "exports": {
+    "./appLogoPlaceholder": "./dist/components/appLogoPlaceholder.js",
+    "./loginButtonWithSpinner": "./dist/components/loginButtonWithSpinner.js",
+    "./colorSettingsContext": "./dist/contexts/colorSettingsContext.js"
+  },
   "typesVersions": {
-    "*": {}
+    "*": {
+      "./appLogoPlaceholder": ["./dist/components/appLogoPlaceholder.d.ts"],
+      "./loginButtonWithSpinner": ["./dist/components/loginButtonWithSpinner.d.ts"],
+      "./colorSettingsContext": ["./dist/contexts/colorSettingsContext.d.ts"]
+    }
   },
   "publishConfig": {
     "access": "public"

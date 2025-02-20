@@ -87,8 +87,7 @@ export const ContentWithBar = (
               key={tab.getId()}
               style={{
                 height: "100%",
-                width: "100%",
-                display: props.selectedId === tab.getId() ? "flex" : "none",
+                display: props.selectedId === tab.getId() ? "block" : "none",
               }}
             >
               {tab.getContentAreaElement()}

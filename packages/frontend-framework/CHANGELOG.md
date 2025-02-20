@@ -1,3 +1,9 @@
+## [@iavofficial/frontend-framework-v1.3.1-dev.2](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.3.1-dev.1...@iavofficial/frontend-framework-v1.3.1-dev.2) (2025-02-20)
+
+### Bug Fixes
+
+* add background in mainVíew.tsx ([eabf8d3](https://github.com/iavofficial/IAVFrontendFramework/commit/eabf8d3341ef2ce75c834c8a8a1bc4d0c72c9473))
+
 ## [@iavofficial/frontend-framework-v1.3.1-dev.1](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.3.0...@iavofficial/frontend-framework-v1.3.1-dev.1) (2025-02-20)
 
 ### Bug Fixes

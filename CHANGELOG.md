@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/iavofficial/IAVFrontendFramework/compare/v1.3.0...v1.3.1) (2025-02-20)
+
+### Bug Fixes
+
+* content with bar ([c745b80](https://github.com/iavofficial/IAVFrontendFramework/commit/c745b80131d38446cac28aff84b68af94d8139ce))
+* **content:** back to old state ([#61](https://github.com/iavofficial/IAVFrontendFramework/issues/61)) ([a27531c](https://github.com/iavofficial/IAVFrontendFramework/commit/a27531c53e95c4389e781b1e736cfc8a0f962130))
+
 ## [1.3.0](https://github.com/iavofficial/IAVFrontendFramework/compare/v1.2.0...v1.3.0) (2025-02-10)
 
 ### Features

@@ -1,3 +1,10 @@
+## [@iavofficial/frontend-framework-v1.4.0-dev.3](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.0-dev.2...@iavofficial/frontend-framework-v1.4.0-dev.3) (2025-02-20)
+
+### Bug Fixes
+
+* package.json ([2619409](https://github.com/iavofficial/IAVFrontendFramework/commit/261940914b1d5afc53cbcce3cd90b62c0a72ab74))
+* routing useEffect ([2399090](https://github.com/iavofficial/IAVFrontendFramework/commit/2399090ee0203b005170ad471958cdda534a1e45))
+
 ## [@iavofficial/frontend-framework-v1.4.0-dev.2](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.0-dev.1...@iavofficial/frontend-framework-v1.4.0-dev.2) (2025-02-20)
 
 ### Bug Fixes

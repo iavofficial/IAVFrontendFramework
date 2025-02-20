@@ -16,10 +16,33 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {useTranslator} from '@iavofficial/frontend-framework/translators';
+import React from "react";
+import makeStyles from "../../content/style_options/makeStyles";
+import {classNames} from "primereact/utils";
+import {PrimeIcons} from "primereact/api";
 
-export const ExampleComponent3 = () => {
-    const t = useTranslator();
+const useStyles = makeStyles(() => ({
+  icon: {
+    fontSize: "larger",
+    width: "24px",
+    height: "24px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+}));
 
-    return <div>{t('component_deactivated')}</div>;
+export interface Props {
+  color: string;
+}
+
+export const DefaultIcon = (props: Props) => {
+  const {classes} = useStyles();
+
+  return (
+    <i
+      className={classNames(classes.icon, PrimeIcons.CIRCLE)}
+      color={props.color}
+    />
+  );
 };

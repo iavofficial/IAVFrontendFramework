@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React from "react";
+import React, {useContext} from "react";
 import {Header, HeaderOptions} from "./header/header";
 import {Navbar} from "./navbar/navbar";
 import {DefaultImprint} from "./imprint/defaultImprint";
@@ -25,6 +25,7 @@ import {Outlet, Route, Routes} from "react-router-dom";
 import {TabAndContentWrapper} from "./navbar/wrappers/typesWrappers";
 import {UserMenuOptions} from "./header/userMenu";
 import If from "./helper/If";
+import {ColorSettingsContext} from "../contexts/colorsettings";
 
 interface MainViewProps {
   tabAndContentWrappers: TabAndContentWrapper[];
@@ -38,6 +39,11 @@ interface MainViewProps {
 }
 
 export const MainView = (props: MainViewProps) => {
+  const colorSettingsContext = useContext(ColorSettingsContext);
+
+  const contentAreaBackground =
+    colorSettingsContext.currentColors.contentArea.backgroundColor;
+
   return (
     <div
       style={{
@@ -54,7 +60,14 @@ export const MainView = (props: MainViewProps) => {
           userMenuOptions={props.userMenuOptions}
         />
       </div>
-      <div style={{display: "flex", flex: "1 1 auto", overflow: "auto"}}>
+      <div
+        style={{
+          display: "flex",
+          flex: "1 1 auto",
+          overflow: "auto",
+          background: contentAreaBackground,
+        }}
+      >
         <If condition={!props.hideNavbar}>
           <Navbar
             tabAndContentWrappers={props.tabAndContentWrappers}

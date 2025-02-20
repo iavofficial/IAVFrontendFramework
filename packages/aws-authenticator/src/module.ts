@@ -253,7 +253,7 @@ export class AWSAuthenticator implements AWSAuthenticatorModule<State> {
 
   public useModuleLifecycle() {
     const dispatch = useDispatch();
-    const hasAuthenticated = useSelector(
+    const hasAuthenticated = useSelector<{[AUTHENTICATION_SLICE_NAME]: State}>(
       (state) => state.auth.hasAuthenticated,
     );
 

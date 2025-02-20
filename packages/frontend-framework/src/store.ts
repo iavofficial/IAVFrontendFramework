@@ -1,12 +1,21 @@
-import { configureStore, EnhancedStore, Middleware, Reducer, StoreEnhancer } from '@reduxjs/toolkit';
-import { AuthModule, AuthState } from "@iavofficial/frontend-framework-shared-types/authenticationProvider";
-import { FFModule } from '@iavofficial/frontend-framework-shared-types/module';
-
+import {
+  configureStore,
+  EnhancedStore,
+  Middleware,
+  Reducer,
+  StoreEnhancer,
+} from "@reduxjs/toolkit";
+import {
+  AuthModule,
+  AuthState,
+} from "@iavofficial/frontend-framework-shared-types/authenticationProvider";
+import {FFModule} from "@iavofficial/frontend-framework-shared-types/module";
+import { TypedUseSelectorHook, useSelector } from "react-redux";
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>;
+export type RootState<TStoreState extends (...args: any) => any> = ReturnType<TStoreState>;
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch;
+export type AppDispatch<TStoreDispatch> = TStoreDispatch;
 
 interface MinimalStoreState {
   auth: AuthState;
@@ -19,19 +28,61 @@ interface FFModules {
 type UserModules = Record<string, FFModule>;
 
 export const defaultModules: FFModules = {
-  auth: DummyAuthenticationProvider
+  auth: DummyAuthenticationProvider,
 };
 
-export class StoreConfig {
-  public reducers: Record<string, Reducer> = {};
-  public middleware: Middleware[] = [];
-  public enhancers: StoreEnhancer[] = [];
-  // This field is used to allow users to add additional values with custom processors to use them inside
-  // a custom storeBuilder
-  public additional: Record<string, any> = {};
+class StoreConfig {
+  constructor(
+    public reducers: { auth: Reducer } & Record<string, Reducer>,
+    public middleware: Middleware[] = [],
+    public enhancers: StoreEnhancer[] = [],
+    public additional: Record<string, any> = {}
+  ) {}
 }
 
-export type ModuleProcessorFunction<M extends FFModule> = (module: M, config: StoreConfig) => StoreConfig;
+
+export class StoreConfigBuilder {
+  private reducers: Record<string, Reducer> = {};
+  private middleware: Middleware[] = [];
+  private enhancers: StoreEnhancer[] = [];
+  // This field is used to allow users to add additional values with custom processors to use them inside
+  // a custom storeBuilder
+  private additional: Record<string, any> = {};
+
+  constructor() {}
+
+  public setReducer(key: string, reducer: Reducer): this {
+    this.reducers[key] = reducer;
+    return this;
+  }
+
+  public addMiddleware(middleware: Middleware): this {
+    this.middleware.push(middleware);
+    return this;
+  }
+
+  public addEnhancer(enhancer: StoreEnhancer): this {
+    this.enhancers.push(enhancer);
+    return this;
+  }
+
+  public setAdditional(key: string, value: any): this {
+    this.additional[key] = value;
+    return this;
+  }
+  
+  build() {
+    if (!this.reducers.auth) {
+      this.reducers.auth = defaultModules.auth.slice.reducer;
+    }
+    return new StoreConfig(this.reducers, this.middleware, this.enhancers, this.additional);
+  }
+}
+
+export type ModuleProcessorFunction<M extends FFModule> = (
+  module: M,
+  config: StoreConfigBuilder,
+) => void;
 
 interface ModuleEntry<M extends FFModule> {
   module: M;
@@ -39,80 +90,112 @@ interface ModuleEntry<M extends FFModule> {
 }
 
 type ModuleAndProcessorMap<ModuleType extends object> = {
-  [K in keyof ModuleType]: ModuleType[K] extends FFModule ? ModuleEntry<ModuleType[K]> : never;
+  [K in keyof ModuleType]: ModuleType[K] extends FFModule
+    ? ModuleEntry<ModuleType[K]>
+    : never;
 };
 
 export class StoreBuilder<TUserModules extends UserModules> {
-  private storeConfig: StoreConfig = new StoreConfig();
+  private storeConfigBuilder: StoreConfigBuilder = new StoreConfigBuilder();
 
   private frameworkModulesAndProcessors: ModuleAndProcessorMap<FFModules>;
 
-  private userModulesAndProcessors: ModuleAndProcessorMap<TUserModules> | undefined;
+  private userModulesAndProcessors:
+    | ModuleAndProcessorMap<TUserModules>
+    | undefined;
 
-  private storeBuilder: (storeConfig: StoreConfig) => EnhancedStore<MinimalStoreState> = defaultStoreBuilder;
+  private storeBuilder: (
+    storeConfig: StoreConfig,
+  ) => EnhancedStore<MinimalStoreState> = defaultStoreBuilder;
 
-  constructor(ffModules: FFModules, userModulesAndProcessors?: ModuleAndProcessorMap<TUserModules>) {
+  constructor(
+    ffModules: FFModules,
+    userModulesAndProcessors?: ModuleAndProcessorMap<TUserModules>,
+  ) {
     this.frameworkModulesAndProcessors = {
       auth: {
         module: ffModules.auth,
-        processor: defaultAuthModuleProcessor
-      }
+        processor: defaultAuthModuleProcessor,
+      },
     };
 
     if (userModulesAndProcessors) {
       this.userModulesAndProcessors = userModulesAndProcessors;
     }
   }
-  
-  setFrameworkModuleProcessor<K extends keyof FFModules>(moduleType: K, processor: ModuleProcessorFunction<FFModules[K]>) {
+
+  setFrameworkModuleProcessor<K extends keyof FFModules>(
+    moduleType: K,
+    processor: ModuleProcessorFunction<FFModules[K]>,
+  ) {
     this.frameworkModulesAndProcessors[moduleType].processor = processor;
   }
-  
-  setUserModuleProcessor<K extends keyof TUserModules>(moduleType: K, processor: ModuleProcessorFunction<TUserModules[K]>) {
-    if(this.userModulesAndProcessors) {
+
+  setUserModuleProcessor<K extends keyof TUserModules>(
+    moduleType: K,
+    processor: ModuleProcessorFunction<TUserModules[K]>,
+  ) {
+    if (this.userModulesAndProcessors) {
       this.userModulesAndProcessors[moduleType].processor = processor;
     }
   }
 
   build() {
-    executeProcessorsForModules(this.frameworkModulesAndProcessors, this.storeConfig);
-  
+    executeProcessorsForModules(
+      this.frameworkModulesAndProcessors,
+      this.storeConfigBuilder,
+    );
+
     if (this.userModulesAndProcessors) {
-      executeProcessorsForModules(this.userModulesAndProcessors, this.storeConfig);
+      executeProcessorsForModules(
+        this.userModulesAndProcessors,
+        this.storeConfigBuilder,
+      );
     }
 
-    return this.storeBuilder(this.storeConfig);
+    const storeConfig = this.storeConfigBuilder.build();
+
+    return this.storeBuilder(storeConfig);
   }
 }
 
 const executeProcessorsForModules = <TModules extends object>(
   modulesAndProcessors: ModuleAndProcessorMap<TModules>,
-  storeConfig: StoreConfig
-): StoreConfig => {
-  let retStoreConfig = { ...storeConfig };
+  storeConfigBuilder: StoreConfigBuilder,
+) => {
   (Object.keys(modulesAndProcessors) as (keyof TModules)[]).forEach((key) => {
     const entry = modulesAndProcessors[key];
-    retStoreConfig = entry.processor(entry.module, retStoreConfig);
+    entry.processor(entry.module, storeConfigBuilder);
   });
-  return retStoreConfig;
 };
 
-export const defaultAuthModuleProcessor = (authModule: AuthModule<AuthState>, storeConfig: StoreConfig) => {
-  storeConfig.reducers = { ...storeConfig.reducers, auth: authModule.slice.reducer };
-  return storeConfig;
-}
+export const defaultAuthModuleProcessor = (
+  authModule: AuthModule<AuthState>,
+  storeConfigBuilder: StoreConfigBuilder,
+) => {
+  storeConfigBuilder.setReducer("auth", authModule.slice.reducer);
+};
 
-export const defaultStoreBuilder = (storeConfig: StoreConfig) => {  
+export const defaultStoreBuilder = (storeConfig: StoreConfig) => {
   const store = configureStore({
     reducer: storeConfig.reducers,
-    middleware: ((getDefaultMiddleware: Function) => getDefaultMiddleware().concat(storeConfig.middleware)),
-    enhancers: (getDefaultEnhancers: Function) => getDefaultEnhancers().concat(storeConfig.enhancers)
+    middleware: (getDefaultMiddleware: Function) =>
+      getDefaultMiddleware().concat(storeConfig.middleware),
+    enhancers: (getDefaultEnhancers: Function) =>
+      getDefaultEnhancers().concat(storeConfig.enhancers),
   });
 
   return store;
-}
+};
 
 export const defaultStore = new StoreBuilder(defaultModules).build();
+
+// Infer the `RootState` and `AppDispatch` types from the store itself
+export type DefaultRootState = RootState<typeof defaultStore.getState>;
+// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
+export type DefaultAppDispatch = AppDispatch<typeof defaultStore.dispatch>;
+
+export const useDefaultSelector: TypedUseSelectorHook<DefaultRootState> = useSelector;
 
 // TODO HINTS:
 /*

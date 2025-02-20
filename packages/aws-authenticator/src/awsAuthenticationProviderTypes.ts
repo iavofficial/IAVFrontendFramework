@@ -1,6 +1,6 @@
 import { AuthModule, AuthState, UserData} from "@iavofficial/frontend-framework-shared-types/authenticationProvider";
 import { AsyncThunk } from "@reduxjs/toolkit";
-import { JWT } from "aws-amplify/auth";
+import { JWT } from "@aws-amplify/auth";
 
 export interface AWSUserData extends UserData {
   idToken: JWT;

@@ -43,6 +43,12 @@ export type ContentLayoutAndStyleAndWithBarProps = ContentLayoutAndStyleProps &
 export const ContentWithBar = (
   props: React.PropsWithChildren<ContentLayoutAndStyleAndWithBarProps>,
 ) => {
+  const selectedContentWrapper = useMemo(() => {
+    return props.contentWrappers.find(
+      (currentWrapper) => currentWrapper.getId() === props.selectedId,
+    );
+  }, [props.contentWrappers, props.selectedId]);
+
   const contentBarStyles = useMemo(() => {
     const tempContentbarStyles: ContentBarStylesArray = [];
     Object.values(ContentBarStyles).forEach((contentBarStyle) => {
@@ -82,17 +88,7 @@ export const ContentWithBar = (
           layoutBehaviour={props.layoutBehaviour}
           contentStyle={props.contentStyle}
         >
-          {props.contentWrappers.map((tab) => (
-            <div
-              key={tab.getId()}
-              style={{
-                height: "100%",
-                display: props.selectedId === tab.getId() ? "block" : "none",
-              }}
-            >
-              {tab.getContentAreaElement()}
-            </div>
-          ))}
+          {selectedContentWrapper?.getContentAreaElement()}
         </ContentLayout>
       </div>
     </div>

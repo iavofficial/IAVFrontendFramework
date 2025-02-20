@@ -1,3 +1,9 @@
+## [@iavofficial/frontend-framework-v1.4.0-dev.4](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.0-dev.3...@iavofficial/frontend-framework-v1.4.0-dev.4) (2025-02-20)
+
+### Bug Fixes
+
+* width ([eb3a893](https://github.com/iavofficial/IAVFrontendFramework/commit/eb3a8933b58f6fd13d3bb2d496ee52a2da33b26c))
+
 ## [@iavofficial/frontend-framework-v1.4.0-dev.3](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.0-dev.2...@iavofficial/frontend-framework-v1.4.0-dev.3) (2025-02-20)
 
 ### Bug Fixes

@@ -21,6 +21,7 @@ import {GeneralGroupTabProps} from "./typesTabGroup";
 import {SvgIcon} from "../svgIcon";
 
 import "./tabGroupUnfolded.css";
+import {DefaultIcon} from "../defaultIcon";
 
 interface AdditionalProps {
   colors: {
@@ -35,7 +36,11 @@ export const TabGroupUnfolded = (
   return (
     <div className="default-nav-element-unfolded default-nav-group-unfolded flex h-full w-full">
       <div className="unfolded-group-wrapper">
-        <SvgIcon color={props.colors.iconColor} element={props.logo} />
+        {props.logo ? (
+          <SvgIcon color={props.colors.iconColor} element={props.logo} />
+        ) : (
+          <DefaultIcon color={props.colors.iconColor} />
+        )}
         <div className="unfolded-group-name-arrow-wrapper">
           <span id="navbar-tab-name">{props.name}</span>
           <i

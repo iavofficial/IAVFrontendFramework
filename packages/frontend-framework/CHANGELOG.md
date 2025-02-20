@@ -1,3 +1,9 @@
+## [@iavofficial/frontend-framework-v1.4.0-dev.2](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.0-dev.1...@iavofficial/frontend-framework-v1.4.0-dev.2) (2025-02-20)
+
+### Bug Fixes
+
+* remove setInitial in useEffect ([2149e2a](https://github.com/iavofficial/IAVFrontendFramework/commit/2149e2a05da0bfc974051a326ab4561efe0385eb))
+
 ## [@iavofficial/frontend-framework-v1.4.0-dev.1](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.3.1-dev.2...@iavofficial/frontend-framework-v1.4.0-dev.1) (2025-02-20)
 
 ### Features

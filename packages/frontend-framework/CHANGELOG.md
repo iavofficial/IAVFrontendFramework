@@ -1,3 +1,11 @@
+## [@iavofficial/frontend-framework-v1.4.0-dev.1](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.3.1-dev.2...@iavofficial/frontend-framework-v1.4.0-dev.1) (2025-02-20)
+
+### Features
+
+* add class for div ([83e6273](https://github.com/iavofficial/IAVFrontendFramework/commit/83e6273aceb680ae7f8241a081a4f1bccf467992))
+* add user icon as ReactElement ([184508f](https://github.com/iavofficial/IAVFrontendFramework/commit/184508fb8ab6fd3582de6cae097ec70d52fcf54b))
+* add width and height for icon ([c680e0b](https://github.com/iavofficial/IAVFrontendFramework/commit/c680e0bf1c10b3e23485cca08a18932a1f594c91))
+
 ## [@iavofficial/frontend-framework-v1.3.1-dev.2](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.3.1-dev.1...@iavofficial/frontend-framework-v1.3.1-dev.2) (2025-02-20)
 
 ### Bug Fixes

@@ -184,7 +184,7 @@ const Redirector = (props: RedirectorProps) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!userIsAuthenticated) {
+        if (!disableLogin && !userIsAuthenticated) {
             if (currentPath !== "/documents") {
                 navigate("/login");
             }

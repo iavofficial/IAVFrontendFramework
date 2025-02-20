@@ -1,3 +1,9 @@
+## [@iavofficial/frontend-framework-v1.3.1-dev.1](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.3.0...@iavofficial/frontend-framework-v1.3.1-dev.1) (2025-02-20)
+
+### Bug Fixes
+
+* add default icon ([6e3fce3](https://github.com/iavofficial/IAVFrontendFramework/commit/6e3fce37ff99e3bd9f27e8412022767c2e98a60d))
+
 ## [1.3.0](https://github.com/iavofficial/IAVFrontendFramework/compare/v1.2.0...v1.3.0) (2025-02-10)
 
 ### Features

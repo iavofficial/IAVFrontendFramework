@@ -37,6 +37,7 @@ import {HeaderPanelElement} from "@iavofficial/frontend-framework/headerPanelEle
 import {PrimeIcons} from "primereact/api";
 import {WHITE} from "@iavofficial/frontend-framework/constants";
 import {HeaderMenuElement} from "@iavofficial/frontend-framework/headerMenuElement";
+import { ExampleComponent7 } from "./components/exampleComponent7";
 
 function Layout() {
     const [selectedButtonOption, setSelectedButtonOption] = useState("Simulated");
@@ -66,6 +67,15 @@ function Layout() {
                 icon: <InfoIcon/>,
             }),
             ExampleComponent1
+        ),
+        new BasicContentWrapper(
+            "/2",
+            simpleNavbarTabFactory({
+                disabled: false,
+                name: "Example for Redux Store",
+                icon: <InfoIcon/>,
+            }),
+            ExampleComponent7
         ),
         new Group(
             (t: TranslateFunctionType) => t("Test_group_not_collapsible"),

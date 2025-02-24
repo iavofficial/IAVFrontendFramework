@@ -70,9 +70,13 @@
     "./package.json",
     "./dist"
   ],
-  "exports": {},
+  "exports": {
+    "./module": "./dist/module.js"
+  },
   "typesVersions": {
-    "*": {}
+    "*": {
+      "./module": ["./dist/module.d.ts"]
+    }
   },
   "publishConfig": {
     "access": "public"

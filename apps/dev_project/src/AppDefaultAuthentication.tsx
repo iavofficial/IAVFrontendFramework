@@ -29,7 +29,7 @@ import {
 
 const store = defaultStore;
 
-function App() {
+export const AppDefaultAuthentication = () => {
   const translations = {
     es: {
       translation: translationES,
@@ -59,4 +59,4 @@ function App() {
   );
 }
 
-export default App;
+export default AppDefaultAuthentication;

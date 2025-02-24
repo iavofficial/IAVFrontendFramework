@@ -31,7 +31,7 @@ export interface DummyAuthenticatorState {
 }
 
 const initialState: DummyAuthenticatorState= {
-  hasAuthenticated: true,
+  hasAuthenticated: false,
   isLoading: false,
   userData: undefined
 }

@@ -78,7 +78,7 @@ export interface Props {
 
 export const UILayer = (props: Props) => {
     const {hasAuthenticated} = useDefaultSelector(state => state.auth);
-
+    
     const [, setCookie] = useCookies([ACCEPTED_COOKIES_NAME]);
 
     const AuthenticationView = props.authenticationView
@@ -124,7 +124,7 @@ export const UILayer = (props: Props) => {
                     />
                 )}
 
-                {!props.disableLogin && hasAuthenticated && (
+                {!props.disableLogin && !hasAuthenticated && (
                     <Route
                         path="/documents"
                         element={
@@ -137,7 +137,7 @@ export const UILayer = (props: Props) => {
                     />
                 )}
 
-                {!props.disableLogin && hasAuthenticated ? (
+                {!props.disableLogin && !hasAuthenticated ? (
                     <Route path="/*" element={<></>}/>
                 ) : (
                     <>

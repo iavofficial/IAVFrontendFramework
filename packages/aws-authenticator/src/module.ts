@@ -17,7 +17,7 @@ import {
 } from "./cognitoService";
 import {useDispatch, useSelector} from "react-redux";
 import {JWT} from "@aws-amplify/auth";
-import {Credentials} from "@iavofficial/frontend-framework-shared-types/authenticationProvider";
+import {AuthState, Credentials} from "@iavofficial/frontend-framework-shared-types/authenticationProvider";
 import {
   AWSAuthenticatorModule,
   AWSUserData,
@@ -29,7 +29,7 @@ export interface FetchSettings {
   [key: string]: any;
 }
 
-export interface AWSAuthenticatorState {
+export interface AWSAuthenticatorState extends AuthState{
   hasAuthenticated: boolean; // true if user is authenticated
   isNewPasswordRequired: boolean; // true if user logs in for the first time with his temp password and has to set a new one
   isLoading: boolean; // true if user is in process of logging in
@@ -42,9 +42,9 @@ export interface AWSAuthenticatorStoreState {
 }
 
 export interface AWSAuthenticatorParameters {
-  failOnNoLegalGroup: boolean;
-  legalGroups: string[];
   configureAmplify: () => void;
+  failOnNoLegalGroup?: boolean;
+  legalGroups?: string[];
 }
 
 export type AWSAuthenticatorAuthDispatch = ThunkDispatch<AWSAuthenticatorStoreState, unknown, Action<string>>;

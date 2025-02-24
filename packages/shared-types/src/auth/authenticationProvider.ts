@@ -9,8 +9,7 @@ export type AuthState = {
   hasAuthenticated: boolean; // true if user is authenticated
   isLoading: boolean; // true if user is in process of logging in
   userData: UserData | undefined; // contains user information; undefined if no user is logged in
-  [auth: string]: any;
-};
+} & Record<string, any>;
 
 export type AuthSlice<TState extends AuthState> = Slice<TState>;
 

@@ -249,8 +249,9 @@ function Layout() {
             documentsComponent={LegalDocuments}
             headerOptions={{
                 userIcon: <div/>,
-                reactElementLeft: appLogo,
+                reactElementLeft: <InfoIcon/>,
                 headerElements: headerElements,
+                hideUserIcon: false
             }}
         />
     );

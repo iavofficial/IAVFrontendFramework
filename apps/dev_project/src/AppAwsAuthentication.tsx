@@ -31,9 +31,9 @@ import { Amplify } from "aws-amplify";
 import { cognitoUserPoolsTokenProvider } from "aws-amplify/auth/cognito";
 import { CookieStorage } from "aws-amplify/utils";
 
-const cognitoPool = "eu-central-1_gbVRNxU0O";
-const cognitoAppId = "36rekcj2o3b3c5ts2n9m0jam4a";
-const domain = "rsm.iav-disa.de";
+const cognitoPool = "eu-central-1_8weTZhK1B" //"eu-central-1_gbVRNxU0O";
+const cognitoAppId = "47qrr39ilc3qo2eu1vhm7tgg0r" //"36rekcj2o3b3c5ts2n9m0jam4a";
+const domain = "localhost";
 
 const configureAmplify: () => void = () => {
     Amplify.configure({

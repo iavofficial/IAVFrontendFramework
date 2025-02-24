@@ -16,8 +16,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Credentials } from "@iavofficial/frontend-framework-shared-types/authenticationProvider";
-import { containsOneOrMoreGroups } from "@iavofficial/frontend-framework-shared-utils/containsOneOrMoreGroups";
+import {Credentials} from "@iavofficial/frontend-framework-shared-types/authenticationProvider";
+import {containsOneOrMoreGroups} from "@iavofficial/frontend-framework-shared-utils/containsOneOrMoreGroups";
 import {
   AuthError,
   confirmSignIn,
@@ -27,6 +27,7 @@ import {
   signIn,
   signOut,
 } from "@aws-amplify/auth";
+import {JWTPojo} from "./awsAuthenticatorTypes";
 
 export async function cognitoLogin(
   credentials: Credentials,
@@ -48,6 +49,7 @@ export async function cognitoLogin(
       return handleSessionResult(failOnNoLegalGroup, legalGroups);
     }
   } catch (error: unknown) {
+    // @ts-ignore
     throw new AuthError(error);
   }
 }
@@ -56,6 +58,7 @@ export async function cognitoLogout() {
   try {
     return await signOut();
   } catch (error: unknown) {
+    // @ts-ignore
     throw new AuthError(error);
   }
 }
@@ -71,6 +74,7 @@ export async function cognitoCheckIsAuthenticated(
       return await handleSessionResult(failOnNoLegalGroup, legalGroups);
     }
   } catch (error: unknown) {
+    // @ts-ignore
     throw new AuthError(error);
   }
 }
@@ -86,6 +90,7 @@ export async function cognitoCompletePassword(
     if (response.isSignedIn && response.nextStep.signInStep === "DONE")
       return handleSessionResult(failOnNoLegalGroup, legalGroups);
   } catch (error: unknown) {
+    // @ts-ignore
     throw new AuthError(error);
   }
 }
@@ -97,6 +102,7 @@ export async function cognitoRefreshToken(
   try {
     return await handleSessionResult(failOnNoLegalGroup, legalGroups);
   } catch (error: unknown) {
+    // @ts-ignore
     throw new AuthError(error);
   }
 }
@@ -127,15 +133,26 @@ async function handleSessionResult(
       groups as string[],
     );
   } catch (error: unknown) {
+    // @ts-ignore
     throw new AuthError(error);
   }
 }
 
 export class ValidUserInformation {
+  public idToken: JWTPojo;
+  public accessToken: JWTPojo;
+
   constructor(
-    public idToken: JWT,
-    public accessToken: JWT,
+    idToken: JWT,
+    accessToken: JWT,
     public username: string,
     public groups: string[],
-  ) {}
+  ) {
+    this.idToken = {
+      payload: idToken.payload,
+    };
+    this.accessToken = {
+      payload: accessToken.payload,
+    };
+  }
 }

@@ -86,6 +86,8 @@ export class AWSAuthenticator implements AWSAuthenticatorModule<AWSAuthenticator
       name: AUTHENTICATION_SLICE_NAME,
       initialState,
       reducers: {
+        // The Redux store demands that objects in action payloads are POJOs
+        // (for example they cannot have functions).
         processSuccessfulAuth: (
           state,
           action: PayloadAction<ValidUserInformation>,
@@ -133,13 +135,12 @@ export class AWSAuthenticator implements AWSAuthenticatorModule<AWSAuthenticator
       AUTHENTICATION_SLICE_NAME + "/thunkCheckIsAuthenticated",
       async (_, {dispatch}) => {
         try {
-          console.log("calling");
           const result: ValidUserInformation | undefined =
             await cognitoCheckIsAuthenticated(
               this.failOnNoLegalGroup,
               this.legalGroups,
             );
-          dispatch(processSuccessfulAuth(result!));
+          dispatch(processSuccessfulAuth({...result}));
           //eslint-disable-next-line
         } catch (error: unknown) {
           dispatch(this.logout({error}));
@@ -184,30 +185,22 @@ export class AWSAuthenticator implements AWSAuthenticatorModule<AWSAuthenticator
     this.login = createAsyncThunk(
       AUTHENTICATION_SLICE_NAME + "/thunkLogin",
       async ({credentials}: {credentials: Credentials}, {dispatch}) => {
-        console.log("logging in");
         dispatch(setLoadingForLogin(true));
-        console.log("logging in 2");
         try {
           const result: ValidUserInformation | object = await cognitoLogin(
             credentials,
             this.failOnNoLegalGroup,
             this.legalGroups,
           );
-          console.log("logging in 3");
           if (result instanceof ValidUserInformation) {
-            dispatch(processSuccessfulAuth(result));
+            dispatch(processSuccessfulAuth({...result}));
           } else {
             dispatch(setNewPasswordRequired({}));
           }
-          console.log("logging in 4");
         } catch (error: unknown) {
-          console.log("logging in 5");
-          console.log(error);
           await this.logout({error});
         } finally {
-          console.log("logging in 6");
           dispatch(setLoadingForLogin(false));
-          console.log("logging in 7");
         }
       },
     );
@@ -219,10 +212,7 @@ export class AWSAuthenticator implements AWSAuthenticatorModule<AWSAuthenticator
         try {
           await cognitoLogout();
         } catch (err: unknown) {
-          console.log("error signing out: ", err);
-        } finally {
-          console.log(error);
-          
+        } finally {          
           dispatch(logout(extractMessageFromError(error)));
         }
       },
@@ -231,28 +221,19 @@ export class AWSAuthenticator implements AWSAuthenticatorModule<AWSAuthenticator
     this.completePassword = createAsyncThunk(
       AUTHENTICATION_SLICE_NAME + "/thunkCompletePassword",
       async ({newPassword}: {newPassword: string}, {dispatch}) => {
-        console.log("completePassword 1");
         dispatch(setLoading(true));
-        console.log("completePassword 2");
         try {
-          console.log("completePassword 3");
           const result = await cognitoCompletePassword(
             newPassword,
             this.failOnNoLegalGroup,
             this.legalGroups,
           );
-          console.log("completePassword 4");
-          dispatch(processSuccessfulAuth(result));
-          console.log("completePassword 5");
+          dispatch(processSuccessfulAuth({...result}));
         } catch (error: unknown) {
-          console.log("completePassword 6");
           // Dispatch the logout thunk with the error
           dispatch(this.logout({error}));
-          console.log("completePassword 7");
         } finally {
-          console.log("completePassword 8");
           dispatch(setLoading(false));
-          console.log("completePassword 9");
         }
       },
     );
@@ -267,7 +248,7 @@ export class AWSAuthenticator implements AWSAuthenticatorModule<AWSAuthenticator
           );
 
           if (response instanceof ValidUserInformation) {
-            dispatch(processSuccessfulAuth(response));
+            dispatch(processSuccessfulAuth({...response}));
           }
         } catch (error: unknown) {
           dispatch(this.logout({error}));
@@ -285,7 +266,6 @@ export class AWSAuthenticator implements AWSAuthenticatorModule<AWSAuthenticator
   
       useEffect(() => {
         this.configureAmplify();
-        console.log(this.configureAmplify);
         dispatch(this.checkIsAuthenticated());
         setIsInitialized(true);
       }, [dispatch]);
@@ -293,7 +273,6 @@ export class AWSAuthenticator implements AWSAuthenticatorModule<AWSAuthenticator
       // Equivalent to ComponentDidUpdate
       useEffect(() => {
         if (hasAuthenticated) {
-          console.log("calling 2");
           dispatch(this.checkIsAuthenticated());
         }
       }, [hasAuthenticated, dispatch]);

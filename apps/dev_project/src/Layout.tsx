@@ -38,6 +38,7 @@ import {PrimeIcons} from "primereact/api";
 import {WHITE} from "@iavofficial/frontend-framework/constants";
 import {HeaderMenuElement} from "@iavofficial/frontend-framework/headerMenuElement";
 import { ExampleComponent7 } from "./components/exampleComponent7";
+import { awsAuthenticationView } from "./AppAwsAuthentication";
 
 function Layout() {
     const [selectedButtonOption, setSelectedButtonOption] = useState("Simulated");
@@ -242,7 +243,7 @@ function Layout() {
             }}
             tabAndContentWrappers={views}
             startingPoint="/"
-            authenticationView={BasicAuthenticationView}
+            authenticationView={awsAuthenticationView}
             settingsMenuOptions={settingsMenuOptions}
             documentsLabelKey="Legal_documents"
             documentsComponent={LegalDocuments}

@@ -71,11 +71,15 @@
     "./dist"
   ],
   "exports": {
-    "./module": "./dist/module.js"
+    "./module": "./dist/module.js",
+
+    "./awsAuthenticationView": "./dist/components/awsAuthenticationView.js"
   },
   "typesVersions": {
     "*": {
-      "./module": ["./dist/module.d.ts"]
+      "./module": ["./dist/module.d.ts"],
+
+      "./awsAuthenticationView": ["./dist/components/awsAuthenticationView.d.ts"]
     }
   },
   "publishConfig": {

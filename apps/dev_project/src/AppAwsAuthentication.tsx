@@ -26,18 +26,50 @@ import {
   StoreBuilder,
 } from "@iavofficial/frontend-framework/store";
 import {AWSAuthenticator} from "@iavofficial/frontend-framework-aws-authenticator/module";
+import {awsAuthenticationViewFactory} from "@iavofficial/frontend-framework-aws-authenticator/awsAuthenticationView";
+import { Amplify } from "aws-amplify";
+import { cognitoUserPoolsTokenProvider } from "aws-amplify/auth/cognito";
+import { CookieStorage } from "aws-amplify/utils";
 
-const configureAmplify: () => void = () => {};
+const cognitoPool = "eu-central-1_gbVRNxU0O";
+const cognitoAppId = "36rekcj2o3b3c5ts2n9m0jam4a";
+const domain = "rsm.iav-disa.de";
+
+const configureAmplify: () => void = () => {
+    Amplify.configure({
+      Auth: {
+        Cognito: {
+          userPoolId: cognitoPool,
+          userPoolClientId: cognitoAppId,
+        },
+      },
+    });
+    cognitoUserPoolsTokenProvider.setKeyValueStorage(
+      new CookieStorage({
+        domain: domain,
+        path: "/",
+        expires: 365,
+        // @ts-ignore
+        secure: domain !== "localhost",
+        sameSite: "lax",
+      }),
+    );
+  };
 
 const modules = {
     auth: new AWSAuthenticator({
-        configureAmplify
+        configureAmplify: configureAmplify,
+        failOnNoLegalGroup: true,
+        legalGroups: ["ADMIN", "SHOWCASE"]
     })
 };
 
+export const awsAuthenticationView = awsAuthenticationViewFactory(modules.auth);
+
+//@ts-ignore
 const store = new StoreBuilder(modules).build();
 
-export const AppDefaultAuthentication = () => {
+export const AppAwsAuthentication = () => {
   const translations = {
     es: {
       translation: translationES,
@@ -56,6 +88,7 @@ export const AppDefaultAuthentication = () => {
   return (
     <GlobalDataLayer
       store={store}
+      // @ts-ignore
       modules={modules}
       translations={translations}
       colorSettings={{
@@ -67,4 +100,4 @@ export const AppDefaultAuthentication = () => {
   );
 }
 
-export default AppDefaultAuthentication;
+export default AppAwsAuthentication;

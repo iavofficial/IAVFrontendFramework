@@ -58,18 +58,39 @@ export const GlobalDataLayer = (props: PropsWithChildren<Props>) => {
   return (
     <ModuleContextProvider modules={props.modules}>
       <Provider store={props.store}>
+        <ModuleLifecycleCaller modules={props.modules}>
         <CookiesProvider>
-            <DefaultLanguageProvider
-              languageOptions={languageOptions}
-              translations={props.translations}
-              initI18Next={props.initI18Next}
-            >
-              <ColorProvider {...props.colorSettings}>
-                <BrowserRouter>{props.children}</BrowserRouter>
-              </ColorProvider>
-            </DefaultLanguageProvider>
+          <DefaultLanguageProvider
+            languageOptions={languageOptions}
+            translations={props.translations}
+            initI18Next={props.initI18Next}
+          >
+            <ColorProvider {...props.colorSettings}>
+              <BrowserRouter>{props.children}</BrowserRouter>
+            </ColorProvider>
+          </DefaultLanguageProvider>
         </CookiesProvider>
+        </ModuleLifecycleCaller>
       </Provider>
     </ModuleContextProvider>
   );
+};
+
+const ModuleLifecycleCaller = (props: PropsWithChildren<{modules: FFMandatoryModules & Record<string, any>}>) => {
+  // Create a sorted, stable array of module keys.
+  const moduleKeys = React.useMemo(
+    () => Object.keys(props.modules).sort(),
+    [props.modules],
+  );
+
+  // For each module, call its hook (or a no-op) in the same order every render.
+  moduleKeys.forEach((key) => {
+    const useModuleLifecycle =
+      props.modules[key].useModuleLifecycle ?? (() => {});
+    // IMPORTANT: Do not place hook calls inside loops if the number of iterations could change.
+    // This approach is only safe if moduleKeys is stable between renders.
+    useModuleLifecycle();
+  });
+
+  return props.children;
 };

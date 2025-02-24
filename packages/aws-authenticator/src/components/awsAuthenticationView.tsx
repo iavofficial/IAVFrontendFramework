@@ -28,10 +28,10 @@ import {
 import {LoginButtonWithSpinner} from "@iavofficial/frontend-framework-shared-react-common/loginButtonWithSpinner";
 import {useTranslator} from "@iavofficial/frontend-framework/translators";
 import {AuthenticationViewProps} from "@iavofficial/frontend-framework-shared-types/authenticationViewProps";
-import "../authenticationView.css";
-import "../../css/globalColors.css";
-import loginBackgroundLightMode from "../../../assets/png/login_background_lightMode.png";
-import loginBackgroundDarkMode from "../../../assets/png/login_background_darkMode.png";
+// import "../authenticationView.css";
+//import "../../css/globalColors.css";
+//import loginBackgroundLightMode from "../../../assets/png/login_background_lightMode.png";
+//import loginBackgroundDarkMode from "../../../assets/png/login_background_darkMode.png";
 import {Dropdown, DropdownChangeEvent} from "primereact/dropdown";
 import {LanguageContext} from "@iavofficial/frontend-framework/language";
 import {parseLanguageResourcesIntoDropdownFormat} from "@iavofficial/frontend-framework-shared-utils/parseLanguageResourcesIntoDropdownFormat";
@@ -47,20 +47,20 @@ interface AWSAuthenticationViewProps extends AuthenticationViewProps {
   module: AWSAuthenticator;
 }
 
-export const AWSAuthenticationViewFactory = (module: AWSAuthenticator) => {
+export const awsAuthenticationViewFactory = (module: AWSAuthenticator) => {
   return (props: AuthenticationViewProps) => (
     <AWSAuthenticationView module={module} {...props} />
   );
 };
 
-const AWSAuthenticationView = (props: AWSAuthenticationViewProps) => {
+export const AWSAuthenticationView = (props: AWSAuthenticationViewProps) => {
   const {module} = props;
 
   const dispatch = useDispatch<AWSAuthenticatorAuthDispatch>();
   const useAuthSelector: TypedUseSelectorHook<AWSAuthenticatorStoreState> = useSelector;
 
   const isNewPasswordRequired = useAuthSelector(state => state[AUTHENTICATION_SLICE_NAME].isNewPasswordRequired);
-  const loginError = useAuthSelector(state => state[AUTHENTICATION_SLICE_NAME].loginError);
+  const loginError = useAuthSelector(state => state[AUTHENTICATION_SLICE_NAME].loginError) ?? "";
   const isLoading = useAuthSelector(state => state[AUTHENTICATION_SLICE_NAME].isLoading);
 
   const [email, setEmail] = useState("");
@@ -103,32 +103,6 @@ const AWSAuthenticationView = (props: AWSAuthenticationViewProps) => {
     } else {
       dispatch(module.login({credentials: {email: email, password: password}}));
     }
-  };
-
-  const getErrorText = (error: undefined | {[key: string]: any} | string) => {
-    if (error) {
-      if (typeof error === "object") {
-        if (error.code) {
-          if (error.code === "UserGroupError") {
-            return t("invalid_access_configuration"); // user was not added to a group
-          } else if (error.code === "NotAuthorizedException") {
-            return t("invalid_username_or_password"); // invalid user credentials
-          } else if (error.code === "InvalidPasswordException") {
-            return t("password_requirements_not_met"); // set password does not conform to password policy
-          } else {
-            return t("server_error");
-          }
-        } else if (error.message) {
-          if (error.message === "UserGroupError") {
-            return t("invalid_access_configuration");
-          }
-          return error.message;
-        }
-      } else {
-        return t("server_error");
-      }
-    }
-    return "";
   };
 
   const companyLogoDefault = (props: AuthenticationViewProps) => (
@@ -195,7 +169,7 @@ const AWSAuthenticationView = (props: AWSAuthenticationViewProps) => {
 
             <LoginButtonWithSpinner isLoading={isLoading} />
             <div className="invalid">
-              {getErrorText(loginError)}
+              {t(loginError)}
             </div>
           </div>
         </form>
@@ -268,7 +242,7 @@ const AWSAuthenticationView = (props: AWSAuthenticationViewProps) => {
           <LoginButtonWithSpinner isLoading={isLoading} />
         </div>
         <div style={{marginTop: "20px"}} className="invalid">
-          {getErrorText(loginError)}
+          {t(loginError)}
         </div>
       </div>
     </form>
@@ -330,13 +304,13 @@ const AWSAuthenticationView = (props: AWSAuthenticationViewProps) => {
             width: "100vw",
             objectFit: "cover",
           }}
-          src={
+          /*src={
             props.authOptions?.backgroundImage
               ? props.authOptions?.backgroundImage
               : colorSettingsContext?.darkmode
                 ? loginBackgroundDarkMode
                 : loginBackgroundLightMode
-          }
+          }*/
         />
       )}
       <div

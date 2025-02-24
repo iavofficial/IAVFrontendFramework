@@ -16,9 +16,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import { generateHash } from "@iavofficial/frontend-framework-shared-utils/hash";
 import React from "react";
 import {Route} from "react-router";
-import {generateHash} from "../../../utils/hash";
 
 /**
  * This class is the base for all simple content wrappers.

@@ -34,26 +34,18 @@ import { generateHashOfLength } from "@iavofficial/frontend-framework-shared-uti
 import { parseLanguageResourcesIntoDropdownFormat } from "@iavofficial/frontend-framework-shared-utils/parseLanguageResourcesIntoDropdownFormat";
 import { LoginButtonWithSpinner } from "@iavofficial/frontend-framework-shared-react-common/loginButtonWithSpinner";
 import { AppLogoPlaceholder } from "@iavofficial/frontend-framework-shared-react-common/appLogoPlaceholder";
-import { AuthModule, AuthState } from "@iavofficial/frontend-framework-shared-types/authenticationProvider";
+import { AuthState } from "@iavofficial/frontend-framework-shared-types/authenticationProvider";
 import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared-react-common/colorSettingsContext";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch, Action } from "@reduxjs/toolkit";
-
-interface BasicAuthenticationViewProps extends AuthenticationViewProps {
-  module: AuthModule<AuthState>;
-}
-
-export const BasicAuthenticationViewFactory = (module: AuthModule<AuthState>) => {
-  return (props: AuthenticationViewProps) => (
-    <BasicAuthenticationView module={module} {...props}/>
-  )
-}
+import { ModuleContext } from "@iavofficial/frontend-framework-shared-react-common/moduleContext";
 
 type BasicAuthenticatorAuthDispatch = ThunkDispatch<AuthState, unknown, Action<string>>;
 type BasicAuthenticatorStoreState = {[AUTHENTICATION_SLICE_NAME]: AuthState}
 
-export const BasicAuthenticationView = (props: BasicAuthenticationViewProps) => {
-  const {module} = props;
+export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
+  const moduleContext = useContext(ModuleContext);
+  const authModule = moduleContext.modules.auth;
 
   const colorSettingsContext = useContext(ColorSettingsContext);
 
@@ -95,7 +87,7 @@ export const BasicAuthenticationView = (props: BasicAuthenticationViewProps) => 
   const submit = (event: FormEvent<HTMLFormElement>) => {
     setTriedToSubmit(true);
     event.preventDefault();
-    dispatch(module.login({credentials: {email: email, password: password}}));
+    dispatch(authModule.login({credentials: {email: email, password: password}}));
   };
 
   const companyLogoDefault = (props: AuthenticationViewProps) => (

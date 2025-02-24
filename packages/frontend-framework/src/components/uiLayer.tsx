@@ -28,8 +28,6 @@ import "./css/globalSettings.css";
 import {BasicAuthenticationView} from "./authentication/default/basicAuthenticationView";
 import {SettingsMenuOptions} from "./header/settingsMenu";
 import {CookieBanner} from "./cookie/cookieBanner";
-import {AuthContext} from "../contexts/auth";
-import {AuthenticationViewProps} from "./authentication/authenticationViewProps";
 import {MainView} from "./mainView";
 import {DefaultImprint} from "./imprint/defaultImprint";
 import {TabAndContentWrapper} from "./navbar/wrappers/typesWrappers";
@@ -44,6 +42,8 @@ import {UserMenuOptions} from "./header/userMenu";
 import {setAcceptCookies} from "../utils/setAcceptCookies";
 import {useCookies} from "react-cookie";
 import {ACCEPTED_COOKIES_NAME} from "../constants";
+import { AuthenticationViewProps } from "@iavofficial/frontend-framework-shared-types/authenticationViewProps";
+import { useDefaultSelector } from "../store";
 
 export interface AuthOptions {
     backgroundImage?: string;
@@ -77,7 +77,7 @@ export interface Props {
 }
 
 export const UILayer = (props: Props) => {
-    const authContext = useContext(AuthContext);
+    const {hasAuthenticated} = useDefaultSelector(state => state.auth);
 
     const [, setCookie] = useCookies([ACCEPTED_COOKIES_NAME]);
 
@@ -124,7 +124,7 @@ export const UILayer = (props: Props) => {
                     />
                 )}
 
-                {!props.disableLogin && !authContext?.hasAuthenticated() && (
+                {!props.disableLogin && hasAuthenticated && (
                     <Route
                         path="/documents"
                         element={
@@ -137,7 +137,7 @@ export const UILayer = (props: Props) => {
                     />
                 )}
 
-                {!props.disableLogin && !authContext?.hasAuthenticated() ? (
+                {!props.disableLogin && hasAuthenticated ? (
                     <Route path="/*" element={<></>}/>
                 ) : (
                     <>
@@ -175,16 +175,15 @@ interface RedirectorProps {
  * @constructor
  */
 const Redirector = (props: RedirectorProps) => {
-    const disableLogin = props.disableLogin;
+    const {hasAuthenticated} = useDefaultSelector(state => state.auth);
 
-    const authContext = useContext(AuthContext);
-    const userIsAuthenticated = authContext!.hasAuthenticated();
+    const disableLogin = props.disableLogin;
 
     const currentPath = useLocation().pathname;
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!userIsAuthenticated) {
+        if (!hasAuthenticated) {
             if (currentPath !== "/documents") {
                 navigate("/login");
             }
@@ -196,7 +195,7 @@ const Redirector = (props: RedirectorProps) => {
     }, [
         disableLogin,
         currentPath,
-        userIsAuthenticated,
+        hasAuthenticated,
         navigate,
         props.startingPoint,
     ]);

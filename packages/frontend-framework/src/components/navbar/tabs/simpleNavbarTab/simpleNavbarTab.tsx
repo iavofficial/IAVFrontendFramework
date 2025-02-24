@@ -21,7 +21,6 @@ import {Link, useLocation} from "react-router-dom";
 import {useTranslator} from "../../../internationalization/translators";
 import "../tabs.css";
 import {GroupableNavbarTab, NavbarTabProps} from "../typesNavbarTab";
-import {ColorSettingsContext} from "../../../../contexts/colorsettings";
 import {SimpleNavbarTabCollapsed} from "./simpleNavbarTabCollapsed";
 import {SimpleNavbarTabUnfolded} from "./simpleNavbarTabUnfolded";
 import {
@@ -34,6 +33,7 @@ import {
   NAVBAR_WIDTH_UNFOLDED,
 } from "../../../../constants";
 import {InjectedOptionsGroupableByWrapperToTab} from "../../types/typesInjectedOptions";
+import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared-react-common/colorSettingsContext";
 
 export interface NestedNavbarTabProps {
   additionalClassNames: string;

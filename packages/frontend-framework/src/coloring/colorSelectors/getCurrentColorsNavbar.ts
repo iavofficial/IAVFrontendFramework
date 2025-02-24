@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {NavbarColorOptions} from "../colorOptionTypes";
+import { NavbarColorOptions } from "@iavofficial/frontend-framework-shared-types/colorOptionTypes";
 import {
   DARK_NAVBAR_BACKGROUND_INSIDE_ACTIVE_GROUP_COLOR,
   DARK_NAV_BACKGROUND_COLOR,

@@ -33,8 +33,8 @@ import {
 import {useCookiesAccepted} from "./cookieHooks";
 import {useTranslator} from "../internationalization/translators";
 import {setAcceptCookies} from "../../utils/setAcceptCookies";
-import {ColorSettingsContext} from "../../contexts/colorsettings";
 import makeStyles from "../content/style_options/makeStyles";
+import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared-react-common/colorSettingsContext";
 
 const useStyles = makeStyles(({darkMode}: {darkMode: boolean}) => ({
   dialog: {

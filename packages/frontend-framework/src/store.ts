@@ -1,18 +1,30 @@
 import {
+  Action,
   configureStore,
   EnhancedStore,
   Middleware,
   Reducer,
   StoreEnhancer,
+  ThunkDispatch,
 } from "@reduxjs/toolkit";
 import {
   AuthModule,
   AuthState,
 } from "@iavofficial/frontend-framework-shared-types/authenticationProvider";
 import {FFStoreModule} from "@iavofficial/frontend-framework-shared-types/module";
-import { TypedUseSelectorHook, useSelector } from "react-redux";
-import { DummyAuthenticator } from "./components/authentication/default/dummyAuthenticationProvider";
-import { AUTHENTICATION_SLICE_NAME } from "./constants";
+import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
+import {DummyAuthenticator} from "./components/authentication/default/dummyAuthenticationProvider";
+import {AUTHENTICATION_SLICE_NAME} from "./constants";
+
+const executeProcessorsForModules = <TModules extends object>(
+  modulesAndProcessors: ModuleAndProcessorMap<TModules>,
+  storeConfigBuilder: StoreConfigBuilder,
+) => {
+  (Object.keys(modulesAndProcessors) as (keyof TModules)[]).forEach((key) => {
+    const entry = modulesAndProcessors[key];
+    entry.processor(entry.module, storeConfigBuilder);
+  });
+};
 
 /*
 To add a new mandatory module:
@@ -31,9 +43,6 @@ To add a new mandatory module:
    include the passed module and the default processor inside the ModuleAndProcessorMap
    for mandatory modules.
 */
-
-export type RootState<TStoreState extends (...args: any) => any> = ReturnType<TStoreState>;
-export type AppDispatch<TStoreDispatch> = TStoreDispatch;
 
 // The mandatory state (which will be the state of different module's slices)
 export interface FFMandatoryState {
@@ -58,7 +67,7 @@ export interface FFMandatoryModules {
 
 // The user can provide additional modules which aren't used by the
 // framework itself.
-export type UserModules = Record<string, FFStoreModule>;
+export type GenericModules = Record<string, FFStoreModule>;
 
 // Processor functions are used to process single modules. They can be
 // replaces in order to allow the developer to implement custom processing,
@@ -72,7 +81,7 @@ export type ModuleProcessorFunction<M extends FFStoreModule> = (
 // Objects of this type aggragate a module and it's corresponding processor
 // method. The following example shows it's structure:
 // {auth: {module: ..., processor: ...}, ...}
-export type ModuleAndProcessorMap<ModuleType extends object> = {
+export type ModuleAndProcessorMap<ModuleType extends Record<string, any>> = {
   [K in keyof ModuleType]: ModuleType[K] extends FFStoreModule
     ? ModuleEntry<ModuleType[K]>
     : never;
@@ -86,7 +95,7 @@ export interface ModuleEntry<M extends FFStoreModule> {
 
 // This object contains the default modules which can be replaced.
 export const defaultModules: FFMandatoryModules = {
-  [AUTHENTICATION_SLICE_NAME]: new DummyAuthenticator()
+  [AUTHENTICATION_SLICE_NAME]: new DummyAuthenticator(),
 };
 
 // An object of this class will contain all reducers etc. of all modules.
@@ -97,7 +106,7 @@ export class StoreConfig {
     public reducers: FFMandatoryReducers & Record<string, Reducer>,
     public middleware: Middleware[] = [],
     public enhancers: StoreEnhancer[] = [],
-    public additional: Record<string, any> = {}
+    public additional: Record<string, any> = {},
   ) {}
 }
 
@@ -135,19 +144,21 @@ export class StoreConfigBuilder {
     this.additional[key] = value;
     return this;
   }
-  
+
   build() {
-    const {
-      [AUTHENTICATION_SLICE_NAME]: auth,
-      ...otherReducers
-    } = this.reducers;
-    
+    const {[AUTHENTICATION_SLICE_NAME]: auth, ...otherReducers} = this.reducers;
+
     const finalReducers: FFMandatoryReducers & Record<string, Reducer> = {
       ...otherReducers,
-      [AUTHENTICATION_SLICE_NAME]: auth ?? defaultModules.auth.slice.reducer
+      [AUTHENTICATION_SLICE_NAME]: auth ?? defaultModules.auth.slice.reducer,
     };
-    
-    return new StoreConfig(finalReducers, this.middleware, this.enhancers, this.additional);
+
+    return new StoreConfig(
+      finalReducers,
+      this.middleware,
+      this.enhancers,
+      this.additional,
+    );
   }
 }
 
@@ -157,7 +168,7 @@ export class StoreConfigBuilder {
 // customization of module processing. Furthermore the Builder contains a storeBuilder method
 // which is used to build the store after all processor methods were executed. The storeBuilder
 // can be replaced to customize the build of the Redux store.
-export class StoreBuilder<TUserModules extends UserModules> {
+export class StoreBuilder<TUserModules extends GenericModules> {
   private storeConfigBuilder: StoreConfigBuilder = new StoreConfigBuilder();
 
   // These are mandatory modules and processors which are essential for the framework as
@@ -205,6 +216,22 @@ export class StoreBuilder<TUserModules extends UserModules> {
     }
   }
 
+  getModules() {
+    const mandatoryModules = Object.entries(this.mandatoryModulesAndProcessors)
+      .map(([key, value]) => ({[key]: value.module}))
+      .reduce((prev, current) => ({...prev, ...current}));
+
+    let userModules: Record<string, FFStoreModule> = {};
+
+    if (this.userModulesAndProcessors) {
+      userModules = Object.entries(this.userModulesAndProcessors)
+        .map(([key, value]) => ({[key]: value.module}))
+        .reduce((prev, current) => ({...prev, ...current}));
+    }
+
+    return {...mandatoryModules, userModules};
+  }
+
   build() {
     executeProcessorsForModules(
       this.mandatoryModulesAndProcessors,
@@ -245,20 +272,21 @@ export const defaultStoreBuilder = (storeConfig: StoreConfig) => {
 
 export const defaultStore = new StoreBuilder(defaultModules).build();
 
+export type RootState<TStoreState extends (...args: any) => any> =
+  ReturnType<TStoreState>;
+export type AppDispatch<TStoreDispatch> = TStoreDispatch;
+
 export type DefaultRootState = RootState<typeof defaultStore.getState>;
 export type DefaultAppDispatch = AppDispatch<typeof defaultStore.dispatch>;
+export type DefaultThunkDispatch = ThunkDispatch<
+  DefaultRootState,
+  unknown,
+  Action<string>
+>;
 
-export const useDefaultSelector: TypedUseSelectorHook<DefaultRootState> = useSelector;
-
-const executeProcessorsForModules = <TModules extends object>(
-  modulesAndProcessors: ModuleAndProcessorMap<TModules>,
-  storeConfigBuilder: StoreConfigBuilder,
-) => {
-  (Object.keys(modulesAndProcessors) as (keyof TModules)[]).forEach((key) => {
-    const entry = modulesAndProcessors[key];
-    entry.processor(entry.module, storeConfigBuilder);
-  });
-};
+export const useDefaultDispatch: () => DefaultThunkDispatch = useDispatch;
+export const useDefaultSelector: TypedUseSelectorHook<DefaultRootState> =
+  useSelector;
 
 // TODO HINTS:
 /*

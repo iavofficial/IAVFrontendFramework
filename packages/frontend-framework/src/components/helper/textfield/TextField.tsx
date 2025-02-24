@@ -23,8 +23,8 @@ import React, {
   useMemo,
 } from "react";
 import {InputText} from "primereact/inputtext";
-import {ColorSettingsContext} from "../../../contexts/colorsettings";
 import {RED} from "../../../constants";
+import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared-react-common/colorSettingsContext";
 
 interface Props {
   className?: string | undefined;

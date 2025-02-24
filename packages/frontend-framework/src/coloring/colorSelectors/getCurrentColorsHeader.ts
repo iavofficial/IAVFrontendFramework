@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {HeaderColorOptions} from "../colorOptionTypes";
+import { HeaderColorOptions } from "@iavofficial/frontend-framework-shared-types/colorOptionTypes";
 import {
   DARK_HEADER_BACKGROUND_COLOR,
   DARK_HEADER_SETTINGS_ICON_COLOR,

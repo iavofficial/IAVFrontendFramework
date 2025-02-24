@@ -16,21 +16,20 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, {PropsWithChildren, useContext} from "react";
+import React, {PropsWithChildren} from "react";
 import {CookiesProvider} from "react-cookie";
-import {AuthContext} from "../contexts/auth";
 import {Translations} from "../contexts/language";
 import {
   DefaultLanguageProvider,
   LanguageOptions,
 } from "./internationalization/defaultLanguageProvider";
-import {DummyAuthenticationProvider} from "./authentication/default/dummyAuthenticationProvider";
 import {ColorProvider, ColorProviderProps} from "../coloring/colorProvider";
 import {DEFAULT_FALLBACK_LANGUAGE} from "../constants";
 import {BrowserRouter} from "react-router-dom";
-import {combineReducers, configureStore, createStore} from "@reduxjs/toolkit";
+import {EnhancedStore} from "@reduxjs/toolkit";
 import {Provider} from "react-redux";
-import { store } from "../store";
+import {FFMandatoryModules, FFMandatoryState} from "../store";
+import {ModuleContextProvider} from "../providers/moduleContextProvider";
 
 // Create this type to make fallbackLang optional for the user.
 type GlobalDataLayerLanguageOptions = Omit<LanguageOptions, "fallbackLang"> & {
@@ -38,24 +37,15 @@ type GlobalDataLayerLanguageOptions = Omit<LanguageOptions, "fallbackLang"> & {
 };
 
 interface Props {
+  modules: FFMandatoryModules & Record<string, any>;
+  store: EnhancedStore<FFMandatoryState>;
   languageOptions?: GlobalDataLayerLanguageOptions;
   translations?: Translations;
   initI18Next?: () => void;
   colorSettings?: ColorProviderProps;
-  authModule?: any;
 }
 
 export const GlobalDataLayer = (props: PropsWithChildren<Props>) => {
-  // TODO
-  const authModule = props.authModule ?? props.authModule;
-
-  
-
-  const authContext = useContext(AuthContext);
-  const AuthenticationProvider = authContext
-    ? React.Fragment
-    : DummyAuthenticationProvider;
-
   const fallbackLang =
     props.languageOptions?.fallbackLang ?? DEFAULT_FALLBACK_LANGUAGE;
   const initialLang =
@@ -66,20 +56,20 @@ export const GlobalDataLayer = (props: PropsWithChildren<Props>) => {
   };
 
   return (
-    <Provider store={store}>
-      <CookiesProvider>
-        <AuthenticationProvider>
-          <DefaultLanguageProvider
-            languageOptions={languageOptions}
-            translations={props.translations}
-            initI18Next={props.initI18Next}
-          >
-            <ColorProvider {...props.colorSettings}>
-              <BrowserRouter>{props.children}</BrowserRouter>
-            </ColorProvider>
-          </DefaultLanguageProvider>
-        </AuthenticationProvider>
-      </CookiesProvider>
-    </Provider>
+    <ModuleContextProvider modules={props.modules}>
+      <Provider store={props.store}>
+        <CookiesProvider>
+            <DefaultLanguageProvider
+              languageOptions={languageOptions}
+              translations={props.translations}
+              initI18Next={props.initI18Next}
+            >
+              <ColorProvider {...props.colorSettings}>
+                <BrowserRouter>{props.children}</BrowserRouter>
+              </ColorProvider>
+            </DefaultLanguageProvider>
+        </CookiesProvider>
+      </Provider>
+    </ModuleContextProvider>
   );
 };

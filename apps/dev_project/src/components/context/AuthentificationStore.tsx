@@ -16,13 +16,13 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {PropsWithChildren, useCallback, useState} from "react";
+/*import {PropsWithChildren, useCallback, useState} from "react";
 import {State} from "@iavofficial/frontend-framework/dummyAuthenticationProvider";
-import {AuthContext, Credentials} from "@iavofficial/frontend-framework/auth";
+import {AuthContext, Credentials} from "@iavofficial/frontend-framework/auth";*/
 
-interface Props {
+/*interface Props {
     additionalContextValues?: { [key: string]: any };
-}
+}*/
 
 
 /**
@@ -32,7 +32,7 @@ interface Props {
  * @param props - The properties passed to the component, including children components.
  * @constructor
  */
-export const AuthenticationStore = (props: PropsWithChildren<Props>) => {
+/*export const AuthenticationStore = (props: PropsWithChildren<Props>) => {
 
     const {
         children
@@ -96,5 +96,4 @@ export const AuthenticationStore = (props: PropsWithChildren<Props>) => {
         </AuthContext.Provider>
     );
 };
-
-
+*/

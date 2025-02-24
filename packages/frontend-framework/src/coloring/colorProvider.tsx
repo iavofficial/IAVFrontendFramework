@@ -17,14 +17,14 @@
  */
 
 import React, {useEffect, useState} from "react";
-import {ColorSettingsContext} from "../contexts/colorsettings";
 import {getCurrentColorsNavbar} from "./colorSelectors/getCurrentColorsNavbar";
 import {getCurrentColorsHeader} from "./colorSelectors/getCurrentColorsHeader";
 import {getCurrentColorsContentArea} from "./colorSelectors/getCurrentColorsContentArea";
 import {getCurrentColorsContentbar} from "./colorSelectors/getCurrentColorsContentbar";
 import {getCurrentColorsContentCell} from "./colorSelectors/getCurrentColorsContentCell";
 import {getCurrentColorsAuthenticationView} from "./colorSelectors/getCurrentColorsAuthenticationView";
-import {ColorOptions} from "./colorOptionTypes";
+import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared-react-common/colorSettingsContext";
+import { ColorOptions } from "@iavofficial/frontend-framework-shared-types/colorOptionTypes";
 
 export interface ColorProviderProps {
   colorOptions?: ColorOptions;

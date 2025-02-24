@@ -23,13 +23,13 @@ import {ContextMenu} from "primereact/contextmenu";
 import UserIcon from "../../assets/svg/userIcon";
 import CompanyLogo from "../../assets/svg/companyLogo";
 import SettingsIcon from "../../assets/svg/settingsIcon";
-import {BLUE3, PADDING_GAB, WHITE} from "../../constants";
+import {APPLICATION_LOGO_PLACEHOLDER, BLUE3, PADDING_GAB, WHITE} from "../../constants";
 import {SettingsMenu, SettingsMenuOptions} from "./settingsMenu";
 import {UserMenu, UserMenuOptions} from "./userMenu";
-import {ColorSettingsContext} from "../../contexts/colorsettings";
-import {AppLogoPlaceholder} from "../appLogoPlaceholder";
 import HeaderIcon from "./headerIcon";
 import makeStyles from "../content/style_options/makeStyles";
+import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared-react-common/colorSettingsContext";
+import { AppLogoPlaceholder } from "@iavofficial/frontend-framework-shared-react-common/appLogoPlaceholder";
 
 const useStyles = makeStyles(() => ({
   wrapper: {
@@ -109,7 +109,7 @@ export const Header = (props: Props) => {
         {props.headerOptions?.reactElementLeft ? (
           props.headerOptions?.reactElementLeft
         ) : (
-          <AppLogoPlaceholder />
+          <AppLogoPlaceholder appLogoPlaceholder={APPLICATION_LOGO_PLACEHOLDER} />
         )}
       </div>
 

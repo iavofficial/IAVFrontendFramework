@@ -3,7 +3,7 @@ import {FFStoreModule, ModuleLifecycleHook} from "../module";
 import { AsyncThunk} from '@reduxjs/toolkit';
 
 
-export type UserData = {username: string} & Record<string, any>;
+export type UserData = {username: string, userGroups?: string[]} & Record<string, any>;
 
 export type AuthState = {
   hasAuthenticated: boolean; // true if user is authenticated

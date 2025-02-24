@@ -25,7 +25,7 @@ import {Outlet, Route, Routes} from "react-router-dom";
 import {TabAndContentWrapper} from "./navbar/wrappers/typesWrappers";
 import {UserMenuOptions} from "./header/userMenu";
 import If from "./helper/If";
-import {ColorSettingsContext} from "../contexts/colorsettings";
+import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared-react-common/colorSettingsContext";
 
 interface MainViewProps {
   tabAndContentWrappers: TabAndContentWrapper[];

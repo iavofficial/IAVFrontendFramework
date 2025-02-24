@@ -18,13 +18,13 @@
 
 import React, {useContext, useState} from "react";
 import {DEFAULT_ELEMENTSIZE, GREY5, WHITE} from "../../constants";
-import {generateHashOfLength} from "../../utils/hash";
 import {Tooltip} from "primereact/tooltip";
 import "./contentbar.css";
-import {ColorSettingsContext} from "../../contexts/colorsettings";
 import {TranslationFunction} from "../../types/translationFunction";
 import {useTranslator} from "../internationalization/translators";
 import {determineCurrentColor} from "../../utils/determineCurrentColor";
+import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared-react-common/colorSettingsContext";
+import { generateHashOfLength } from "@iavofficial/frontend-framework-shared-utils/hash";
 
 export interface Props {
   displayName: string | TranslationFunction;

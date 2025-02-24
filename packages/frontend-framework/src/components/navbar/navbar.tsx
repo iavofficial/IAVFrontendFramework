@@ -25,9 +25,7 @@ import {useTranslator} from "../internationalization/translators";
 import {Tooltip} from "primereact/tooltip";
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
-import {ColorSettingsContext} from "../../contexts/colorsettings";
 import {calculateNavbarArrowFunctionColor} from "../../utils/calculateNavbarArrowColor";
-import {generateHashOfLength} from "../../utils/hash";
 import {NavbarSettingsContext} from "../../contexts/navbarContext";
 import {
   DEFAULT_ELEMENTSIZE,
@@ -35,6 +33,8 @@ import {
   NAVBAR_WIDTH_UNFOLDED,
   PADDING_GAB,
 } from "../../constants";
+import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared-react-common/colorSettingsContext";
+import { generateHashOfLength } from "@iavofficial/frontend-framework-shared-utils/hash";
 
 interface Props {
   tabAndContentWrappers: TabAndContentWrapper[];

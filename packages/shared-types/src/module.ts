@@ -12,4 +12,4 @@ export type FFStoreModule = Partial<{
   additional: Record<string, unknown>;
   // TODO: What to do with this? --> Maybe decide when implementing routing.
   //  useModuleLifecycle: ModuleLifecycleHook;
-}>;
+}> & Record<string, any>;

@@ -17,9 +17,9 @@
  */
 
 import React, {useContext} from "react";
-import {ColorSettingsContext} from "../../contexts/colorsettings";
 import {useTranslator} from "../internationalization/translators";
 import "../css/globalColors.css";
+import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared-react-common/colorSettingsContext";
 
 export const ImprintText = () => {
   const t = useTranslator();

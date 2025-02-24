@@ -17,44 +17,46 @@
  */
 
 import translationES from "./assets/translations/es.json";
-import {GlobalDataLayer} from "@iavofficial/frontend-framework/globalDataLayer";
-import {DummyAuthenticationProvider} from "@iavofficial/frontend-framework/dummyAuthenticationProvider";
+import { GlobalDataLayer } from "@iavofficial/frontend-framework/globalDataLayer";
 import translationEN from "./assets/translations/en.json";
 import translationDE from "./assets/translations/de.json";
 import translationDECH from "./assets/translations/de-CH.json";
 import Layout from "./Layout.tsx";
+import {
+  defaultModules,
+  defaultStore,
+} from "@iavofficial/frontend-framework/store";
+
+const store = defaultStore;
 
 function App() {
+  const translations = {
+    es: {
+      translation: translationES,
+    },
+    en: {
+      translation: translationEN,
+    },
+    de: {
+      translation: translationDE,
+    },
+    de_CH: {
+      translation: translationDECH,
+    },
+  };
 
-    const translations = {
-        es: {
-            translation: translationES,
-        },
-        en: {
-            translation: translationEN,
-        },
-        de: {
-            translation: translationDE,
-        },
-        de_CH: {
-            translation: translationDECH,
-        },
-    };
-
-    return (
-        <DummyAuthenticationProvider
-            additionalContextValues={{getUserGroups: () => []}}
-        >
-            <GlobalDataLayer
-                translations={translations}
-                colorSettings={{
-                    colorOptions: {},
-                }}
-            >
-                <Layout/>
-            </GlobalDataLayer>
-        </DummyAuthenticationProvider>
-    );
+  return (
+    <GlobalDataLayer
+      store={store}
+      modules={defaultModules}
+      translations={translations}
+      colorSettings={{
+        colorOptions: {},
+      }}
+    >
+      <Layout />
+    </GlobalDataLayer>
+  );
 }
 
 export default App;

@@ -237,6 +237,7 @@ function Layout() {
             documentsLabelKey="Legal_documents"
             documentsComponent={LegalDocuments}
             headerOptions={{
+                userIcon: <div/>,
                 reactElementLeft: appLogo,
                 headerElements: headerElements,
             }}

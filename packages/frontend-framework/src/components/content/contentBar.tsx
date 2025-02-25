@@ -87,7 +87,7 @@ export const ContentBar = (props: PropsContentBar) => {
   const styleDependencies = {
     [ContentBarStyles.SET_SPACING_COLOR]: [ContentBarStyles.SPACING],
   };
-  //@ts-ignore
+  
   const [classNames, styles] = useStyleMap(
     classesMap,
     stylesMap,

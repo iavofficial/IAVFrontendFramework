@@ -31,9 +31,9 @@ import { Amplify } from "aws-amplify";
 import { cognitoUserPoolsTokenProvider } from "aws-amplify/auth/cognito";
 import { CookieStorage } from "aws-amplify/utils";
 
-const cognitoPool = "eu-central-1_8weTZhK1B" //"eu-central-1_gbVRNxU0O";
-const cognitoAppId = "47qrr39ilc3qo2eu1vhm7tgg0r" //"36rekcj2o3b3c5ts2n9m0jam4a";
-const domain = "localhost";
+const cognitoPool = "eu-central-1_8weTZhK1B"; //"eu-central-1_gbVRNxU0O";
+const cognitoAppId = "47qrr39ilc3qo2eu1vhm7tgg0r"; //"36rekcj2o3b3c5ts2n9m0jam4a";
+const domain = "localhost"; //"rsm.iav-disa.de";
 
 const configureAmplify: () => void = () => {
     Amplify.configure({
@@ -56,7 +56,7 @@ const configureAmplify: () => void = () => {
     );
   };
 
-const modules = {
+  const modules = {
     auth: new AWSAuthenticator({
         configureAmplify: configureAmplify,
         failOnNoLegalGroup: true,
@@ -66,7 +66,6 @@ const modules = {
 
 export const awsAuthenticationView = awsAuthenticationViewFactory(modules.auth);
 
-//@ts-ignore
 const store = new StoreBuilder(modules).build();
 
 export const AppAwsAuthentication = () => {
@@ -88,7 +87,6 @@ export const AppAwsAuthentication = () => {
   return (
     <GlobalDataLayer
       store={store}
-      // @ts-ignore
       modules={modules}
       translations={translations}
       colorSettings={{

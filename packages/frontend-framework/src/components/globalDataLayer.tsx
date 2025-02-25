@@ -30,14 +30,15 @@ import {EnhancedStore} from "@reduxjs/toolkit";
 import {Provider} from "react-redux";
 import {FFMandatoryModules, FFMandatoryState} from "../store";
 import {ModuleContextProvider} from "../providers/moduleContextProvider";
+import {AuthState} from "@iavofficial/frontend-framework-shared-types/authenticationProvider";
 
 // Create this type to make fallbackLang optional for the user.
 type GlobalDataLayerLanguageOptions = Omit<LanguageOptions, "fallbackLang"> & {
   fallbackLang?: string;
 };
 
-interface Props {
-  modules: FFMandatoryModules & Record<string, any>;
+interface Props<TAuthState extends AuthState> {
+  modules: FFMandatoryModules<TAuthState> & Record<string, unknown>;
   store: EnhancedStore<FFMandatoryState>;
   languageOptions?: GlobalDataLayerLanguageOptions;
   translations?: Translations;
@@ -45,7 +46,9 @@ interface Props {
   colorSettings?: ColorProviderProps;
 }
 
-export const GlobalDataLayer = (props: PropsWithChildren<Props>) => {
+export const GlobalDataLayer = <TAuthState extends AuthState>(
+  props: PropsWithChildren<Props<TAuthState>>,
+) => {
   const fallbackLang =
     props.languageOptions?.fallbackLang ?? DEFAULT_FALLBACK_LANGUAGE;
   const initialLang =
@@ -59,24 +62,28 @@ export const GlobalDataLayer = (props: PropsWithChildren<Props>) => {
     <ModuleContextProvider modules={props.modules}>
       <Provider store={props.store}>
         <ModuleLifecycleCaller modules={props.modules}>
-        <CookiesProvider>
-          <DefaultLanguageProvider
-            languageOptions={languageOptions}
-            translations={props.translations}
-            initI18Next={props.initI18Next}
-          >
-            <ColorProvider {...props.colorSettings}>
-              <BrowserRouter>{props.children}</BrowserRouter>
-            </ColorProvider>
-          </DefaultLanguageProvider>
-        </CookiesProvider>
+          <CookiesProvider>
+            <DefaultLanguageProvider
+              languageOptions={languageOptions}
+              translations={props.translations}
+              initI18Next={props.initI18Next}
+            >
+              <ColorProvider {...props.colorSettings}>
+                <BrowserRouter>{props.children}</BrowserRouter>
+              </ColorProvider>
+            </DefaultLanguageProvider>
+          </CookiesProvider>
         </ModuleLifecycleCaller>
       </Provider>
     </ModuleContextProvider>
   );
 };
 
-const ModuleLifecycleCaller = (props: PropsWithChildren<{modules: FFMandatoryModules & Record<string, any>}>) => {
+const ModuleLifecycleCaller = <TAuthState extends AuthState>(
+  props: PropsWithChildren<{
+    modules: FFMandatoryModules<TAuthState> & Record<string, any>;
+  }>,
+) => {
   // Create a sorted, stable array of module keys.
   const moduleKeys = React.useMemo(
     () => Object.keys(props.modules).sort(),

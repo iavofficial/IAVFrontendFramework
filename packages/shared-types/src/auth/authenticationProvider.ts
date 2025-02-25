@@ -3,20 +3,18 @@ import {FFStoreModule, ModuleLifecycleHook} from "../module";
 import { AsyncThunk} from '@reduxjs/toolkit';
 
 
-export type UserData = {username: string, userGroups?: string[]} & Record<string, any>;
+export type UserData = {username: string, userGroups?: string[]} & Record<string, unknown>;
 
 export type AuthState = {
   hasAuthenticated: boolean; // true if user is authenticated
   isLoading: boolean; // true if user is in process of logging in
   userData: UserData | undefined; // contains user information; undefined if no user is logged in
-} & Record<string, any>;
+};
 
 export type AuthSlice<TState extends AuthState> = Slice<TState>;
 
 export type FetchAuthedFunctionArgs = {
-  url: string,
-  token?: object,
-  settings?: object
+  url: string
 }
 
 export interface Credentials {

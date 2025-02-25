@@ -61,7 +61,6 @@ const makeStyles = <
       const styleElement = document.createElement("style");
       styleElement.textContent = `.${className} { ${styleString} }`;
       document.head.appendChild(styleElement);
-      //@ts-ignore
       classes[key] = className;
     }
     return {classes};

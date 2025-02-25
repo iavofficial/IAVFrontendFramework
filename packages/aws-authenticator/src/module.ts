@@ -30,9 +30,7 @@ export interface FetchSettings {
 }
 
 export interface AWSAuthenticatorState extends AuthState{
-  hasAuthenticated: boolean; // true if user is authenticated
   isNewPasswordRequired: boolean; // true if user logs in for the first time with his temp password and has to set a new one
-  isLoading: boolean; // true if user is in process of logging in
   userData: AWSUserData | undefined; // contains user information; undefined if no user is logged in
   loginError: string | undefined;
 }
@@ -63,7 +61,6 @@ export class AWSAuthenticator implements AWSAuthenticatorModule<AWSAuthenticator
   private configureAmplify: () => void;
 
   public slice: Slice<AWSAuthenticatorState>;
-  // @ts-ignore
   public fetchAuthed;
   public login;
   public logout;
@@ -95,7 +92,7 @@ export class AWSAuthenticator implements AWSAuthenticatorModule<AWSAuthenticator
           if (!state.hasAuthenticated || state.isNewPasswordRequired) {
             state.hasAuthenticated = true;
             state.isNewPasswordRequired = false;
-            //@ts-ignore
+            // @ts-ignore
             state.userData = action.payload;
             state.loginError = undefined;
           }

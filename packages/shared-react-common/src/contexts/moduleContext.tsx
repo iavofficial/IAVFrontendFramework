@@ -4,12 +4,13 @@ import {
   AuthState,
 } from "@iavofficial/frontend-framework-shared-types/authenticationProvider";
 
-export interface ModuleContextValues {
+export interface ModuleContextValues<TAuthState extends AuthState> {
   modules: {
-    auth: AuthModule<AuthState>;
+    auth: AuthModule<TAuthState>;
   } & Record<string, any>;
 }
 
-export const ModuleContext = React.createContext<ModuleContextValues>(
-  {} as ModuleContextValues
+// TODO
+export const ModuleContext = React.createContext<ModuleContextValues<any>>(
+  {} as ModuleContextValues<any>
 );

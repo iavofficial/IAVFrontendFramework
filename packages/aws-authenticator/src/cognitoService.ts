@@ -34,49 +34,44 @@ export async function cognitoLogin(
   failOnNoLegalGroup?: boolean,
   legalGroups?: string[],
 ) {
-  try {
-    const response = await signIn({
-      username: credentials.email.valueOf(),
-      password: credentials.password.valueOf(),
+  return await signIn({
+    username: credentials.email.valueOf(),
+    password: credentials.password.valueOf(),
+  })
+    .then((response) => {
+      if (
+        response.nextStep.signInStep ===
+        "CONFIRM_SIGN_IN_WITH_NEW_PASSWORD_REQUIRED"
+      ) {
+        return {};
+      } else {
+        return handleSessionResult(failOnNoLegalGroup, legalGroups);
+      }
+    })
+    .catch((error: Error) => {
+      throw new AuthError(error);
     });
-
-    if (
-      response.nextStep.signInStep ===
-      "CONFIRM_SIGN_IN_WITH_NEW_PASSWORD_REQUIRED"
-    ) {
-      return {};
-    } else {
-      return handleSessionResult(failOnNoLegalGroup, legalGroups);
-    }
-  } catch (error: unknown) {
-    // @ts-ignore
-    throw new AuthError(error);
-  }
 }
 
 export async function cognitoLogout() {
-  try {
-    return await signOut();
-  } catch (error: unknown) {
-    // @ts-ignore
+  return await signOut().catch((error: Error) => {
     throw new AuthError(error);
-  }
+  });
 }
 
 export async function cognitoCheckIsAuthenticated(
   failOnNoLegalGroup?: boolean,
   legalGroups?: string[],
 ) {
-  try {
-    const response = await getCurrentUser();
-
-    if (response.username) {
-      return await handleSessionResult(failOnNoLegalGroup, legalGroups);
-    }
-  } catch (error: unknown) {
-    // @ts-ignore
-    throw new AuthError(error);
-  }
+  return await getCurrentUser()
+    .then((response) => {
+      if (response.username) {
+        return handleSessionResult(failOnNoLegalGroup, legalGroups);
+      }
+    })
+    .catch((error: Error) => {
+      throw new AuthError(error);
+    });
 }
 
 export async function cognitoCompletePassword(
@@ -84,27 +79,26 @@ export async function cognitoCompletePassword(
   failOnNoLegalGroup?: boolean,
   legalGroups?: string[],
 ) {
-  try {
-    const response = await confirmSignIn({challengeResponse: newPassword});
-
-    if (response.isSignedIn && response.nextStep.signInStep === "DONE")
-      return handleSessionResult(failOnNoLegalGroup, legalGroups);
-  } catch (error: unknown) {
-    // @ts-ignore
-    throw new AuthError(error);
-  }
+  return await confirmSignIn({challengeResponse: newPassword})
+    .then((response) => {
+      if (response.isSignedIn && response.nextStep.signInStep === "DONE") {
+        return handleSessionResult(failOnNoLegalGroup, legalGroups);
+      }
+    })
+    .catch((error: Error) => {
+      throw new AuthError(error);
+    });
 }
 
 export async function cognitoRefreshToken(
   failOnNoLegalGroup?: boolean,
   legalGroups?: string[],
 ) {
-  try {
-    return await handleSessionResult(failOnNoLegalGroup, legalGroups);
-  } catch (error: unknown) {
-    // @ts-ignore
-    throw new AuthError(error);
-  }
+  return await handleSessionResult(failOnNoLegalGroup, legalGroups).catch(
+    (error: Error) => {
+      throw new AuthError(error);
+    },
+  );
 }
 
 async function handleSessionResult(
@@ -112,30 +106,31 @@ async function handleSessionResult(
   legalGroups?: string[],
   forceRefresh?: boolean,
 ) {
-  try {
-    const {tokens} = await fetchAuthSession({forceRefresh: forceRefresh});
-    const idToken = tokens?.idToken;
-    const accessToken = tokens?.accessToken;
-    const groups = idToken?.payload["cognito:groups"];
-    const username = idToken?.payload["cognito:username"] as string;
+  return await fetchAuthSession({forceRefresh: forceRefresh})
+    .then((response) => {
+      const {tokens} = response;
+      const idToken = tokens?.idToken;
+      const accessToken = tokens?.accessToken;
+      const groups = idToken?.payload["cognito:groups"];
+      const username = idToken?.payload["cognito:username"] as string;
 
-    if (failOnNoLegalGroup) {
-      if (!groups || !legalGroups) throw new Error("UserGroupError"); // throw invalid user error (user is valid and authorized, but is not assigned any legal groups)
+      if (failOnNoLegalGroup) {
+        if (!groups || !legalGroups) throw new Error("UserGroupError"); // throw invalid user error (user is valid and authorized, but is not assigned any legal groups)
 
-      if (!containsOneOrMoreGroups(groups as string[], legalGroups))
-        throw new Error("UserGroupError"); // throw invalid user error (user is valid and authorized, but is not assigned any legal groups)
-    }
+        if (!containsOneOrMoreGroups(groups as string[], legalGroups))
+          throw new Error("UserGroupError"); // throw invalid user error (user is valid and authorized, but is not assigned any legal groups)
+      }
 
-    return new ValidUserInformation(
-      idToken!,
-      accessToken!,
-      username.toString(),
-      groups as string[],
-    );
-  } catch (error: unknown) {
-    // @ts-ignore
-    throw new AuthError(error);
-  }
+      return new ValidUserInformation(
+        idToken!,
+        accessToken!,
+        username.toString(),
+        groups as string[],
+      );
+    })
+    .catch((error: Error) => {
+      throw new AuthError(error);
+    });
 }
 
 export class ValidUserInformation {

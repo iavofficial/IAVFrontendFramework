@@ -37,10 +37,10 @@
     "dev": "turbo run dev build-live",
     "test": "turbo run test",
     "build": "turbo run build",
+    "format": "prettier --write \"{packages,apps}/*/{src,docs*}/**/*.{ts,tsx,js,jsx,json,html,css}\"",
     "release": "turbo run release --concurrency=1",
     "generate-docs": "turbo run generate-docs"
   },
-  
   "workspaces": [
     "apps/*",
     "packages/*"

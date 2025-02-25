@@ -1,6 +1,7 @@
 import { AuthModule, AuthState, UserData} from "@iavofficial/frontend-framework-shared-types/authenticationProvider";
 import { AsyncThunk } from "@reduxjs/toolkit";
 import { JWT } from "@aws-amplify/auth";
+import { AWSAuthenticatorState } from "./module";
 
 export interface JWTPojo {
   payload: JWT["payload"];
@@ -14,6 +15,10 @@ export interface AWSUserData extends UserData {
   groups: string[];
 }
 
-export type AWSAuthenticatorModule<TState extends AuthState> = {
+export type AWSAuthenticatorExtras = {
+  checkIsAuthenticated: AsyncThunk<void, void, {}>;
   completePassword: AsyncThunk<void, {newPassword: string}, {}>;
-} & AuthModule<TState>;
+  refreshSession: AsyncThunk<void, void, {}>;
+} & Record<string, unknown>;
+
+export type AWSAuthenticatorModule = AuthModule<AWSAuthenticatorState>;

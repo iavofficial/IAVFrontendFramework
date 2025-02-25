@@ -59,8 +59,8 @@ export const AWSAuthenticationView = (props: AWSAuthenticationViewProps) => {
   const dispatch = useDispatch<AWSAuthenticatorAuthDispatch>();
   const useAuthSelector: TypedUseSelectorHook<AWSAuthenticatorStoreState> = useSelector;
 
-  const isNewPasswordRequired = useAuthSelector(state => state[AUTHENTICATION_SLICE_NAME].isNewPasswordRequired);
-  const loginError = useAuthSelector(state => state[AUTHENTICATION_SLICE_NAME].loginError) ?? "";
+  const isNewPasswordRequired = useAuthSelector(state => state[AUTHENTICATION_SLICE_NAME].extras.isNewPasswordRequired);
+  const loginError = useAuthSelector(state => state[AUTHENTICATION_SLICE_NAME].extras.loginError) ?? "";
   const isLoading = useAuthSelector(state => state[AUTHENTICATION_SLICE_NAME].isLoading);
 
   const [email, setEmail] = useState("");
@@ -99,7 +99,7 @@ export const AWSAuthenticationView = (props: AWSAuthenticationViewProps) => {
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (isNewPasswordRequired) {
-      dispatch(module.completePassword({newPassword: password}));
+      dispatch(module.extras.completePassword({newPassword: password}));
     } else {
       dispatch(module.login({credentials: {email: email, password: password}}));
     }

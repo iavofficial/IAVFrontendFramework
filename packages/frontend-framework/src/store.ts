@@ -121,7 +121,7 @@ export class StoreConfigBuilder {
   private enhancers: StoreEnhancer[] = [];
   // This field is used to allow users to add additional values with custom processors to use them inside
   // a custom storeBuilder
-  private additional: Record<string, any> = {};
+  private extras: Record<string, any> = {};
 
   constructor() {}
 
@@ -140,8 +140,8 @@ export class StoreConfigBuilder {
     return this;
   }
 
-  public setAdditional(key: string, value: any): this {
-    this.additional[key] = value;
+  public setExtras(key: string, value: any): this {
+    this.extras[key] = value;
     return this;
   }
 
@@ -157,7 +157,7 @@ export class StoreConfigBuilder {
       finalReducers,
       this.middleware,
       this.enhancers,
-      this.additional,
+      this.extras,
     );
   }
 }

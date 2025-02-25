@@ -17,26 +17,34 @@ import {
 } from "./cognitoService";
 import {useDispatch, useSelector} from "react-redux";
 import {JWT} from "@aws-amplify/auth";
-import {AuthState, Credentials} from "@iavofficial/frontend-framework-shared-types/authenticationProvider";
 import {
+  AuthState,
+  Credentials,
+} from "@iavofficial/frontend-framework-shared-types/authenticationProvider";
+import {
+  AWSAuthenticatorExtras,
   AWSAuthenticatorModule,
   AWSUserData,
 } from "./awsAuthenticatorTypes";
-import { AUTHENTICATION_SLICE_NAME } from "@iavofficial/frontend-framework/constants";
+import {AUTHENTICATION_SLICE_NAME} from "@iavofficial/frontend-framework/constants";
 
 export interface FetchSettings {
   headers?: Headers;
   [key: string]: any;
 }
 
-export interface AWSAuthenticatorState extends AuthState{
-  isNewPasswordRequired: boolean; // true if user logs in for the first time with his temp password and has to set a new one
-  userData: AWSUserData | undefined; // contains user information; undefined if no user is logged in
+interface AWSAuthenticatorStateExtras {
   loginError: string | undefined;
+  isNewPasswordRequired: boolean; // true if user logs in for the first time with his temp password and has to set a new one
+}
+
+export interface AWSAuthenticatorState extends AuthState {
+  userData: AWSUserData | undefined; // contains user information; undefined if no user is logged in
+  extras: AWSAuthenticatorStateExtras;
 }
 
 export interface AWSAuthenticatorStoreState {
-  [AUTHENTICATION_SLICE_NAME]: AWSAuthenticatorState
+  [AUTHENTICATION_SLICE_NAME]: AWSAuthenticatorState;
 }
 
 export interface AWSAuthenticatorParameters {
@@ -45,39 +53,42 @@ export interface AWSAuthenticatorParameters {
   legalGroups?: string[];
 }
 
-export type AWSAuthenticatorAuthDispatch = ThunkDispatch<AWSAuthenticatorStoreState, unknown, Action<string>>;
+export type AWSAuthenticatorAuthDispatch = ThunkDispatch<
+  AWSAuthenticatorStoreState,
+  unknown,
+  Action<string>
+>;
 
 const initialState: AWSAuthenticatorState = {
   hasAuthenticated: false,
-  isNewPasswordRequired: false,
   isLoading: false,
   userData: undefined,
-  loginError: undefined,
+  extras: {
+    isNewPasswordRequired: false,
+    loginError: undefined,
+  },
 };
 
-export class AWSAuthenticator implements AWSAuthenticatorModule<AWSAuthenticatorState> {
-  private failOnNoLegalGroup: boolean;
-  private legalGroups: string[];
-  private configureAmplify: () => void;
+export class AWSAuthenticator implements AWSAuthenticatorModule {
+  private config;
 
   public slice: Slice<AWSAuthenticatorState>;
   public fetchAuthed;
   public login;
   public logout;
-  public completePassword;
-  public refreshSession;
   public useModuleLifecycle;
-
-  private checkIsAuthenticated;
+  public extras: AWSAuthenticatorExtras;
 
   constructor({
     configureAmplify,
-    failOnNoLegalGroup = false,
+    failOnNoLegalGroup,
     legalGroups = [],
   }: AWSAuthenticatorParameters) {
-    this.failOnNoLegalGroup = failOnNoLegalGroup;
-    this.legalGroups = legalGroups;
-    this.configureAmplify = configureAmplify;
+    this.config = {
+      failOnNoLegalGroup,
+      legalGroups,
+      configureAmplify,
+    };
 
     this.slice = createSlice({
       name: AUTHENTICATION_SLICE_NAME,
@@ -89,12 +100,12 @@ export class AWSAuthenticator implements AWSAuthenticatorModule<AWSAuthenticator
           state,
           action: PayloadAction<ValidUserInformation>,
         ) => {
-          if (!state.hasAuthenticated || state.isNewPasswordRequired) {
+          if (!state.hasAuthenticated || state.extras.isNewPasswordRequired) {
             state.hasAuthenticated = true;
-            state.isNewPasswordRequired = false;
+            state.extras.isNewPasswordRequired = false;
             // @ts-ignore
             state.userData = action.payload;
-            state.loginError = undefined;
+            state.extras.loginError = undefined;
           }
         },
         setLoading: (state, action: PayloadAction<boolean>) => {
@@ -103,18 +114,18 @@ export class AWSAuthenticator implements AWSAuthenticatorModule<AWSAuthenticator
         setLoadingForLogin: (state, action: PayloadAction<boolean>) => {
           state.isLoading = action.payload;
           if (action.payload == true) {
-            state.loginError = undefined;
+            state.extras.loginError = undefined;
           }
         },
         setNewPasswordRequired: (state) => {
-          state.isNewPasswordRequired = true;
+          state.extras.isNewPasswordRequired = true;
           state.hasAuthenticated = false;
         },
         logout: (state, action: PayloadAction<string>) => {
           state.isLoading = false;
           state.hasAuthenticated = false;
           state.userData = undefined;
-          state.loginError = action.payload;
+          state.extras.loginError = action.payload;
         },
       },
     });
@@ -128,23 +139,6 @@ export class AWSAuthenticator implements AWSAuthenticatorModule<AWSAuthenticator
     } = this.slice.actions;
 
     // Side effect functions
-    this.checkIsAuthenticated = createAsyncThunk(
-      AUTHENTICATION_SLICE_NAME + "/thunkCheckIsAuthenticated",
-      async (_, {dispatch}) => {
-        try {
-          const result: ValidUserInformation | undefined =
-            await cognitoCheckIsAuthenticated(
-              this.failOnNoLegalGroup,
-              this.legalGroups,
-            );
-          dispatch(processSuccessfulAuth({...result}));
-          //eslint-disable-next-line
-        } catch (error: unknown) {
-          dispatch(this.logout({error}));
-        }
-      },
-    );
-
     //In Amplify 6 the fetchAuthedSession Function handles the renewing of sessions
     this.fetchAuthed = createAsyncThunk<
       Response,
@@ -152,30 +146,19 @@ export class AWSAuthenticator implements AWSAuthenticatorModule<AWSAuthenticator
       {state: {[AUTHENTICATION_SLICE_NAME]: AWSAuthenticatorState}}
     >(
       AUTHENTICATION_SLICE_NAME + "/thunkFetchAuthed",
-      async (
-        {
+      async ({url, token, settings}, {dispatch, getState}) => {
+        dispatch(this.extras.checkIsAuthenticated()).unwrap();
+        return await fetch(
           url,
-          token,
-          settings,
-        },
-        {dispatch, getState},
-      ) => {
-        try {
-          dispatch(this.checkIsAuthenticated()).unwrap();
-          const response = await fetch(
-            url,
-            generateSettingsWithAuthFrom(getState().auth, token, settings),
-          );
-
-          return response;
-        } catch (error: unknown) {
+          generateSettingsWithAuthFrom(getState().auth, token, settings),
+        ).catch(() => {
           dispatch(this.logout());
           return new Promise<Response>((resolve) => {
             resolve(
               new Response(null, {status: 401, statusText: "Unauthorized"}),
             );
           });
-        }
+        });
       },
     );
 
@@ -183,22 +166,25 @@ export class AWSAuthenticator implements AWSAuthenticatorModule<AWSAuthenticator
       AUTHENTICATION_SLICE_NAME + "/thunkLogin",
       async ({credentials}: {credentials: Credentials}, {dispatch}) => {
         dispatch(setLoadingForLogin(true));
-        try {
-          const result: ValidUserInformation | object = await cognitoLogin(
-            credentials,
-            this.failOnNoLegalGroup,
-            this.legalGroups,
-          );
-          if (result instanceof ValidUserInformation) {
-            dispatch(processSuccessfulAuth({...result}));
-          } else {
-            dispatch(setNewPasswordRequired({}));
-          }
-        } catch (error: unknown) {
-          await this.logout({error});
-        } finally {
-          dispatch(setLoadingForLogin(false));
-        }
+        return await cognitoLogin(
+          credentials,
+          this.config.failOnNoLegalGroup,
+          this.config.legalGroups,
+        )
+          .then((result: ValidUserInformation | object) => {
+            if (result instanceof ValidUserInformation) {
+              dispatch(processSuccessfulAuth({...result}));
+            } else {
+              dispatch(setNewPasswordRequired({}));
+            }
+          })
+          .catch((error: Error) => {
+            console.log("Error signing in: ", error);
+            this.logout({error});
+          })
+          .finally(() => {
+            dispatch(setLoadingForLogin(false));
+          });
       },
     );
 
@@ -206,78 +192,99 @@ export class AWSAuthenticator implements AWSAuthenticatorModule<AWSAuthenticator
       AUTHENTICATION_SLICE_NAME + "/thunkLogout",
       async ({error}: {error?: unknown} = {}, {dispatch}) => {
         dispatch(setLoading(true));
-        try {
-          await cognitoLogout();
-        } catch (err: unknown) {
-        } finally {          
-          dispatch(logout(extractMessageFromError(error)));
-        }
+        return await cognitoLogout()
+          .catch((error: Error) => {
+            console.log("Error signing out: ", error);
+          })
+          .finally(() => {
+            dispatch(logout(extractMessageFromError(error)));
+          });
       },
     );
 
-    this.completePassword = createAsyncThunk(
-      AUTHENTICATION_SLICE_NAME + "/thunkCompletePassword",
-      async ({newPassword}: {newPassword: string}, {dispatch}) => {
-        dispatch(setLoading(true));
-        try {
-          const result = await cognitoCompletePassword(
+    this.extras = {
+      checkIsAuthenticated: createAsyncThunk(
+        AUTHENTICATION_SLICE_NAME + "/thunkCheckIsAuthenticated",
+        async (_, {dispatch}) => {
+          return await cognitoCheckIsAuthenticated(
+            this.config.failOnNoLegalGroup,
+            this.config.legalGroups,
+          )
+            .then((result: ValidUserInformation | undefined) => {
+              dispatch(processSuccessfulAuth({...result}));
+            })
+            .catch((error: Error) => {
+              dispatch(this.logout({}));
+            });
+        },
+      ),
+      completePassword: createAsyncThunk(
+        AUTHENTICATION_SLICE_NAME + "/thunkCompletePassword",
+        async ({newPassword}: {newPassword: string}, {dispatch}) => {
+          dispatch(setLoading(true));
+          return await cognitoCompletePassword(
             newPassword,
-            this.failOnNoLegalGroup,
-            this.legalGroups,
-          );
-          dispatch(processSuccessfulAuth({...result}));
-        } catch (error: unknown) {
-          // Dispatch the logout thunk with the error
-          dispatch(this.logout({error}));
-        } finally {
-          dispatch(setLoading(false));
-        }
-      },
-    );
-
-    this.refreshSession = createAsyncThunk(
-      AUTHENTICATION_SLICE_NAME + "/thunkRefreshSession",
-      async (_, {dispatch}) => {
-        try {
-          const response = await cognitoRefreshToken(
-            this.failOnNoLegalGroup,
-            this.legalGroups,
-          );
-
-          if (response instanceof ValidUserInformation) {
-            dispatch(processSuccessfulAuth({...response}));
-          }
-        } catch (error: unknown) {
-          dispatch(this.logout({error}));
-        }
-      },
-    );
+            this.config.failOnNoLegalGroup,
+            this.config.legalGroups,
+          )
+            .then((result) => {
+              dispatch(processSuccessfulAuth({...result}));
+            })
+            .catch((error: Error) => {
+              dispatch(this.logout({error}));
+            })
+            .finally(() => {
+              dispatch(setLoading(false));
+            });
+        },
+      ),
+      refreshSession: createAsyncThunk(
+        AUTHENTICATION_SLICE_NAME + "/thunkRefreshSession",
+        async (_, {dispatch}) => {
+          return await cognitoRefreshToken(
+            this.config.failOnNoLegalGroup,
+            this.config.legalGroups,
+          )
+            .then((response) => {
+              if (response instanceof ValidUserInformation) {
+                dispatch(processSuccessfulAuth({...response}));
+              }
+            })
+            .catch((error: Error) => {
+              dispatch(this.logout({error}));
+            });
+        },
+      ),
+    };
 
     this.useModuleLifecycle = () => {
-      const [isInitialized, setIsInitialized]  = useState(false);
+      const [isInitialized, setIsInitialized] = useState(false);
 
       const dispatch = useDispatch<AWSAuthenticatorAuthDispatch>();
       const hasAuthenticated = useSelector<AWSAuthenticatorStoreState>(
         (state) => state.auth.hasAuthenticated,
       );
-  
+
       useEffect(() => {
-        this.configureAmplify();
-        dispatch(this.checkIsAuthenticated());
-        setIsInitialized(true);
-      }, [dispatch]);
-  
+        if(!isInitialized){
+          this.config.configureAmplify();
+          dispatch(this.extras.checkIsAuthenticated());
+          setIsInitialized(true);
+        }
+      }, [dispatch, isInitialized]);
+
       // Equivalent to ComponentDidUpdate
       useEffect(() => {
         if (hasAuthenticated) {
-          dispatch(this.checkIsAuthenticated());
+          "running"
+          dispatch(this.extras.checkIsAuthenticated());
         }
       }, [hasAuthenticated, dispatch]);
-  
+
       return {
         renderChildren: isInitialized,
       };
-    }
+    };
   }
 }
 

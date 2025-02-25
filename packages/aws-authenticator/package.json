@@ -36,7 +36,6 @@
     "aws authenticator"
   ],
   "dependencies": {
-    "@aws-amplify/auth": "6.5.5",
     "@iavofficial/frontend-framework": "*",
     "@iavofficial/frontend-framework-shared-react-common": "*",
     "@iavofficial/frontend-framework-shared-types": "*",
@@ -46,7 +45,8 @@
   },
   "peerDependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "aws-amplify": "^6.7.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.21.0",

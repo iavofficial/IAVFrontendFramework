@@ -5,10 +5,11 @@ import { AsyncThunk} from '@reduxjs/toolkit';
 
 export type UserData = {username: string, userGroups?: string[]} & Record<string, unknown>;
 
-export type AuthState = {
+export type AuthState<TExtras = {}> = {
   hasAuthenticated: boolean; // true if user is authenticated
   isLoading: boolean; // true if user is in process of logging in
   userData: UserData | undefined; // contains user information; undefined if no user is logged in
+  extras?: TExtras;
 };
 
 export type AuthSlice<TState extends AuthState> = Slice<TState>;
@@ -22,7 +23,7 @@ export interface Credentials {
   password: string;
 }
 
-export interface AuthModule<TState extends AuthState> extends FFStoreModule{
+export interface AuthModule<TState extends AuthState> extends FFStoreModule {
   slice: AuthSlice<TState>;
   fetchAuthed: AsyncThunk<Response, FetchAuthedFunctionArgs, any>;
   login: AsyncThunk<void, {credentials: Credentials}, any>;

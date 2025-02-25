@@ -26,7 +26,7 @@ import {
   JWT,
   signIn,
   signOut,
-} from "@aws-amplify/auth";
+} from "aws-amplify/auth";
 import {JWTPojo} from "./awsAuthenticatorTypes";
 
 export async function cognitoLogin(

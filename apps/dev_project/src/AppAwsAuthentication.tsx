@@ -25,36 +25,36 @@ import Layout from "./Layout.tsx";
 import {
   StoreBuilder,
 } from "@iavofficial/frontend-framework/store";
-import {AWSAuthenticator} from "@iavofficial/frontend-framework-aws-authenticator/module";
-import {awsAuthenticationViewFactory} from "@iavofficial/frontend-framework-aws-authenticator/awsAuthenticationView";
 import { Amplify } from "aws-amplify";
 import { cognitoUserPoolsTokenProvider } from "aws-amplify/auth/cognito";
 import { CookieStorage } from "aws-amplify/utils";
+import { AWSAuthenticator } from "@iavofficial/frontend-framework-aws-authenticator/module";
+import { awsAuthenticationViewFactory } from "@iavofficial/frontend-framework-aws-authenticator/awsAuthenticationView";
 
-const cognitoPool = "eu-central-1_8weTZhK1B"; //"eu-central-1_gbVRNxU0O";
-const cognitoAppId = "47qrr39ilc3qo2eu1vhm7tgg0r"; //"36rekcj2o3b3c5ts2n9m0jam4a";
-const domain = "localhost"; //"rsm.iav-disa.de";
+const cognitoPool = "eu-central-1_8weTZhK1B";
+const cognitoAppId = "47qrr39ilc3qo2eu1vhm7tgg0r";
+const domain = "localhost";
 
 const configureAmplify: () => void = () => {
-    Amplify.configure({
-      Auth: {
-        Cognito: {
-          userPoolId: cognitoPool,
-          userPoolClientId: cognitoAppId,
-        },
+  Amplify.configure({
+    Auth: {
+      Cognito: {
+        userPoolId: cognitoPool,
+        userPoolClientId: cognitoAppId,
       },
-    });
-    cognitoUserPoolsTokenProvider.setKeyValueStorage(
-      new CookieStorage({
-        domain: domain,
-        path: "/",
-        expires: 365,
-        // @ts-ignore
-        secure: domain !== "localhost",
-        sameSite: "lax",
-      }),
-    );
-  };
+    },
+  });
+  cognitoUserPoolsTokenProvider.setKeyValueStorage(
+    new CookieStorage({
+      domain: domain,
+      path: "/",
+      expires: 365,
+      // @ts-ignore
+      secure: domain !== "localhost",
+      sameSite: "lax",
+    }),
+  );
+};
 
   const modules = {
     auth: new AWSAuthenticator({
@@ -66,7 +66,12 @@ const configureAmplify: () => void = () => {
 
 export const awsAuthenticationView = awsAuthenticationViewFactory(modules.auth);
 
-const store = new StoreBuilder(modules).build();
+const store = new StoreBuilder(modules)
+/*.setFrameworkModuleProcessor("auth", (
+  authModule: AWSAuthenticator,
+  storeConfigBuilder: StoreConfigBuilder,
+) => {
+})*/.build();
 
 export const AppAwsAuthentication = () => {
   const translations = {

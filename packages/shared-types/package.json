@@ -67,7 +67,7 @@
   "exports": {
     "./authenticationProvider": "./dist/auth/authenticationProvider.js",
     "./authenticationViewProps": "./dist/auth/authenticationViewProps.js",
-    "./colorOptionTypes": "./dist/colorOptionTypes.js",
+    "./colorOptionTypes": "./dist/color/colorOptionTypes.js",
     "./module": "./dist/module.js"
   },
   "typesVersions": {
@@ -79,7 +79,7 @@
         "./dist/auth/authenticationViewProps.d.ts"
       ],
       "./colorOptionTypes": [
-        "./dist/colorOptionTypes.d.ts"
+        "./dist/color/colorOptionTypes.d.ts"
       ],
       "./module": [
         "./dist/module.d.ts"

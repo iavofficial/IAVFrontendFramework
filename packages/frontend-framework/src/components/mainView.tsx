@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, {useContext} from "react";
+import React from "react";
 import {Header, HeaderOptions} from "./header/header";
 import {Navbar} from "./navbar/navbar";
 import {DefaultImprint} from "./imprint/defaultImprint";
@@ -25,72 +25,66 @@ import {Outlet, Route, Routes} from "react-router-dom";
 import {TabAndContentWrapper} from "./navbar/wrappers/typesWrappers";
 import {UserMenuOptions} from "./header/userMenu";
 import If from "./helper/If";
-import {ColorSettingsContext} from "../contexts/colorsettings";
 
 interface MainViewProps {
-  tabAndContentWrappers: TabAndContentWrapper[];
-  documentsComponent?: React.ComponentType<any>;
-  documentsLabelKey?: string;
-  hideLegalDocuments?: boolean;
-  headerOptions?: HeaderOptions;
-  settingsMenuOptions?: SettingsMenuOptions;
-  userMenuOptions?: UserMenuOptions;
-  hideNavbar?: boolean;
+    tabAndContentWrappers: TabAndContentWrapper[];
+    documentsComponent?: React.ComponentType<any>;
+    documentsLabelKey?: string;
+    hideLegalDocuments?: boolean;
+    headerOptions?: HeaderOptions;
+    settingsMenuOptions?: SettingsMenuOptions;
+    userMenuOptions?: UserMenuOptions;
+    hideNavbar?: boolean;
 }
 
 export const MainView = (props: MainViewProps) => {
-  const colorSettingsContext = useContext(ColorSettingsContext);
 
-  const contentAreaBackground =
-    colorSettingsContext.currentColors.contentArea.backgroundColor;
+    return (
+        <div
+            style={{
+                display: "flex",
+                flexDirection: "column",
+                height: "100%",
+                bottom: "0",
+            }}
+        >
+            <div style={{flex: "0 0 auto"}}>
+                <Header
+                    headerOptions={props.headerOptions}
+                    settingsMenuOptions={props.settingsMenuOptions}
+                    userMenuOptions={props.userMenuOptions}
+                />
+            </div>
+            <div
+                style={{
+                    display: "flex",
+                    flex: "1 1 auto",
+                    overflow: "auto",
+                }}
+            >
+                <If condition={!props.hideNavbar}>
+                    <Navbar
+                        tabAndContentWrappers={props.tabAndContentWrappers}
+                        documentsLabelKey={props.documentsLabelKey}
+                        hideLegalDocuments={props.hideLegalDocuments}
+                    />
+                </If>
+                <Outlet/>
+                <Routes>
+                    {props.tabAndContentWrappers.map((wrapper) => wrapper.getRoutes())}
 
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        height: "100%",
-        bottom: "0",
-      }}
-    >
-      <div style={{flex: "0 0 auto"}}>
-        <Header
-          headerOptions={props.headerOptions}
-          settingsMenuOptions={props.settingsMenuOptions}
-          userMenuOptions={props.userMenuOptions}
-        />
-      </div>
-      <div
-        style={{
-          display: "flex",
-          flex: "1 1 auto",
-          overflow: "auto",
-          background: contentAreaBackground,
-        }}
-      >
-        <If condition={!props.hideNavbar}>
-          <Navbar
-            tabAndContentWrappers={props.tabAndContentWrappers}
-            documentsLabelKey={props.documentsLabelKey}
-            hideLegalDocuments={props.hideLegalDocuments}
-          />
-        </If>
-        <Outlet />
-        <Routes>
-          {props.tabAndContentWrappers.map((wrapper) => wrapper.getRoutes())}
-
-          <Route
-            path="/documents"
-            element={
-              props.documentsComponent ? (
-                <props.documentsComponent />
-              ) : (
-                <DefaultImprint />
-              )
-            }
-          />
-        </Routes>
-      </div>
-    </div>
-  );
+                    <Route
+                        path="/documents"
+                        element={
+                            props.documentsComponent ? (
+                                <props.documentsComponent/>
+                            ) : (
+                                <DefaultImprint/>
+                            )
+                        }
+                    />
+                </Routes>
+            </div>
+        </div>
+    );
 };

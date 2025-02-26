@@ -23,7 +23,6 @@ import {
 } from "@iavofficial/frontend-framework-shared-types/authenticationProvider";
 import {
   AWSAuthenticatorExtras,
-  AWSAuthenticatorModule,
   AWSUserData,
 } from "./awsAuthenticatorTypes";
 import {AUTHENTICATION_SLICE_NAME} from "@iavofficial/frontend-framework/constants";
@@ -69,7 +68,7 @@ const initialState: AWSAuthenticatorState = {
   },
 };
 
-export class AWSAuthenticator implements AWSAuthenticatorModule {
+export class AWSAuthenticator {
   private config;
 
   public slice: Slice<AWSAuthenticatorState>;
@@ -300,21 +299,21 @@ const generateSettingsWithAuthFrom = (
         const settingsWithAuth = Object.assign({}, settings);
         settingsWithAuth.headers?.set(
           "Authorization",
-          "Bearer " + (token ? token : state.userData?.idToken.toString()),
+          "Bearer " + (token ? token : state.userData?.extras.idToken.toString()),
         );
         return settingsWithAuth;
       }
     } else {
       return Object.assign(settings, {
         headers: new Headers({
-          Authorization: "Bearer " + (token ? token : state.userData?.idToken),
+          Authorization: "Bearer " + (token ? token : state.userData?.extras.idToken),
         }),
       });
     }
   } else {
     return {
       headers: new Headers({
-        Authorization: "Bearer " + (token ? token : state.userData?.idToken),
+        Authorization: "Bearer " + (token ? token : state.userData?.extras.idToken),
       }),
     };
   }

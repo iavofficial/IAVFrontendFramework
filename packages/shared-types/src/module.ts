@@ -10,5 +10,5 @@ export type FFStoreModule = {
   middleware?: Middleware[];
   enhancers?: StoreEnhancer[];
   useModuleLifecycle?: ModuleLifecycleHook;
-  extras?: Record<string, unknown>;
+  extras?: object;
 }

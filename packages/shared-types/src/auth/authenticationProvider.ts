@@ -27,5 +27,5 @@ export interface AuthModule<TState extends AuthState> extends FFStoreModule {
   slice: AuthSlice<TState>;
   fetchAuthed: AsyncThunk<Response, FetchAuthedFunctionArgs, any>;
   login: AsyncThunk<void, {credentials: Credentials}, any>;
-  logout: AsyncThunk<void, {error?: any} | undefined, any>;
+  logout: AsyncThunk<void, {error?: unknown} | undefined, any>;
 }

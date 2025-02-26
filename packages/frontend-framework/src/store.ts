@@ -174,7 +174,7 @@ export class StoreBuilder<TAuthState extends AuthState, TUserModules extends Gen
   // These are mandatory modules and processors which are essential for the framework as
   // it uses values and methods of the processed modules.
   private mandatoryModulesAndProcessors: ModuleAndProcessorMap<FFMandatoryModules<TAuthState>>;
-
+  
   // These are optional and modules and processors of the user.
   private userModulesAndProcessors:
     | ModuleAndProcessorMap<TUserModules>
@@ -202,12 +202,12 @@ export class StoreBuilder<TAuthState extends AuthState, TUserModules extends Gen
 
   setFrameworkModuleProcessor<K extends keyof FFMandatoryModules<TAuthState>>(
     moduleType: K,
-    processor: ModuleProcessorFunction<FFMandatoryModules<TAuthState>[K]>,
+    processor: ModuleProcessorFunction<(typeof this.mandatoryModulesAndProcessors)[K]["module"]>,
   ) {
     this.mandatoryModulesAndProcessors[moduleType].processor = processor;
     return this;
   }
-
+  
   setUserModuleProcessor<K extends keyof TUserModules>(
     moduleType: K,
     processor: ModuleProcessorFunction<TUserModules[K]>,

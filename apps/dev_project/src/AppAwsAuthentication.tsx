@@ -24,6 +24,7 @@ import translationDECH from "./assets/translations/de-CH.json";
 import Layout from "./Layout.tsx";
 import {
   StoreBuilder,
+  StoreConfigBuilder,
 } from "@iavofficial/frontend-framework/store";
 import { Amplify } from "aws-amplify";
 import { cognitoUserPoolsTokenProvider } from "aws-amplify/auth/cognito";
@@ -67,11 +68,11 @@ const configureAmplify: () => void = () => {
 export const awsAuthenticationView = awsAuthenticationViewFactory(modules.auth);
 
 const store = new StoreBuilder(modules)
-/*.setFrameworkModuleProcessor("auth", (
+.setFrameworkModuleProcessor("auth", (
   authModule: AWSAuthenticator,
   storeConfigBuilder: StoreConfigBuilder,
 ) => {
-})*/.build();
+}).build();
 
 export const AppAwsAuthentication = () => {
   const translations = {

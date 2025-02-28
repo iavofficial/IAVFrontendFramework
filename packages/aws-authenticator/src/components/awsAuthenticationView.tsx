@@ -20,8 +20,8 @@ import React, {FormEvent, useContext, useState} from "react";
 import {Link} from "react-router-dom";
 import {useTranslator} from "@iavofficial/frontend-framework/translators";
 import {AuthenticationViewProps} from "@iavofficial/frontend-framework-shared/authenticationViewProps";
-//import loginBackgroundLightMode from "../../../assets/png/login_background_lightMode.png";
-//import loginBackgroundDarkMode from "../../../assets/png/login_background_darkMode.png";
+import loginBackgroundLightMode from "../../assets/png/login_background_lightMode.png";
+import loginBackgroundDarkMode from "../../assets/png/login_background_darkMode.png";
 import {Dropdown, DropdownChangeEvent} from "primereact/dropdown";
 import {LanguageContext} from "@iavofficial/frontend-framework/language";
 import {parseLanguageResourcesIntoDropdownFormat} from "@iavofficial/frontend-framework-shared/parseLanguageResourcesIntoDropdownFormat";
@@ -29,12 +29,21 @@ import {generateHashOfLength} from "@iavofficial/frontend-framework-shared/hash"
 import {Tooltip} from "primereact/tooltip";
 import CompanyLogo from "../assets/svg/companyLogo";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
-import {AWSAuthenticatorAuthDispatch, AWSAuthenticator, AWSAuthenticatorStoreState} from "../awsAuthenticatorModule";
+import {
+  AWSAuthenticatorAuthDispatch,
+  AWSAuthenticator,
+  AWSAuthenticatorStoreState,
+} from "../awsAuthenticatorModule";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
-import { LoginButtonWithSpinner } from "@iavofficial/frontend-framework-shared/loginButtonWithSpinner";
-import { AppLogoPlaceholder } from "@iavofficial/frontend-framework-shared/appLogoPlaceholder";
+import {LoginButtonWithSpinner} from "@iavofficial/frontend-framework-shared/loginButtonWithSpinner";
+import {AppLogoPlaceholder} from "@iavofficial/frontend-framework-shared/appLogoPlaceholder";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/mandatoryModuleNames";
-import { APPLICATION_LOGO_PLACEHOLDER, BLUE3, PADDING_GAB, WHITE } from "@iavofficial/frontend-framework-shared/constants";
+import {
+  APPLICATION_LOGO_PLACEHOLDER,
+  BLUE3,
+  PADDING_GAB,
+  WHITE,
+} from "@iavofficial/frontend-framework-shared/constants";
 
 interface AWSAuthenticationViewProps extends AuthenticationViewProps {
   module: AWSAuthenticator;
@@ -50,11 +59,20 @@ export const AWSAuthenticationView = (props: AWSAuthenticationViewProps) => {
   const {module} = props;
 
   const dispatch = useDispatch<AWSAuthenticatorAuthDispatch>();
-  const useAuthSelector: TypedUseSelectorHook<AWSAuthenticatorStoreState> = useSelector;
+  const useAuthSelector: TypedUseSelectorHook<AWSAuthenticatorStoreState> =
+    useSelector;
 
-  const isNewPasswordRequired = useAuthSelector(state => state[MandatoryModuleNames.Authentication].extras.isNewPasswordRequired);
-  const loginError = useAuthSelector(state => state[MandatoryModuleNames.Authentication].extras.loginError) ?? "";
-  const isLoading = useAuthSelector(state => state[MandatoryModuleNames.Authentication].isLoading);
+  const isNewPasswordRequired = useAuthSelector(
+    (state) =>
+      state[MandatoryModuleNames.Authentication].extras.isNewPasswordRequired,
+  );
+  const loginError =
+    useAuthSelector(
+      (state) => state[MandatoryModuleNames.Authentication].extras.loginError,
+    ) ?? "";
+  const isLoading = useAuthSelector(
+    (state) => state[MandatoryModuleNames.Authentication].isLoading,
+  );
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -135,9 +153,7 @@ export const AWSAuthenticationView = (props: AWSAuthenticationViewProps) => {
                 fontSize: "12px",
                 color: inputFieldDescriptionTextColor,
               }}
-              className={
-                "inputLabel " + (loginError ? "invalid" : "")
-              }
+              className={"inputLabel " + (loginError ? "invalid" : "")}
             >
               {t("New_password")}
             </label>
@@ -152,8 +168,7 @@ export const AWSAuthenticationView = (props: AWSAuthenticationViewProps) => {
                 color: inputFieldTextColor,
               }}
               className={
-                "form-control p-inputtext " +
-                (loginError ? "invalid" : "")
+                "form-control p-inputtext " + (loginError ? "invalid" : "")
               }
               onChange={(ev) => setPassword(ev.target.value)}
               required
@@ -161,9 +176,7 @@ export const AWSAuthenticationView = (props: AWSAuthenticationViewProps) => {
             />
 
             <LoginButtonWithSpinner isLoading={isLoading} />
-            <div className="invalid">
-              {t(loginError)}
-            </div>
+            <div className="invalid">{t(loginError)}</div>
           </div>
         </form>
       </div>
@@ -258,7 +271,9 @@ export const AWSAuthenticationView = (props: AWSAuthenticationViewProps) => {
         {props.headerOptions?.reactElementLeft ? (
           props.headerOptions?.reactElementLeft
         ) : (
-          <AppLogoPlaceholder appLogoPlaceholder={APPLICATION_LOGO_PLACEHOLDER} />
+          <AppLogoPlaceholder
+            appLogoPlaceholder={APPLICATION_LOGO_PLACEHOLDER}
+          />
         )}
       </div>
       <div
@@ -297,13 +312,13 @@ export const AWSAuthenticationView = (props: AWSAuthenticationViewProps) => {
             width: "100vw",
             objectFit: "cover",
           }}
-          /*src={
+          src={
             props.authOptions?.backgroundImage
               ? props.authOptions?.backgroundImage
               : colorSettingsContext?.darkmode
                 ? loginBackgroundDarkMode
                 : loginBackgroundLightMode
-          }*/
+          }
         />
       )}
       <div

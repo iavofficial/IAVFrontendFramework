@@ -231,9 +231,7 @@ function Layout() {
             />
         )
     ];
-
-    const appLogo = <span className="ml-3">Example application</span>;
-
+    
     return (
         <UILayer
             authOptions={{
@@ -248,8 +246,8 @@ function Layout() {
             documentsLabelKey="Legal_documents"
             documentsComponent={LegalDocuments}
             headerOptions={{
-                userIcon: <div/>,
-                reactElementLeft: <InfoIcon/>,
+                userIcon: <InfoIcon style={{backgroundColor: WHITE}}/>,
+                reactElementLeft: <span className="ml-3">Dev application</span>,
                 headerElements: headerElements,
                 hideUserIcon: false
             }}

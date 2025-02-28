@@ -26,8 +26,8 @@ export interface Credentials {
   password: string;
 }
 
-export interface AuthModule extends FFStoreModule {
-  slice: Slice;
+export interface AuthModule<TAuthState extends AuthState> extends FFStoreModule {
+  slice: Slice<TAuthState>;
   fetchAuthed: AsyncThunk<Response, FetchAuthedFunctionArgs, any>;
   login: AsyncThunk<void, {credentials: Credentials}, any>;
   logout: AsyncThunk<void, {error?: unknown} | undefined, any>;

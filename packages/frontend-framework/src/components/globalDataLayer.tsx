@@ -37,8 +37,8 @@ type GlobalDataLayerLanguageOptions = Omit<LanguageOptions, "fallbackLang"> & {
   fallbackLang?: string;
 };
 
-interface Props {
-  modules: FFMandatoryModules;
+interface Props<TAuthState extends AuthState> {
+  modules: FFMandatoryModules<TAuthState>;
   store: EnhancedStore<FFMandatoryState>;
   languageOptions?: GlobalDataLayerLanguageOptions;
   translations?: Translations;
@@ -46,8 +46,8 @@ interface Props {
   colorSettings?: ColorProviderProps;
 }
 
-export const GlobalDataLayer = (
-  props: PropsWithChildren<Props>,
+export const GlobalDataLayer = <TAuthState extends AuthState>(
+  props: PropsWithChildren<Props<TAuthState>>,
 ) => {
   const fallbackLang =
     props.languageOptions?.fallbackLang ?? DEFAULT_FALLBACK_LANGUAGE;
@@ -79,9 +79,9 @@ export const GlobalDataLayer = (
   );
 };
 
-const ModuleLifecycleCaller = (
+const ModuleLifecycleCaller = <TAuthState extends AuthState>(
   props: PropsWithChildren<{
-    modules: FFMandatoryModules & Record<string, any>;
+    modules: FFMandatoryModules<TAuthState> & Record<string, any>;
   }>,
 ) => {
   // Create a sorted, stable array of module keys.

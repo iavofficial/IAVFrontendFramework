@@ -20,7 +20,6 @@ import {SelectButton} from "primereact/selectbutton";
 import {useState} from "react";
 import {UILayer} from "@iavofficial/frontend-framework/uiLayer";
 import {TranslateFunctionType} from "@iavofficial/frontend-framework/translationFunction";
-import {BasicAuthenticationView} from "@iavofficial/frontend-framework/basicAuthenticationView";
 import {BasicContentWrapper} from "@iavofficial/frontend-framework/basicContentWrapper";
 import {Group} from "@iavofficial/frontend-framework/group";
 import InfoIcon from "./assets/infoIcon.svg?react";

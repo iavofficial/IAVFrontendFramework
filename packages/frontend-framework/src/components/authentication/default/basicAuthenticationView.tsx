@@ -18,10 +18,8 @@
 
 import React, {FormEvent, useContext, useState} from "react";
 import {Link} from "react-router-dom";
-import {APPLICATION_LOGO_PLACEHOLDER, AUTHENTICATION_SLICE_NAME, BLUE3, PADDING_GAB, WHITE} from "../../../constants";
+import {APPLICATION_LOGO_PLACEHOLDER, BLUE3, PADDING_GAB, WHITE} from "@iavofficial/frontend-framework-shared/constants";
 import {useTranslator} from "../../internationalization/translators";
-import "../authenticationView.css";
-import "../../css/globalColors.css";
 import loginBackgroundLightMode from "../../../assets/png/login_background_lightMode.png";
 import loginBackgroundDarkMode from "../../../assets/png/login_background_darkMode.png";
 import {Dropdown, DropdownChangeEvent} from "primereact/dropdown";
@@ -29,19 +27,20 @@ import {LanguageContext} from "../../../contexts/language";
 import {Tooltip} from "primereact/tooltip";
 import CompanyLogo from "../../../assets/svg/companyLogo";
 import TextField from "../../helper/textfield/TextField";
-import { AuthenticationViewProps } from "@iavofficial/frontend-framework-shared-types/authenticationViewProps";
-import { generateHashOfLength } from "@iavofficial/frontend-framework-shared-utils/hash";
-import { parseLanguageResourcesIntoDropdownFormat } from "@iavofficial/frontend-framework-shared-utils/parseLanguageResourcesIntoDropdownFormat";
-import { LoginButtonWithSpinner } from "@iavofficial/frontend-framework-shared-react-common/loginButtonWithSpinner";
-import { AppLogoPlaceholder } from "@iavofficial/frontend-framework-shared-react-common/appLogoPlaceholder";
-import { AuthState } from "@iavofficial/frontend-framework-shared-types/authenticationProvider";
-import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared-react-common/colorSettingsContext";
+import { AuthenticationViewProps } from "@iavofficial/frontend-framework-shared/authenticationViewProps";
+import { generateHashOfLength } from "@iavofficial/frontend-framework-shared/hash";
+import { parseLanguageResourcesIntoDropdownFormat } from "@iavofficial/frontend-framework-shared/parseLanguageResourcesIntoDropdownFormat";
+import { LoginButtonWithSpinner } from "@iavofficial/frontend-framework-shared/loginButtonWithSpinner";
+import { AppLogoPlaceholder } from "@iavofficial/frontend-framework-shared/appLogoPlaceholder";
+import { AuthState } from "@iavofficial/frontend-framework-shared/authenticationProvider";
+import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch, Action } from "@reduxjs/toolkit";
-import { ModuleContext } from "@iavofficial/frontend-framework-shared-react-common/moduleContext";
+import { ModuleContext } from "@iavofficial/frontend-framework-shared/moduleContext";
+import { MandatoryModuleNames } from "@iavofficial/frontend-framework-shared/mandatoryModuleNames";
 
 type BasicAuthenticatorAuthDispatch = ThunkDispatch<AuthState, unknown, Action<string>>;
-type BasicAuthenticatorStoreState = {[AUTHENTICATION_SLICE_NAME]: AuthState}
+type BasicAuthenticatorStoreState = {[MandatoryModuleNames.Authentication]: AuthState}
 
 export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
   const moduleContext = useContext(ModuleContext);
@@ -52,7 +51,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
   const dispatch = useDispatch<BasicAuthenticatorAuthDispatch>();
   const useAuthSelector: TypedUseSelectorHook<BasicAuthenticatorStoreState> = useSelector;
 
-  const isLoading = useAuthSelector(state => state[AUTHENTICATION_SLICE_NAME].isLoading);
+  const isLoading = useAuthSelector(state => state[MandatoryModuleNames.Authentication].isLoading);
 
   const [triedToSubmit, setTriedToSubmit] = useState<boolean>(false);
   const [email, setEmail] = useState("");

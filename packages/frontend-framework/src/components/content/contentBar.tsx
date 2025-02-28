@@ -23,16 +23,15 @@ import React, {
   useRef,
   useState,
 } from "react";
-import "../css/globalColors.css";
 import {BasicContentbarWrapper} from "./basicContentbarWrapper";
 import {CustomContentbarWrapper} from "./customContentbarWrapper";
 import {NavbarSettingsContext} from "../../contexts/navbarContext";
 import {calculateWidth} from "../../utils/calculateWidth";
 import {ContentBarButtonElement} from "./contentBarButtonElement";
-import {DEFAULT_ELEMENTSIZE, PADDING_GAB} from "../../constants";
 import {useStyleMap} from "./style_options/useStyleMap";
 import {StyleProps, StylesArray} from "./style_options/styleTypes";
-import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared-react-common/colorSettingsContext";
+import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared/colorSettingsContext";
+import {DEFAULT_ELEMENTSIZE, PADDING_GAB} from "@iavofficial/frontend-framework-shared/constants";
 
 export const ContentBarStyles = {
   SPACING: "SPACING",

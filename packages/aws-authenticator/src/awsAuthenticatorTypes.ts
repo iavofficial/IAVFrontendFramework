@@ -1,6 +1,6 @@
 import {
   UserData,
-} from "@iavofficial/frontend-framework-shared-types/authenticationProvider";
+} from "@iavofficial/frontend-framework-shared/authenticationProvider";
 import {AsyncThunk} from "@reduxjs/toolkit";
 import {JWT} from "@aws-amplify/auth";
 

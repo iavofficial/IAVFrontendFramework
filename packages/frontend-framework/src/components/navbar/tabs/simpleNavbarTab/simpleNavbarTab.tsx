@@ -27,13 +27,13 @@ import {
   determineCurrentColor,
   determineCurrentColorInsideGroup,
 } from "../../../../utils/determineCurrentColor";
+import {InjectedOptionsGroupableByWrapperToTab} from "../../types/typesInjectedOptions";
 import {
   DEFAULT_ELEMENTSIZE,
   GAB_NAVBAR_UNFOLDED,
   NAVBAR_WIDTH_UNFOLDED,
-} from "../../../../constants";
-import {InjectedOptionsGroupableByWrapperToTab} from "../../types/typesInjectedOptions";
-import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared-react-common/colorSettingsContext";
+} from "@iavofficial/frontend-framework-shared/constants";
+import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 
 export interface NestedNavbarTabProps {
   additionalClassNames: string;

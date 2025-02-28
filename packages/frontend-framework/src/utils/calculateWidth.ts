@@ -19,7 +19,7 @@
 import {
   DEFAULT_ELEMENTSIZE,
   DEFAULT_WIDTH_CONTENTSECTIONELEMENT,
-} from "../constants";
+} from "@iavofficial/frontend-framework-shared/constants";
 
 export function calculateWidth(
   navbarCollapsed: boolean,

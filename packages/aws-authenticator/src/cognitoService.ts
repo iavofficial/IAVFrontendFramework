@@ -16,8 +16,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {Credentials} from "@iavofficial/frontend-framework-shared-types/authenticationProvider";
-import {containsOneOrMoreGroups} from "@iavofficial/frontend-framework-shared-utils/containsOneOrMoreGroups";
+import {Credentials} from "@iavofficial/frontend-framework-shared/authenticationProvider";
+import {containsOneOrMoreGroups} from "@iavofficial/frontend-framework-shared/containsOneOrMoreGroups";
 import {
   AuthError,
   confirmSignIn,

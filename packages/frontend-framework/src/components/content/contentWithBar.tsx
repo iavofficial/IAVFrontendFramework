@@ -17,7 +17,6 @@
  */
 
 import React, {useMemo} from "react";
-import "../css/globalColors.css";
 import {
   ContentBar,
   ContentBarStyles,

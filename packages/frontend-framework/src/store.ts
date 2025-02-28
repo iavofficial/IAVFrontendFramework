@@ -7,14 +7,11 @@ import {
   StoreEnhancer,
   ThunkDispatch,
 } from "@reduxjs/toolkit";
-import {
-  AuthModule,
-  AuthState,
-} from "@iavofficial/frontend-framework-shared-types/authenticationProvider";
-import {FFStoreModule} from "@iavofficial/frontend-framework-shared-types/module";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {DummyAuthenticator} from "./components/authentication/default/dummyAuthenticationProvider";
-import {AUTHENTICATION_SLICE_NAME} from "./constants";
+import { MandatoryModuleNames } from "@iavofficial/frontend-framework-shared/mandatoryModuleNames";
+import { AuthModule, AuthState } from "@iavofficial/frontend-framework-shared/authenticationProvider";
+import { FFStoreModule } from "@iavofficial/frontend-framework-shared/module";
 
 const executeProcessorsForModules = <TModules extends object>(
   modulesAndProcessors: ModuleAndProcessorMap<TModules>,
@@ -45,9 +42,9 @@ To add a new mandatory module:
 */
 
 // The mandatory state (which will be the state of different module's slices)
-export interface FFMandatoryState {
-  [AUTHENTICATION_SLICE_NAME]: AuthState;
-}
+export type FFMandatoryState = {
+  [K in typeof MandatoryModuleNames.Authentication]: AuthState;
+};
 
 // It is concluded that every mandatory state will have a root reducer object.
 // Without the possiblity of changing values (so the existence of reducers)
@@ -62,7 +59,7 @@ export type FFMandatoryReducers = {
 // So the minimal configuration is exactly the set of values and methods
 // used by the framework itself.
 export interface FFMandatoryModules<TAuthState extends AuthState = AuthState> {
-  [AUTHENTICATION_SLICE_NAME]: AuthModule<TAuthState>;
+  [MandatoryModuleNames.Authentication]: AuthModule<TAuthState>;
 }
 
 // The user can provide additional modules which aren't used by the
@@ -95,7 +92,7 @@ export interface ModuleEntry<M extends FFStoreModule> {
 
 // This object contains the default modules which can be replaced.
 export const defaultModules: FFMandatoryModules = {
-  [AUTHENTICATION_SLICE_NAME]: new DummyAuthenticator(),
+  [MandatoryModuleNames.Authentication]: new DummyAuthenticator(),
 };
 
 // An object of this class will contain all reducers etc. of all modules.
@@ -146,11 +143,11 @@ export class StoreConfigBuilder {
   }
 
   build() {
-    const {[AUTHENTICATION_SLICE_NAME]: auth, ...otherReducers} = this.reducers;
+    const {[MandatoryModuleNames.Authentication]: auth, ...otherReducers} = this.reducers;
 
     const finalReducers: FFMandatoryReducers & Record<string, Reducer> = {
       ...otherReducers,
-      [AUTHENTICATION_SLICE_NAME]: auth ?? defaultModules.auth.slice.reducer,
+      [MandatoryModuleNames.Authentication]: auth ?? defaultModules.auth.slice.reducer,
     };
 
     return new StoreConfig(
@@ -190,8 +187,8 @@ TUserModules extends GenericModules> {
     userModulesAndProcessors?: ModuleAndProcessorMap<TUserModules>,
   ) {
     this.mandatoryModulesAndProcessors = {
-      [AUTHENTICATION_SLICE_NAME]: {
-        module: ffMandatoryModules[AUTHENTICATION_SLICE_NAME],
+      [MandatoryModuleNames.Authentication]: {
+        module: ffMandatoryModules[MandatoryModuleNames.Authentication],
         processor: defaultAuthModuleProcessor,
       },
     };
@@ -290,9 +287,3 @@ export type DefaultThunkDispatch = ThunkDispatch<
 export const useDefaultDispatch: () => DefaultThunkDispatch = useDispatch;
 export const useDefaultSelector: TypedUseSelectorHook<DefaultRootState> =
   useSelector;
-
-// TODO HINTS:
-/*
-- Important: Both Module Set and Store have to be passed to the GlobalDataLayer in order to integrate the Provider with the store and call all useModuleLifecycle Hooks of all modules.
-- Maybe there should be a replaceable store creation method to allow for attaching middleware or other Redux features which not have been thought of.
-*/

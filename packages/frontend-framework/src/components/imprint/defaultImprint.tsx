@@ -18,8 +18,7 @@
 
 import React, {useContext} from "react";
 import {ImprintText} from "./imprintText";
-import "../css/globalColors.css";
-import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared-react-common/colorSettingsContext";
+import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 
 export const DefaultImprint = () => {
   const colorSettingsContext = useContext(ColorSettingsContext);

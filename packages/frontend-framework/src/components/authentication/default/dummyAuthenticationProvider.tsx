@@ -16,9 +16,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { AuthModule, Credentials, UserData } from "@iavofficial/frontend-framework-shared-types/authenticationProvider";
+import { AuthModule, Credentials, UserData } from "@iavofficial/frontend-framework-shared/authenticationProvider";
+import { MandatoryModuleNames } from "@iavofficial/frontend-framework-shared/mandatoryModuleNames";
 import { createAsyncThunk, createSlice, PayloadAction, Slice, ThunkDispatch } from "@reduxjs/toolkit";
-import { AUTHENTICATION_SLICE_NAME } from "../../../constants";
 
 export interface Props {
   additionalContextValues?: {[key: string]: any};
@@ -45,7 +45,7 @@ export class DummyAuthenticator implements AuthModule<DummyAuthenticatorState>{
 
   constructor() {
     this.slice = createSlice({
-      name: AUTHENTICATION_SLICE_NAME,
+      name: MandatoryModuleNames.Authentication,
       initialState,
       reducers: {
         login: (state, action: PayloadAction<string>) => {
@@ -70,23 +70,23 @@ export class DummyAuthenticator implements AuthModule<DummyAuthenticatorState>{
     this.fetchAuthed = createAsyncThunk<
     Response,
     {url: string; settings?: object},
-    {state: {[AUTHENTICATION_SLICE_NAME]: DummyAuthenticatorState}}
+    {state: {[MandatoryModuleNames.Authentication]: DummyAuthenticatorState}}
     >(
-      AUTHENTICATION_SLICE_NAME + "/fetchAuthed",
+      MandatoryModuleNames.Authentication + "/fetchAuthed",
       async ({url, settings}) => {
         return fetch(url, settings);
       }
     );
 
     this.login = createAsyncThunk(
-      AUTHENTICATION_SLICE_NAME + "/login",
+      MandatoryModuleNames.Authentication + "/login",
       async ({credentials} : {credentials: Credentials}, {dispatch}) => {
         dispatch(login(credentials.email));
       }
     );
 
     this.logout = createAsyncThunk<void, {error?: unknown} | undefined, {}>(
-      AUTHENTICATION_SLICE_NAME + "/logout",
+      MandatoryModuleNames.Authentication + "/logout",
       async ({error}: {error?: unknown} = {}, {dispatch}) => {
         dispatch(logout({}));
       }

@@ -37,7 +37,7 @@
   ],
   "dependencies": {
     "@iavofficial/frontend-framework": "*",
-    "@iavofficial/frontend-framework-shared-react-common": "*",
+    "@iavofficial/frontend-framework-shared-ui-components": "*",
     "@iavofficial/frontend-framework-shared-types": "*",
     "@iavofficial/frontend-framework-shared-utils": "*",
     "@reduxjs/toolkit": "^2.5.1",
@@ -71,15 +71,25 @@
     "./dist"
   ],
   "exports": {
-    "./module": "./dist/module.js",
-
+    "./awsAuthenticatorModule": "./dist/awsAuthenticatorModule.js",
+    "./cognitoService": "./dist/cognitoService.js",
+    "./awsAuthenticatorTypes": "./dist/awsAuthenticatorTypes.js",
     "./awsAuthenticationView": "./dist/components/awsAuthenticationView.js"
   },
   "typesVersions": {
     "*": {
-      "./module": ["./dist/module.d.ts"],
-
-      "./awsAuthenticationView": ["./dist/components/awsAuthenticationView.d.ts"]
+      "./awsAuthenticatorModule": [
+        "./dist/awsAuthenticatorModule.d.ts"
+      ],
+      "./cognitoService": [
+        "./dist/cognitoService.d.ts"
+      ],
+      "./awsAuthenticatorTypes": [
+        "./dist/awsAuthenticatorTypes.d.ts"
+      ],
+      "./awsAuthenticationView": [
+        "./dist/components/awsAuthenticationView.d.ts"
+      ]
     }
   },
   "publishConfig": {

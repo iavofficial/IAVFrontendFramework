@@ -20,7 +20,6 @@ import {useTranslator} from "@iavofficial/frontend-framework/translators";
 import {ImprintText} from "@iavofficial/frontend-framework/imprint";
 import {useContext} from "react";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework/colorSettingsContext";
-import "@iavofficial/frontend-framework/globalColors.css";
 
 export const LegalDocuments = () => {
     const t = useTranslator();

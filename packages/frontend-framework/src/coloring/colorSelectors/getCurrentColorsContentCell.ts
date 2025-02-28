@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { ContentCellColorOptions } from "@iavofficial/frontend-framework-shared-types/colorOptionTypes";
+import { ContentCellColorOptions } from "@iavofficial/frontend-framework-shared/colorOptionTypes";
 import {
   DARK_CONTENT_CELL_BACKGROUND_COLOR,
   LIGHT_CONTENT_CELL_BACKGROUND_COLOR,

@@ -18,30 +18,23 @@
 
 import React, {FormEvent, useContext, useState} from "react";
 import {Link} from "react-router-dom";
-import {
-  APPLICATION_LOGO_PLACEHOLDER,
-  AUTHENTICATION_SLICE_NAME,
-  BLUE3,
-  PADDING_GAB,
-  WHITE,
-} from "@iavofficial/frontend-framework/constants";
-import {LoginButtonWithSpinner} from "@iavofficial/frontend-framework-shared-react-common/loginButtonWithSpinner";
 import {useTranslator} from "@iavofficial/frontend-framework/translators";
-import {AuthenticationViewProps} from "@iavofficial/frontend-framework-shared-types/authenticationViewProps";
-// import "../authenticationView.css";
-//import "../../css/globalColors.css";
+import {AuthenticationViewProps} from "@iavofficial/frontend-framework-shared/authenticationViewProps";
 //import loginBackgroundLightMode from "../../../assets/png/login_background_lightMode.png";
 //import loginBackgroundDarkMode from "../../../assets/png/login_background_darkMode.png";
 import {Dropdown, DropdownChangeEvent} from "primereact/dropdown";
 import {LanguageContext} from "@iavofficial/frontend-framework/language";
-import {parseLanguageResourcesIntoDropdownFormat} from "@iavofficial/frontend-framework-shared-utils/parseLanguageResourcesIntoDropdownFormat";
-import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared-react-common/colorSettingsContext";
-import {generateHashOfLength} from "@iavofficial/frontend-framework-shared-utils/hash";
+import {parseLanguageResourcesIntoDropdownFormat} from "@iavofficial/frontend-framework-shared/parseLanguageResourcesIntoDropdownFormat";
+import {generateHashOfLength} from "@iavofficial/frontend-framework-shared/hash";
 import {Tooltip} from "primereact/tooltip";
-import {AppLogoPlaceholder} from "@iavofficial/frontend-framework-shared-react-common/appLogoPlaceholder";
 import CompanyLogo from "../assets/svg/companyLogo";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
-import {AWSAuthenticatorAuthDispatch, AWSAuthenticator, AWSAuthenticatorStoreState} from "../module";
+import {AWSAuthenticatorAuthDispatch, AWSAuthenticator, AWSAuthenticatorStoreState} from "../awsAuthenticatorModule";
+import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
+import { LoginButtonWithSpinner } from "@iavofficial/frontend-framework-shared/loginButtonWithSpinner";
+import { AppLogoPlaceholder } from "@iavofficial/frontend-framework-shared/appLogoPlaceholder";
+import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/mandatoryModuleNames";
+import { APPLICATION_LOGO_PLACEHOLDER, BLUE3, PADDING_GAB, WHITE } from "@iavofficial/frontend-framework-shared/constants";
 
 interface AWSAuthenticationViewProps extends AuthenticationViewProps {
   module: AWSAuthenticator;
@@ -59,9 +52,9 @@ export const AWSAuthenticationView = (props: AWSAuthenticationViewProps) => {
   const dispatch = useDispatch<AWSAuthenticatorAuthDispatch>();
   const useAuthSelector: TypedUseSelectorHook<AWSAuthenticatorStoreState> = useSelector;
 
-  const isNewPasswordRequired = useAuthSelector(state => state[AUTHENTICATION_SLICE_NAME].extras.isNewPasswordRequired);
-  const loginError = useAuthSelector(state => state[AUTHENTICATION_SLICE_NAME].extras.loginError) ?? "";
-  const isLoading = useAuthSelector(state => state[AUTHENTICATION_SLICE_NAME].isLoading);
+  const isNewPasswordRequired = useAuthSelector(state => state[MandatoryModuleNames.Authentication].extras.isNewPasswordRequired);
+  const loginError = useAuthSelector(state => state[MandatoryModuleNames.Authentication].extras.loginError) ?? "";
+  const isLoading = useAuthSelector(state => state[MandatoryModuleNames.Authentication].isLoading);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

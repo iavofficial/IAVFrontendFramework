@@ -22,8 +22,8 @@ import {InjectedOptionsGroupableByWrapperToTab} from "../types/typesInjectedOpti
 import {InjectedOptionsByNavbarToWrapper} from "../types/typesInjectedOptions";
 import {ContentWrapperGeneralization} from "./contentWrapperGeneralization";
 import {GroupableTabAndContentWrapper} from "./typesWrappers";
-import {ComponentTypeMinProps} from "../../../types/typesReact";
 import {InjectedOptionsObject} from "../types/typesInjectedOptions";
+import {ComponentTypeMinProps} from "@iavofficial/frontend-framework-shared/componentTypeMinProps";
 
 export class BasicContentWrapper
   extends ContentWrapperGeneralization

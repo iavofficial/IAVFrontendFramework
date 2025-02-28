@@ -19,7 +19,7 @@
 import React, {ReactElement} from "react";
 import {ContentbarWrapperInterface} from "./contentbarWrapperInterface";
 import "./contentbar.css";
-import { generateHashOfLength } from "@iavofficial/frontend-framework-shared-utils/hash";
+import { generateHashOfLength } from "@iavofficial/frontend-framework-shared/hash";
 
 export class CustomContentbarWrapper implements ContentbarWrapperInterface {
   constructor(

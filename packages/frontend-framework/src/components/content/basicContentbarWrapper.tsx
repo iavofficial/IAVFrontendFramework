@@ -20,7 +20,7 @@ import React from "react";
 import {ContentbarWrapperInterface} from "./contentbarWrapperInterface";
 import {DefaultContentSelectionElement} from "./defaultContentSelectionElement";
 import {TranslationFunction} from "../../types/translationFunction";
-import { generateHashOfLength } from "@iavofficial/frontend-framework-shared-utils/hash";
+import { generateHashOfLength } from "@iavofficial/frontend-framework-shared/hash";
 
 interface ConstructorArgs {
   id: string;

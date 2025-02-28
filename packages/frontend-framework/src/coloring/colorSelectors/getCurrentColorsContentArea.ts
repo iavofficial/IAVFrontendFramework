@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { ContentAreaColorOptions } from "@iavofficial/frontend-framework-shared-types/colorOptionTypes";
+import { ContentAreaColorOptions } from "@iavofficial/frontend-framework-shared/colorOptionTypes";
 import {
   DARK_CONTENT_AREA_BACKGROUND_COLOR,
   LIGHT_CONTENT_AREA_BACKGROUND_COLOR,

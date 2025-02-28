@@ -17,11 +17,11 @@
  */
 
 import React, {useContext} from "react";
-import {containsOneOrMoreGroups} from "@iavofficial/frontend-framework-shared-utils/containsOneOrMoreGroups";
 import {SimpleNavbarTab} from "./simpleNavbarTab/simpleNavbarTab";
 import {GroupableNavbarTab, NavbarTabProps} from "./typesNavbarTab";
 import {InjectedOptionsGroupableByWrapperToTab} from "../types/typesInjectedOptions";
 import { useDefaultSelector } from "../../../store";
+import {containsOneOrMoreGroups} from "@iavofficial/frontend-framework-shared/containsOneOrMoreGroups";
 
 export interface Props {
   permittedGroups: string[];

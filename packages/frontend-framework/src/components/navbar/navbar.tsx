@@ -19,7 +19,6 @@
 import React, {useContext} from "react";
 import {Link} from "react-router-dom";
 import "./navbar.css";
-import "../css/globalColors.css";
 import {TabAndContentWrapper} from "./wrappers/typesWrappers";
 import {useTranslator} from "../internationalization/translators";
 import {Tooltip} from "primereact/tooltip";
@@ -32,9 +31,9 @@ import {
   GAB_NAVBAR_COLLAPSED,
   NAVBAR_WIDTH_UNFOLDED,
   PADDING_GAB,
-} from "../../constants";
-import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared-react-common/colorSettingsContext";
-import { generateHashOfLength } from "@iavofficial/frontend-framework-shared-utils/hash";
+} from "@iavofficial/frontend-framework-shared/constants";
+import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared/colorSettingsContext";
+import { generateHashOfLength } from "@iavofficial/frontend-framework-shared/hash";
 
 interface Props {
   tabAndContentWrappers: TabAndContentWrapper[];

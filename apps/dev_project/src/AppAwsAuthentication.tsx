@@ -24,13 +24,12 @@ import translationDECH from "./assets/translations/de-CH.json";
 import Layout from "./Layout.tsx";
 import {
   StoreBuilder,
-  StoreConfigBuilder,
 } from "@iavofficial/frontend-framework/store";
 import { Amplify } from "aws-amplify";
 import { cognitoUserPoolsTokenProvider } from "aws-amplify/auth/cognito";
 import { CookieStorage } from "aws-amplify/utils";
-import { AWSAuthenticator } from "@iavofficial/frontend-framework-aws-authenticator/module";
 import { awsAuthenticationViewFactory } from "@iavofficial/frontend-framework-aws-authenticator/awsAuthenticationView";
+import { AWSAuthenticator } from "@iavofficial/frontend-framework-aws-authenticator/awsAuthenticatorModule";
 
 const cognitoPool = "eu-central-1_8weTZhK1B";
 const cognitoAppId = "47qrr39ilc3qo2eu1vhm7tgg0r";
@@ -68,11 +67,12 @@ const configureAmplify: () => void = () => {
 export const awsAuthenticationView = awsAuthenticationViewFactory(modules.auth);
 
 const store = new StoreBuilder(modules)
-.setFrameworkModuleProcessor("auth", (
+/*.setFrameworkModuleProcessor("auth", (
   authModule: AWSAuthenticator,
   storeConfigBuilder: StoreConfigBuilder,
 ) => {
-}).build();
+
+})*/.build();
 
 export const AppAwsAuthentication = () => {
   const translations = {

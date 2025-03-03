@@ -36,7 +36,6 @@
     "aws authenticator"
   ],
   "dependencies": {
-    "@iavofficial/frontend-framework-shared-types": "*",
     "@reduxjs/toolkit": "^2.5.1"
   },
   "peerDependencies": {

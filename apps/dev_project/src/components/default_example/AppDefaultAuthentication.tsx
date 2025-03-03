@@ -16,12 +16,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import translationES from "./assets/translations/es.json";
+import translationES from "../../assets/translations/es.json";
 import { GlobalDataLayer } from "@iavofficial/frontend-framework/globalDataLayer";
-import translationEN from "./assets/translations/en.json";
-import translationDE from "./assets/translations/de.json";
-import translationDECH from "./assets/translations/de-CH.json";
-import Layout from "./Layout.tsx";
+import translationEN from "../../assets/translations/en.json";
+import translationDE from "../../assets/translations/de.json";
+import translationDECH from "../../assets/translations/de-CH.json";
+import Layout from "../../Layout.tsx";
 import {
   defaultModules,
   defaultStore,
@@ -57,6 +57,4 @@ export const AppDefaultAuthentication = () => {
       <Layout />
     </GlobalDataLayer>
   );
-}
-
-export default AppDefaultAuthentication;
+};

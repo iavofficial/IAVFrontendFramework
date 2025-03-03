@@ -136,6 +136,7 @@
     "./mandatoryModuleNames": "./dist/re-exports/mandatoryModuleNames.js",
     "./hash": "./dist/re-exports/hash.js",
     "./colorSettingsContext": "./dist/re-exports/colorSettingsContext.js",
+    "./moduleContext": "./dist/re-exports/moduleContext.js",
 
     "./constants.css": "./dist/css/constants.css",
     "./mainPage.css": "./dist/css/mainPage.css",
@@ -198,7 +199,8 @@
       "./constants": ["./dist/re-exports/constants.d.ts"],
       "./mandatoryModuleNames": ["./dist/re-exports/mandatoryModuleNames.d.ts"],
       "./hash": ["./dist/re-exports/hash.d.ts"],
-      "./colorSettingsContext": ["./dist/re-exports/colorSettingsContext.d.ts"]
+      "./colorSettingsContext": ["./dist/re-exports/colorSettingsContext.d.ts"],
+      "./moduleContext": ["./dist/re-exports/moduleContext.d.ts"]
     }
   },
   "publishConfig": {

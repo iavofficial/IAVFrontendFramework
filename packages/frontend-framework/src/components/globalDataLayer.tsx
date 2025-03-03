@@ -84,18 +84,20 @@ const ModuleLifecycleCaller = <TAuthState extends AuthState>(
     modules: FFMandatoryModules<TAuthState> & Record<string, any>;
   }>,
 ) => {
-  // Create a sorted, stable array of module keys.
+  // React hooks have to be called in the same order at every render.
+  // Because of this the sort method is used to create an array of the
+  // modules in a stable order.
   const moduleKeys = React.useMemo(
     () => Object.keys(props.modules).sort(),
     [props.modules],
   );
 
-  // For each module, call its hook (or a no-op) in the same order every render.
+  // Call the useModuleLifecycle Hook for every module.
+  // This approach is only safe if moduleKeys is stable (because of the
+  // Hook rules described above).
   moduleKeys.forEach((key) => {
     const useModuleLifecycle =
       props.modules[key].useModuleLifecycle ?? (() => {});
-    // IMPORTANT: Do not place hook calls inside loops if the number of iterations could change.
-    // This approach is only safe if moduleKeys is stable between renders.
     useModuleLifecycle();
   });
 

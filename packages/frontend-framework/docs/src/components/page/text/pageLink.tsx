@@ -1,39 +1,38 @@
-import React from "react";
+import React, {HTMLAttributeAnchorTarget} from "react";
 import {Link} from "react-router-dom";
 import makeStyles from "../../../../../src/components/content/style_options/makeStyles.tsx";
+import {BLUE3} from "../../../../../src/constants.ts";
 
 const useStyles = makeStyles(() => ({
     link: {
         textDecoration: "none",
-        color: "var(--primary-color)",
-        fontWeight: "bold",
-        padding: "8px 16px",
+        color: BLUE3,
+        paddingLeft: "4px",
         borderRadius: "4px",
         transition: "background-color 0.3s ease",
         display: "inline-block",
         "&:hover": {
-            backgroundColor: "#f0f0f0",
-        },
-    },
-    activeLink: {
-        backgroundColor: "#e0e0e0",
+            textDecoration: "underline",
+        }
     },
 }));
 
 interface Props {
     to: string;
     label: string;
+    target?: HTMLAttributeAnchorTarget | undefined;
     className?: string;
 }
 
 const PageLink: React.FC<Props> = (props) => {
 
-    const {to, className, label} = props;
+    const {to, className, label, target} = props;
 
     const {classes} = useStyles();
 
     return (
         <Link
+            target={target}
             to={to}
             className={`${classes.link} ${className ? className : ""}`}>
             {label}

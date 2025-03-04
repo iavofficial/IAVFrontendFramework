@@ -6,6 +6,7 @@ import SubTitle from "../components/page/text/subTitle.tsx";
 import Table from "../components/page/utils/table.tsx";
 import BulletList from "../components/page/text/bulletList.tsx";
 import PageLink from "../components/page/text/pageLink.tsx";
+import Image from "../components/page/utils/image.tsx";
 
 const Overview: React.FC = () => {
 
@@ -71,17 +72,22 @@ const Overview: React.FC = () => {
             </SubTitle>
             <Typography variant={"p"}>
                 We manage bug reports and support requests through
-                <PageLink to={"https://github.com/iavofficial/IAVFrontendFramework/issues"} label={"GitHub Issues"}/>.
+                <PageLink
+                    to={"https://github.com/iavofficial/IAVFrontendFramework/issues"}
+                    label={"GitHub Issues"}
+                    target={"_blank"}/>.
                 For more details on how to contribute, please read our
-                <PageLink to={"https://github.com/iavofficial/IAVFrontendFramework/blob/main/CONTRIBUTING.md"}
-                          label={"Contributing Guidelines"}/>.
+                <PageLink
+                    to={"https://github.com/iavofficial/IAVFrontendFramework/blob/main/CONTRIBUTING.md"}
+                    label={"Contributing Guidelines"}
+                    target={"_blank"}/>.
             </Typography>
 
             <SubTitle>Layout</SubTitle>
 
-            <img alt="Login" class="cell" src="./assets/index/login.png"/>
+            <Image alt="Login" src="assets/index/login.png"/>
 
-            <img alt="Menu" class="cell" src="./assets/index/menu.png"/>
+            <Image alt="Menu" src="assets/index/menu.png"/>
         </Page>
     )
 };

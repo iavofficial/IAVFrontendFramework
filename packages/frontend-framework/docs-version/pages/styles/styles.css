@@ -68,6 +68,14 @@ button {
     font-size: 0.875rem;
 }
 
+.drawer a.active {
+    background-color: lightgray;
+}
+
+.drawer li:hover {
+    background-color: #333
+}
+
 .drawer h1 {
     font-size: 1.25rem;
     margin-bottom: 1em;
@@ -90,10 +98,6 @@ button {
     transition: background-color 0.3s ease;
 }
 
-.drawer li:hover {
-    background-color: #333
-}
-
 .drawer a {
     cursor: pointer;
     display: block;
@@ -101,10 +105,6 @@ button {
     color: var(--primary-color);
     padding: 8px;
     border-radius: 4px;
-}
-
-.drawer a.active {
-    background-color: lightgray;
 }
 
 .drawer a:hover {

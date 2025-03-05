@@ -50,7 +50,7 @@ export interface HeaderOptions {
   reactElementLeft?: ReactElement;
   hideLeft?: boolean;
   hideRight?: boolean;
-  userIcon: ReactElement;
+  userIcon?: ReactElement;
   hideUserIcon?: boolean;
   headerElements?: ReactElement[];
 }

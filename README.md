@@ -52,6 +52,10 @@ Here's a quick look of an example of the IAV Frontend Framework:
 This project is licensed under the **Apache-2.0** license. The full license text is included in
 the [root of the repository](./LICENSE).
 
+## SBOM
+As this project is a monorepo, the SBOM.spdx files are contained inside the specific package folders. You can find these
+folders inside the packages folder.
+
 ## Contributing
 
 Contributions are welcome! Please read the [contributing guidelines](./CONTRIBUTING.md) before submitting a pull

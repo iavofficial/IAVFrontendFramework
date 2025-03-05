@@ -6,7 +6,7 @@ This content is produced and maintained by IAV GmbH Ingenieurgesellschaft Auto u
 
 ## Copyright
 
-Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
 
 ## Declared Project Licenses
 

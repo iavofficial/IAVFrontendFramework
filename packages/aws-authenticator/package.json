@@ -6,7 +6,7 @@
   "description": "This package provides AWS authentication using AWS Cognito.",
   "scripts": {
     "setup": "npm i",
-    "build": "npx babel ./src --out-dir ./dist --extensions .ts,.tsx --copy-files && npx babel ./package.json --out-dir ./dist --copy-files && npx tsc --outDir ./dist",
+    "build": "cross-env-shell \"../../scripts/unix/packages/build.sh || echo \"Not implemented yet.\"",
     "build-live": "cross-env-shell \"..\\..\\scripts\\win\\build-live.bat || echo \"Not implemented yet.\"",
     "test": "jest --passWithNoTests",
     "lint": "eslint src/**/*.{js,ts,tsx}",

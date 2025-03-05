@@ -96,7 +96,7 @@ export type ModuleProcessorFunction<M extends FFStoreModule> = (
 // Objects of this type aggragate a module and it's corresponding processor
 // method. The following example shows it's structure:
 // {auth: {module: ..., processor: ...}, ...}
-export type ModuleAndProcessorMap<ModuleType extends Record<string, any>> = {
+export type ModuleAndProcessorMap<ModuleType extends object> = {
   [K in keyof ModuleType]: ModuleType[K] extends FFStoreModule
     ? ModuleEntry<ModuleType[K]>
     : never;
@@ -121,7 +121,7 @@ export class StoreConfig {
     public reducers: FFMandatoryReducers & Record<string, Reducer>,
     public middleware: Middleware[] = [],
     public enhancers: StoreEnhancer[] = [],
-    public additional: Record<string, any> = {},
+    public additional: Record<string, unknown> = {},
   ) {}
 }
 
@@ -136,7 +136,7 @@ export class StoreConfigBuilder {
   private enhancers: StoreEnhancer[] = [];
   // This field is used to allow users to add additional values with custom processors to use them inside
   // a custom storeBuilder
-  private extras: Record<string, any> = {};
+  private extras: Record<string, unknown> = {};
 
   constructor() {}
 
@@ -155,7 +155,7 @@ export class StoreConfigBuilder {
     return this;
   }
 
-  public setExtras(key: string, value: any): this {
+  public setExtras(key: string, value: unknown): this {
     this.extras[key] = value;
     return this;
   }

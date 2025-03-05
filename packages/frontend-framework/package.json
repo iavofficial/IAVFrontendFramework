@@ -10,7 +10,6 @@
     "build-live": "cross-env-shell \"..\\..\\scripts\\win\\build-live.bat || echo \"Not implemented yet.\"\"",
     "test": "jest --passWithNoTests",
     "lint": "eslint src/**/*.{js,ts,tsx}",
-    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json}\" && prettier --write \"docs/*\"",
     "release": "npx semantic-release",
     "generate-docs": "../../scripts/unix/docs_generation/generate-docs-for-package.sh"
   },

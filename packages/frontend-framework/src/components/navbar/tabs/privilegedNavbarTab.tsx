@@ -20,7 +20,7 @@ import React, {useContext} from "react";
 import {SimpleNavbarTab} from "./simpleNavbarTab/simpleNavbarTab";
 import {GroupableNavbarTab, NavbarTabProps} from "./typesNavbarTab";
 import {InjectedOptionsGroupableByWrapperToTab} from "../types/typesInjectedOptions";
-import { useDefaultSelector } from "../../../store";
+import {useDefaultSelector} from "../../../store";
 import {containsOneOrMoreGroups} from "@iavofficial/frontend-framework-shared/containsOneOrMoreGroups";
 
 export interface Props {
@@ -30,14 +30,11 @@ export interface Props {
 export const PrivilegedNavbarTab: GroupableNavbarTab<Props> = (
   props: NavbarTabProps<InjectedOptionsGroupableByWrapperToTab> & Props,
 ) => {
-  const userData = useDefaultSelector(state => state.auth.userData);
+  const userData = useDefaultSelector((state) => state.auth.userData);
 
   const userGroups = userData?.userGroups ?? [];
 
-  const permitted = containsOneOrMoreGroups(
-    userGroups,
-    props.permittedGroups
-  );
+  const permitted = containsOneOrMoreGroups(userGroups, props.permittedGroups);
   return permitted ? (
     <SimpleNavbarTab
       icon={props.icon}

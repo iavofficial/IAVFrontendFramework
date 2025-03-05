@@ -18,7 +18,7 @@
 
 import React from "react";
 import {Route} from "react-router";
-import { generateHash } from "@iavofficial/frontend-framework-shared/hash";
+import {generateHash} from "@iavofficial/frontend-framework-shared/hash";
 
 /**
  * This class is the base for all simple content wrappers.

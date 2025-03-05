@@ -27,9 +27,12 @@ import {
 } from "@reduxjs/toolkit";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {DummyAuthenticator} from "./components/authentication/default/dummyAuthenticationProvider";
-import { MandatoryModuleNames } from "@iavofficial/frontend-framework-shared/mandatoryModuleNames";
-import { AuthModule, AuthState } from "@iavofficial/frontend-framework-shared/authenticationProvider";
-import { FFStoreModule } from "@iavofficial/frontend-framework-shared/module";
+import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/mandatoryModuleNames";
+import {
+  AuthModule,
+  AuthState,
+} from "@iavofficial/frontend-framework-shared/authenticationProvider";
+import {FFStoreModule} from "@iavofficial/frontend-framework-shared/module";
 
 const executeProcessorsForModules = <TModules extends object>(
   modulesAndProcessors: ModuleAndProcessorMap<TModules>,
@@ -161,11 +164,13 @@ export class StoreConfigBuilder {
   }
 
   build() {
-    const {[MandatoryModuleNames.Authentication]: auth, ...otherReducers} = this.reducers;
+    const {[MandatoryModuleNames.Authentication]: auth, ...otherReducers} =
+      this.reducers;
 
     const finalReducers: FFMandatoryReducers & Record<string, Reducer> = {
       ...otherReducers,
-      [MandatoryModuleNames.Authentication]: auth ?? defaultModules.auth.slice.reducer,
+      [MandatoryModuleNames.Authentication]:
+        auth ?? defaultModules.auth.slice.reducer,
     };
 
     return new StoreConfig(
@@ -183,14 +188,18 @@ export class StoreConfigBuilder {
 // customization of module processing. Furthermore the Builder contains a storeBuilder method
 // which is used to build the store after all processor methods were executed. The storeBuilder
 // can be replaced to customize the build of the Redux store.
-export class StoreBuilder<TAuthState extends AuthState,
-TUserModules extends GenericModules> {
+export class StoreBuilder<
+  TAuthState extends AuthState,
+  TUserModules extends GenericModules,
+> {
   private storeConfigBuilder: StoreConfigBuilder = new StoreConfigBuilder();
 
   // These are mandatory modules and processors which are essential for the framework as
   // it uses values and methods of the processed modules.
-  private mandatoryModulesAndProcessors: ModuleAndProcessorMap<FFMandatoryModules<TAuthState>>;
-  
+  private mandatoryModulesAndProcessors: ModuleAndProcessorMap<
+    FFMandatoryModules<TAuthState>
+  >;
+
   // These are optional and modules and processors of the user.
   private userModulesAndProcessors:
     | ModuleAndProcessorMap<TUserModules>
@@ -218,12 +227,14 @@ TUserModules extends GenericModules> {
 
   setFrameworkModuleProcessor<K extends keyof FFMandatoryModules<TAuthState>>(
     moduleType: K,
-    processor: ModuleProcessorFunction<(typeof this.mandatoryModulesAndProcessors)[K]["module"]>,
+    processor: ModuleProcessorFunction<
+      (typeof this.mandatoryModulesAndProcessors)[K]["module"]
+    >,
   ) {
     this.mandatoryModulesAndProcessors[moduleType].processor = processor;
     return this;
   }
-  
+
   setUserModuleProcessor<K extends keyof TUserModules>(
     moduleType: K,
     processor: ModuleProcessorFunction<TUserModules[K]>,

@@ -36,8 +36,8 @@ import {HeaderPanelElement} from "@iavofficial/frontend-framework/headerPanelEle
 import {PrimeIcons} from "primereact/api";
 import {WHITE} from "@iavofficial/frontend-framework/constants";
 import {HeaderMenuElement} from "@iavofficial/frontend-framework/headerMenuElement";
-import { ExampleComponent7 } from "./components/exampleComponent7";
-import { AwsAuthenticationView } from "./components/aws_example/store";
+import {ExampleComponent7} from "./components/exampleComponent7";
+import {AwsAuthenticationView} from "./components/aws_example/store";
 
 function Layout() {
     const [selectedButtonOption, setSelectedButtonOption] = useState("Simulated");
@@ -230,7 +230,7 @@ function Layout() {
             />
         )
     ];
-    
+
     return (
         <UILayer
             authOptions={{
@@ -246,7 +246,6 @@ function Layout() {
             documentsComponent={LegalDocuments}
             headerOptions={{
                 userIcon: <InfoIcon style={{backgroundColor: WHITE}}/>,
-                reactElementLeft: <span className="ml-3">Dev application</span>,
                 headerElements: headerElements,
                 hideUserIcon: false
             }}

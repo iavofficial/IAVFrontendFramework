@@ -19,7 +19,7 @@
 import React, {CSSProperties, PropsWithChildren, useContext} from "react";
 
 import "./contentCell.css";
-import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared/colorSettingsContext";
+import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 
 export enum CellPaddings {
   FULL,

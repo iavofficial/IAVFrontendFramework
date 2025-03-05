@@ -118,6 +118,15 @@ const loadPageNav = async () => {
                 const link = document.createElement('a');
                 link.textContent = header.textContent;
                 link.href = `#${header.id || header.textContent.replace(/\s+/g, '-').toLowerCase()}`;
+                link.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const targetId = header.id || header.textContent.replace(/\s+/g, '-').toLowerCase();
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        const offset = targetElement.getBoundingClientRect().top + window.scrollY;
+                        window.scrollTo({top: offset - 80, behavior: 'smooth'});
+                    }
+                });
                 listItem.appendChild(link);
                 navList.appendChild(listItem);
             });
@@ -136,6 +145,15 @@ const createPageNavigation = () => {
         const link = document.createElement('a');
         link.textContent = header.textContent;
         link.href = `#${header.id || header.textContent.replace(/\s+/g, '-').toLowerCase()}`;
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+            const targetId = header.id || header.textContent.replace(/\s+/g, '-').toLowerCase();
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                const offset = targetElement.getBoundingClientRect().top + window.scrollY;
+                window.scrollTo({top: offset - 80, behavior: 'smooth'});
+            }
+        });
         listItem.appendChild(link);
         navList.appendChild(listItem);
     });

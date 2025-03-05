@@ -422,7 +422,7 @@ export const AWSAuthenticationView = (props: AWSAuthenticationViewProps) => {
           &copy;{" "}
           {props.authOptions?.companyText
             ? props.authOptions?.companyText
-            : "IAV GmbH 2024"}
+            : "Company 2025"}
         </span>
       </div>
     </div>

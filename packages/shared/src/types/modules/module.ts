@@ -25,7 +25,7 @@ export type ModuleLifecycleHook = () => {renderChildren: boolean} & Record<
 
 export type FFModule = {
   useModuleLifecycle?: ModuleLifecycleHook;
-}
+};
 
 export type FFStoreModule = {
   slice?: Slice;

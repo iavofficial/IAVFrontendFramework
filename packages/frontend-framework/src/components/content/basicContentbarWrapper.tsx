@@ -17,10 +17,10 @@
  */
 
 import React from "react";
-import {generateHashOfLength} from "../../utils/hash";
 import {ContentbarWrapperInterface} from "./contentbarWrapperInterface";
 import {DefaultContentSelectionElement} from "./defaultContentSelectionElement";
 import {TranslationFunction} from "../../types/translationFunction";
+import { generateHashOfLength } from "@iavofficial/frontend-framework-shared/hash";
 
 interface ConstructorArgs {
   id: string;

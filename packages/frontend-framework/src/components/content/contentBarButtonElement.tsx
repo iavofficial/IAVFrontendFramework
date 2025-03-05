@@ -17,8 +17,8 @@
  */
 
 import React, {useContext, useState} from "react";
-import {ColorSettingsContext} from "../../contexts/colorsettings";
-import {DEFAULT_ELEMENTSIZE} from "../../constants";
+import {DEFAULT_ELEMENTSIZE} from "@iavofficial/frontend-framework-shared/constants";
+import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 
 export interface Props {
   handleOnClickEvent: () => void;

@@ -17,11 +17,11 @@
  */
 
 import React, {useContext} from "react";
-import {AuthContext} from "../../../contexts/auth";
-import {containsOneOrMoreGroups} from "../../../utils/groupChecker";
 import {SimpleNavbarTab} from "./simpleNavbarTab/simpleNavbarTab";
 import {GroupableNavbarTab, NavbarTabProps} from "./typesNavbarTab";
 import {InjectedOptionsGroupableByWrapperToTab} from "../types/typesInjectedOptions";
+import { useDefaultSelector } from "../../../store";
+import {containsOneOrMoreGroups} from "@iavofficial/frontend-framework-shared/containsOneOrMoreGroups";
 
 export interface Props {
   permittedGroups: string[];
@@ -30,10 +30,13 @@ export interface Props {
 export const PrivilegedNavbarTab: GroupableNavbarTab<Props> = (
   props: NavbarTabProps<InjectedOptionsGroupableByWrapperToTab> & Props,
 ) => {
-  const authContext = useContext(AuthContext);
+  const userData = useDefaultSelector(state => state.auth.userData);
+
+  const userGroups = userData?.userGroups ?? [];
+
   const permitted = containsOneOrMoreGroups(
-    authContext?.getUserGroups(),
-    props.permittedGroups,
+    userGroups,
+    props.permittedGroups
   );
   return permitted ? (
     <SimpleNavbarTab

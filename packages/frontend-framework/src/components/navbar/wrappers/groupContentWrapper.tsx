@@ -19,13 +19,13 @@
 import React, {ReactElement} from "react";
 import {RouteProps} from "react-router-dom";
 import {TabGroup} from "../tabs/tabGroup/tabGroup";
-import {generateHashForValues} from "../../../utils/hash";
 import {TranslateFunctionType} from "../../../types/translationFunction";
 import {GroupableTabAndContentWrapper} from "./typesWrappers";
 import {
   InjectedOptionsByGroupToWrapper,
   InjectedOptionsByNavbarToWrapper,
 } from "../types/typesInjectedOptions";
+import { generateHashForValues } from "@iavofficial/frontend-framework-shared/hash";
 
 export class Group implements GroupableTabAndContentWrapper {
   private _insideGroup = false;

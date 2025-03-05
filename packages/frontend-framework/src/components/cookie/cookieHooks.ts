@@ -18,7 +18,7 @@
 
 import {useCookies} from "react-cookie";
 
-import {ACCEPTED_COOKIES_NAME} from "../../constants";
+import {ACCEPTED_COOKIES_NAME} from "@iavofficial/frontend-framework-shared/constants";
 
 export function useCookiesAccepted() {
   const [cookies] = useCookies([ACCEPTED_COOKIES_NAME]);

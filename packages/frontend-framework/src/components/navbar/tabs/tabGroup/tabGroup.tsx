@@ -19,7 +19,6 @@
 import React, {ReactElement, useContext, useEffect, useState} from "react";
 import "../../navbar.css";
 import {useTranslator} from "../../../internationalization/translators";
-import {ColorSettingsContext} from "../../../../contexts/colorsettings";
 import {TranslateFunctionType} from "../../../../types/translationFunction";
 import {TabGroupCollapsed} from "./tabGroupCollapsed";
 import {TabGroupUnfolded} from "./tabGroupUnfolded";
@@ -32,7 +31,8 @@ import {
 import {
   DEFAULT_ELEMENTSIZE,
   NAVBAR_WIDTH_UNFOLDED,
-} from "../../../../constants";
+} from "@iavofficial/frontend-framework-shared/constants";
+import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 
 interface Props {
   name: string | ((t: TranslateFunctionType) => string);

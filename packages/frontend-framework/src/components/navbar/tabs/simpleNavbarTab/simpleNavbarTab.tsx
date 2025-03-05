@@ -21,19 +21,19 @@ import {Link, useLocation} from "react-router-dom";
 import {useTranslator} from "../../../internationalization/translators";
 import "../tabs.css";
 import {GroupableNavbarTab, NavbarTabProps} from "../typesNavbarTab";
-import {ColorSettingsContext} from "../../../../contexts/colorsettings";
 import {SimpleNavbarTabCollapsed} from "./simpleNavbarTabCollapsed";
 import {SimpleNavbarTabUnfolded} from "./simpleNavbarTabUnfolded";
 import {
   determineCurrentColor,
   determineCurrentColorInsideGroup,
 } from "../../../../utils/determineCurrentColor";
+import {InjectedOptionsGroupableByWrapperToTab} from "../../types/typesInjectedOptions";
 import {
   DEFAULT_ELEMENTSIZE,
   GAB_NAVBAR_UNFOLDED,
   NAVBAR_WIDTH_UNFOLDED,
-} from "../../../../constants";
-import {InjectedOptionsGroupableByWrapperToTab} from "../../types/typesInjectedOptions";
+} from "@iavofficial/frontend-framework-shared/constants";
+import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 
 export interface NestedNavbarTabProps {
   additionalClassNames: string;

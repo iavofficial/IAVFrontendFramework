@@ -17,14 +17,14 @@
  */
 
 import React, {useContext, useState} from "react";
-import {DEFAULT_ELEMENTSIZE, GREY5, WHITE} from "../../constants";
-import {generateHashOfLength} from "../../utils/hash";
 import {Tooltip} from "primereact/tooltip";
 import "./contentbar.css";
-import {ColorSettingsContext} from "../../contexts/colorsettings";
 import {TranslationFunction} from "../../types/translationFunction";
 import {useTranslator} from "../internationalization/translators";
 import {determineCurrentColor} from "../../utils/determineCurrentColor";
+import {DEFAULT_ELEMENTSIZE, GREY5, WHITE} from "@iavofficial/frontend-framework-shared/constants";
+import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared/colorSettingsContext";
+import { generateHashOfLength } from "@iavofficial/frontend-framework-shared/hash";
 
 export interface Props {
   displayName: string | TranslationFunction;

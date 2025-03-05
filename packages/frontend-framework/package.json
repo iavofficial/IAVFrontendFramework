@@ -6,13 +6,13 @@
   "description": "This framework is the foundation of frontend applications to provide maintainability, expandability, unification and an improved developer experience.",
   "scripts": {
     "setup": "npm i",
-    "build": "npx babel ./src --out-dir ./dist --extensions .ts,.tsx --copy-files && npx babel ./package.json --out-dir ./dist --copy-files && npx tsc --outDir ./dist",
-    "build-live": "cross-env-shell \"..\\..\\scripts\\win\\build-live.bat || echo \"Not implemented yet.\"",
+    "build": "cross-env-shell \"../../scripts/unix/packages/build.sh || echo \"Not implemented yet.\"\"",
+    "build-live": "cross-env-shell \"..\\..\\scripts\\win\\build-live.bat || echo \"Not implemented yet.\"\"",
     "test": "jest --passWithNoTests",
     "lint": "eslint src/**/*.{js,ts,tsx}",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json}\" && prettier --write \"docs/*\"",
     "release": "npx semantic-release",
-    "generate-docs": "../../scripts/unix/generate-docs-for-package.sh"
+    "generate-docs": "../../scripts/unix/docs_generation/generate-docs-for-package.sh"
   },
   "eslintConfig": {
     "extends": [
@@ -35,6 +35,8 @@
     "iav-core"
   ],
   "dependencies": {
+    "@iavofficial/frontend-framework-shared": "*",
+    "@reduxjs/toolkit": "^2.5.1",
     "i18next": "^22.4.13",
     "i18next-browser-languagedetector": "^7.0.1",
     "primeflex": "^3.3.0",
@@ -42,6 +44,7 @@
     "primereact": "^10.3.3",
     "react-cookie": "^7.2.1",
     "react-i18next": "^12.2.0",
+    "react-redux": "^9.2.0",
     "simplebar-react": "^3.2.3"
   },
   "peerDependencies": {
@@ -63,7 +66,7 @@
     "@types/node": "^18.15.5",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
-    "aws-amplify": "^6.3.4",
+    "@vitejs/plugin-react": "^4.3.4",
     "babel-plugin-inline-react-svg": "^2.0.2",
     "conventional-changelog-conventionalcommits": "^8.0.0",
     "jest": "^29.7.0",
@@ -71,21 +74,23 @@
     "typescript": "^5.0.2"
   },
   "files": [
-    "./LICENSE",
-    "./NOTICE",
+    "./dist",
     "./package.json",
-    "./README.md",
-    "./dist"
+    "./LICENSE",
+    "./NOTICE.md",
+    "./SBOM.spdx",
+    "./README.md"
   ],
   "exports": {
+    "./store": "./dist/store.js",
     "./uiLayer": "./dist/components/uiLayer.js",
     "./globalDataLayer": "./dist/components/globalDataLayer.js",
     "./auth": "./dist/contexts/auth.js",
     "./dummyAuthenticationProvider": "./dist/components/authentication/default/dummyAuthenticationProvider.js",
-    "./awsAuthenticationProvider": "./dist/components/authentication/aws/awsAuthenticationProvider.js",
-    "./awsAuthenticationView": "./dist/components/authentication/aws/awsAuthenticationView.js",
     "./basicAuthenticationView": "./dist/components/authentication/default/basicAuthenticationView.js",
     "./navbar": "./dist/components/navbar/navbar.js",
+    "./navbarSettingsTypes": "./dist/types/navbarSettingsTypes.js",
+    "./navbarSettingsContext": "./dist/types/navbarContext.js",
     "./basicContentWrapper": "./dist/components/navbar/wrappers/basicContentWrapper.js",
     "./group": "./dist/components/navbar/wrappers/groupContentWrapper.js",
     "./contentWrapperGeneralization": "./dist/components/navbar/wrappers/contentWrapperGeneralization.js",
@@ -102,87 +107,180 @@
     "./typesWrappers": "./dist/components/navbar/wrappers/typesWrappers.js",
     "./customContentbarWrapper": "./dist/components/content/customContentbarWrapper.js",
     "./basicContentbarWrapper": "./dist/components/content/basicContentbarWrapper.js",
-    "./colorProvider": "./dist/coloring/colorProvider.js",
-    "./colorSettingsContext": "./dist/contexts/colorsettings.js",
-    "./colorOptionTypes": "./dist/coloring/colorOptionTypes.js",
-    "./constants": "./dist/constants.js",
     "./contentWithBar": "./dist/components/content/contentWithBar.js",
     "./contentLayout": "./dist/components/content/contentLayout.js",
     "./contentStyle": "./dist/components/content/contentStyle.js",
     "./contentCell": "./dist/components/content/contentCell.js",
+    "./colorProvider": "./dist/coloring/colorProvider.js",
+    "./colorOptionTypes": "./dist/coloring/colorOptionTypes.js",
+    "./i18n": "./dist/components/internationalization/i18n.js",
+    "./language": "./dist/contexts/language.js",
+    "./translationFunction": "./dist/types/translationFunction.js",
+    "./translators": "./dist/components/internationalization/translators.js",
     "./header": "./dist/components/header/header.js",
     "./settingsMenu": "./dist/components/header/settingsMenu.js",
     "./userMenu": "./dist/components/header/userMenu.js",
     "./cookieBanner": "./dist/components/cookie/cookieBanner.js",
     "./defaultContentSelectionElement": "./dist/components/content/defaultContentSelectionElement.js",
-    "./hash": "./dist/utils/hash.js",
-    "./navbarSettingsTypes": "./dist/types/navbarSettingsTypes.js",
-    "./navbarSettingsContext": "./dist/types/navbarContext.js",
-    "./i18n": "./dist/components/internationalization/i18n.js",
-    "./language": "./dist/contexts/language.js",
-    "./translators": "./dist/components/internationalization/translators.js",
-    "./translationFunction": "./dist/types/translationFunction.js",
     "./imprint": "./dist/components/imprint/imprintText.js",
-    "./constants.css": "./dist/components/css/constants.css",
-    "./mainPage.css": "./dist/components/css/mainPage.css",
-    "./framework.css": "./dist/components/css/framework.css",
-    "./globalColors.css": "./dist/components/css/globalColors.css",
     "./headerPanelElement": "./dist/components/header/headerPanelElement.js",
-    "./headerMenuElement": "./dist/components/header/headerMenuElement.js"
+    "./headerMenuElement": "./dist/components/header/headerMenuElement.js",
+    "./constants": "./dist/re-exports/constants.js",
+    "./mandatoryModuleNames": "./dist/re-exports/mandatoryModuleNames.js",
+    "./hash": "./dist/re-exports/hash.js",
+    "./colorSettingsContext": "./dist/re-exports/colorSettingsContext.js",
+    "./moduleContext": "./dist/re-exports/moduleContext.js",
+    "./constants.css": "./dist/css/constants.css",
+    "./mainPage.css": "./dist/css/mainPage.css",
+    "./framework.css": "./dist/css/framework.css",
+    "./globalColors.css": "./dist/css/globalColors.css"
   },
   "typesVersions": {
     "*": {
-      "./uiLayer": "./dist/components/uiLayer.d.ts",
-      "./globalDataLayer": "./dist/components/globalDataLayer.d.ts",
-      "./auth": "./dist/contexts/auth.d.ts",
-      "./dummyAuthenticationProvider": "./dist/components/authentication/default/dummyAuthenticationProvider.d.ts",
-      "./awsAuthenticationProvider": "./dist/components/authentication/aws/awsAuthenticationProvider.d.ts",
-      "./awsAuthenticationView": "./dist/components/authentication/aws/awsAuthenticationView.d.ts",
-      "./basicAuthenticationView": "./dist/components/authentication/default/basicAuthenticationView.d.ts",
-      "./navbar": "./dist/components/navbar/navbar.d.ts",
-      "./basicContentWrapper": "./dist/components/navbar/wrappers/basicContentWrapper.d.ts",
-      "./group": "./dist/components/navbar/wrappers/groupContentWrapper.d.ts",
-      "./contentWrapperGeneralization": "./dist/components/navbar/wrappers/contentWrapperGeneralization.d.ts",
-      "./simpleNavbarTab": "./dist/components/navbar/tabs/simpleNavbarTab/simpleNavbarTab.d.ts",
-      "./privilegedNavbarTab": "./dist/components/navbar/tabs/privilegedNavbarTab.d.ts",
-      "./tabGroup": "./dist/components/navbar/tabs/tabGroup/tabGroup.d.ts",
-      "./simpleNavbarTabFactory": "./dist/components/navbar/factories/simpleNavbarTabFactory.d.ts",
-      "./privilegedNavbarTabFactory": "./dist/components/navbar/factories/privilegedNavbarTabFactory.d.ts",
-      "./typesTabFactories": "./dist/components/navbar/factories/typesFactories.d.ts",
-      "./typesSimpleNavbarTab": "./dist/components/navbar/tabs/simpleNavbarTab/typesSimpleNavbarTab.d.ts",
-      "./typesTabGroup": "./dist/components/navbar/tabs/tabGroup/typesTabGroup.d.ts",
-      "./typesNavbarTab": "./dist/components/navbar/tabs/typesNavbarTab.d.ts",
-      "./typesInjectedOptions": "./dist/components/navbar/types/typesInjectedOptions.d.ts",
-      "./typesWrappers": "./dist/components/navbar/wrappers/typesWrappers.d.ts",
-      "./customContentbarWrapper": "./dist/components/content/customContentbarWrapper.d.ts",
-      "./basicContentbarWrapper": "./dist/components/content/basicContentbarWrapper.d.ts",
-      "./colorProvider": "./dist/coloring/colorProvider.d.ts",
-      "./colorSettingsContext": "./dist/contexts/colorsettings.d.ts",
-      "./colorOptionTypes": "./dist/coloring/colorOptionTypes.d.ts",
-      "./constants": "./dist/constants.d.ts",
-      "./contentWithBar": "./dist/components/content/contentWithBar.d.ts",
-      "./contentLayout": "./dist/components/content/contentLayout.d.ts",
-      "./contentStyle": "./dist/components/content/contentStyle.d.ts",
-      "./contentCell": "./dist/components/content/contentCell.d.ts",
-      "./header": "./dist/components/header/header.d.ts",
-      "./settingsMenu": "./dist/components/header/settingsMenu.d.ts",
-      "./userMenu": "./dist/components/header/userMenu.d.ts",
-      "./cookieBanner": "./dist/components/cookie/cookieBanner.d.ts",
-      "./defaultContentSelectionElement": "./dist/components/content/defaultContentSelectionElement.d.ts",
-      "./hash": "./dist/utils/hash.d.ts",
-      "./navbarSettingsTypes": "./dist/types/navbarSettingsTypes.d.ts",
-      "./navbarSettingsContext": "./dist/types/navbarSettingsContext.d.ts",
-      "./i18n": "./dist/components/internationalization/i18n.d.ts",
-      "./language": "./dist/contexts/language.d.ts",
-      "./translators": "./dist/components/internationalization/translators.d.ts",
-      "./translationFunction": "./dist/types/translationFunction.d.ts",
-      "./imprint": "./dist/components/imprint/imprintText.d.ts",
-      "./constants.css": "./dist/components/css/constants.css",
-      "./mainPage.css": "./dist/components/css/mainPage.css",
-      "./framework.css": "./dist/components/css/framework.css",
-      "./globalColors.css": "./dist/components/css/globalColors.css",
-      "./headerPanelElement": "./dist/components/header/headerPanelElement.d.ts",
-      "./headerMenuElement": "./dist/components/header/headerMenuElement.d.ts"
+      "./store": [
+        "./dist/store.d.ts"
+      ],
+      "./uiLayer": [
+        "./dist/components/uiLayer.d.ts"
+      ],
+      "./globalDataLayer": [
+        "./dist/components/globalDataLayer.d.ts"
+      ],
+      "./auth": [
+        "./dist/contexts/auth.d.ts"
+      ],
+      "./dummyAuthenticationProvider": [
+        "./dist/components/authentication/default/dummyAuthenticationProvider.d.ts"
+      ],
+      "./basicAuthenticationView": [
+        "./dist/components/authentication/default/basicAuthenticationView.d.ts"
+      ],
+      "./navbar": [
+        "./dist/components/navbar/navbar.d.ts"
+      ],
+      "./navbarSettingsTypes": [
+        "./dist/types/navbarSettingsTypes.d.ts"
+      ],
+      "./navbarSettingsContext": [
+        "./dist/types/navbarContext.d.ts"
+      ],
+      "./basicContentWrapper": [
+        "./dist/components/navbar/wrappers/basicContentWrapper.d.ts"
+      ],
+      "./group": [
+        "./dist/components/navbar/wrappers/groupContentWrapper.d.ts"
+      ],
+      "./contentWrapperGeneralization": [
+        "./dist/components/navbar/wrappers/contentWrapperGeneralization.d.ts"
+      ],
+      "./simpleNavbarTab": [
+        "./dist/components/navbar/tabs/simpleNavbarTab/simpleNavbarTab.d.ts"
+      ],
+      "./privilegedNavbarTab": [
+        "./dist/components/navbar/tabs/privilegedNavbarTab.d.ts"
+      ],
+      "./tabGroup": [
+        "./dist/components/navbar/tabs/tabGroup/tabGroup.d.ts"
+      ],
+      "./simpleNavbarTabFactory": [
+        "./dist/components/navbar/factories/simpleNavbarTabFactory.d.ts"
+      ],
+      "./privilegedNavbarTabFactory": [
+        "./dist/components/navbar/factories/privilegedNavbarTabFactory.d.ts"
+      ],
+      "./typesTabFactories": [
+        "./dist/components/navbar/factories/typesFactories.d.ts"
+      ],
+      "./typesSimpleNavbarTab": [
+        "./dist/components/navbar/tabs/simpleNavbarTab/typesSimpleNavbarTab.d.ts"
+      ],
+      "./typesTabGroup": [
+        "./dist/components/navbar/tabs/tabGroup/typesTabGroup.d.ts"
+      ],
+      "./typesNavbarTab": [
+        "./dist/components/navbar/tabs/typesNavbarTab.d.ts"
+      ],
+      "./typesInjectedOptions": [
+        "./dist/components/navbar/types/typesInjectedOptions.d.ts"
+      ],
+      "./typesWrappers": [
+        "./dist/components/navbar/wrappers/typesWrappers.d.ts"
+      ],
+      "./customContentbarWrapper": [
+        "./dist/components/content/customContentbarWrapper.d.ts"
+      ],
+      "./basicContentbarWrapper": [
+        "./dist/components/content/basicContentbarWrapper.d.ts"
+      ],
+      "./contentWithBar": [
+        "./dist/components/content/contentWithBar.d.ts"
+      ],
+      "./contentLayout": [
+        "./dist/components/content/contentLayout.d.ts"
+      ],
+      "./contentStyle": [
+        "./dist/components/content/contentStyle.d.ts"
+      ],
+      "./contentCell": [
+        "./dist/components/content/contentCell.d.ts"
+      ],
+      "./colorProvider": [
+        "./dist/coloring/colorProvider.d.ts"
+      ],
+      "./colorOptionTypes": [
+        "./dist/coloring/colorOptionTypes.d.ts"
+      ],
+      "./i18n": [
+        "./dist/components/internationalization/i18n.d.ts"
+      ],
+      "./language": [
+        "./dist/contexts/language.d.ts"
+      ],
+      "./translationFunction": [
+        "./dist/types/translationFunction.d.ts"
+      ],
+      "./translators": [
+        "./dist/components/internationalization/translators.d.ts"
+      ],
+      "./header": [
+        "./dist/components/header/header.d.ts"
+      ],
+      "./settingsMenu": [
+        "./dist/components/header/settingsMenu.d.ts"
+      ],
+      "./userMenu": [
+        "./dist/components/header/userMenu.d.ts"
+      ],
+      "./cookieBanner": [
+        "./dist/components/cookie/cookieBanner.d.ts"
+      ],
+      "./defaultContentSelectionElement": [
+        "./dist/components/content/defaultContentSelectionElement.d.ts"
+      ],
+      "./imprint": [
+        "./dist/components/imprint/imprintText.d.ts"
+      ],
+      "./headerPanelElement": [
+        "./dist/components/header/headerPanelElement.d.ts"
+      ],
+      "./headerMenuElement": [
+        "./dist/components/header/headerMenuElement.d.ts"
+      ],
+      "./constants": [
+        "./dist/re-exports/constants.d.ts"
+      ],
+      "./mandatoryModuleNames": [
+        "./dist/re-exports/mandatoryModuleNames.d.ts"
+      ],
+      "./hash": [
+        "./dist/re-exports/hash.d.ts"
+      ],
+      "./colorSettingsContext": [
+        "./dist/re-exports/colorSettingsContext.d.ts"
+      ],
+      "./moduleContext": [
+        "./dist/re-exports/moduleContext.d.ts"
+      ]
     }
   },
   "publishConfig": {

@@ -16,87 +16,80 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, {Component} from "react";
-import {
-  AuthContext,
-  AuthenticationProvider,
-  Credentials,
-  UserDataBasic,
-} from "../../../contexts/auth";
+import { AuthModule, Credentials, UserData } from "@iavofficial/frontend-framework-shared/authenticationProvider";
+import { MandatoryModuleNames } from "@iavofficial/frontend-framework-shared/mandatoryModuleNames";
+import { createAsyncThunk, createSlice, PayloadAction, Slice, ThunkDispatch } from "@reduxjs/toolkit";
 
 export interface Props {
   additionalContextValues?: {[key: string]: any};
 }
 
-export interface State {
+export interface DummyAuthenticatorState {
   hasAuthenticated: boolean;
-  userData: UserDataBasic | undefined;
-  isRefreshing: boolean;
+  userData: UserData | undefined;
+  isLoading: boolean;
 }
 
-export class DummyAuthenticationProvider
-  extends Component<React.PropsWithChildren<Props>, State>
-  implements AuthenticationProvider
-{
-  constructor(props: React.PropsWithChildren<Props>) {
-    super(props);
-    this.state = {
-      hasAuthenticated: false,
-      userData: undefined,
-      isRefreshing: false,
-    };
-  }
+const initialState: DummyAuthenticatorState= {
+  hasAuthenticated: false,
+  isLoading: false,
+  userData: undefined
+}
 
-  fetchAuthed = (url: string, settings?: object) => {
-    return fetch(url, settings);
-  };
+export class DummyAuthenticator implements AuthModule<DummyAuthenticatorState>{
+  public slice: Slice<DummyAuthenticatorState>;
 
-  login = (credentials: Credentials) => {
-    this.setState({
-      isRefreshing: true,
-      hasAuthenticated: true,
-      userData: {username: credentials.email},
+  public fetchAuthed;
+  public login;
+  public logout;
+
+  constructor() {
+    this.slice = createSlice({
+      name: MandatoryModuleNames.Authentication,
+      initialState,
+      reducers: {
+        login: (state, action: PayloadAction<string>) => {
+          // TODO: Check whether this works.
+          state.isLoading = true;
+          state.hasAuthenticated = true;
+          state.userData = {username: action.payload}
+        },
+        logout: (state) => {
+          state.isLoading = false;
+          state.hasAuthenticated = false;
+          state.userData = undefined;
+        }
+      }
     });
-  };
 
-  logout = () => {
-    this.setState({
-      isRefreshing: false,
-      hasAuthenticated: false,
-      userData: undefined,
-    });
-  };
+    const {
+      login,
+      logout
+    } = this.slice.actions;
 
-  hasAuthenticated = () => {
-    return this.state.hasAuthenticated;
-  };
-
-  getUserData = () => {
-    return this.state.userData?.groups;
-  };
-
-  isRefreshing = () => {
-    return this.state.isRefreshing;
-  };
-
-  render() {
-    return (
-      <AuthContext.Provider
-        value={Object.assign(
-          {
-            ...this.state,
-            hasAuthenticated: this.hasAuthenticated,
-            login: this.login,
-            logout: this.logout,
-            getUserData: this.getUserData,
-            fetchAuthed: this.fetchAuthed,
-            isRefreshing: this.isRefreshing,
-          },
-          this.props.additionalContextValues,
-        )}
-      >
-        {this.props.children}
-      </AuthContext.Provider>
+    this.fetchAuthed = createAsyncThunk<
+    Response,
+    {url: string; settings?: object},
+    {state: {[MandatoryModuleNames.Authentication]: DummyAuthenticatorState}}
+    >(
+      MandatoryModuleNames.Authentication + "/fetchAuthed",
+      async ({url, settings}) => {
+        return fetch(url, settings);
+      }
     );
+
+    this.login = createAsyncThunk(
+      MandatoryModuleNames.Authentication + "/login",
+      async ({credentials} : {credentials: Credentials}, {dispatch}) => {
+        dispatch(login(credentials.email));
+      }
+    );
+
+    this.logout = createAsyncThunk<void, {error?: unknown} | undefined, {}>(
+      MandatoryModuleNames.Authentication + "/logout",
+      async ({error}: {error?: unknown} = {}, {dispatch}) => {
+        dispatch(logout({}));
+      }
+    )
   }
 }

@@ -20,7 +20,6 @@ import {SelectButton} from "primereact/selectbutton";
 import {useState} from "react";
 import {UILayer} from "@iavofficial/frontend-framework/uiLayer";
 import {TranslateFunctionType} from "@iavofficial/frontend-framework/translationFunction";
-import {BasicAuthenticationView} from "@iavofficial/frontend-framework/basicAuthenticationView";
 import {BasicContentWrapper} from "@iavofficial/frontend-framework/basicContentWrapper";
 import {Group} from "@iavofficial/frontend-framework/group";
 import InfoIcon from "./assets/infoIcon.svg?react";
@@ -37,6 +36,8 @@ import {HeaderPanelElement} from "@iavofficial/frontend-framework/headerPanelEle
 import {PrimeIcons} from "primereact/api";
 import {WHITE} from "@iavofficial/frontend-framework/constants";
 import {HeaderMenuElement} from "@iavofficial/frontend-framework/headerMenuElement";
+import { ExampleComponent7 } from "./components/exampleComponent7";
+import { AwsAuthenticationView } from "./components/aws_example/store";
 
 function Layout() {
     const [selectedButtonOption, setSelectedButtonOption] = useState("Simulated");
@@ -66,6 +67,15 @@ function Layout() {
                 icon: <InfoIcon/>,
             }),
             ExampleComponent1
+        ),
+        new BasicContentWrapper(
+            "/2",
+            simpleNavbarTabFactory({
+                disabled: false,
+                name: "Example for Redux Store",
+                icon: <InfoIcon/>,
+            }),
+            ExampleComponent7
         ),
         new Group(
             (t: TranslateFunctionType) => t("Test_group_not_collapsible"),
@@ -220,9 +230,7 @@ function Layout() {
             />
         )
     ];
-
-    const appLogo = <span className="ml-3">Example application</span>;
-
+    
     return (
         <UILayer
             authOptions={{
@@ -232,13 +240,15 @@ function Layout() {
             }}
             tabAndContentWrappers={views}
             startingPoint="/"
-            authenticationView={BasicAuthenticationView}
+            authenticationView={AwsAuthenticationView}
             settingsMenuOptions={settingsMenuOptions}
             documentsLabelKey="Legal_documents"
             documentsComponent={LegalDocuments}
             headerOptions={{
-                reactElementLeft: appLogo,
+                userIcon: <InfoIcon style={{backgroundColor: WHITE}}/>,
+                reactElementLeft: <span className="ml-3">Dev application</span>,
                 headerElements: headerElements,
+                hideUserIcon: false
             }}
         />
     );

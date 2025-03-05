@@ -18,34 +18,46 @@
 
 import React, {FormEvent, useContext, useState} from "react";
 import {Link} from "react-router-dom";
-import {BLUE3, PADDING_GAB, WHITE} from "../../../constants";
-import {AuthContext} from "../../../contexts/auth";
-import {LoginButtonWithSpinner} from "../loginButtonWithSpinner";
+import {APPLICATION_LOGO_PLACEHOLDER, BLUE3, PADDING_GAB, WHITE} from "@iavofficial/frontend-framework-shared/constants";
 import {useTranslator} from "../../internationalization/translators";
-import {AuthenticationViewProps} from "../authenticationViewProps";
-import "../authenticationView.css";
-import "../../css/globalColors.css";
 import loginBackgroundLightMode from "../../../assets/png/login_background_lightMode.png";
 import loginBackgroundDarkMode from "../../../assets/png/login_background_darkMode.png";
 import {Dropdown, DropdownChangeEvent} from "primereact/dropdown";
 import {LanguageContext} from "../../../contexts/language";
-import {parseLanguageResourcesIntoDropdownFormat} from "../../../utils/parseLanguageResourcesIntoDropdownFormat";
-import {ColorSettingsContext} from "../../../contexts/colorsettings";
-import {generateHashOfLength} from "../../../utils/hash";
 import {Tooltip} from "primereact/tooltip";
-import {AppLogoPlaceholder} from "../../appLogoPlaceholder";
 import CompanyLogo from "../../../assets/svg/companyLogo";
 import TextField from "../../helper/textfield/TextField";
+import { AuthenticationViewProps } from "@iavofficial/frontend-framework-shared/authenticationViewProps";
+import { generateHashOfLength } from "@iavofficial/frontend-framework-shared/hash";
+import { parseLanguageResourcesIntoDropdownFormat } from "@iavofficial/frontend-framework-shared/parseLanguageResourcesIntoDropdownFormat";
+import { LoginButtonWithSpinner } from "@iavofficial/frontend-framework-shared/loginButtonWithSpinner";
+import { AppLogoPlaceholder } from "@iavofficial/frontend-framework-shared/appLogoPlaceholder";
+import { AuthState } from "@iavofficial/frontend-framework-shared/authenticationProvider";
+import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared/colorSettingsContext";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import { ThunkDispatch, Action } from "@reduxjs/toolkit";
+import { ModuleContext } from "@iavofficial/frontend-framework-shared/moduleContext";
+import { MandatoryModuleNames } from "@iavofficial/frontend-framework-shared/mandatoryModuleNames";
+
+type BasicAuthenticatorAuthDispatch = ThunkDispatch<AuthState, unknown, Action<string>>;
+type BasicAuthenticatorStoreState = {[MandatoryModuleNames.Authentication]: AuthState}
 
 export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
+  const moduleContext = useContext(ModuleContext);
+  const authModule = moduleContext.modules.auth;
+
   const colorSettingsContext = useContext(ColorSettingsContext);
+
+  const dispatch = useDispatch<BasicAuthenticatorAuthDispatch>();
+  const useAuthSelector: TypedUseSelectorHook<BasicAuthenticatorStoreState> = useSelector;
+
+  const isLoading = useAuthSelector(state => state[MandatoryModuleNames.Authentication].isLoading);
 
   const [triedToSubmit, setTriedToSubmit] = useState<boolean>(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const langContext = useContext(LanguageContext);
 
-  const authContext = useContext(AuthContext);
   const t = useTranslator();
 
   const headerBackgroundColor =
@@ -74,7 +86,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
   const submit = (event: FormEvent<HTMLFormElement>) => {
     setTriedToSubmit(true);
     event.preventDefault();
-    authContext?.login({email: email, password: password});
+    dispatch(authModule.login({credentials: {email: email, password: password}}));
   };
 
   const companyLogoDefault = (props: AuthenticationViewProps) => (
@@ -106,7 +118,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
         {props.headerOptions?.reactElementLeft ? (
           props.headerOptions?.reactElementLeft
         ) : (
-          <AppLogoPlaceholder />
+          <AppLogoPlaceholder appLogoPlaceholder={APPLICATION_LOGO_PLACEHOLDER} />
         )}
       </div>
 
@@ -251,16 +263,14 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                 required={true}
                 error={
                   triedToSubmit &&
-                  (authContext?.isRefreshing
-                    ? !authContext.isRefreshing()
-                    : false)
+                  !isLoading
                 }
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 helperText={passwordErrorMessage || t("wrong_password")}
               />
               <div>
-                <LoginButtonWithSpinner isLoading={authContext?.isLoading} />
+                <LoginButtonWithSpinner isLoading={isLoading} />
               </div>
             </div>
           </form>

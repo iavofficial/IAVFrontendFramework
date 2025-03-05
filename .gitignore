@@ -28,3 +28,6 @@ yarn-error.log*
 **/node_modules
 **/dist
 **/build
+
+# Local env files for values which should not be uploaded to GitHub
+**/.env.*.local

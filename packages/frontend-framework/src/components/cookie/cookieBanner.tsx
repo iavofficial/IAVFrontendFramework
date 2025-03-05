@@ -20,6 +20,10 @@ import React, {useContext, useState} from "react";
 import {Dialog} from "primereact/dialog";
 import {Button} from "primereact/button";
 import {useCookies} from "react-cookie";
+import {useCookiesAccepted} from "./cookieHooks";
+import {useTranslator} from "../internationalization/translators";
+import {setAcceptCookies} from "../../utils/setAcceptCookies";
+import makeStyles from "../content/style_options/makeStyles";
 import {
   ACCEPTED_COOKIES_NAME,
   BLACK,
@@ -29,12 +33,8 @@ import {
   GREY5,
   GREY6,
   WHITE,
-} from "../../constants";
-import {useCookiesAccepted} from "./cookieHooks";
-import {useTranslator} from "../internationalization/translators";
-import {setAcceptCookies} from "../../utils/setAcceptCookies";
-import {ColorSettingsContext} from "../../contexts/colorsettings";
-import makeStyles from "../content/style_options/makeStyles";
+} from "@iavofficial/frontend-framework-shared/constants";
+import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 
 const useStyles = makeStyles(({darkMode}: {darkMode: boolean}) => ({
   dialog: {

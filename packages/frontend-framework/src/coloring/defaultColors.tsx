@@ -26,7 +26,7 @@ import {
   GREY6,
   GREY_MENU_SPECIAL_1,
   WHITE,
-} from "../constants";
+} from "@iavofficial/frontend-framework-shared/constants";
 
 //. Header
 export const LIGHT_HEADER_BACKGROUND_COLOR = BLUE0;

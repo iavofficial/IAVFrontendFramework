@@ -18,8 +18,9 @@
 
 import React, {useContext} from "react";
 import {ContextMenu} from "primereact/contextmenu";
-import {AuthContext} from "../../contexts/auth";
 import {MenuItem} from "./settingsMenu";
+import { useDefaultDispatch } from "../../store";
+import { ModuleContext } from "@iavofficial/frontend-framework-shared/moduleContext";
 
 export interface Props {
   hideMenu: (e: React.KeyboardEvent) => void;
@@ -33,7 +34,10 @@ export interface UserMenuOptions {
 
 //eslint-disable-next-line
 export const UserMenu = React.forwardRef<ContextMenu, Props>((props, ref) => {
-  const authContext = useContext(AuthContext);
+  const moduleContext = useContext(ModuleContext);
+
+  const dispatch = useDefaultDispatch();
+
   const basicOptions: MenuItem[] = [];
 
   if (!props.userMenuOptions?.hideLogoutButton) {
@@ -41,7 +45,7 @@ export const UserMenu = React.forwardRef<ContextMenu, Props>((props, ref) => {
       label: "Logout",
       icon: "pi pi-sign-out",
       command: () => {
-        authContext?.logout();
+        dispatch(moduleContext.modules.auth.logout());
       },
     });
   }

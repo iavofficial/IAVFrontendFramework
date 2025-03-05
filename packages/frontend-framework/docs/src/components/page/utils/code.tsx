@@ -1,4 +1,4 @@
-import React from "react";
+import React, {PropsWithChildren} from "react";
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import makeStyles from "../../../../../src/components/content/style_options/makeStyles.tsx";
 import {ocean} from "react-syntax-highlighter/dist/cjs/styles/hljs";
@@ -12,16 +12,16 @@ const useStyles = makeStyles(() => ({
         whiteSpace: "pre-wrap",
         fontSize: "0.875rem",
         lineHeight: "1.5",
-        background: "#2b303b"
+        background: "#2b303b",
+        paddingLeft: "8px"
     },
 }));
 
 interface Props {
     language: string;
-    children: string;
 }
 
-const Code: React.FC<Props> = (props) => {
+const Code: React.FC<PropsWithChildren<Props>> = (props) => {
 
     const {language, children} = props;
 

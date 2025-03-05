@@ -6,13 +6,13 @@
   "description": "This package provides react components, contexts, types, utils etc. for use in multiple frontend framework packages.",
   "scripts": {
     "setup": "npm i",
-    "build": "cross-env-shell \"../../scripts/unix/packages/build.sh || echo \"Not implemented yet.\"",
-    "build-live": "cross-env-shell \"..\\..\\scripts\\win\\build-live.bat || echo \"Not implemented yet.\"",
+    "build": "cross-env-shell \"../../scripts/unix/packages/build.sh || echo \"Not implemented yet.\"\"",
+    "build-live": "cross-env-shell \"..\\..\\scripts\\win\\build-live.bat || echo \"Not implemented yet.\"\"",
     "test": "jest --passWithNoTests",
     "lint": "eslint src/**/*.{js,ts,tsx}",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json}\" && prettier --write \"docs/*\"",
     "release": "npx semantic-release",
-    "generate-docs": "../../scripts/unix/generate-docs-for-package.sh"
+    "generate-docs": "../../scripts/unix/docs_generation/generate-docs-for-package.sh"
   },
   "eslintConfig": {
     "extends": [
@@ -61,8 +61,12 @@
     "typescript": "^5.0.2"
   },
   "files": [
+    "./dist",
     "./package.json",
-    "./dist"
+    "./LICENSE",
+    "./NOTICE.md",
+    "./SBOM.spdx",
+    "./README.md"
   ],
   "exports": {
     "./appLogoPlaceholder": "./dist/components/appLogoPlaceholder.js",
@@ -72,16 +76,12 @@
     "./authenticationView.css": "./dist/css/authenticationView.css",
     "./constants": "./dist/constants/constants.js",
     "./mandatoryModuleNames": "./dist/constants/auth/mandatoryModuleNames.js",
-
     "./module": "./dist/types/modules/module.js",
     "./authenticationProvider": "./dist/types/modules/auth/authenticationProvider.js",
     "./authenticationViewProps": "./dist/types/modules/auth/authenticationViewProps.js",
-
     "./colorOptionTypes": "./dist/types/color/colorOptionTypes.js",
-
     "./requiredMutable": "./dist/types/util-types/requiredMutable.js",
     "./componentTypeMinProps": "./dist/types/util-types/componentTypeMinProps.js",
-
     "./containsOneOrMoreGroups": "./dist/utils/auth/containsOneOrMoreGroups.js",
     "./parseLanguageResourcesIntoDropdownFormat": "./dist/utils/internationalization/parseLanguageResourcesIntoDropdownFormat.js",
     "./hash": "./dist/utils/hash.js"
@@ -106,37 +106,33 @@
       "./mandatoryModuleNames": [
         "./dist/constants/auth/mandatoryModuleNames.d.ts"
       ],
-
       "./module": [
-          "./dist/types/modules/module.d.ts"
-        ],
-        "./authenticationProvider": [
-          "./dist/types/modules/auth/authenticationProvider.d.ts"
-        ],
-        "./authenticationViewProps": [
-          "./dist/types/modules/auth/authenticationViewProps.d.ts"
-        ],
-  
-        "./colorOptionTypes": [
-          "./dist/types/color/colorOptionTypes.d.ts"
-        ],
-  
-        "./requiredMutable": [
-          "./dist/types/util-types/requiredMutable.d.ts"
-        ],
-        "./componentTypeMinProps": [
-          "./dist/types/util-types/componentTypeMinProps.d.ts"
-        ],
-
-        "./containsOneOrMoreGroups": [
-          "./dist/utils/auth/containsOneOrMoreGroups.d.ts"
-        ],
-        "./parseLanguageResourcesIntoDropdownFormat": [
-          "./dist/utils/internationalization/parseLanguageResourcesIntoDropdownFormat.d.ts"
-        ],
-        "./hash": [
-          "./dist/utils/hash.d.ts"
-        ]
+        "./dist/types/modules/module.d.ts"
+      ],
+      "./authenticationProvider": [
+        "./dist/types/modules/auth/authenticationProvider.d.ts"
+      ],
+      "./authenticationViewProps": [
+        "./dist/types/modules/auth/authenticationViewProps.d.ts"
+      ],
+      "./colorOptionTypes": [
+        "./dist/types/color/colorOptionTypes.d.ts"
+      ],
+      "./requiredMutable": [
+        "./dist/types/util-types/requiredMutable.d.ts"
+      ],
+      "./componentTypeMinProps": [
+        "./dist/types/util-types/componentTypeMinProps.d.ts"
+      ],
+      "./containsOneOrMoreGroups": [
+        "./dist/utils/auth/containsOneOrMoreGroups.d.ts"
+      ],
+      "./parseLanguageResourcesIntoDropdownFormat": [
+        "./dist/utils/internationalization/parseLanguageResourcesIntoDropdownFormat.d.ts"
+      ],
+      "./hash": [
+        "./dist/utils/hash.d.ts"
+      ]
     }
   },
   "publishConfig": {

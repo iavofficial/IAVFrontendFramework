@@ -18,7 +18,7 @@
 # IMPORTANT: This script should be executed in the root folder of the repository.
 
 # Define an array of files to copy
-FILES=".gitignore CHANGELOG.md CONTRIBUTING.md LICENSE NOTICE.md README.md SBOM.spdx"
+FILES=".gitignore CONTRIBUTING.md LICENSE NOTICE.md README.md"
 
 # Define source and target directories
 SRC_DIR="./main"

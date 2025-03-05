@@ -33,7 +33,7 @@
   },
   "scripts": {
     "setup:root": "npm i",
-    "checkout-docs:root": "./scripts/unix/copy-root-docs-and-prepare.sh",
+    "checkout-docs:root": "./scripts/unix/docs_generation/copy-root-docs-and-prepare.sh",
     "dev": "turbo run dev build-live",
     "test": "turbo run test",
     "build": "turbo run build",

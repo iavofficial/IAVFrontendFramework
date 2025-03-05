@@ -6,13 +6,13 @@
   "description": "This package provides AWS authentication using AWS Cognito.",
   "scripts": {
     "setup": "npm i",
-    "build": "cross-env-shell \"../../scripts/unix/packages/build.sh || echo \"Not implemented yet.\"",
-    "build-live": "cross-env-shell \"..\\..\\scripts\\win\\build-live.bat || echo \"Not implemented yet.\"",
+    "build": "cross-env-shell \"../../scripts/unix/packages/build.sh || echo \"Not implemented yet.\"\"",
+    "build-live": "cross-env-shell \"..\\..\\scripts\\win\\build-live.bat || echo \"Not implemented yet.\"\"",
     "test": "jest --passWithNoTests",
     "lint": "eslint src/**/*.{js,ts,tsx}",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json}\" && prettier --write \"docs/*\"",
     "release": "npx semantic-release",
-    "generate-docs": "../../scripts/unix/generate-docs-for-package.sh"
+    "generate-docs": "../../scripts/unix/docs_generation/generate-docs-for-package.sh"
   },
   "eslintConfig": {
     "extends": [
@@ -65,8 +65,12 @@
     "typescript": "^5.0.2"
   },
   "files": [
+    "./dist",
     "./package.json",
-    "./dist"
+    "./LICENSE",
+    "./NOTICE.md",
+    "./SBOM.spdx",
+    "./README.md"
   ],
   "exports": {
     "./awsAuthenticatorModule": "./dist/awsAuthenticatorModule.js",

@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, {useMemo} from "react";
+import React, {useContext, useMemo} from "react";
 import {
   ContentBar,
   ContentBarStyles,
@@ -25,6 +25,7 @@ import {
 import {BasicContentbarWrapper} from "./basicContentbarWrapper";
 import {CustomContentbarWrapper} from "./customContentbarWrapper";
 import {ContentLayout, ContentLayoutAndStyleProps} from "./contentLayout";
+import {ColorSettingsContext} from "../../contexts/colorsettings";
 
 export type ContentWithBarProps = {
   contentWrappers: BasicContentbarWrapper[] | CustomContentbarWrapper[];
@@ -42,6 +43,11 @@ export type ContentLayoutAndStyleAndWithBarProps = ContentLayoutAndStyleProps &
 export const ContentWithBar = (
   props: React.PropsWithChildren<ContentLayoutAndStyleAndWithBarProps>,
 ) => {
+  const colorSettingsContext = useContext(ColorSettingsContext);
+
+  const contentAreaBackground =
+    colorSettingsContext.currentColors.contentArea.backgroundColor;
+
   const selectedContentWrapper = useMemo(() => {
     return props.contentWrappers.find(
       (currentWrapper) => currentWrapper.getId() === props.selectedId,
@@ -62,7 +68,14 @@ export const ContentWithBar = (
   }, [props.contentStyle]);
 
   return (
-    <div className="flex flex-column" style={{width: "100%", overflow: "auto"}}>
+    <div
+      className="flex flex-column"
+      style={{
+        width: "100%",
+        overflow: "auto",
+        background: contentAreaBackground,
+      }}
+    >
       {props.contentWrappers.length >= 1 && (
         <ContentBar
           selectedId={props.selectedId}

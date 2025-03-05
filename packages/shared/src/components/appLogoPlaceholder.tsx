@@ -23,7 +23,5 @@ interface Props {
 }
 
 export const AppLogoPlaceholder = (props: Props) => {
-  return (
-    <span style={{marginLeft: "20px"}}>{props.appLogoPlaceholder}</span>
-  );
+  return <span style={{marginLeft: "20px"}}>{props.appLogoPlaceholder}</span>;
 };

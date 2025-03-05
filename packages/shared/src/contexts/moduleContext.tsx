@@ -16,21 +16,26 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useContext } from "react";
-import { AuthModule, AuthState } from "../types/modules/auth/authenticationProvider";
+import React, {useContext} from "react";
+import {
+  AuthModule,
+  AuthState,
+} from "../types/modules/auth/authenticationProvider";
 
 export type ModuleContextValues<TModules> = {
   modules: TModules;
-}
+};
 
 export type DefaultModuleContextValues = ModuleContextValues<{
   auth: AuthModule<AuthState>;
 }>;
 
 export const ModuleContext = React.createContext<DefaultModuleContextValues>(
-  {} as DefaultModuleContextValues
+  {} as DefaultModuleContextValues,
 );
 
-export const useModuleContext = <TModules,>(): ModuleContextValues<TModules> => {
+export const useModuleContext = <
+  TModules,
+>(): ModuleContextValues<TModules> => {
   return useContext(ModuleContext) as ModuleContextValues<TModules>;
 };

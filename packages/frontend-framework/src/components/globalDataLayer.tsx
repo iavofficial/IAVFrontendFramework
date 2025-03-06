@@ -37,8 +37,8 @@ type GlobalDataLayerLanguageOptions = Omit<LanguageOptions, "fallbackLang"> & {
   fallbackLang?: string;
 };
 
-interface Props<TAuthState extends AuthState> {
-  modules: FFMandatoryModules<TAuthState>;
+interface Props<TState extends FFMandatoryState> {
+  modules: FFMandatoryModules<TState>;
   store: EnhancedStore<FFMandatoryState>;
   languageOptions?: GlobalDataLayerLanguageOptions;
   translations?: Translations;
@@ -46,8 +46,8 @@ interface Props<TAuthState extends AuthState> {
   colorSettings?: ColorProviderProps;
 }
 
-export const GlobalDataLayer = <TAuthState extends AuthState>(
-  props: PropsWithChildren<Props<TAuthState>>,
+export const GlobalDataLayer = <TState extends FFMandatoryState>(
+  props: PropsWithChildren<Props<TState>>,
 ) => {
   const fallbackLang =
     props.languageOptions?.fallbackLang ?? DEFAULT_FALLBACK_LANGUAGE;
@@ -79,9 +79,9 @@ export const GlobalDataLayer = <TAuthState extends AuthState>(
   );
 };
 
-const ModuleLifecycleCaller = <TAuthState extends AuthState>(
+const ModuleLifecycleCaller = <TState extends FFMandatoryState>(
   props: PropsWithChildren<{
-    modules: FFMandatoryModules<TAuthState> & Record<string, any>;
+    modules: FFMandatoryModules<TState> & Record<string, any>;
   }>,
 ) => {
   // React hooks have to be called in the same order at every render.

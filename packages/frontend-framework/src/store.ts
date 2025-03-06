@@ -96,6 +96,8 @@ export type ModuleProcessorFunction<M extends FFStoreModule> = (
 // Objects of this type aggragate a module and it's corresponding processor
 // method. The following example shows it's structure:
 // {auth: {module: ..., processor: ...}, ...}
+// The effect of never in this case is that there cannot be a key with a value
+// which does not extend FFStoreModule.
 export type ModuleAndProcessorMap<ModuleType extends object> = {
   [K in keyof ModuleType]: ModuleType[K] extends FFStoreModule
     ? ModuleEntry<ModuleType[K]>
@@ -161,6 +163,7 @@ export class StoreConfigBuilder {
   }
 
   build() {
+    // This logic is necessary to ensure that every reducer key is present and has a module as it's value.
     const {[MandatoryModuleNames.Authentication]: auth, ...otherReducers} = this.reducers;
 
     const finalReducers: FFMandatoryReducers & Record<string, Reducer> = {
@@ -290,6 +293,7 @@ export const defaultStoreBuilder = (storeConfig: StoreConfig) => {
 
 export const defaultStore = new StoreBuilder(defaultModules).build();
 
+// The extended type is taken from the ReturnType type.
 export type RootState<TStoreState extends (...args: any) => any> =
   ReturnType<TStoreState>;
 export type AppDispatch<TStoreDispatch> = TStoreDispatch;

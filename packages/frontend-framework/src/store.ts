@@ -118,22 +118,14 @@ export const defaultModules: FFMandatoryModules = {
   [MandatoryModuleNames.Authentication]: new DummyAuthenticator(),
 };
 
-export interface FFMandatoryModulesExactModuleType<
-  TState extends FFMandatoryState = FFMandatoryState,
-  TAuthModule extends AuthModule<TState["auth"]> = AuthModule<TState["auth"]>,
-> {
-  auth: TAuthModule;
-  // Add other modules similarly if needed.
-}
-
 type ExtractModuleState<T> = T extends FFStoreModule<infer S> ? S : never;
 
 type ActualMandatoryStateFromModules<
-  TModules extends Partial<FFMandatoryModules<any>>
+  TModules extends Partial<FFMandatoryModules2>,
 > = {
-  [K in keyof FFMandatoryModules<any>]: K extends keyof TModules
+  [K in keyof FFMandatoryModules2]: K extends keyof TModules
     ? ExtractModuleState<TModules[K]>
-    : ExtractModuleState<FFMandatoryModules<any>[K]>;
+    : ExtractModuleState<FFMandatoryModules2[K]>;
 };
 
 type MergeModules<TUserModules, TDefaultModules> = Omit<
@@ -142,18 +134,22 @@ type MergeModules<TUserModules, TDefaultModules> = Omit<
 > &
   TUserModules;
 
+type FFMandatoryModules2<TState extends FFMandatoryState = FFMandatoryState> = {
+  auth: AuthModule<TState["auth"]>;
+};
+
 export class ModuleSetBuilder<
-  TModules extends Partial<FFMandatoryModules<any>>,
-  TState extends FFMandatoryState = ActualMandatoryStateFromModules<TModules>
+  TModules extends Partial<FFMandatoryModules2<TState>>,
+  TState extends FFMandatoryState = ActualMandatoryStateFromModules<TModules>,
 > {
-  private defaultModules: FFMandatoryModulesExactModuleType<TState> = defaultModules;
+  private defaultModules = defaultModules;
   private modules: TModules;
 
   constructor(modules: TModules) {
     this.modules = modules;
   }
 
-  build(): MergeModules<TModules, FFMandatoryModulesExactModuleType<TState>> {
+  build(): MergeModules<TModules, typeof defaultModules> {
     const mergedModules = {
       ...this.defaultModules,
       ...this.modules,
@@ -161,7 +157,6 @@ export class ModuleSetBuilder<
     return mergedModules;
   }
 }
-
 
 /*// This assumes that each module (e.g. AuthModule) is generic in its state type.
 type ActualMandatoryStateFromModules<
@@ -353,8 +348,8 @@ export class StoreBuilder<
   // These are mandatory modules and processors which are essential for the framework as
   // it uses values and methods of the processed modules.
   private mandatoryModulesAndProcessors: ModuleAndProcessorMap<
-  FFMandatoryModules<TAuthState>
->;
+    FFMandatoryModules<TAuthState>
+  >;
 
   // These are optional and modules and processors of the user.
   private userModulesAndProcessors:

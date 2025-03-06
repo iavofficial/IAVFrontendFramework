@@ -7,7 +7,6 @@ const useStyles = makeStyles(() => ({
     link: {
         textDecoration: "none",
         color: BLUE3,
-        paddingLeft: "4px",
         borderRadius: "4px",
         transition: "background-color 0.3s ease",
         display: "inline-block",

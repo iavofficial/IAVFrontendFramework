@@ -16,7 +16,6 @@
 
 import React from "react";
 import makeStyles from "../../src/components/content/style_options/makeStyles.tsx";
-import PageNavigation from "./components/drawer/pageNavigation.tsx";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Overview from "./pages/overview.tsx";
 import Information from "./pages/information.tsx";
@@ -29,7 +28,7 @@ import ColorSettings from "./pages/colorSettings.tsx";
 import ExampleProject from "./pages/exampleProject.tsx";
 import Playground from "./pages/playground.tsx";
 import FAQ from "./pages/faq.tsx";
-import Header from "./components/header/header.tsx";
+import Imprint from "./components/page/utils/imprint.tsx";
 
 const useStyles = makeStyles(() => ({
     wrapper: {
@@ -48,8 +47,6 @@ const Layout: React.FC = () => {
     return (
         <div className={classes.wrapper}>
             <Router>
-                <PageNavigation/>
-                <Header/>
                 <Routes>
                     <Route path="/overview" element={<Overview/>}/>
                     <Route path="/information" element={<Information/>}/>
@@ -62,6 +59,7 @@ const Layout: React.FC = () => {
                     <Route path="/example-project" element={<ExampleProject/>}/>
                     <Route path="/playground" element={<Playground/>}/>
                     <Route path="/faq" element={<FAQ/>}/>
+                    <Route path="/imprint" element={<Imprint/>}/>
                 </Routes>
             </Router>
         </div>

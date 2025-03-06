@@ -71,16 +71,14 @@ const Overview: React.FC = () => {
                 Ongoing Maintenance and Support
             </SubTitle>
             <Typography variant={"p"}>
-                We manage bug reports and support requests through
-                <PageLink
-                    to={"https://github.com/iavofficial/IAVFrontendFramework/issues"}
-                    label={"GitHub Issues"}
-                    target={"_blank"}/>.
-                For more details on how to contribute, please read our
-                <PageLink
-                    to={"https://github.com/iavofficial/IAVFrontendFramework/blob/main/CONTRIBUTING.md"}
-                    label={"Contributing Guidelines"}
-                    target={"_blank"}/>.
+                We manage bug reports and support requests through <PageLink
+                to={"https://github.com/iavofficial/IAVFrontendFramework/issues"}
+                label={"GitHub Issues"}
+                target={"_blank"}/>.
+                For more details on how to contribute, please read our <PageLink
+                to={"https://github.com/iavofficial/IAVFrontendFramework/blob/main/CONTRIBUTING.md"}
+                label={"Contributing Guidelines"}
+                target={"_blank"}/>.
             </Typography>
 
             <SubTitle>Layout</SubTitle>

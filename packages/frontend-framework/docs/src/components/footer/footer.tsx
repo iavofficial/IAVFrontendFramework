@@ -14,45 +14,31 @@
  * limitations under the License.
  **/
 
-import React, {PropsWithChildren} from "react";
+import React from "react";
 import makeStyles from "../../../../src/components/content/style_options/makeStyles.tsx";
-import PageNavigation from "../drawer/pageNavigation.tsx";
-import Header from "../header/header.tsx";
-import Footer from "../footer/footer.tsx";
-import OnThisPage from "../drawer/onThisPage.tsx";
+import PageLink from "../page/text/pageLink.tsx";
 
 const useStyles = makeStyles(() => ({
-    wrapper: {
-        height: "100vh",
+    footer: {
         width: "100%",
+        padding: "16px 0",
+        backgroundColor: "#ffffff",
+        borderTop: "1px solid lightgray",
         display: "flex",
-        flexDirection: "column",
-        fontFamily: "Arial, sans-serif",
-    },
-    page: {
-        flex: 1,
-        padding: "20px",
-        margin: "60px auto 20px auto",
-        width: "60%",
-        textAlign: "justify"
+        justifyContent: "center",
+        alignItems: "center",
     }
 }));
 
-const Page: React.FC<PropsWithChildren> = (props) => {
+const Footer = () => {
 
-    const {classes} = useStyles();
+    const {classes} = useStyles()
 
     return (
-        <div className={classes.wrapper}>
-            <PageNavigation/>
-            <OnThisPage/>
-            <Header/>
-            <div className={classes.page}>
-                {props.children}
-            </div>
-            <Footer/>
+        <div className={classes.footer}>
+            <PageLink to={"/imprint"} label={"Imprint"} target={"_blank"}/>
         </div>
     );
 }
 
-export default Page;
+export default Footer;

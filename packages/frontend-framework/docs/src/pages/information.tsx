@@ -36,7 +36,7 @@ const Information: React.FC = () => {
                 receive an email notification for a new release, subscribe to the GitHub
                 repository:
             </Typography>
-            <BulletList items={bulletList} showBullets={true}/>
+            <BulletList items={bulletList} bulletType={"bullet"}/>
             <SubTitle>TypeScript</SubTitle>
             <Typography variant={"p"}>
                 The framework supports JavaScript and TypeScript. It is recommended to use

@@ -1,12 +1,12 @@
 import React from "react";
 import makeStyles from "../../../../../src/components/content/style_options/makeStyles.tsx";
 
-const useStyles = makeStyles(({showBullets}) => ({
+const useStyles = makeStyles(({bulletType}) => ({
     list: {
-        listStyleType: showBullets ? "disc" : "none",
+        listStyleType: bulletType === "bullet" ? "disc" : bulletType === "number" ? "decimal" : "none",
         padding: 0,
         margin: 0,
-        paddingLeft: showBullets ? "40px" : 0,
+        paddingLeft: bulletType ? "40px" : 0,
     },
     listItem: {
         marginBottom: "8px",
@@ -16,14 +16,14 @@ const useStyles = makeStyles(({showBullets}) => ({
 
 interface Props {
     items: string[];
-    showBullets?: boolean;
+    bulletType?: "bullet" | "number";
 }
 
 const BulletList: React.FC<Props> = (props) => {
 
-    const {items, showBullets} = props;
+    const {items, bulletType} = props;
 
-    const {classes} = useStyles({showBullets});
+    const {classes} = useStyles({bulletType});
 
     return (
         <ul className={classes.list}>

@@ -52,7 +52,7 @@ const Overview: React.FC = () => {
             <Table data={tableData}/>
             <SubTitle>Key features</SubTitle>
             <BulletList
-                showBullets={true}
+                bulletType="bullet"
                 items={[
                     "Standardized frontend layout (see more in the following general layout section)",
                     "Authentication service for AWS Cognito (other authentication services are possible)",

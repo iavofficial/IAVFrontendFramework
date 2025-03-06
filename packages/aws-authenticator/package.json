@@ -36,7 +36,6 @@
     "aws authenticator"
   ],
   "dependencies": {
-    "@iavofficial/frontend-framework": "*",
     "@iavofficial/frontend-framework-shared": "*",
     "@reduxjs/toolkit": "^2.5.1",
     "react-redux": "^9.2.0"

@@ -27,9 +27,12 @@ import {
 } from "@reduxjs/toolkit";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {DummyAuthenticator} from "./components/authentication/default/dummyAuthenticationProvider";
-import { MandatoryModuleNames } from "@iavofficial/frontend-framework-shared/mandatoryModuleNames";
-import { AuthModule, AuthState } from "@iavofficial/frontend-framework-shared/authenticationProvider";
-import { FFStoreModule } from "@iavofficial/frontend-framework-shared/module";
+import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/mandatoryModuleNames";
+import {
+  AuthModule,
+  AuthState,
+} from "@iavofficial/frontend-framework-shared/authenticationProvider";
+import {FFStoreModule, FFStoreModuleGeneric} from "@iavofficial/frontend-framework-shared/module";
 
 const executeProcessorsForModules = <TModules extends object>(
   modulesAndProcessors: ModuleAndProcessorMap<TModules>,
@@ -76,9 +79,9 @@ export type FFMandatoryReducers = {
 // essential values and methods to the framework, for example login.
 // So the minimal configuration is exactly the set of values and methods
 // used by the framework itself.
-export interface FFMandatoryModules<TAuthState extends AuthState = AuthState> {
+export type FFMandatoryModules<TAuthState extends AuthState = AuthState> = {
   [MandatoryModuleNames.Authentication]: AuthModule<TAuthState>;
-}
+};
 
 // The user can provide additional modules which aren't used by the
 // framework itself.
@@ -114,6 +117,160 @@ export interface ModuleEntry<M extends FFStoreModule> {
 export const defaultModules: FFMandatoryModules = {
   [MandatoryModuleNames.Authentication]: new DummyAuthenticator(),
 };
+
+export interface FFMandatoryModulesExactModuleType<
+  TState extends FFMandatoryState = FFMandatoryState,
+  TAuthModule extends AuthModule<TState["auth"]> = AuthModule<TState["auth"]>,
+> {
+  auth: TAuthModule;
+  // Add other modules similarly if needed.
+}
+
+type ExtractModuleState<T> = T extends FFStoreModuleGeneric<infer S> ? S : never;
+
+type ActualMandatoryStateFromModules<
+  TModules extends Partial<FFMandatoryModules<any>>
+> = {
+  [K in keyof FFMandatoryModules<any>]: K extends keyof TModules
+    ? ExtractModuleState<TModules[K]>
+    : ExtractModuleState<FFMandatoryModules<any>[K]>;
+};
+
+
+type MergeModules<TUserModules, TDefaultModules> = Omit<
+  TDefaultModules,
+  keyof TUserModules
+> &
+  TUserModules;
+
+export class ModuleSetBuilder<
+  TModules extends Partial<FFMandatoryModules<any>>,
+  TState extends FFMandatoryState = ActualMandatoryStateFromModules<TModules>
+> {
+  private defaultModules: FFMandatoryModulesExactModuleType<TState> = defaultModules;
+  private modules: TModules;
+
+  constructor(modules: TModules) {
+    this.modules = modules;
+  }
+
+  build(): MergeModules<TModules, FFMandatoryModulesExactModuleType<TState>> {
+    const mergedModules = {
+      ...this.defaultModules,
+      ...this.modules,
+    };
+    return mergedModules;
+  }
+}
+
+
+/*// This assumes that each module (e.g. AuthModule) is generic in its state type.
+type ActualMandatoryStateFromModules<
+  TModules extends Partial<FFMandatoryModules<any>>,
+> = {
+  [K in keyof FFMandatoryModules<any>]: K extends keyof TModules
+    ? TModules[K] extends AuthModule<infer S>
+      ? S
+      : FFMandatoryModules<any>[K] extends AuthModule<infer S>
+        ? S
+        : never
+    : FFMandatoryModules<any>[K] extends AuthModule<infer S>
+      ? S
+      : never;
+};
+
+type MergeModules<TUserModules, TDefaultModules> = Omit<
+  TDefaultModules,
+  keyof TUserModules
+> &
+  TUserModules;
+
+export class ModuleSetBuilder<
+  TModules extends Partial<FFMandatoryModules<any>>,
+  TState extends FFMandatoryState = ActualMandatoryStateFromModules<TModules>,
+> {
+  private defaultModules: FFMandatoryModulesExactModuleType<TState> =
+    defaultModules;
+  private modules: TModules;
+
+  constructor(modules: TModules) {
+    this.modules = modules;
+  }
+
+  build(): MergeModules<TModules, FFMandatoryModulesExactModuleType<TState>> {
+    // Merge the defaults with the user modules.
+    const mergedModules = {
+      ...this.defaultModules,
+      ...this.modules,
+    };
+    return mergedModules;
+  }
+}*/
+
+/*
+export const defaultModules: FFMandatoryModules = {
+  [MandatoryModuleNames.Authentication]: new DummyAuthenticator(),
+};
+
+type MergeModules<TUserModules, TDefaultModules> = Omit<
+  TDefaultModules,
+  keyof TUserModules
+> &
+  TUserModules;
+
+export class ModuleSetBuilder<
+  TModules extends Partial<FFMandatoryModules<any>>,
+  TAuthState extends AuthState = (TModules extends {auth: AuthModule<infer S>}
+    ? S
+    : AuthState) &
+    AuthState,
+> {
+  private defaultModules: FFMandatoryModules<TAuthState> = defaultModules;
+  private modules: TModules;
+
+  constructor(modules: TModules) {
+    this.modules = modules;
+  }
+
+  build() {
+    const mergedModules = {
+      ...this.defaultModules,
+      ...this.modules,
+    } as MergeModules<TModules, FFMandatoryModules<TAuthState>>;
+    return mergedModules;
+  }
+}
+*/
+
+/*
+type MergeModules<TUserModules, TDefaultModules> = Omit<
+  TDefaultModules,
+  keyof TUserModules
+> &
+  TUserModules;
+
+export class ModuleSetBuilder<
+  TModules extends Partial<FFMandatoryModules<TAuthState>>,
+  TAuthState extends AuthState,
+> {
+  private defaultModules: FFMandatoryModules<TAuthState> = defaultModules;
+  private modules: TModules;
+
+  constructor(modules: TModules) {
+    this.modules = modules;
+  }
+
+  build(): MergeModules<TModules, FFMandatoryModules<TAuthState>> {
+    // Create a merged object where user-provided modules override defaults.
+    const mergedModules = {
+      ...this.defaultModules,
+      ...this.modules,
+    } as MergeModules<TModules, FFMandatoryModules<TAuthState>>;
+
+    return mergedModules;
+  }
+}
+*/
 
 // An object of this class will contain all reducers etc. of all modules.
 // They are added by the corresponding processors. The object will be passed
@@ -164,11 +321,13 @@ export class StoreConfigBuilder {
 
   build() {
     // This logic is necessary to ensure that every reducer key is present and has a module as it's value.
-    const {[MandatoryModuleNames.Authentication]: auth, ...otherReducers} = this.reducers;
+    const {[MandatoryModuleNames.Authentication]: auth, ...otherReducers} =
+      this.reducers;
 
     const finalReducers: FFMandatoryReducers & Record<string, Reducer> = {
       ...otherReducers,
-      [MandatoryModuleNames.Authentication]: auth ?? defaultModules.auth.slice.reducer,
+      [MandatoryModuleNames.Authentication]:
+        auth ?? defaultModules.auth.slice.reducer,
     };
 
     return new StoreConfig(
@@ -186,14 +345,18 @@ export class StoreConfigBuilder {
 // customization of module processing. Furthermore the Builder contains a storeBuilder method
 // which is used to build the store after all processor methods were executed. The storeBuilder
 // can be replaced to customize the build of the Redux store.
-export class StoreBuilder<TAuthState extends AuthState,
-TUserModules extends GenericModules> {
+export class StoreBuilder<
+  TAuthState extends AuthState,
+  TUserModules extends GenericModules,
+> {
   private storeConfigBuilder: StoreConfigBuilder = new StoreConfigBuilder();
 
   // These are mandatory modules and processors which are essential for the framework as
   // it uses values and methods of the processed modules.
-  private mandatoryModulesAndProcessors: ModuleAndProcessorMap<FFMandatoryModules<TAuthState>>;
-  
+  private mandatoryModulesAndProcessors: ModuleAndProcessorMap<
+  FFMandatoryModules<TAuthState>
+>;
+
   // These are optional and modules and processors of the user.
   private userModulesAndProcessors:
     | ModuleAndProcessorMap<TUserModules>
@@ -221,12 +384,14 @@ TUserModules extends GenericModules> {
 
   setFrameworkModuleProcessor<K extends keyof FFMandatoryModules<TAuthState>>(
     moduleType: K,
-    processor: ModuleProcessorFunction<(typeof this.mandatoryModulesAndProcessors)[K]["module"]>,
+    processor: ModuleProcessorFunction<
+      (typeof this.mandatoryModulesAndProcessors)[K]["module"]
+    >,
   ) {
     this.mandatoryModulesAndProcessors[moduleType].processor = processor;
     return this;
   }
-  
+
   setUserModuleProcessor<K extends keyof TUserModules>(
     moduleType: K,
     processor: ModuleProcessorFunction<TUserModules[K]>,

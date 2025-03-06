@@ -33,3 +33,10 @@ export type FFStoreModule = {
   enhancers?: StoreEnhancer[];
   extras?: object;
 } & FFModule;
+
+export type FFStoreModuleGeneric<TState> = {
+  slice?: Slice<TState>;
+  middleware?: Middleware[];
+  enhancers?: StoreEnhancer[];
+  extras?: object;
+} & FFModule;

@@ -36,6 +36,7 @@ import {
 import {useDispatch, useSelector} from "react-redux";
 import {JWT} from "@aws-amplify/auth";
 import {
+  AuthModule,
   AuthState,
   Credentials,
 } from "@iavofficial/frontend-framework-shared/authenticationProvider";
@@ -83,7 +84,7 @@ const initialState: AWSAuthenticatorState = {
   },
 };
 
-export class AWSAuthenticator {
+export class AWSAuthenticator implements AuthModule<AWSAuthenticatorState> {
   private config;
 
   public slice: Slice<AWSAuthenticatorState>;

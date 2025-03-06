@@ -33,6 +33,7 @@ import {
   AWSAuthenticatorAuthDispatch,
   AWSAuthenticator,
   AWSAuthenticatorStoreState,
+  AWSAuthenticatorState,
 } from "../awsAuthenticatorModule";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 import {LoginButtonWithSpinner} from "@iavofficial/frontend-framework-shared/loginButtonWithSpinner";
@@ -44,12 +45,18 @@ import {
   PADDING_GAB,
   WHITE,
 } from "@iavofficial/frontend-framework-shared/constants";
+import { AWSAuthenticatorExtras } from "../awsAuthenticatorTypes";
+import { AuthModule } from "@iavofficial/frontend-framework-shared/authenticationProvider";
+
+type NecessaryModuleAttributes ={
+  extras: AWSAuthenticatorExtras;
+} & Omit<AuthModule<AWSAuthenticatorState>, "useModuleLifecycle">;
 
 interface AWSAuthenticationViewProps extends AuthenticationViewProps {
-  module: AWSAuthenticator;
+  module: NecessaryModuleAttributes
 }
 
-export const awsAuthenticationViewFactory = (module: AWSAuthenticator) => {
+export const awsAuthenticationViewFactory = (module: NecessaryModuleAttributes) => {
   return (props: AuthenticationViewProps) => (
     <AWSAuthenticationView module={module} {...props} />
   );

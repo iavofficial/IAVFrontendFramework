@@ -16,12 +16,19 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { StoreBuilder } from "@iavofficial/frontend-framework/store";
+import {
+  ModuleSetBuilder,
+  StoreBuilder,
+  StoreConfigBuilder,
+} from "@iavofficial/frontend-framework/store";
 import { Amplify } from "aws-amplify";
 import { cognitoUserPoolsTokenProvider } from "aws-amplify/auth/cognito";
 import { CookieStorage } from "aws-amplify/utils";
 import { awsAuthenticationViewFactory } from "@iavofficial/frontend-framework-aws-authenticator/awsAuthenticationView";
-import { AWSAuthenticator } from "@iavofficial/frontend-framework-aws-authenticator/awsAuthenticatorModule";
+import {
+  AWSAuthenticator,
+  AWSAuthenticatorState,
+} from "@iavofficial/frontend-framework-aws-authenticator/awsAuthenticatorModule";
 import { useModuleContext } from "@iavofficial/frontend-framework/moduleContext";
 
 console.log("AHOI");
@@ -53,7 +60,7 @@ const configureAmplify: () => void = () => {
   );
 };
 
-export const modules = {
+const customModules = {
   auth: new AWSAuthenticator({
     configureAmplify: configureAmplify,
     failOnNoLegalGroup: true,
@@ -61,13 +68,14 @@ export const modules = {
   }),
 };
 
+export const modules = new ModuleSetBuilder(customModules).build();
+
 export const store = new StoreBuilder(modules)
-  /*.setFrameworkModuleProcessor("auth", (
-    authModule: AWSAuthenticator,
-    storeConfigBuilder: StoreConfigBuilder,
-  ) => {
-  
-  })*/ .build();
+  .setFrameworkModuleProcessor(
+    "auth",
+    (authModule: AWSAuthenticator, storeConfigBuilder: StoreConfigBuilder) => {}
+  )
+  .build();
 
 export const AwsAuthenticationView = awsAuthenticationViewFactory(modules.auth);
 

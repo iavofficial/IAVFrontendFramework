@@ -1,9 +1,304 @@
 import React from "react";
+import Page from "../components/page/page.tsx";
+import Title from "../components/page/text/title.tsx";
+import SubTitle from "../components/page/text/subTitle.tsx";
+import Typography from "../components/page/utils/typography.tsx";
+import Code from "../components/page/utils/code.tsx";
+import SubSubTitle from "../components/page/text/subSubTitle.tsx";
+import Image from "../components/page/utils/image.tsx";
 
 const ColorSettings: React.FC = () => {
 
     return (
-        <p>TEST</p>
+        <Page>
+            <Title>Color Settings and Dark Mode</Title>
+            <SubTitle>Introduction</SubTitle>
+            <Typography variant={"p"}>
+                Color and theme (dark / light mode) information is stored and provided by
+                the React context called <strong>ColorSettings</strong>
+                context. The ColorSettings context`s provider component is embedded inside
+                the ColorProvider component. The ColorProvider itself is contained in
+                GlobalDataLayer. Your interface to the ColorProvider component is the
+                colorSettings property of the GlobalDataLayer component. This property
+                will be explained later on.
+            </Typography>
+            <Typography variant={"p"}>
+                Using these options you are able to set custom colors (especially for
+                framework components). Furthermore, the ColorSettings context provides you
+                the information whether the dark mode is activated. This allows you to
+                implement a dark mode four your components.
+            </Typography>
+            <Typography variant={"p"}>
+                All colors are exported by the framework&#39;s constants file. The
+                following code snippet shows you how to import these colors:
+            </Typography>
+            <Typography variant={"p"}>
+                <strong>Example exported color</strong>
+            </Typography>
+            <Code language={"typescript"}>
+                {`import {BLUE0} from "@iavofficial/frontend-framework/constants";`}
+            </Code>
+            <Title>Overwrite default colors</Title>
+            <SubTitle>CSS</SubTitle>
+            <Typography variant={"p"}>
+                Besides providing the colors as JS constants, all colors are defined as
+                CSS constants within the root and can be used within the css files of the
+                project. The following code snippet shows you how to use these colors
+                inside css files:
+            </Typography>
+            <Typography variant={"p"}>
+                <strong>Example exported css constants and variables definition</strong>
+            </Typography>
+            <Code language={"typescript"}>
+                {`// Example for exported color by the framework:
+:root {
+   --blue-0: #001a54;
+}
+
+.your-class {
+   color: var(--blue-0);
+}`}
+            </Code>
+            <Typography variant={"p"}>
+                The framework provides CSS classes for styling your components. This is
+                inspired by PrimeReact. The classes are defined in the globalColors.css
+                file and globally exported. The following code snippet illustrates the
+                structure of these classe&#39;s names.
+            </Typography>
+            <Typography variant={"p"}>
+                <strong>Global CSS colors</strong>
+            </Typography>
+            <Code language={"typescript"}>
+                {`/* BACKGROUND CLASSES*/
+.bg-white-1{ // because of name conflicts with primereact this name is an execption
+  background-color: var(--white);
+}
+
+.bg-blue-0{
+  background-color: var(--blue-0);
+}
+
+/* COLOR CLASSES*/
+.color-white{
+  color: var(--white);
+}
+
+.color-blue-0{
+  color: var(--blue-0);
+}`}
+            </Code>
+            <SubTitle>colorSettings property of GlobalDataLayer</SubTitle>
+            <Typography variant={"p"}>
+                Using the colorSettings property you can pass an object of the following structure:
+            </Typography>
+            <Code language={"typescript"}>
+                {`export interface ColorProviderProps {
+    colorOptions?: ColorOptions; // Options to overwrite the default framework component's default colors.
+    disableCustomColorsForLightMode?: boolean; // Option to disable your color settings for the light mode.
+    disableCustomColorsForDarkMode?: boolean; // Option to disable your color settings for the dark mode.
+}`}
+            </Code>
+            <Typography variant={"p"}>
+                If you want to overwrite the colors of framework components you can do so
+                using GlobalDataLayer&#39;s colorSettings property. The colors should be
+                defined in HEX representation. The following code snippet shows the
+                options object to overwrite the default colors. The specific interfaces
+                are listed later on.
+            </Typography>
+            <Typography variant={"p"}>
+                <strong>Interface colorObject</strong>
+            </Typography>
+            <Code language={"typescript"}>
+                {`export interface ColorOptions {
+    header?: HeaderColorOptions;
+    navbar?: NavbarColorOptions;
+    contentArea?: ContentAreaColorOptions;
+    contentbar?: ContentbarColorOptions;
+    contentCell?: ContentCellColorOptions;
+    authenticationView?: AuthenticationViewColorOptions;
+}`}
+            </Code>
+            <Typography variant={"p"}>
+                The following interfaces show that most settings are divided by the state
+                of the corresponding element: default, hovering and active.
+            </Typography>
+            <SubSubTitle>Color options of the header</SubSubTitle>
+            <Typography variant={"p"}>
+                Using these options you can define the colors of the main view&#39;s
+                header.
+            </Typography>
+            <Typography variant={"p"}>
+                <strong>Interface HeaderColorType</strong>
+            </Typography>
+            <Code language={"typescript"}>
+                {`export interface HeaderColorOptions {
+    backgroundColor?: string;
+    settingsIconColor?: string;
+    userIconColor?: string;
+}`}
+            </Code>
+            <SubSubTitle>Color options of the navigation bar (including the navigation tabs)</SubSubTitle>
+            <Typography variant={"p"}>
+                Using these options you can define the colors of the main view&#39;s
+                navigation bar.
+            </Typography>
+            <Typography variant={"p"}>
+                <strong>Interface NavbarColorType</strong>
+            </Typography>
+            <Code language={"typescript"}>
+                {`export interface NavbarColorOptions {
+    backgroundColor?: string;
+    navbarCollapseArrowColor?: string;
+    legalDocumentsIconColor?: string;
+    scrollbarColor?: string;
+    content?: TabColorOptionsOptional; // Color settings for the navigation tabs
+}`}
+            </Code>
+            <Code language={"typescript"}>
+                {`export interface TabColorOptionsOptional {
+    insideActiveGroupColor?: string;
+    default?: {
+        tabBackgroundDefaultColor?: string;
+        tabFontDefaultColor?: string;
+        tabIconDefaultColor?: string;
+        groupBackgroundDefaultColor?: string;
+        groupFontDefaultColor?: string;
+        groupIconDefaultColor?: string;
+        groupArrowDefaultColor?: string;
+    };
+    hover?: {
+        tabBackgroundHoverColor?: string;
+        tabFontHoverColor?: string;
+        tabIconHoverColor?: string;
+        groupBackgroundHoverColor?: string;
+        groupFontHoverColor?: string;
+        groupIconHoverColor?: string;
+        groupArrowHoverColor?: string;
+    };
+    active?: {
+        tabBackgroundActiveColor?: string;
+        tabFontActiveColor?: string;
+        tabIconActiveColor?: string;
+        groupBackgroundActiveColor?: string;
+        groupFontActiveColor?: string;
+        groupIconActiveColor?: string;
+        groupArrowActiveColor?: string;
+    };
+}`}
+            </Code>
+            <SubSubTitle>Color options of the content area</SubSubTitle>
+            <Typography variant={"p"}>
+                Using these options you can set the colors of the content area:
+            </Typography>
+            <Typography variant={"p"}>
+                <strong>ContentColorType</strong>
+            </Typography>
+            <Code language={"typescript"}>
+                {`export interface ContentAreaColorOptions {
+    backgroundColor?: string;
+}`}
+            </Code>
+            <SubSubTitle>Color options of the content bar (including tabs)</SubSubTitle>
+            <Typography variant={"p"}>
+                Using these options you can set the colors of the tabs of the content bar:
+            </Typography>
+            <Typography variant={"p"}>
+                <strong>ContentbarTabColorType</strong>
+            </Typography>
+            <Code language={"typescript"}>
+                {`export interface ContentbarColorOptions {
+    backgroundColor?: string;
+    iconDefaultColor?: string;
+    iconHoverColor?: string;
+    buttonDefaultColor?: string;
+    buttonHoverColor?: string;
+    tabs?: ContentbarTabColorType; // Color settings of the tabs
+}`}
+            </Code>
+            <Code language={"typescript"}>
+                {`export interface ContentbarTabColorType {
+    backgroundDefaultColor?: string;
+    backgroundHoverColor?: string;
+    backgroundActiveColor?: string;
+    textDefaultColor?: string;
+    textHoverColor?: string;
+    textActiveColor?: string;
+    iconDefaultColor?: string;
+    iconHoverColor?: string;
+    iconActiveColor?: string;
+}`}
+            </Code>
+            <SubSubTitle>Color options for content cells</SubSubTitle>
+            <Typography variant={"p"}>
+                Using these options you can set the colors of content cells:
+            </Typography>
+            <Code language={"typescript"}>
+                {`export interface ContentCellColorOptions {
+    backgroundColor?: string;
+}`}
+            </Code>
+            <SubSubTitle>
+                Color options for the authentication view
+            </SubSubTitle>
+            <Typography variant={"p"}>
+                Using these options you can set the colors of the authentication view:
+            </Typography>
+            <Typography variant={"p"}>
+                <strong>Interfaces ContentElements</strong>
+            </Typography>
+            <Code language={"typescript"}>
+                {`export interface AuthenticationViewColorOptions {
+    headerBackgroundColor?: string;
+    loginButtonBackgroundColor?: string;
+    loginButtonTextColor?: string;
+    legalNoticeIconColor?: string;
+    loginFormBackgroundColor?: string;
+    fullScreenBackgroundColor?: string; // If fullscreenBackgroundcolor is defined, this color will replace the background image inside the authentication view.
+    companyTextColor?: string;
+    inputFieldDescriptionTextColor?: string;
+    inputFieldBackgroundColor?: string;
+    inputFieldTextColor?: string;
+    passwortRequirementsTextColor?: string; // Defines the color of the text for the requirements to set a new password of the AWS authentication view.
+    themeTogglerColor?: string;
+}
+export interface AuthenticationColorType {
+    headerBackgroundColor?: string;
+    loginButtonBackgroundColor?: string;
+    loginButtonTextColor?: string;
+    legalNoticeIconColor?: string;
+    loginFormBackgroundColor?: string;
+    fullScreenBackgroundColor?: string;
+    companyTextColor?: string;
+    inputFieldDescriptionTextColor?: string;
+    inputFieldBackgroundColor?: string;
+    inputFieldTextColor?: string;
+    passwortRequirementsTextColor?: string; // Defines the color of the text for the requirements to set a new password of the AWS authentication view.
+}`}
+            </Code>
+            <Title>Other color options</Title>
+            <Typography variant={"p"}>
+                To change the color of the PrimeReact components DropDown and ContextMenu
+                you have to overwrite the following css variables:
+            </Typography>
+            <Typography variant={"p"}>
+                <strong>CSS Properties</strong>
+            </Typography>
+            <Code language={"css"}>
+                {`:root {
+    --contextmenubgmaincolor: ... // Background color of the contextsubmenu (settingsmenu and loginmenu).
+    --highlightcolor: ... // Background color of the contextsubmenu if hovered or selected (settingsmenu and loginmenu).
+    --textAndIconMainColor: ... // Main text and icon color.
+    --textAndIconHighlightColor: ... // Text and icon color if hovered or selected.
+    --dropdownBg: ... // Background of the DropDown component.
+    --dropdownBgHighlight: ... // Color of the texts highlighting if hovered of selected.
+}`}
+            </Code>
+            <Title>Example for using custom colors</Title>
+            <Typography variant={"p"}>
+                Using these options you can for example create a view like the following.
+            </Typography>
+            <Image src={"assets/color-settings/custom-coloring.png"}/>
+        </Page>
     )
 };
 

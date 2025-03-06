@@ -13,7 +13,8 @@ const useStyles = makeStyles(() => ({
         fontSize: "0.875rem",
         lineHeight: "1.5",
         background: "#2b303b",
-        paddingLeft: "8px"
+        paddingLeft: "8px",
+        margin: "8px 0"
     },
 }));
 

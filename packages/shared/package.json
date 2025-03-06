@@ -75,7 +75,7 @@
     "./moduleContext": "./dist/contexts/moduleContext.js",
     "./authenticationView.css": "./dist/css/authenticationView.css",
     "./constants": "./dist/constants/constants.js",
-    "./mandatoryModuleNames": "./dist/constants/auth/mandatoryModuleNames.js",
+    "./mandatoryModuleNames": "./dist/constants/mandatoryModuleNames.js",
     "./module": "./dist/types/modules/module.js",
     "./authenticationProvider": "./dist/types/modules/auth/authenticationProvider.js",
     "./authenticationViewProps": "./dist/types/modules/auth/authenticationViewProps.js",
@@ -104,7 +104,7 @@
         "./dist/constants/constants.d.ts"
       ],
       "./mandatoryModuleNames": [
-        "./dist/constants/auth/mandatoryModuleNames.d.ts"
+        "./dist/constants/mandatoryModuleNames.d.ts"
       ],
       "./module": [
         "./dist/types/modules/module.d.ts"

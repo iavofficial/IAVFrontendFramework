@@ -32,7 +32,7 @@ import {
   AuthModule,
   AuthState,
 } from "@iavofficial/frontend-framework-shared/authenticationProvider";
-import {FFStoreModule, FFStoreModuleGeneric} from "@iavofficial/frontend-framework-shared/module";
+import {FFStoreModule} from "@iavofficial/frontend-framework-shared/module";
 
 const executeProcessorsForModules = <TModules extends object>(
   modulesAndProcessors: ModuleAndProcessorMap<TModules>,
@@ -126,7 +126,7 @@ export interface FFMandatoryModulesExactModuleType<
   // Add other modules similarly if needed.
 }
 
-type ExtractModuleState<T> = T extends FFStoreModuleGeneric<infer S> ? S : never;
+type ExtractModuleState<T> = T extends FFStoreModule<infer S> ? S : never;
 
 type ActualMandatoryStateFromModules<
   TModules extends Partial<FFMandatoryModules<any>>
@@ -135,7 +135,6 @@ type ActualMandatoryStateFromModules<
     ? ExtractModuleState<TModules[K]>
     : ExtractModuleState<FFMandatoryModules<any>[K]>;
 };
-
 
 type MergeModules<TUserModules, TDefaultModules> = Omit<
   TDefaultModules,

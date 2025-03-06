@@ -27,14 +27,7 @@ export type FFModule = {
   useModuleLifecycle?: ModuleLifecycleHook;
 }
 
-export type FFStoreModule = {
-  slice?: Slice;
-  middleware?: Middleware[];
-  enhancers?: StoreEnhancer[];
-  extras?: object;
-} & FFModule;
-
-export type FFStoreModuleGeneric<TState> = {
+export type FFStoreModule<TState = any> = {
   slice?: Slice<TState>;
   middleware?: Middleware[];
   enhancers?: StoreEnhancer[];

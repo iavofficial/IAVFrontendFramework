@@ -298,6 +298,69 @@ export interface AuthenticationColorType {
                 Using these options you can for example create a view like the following.
             </Typography>
             <Image src={"assets/color-settings/custom-coloring.png"}/>
+            <Title>How to implement a dark mode in custom components</Title>
+            <SubTitle>Implement dark mode using the ColorSettings context</SubTitle>
+            <Typography variant={"p"}>
+                If you want to implement a component including a dark mode you will have
+                to know whether the dark mode is activated at first. You are able to get
+                this information by reading the darkmode attribute of the ColorSettings
+                context. The following code snippet shows an example:
+            </Typography>
+            <Typography variant={"p"}>
+                <strong>Interfaces ContentElements</strong>
+            </Typography>
+            <Code language={"typescript"}>
+                {`import React, { useContext } from 'react';
+import { ColorSettingsContext } from 'disa-framework/colorSettingsContext';
+import '@iavofficial/frontend-framework/globalColors.css';
+
+export const ExampleComponent = () => {
+    const colorSettingsContext = useContext(ColorSettingsContext);
+
+    return (
+        <div style={{ width: '100%' }}
+            className={colorSettingsContext?.darkmode ? 'color-white bg-black' : 'color-black bg-white'}>
+            ExampleComponent
+        </div>
+    );
+};`}
+            </Code>
+            <Typography variant={"p"}>
+                However, deciding which colors should be used regarding the theme inside
+                your components is a bad practice. Instead you should maintain the
+                currently used colors in a central place like the framework does. Consult
+                the framework implementation (especially the ColorProvider component) for
+                further details.
+            </Typography>
+            <SubSubTitle>Implement dark mode using the color-theme html attribute</SubSubTitle>
+            <Typography variant={"p"}>
+                If the user activates the dark mode the &quot;color-theme&quot; html
+                attribute will be set (at html body). This enables you to style your
+                components for the light and dark mode using CSS attribute selectors like
+                so:
+            </Typography>
+            <Code language={"typescript"}>
+                {`.example {
+    background-color: white;
+}
+
+[color-theme="dark"] .example {
+    background-color: black;
+}`}
+            </Code>
+            <Typography variant={"p"}>
+                This CSS will set a white background for the class &quot;example&quot; if
+                the color-theme is not &quot;dark&quot; (light mode is activated). If the
+                color-theme is set to &quot;dark&quot; (dark mode is activated) it will
+                set the background to black.
+            </Typography>
+            <Title>How to disable the dark mode</Title>
+            <Typography variant={"p"}>
+                To disable the dark mode use the <em>hideColorThemeToggler</em> option
+                inside <em>settingsMenuOptions</em>
+                of the UILayer component. This will prevent the user from changing the
+                theme.
+            </Typography>
         </Page>
     )
 };

@@ -16,7 +16,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { ContentStyle, ContentStyleTemplates } from "@iavofficial/frontend-framework/contentStyle";
+import {
+  ContentStyle,
+  ContentStyleTemplates,
+} from "@iavofficial/frontend-framework/contentStyle";
 import { useDefaultSelector } from "@iavofficial/frontend-framework/store";
 
 export const ExampleComponent7 = () => {
@@ -24,7 +27,7 @@ export const ExampleComponent7 = () => {
 
   return (
     <ContentStyle appliedStyles={ContentStyleTemplates.DEFAULT}>
-              <div>State of authentication: {hasAuthenticated.toString()}</div>
+      <div>State of authentication: {hasAuthenticated.toString()}</div>
     </ContentStyle>
   );
 };

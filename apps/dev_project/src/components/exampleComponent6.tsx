@@ -17,20 +17,20 @@
  */
 
 import {
-    ContentLayout,
-    LayoutBehaviour,
+  ContentLayout,
+  LayoutBehaviour,
 } from "@iavofficial/frontend-framework/contentLayout";
-import {ContentStyleTemplates} from "@iavofficial/frontend-framework/contentStyle";
+import { ContentStyleTemplates } from "@iavofficial/frontend-framework/contentStyle";
 
 export const ExampleComponent6 = () => {
-    return (
-        <ContentLayout
-            layoutBehaviour={LayoutBehaviour.FLEX}
-            contentStyle={{appliedStyles: ContentStyleTemplates.DEFAULT}}
-        >
-            <div className="w-full" style={{backgroundColor: "white"}}>
-                Example component 6
-            </div>
-        </ContentLayout>
-    );
+  return (
+    <ContentLayout
+      layoutBehaviour={LayoutBehaviour.FLEX}
+      contentStyle={{ appliedStyles: ContentStyleTemplates.DEFAULT }}
+    >
+      <div className="w-full" style={{ backgroundColor: "white" }}>
+        Example component 6
+      </div>
+    </ContentLayout>
+  );
 };

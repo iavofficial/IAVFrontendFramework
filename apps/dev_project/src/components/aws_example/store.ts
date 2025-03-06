@@ -16,49 +16,49 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {StoreBuilder} from "@iavofficial/frontend-framework/store";
-import {Amplify} from "aws-amplify";
-import {cognitoUserPoolsTokenProvider} from "aws-amplify/auth/cognito";
-import {CookieStorage} from "aws-amplify/utils";
-import {awsAuthenticationViewFactory} from "@iavofficial/frontend-framework-aws-authenticator/awsAuthenticationView";
-import {AWSAuthenticator} from "@iavofficial/frontend-framework-aws-authenticator/awsAuthenticatorModule";
-import {useModuleContext} from "@iavofficial/frontend-framework/moduleContext";
+import { StoreBuilder } from "@iavofficial/frontend-framework/store";
+import { Amplify } from "aws-amplify";
+import { cognitoUserPoolsTokenProvider } from "aws-amplify/auth/cognito";
+import { CookieStorage } from "aws-amplify/utils";
+import { awsAuthenticationViewFactory } from "@iavofficial/frontend-framework-aws-authenticator/awsAuthenticationView";
+import { AWSAuthenticator } from "@iavofficial/frontend-framework-aws-authenticator/awsAuthenticatorModule";
+import { useModuleContext } from "@iavofficial/frontend-framework/moduleContext";
 
 const cognitoPool = import.meta.env.VITE_COGNITO_POOL;
 const cognitoAppId = import.meta.env.VITE_COGNITO_APP_ID;
 const domain = import.meta.env.VITE_DOMAIN;
 
 const configureAmplify: () => void = () => {
-    Amplify.configure({
-        Auth: {
-            Cognito: {
-                userPoolId: cognitoPool,
-                userPoolClientId: cognitoAppId,
-            },
-        },
-    });
-    cognitoUserPoolsTokenProvider.setKeyValueStorage(
-        new CookieStorage({
-            domain: domain,
-            path: "/",
-            expires: 365,
-            // @ts-ignore
-            secure: domain !== "localhost",
-            sameSite: "lax",
-        })
-    );
+  Amplify.configure({
+    Auth: {
+      Cognito: {
+        userPoolId: cognitoPool,
+        userPoolClientId: cognitoAppId,
+      },
+    },
+  });
+  cognitoUserPoolsTokenProvider.setKeyValueStorage(
+    new CookieStorage({
+      domain: domain,
+      path: "/",
+      expires: 365,
+      // @ts-ignore
+      secure: domain !== "localhost",
+      sameSite: "lax",
+    }),
+  );
 };
 
 export const modules = {
-    auth: new AWSAuthenticator({
-        configureAmplify: configureAmplify,
-        failOnNoLegalGroup: true,
-        legalGroups: ["ADMIN", "SHOWCASE"],
-    }),
+  auth: new AWSAuthenticator({
+    configureAmplify: configureAmplify,
+    failOnNoLegalGroup: true,
+    legalGroups: ["ADMIN", "SHOWCASE"],
+  }),
 };
 
 export const store = new StoreBuilder(modules)
-    /*.setFrameworkModuleProcessor("auth", (
+  /*.setFrameworkModuleProcessor("auth", (
       authModule: AWSAuthenticator,
       storeConfigBuilder: StoreConfigBuilder,
     ) => {

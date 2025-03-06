@@ -52,6 +52,6 @@ export const AppAwsAuthentication = () => {
       <Layout />
     </GlobalDataLayer>
   );
-}
+};
 
 export default AppAwsAuthentication;

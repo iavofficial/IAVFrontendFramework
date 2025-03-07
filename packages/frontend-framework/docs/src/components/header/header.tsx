@@ -17,7 +17,7 @@
 import React, {useCallback, useEffect, useState} from "react";
 import {DropdownChangeEvent} from 'primereact/dropdown';
 import makeStyles from "../../../../src/components/content/style_options/makeStyles";
-import Typography from "../page/utils/typography.tsx";
+import Title from "../page/text/title.tsx";
 
 const useStyles = makeStyles(() => ({
     header: {
@@ -122,7 +122,7 @@ const Header: React.FC = () => {
                 <img alt="GitHub" height="32"
                      src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="32"/>
             </a>
-            <Typography className={classes.headerTitle} variant={"h1"}>IAV Frontend Framework</Typography>
+            <Title className={classes.headerTitle}>IAV Frontend Framework</Title>
             <div className={classes.versionDropdown}>
                 <label>
                     <select className={classes.headerVersion} value={selectedVersion} onChange={handleVersionChange}>

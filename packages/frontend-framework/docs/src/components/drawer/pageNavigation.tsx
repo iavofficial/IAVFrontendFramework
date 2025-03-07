@@ -15,8 +15,8 @@
  **/
 import React from 'react';
 import {Link} from 'react-router-dom';
-import Typography from "../page/utils/typography.tsx";
 import makeStyles from "../../../../src/components/content/style_options/makeStyles.tsx";
+import SubSubTitle from "../page/text/subSubTitle.tsx";
 
 const useStyles = makeStyles(() => ({
     drawer: {
@@ -82,7 +82,7 @@ const PageNavigation: React.FC = () => {
                 <li><Link to="/example-project">09 - Example Project</Link></li>
                 <li><Link to="/playground">10 - Playground</Link></li>
             </ul>
-            <Typography variant={"h3"}>Need help?</Typography>
+            <SubSubTitle>Need help?</SubSubTitle>
             <ul>
                 <li><Link to="/faq">FAQ</Link></li>
             </ul>

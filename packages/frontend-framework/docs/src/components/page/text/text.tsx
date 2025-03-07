@@ -46,27 +46,18 @@ const useStyles = makeStyles(() => ({
 
 interface Props {
     className?: string;
-    variant: "p" | "h1" | "h2" | "h3";
 }
 
-const Typography: React.FC<PropsWithChildren<Props>> = (props) => {
+const Text: React.FC<PropsWithChildren<Props>> = (props) => {
 
-    const {className, variant, children} = props;
+    const {className, children} = props;
 
     const {classes} = useStyles();
 
-    switch (variant) {
-        case "h1":
-            return <h1 className={classNames(className, classes.typography, classes.h1)}>{children}</h1>;
-        case "h2":
-            return <h2 className={classNames(className, classes.typography, classes.h2)}>{children}</h2>;
-        case "h3":
-            return <h3 className={classNames(className, classes.typography, classes.h3)}>{children}</h3>;
-        case "p":
-            return <p className={classNames(className, classes.typography, classes.p)}>{children}</p>;
-        default:
-            return null;
-    }
+
+    return (
+        <p className={classNames(className, classes.typography, classes.p)}>{children}</p>
+    );
 };
 
-export default Typography;
+export default Text;

@@ -2,6 +2,7 @@ import React, {PropsWithChildren} from "react";
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import makeStyles from "../../../../../src/components/content/style_options/makeStyles.tsx";
 import {ocean} from "react-syntax-highlighter/dist/cjs/styles/hljs";
+import {GREY2} from "../../../../../src/constants.ts";
 
 const useStyles = makeStyles(() => ({
     codeBlock: {
@@ -16,20 +17,28 @@ const useStyles = makeStyles(() => ({
         paddingLeft: "8px",
         margin: "8px 0"
     },
+    title: {
+        padding: "2px 0",
+        color: GREY2,
+        fontSize: "0.8rem",
+        fontWeight: "bold",
+    }
 }));
 
 interface Props {
     language: string;
+    title?: string;  // Optional title
 }
 
 const Code: React.FC<PropsWithChildren<Props>> = (props) => {
 
-    const {language, children} = props;
+    const {language, children, title} = props;
 
     const {classes} = useStyles();
 
     return (
         <div className={classes.codeBlock}>
+            {title && <div className={classes.title}>{title}</div>}
             <SyntaxHighlighter language={language} style={ocean}>
                 {children}
             </SyntaxHighlighter>

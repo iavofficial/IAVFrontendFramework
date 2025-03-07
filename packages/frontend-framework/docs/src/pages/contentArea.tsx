@@ -2,11 +2,12 @@ import React from "react";
 import Page from "../components/page/page.tsx";
 import Title from "../components/page/text/title.tsx";
 import SubTitle from "../components/page/text/subTitle.tsx";
-import Typography from "../components/page/utils/typography.tsx";
 import SubSubTitle from "../components/page/text/subSubTitle.tsx";
 import Code from "../components/page/utils/code.tsx";
 import BulletList from "../components/page/text/bulletList.tsx";
 import Image from "../components/page/utils/image.tsx";
+import Text from "../components/page/text/text.tsx";
+
 
 const ContentArea: React.FC = () => {
 
@@ -14,7 +15,7 @@ const ContentArea: React.FC = () => {
         <Page>
             <Title>Content Area</Title>
             <SubTitle>Style, Layout and embedding the Content Bar</SubTitle>
-            <Typography variant={"p"}>
+            <Text>
                 As shown in UILayer you are free to pass every component for the content
                 area. However, the framework provides three higher order components for
                 your content area components. Their purposes are styling (ContentStyle),
@@ -22,25 +23,25 @@ const ContentArea: React.FC = () => {
                 you use ContentLayout, ContentStyle will be applied automatically. If you
                 use ContentWithBar, ContentLayout (and because of this also ContentStyle)
                 will be applied.
-            </Typography>
+            </Text>
             <SubSubTitle>The ContentStyle component</SubSubTitle>
-            <Typography variant={"p"}>
+            <Text>
                 The ContentStyle components adds the current background color and other
                 styles to your content area component. This allows you to easily embed a
                 frame (in light mode it is grey, as shown in some screenshots in this
                 documentation) for your content area component. ContentStyle has the
                 following properties:
-            </Typography>
+            </Text>
             <Code language={"language"}>
                 {`export interface ContentStyleProps {
     appliedStyles?: StylesArray<typeof ContentStyleStyles>;
 }`}
             </Code>
-            <Typography variant={"p"}>
+            <Text>
                 This means that you are able to pass an array of predefined styles to the
                 component which should be activated. The predefined styles are the
                 following:
-            </Typography>
+            </Text>
             <Code language={"language"}>
                 {`export const ContentStyleStyles = {
     WRAPPER_FULL_WIDTH: "WRAPPER_FULL_WIDTH",
@@ -49,46 +50,43 @@ const ContentArea: React.FC = () => {
     SET_SPACING_COLOR: "SET_SPACING_COLOR",
 };`}
             </Code>
-            <Typography variant={"p"}>
+            <Text>
                 The framework also exports templates. These are just predefined arrays of
                 styles. These are the following:
-            </Typography>
+            </Text>
             <BulletList
                 bulletType={"bullet"}
                 items={[
                     "DEFAULT: This template should be used for simple content areas (for example it sets a colored gap).",
                     "CONTENT_CELLS: This template should be used if you want to use the ContentCell component."
                 ]}/>
-            <Typography variant={"p"}>
-                <strong>Examples</strong>
-            </Typography>
-            <Code language={"typescript"}>
+            <Code title={"First Example"} language={"typescript"}>
                 {`<ContentStyle
     appliedStyles={[ContentStyleStyles.FULL_WIDTH, ContentStyleStyles.SPACING, ContentStyleStyles.SET_SPACING_COLOR]}
 />`}
             </Code>
-            <Code language={"typescript"}>
+            <Code title={"Second Example"} language={"typescript"}>
                 {`<ContentStyle
     appliedStyles={ContentStyleTemplates.DEFAULT}
 />`}
             </Code>
             <SubSubTitle>The ContentLayout component</SubSubTitle>
-            <Typography variant={"p"}>
+            <Text>
                 Using the ContentLayout component you are able to specify a content layout
                 for your content area component. Furthermore, the ContentLayout component
                 uses the ContentStyle component. To use ContentStyle with ContentLayout
                 you have to pass an object containing the appliedStyles array to
                 ContentLayout.
-            </Typography>
+            </Text>
             <Code language={"typescript"}>
                 {`interface Props {
     contentStyle?: ContentStyleProps; // An object of the following format: {appliedStyles: [...]}
     layoutBehaviour?: LayoutBehaviour; // Option to specify the layout which is one option of the following enum.
 }`}
             </Code>
-            <Typography variant={"p"}>
+            <Text>
                 The LayoutBehaviour enum is defined like this:
-            </Typography>
+            </Text>
             <Code language={"typescript"}>
                 {`export enum LayoutBehaviour {
     // Parent div of content will have no specific layout class
@@ -101,9 +99,9 @@ const ContentArea: React.FC = () => {
     FLEX_COL = "flex flex-column",
 }`}
             </Code>
-            <Typography variant={"p"}>
+            <Text>
                 The following code block shows an example of using ContentLayout:
-            </Typography>
+            </Text>
             <Code language={"typescript"}>
                 {`import { CellPaddings, ContentCell } from '@iavofficial/frontend-framework/contentCell';
 import { ContentLayout, LayoutBehaviour } from '@iavofficial/frontend-framework/contentLayout';
@@ -120,19 +118,19 @@ export const ExampleComponent = () => {
   );
 };`}
             </Code>
-            <Typography variant={"p"}>
+            <Text>
                 The ContentCell component will be explained later on.
-            </Typography>
+            </Text>
             <SubSubTitle>The ContentWithBar component</SubSubTitle>
-            <Typography variant={"p"}>
+            <Text>
                 This HOC can be used for implementing a content area component containing
                 a Content Bar. To embed the Content Bar you just have to pass a wrapper
                 array containing your components to the ContentWithBar component using
                 it`s &quot;contentWrappers&quot; property. The ContentWithBar component
                 will render the Content Bar and underneath it will render your content
                 area UI which is the child of this component.
-            </Typography>
-            <Typography variant={"p"}>
+            </Text>
+            <Text>
                 To define the tabs for the Content Bar and the corresponding components
                 which will be shown inside the content area, you have to define a wrapper
                 object array similarly to the array for the navigation bar. This time you
@@ -142,23 +140,20 @@ export const ExampleComponent = () => {
                 a custom component which will be rendered inside the content bar. The
                 array is then passed to the Content component using the contentWrappers
                 property.
-            </Typography>
-            <Typography variant={"p"}>
+            </Text>
+            <Text>
                 Furthermore, the framework will render buttons for sliding to the left and
                 right inside the content bar. While the navigation bar isn&#39;t
                 collapsed, this will happen if there are more than 5 elements inside the
                 content bar. If the navigation bar is collapsed, the buttons will render
                 if there are more than 6 elements in the content bar.
-            </Typography>
-            <Typography variant={"p"}>
+            </Text>
+            <Text>
                 ContentWithBar uses ContentLayout and ContentStyle. Because of this the
                 functionality of these components will be added by default. The following
                 code snippet shows the properties of the Content component.
-            </Typography>
-            <Typography variant={"p"}>
-                <strong>Interface Content</strong>
-            </Typography>
-            <Code language={"typescript"}>
+            </Text>
+            <Code title={"Interface Content"} language={"typescript"}>
                 {`export interface Props {
     contentStyle?: ContentStyleProps; // An object of the following format: {appliedStyles: [...]} 
     layoutBehaviour?: LayoutBehaviour; // Option to specify the layout which is one option of the following enum.
@@ -171,13 +166,10 @@ export const ExampleComponent = () => {
     onClickRightSlideButton?: () => any;// Using this property you can pass a function that will be triggerd if the slide right Button is clicked.
 }`}
             </Code>
-            <Typography variant={"p"}>
+            <Text>
                 The following code snippet shows the attributes of the BasicContentbarWrapper class:
-            </Typography>
-            <Typography variant={"p"}>
-                <strong>Constructor BasicContentbarWrapper</strong>
-            </Typography>
-            <Code language={"typescript"}>
+            </Text>
+            <Code title={"Constructor BasicContentbarWrapper"} language={"typescript"}>
                 {`constructor({
     id: string, // Identifier of the tab element.
     displayName: string | TranslationFunction, // Display name of the tab element.
@@ -187,27 +179,21 @@ export const ExampleComponent = () => {
     closable?: boolean, // Property to define if a closing icon will be rendered.
 }) {}`}
             </Code>
-            <Typography variant={"p"}>
+            <Text>
                 The following code snippet shows the attributes of the
                 CustomContentbarWrapper class:
-            </Typography>
-            <Typography variant={"p"}>
-                <strong>Constructor CustomContentbarWrapper</strong>
-            </Typography>
-            <Code language={"typescript"}>
+            </Text>
+            <Code title={"Constructor CustomContentbarWrapper"} language={"typescript"}>
                 {`constructor({
   id: string, // Identifier of the tab element
   renderElement: ReactElement, // The custom tab element that should be rendered within the content bar.
   contentAreaElement: React.ReactElement // Defines which custom component should be rendered when selecting a content bar tab.
 }) {}`}
             </Code>
-            <Typography variant={"p"}>
+            <Text>
                 The following code snippet shows an example for creating a component containing a content bar:
-            </Typography>
-            <Typography variant={"p"}>
-                <strong>Example Content Component Implementation</strong>
-            </Typography>
-            <Code language={"typescript"}>
+            </Text>
+            <Code title={"Example Content Component Implementation"} language={"typescript"}>
                 {`export const ExampleComponent1 = () => {
   const [selectedId, setSelectedId] = useState<string>(WrapperIds.Test1);
 
@@ -264,22 +250,19 @@ export const ExampleComponent = () => {
   );
 };`}
             </Code>
-            <Typography variant={"p"}>
+            <Text>
                 <strong>Hint:</strong> see further integration with different use cases and
                 React State Management hooks in the Example-Project and TemplateProject
-            </Typography>
+            </Text>
             <SubTitle>ContentCell</SubTitle>
-            <Typography variant={"p"}>
+            <Text>
                 The framework provides a grid system to structure the content area. For
                 this purpose the framework provides the ContentCell component. The
                 component has to be embedded inside ContentLayout (or ContentWithBar as it
                 uses ContentLayout) with your desired content area layout. The following
                 code snippet shows it&#39;s properties.
-            </Typography>
-            <Typography variant={"p"}>
-                <strong>Interface ContentCell and CellPaddings ENUM</strong>
-            </Typography>
-            <Code language={"typescript"}>
+            </Text>
+            <Code title={"Interface ContentCell and CellPaddings ENUM"} language={"typescript"}>
                 {`export enum CellPaddings {
   FULL,
   VERT_RIGHT,
@@ -294,18 +277,15 @@ export interface Props {
   paddings: CellPaddings; // Definition of the element's padding.
 }`}
             </Code>
-            <Typography variant={"p"}>
+            <Text>
                 The following code snippet shows an example implementation of a content
                 area using the grid system.
-            </Typography>
-            <Typography variant={"p"}>
+            </Text>
+            <Text>
                 <strong>Important hint:</strong> This component has to be embedded inside
                 ContentLayout (or ContentWithBar) with the layout set to GRID.
-            </Typography>
-            <Typography variant={"p"}>
-                <strong>Example implementation with the ContentCell components</strong>
-            </Typography>
-            <Code language={"typescript"}>
+            </Text>
+            <Code title={"Example implementation with the ContentCell components"} language={"typescript"}>
                 {`import { ContentCell } from '@iavofficial/frontend-framework/contentCell';
 import React from 'react';
 
@@ -356,9 +336,9 @@ export const ContentbarExampleWithText = (props: Props) => {
   );
 };`}
             </Code>
-            <Typography variant={"p"}>
+            <Text>
                 The resulting content area looks like this:
-            </Typography>
+            </Text>
             <Image src={"assets/content-area/content-area.png"}/>
         </Page>
     )

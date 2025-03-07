@@ -2,10 +2,10 @@ import React from "react";
 import Page from "../components/page/page.tsx";
 import Title from "../components/page/text/title.tsx";
 import SubTitle from "../components/page/text/subTitle.tsx";
-import Typography from "../components/page/utils/typography.tsx";
 import Code from "../components/page/utils/code.tsx";
 import SubSubTitle from "../components/page/text/subSubTitle.tsx";
 import Image from "../components/page/utils/image.tsx";
+import Text from "../components/page/text/text.tsx";
 
 const ColorSettings: React.FC = () => {
 
@@ -13,7 +13,7 @@ const ColorSettings: React.FC = () => {
         <Page>
             <Title>Color Settings and Dark Mode</Title>
             <SubTitle>Introduction</SubTitle>
-            <Typography variant={"p"}>
+            <Text>
                 Color and theme (dark / light mode) information is stored and provided by
                 the React context called <strong>ColorSettings</strong>
                 context. The ColorSettings context`s provider component is embedded inside
@@ -21,35 +21,29 @@ const ColorSettings: React.FC = () => {
                 GlobalDataLayer. Your interface to the ColorProvider component is the
                 colorSettings property of the GlobalDataLayer component. This property
                 will be explained later on.
-            </Typography>
-            <Typography variant={"p"}>
+            </Text>
+            <Text>
                 Using these options you are able to set custom colors (especially for
                 framework components). Furthermore, the ColorSettings context provides you
                 the information whether the dark mode is activated. This allows you to
                 implement a dark mode four your components.
-            </Typography>
-            <Typography variant={"p"}>
+            </Text>
+            <Text>
                 All colors are exported by the framework&#39;s constants file. The
                 following code snippet shows you how to import these colors:
-            </Typography>
-            <Typography variant={"p"}>
-                <strong>Example exported color</strong>
-            </Typography>
-            <Code language={"typescript"}>
+            </Text>
+            <Code title={"Example exported color"} language={"typescript"}>
                 {`import {BLUE0} from "@iavofficial/frontend-framework/constants";`}
             </Code>
             <Title>Overwrite default colors</Title>
             <SubTitle>CSS</SubTitle>
-            <Typography variant={"p"}>
+            <Text>
                 Besides providing the colors as JS constants, all colors are defined as
                 CSS constants within the root and can be used within the css files of the
                 project. The following code snippet shows you how to use these colors
                 inside css files:
-            </Typography>
-            <Typography variant={"p"}>
-                <strong>Example exported css constants and variables definition</strong>
-            </Typography>
-            <Code language={"typescript"}>
+            </Text>
+            <Code title={"Example exported css constants and variables definition"} language={"typescript"}>
                 {`// Example for exported color by the framework:
 :root {
    --blue-0: #001a54;
@@ -59,16 +53,13 @@ const ColorSettings: React.FC = () => {
    color: var(--blue-0);
 }`}
             </Code>
-            <Typography variant={"p"}>
+            <Text>
                 The framework provides CSS classes for styling your components. This is
                 inspired by PrimeReact. The classes are defined in the globalColors.css
                 file and globally exported. The following code snippet illustrates the
                 structure of these classe&#39;s names.
-            </Typography>
-            <Typography variant={"p"}>
-                <strong>Global CSS colors</strong>
-            </Typography>
-            <Code language={"typescript"}>
+            </Text>
+            <Code title={"Global CSS colors"} language={"typescript"}>
                 {`/* BACKGROUND CLASSES*/
 .bg-white-1{ // because of name conflicts with primereact this name is an execption
   background-color: var(--white);
@@ -88,9 +79,9 @@ const ColorSettings: React.FC = () => {
 }`}
             </Code>
             <SubTitle>colorSettings property of GlobalDataLayer</SubTitle>
-            <Typography variant={"p"}>
+            <Text>
                 Using the colorSettings property you can pass an object of the following structure:
-            </Typography>
+            </Text>
             <Code language={"typescript"}>
                 {`export interface ColorProviderProps {
     colorOptions?: ColorOptions; // Options to overwrite the default framework component's default colors.
@@ -98,17 +89,14 @@ const ColorSettings: React.FC = () => {
     disableCustomColorsForDarkMode?: boolean; // Option to disable your color settings for the dark mode.
 }`}
             </Code>
-            <Typography variant={"p"}>
+            <Text>
                 If you want to overwrite the colors of framework components you can do so
                 using GlobalDataLayer&#39;s colorSettings property. The colors should be
                 defined in HEX representation. The following code snippet shows the
                 options object to overwrite the default colors. The specific interfaces
                 are listed later on.
-            </Typography>
-            <Typography variant={"p"}>
-                <strong>Interface colorObject</strong>
-            </Typography>
-            <Code language={"typescript"}>
+            </Text>
+            <Code title={"Interface colorObject"} language={"typescript"}>
                 {`export interface ColorOptions {
     header?: HeaderColorOptions;
     navbar?: NavbarColorOptions;
@@ -118,19 +106,16 @@ const ColorSettings: React.FC = () => {
     authenticationView?: AuthenticationViewColorOptions;
 }`}
             </Code>
-            <Typography variant={"p"}>
+            <Text>
                 The following interfaces show that most settings are divided by the state
                 of the corresponding element: default, hovering and active.
-            </Typography>
+            </Text>
             <SubSubTitle>Color options of the header</SubSubTitle>
-            <Typography variant={"p"}>
+            <Text>
                 Using these options you can define the colors of the main view&#39;s
                 header.
-            </Typography>
-            <Typography variant={"p"}>
-                <strong>Interface HeaderColorType</strong>
-            </Typography>
-            <Code language={"typescript"}>
+            </Text>
+            <Code title={"Interface HeaderColorType"} language={"typescript"}>
                 {`export interface HeaderColorOptions {
     backgroundColor?: string;
     settingsIconColor?: string;
@@ -138,14 +123,11 @@ const ColorSettings: React.FC = () => {
 }`}
             </Code>
             <SubSubTitle>Color options of the navigation bar (including the navigation tabs)</SubSubTitle>
-            <Typography variant={"p"}>
+            <Text>
                 Using these options you can define the colors of the main view&#39;s
                 navigation bar.
-            </Typography>
-            <Typography variant={"p"}>
-                <strong>Interface NavbarColorType</strong>
-            </Typography>
-            <Code language={"typescript"}>
+            </Text>
+            <Code title={"Interface NavbarColorType"} language={"typescript"}>
                 {`export interface NavbarColorOptions {
     backgroundColor?: string;
     navbarCollapseArrowColor?: string;
@@ -187,25 +169,19 @@ const ColorSettings: React.FC = () => {
 }`}
             </Code>
             <SubSubTitle>Color options of the content area</SubSubTitle>
-            <Typography variant={"p"}>
+            <Text>
                 Using these options you can set the colors of the content area:
-            </Typography>
-            <Typography variant={"p"}>
-                <strong>ContentColorType</strong>
-            </Typography>
-            <Code language={"typescript"}>
+            </Text>
+            <Code title={"ContentColorType"} language={"typescript"}>
                 {`export interface ContentAreaColorOptions {
     backgroundColor?: string;
 }`}
             </Code>
             <SubSubTitle>Color options of the content bar (including tabs)</SubSubTitle>
-            <Typography variant={"p"}>
+            <Text>
                 Using these options you can set the colors of the tabs of the content bar:
-            </Typography>
-            <Typography variant={"p"}>
-                <strong>ContentbarTabColorType</strong>
-            </Typography>
-            <Code language={"typescript"}>
+            </Text>
+            <Code title={"ContentbarTabColorOptions"} language={"typescript"}>
                 {`export interface ContentbarColorOptions {
     backgroundColor?: string;
     iconDefaultColor?: string;
@@ -215,7 +191,7 @@ const ColorSettings: React.FC = () => {
     tabs?: ContentbarTabColorType; // Color settings of the tabs
 }`}
             </Code>
-            <Code language={"typescript"}>
+            <Code title={"ContentbarTabColorType"} language={"typescript"}>
                 {`export interface ContentbarTabColorType {
     backgroundDefaultColor?: string;
     backgroundHoverColor?: string;
@@ -229,9 +205,9 @@ const ColorSettings: React.FC = () => {
 }`}
             </Code>
             <SubSubTitle>Color options for content cells</SubSubTitle>
-            <Typography variant={"p"}>
+            <Text>
                 Using these options you can set the colors of content cells:
-            </Typography>
+            </Text>
             <Code language={"typescript"}>
                 {`export interface ContentCellColorOptions {
     backgroundColor?: string;
@@ -240,13 +216,10 @@ const ColorSettings: React.FC = () => {
             <SubSubTitle>
                 Color options for the authentication view
             </SubSubTitle>
-            <Typography variant={"p"}>
+            <Text>
                 Using these options you can set the colors of the authentication view:
-            </Typography>
-            <Typography variant={"p"}>
-                <strong>Interfaces ContentElements</strong>
-            </Typography>
-            <Code language={"typescript"}>
+            </Text>
+            <Code title={"Interfaces ContentElements"} language={"typescript"}>
                 {`export interface AuthenticationViewColorOptions {
     headerBackgroundColor?: string;
     loginButtonBackgroundColor?: string;
@@ -276,14 +249,11 @@ export interface AuthenticationColorType {
 }`}
             </Code>
             <Title>Other color options</Title>
-            <Typography variant={"p"}>
+            <Text>
                 To change the color of the PrimeReact components DropDown and ContextMenu
                 you have to overwrite the following css variables:
-            </Typography>
-            <Typography variant={"p"}>
-                <strong>CSS Properties</strong>
-            </Typography>
-            <Code language={"css"}>
+            </Text>
+            <Code title={"CSS Properties"} language={"css"}>
                 {`:root {
     --contextmenubgmaincolor: ... // Background color of the contextsubmenu (settingsmenu and loginmenu).
     --highlightcolor: ... // Background color of the contextsubmenu if hovered or selected (settingsmenu and loginmenu).
@@ -294,22 +264,19 @@ export interface AuthenticationColorType {
 }`}
             </Code>
             <Title>Example for using custom colors</Title>
-            <Typography variant={"p"}>
+            <Text>
                 Using these options you can for example create a view like the following.
-            </Typography>
+            </Text>
             <Image src={"assets/color-settings/custom-coloring.png"}/>
             <Title>How to implement a dark mode in custom components</Title>
             <SubTitle>Implement dark mode using the ColorSettings context</SubTitle>
-            <Typography variant={"p"}>
+            <Text>
                 If you want to implement a component including a dark mode you will have
                 to know whether the dark mode is activated at first. You are able to get
                 this information by reading the darkmode attribute of the ColorSettings
                 context. The following code snippet shows an example:
-            </Typography>
-            <Typography variant={"p"}>
-                <strong>Interfaces ContentElements</strong>
-            </Typography>
-            <Code language={"typescript"}>
+            </Text>
+            <Code title={"Interfaces ContentElements"} language={"typescript"}>
                 {`import React, { useContext } from 'react';
 import { ColorSettingsContext } from 'disa-framework/colorSettingsContext';
 import '@iavofficial/frontend-framework/globalColors.css';
@@ -325,20 +292,20 @@ export const ExampleComponent = () => {
     );
 };`}
             </Code>
-            <Typography variant={"p"}>
+            <Text>
                 However, deciding which colors should be used regarding the theme inside
                 your components is a bad practice. Instead you should maintain the
                 currently used colors in a central place like the framework does. Consult
                 the framework implementation (especially the ColorProvider component) for
                 further details.
-            </Typography>
+            </Text>
             <SubSubTitle>Implement dark mode using the color-theme html attribute</SubSubTitle>
-            <Typography variant={"p"}>
+            <Text>
                 If the user activates the dark mode the &quot;color-theme&quot; html
                 attribute will be set (at html body). This enables you to style your
                 components for the light and dark mode using CSS attribute selectors like
                 so:
-            </Typography>
+            </Text>
             <Code language={"typescript"}>
                 {`.example {
     background-color: white;
@@ -348,19 +315,19 @@ export const ExampleComponent = () => {
     background-color: black;
 }`}
             </Code>
-            <Typography variant={"p"}>
+            <Text>
                 This CSS will set a white background for the class &quot;example&quot; if
                 the color-theme is not &quot;dark&quot; (light mode is activated). If the
                 color-theme is set to &quot;dark&quot; (dark mode is activated) it will
                 set the background to black.
-            </Typography>
+            </Text>
             <Title>How to disable the dark mode</Title>
-            <Typography variant={"p"}>
+            <Text>
                 To disable the dark mode use the <em>hideColorThemeToggler</em> option
                 inside <em>settingsMenuOptions</em>
                 of the UILayer component. This will prevent the user from changing the
                 theme.
-            </Typography>
+            </Text>
         </Page>
     )
 };

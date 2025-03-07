@@ -1,5 +1,4 @@
 import React from "react";
-import Typography from "../components/page/utils/typography.tsx";
 import Page from "../components/page/page.tsx";
 import Title from "../components/page/text/title.tsx";
 import SubTitle from "../components/page/text/subTitle.tsx";
@@ -7,6 +6,7 @@ import Table from "../components/page/utils/table.tsx";
 import BulletList from "../components/page/text/bulletList.tsx";
 import PageLink from "../components/page/text/pageLink.tsx";
 import Image from "../components/page/utils/image.tsx";
+import Text from "../components/page/text/text.tsx";
 
 const Overview: React.FC = () => {
 
@@ -28,7 +28,7 @@ const Overview: React.FC = () => {
     return (
         <Page>
             <Title>Quick Overview</Title>
-            <Typography variant={"p"}>
+            <Text>
                 The IAV Frontend Framework enhances the development and maintenance of
                 multiple frontend applications by centralizing key functionalities. It
                 tackles common issues like maintainability and extendability, while
@@ -39,14 +39,14 @@ const Overview: React.FC = () => {
                 to integrate different corporate designs. By leveraging GitHub for version
                 control and collaboration, developers benefit from streamlined workflows,
                 centralized support, and reduced redundancy across projects.
-            </Typography>
-            <Typography variant={"p"}>
+            </Text>
+            <Text>
                 This is the official documentation of the IAV frontend framework. The job
                 of the framework is to make your life way <strong>easier</strong>. It
                 achieves maintainability, extendability, a lower risk of faults, and a
                 greater developer experience by generalization. You want to maximize the
                 speed of your development process? Just have a look.
-            </Typography>
+            </Text>
             <Title>Overview</Title>
             <SubTitle>Technical Overview</SubTitle>
             <Table data={tableData}/>
@@ -70,7 +70,7 @@ const Overview: React.FC = () => {
             <SubTitle>
                 Ongoing Maintenance and Support
             </SubTitle>
-            <Typography variant={"p"}>
+            <Text>
                 We manage bug reports and support requests through <PageLink
                 to={"https://github.com/iavofficial/IAVFrontendFramework/issues"}
                 label={"GitHub Issues"}
@@ -79,7 +79,7 @@ const Overview: React.FC = () => {
                 to={"https://github.com/iavofficial/IAVFrontendFramework/blob/main/CONTRIBUTING.md"}
                 label={"Contributing Guidelines"}
                 target={"_blank"}/>.
-            </Typography>
+            </Text>
 
             <SubTitle>Layout</SubTitle>
 

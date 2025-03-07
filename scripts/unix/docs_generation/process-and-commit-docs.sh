@@ -30,7 +30,7 @@ rsync -av --exclude="packages" --delete main/generated_docs/* generated_docs/
 for scope in "$SOURCE_DIR"/*; do
     if [ -d "$scope" ]; then
         scope_name=$(basename "$scope")
-        
+
         # Create the scope folder in the destination if it does not exist
         mkdir -p "$DEST_DIR/$scope_name"
 
@@ -38,7 +38,7 @@ for scope in "$SOURCE_DIR"/*; do
         for package in "$scope"/*; do
             if [ -d "$package" ]; then
                 package_name=$(basename "$package")
-                
+
                 # Create the package folder in the destination if it does not exist
                 mkdir -p "$DEST_DIR/$scope_name/$package_name"
 

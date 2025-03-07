@@ -1,7 +1,7 @@
 import React, {HTMLAttributeAnchorTarget} from "react";
 import {Link} from "react-router-dom";
 import makeStyles from "../../../../../src/components/content/style_options/makeStyles.tsx";
-import {BLUE3} from "../../../../../src/constants.ts";
+import {BLUE3} from "@iavofficial/frontend-framework/constants";
 
 const useStyles = makeStyles(() => ({
     link: {

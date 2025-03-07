@@ -2,7 +2,8 @@ import React, {PropsWithChildren} from "react";
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import makeStyles from "../../../../../src/components/content/style_options/makeStyles.tsx";
 import {ocean} from "react-syntax-highlighter/dist/cjs/styles/hljs";
-import {GREY2} from "../../../../../src/constants.ts";
+import {GREY2} from "@iavofficial/frontend-framework/constants";
+
 
 const useStyles = makeStyles(() => ({
     codeBlock: {

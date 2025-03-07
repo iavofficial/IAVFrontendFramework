@@ -45,11 +45,11 @@ import {
   WHITE,
 } from "@iavofficial/frontend-framework-shared/constants";
 import { AWSAuthenticatorExtras } from "../awsAuthenticatorTypes";
-import { AuthModuleStore } from "@iavofficial/frontend-framework-shared/authenticatorModule";
+import { AuthModule } from "@iavofficial/frontend-framework-shared/authenticatorModule";
 
 type NecessaryModuleAttributes ={
   extras: AWSAuthenticatorExtras;
-} & Omit<AuthModuleStore<AWSAuthenticatorState>, "useModuleLifecycle">;
+} & Omit<AuthModule<AWSAuthenticatorState>, "useModuleLifecycle">;
 
 interface AWSAuthenticationViewProps extends AuthenticationViewProps {
   module: NecessaryModuleAttributes

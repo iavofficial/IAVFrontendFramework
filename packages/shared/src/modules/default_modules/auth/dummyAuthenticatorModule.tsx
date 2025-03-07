@@ -17,7 +17,7 @@
  */
 
 import { createAsyncThunk, createSlice, PayloadAction, Slice, ThunkDispatch } from "@reduxjs/toolkit";
-import { AuthModuleStore, Credentials, UserData } from "../../../types/modules/auth/authenticatorModule";
+import { AuthModule, Credentials, UserData } from "../../../types/modules/auth/authenticatorModule";
 import { MandatoryModuleNames } from "../../../constants/mandatoryModuleNames";
 
 export interface Props {
@@ -36,7 +36,7 @@ const initialState: DummyAuthenticatorState= {
   userData: undefined
 }
 
-export class DummyAuthenticator implements AuthModuleStore<DummyAuthenticatorState>{
+export class DummyAuthenticator implements AuthModule<DummyAuthenticatorState>{
   public slice: Slice<DummyAuthenticatorState>;
 
   public fetchAuthed;

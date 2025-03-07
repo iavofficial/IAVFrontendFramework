@@ -1,45 +1,33 @@
-import {FFModule, FFStoreModule} from "../../types/modules/generalModule";
+import {FFModule} from "../../types/modules/generalModule";
 import {
   ActualMandatoryStateFromModules,
   FFMandatoryStoreModules,
   FFMandatoryState,
   MergeModules,
 } from "../../types/modules/moduleOrchestrationTypes";
-import {
-  defaultModules,
-  defaultModulesWithoutStore,
-  defaultStoreModules,
-} from "./moduleDefaults";
-
-type ConstructorParams<TModulesWithoutStore, TStoreModules> = {
-  modulesWithoutStore?: TModulesWithoutStore;
-  storeModules?: TStoreModules;
-};
+import {defaultNonStoreModules, defaultStoreModules} from "./moduleDefaults";
 
 export class ModuleSetBuilder<
-  TModulesWithoutStore extends Record<string, FFModule>,
+  TNonStoreModules extends Record<string, FFModule>,
   TStoreModules extends Partial<FFMandatoryStoreModules<TState>>,
   TState extends
     FFMandatoryState = ActualMandatoryStateFromModules<TStoreModules>,
 > {
-  private modulesWithoutStore;
+  private nonStoreModules;
   private storeModules: MergeModules<TStoreModules, typeof defaultStoreModules>;
 
   constructor(params: {
-    modulesWithoutStore: TModulesWithoutStore;
+    nonStoreModules: TNonStoreModules;
     storeModules: TStoreModules;
   }) {
-    const modulesWithoutStore = params.modulesWithoutStore;
-    const storeModules = params.storeModules;
-
     this.storeModules = {
       ...defaultStoreModules,
-      ...storeModules,
+      ...params.storeModules,
     };
 
-    this.modulesWithoutStore = {
-      ...defaultModulesWithoutStore,
-      ...modulesWithoutStore,
+    this.nonStoreModules = {
+      ...defaultNonStoreModules,
+      ...params.nonStoreModules,
     };
   }
 
@@ -52,8 +40,8 @@ export class ModuleSetBuilder<
       // which has a default implementation inside the framework. The user may want to write a custom
       // Routing Module X which should replace the default implementation. He will pass X inside the
       // constructor because of which this.storeModules contains X. However, sinde M is a default
-      // implementation it is presend inside defaultModulesWithoutStore. Because of this M is present
-      // in this.modulesWithoutStore, so the union of this.storeModules and this.modulesWithoutStore
+      // implementation it is presend inside defaultNonStoreModules. Because of this M is present
+      // in this.nonStoreModules, so the union of this.storeModules and this.nonStoreModules
       // contains two routing modules (X and M) for the router key. Of course, the user module should
       // overwrite the default implementation.
       // However, the other way around makes no sense (a user module without store replaces a default
@@ -62,7 +50,7 @@ export class ModuleSetBuilder<
       // A default implementation for the store can be overwritten by just custom modules for the store.
       // A default implementation without store can be overwritten by custom modules both for and without
       // the store.
-      all: {...this.modulesWithoutStore, ...this.storeModules},
+      all: {...this.nonStoreModules, ...this.storeModules},
     };
   }
 }

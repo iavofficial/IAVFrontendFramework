@@ -60,7 +60,7 @@ const customModules = {
   }),
 };
 
-export const modules = new ModuleSetBuilder({storeModules: customModules, modulesWithoutStore: {}}).build();
+export const modules = new ModuleSetBuilder({storeModules: customModules, nonStoreModules: {}}).build();
 
 export const store = new StoreBuilder(modules.storeModules)
 /*    .setFrameworkModuleProcessor(

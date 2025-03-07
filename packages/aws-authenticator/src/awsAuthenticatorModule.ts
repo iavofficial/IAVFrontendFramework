@@ -36,7 +36,7 @@ import {
 import {useDispatch, useSelector} from "react-redux";
 import {AWSAuthenticatorExtras, AWSUserData} from "./awsAuthenticatorTypes";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/mandatoryModuleNames";
-import { AuthModuleStore, AuthState, Credentials } from "@iavofficial/frontend-framework-shared/authenticatorModule";
+import { AuthModule, AuthState, Credentials } from "@iavofficial/frontend-framework-shared/authenticatorModule";
 import { JWT } from "aws-amplify/auth";
 
 export interface FetchSettings {

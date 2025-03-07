@@ -19,7 +19,7 @@
 import {Reducer} from "@reduxjs/toolkit";
 import {FFStoreModule} from "../../types/modules/generalModule";
 import {MandatoryModuleNames} from "../../constants/mandatoryModuleNames";
-import {AuthModuleStore, AuthState} from "./auth/authenticatorModule";
+import {AuthModule, AuthState} from "./auth/authenticatorModule";
 import {StoreConfigBuilder} from "../../modules/module_orchestration/storeConfigBuilder";
 /*
 To add a new mandatory module:
@@ -59,7 +59,7 @@ export type FFMandatoryReducers<TState extends FFMandatoryState> = {
 export type FFMandatoryStoreModules<
   TState extends FFMandatoryState = FFMandatoryState,
 > = {
-  [MandatoryModuleNames.Authentication]: AuthModuleStore<
+  [MandatoryModuleNames.Authentication]: AuthModule<
     TState[typeof MandatoryModuleNames.Authentication]
   >;
 };

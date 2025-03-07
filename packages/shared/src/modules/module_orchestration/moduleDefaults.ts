@@ -18,13 +18,8 @@ export const defaultStoreModules: FFMandatoryStoreModules = {
   [MandatoryModuleNames.Authentication]: new DummyAuthenticator(),
 };
 
-export const defaultModulesWithoutStore = {
+export const defaultNonStoreModules = {
 
-}
-
-export const defaultModules = {
-  store: defaultStoreModules,
-  withoutStore: defaultModulesWithoutStore
 }
 
 export const defaultStore = new StoreBuilder(defaultStoreModules).build();

@@ -15,11 +15,6 @@ import {
 } from "../../types/modules/moduleOrchestrationTypes";
 import {StoreConfig} from "./storeConfig";
 import {StoreConfigBuilder} from "./storeConfigBuilder";
-import {FFStoreModule} from "../../types/modules/generalModule";
-import {
-  AuthModuleStore,
-  AuthState,
-} from "../../types/modules/auth/authenticatorModule";
 import {MandatoryModuleNames} from "../../constants/mandatoryModuleNames";
 
 // can be replaced to customize the build of the Redux store.
@@ -28,17 +23,18 @@ export class StoreBuilder<
   TModules extends FFMandatoryStoreModules<TState>,
   TState extends FFMandatoryState = ActualMandatoryStateFromModules<TModules>,
 > {
-  private storeConfigBuilder: StoreConfigBuilder = new StoreConfigBuilder();
+  private storeConfigBuilder: StoreConfigBuilder<TState>;
 
   // These are mandatory modules and processors which are essential for the framework as
   // it uses values and methods of the processed modules.
   private mandatoryModulesAndProcessors: ModuleAndProcessorMap<
-    FFMandatoryStoreModules<TState>
+    FFMandatoryStoreModules<TState>,
+    TState
   >;
 
   // These are optional and modules and processors of the user.
   private userModulesAndProcessors:
-    | ModuleAndProcessorMap<TUserModules>
+    | ModuleAndProcessorMap<TUserModules, TState>
     | undefined;
 
   private storeBuilder: (
@@ -46,13 +42,14 @@ export class StoreBuilder<
   ) => EnhancedStore<TState> = defaultStoreBuilder;
 
   constructor(
-    FFMandatoryStoreModules: TModules,
-    userModulesAndProcessors?: ModuleAndProcessorMap<TUserModules>,
+    ffMandatoryStoreModules: TModules,
+    userModulesAndProcessors?: ModuleAndProcessorMap<TUserModules, TState>,
   ) {
+    this.storeConfigBuilder = new StoreConfigBuilder(ffMandatoryStoreModules);
+
     this.mandatoryModulesAndProcessors = {
       [MandatoryModuleNames.Authentication]: {
-        module: FFMandatoryStoreModules[MandatoryModuleNames.Authentication],
-        processor: defaultAuthModuleStoreProcessor,
+        module: ffMandatoryStoreModules[MandatoryModuleNames.Authentication]
       },
     };
 
@@ -66,7 +63,8 @@ export class StoreBuilder<
   >(
     moduleType: K,
     processor: ModuleProcessorFunction<
-      (typeof this.mandatoryModulesAndProcessors)[K]["module"]
+      (typeof this.mandatoryModulesAndProcessors)[K]["module"],
+      TState
     >,
   ) {
     this.mandatoryModulesAndProcessors[moduleType].processor = processor;
@@ -75,28 +73,12 @@ export class StoreBuilder<
 
   setUserModuleProcessor<K extends keyof TUserModules>(
     moduleType: K,
-    processor: ModuleProcessorFunction<TUserModules[K]>,
+    processor: ModuleProcessorFunction<TUserModules[K], TState>,
   ) {
     if (this.userModulesAndProcessors) {
       this.userModulesAndProcessors[moduleType].processor = processor;
     }
     return this;
-  }
-
-  getModules() {
-    const mandatoryModules = Object.entries(this.mandatoryModulesAndProcessors)
-      .map(([key, value]) => ({[key]: value.module}))
-      .reduce((prev, current) => ({...prev, ...current}));
-
-    let userModules: Record<string, FFStoreModule> = {};
-
-    if (this.userModulesAndProcessors) {
-      userModules = Object.entries(this.userModulesAndProcessors)
-        .map(([key, value]) => ({[key]: value.module}))
-        .reduce((prev, current) => ({...prev, ...current}));
-    }
-
-    return {...mandatoryModules, userModules};
   }
 
   build() {
@@ -118,17 +100,9 @@ export class StoreBuilder<
   }
 }
 
-export const defaultAuthModuleStoreProcessor = <TAuthState extends AuthState>(
-  authModule: AuthModuleStore<TAuthState>,
-  storeConfigBuilder: StoreConfigBuilder,
+export const defaultStoreBuilder = <TState extends FFMandatoryState>(
+  storeConfig: StoreConfig<TState>,
 ) => {
-  storeConfigBuilder.setReducer(
-    MandatoryModuleNames.Authentication,
-    authModule.slice.reducer,
-  );
-};
-
-export const defaultStoreBuilder = <TState extends FFMandatoryState>(storeConfig: StoreConfig) => {
   const store = configureStore<TState>({
     reducer: storeConfig.reducers,
     middleware: (getDefaultMiddleware: Function) =>
@@ -140,12 +114,17 @@ export const defaultStoreBuilder = <TState extends FFMandatoryState>(storeConfig
   return store;
 };
 
-const executeProcessorsForModules = <TModules extends object>(
-  modulesAndProcessors: ModuleAndProcessorMap<TModules>,
-  storeConfigBuilder: StoreConfigBuilder,
+const executeProcessorsForModules = <
+  TModules extends object,
+  TState extends FFMandatoryState,
+>(
+  modulesAndProcessors: ModuleAndProcessorMap<TModules, TState>,
+  storeConfigBuilder: StoreConfigBuilder<TState>,
 ) => {
   (Object.keys(modulesAndProcessors) as (keyof TModules)[]).forEach((key) => {
     const entry = modulesAndProcessors[key];
-    entry.processor(entry.module, storeConfigBuilder);
+    if (entry.processor) {
+      entry.processor(entry.module, storeConfigBuilder);
+    }
   });
 };

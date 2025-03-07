@@ -19,8 +19,8 @@
 import {Reducer} from "@reduxjs/toolkit";
 import {FFStoreModule} from "../../types/modules/generalModule";
 import {MandatoryModuleNames} from "../../constants/mandatoryModuleNames";
-import { AuthModuleStore, AuthState } from "./auth/authenticatorModule";
-import { StoreConfigBuilder } from "../../modules/module_orchestration/storeConfigBuilder";
+import {AuthModuleStore, AuthState} from "./auth/authenticatorModule";
+import {StoreConfigBuilder} from "../../modules/module_orchestration/storeConfigBuilder";
 /*
 To add a new mandatory module:
 1. Add the state (of it's slice) to FFMandatoryState.
@@ -59,12 +59,16 @@ export type FFMandatoryReducers<TState extends FFMandatoryState> = {
 export type FFMandatoryStoreModules<
   TState extends FFMandatoryState = FFMandatoryState,
 > = {
-  [MandatoryModuleNames.Authentication]: AuthModuleStore<TState[typeof MandatoryModuleNames.Authentication]>;
+  [MandatoryModuleNames.Authentication]: AuthModuleStore<
+    TState[typeof MandatoryModuleNames.Authentication]
+  >;
 };
 
-export type FFMandatoryNonStoreModules = {
-  
-}
+export type FFMandatoryNonStoreModules = {};
+
+export type FFAllMandatoryModules<
+  TState extends FFMandatoryState = FFMandatoryState,
+> = FFMandatoryStoreModules<TState> & FFMandatoryNonStoreModules;
 
 // The user can provide additional modules which aren't used by the
 // framework itself.
@@ -74,26 +78,32 @@ export type GenericModules = Record<string, FFStoreModule>;
 // replaces in order to allow the developer to implement custom processing,
 // since it is not possible to think of every possible processing step which
 // could occur at development of the framework.
-export type ModuleProcessorFunction<M extends FFStoreModule> = (
-  module: M,
-  config: StoreConfigBuilder,
-) => void;
+export type ModuleProcessorFunction<
+  M extends FFStoreModule,
+  TState extends FFMandatoryState,
+> = (module: M, config: StoreConfigBuilder<TState>) => void;
 
 // Objects of this type aggragate a module and it's corresponding processor
 // method. The following example shows it's structure:
 // {auth: {module: ..., processor: ...}, ...}
 // The effect of never in this case is that there cannot be a key with a value
 // which does not extend FFStoreModule.
-export type ModuleAndProcessorMap<ModuleType extends object> = {
+export type ModuleAndProcessorMap<
+  ModuleType extends object,
+  TState extends FFMandatoryState,
+> = {
   [K in keyof ModuleType]: ModuleType[K] extends FFStoreModule
-    ? ModuleEntry<ModuleType[K]>
+    ? ModuleEntry<ModuleType[K], TState>
     : never;
 };
 
 // This type defines the structure of one entry inside the ModuleAndProcessorMap.
-export interface ModuleEntry<M extends FFStoreModule> {
+export interface ModuleEntry<
+  M extends FFStoreModule,
+  TState extends FFMandatoryState,
+> {
   module: M;
-  processor: ModuleProcessorFunction<M>;
+  processor?: ModuleProcessorFunction<M, TState>;
 }
 
 // Using this type the State Type of a Module can be iferred.

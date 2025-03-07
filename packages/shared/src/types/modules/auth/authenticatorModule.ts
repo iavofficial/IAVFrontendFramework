@@ -18,7 +18,7 @@
 
 import {Slice} from "@reduxjs/toolkit";
 import {AsyncThunk} from "@reduxjs/toolkit";
-import { FFStoreModule } from "../generalModule";
+import {FFStoreModule} from "../generalModule";
 
 export type UserData = {
   username: string;
@@ -50,5 +50,3 @@ export type AuthModuleStore<TAuthState extends AuthState> = {
   login: AsyncThunk<void, {credentials: Credentials}, any>;
   logout: AsyncThunk<void, {error?: unknown} | undefined, any>;
 } & FFStoreModule;
-
-export type AuthModule = Omit<AuthModuleStore<any>, "slice">;

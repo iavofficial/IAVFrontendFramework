@@ -63,9 +63,9 @@ const customModules = {
 export const modules = new ModuleSetBuilder({storeModules: customModules, modulesWithoutStore: {}}).build();
 
 export const store = new StoreBuilder(modules.storeModules)
-  /*  .setFrameworkModuleProcessor(
+/*    .setFrameworkModuleProcessor(
     "auth",
-    (authModule: AWSAuthenticator, storeConfigBuilder: StoreConfigBuilder) => {}
+    (authModule: AWSAuthenticator, storeConfigBuilder) => {}
   )*/
   .build();
 

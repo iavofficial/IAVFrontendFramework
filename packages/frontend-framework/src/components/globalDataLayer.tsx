@@ -32,7 +32,7 @@ import {DEFAULT_FALLBACK_LANGUAGE} from "@iavofficial/frontend-framework-shared/
 import {
   FFMandatoryStoreModules,
   FFMandatoryState,
-  FFMandatoryNonStoreModules,
+  FFAllMandatoryModules,
 } from "@iavofficial/frontend-framework-shared/moduleOrchestrationTypes";
 import {FFModule} from "@iavofficial/frontend-framework-shared/generalModule";
 
@@ -42,7 +42,7 @@ type GlobalDataLayerLanguageOptions = Omit<LanguageOptions, "fallbackLang"> & {
 };
 
 interface Props<TState extends FFMandatoryState> {
-  modules: FFMandatoryStoreModules<TState> & FFMandatoryNonStoreModules;
+  modules: FFAllMandatoryModules<TState> & Record<string, FFModule>;
   store: EnhancedStore<TState>;
   languageOptions?: GlobalDataLayerLanguageOptions;
   translations?: Translations;
@@ -83,9 +83,9 @@ export const GlobalDataLayer = <TState extends FFMandatoryState>(
   );
 };
 
-const ModuleLifecycleCaller = <TState extends FFMandatoryState>(
+const ModuleLifecycleCaller = (
   props: PropsWithChildren<{
-    modules: FFMandatoryStoreModules<TState> & Record<string, any>;
+    modules: Record<string, FFModule>;
   }>,
 ) => {
   // React hooks have to be called in the same order at every render.

@@ -59,7 +59,7 @@ export type FFMandatoryReducers = {
 export type FFMandatoryModules<
   TState extends FFMandatoryState = FFMandatoryState,
 > = {
-  auth: AuthModule<TState[typeof MandatoryModuleNames.Authentication]>;
+  [MandatoryModuleNames.Authentication]: AuthModule<TState[typeof MandatoryModuleNames.Authentication]>;
 };
 
 // The user can provide additional modules which aren't used by the

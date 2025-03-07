@@ -14,7 +14,7 @@
  * limitations under the License.
  **/
 
-import React, {PropsWithChildren} from "react";
+import React, {PropsWithChildren, useEffect} from "react";
 import makeStyles from "../../../../src/components/content/style_options/makeStyles.tsx";
 import Footer from "../footer/footer.tsx";
 import OnThisPage from "../drawer/onThisPage.tsx";
@@ -38,6 +38,10 @@ const useStyles = makeStyles(() => ({
 const Page: React.FC<PropsWithChildren> = (props) => {
 
     const {classes} = useStyles();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     return (
         <div className={classes.wrapper}>

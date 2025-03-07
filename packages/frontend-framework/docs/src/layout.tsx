@@ -28,8 +28,7 @@ function Layout() {
                 </>
             )}
             <Routes>
-                <Route path="/" element={<Navigate to="/overview" replace/>}/>
-                <Route path="/overview" element={<Overview/>}/>
+                <Route path="overview" element={<Overview/>}/>
                 <Route path="/information" element={<Information/>}/>
                 <Route path="/installation-guide" element={<InstallationGuide/>}/>
                 <Route path="/interface" element={<Interface/>}/>
@@ -41,6 +40,7 @@ function Layout() {
                 <Route path="/playground" element={<Playground/>}/>
                 <Route path="/faq" element={<FAQ/>}/>
                 <Route path="/imprint" element={<Imprint/>}/>
+                <Route path="*" element={<Navigate to="/overview" replace/>}/>
             </Routes>
         </>
     );

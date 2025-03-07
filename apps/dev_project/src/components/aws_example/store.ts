@@ -27,10 +27,6 @@ import { awsAuthenticationViewFactory } from "@iavofficial/frontend-framework-aw
 import { AWSAuthenticator } from "@iavofficial/frontend-framework-aws-authenticator/awsAuthenticatorModule";
 import { useModuleContext } from "@iavofficial/frontend-framework/moduleContext";
 
-console.log("AHOI");
-
-console.log(import.meta.env);
-
 const cognitoPool = import.meta.env.VITE_COGNITO_POOL;
 const cognitoAppId = import.meta.env.VITE_COGNITO_APP_ID;
 const domain = import.meta.env.VITE_DOMAIN;

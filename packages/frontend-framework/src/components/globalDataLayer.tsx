@@ -27,10 +27,9 @@ import {ColorProvider, ColorProviderProps} from "../coloring/colorProvider";
 import {BrowserRouter} from "react-router-dom";
 import {EnhancedStore} from "@reduxjs/toolkit";
 import {Provider} from "react-redux";
-import {FFMandatoryModules, FFMandatoryState} from "../module_orchestration/store";
 import {ModuleContextProvider} from "../contexts/providers/moduleContextProvider";
 import {DEFAULT_FALLBACK_LANGUAGE} from "@iavofficial/frontend-framework-shared/constants";
-import {AuthState} from "@iavofficial/frontend-framework-shared/authenticationProvider";
+import { FFMandatoryModules, FFMandatoryState } from "@iavofficial/frontend-framework-shared/moduleOrchestrationTypes";
 
 // Create this type to make fallbackLang optional for the user.
 type GlobalDataLayerLanguageOptions = Omit<LanguageOptions, "fallbackLang"> & {

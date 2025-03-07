@@ -16,8 +16,6 @@
 
 import React, {PropsWithChildren} from "react";
 import makeStyles from "../../../../src/components/content/style_options/makeStyles.tsx";
-import PageNavigation from "../drawer/pageNavigation.tsx";
-import Header from "../header/header.tsx";
 import Footer from "../footer/footer.tsx";
 import OnThisPage from "../drawer/onThisPage.tsx";
 
@@ -26,8 +24,7 @@ const useStyles = makeStyles(() => ({
         height: "100vh",
         width: "100%",
         display: "flex",
-        flexDirection: "column",
-        fontFamily: "Arial, sans-serif",
+        flexDirection: "column"
     },
     page: {
         flex: 1,
@@ -44,9 +41,7 @@ const Page: React.FC<PropsWithChildren> = (props) => {
 
     return (
         <div className={classes.wrapper}>
-            <PageNavigation/>
             <OnThisPage/>
-            <Header/>
             <div className={classes.page}>
                 {props.children}
             </div>

@@ -4,7 +4,7 @@ import makeStyles from "../../../../src/components/content/style_options/makeSty
 const useStyles = makeStyles(() => ({
     pageNav: {
         position: "fixed",
-        top: "50px",
+        top: "61px",
         right: "0",
         width: "200px",
         height: "100%",
@@ -48,17 +48,21 @@ const OnThisPage: React.FC = () => {
 
     useEffect(() => {
         const elements = document.querySelectorAll("h1, h2");
-        const newHeadings = Array.from(elements).map((el) => {
-            const id = el.textContent?.toLowerCase();
-            el.id = id;
-            return {id, text: el.textContent || "", tag: el.tagName.toLowerCase()};
-        });
+        const newHeadings = Array.from(elements)
+            .filter((el) => el.textContent !== "IAV Frontend Framework")
+            .map((el) => {
+                const id = el.textContent?.toLowerCase();
+                el.id = id;
+                return {id, text: el.textContent || "", tag: el.tagName.toLowerCase()};
+            });
+
         setHeadings(newHeadings);
     }, []);
 
+
     const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
         e.preventDefault();
-        const target = document.getElementById(id);
+        const target = document.getElementById(id)
         if (target) {
             const offset = 80;
             const top = target.getBoundingClientRect().top + window.scrollY - offset;

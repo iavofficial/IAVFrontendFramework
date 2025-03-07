@@ -145,7 +145,6 @@ const createPageNavigation = () => {
 const loadVersionDropdown = async (url) => {
     const versionDropdown = document.getElementById('versionDropdown');
     const versionResponse = await fetch("../../version-list.md");
-    console.log(versionResponse)
     if (versionResponse.ok) {
         const currentVersion = extractVersionFromURL(url);
         const versionText = await versionResponse.text();

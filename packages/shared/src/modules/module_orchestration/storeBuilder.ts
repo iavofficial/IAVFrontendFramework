@@ -13,11 +13,14 @@ import {
   ModuleAndProcessorMap,
   ModuleProcessorFunction,
 } from "../../types/modules/moduleOrchestrationTypes";
-import { StoreConfig } from "./storeConfig";
-import { StoreConfigBuilder } from "./storeConfigBuilder";
-import { FFStoreModule } from "../../types/modules/generalModule";
-import { AuthModule, AuthState } from "../../types/modules/auth/authenticatorModule";
-import { MandatoryModuleNames } from "../../constants/mandatoryModuleNames";
+import {StoreConfig} from "./storeConfig";
+import {StoreConfigBuilder} from "./storeConfigBuilder";
+import {FFStoreModule} from "../../types/modules/generalModule";
+import {
+  AuthModule,
+  AuthState,
+} from "../../types/modules/auth/authenticatorModule";
+import {MandatoryModuleNames} from "../../constants/mandatoryModuleNames";
 
 // can be replaced to customize the build of the Redux store.
 export class StoreBuilder<
@@ -58,9 +61,13 @@ export class StoreBuilder<
     }
   }
 
-  setFrameworkModuleProcessor<K extends keyof FFMandatoryModules<TState>>(
+  setFrameworkModuleProcessor<
+    K extends keyof typeof this.mandatoryModulesAndProcessors,
+  >(
     moduleType: K,
-    processor: ModuleProcessorFunction<TModules[K]>,
+    processor: ModuleProcessorFunction<
+      (typeof this.mandatoryModulesAndProcessors)[K]["module"]
+    >,
   ) {
     this.mandatoryModulesAndProcessors[moduleType].processor = processor;
     return this;
@@ -115,7 +122,10 @@ export const defaultAuthModuleProcessor = <TAuthState extends AuthState>(
   authModule: AuthModule<TAuthState>,
   storeConfigBuilder: StoreConfigBuilder,
 ) => {
-  storeConfigBuilder.setReducer("auth", authModule.slice.reducer);
+  storeConfigBuilder.setReducer(
+    MandatoryModuleNames.Authentication,
+    authModule.slice.reducer,
+  );
 };
 
 export const defaultStoreBuilder = (storeConfig: StoreConfig) => {

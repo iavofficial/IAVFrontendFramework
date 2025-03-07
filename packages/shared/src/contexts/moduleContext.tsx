@@ -17,15 +17,13 @@
  */
 
 import React, { useContext } from "react";
-import { AuthModule, AuthState } from "../types/modules/auth/authenticationProvider";
+import { FFMandatoryModules } from "../types/modules/moduleOrchestrationTypes";
 
 export type ModuleContextValues<TModules> = {
   modules: TModules;
 }
 
-export type DefaultModuleContextValues = ModuleContextValues<{
-  auth: AuthModule<AuthState>;
-}>;
+export type DefaultModuleContextValues = ModuleContextValues<FFMandatoryModules>;
 
 export const ModuleContext = React.createContext<DefaultModuleContextValues>(
   {} as DefaultModuleContextValues

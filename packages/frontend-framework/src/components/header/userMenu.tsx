@@ -16,11 +16,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, {useContext} from "react";
+import React from "react";
 import {ContextMenu} from "primereact/contextmenu";
 import {MenuItem} from "./settingsMenu";
-import { ModuleContext } from "@iavofficial/frontend-framework-shared/moduleContext";
+import {  useModuleContext } from "@iavofficial/frontend-framework-shared/moduleContext";
 import { useDefaultDispatch } from "@iavofficial/frontend-framework-shared/moduleDefaults";
+import { MandatoryModuleNames } from "@iavofficial/frontend-framework-shared/mandatoryModuleNames";
 
 export interface Props {
   hideMenu: (e: React.KeyboardEvent) => void;
@@ -34,7 +35,7 @@ export interface UserMenuOptions {
 
 //eslint-disable-next-line
 export const UserMenu = React.forwardRef<ContextMenu, Props>((props, ref) => {
-  const moduleContext = useContext(ModuleContext);
+  const {modules} = useModuleContext();
 
   const dispatch = useDefaultDispatch();
 
@@ -45,7 +46,7 @@ export const UserMenu = React.forwardRef<ContextMenu, Props>((props, ref) => {
       label: "Logout",
       icon: "pi pi-sign-out",
       command: () => {
-        dispatch(moduleContext.modules.auth.logout());
+        dispatch(modules[MandatoryModuleNames.Authentication].logout());
       },
     });
   }

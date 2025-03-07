@@ -26,5 +26,5 @@
   "include": [
    "src",
    "custom.d.ts"
-  ]
+, "src/module_orchestration/store.ts"  ]
 }

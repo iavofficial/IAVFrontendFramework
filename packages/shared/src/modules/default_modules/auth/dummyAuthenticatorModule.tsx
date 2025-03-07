@@ -16,19 +16,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {
-  AuthModule,
-  Credentials,
-  UserData,
-} from "@iavofficial/frontend-framework-shared/authenticationProvider";
-import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/mandatoryModuleNames";
-import {
-  createAsyncThunk,
-  createSlice,
-  PayloadAction,
-  Slice,
-  ThunkDispatch,
-} from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction, Slice, ThunkDispatch } from "@reduxjs/toolkit";
+import { AuthModule, Credentials, UserData } from "../../../types/modules/auth/authenticatorModule";
+import { MandatoryModuleNames } from "../../../constants/mandatoryModuleNames";
 
 export interface Props {
   additionalContextValues?: {[key: string]: any};
@@ -40,13 +30,13 @@ export interface DummyAuthenticatorState {
   isLoading: boolean;
 }
 
-const initialState: DummyAuthenticatorState = {
+const initialState: DummyAuthenticatorState= {
   hasAuthenticated: false,
   isLoading: false,
-  userData: undefined,
-};
+  userData: undefined
+}
 
-export class DummyAuthenticator implements AuthModule<DummyAuthenticatorState> {
+export class DummyAuthenticator implements AuthModule<DummyAuthenticatorState>{
   public slice: Slice<DummyAuthenticatorState>;
 
   public fetchAuthed;
@@ -62,41 +52,44 @@ export class DummyAuthenticator implements AuthModule<DummyAuthenticatorState> {
           // TODO: Check whether this works.
           state.isLoading = true;
           state.hasAuthenticated = true;
-          state.userData = {username: action.payload};
+          state.userData = {username: action.payload}
         },
         logout: (state) => {
           state.isLoading = false;
           state.hasAuthenticated = false;
           state.userData = undefined;
-        },
-      },
+        }
+      }
     });
 
-    const {login, logout} = this.slice.actions;
+    const {
+      login,
+      logout
+    } = this.slice.actions;
 
     this.fetchAuthed = createAsyncThunk<
-      Response,
-      {url: string; settings?: object},
-      {state: {[MandatoryModuleNames.Authentication]: DummyAuthenticatorState}}
+    Response,
+    {url: string; settings?: object},
+    {state: {[MandatoryModuleNames.Authentication]: DummyAuthenticatorState}}
     >(
       MandatoryModuleNames.Authentication + "/fetchAuthed",
       async ({url, settings}) => {
         return fetch(url, settings);
-      },
+      }
     );
 
     this.login = createAsyncThunk(
       MandatoryModuleNames.Authentication + "/login",
-      async ({credentials}: {credentials: Credentials}, {dispatch}) => {
+      async ({credentials} : {credentials: Credentials}, {dispatch}) => {
         dispatch(login(credentials.email));
-      },
+      }
     );
 
     this.logout = createAsyncThunk<void, {error?: unknown} | undefined, {}>(
       MandatoryModuleNames.Authentication + "/logout",
       async ({error}: {error?: unknown} = {}, {dispatch}) => {
         dispatch(logout({}));
-      },
-    );
+      }
+    )
   }
 }

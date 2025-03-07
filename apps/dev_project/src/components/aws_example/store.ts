@@ -16,7 +16,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { StoreBuilder } from "@iavofficial/frontend-framework/store";
+import {
+  ModuleSetBuilder,
+  StoreBuilder,
+} from "@iavofficial/frontend-framework/store";
 import { Amplify } from "aws-amplify";
 import { cognitoUserPoolsTokenProvider } from "aws-amplify/auth/cognito";
 import { CookieStorage } from "aws-amplify/utils";
@@ -45,11 +48,11 @@ const configureAmplify: () => void = () => {
       // @ts-ignore
       secure: domain !== "localhost",
       sameSite: "lax",
-    }),
+    })
   );
 };
 
-export const modules = {
+const customModules = {
   auth: new AWSAuthenticator({
     configureAmplify: configureAmplify,
     failOnNoLegalGroup: true,
@@ -57,13 +60,14 @@ export const modules = {
   }),
 };
 
-export const store = new StoreBuilder(modules)
-  /*.setFrameworkModuleProcessor("auth", (
-      authModule: AWSAuthenticator,
-      storeConfigBuilder: StoreConfigBuilder,
-    ) => {
+export const modules = new ModuleSetBuilder(customModules).build();
 
-    })*/ .build();
+export const store = new StoreBuilder(modules)
+  /*  .setFrameworkModuleProcessor(
+    "auth",
+    (authModule: AWSAuthenticator, storeConfigBuilder: StoreConfigBuilder) => {}
+  )*/
+  .build();
 
 export const AwsAuthenticationView = awsAuthenticationViewFactory(modules.auth);
 

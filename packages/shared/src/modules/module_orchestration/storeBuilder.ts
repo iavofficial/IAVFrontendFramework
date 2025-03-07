@@ -7,7 +7,7 @@
 import {configureStore, EnhancedStore} from "@reduxjs/toolkit";
 import {
   ActualMandatoryStateFromModules,
-  FFMandatoryModules,
+  FFMandatoryStoreModules,
   FFMandatoryState,
   GenericModules,
   ModuleAndProcessorMap,
@@ -17,7 +17,7 @@ import {StoreConfig} from "./storeConfig";
 import {StoreConfigBuilder} from "./storeConfigBuilder";
 import {FFStoreModule} from "../../types/modules/generalModule";
 import {
-  AuthModule,
+  AuthModuleStore,
   AuthState,
 } from "../../types/modules/auth/authenticatorModule";
 import {MandatoryModuleNames} from "../../constants/mandatoryModuleNames";
@@ -25,7 +25,7 @@ import {MandatoryModuleNames} from "../../constants/mandatoryModuleNames";
 // can be replaced to customize the build of the Redux store.
 export class StoreBuilder<
   TUserModules extends GenericModules,
-  TModules extends FFMandatoryModules<TState>,
+  TModules extends FFMandatoryStoreModules<TState>,
   TState extends FFMandatoryState = ActualMandatoryStateFromModules<TModules>,
 > {
   private storeConfigBuilder: StoreConfigBuilder = new StoreConfigBuilder();
@@ -33,7 +33,7 @@ export class StoreBuilder<
   // These are mandatory modules and processors which are essential for the framework as
   // it uses values and methods of the processed modules.
   private mandatoryModulesAndProcessors: ModuleAndProcessorMap<
-    FFMandatoryModules<TState>
+    FFMandatoryStoreModules<TState>
   >;
 
   // These are optional and modules and processors of the user.
@@ -42,17 +42,17 @@ export class StoreBuilder<
     | undefined;
 
   private storeBuilder: (
-    storeConfig: StoreConfig,
-  ) => EnhancedStore<FFMandatoryState> = defaultStoreBuilder;
+    storeConfig: StoreConfig<TState>,
+  ) => EnhancedStore<TState> = defaultStoreBuilder;
 
   constructor(
-    ffMandatoryModules: TModules,
+    FFMandatoryStoreModules: TModules,
     userModulesAndProcessors?: ModuleAndProcessorMap<TUserModules>,
   ) {
     this.mandatoryModulesAndProcessors = {
       [MandatoryModuleNames.Authentication]: {
-        module: ffMandatoryModules[MandatoryModuleNames.Authentication],
-        processor: defaultAuthModuleProcessor,
+        module: FFMandatoryStoreModules[MandatoryModuleNames.Authentication],
+        processor: defaultAuthModuleStoreProcessor,
       },
     };
 
@@ -118,8 +118,8 @@ export class StoreBuilder<
   }
 }
 
-export const defaultAuthModuleProcessor = <TAuthState extends AuthState>(
-  authModule: AuthModule<TAuthState>,
+export const defaultAuthModuleStoreProcessor = <TAuthState extends AuthState>(
+  authModule: AuthModuleStore<TAuthState>,
   storeConfigBuilder: StoreConfigBuilder,
 ) => {
   storeConfigBuilder.setReducer(
@@ -128,8 +128,8 @@ export const defaultAuthModuleProcessor = <TAuthState extends AuthState>(
   );
 };
 
-export const defaultStoreBuilder = (storeConfig: StoreConfig) => {
-  const store = configureStore({
+export const defaultStoreBuilder = <TState extends FFMandatoryState>(storeConfig: StoreConfig) => {
+  const store = configureStore<TState>({
     reducer: storeConfig.reducers,
     middleware: (getDefaultMiddleware: Function) =>
       getDefaultMiddleware().concat(storeConfig.middleware),

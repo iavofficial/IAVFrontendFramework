@@ -44,9 +44,11 @@ export type AuthState = {
   extras?: object;
 };
 
-export type AuthModule<TAuthState extends AuthState> = {
+export type AuthModuleStore<TAuthState extends AuthState> = {
   slice: Slice<TAuthState>;
   fetchAuthed: AsyncThunk<Response, FetchAuthedFunctionArgs, any>;
   login: AsyncThunk<void, {credentials: Credentials}, any>;
   logout: AsyncThunk<void, {error?: unknown} | undefined, any>;
 } & FFStoreModule;
+
+export type AuthModule = Omit<AuthModuleStore<any>, "slice">;

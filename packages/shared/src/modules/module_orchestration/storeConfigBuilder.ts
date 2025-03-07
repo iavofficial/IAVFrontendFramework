@@ -4,13 +4,13 @@
 // reducer for the auth key) were added. Inspect the build method for further
 
 import { Middleware, Reducer, StoreEnhancer } from "@reduxjs/toolkit";
-import { FFMandatoryReducers } from "../../types/modules/moduleOrchestrationTypes";
+import { FFMandatoryReducers, FFMandatoryState } from "../../types/modules/moduleOrchestrationTypes";
 import { StoreConfig } from "./storeConfig";
-import { defaultModules } from "./moduleDefaults";
+import { defaultStoreModules } from "./moduleDefaults";
 import { MandatoryModuleNames } from "../../constants/mandatoryModuleNames";
 
 // insight.
-export class StoreConfigBuilder {
+export class StoreConfigBuilder<TState extends FFMandatoryState> {
     private reducers: Record<string, Reducer> = {};
     private middleware: Middleware[] = [];
     private enhancers: StoreEnhancer[] = [];
@@ -45,10 +45,10 @@ export class StoreConfigBuilder {
       const {[MandatoryModuleNames.Authentication]: auth, ...otherReducers} =
         this.reducers;
   
-      const finalReducers: FFMandatoryReducers & Record<string, Reducer> = {
+      const finalReducers: FFMandatoryReducers<TState> & Record<string, Reducer> = {
         ...otherReducers,
         [MandatoryModuleNames.Authentication]:
-          auth ?? defaultModules.auth.slice.reducer,
+          auth ?? defaultStoreModules.auth.slice.reducer,
       };
   
       return new StoreConfig(

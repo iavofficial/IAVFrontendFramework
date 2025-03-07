@@ -43,7 +43,7 @@ export const AppAwsAuthentication = () => {
   return (
     <GlobalDataLayer
       store={store}
-      modules={modules}
+      modules={modules.all}
       translations={translations}
       colorSettings={{
         colorOptions: {},

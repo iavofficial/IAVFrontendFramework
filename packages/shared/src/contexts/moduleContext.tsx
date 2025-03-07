@@ -17,13 +17,13 @@
  */
 
 import React, { useContext } from "react";
-import { FFMandatoryModules } from "../types/modules/moduleOrchestrationTypes";
+import { FFMandatoryStoreModules } from "../types/modules/moduleOrchestrationTypes";
 
 export type ModuleContextValues<TModules> = {
   modules: TModules;
 }
 
-export type DefaultModuleContextValues = ModuleContextValues<FFMandatoryModules>;
+export type DefaultModuleContextValues = ModuleContextValues<FFMandatoryStoreModules>;
 
 export const ModuleContext = React.createContext<DefaultModuleContextValues>(
   {} as DefaultModuleContextValues

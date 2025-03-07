@@ -19,12 +19,12 @@
 import {Reducer} from "@reduxjs/toolkit";
 import {FFStoreModule} from "../../types/modules/generalModule";
 import {MandatoryModuleNames} from "../../constants/mandatoryModuleNames";
-import { AuthModule, AuthState } from "./auth/authenticatorModule";
+import { AuthModuleStore, AuthState } from "./auth/authenticatorModule";
 import { StoreConfigBuilder } from "../../modules/module_orchestration/storeConfigBuilder";
 /*
 To add a new mandatory module:
 1. Add the state (of it's slice) to FFMandatoryState.
-2. Add the type of the module in minimal configuration to FFMandatoryModules. Minimal
+2. Add the type of the module in minimal configuration to FFMandatoryStoreModules. Minimal
    configuration means that the module includes just only all values and methods which
    are used by the framework itself. This is necessary to ensure that only modules can
    be used which are of this type and because of this provide all necessary values and
@@ -47,8 +47,8 @@ export type FFMandatoryState = {
 // It is concluded that every mandatory state will have a root reducer object.
 // Without the possiblity of changing values (so the existence of reducers)
 // state is not sensible.
-export type FFMandatoryReducers = {
-  [K in keyof FFMandatoryState]: Reducer<FFMandatoryState[K]>;
+export type FFMandatoryReducers<TState extends FFMandatoryState> = {
+  [K in keyof TState]: Reducer<TState[K]>;
 };
 
 // All mandatory modules with minimal setup which is needed by the framework.
@@ -56,11 +56,15 @@ export type FFMandatoryReducers = {
 // essential values and methods to the framework, for example login.
 // So the minimal configuration is exactly the set of values and methods
 // used by the framework itself.
-export type FFMandatoryModules<
+export type FFMandatoryStoreModules<
   TState extends FFMandatoryState = FFMandatoryState,
 > = {
-  [MandatoryModuleNames.Authentication]: AuthModule<TState[typeof MandatoryModuleNames.Authentication]>;
+  [MandatoryModuleNames.Authentication]: AuthModuleStore<TState[typeof MandatoryModuleNames.Authentication]>;
 };
+
+export type FFMandatoryNonStoreModules = {
+  
+}
 
 // The user can provide additional modules which aren't used by the
 // framework itself.
@@ -99,11 +103,11 @@ export type ExtractModuleState<T> =
 // This type creates an object of the specific state of all modules, for example:
 // {auth: AWSAuthenticatorState, routing: ReactRouterRouterState}
 export type ActualMandatoryStateFromModules<
-  TModules extends Partial<FFMandatoryModules>,
+  TModules extends Partial<FFMandatoryStoreModules>,
 > = {
-  [K in keyof FFMandatoryModules]: K extends keyof TModules
+  [K in keyof FFMandatoryStoreModules]: K extends keyof TModules
     ? ExtractModuleState<TModules[K]>
-    : ExtractModuleState<FFMandatoryModules[K]>;
+    : ExtractModuleState<FFMandatoryStoreModules[K]>;
 };
 
 // This type merges two module types. If there are duplicate keys regarding

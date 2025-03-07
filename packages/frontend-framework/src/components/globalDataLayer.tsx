@@ -29,7 +29,12 @@ import {EnhancedStore} from "@reduxjs/toolkit";
 import {Provider} from "react-redux";
 import {ModuleContextProvider} from "../contexts/providers/moduleContextProvider";
 import {DEFAULT_FALLBACK_LANGUAGE} from "@iavofficial/frontend-framework-shared/constants";
-import { FFMandatoryModules, FFMandatoryState } from "@iavofficial/frontend-framework-shared/moduleOrchestrationTypes";
+import {
+  FFMandatoryStoreModules,
+  FFMandatoryState,
+  FFMandatoryNonStoreModules,
+} from "@iavofficial/frontend-framework-shared/moduleOrchestrationTypes";
+import {FFModule} from "@iavofficial/frontend-framework-shared/generalModule";
 
 // Create this type to make fallbackLang optional for the user.
 type GlobalDataLayerLanguageOptions = Omit<LanguageOptions, "fallbackLang"> & {
@@ -37,8 +42,8 @@ type GlobalDataLayerLanguageOptions = Omit<LanguageOptions, "fallbackLang"> & {
 };
 
 interface Props<TState extends FFMandatoryState> {
-  modules: FFMandatoryModules<TState>;
-  store: EnhancedStore<FFMandatoryState>;
+  modules: FFMandatoryStoreModules<TState> & FFMandatoryNonStoreModules;
+  store: EnhancedStore<TState>;
   languageOptions?: GlobalDataLayerLanguageOptions;
   translations?: Translations;
   initI18Next?: () => void;
@@ -53,8 +58,8 @@ export const GlobalDataLayer = <TState extends FFMandatoryState>(
   const initialLang =
     props.languageOptions?.initialLang ?? DEFAULT_FALLBACK_LANGUAGE;
   const languageOptions = {
-    fallbackLang: fallbackLang,
-    initialLang: initialLang,
+    fallbackLang,
+    initialLang,
   };
 
   return (
@@ -80,7 +85,7 @@ export const GlobalDataLayer = <TState extends FFMandatoryState>(
 
 const ModuleLifecycleCaller = <TState extends FFMandatoryState>(
   props: PropsWithChildren<{
-    modules: FFMandatoryModules<TState> & Record<string, any>;
+    modules: FFMandatoryStoreModules<TState> & Record<string, any>;
   }>,
 ) => {
   // React hooks have to be called in the same order at every render.

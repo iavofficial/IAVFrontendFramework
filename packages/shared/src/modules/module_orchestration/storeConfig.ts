@@ -2,12 +2,12 @@
 // They are added by the corresponding processors. The object will be passed
 
 import { Middleware, Reducer, StoreEnhancer } from "@reduxjs/toolkit";
-import { FFMandatoryReducers } from "../../types/modules/moduleOrchestrationTypes";
+import { FFMandatoryReducers, FFMandatoryState } from "../../types/modules/moduleOrchestrationTypes";
 
 // to a store builder function to create the store.
-export class StoreConfig {
+export class StoreConfig<TState extends FFMandatoryState> {
     constructor(
-      public reducers: FFMandatoryReducers & Record<string, Reducer>,
+      public reducers: FFMandatoryReducers<TState> & Record<string, Reducer>,
       public middleware: Middleware[] = [],
       public enhancers: StoreEnhancer[] = [],
       public additional: Record<string, unknown> = {},

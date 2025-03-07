@@ -26,7 +26,7 @@ DEST_DIR="generated_docs/packages"
 # copies (also overwrites) the other files.
 rsync -av --exclude="packages" --delete main/generated_docs/* generated_docs/
 
-# Iterate over scopes
+# Copy all version folders to root generated documentation (and overwrite if necessary)
 for scope in "$SOURCE_DIR"/*; do
     if [ -d "$scope" ]; then
         scope_name=$(basename "$scope")
@@ -42,25 +42,15 @@ for scope in "$SOURCE_DIR"/*; do
                 # Create the package folder in the destination if it does not exist
                 mkdir -p "$DEST_DIR/$scope_name/$package_name"
 
-                # Iterate over docs within the package
-                for doc in "$package"/docs/*; do
-                    if [ -d "$doc" ]; then
-                        package_version=$(basename "$doc")
-                        echo "Processing $package_name version $package_version..."
-
-                        # Navigate to the docs directory and run npm build
-                        cd "$doc"
-                        npm run build
-
-                        # Rename the dist folder to the version name
-                        mv dist "$package_version"
-
-                        # Copy the version folder to the destination folder
-                        cp -r "$package_version" "$DEST_DIR/$scope_name/$package_name/"
-                        echo "Copied $package_version to $DEST_DIR/$scope_name/$package_name/"
-
-                        # Move back to the root directory
-                        cd -
+                # Copy version folders, overwriting existing ones
+                for version in "$package"/*; do
+                    if [ -d "$version" ]; then
+                        version_name=$(basename "$version")
+                        # Delete version folder if it exists
+                        rm -rf "$DEST_DIR/$scope_name/$package_name/$version_name"
+                        # Copy the version folder to root generated documentation
+                        cp -r "$SOURCE_DIR/$scope_name/$package_name/$version_name" "$DEST_DIR/$scope_name/$package_name/"
+                        echo "Copied $SOURCE_DIR/$scope_name/$package_name/$version_name to $DEST_DIR/$scope_name/$package_name/"
                     fi
                 done
             fi

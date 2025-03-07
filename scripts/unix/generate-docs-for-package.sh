@@ -17,15 +17,15 @@
 # IMPORTANT: This script should be executed in the context of packages.
 
 DOCS_DIR="../../generated_docs/packages"
-DOCS_PACKAGE_DIR="docs"
+DOCS_DIST_DIR="docs/dist"
 
 NAME=$(node -p "require('./package.json').name")
 VERSION=$(node -p "require('./package.json').version")
 
-VERSION_DOCS_PATH="${DOCS_DIR}/${NAME}/${VERSION}"
+DOCS_TARGET_PATH="${DOCS_DIR}/${NAME}/${VERSION}"
 
-mkdir -p VERSION_DOCS_PATH
+mkdir -p $DOCS_TARGET_PATH
 
-cp -r $DOCS_PACKAGE_DIR/* VERSION_DOCS_PATH
+cp -r $DOCS_DIST_DIR/* $DOCS_TARGET_PATH
 
-echo "Created docs for ${NAME}"
+echo "Created docs for ${NAME} version ${VERSION}"

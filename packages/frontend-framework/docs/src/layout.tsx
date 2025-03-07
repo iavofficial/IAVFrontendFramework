@@ -16,7 +16,7 @@
 
 import React from "react";
 import makeStyles from "../../src/components/content/style_options/makeStyles.tsx";
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import {BrowserRouter as Router, Navigate, Route, Routes} from "react-router-dom";
 import Overview from "./pages/overview.tsx";
 import Information from "./pages/information.tsx";
 import InstallationGuide from "./pages/installationGuide.tsx";
@@ -48,6 +48,7 @@ const Layout: React.FC = () => {
         <div className={classes.wrapper}>
             <Router>
                 <Routes>
+                    <Route path="/" element={<Navigate to="/overview" replace/>}/>
                     <Route path="/overview" element={<Overview/>}/>
                     <Route path="/information" element={<Information/>}/>
                     <Route path="/installation-guide" element={<InstallationGuide/>}/>

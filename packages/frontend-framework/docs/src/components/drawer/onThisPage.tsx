@@ -49,7 +49,7 @@ const OnThisPage: React.FC = () => {
     useEffect(() => {
         const elements = document.querySelectorAll("h1, h2");
         const newHeadings = Array.from(elements).map((el) => {
-            const id = el.textContent.toLowerCase();
+            const id = el.textContent?.toLowerCase();
             el.id = id;
             return {id, text: el.textContent || "", tag: el.tagName.toLowerCase()};
         });

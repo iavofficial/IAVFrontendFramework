@@ -34,7 +34,6 @@ import {HeaderOptions} from "./header/header";
 import {UserMenuOptions} from "./header/userMenu";
 import {setAcceptCookies} from "../utils/setAcceptCookies";
 import {useCookies} from "react-cookie";
-import {useDefaultSelector} from "../store";
 import {ACCEPTED_COOKIES_NAME} from "@iavofficial/frontend-framework-shared/constants";
 import {AuthenticationViewProps} from "@iavofficial/frontend-framework-shared/authenticationViewProps";
 import "./uiLayer.css";
@@ -45,6 +44,7 @@ import "../css/globalChangesOnPrimeReactComponents.css";
 import "../css/globalSettings.css";
 import "../css/globalColors.css";
 import "../css/authenticationView.css";
+import { useDefaultSelector } from "@iavofficial/frontend-framework-shared/moduleDefaults";
 
 export interface AuthOptions {
   backgroundImage?: string;

@@ -18,7 +18,7 @@
 
 import React from "react";
 import {PropsWithChildren} from "react";
-import {FFMandatoryModules, FFMandatoryState} from "../../store";
+import {FFMandatoryModules, FFMandatoryState} from "../../module_orchestration/store";
 import { ModuleContext } from "@iavofficial/frontend-framework-shared/moduleContext";
 
 export interface Props<TState extends FFMandatoryState> {

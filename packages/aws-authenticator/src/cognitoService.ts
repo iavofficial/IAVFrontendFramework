@@ -16,7 +16,6 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {Credentials} from "@iavofficial/frontend-framework-shared/authenticationProvider";
 import {containsOneOrMoreGroups} from "@iavofficial/frontend-framework-shared/containsOneOrMoreGroups";
 import {
   AuthError,
@@ -28,6 +27,7 @@ import {
   signOut,
 } from "aws-amplify/auth";
 import {JWTPojo} from "./awsAuthenticatorTypes";
+import { Credentials } from "@iavofficial/frontend-framework-shared/authenticatorModule";
 
 export async function cognitoLogin(
   credentials: Credentials,

@@ -26,5 +26,5 @@
   "include": [
    "src",
    "custom.d.ts"
-  ]
+, "../frontend-framework/src/module_orchestration/moduleSetBuilder.ts", "../frontend-framework/src/module_orchestration/store.ts", "../frontend-framework/src/module_orchestration/storeBuilder.ts", "../frontend-framework/src/module_orchestration/storeConfig.ts", "../frontend-framework/src/module_orchestration/storeConfigBuilder.ts"  ]
 }

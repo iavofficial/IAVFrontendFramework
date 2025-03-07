@@ -31,7 +31,6 @@ import CompanyLogo from "../assets/svg/companyLogo";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {
   AWSAuthenticatorAuthDispatch,
-  AWSAuthenticator,
   AWSAuthenticatorStoreState,
   AWSAuthenticatorState,
 } from "../awsAuthenticatorModule";
@@ -46,7 +45,7 @@ import {
   WHITE,
 } from "@iavofficial/frontend-framework-shared/constants";
 import { AWSAuthenticatorExtras } from "../awsAuthenticatorTypes";
-import { AuthModule } from "@iavofficial/frontend-framework-shared/authenticationProvider";
+import { AuthModule } from "@iavofficial/frontend-framework-shared/authenticatorModule";
 
 type NecessaryModuleAttributes ={
   extras: AWSAuthenticatorExtras;

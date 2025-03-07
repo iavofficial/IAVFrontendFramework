@@ -16,9 +16,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { AuthModule, Credentials, UserData } from "@iavofficial/frontend-framework-shared/authenticationProvider";
-import { MandatoryModuleNames } from "@iavofficial/frontend-framework-shared/mandatoryModuleNames";
 import { createAsyncThunk, createSlice, PayloadAction, Slice, ThunkDispatch } from "@reduxjs/toolkit";
+import { AuthModule, Credentials, UserData } from "../../../types/modules/auth/authenticatorModule";
+import { MandatoryModuleNames } from "../../../constants/mandatoryModuleNames";
 
 export interface Props {
   additionalContextValues?: {[key: string]: any};

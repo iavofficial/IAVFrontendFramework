@@ -32,12 +32,12 @@ import { generateHashOfLength } from "@iavofficial/frontend-framework-shared/has
 import { parseLanguageResourcesIntoDropdownFormat } from "@iavofficial/frontend-framework-shared/parseLanguageResourcesIntoDropdownFormat";
 import { LoginButtonWithSpinner } from "@iavofficial/frontend-framework-shared/loginButtonWithSpinner";
 import { AppLogoPlaceholder } from "@iavofficial/frontend-framework-shared/appLogoPlaceholder";
-import { AuthState } from "@iavofficial/frontend-framework-shared/authenticationProvider";
 import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch, Action } from "@reduxjs/toolkit";
 import { ModuleContext } from "@iavofficial/frontend-framework-shared/moduleContext";
 import { MandatoryModuleNames } from "@iavofficial/frontend-framework-shared/mandatoryModuleNames";
+import { AuthState } from "@iavofficial/frontend-framework-shared/authenticatorModule";
 
 type BasicAuthenticatorAuthDispatch = ThunkDispatch<AuthState, unknown, Action<string>>;
 type BasicAuthenticatorStoreState = {[MandatoryModuleNames.Authentication]: AuthState}

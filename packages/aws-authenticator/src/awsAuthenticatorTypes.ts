@@ -16,11 +16,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {
-  UserData,
-} from "@iavofficial/frontend-framework-shared/authenticationProvider";
 import {AsyncThunk} from "@reduxjs/toolkit";
 import {JWT} from "@aws-amplify/auth";
+import { UserData } from "@iavofficial/frontend-framework-shared/authenticatorModule";
 
 export interface JWTPojo {
   payload: JWT["payload"];

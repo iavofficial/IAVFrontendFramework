@@ -1,54 +1,25 @@
-# React + TypeScript + Vite
+# IAV Frontend Framework Documentation
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## React Project
 
-Currently, two official plugins are available:
+This is the IAV Frontend Framework, built using React.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Structure
 
-## Expanding the ESLint configuration
+- Every new page should be wrapped in the `<Page>` component.
+- You can use helper components like `<Title>`, `<SubTitle>`, and `<Text>` to create your own page structure.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Adding a New Page
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+To add a new page:
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+1. Create a new page component (e.g., `MyPage.tsx`).
+2. Wrap the content of the page in the `<Page>` component.
+3. Add the page with a URI to the router in `layout.tsx`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Build
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+To build the project, run:
+
+```bash
+npm run build

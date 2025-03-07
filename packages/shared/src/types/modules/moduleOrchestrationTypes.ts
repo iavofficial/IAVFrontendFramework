@@ -41,7 +41,7 @@ To add a new mandatory module:
 
 // The mandatory state (which will be the state of different module's slices)
 export type FFMandatoryState = {
-  [K in typeof MandatoryModuleNames.Authentication]: AuthState;
+  [MandatoryModuleNames.Authentication]: AuthState;
 };
 
 // It is concluded that every mandatory state will have a root reducer object.

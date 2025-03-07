@@ -16,19 +16,23 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useContext } from "react";
-import { FFMandatoryStoreModules } from "../types/modules/moduleOrchestrationTypes";
+import React, {useContext} from "react";
+import {FFMandatoryStoreModules} from "../types/modules/moduleOrchestrationTypes";
+import {allDefaultModules} from "../modules/module_orchestration/moduleDefaults";
 
 export type ModuleContextValues<TModules> = {
   modules: TModules;
-}
+};
 
-export type DefaultModuleContextValues = ModuleContextValues<FFMandatoryStoreModules>;
+export type DefaultModuleContextValues =
+  ModuleContextValues<FFMandatoryStoreModules>;
 
 export const ModuleContext = React.createContext<DefaultModuleContextValues>(
-  {} as DefaultModuleContextValues
+  {} as DefaultModuleContextValues,
 );
 
-export const useModuleContext = <TModules,>(): ModuleContextValues<TModules> => {
+export const useModuleContext = <
+  TModules = typeof allDefaultModules,
+>(): ModuleContextValues<TModules> => {
   return useContext(ModuleContext) as ModuleContextValues<TModules>;
 };

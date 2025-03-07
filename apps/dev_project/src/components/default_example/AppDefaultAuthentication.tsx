@@ -23,7 +23,7 @@ import translationDE from "../../assets/translations/de.json";
 import translationDECH from "../../assets/translations/de-CH.json";
 import Layout from "../../Layout.tsx";
 import {
-  defaultStoreModules,
+  allDefaultModules,
   defaultStore,
 } from "@iavofficial/frontend-framework/store";
 
@@ -48,7 +48,7 @@ export const AppDefaultAuthentication = () => {
   return (
     <GlobalDataLayer
       store={store}
-      modules={defaultStoreModules}
+      modules={allDefaultModules}
       translations={translations}
       colorSettings={{
         colorOptions: {},

@@ -2,7 +2,7 @@
 // They are added by the corresponding processors. The object will be passed
 
 import { Middleware, Reducer, StoreEnhancer } from "@reduxjs/toolkit";
-import { FFMandatoryReducers } from "./moduleOrchestrationTypes";
+import { FFMandatoryReducers } from "../../types/modules/moduleOrchestrationTypes";
 
 // to a store builder function to create the store.
 export class StoreConfig {

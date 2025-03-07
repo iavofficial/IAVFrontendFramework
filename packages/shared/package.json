@@ -79,7 +79,7 @@
     "./mandatoryModuleNames": "./dist/constants/mandatoryModuleNames.js",
     "./generalModule": "./dist/types/modules/generalModule.js",
     "./moduleDefaults": "./dist/modules/module_orchestration/moduleDefaults.js",
-    "./moduleOrchestrationTypes": "./dist/modules/module_orchestration/moduleOrchestrationTypes.js",
+    "./moduleOrchestrationTypes": "./dist/types/modules/moduleOrchestrationTypes.js",
     "./moduleSetBuilder": "./dist/modules/module_orchestration/moduleSetBuilder.js",
     "./storeBuilder": "./dist/modules/module_orchestration/storeBuilder.js",
     "./storeConfig": "./dist/modules/module_orchestration/storeConfig.js",
@@ -121,7 +121,7 @@
         "./dist/modules/module_orchestration/moduleDefaults.d.ts"
       ],
       "./moduleOrchestrationTypes": [
-        "./dist/modules/module_orchestration/moduleOrchestrationTypes.d.ts"
+        "./dist/types/modules/moduleOrchestrationTypes.d.ts"
       ],
       "./moduleSetBuilder": [
         "./dist/modules/module_orchestration/moduleSetBuilder.d.ts"

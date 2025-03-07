@@ -1,13 +1,9 @@
 import {Action, ThunkDispatch} from "@reduxjs/toolkit";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
-import {
-  AppDispatch,
-  FFMandatoryModules,
-  RootState,
-} from "./moduleOrchestrationTypes";
 import {MandatoryModuleNames} from "../../constants/mandatoryModuleNames";
 import {DummyAuthenticator} from "../default_modules/auth/dummyAuthenticatorModule";
 import {StoreBuilder} from "./storeBuilder";
+import { AppDispatch, FFMandatoryModules, RootState } from "../../types/modules/moduleOrchestrationTypes";
 
 export type DefaultRootState = RootState<typeof defaultStore.getState>;
 export type DefaultAppDispatch = AppDispatch<typeof defaultStore.dispatch>;

@@ -12,7 +12,7 @@ import {
   GenericModules,
   ModuleAndProcessorMap,
   ModuleProcessorFunction,
-} from "./moduleOrchestrationTypes";
+} from "../../types/modules/moduleOrchestrationTypes";
 import { StoreConfig } from "./storeConfig";
 import { StoreConfigBuilder } from "./storeConfigBuilder";
 import { FFStoreModule } from "../../types/modules/generalModule";

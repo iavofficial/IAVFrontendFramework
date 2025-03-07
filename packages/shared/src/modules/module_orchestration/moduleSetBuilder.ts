@@ -1,5 +1,5 @@
+import { ActualMandatoryStateFromModules, FFMandatoryModules, FFMandatoryState, MergeModules } from "../../types/modules/moduleOrchestrationTypes";
 import { defaultModules } from "./moduleDefaults";
-import { ActualMandatoryStateFromModules, FFMandatoryModules, FFMandatoryState, MergeModules } from "./moduleOrchestrationTypes";
 
 export class ModuleSetBuilder<
   TModules extends Partial<FFMandatoryModules<TState>>,

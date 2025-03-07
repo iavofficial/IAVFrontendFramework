@@ -4,7 +4,7 @@
 // reducer for the auth key) were added. Inspect the build method for further
 
 import { Middleware, Reducer, StoreEnhancer } from "@reduxjs/toolkit";
-import { FFMandatoryReducers } from "./moduleOrchestrationTypes";
+import { FFMandatoryReducers } from "../../types/modules/moduleOrchestrationTypes";
 import { StoreConfig } from "./storeConfig";
 import { defaultModules } from "./moduleDefaults";
 import { MandatoryModuleNames } from "../../constants/mandatoryModuleNames";

@@ -16,13 +16,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {
-  Reducer,
-} from "@reduxjs/toolkit";
-import { StoreConfigBuilder } from "./storeConfigBuilder";
-import { AuthModule, AuthState } from "../../types/modules/auth/authenticatorModule";
-import { FFStoreModule } from "../../types/modules/generalModule";
-import { MandatoryModuleName, MandatoryModuleNames } from "../../constants/mandatoryModuleNames";
+import {Reducer} from "@reduxjs/toolkit";
+import {FFStoreModule} from "../../types/modules/generalModule";
+import {MandatoryModuleNames} from "../../constants/mandatoryModuleNames";
+import { AuthModule, AuthState } from "./auth/authenticatorModule";
+import { StoreConfigBuilder } from "../../modules/module_orchestration/storeConfigBuilder";
 /*
 To add a new mandatory module:
 1. Add the state (of it's slice) to FFMandatoryState.
@@ -58,7 +56,9 @@ export type FFMandatoryReducers = {
 // essential values and methods to the framework, for example login.
 // So the minimal configuration is exactly the set of values and methods
 // used by the framework itself.
-export type FFMandatoryModules<TState extends FFMandatoryState = FFMandatoryState> = {
+export type FFMandatoryModules<
+  TState extends FFMandatoryState = FFMandatoryState,
+> = {
   auth: AuthModule<TState[typeof MandatoryModuleNames.Authentication]>;
 };
 
@@ -93,7 +93,8 @@ export interface ModuleEntry<M extends FFStoreModule> {
 }
 
 // Using this type the State Type of a Module can be iferred.
-export type ExtractModuleState<T> = T extends FFStoreModule<infer S> ? S : never;
+export type ExtractModuleState<T> =
+  T extends FFStoreModule<infer S> ? S : never;
 
 // This type creates an object of the specific state of all modules, for example:
 // {auth: AWSAuthenticatorState, routing: ReactRouterRouterState}

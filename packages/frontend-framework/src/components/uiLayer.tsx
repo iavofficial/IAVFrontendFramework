@@ -20,8 +20,7 @@ import "primeflex/primeflex.css";
 import "primereact/resources/themes/nova/theme.css";
 import "primereact/resources/primereact.css";
 import "primeicons/primeicons.css";
-import React, {useContext, useEffect} from "react";
-import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
+import React, {useEffect} from "react";
 import {BasicAuthenticationView} from "./authentication/default/basicAuthenticationView";
 import {SettingsMenuOptions} from "./header/settingsMenu";
 import {CookieBanner} from "./cookie/cookieBanner";
@@ -44,7 +43,12 @@ import "../css/globalChangesOnPrimeReactComponents.css";
 import "../css/globalSettings.css";
 import "../css/globalColors.css";
 import "../css/authenticationView.css";
-import { useDefaultSelector } from "@iavofficial/frontend-framework-shared/moduleDefaults";
+import {
+  DefaultNonStoreModules,
+  useDefaultSelector,
+} from "@iavofficial/frontend-framework-shared/moduleDefaults";
+import {useModuleContext} from "@iavofficial/frontend-framework-shared/moduleContext";
+import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/mandatoryModuleNames";
 
 export interface AuthOptions {
   backgroundImage?: string;
@@ -62,7 +66,7 @@ export interface NavbarOptions {
 export interface Props {
   // This indicates that the passed objects should have the type's properties at least.
   tabAndContentWrappers: TabAndContentWrapper[];
-  startingPoint: string;
+  initialPath: string;
   disableLogin?: boolean;
   disableCookieBanner?: boolean;
   authenticationView?: React.ComponentType<AuthenticationViewProps & any>;
@@ -79,8 +83,11 @@ export interface Props {
 
 export const UILayer = (props: Props) => {
   const {hasAuthenticated} = useDefaultSelector((state) => state.auth);
+  const {modules} = useModuleContext<DefaultNonStoreModules>();
 
   const [, setCookie] = useCookies([ACCEPTED_COOKIES_NAME]);
+
+  const disableLogin = !!props.disableLogin;
 
   const AuthenticationView = props.authenticationView
     ? props.authenticationView
@@ -98,68 +105,64 @@ export const UILayer = (props: Props) => {
     }
   }, [props.disableCookieBanner, setCookie]);
 
+  const routes = [
+    {
+      path: "/login",
+      disabled: disableLogin,
+      element: (
+        <AuthenticationView
+          authOptions={props.authOptions}
+          hideLanguageSelection={
+            props.settingsMenuOptions?.hideLanguageSelection
+          }
+          headerOptions={props.headerOptions}
+          hideLegalDocuments={props.hideLegalDocuments}
+        />
+      ),
+    },
+    {
+      path: "/documents",
+      disabled: disableLogin || hasAuthenticated,
+      element: props.documentsComponent ? (
+        <props.documentsComponent />
+      ) : (
+        <DefaultImprint />
+      ),
+    },
+    // Maybe include !props.disableLogin && !hasAuthenticated with <Route path="/*" element={<></>} />
+    {
+      path: "/*",
+      disabled: !disableLogin && !hasAuthenticated,
+      element: (
+        <MainView
+          headerOptions={props.headerOptions}
+          settingsMenuOptions={props.settingsMenuOptions}
+          userMenuOptions={userMenuOptions}
+          documentsLabelKey={props.documentsLabelKey}
+          documentsComponent={props.documentsComponent}
+          tabAndContentWrappers={props.tabAndContentWrappers}
+          hideLegalDocuments={props.hideLegalDocuments}
+          hideNavbar={props.hideNavbar}
+        />
+      ),
+    },
+  ];
+
+  const UILayerRouter = modules[MandatoryModuleNames.Router].uiLayerRouter;
+
   return (
     <NavbarSettingsProvider
       staticCollapsedState={props.navbarOptions?.staticCollapsedState}
     >
       {!props.disableCookieBanner && <CookieBanner />}
-      <Redirector
-        startingPoint={props.startingPoint}
-        disableLogin={props.disableLogin}
-      />
 
-      <Routes>
-        {!props.disableLogin && (
-          <Route
-            path="/login"
-            element={
-              <AuthenticationView
-                authOptions={props.authOptions}
-                hideLanguageSelection={
-                  props.settingsMenuOptions?.hideLanguageSelection
-                }
-                headerOptions={props.headerOptions}
-                hideLegalDocuments={props.hideLegalDocuments}
-              />
-            }
-          />
-        )}
-
-        {!props.disableLogin && !hasAuthenticated && (
-          <Route
-            path="/documents"
-            element={
-              props.documentsComponent ? (
-                <props.documentsComponent />
-              ) : (
-                <DefaultImprint />
-              )
-            }
-          />
-        )}
-
-        {!props.disableLogin && !hasAuthenticated ? (
-          <Route path="/*" element={<></>} />
-        ) : (
-          <>
-            <Route
-              path="/*"
-              element={
-                <MainView
-                  headerOptions={props.headerOptions}
-                  settingsMenuOptions={props.settingsMenuOptions}
-                  userMenuOptions={userMenuOptions}
-                  documentsLabelKey={props.documentsLabelKey}
-                  documentsComponent={props.documentsComponent}
-                  tabAndContentWrappers={props.tabAndContentWrappers}
-                  hideLegalDocuments={props.hideLegalDocuments}
-                  hideNavbar={props.hideNavbar}
-                />
-              }
-            />
-          </>
-        )}
-      </Routes>
+      {
+        <UILayerRouter
+          routes={routes}
+          disableLogin={disableLogin}
+          initialPath={props.initialPath}
+        />
+      }
     </NavbarSettingsProvider>
   );
 };
@@ -168,38 +171,3 @@ interface RedirectorProps {
   startingPoint: string;
   disableLogin?: boolean;
 }
-
-/**
- * This component is needed because the useLocation hook can only be used inside a Router-component
- * environment.
- * @param props
- * @constructor
- */
-const Redirector = (props: RedirectorProps) => {
-  const {hasAuthenticated} = useDefaultSelector((state) => state.auth);
-
-  const disableLogin = props.disableLogin;
-
-  const currentPath = useLocation().pathname;
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!hasAuthenticated) {
-      if (currentPath !== "/documents") {
-        navigate("/login");
-      }
-    } else {
-      if (currentPath === "/login" || currentPath === "/") {
-        navigate(props.startingPoint.valueOf());
-      }
-    }
-  }, [
-    disableLogin,
-    currentPath,
-    hasAuthenticated,
-    navigate,
-    props.startingPoint,
-  ]);
-
-  return <React.Fragment />;
-};

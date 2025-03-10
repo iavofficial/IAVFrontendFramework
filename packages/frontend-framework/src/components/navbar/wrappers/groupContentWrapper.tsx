@@ -25,7 +25,8 @@ import {
   InjectedOptionsByGroupToWrapper,
   InjectedOptionsByNavbarToWrapper,
 } from "../types/typesInjectedOptions";
-import { generateHashForValues } from "@iavofficial/frontend-framework-shared/hash";
+import {generateHashForValues} from "@iavofficial/frontend-framework-shared/hash";
+import {BasicRoute} from "@iavofficial/frontend-framework-shared/routingModule";
 
 export class Group implements GroupableTabAndContentWrapper {
   private _insideGroup = false;
@@ -49,9 +50,9 @@ export class Group implements GroupableTabAndContentWrapper {
   };
 
   getRoutes = () => {
-    const routes: ReactElement<RouteProps>[] = [];
-    this._contentWrappers.forEach((view) => {
-      view.getRoutes().forEach((route) => {
+    const routes: BasicRoute[] = [];
+    this._contentWrappers.forEach((wrapper) => {
+      wrapper.getRoutes().forEach((route) => {
         routes.push(route);
       });
     });

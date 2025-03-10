@@ -16,9 +16,14 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-export const MandatoryModuleNames = {
-  Authentication: "auth",
-  Router: "router"
-} as const;
+import React from "react";
+import {LinkProps} from "../../../../types/modules/routing/routingModule";
+import {Link as ReactRouterLink} from "react-router-dom";
 
-export type MandatoryModuleName = typeof MandatoryModuleNames[keyof typeof MandatoryModuleNames];
+export const Link = (props: LinkProps) => {
+  return (
+    <ReactRouterLink to={props.to} style={props.style} target={props.target ?? ""}>
+      {props.children}
+    </ReactRouterLink>
+  );
+};

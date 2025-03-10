@@ -16,9 +16,26 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-export const MandatoryModuleNames = {
-  Authentication: "auth",
-  Router: "router"
-} as const;
+import React from "react";
+import {Fragment} from "react/jsx-runtime";
+import {MainViewRouterProps} from "../../../../types/modules/routing/routingModule";
+import {Route, Routes} from "react-router";
+import {generateHash} from "../../../../utils/hash";
 
-export type MandatoryModuleName = typeof MandatoryModuleNames[keyof typeof MandatoryModuleNames];
+export const MainViewRouter = (props: MainViewRouterProps) => {
+  return (
+    <Routes>
+      {props.routes.map((route) =>
+        route.disabled ? (
+          <Fragment />
+        ) : (
+          <Route
+            key={route.key ?? generateHash(route.path)}
+            path={route.path}
+            element={route.element}
+          />
+        ),
+      )}
+    </Routes>
+  );
+};

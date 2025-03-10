@@ -26,6 +26,7 @@ import {
   FFMandatoryStoreModules,
   RootState,
 } from "../../types/modules/moduleOrchestrationTypes";
+import {ReactRouterRouter} from "../default_modules/router/reactRouterRouterModule";
 
 export type DefaultRootState = RootState<DefaultStoreState>;
 export type DefaultAppDispatch = AppDispatch<DefaultStoreDispatch>;
@@ -42,7 +43,9 @@ export const defaultStoreModules: FFMandatoryStoreModules = {
 
 export type DefaultStoreModules = typeof defaultStoreModules;
 
-export const defaultNonStoreModules = {};
+export const defaultNonStoreModules = {
+  [MandatoryModuleNames.Router]: new ReactRouterRouter(),
+};
 
 export type DefaultNonStoreModules = typeof defaultNonStoreModules;
 

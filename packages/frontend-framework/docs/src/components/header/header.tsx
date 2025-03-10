@@ -94,7 +94,7 @@ const Header: React.FC = () => {
     };
 
     const loadVersions = useCallback(async () => {
-        const response = await fetch("/assets/version-list.md");
+        const response = await fetch("/version-list.md");
         if (response.ok) {
             const versionText = await response.text();
             console.log(versionText);

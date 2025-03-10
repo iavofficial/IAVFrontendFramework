@@ -44,7 +44,7 @@ type BasicAuthenticatorStoreState = {[MandatoryModuleNames.Authentication]: Auth
 
 export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
   const {modules} = useModuleContext();
-  const authModule = modules.auth;
+  const authModule = modules[MandatoryModuleNames.Authentication];
 
   const colorSettingsContext = useContext(ColorSettingsContext);
 

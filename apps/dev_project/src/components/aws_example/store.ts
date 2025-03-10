@@ -17,15 +17,16 @@
  */
 
 import {
-  ModuleSetBuilder,
+  createModules,
   StoreBuilder,
 } from "@iavofficial/frontend-framework/store";
 import { Amplify } from "aws-amplify";
 import { cognitoUserPoolsTokenProvider } from "aws-amplify/auth/cognito";
 import { CookieStorage } from "aws-amplify/utils";
-import { awsAuthenticationViewFactory } from "@iavofficial/frontend-framework-aws-authenticator/awsAuthenticationView";
 import { AWSAuthenticator } from "@iavofficial/frontend-framework-aws-authenticator/awsAuthenticatorModule";
 import { useModuleContext } from "@iavofficial/frontend-framework/moduleContext";
+import { AWSAuthenticationView } from "@iavofficial/frontend-framework-aws-authenticator/awsAuthenticationView";
+import { MandatoryModuleNames } from "@iavofficial/frontend-framework/mandatoryModuleNames";
 
 const cognitoPool = import.meta.env.VITE_COGNITO_POOL;
 const cognitoAppId = import.meta.env.VITE_COGNITO_APP_ID;
@@ -53,23 +54,25 @@ const configureAmplify: () => void = () => {
 };
 
 const customModules = {
-  auth: new AWSAuthenticator({
+  [MandatoryModuleNames.Authentication]: new AWSAuthenticator({
     configureAmplify: configureAmplify,
     failOnNoLegalGroup: true,
     legalGroups: ["ADMIN", "SHOWCASE"],
   }),
 };
 
-export const modules = new ModuleSetBuilder({storeModules: customModules, nonStoreModules: {}}).build();
+export const modules = createModules({ storeModules: customModules });
 
 export const store = new StoreBuilder(modules.storeModules)
-/*    .setFrameworkModuleProcessor(
+  /*    .setFrameworkModuleProcessor(
     "auth",
     (authModule: AWSAuthenticator, storeConfigBuilder) => {}
   )*/
   .build();
 
-export const AwsAuthenticationView = awsAuthenticationViewFactory(modules.all.auth);
+export const awsAuthenticationView = AWSAuthenticationView<
+  typeof modules.storeModules
+>;
 
 // Use this to create a typed module context.
 export const useTypedModuleContext = useModuleContext<typeof modules>;

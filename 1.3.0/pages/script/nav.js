@@ -57,16 +57,6 @@ const getOptionalVersionList = async () => {
     }
 };
 
-const compareVersions = (v1, v2) => {
-    const parts1 = v1.split('.').map(Number);
-    const parts2 = v2.split('.').map(Number);
-    for (let i = 0; i < Math.max(parts1.length, parts2.length); i++) {
-        const diff = (parts1[i] || 0) - (parts2[i] || 0);
-        if (diff !== 0) return diff;
-    }
-    return 0;
-};
-
 const getNewestVersion = async () => {
     return await getOptionalVersionList();
 };
@@ -84,12 +74,17 @@ const navigate = async (url, version = null) => {
     const currentVersion = version || await getSelectedVersion();
     const expectedPath = `${basePath}/${currentVersion}/${url}`;
     const currentPath = window.location.pathname;
-    if (currentPath !== expectedPath) {
-        window.history.pushState({}, '', expectedPath);
+
+    if (compareVersions(currentVersion, '1.4.0') >= 0) {
+        window.location.reload();
+    } else {
+        if (currentPath !== expectedPath) {
+            window.history.pushState({}, '', expectedPath);
+        }
+        document.getElementById('container').innerHTML = await fetchData(expectedPath);
+        createPageNavigation();
     }
-    document.getElementById('container').innerHTML = await fetchData(expectedPath);
-    createPageNavigation();
-}
+};
 
 const fetchData = async (path) => {
     const response = await fetch(path);

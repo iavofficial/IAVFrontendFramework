@@ -21,8 +21,9 @@ function Layout() {
     const location = useLocation();
     const hideNavigation = location.pathname.startsWith(`${BASE_PATH}/imprint`);
 
-    if (location.pathname.includes('index.html')) {
-        return <Navigate to={`${BASE_PATH}/overview`} replace/>;
+    if (location.pathname.includes('.html')) {
+        const pathWithoutHtml = location.pathname.replace('.html', '');
+        return <Navigate to={pathWithoutHtml} replace/>;
     }
 
     return (

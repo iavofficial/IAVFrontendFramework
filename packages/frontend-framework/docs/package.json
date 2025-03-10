@@ -3,6 +3,7 @@
   "private": true,
   "version": "1.4.0",
   "type": "module",
+  "homepage": "https://iavofficial.github.io/IAVFrontendFramework",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

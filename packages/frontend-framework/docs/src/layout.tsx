@@ -14,10 +14,8 @@ import FAQ from "./pages/faq.tsx";
 import Imprint from "./components/page/utils/imprint.tsx";
 import PageNavigation from "./components/drawer/pageNavigation.tsx";
 import Header from "./components/header/header.tsx";
-import packageJson from "../package.json";
 
-const version = packageJson.version;
-const BASE_PATH = `/${version}`;
+const BASE_PATH = `1.4.0`;
 
 function Layout() {
     const location = useLocation();

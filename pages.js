@@ -35,9 +35,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         return 0;
     }
     const newestVersion = await getNewestVersion();
-    if (compareVersions(newestVersion, '1.4.0') >= 0) {
-        window.location.reload();
-    } else if (newestVersion) {
+    if (newestVersion) {
         window.location.href = `/IAVFrontendFramework/${newestVersion}/index.html`;
     }
 });

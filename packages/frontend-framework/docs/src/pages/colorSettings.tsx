@@ -267,7 +267,7 @@ export interface AuthenticationColorType {
             <Text>
                 Using these options you can for example create a view like the following.
             </Text>
-            <Image src={"assets/color-settings/custom-coloring.png"}/>
+            <Image src={"assets/color-settings/custom-coloring.png"} fromGhPages/>
             <Title>How to implement a dark mode in custom components</Title>
             <SubTitle>Implement dark mode using the ColorSettings context</SubTitle>
             <Text>

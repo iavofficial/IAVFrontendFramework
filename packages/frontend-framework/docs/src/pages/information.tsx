@@ -69,23 +69,23 @@ const Information: React.FC = () => {
             <Text>
                 The following image explains the terminology used in this documentation.
             </Text>
-            <Image src={"assets/information/terminology-definition.png"}/>
+            <Image src={"assets/information/terminology-definition.png"} fromGhPages/>
             <Text>
                 The following image show the appearance of the framework when the dark
                 mode is activated.
             </Text>
-            <Image src={"assets/information/iav-frontend-framework-darkmode.png"}/>
+            <Image src={"assets/information/iav-frontend-framework-darkmode.png"} fromGhPages/>
             <SubTitle>Official IAV-Colors</SubTitle>
             <Text>
                 The following image shows the standardized color spectrum of IAV.
             </Text>
-            <Image src={"assets/information/styleguide.png"}/>
+            <Image src={"assets/information/styleguide.png"} fromGhPages/>
             <SubTitle>Styleguide</SubTitle>
             <Text>
                 The following image shows the style guide which is based on the IAV
                 corporate design colors and the extension.
             </Text>
-            <Image src={"assets/information/styleguide-additional-info.png"}/>
+            <Image src={"assets/information/styleguide-additional-info.png"} fromGhPages/>
         </Page>
 
 

@@ -339,7 +339,7 @@ export const ContentbarExampleWithText = (props: Props) => {
             <Text>
                 The resulting content area looks like this:
             </Text>
-            <Image src={"assets/content-area/content-area.png"}/>
+            <Image src={"assets/content-area/content-area.png"} fromGhPages/>
         </Page>
     )
 };

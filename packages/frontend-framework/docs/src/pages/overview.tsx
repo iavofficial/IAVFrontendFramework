@@ -83,9 +83,9 @@ const Overview: React.FC = () => {
 
             <SubTitle>Layout</SubTitle>
 
-            <Image alt="Login" src="assets/index/login.png"/>
+            <Image alt="Login" src="assets/index/login.png" fromGhPages/>
 
-            <Image alt="Menu" src="assets/index/menu.png"/>
+            <Image alt="Menu" src="assets/index/menu.png" fromGhPages/>
         </Page>
     )
 };

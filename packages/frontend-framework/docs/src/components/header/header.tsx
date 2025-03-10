@@ -94,7 +94,8 @@ const Header: React.FC = () => {
     };
 
     const loadVersions = useCallback(async () => {
-        const response = await fetch("/version-list.md");
+        const response = await fetch("https://iavofficial.github.io/IAVFrontendFramework/version-list.md");
+        console.log(response)
         if (response.ok) {
             const versionText = await response.text();
             console.log(versionText);
@@ -117,7 +118,8 @@ const Header: React.FC = () => {
     const handleVersionChange = (event: React.ChangeEvent<DropdownChangeEvent>) => {
         const newVersion = event.target.value;
         setSelectedVersion(newVersion);
-        navigate(`/${newVersion}${window.location.pathname.replace(/^\/[^/]+/, '')}`);
+        const newPath = window.location.pathname.replace(/^\/IAVFrontendFramework\/[^/]+/, `/IAVFrontendFramework/${newVersion}`);
+        navigate(newPath);
     };
 
     return (

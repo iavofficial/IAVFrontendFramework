@@ -15,11 +15,15 @@ import Imprint from "./components/page/utils/imprint.tsx";
 import PageNavigation from "./components/drawer/pageNavigation.tsx";
 import Header from "./components/header/header.tsx";
 
-const BASE_PATH = `1.4.0`;
+const BASE_PATH = `IAVFrontendFramework/1.4.0`;
 
 function Layout() {
     const location = useLocation();
     const hideNavigation = location.pathname.startsWith(`${BASE_PATH}/imprint`);
+
+    if (location.pathname.includes('index.html')) {
+        return <Navigate to={`${BASE_PATH}/overview`} replace/>;
+    }
 
     return (
         <>

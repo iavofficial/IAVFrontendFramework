@@ -68,7 +68,7 @@ const PageNavigation: React.FC = () => {
 
     const {classes} = useStyles();
 
-    const BASE_PATH = `1.4.0`;
+    const BASE_PATH = `IAVFrontendFramework/1.4.0`;
 
     return (
         <div className={classes.drawer}>

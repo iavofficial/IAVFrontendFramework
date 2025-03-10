@@ -25,15 +25,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 return versions[versions.length - 1];
             })
     };
-    const compareVersions = (v1, v2) => {
-        const parts1 = v1.split('.').map(Number);
-        const parts2 = v2.split('.').map(Number);
-        for (let i = 0; i < Math.max(parts1.length, parts2.length); i++) {
-            const diff = (parts1[i] || 0) - (parts2[i] || 0);
-            if (diff !== 0) return diff;
-        }
-        return 0;
-    }
     const newestVersion = await getNewestVersion();
     if (newestVersion) {
         window.location.href = `/IAVFrontendFramework/${newestVersion}/index.html`;

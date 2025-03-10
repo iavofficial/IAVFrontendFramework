@@ -14,10 +14,14 @@ import FAQ from "./pages/faq.tsx";
 import Imprint from "./components/page/utils/imprint.tsx";
 import PageNavigation from "./components/drawer/pageNavigation.tsx";
 import Header from "./components/header/header.tsx";
+import packageJson from "../package.json";
+
+const version = packageJson.version;
+const BASE_PATH = `/${version}`;
 
 function Layout() {
     const location = useLocation();
-    const hideNavigation = location.pathname === "/imprint";
+    const hideNavigation = location.pathname.startsWith(`${BASE_PATH}/imprint`);
 
     return (
         <>
@@ -28,19 +32,19 @@ function Layout() {
                 </>
             )}
             <Routes>
-                <Route path="overview" element={<Overview/>}/>
-                <Route path="/information" element={<Information/>}/>
-                <Route path="/installation-guide" element={<InstallationGuide/>}/>
-                <Route path="/interface" element={<Interface/>}/>
-                <Route path="/globaldatalayer" element={<GlobalDataLayer/>}/>
-                <Route path="/uilayer" element={<UILayer/>}/>
-                <Route path="/content-area" element={<ContentArea/>}/>
-                <Route path="/color-settings-and-dark-mode" element={<ColorSettings/>}/>
-                <Route path="/example-project" element={<ExampleProject/>}/>
-                <Route path="/playground" element={<Playground/>}/>
-                <Route path="/faq" element={<FAQ/>}/>
-                <Route path="/imprint" element={<Imprint/>}/>
-                <Route path="*" element={<Navigate to="/overview" replace/>}/>
+                <Route path={`${BASE_PATH}/overview`} element={<Overview/>}/>
+                <Route path={`${BASE_PATH}/information`} element={<Information/>}/>
+                <Route path={`${BASE_PATH}/installation-guide`} element={<InstallationGuide/>}/>
+                <Route path={`${BASE_PATH}/interface`} element={<Interface/>}/>
+                <Route path={`${BASE_PATH}/globaldatalayer`} element={<GlobalDataLayer/>}/>
+                <Route path={`${BASE_PATH}/uilayer`} element={<UILayer/>}/>
+                <Route path={`${BASE_PATH}/content-area`} element={<ContentArea/>}/>
+                <Route path={`${BASE_PATH}/color-settings-and-dark-mode`} element={<ColorSettings/>}/>
+                <Route path={`${BASE_PATH}/example-project`} element={<ExampleProject/>}/>
+                <Route path={`${BASE_PATH}/playground`} element={<Playground/>}/>
+                <Route path={`${BASE_PATH}/faq`} element={<FAQ/>}/>
+                <Route path={`${BASE_PATH}/imprint`} element={<Imprint/>}/>
+                <Route path="/" element={<Navigate to={`${BASE_PATH}/overview`} replace/>}/>
             </Routes>
         </>
     );

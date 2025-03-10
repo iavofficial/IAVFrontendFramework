@@ -18,6 +18,7 @@ import React, {useCallback, useEffect, useState} from "react";
 import {DropdownChangeEvent} from 'primereact/dropdown';
 import makeStyles from "../../../../src/components/content/style_options/makeStyles";
 import Title from "../page/text/title.tsx";
+import {useNavigate} from "react-router";
 
 const useStyles = makeStyles(() => ({
     header: {
@@ -85,26 +86,29 @@ const Header: React.FC = () => {
     const [versions, setVersions] = useState<string[]>([]);
     const [selectedVersion, setSelectedVersion] = useState<string>("");
 
+    const navigate = useNavigate();
+
     const extractVersionFromURL = (url: string): string => {
         const parts = url.split("/");
         return parts[parts.length - 2] || "latest";
     };
 
     const loadVersions = useCallback(async () => {
-        const response = await fetch("assets/version-list.md");
+        const response = await fetch("/assets/version-list.md");
         if (response.ok) {
             const versionText = await response.text();
+            console.log(versionText);
             const versionList = versionText
                 .split("\n")
                 .map(line => line.trim())
-                .filter(line => line !== "");
+                .filter(line => line !== "")
+                .sort((a, b) => b.localeCompare(a, undefined, {numeric: true}))
+
             const currentVersion = extractVersionFromURL(window.location.href);
             setVersions([currentVersion, ...versionList.filter(v => v !== currentVersion)]);
             setSelectedVersion(currentVersion);
         }
-
     }, []);
-
 
     useEffect(() => {
         loadVersions();
@@ -113,6 +117,7 @@ const Header: React.FC = () => {
     const handleVersionChange = (event: React.ChangeEvent<DropdownChangeEvent>) => {
         const newVersion = event.target.value;
         setSelectedVersion(newVersion);
+        navigate(`/${newVersion}${window.location.pathname.replace(/^\/[^/]+/, '')}`);
     };
 
     return (

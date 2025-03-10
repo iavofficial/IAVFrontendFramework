@@ -79,10 +79,10 @@ const PageNavigation: React.FC = () => {
                 <li><Link to={`${BASE_PATH}/interface`}>03 - Interface</Link></li>
                 <li><Link to={`${BASE_PATH}/globaldatalayer`}>04 - GlobalDataLayer</Link></li>
                 <li><Link to={`${BASE_PATH}/uilayer`}>05 - UILayer</Link></li>
-                <li><Link to={`${BASE_PATH}/content-area`}>07 - Content Area</Link></li>
-                <li><Link to={`${BASE_PATH}/color-settings-and-dark-mode`}>08 - Color Settings and Dark Mode</Link></li>
-                <li><Link to={`${BASE_PATH}/example-project`}>09 - Example Project</Link></li>
-                <li><Link to={`${BASE_PATH}/playground`}>10 - Playground</Link></li>
+                <li><Link to={`${BASE_PATH}/content-area`}>06 - Content Area</Link></li>
+                <li><Link to={`${BASE_PATH}/color-settings-and-dark-mode`}>07 - Color Settings and Dark Mode</Link></li>
+                <li><Link to={`${BASE_PATH}/example-project`}>08 - Example Project</Link></li>
+                <li><Link to={`${BASE_PATH}/playground`}>09 - Playground</Link></li>
             </ul>
             <SubSubTitle>Need help?</SubSubTitle>
             <ul>

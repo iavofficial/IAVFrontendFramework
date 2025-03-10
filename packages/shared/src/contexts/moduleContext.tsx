@@ -18,7 +18,7 @@
 
 import React, {useContext} from "react";
 import {FFMandatoryStoreModules} from "../types/modules/moduleOrchestrationTypes";
-import {allDefaultModules} from "../modules/module_orchestration/moduleDefaults";
+import {AllDefaultModules} from "../modules/module_orchestration/moduleDefaults";
 
 export type ModuleContextValues<TModules> = {
   modules: TModules;
@@ -32,7 +32,7 @@ export const ModuleContext = React.createContext<DefaultModuleContextValues>(
 );
 
 export const useModuleContext = <
-  TModules = typeof allDefaultModules,
+  TModules = AllDefaultModules,
 >(): ModuleContextValues<TModules> => {
   return useContext(ModuleContext) as ModuleContextValues<TModules>;
 };

@@ -20,6 +20,7 @@ let basePath = '/IAVFrontendFramework';
 
 document.addEventListener('DOMContentLoaded', async () => {
     const newestVersion = await getNewestVersion();
+    console.log(newestVersion)
     const response = await fetch(`${basePath}/${newestVersion}/index.html`)
     const indexHTML = await response.text();
     document.open();
@@ -45,10 +46,25 @@ const getOptionalVersionList = async () => {
     if (response.ok) {
         const data = await response.text();
         const versions = data.trim().split('\n');
-        return versions[versions.length - 1];
+        const latestVersion = versions[versions.length - 1];
+        if (compareVersions(latestVersion, "1.4.0") >= 0) {
+            return "1.3.0";
+        } else {
+            return latestVersion;
+        }
     } else {
         return "docs";
     }
+};
+
+const compareVersions = (v1, v2) => {
+    const parts1 = v1.split('.').map(Number);
+    const parts2 = v2.split('.').map(Number);
+    for (let i = 0; i < Math.max(parts1.length, parts2.length); i++) {
+        const diff = (parts1[i] || 0) - (parts2[i] || 0);
+        if (diff !== 0) return diff;
+    }
+    return 0;
 };
 
 const getNewestVersion = async () => {

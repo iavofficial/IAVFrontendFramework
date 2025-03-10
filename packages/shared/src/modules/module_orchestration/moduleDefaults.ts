@@ -9,8 +9,8 @@ import {
   RootState,
 } from "../../types/modules/moduleOrchestrationTypes";
 
-export type DefaultRootState = RootState<typeof defaultStore.getState>;
-export type DefaultAppDispatch = AppDispatch<typeof defaultStore.dispatch>;
+export type DefaultRootState = RootState<DefaultStoreState>;
+export type DefaultAppDispatch = AppDispatch<DefaultStoreDispatch>;
 export type DefaultThunkDispatch = ThunkDispatch<
   DefaultRootState,
   unknown,
@@ -38,6 +38,8 @@ export type AllDefaultModules = typeof allDefaultModules;
 export const defaultStore = new StoreBuilder(defaultStoreModules).build();
 
 export type DefaultStore = typeof defaultStore;
+export type DefaultStoreState = typeof defaultStore.getState;
+export type DefaultStoreDispatch = typeof defaultStore.dispatch;
 
 export const useDefaultDispatch: () => DefaultThunkDispatch = useDispatch;
 export const useDefaultSelector: TypedUseSelectorHook<DefaultRootState> =

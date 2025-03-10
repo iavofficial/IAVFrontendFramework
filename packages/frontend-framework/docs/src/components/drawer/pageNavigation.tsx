@@ -68,23 +68,25 @@ const PageNavigation: React.FC = () => {
 
     const {classes} = useStyles();
 
+    const BASE_PATH = `1.4.0`;
+
     return (
         <div className={classes.drawer}>
             <ul>
-                <li><Link to="/overview">Quick Overview</Link></li>
-                <li><Link to="/information">01 - Important Information</Link></li>
-                <li><Link to="/installation-guide">02 - Installation</Link></li>
-                <li><Link to="/interface">03 - Interface</Link></li>
-                <li><Link to="/globaldatalayer">04 - GlobalDataLayer</Link></li>
-                <li><Link to="/uilayer">05 - UILayer</Link></li>
-                <li><Link to="/content-area">07 - Content Area</Link></li>
-                <li><Link to="/color-settings-and-dark-mode">08 - Color Settings and Dark Mode</Link></li>
-                <li><Link to="/example-project">09 - Example Project</Link></li>
-                <li><Link to="/playground">10 - Playground</Link></li>
+                <li><Link to={`${BASE_PATH}/overview`}>Quick Overview</Link></li>
+                <li><Link to={`${BASE_PATH}/information`}>01 - Important Information</Link></li>
+                <li><Link to={`${BASE_PATH}/installation-guide`}>02 - Installation</Link></li>
+                <li><Link to={`${BASE_PATH}/interface`}>03 - Interface</Link></li>
+                <li><Link to={`${BASE_PATH}/globaldatalayer`}>04 - GlobalDataLayer</Link></li>
+                <li><Link to={`${BASE_PATH}/uilayer`}>05 - UILayer</Link></li>
+                <li><Link to={`${BASE_PATH}/content-area`}>07 - Content Area</Link></li>
+                <li><Link to={`${BASE_PATH}/color-settings-and-dark-mode`}>08 - Color Settings and Dark Mode</Link></li>
+                <li><Link to={`${BASE_PATH}/example-project`}>09 - Example Project</Link></li>
+                <li><Link to={`${BASE_PATH}/playground`}>10 - Playground</Link></li>
             </ul>
             <SubSubTitle>Need help?</SubSubTitle>
             <ul>
-                <li><Link to="/faq">FAQ</Link></li>
+                <li><Link to={`${BASE_PATH}/faq`}>FAQ</Link></li>
             </ul>
         </div>
     );

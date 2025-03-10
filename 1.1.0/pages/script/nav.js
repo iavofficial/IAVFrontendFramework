@@ -181,9 +181,7 @@ const loadVersionDropdown = async (url) => {
         const versionText = await versionResponse.text();
         const versions = versionText.split('\n')
             .map(line => line.trim())
-            .filter(line => line !== '' && line !== currentVersion)
             .reverse();
-        versions.unshift(currentVersion);
         versions.forEach(version => {
             const option = document.createElement('option');
             option.value = version;

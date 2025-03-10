@@ -118,9 +118,26 @@ const Header: React.FC = () => {
     const handleVersionChange = (event: React.ChangeEvent<DropdownChangeEvent>) => {
         const newVersion = event.target.value;
         setSelectedVersion(newVersion);
+        const isVersionLowerThan140 = compareVersions(newVersion, '1.4.0') < 0;
         const newPath = window.location.pathname.replace(/^\/IAVFrontendFramework\/[^/]+/, `/IAVFrontendFramework/${newVersion}`);
         navigate(newPath);
+        if (isVersionLowerThan140) {
+            window.location.reload();
+        }
     };
+
+    const compareVersions = (version1: string, version2: string): number => {
+        const v1Parts = version1.split('.').map(Number);
+        const v2Parts = version2.split('.').map(Number);
+        return v1Parts.reduce((acc, v1, i) => {
+            const v2 = v2Parts[i] || 0;
+            if (acc !== 0) return acc;
+            if (v1 > v2) return 1;
+            if (v1 < v2) return -1;
+            return 0;
+        }, 0);
+    };
+
 
     return (
         <header className={classes.header}>

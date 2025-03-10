@@ -4,7 +4,7 @@ import Layout from "./layout.tsx";
 
 function App() {
     return (
-        <Router basename="/IAVFrontendFramework">
+        <Router>
             <Layout/>
         </Router>
     );

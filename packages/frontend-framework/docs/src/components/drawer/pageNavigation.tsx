@@ -64,29 +64,33 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-const PageNavigation: React.FC = () => {
+interface Props {
+    basePath: string;
+}
+
+const PageNavigation: React.FC<Props> = (props) => {
+
+    const {basePath} = props;
 
     const {classes} = useStyles();
-
-    const BASE_PATH = `IAVFrontendFramework/1.4.0`;
 
     return (
         <div className={classes.drawer}>
             <ul>
-                <li><Link to={`${BASE_PATH}/overview`}>Quick Overview</Link></li>
-                <li><Link to={`${BASE_PATH}/information`}>01 - Important Information</Link></li>
-                <li><Link to={`${BASE_PATH}/installation-guide`}>02 - Installation</Link></li>
-                <li><Link to={`${BASE_PATH}/interface`}>03 - Interface</Link></li>
-                <li><Link to={`${BASE_PATH}/globaldatalayer`}>04 - GlobalDataLayer</Link></li>
-                <li><Link to={`${BASE_PATH}/uilayer`}>05 - UILayer</Link></li>
-                <li><Link to={`${BASE_PATH}/content-area`}>06 - Content Area</Link></li>
-                <li><Link to={`${BASE_PATH}/color-settings-and-dark-mode`}>07 - Color Settings and Dark Mode</Link></li>
-                <li><Link to={`${BASE_PATH}/example-project`}>08 - Example Project</Link></li>
-                <li><Link to={`${BASE_PATH}/playground`}>09 - Playground</Link></li>
+                <li><Link to={`${basePath}/overview`}>Quick Overview</Link></li>
+                <li><Link to={`${basePath}/information`}>01 - Important Information</Link></li>
+                <li><Link to={`${basePath}/installation-guide`}>02 - Installation</Link></li>
+                <li><Link to={`${basePath}/interface`}>03 - Interface</Link></li>
+                <li><Link to={`${basePath}/globaldatalayer`}>04 - GlobalDataLayer</Link></li>
+                <li><Link to={`${basePath}/uilayer`}>05 - UILayer</Link></li>
+                <li><Link to={`${basePath}/content-area`}>06 - Content Area</Link></li>
+                <li><Link to={`${basePath}/color-settings-and-dark-mode`}>07 - Color Settings and Dark Mode</Link></li>
+                <li><Link to={`${basePath}/example-project`}>08 - Example Project</Link></li>
+                <li><Link to={`${basePath}/playground`}>09 - Playground</Link></li>
             </ul>
             <SubSubTitle>Need help?</SubSubTitle>
             <ul>
-                <li><Link to={`${BASE_PATH}/faq`}>FAQ</Link></li>
+                <li><Link to={`${basePath}/faq`}>FAQ</Link></li>
             </ul>
         </div>
     );

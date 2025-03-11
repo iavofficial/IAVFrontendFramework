@@ -19,9 +19,9 @@ import Header from "./components/header/header.tsx";
 function Layout() {
     const location = useLocation();
 
-    const currentVersion = "1.4.0"
+    const currentVersion = "1.5.0"
 
-    const basePath = `IAVFrontendFramework${currentVersion}`;
+    const basePath = `IAVFrontendFramework/${currentVersion}`;
 
     const hideNavigation = location.pathname.startsWith(`IAVFrontendFramework${currentVersion}/imprint`);
 
@@ -38,7 +38,7 @@ function Layout() {
         <>
             {!hideNavigation && (
                 <>
-                    <PageNavigation/>
+                    <PageNavigation basePath={basePath}/>
                     <Header/>
                 </>
             )}

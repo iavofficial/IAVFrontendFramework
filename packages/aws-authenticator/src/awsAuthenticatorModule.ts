@@ -80,7 +80,7 @@ const initialState: AWSAuthenticatorState = {
   },
 };
 
-export class AWSAuthenticator {
+export class AWSAuthenticator implements AuthModule<AWSAuthenticatorState>{
   private config;
 
   public slice: Slice<AWSAuthenticatorState>;

@@ -49,4 +49,4 @@ export type AuthModule<TAuthState extends AuthState> = {
   fetchAuthed: AsyncThunk<Response, FetchAuthedFunctionArgs, any>;
   login: AsyncThunk<void, {credentials: Credentials}, any>;
   logout: AsyncThunk<void, {error?: unknown} | undefined, any>;
-} & FFStoreModule;
+} & FFStoreModule<TAuthState>;

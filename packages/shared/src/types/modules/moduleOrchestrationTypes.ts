@@ -21,23 +21,10 @@ import {FFStoreModule} from "../../types/modules/generalModule";
 import {MandatoryModuleNames} from "../../constants/mandatoryModuleNames";
 import {AuthModule, AuthState} from "./auth/authenticatorModule";
 import {StoreConfigBuilder} from "../../modules/module_orchestration/storeConfigBuilder";
-/*
-To add a new mandatory module:
-1. Add the state (of it's slice) to FFMandatoryState.
-2. Add the type of the module in minimal configuration to FFMandatoryStoreModules. Minimal
-   configuration means that the module includes just only all values and methods which
-   are used by the framework itself. This is necessary to ensure that only modules can
-   be used which are of this type and because of this provide all necessary values and
-   methods to the framework.
-3. Add an instance of a default module for this key.
-4. Inside the build method of the StoreConfigBuilder: Add the root reducer of your default
-   module like it is done for auth. This is necessary to ensure that all mandatory reducers
-   are present when building the redux store.
-5. Create a default processor for the module.
-6. Inside the constructor of StoreBuilder: Add an object with the corresponding key to
-   include the passed module and the default processor inside the ModuleAndProcessorMap
-   for mandatory modules.
-*/
+
+export type FFStoreModules<TState = any> = {
+  [K in keyof TState]: FFStoreModule<TState>;
+};
 
 // The mandatory state (which will be the state of different module's slices)
 export type FFMandatoryState = {
@@ -72,16 +59,7 @@ export type FFAllMandatoryModules<
 
 // The user can provide additional modules which aren't used by the
 // framework itself.
-export type GenericModules = Record<string, FFStoreModule>;
-
-// Processor functions are used to process single modules. They can be
-// replaces in order to allow the developer to implement custom processing,
-// since it is not possible to think of every possible processing step which
-// could occur at development of the framework.
-export type ModuleProcessorFunction<
-  M extends FFStoreModule,
-  TState extends FFMandatoryState,
-> = (module: M, config: StoreConfigBuilder<TState>) => void;
+export type GenericModules = Record<string, FFStoreModule<unknown>>;
 
 // Objects of this type aggragate a module and it's corresponding processor
 // method. The following example shows it's structure:
@@ -89,22 +67,36 @@ export type ModuleProcessorFunction<
 // The effect of never in this case is that there cannot be a key with a value
 // which does not extend FFStoreModule.
 export type ModuleAndProcessorMap<
-  ModuleType extends object,
-  TState extends FFMandatoryState,
+  ModuleTypes extends FFStoreModules,
+  TFrameworkModulesState extends FFMandatoryState,
 > = {
-  [K in keyof ModuleType]: ModuleType[K] extends FFStoreModule
-    ? ModuleEntry<ModuleType[K], TState>
+  [K in keyof ModuleTypes]: ModuleTypes[K] extends FFStoreModule<
+    ExtractModuleState<ModuleTypes[K]>
+  >
+    ? ModuleEntry<ModuleTypes[K], TFrameworkModulesState>
     : never;
 };
 
 // This type defines the structure of one entry inside the ModuleAndProcessorMap.
 export interface ModuleEntry<
-  M extends FFStoreModule,
-  TState extends FFMandatoryState,
+  TModule,
+  TFrameworkModulesState extends FFMandatoryState,
 > {
-  module: M;
-  processor?: ModuleProcessorFunction<M, TState>;
+  module: TModule;
+  processor?: ModuleProcessorFunction<TModule, TFrameworkModulesState>;
 }
+
+// Processor functions are used to process single modules. They can be
+// replaces in order to allow the developer to implement custom processing,
+// since it is not possible to think of every possible processing step which
+// could occur at development of the framework.
+export type ModuleProcessorFunction<
+  TModule,
+  TFrameworkModulesState extends FFMandatoryState,
+> = (
+  module: TModule,
+  config: StoreConfigBuilder<TFrameworkModulesState>,
+) => void;
 
 // Using this type the State Type of a Module can be iferred.
 export type ExtractModuleState<T> =

@@ -28,6 +28,7 @@ import {
   FFMandatoryStoreModules,
 } from "../../types/modules/moduleOrchestrationTypes";
 import {StoreConfig} from "./storeConfig";
+import {FFStoreModule} from "../../types/modules/generalModule";
 
 export class StoreConfigBuilder<TState extends FFMandatoryState> {
   private reducers: FFMandatoryReducers<TState>;
@@ -42,16 +43,21 @@ export class StoreConfigBuilder<TState extends FFMandatoryState> {
     let middleware: Middleware[] = [];
     let enhancers: StoreEnhancer[] = [];
     let extras = {};
-    Object.entries(modules).forEach(([key, module]) => {
-      reducers = {...reducers, [key]: module.slice.reducer};
-      if (module.middleware) {
-        middleware = [...middleware, ...module.middleware];
-      }
-      if (module.enhancers) {
-        enhancers = [...enhancers, ...module.enhancers];
-      }
-      extras = {...extras, ...module.extras};
-    });
+    // Key is incorrectly inferred to be of type string
+    Object.entries(modules as Record<keyof TState, FFStoreModule<unknown>>).forEach(
+      ([key, module]) => {
+        if (module?.slice?.reducer) {
+          reducers = {...reducers, [key]: module.slice.reducer};
+        }
+        if (module.middleware) {
+          middleware = [...middleware, ...module.middleware];
+        }
+        if (module.enhancers) {
+          enhancers = [...enhancers, ...module.enhancers];
+        }
+        extras = {...extras, ...module.extras};
+      },
+    );
     this.reducers = reducers as FFMandatoryReducers<TState>;
     this.middleware = middleware;
     this.enhancers = enhancers;
@@ -61,7 +67,7 @@ export class StoreConfigBuilder<TState extends FFMandatoryState> {
   public setReducer<K extends keyof TState>(key: K, reducer: Reducer<TState[K]>): this {
     this.reducers[key] = reducer;
     return this;
-  }
+  }  
 
   public setMiddleware(middleware: Middleware[]): this {
     this.middleware = middleware;

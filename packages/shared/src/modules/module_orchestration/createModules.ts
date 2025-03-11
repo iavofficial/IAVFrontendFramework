@@ -23,31 +23,31 @@ import {
   FFMandatoryState,
   GenericModules,
 } from "../../types/modules/moduleOrchestrationTypes";
-import { Exact } from "../../types/util-types/exact";
 import {defaultNonStoreModules, defaultStoreModules} from "./moduleDefaults";
 
 export function createModules<
-  TUserStoreModules extends GenericModules,
-  TNonStoreModules extends Record<string, FFModule> = Record<string, FFModule>,
+  TUserStoreModules extends Partial<TNonStoreModules>,
   TMandatoryStoreModules extends Partial<FFMandatoryStoreModules<TState>> = {},
+  TNonStoreModules extends Record<string, FFModule> = Record<string, FFModule>,
   TState extends
     FFMandatoryState = ActualMandatoryStateFromModules<TMandatoryStoreModules>,
 >(
   params: {
-    mandatoryStoreModules?: TMandatoryStoreModules,
-    nonStoreModules?: TNonStoreModules;
+    frameworkStoreModules?: TMandatoryStoreModules,
     userStoreModules?: TUserStoreModules;
+    nonStoreModules?: TNonStoreModules;
   } = {},
 ) {
   const {
-    mandatoryStoreModules: storeModules = {} as TMandatoryStoreModules,
+    frameworkStoreModules = {} as TMandatoryStoreModules,
     nonStoreModules = {} as TNonStoreModules,
     userStoreModules = {},
   } = params;
 
   const mergedMandatoryStoreModules = {
+    ...userStoreModules,
     ...defaultStoreModules,
-    ...storeModules,
+    ...frameworkStoreModules,
   };
 
   const mergedNonStoreModules = {
@@ -56,7 +56,7 @@ export function createModules<
   };
 
   return {
-    mandatoryStoreModules: mergedMandatoryStoreModules,
+    frameworkStoreModules: mergedMandatoryStoreModules,
     userStoreModules: userStoreModules,
     // Modules which are relevant for the store overwrite modules which are not relevant
     // for the store in case there is a duplicate key. This is necessary because store modules
@@ -74,6 +74,6 @@ export function createModules<
     // A default implementation for the store can be overwritten by just custom modules for the store.
     // A default implementation without store can be overwritten by custom modules both for and without
     // the store.
-    all: {...userStoreModules, ...mergedNonStoreModules, ...mergedMandatoryStoreModules},
+    all: {...mergedNonStoreModules, ...userStoreModules, ...mergedMandatoryStoreModules},
   };
 }

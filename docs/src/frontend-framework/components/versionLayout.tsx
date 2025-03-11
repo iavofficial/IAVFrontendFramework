@@ -1,6 +1,6 @@
 import {Navigate, useParams} from "react-router-dom";
-import Version1_4_0 from "../versions/1.4.0";
-import Version1_5_0 from "../versions/1.5.0";
+import Version1_4_0 from "../versions/1.1.0";
+import Version1_5_0 from "../versions/1.3.0";
 import React from "react";
 
 interface Props {

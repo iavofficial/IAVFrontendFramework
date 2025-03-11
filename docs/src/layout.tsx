@@ -3,13 +3,13 @@ import PageNavigation from "./frontend-framework/common/drawer/pageNavigation.ts
 import Header from "./frontend-framework/common/header/header.tsx";
 import VersionLayout from "./frontend-framework/components/versionLayout.tsx";
 
-
 function Layout() {
+
     const location = useLocation();
 
-    const repoAuthor = "mikewegele";
-    const currentVersion = "1.5.0";
-    const projectName = "iav-test-2";
+    const repoAuthor = "iavofficial";
+    const currentVersion = "1.3.0";
+    const projectName = "IAVFrontendFramework";
     const basePath = `${projectName}/${currentVersion}`;
 
     if (location.pathname.includes('index.html')) {

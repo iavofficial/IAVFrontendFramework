@@ -32,8 +32,8 @@ import {
   NAVBAR_WIDTH_UNFOLDED,
   PADDING_GAB,
 } from "@iavofficial/frontend-framework-shared/constants";
-import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared/colorSettingsContext";
-import { generateHashOfLength } from "@iavofficial/frontend-framework-shared/hash";
+import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
+import {generateHashOfLength} from "@iavofficial/frontend-framework-shared/hash";
 
 interface Props {
   tabAndContentWrappers: TabAndContentWrapper[];

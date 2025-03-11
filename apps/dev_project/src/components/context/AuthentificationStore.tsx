@@ -24,7 +24,6 @@ import {AuthContext, Credentials} from "@iavofficial/frontend-framework/auth";*/
     additionalContextValues?: { [key: string]: any };
 }*/
 
-
 /**
  * The `AuthenticationStore` component handles authentication within the framework.
  * Instead of using dummy provider, it simulates the behavior of a real user who uses the framework.

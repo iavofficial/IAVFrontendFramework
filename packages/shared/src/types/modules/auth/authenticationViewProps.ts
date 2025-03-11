@@ -36,4 +36,4 @@ export type AuthenticationViewProps = {
   };
   hideLanguageSelection?: boolean;
   hideLegalDocuments?: boolean;
-}
+};

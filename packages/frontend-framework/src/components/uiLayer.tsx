@@ -20,7 +20,7 @@ import "primeflex/primeflex.css";
 import "primereact/resources/themes/nova/theme.css";
 import "primereact/resources/primereact.css";
 import "primeicons/primeicons.css";
-import React, {useContext, useEffect} from "react";
+import React, {useEffect} from "react";
 import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import {BasicAuthenticationView} from "./authentication/default/basicAuthenticationView";
 import {SettingsMenuOptions} from "./header/settingsMenu";
@@ -184,7 +184,7 @@ const Redirector = (props: RedirectorProps) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!hasAuthenticated) {
+    if (!disableLogin && !hasAuthenticated) {
       if (currentPath !== "/documents") {
         navigate("/login");
       }

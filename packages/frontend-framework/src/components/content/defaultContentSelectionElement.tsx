@@ -22,9 +22,13 @@ import "./contentbar.css";
 import {TranslationFunction} from "../../types/translationFunction";
 import {useTranslator} from "../internationalization/translators";
 import {determineCurrentColor} from "../../utils/determineCurrentColor";
-import {DEFAULT_ELEMENTSIZE, GREY5, WHITE} from "@iavofficial/frontend-framework-shared/constants";
-import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared/colorSettingsContext";
-import { generateHashOfLength } from "@iavofficial/frontend-framework-shared/hash";
+import {
+  DEFAULT_ELEMENTSIZE,
+  GREY5,
+  WHITE,
+} from "@iavofficial/frontend-framework-shared/constants";
+import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
+import {generateHashOfLength} from "@iavofficial/frontend-framework-shared/hash";
 
 export interface Props {
   displayName: string | TranslationFunction;

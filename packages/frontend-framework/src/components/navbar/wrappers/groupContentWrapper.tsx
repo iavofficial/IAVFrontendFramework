@@ -25,7 +25,7 @@ import {
   InjectedOptionsByGroupToWrapper,
   InjectedOptionsByNavbarToWrapper,
 } from "../types/typesInjectedOptions";
-import { generateHashForValues } from "@iavofficial/frontend-framework-shared/hash";
+import {generateHashForValues} from "@iavofficial/frontend-framework-shared/hash";
 
 export class Group implements GroupableTabAndContentWrapper {
   private _insideGroup = false;

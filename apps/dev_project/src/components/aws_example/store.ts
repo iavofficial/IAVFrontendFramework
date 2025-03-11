@@ -27,7 +27,6 @@ import { AWSAuthenticator } from "@iavofficial/frontend-framework-aws-authentica
 import { useModuleContext } from "@iavofficial/frontend-framework/moduleContext";
 import { AWSAuthenticationView } from "@iavofficial/frontend-framework-aws-authenticator/awsAuthenticationView";
 import { MandatoryModuleNames } from "@iavofficial/frontend-framework/mandatoryModuleNames";
-import { configureStore } from "@reduxjs/toolkit";
 
 const cognitoPool = import.meta.env.VITE_COGNITO_POOL;
 const cognitoAppId = import.meta.env.VITE_COGNITO_APP_ID;
@@ -62,9 +61,9 @@ const customModules = {
   })
 };
 
-export const modules = createModules({ storeModules: customModules });
+export const modules = createModules({ mandatoryStoreModules: customModules });
 
-export const store = new StoreBuilder(modules.storeModules)
+export const store = new StoreBuilder(modules.mandatoryStoreModules)
   /*.setFrameworkModuleProcessor(
     "auth",
     (authModule: AWSAuthenticator, storeConfigBuilder) => {}
@@ -82,7 +81,7 @@ export const store = new StoreBuilder(modules.storeModules)
   .build();
 
 export const awsAuthenticationView = AWSAuthenticationView<
-  typeof modules.storeModules
+  typeof modules.mandatoryStoreModules
 >;
 
 // Use this to create a typed module context.

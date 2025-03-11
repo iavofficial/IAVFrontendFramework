@@ -30,15 +30,12 @@ import {
   GenericModules,
   ModuleAndProcessorMap,
   ModuleProcessorFunction,
+  FFMandatoryNonStoreModules,
 } from "../../types/modules/moduleOrchestrationTypes";
 import {StoreConfig} from "./storeConfig";
 import {StoreConfigBuilder} from "./storeConfigBuilder";
 import {MandatoryModuleNames} from "../../constants/mandatoryModuleNames";
-
-type Exact<T, U extends T> = T & {
-  // This additional constraint ensures that U has no keys beyond those in T.
-  [K in keyof U]: K extends keyof T ? U[K] : never;
-};
+import { Exact } from "../../types/util-types/exact";
 
 // can be replaced to customize the build of the Redux store.
 export class StoreBuilder<
@@ -54,7 +51,7 @@ export class StoreBuilder<
     FFMandatoryStoreModules<TState>,
     TState
   >;
-  
+
   // These are optional and modules and processors of the user.
   private userModulesAndProcessors:
     | ModuleAndProcessorMap<TUserModules, TState>
@@ -65,7 +62,7 @@ export class StoreBuilder<
   ) => EnhancedStore<TState> = defaultStoreBuilder;
 
   constructor(
-    ffMandatoryStoreModules: Exact<FFMandatoryStoreModules<TState>, TModules>,
+    ffMandatoryStoreModules: Exact<FFMandatoryStoreModules<TState> & FFMandatoryNonStoreModules, TModules>,
     userModulesAndProcessors?: ModuleAndProcessorMap<TUserModules, TState>,
   ) {
     this.storeConfigBuilder = new StoreConfigBuilder(ffMandatoryStoreModules);

@@ -21,26 +21,31 @@ import {
   ActualMandatoryStateFromModules,
   FFMandatoryStoreModules,
   FFMandatoryState,
+  GenericModules,
 } from "../../types/modules/moduleOrchestrationTypes";
+import { Exact } from "../../types/util-types/exact";
 import {defaultNonStoreModules, defaultStoreModules} from "./moduleDefaults";
 
 export function createModules<
+  TUserStoreModules extends GenericModules,
   TNonStoreModules extends Record<string, FFModule> = Record<string, FFModule>,
-  TStoreModules extends Partial<FFMandatoryStoreModules<TState>> = {},
+  TMandatoryStoreModules extends Partial<FFMandatoryStoreModules<TState>> = {},
   TState extends
-    FFMandatoryState = ActualMandatoryStateFromModules<TStoreModules>,
+    FFMandatoryState = ActualMandatoryStateFromModules<TMandatoryStoreModules>,
 >(
   params: {
+    mandatoryStoreModules?: TMandatoryStoreModules,
     nonStoreModules?: TNonStoreModules;
-    storeModules?: TStoreModules;
+    userStoreModules?: TUserStoreModules;
   } = {},
 ) {
   const {
+    mandatoryStoreModules: storeModules = {} as TMandatoryStoreModules,
     nonStoreModules = {} as TNonStoreModules,
-    storeModules = {} as TStoreModules,
+    userStoreModules = {},
   } = params;
 
-  const mergedStoreModules = {
+  const mergedMandatoryStoreModules = {
     ...defaultStoreModules,
     ...storeModules,
   };
@@ -51,7 +56,8 @@ export function createModules<
   };
 
   return {
-    storeModules: mergedStoreModules,
+    mandatoryStoreModules: mergedMandatoryStoreModules,
+    userStoreModules: userStoreModules,
     // Modules which are relevant for the store overwrite modules which are not relevant
     // for the store in case there is a duplicate key. This is necessary because store modules
     // are "more specific" than other modules. For example there could be a Module M for Routing
@@ -68,6 +74,6 @@ export function createModules<
     // A default implementation for the store can be overwritten by just custom modules for the store.
     // A default implementation without store can be overwritten by custom modules both for and without
     // the store.
-    all: {...mergedNonStoreModules, ...mergedStoreModules},
+    all: {...userStoreModules, ...mergedNonStoreModules, ...mergedMandatoryStoreModules},
   };
 }

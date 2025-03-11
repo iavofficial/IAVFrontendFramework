@@ -47,9 +47,27 @@ const Interface: React.FC = () => {
       <Text>
         To configure which modules should be used the Framework provides some
         essential interfaces. However, before you are able to use them you have
-        to understand that there are two categories of modules. The seperation
-        is based on whether a module needs to share statefull values across the
-        framework. For this purpose the Framework uses Redux.
+        to understand that there are multiple categories of modules.
+      </Text>
+      <Text>
+        At first you have to differentiate between so called mandatory modules
+        and user modules. Mandatory modules are modules for which a default
+        implementation is given, for example for authentication. The Framework
+        relies on the given basic functionality. The second category are user
+        modules. The Framework allows to add modules which aren't of use for the
+        Framework.
+      </Text>
+      <Text>
+        To understand the purpose of user modules you have to know that the
+        Framework uses Redux as it's global state management library to allow
+        for communication between the modules, the core Framework and your React
+        components. You may want to define modules which add something to the
+        store which isn't core Framework functionality. For this you can define
+        user modules and pass them to the Framework.
+      </Text>
+      <Text>
+        You, or the Framework itself, may define moduls which don't make 
+        The second differentiation is based on whether 
       </Text>
       <BulletList
         bulletType="bullet"
@@ -62,8 +80,14 @@ const Interface: React.FC = () => {
         ]}
       />
       <Text>
-        The Framework expects you to provide an array of modules which should be
-        used at two locations:
+        Furthermore, you have to differentiate between mandatory modules and
+        user modules. Mandatory modules are modules for which default modules
+        exist. They are mandatory as the framework cannot do it's job without
+        this basic functionality.
+      </Text>
+      <Text>
+        The Framework expects you to provide an array of modules at two
+        locations:
       </Text>
       <BulletList
         bulletType="bullet"
@@ -75,16 +99,16 @@ const Interface: React.FC = () => {
         ]}
       />
       <Text>
-        Altough theoretically you could build the module array on your own this
-        is not recommended. As over time more sub systems will become self
-        contained modules, minor changes can result in a breaking change in your
+        Altough you could build the module array on your own, this is not
+        recommended. Since over time more sub systems will become self contained
+        modules, minor changes can result in a breaking change in your
         application since the new default modules are not provided by your cusom
         module array.
       </Text>
       <Text>
         To fix this issue the Framework provides the factory method{" "}
         <strong>createModules</strong> to create the module array. In fact, the
-        method returns two module arrays. <i>modules.store</i> contains all
+        method returns multiple module arrays. <i>modules.store</i> contains all
         modules which contain values which should be shared using the Redux
         store. <i>modules.all</i> contains all modules, store and non store
         ones. The returned module arrays contain all the necessary default

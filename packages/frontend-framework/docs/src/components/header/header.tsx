@@ -105,7 +105,6 @@ const Header: React.FC<Props> = (props) => {
         const response = await fetch(`https://${repoAuthor}.github.io/${projectName}/version-list.md`);
         if (response.ok) {
             const versionText = await response.text();
-            console.log(versionText);
             const versionList = versionText
                 .split("\n")
                 .map(line => line.trim())

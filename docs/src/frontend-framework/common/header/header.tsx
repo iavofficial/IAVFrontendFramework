@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect, useState} from "react";
 import makeStyles from "../../../util/makeStyles.tsx";
 import Title from "../page/text/title.tsx";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useLocation, useNavigate, useParams} from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
     header: {
@@ -72,16 +72,13 @@ const Header: React.FC<Props> = (props) => {
     const {projectName, repoAuthor} = props;
     const {classes} = useStyles();
 
+    const {version} = useParams<{ version: string }>();
+
     const [versions, setVersions] = useState<string[]>([]);
     const [selectedVersion, setSelectedVersion] = useState<string>("");
 
     const navigate = useNavigate();
     const location = useLocation();
-
-    const extractVersionFromURL = (url: string): string => {
-        const parts = url.split("/");
-        return parts[parts.length - 2] || "latest"; // Holen der Version aus der URL
-    };
 
     const loadVersions = useCallback(async () => {
         const response = await fetch(`https://${repoAuthor}.github.io/${projectName}/version-list.md`);
@@ -93,11 +90,11 @@ const Header: React.FC<Props> = (props) => {
                 .filter(line => line !== "")
                 .sort((a, b) => b.localeCompare(a, undefined, {numeric: true}));
 
-            const currentVersion = extractVersionFromURL(location.pathname);
+            const currentVersion = version || "1.1.0";
             setVersions([currentVersion, ...versionList.filter(v => v !== currentVersion)]);
             setSelectedVersion(currentVersion);
         }
-    }, [projectName, repoAuthor, location.pathname]);
+    }, [repoAuthor, projectName, version]);
 
     useEffect(() => {
         loadVersions();

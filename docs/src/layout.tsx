@@ -20,7 +20,7 @@ function Layout() {
                         <>
                             <PageNavigation projectName={projectName} currentVersion={currentVersion}/>
                             <Header projectName={projectName} repoAuthor={repoAuthor}/>
-                            <VersionLayout projectName={projectName}/>
+                            <VersionLayout/>
                         </>
                     }
                 />

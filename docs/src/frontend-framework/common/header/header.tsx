@@ -80,13 +80,15 @@ const Header: React.FC<Props> = (props) => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const handleDocsVersionChange = useCallback((newVersion: string) => {
-        const newPath = location.pathname.replace(
-            /^\/([^/]+)\/[^/]+\/dist\/index\.html/,
-            `/$1/${newVersion}/overview`
-        );
-        navigate(newPath);
-    }, [location.pathname, navigate]);
+    const handleLocalVersionChange = useCallback(
+        (newVersion: string) => {
+            let newPath = location.pathname;
+            newPath = newPath.replace(/\/docs\/([^\/]+)\/[^\/]+$/, `/${newVersion}/overview`);
+            navigate(newPath);
+        },
+        [location.pathname, navigate]
+    );
+
 
     const handleVersionChange = useCallback((newVersion: string) => {
         const newPath = location.pathname.replace(
@@ -122,12 +124,12 @@ const Header: React.FC<Props> = (props) => {
             if (!isValidVersion(version)) {
                 const versionList = await getVersionList();
                 if (versionList) {
-                    handleDocsVersionChange(`${versionList[0]}`);
+                    handleLocalVersionChange(`${versionList[0]}`);
                 }
             }
         };
         fetchVersion();
-    }, [version, handleVersionChange, getVersionList, handleDocsVersionChange, isValidVersion]);
+    }, [version, handleVersionChange, getVersionList, handleLocalVersionChange, isValidVersion]);
 
     useEffect(() => {
         loadVersions();

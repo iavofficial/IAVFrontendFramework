@@ -112,7 +112,7 @@ const Header: React.FC<Props> = (props) => {
                 setSelectedVersion(versionList[0]);
             }
         }
-    }, [repoAuthor, projectName, version]);
+    }, [getVersionList, version]);
 
     useEffect(() => {
         const fetchVersion = async () => {

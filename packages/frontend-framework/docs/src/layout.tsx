@@ -19,8 +19,9 @@ import Header from "./components/header/header.tsx";
 function Layout() {
     const location = useLocation();
 
-    const currentVersion = "1.5.0"
-    const projectName = "iav-test-2"
+    const repoAuthor = "mikewegele";
+    const currentVersion = "1.5.0";
+    const projectName = "iav-test-2";
     const basePath = `${projectName}/${currentVersion}`;
 
     const hideNavigation = location.pathname.startsWith(`${projectName}${currentVersion}/imprint`);
@@ -39,7 +40,7 @@ function Layout() {
             {!hideNavigation && (
                 <>
                     <PageNavigation basePath={basePath}/>
-                    <Header projectName={projectName}/>
+                    <Header projectName={projectName} repoAuthor={repoAuthor}/>
                 </>
             )}
             <Routes>

@@ -82,11 +82,12 @@ const useStyles = makeStyles(() => ({
 
 interface Props {
     projectName: string;
+    repoAuthor: string;
 }
 
 const Header: React.FC<Props> = (props) => {
 
-    const {projectName} = props;
+    const {projectName, repoAuthor} = props;
 
     const {classes} = useStyles();
 
@@ -101,7 +102,7 @@ const Header: React.FC<Props> = (props) => {
     };
 
     const loadVersions = useCallback(async () => {
-        const response = await fetch(`https://iavofficial.github.io/${projectName}/version-list.md`);
+        const response = await fetch(`https://${repoAuthor}.github.io/${projectName}/version-list.md`);
         if (response.ok) {
             const versionText = await response.text();
             console.log(versionText);

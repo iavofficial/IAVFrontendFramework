@@ -84,11 +84,11 @@ const Header: React.FC<Props> = (props) => {
         (newVersion: string) => {
             let newPath = location.pathname;
             newPath = newPath.replace(/\/docs\/([^\/]+)\/[^\/]+$/, `/${newVersion}/overview`);
+            newPath = newPath.replace(/\/index\.html$/, `/${newVersion}/overview`);
             navigate(newPath);
         },
         [location.pathname, navigate]
     );
-
 
     const handleVersionChange = useCallback((newVersion: string) => {
         const newPath = location.pathname.replace(

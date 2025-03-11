@@ -5,9 +5,8 @@ import VersionLayout from "./frontend-framework/components/versionLayout.tsx";
 
 function Layout() {
 
-    const repoAuthor = "iavofficial";
     const currentVersion = "1.3.0";
-    const projectName = "IAVFrontendFramework";
+    const projectName = "iav-test-2";
     const basePath = `${projectName}/${currentVersion}`;
 
     return (
@@ -19,7 +18,7 @@ function Layout() {
                     element={
                         <>
                             <PageNavigation projectName={projectName} currentVersion={currentVersion}/>
-                            <Header projectName={projectName} repoAuthor={repoAuthor}/>
+                            <Header projectName={projectName}/>
                             <VersionLayout/>
                         </>
                     }

@@ -66,11 +66,10 @@ const useStyles = makeStyles(() => ({
 
 interface Props {
     projectName: string;
-    repoAuthor: string;
 }
 
 const Header: React.FC<Props> = (props) => {
-    const {projectName, repoAuthor} = props;
+    const {projectName} = props;
     const {classes} = useStyles();
 
     const {version} = useParams<{ version: string }>();

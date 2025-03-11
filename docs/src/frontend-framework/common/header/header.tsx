@@ -100,22 +100,26 @@ const Header: React.FC<Props> = (props) => {
         return Object.keys(versionMappings);
     }, []);
 
+    const isValidVersion = useCallback((version: string | undefined) => {
+        return version && /^\d+\.\d+\.\d+$/.test(version);
+    }, []);
+
     const loadVersions = useCallback(async () => {
         const versionList = await getVersionList();
         if (versionList) {
-            if (version !== "docs") {
-                setVersions([version || "", ...versionList.filter(v => v !== version && v !== "docs")]);
+            if (isValidVersion(version)) {
+                setVersions([version || "", ...versionList.filter(v => v !== version && !isValidVersion(v))]);
                 setSelectedVersion(version || "");
             } else {
                 setVersions(versionList);
                 setSelectedVersion(versionList[0]);
             }
         }
-    }, [getVersionList, version]);
+    }, [getVersionList, isValidVersion, version]);
 
     useEffect(() => {
         const fetchVersion = async () => {
-            if (version === "docs") {
+            if (!isValidVersion(version)) {
                 const versionList = await getVersionList();
                 if (versionList) {
                     handleDocsVersionChange(`${versionList[0]}`);
@@ -123,7 +127,7 @@ const Header: React.FC<Props> = (props) => {
             }
         };
         fetchVersion();
-    }, [version, handleVersionChange, getVersionList, handleDocsVersionChange]);
+    }, [version, handleVersionChange, getVersionList, handleDocsVersionChange, isValidVersion]);
 
     useEffect(() => {
         loadVersions();

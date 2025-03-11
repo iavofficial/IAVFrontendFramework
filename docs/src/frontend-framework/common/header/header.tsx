@@ -108,7 +108,7 @@ const Header: React.FC<Props> = (props) => {
         const versionList = await getVersionList();
         if (versionList) {
             if (isValidVersion(version)) {
-                setVersions([version || "", ...versionList.filter(v => v !== version && !isValidVersion(v))]);
+                setVersions([version || "", ...versionList.filter(v => v !== version && isValidVersion(v))]);
                 setSelectedVersion(version || "");
             } else {
                 setVersions(versionList);

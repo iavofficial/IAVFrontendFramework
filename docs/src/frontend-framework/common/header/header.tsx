@@ -80,6 +80,20 @@ const Header: React.FC<Props> = (props) => {
     const navigate = useNavigate();
     const location = useLocation();
 
+    const handleVersionChange = useCallback((newVersion: string) => {
+        const newPath = location.pathname.replace(
+            /^\/([^/]+)\/[^/]+/,
+            `/$1/${newVersion}`
+        );
+        navigate(newPath);
+    }, [location.pathname, navigate]);
+
+    useEffect(() => {
+        if (version === "docs") {
+            handleVersionChange(versions[0])
+        }
+    }, [handleVersionChange, version, versions]);
+
     const loadVersions = useCallback(async () => {
         const response = await fetch(`https://${repoAuthor}.github.io/${projectName}/version-list.md`);
         if (response.ok) {
@@ -104,15 +118,6 @@ const Header: React.FC<Props> = (props) => {
         loadVersions();
     }, [loadVersions]);
 
-    const handleVersionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        const newVersion = event.target.value;
-        const newPath = location.pathname.replace(
-            /^\/([^/]+)\/[^/]+/,
-            `/$1/${newVersion}`
-        );
-        navigate(newPath);
-    };
-
     return (
         <header className={classes.header}>
             <a href={`https://github.com/iavofficial/${projectName}`} target="_blank" rel="noopener noreferrer">
@@ -122,7 +127,8 @@ const Header: React.FC<Props> = (props) => {
             <Title className={classes.headerTitle}>IAV Frontend Framework</Title>
             <div className={classes.versionDropdown}>
                 <label>
-                    <select className={classes.headerVersion} value={selectedVersion} onChange={handleVersionChange}>
+                    <select className={classes.headerVersion} value={selectedVersion}
+                            onChange={event => handleVersionChange(event.target.value)}>
                         {versions.map(version => (
                             <option key={version} value={version}>{version}</option>
                         ))}

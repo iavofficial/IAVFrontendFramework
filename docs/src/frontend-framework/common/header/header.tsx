@@ -90,9 +90,13 @@ const Header: React.FC<Props> = (props) => {
                 .filter(line => line !== "")
                 .sort((a, b) => b.localeCompare(a, undefined, {numeric: true}));
 
-            const currentVersion = version || "1.1.0";
-            setVersions([currentVersion, ...versionList.filter(v => v !== currentVersion)]);
-            setSelectedVersion(currentVersion);
+            if (version !== "docs") {
+                setVersions([version || "", ...versionList.filter(v => v !== version && v !== "docs")]);
+                setSelectedVersion(version || "");
+            } else {
+                setVersions(versionList);
+                setSelectedVersion(versionList[0]);
+            }
         }
     }, [repoAuthor, projectName, version]);
 

@@ -80,7 +80,14 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-const Header: React.FC = () => {
+interface Props {
+    projectName: string;
+}
+
+const Header: React.FC<Props> = (props) => {
+
+    const {projectName} = props;
+
     const {classes} = useStyles();
 
     const [versions, setVersions] = useState<string[]>([]);
@@ -94,7 +101,7 @@ const Header: React.FC = () => {
     };
 
     const loadVersions = useCallback(async () => {
-        const response = await fetch("https://iavofficial.github.io/IAVFrontendFramework/version-list.md");
+        const response = await fetch(`https://iavofficial.github.io/${projectName}/version-list.md`);
         if (response.ok) {
             const versionText = await response.text();
             console.log(versionText);
@@ -117,14 +124,17 @@ const Header: React.FC = () => {
     const handleVersionChange = (event: React.ChangeEvent<DropdownChangeEvent>) => {
         const newVersion = event.target.value;
         setSelectedVersion(newVersion);
-        const newPath = window.location.pathname.replace(/^\/IAVFrontendFramework\/[^/]+/, `/IAVFrontendFramework/${newVersion}`);
+        const newPath = window.location.pathname.replace(
+            new RegExp(`^/${projectName}/[^/]+`),
+            `/${projectName}/${newVersion}`
+        );
         navigate(newPath);
         window.location.reload();
     };
 
     return (
         <header className={classes.header}>
-            <a href="https://github.com/iavofficial/IAVFrontendFramework" target="_blank" rel="noopener noreferrer">
+            <a href={`https://github.com/iavofficial/${projectName}`} target="_blank" rel="noopener noreferrer">
                 <img alt="GitHub" height="32"
                      src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="32"/>
             </a>

@@ -20,10 +20,10 @@ function Layout() {
     const location = useLocation();
 
     const currentVersion = "1.5.0"
+    const projectName = "iav-test-2"
+    const basePath = `${projectName}/${currentVersion}`;
 
-    const basePath = `IAVFrontendFramework/${currentVersion}`;
-
-    const hideNavigation = location.pathname.startsWith(`IAVFrontendFramework${currentVersion}/imprint`);
+    const hideNavigation = location.pathname.startsWith(`${projectName}${currentVersion}/imprint`);
 
     if (location.pathname.includes('index.html')) {
         return <Navigate to={`${basePath}/overview`} replace/>;
@@ -39,7 +39,7 @@ function Layout() {
             {!hideNavigation && (
                 <>
                     <PageNavigation basePath={basePath}/>
-                    <Header/>
+                    <Header projectName={projectName}/>
                 </>
             )}
             <Routes>

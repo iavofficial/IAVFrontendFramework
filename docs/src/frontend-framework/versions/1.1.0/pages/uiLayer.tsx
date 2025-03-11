@@ -29,6 +29,7 @@ const UILayer: React.FC = () => {
     authOptions?: AuthOptions;  // Optional property to customize the authentication view. The object will be explained later in this chapter.
     documentsLabelKey?: string; // Optional parameter to replace the text for the legal documents which is shown when hovering over the info icon inside the authentication view and at the bottom of the navigation bar. You have to pass a string which is the key of corresponding translations in your translation files.
     hideLegalDocuments?: boolean; // Option to hide the link for the legal documents. This could be of use if you develop a desktop application like electron.
+    hideNavbar?: boolean; // Option to hide the Navbar. This could be of use if you develop an application with only one page needed.
     navbarOptions?: NavbarOptions; // Option to configure the navigation bar. This is explained later.
     disableCookieBanner?: boolean; // Option to disable / hide the provided cookie banner / disclaimer.
     disableLogin?: boolean; // Option to disable the login and logout.

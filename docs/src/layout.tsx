@@ -1,25 +1,14 @@
-import {Navigate, Route, Routes, useLocation} from "react-router-dom";
+import {Navigate, Route, Routes} from "react-router-dom";
 import PageNavigation from "./frontend-framework/common/drawer/pageNavigation.tsx";
 import Header from "./frontend-framework/common/header/header.tsx";
 import VersionLayout from "./frontend-framework/components/versionLayout.tsx";
 
 function Layout() {
 
-    const location = useLocation();
-
     const repoAuthor = "iavofficial";
     const currentVersion = "1.3.0";
     const projectName = "IAVFrontendFramework";
     const basePath = `${projectName}/${currentVersion}`;
-
-    if (location.pathname.includes('index.html')) {
-        return <Navigate to={`${basePath}/overview`} replace/>;
-    }
-
-    if (location.pathname.includes('.html')) {
-        const pathWithoutHtml = location.pathname.replace('.html', '');
-        return <Navigate to={pathWithoutHtml} replace/>;
-    }
 
     return (
         <>

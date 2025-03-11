@@ -1,4 +1,4 @@
-import {Navigate, Route, Routes} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import React from "react";
 import Overview from "./pages/overview.tsx";
 import Information from "./pages/information.tsx";
@@ -13,7 +13,7 @@ import Playground from "./pages/playground.tsx";
 import FAQ from "./pages/faq.tsx";
 import Imprint from "../../common/page/utils/imprint.tsx";
 
-const Version1_5_0 = () => {
+const Version1_3_0 = () => {
     return (
         <Routes>
             <Route path={`/overview`} element={<Overview/>}/>
@@ -28,9 +28,8 @@ const Version1_5_0 = () => {
             <Route path={`/playground`} element={<Playground/>}/>
             <Route path={`/faq`} element={<FAQ/>}/>
             <Route path={`/imprint`} element={<Imprint/>}/>
-            <Route path="/" element={<Navigate to={`/overview`} replace/>}/>
         </Routes>
     )
 }
 
-export default Version1_5_0;
+export default Version1_3_0;

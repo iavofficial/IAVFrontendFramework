@@ -38,15 +38,6 @@ const App: React.FC = () => {
 export default App;
 `}
             </Code>
-            <SubTitle>Using AWS Amplify</SubTitle>
-            <Text>
-                The IAV Frontend Framework is compatible with AWS Amplify, but you need to
-                install it separately. You have to install at least the version
-                "aws-amplify@^6.5.2".
-            </Text>
-            <Code language={"bash"}>
-                npm install aws-amplify
-            </Code>
         </Page>
     )
 };

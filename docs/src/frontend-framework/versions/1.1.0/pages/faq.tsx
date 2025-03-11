@@ -34,11 +34,6 @@ const FAQ: React.FC = () => {
                 to={"https://stackoverflow.com/questions/74720726/type-definition-for-vite-plugin-svgr"}
                 label={"here"}/>.
             </Text>
-            <SubTitle>Can the IAV Frontend Framework be used with Angular?</SubTitle>
-            <Text>
-                No, the IAV Frontend Framework only supports React Components and is
-                therefore only suitable for React-based projects.
-            </Text>
         </Page>
     )
 };

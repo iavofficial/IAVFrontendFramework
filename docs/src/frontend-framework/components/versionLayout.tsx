@@ -1,6 +1,6 @@
 import {Navigate, useParams} from "react-router-dom";
-import Version1_4_0 from "../versions/1.1.0";
-import Version1_5_0 from "../versions/1.3.0";
+import Version1_1_0 from "../versions/1.1.0";
+import Version1_3_0 from "../versions/1.3.0";
 import React from "react";
 
 interface Props {
@@ -14,11 +14,11 @@ const VersionLayout: React.FC<Props> = (props) => {
     const {version} = useParams<{ version: string }>();
 
     const versions: Record<string, JSX.Element> = {
-        "1.4.0": <Version1_4_0/>,
-        "1.5.0": <Version1_5_0/>,
+        "1.1.0": <Version1_1_0/>,
+        "1.3.0": <Version1_3_0/>,
     };
 
-    return versions[version] || <Navigate to={`/${projectName}/1.5.0`} replace/>;
+    return versions[version] || <Navigate to={`/${projectName}/${version}/overview`} replace/>;
 };
 
 export default VersionLayout;

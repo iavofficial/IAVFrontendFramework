@@ -12,6 +12,10 @@ const Overview: React.FC = () => {
 
     const tableData = [
         {
+            key: "Programming Language",
+            value: "JavaScript"
+        },
+        {
             key: "Key dependencies",
             value: "React 18, ReactDOM 18, Typescript 5, AWS Amplify 6",
         },

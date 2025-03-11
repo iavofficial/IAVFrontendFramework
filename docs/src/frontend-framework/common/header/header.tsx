@@ -80,6 +80,14 @@ const Header: React.FC<Props> = (props) => {
     const navigate = useNavigate();
     const location = useLocation();
 
+    const handleDocsVersionChange = useCallback((newVersion: string) => {
+        const newPath = location.pathname.replace(
+            /^\/([^/]+)\/[^/]+\/dist\/index\.html/,
+            `/$1/${newVersion}/overview`
+        );
+        navigate(newPath);
+    }, [location.pathname, navigate]);
+
     const handleVersionChange = useCallback((newVersion: string) => {
         const newPath = location.pathname.replace(
             /^\/([^/]+)\/[^/]+/,
@@ -119,7 +127,7 @@ const Header: React.FC<Props> = (props) => {
             if (version === "docs") {
                 const versionList = await getVersionList();
                 if (versionList) {
-                    handleVersionChange(versionList[0]);
+                    handleDocsVersionChange(`${versionList[0]}`);
                 }
             }
         };

@@ -2,6 +2,7 @@ import React, {useCallback, useEffect, useState} from "react";
 import makeStyles from "../../../util/makeStyles.tsx";
 import Title from "../page/text/title.tsx";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {versionMappings} from "../../versionMappings.ts";
 
 const useStyles = makeStyles(() => ({
     header: {
@@ -97,7 +98,7 @@ const Header: React.FC<Props> = (props) => {
     }, [location.pathname, navigate]);
 
     const getVersionList = useCallback(async (): Promise<string[] | null> => {
-        return ["1.1.0", "1.3.0", "2.0.0"];
+        return Object.keys(versionMappings);
     }, []);
 
     const loadVersions = useCallback(async () => {

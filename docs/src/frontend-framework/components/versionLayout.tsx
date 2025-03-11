@@ -1,24 +1,17 @@
+import React from "react";
 import {useParams} from "react-router-dom";
-import React, {useEffect, useState} from "react";
+import {versionMappings} from "../versionMappings.ts";
 
 const VersionLayout: React.FC = () => {
     const {version} = useParams<{ version: string }>();
-    const [Component, setComponent] = useState<React.ComponentType | null>(null);
 
-    useEffect(() => {
-        const loadVersionComponent = async () => {
-            try {
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                //@ts-expect-error
-                const module = await import(`../versions/${version}`);
+    const [Component, setComponent] = React.useState<React.ComponentType | null>(null);
+
+    React.useEffect(() => {
+        if (version && versionMappings[version]) {
+            versionMappings[version]().then((module) => {
                 setComponent(() => module.default);
-            } catch (error) {
-                console.error(`Error loading version ${version}:`, error);
-            }
-        };
-
-        if (version) {
-            loadVersionComponent();
+            });
         }
     }, [version]);
 

@@ -2,11 +2,12 @@ import {Navigate, Route, Routes} from "react-router-dom";
 import PageNavigation from "./frontend-framework/common/drawer/pageNavigation.tsx";
 import Header from "./frontend-framework/common/header/header.tsx";
 import VersionLayout from "./frontend-framework/components/versionLayout.tsx";
+import {versionMappings} from "./frontend-framework/versionMappings.ts";
 
 function Layout() {
 
-    const currentVersion = "1.3.0";
-    const projectName = "iav-test-2";
+    const currentVersion = Object.keys(versionMappings).reverse()[0];
+    const projectName = "IAVFrontendFramework";
     const basePath = `${projectName}/${currentVersion}`;
 
     return (

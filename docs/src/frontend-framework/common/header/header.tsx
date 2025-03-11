@@ -2,6 +2,7 @@ import React, {useCallback, useEffect, useState} from "react";
 import makeStyles from "../../../util/makeStyles.tsx";
 import Title from "../page/text/title.tsx";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
+import { VERSIONS } from "../../components/versionLayout.tsx";
 
 const useStyles = makeStyles(() => ({
     header: {
@@ -96,7 +97,7 @@ const Header: React.FC<Props> = (props) => {
         navigate(newPath);
     }, [location.pathname, navigate]);
 
-    const getVersionList = useCallback(async (): Promise<string[] | null> => {
+    const getVersionList = () => VERSIONS /*useCallback(async (): Promise<string[] | null> => {
         const response = await fetch(`https://${repoAuthor}.github.io/${projectName}/version-list.md`);
         if (response.ok) {
             const versionText = await response.text();
@@ -107,7 +108,7 @@ const Header: React.FC<Props> = (props) => {
                 .sort((a, b) => b.localeCompare(a, undefined, {numeric: true}));
         }
         return null;
-    }, [projectName, repoAuthor]);
+    }, [projectName, repoAuthor]);*/
 
     const loadVersions = useCallback(async () => {
         const versionList = await getVersionList();

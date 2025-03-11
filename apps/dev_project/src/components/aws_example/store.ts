@@ -27,6 +27,7 @@ import { AWSAuthenticator } from "@iavofficial/frontend-framework-aws-authentica
 import { useModuleContext } from "@iavofficial/frontend-framework/moduleContext";
 import { AWSAuthenticationView } from "@iavofficial/frontend-framework-aws-authenticator/awsAuthenticationView";
 import { MandatoryModuleNames } from "@iavofficial/frontend-framework/mandatoryModuleNames";
+import { configureStore } from "@reduxjs/toolkit";
 
 const cognitoPool = import.meta.env.VITE_COGNITO_POOL;
 const cognitoAppId = import.meta.env.VITE_COGNITO_APP_ID;
@@ -58,16 +59,26 @@ const customModules = {
     configureAmplify: configureAmplify,
     failOnNoLegalGroup: true,
     legalGroups: ["ADMIN", "SHOWCASE"],
-  }),
+  })
 };
 
 export const modules = createModules({ storeModules: customModules });
 
 export const store = new StoreBuilder(modules.storeModules)
-  /*    .setFrameworkModuleProcessor(
+  /*.setFrameworkModuleProcessor(
     "auth",
     (authModule: AWSAuthenticator, storeConfigBuilder) => {}
   )*/
+  /*.setStoreBuilder((storeConfig) => {
+    const store = configureStore({
+      reducer: storeConfig.reducers,
+      middleware: (getDefaultMiddleware: Function) =>
+        getDefaultMiddleware().concat(storeConfig.middleware),
+      enhancers: (getDefaultEnhancers: Function) =>
+        getDefaultEnhancers().concat(storeConfig.enhancers),
+    });
+    return store;
+  })*/
   .build();
 
 export const awsAuthenticationView = AWSAuthenticationView<

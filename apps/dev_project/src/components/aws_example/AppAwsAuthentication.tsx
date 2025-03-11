@@ -22,7 +22,7 @@ import translationEN from "../../assets/translations/en.json";
 import translationDE from "../../assets/translations/de.json";
 import translationDECH from "../../assets/translations/de-CH.json";
 import Layout from "../../Layout.tsx";
-import { modules, store } from "./store.ts";
+import { awsAuthenticationView, modules, store } from "./store.ts";
 
 export const AppAwsAuthentication = () => {
   const translations = {
@@ -43,13 +43,13 @@ export const AppAwsAuthentication = () => {
   return (
     <GlobalDataLayer
       store={store}
-      modules={modules}
+      modules={modules.all}
       translations={translations}
       colorSettings={{
         colorOptions: {},
       }}
     >
-      <Layout />
+      <Layout authenticationView={awsAuthenticationView} />
     </GlobalDataLayer>
   );
 };

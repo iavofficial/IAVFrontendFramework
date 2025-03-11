@@ -18,7 +18,7 @@
 
 import {Slice} from "@reduxjs/toolkit";
 import {AsyncThunk} from "@reduxjs/toolkit";
-import { FFStoreModule } from "../generalModule";
+import {FFStoreModule} from "../generalModule";
 
 export type UserData = {
   username: string;

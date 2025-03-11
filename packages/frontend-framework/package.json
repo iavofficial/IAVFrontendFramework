@@ -124,7 +124,6 @@
     "./headerPanelElement": "./dist/components/header/headerPanelElement.js",
     "./headerMenuElement": "./dist/components/header/headerMenuElement.js",
     "./store": "./dist/re-exports/store.js",
-    "./defaultModules": "./dist/re-exports/defaultModules.js",
     "./constants": "./dist/re-exports/constants.js",
     "./mandatoryModuleNames": "./dist/re-exports/mandatoryModuleNames.js",
     "./hash": "./dist/re-exports/hash.js",
@@ -265,9 +264,6 @@
       ],
       "./store": [
         "./dist/re-exports/store.d.ts"
-      ],
-      "./defaultModules": [
-        "./dist/re-exports/defaultModules.d.ts"
       ],
       "./constants": [
         "./dist/re-exports/constants.d.ts"

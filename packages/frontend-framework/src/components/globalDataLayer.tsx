@@ -27,10 +27,14 @@ import {ColorProvider, ColorProviderProps} from "../coloring/colorProvider";
 import {BrowserRouter} from "react-router-dom";
 import {EnhancedStore} from "@reduxjs/toolkit";
 import {Provider} from "react-redux";
-import {FFMandatoryModules, FFMandatoryState} from "../module_orchestration/store";
 import {ModuleContextProvider} from "../contexts/providers/moduleContextProvider";
 import {DEFAULT_FALLBACK_LANGUAGE} from "@iavofficial/frontend-framework-shared/constants";
-import {AuthState} from "@iavofficial/frontend-framework-shared/authenticationProvider";
+import {
+  FFMandatoryStoreModules,
+  FFMandatoryState,
+  FFAllMandatoryModules,
+} from "@iavofficial/frontend-framework-shared/moduleOrchestrationTypes";
+import {FFModule} from "@iavofficial/frontend-framework-shared/generalModule";
 
 // Create this type to make fallbackLang optional for the user.
 type GlobalDataLayerLanguageOptions = Omit<LanguageOptions, "fallbackLang"> & {
@@ -38,8 +42,8 @@ type GlobalDataLayerLanguageOptions = Omit<LanguageOptions, "fallbackLang"> & {
 };
 
 interface Props<TState extends FFMandatoryState> {
-  modules: FFMandatoryModules<TState>;
-  store: EnhancedStore<FFMandatoryState>;
+  modules: FFAllMandatoryModules<TState> & Record<string, FFModule>;
+  store: EnhancedStore<TState>;
   languageOptions?: GlobalDataLayerLanguageOptions;
   translations?: Translations;
   initI18Next?: () => void;
@@ -54,8 +58,8 @@ export const GlobalDataLayer = <TState extends FFMandatoryState>(
   const initialLang =
     props.languageOptions?.initialLang ?? DEFAULT_FALLBACK_LANGUAGE;
   const languageOptions = {
-    fallbackLang: fallbackLang,
-    initialLang: initialLang,
+    fallbackLang,
+    initialLang,
   };
 
   return (
@@ -79,9 +83,9 @@ export const GlobalDataLayer = <TState extends FFMandatoryState>(
   );
 };
 
-const ModuleLifecycleCaller = <TState extends FFMandatoryState>(
+const ModuleLifecycleCaller = (
   props: PropsWithChildren<{
-    modules: FFMandatoryModules<TState> & Record<string, any>;
+    modules: Record<string, FFModule>;
   }>,
 ) => {
   // React hooks have to be called in the same order at every render.

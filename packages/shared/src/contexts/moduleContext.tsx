@@ -17,25 +17,22 @@
  */
 
 import React, {useContext} from "react";
-import {
-  AuthModule,
-  AuthState,
-} from "../types/modules/auth/authenticationProvider";
+import {FFMandatoryStoreModules} from "../types/modules/moduleOrchestrationTypes";
+import {AllDefaultModules} from "../modules/module_orchestration/moduleDefaults";
 
 export type ModuleContextValues<TModules> = {
   modules: TModules;
 };
 
-export type DefaultModuleContextValues = ModuleContextValues<{
-  auth: AuthModule<AuthState>;
-}>;
+export type DefaultModuleContextValues =
+  ModuleContextValues<FFMandatoryStoreModules>;
 
 export const ModuleContext = React.createContext<DefaultModuleContextValues>(
   {} as DefaultModuleContextValues,
 );
 
 export const useModuleContext = <
-  TModules,
+  TModules = AllDefaultModules,
 >(): ModuleContextValues<TModules> => {
   return useContext(ModuleContext) as ModuleContextValues<TModules>;
 };

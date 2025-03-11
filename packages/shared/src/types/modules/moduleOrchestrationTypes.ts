@@ -19,12 +19,12 @@
 import {Reducer} from "@reduxjs/toolkit";
 import {FFStoreModule} from "../../types/modules/generalModule";
 import {MandatoryModuleNames} from "../../constants/mandatoryModuleNames";
-import { AuthModule, AuthState } from "./auth/authenticatorModule";
-import { StoreConfigBuilder } from "../../modules/module_orchestration/storeConfigBuilder";
+import {AuthModule, AuthState} from "./auth/authenticatorModule";
+import {StoreConfigBuilder} from "../../modules/module_orchestration/storeConfigBuilder";
 /*
 To add a new mandatory module:
 1. Add the state (of it's slice) to FFMandatoryState.
-2. Add the type of the module in minimal configuration to FFMandatoryModules. Minimal
+2. Add the type of the module in minimal configuration to FFMandatoryStoreModules. Minimal
    configuration means that the module includes just only all values and methods which
    are used by the framework itself. This is necessary to ensure that only modules can
    be used which are of this type and because of this provide all necessary values and
@@ -47,8 +47,8 @@ export type FFMandatoryState = {
 // It is concluded that every mandatory state will have a root reducer object.
 // Without the possiblity of changing values (so the existence of reducers)
 // state is not sensible.
-export type FFMandatoryReducers = {
-  [K in keyof FFMandatoryState]: Reducer<FFMandatoryState[K]>;
+export type FFMandatoryReducers<TState extends FFMandatoryState> = {
+  [K in keyof TState]: Reducer<TState[K]>;
 };
 
 // All mandatory modules with minimal setup which is needed by the framework.
@@ -56,11 +56,19 @@ export type FFMandatoryReducers = {
 // essential values and methods to the framework, for example login.
 // So the minimal configuration is exactly the set of values and methods
 // used by the framework itself.
-export type FFMandatoryModules<
+export type FFMandatoryStoreModules<
   TState extends FFMandatoryState = FFMandatoryState,
 > = {
-  [MandatoryModuleNames.Authentication]: AuthModule<TState[typeof MandatoryModuleNames.Authentication]>;
+  [MandatoryModuleNames.Authentication]: AuthModule<
+    TState[typeof MandatoryModuleNames.Authentication]
+  >;
 };
+
+export type FFMandatoryNonStoreModules = {};
+
+export type FFAllMandatoryModules<
+  TState extends FFMandatoryState = FFMandatoryState,
+> = FFMandatoryStoreModules<TState> & FFMandatoryNonStoreModules;
 
 // The user can provide additional modules which aren't used by the
 // framework itself.
@@ -70,26 +78,32 @@ export type GenericModules = Record<string, FFStoreModule>;
 // replaces in order to allow the developer to implement custom processing,
 // since it is not possible to think of every possible processing step which
 // could occur at development of the framework.
-export type ModuleProcessorFunction<M extends FFStoreModule> = (
-  module: M,
-  config: StoreConfigBuilder,
-) => void;
+export type ModuleProcessorFunction<
+  M extends FFStoreModule,
+  TState extends FFMandatoryState,
+> = (module: M, config: StoreConfigBuilder<TState>) => void;
 
 // Objects of this type aggragate a module and it's corresponding processor
 // method. The following example shows it's structure:
 // {auth: {module: ..., processor: ...}, ...}
 // The effect of never in this case is that there cannot be a key with a value
 // which does not extend FFStoreModule.
-export type ModuleAndProcessorMap<ModuleType extends object> = {
+export type ModuleAndProcessorMap<
+  ModuleType extends object,
+  TState extends FFMandatoryState,
+> = {
   [K in keyof ModuleType]: ModuleType[K] extends FFStoreModule
-    ? ModuleEntry<ModuleType[K]>
+    ? ModuleEntry<ModuleType[K], TState>
     : never;
 };
 
 // This type defines the structure of one entry inside the ModuleAndProcessorMap.
-export interface ModuleEntry<M extends FFStoreModule> {
+export interface ModuleEntry<
+  M extends FFStoreModule,
+  TState extends FFMandatoryState,
+> {
   module: M;
-  processor: ModuleProcessorFunction<M>;
+  processor?: ModuleProcessorFunction<M, TState>;
 }
 
 // Using this type the State Type of a Module can be iferred.
@@ -99,11 +113,11 @@ export type ExtractModuleState<T> =
 // This type creates an object of the specific state of all modules, for example:
 // {auth: AWSAuthenticatorState, routing: ReactRouterRouterState}
 export type ActualMandatoryStateFromModules<
-  TModules extends Partial<FFMandatoryModules>,
+  TModules extends Partial<FFMandatoryStoreModules>,
 > = {
-  [K in keyof FFMandatoryModules]: K extends keyof TModules
+  [K in keyof FFMandatoryStoreModules]: K extends keyof TModules
     ? ExtractModuleState<TModules[K]>
-    : ExtractModuleState<FFMandatoryModules[K]>;
+    : ExtractModuleState<FFMandatoryStoreModules[K]>;
 };
 
 // This type merges two module types. If there are duplicate keys regarding

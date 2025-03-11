@@ -44,25 +44,23 @@ import {
   PADDING_GAB,
   WHITE,
 } from "@iavofficial/frontend-framework-shared/constants";
-import { AWSAuthenticatorExtras } from "../awsAuthenticatorTypes";
-import { AuthModule } from "@iavofficial/frontend-framework-shared/authenticatorModule";
+import {AWSAuthenticatorExtras} from "../awsAuthenticatorTypes";
+import {AuthModule} from "@iavofficial/frontend-framework-shared/authenticatorModule";
+import {useModuleContext} from "@iavofficial/frontend-framework-shared/moduleContext";
 
-type NecessaryModuleAttributes ={
+type NecessaryModuleAttributes = {
   extras: AWSAuthenticatorExtras;
 } & Omit<AuthModule<AWSAuthenticatorState>, "useModuleLifecycle">;
 
-interface AWSAuthenticationViewProps extends AuthenticationViewProps {
-  module: NecessaryModuleAttributes
-}
-
-export const awsAuthenticationViewFactory = (module: NecessaryModuleAttributes) => {
-  return (props: AuthenticationViewProps) => (
-    <AWSAuthenticationView module={module} {...props} />
-  );
-};
-
-export const AWSAuthenticationView = (props: AWSAuthenticationViewProps) => {
-  const {module} = props;
+export const AWSAuthenticationView = <
+  TModules extends {
+    [MandatoryModuleNames.Authentication]: NecessaryModuleAttributes;
+  },
+>(
+  props: AuthenticationViewProps,
+) => {
+  const {modules} = useModuleContext<TModules>();
+  const authenticationModule = modules[MandatoryModuleNames.Authentication];
 
   const dispatch = useDispatch<AWSAuthenticatorAuthDispatch>();
   const useAuthSelector: TypedUseSelectorHook<AWSAuthenticatorStoreState> =
@@ -116,9 +114,9 @@ export const AWSAuthenticationView = (props: AWSAuthenticationViewProps) => {
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (isNewPasswordRequired) {
-      dispatch(module.extras.completePassword({newPassword: password}));
+      dispatch(authenticationModule.extras.completePassword({newPassword: password}));
     } else {
-      dispatch(module.login({credentials: {email: email, password: password}}));
+      dispatch(authenticationModule.login({credentials: {email: email, password: password}}));
     }
   };
 

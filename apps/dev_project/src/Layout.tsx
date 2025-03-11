@@ -37,9 +37,12 @@ import { PrimeIcons } from "primereact/api";
 import { WHITE } from "@iavofficial/frontend-framework/constants";
 import { HeaderMenuElement } from "@iavofficial/frontend-framework/headerMenuElement";
 import { ExampleComponent7 } from "./components/exampleComponent7";
-import { AwsAuthenticationView } from "./components/aws_example/store";
 
-function Layout() {
+interface Props {
+  authenticationView?: React.ComponentType;
+}
+
+const Layout = (props: Props) => {
   const [selectedButtonOption, setSelectedButtonOption] = useState("Simulated");
 
   const settingsMenuOptions = {
@@ -66,7 +69,7 @@ function Layout() {
         name: "Example without Translation",
         icon: <InfoIcon />,
       }),
-      ExampleComponent1,
+      ExampleComponent1
     ),
     new BasicContentWrapper(
       "/2",
@@ -75,7 +78,7 @@ function Layout() {
         name: "Example for Redux Store",
         icon: <InfoIcon />,
       }),
-      ExampleComponent7,
+      ExampleComponent7
     ),
     new Group(
       (t: TranslateFunctionType) => t("Test_group_not_collapsible"),
@@ -90,9 +93,9 @@ function Layout() {
             disabled: false,
             icon: <InfoIcon />,
           }),
-          ExampleComponent2,
+          ExampleComponent2
         ),
-      ],
+      ]
     ),
     new BasicContentWrapper(
       "/group-example3/",
@@ -103,7 +106,7 @@ function Layout() {
         permittedGroups: ["ADMIN"],
         icon: <InfoIcon />,
       }),
-      ExampleComponent3,
+      ExampleComponent3
     ),
     new BasicContentWrapper(
       "/group-example4/",
@@ -113,7 +116,7 @@ function Layout() {
         disabled: false,
         icon: <InfoIcon />,
       }),
-      ExampleComponent4,
+      ExampleComponent4
     ),
     new Group(
       (t: TranslateFunctionType) => t("Test_group_collapsible"),
@@ -129,7 +132,7 @@ function Layout() {
               disabled: false,
               icon: <InfoIcon />,
             }),
-            ExampleComponent3,
+            ExampleComponent3
           ),
         ]),
         new BasicContentWrapper(
@@ -140,7 +143,7 @@ function Layout() {
             disabled: false,
             icon: <InfoIcon />,
           }),
-          ExampleComponent4,
+          ExampleComponent4
         ),
         new BasicContentWrapper(
           "/group-example53/",
@@ -150,9 +153,9 @@ function Layout() {
             disabled: true,
             icon: <InfoIcon />,
           }),
-          ExampleComponent3,
+          ExampleComponent3
         ),
-      ],
+      ]
     ),
     new BasicContentWrapper(
       "/group-example6/",
@@ -162,7 +165,7 @@ function Layout() {
         disabled: false,
         icon: <InfoIcon />,
       }),
-      ExampleComponent5,
+      ExampleComponent5
     ),
     new BasicContentWrapper(
       "/group-example7/",
@@ -172,7 +175,7 @@ function Layout() {
         disabled: false,
         icon: <InfoIcon />,
       }),
-      ExampleComponent6,
+      ExampleComponent6
     ),
     new BasicContentWrapper(
       "/nested-route/example1/",
@@ -182,7 +185,7 @@ function Layout() {
         disabled: false,
         icon: <InfoIcon />,
       }),
-      ExampleComponent6,
+      ExampleComponent6
     ),
   ];
 
@@ -234,17 +237,18 @@ function Layout() {
       }}
       tabAndContentWrappers={views}
       startingPoint="/"
-      authenticationView={AwsAuthenticationView}
+      authenticationView={props.authenticationView}
       settingsMenuOptions={settingsMenuOptions}
       documentsLabelKey="Legal_documents"
       documentsComponent={LegalDocuments}
       headerOptions={{
         userIcon: <InfoIcon style={{ backgroundColor: WHITE }} />,
+        reactElementLeft: <span className="ml-3">Dev application</span>,
         headerElements: headerElements,
         hideUserIcon: false,
       }}
     />
   );
-}
+};
 
 export default Layout;

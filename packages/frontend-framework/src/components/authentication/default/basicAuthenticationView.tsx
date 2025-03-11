@@ -35,7 +35,7 @@ import { AppLogoPlaceholder } from "@iavofficial/frontend-framework-shared/appLo
 import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch, Action } from "@reduxjs/toolkit";
-import { ModuleContext } from "@iavofficial/frontend-framework-shared/moduleContext";
+import { useModuleContext } from "@iavofficial/frontend-framework-shared/moduleContext";
 import { MandatoryModuleNames } from "@iavofficial/frontend-framework-shared/mandatoryModuleNames";
 import { AuthState } from "@iavofficial/frontend-framework-shared/authenticatorModule";
 
@@ -43,8 +43,8 @@ type BasicAuthenticatorAuthDispatch = ThunkDispatch<AuthState, unknown, Action<s
 type BasicAuthenticatorStoreState = {[MandatoryModuleNames.Authentication]: AuthState}
 
 export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
-  const moduleContext = useContext(ModuleContext);
-  const authModule = moduleContext.modules.auth;
+  const {modules} = useModuleContext();
+  const authModule = modules[MandatoryModuleNames.Authentication];
 
   const colorSettingsContext = useContext(ColorSettingsContext);
 

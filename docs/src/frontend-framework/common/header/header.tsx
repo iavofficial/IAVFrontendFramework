@@ -88,22 +88,22 @@ const Header: React.FC<Props> = (props) => {
         navigate(newPath);
     }, [location.pathname, navigate]);
 
-    useEffect(() => {
-        if (version === "docs") {
-            handleVersionChange(versions[0])
-        }
-    }, [handleVersionChange, version, versions]);
-
-    const loadVersions = useCallback(async () => {
+    const getVersionList = useCallback(async (): Promise<string[] | null> => {
         const response = await fetch(`https://${repoAuthor}.github.io/${projectName}/version-list.md`);
         if (response.ok) {
             const versionText = await response.text();
-            const versionList = versionText
+            return versionText
                 .split("\n")
                 .map(line => line.trim())
                 .filter(line => line !== "")
                 .sort((a, b) => b.localeCompare(a, undefined, {numeric: true}));
+        }
+        return null;
+    }, [projectName, repoAuthor]);
 
+    const loadVersions = useCallback(async () => {
+        const versionList = await getVersionList();
+        if (versionList) {
             if (version !== "docs") {
                 setVersions([version || "", ...versionList.filter(v => v !== version && v !== "docs")]);
                 setSelectedVersion(version || "");
@@ -113,6 +113,18 @@ const Header: React.FC<Props> = (props) => {
             }
         }
     }, [repoAuthor, projectName, version]);
+
+    useEffect(() => {
+        const fetchVersion = async () => {
+            if (version === "docs") {
+                const versionList = await getVersionList();
+                if (versionList) {
+                    handleVersionChange(versionList[0]);
+                }
+            }
+        };
+        fetchVersion();
+    }, [version, handleVersionChange, getVersionList]);
 
     useEffect(() => {
         loadVersions();

@@ -1,21 +1,21 @@
-import { useParams } from "react-router-dom";
-import Version1_1_0 from "../versions/1.1.0";
-import Version1_3_0 from "../versions/1.3.0";
-import Version2_0_0 from "../versions/2.0.0";
 import React from "react";
-
-export const VERSIONS = ["1.1.0", "1.3.0", "2.0.0"];
+import {useParams} from "react-router-dom";
+import {versionMappings} from "../versionMappings.ts";
 
 const VersionLayout: React.FC = () => {
-  const { version } = useParams<{ version: string }>();
+    const {version} = useParams<{ version: string }>();
 
-  const versions: Record<string, JSX.Element> = {
-    "1.1.0": <Version1_1_0 />,
-    "1.3.0": <Version1_3_0 />,
-    "2.0.0": <Version2_0_0 />,
-  };
+    const [Component, setComponent] = React.useState<React.ComponentType | null>(null);
 
-  return versions[version ?? ""];
+    React.useEffect(() => {
+        if (version && versionMappings[version]) {
+            versionMappings[version]().then((module) => {
+                setComponent(() => module.default);
+            });
+        }
+    }, [version]);
+
+    return Component ? <Component/> : <div>Loading...</div>;
 };
 
 export default VersionLayout;

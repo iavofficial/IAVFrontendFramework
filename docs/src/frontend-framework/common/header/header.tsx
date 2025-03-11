@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useState} from "react";
 import makeStyles from "../../../util/makeStyles.tsx";
 import Title from "../page/text/title.tsx";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
-import { VERSIONS } from "../../components/versionLayout.tsx";
+import {versionMappings} from "../../versionMappings.ts";
 
 const useStyles = makeStyles(() => ({
     header: {
@@ -97,18 +97,9 @@ const Header: React.FC<Props> = (props) => {
         navigate(newPath);
     }, [location.pathname, navigate]);
 
-    const getVersionList = () => VERSIONS /*useCallback(async (): Promise<string[] | null> => {
-        const response = await fetch(`https://${repoAuthor}.github.io/${projectName}/version-list.md`);
-        if (response.ok) {
-            const versionText = await response.text();
-            return versionText
-                .split("\n")
-                .map(line => line.trim())
-                .filter(line => line !== "")
-                .sort((a, b) => b.localeCompare(a, undefined, {numeric: true}));
-        }
-        return null;
-    }, [projectName, repoAuthor]);*/
+    const getVersionList = useCallback(async (): Promise<string[] | null> => {
+        return Object.keys(versionMappings);
+    }, []);
 
     const loadVersions = useCallback(async () => {
         const versionList = await getVersionList();
@@ -121,7 +112,7 @@ const Header: React.FC<Props> = (props) => {
                 setSelectedVersion(versionList[0]);
             }
         }
-    }, [repoAuthor, projectName, version]);
+    }, [getVersionList, version]);
 
     useEffect(() => {
         const fetchVersion = async () => {
@@ -133,7 +124,7 @@ const Header: React.FC<Props> = (props) => {
             }
         };
         fetchVersion();
-    }, [version, handleVersionChange, getVersionList]);
+    }, [version, handleVersionChange, getVersionList, handleDocsVersionChange]);
 
     useEffect(() => {
         loadVersions();

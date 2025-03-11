@@ -7,7 +7,7 @@ import {versionMappings} from "./frontend-framework/versionMappings.ts";
 function Layout() {
 
     const currentVersion = Object.keys(versionMappings).reverse()[0];
-    const projectName = "IAVFrontendFramework";
+    const projectName = "iav-test-2";
     const basePath = `${projectName}/${currentVersion}`;
 
     return (

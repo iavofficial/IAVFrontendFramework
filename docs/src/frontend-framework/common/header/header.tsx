@@ -124,7 +124,7 @@ const Header: React.FC<Props> = (props) => {
             }
         };
         fetchVersion();
-    }, [version, handleVersionChange, getVersionList]);
+    }, [version, handleVersionChange, getVersionList, handleDocsVersionChange]);
 
     useEffect(() => {
         loadVersions();

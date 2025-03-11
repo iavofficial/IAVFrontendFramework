@@ -97,17 +97,8 @@ const Header: React.FC<Props> = (props) => {
     }, [location.pathname, navigate]);
 
     const getVersionList = useCallback(async (): Promise<string[] | null> => {
-        const response = await fetch(`https://${repoAuthor}.github.io/${projectName}/version-list.md`);
-        if (response.ok) {
-            const versionText = await response.text();
-            return versionText
-                .split("\n")
-                .map(line => line.trim())
-                .filter(line => line !== "")
-                .sort((a, b) => b.localeCompare(a, undefined, {numeric: true}));
-        }
-        return null;
-    }, [projectName, repoAuthor]);
+        return ["1.1.0", "1.3.0", "2.0.0"];
+    }, []);
 
     const loadVersions = useCallback(async () => {
         const versionList = await getVersionList();

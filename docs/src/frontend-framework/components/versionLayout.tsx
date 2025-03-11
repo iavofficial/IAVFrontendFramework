@@ -1,19 +1,28 @@
 import {useParams} from "react-router-dom";
-import Version1_1_0 from "../versions/1.1.0";
-import Version1_3_0 from "../versions/1.3.0";
-import React from "react";
-
+import React, {useEffect, useState} from "react";
 
 const VersionLayout: React.FC = () => {
-
     const {version} = useParams<{ version: string }>();
+    const [Component, setComponent] = useState<React.ComponentType | null>(null);
 
-    const versions: Record<string, JSX.Element> = {
-        "1.1.0": <Version1_1_0/>,
-        "1.3.0": <Version1_3_0/>,
-    };
+    useEffect(() => {
+        const loadVersionComponent = async () => {
+            try {
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                //@ts-expect-error
+                const module = await import(`../versions/${version}`);
+                setComponent(() => module.default);
+            } catch (error) {
+                console.error(`Error loading version ${version}:`, error);
+            }
+        };
 
-    return versions[version];
+        if (version) {
+            loadVersionComponent();
+        }
+    }, [version]);
+
+    return Component ? <Component/> : <div>Loading...</div>;
 };
 
 export default VersionLayout;

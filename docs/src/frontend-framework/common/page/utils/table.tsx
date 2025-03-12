@@ -16,7 +16,7 @@
 
 import React from "react";
 import makeStyles from "../../../../util/makeStyles.tsx";
-import {BLUE3} from "@iavofficial/frontend-framework/constants";
+import {BLUE3, GREY1} from "@iavofficial/frontend-framework/constants";
 
 const useStyles = makeStyles(() => ({
     table: {
@@ -42,6 +42,9 @@ const useStyles = makeStyles(() => ({
         border: "1px solid #dee2e6",
         padding: "10px",
         textAlign: "left",
+    },
+    grey1: {
+        backgroundColor: GREY1
     },
 }));
 
@@ -75,7 +78,10 @@ const Table: React.FC<Props> = (props) => {
             </thead>
             <tbody className={classes.tbody}>
             {data.map((row, index) => (
-                <tr key={index}>
+                <tr
+                    key={index}
+                    className={index % 2 === 0 ? classes.grey1 : undefined}
+                >
                     {columns.map((col) => (
                         <td key={col.title} className={classes.td}>
                             {row[col.title]}
@@ -89,4 +95,3 @@ const Table: React.FC<Props> = (props) => {
 };
 
 export default Table;
-

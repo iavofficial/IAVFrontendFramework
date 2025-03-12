@@ -11,7 +11,7 @@ function Layout() {
     const location = useLocation();
 
     const currentVersion = Object.keys(versionMappings).reverse()[0];
-    const projectName = "IAVFrontendFramework";
+    const projectName = "iav-test-2";
     const basePath = `${projectName}/${currentVersion}`;
 
     useEffect(() => {
@@ -34,6 +34,7 @@ function Layout() {
                         </>
                     }
                 />
+                <Route path={"*"} element={<p>REDIRECT</p>}/>
             </Routes>
         </>
     );

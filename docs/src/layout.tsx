@@ -10,7 +10,7 @@ function Layout() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const currentVersion = Object.keys(versionMappings).reverse()[0];
+    const currentVersion = Object.keys(versionMappings)[0];
     const projectName = "IAVFrontendFramework";
     const basePath = `${projectName}/${currentVersion}`;
 

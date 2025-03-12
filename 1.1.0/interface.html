@@ -21,40 +21,12 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Main Components</title>
-    <script src="./pages/script/nav.js" type="application/javascript"></script>
-    <link href="./pages/styles/styles.css" rel="stylesheet">
-    <link href="./pages/styles/pages.css" rel="stylesheet">
+    <title>Redirecting</title>
+    <script>
+        window.location.href = "../index.html";
+    </script>
 </head>
 <body>
-<h1 id="main-components">Main Components</h1>
-
-<p class="cell">The framework's main interfaces are the components <code>GlobalDataLayer</code> and <code>UILayer</code>.
-    <code>GlobalDataLayer</code> contains all React contexts of the framework to share data across the whole
-    component tree. The <code>UILayer</code> component contains the components which actually render the UI.
-</p>
-
-<p class="cell">
-    The reason for the separation into two layers can be understood by the following example:
-    Imagine developing a React context which needs the authentication information. The authentication
-    information is stored inside the <code>GlobalDataLayer</code>. Where to put your React context's provider?
-    To
-    pass your context to the <code>UILayer</code> and then rendering the Provider seems inappropriate. Instead,
-    you put the Provider between the <code>GlobalDataLayer</code> and <code>UILayer</code> yourself. By doing
-    this, your React context has access to all of the framework's contexts, and the <code>UILayer</code>
-    additionally has access to your context.
-</p>
-
-<h2 id="an-example-for-this-situation">An example for this situation</h2>
-<pre class="cell"><code>...
-<span class="pl-k">return</span> (
-<span class="pl-c">// If you don't want to use the default authentication provider, you would have to render another authentication provider at this position. Authentication providers will be explained later on.</span>
-    &lt;GlobalDataLayer ...properties...&gt;
-    <span class="pl-c">// Your react contexts go here.</span>
-        &lt;UILayer ...properties... /&gt;
-    &lt;/GlobalDataLayer&gt;
-);
-...
-</code></pre>
+<p>If the redirection does not happen automatically, <a href="../index.html">click here</a>.</p>
 </body>
 </html>

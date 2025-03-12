@@ -45,32 +45,42 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
+export interface Column {
+    title: string;
+}
+
+export type TableData<T extends { title: string }[]> = {
+    [K in T[number]['title']]: string;
+}[];
+
 interface Props {
-    data: Array<{
-        key: string;
-        value: string;
-    }>;
+    columns: Column[];
+    data: Array<Record<string, string>>;
 }
 
 const Table: React.FC<Props> = (props) => {
-
-    const {data} = props;
-
+    const {columns, data} = props;
     const {classes} = useStyles();
 
     return (
         <table className={classes.table}>
             <thead className={classes.thead}>
             <tr>
-                <th className={classes.th}>Key</th>
-                <th className={classes.th}>Value</th>
+                {columns.map((col) => (
+                    <th key={col.title} className={classes.th}>
+                        {col.title}
+                    </th>
+                ))}
             </tr>
             </thead>
             <tbody className={classes.tbody}>
             {data.map((row, index) => (
                 <tr key={index}>
-                    <td className={classes.td}><strong>{row.key}</strong></td>
-                    <td className={classes.td}>{row.value}</td>
+                    {columns.map((col) => (
+                        <td key={col.title} className={classes.td}>
+                            {row[col.title]}
+                        </td>
+                    ))}
                 </tr>
             ))}
             </tbody>
@@ -79,3 +89,4 @@ const Table: React.FC<Props> = (props) => {
 };
 
 export default Table;
+

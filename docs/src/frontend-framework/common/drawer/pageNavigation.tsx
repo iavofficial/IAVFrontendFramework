@@ -14,8 +14,9 @@
  * limitations under the License.
  **/
 
-import {Link, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import makeStyles from "../../../util/makeStyles.tsx";
+import NavLinkItem from "./drawerLink.tsx";
 
 const useStyles = makeStyles(() => ({
     drawer: {
@@ -39,39 +40,18 @@ const useStyles = makeStyles(() => ({
             padding: "3px 0px",
             borderRadius: "4px",
             transition: "background-color 0.3s ease",
-            "&::marker": {
-                content: "none"
-            },
-            "&:hover": {
-                color: "white",
-                backgroundColor: "#333"
-            }
-
         },
-        "& a": {
-            cursor: "pointer",
-            display: "block",
-            textDecoration: "none",
-            color: "var(--primary-color)",
-            padding: "8px",
-            borderRadius: "4px",
-
-        }
-    },
-    activeLink: {
-        backgroundColor: "lightgray",
     },
 }));
 
 interface Props {
-    projectName: string
-    currentVersion: string
+    projectName: string;
+    currentVersion: string;
 }
 
 const PageNavigation: React.FC<Props> = (props) => {
 
     const {projectName, currentVersion} = props;
-
     const {classes} = useStyles();
 
     const {version} = useParams<{ version: string }>();
@@ -80,20 +60,21 @@ const PageNavigation: React.FC<Props> = (props) => {
     return (
         <div className={classes.drawer}>
             <ul>
-                <li><Link to={`${basePath}/overview`}>Quick Overview</Link></li>
-                <li><Link to={`${basePath}/information`}>01 - Important Information</Link></li>
-                <li><Link to={`${basePath}/installation-guide`}>02 - Installation</Link></li>
-                <li><Link to={`${basePath}/interface`}>03 - Interface</Link></li>
-                <li><Link to={`${basePath}/globaldatalayer`}>04 - GlobalDataLayer</Link></li>
-                <li><Link to={`${basePath}/uilayer`}>05 - UILayer</Link></li>
-                <li><Link to={`${basePath}/content-area`}>06 - Content Area</Link></li>
-                <li><Link to={`${basePath}/color-settings-and-dark-mode`}>07 - Color Settings and Dark Mode</Link></li>
-                <li><Link to={`${basePath}/example-project`}>08 - Example Project</Link></li>
-                <li><Link to={`${basePath}/playground`}>09 - Playground</Link></li>
+                <NavLinkItem to={`${basePath}/overview`} label={"Quick Overview"}/>
+                <NavLinkItem to={`${basePath}/information`} label={"01 - Important Information"}/>
+                <NavLinkItem to={`${basePath}/installation-guide`} label={"02 - Installation"}/>
+                <NavLinkItem to={`${basePath}/interface`} label={"03 - Interface"}/>
+                <NavLinkItem to={`${basePath}/globaldatalayer`} label={"04 - GlobalDataLayer"}/>
+                <NavLinkItem to={`${basePath}/uilayer`} label={"05 - UILayer"}/>
+                <NavLinkItem to={`${basePath}/content-area`} label={"06 - Content Area"}/>
+                <NavLinkItem to={`${basePath}/color-settings-and-dark-mode`}
+                             label={"07 - Color Settings and Dark Mode"}/>
+                <NavLinkItem to={`${basePath}/example-project`} label={"08 - Example Project"}/>
+                <NavLinkItem to={`${basePath}/playground`} label={"09 - Playground"}/>
             </ul>
             <h3>Need help?</h3>
             <ul>
-                <li><Link to={`${basePath}/faq`}>FAQ</Link></li>
+                <NavLinkItem to={`${basePath}/faq`} label={"FAQ"}/>
             </ul>
         </div>
     );

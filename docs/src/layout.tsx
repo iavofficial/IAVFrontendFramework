@@ -34,7 +34,7 @@ function Layout() {
                         </>
                     }
                 />
-                <Route path={"*"} element={<p>REDIRECT</p>}/>
+                <Route path="*" element={<Navigate to="/index.html" replace/>}/>
             </Routes>
         </>
     );

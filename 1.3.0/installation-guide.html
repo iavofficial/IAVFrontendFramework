@@ -16,63 +16,17 @@
  SPDX-License-Identifier: Apache-2.0
 -->
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Installation Guide</title>
-    <script src="./pages/script/nav.js" type="application/javascript"></script>
-    <link href="./pages/styles/styles.css" rel="stylesheet" />
-    <link href="./pages/styles/pages.css" rel="stylesheet" />
-  </head>
-  <body>
-    <h1 id="installation-guide">Installation Guide</h1>
-
-    <h3 id="npm-install">npm install</h3>
-    <pre
-      class="cell"
-    ><code>npm install @iavofficial/frontend-framework</code></pre>
-
-    <h2 id="add-the-framework-to-a-new-react-application">
-      Add the framework to a new React application
-    </h2>
-    <p class="cell">
-      If you want to add the framework by creating a new React app with
-      <code>create-react-app</code> or using <code>vite</code>, it works too.
-      Just paste the following code snippets into the <code>App.tsx</code> file.
-    </p>
-
-    <p class="cell">
-      <strong>NOTE:</strong> If you use <code>vite</code> to create a new React
-      app, the webview may look broken. After clearing the
-      <code>index.css</code> file, the problem is solved.
-    </p>
-
-    <h3 id="codesnippet-app-tsx">Codesnippet App.tsx</h3>
-    <pre class="cell">
-<code><span class="pl-k">import</span> { GlobalDataLayer } <span class="pl-k">from</span> <span class="pl-s">'@iavofficial/frontend-framework/globalDataLayer';</span>
-<span class="pl-k">import</span> { UILayer } <span class="pl-k">from</span> <span class="pl-s">'@iavofficial/frontend-framework/uiLayer';</span>
-
-<span class="pl-k">const</span> App: React.FC = () => {
-    <span class="pl-k">return</span> (
-        &lt;GlobalDataLayer&gt;
-            &lt;UILayer startingPoint="/" tabAndContentWrappers={[]}/&gt;
-        &lt;/GlobalDataLayer&gt;
-    );
-}
-
-<span class="pl-k">export default</span> App;</code></pre>
-
-    <h2 id="using-aws-amplify">Using AWS Amplify</h2>
-
-    <p>
-      The IAV Frontend Framework is compatible with AWS Amplify, but you need to
-      install it separately. You have to install at least the version
-      <code>aws-amplify@^6.5.2</code>.
-    </p>
-
-    <pre><code class="language-bash">npm install aws-amplify
-</code></pre>
-  </body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Weiterleitung</title>
+    <script>
+        window.location.href = "../../index.html";
+    </script>
+</head>
+<body>
+<p>Falls die Weiterleitung nicht automatisch funktioniert, <a href="../../index.html">hier klicken</a>.</p>
+</body>
 </html>

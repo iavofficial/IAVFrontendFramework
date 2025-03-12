@@ -22,7 +22,6 @@ import {
   createAsyncThunk,
   createSlice,
   PayloadAction,
-  Slice,
   ThunkDispatch,
 } from "@reduxjs/toolkit";
 import {

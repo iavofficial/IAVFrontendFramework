@@ -22,3 +22,5 @@ export const MandatoryModuleNames = {
 
 export type MandatoryModuleName =
   (typeof MandatoryModuleNames)[keyof typeof MandatoryModuleNames];
+
+export const USER_MODULES_PREFIX = "user";

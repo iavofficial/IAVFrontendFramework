@@ -53,7 +53,9 @@ export const allDefaultModules = {
 
 export type AllDefaultModules = typeof allDefaultModules;
 
-export const defaultStore = new StoreBuilder(defaultStoreModules).build();
+export const defaultStore = new StoreBuilder({
+  frameworkStoreModules: defaultStoreModules,
+}).build();
 
 export type DefaultStore = typeof defaultStore;
 export type DefaultStoreState = typeof defaultStore.getState;

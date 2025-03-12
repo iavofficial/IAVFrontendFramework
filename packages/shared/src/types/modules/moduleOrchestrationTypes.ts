@@ -26,16 +26,9 @@ export type FFStoreModules<TModulesState = unknown> = {
   [K in keyof TModulesState]: FFStoreModule<TModulesState[K]>;
 };
 
-// The mandatory state (which will be the state of different module's slices)
+// The (default) mandatory state (which will be the state of different module's slices)
 export type FFMandatoryState = {
   [MandatoryModuleNames.Authentication]: AuthState;
-};
-
-// It is concluded that every mandatory state will have a root reducer object.
-// Without the possiblity of changing values (so the existence of reducers)
-// state is not sensible.
-export type FFMandatoryReducers<TModulesState extends FFMandatoryState> = {
-  [K in keyof TModulesState]: Reducer<TModulesState[K]>;
 };
 
 // All mandatory modules with minimal setup which is needed by the framework.
@@ -51,11 +44,19 @@ export type FFMandatoryStoreModules<
   >;
 };
 
+// The types of all default M mandatory modules without a state for the store.
 export type FFMandatoryNonStoreModules = {};
 
 export type FFAllMandatoryModules<
   TModulesState extends FFMandatoryState = FFMandatoryState,
 > = FFMandatoryStoreModules<TModulesState> & FFMandatoryNonStoreModules;
+
+// It is concluded that every mandatory state will have a root reducer object.
+// Without the possiblity of changing values (so the existence of reducers)
+// state is not sensible.
+export type FFMandatoryReducers<TModulesState extends FFMandatoryState> = {
+  [K in keyof TModulesState]: Reducer<TModulesState[K]>;
+};
 
 // The user can provide additional modules which aren't used by the
 // framework itself.
@@ -87,7 +88,7 @@ export interface ModuleEntry<
 }
 
 // Processor functions are used to process single modules. They can be
-// replaces in order to allow the developer to implement custom processing,
+// replaced in order to allow the developer to implement custom processing,
 // since it is not possible to think of every possible processing step which
 // could occur at development of the framework.
 export type ModuleProcessorFunction<

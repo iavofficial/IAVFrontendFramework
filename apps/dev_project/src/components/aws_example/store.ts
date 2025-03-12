@@ -18,7 +18,6 @@
 
 import {
   createModules,
-  FFMandatoryStoreModules,
   StoreBuilder,
 } from "@iavofficial/frontend-framework/store";
 import { Amplify } from "aws-amplify";
@@ -28,7 +27,6 @@ import { AWSAuthenticator } from "@iavofficial/frontend-framework-aws-authentica
 import { useModuleContext } from "@iavofficial/frontend-framework/moduleContext";
 import { AWSAuthenticationView } from "@iavofficial/frontend-framework-aws-authenticator/awsAuthenticationView";
 import { MandatoryModuleNames } from "@iavofficial/frontend-framework/mandatoryModuleNames";
-import { configureStore } from "@reduxjs/toolkit";
 
 const cognitoPool = import.meta.env.VITE_COGNITO_POOL;
 const cognitoAppId = import.meta.env.VITE_COGNITO_APP_ID;
@@ -55,36 +53,23 @@ const configureAmplify: () => void = () => {
   );
 };
 
-const frameworkStoreModules = {
+const customModules = {
   [MandatoryModuleNames.Authentication]: new AWSAuthenticator({
     configureAmplify: configureAmplify,
     failOnNoLegalGroup: true,
     legalGroups: ["ADMIN", "SHOWCASE"],
-  })
-};
-
-const userStoreModules = {
+  }),
   userModule: new AWSAuthenticator({
     configureAmplify: configureAmplify,
     failOnNoLegalGroup: true,
     legalGroups: ["ADMIN", "SHOWCASE"],
   }),
-};
-
-const nonStoreModules = {
   test: { text: "text" },
 };
 
-export const modules = createModules({
-  frameworkStoreModules: frameworkStoreModules,
-  userStoreModules: userStoreModules,
-  nonStoreModules: nonStoreModules
-});
+export const modules = createModules(customModules);
 
-export const store = new StoreBuilder(
-  modules.frameworkStoreModules,
-  modules.userStoreModules
-)
+export const store = new StoreBuilder(modules.storeModules)
   .setFrameworkModuleProcessor(
     MandatoryModuleNames.Authentication,
     (module, storeConfigBuilder) => {}
@@ -101,9 +86,7 @@ export const store = new StoreBuilder(
   })*/
   .build();
 
-export const awsAuthenticationView = AWSAuthenticationView<
-  typeof modules.frameworkStoreModules
->;
+export const awsAuthenticationView = AWSAuthenticationView;
 
 // Use this to create a typed module context.
 export const useTypedModuleContext = useModuleContext<typeof modules>;

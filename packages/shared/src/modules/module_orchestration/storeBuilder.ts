@@ -34,10 +34,13 @@ import {
 } from "../../types/modules/moduleOrchestrationTypes";
 import {StoreConfig} from "./storeConfig";
 import {StoreConfigBuilder} from "./storeConfigBuilder";
-import {MandatoryModuleNames} from "../../constants/mandatoryModuleNames";
+import {
+  MandatoryModuleNames,
+  USER_MODULES_PREFIX,
+} from "../../constants/mandatoryModuleNames";
 import {Exact} from "../../types/util-types/exact";
-import {FFStoreModule} from "../../types/modules/generalModule";
 import {DefaultNonStoreModules} from "./moduleDefaults";
+import {RestrictKeyToPrefix} from "../../types/util-types/restrictKeyToPrefix";
 
 // can be replaced to customize the build of the Redux store.
 export class StoreBuilder<
@@ -70,36 +73,50 @@ export class StoreBuilder<
     storeConfig: StoreConfig<TFrameworkModuleState>,
   ) => EnhancedStore<TFrameworkModuleState> = defaultStoreBuilder;
 
-  constructor(
+  constructor(storeModules: {
     // It has to be ensured that frameworkStoreModules has no more keys than
     // there are mandatory modules as this attribute's purpose is to override
     // default store modules.
     frameworkStoreModules: Exact<
       FFMandatoryStoreModules<TFrameworkModuleState>,
       TFrameworkModules
-    >,
+    >;
     // TUserModules should not be used to override mandatory modules.
+    // Because of this Omit is used in order to prevent userStoreModules
+    // to have keys of FFMandatoryStoreModules.
+    // Furthermore, RestrictKeyToPrefix is used in order to ensure that
+    // every user module begins with a specific prefix for user modules.
+    // By doing this a collision of keys for new Framework Modules with
+    // user modules can be avoided.
     userStoreModules?: Exact<
-      Omit<TUserStoreModules, keyof FFMandatoryStoreModules>,
+      RestrictKeyToPrefix<
+        Omit<TUserStoreModules, keyof FFMandatoryStoreModules>,
+        typeof USER_MODULES_PREFIX
+      >,
       TUserStoreModules
-    >,
-  ) {
-    this.storeConfigBuilder = new StoreConfigBuilder(frameworkStoreModules);
+    >;
+  }) {
+    this.storeConfigBuilder = new StoreConfigBuilder(
+      storeModules.frameworkStoreModules,
+    );
 
     this.mandatoryModulesAndProcessors = {
       [MandatoryModuleNames.Authentication]: {
-        module: frameworkStoreModules[MandatoryModuleNames.Authentication],
+        module:
+          storeModules.frameworkStoreModules[
+            MandatoryModuleNames.Authentication
+          ],
       },
     };
 
-    if (userStoreModules) {
-      this.userStoreModulesAndProcessors = Object.entries(userStoreModules).map(
-        ([key, value]) => ({
-          [key]: {
-            module: value,
-          },
-        }),
-      ) as ModuleAndProcessorMap<TUserStoreModules, TFrameworkModuleState>;
+    if (storeModules.userStoreModules) {
+      this.userStoreModulesAndProcessors = Object.entries(
+        storeModules.userStoreModules,
+      ).map(([key, value]) => ({
+        [key]: {
+          module: value,
+        },
+      })) as ModuleAndProcessorMap<TUserStoreModules, TFrameworkModuleState>;
     }
   }
 

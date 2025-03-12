@@ -33,6 +33,7 @@ import {
   AWSAuthenticatorAuthDispatch,
   AWSAuthenticatorStoreState,
   AWSAuthenticatorState,
+  AWSAuthenticator,
 } from "../awsAuthenticatorModule";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 import {LoginButtonWithSpinner} from "@iavofficial/frontend-framework-shared/loginButtonWithSpinner";
@@ -55,7 +56,7 @@ type NecessaryModuleAttributes = {
 export const AWSAuthenticationView = <
   TModules extends {
     [MandatoryModuleNames.Authentication]: NecessaryModuleAttributes;
-  },
+  } = {[MandatoryModuleNames.Authentication]: AWSAuthenticator},
 >(
   props: AuthenticationViewProps,
 ) => {
@@ -114,9 +115,15 @@ export const AWSAuthenticationView = <
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (isNewPasswordRequired) {
-      dispatch(authenticationModule.extras.completePassword({newPassword: password}));
+      dispatch(
+        authenticationModule.extras.completePassword({newPassword: password}),
+      );
     } else {
-      dispatch(authenticationModule.login({credentials: {email: email, password: password}}));
+      dispatch(
+        authenticationModule.login({
+          credentials: {email: email, password: password},
+        }),
+      );
     }
   };
 

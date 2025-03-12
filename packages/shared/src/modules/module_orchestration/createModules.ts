@@ -16,7 +16,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {FFModule, FFStoreModule} from "../../types/modules/generalModule";
+function rebuild<T>(obj: T): T {
+  return {...obj};
+}
+
+import {FFModule} from "../../types/modules/generalModule";
 import {
   ActualMandatoryStateFromModules,
   FFMandatoryStoreModules,
@@ -33,41 +37,48 @@ import {
   defaultStoreModules,
 } from "./moduleDefaults";
 
-export function createModules<
-  // Partial of DefaultNonStoreModules ensures that if TUserStoreModules is used for
-  // overriding default non store modules, the user modules have to statisfy the
-  // corresponding TS constraints.
-  TUserStoreModules extends FFStoreModules<TUserModulesState> & Partial<DefaultNonStoreModules>,
-  // Same for TMandatoryStoreModules regarding overriding the default store modules.
-  TUserModulesState = ActualUserModulesStateFromModules<TUserStoreModules>,
-  TFrameworkStoreModules extends Partial<
-    FFMandatoryStoreModules<TMandatoryModulesState>
-  > = {},
-  TMandatoryModulesState extends
-    FFMandatoryState = ActualMandatoryStateFromModules<TFrameworkStoreModules>,
-  TNonStoreModules extends Partial<DefaultNonStoreModules> = {},
->(
-  params: {
-    // It has to be ensured that frameworkStoreModules has no more keys than
-    // there are mandatory modules as this attribute's purpose is to override
-    // default store modules.
-    frameworkStoreModules?: ExactPartial<
-      FFMandatoryStoreModules<TMandatoryModulesState>,
-      TFrameworkStoreModules
-    >;
-    // TUserModules should not be used to override mandatory modules.
-    userStoreModules?: Exact<
-    Omit<TUserStoreModules, keyof FFMandatoryStoreModules>,
-    TUserStoreModules
-  >;
-    nonStoreModules?: TNonStoreModules;
-  } = {},
+type WithoutSlice<T> = {
+  [K in keyof T as T[K] extends {slice: any} ? never : K]: T[K];
+};
+
+type WithoutKeys<T, U> = Pick<T, Exclude<keyof T, keyof U>>;
+
+// It would be better to use FFModule inside the Record to ensure that
+// the useModuleLifecycle method has the expected type if the module
+// provides this hook. However, doing this results in problems as
+// when providing the modules with an object literal TS performs
+// excess property checking for object literals (passed objects have
+// to fully match). If the module does not contain this hook it results
+// in an error. Furthermore, an index signature to open the FFModule type
+// cannot be added since it introduces other errors.
+// However, just providing object inside the Record is not very critical
+// as the user will get an error when he passes the modules to the
+// GlobalDataLayer if module types mismatch with FFModule.
+export function createModules<TModules extends Record<string, object>>(
+  paramModules?: TModules,
 ) {
-  const {
-    frameworkStoreModules = {} as TFrameworkStoreModules,
-    nonStoreModules = {} as TNonStoreModules,
-    userStoreModules = {} as TUserStoreModules,
-  } = params;
+  const modules = paramModules ?? ({} as TModules);
+
+  // Using Omit unfortunately does not work.
+  type TNonStoreModules = WithoutSlice<TModules>;
+  type TStoreModules = WithoutKeys<TModules, TNonStoreModules>;
+
+  type TUserStoreModules = WithoutKeys<TStoreModules, DefaultStoreModules>;
+  type TFrameworkStoreModules = WithoutKeys<TStoreModules, TUserStoreModules>;
+
+  let frameworkStoreModules = {} as TFrameworkStoreModules;
+  let userStoreModules = {} as TUserStoreModules;
+  let nonStoreModules = {} as TNonStoreModules;
+
+  Object.entries(modules).forEach(([key, module]) => {
+    if (!("slice" in module)) {
+      nonStoreModules = {...nonStoreModules, [key]: module};
+    } else if (key in defaultStoreModules) {
+      frameworkStoreModules = {...frameworkStoreModules, [key]: module};
+    } else {
+      userStoreModules = {...userStoreModules, [key]: module};
+    }
+  });
 
   type TMergedFrameworkStoreModules = MergeModules<
     DefaultStoreModules,
@@ -77,6 +88,11 @@ export function createModules<
     ...defaultStoreModules,
     ...frameworkStoreModules,
   } as TMergedFrameworkStoreModules;
+
+  const storeModules = {
+    frameworkStoreModules: mergedFrameworkStoreModules,
+    userStoreModules: rebuild(userStoreModules),
+  };
 
   type TMergedNonStoreModules = MergeModules<
     DefaultNonStoreModules,
@@ -106,7 +122,7 @@ export function createModules<
      (modules.frameworkStoreModules).
      A default implementation without store can be overwritten by custom modules both for and without
      the store.
-     */
+  */
 
   const allModules = {
     ...mergedNonStoreModules,
@@ -118,8 +134,7 @@ export function createModules<
   >;
 
   return {
-    frameworkStoreModules: mergedFrameworkStoreModules,
-    userStoreModules: userStoreModules,
+    storeModules: storeModules,
     all: allModules,
   };
 }

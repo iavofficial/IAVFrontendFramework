@@ -11,25 +11,53 @@ import ColorSettings from "./pages/colorSettings.tsx";
 import ExampleProject from "./pages/exampleProject.tsx";
 import Playground from "./pages/playground.tsx";
 import FAQ from "./pages/faq.tsx";
-import Imprint from "../../common/page/utils/imprint.tsx";
+import PageNavigation from "../../common/drawer/pageNavigation.tsx";
+import NavLinkItem from "../../common/drawer/drawerLink.tsx";
+
+const routes = [
+    {path: "overview", label: "Quick Overview", element: <Overview/>},
+    {path: "information", label: "01 - Important Information", element: <Information/>},
+    {path: "installation-guide", label: "02 - Installation", element: <InstallationGuide/>},
+    {path: "interface", label: "03 - Interface", element: <Interface/>},
+    {path: "globaldatalayer", label: "04 - GlobalDataLayer", element: <GlobalDataLayer/>},
+    {path: "uilayer", label: "05 - UILayer", element: <UILayer/>},
+    {path: "content-area", label: "06 - Content Area", element: <ContentArea/>},
+    {path: "color-settings-and-dark-mode", label: "07 - Color Settings and Dark Mode", element: <ColorSettings/>},
+    {path: "example-project", label: "08 - Example Project", element: <ExampleProject/>},
+    {path: "playground", label: "09 - Playground", element: <Playground/>},
+];
+
+const helpRoutes = [
+    {path: "faq", label: "FAQ", element: <FAQ/>},
+];
 
 const Version2_0_0 = () => {
+
     return (
-        <Routes>
-            <Route path={`/overview`} element={<Overview/>}/>
-            <Route path={`/information`} element={<Information/>}/>
-            <Route path={`/installation-guide`} element={<InstallationGuide/>}/>
-            <Route path={`/interface`} element={<Interface/>}/>
-            <Route path={`/globaldatalayer`} element={<GlobalDataLayer/>}/>
-            <Route path={`/uilayer`} element={<UILayer/>}/>
-            <Route path={`/content-area`} element={<ContentArea/>}/>
-            <Route path={`/color-settings-and-dark-mode`} element={<ColorSettings/>}/>
-            <Route path={`/example-project`} element={<ExampleProject/>}/>
-            <Route path={`/playground`} element={<Playground/>}/>
-            <Route path={`/faq`} element={<FAQ/>}/>
-            <Route path={`/imprint`} element={<Imprint/>}/>
-        </Routes>
-    )
-}
+        <>
+            <PageNavigation>
+                <ul>
+                    {routes.map(({path, label}) => (
+                        <NavLinkItem to={path} label={label}/>
+                    ))}
+                </ul>
+                <h3>Need help?</h3>
+                <ul>
+                    {helpRoutes.map(({path, label}) => (
+                        <NavLinkItem to={path} label={label}/>
+                    ))}
+                </ul>
+            </PageNavigation>
+            <Routes>
+                {routes.map(({path, element}) => (
+                    <Route key={path} path={path} element={element}/>
+                ))}
+                {helpRoutes.map(({path, element}) => (
+                    <Route key={path} path={path} element={element}/>
+                ))}
+            </Routes>
+        </>
+    );
+};
 
 export default Version2_0_0;

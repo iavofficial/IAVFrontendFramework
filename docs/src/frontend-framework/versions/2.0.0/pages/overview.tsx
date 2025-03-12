@@ -2,7 +2,7 @@ import React from "react";
 import Page from "../../../common/page/page.tsx";
 import Title from "../../../common/page/text/title.tsx";
 import SubTitle from "../../../common/page/text/subTitle.tsx";
-import Table from "../../../common/page/utils/table.tsx";
+import Table, {TableData} from "../../../common/page/utils/table.tsx";
 import BulletList from "../../../common/page/text/bulletList.tsx";
 import PageLink from "../../../common/page/text/pageLink.tsx";
 import Image from "../../../common/page/utils/image.tsx";
@@ -10,25 +10,29 @@ import Text from "../../../common/page/text/text.tsx";
 
 const Overview: React.FC = () => {
 
-    const tableData = [
+    const columns = [
+        {title: "Category"},
+        {title: "Value"},
+    ] as const;
+
+    const tableData: TableData<typeof columns> = [
         {
-            key: "Programming Language",
-            value: "JavaScript"
+            Category: "Programming Language",
+            Value: "JavaScript"
         },
         {
-            key: "Key dependencies",
-            value: "React 18, ReactDOM 18, Typescript 5, AWS Amplify 6",
+            Category: "Key dependencies",
+            Value: "React 18, ReactDOM 18, Typescript 5, AWS Amplify 6",
         },
         {
-            key: "UI-Component libraries",
-            value: "PrimeReact, PrimeIcons",
+            Category: "UI-Component libraries",
+            Value: "PrimeReact, PrimeIcons",
         },
         {
-            key: "Requirements",
-            value: "At least npm version 8 and node version 16",
+            Category: "Requirements",
+            Value: "At least npm version 8 and node version 16",
         },
     ];
-
     return (
         <Page>
             <Title>Quick Overview</Title>
@@ -53,7 +57,7 @@ const Overview: React.FC = () => {
             </Text>
             <Title>Overview</Title>
             <SubTitle>Technical Overview</SubTitle>
-            <Table data={tableData}/>
+            <Table data={tableData} columns={columns}/>
             <SubTitle>Key features</SubTitle>
             <BulletList
                 bulletType="bullet"

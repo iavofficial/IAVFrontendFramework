@@ -1,14 +1,24 @@
-import {Navigate, Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import PageNavigation from "./frontend-framework/common/drawer/pageNavigation.tsx";
 import Header from "./frontend-framework/common/header/header.tsx";
 import VersionLayout from "./frontend-framework/components/versionLayout.tsx";
 import {versionMappings} from "./frontend-framework/versionMappings.ts";
+import {useEffect} from "react";
 
 function Layout() {
+
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const currentVersion = Object.keys(versionMappings).reverse()[0];
     const projectName = "IAVFrontendFramework";
     const basePath = `${projectName}/${currentVersion}`;
+
+    useEffect(() => {
+        if (location.pathname.endsWith(".html")) {
+            navigate(location.pathname.replace(/\.html$/, ""), {replace: true});
+        }
+    }, [location, navigate]);
 
     return (
         <>

@@ -18,6 +18,7 @@
 
 import {
   createModules,
+  FFMandatoryStoreModules,
   StoreBuilder,
 } from "@iavofficial/frontend-framework/store";
 import { Amplify } from "aws-amplify";
@@ -27,6 +28,7 @@ import { AWSAuthenticator } from "@iavofficial/frontend-framework-aws-authentica
 import { useModuleContext } from "@iavofficial/frontend-framework/moduleContext";
 import { AWSAuthenticationView } from "@iavofficial/frontend-framework-aws-authenticator/awsAuthenticationView";
 import { MandatoryModuleNames } from "@iavofficial/frontend-framework/mandatoryModuleNames";
+import { configureStore } from "@reduxjs/toolkit";
 
 const cognitoPool = import.meta.env.VITE_COGNITO_POOL;
 const cognitoAppId = import.meta.env.VITE_COGNITO_APP_ID;
@@ -53,25 +55,54 @@ const configureAmplify: () => void = () => {
   );
 };
 
-const customModules = {
+const frameworkStoreModules = {
   [MandatoryModuleNames.Authentication]: new AWSAuthenticator({
+    configureAmplify: configureAmplify,
+    failOnNoLegalGroup: true,
+    legalGroups: ["ADMIN", "SHOWCASE"],
+  })
+};
+
+const userStoreModules = {
+  userModule: new AWSAuthenticator({
     configureAmplify: configureAmplify,
     failOnNoLegalGroup: true,
     legalGroups: ["ADMIN", "SHOWCASE"],
   }),
 };
 
-export const modules = createModules({ storeModules: customModules });
+const nonStoreModules = {
+  test: { text: "text" },
+};
 
-export const store = new StoreBuilder(modules.storeModules)
-  /*    .setFrameworkModuleProcessor(
-    "auth",
-    (authModule: AWSAuthenticator, storeConfigBuilder) => {}
-  )*/
+export const modules = createModules({
+  frameworkStoreModules: frameworkStoreModules,
+  userStoreModules: userStoreModules,
+  nonStoreModules: nonStoreModules
+});
+
+export const store = new StoreBuilder(
+  modules.frameworkStoreModules,
+  modules.userStoreModules
+)
+  .setFrameworkModuleProcessor(
+    MandatoryModuleNames.Authentication,
+    (module, storeConfigBuilder) => {}
+  )
+  /*.setStoreBuilder((storeConfig) => {
+    const store = configureStore({
+      reducer: storeConfig.reducers,
+      middleware: (getDefaultMiddleware: Function) =>
+        getDefaultMiddleware().concat(storeConfig.middleware),
+      enhancers: (getDefaultEnhancers: Function) =>
+        getDefaultEnhancers().concat(storeConfig.enhancers),
+    });
+    return store;
+  })*/
   .build();
 
 export const awsAuthenticationView = AWSAuthenticationView<
-  typeof modules.storeModules
+  typeof modules.frameworkStoreModules
 >;
 
 // Use this to create a typed module context.

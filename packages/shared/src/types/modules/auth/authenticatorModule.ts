@@ -45,7 +45,6 @@ export type AuthState = {
 };
 
 export type AuthModule<TAuthState extends AuthState> = {
-  slice: Slice<TAuthState>;
   fetchAuthed: AsyncThunk<Response, FetchAuthedFunctionArgs, any>;
   login: AsyncThunk<void, {credentials: Credentials}, any>;
   logout: AsyncThunk<void, {error?: unknown} | undefined, any>;

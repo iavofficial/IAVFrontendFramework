@@ -36,8 +36,12 @@ import {
 import {useDispatch, useSelector} from "react-redux";
 import {AWSAuthenticatorExtras, AWSUserData} from "./awsAuthenticatorTypes";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/mandatoryModuleNames";
-import { AuthModule, AuthState, Credentials } from "@iavofficial/frontend-framework-shared/authenticatorModule";
-import { JWT } from "aws-amplify/auth";
+import {
+  AuthModule,
+  AuthState,
+  Credentials,
+} from "@iavofficial/frontend-framework-shared/authenticatorModule";
+import {JWT} from "aws-amplify/auth";
 
 export interface FetchSettings {
   headers?: Headers;
@@ -80,10 +84,10 @@ const initialState: AWSAuthenticatorState = {
   },
 };
 
-export class AWSAuthenticator implements AuthModule<AWSAuthenticatorState>{
+export class AWSAuthenticator implements AuthModule<AWSAuthenticatorState> {
   private config;
 
-  public slice: Slice<AWSAuthenticatorState>;
+  public slice;
   public fetchAuthed;
   public login;
   public logout;
@@ -186,7 +190,7 @@ export class AWSAuthenticator implements AuthModule<AWSAuthenticatorState>{
             if (result instanceof ValidUserInformation) {
               dispatch(processSuccessfulAuth({...result}));
             } else {
-              dispatch(setNewPasswordRequired({}));
+              dispatch(setNewPasswordRequired());
             }
           })
           .catch((error: Error) => {
@@ -222,7 +226,9 @@ export class AWSAuthenticator implements AuthModule<AWSAuthenticatorState>{
             this.config.legalGroups,
           )
             .then((result: ValidUserInformation | undefined) => {
-              dispatch(processSuccessfulAuth({...result}));
+              if (result !== undefined) {
+                dispatch(processSuccessfulAuth({...result}));
+              }
             })
             .catch((error: Error) => {
               dispatch(this.logout({}));
@@ -239,7 +245,9 @@ export class AWSAuthenticator implements AuthModule<AWSAuthenticatorState>{
             this.config.legalGroups,
           )
             .then((result) => {
-              dispatch(processSuccessfulAuth({...result}));
+              if (result !== undefined) {
+                dispatch(processSuccessfulAuth({...result}));
+              }
             })
             .catch((error: Error) => {
               dispatch(this.logout({error}));

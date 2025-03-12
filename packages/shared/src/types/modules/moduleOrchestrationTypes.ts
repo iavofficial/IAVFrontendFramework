@@ -23,7 +23,7 @@ import {AuthModule, AuthState} from "./auth/authenticatorModule";
 import {StoreConfigBuilder} from "../../modules/module_orchestration/storeConfigBuilder";
 
 export type FFStoreModules<TModulesState = unknown> = {
-  [K in keyof TModulesState]: FFStoreModule<TModulesState>;
+  [K in keyof TModulesState]: FFStoreModule<TModulesState[K]>;
 };
 
 // The mandatory state (which will be the state of different module's slices)
@@ -112,13 +112,17 @@ export type ActualMandatoryStateFromModules<
     : ExtractModuleState<FFMandatoryStoreModules[K]>;
 };
 
+export type ActualUserModulesStateFromModules<TModules> = {
+  [K in keyof TModules]: ExtractModuleState<TModules[K]>;
+};
+
 // This type merges two module types. If there are duplicate keys regarding
 // both types, the keys of TDefaultModules will be overwritten.
-export type MergeModules<TCustomModules, TDefaultModules> = Omit<
-  TDefaultModules,
-  keyof TCustomModules
+export type MergeModules<TDefault, TOverrides> = Omit<
+  TDefault,
+  keyof TOverrides
 > &
-  TCustomModules;
+  TOverrides;
 
 // The extended type is taken from the ReturnType type.
 export type RootState<TStoreState extends (...args: any) => any> =

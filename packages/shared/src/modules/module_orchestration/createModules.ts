@@ -16,16 +16,20 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {FFModule} from "../../types/modules/generalModule";
+import {FFModule, FFStoreModule} from "../../types/modules/generalModule";
 import {
   ActualMandatoryStateFromModules,
   FFMandatoryStoreModules,
   FFMandatoryState,
+  MergeModules,
+  ActualUserModulesStateFromModules,
+  FFStoreModules,
 } from "../../types/modules/moduleOrchestrationTypes";
-import {ExactPartial} from "../../types/util-types/exact";
+import {Exact, ExactPartial} from "../../types/util-types/exact";
 import {
   DefaultNonStoreModules,
   defaultNonStoreModules,
+  DefaultStoreModules,
   defaultStoreModules,
 } from "./moduleDefaults";
 
@@ -33,14 +37,15 @@ export function createModules<
   // Partial of DefaultNonStoreModules ensures that if TUserStoreModules is used for
   // overriding default non store modules, the user modules have to statisfy the
   // corresponding TS constraints.
-  TUserStoreModules extends Partial<DefaultNonStoreModules>,
+  TUserStoreModules extends FFStoreModules<TUserModulesState> & Partial<DefaultNonStoreModules>,
   // Same for TMandatoryStoreModules regarding overriding the default store modules.
-  TMandatoryStoreModules extends Partial<
+  TUserModulesState = ActualUserModulesStateFromModules<TUserStoreModules>,
+  TFrameworkStoreModules extends Partial<
     FFMandatoryStoreModules<TMandatoryModulesState>
   > = {},
-  TNonStoreModules extends Record<string, FFModule> = Record<string, FFModule>,
   TMandatoryModulesState extends
-    FFMandatoryState = ActualMandatoryStateFromModules<TMandatoryStoreModules>,
+    FFMandatoryState = ActualMandatoryStateFromModules<TFrameworkStoreModules>,
+  TNonStoreModules extends Partial<DefaultNonStoreModules> = {},
 >(
   params: {
     // It has to be ensured that frameworkStoreModules has no more keys than
@@ -48,37 +53,41 @@ export function createModules<
     // default store modules.
     frameworkStoreModules?: ExactPartial<
       FFMandatoryStoreModules<TMandatoryModulesState>,
-      TMandatoryStoreModules
+      TFrameworkStoreModules
     >;
     // TUserModules should not be used to override mandatory modules.
-    userStoreModules?: Omit<TUserStoreModules, keyof FFMandatoryStoreModules>;
+    userStoreModules?: Exact<
+    Omit<TUserStoreModules, keyof FFMandatoryStoreModules>,
+    TUserStoreModules
+  >;
     nonStoreModules?: TNonStoreModules;
   } = {},
 ) {
   const {
-    frameworkStoreModules = {} as TMandatoryStoreModules,
+    frameworkStoreModules = {} as TFrameworkStoreModules,
     nonStoreModules = {} as TNonStoreModules,
     userStoreModules = {} as TUserStoreModules,
   } = params;
 
-  const mergedMandatoryStoreModules = {
-    // User store modules should not override mandatory store modules (which are
-    // default ones and passed custom ones). This is why user store modules are
-    // spread first.
-    ...userStoreModules,
+  type TMergedFrameworkStoreModules = MergeModules<
+    DefaultStoreModules,
+    TFrameworkStoreModules
+  >;
+  const mergedFrameworkStoreModules = {
     ...defaultStoreModules,
     ...frameworkStoreModules,
-  };
+  } as TMergedFrameworkStoreModules;
 
+  type TMergedNonStoreModules = MergeModules<
+    DefaultNonStoreModules,
+    TNonStoreModules
+  >;
   const mergedNonStoreModules = {
     ...defaultNonStoreModules,
     ...nonStoreModules,
-  };
+  } as TMergedNonStoreModules;
 
-  return {
-    frameworkStoreModules: mergedMandatoryStoreModules,
-    userStoreModules: userStoreModules,
-    /*
+  /*
     User store modules override modules which are not relevant
      for the store in case the user wants to implement non store modules but wants to add a state.
      This is necessary because store modules are "more specific" than other modules. For example there
@@ -98,10 +107,19 @@ export function createModules<
      A default implementation without store can be overwritten by custom modules both for and without
      the store.
      */
-    all: {
-      ...mergedNonStoreModules,
-      ...userStoreModules,
-      ...mergedMandatoryStoreModules,
-    },
+
+  const allModules = {
+    ...mergedNonStoreModules,
+    ...userStoreModules,
+    ...mergedFrameworkStoreModules,
+  } as MergeModules<
+    MergeModules<TMergedNonStoreModules, typeof userStoreModules>,
+    TMergedFrameworkStoreModules
+  >;
+
+  return {
+    frameworkStoreModules: mergedFrameworkStoreModules,
+    userStoreModules: userStoreModules,
+    all: allModules,
   };
 }

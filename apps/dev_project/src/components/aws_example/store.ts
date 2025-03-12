@@ -55,7 +55,7 @@ const configureAmplify: () => void = () => {
   );
 };
 
-const customModules = {
+const frameworkStoreModules = {
   [MandatoryModuleNames.Authentication]: new AWSAuthenticator({
     configureAmplify: configureAmplify,
     failOnNoLegalGroup: true,
@@ -63,11 +63,30 @@ const customModules = {
   })
 };
 
-export const modules = createModules({ frameworkStoreModules: customModules });
+const userStoreModules = {
+  userModule: new AWSAuthenticator({
+    configureAmplify: configureAmplify,
+    failOnNoLegalGroup: true,
+    legalGroups: ["ADMIN", "SHOWCASE"],
+  }),
+};
 
-export const store = new StoreBuilder(customModules)
+const nonStoreModules = {
+  test: { text: "text" },
+};
+
+export const modules = createModules({
+  frameworkStoreModules: frameworkStoreModules,
+  userStoreModules: userStoreModules,
+  nonStoreModules: nonStoreModules
+});
+
+export const store = new StoreBuilder(
+  modules.frameworkStoreModules,
+  modules.userStoreModules
+)
   .setFrameworkModuleProcessor(
-    "auth",
+    MandatoryModuleNames.Authentication,
     (module, storeConfigBuilder) => {}
   )
   /*.setStoreBuilder((storeConfig) => {

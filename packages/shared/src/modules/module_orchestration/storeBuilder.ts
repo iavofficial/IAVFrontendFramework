@@ -30,19 +30,27 @@ import {
   ModuleAndProcessorMap,
   ModuleProcessorFunction,
   FFStoreModules,
+  ActualUserModulesStateFromModules,
 } from "../../types/modules/moduleOrchestrationTypes";
 import {StoreConfig} from "./storeConfig";
 import {StoreConfigBuilder} from "./storeConfigBuilder";
 import {MandatoryModuleNames} from "../../constants/mandatoryModuleNames";
 import {Exact} from "../../types/util-types/exact";
 import {FFStoreModule} from "../../types/modules/generalModule";
+import {DefaultNonStoreModules} from "./moduleDefaults";
 
 // can be replaced to customize the build of the Redux store.
 export class StoreBuilder<
-  TUserStoreModules extends Record<string, FFStoreModule<unknown>>,
   TFrameworkModules extends FFMandatoryStoreModules<TFrameworkModuleState>,
+  // Partial of DefaultNonStoreModules ensures that if TUserStoreModules is used for
+  // overriding default non store modules, the user modules have to statisfy the
+  // corresponding TS constraints.
+  TUserStoreModules extends FFStoreModules<TUserModulesState> &
+    Partial<DefaultNonStoreModules>,
   TFrameworkModuleState extends
     FFMandatoryState = ActualMandatoryStateFromModules<TFrameworkModules>,
+  // Same for TMandatoryStoreModules regarding overriding the default store modules.
+  TUserModulesState = ActualUserModulesStateFromModules<TUserStoreModules>,
 > {
   private storeConfigBuilder: StoreConfigBuilder<TFrameworkModuleState>;
 
@@ -71,7 +79,10 @@ export class StoreBuilder<
       TFrameworkModules
     >,
     // TUserModules should not be used to override mandatory modules.
-    userStoreModules?: Omit<TUserStoreModules, keyof FFMandatoryStoreModules>,
+    userStoreModules?: Exact<
+      Omit<TUserStoreModules, keyof FFMandatoryStoreModules>,
+      TUserStoreModules
+    >,
   ) {
     this.storeConfigBuilder = new StoreConfigBuilder(frameworkStoreModules);
 

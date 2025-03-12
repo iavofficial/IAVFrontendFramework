@@ -27,7 +27,7 @@ function Layout() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const currentVersion = Object.keys(versionMappings)[0];
+    const currentVersion = Object.keys(versionMappings).reverse()[0];
     const projectName = "IAVFrontendFramework";
     const basePath = `${projectName}/${currentVersion}`;
 
@@ -41,6 +41,7 @@ function Layout() {
         <>
             <Routes>
                 <Route path="/" element={<Navigate to={`/${basePath}/overview`} replace/>}/>
+                <Route path="/:projectName/imprint" element={<Imprint/>}/>
                 <Route
                     path=":projectName/:version/*"
                     element={
@@ -51,7 +52,6 @@ function Layout() {
                         </>
                     }
                 />
-                <Route path={`/:projectName/imprint`} element={<Imprint/>}/>
                 <Route path="*" element={<Navigate to={`/${basePath}/overview`} replace/>}/>
             </Routes>
         </>

@@ -37,11 +37,9 @@ const Footer = () => {
 
     const {projectName} = useParams<{ projectName: string }>();
 
-    console.log(projectName)
-
     return (
         <div className={classes.footer}>
-            <PageLink to={`/${projectName}/imprint`} label={"Imprint"} target={"_blank"}/>
+            <PageLink to={`/${projectName}/imprint`} label={"Imprint"}/>
         </div>
     );
 }

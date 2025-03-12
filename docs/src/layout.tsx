@@ -34,7 +34,7 @@ function Layout() {
                         </>
                     }
                 />
-                <Route path="*" element={<Navigate to="/index.html" replace/>}/>
+                <Route path="*" element={<Navigate to={`/${basePath}/overview`} replace/>}/>
             </Routes>
         </>
     );

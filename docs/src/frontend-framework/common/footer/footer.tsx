@@ -17,6 +17,7 @@
 import React from "react";
 import makeStyles from "../../../util/makeStyles.tsx";
 import PageLink from "../page/text/pageLink.tsx";
+import {useParams} from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
     footer: {
@@ -34,9 +35,13 @@ const Footer = () => {
 
     const {classes} = useStyles()
 
+    const {projectName} = useParams<{ projectName: string }>();
+
+    console.log(projectName)
+
     return (
         <div className={classes.footer}>
-            <PageLink to={"/imprint"} label={"Imprint"} target={"_blank"}/>
+            <PageLink to={`/${projectName}/imprint`} label={"Imprint"} target={"_blank"}/>
         </div>
     );
 }

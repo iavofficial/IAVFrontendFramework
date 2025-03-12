@@ -49,8 +49,8 @@ const NavLinkItem: React.FC<PropsWithChildren<Props>> = (props) => {
     const {classes} = useStyles();
     const location = useLocation();
 
-    const isActive = location.pathname === to;
-
+    const isActive = location.pathname.includes(to);
+    
     return (
         <li>
             <Link

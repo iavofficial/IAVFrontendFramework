@@ -11,7 +11,7 @@ function Layout() {
     const location = useLocation();
 
     const currentVersion = Object.keys(versionMappings).reverse()[0];
-    const projectName = "iav-test-2";
+    const projectName = "IAVFrontendFramework";
     const basePath = `${projectName}/${currentVersion}`;
 
     useEffect(() => {

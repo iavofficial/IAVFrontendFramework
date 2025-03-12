@@ -115,7 +115,7 @@ const Header: React.FC<Props> = (props) => {
     }, [location.pathname, navigate]);
 
     const getVersionList = useCallback(async (): Promise<string[] | null> => {
-        return Object.keys(versionMappings);
+        return Object.keys(versionMappings).reverse();
     }, []);
 
     const isValidVersion = useCallback((version: string | undefined) => {

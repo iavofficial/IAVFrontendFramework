@@ -15,7 +15,6 @@
  **/
 
 import {Navigate, Route, Routes, useLocation, useNavigate} from "react-router-dom";
-import PageNavigation from "./frontend-framework/common/drawer/pageNavigation.tsx";
 import Header from "./frontend-framework/common/header/header.tsx";
 import VersionLayout from "./frontend-framework/components/versionLayout.tsx";
 import {versionMappings} from "./frontend-framework/versionMappings.ts";
@@ -46,7 +45,6 @@ function Layout() {
                     path=":projectName/:version/*"
                     element={
                         <>
-                            <PageNavigation projectName={projectName} currentVersion={currentVersion}/>
                             <Header projectName={projectName}/>
                             <VersionLayout/>
                         </>

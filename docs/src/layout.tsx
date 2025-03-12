@@ -29,7 +29,7 @@ function Layout() {
                     element={
                         <>
                             <PageNavigation projectName={projectName} currentVersion={currentVersion}/>
-                            <Header projectName={projectName}/>
+                            <Header projectName={projectName} currentVersion={currentVersion}/>
                             <VersionLayout/>
                         </>
                     }

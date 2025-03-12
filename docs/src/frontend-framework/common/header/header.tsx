@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect, useState} from "react";
 import makeStyles from "../../../util/makeStyles.tsx";
 import Title from "../page/text/title.tsx";
-import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {versionMappings} from "../../versionMappings.ts";
 
 const useStyles = makeStyles(() => ({
@@ -66,29 +66,18 @@ const useStyles = makeStyles(() => ({
 
 interface Props {
     projectName: string;
+    currentVersion: string;
 }
 
 const Header: React.FC<Props> = (props) => {
-    const {projectName} = props;
+    const {projectName, currentVersion} = props;
     const {classes} = useStyles();
-
-    const {version} = useParams<{ version: string }>();
 
     const [versions, setVersions] = useState<string[]>([]);
     const [selectedVersion, setSelectedVersion] = useState<string>("");
 
     const navigate = useNavigate();
     const location = useLocation();
-
-    const handleLocalVersionChange = useCallback(
-        (newVersion: string) => {
-            let newPath = location.pathname;
-            newPath = newPath.replace(/\/docs\/([^\/]+)\/[^\/]+$/, `/${newVersion}/overview`);
-            newPath = newPath.replace(/\/index\.html$/, `/${newVersion}/overview`);
-            navigate(newPath);
-        },
-        [location.pathname, navigate]
-    );
 
     const handleVersionChange = useCallback((newVersion: string) => {
         const newPath = location.pathname.replace(
@@ -102,34 +91,13 @@ const Header: React.FC<Props> = (props) => {
         return Object.keys(versionMappings).reverse();
     }, []);
 
-    const isValidVersion = useCallback((version: string | undefined) => {
-        return version && /^\d+\.\d+\.\d+$/.test(version);
-    }, []);
-
     const loadVersions = useCallback(async () => {
         const versionList = await getVersionList();
         if (versionList) {
-            if (isValidVersion(version)) {
-                setVersions([version || "", ...versionList.filter(v => v !== version && isValidVersion(v))]);
-                setSelectedVersion(version || "");
-            } else {
-                setVersions(versionList);
-                setSelectedVersion(versionList[0]);
-            }
+            setVersions([currentVersion || "", ...versionList.filter(v => v !== currentVersion)]);
+            setSelectedVersion(currentVersion || "");
         }
-    }, [getVersionList, isValidVersion, version]);
-
-    useEffect(() => {
-        const fetchVersion = async () => {
-            if (!isValidVersion(version)) {
-                const versionList = await getVersionList();
-                if (versionList) {
-                    handleLocalVersionChange(`${versionList[0]}`);
-                }
-            }
-        };
-        fetchVersion();
-    }, [version, handleVersionChange, getVersionList, handleLocalVersionChange, isValidVersion]);
+    }, [currentVersion, getVersionList]);
 
     useEffect(() => {
         loadVersions();

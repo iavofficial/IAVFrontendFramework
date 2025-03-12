@@ -30,44 +30,52 @@ import {
 import {StoreConfig} from "./storeConfig";
 import {FFStoreModule} from "../../types/modules/generalModule";
 
-export class StoreConfigBuilder<TState extends FFMandatoryState> {
-  private reducers: FFMandatoryReducers<TState>;
+export class StoreConfigBuilder<TModulesState extends FFMandatoryState> {
+  // Although it is just FFMandatoryReducers, the reducers can be more.
+  private reducers: FFMandatoryReducers<TModulesState>;
   private middleware: Middleware[] = [];
   private enhancers: StoreEnhancer[] = [];
   // This field is used to allow users to add additional values with custom processors to use them inside
   // a custom storeBuilder
   private extras: Record<string, unknown> = {};
 
-  constructor(modules: FFMandatoryStoreModules<TState>) {
+  // The modules have to be passed inside the constructor in order to
+  // ensure that there is a reducer for every mandatory store module.
+  constructor(modules: FFMandatoryStoreModules<TModulesState>) {
     let reducers = {};
     let middleware: Middleware[] = [];
     let enhancers: StoreEnhancer[] = [];
     let extras = {};
+    // Default processing of the modules.
     // Key is incorrectly inferred to be of type string
-    Object.entries(modules as Record<keyof TState, FFStoreModule<unknown>>).forEach(
-      ([key, module]) => {
-        if (module?.slice?.reducer) {
-          reducers = {...reducers, [key]: module.slice.reducer};
-        }
-        if (module.middleware) {
-          middleware = [...middleware, ...module.middleware];
-        }
-        if (module.enhancers) {
-          enhancers = [...enhancers, ...module.enhancers];
-        }
-        extras = {...extras, ...module.extras};
-      },
-    );
-    this.reducers = reducers as FFMandatoryReducers<TState>;
+    Object.entries(
+      modules as Record<keyof TModulesState, FFStoreModule<unknown>>,
+    ).forEach(([key, module]) => {
+      if (module?.slice?.reducer) {
+        reducers = {...reducers, [key]: module.slice.reducer};
+      }
+      if (module.middleware) {
+        middleware = [...middleware, ...module.middleware];
+      }
+      if (module.enhancers) {
+        enhancers = [...enhancers, ...module.enhancers];
+      }
+      extras = {...extras, ...module.extras};
+    });
+    // TS does not recognize the wanted type from Object methods.
+    this.reducers = reducers as FFMandatoryReducers<TModulesState>;
     this.middleware = middleware;
     this.enhancers = enhancers;
     this.extras = extras;
   }
 
-  public setReducer<K extends keyof TState>(key: K, reducer: Reducer<TState[K]>): this {
+  public setReducer<K extends keyof TModulesState>(
+    key: K,
+    reducer: Reducer<TModulesState[K]>,
+  ): this {
     this.reducers[key] = reducer;
     return this;
-  }  
+  }
 
   public setMiddleware(middleware: Middleware[]): this {
     this.middleware = middleware;

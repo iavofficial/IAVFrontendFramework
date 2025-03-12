@@ -22,8 +22,8 @@ import {MandatoryModuleNames} from "../../constants/mandatoryModuleNames";
 import {AuthModule, AuthState} from "./auth/authenticatorModule";
 import {StoreConfigBuilder} from "../../modules/module_orchestration/storeConfigBuilder";
 
-export type FFStoreModules<TState = any> = {
-  [K in keyof TState]: FFStoreModule<TState>;
+export type FFStoreModules<TModulesState = unknown> = {
+  [K in keyof TModulesState]: FFStoreModule<TModulesState>;
 };
 
 // The mandatory state (which will be the state of different module's slices)
@@ -34,8 +34,8 @@ export type FFMandatoryState = {
 // It is concluded that every mandatory state will have a root reducer object.
 // Without the possiblity of changing values (so the existence of reducers)
 // state is not sensible.
-export type FFMandatoryReducers<TState extends FFMandatoryState> = {
-  [K in keyof TState]: Reducer<TState[K]>;
+export type FFMandatoryReducers<TModulesState extends FFMandatoryState> = {
+  [K in keyof TModulesState]: Reducer<TModulesState[K]>;
 };
 
 // All mandatory modules with minimal setup which is needed by the framework.
@@ -44,18 +44,18 @@ export type FFMandatoryReducers<TState extends FFMandatoryState> = {
 // So the minimal configuration is exactly the set of values and methods
 // used by the framework itself.
 export type FFMandatoryStoreModules<
-  TState extends FFMandatoryState = FFMandatoryState,
+  TModulesState extends FFMandatoryState = FFMandatoryState,
 > = {
   [MandatoryModuleNames.Authentication]: AuthModule<
-    TState[typeof MandatoryModuleNames.Authentication]
+    TModulesState[typeof MandatoryModuleNames.Authentication]
   >;
 };
 
 export type FFMandatoryNonStoreModules = {};
 
 export type FFAllMandatoryModules<
-  TState extends FFMandatoryState = FFMandatoryState,
-> = FFMandatoryStoreModules<TState> & FFMandatoryNonStoreModules;
+  TModulesState extends FFMandatoryState = FFMandatoryState,
+> = FFMandatoryStoreModules<TModulesState> & FFMandatoryNonStoreModules;
 
 // The user can provide additional modules which aren't used by the
 // framework itself.
@@ -67,13 +67,13 @@ export type GenericModules = Record<string, FFStoreModule<unknown>>;
 // The effect of never in this case is that there cannot be a key with a value
 // which does not extend FFStoreModule.
 export type ModuleAndProcessorMap<
-  ModuleTypes extends FFStoreModules,
+  TModules extends FFStoreModules,
   TFrameworkModulesState extends FFMandatoryState,
 > = {
-  [K in keyof ModuleTypes]: ModuleTypes[K] extends FFStoreModule<
-    ExtractModuleState<ModuleTypes[K]>
+  [K in keyof TModules]: TModules[K] extends FFStoreModule<
+    ExtractModuleState<TModules[K]>
   >
-    ? ModuleEntry<ModuleTypes[K], TFrameworkModulesState>
+    ? ModuleEntry<TModules[K], TFrameworkModulesState>
     : never;
 };
 
@@ -123,4 +123,5 @@ export type MergeModules<TCustomModules, TDefaultModules> = Omit<
 // The extended type is taken from the ReturnType type.
 export type RootState<TStoreState extends (...args: any) => any> =
   ReturnType<TStoreState>;
+
 export type AppDispatch<TStoreDispatch> = TStoreDispatch;

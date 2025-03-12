@@ -29,7 +29,6 @@ import {
   FFMandatoryState,
   ModuleAndProcessorMap,
   ModuleProcessorFunction,
-  FFMandatoryNonStoreModules,
   FFStoreModules,
 } from "../../types/modules/moduleOrchestrationTypes";
 import {StoreConfig} from "./storeConfig";
@@ -37,10 +36,6 @@ import {StoreConfigBuilder} from "./storeConfigBuilder";
 import {MandatoryModuleNames} from "../../constants/mandatoryModuleNames";
 import {Exact} from "../../types/util-types/exact";
 import {FFStoreModule} from "../../types/modules/generalModule";
-import {
-  AuthModule,
-  AuthState,
-} from "../../types/modules/auth/authenticatorModule";
 
 // can be replaced to customize the build of the Redux store.
 export class StoreBuilder<
@@ -68,11 +63,15 @@ export class StoreBuilder<
   ) => EnhancedStore<TFrameworkModuleState> = defaultStoreBuilder;
 
   constructor(
+    // It has to be ensured that frameworkStoreModules has no more keys than
+    // there are mandatory modules as this attribute's purpose is to override
+    // default store modules.
     frameworkStoreModules: Exact<
-      TFrameworkModules & FFMandatoryNonStoreModules,
+      FFMandatoryStoreModules<TFrameworkModuleState>,
       TFrameworkModules
     >,
-    userStoreModules?: TUserStoreModules,
+    // TUserModules should not be used to override mandatory modules.
+    userStoreModules?: Omit<TUserStoreModules, keyof FFMandatoryStoreModules>,
   ) {
     this.storeConfigBuilder = new StoreConfigBuilder(frameworkStoreModules);
 

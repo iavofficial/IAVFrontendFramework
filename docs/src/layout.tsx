@@ -51,7 +51,7 @@ function Layout() {
                         </>
                     }
                 />
-                <Route path={`${projectName}/imprint`} element={<Imprint/>}/>
+                <Route path={`/:projectName/imprint`} element={<Imprint/>}/>
                 <Route path="*" element={<Navigate to={`/${basePath}/overview`} replace/>}/>
             </Routes>
         </>

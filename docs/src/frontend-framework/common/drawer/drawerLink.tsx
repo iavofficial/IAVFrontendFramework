@@ -50,7 +50,7 @@ const NavLinkItem: React.FC<PropsWithChildren<Props>> = (props) => {
     const location = useLocation();
 
     const isActive = location.pathname.includes(to);
-    
+        
     return (
         <li>
             <Link

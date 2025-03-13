@@ -27,8 +27,14 @@ import {
   FFMandatoryState,
   FFMandatoryStoreModules,
 } from "../../types/modules/moduleOrchestrationTypes";
-import {StoreConfig} from "./storeConfig";
 import {FFStoreModule} from "../../types/modules/generalModule";
+
+export type StoreConfig<TState extends FFMandatoryState> = {
+  reducers: FFMandatoryReducers<TState> & Record<string, Reducer>;
+  middleware: Middleware[];
+  enhancers: StoreEnhancer[];
+  extras: Record<string, unknown>;
+};
 
 export class StoreConfigBuilder<TModulesState extends FFMandatoryState> {
   // Although it is just FFMandatoryReducers, the reducers can be more.
@@ -45,7 +51,6 @@ export class StoreConfigBuilder<TModulesState extends FFMandatoryState> {
     let reducers = {};
     let middleware: Middleware[] = [];
     let enhancers: StoreEnhancer[] = [];
-    let extras = {};
     // Default processing of the modules.
     // Key is incorrectly inferred to be of type string
     Object.entries(
@@ -60,13 +65,11 @@ export class StoreConfigBuilder<TModulesState extends FFMandatoryState> {
       if (module.enhancers) {
         enhancers = [...enhancers, ...module.enhancers];
       }
-      extras = {...extras, ...module.extras};
     });
     // TS does not recognize the wanted type from Object methods.
     this.reducers = reducers as FFMandatoryReducers<TModulesState>;
     this.middleware = middleware;
     this.enhancers = enhancers;
-    this.extras = extras;
   }
 
   public setReducer<K extends keyof TModulesState>(
@@ -93,11 +96,11 @@ export class StoreConfigBuilder<TModulesState extends FFMandatoryState> {
   }
 
   build() {
-    return new StoreConfig(
-      this.reducers,
-      this.middleware,
-      this.enhancers,
-      this.extras,
-    );
+    return {
+      reducers: this.reducers,
+      middleware: this.middleware,
+      enhancers: this.enhancers,
+      extras: this.extras,
+    };
   }
 }

@@ -11,14 +11,20 @@ export const transformModulesToProcessorMap = <
 >(
   modules: TModules,
 ) => {
-  return Object.entries(modules)
-    .map(([key, value]) => ({
-      [key]: {
-        module: value,
-      },
-    }))
-    .reduce((prev, current) => ({
-      ...prev,
-      ...current,
-    })) as ModuleAndProcessorMap<TModules, TFrameworkModulesState>;
+  const modulesArray = Object.entries(modules).map(([key, value]) => ({
+    [key]: {
+      module: value,
+    },
+  }));
+
+  const processorMap = (
+    modulesArray.length > 0
+      ? modulesArray.reduce((prev, current) => ({
+          ...prev,
+          ...current,
+        }))
+      : {}
+  ) as ModuleAndProcessorMap<TModules, TFrameworkModulesState>;
+
+  return processorMap;
 };

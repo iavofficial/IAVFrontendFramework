@@ -19,8 +19,8 @@
 import {Middleware, Slice, StoreEnhancer} from "@reduxjs/toolkit";
 
 export type ModuleLifecycleHook = () => {renderChildren: boolean} & Record<
-  string,
-  unknown
+string,
+unknown
 >;
 
 export type FFModule = {

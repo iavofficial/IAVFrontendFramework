@@ -16,14 +16,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {DefaultStoreModules, defaultStoreModules} from "./moduleDefaults";
-import { mergeModules } from "./util/mergeModules";
-
-type WithoutSlice<T> = {
-  [K in keyof T as T[K] extends {slice: any} ? never : K]: T[K];
-};
-
-type WithoutKeys<T, U> = Pick<T, Exclude<keyof T, keyof U>>;
+import {mergeModules} from "./util/mergeModules";
+import { seperateModuleTypes } from "./util/seperateModuleTypes";
 
 // It would be better to use FFModule inside the Record to ensure that
 // the useModuleLifecycle method has the expected type if the module
@@ -41,26 +35,7 @@ export const createModules = <TModules extends Record<string, object>>(
 ) => {
   const modules = paramModules ?? ({} as TModules);
 
-  // Using Omit unfortunately does not work.
-  type TNonStoreModules = WithoutSlice<TModules>;
-  type TStoreModules = WithoutKeys<TModules, TNonStoreModules>;
+  const seperatedModules = seperateModuleTypes(modules);
 
-  type TUserStoreModules = WithoutKeys<TStoreModules, DefaultStoreModules>;
-  type TFrameworkStoreModules = WithoutKeys<TStoreModules, TUserStoreModules>;
-
-  let frameworkStoreModules = {} as TFrameworkStoreModules;
-  let userStoreModules = {} as TUserStoreModules;
-  let nonStoreModules = {} as TNonStoreModules;
-
-  Object.entries(modules).forEach(([key, module]) => {
-    if (!("slice" in module)) {
-      nonStoreModules = {...nonStoreModules, [key]: module};
-    } else if (key in defaultStoreModules) {
-      frameworkStoreModules = {...frameworkStoreModules, [key]: module};
-    } else {
-      userStoreModules = {...userStoreModules, [key]: module};
-    }
-  });
-
-  return mergeModules(frameworkStoreModules, userStoreModules, nonStoreModules);
+  return mergeModules(seperatedModules);
 };

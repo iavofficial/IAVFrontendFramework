@@ -1,4 +1,6 @@
-import { MergeModules } from "../../../types/modules/moduleOrchestrationTypes";
+import {MergeModules} from "../../../types/modules/moduleOrchestrationTypes";
+import {Exact} from "../../../types/util-types/exact";
+import {RestrictKeyToPrefix} from "../../../types/util-types/restrictKeyToPrefix";
 import {
   defaultNonStoreModules,
   DefaultNonStoreModules,
@@ -9,33 +11,35 @@ import {
 export const mergeModules = <
   TFrameworkStoreModules extends object,
   TUserStoreModules extends object,
-  TNonStoreModules extends object,
->(
-  frameworkStoreModules: TFrameworkStoreModules,
-  userStoreModules: TUserStoreModules,
-  nonStoreModules: TNonStoreModules,
-) => {
+  TFrameworkNonStoreModules extends object,
+  TUserNonStoreModules extends object,
+>(modules: {
+  frameworkStoreModules: TFrameworkStoreModules;
+  userStoreModules: TUserStoreModules;
+  frameworkNonStoreModules: TFrameworkNonStoreModules;
+  userNonStoreModules: TUserNonStoreModules;
+}) => {
   type TMergedFrameworkStoreModules = MergeModules<
     DefaultStoreModules,
     TFrameworkStoreModules
   >;
   const mergedFrameworkStoreModules = {
     ...defaultStoreModules,
-    ...frameworkStoreModules,
+    ...modules.frameworkStoreModules,
   } as TMergedFrameworkStoreModules;
 
   const storeModules = {
     frameworkStoreModules: mergedFrameworkStoreModules,
-    userStoreModules: userStoreModules,
+    userStoreModules: modules.userStoreModules,
   };
 
   type TMergedNonStoreModules = MergeModules<
     DefaultNonStoreModules,
-    TNonStoreModules
+    TFrameworkNonStoreModules
   >;
   const mergedNonStoreModules = {
     ...defaultNonStoreModules,
-    ...nonStoreModules,
+    ...modules.frameworkNonStoreModules,
   } as TMergedNonStoreModules;
 
   /*
@@ -60,11 +64,12 @@ export const mergeModules = <
   */
 
   const allModules = {
+    ...modules.userNonStoreModules,
     ...mergedNonStoreModules,
-    ...userStoreModules,
+    ...modules.userStoreModules,
     ...mergedFrameworkStoreModules,
   } as MergeModules<
-    MergeModules<TMergedNonStoreModules, typeof userStoreModules>,
+    MergeModules<TMergedNonStoreModules, typeof modules.userStoreModules>,
     TMergedFrameworkStoreModules
   >;
 

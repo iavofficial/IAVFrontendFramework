@@ -27,6 +27,7 @@ import { AWSAuthenticator } from "@iavofficial/frontend-framework-aws-authentica
 import { useModuleContext } from "@iavofficial/frontend-framework/moduleContext";
 import { AWSAuthenticationView } from "@iavofficial/frontend-framework-aws-authenticator/awsAuthenticationView";
 import { MandatoryModuleNames } from "@iavofficial/frontend-framework/constants";
+import { configureStore } from "@reduxjs/toolkit";
 
 const cognitoPool = import.meta.env.VITE_COGNITO_POOL;
 const cognitoAppId = import.meta.env.VITE_COGNITO_APP_ID;
@@ -69,22 +70,26 @@ const userStoreModules = {
   }),
 };
 
-const nonStoreModules = {
-  test: { text: "text" },
+const frameworkNonStoreModules = {};
+
+const userNonStoreModules = {
+  userTest: { text: "text", useModuleLifecycle: () => {} },
 };
 
 export const modules = createModulesSeperately({
-  frameworkStoreModules: frameworkStoreModules,
-  userStoreModules: userStoreModules,
-  nonStoreModules: nonStoreModules,
+  frameworkStoreModules,
+  userStoreModules,
+  frameworkNonStoreModules,
+  userNonStoreModules,
 });
 
 export const store = new StoreBuilder(modules.storeModules)
-  .setFrameworkModuleProcessor(
+  /*.setFrameworkModuleProcessor(
     MandatoryModuleNames.Authentication,
     (module, storeConfigBuilder) => {}
   )
-  /*.setStoreBuilder((storeConfig) => {
+  .setUserModuleProcessor("userModule", (module, StoreConfigBuilder) => {})
+  .setStoreBuilder((storeConfig) => {
     const store = configureStore({
       reducer: storeConfig.reducers,
       middleware: (getDefaultMiddleware: Function) =>

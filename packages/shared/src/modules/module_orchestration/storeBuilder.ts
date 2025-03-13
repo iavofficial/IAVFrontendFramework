@@ -32,107 +32,97 @@ import {
   ModuleProcessorFunction,
   FFStoreModules,
   ActualUserModulesStateFromModules,
+  TParamFrameworkStoreModules,
+  TParamUserStoreModules,
 } from "../../types/modules/moduleOrchestrationTypes";
-import {StoreConfig} from "./storeConfig";
-import {StoreConfigBuilder} from "./storeConfigBuilder";
-import {
-  USER_MODULES_PREFIX,
-} from "../../constants/moduleNames";
-import {Exact} from "../../types/util-types/exact";
+import {StoreConfig, StoreConfigBuilder} from "./storeConfigBuilder";
 import {DefaultNonStoreModules} from "./moduleDefaults";
-import {RestrictKeyToPrefix} from "../../types/util-types/restrictKeyToPrefix";
 import {transformModulesToProcessorMap} from "./util/transformModulesToProcessorMap";
 
 export class StoreBuilder<
-  TFrameworkStoreModules extends FFMandatoryStoreModules<TFrameworkModuleState>,
+  TFrameworkStoreModules extends
+    FFMandatoryStoreModules<TFrameworkModulesState>,
   // Partial of DefaultNonStoreModules ensures that if TUserStoreModules is used for
   // overriding default non store modules, the user modules have to statisfy the
   // corresponding TS constraints.
   TUserStoreModules extends FFStoreModules<TUserModulesState> &
     Partial<DefaultNonStoreModules>,
-  TFrameworkModuleState extends
+  TFrameworkModulesState extends
     FFMandatoryState = ActualMandatoryStateFromModules<TFrameworkStoreModules>,
   // Same for TMandatoryStoreModules regarding overriding the default store modules.
   TUserModulesState = ActualUserModulesStateFromModules<TUserStoreModules>,
 > {
-  private storeConfigBuilder: StoreConfigBuilder<TFrameworkModuleState>;
+  private storeConfigBuilder: StoreConfigBuilder<TFrameworkModulesState>;
 
   // These are mandatory modules and processors which are essential for the framework as
   // it uses values and methods of the processed modules.
-  private mandatoryModulesAndProcessors: ModuleAndProcessorMap<
-    FFMandatoryStoreModules<TFrameworkModuleState>,
-    TFrameworkModuleState
+  private frameworkModulesAndProcessors: ModuleAndProcessorMap<
+    FFMandatoryStoreModules<TFrameworkModulesState>,
+    TFrameworkModulesState
   >;
 
   // These are optional modules and processors of the user.
   private userStoreModulesAndProcessors:
-    | ModuleAndProcessorMap<TUserStoreModules, TFrameworkModuleState>
+    | ModuleAndProcessorMap<TUserStoreModules, TFrameworkModulesState>
     | undefined;
 
   private storeBuilder: (
-    storeConfig: StoreConfig<TFrameworkModuleState>,
-  ) => EnhancedStore<TFrameworkModuleState> = defaultStoreBuilder;
+    storeConfig: StoreConfig<TFrameworkModulesState>,
+  ) => EnhancedStore<TFrameworkModulesState> = defaultStoreBuilder;
 
   constructor(storeModules: {
-    // It has to be ensured that frameworkStoreModules has no more keys than
-    // there are mandatory modules as this attribute's purpose is to override
-    // default store modules.
-    frameworkStoreModules: Exact<
-      FFMandatoryStoreModules<TFrameworkModuleState>,
-      TFrameworkStoreModules
+    frameworkStoreModules: TParamFrameworkStoreModules<
+      TFrameworkStoreModules,
+      TFrameworkModulesState
     >;
-    // TUserModules should not be used to override mandatory modules.
-    // Because of this Omit is used in order to prevent userStoreModules
-    // to have keys of FFMandatoryStoreModules.
-    // Furthermore, RestrictKeyToPrefix is used in order to ensure that
-    // every user module begins with a specific prefix for user modules.
-    // By doing this a collision of keys for new Framework Modules with
-    // user modules can be avoided.
-    userStoreModules?: Exact<
-      RestrictKeyToPrefix<
-        Omit<TUserStoreModules, keyof FFMandatoryStoreModules>,
-        typeof USER_MODULES_PREFIX
-      >,
-      TUserStoreModules
+    userStoreModules?: TParamUserStoreModules<
+      TUserStoreModules,
+      TUserModulesState
     >;
   }) {
     this.storeConfigBuilder = new StoreConfigBuilder(
       storeModules.frameworkStoreModules,
     );
 
-    this.mandatoryModulesAndProcessors = transformModulesToProcessorMap<
+    this.frameworkModulesAndProcessors = transformModulesToProcessorMap<
       TFrameworkStoreModules,
-      TFrameworkModuleState
+      TFrameworkModulesState
     >(storeModules.frameworkStoreModules);
 
     if (storeModules.userStoreModules) {
       this.userStoreModulesAndProcessors = transformModulesToProcessorMap<
         TUserStoreModules,
-        TFrameworkModuleState
+        TFrameworkModulesState
       >(storeModules.userStoreModules);
     }
   }
 
   setFrameworkModuleProcessor<
-    K extends keyof typeof this.mandatoryModulesAndProcessors,
+    K extends keyof typeof this.frameworkModulesAndProcessors,
   >(
     moduleType: K,
     processor: ModuleProcessorFunction<
       TFrameworkStoreModules[K],
-      TFrameworkModuleState
+      TFrameworkModulesState
     >,
   ) {
-    this.mandatoryModulesAndProcessors[moduleType].processor = processor;
+    this.frameworkModulesAndProcessors[moduleType].processor = processor;
     return this;
   }
 
   setUserModuleProcessor<
-    K extends keyof typeof this.userStoreModulesAndProcessors,
+    K extends keyof ModuleAndProcessorMap<
+      TUserStoreModules,
+      TFrameworkModulesState
+    >,
   >(
     moduleType: K,
     processor: ModuleProcessorFunction<
-      (typeof this.userStoreModulesAndProcessors)[K]["module"],
-      TFrameworkModuleState
+      ModuleAndProcessorMap<
+        TUserStoreModules,
+        TFrameworkModulesState
+      >[K]["module"],
+      TFrameworkModulesState
     >,
   ) {
     if (this.userStoreModulesAndProcessors) {
@@ -143,8 +133,8 @@ export class StoreBuilder<
 
   setStoreBuilder(
     storeBuilder: (
-      storeConfig: StoreConfig<TFrameworkModuleState>,
-    ) => EnhancedStore<TFrameworkModuleState>,
+      storeConfig: StoreConfig<TFrameworkModulesState>,
+    ) => EnhancedStore<TFrameworkModulesState>,
   ) {
     this.storeBuilder = storeBuilder;
     return this;
@@ -152,7 +142,7 @@ export class StoreBuilder<
 
   build() {
     executeProcessorsForModules(
-      this.mandatoryModulesAndProcessors,
+      this.frameworkModulesAndProcessors,
       this.storeConfigBuilder,
     );
 
@@ -164,6 +154,8 @@ export class StoreBuilder<
     }
 
     const storeConfig = this.storeConfigBuilder.build();
+
+    console.log(storeConfig);
 
     return this.storeBuilder(storeConfig);
   }

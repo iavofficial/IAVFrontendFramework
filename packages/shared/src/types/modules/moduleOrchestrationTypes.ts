@@ -18,9 +18,15 @@
 
 import {Reducer} from "@reduxjs/toolkit";
 import {FFStoreModule} from "../../types/modules/generalModule";
-import {MandatoryModuleNames} from "../../constants/moduleNames";
+import {
+  MandatoryModuleNames,
+  USER_MODULES_PREFIX,
+} from "../../constants/moduleNames";
 import {AuthModule, AuthState} from "./auth/authenticatorModule";
 import {StoreConfigBuilder} from "../../modules/module_orchestration/storeConfigBuilder";
+import {Exact, ExactPartial} from "../util-types/exact";
+import {RestrictKeyToPrefix} from "../util-types/restrictKeyToPrefix";
+import {DefaultNonStoreModules} from "../../modules/module_orchestration/moduleDefaults";
 
 export type FFStoreModules<TModulesState = unknown> = {
   [K in keyof TModulesState]: FFStoreModule<TModulesState[K]>;
@@ -130,3 +136,48 @@ export type RootState<TStoreState extends (...args: any) => any> =
   ReturnType<TStoreState>;
 
 export type AppDispatch<TStoreDispatch> = TStoreDispatch;
+
+// It has to be ensured that frameworkStoreModules has no more keys than
+// there are mandatory modules as this attribute's purpose is to override
+// default store modules.
+export type TParamFrameworkStoreModules<
+  TModules extends FFMandatoryStoreModules<TFrameworkModuleState>,
+  TFrameworkModuleState extends FFMandatoryState,
+> = Exact<FFMandatoryStoreModules<TFrameworkModuleState>, TModules>;
+
+export type TParamFrameworkStoreModulesPartial<
+  TModules extends Partial<FFMandatoryStoreModules<TFrameworkModuleState>>,
+  TFrameworkModuleState extends FFMandatoryState,
+> = ExactPartial<FFMandatoryStoreModules<TFrameworkModuleState>, TModules>;
+
+// TUserModules should not be used to override mandatory modules.
+// Because of this Omit is used in order to prevent userStoreModules
+// to have keys of FFMandatoryStoreModules.
+// Furthermore, RestrictKeyToPrefix is used in order to ensure that
+// every user module begins with a specific prefix for user modules.
+// By doing this a collision of keys for new Framework Modules with
+// user modules can be avoided.
+export type TParamUserStoreModules<
+  TUserStoreModules extends FFStoreModules<TUserModulesState> &
+    Partial<DefaultNonStoreModules>,
+  TUserModulesState,
+> = Exact<
+  RestrictKeyToPrefix<
+    Omit<TUserStoreModules, keyof FFMandatoryStoreModules>,
+    typeof USER_MODULES_PREFIX
+  >,
+  TUserStoreModules
+>;
+
+export type TParamFrameworkNonStoreModules<
+  TFrameworkNonStoreModules extends DefaultNonStoreModules,
+> = Exact<Partial<DefaultNonStoreModules>, TFrameworkNonStoreModules>;
+
+export type TParamFrameworkNonStoreModulesPartial<
+  TFrameworkNonStoreModules extends Partial<DefaultNonStoreModules>,
+> = ExactPartial<Partial<DefaultNonStoreModules>, TFrameworkNonStoreModules>;
+
+export type TParamUserNonStoreModules<TUserNonStoreModules> = Exact<
+  RestrictKeyToPrefix<TUserNonStoreModules, typeof USER_MODULES_PREFIX>,
+  TUserNonStoreModules
+>;

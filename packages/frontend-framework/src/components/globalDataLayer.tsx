@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, {PropsWithChildren} from "react";
+import React, {PropsWithChildren, useEffect} from "react";
 import {CookiesProvider} from "react-cookie";
 import {Translations} from "../contexts/language";
 import {
@@ -34,6 +34,8 @@ import {
   FFAllMandatoryModules,
 } from "@iavofficial/frontend-framework-shared/moduleOrchestrationTypes";
 import {FFModule} from "@iavofficial/frontend-framework-shared/generalModule";
+import {checkIfUserModulesKeysValid} from "@iavofficial/frontend-framework-shared/checkIfUserModulesKeysValid";
+import {seperateModuleTypes} from "@iavofficial/frontend-framework-shared/seperateModuleTypes";
 
 // Create this type to make fallbackLang optional for the user.
 type GlobalDataLayerLanguageOptions = Omit<LanguageOptions, "fallbackLang"> & {
@@ -52,6 +54,16 @@ interface Props<TState extends FFMandatoryState> {
 export const GlobalDataLayer = <TState extends FFMandatoryState>(
   props: PropsWithChildren<Props<TState>>,
 ) => {
+  // Throw an error if user modules do not meet the convention that
+  // they have to begin with a specific prefix.
+  useEffect(() => {
+    const seperatedModules = seperateModuleTypes(props.modules);
+    checkIfUserModulesKeysValid({
+      userStoreModules: seperatedModules.userStoreModules,
+      userNonStoreModules: seperatedModules.nonStoreUserModules,
+    });
+  }, [props.modules]);
+
   const fallbackLang =
     props.languageOptions?.fallbackLang ?? DEFAULT_FALLBACK_LANGUAGE;
   const initialLang =

@@ -16,20 +16,22 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {USER_MODULES_PREFIX} from "../../constants/moduleNames";
 import {
   ActualMandatoryStateFromModules,
   FFMandatoryStoreModules,
   FFMandatoryState,
   ActualUserModulesStateFromModules,
   FFStoreModules,
+  TParamUserStoreModules,
+  TParamUserNonStoreModules,
+  TParamFrameworkStoreModulesPartial,
+  TParamFrameworkNonStoreModulesPartial,
 } from "../../types/modules/moduleOrchestrationTypes";
-import {Exact, ExactPartial} from "../../types/util-types/exact";
-import {RestrictKeyToPrefix} from "../../types/util-types/restrictKeyToPrefix";
 import {DefaultNonStoreModules} from "./moduleDefaults";
-import { mergeModules } from "./util/mergeModules";
+import {mergeModules} from "./util/mergeModules";
 
 export function createModulesSeperately<
+  TUserNonStoreModules extends object,
   // Partial of DefaultNonStoreModules ensures that if TUserStoreModules is used for
   // overriding default non store modules, the user modules have to statisfy the
   // corresponding TS constraints.
@@ -38,42 +40,36 @@ export function createModulesSeperately<
   // Same for TMandatoryStoreModules regarding overriding the default store modules.
   TUserModulesState = ActualUserModulesStateFromModules<TUserStoreModules>,
   TFrameworkStoreModules extends Partial<
-    FFMandatoryStoreModules<TMandatoryModulesState>
+    FFMandatoryStoreModules<TFrameworkModulesState>
   > = {},
-  TMandatoryModulesState extends
+  TFrameworkModulesState extends
     FFMandatoryState = ActualMandatoryStateFromModules<TFrameworkStoreModules>,
-  TNonStoreModules extends Partial<DefaultNonStoreModules> = {},
+  TFrameworkNonStoreModules extends Partial<DefaultNonStoreModules> = {},
 >(
   params: {
-    // It has to be ensured that frameworkStoreModules has no more keys than
-    // there are mandatory modules as this attribute's purpose is to override
-    // default store modules.
-    frameworkStoreModules?: ExactPartial<
-      FFMandatoryStoreModules<TMandatoryModulesState>,
-      TFrameworkStoreModules
+    frameworkStoreModules?: TParamFrameworkStoreModulesPartial<
+      TFrameworkStoreModules,
+      TFrameworkModulesState
     >;
-    // TUserModules should not be used to override mandatory modules.
-    // Because of this Omit is used in order to prevent userStoreModules
-    // to have keys of FFMandatoryStoreModules.
-    // Furthermore, RestrictKeyToPrefix is used in order to ensure that
-    // every user module begins with a specific prefix for user modules.
-    // By doing this a collision of keys for new Framework Modules with
-    // user modules can be avoided.
-    userStoreModules?: Exact<
-      RestrictKeyToPrefix<
-        Omit<TUserStoreModules, keyof FFMandatoryStoreModules>,
-        typeof USER_MODULES_PREFIX
-      >,
-      TUserStoreModules
+    userStoreModules?: TParamUserStoreModules<
+      TUserStoreModules,
+      TUserModulesState
     >;
-    nonStoreModules?: TNonStoreModules;
+    frameworkNonStoreModules?: TParamFrameworkNonStoreModulesPartial<TFrameworkNonStoreModules>;
+    userNonStoreModules?: TParamUserNonStoreModules<TUserNonStoreModules>;
   } = {},
 ) {
   const {
     frameworkStoreModules = {} as TFrameworkStoreModules,
-    nonStoreModules = {} as TNonStoreModules,
     userStoreModules = {} as TUserStoreModules,
+    frameworkNonStoreModules  = {} as TFrameworkNonStoreModules,
+    userNonStoreModules = {} as TUserNonStoreModules,
   } = params;
 
-  return mergeModules(frameworkStoreModules, userStoreModules, nonStoreModules);
+  return mergeModules({
+    frameworkStoreModules: frameworkStoreModules,
+    userStoreModules: userStoreModules,
+    frameworkNonStoreModules: frameworkNonStoreModules,
+    userNonStoreModules: userNonStoreModules,
+  });
 }

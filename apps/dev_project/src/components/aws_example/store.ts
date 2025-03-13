@@ -19,6 +19,7 @@
 import {
   createModules,
   StoreBuilder,
+  StoreConfigBuilder,
 } from "@iavofficial/frontend-framework/store";
 import { Amplify } from "aws-amplify";
 import { cognitoUserPoolsTokenProvider } from "aws-amplify/auth/cognito";
@@ -27,6 +28,7 @@ import { AWSAuthenticator } from "@iavofficial/frontend-framework-aws-authentica
 import { useModuleContext } from "@iavofficial/frontend-framework/moduleContext";
 import { AWSAuthenticationView } from "@iavofficial/frontend-framework-aws-authenticator/awsAuthenticationView";
 import { MandatoryModuleNames } from "@iavofficial/frontend-framework/constants";
+import { configureStore } from "@reduxjs/toolkit";
 
 const cognitoPool = import.meta.env.VITE_COGNITO_POOL;
 const cognitoAppId = import.meta.env.VITE_COGNITO_APP_ID;
@@ -64,17 +66,18 @@ const customModules = {
     failOnNoLegalGroup: true,
     legalGroups: ["ADMIN", "SHOWCASE"],
   }),
-  test: { text: "text" },
+  userTest: { text: "text" },
 };
 
 export const modules = createModules(customModules);
 
 export const store = new StoreBuilder(modules.storeModules)
-  .setFrameworkModuleProcessor(
+  /*.setFrameworkModuleProcessor(
     MandatoryModuleNames.Authentication,
     (module, storeConfigBuilder) => {}
   )
-  /*.setStoreBuilder((storeConfig) => {
+  .setUserModuleProcessor("userModule", (module, StoreConfigBuilder) => {})
+  .setStoreBuilder((storeConfig) => {
     const store = configureStore({
       reducer: storeConfig.reducers,
       middleware: (getDefaultMiddleware: Function) =>
@@ -89,4 +92,4 @@ export const store = new StoreBuilder(modules.storeModules)
 export const awsAuthenticationView = AWSAuthenticationView;
 
 // Use this to create a typed module context.
-export const useTypedModuleContext = useModuleContext<typeof modules>;
+export const useTypedModuleContext = useModuleContext<typeof modules.all>;

@@ -66,9 +66,9 @@ const Interface: React.FC = () => {
         override default module, but also custom user modules which have no
         default module counterpart. However, over time more sub systems will be
         created, resulting in more keys for default modules. Because of this a
-        convention is necessary to prevent key collisions. Because of this there
-        is the rule that keys for every custom user module have to begin with
-        the prefix "user".
+        convention is necessary to prevent key collisions. Because of this it is
+        required that keys for every custom user module have to begin with the
+        prefix <strong>"user"</strong>.
       </Text>
       <Text>
         The following code snippet shows an example for the use of{" "}

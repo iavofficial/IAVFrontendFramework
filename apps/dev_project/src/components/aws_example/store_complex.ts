@@ -70,10 +70,12 @@ const userStoreModules = {
   }),
 };
 
-const frameworkNonStoreModules = {};
+const frameworkNonStoreModules = {
+  // ...
+};
 
 const userNonStoreModules = {
-  userTest: { text: "text", useModuleLifecycle: () => {} },
+  userTest: { text: "text" },
 };
 
 export const modules = createModulesSeperately({
@@ -84,9 +86,14 @@ export const modules = createModulesSeperately({
 });
 
 export const store = new StoreBuilder(modules.storeModules)
-  /*.setFrameworkModuleProcessor(
+  .setFrameworkModuleProcessor(
     MandatoryModuleNames.Authentication,
-    (module, storeConfigBuilder) => {}
+    (module, storeConfigBuilder) => {
+      storeConfigBuilder.setReducer(
+        MandatoryModuleNames.Authentication,
+        module.slice.reducer
+      );
+    }
   )
   .setUserModuleProcessor("userModule", (module, StoreConfigBuilder) => {})
   .setStoreBuilder((storeConfig) => {
@@ -98,7 +105,7 @@ export const store = new StoreBuilder(modules.storeModules)
         getDefaultEnhancers().concat(storeConfig.enhancers),
     });
     return store;
-  })*/
+  })
   .build();
 
 export const awsAuthenticationView = AWSAuthenticationView;

@@ -125,7 +125,6 @@
     "./headerMenuElement": "./dist/components/header/headerMenuElement.js",
     "./store": "./dist/re-exports/store.js",
     "./constants": "./dist/re-exports/constants.js",
-    "./mandatoryModuleNames": "./dist/re-exports/mandatoryModuleNames.js",
     "./hash": "./dist/re-exports/hash.js",
     "./colorSettingsContext": "./dist/re-exports/colorSettingsContext.js",
     "./moduleContext": "./dist/re-exports/moduleContext.js",
@@ -267,9 +266,6 @@
       ],
       "./constants": [
         "./dist/re-exports/constants.d.ts"
-      ],
-      "./mandatoryModuleNames": [
-        "./dist/re-exports/mandatoryModuleNames.d.ts"
       ],
       "./hash": [
         "./dist/re-exports/hash.d.ts"

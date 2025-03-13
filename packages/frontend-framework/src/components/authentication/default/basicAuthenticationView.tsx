@@ -36,8 +36,8 @@ import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared/col
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch, Action } from "@reduxjs/toolkit";
 import { useModuleContext } from "@iavofficial/frontend-framework-shared/moduleContext";
-import { MandatoryModuleNames } from "@iavofficial/frontend-framework-shared/mandatoryModuleNames";
 import { AuthState } from "@iavofficial/frontend-framework-shared/authenticatorModule";
+import { MandatoryModuleNames } from "@iavofficial/frontend-framework-shared/moduleNames";
 
 type BasicAuthenticatorAuthDispatch = ThunkDispatch<AuthState, unknown, Action<string>>;
 type BasicAuthenticatorStoreState = {[MandatoryModuleNames.Authentication]: AuthState}

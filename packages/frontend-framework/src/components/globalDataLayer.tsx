@@ -30,7 +30,6 @@ import {Provider} from "react-redux";
 import {ModuleContextProvider} from "../contexts/providers/moduleContextProvider";
 import {DEFAULT_FALLBACK_LANGUAGE} from "@iavofficial/frontend-framework-shared/constants";
 import {
-  FFMandatoryStoreModules,
   FFMandatoryState,
   FFAllMandatoryModules,
 } from "@iavofficial/frontend-framework-shared/moduleOrchestrationTypes";

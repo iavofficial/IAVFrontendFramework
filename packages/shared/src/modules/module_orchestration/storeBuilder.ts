@@ -17,10 +17,11 @@
  */
 
 // The Store Builder is used by the developer to create a Redux store and pass it to the
-// framework. It includes different processor modules which process a corresponding module.
-// While the Builder provides default processor methods, they can be replaced allowing for
-// customization of module processing. Furthermore the Builder contains a storeBuilder method
-// which is used to build the store after all processor methods were executed. The storeBuilder
+// framework. It can include different processor methods which process a corresponding module.
+// While the Builder provides default processing logic via the StoreConfigBuilder, custom processor
+// methods are necessary when specific modules have to be processed another way.
+// Furthermore the Builder contains a storeBuilder method which is used to build the store after
+// all processor methods were executed. The storeBuilder can be replaced too.
 
 import {configureStore, EnhancedStore} from "@reduxjs/toolkit";
 import {
@@ -35,23 +36,22 @@ import {
 import {StoreConfig} from "./storeConfig";
 import {StoreConfigBuilder} from "./storeConfigBuilder";
 import {
-  MandatoryModuleNames,
   USER_MODULES_PREFIX,
-} from "../../constants/mandatoryModuleNames";
+} from "../../constants/moduleNames";
 import {Exact} from "../../types/util-types/exact";
 import {DefaultNonStoreModules} from "./moduleDefaults";
 import {RestrictKeyToPrefix} from "../../types/util-types/restrictKeyToPrefix";
+import {transformModulesToProcessorMap} from "./util/transformModulesToProcessorMap";
 
-// can be replaced to customize the build of the Redux store.
 export class StoreBuilder<
-  TFrameworkModules extends FFMandatoryStoreModules<TFrameworkModuleState>,
+  TFrameworkStoreModules extends FFMandatoryStoreModules<TFrameworkModuleState>,
   // Partial of DefaultNonStoreModules ensures that if TUserStoreModules is used for
   // overriding default non store modules, the user modules have to statisfy the
   // corresponding TS constraints.
   TUserStoreModules extends FFStoreModules<TUserModulesState> &
     Partial<DefaultNonStoreModules>,
   TFrameworkModuleState extends
-    FFMandatoryState = ActualMandatoryStateFromModules<TFrameworkModules>,
+    FFMandatoryState = ActualMandatoryStateFromModules<TFrameworkStoreModules>,
   // Same for TMandatoryStoreModules regarding overriding the default store modules.
   TUserModulesState = ActualUserModulesStateFromModules<TUserStoreModules>,
 > {
@@ -64,7 +64,7 @@ export class StoreBuilder<
     TFrameworkModuleState
   >;
 
-  // These are optional and modules and processors of the user.
+  // These are optional modules and processors of the user.
   private userStoreModulesAndProcessors:
     | ModuleAndProcessorMap<TUserStoreModules, TFrameworkModuleState>
     | undefined;
@@ -79,7 +79,7 @@ export class StoreBuilder<
     // default store modules.
     frameworkStoreModules: Exact<
       FFMandatoryStoreModules<TFrameworkModuleState>,
-      TFrameworkModules
+      TFrameworkStoreModules
     >;
     // TUserModules should not be used to override mandatory modules.
     // Because of this Omit is used in order to prevent userStoreModules
@@ -100,23 +100,16 @@ export class StoreBuilder<
       storeModules.frameworkStoreModules,
     );
 
-    this.mandatoryModulesAndProcessors = {
-      [MandatoryModuleNames.Authentication]: {
-        module:
-          storeModules.frameworkStoreModules[
-            MandatoryModuleNames.Authentication
-          ],
-      },
-    };
+    this.mandatoryModulesAndProcessors = transformModulesToProcessorMap<
+      TFrameworkStoreModules,
+      TFrameworkModuleState
+    >(storeModules.frameworkStoreModules);
 
     if (storeModules.userStoreModules) {
-      this.userStoreModulesAndProcessors = Object.entries(
-        storeModules.userStoreModules,
-      ).map(([key, value]) => ({
-        [key]: {
-          module: value,
-        },
-      })) as ModuleAndProcessorMap<TUserStoreModules, TFrameworkModuleState>;
+      this.userStoreModulesAndProcessors = transformModulesToProcessorMap<
+        TUserStoreModules,
+        TFrameworkModuleState
+      >(storeModules.userStoreModules);
     }
   }
 
@@ -125,7 +118,7 @@ export class StoreBuilder<
   >(
     moduleType: K,
     processor: ModuleProcessorFunction<
-      TFrameworkModules[K],
+      TFrameworkStoreModules[K],
       TFrameworkModuleState
     >,
   ) {

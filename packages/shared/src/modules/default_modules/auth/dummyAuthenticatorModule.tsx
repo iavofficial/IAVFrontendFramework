@@ -18,7 +18,7 @@
 
 import { createAsyncThunk, createSlice, PayloadAction, Slice, ThunkDispatch } from "@reduxjs/toolkit";
 import { AuthModule, Credentials, UserData } from "../../../types/modules/auth/authenticatorModule";
-import { MandatoryModuleNames } from "../../../constants/mandatoryModuleNames";
+import { MandatoryModuleNames } from "../../../constants/moduleNames";
 
 export interface Props {
   additionalContextValues?: {[key: string]: any};

@@ -18,7 +18,7 @@
 
 import {Action, ThunkDispatch} from "@reduxjs/toolkit";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
-import {MandatoryModuleNames} from "../../constants/mandatoryModuleNames";
+import {MandatoryModuleNames} from "../../constants/moduleNames";
 import {DummyAuthenticator} from "../default_modules/auth/dummyAuthenticatorModule";
 import {StoreBuilder} from "./storeBuilder";
 import {

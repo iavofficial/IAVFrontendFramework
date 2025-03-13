@@ -17,7 +17,7 @@
  */
 
 import {
-  createModules,
+  createModulesSeperately,
   StoreBuilder,
 } from "@iavofficial/frontend-framework/store";
 import { Amplify } from "aws-amplify";
@@ -53,21 +53,31 @@ const configureAmplify: () => void = () => {
   );
 };
 
-const customModules = {
+const frameworkStoreModules = {
   [MandatoryModuleNames.Authentication]: new AWSAuthenticator({
     configureAmplify: configureAmplify,
     failOnNoLegalGroup: true,
     legalGroups: ["ADMIN", "SHOWCASE"],
   }),
+};
+
+const userStoreModules = {
   userModule: new AWSAuthenticator({
     configureAmplify: configureAmplify,
     failOnNoLegalGroup: true,
     legalGroups: ["ADMIN", "SHOWCASE"],
   }),
+};
+
+const nonStoreModules = {
   test: { text: "text" },
 };
 
-export const modules = createModules(customModules);
+export const modules = createModulesSeperately({
+  frameworkStoreModules: frameworkStoreModules,
+  userStoreModules: userStoreModules,
+  nonStoreModules: nonStoreModules,
+});
 
 export const store = new StoreBuilder(modules.storeModules)
   .setFrameworkModuleProcessor(

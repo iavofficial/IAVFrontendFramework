@@ -38,7 +38,6 @@ import {
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 import {LoginButtonWithSpinner} from "@iavofficial/frontend-framework-shared/loginButtonWithSpinner";
 import {AppLogoPlaceholder} from "@iavofficial/frontend-framework-shared/appLogoPlaceholder";
-import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/mandatoryModuleNames";
 import {
   APPLICATION_LOGO_PLACEHOLDER,
   BLUE3,
@@ -48,6 +47,7 @@ import {
 import {AWSAuthenticatorExtras} from "../awsAuthenticatorTypes";
 import {AuthModule} from "@iavofficial/frontend-framework-shared/authenticatorModule";
 import {useModuleContext} from "@iavofficial/frontend-framework-shared/moduleContext";
+import { MandatoryModuleNames } from "@iavofficial/frontend-framework-shared/moduleNames";
 
 type NecessaryModuleAttributes = {
   extras: AWSAuthenticatorExtras;

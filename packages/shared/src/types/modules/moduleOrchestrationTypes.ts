@@ -18,7 +18,7 @@
 
 import {Reducer} from "@reduxjs/toolkit";
 import {FFStoreModule} from "../../types/modules/generalModule";
-import {MandatoryModuleNames} from "../../constants/mandatoryModuleNames";
+import {MandatoryModuleNames} from "../../constants/moduleNames";
 import {AuthModule, AuthState} from "./auth/authenticatorModule";
 import {StoreConfigBuilder} from "../../modules/module_orchestration/storeConfigBuilder";
 

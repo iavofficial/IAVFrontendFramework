@@ -41,18 +41,18 @@ export const seperateModuleTypes = <TModules extends Record<string, object>>(
   let userNonStoreModules = {} as TUserNonStoreModules;
 
   Object.entries(modules).forEach(([key, module]) => {
-    if (!("slice" in module)) {
-      if (Object.keys(defaultNonStoreModules).includes(key)) {
-        frameworkNonStoreModules = {...frameworkNonStoreModules, [key]: module};
-      } else {
-        userNonStoreModules = {...userNonStoreModules, [key]: module};
-      }
-    } else if (key in defaultStoreModules) {
+    if (key in defaultStoreModules) {
       frameworkStoreModules = {...frameworkStoreModules, [key]: module};
-    } else {
+    } else if (key in defaultNonStoreModules) {
+      frameworkNonStoreModules = {...frameworkNonStoreModules, [key]: module};
+    } else if ("slice" in module) {
       userStoreModules = {...userStoreModules, [key]: module};
+    } else {
+      userNonStoreModules = {...userNonStoreModules, [key]: module};
     }
   });
+
+  console.log(frameworkStoreModules);
 
   return {
     frameworkStoreModules: frameworkStoreModules,

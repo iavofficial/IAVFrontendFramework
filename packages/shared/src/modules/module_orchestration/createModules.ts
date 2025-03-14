@@ -16,8 +16,15 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import {
+  ActualMandatoryStateFromModules,
+  FFMandatoryNonStoreModules,
+  FFMandatoryState,
+  FFMandatoryStoreModules,
+  TParamAllModulesPartial,
+} from "../../types/modules/moduleOrchestrationTypes";
 import {mergeModules} from "./util/mergeModules";
-import { seperateModuleTypes } from "./util/seperateModuleTypes";
+import {seperateModuleTypes} from "./util/seperateModuleTypes";
 
 // It would be better to use FFModule inside the Record to ensure that
 // the useModuleLifecycle method has the expected type if the module
@@ -30,8 +37,16 @@ import { seperateModuleTypes } from "./util/seperateModuleTypes";
 // However, just providing object inside the Record is not very critical
 // as the user will get an error when he passes the modules to the
 // GlobalDataLayer if module types mismatch with FFModule.
-export const createModules = <TModules extends Record<string, object>>(
-  paramModules?: TModules,
+export const createModules = <
+  TModules extends Partial<
+    FFMandatoryStoreModules<TFrameworkStoreModulesState>
+  > &
+    Partial<FFMandatoryNonStoreModules> &
+    Record<string, object>,
+  TFrameworkStoreModulesState extends
+    FFMandatoryState = ActualMandatoryStateFromModules<TModules>,
+>(
+  paramModules?: TParamAllModulesPartial<TModules, TFrameworkStoreModulesState>,
 ) => {
   const modules = paramModules ?? ({} as TModules);
 

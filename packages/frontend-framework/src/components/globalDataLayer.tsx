@@ -32,6 +32,10 @@ import {DEFAULT_FALLBACK_LANGUAGE} from "@iavofficial/frontend-framework-shared/
 import {
   FFMandatoryState,
   FFAllMandatoryModules,
+  FFMandatoryStoreModules,
+  FFMandatoryNonStoreModules,
+  ActualMandatoryStateFromModules,
+  TParamAllModules,
 } from "@iavofficial/frontend-framework-shared/moduleOrchestrationTypes";
 import {FFModule} from "@iavofficial/frontend-framework-shared/generalModule";
 import {checkIfUserModulesKeysValid} from "@iavofficial/frontend-framework-shared/checkIfUserModulesKeysValid";
@@ -42,17 +46,29 @@ type GlobalDataLayerLanguageOptions = Omit<LanguageOptions, "fallbackLang"> & {
   fallbackLang?: string;
 };
 
-interface Props<TState extends FFMandatoryState> {
-  modules: FFAllMandatoryModules<TState> & Record<string, FFModule>;
-  store: EnhancedStore<TState>;
+interface Props<
+  TModules extends FFMandatoryStoreModules<TFrameworkStoreModulesState> &
+    FFMandatoryNonStoreModules &
+    Record<string, object>,
+  TFrameworkStoreModulesState extends
+    FFMandatoryState = ActualMandatoryStateFromModules<TModules>,
+> {
+  modules: TParamAllModules<TModules, TFrameworkStoreModulesState>;
+  store: EnhancedStore<TFrameworkStoreModulesState>;
   languageOptions?: GlobalDataLayerLanguageOptions;
   translations?: Translations;
   initI18Next?: () => void;
   colorSettings?: ColorProviderProps;
 }
 
-export const GlobalDataLayer = <TState extends FFMandatoryState>(
-  props: PropsWithChildren<Props<TState>>,
+export const GlobalDataLayer = <
+  TModules extends FFMandatoryStoreModules<TFrameworkStoreModulesState> &
+    FFMandatoryNonStoreModules &
+    Record<string, object>,
+  TFrameworkStoreModulesState extends
+    FFMandatoryState = ActualMandatoryStateFromModules<TModules>,
+>(
+  props: PropsWithChildren<Props<TModules, TFrameworkStoreModulesState>>,
 ) => {
   // Throw an error if user modules do not meet the convention that
   // they have to begin with a specific prefix.

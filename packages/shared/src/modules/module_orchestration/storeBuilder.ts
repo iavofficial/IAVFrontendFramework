@@ -154,9 +154,7 @@ export class StoreBuilder<
     }
 
     const storeConfig = this.storeConfigBuilder.build();
-
-    console.log(storeConfig);
-
+    
     return this.storeBuilder(storeConfig);
   }
 }

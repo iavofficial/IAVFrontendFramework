@@ -45,6 +45,14 @@ const routes = [
     {path: "playground", label: "10 - Playground", element: <Playground/>},
 ];
 
+const modulesRoutes = [
+    {
+        path: "module-awsauthenticator",
+        label: "AWSAuthenticator",
+        element: <Playground/>,
+    },
+];
+
 const helpRoutes = [
     {path: "faq", label: "FAQ", element: <FAQ/>},
 ];
@@ -61,6 +69,12 @@ const Version2_0_0 = () => {
                 <h3>Need help?</h3>
                 <ul>
                     {helpRoutes.map(({path, label}) => (
+                        <NavLinkItem to={path} label={label} key={path}/>
+                    ))}
+                </ul>
+                <h3>Modules</h3>
+                <ul>
+                    {modulesRoutes.map(({path, label}) => (
                         <NavLinkItem to={path} label={label} key={path}/>
                     ))}
                 </ul>

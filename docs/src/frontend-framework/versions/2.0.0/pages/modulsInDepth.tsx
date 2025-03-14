@@ -30,7 +30,7 @@ const ModulesInDepth = () => (
             system.
         </Text>
         <SubTitle>
-            The different kinds of modules and createModulesSeperately
+            The different kinds of modules and the method createModulesSeparately
         </SubTitle>
         <Text>
             For precise typing and other processing reasons the Framework splits the

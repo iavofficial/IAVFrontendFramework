@@ -110,7 +110,7 @@ export type ExtractModuleState<T> =
   T extends FFStoreModule<infer S> ? S : never;
 
 // This type creates an object of the specific state of all modules, for example:
-// {auth: AWSAuthenticatorState, routing: ReactRouterRouterState}
+// {auth: AwsAuthenticatorState, routing: ReactRouterRouterState}
 export type ActualMandatoryStateFromModules<
   TModules extends Partial<FFMandatoryStoreModules>,
 > = {

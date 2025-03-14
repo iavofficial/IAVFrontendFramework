@@ -23,9 +23,9 @@ import {
 import { Amplify } from "aws-amplify";
 import { cognitoUserPoolsTokenProvider } from "aws-amplify/auth/cognito";
 import { CookieStorage } from "aws-amplify/utils";
-import { AWSAuthenticator } from "@iavofficial/frontend-framework-aws-authenticator/awsAuthenticatorModule";
+import { AwsAuthenticator } from "@iavofficial/frontend-framework-aws-authenticator/awsAuthenticatorModule";
 import { useModuleContext } from "@iavofficial/frontend-framework/moduleContext";
-import { AWSAuthenticationView } from "@iavofficial/frontend-framework-aws-authenticator/awsAuthenticationView";
+import { AwsAuthenticationView } from "@iavofficial/frontend-framework-aws-authenticator/awsAuthenticationView";
 import { MandatoryModuleNames } from "@iavofficial/frontend-framework/constants";
 import { configureStore } from "@reduxjs/toolkit";
 
@@ -33,7 +33,7 @@ const cognitoPool = import.meta.env.VITE_COGNITO_POOL;
 const cognitoAppId = import.meta.env.VITE_COGNITO_APP_ID;
 const domain = import.meta.env.VITE_DOMAIN;
 
-const configureAmplify: () => void = () => {
+const configureAmplify = () => {
   Amplify.configure({
     Auth: {
       Cognito: {
@@ -55,7 +55,7 @@ const configureAmplify: () => void = () => {
 };
 
 const frameworkStoreModules = {
-  [MandatoryModuleNames.Authentication]: new AWSAuthenticator({
+  [MandatoryModuleNames.Authentication]: new AwsAuthenticator({
     configureAmplify: configureAmplify,
     failOnNoLegalGroup: true,
     legalGroups: ["ADMIN", "SHOWCASE"],
@@ -63,7 +63,7 @@ const frameworkStoreModules = {
 };
 
 const userStoreModules = {
-  userModule: new AWSAuthenticator({
+  userModule: new AwsAuthenticator({
     configureAmplify: configureAmplify,
     failOnNoLegalGroup: true,
     legalGroups: ["ADMIN", "SHOWCASE"],
@@ -86,7 +86,7 @@ export const modules = createModulesSeperately({
 });
 
 export const store = new StoreBuilder(modules.storeModules)
-  .setFrameworkModuleProcessor(
+  /*.setFrameworkModuleProcessor(
     MandatoryModuleNames.Authentication,
     (module, storeConfigBuilder) => {
       storeConfigBuilder.setReducer(
@@ -105,10 +105,10 @@ export const store = new StoreBuilder(modules.storeModules)
         getDefaultEnhancers().concat(storeConfig.enhancers),
     });
     return store;
-  })
+  })*/
   .build();
 
-export const awsAuthenticationView = AWSAuthenticationView;
+export const awsAuthenticationView = AwsAuthenticationView;
 
 // Use this to create a typed module context.
 export const useTypedModuleContext = useModuleContext<typeof modules>;

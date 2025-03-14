@@ -12,9 +12,9 @@ const Interface: React.FC = () => {
       <SubTitle>Main React Components</SubTitle>
       <Text>
         The framework's main interfaces are the components{" "}
-        <code>GlobalDataLayer</code> and <code>UILayer</code>.
+        <code>GlobalDataLayer</code> and <code>UILayer</code>.{" "}
         <code>GlobalDataLayer</code> contains all React contexts of the
-        framework to share data across the whole component tree. The
+        framework to share special data across the whole component tree. The{" "}
         <code>UILayer</code> component contains the components which actually
         render the UI.
       </Text>
@@ -25,7 +25,7 @@ const Interface: React.FC = () => {
         inside the <code>GlobalDataLayer</code>. Where to put your React
         context's provider? To pass your context to the <code>UILayer</code> and
         then rendering the Provider seems inappropriate. Instead, you put the
-        Provider between the <code>GlobalDataLayer</code> and
+        Provider between the <code>GlobalDataLayer</code> and{" "}
         <code>UILayer</code> yourself. By doing this, your React context has
         access to all the framework's contexts, and the <code>UILayer</code>
         additionally has access to your context.
@@ -44,31 +44,32 @@ const Interface: React.FC = () => {
       <Title>Module System</Title>
       <Text>
         With version 2.0.0 we began modularizing the Framework. This means that
-        several sub systems are getting outsourced into seperated packages.
-        These modules are managed by a central module orchestration system. An
-        important aspect of this system is the supply of a global state to which
-        modules can add their own values. The global state is implemented using
-        a Redux Store.
+        several sub systems are getting outsourced into seperate packages. These
+        modules are simple objects {"(generally implemented with classes)"} and
+        managed by a central module orchestration system. An important aspect of
+        this system is the supply of a global state to which modules can add
+        their own values. The global state is implemented using a Redux Store.
+        Because we use Redux a basic understanding of this library is necessary.
       </Text>
       <Text>
         To facilitate the use of the module system the Framework provides two
         main programming interfaces. The first one is the method{" "}
         <i>createModules</i>. This method allows you to pass an object
         containing multiple modules to configure which modules should be used.
-        The method then takes your modules and adds the default modules if
-        necessary. It returns a map which contains all relevant objects, meaning
-        a union of your custom modules and default modules. If you just want to
-        use the default implementation, just call <i>createModules</i> without
-        any parameters.
+        The method takes your modules and adds the default modules if necessary.
+        It returns a map which contains all relevant objects, meaning a union of
+        your custom modules and default modules. If you just want to use the
+        default implementation, just call <i>createModules</i> without any
+        parameters.
       </Text>
       <Text>
         The described object contains all your modules. These are modules which
-        override default module, but also custom user modules which have no
+        override default modules, but also custom user modules which have no
         default module counterpart. However, over time more sub systems will be
         created, resulting in more keys for default modules. Because of this a
-        convention is necessary to prevent key collisions. Because of this it is
-        required that keys for every custom user module have to begin with the
-        prefix <strong>"user"</strong>.
+        convention is necessary to prevent key collisions. It is required that
+        keys for every custom user module have to begin with the prefix{" "}
+        <strong>"user"</strong>.
       </Text>
       <Text>
         The following code snippet shows an example for the use of{" "}
@@ -89,13 +90,13 @@ const Interface: React.FC = () => {
 const modules = createModules(customModules);`}
       </Code>
       <Text>
-        After creating the modules map you have to create the Redux Store. For
+        After creating the module map you have to create the Redux Store. For
         this purpose the Framework provides the <i>StoreBuilder</i> class. The{" "}
         <i>StoreBuilder</i> class expects you to pass <strong>all</strong>{" "}
         necessary store modules and <strong>all</strong> user store modules
-        inside the constructor. This map was created by <i>createModules</i> for
-        you. The following example shows you the recommended way to pass the
-        modules.
+        inside the constructor. The required map is created by{" "}
+        <i>createModules</i> for you. The following example shows you the
+        recommended way to pass the modules.
       </Text>
       <Code language="ts" title="Example for the use of StoreBuilder">
         {`const store = new StoreBuilder(modules.storeModules).build();`}

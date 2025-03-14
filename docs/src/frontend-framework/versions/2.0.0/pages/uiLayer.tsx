@@ -77,28 +77,34 @@ const UILayer: React.FC = () => {
                 following code snippet:
             </Text>
             <Code title={"PrivilegedNavbarTab"} language={"typescript"}>
-                {`// Properties which should be added to the properties of the  navbarTabProps interface.
-export interface Props {
-    permittedGroups: string[];
+                {`export interface Props {
+  permittedGroups: string[];
 }
 
-export const PrivilegedNavbarTab: GroupableNavbarTab<Props> = (props) => {
-    const authContext = useContext(AuthContext);
-    const permitted = containsOneOrMoreGroups(
-        authContext?.getUserGroups(),
-        props.permittedGroups
-    );
-    return permitted ? (
-        <SimpleNavbarTab
-            icon={props.icon}
-            disabled={props.disabled}
-            name={props.name}
-            frameworkInjectedOptions={props.frameworkInjectedOptions}
-         />
-    ) : (
-        <></>
-    );
-};`}
+export const PrivilegedNavbarTab: GroupableNavbarTab<Props> = (
+  props: NavbarTabProps<InjectedOptionsGroupableByWrapperToTab> & Props,
+) => {
+  const userData = useDefaultSelector(state => state.auth.userData);
+
+  const userGroups = userData?.userGroups ?? [];
+
+  const permitted = containsOneOrMoreGroups(
+    userGroups,
+    props.permittedGroups
+  );
+
+  return permitted ? (
+    <SimpleNavbarTab
+      icon={props.icon}
+      disabled={props.disabled}
+      name={props.name}
+      frameworkInjectedOptions={props.frameworkInjectedOptions}
+    />
+  ) : (
+    <></>
+  );
+};
+`}
             </Code>
             <Text>
                 As you may have noticed PrivilegedNavbarTab is of type
@@ -139,7 +145,7 @@ export const PrivilegedNavbarTab: GroupableNavbarTab<Props> = (props) => {
                 inside an instance of BasicContentWrapper the framework is able to assign
                 each navigation tab to a content area element. In order to specify all
                 your navigation tabs and the corresponding content area elements you have
-                to
+                to{" "}
                 <strong>create an array of instances of this BasicContentWrapper</strong>.
                 The class has the following parameters:
             </Text>
@@ -231,13 +237,13 @@ const views = [
                 example svg element.
             </Text>
             <Text>
-                <strong>hint1:</strong> We recommend to use the UI/UX Tool Figma for
+                <strong>Hint 1:</strong> We recommend to use the UI/UX Tool Figma for
                 Prototyping. Figma offers the functionality to export icons. The framework
                 supports the exported figma icons after the setting of the
                 &quot;current&quot; value in svg files.
             </Text>
             <Text>
-                <strong>hint2:</strong> If you encounter issues to import SVGs as
+                <strong>Hint 2:</strong> If you encounter issues to import SVGs as
                 ReactComponents while using vite, see the FAQ section.
             </Text>
             <Code title={"*Examplefile of an .svg"} language={"typescript"}>

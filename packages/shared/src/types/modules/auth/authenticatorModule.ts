@@ -30,6 +30,7 @@ export type AuthSlice<TState extends AuthState> = Slice<TState>;
 
 export type FetchAuthedFunctionArgs = {
   url: string;
+  settings?: object;
 };
 
 export type Credentials = {

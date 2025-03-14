@@ -18,7 +18,12 @@
 
 import React, {FormEvent, useContext, useState} from "react";
 import {Link} from "react-router-dom";
-import {APPLICATION_LOGO_PLACEHOLDER, BLUE3, PADDING_GAB, WHITE} from "@iavofficial/frontend-framework-shared/constants";
+import {
+  APPLICATION_LOGO_PLACEHOLDER,
+  BLUE3,
+  PADDING_GAB,
+  WHITE,
+} from "@iavofficial/frontend-framework-shared/constants";
 import {useTranslator} from "../../internationalization/translators";
 import loginBackgroundLightMode from "../../../assets/png/login_background_lightMode.png";
 import loginBackgroundDarkMode from "../../../assets/png/login_background_darkMode.png";
@@ -27,20 +32,26 @@ import {LanguageContext} from "../../../contexts/language";
 import {Tooltip} from "primereact/tooltip";
 import CompanyLogo from "../../../assets/svg/companyLogo";
 import TextField from "../../helper/textfield/TextField";
-import { AuthenticationViewProps } from "@iavofficial/frontend-framework-shared/authenticationViewProps";
-import { generateHashOfLength } from "@iavofficial/frontend-framework-shared/hash";
-import { parseLanguageResourcesIntoDropdownFormat } from "@iavofficial/frontend-framework-shared/parseLanguageResourcesIntoDropdownFormat";
-import { LoginButtonWithSpinner } from "@iavofficial/frontend-framework-shared/loginButtonWithSpinner";
-import { AppLogoPlaceholder } from "@iavofficial/frontend-framework-shared/appLogoPlaceholder";
-import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared/colorSettingsContext";
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { ThunkDispatch, Action } from "@reduxjs/toolkit";
-import { useModuleContext } from "@iavofficial/frontend-framework-shared/moduleContext";
-import { AuthState } from "@iavofficial/frontend-framework-shared/authenticatorModule";
-import { MandatoryModuleNames } from "@iavofficial/frontend-framework-shared/moduleNames";
+import {AuthenticationViewProps} from "@iavofficial/frontend-framework-shared/authenticationViewProps";
+import {generateHashOfLength} from "@iavofficial/frontend-framework-shared/hash";
+import {parseLanguageResourcesIntoDropdownFormat} from "@iavofficial/frontend-framework-shared/parseLanguageResourcesIntoDropdownFormat";
+import {LoginButtonWithSpinner} from "@iavofficial/frontend-framework-shared/loginButtonWithSpinner";
+import {AppLogoPlaceholder} from "@iavofficial/frontend-framework-shared/appLogoPlaceholder";
+import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
+import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
+import {ThunkDispatch, Action} from "@reduxjs/toolkit";
+import {useModuleContext} from "@iavofficial/frontend-framework-shared/moduleContext";
+import {AuthState} from "@iavofficial/frontend-framework-shared/authenticatorModule";
+import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
 
-type BasicAuthenticatorAuthDispatch = ThunkDispatch<AuthState, unknown, Action<string>>;
-type BasicAuthenticatorStoreState = {[MandatoryModuleNames.Authentication]: AuthState}
+type BasicAuthenticatorAuthDispatch = ThunkDispatch<
+  AuthState,
+  unknown,
+  Action<string>
+>;
+type BasicAuthenticatorStoreState = {
+  [MandatoryModuleNames.Authentication]: AuthState;
+};
 
 export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
   const {modules} = useModuleContext();
@@ -49,9 +60,12 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
   const colorSettingsContext = useContext(ColorSettingsContext);
 
   const dispatch = useDispatch<BasicAuthenticatorAuthDispatch>();
-  const useAuthSelector: TypedUseSelectorHook<BasicAuthenticatorStoreState> = useSelector;
+  const useAuthSelector: TypedUseSelectorHook<BasicAuthenticatorStoreState> =
+    useSelector;
 
-  const isLoading = useAuthSelector(state => state[MandatoryModuleNames.Authentication].isLoading);
+  const isLoading = useAuthSelector(
+    (state) => state[MandatoryModuleNames.Authentication].isLoading,
+  );
 
   const [triedToSubmit, setTriedToSubmit] = useState<boolean>(false);
   const [email, setEmail] = useState("");
@@ -86,7 +100,9 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
   const submit = (event: FormEvent<HTMLFormElement>) => {
     setTriedToSubmit(true);
     event.preventDefault();
-    dispatch(authModule.login({credentials: {email: email, password: password}}));
+    dispatch(
+      authModule.login({credentials: {email: email, password: password}}),
+    );
   };
 
   const companyLogoDefault = (props: AuthenticationViewProps) => (
@@ -118,7 +134,9 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
         {props.headerOptions?.reactElementLeft ? (
           props.headerOptions?.reactElementLeft
         ) : (
-          <AppLogoPlaceholder appLogoPlaceholder={APPLICATION_LOGO_PLACEHOLDER} />
+          <AppLogoPlaceholder
+            appLogoPlaceholder={APPLICATION_LOGO_PLACEHOLDER}
+          />
         )}
       </div>
 
@@ -261,10 +279,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                 name="password"
                 type="password"
                 required={true}
-                error={
-                  triedToSubmit &&
-                  !isLoading
-                }
+                error={triedToSubmit && !isLoading}
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 helperText={passwordErrorMessage || t("wrong_password")}

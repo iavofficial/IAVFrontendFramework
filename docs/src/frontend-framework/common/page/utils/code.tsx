@@ -21,7 +21,7 @@ import {ocean} from "react-syntax-highlighter/dist/cjs/styles/hljs";
 import {GREY2} from "@iavofficial/frontend-framework/constants";
 
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((optionalStyles?: Record<string, string>) => ({
     codeBlock: {
         width: "100%",
         padding: "2px",
@@ -32,7 +32,8 @@ const useStyles = makeStyles(() => ({
         lineHeight: "1.5",
         background: "#2b303b",
         paddingLeft: "8px",
-        margin: "8px 0"
+        margin: "8px 0",
+        ...optionalStyles
     },
     title: {
         padding: "2px 0",
@@ -44,6 +45,7 @@ const useStyles = makeStyles(() => ({
 
 interface Props {
     language: string;
+    style?: Record<string, string>;
     title?: string;  // Optional title
 }
 
@@ -51,7 +53,7 @@ const Code: React.FC<PropsWithChildren<Props>> = (props) => {
 
     const {language, children, title} = props;
 
-    const {classes} = useStyles();
+    const {classes} = useStyles(props.style);
 
     return (
         <div className={classes.codeBlock}>

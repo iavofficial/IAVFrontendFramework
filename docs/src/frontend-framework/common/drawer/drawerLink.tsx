@@ -45,7 +45,7 @@ interface Props {
 const NavLinkItem: React.FC<PropsWithChildren<Props>> = (props) => {
 
     const {to, label} = props;
-
+    
     const {classes} = useStyles();
     const location = useLocation();
 

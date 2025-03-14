@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, {PropsWithChildren, useEffect} from "react";
+import React, {Fragment, PropsWithChildren, useEffect} from "react";
 import {CookiesProvider} from "react-cookie";
 import {Translations} from "../contexts/language";
 import {
@@ -60,7 +60,7 @@ export const GlobalDataLayer = <TState extends FFMandatoryState>(
     const seperatedModules = seperateModuleTypes(props.modules);
     checkIfUserModulesKeysValid({
       userStoreModules: seperatedModules.userStoreModules,
-      userNonStoreModules: seperatedModules.nonStoreUserModules,
+      userNonStoreModules: seperatedModules.userNonStoreModules,
     });
   }, [props.modules]);
 
@@ -107,14 +107,23 @@ const ModuleLifecycleCaller = (
     [props.modules],
   );
 
+  let renderChildren = true;
+
   // Call the useModuleLifecycle Hook for every module.
   // This approach is only safe if moduleKeys is stable (because of the
-  // Hook rules described above).
+  // Hook rules).
   moduleKeys.forEach((key) => {
     const useModuleLifecycle =
-      props.modules[key].useModuleLifecycle ?? (() => {});
-    useModuleLifecycle();
+      props.modules[key].useModuleLifecycle ??
+      (() => ({
+        renderChildren: true,
+      }));
+    const lifecycleReturnVal = useModuleLifecycle();
+
+    if (!lifecycleReturnVal.renderChildren) {
+      renderChildren = lifecycleReturnVal.renderChildren;
+    }
   });
 
-  return props.children;
+  return renderChildren ? props.children : <Fragment />;
 };

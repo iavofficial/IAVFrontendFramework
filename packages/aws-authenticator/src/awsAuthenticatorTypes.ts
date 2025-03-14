@@ -26,7 +26,7 @@ export interface JWTPojo {
 
 // The Redux store demands that objects in action payloads are POJOs
 // (for example they cannot have functions).
-export interface AWSUserData extends UserData {
+export interface AwsUserData extends UserData {
   extras: {
     idToken: JWTPojo;
     accessToken: JWTPojo;
@@ -34,7 +34,7 @@ export interface AWSUserData extends UserData {
   };
 }
 
-export type AWSAuthenticatorExtras = {
+export type AwsAuthenticatorExtras = {
   checkIsAuthenticated: AsyncThunk<void, void, {}>;
   completePassword: AsyncThunk<void, {newPassword: string}, {}>;
   refreshSession: AsyncThunk<void, void, {}>;

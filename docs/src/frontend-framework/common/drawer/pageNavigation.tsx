@@ -14,9 +14,8 @@
  * limitations under the License.
  **/
 
-import {useParams} from "react-router-dom";
 import makeStyles from "../../../util/makeStyles.tsx";
-import NavLinkItem from "./drawerLink.tsx";
+import {PropsWithChildren} from "react";
 
 const useStyles = makeStyles(() => ({
     drawer: {
@@ -44,38 +43,13 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-interface Props {
-    projectName: string;
-    currentVersion: string;
-}
+const PageNavigation: React.FC<PropsWithChildren> = (props) => {
 
-const PageNavigation: React.FC<Props> = (props) => {
-
-    const {projectName, currentVersion} = props;
     const {classes} = useStyles();
-
-    const {version} = useParams<{ version: string }>();
-    const basePath = `/${projectName}/${version || currentVersion}`;
 
     return (
         <div className={classes.drawer}>
-            <ul>
-                <NavLinkItem to={`${basePath}/overview`} label={"Quick Overview"}/>
-                <NavLinkItem to={`${basePath}/information`} label={"01 - Important Information"}/>
-                <NavLinkItem to={`${basePath}/installation-guide`} label={"02 - Installation"}/>
-                <NavLinkItem to={`${basePath}/interface`} label={"03 - Interface"}/>
-                <NavLinkItem to={`${basePath}/globaldatalayer`} label={"04 - GlobalDataLayer"}/>
-                <NavLinkItem to={`${basePath}/uilayer`} label={"05 - UILayer"}/>
-                <NavLinkItem to={`${basePath}/content-area`} label={"06 - Content Area"}/>
-                <NavLinkItem to={`${basePath}/color-settings-and-dark-mode`}
-                             label={"07 - Color Settings and Dark Mode"}/>
-                <NavLinkItem to={`${basePath}/example-project`} label={"08 - Example Project"}/>
-                <NavLinkItem to={`${basePath}/playground`} label={"09 - Playground"}/>
-            </ul>
-            <h3>Need help?</h3>
-            <ul>
-                <NavLinkItem to={`${basePath}/faq`} label={"FAQ"}/>
-            </ul>
+            {props.children}
         </div>
     );
 };

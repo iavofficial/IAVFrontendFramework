@@ -30,40 +30,41 @@ import {Tooltip} from "primereact/tooltip";
 import CompanyLogo from "../assets/svg/companyLogo";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {
-  AWSAuthenticatorAuthDispatch,
-  AWSAuthenticatorStoreState,
-  AWSAuthenticatorState,
+  AwsAuthenticatorAuthDispatch,
+  AwsAuthenticatorStoreState,
+  AwsAuthenticatorState,
+  AwsAuthenticator,
 } from "../awsAuthenticatorModule";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 import {LoginButtonWithSpinner} from "@iavofficial/frontend-framework-shared/loginButtonWithSpinner";
 import {AppLogoPlaceholder} from "@iavofficial/frontend-framework-shared/appLogoPlaceholder";
-import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/mandatoryModuleNames";
 import {
   APPLICATION_LOGO_PLACEHOLDER,
   BLUE3,
   PADDING_GAB,
   WHITE,
 } from "@iavofficial/frontend-framework-shared/constants";
-import {AWSAuthenticatorExtras} from "../awsAuthenticatorTypes";
+import {AwsAuthenticatorExtras} from "../awsAuthenticatorTypes";
 import {AuthModule} from "@iavofficial/frontend-framework-shared/authenticatorModule";
 import {useModuleContext} from "@iavofficial/frontend-framework-shared/moduleContext";
+import { MandatoryModuleNames } from "@iavofficial/frontend-framework-shared/moduleNames";
 
 type NecessaryModuleAttributes = {
-  extras: AWSAuthenticatorExtras;
-} & Omit<AuthModule<AWSAuthenticatorState>, "useModuleLifecycle">;
+  extras: AwsAuthenticatorExtras;
+} & Omit<AuthModule<AwsAuthenticatorState>, "useModuleLifecycle">;
 
-export const AWSAuthenticationView = <
+export const AwsAuthenticationView = <
   TModules extends {
     [MandatoryModuleNames.Authentication]: NecessaryModuleAttributes;
-  },
+  } = {[MandatoryModuleNames.Authentication]: AwsAuthenticator},
 >(
   props: AuthenticationViewProps,
 ) => {
   const {modules} = useModuleContext<TModules>();
   const authenticationModule = modules[MandatoryModuleNames.Authentication];
 
-  const dispatch = useDispatch<AWSAuthenticatorAuthDispatch>();
-  const useAuthSelector: TypedUseSelectorHook<AWSAuthenticatorStoreState> =
+  const dispatch = useDispatch<AwsAuthenticatorAuthDispatch>();
+  const useAuthSelector: TypedUseSelectorHook<AwsAuthenticatorStoreState> =
     useSelector;
 
   const isNewPasswordRequired = useAuthSelector(
@@ -114,9 +115,15 @@ export const AWSAuthenticationView = <
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (isNewPasswordRequired) {
-      dispatch(authenticationModule.extras.completePassword({newPassword: password}));
+      dispatch(
+        authenticationModule.extras.completePassword({newPassword: password}),
+      );
     } else {
-      dispatch(authenticationModule.login({credentials: {email: email, password: password}}));
+      dispatch(
+        authenticationModule.login({
+          credentials: {email: email, password: password},
+        }),
+      );
     }
   };
 

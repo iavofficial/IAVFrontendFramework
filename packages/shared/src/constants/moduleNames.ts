@@ -16,18 +16,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-// An object of this class will contain all reducers etc. of all modules.
-// They are added by the corresponding processors. The object will be passed
+export const MandatoryModuleNames = {
+  Authentication: "auth",
+} as const;
 
-import { Middleware, Reducer, StoreEnhancer } from "@reduxjs/toolkit";
-import { FFMandatoryReducers, FFMandatoryState } from "../../types/modules/moduleOrchestrationTypes";
+export type MandatoryModuleName =
+  (typeof MandatoryModuleNames)[keyof typeof MandatoryModuleNames];
 
-// to a store builder function to create the store.
-export class StoreConfig<TState extends FFMandatoryState> {
-    constructor(
-      public reducers: FFMandatoryReducers<TState> & Record<string, Reducer>,
-      public middleware: Middleware[] = [],
-      public enhancers: StoreEnhancer[] = [],
-      public additional: Record<string, unknown> = {},
-    ) {}
-  }
+export const USER_MODULES_PREFIX = "user";

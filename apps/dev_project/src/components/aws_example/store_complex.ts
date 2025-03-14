@@ -17,7 +17,7 @@
  */
 
 import {
-  createModules,
+  createModulesSeperately,
   StoreBuilder,
 } from "@iavofficial/frontend-framework/store";
 import { Amplify } from "aws-amplify";
@@ -27,6 +27,7 @@ import { AwsAuthenticator } from "@iavofficial/frontend-framework-aws-authentica
 import { useModuleContext } from "@iavofficial/frontend-framework/moduleContext";
 import { AwsAuthenticationView } from "@iavofficial/frontend-framework-aws-authenticator/awsAuthenticationView";
 import { MandatoryModuleNames } from "@iavofficial/frontend-framework/constants";
+import { configureStore } from "@reduxjs/toolkit";
 
 const cognitoPool = import.meta.env.VITE_COGNITO_POOL;
 const cognitoAppId = import.meta.env.VITE_COGNITO_APP_ID;
@@ -53,26 +54,46 @@ const configureAmplify = () => {
   );
 };
 
-const customModules = {
+const frameworkStoreModules = {
   [MandatoryModuleNames.Authentication]: new AwsAuthenticator({
     configureAmplify: configureAmplify,
     failOnNoLegalGroup: true,
     legalGroups: ["ADMIN", "SHOWCASE"],
   }),
+};
+
+const userStoreModules = {
   userModule: new AwsAuthenticator({
     configureAmplify: configureAmplify,
     failOnNoLegalGroup: true,
     legalGroups: ["ADMIN", "SHOWCASE"],
   }),
+};
+
+const frameworkNonStoreModules = {
+  // ...
+};
+
+const userNonStoreModules = {
   userTest: { text: "text" },
 };
 
-export const modules = createModules(customModules);
+export const modules = createModulesSeperately({
+  frameworkStoreModules,
+  userStoreModules,
+  frameworkNonStoreModules,
+  userNonStoreModules,
+});
 
 export const store = new StoreBuilder(modules.storeModules)
   /*.setFrameworkModuleProcessor(
     MandatoryModuleNames.Authentication,
-    (module, storeConfigBuilder) => {}
+    (module, storeConfigBuilder) => {
+      storeConfigBuilder.setReducer(
+        MandatoryModuleNames.Authentication,
+        module.slice.reducer
+      );
+    }
   )
   .setUserModuleProcessor("userModule", (module, StoreConfigBuilder) => {})
   .setStoreBuilder((storeConfig) => {
@@ -90,4 +111,4 @@ export const store = new StoreBuilder(modules.storeModules)
 export const awsAuthenticationView = AwsAuthenticationView;
 
 // Use this to create a typed module context.
-export const useTypedModuleContext = useModuleContext<typeof modules.all>;
+export const useTypedModuleContext = useModuleContext<typeof modules>;

@@ -17,3 +17,4 @@
  */
 
 export * from "@iavofficial/frontend-framework-shared/constants";
+export * from "@iavofficial/frontend-framework-shared/moduleNames";

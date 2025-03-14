@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, {PropsWithChildren} from "react";
+import React, {Fragment, PropsWithChildren, useEffect} from "react";
 import {CookiesProvider} from "react-cookie";
 import {Translations} from "../contexts/language";
 import {
@@ -30,11 +30,12 @@ import {Provider} from "react-redux";
 import {ModuleContextProvider} from "../contexts/providers/moduleContextProvider";
 import {DEFAULT_FALLBACK_LANGUAGE} from "@iavofficial/frontend-framework-shared/constants";
 import {
-  FFMandatoryStoreModules,
   FFMandatoryState,
   FFAllMandatoryModules,
 } from "@iavofficial/frontend-framework-shared/moduleOrchestrationTypes";
 import {FFModule} from "@iavofficial/frontend-framework-shared/generalModule";
+import {checkIfUserModulesKeysValid} from "@iavofficial/frontend-framework-shared/checkIfUserModulesKeysValid";
+import {seperateModuleTypes} from "@iavofficial/frontend-framework-shared/seperateModuleTypes";
 
 // Create this type to make fallbackLang optional for the user.
 type GlobalDataLayerLanguageOptions = Omit<LanguageOptions, "fallbackLang"> & {
@@ -53,6 +54,16 @@ interface Props<TState extends FFMandatoryState> {
 export const GlobalDataLayer = <TState extends FFMandatoryState>(
   props: PropsWithChildren<Props<TState>>,
 ) => {
+  // Throw an error if user modules do not meet the convention that
+  // they have to begin with a specific prefix.
+  useEffect(() => {
+    const seperatedModules = seperateModuleTypes(props.modules);
+    checkIfUserModulesKeysValid({
+      userStoreModules: seperatedModules.userStoreModules,
+      userNonStoreModules: seperatedModules.userNonStoreModules,
+    });
+  }, [props.modules]);
+
   const fallbackLang =
     props.languageOptions?.fallbackLang ?? DEFAULT_FALLBACK_LANGUAGE;
   const initialLang =
@@ -96,14 +107,23 @@ const ModuleLifecycleCaller = (
     [props.modules],
   );
 
+  let renderChildren = true;
+
   // Call the useModuleLifecycle Hook for every module.
   // This approach is only safe if moduleKeys is stable (because of the
-  // Hook rules described above).
+  // Hook rules).
   moduleKeys.forEach((key) => {
     const useModuleLifecycle =
-      props.modules[key].useModuleLifecycle ?? (() => {});
-    useModuleLifecycle();
+      props.modules[key].useModuleLifecycle ??
+      (() => ({
+        renderChildren: true,
+      }));
+    const lifecycleReturnVal = useModuleLifecycle();
+
+    if (!lifecycleReturnVal.renderChildren) {
+      renderChildren = lifecycleReturnVal.renderChildren;
+    }
   });
 
-  return props.children;
+  return renderChildren ? props.children : <Fragment />;
 };

@@ -14,84 +14,90 @@
  * limitations under the License.
  **/
 
-import React from "react";
+import React, { ReactElement } from "react";
 import makeStyles from "../../../../util/makeStyles.tsx";
-import {BLUE3, GREY1} from "@iavofficial/frontend-framework/constants";
+import { BLUE3, GREY1 } from "@iavofficial/frontend-framework/constants";
 
 const useStyles = makeStyles(() => ({
-    table: {
-        width: "100%",
-        borderCollapse: "collapse",
-        marginBottom: "1.5em",
-        borderRadius: "8px",
-        overflow: "hidden",
-    },
-    thead: {
-        backgroundColor: BLUE3,
-        color: "#fff",
-    },
-    tbody: {
-        backgroundColor: "#fff",
-    },
-    th: {
-        border: "1px solid #dee2e6",
-        padding: "10px",
-        textAlign: "left",
-    },
-    td: {
-        border: "1px solid #dee2e6",
-        padding: "10px",
-        textAlign: "left",
-    },
-    grey1: {
-        backgroundColor: GREY1
-    },
+  table: {
+    width: "100%",
+    borderCollapse: "collapse",
+    marginBottom: "1.5em",
+    borderRadius: "8px",
+    overflow: "hidden",
+  },
+  thead: {
+    backgroundColor: BLUE3,
+    color: "#fff",
+  },
+  tbody: {
+    backgroundColor: "#fff",
+  },
+  th: {
+    border: "1px solid #dee2e6",
+    padding: "10px",
+    textAlign: "left",
+  },
+  td: {
+    border: "1px solid #dee2e6",
+    padding: "10px",
+    textAlign: "left",
+  },
+  grey1: {
+    backgroundColor: GREY1,
+  },
 }));
 
 export interface Column {
-    title: string;
+  title: string;
+  key?: string;
+  centerContent?: boolean;
 }
 
 export type TableData<T extends { title: string }[]> = {
-    [K in T[number]['title']]: string;
+  [K in T[number]["title"]]: string;
 }[];
 
 interface Props {
-    columns: Column[];
-    data: Array<Record<string, string>>;
+  columns: Column[];
+  data: Array<Record<string, string | ReactElement>>;
 }
 
 const Table: React.FC<Props> = (props) => {
-    const {columns, data} = props;
-    const {classes} = useStyles();
+  const { columns, data } = props;
+  const { classes } = useStyles();
 
-    return (
-        <table className={classes.table}>
-            <thead className={classes.thead}>
-            <tr>
-                {columns.map((col) => (
-                    <th key={col.title} className={classes.th}>
-                        {col.title}
-                    </th>
-                ))}
-            </tr>
-            </thead>
-            <tbody className={classes.tbody}>
-            {data.map((row, index) => (
-                <tr
-                    key={index}
-                    className={index % 2 === 0 ? classes.grey1 : undefined}
-                >
-                    {columns.map((col) => (
-                        <td key={col.title} className={classes.td}>
-                            {row[col.title]}
-                        </td>
-                    ))}
-                </tr>
+  return (
+    <table className={classes.table}>
+      <thead className={classes.thead}>
+        <tr>
+          {columns.map((col) => (
+            <th key={col.title} className={classes.th}>
+              {col.title}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody className={classes.tbody}>
+        {data.map((row, index) => (
+          <tr
+            key={index}
+            className={index % 2 === 0 ? classes.grey1 : undefined}
+          >
+            {columns.map((col) => (
+              <td key={col.title} className={classes.td}>
+                {col.centerContent ? (
+                  <div style={{width: "100%", display: "flex", alignItems: "center", justifyContent: "center"}}>{row[col.key ?? col.title]}</div>
+                ) : (
+                  row[col.key ?? col.title]
+                )}
+              </td>
             ))}
-            </tbody>
-        </table>
-    );
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
 };
 
 export default Table;

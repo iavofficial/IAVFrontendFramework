@@ -17,7 +17,7 @@
  */
 
 import {PropsWithChildren, ReactElement} from "react";
-import {FFStoreModule} from "../generalModule";
+import {FFModule} from "../generalModule";
 
 export type BasicRoute = {
   path: string;
@@ -45,17 +45,17 @@ export type MainViewRouterProps = {
 };
 
 export type useLocationType = () => {
-  pathname: string;
+  pathName: string;
 };
 
 export type useIsTabActiveType = (tabPath: string) => {
   isActive: boolean;
 };
 
-export type RouterModule<TRoutingState = {}> = {
-  uiLayerRouter: React.ComponentType<UILayerRouterProps>;
-  mainViewRouter: React.ComponentType<MainViewRouterProps>;
-  link: React.ComponentType<LinkProps>;
+export type RouterModule = {
+  UiLayerRouter: React.ComponentType<UILayerRouterProps>;
+  MainViewRouter: React.ComponentType<MainViewRouterProps>;
+  Link: React.ComponentType<LinkProps>;
   useLocation: useLocationType;
   useIsTabActive: useIsTabActiveType;
-} & FFStoreModule<TRoutingState>;
+} & FFModule;

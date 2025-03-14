@@ -18,24 +18,28 @@
 
 import {UILayerRouter} from "./components/UILayerRouter";
 import {MainViewRouter} from "./components/MainViewRouter";
-import {
-  RouterModule,
-} from "@iavofficial/frontend-framework-shared/routingModule";
 import {Link} from "./components/Link";
-import {useLocation} from "react-router";
+import {useLocation as useLocationReactRouter} from "react-router";
+import {RouterModule} from "../../../types/modules/router/routerModule";
 
 export class ReactRouterRouter implements RouterModule {
-  public uiLayerRouter;
-  public mainViewRouter;
-  public link;
+  public UiLayerRouter;
+  public MainViewRouter;
+  public Link;
   public useLocation;
   public useIsTabActive;
 
   constructor() {
-    this.uiLayerRouter = UILayerRouter;
-    this.mainViewRouter = MainViewRouter;
-    this.link = Link;
-    this.useLocation = useLocation;
+    this.UiLayerRouter = UILayerRouter;
+    this.MainViewRouter = MainViewRouter;
+    this.Link = Link;
+
+    this.useLocation = () => {
+      const location = useLocationReactRouter();
+      return {
+        pathName: location.pathname,
+      };
+    };
 
     this.useIsTabActive = (tabPath: string) => {
       const location = this.useLocation();
@@ -48,7 +52,7 @@ export class ReactRouterRouter implements RouterModule {
 
       const regex = new RegExp(regexString);
 
-      let isActive = regex.test(location.pathname);
+      let isActive = regex.test(location.pathName);
 
       return {
         isActive,

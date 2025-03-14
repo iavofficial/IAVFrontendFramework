@@ -3,7 +3,10 @@ import Title from "../../../common/page/text/title";
 import Text from "../../../common/page/text/text";
 import SubTitle from "../../../common/page/text/subTitle";
 import Table from "../../../common/page/utils/table";
-import { MODULE_METHOD_TABLE_COLUMNS, MODULE_STATE_TABLE_COLUMNS } from "../../../common/page/text/moduleTableColumns";
+import {
+  MODULE_THUNKS_TABLE_COLUMNS,
+  MODULE_STATE_TABLE_COLUMNS,
+} from "../../../common/page/text/moduleTableColumns";
 import Code from "../../../common/page/utils/code";
 
 export const GeneralAuthModule = () => {
@@ -42,7 +45,7 @@ export const GeneralAuthModule = () => {
 
       <SubTitle>Necessary Thunks (methods)</SubTitle>
       <Table
-        columns={MODULE_METHOD_TABLE_COLUMNS}
+        columns={MODULE_THUNKS_TABLE_COLUMNS}
         data={[
           {
             name: "fetchAuthed",
@@ -70,6 +73,12 @@ export const GeneralAuthModule = () => {
   );
 };
 
-const CodeFetchAuthedParams = <Code language="ts">{`{url: string; settings?: object}`}</Code>
-const CodeLoginParams = <Code language="ts">{`{credentials: Credentials}`}</Code>
-const CodeLogoutParams = <Code language="ts">{`{error?: unknown} | undefined`}</Code>
+const CodeFetchAuthedParams = (
+  <Code language="ts">{`{url: string; settings?: object}`}</Code>
+);
+const CodeLoginParams = (
+  <Code language="ts">{`{credentials: Credentials}`}</Code>
+);
+const CodeLogoutParams = (
+  <Code language="ts">{`{error?: unknown} | undefined`}</Code>
+);

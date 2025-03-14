@@ -12,9 +12,21 @@ export const MODULE_STATE_TABLE_COLUMNS: Column[] = [
   { key: "description", title: "Description" },
 ];
 
-export const MODULE_METHOD_TABLE_COLUMNS: Column[] = [
+export const MODULE_THUNKS_TABLE_COLUMNS: Column[] = [
   { key: "name", title: "Method Name" },
   { key: "parameters", title: "Parameters" },
   { key: "return_type", title: "Return Type" },
+  { key: "description", title: "Description" },
+];
+
+export const MODULE_METHOD_TABLE_COLUMNS: Column[] = [
+  { key: "name", title: "Method Name" },
+  { key: "type", title: "Type" },
+  { key: "description", title: "Description" },
+];
+
+export const MODULE_COMPONENT_TABLE_COLUMNS: Column[] = [
+  { key: "name", title: "Method Name" },
+  { key: "component_type", title: "Type of the Component" },
   { key: "description", title: "Description" },
 ];

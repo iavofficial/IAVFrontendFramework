@@ -26,7 +26,7 @@ import {
   InjectedOptionsByNavbarToWrapper,
 } from "../types/typesInjectedOptions";
 import {generateHashForValues} from "@iavofficial/frontend-framework-shared/hash";
-import {BasicRoute} from "@iavofficial/frontend-framework-shared/routingModule";
+import {BasicRoute} from "@iavofficial/frontend-framework-shared/routerModule";
 
 export class Group implements GroupableTabAndContentWrapper {
   private _insideGroup = false;

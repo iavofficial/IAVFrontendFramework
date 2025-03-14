@@ -211,6 +211,12 @@ public setExtras(key: string, value: unknown): this`}
           default_module: "DummyAuthenticationProvider",
           ts_type: CodeAuthModuleType,
         },
+        {
+          key: "router",
+          type_of_module: "Framework Non Store Module",
+          default_module: "ReactRouterRouter",
+          ts_type: CodeRouterModuleType,
+        },
       ]}
     />
     <SubTitle>Other relevant interfaces</SubTitle>
@@ -244,4 +250,18 @@ const CodeAuthModuleType = (
   login: AsyncThunk<void, {credentials: Credentials}, any>;
   logout: AsyncThunk<void, {error?: unknown} | undefined, any>;
 } & FFStoreModule<TAuthState>;`}</Code>
+);
+
+const CodeRouterModuleType = (
+  <Code
+    style={{ width: "fit-content" }}
+    language="ts"
+  >{`export type RouterModule = {
+  UiLayerRouter: React.ComponentType<UILayerRouterProps>;
+  MainViewRouter: React.ComponentType<MainViewRouterProps>;
+  Link: React.ComponentType<LinkProps>;
+  useLocation: useLocationType;
+  useIsTabActive: useIsTabActiveType;
+} & FFModule;
+`}</Code>
 );

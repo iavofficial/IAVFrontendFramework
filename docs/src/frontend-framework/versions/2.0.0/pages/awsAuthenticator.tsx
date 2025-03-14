@@ -1,7 +1,7 @@
 import Page from "../../../common/page/page";
 import { ModuleProfile } from "../../../common/page/text/moduleProfile";
 import {
-  MODULE_METHOD_TABLE_COLUMNS,
+  MODULE_THUNKS_TABLE_COLUMNS,
   MODULE_PARAM_TABLE_COLUMNS,
   MODULE_STATE_TABLE_COLUMNS,
 } from "../../../common/page/text/moduleTableColumns";
@@ -72,7 +72,7 @@ export const AwsAuthenticator = () => {
 
       <SubTitle>Additional / overriden Thunks (methods)</SubTitle>
       <Table
-        columns={MODULE_METHOD_TABLE_COLUMNS}
+        columns={MODULE_THUNKS_TABLE_COLUMNS}
         data={[
           {
             name: "fetchAuthed",

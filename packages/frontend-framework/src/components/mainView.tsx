@@ -28,7 +28,7 @@ import If from "./helper/If";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 import {useModuleContext} from "@iavofficial/frontend-framework-shared/moduleContext";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
-import {BasicRoute} from "@iavofficial/frontend-framework-shared/routingModule";
+import {BasicRoute} from "@iavofficial/frontend-framework-shared/routerModule";
 import { DefaultNonStoreModules } from "@iavofficial/frontend-framework-shared/moduleDefaults";
 
 interface MainViewProps {

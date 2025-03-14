@@ -9,7 +9,6 @@ import UILayer from "./pages/uiLayer.tsx";
 import ContentArea from "./pages/contentArea.tsx";
 import ColorSettings from "./pages/colorSettings.tsx";
 import DevProject from "./pages/devProject.tsx";
-import Playground from "./pages/playground.tsx";
 import FAQ from "./pages/faq.tsx";
 import PageNavigation from "../../common/drawer/pageNavigation.tsx";
 import NavLinkItem from "../../common/drawer/drawerLink.tsx";
@@ -18,6 +17,8 @@ import { DummyAuthenticator } from "./pages/dummyAuthenticator.tsx";
 import { RouteDefinition } from "../../common/page/routeDefinition.ts";
 import { GeneralAuthModule } from "./pages/generalAuthModule.tsx";
 import { AwsAuthenticator } from "./pages/awsAuthenticator.tsx";
+import { ReactRouterRouter } from "./pages/reactRouterRouter.tsx";
+import { GeneralRouterModule } from "./pages/generalRouterModule.tsx";
 
 const routes : RouteDefinition[] = [
   { path: "overview", label: "Quick Overview", element: <Overview /> },
@@ -81,6 +82,21 @@ const modulesRoutes = {
       },
     ],
   },
+  router: {
+    title: "router",
+    modules: [
+      {
+        path: "general-router-module",
+        label: "General router module",
+        element: <GeneralRouterModule />,
+      },
+      {
+        path: "react-router-router",
+        label: "ReactRouterRouter",
+        element: <ReactRouterRouter />,
+      },
+    ]
+  }
 };
 
 const helpRoutes = [{ path: "faq", label: "FAQ", element: <FAQ /> }];

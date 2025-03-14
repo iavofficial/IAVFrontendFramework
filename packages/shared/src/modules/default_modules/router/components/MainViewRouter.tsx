@@ -18,7 +18,7 @@
 
 import React from "react";
 import {Fragment} from "react/jsx-runtime";
-import {MainViewRouterProps} from "../../../../types/modules/routing/routingModule";
+import {MainViewRouterProps} from "../../../../types/modules/router/routerModule";
 import {Route, Routes} from "react-router";
 import {generateHash} from "../../../../utils/hash";
 

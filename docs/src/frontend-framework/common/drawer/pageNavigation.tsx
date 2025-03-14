@@ -20,7 +20,7 @@ import {PropsWithChildren} from "react";
 const useStyles = makeStyles(() => ({
     drawer: {
         position: "fixed",
-        top: "50px",
+        top: "61px",
         left: "0",
         width: "200px",
         height: "100%",

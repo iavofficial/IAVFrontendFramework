@@ -25,10 +25,10 @@ export type ModuleLifecycleHook = () => {renderChildren: boolean} & Record<
 
 export type FFModule = {
   useModuleLifecycle?: ModuleLifecycleHook;
-}
+};
 
-export type FFStoreModule<TState = any, TSlice extends Slice<TState> = Slice<TState>> = {
-  slice?: TSlice;
+export type FFStoreModule<TState> = {
+  slice: Slice<TState>;
   middleware?: Middleware[];
   enhancers?: StoreEnhancer[];
   extras?: object;

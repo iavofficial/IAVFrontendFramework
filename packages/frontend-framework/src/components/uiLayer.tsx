@@ -48,7 +48,7 @@ import {
   useDefaultSelector,
 } from "@iavofficial/frontend-framework-shared/moduleDefaults";
 import {useModuleContext} from "@iavofficial/frontend-framework-shared/moduleContext";
-import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/mandatoryModuleNames";
+import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
 
 export interface AuthOptions {
   backgroundImage?: string;
@@ -166,8 +166,3 @@ export const UILayer = (props: Props) => {
     </NavbarSettingsProvider>
   );
 };
-
-interface RedirectorProps {
-  startingPoint: string;
-  disableLogin?: boolean;
-}

@@ -1,6 +1,6 @@
 {
   "name": "@iavofficial/frontend-framework",
-  "version": "1.4.0-dev.2",
+  "version": "1.4.0-dev.5",
   "private": false,
   "license": "Apache-2.0",
   "description": "This framework is the foundation of frontend applications to provide maintainability, expandability, unification and an improved developer experience.",
@@ -10,7 +10,6 @@
     "build-live": "cross-env-shell \"..\\..\\scripts\\win\\build-live.bat || echo \"Not implemented yet.\"\"",
     "test": "jest --passWithNoTests",
     "lint": "eslint src/**/*.{js,ts,tsx}",
-    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json}\" && prettier --write \"docs/*\"",
     "release": "npx semantic-release",
     "generate-docs": "../../scripts/unix/docs_generation/generate-docs-for-package.sh"
   },
@@ -124,7 +123,6 @@
     "./headerMenuElement": "./dist/components/header/headerMenuElement.js",
     "./store": "./dist/re-exports/store.js",
     "./constants": "./dist/re-exports/constants.js",
-    "./mandatoryModuleNames": "./dist/re-exports/mandatoryModuleNames.js",
     "./hash": "./dist/re-exports/hash.js",
     "./colorSettingsContext": "./dist/re-exports/colorSettingsContext.js",
     "./moduleContext": "./dist/re-exports/moduleContext.js",
@@ -266,9 +264,6 @@
       ],
       "./constants": [
         "./dist/re-exports/constants.d.ts"
-      ],
-      "./mandatoryModuleNames": [
-        "./dist/re-exports/mandatoryModuleNames.d.ts"
       ],
       "./hash": [
         "./dist/re-exports/hash.d.ts"

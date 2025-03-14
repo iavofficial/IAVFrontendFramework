@@ -16,58 +16,26 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {FFModule} from "../../types/modules/generalModule";
-import {
-  ActualMandatoryStateFromModules,
-  FFMandatoryStoreModules,
-  FFMandatoryState,
-} from "../../types/modules/moduleOrchestrationTypes";
-import {defaultNonStoreModules, defaultStoreModules} from "./moduleDefaults";
+import {mergeModules} from "./util/mergeModules";
+import { seperateModuleTypes } from "./util/seperateModuleTypes";
 
-export function createModules<
-  TNonStoreModules extends Record<string, FFModule> = Record<string, FFModule>,
-  TStoreModules extends Partial<FFMandatoryStoreModules<TState>> = {},
-  TState extends
-    FFMandatoryState = ActualMandatoryStateFromModules<TStoreModules>,
->(
-  params: {
-    nonStoreModules?: TNonStoreModules;
-    storeModules?: TStoreModules;
-  } = {},
-) {
-  const {
-    nonStoreModules = {} as TNonStoreModules,
-    storeModules = {} as TStoreModules,
-  } = params;
+// It would be better to use FFModule inside the Record to ensure that
+// the useModuleLifecycle method has the expected type if the module
+// provides this hook. However, doing this results in problems as
+// when providing the modules with an object literal TS performs
+// excess property checking for object literals (passed objects have
+// to fully match). If the module does not contain this hook it results
+// in an error. Furthermore, an index signature to open the FFModule type
+// cannot be added since it introduces other errors.
+// However, just providing object inside the Record is not very critical
+// as the user will get an error when he passes the modules to the
+// GlobalDataLayer if module types mismatch with FFModule.
+export const createModules = <TModules extends Record<string, object>>(
+  paramModules?: TModules,
+) => {
+  const modules = paramModules ?? ({} as TModules);
 
-  const mergedStoreModules = {
-    ...defaultStoreModules,
-    ...storeModules,
-  };
+  const seperatedModules = seperateModuleTypes(modules);
 
-  const mergedNonStoreModules = {
-    ...defaultNonStoreModules,
-    ...nonStoreModules,
-  };
-
-  return {
-    storeModules: mergedStoreModules,
-    // Modules which are relevant for the store overwrite modules which are not relevant
-    // for the store in case there is a duplicate key. This is necessary because store modules
-    // are "more specific" than other modules. For example there could be a Module M for Routing
-    // which has a default implementation inside the framework. The user may want to write a custom
-    // Routing Module X which should replace the default implementation. He will pass X inside the
-    // constructor because of which this.storeModules contains X. However, sinde M is a default
-    // implementation it is presend inside defaultNonStoreModules. Because of this M is present
-    // in this.nonStoreModules, so the union of this.storeModules and this.nonStoreModules
-    // contains two routing modules (X and M) for the router key. Of course, the user module should
-    // overwrite the default implementation.
-    // However, the other way around makes no sense (a user module without store replaces a default
-    // implementation which is included inside the store), since the state which is defined inside
-    // the default implementation is necessary for the framework to work correctly. So you can conclude:
-    // A default implementation for the store can be overwritten by just custom modules for the store.
-    // A default implementation without store can be overwritten by custom modules both for and without
-    // the store.
-    all: {...mergedNonStoreModules, ...mergedStoreModules},
-  };
-}
+  return mergeModules(seperatedModules);
+};

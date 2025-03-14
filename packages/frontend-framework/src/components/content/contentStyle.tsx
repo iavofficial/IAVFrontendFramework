@@ -20,7 +20,7 @@ import React from "react";
 import {PropsWithChildren, useContext} from "react";
 import {useStyleMap} from "./style_options/useStyleMap";
 import {StyleProps, StylesArray} from "./style_options/styleTypes";
-import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared/colorSettingsContext";
+import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 
 export const ContentStyleStyles = {
   WRAPPER_FULL_WIDTH: "WRAPPER_FULL_WIDTH",

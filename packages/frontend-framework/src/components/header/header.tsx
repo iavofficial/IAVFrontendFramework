@@ -26,9 +26,14 @@ import {SettingsMenu, SettingsMenuOptions} from "./settingsMenu";
 import {UserMenu, UserMenuOptions} from "./userMenu";
 import HeaderIcon from "./headerIcon";
 import makeStyles from "../content/style_options/makeStyles";
-import {APPLICATION_LOGO_PLACEHOLDER, BLUE3, PADDING_GAB, WHITE} from "@iavofficial/frontend-framework-shared/constants";
-import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared/colorSettingsContext";
-import { AppLogoPlaceholder } from "@iavofficial/frontend-framework-shared/appLogoPlaceholder";
+import {
+  APPLICATION_LOGO_PLACEHOLDER,
+  BLUE3,
+  PADDING_GAB,
+  WHITE,
+} from "@iavofficial/frontend-framework-shared/constants";
+import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
+import {AppLogoPlaceholder} from "@iavofficial/frontend-framework-shared/appLogoPlaceholder";
 
 const useStyles = makeStyles(() => ({
   wrapper: {
@@ -45,7 +50,7 @@ export interface HeaderOptions {
   reactElementLeft?: ReactElement;
   hideLeft?: boolean;
   hideRight?: boolean;
-  userIcon: ReactElement;
+  userIcon?: ReactElement;
   hideUserIcon?: boolean;
   headerElements?: ReactElement[];
 }
@@ -108,7 +113,9 @@ export const Header = (props: Props) => {
         {props.headerOptions?.reactElementLeft ? (
           props.headerOptions?.reactElementLeft
         ) : (
-          <AppLogoPlaceholder appLogoPlaceholder={APPLICATION_LOGO_PLACEHOLDER} />
+          <AppLogoPlaceholder
+            appLogoPlaceholder={APPLICATION_LOGO_PLACEHOLDER}
+          />
         )}
       </div>
 

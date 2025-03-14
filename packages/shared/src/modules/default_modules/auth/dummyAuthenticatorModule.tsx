@@ -18,7 +18,7 @@
 
 import { createAsyncThunk, createSlice, PayloadAction, Slice, ThunkDispatch } from "@reduxjs/toolkit";
 import { AuthModule, Credentials, UserData } from "../../../types/modules/auth/authenticatorModule";
-import { MandatoryModuleNames } from "../../../constants/mandatoryModuleNames";
+import { MandatoryModuleNames } from "../../../constants/moduleNames";
 
 export interface Props {
   additionalContextValues?: {[key: string]: any};
@@ -36,8 +36,8 @@ const initialState: DummyAuthenticatorState= {
   userData: undefined
 }
 
-export class DummyAuthenticator implements AuthModule<DummyAuthenticatorState>{
-  public slice: Slice<DummyAuthenticatorState>;
+export class DummyAuthenticator {
+  public slice;
 
   public fetchAuthed;
   public login;
@@ -88,7 +88,7 @@ export class DummyAuthenticator implements AuthModule<DummyAuthenticatorState>{
     this.logout = createAsyncThunk<void, {error?: unknown} | undefined, {}>(
       MandatoryModuleNames.Authentication + "/logout",
       async ({error}: {error?: unknown} = {}, {dispatch}) => {
-        dispatch(logout({}));
+        dispatch(logout());
       }
     )
   }

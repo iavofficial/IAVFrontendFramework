@@ -30,8 +30,11 @@ import {calculateWidth} from "../../utils/calculateWidth";
 import {ContentBarButtonElement} from "./contentBarButtonElement";
 import {useStyleMap} from "./style_options/useStyleMap";
 import {StyleProps, StylesArray} from "./style_options/styleTypes";
-import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared/colorSettingsContext";
-import {DEFAULT_ELEMENTSIZE, PADDING_GAB} from "@iavofficial/frontend-framework-shared/constants";
+import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
+import {
+  DEFAULT_ELEMENTSIZE,
+  PADDING_GAB,
+} from "@iavofficial/frontend-framework-shared/constants";
 
 export const ContentBarStyles = {
   SPACING: "SPACING",
@@ -86,7 +89,7 @@ export const ContentBar = (props: PropsContentBar) => {
   const styleDependencies = {
     [ContentBarStyles.SET_SPACING_COLOR]: [ContentBarStyles.SPACING],
   };
-  
+
   const [classNames, styles] = useStyleMap(
     classesMap,
     stylesMap,

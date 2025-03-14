@@ -22,7 +22,6 @@ import {
   createAsyncThunk,
   createSlice,
   PayloadAction,
-  Slice,
   ThunkDispatch,
 } from "@reduxjs/toolkit";
 import {
@@ -34,43 +33,47 @@ import {
   ValidUserInformation,
 } from "./cognitoService";
 import {useDispatch, useSelector} from "react-redux";
-import {AWSAuthenticatorExtras, AWSUserData} from "./awsAuthenticatorTypes";
-import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/mandatoryModuleNames";
-import { AuthModule, AuthState, Credentials } from "@iavofficial/frontend-framework-shared/authenticatorModule";
-import { JWT } from "aws-amplify/auth";
+import {AwsAuthenticatorExtras, AwsUserData} from "./awsAuthenticatorTypes";
+import {
+  AuthModule,
+  AuthState,
+  Credentials,
+} from "@iavofficial/frontend-framework-shared/authenticatorModule";
+import {JWT} from "aws-amplify/auth";
+import { MandatoryModuleNames } from "@iavofficial/frontend-framework-shared/moduleNames";
 
 export interface FetchSettings {
   headers?: Headers;
   [key: string]: any;
 }
 
-interface AWSAuthenticatorStateExtras {
+interface AwsAuthenticatorStateExtras {
   loginError: string | undefined;
   isNewPasswordRequired: boolean; // true if user logs in for the first time with his temp password and has to set a new one
 }
 
-export interface AWSAuthenticatorState extends AuthState {
-  userData: AWSUserData | undefined; // contains user information; undefined if no user is logged in
-  extras: AWSAuthenticatorStateExtras;
+export interface AwsAuthenticatorState extends AuthState {
+  userData: AwsUserData | undefined; // contains user information; undefined if no user is logged in
+  extras: AwsAuthenticatorStateExtras;
 }
 
-export interface AWSAuthenticatorStoreState {
-  [MandatoryModuleNames.Authentication]: AWSAuthenticatorState;
+export interface AwsAuthenticatorStoreState {
+  [MandatoryModuleNames.Authentication]: AwsAuthenticatorState;
 }
 
-export interface AWSAuthenticatorParameters {
+export interface AwsAuthenticatorParameters {
   configureAmplify: () => void;
   failOnNoLegalGroup?: boolean;
   legalGroups?: string[];
 }
 
-export type AWSAuthenticatorAuthDispatch = ThunkDispatch<
-  AWSAuthenticatorStoreState,
+export type AwsAuthenticatorAuthDispatch = ThunkDispatch<
+  AwsAuthenticatorStoreState,
   unknown,
   Action<string>
 >;
 
-const initialState: AWSAuthenticatorState = {
+const initialState: AwsAuthenticatorState = {
   hasAuthenticated: false,
   isLoading: false,
   userData: undefined,
@@ -80,21 +83,21 @@ const initialState: AWSAuthenticatorState = {
   },
 };
 
-export class AWSAuthenticator {
+export class AwsAuthenticator implements AuthModule<AwsAuthenticatorState> {
   private config;
 
-  public slice: Slice<AWSAuthenticatorState>;
+  public slice;
   public fetchAuthed;
   public login;
   public logout;
   public useModuleLifecycle;
-  public extras: AWSAuthenticatorExtras;
+  public extras: AwsAuthenticatorExtras;
 
   constructor({
     configureAmplify,
     failOnNoLegalGroup,
     legalGroups = [],
-  }: AWSAuthenticatorParameters) {
+  }: AwsAuthenticatorParameters) {
     this.config = {
       failOnNoLegalGroup,
       legalGroups,
@@ -154,7 +157,7 @@ export class AWSAuthenticator {
     this.fetchAuthed = createAsyncThunk<
       Response,
       {url: string; token?: JWT; settings?: FetchSettings},
-      {state: {[MandatoryModuleNames.Authentication]: AWSAuthenticatorState}}
+      {state: {[MandatoryModuleNames.Authentication]: AwsAuthenticatorState}}
     >(
       MandatoryModuleNames.Authentication + "/thunkFetchAuthed",
       async ({url, token, settings}, {dispatch, getState}) => {
@@ -186,7 +189,7 @@ export class AWSAuthenticator {
             if (result instanceof ValidUserInformation) {
               dispatch(processSuccessfulAuth({...result}));
             } else {
-              dispatch(setNewPasswordRequired({}));
+              dispatch(setNewPasswordRequired());
             }
           })
           .catch((error: Error) => {
@@ -222,7 +225,9 @@ export class AWSAuthenticator {
             this.config.legalGroups,
           )
             .then((result: ValidUserInformation | undefined) => {
-              dispatch(processSuccessfulAuth({...result}));
+              if (result !== undefined) {
+                dispatch(processSuccessfulAuth({...result}));
+              }
             })
             .catch((error: Error) => {
               dispatch(this.logout({}));
@@ -239,7 +244,9 @@ export class AWSAuthenticator {
             this.config.legalGroups,
           )
             .then((result) => {
-              dispatch(processSuccessfulAuth({...result}));
+              if (result !== undefined) {
+                dispatch(processSuccessfulAuth({...result}));
+              }
             })
             .catch((error: Error) => {
               dispatch(this.logout({error}));
@@ -271,8 +278,8 @@ export class AWSAuthenticator {
     this.useModuleLifecycle = () => {
       const [isInitialized, setIsInitialized] = useState(false);
 
-      const dispatch = useDispatch<AWSAuthenticatorAuthDispatch>();
-      const hasAuthenticated = useSelector<AWSAuthenticatorStoreState>(
+      const dispatch = useDispatch<AwsAuthenticatorAuthDispatch>();
+      const hasAuthenticated = useSelector<AwsAuthenticatorStoreState>(
         (state) => state.auth.hasAuthenticated,
       );
 
@@ -301,7 +308,7 @@ export class AWSAuthenticator {
 
 // Utility functions
 const generateSettingsWithAuthFrom = (
-  state: AWSAuthenticatorState,
+  state: AwsAuthenticatorState,
   token?: JWT,
   settings?: FetchSettings,
 ) => {

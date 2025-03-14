@@ -18,37 +18,23 @@
 
 import {Reducer} from "@reduxjs/toolkit";
 import {FFStoreModule} from "../../types/modules/generalModule";
-import {MandatoryModuleNames} from "../../constants/mandatoryModuleNames";
+import {
+  MandatoryModuleNames,
+  USER_MODULES_PREFIX,
+} from "../../constants/moduleNames";
 import {AuthModule, AuthState} from "./auth/authenticatorModule";
 import {StoreConfigBuilder} from "../../modules/module_orchestration/storeConfigBuilder";
-/*
-To add a new mandatory module:
-1. Add the state (of it's slice) to FFMandatoryState.
-2. Add the type of the module in minimal configuration to FFMandatoryStoreModules. Minimal
-   configuration means that the module includes just only all values and methods which
-   are used by the framework itself. This is necessary to ensure that only modules can
-   be used which are of this type and because of this provide all necessary values and
-   methods to the framework.
-3. Add an instance of a default module for this key.
-4. Inside the build method of the StoreConfigBuilder: Add the root reducer of your default
-   module like it is done for auth. This is necessary to ensure that all mandatory reducers
-   are present when building the redux store.
-5. Create a default processor for the module.
-6. Inside the constructor of StoreBuilder: Add an object with the corresponding key to
-   include the passed module and the default processor inside the ModuleAndProcessorMap
-   for mandatory modules.
-*/
+import {Exact, ExactPartial} from "../util-types/exact";
+import {RestrictKeyToPrefix} from "../util-types/restrictKeyToPrefix";
+import {DefaultNonStoreModules} from "../../modules/module_orchestration/moduleDefaults";
 
-// The mandatory state (which will be the state of different module's slices)
-export type FFMandatoryState = {
-  [MandatoryModuleNames.Authentication]: AuthState;
+export type FFStoreModules<TModulesState = unknown> = {
+  [K in keyof TModulesState]: FFStoreModule<TModulesState[K]>;
 };
 
-// It is concluded that every mandatory state will have a root reducer object.
-// Without the possiblity of changing values (so the existence of reducers)
-// state is not sensible.
-export type FFMandatoryReducers<TState extends FFMandatoryState> = {
-  [K in keyof TState]: Reducer<TState[K]>;
+// The (default) mandatory state (which will be the state of different module's slices)
+export type FFMandatoryState = {
+  [MandatoryModuleNames.Authentication]: AuthState;
 };
 
 // All mandatory modules with minimal setup which is needed by the framework.
@@ -57,31 +43,30 @@ export type FFMandatoryReducers<TState extends FFMandatoryState> = {
 // So the minimal configuration is exactly the set of values and methods
 // used by the framework itself.
 export type FFMandatoryStoreModules<
-  TState extends FFMandatoryState = FFMandatoryState,
+  TModulesState extends FFMandatoryState = FFMandatoryState,
 > = {
   [MandatoryModuleNames.Authentication]: AuthModule<
-    TState[typeof MandatoryModuleNames.Authentication]
+    TModulesState[typeof MandatoryModuleNames.Authentication]
   >;
 };
 
+// The types of all default M mandatory modules without a state for the store.
 export type FFMandatoryNonStoreModules = {};
 
 export type FFAllMandatoryModules<
-  TState extends FFMandatoryState = FFMandatoryState,
-> = FFMandatoryStoreModules<TState> & FFMandatoryNonStoreModules;
+  TModulesState extends FFMandatoryState = FFMandatoryState,
+> = FFMandatoryStoreModules<TModulesState> & FFMandatoryNonStoreModules;
+
+// It is concluded that every mandatory state will have a root reducer object.
+// Without the possiblity of changing values (so the existence of reducers)
+// state is not sensible.
+export type FFMandatoryReducers<TModulesState extends FFMandatoryState> = {
+  [K in keyof TModulesState]: Reducer<TModulesState[K]>;
+};
 
 // The user can provide additional modules which aren't used by the
 // framework itself.
-export type GenericModules = Record<string, FFStoreModule>;
-
-// Processor functions are used to process single modules. They can be
-// replaces in order to allow the developer to implement custom processing,
-// since it is not possible to think of every possible processing step which
-// could occur at development of the framework.
-export type ModuleProcessorFunction<
-  M extends FFStoreModule,
-  TState extends FFMandatoryState,
-> = (module: M, config: StoreConfigBuilder<TState>) => void;
+export type GenericModules = Record<string, FFStoreModule<unknown>>;
 
 // Objects of this type aggragate a module and it's corresponding processor
 // method. The following example shows it's structure:
@@ -89,29 +74,43 @@ export type ModuleProcessorFunction<
 // The effect of never in this case is that there cannot be a key with a value
 // which does not extend FFStoreModule.
 export type ModuleAndProcessorMap<
-  ModuleType extends object,
-  TState extends FFMandatoryState,
+  TModules extends FFStoreModules,
+  TFrameworkModulesState extends FFMandatoryState,
 > = {
-  [K in keyof ModuleType]: ModuleType[K] extends FFStoreModule
-    ? ModuleEntry<ModuleType[K], TState>
+  [K in keyof TModules]: TModules[K] extends FFStoreModule<
+    ExtractModuleState<TModules[K]>
+  >
+    ? ModuleEntry<TModules[K], TFrameworkModulesState>
     : never;
 };
 
 // This type defines the structure of one entry inside the ModuleAndProcessorMap.
 export interface ModuleEntry<
-  M extends FFStoreModule,
-  TState extends FFMandatoryState,
+  TModule,
+  TFrameworkModulesState extends FFMandatoryState,
 > {
-  module: M;
-  processor?: ModuleProcessorFunction<M, TState>;
+  module: TModule;
+  processor?: ModuleProcessorFunction<TModule, TFrameworkModulesState>;
 }
+
+// Processor functions are used to process single modules. They can be
+// replaced in order to allow the developer to implement custom processing,
+// since it is not possible to think of every possible processing step which
+// could occur at development of the framework.
+export type ModuleProcessorFunction<
+  TModule,
+  TFrameworkModulesState extends FFMandatoryState,
+> = (
+  module: TModule,
+  config: StoreConfigBuilder<TFrameworkModulesState>,
+) => void;
 
 // Using this type the State Type of a Module can be iferred.
 export type ExtractModuleState<T> =
   T extends FFStoreModule<infer S> ? S : never;
 
 // This type creates an object of the specific state of all modules, for example:
-// {auth: AWSAuthenticatorState, routing: ReactRouterRouterState}
+// {auth: AwsAuthenticatorState, routing: ReactRouterRouterState}
 export type ActualMandatoryStateFromModules<
   TModules extends Partial<FFMandatoryStoreModules>,
 > = {
@@ -120,15 +119,65 @@ export type ActualMandatoryStateFromModules<
     : ExtractModuleState<FFMandatoryStoreModules[K]>;
 };
 
+export type ActualUserModulesStateFromModules<TModules> = {
+  [K in keyof TModules]: ExtractModuleState<TModules[K]>;
+};
+
 // This type merges two module types. If there are duplicate keys regarding
 // both types, the keys of TDefaultModules will be overwritten.
-export type MergeModules<TCustomModules, TDefaultModules> = Omit<
-  TDefaultModules,
-  keyof TCustomModules
+export type MergeModules<TDefault, TOverrides> = Omit<
+  TDefault,
+  keyof TOverrides
 > &
-  TCustomModules;
+  TOverrides;
 
 // The extended type is taken from the ReturnType type.
 export type RootState<TStoreState extends (...args: any) => any> =
   ReturnType<TStoreState>;
+
 export type AppDispatch<TStoreDispatch> = TStoreDispatch;
+
+// It has to be ensured that frameworkStoreModules has no more keys than
+// there are mandatory modules as this attribute's purpose is to override
+// default store modules.
+export type TParamFrameworkStoreModules<
+  TModules extends FFMandatoryStoreModules<TFrameworkModuleState>,
+  TFrameworkModuleState extends FFMandatoryState,
+> = Exact<FFMandatoryStoreModules<TFrameworkModuleState>, TModules>;
+
+export type TParamFrameworkStoreModulesPartial<
+  TModules extends Partial<FFMandatoryStoreModules<TFrameworkModuleState>>,
+  TFrameworkModuleState extends FFMandatoryState,
+> = ExactPartial<FFMandatoryStoreModules<TFrameworkModuleState>, TModules>;
+
+// TUserModules should not be used to override mandatory modules.
+// Because of this Omit is used in order to prevent userStoreModules
+// to have keys of FFMandatoryStoreModules.
+// Furthermore, RestrictKeyToPrefix is used in order to ensure that
+// every user module begins with a specific prefix for user modules.
+// By doing this a collision of keys for new Framework Modules with
+// user modules can be avoided.
+export type TParamUserStoreModules<
+  TUserStoreModules extends FFStoreModules<TUserModulesState> &
+    Partial<DefaultNonStoreModules>,
+  TUserModulesState,
+> = Exact<
+  RestrictKeyToPrefix<
+    Omit<TUserStoreModules, keyof FFMandatoryStoreModules>,
+    typeof USER_MODULES_PREFIX
+  >,
+  TUserStoreModules
+>;
+
+export type TParamFrameworkNonStoreModules<
+  TFrameworkNonStoreModules extends DefaultNonStoreModules,
+> = Exact<Partial<DefaultNonStoreModules>, TFrameworkNonStoreModules>;
+
+export type TParamFrameworkNonStoreModulesPartial<
+  TFrameworkNonStoreModules extends Partial<DefaultNonStoreModules>,
+> = ExactPartial<Partial<DefaultNonStoreModules>, TFrameworkNonStoreModules>;
+
+export type TParamUserNonStoreModules<TUserNonStoreModules> = Exact<
+  RestrictKeyToPrefix<TUserNonStoreModules, typeof USER_MODULES_PREFIX>,
+  TUserNonStoreModules
+>;

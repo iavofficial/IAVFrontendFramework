@@ -24,7 +24,7 @@ import React, {
 } from "react";
 import {InputText} from "primereact/inputtext";
 import {RED} from "@iavofficial/frontend-framework-shared/constants";
-import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared/colorSettingsContext";
+import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 
 interface Props {
   className?: string | undefined;

@@ -16,48 +16,48 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {useTranslator} from "@iavofficial/frontend-framework/translators";
-import {ImprintText} from "@iavofficial/frontend-framework/imprint";
-import {useContext} from "react";
-import {ColorSettingsContext} from "@iavofficial/frontend-framework/colorSettingsContext";
+import { useTranslator } from "@iavofficial/frontend-framework/translators";
+import { ImprintText } from "@iavofficial/frontend-framework/imprint";
+import { useContext } from "react";
+import { ColorSettingsContext } from "@iavofficial/frontend-framework/colorSettingsContext";
 
 export const LegalDocuments = () => {
-    const t = useTranslator();
-    const colorSettingsContext = useContext(ColorSettingsContext);
+  const t = useTranslator();
+  const colorSettingsContext = useContext(ColorSettingsContext);
 
-    return (
+  return (
+    <div
+      className={
+        (colorSettingsContext?.darkmode ? "bg-black" : "bg-grey-1") + " p-3"
+      }
+      style={{ height: "100%", width: "100%", overflow: "auto" }}
+    >
+      <div
+        className={
+          (colorSettingsContext?.darkmode ? "bg-grey-6" : "bg-white-1") +
+          " flex px-3"
+        }
+        style={{
+          flexDirection: "column",
+          height: "100%",
+          width: "100%",
+          overflow: "auto",
+        }}
+      >
         <div
-            className={
-                (colorSettingsContext?.darkmode ? "bg-black" : "bg-grey-1") + " p-3"
-            }
-            style={{height: "100%", width: "100%", overflow: "auto"}}
+          className={
+            colorSettingsContext?.darkmode ? "color-blue-3" : "color-red"
+          }
+          style={{
+            textAlign: "center",
+            fontSize: "25px",
+            fontWeight: "bolder",
+          }}
         >
-            <div
-                className={
-                    (colorSettingsContext?.darkmode ? "bg-grey-6" : "bg-white-1") +
-                    " flex px-3"
-                }
-                style={{
-                    flexDirection: "column",
-                    height: "100%",
-                    width: "100%",
-                    overflow: "auto",
-                }}
-            >
-                <div
-                    className={
-                        colorSettingsContext?.darkmode ? "color-blue-3" : "color-red"
-                    }
-                    style={{
-                        textAlign: "center",
-                        fontSize: "25px",
-                        fontWeight: "bolder",
-                    }}
-                >
-                    {t("Customized_legal_documents")}
-                </div>
-                <ImprintText/>
-            </div>
+          {t("Customized_legal_documents")}
         </div>
-    );
+        <ImprintText />
+      </div>
+    </div>
+  );
 };

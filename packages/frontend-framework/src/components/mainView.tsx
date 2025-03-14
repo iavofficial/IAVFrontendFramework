@@ -27,7 +27,7 @@ import {UserMenuOptions} from "./header/userMenu";
 import If from "./helper/If";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 import {useModuleContext} from "@iavofficial/frontend-framework-shared/moduleContext";
-import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/mandatoryModuleNames";
+import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
 import {BasicRoute} from "@iavofficial/frontend-framework-shared/routingModule";
 import { DefaultNonStoreModules } from "@iavofficial/frontend-framework-shared/moduleDefaults";
 
@@ -94,7 +94,7 @@ export const MainView = (props: MainViewProps) => {
           display: "flex",
           flex: "1 1 auto",
           overflow: "auto",
-          background: contentAreaBackground,
+          backgroundColor: contentAreaBackground,
         }}
       >
         <If condition={!props.hideNavbar}>

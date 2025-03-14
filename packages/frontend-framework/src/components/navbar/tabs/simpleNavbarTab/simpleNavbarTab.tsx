@@ -37,7 +37,7 @@ import {useModuleContext} from "@iavofficial/frontend-framework-shared/moduleCon
 import {
   AllDefaultModules,
 } from "@iavofficial/frontend-framework-shared/moduleDefaults";
-import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/mandatoryModuleNames";
+import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
 
 export interface NestedNavbarTabProps {
   additionalClassNames: string;

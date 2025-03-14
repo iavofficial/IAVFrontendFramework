@@ -78,11 +78,14 @@
     "./moduleContext": "./dist/contexts/moduleContext.js",
     "./authenticationView.css": "./dist/css/authenticationView.css",
     "./constants": "./dist/constants/constants.js",
-    "./mandatoryModuleNames": "./dist/constants/mandatoryModuleNames.js",
+    "./moduleNames": "./dist/constants/moduleNames.js",
     "./generalModule": "./dist/types/modules/generalModule.js",
     "./moduleDefaults": "./dist/modules/module_orchestration/moduleDefaults.js",
     "./moduleOrchestrationTypes": "./dist/types/modules/moduleOrchestrationTypes.js",
     "./createModules": "./dist/modules/module_orchestration/createModules.js",
+    "./createModulesSeperately": "./dist/modules/module_orchestration/createModulesSeperately.js",
+    "./checkIfUserModulesKeysValid": "./dist/modules/module_orchestration/util/checkIfUserModulesKeysValid.js",
+    "./seperateModuleTypes": "./dist/modules/module_orchestration/util/seperateModuleTypes.js",
     "./storeBuilder": "./dist/modules/module_orchestration/storeBuilder.js",
     "./storeConfig": "./dist/modules/module_orchestration/storeConfig.js",
     "./storeConfigBuilder": "./dist/modules/module_orchestration/storeConfigBuilder.js",
@@ -114,8 +117,8 @@
       "./constants": [
         "./dist/constants/constants.d.ts"
       ],
-      "./mandatoryModuleNames": [
-        "./dist/constants/mandatoryModuleNames.d.ts"
+      "./moduleNames": [
+        "./dist/constants/moduleNames.d.ts"
       ],
       "./generalModule": [
         "./dist/types/modules/generalModule.d.ts"
@@ -128,6 +131,15 @@
       ],
       "./createModules": [
         "./dist/modules/module_orchestration/createModules.d.ts"
+      ],
+      "./createModulesSeperately": [
+        "./dist/modules/module_orchestration/createModulesSeperately.js"
+      ],
+      "./checkIfUserModulesKeysValid": [
+        "./dist/modules/module_orchestration/util/checkIfUserModulesKeysValid.d.ts"
+      ],
+      "./seperateModuleTypes": [
+        "./dist/modules/module_orchestration/util/seperateModuleTypes.d.ts"
       ],
       "./storeBuilder": [
         "./dist/modules/module_orchestration/storeBuilder.d.ts"

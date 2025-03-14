@@ -18,7 +18,7 @@
 
 import {Action, ThunkDispatch} from "@reduxjs/toolkit";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
-import {MandatoryModuleNames} from "../../constants/mandatoryModuleNames";
+import {MandatoryModuleNames} from "../../constants/moduleNames";
 import {DummyAuthenticator} from "../default_modules/auth/dummyAuthenticatorModule";
 import {StoreBuilder} from "./storeBuilder";
 import {
@@ -56,7 +56,9 @@ export const allDefaultModules = {
 
 export type AllDefaultModules = typeof allDefaultModules;
 
-export const defaultStore = new StoreBuilder(defaultStoreModules).build();
+export const defaultStore = new StoreBuilder({
+  frameworkStoreModules: defaultStoreModules,
+}).build();
 
 export type DefaultStore = typeof defaultStore;
 export type DefaultStoreState = typeof defaultStore.getState;

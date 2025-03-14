@@ -35,7 +35,7 @@ import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/color
 import {generateHashOfLength} from "@iavofficial/frontend-framework-shared/hash";
 import {useModuleContext} from "@iavofficial/frontend-framework-shared/moduleContext";
 import {AllDefaultModules} from "@iavofficial/frontend-framework-shared/moduleDefaults";
-import { MandatoryModuleNames } from "@iavofficial/frontend-framework-shared/mandatoryModuleNames";
+import { MandatoryModuleNames } from "@iavofficial/frontend-framework-shared/moduleNames";
 
 interface Props {
   tabAndContentWrappers: TabAndContentWrapper[];

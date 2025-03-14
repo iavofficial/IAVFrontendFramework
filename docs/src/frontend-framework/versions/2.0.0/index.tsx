@@ -86,6 +86,9 @@ const Version2_0_0 = () => {
                 {helpRoutes.map(({path, element}) => (
                     <Route key={path} path={path} element={element}/>
                 ))}
+                {modulesRoutes.map(({path, element}) => (
+                    <Route key={path} path={path} element={element}/>
+                ))}
             </Routes>
         </>
     )

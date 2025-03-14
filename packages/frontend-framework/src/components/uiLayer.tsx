@@ -148,7 +148,7 @@ export const UILayer = (props: Props) => {
     },
   ];
 
-  const UILayerRouter = modules[MandatoryModuleNames.Router].uiLayerRouter;
+  const UILayerRouter = modules[MandatoryModuleNames.Router].UiLayerRouter;
 
   return (
     <NavbarSettingsProvider

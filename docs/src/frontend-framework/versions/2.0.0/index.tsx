@@ -104,7 +104,6 @@ const helpRoutes = [{ path: "faq", label: "FAQ", element: <FAQ /> }];
 const Version2_0_0 = () => {
   let allModuleRoutes: RouteDefinition[] = [];
   Object.values(modulesRoutes).forEach((entry) => {
-    console.log(entry.modules);
     allModuleRoutes = [...allModuleRoutes, ...entry.modules];
   });
 

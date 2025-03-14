@@ -71,7 +71,7 @@ export const MainView = (props: MainViewProps) => {
     return tabRoutes;
   }, [props.tabAndContentWrappers]);
 
-  const MainViewRouter = modules[MandatoryModuleNames.Router].mainViewRouter;
+  const MainViewRouter = modules[MandatoryModuleNames.Router].MainViewRouter;
 
   return (
     <div

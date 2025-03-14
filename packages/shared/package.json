@@ -91,7 +91,7 @@
     "./dummyAuthenticatorModule": "./dist/modules/default_modules/auth/dummyAuthenticatorModule.js",
     "./authenticatorModule": "./dist/types/modules/auth/authenticatorModule.js",
     "./authenticationViewProps": "./dist/types/modules/auth/authenticationViewProps.js",
-    "./routerModule": "./dist/types/modules/routing/routerModule.js",
+    "./routerModule": "./dist/types/modules/router/routerModule.js",
     "./colorOptionTypes": "./dist/types/color/colorOptionTypes.js",
     "./requiredMutable": "./dist/types/util-types/requiredMutable.js",
     "./componentTypeMinProps": "./dist/types/util-types/componentTypeMinProps.js",
@@ -156,7 +156,7 @@
         "./dist/types/modules/auth/authenticationViewProps.d.ts"
       ],
       "./routerModule": [
-        "./dist/types/modules/routing/routerModule.d.ts"
+        "./dist/types/modules/router/routerModule.d.ts"
       ],
       "./colorOptionTypes": [
         "./dist/types/color/colorOptionTypes.d.ts"

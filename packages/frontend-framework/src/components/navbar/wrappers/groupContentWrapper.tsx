@@ -17,7 +17,6 @@
  */
 
 import React, {ReactElement} from "react";
-import {RouteProps} from "react-router-dom";
 import {TabGroup} from "../tabs/tabGroup/tabGroup";
 import {TranslateFunctionType} from "../../../types/translationFunction";
 import {GroupableTabAndContentWrapper} from "./typesWrappers";

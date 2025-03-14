@@ -61,7 +61,7 @@ export const Navbar = (props: Props) => {
   const scrollbarColor =
     colorSettingsContext.currentColors.navbar.scrollbarColor;
 
-  const Link = modules[MandatoryModuleNames.Router].link;
+  const Link = modules[MandatoryModuleNames.Router].Link;
 
   const identifier = generateHashOfLength(4);
   const identifierLegal = "a" + identifier;

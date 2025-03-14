@@ -147,7 +147,7 @@ export const SimpleNavbarTab: GroupableNavbarTab = (
 
   const styleHidden = props.hidden ? {display: "none"} : {};
 
-  const Link = routerModule.link;
+  const Link = routerModule.Link;
 
   return (
     <div style={styleHidden}>

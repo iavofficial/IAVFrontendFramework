@@ -27,6 +27,7 @@ import { AwsAuthenticator } from "@iavofficial/frontend-framework-aws-authentica
 import { useModuleContext } from "@iavofficial/frontend-framework/moduleContext";
 import { AwsAuthenticationView } from "@iavofficial/frontend-framework-aws-authenticator/awsAuthenticationView";
 import { MandatoryModuleNames } from "@iavofficial/frontend-framework/constants";
+import { GlobalDataLayer } from "@iavofficial/frontend-framework/globalDataLayer";
 
 const cognitoPool = import.meta.env.VITE_COGNITO_POOL;
 const cognitoAppId = import.meta.env.VITE_COGNITO_APP_ID;

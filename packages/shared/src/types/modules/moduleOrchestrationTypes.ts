@@ -181,3 +181,35 @@ export type TParamUserNonStoreModules<TUserNonStoreModules> = Exact<
   RestrictKeyToPrefix<TUserNonStoreModules, typeof USER_MODULES_PREFIX>,
   TUserNonStoreModules
 >;
+
+// An array of all modules should exactly contain all necessary
+// Framework Store Modules and Framework Non Store Modules.
+// As the rest are user modules, they should begin with the
+// corresponding prefix for user modules.
+export type TParamAllModules<
+  TModules extends FFMandatoryStoreModules<TFrameworkStoreModulesState> &
+    FFMandatoryNonStoreModules &
+    Record<string, object>,
+  TFrameworkStoreModulesState extends
+    FFMandatoryState = ActualMandatoryStateFromModules<TModules>,
+> = Exact<
+  FFMandatoryStoreModules<TFrameworkStoreModulesState> &
+    FFMandatoryNonStoreModules &
+    RestrictKeyToPrefix<TModules, typeof USER_MODULES_PREFIX>,
+  TModules
+>;
+
+export type TParamAllModulesPartial<
+  TModules extends Partial<
+    FFMandatoryStoreModules<TFrameworkStoreModulesState>
+  > &
+    Partial<FFMandatoryNonStoreModules> &
+    Record<string, object>,
+  TFrameworkStoreModulesState extends
+    FFMandatoryState = ActualMandatoryStateFromModules<TModules>,
+> = Exact<
+  Partial<FFMandatoryStoreModules<TFrameworkStoreModulesState>> &
+    Partial<FFMandatoryNonStoreModules> &
+    RestrictKeyToPrefix<TModules, typeof USER_MODULES_PREFIX>,
+  TModules
+>;

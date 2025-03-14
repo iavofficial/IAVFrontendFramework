@@ -38,13 +38,14 @@ const useStyles = makeStyles(() => ({
 }));
 
 interface Props {
+    key?: string;
     to: string;
     label: string;
 }
 
 const NavLinkItem: React.FC<PropsWithChildren<Props>> = (props) => {
 
-    const {to, label} = props;
+    const {key, to, label} = props;
 
     const {classes} = useStyles();
     const location = useLocation();
@@ -52,7 +53,7 @@ const NavLinkItem: React.FC<PropsWithChildren<Props>> = (props) => {
     const isActive = location.pathname.includes(to);
 
     return (
-        <li>
+        <li key={key}>
             <Link
                 to={to}
                 className={`${classes.link} ${isActive ? classes.activeLink : ""}`}>

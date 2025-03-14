@@ -29,6 +29,7 @@ import ColorSettings from "./pages/colorSettings.tsx";
 import ExampleProject from "./pages/exampleProject.tsx";
 import Playground from "./pages/playground.tsx";
 import FAQ from "./pages/faq.tsx";
+import ModulesInDepth from "./pages/modulsInDepth.tsx";
 
 const routes = [
     {path: "overview", label: "Quick Overview", element: <Overview/>},
@@ -39,8 +40,9 @@ const routes = [
     {path: "uilayer", label: "05 - UILayer", element: <UILayer/>},
     {path: "content-area", label: "06 - Content Area", element: <ContentArea/>},
     {path: "color-settings-and-dark-mode", label: "07 - Color Settings and Dark Mode", element: <ColorSettings/>},
-    {path: "example-project", label: "08 - Example Project", element: <ExampleProject/>},
-    {path: "playground", label: "09 - Playground", element: <Playground/>},
+    {path: "modules-in-depth", label: "08 - Modules in depth", element: <ModulesInDepth/>},
+    {path: "example-project", label: "09 - Example Project", element: <ExampleProject/>},
+    {path: "playground", label: "10 - Playground", element: <Playground/>},
 ];
 
 const helpRoutes = [
@@ -53,13 +55,13 @@ const Version2_0_0 = () => {
             <PageNavigation>
                 <ul>
                     {routes.map(({path, label}) => (
-                        <NavLinkItem to={path} label={label}/>
+                        <NavLinkItem to={path} label={label} key={path}/>
                     ))}
                 </ul>
                 <h3>Need help?</h3>
                 <ul>
                     {helpRoutes.map(({path, label}) => (
-                        <NavLinkItem to={path} label={label}/>
+                        <NavLinkItem to={path} label={label} key={path}/>
                     ))}
                 </ul>
             </PageNavigation>

@@ -53,13 +53,13 @@ const Version1_3_0 = () => {
             <PageNavigation>
                 <ul>
                     {routes.map(({path, label}) => (
-                        <NavLinkItem to={path} label={label}/>
+                        <NavLinkItem to={path} label={label} key={path}/>
                     ))}
                 </ul>
                 <h3>Need help?</h3>
                 <ul>
                     {helpRoutes.map(({path, label}) => (
-                        <NavLinkItem to={path} label={label}/>
+                        <NavLinkItem to={path} label={label} key={path}/>
                     ))}
                 </ul>
             </PageNavigation>

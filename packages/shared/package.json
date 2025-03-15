@@ -85,7 +85,6 @@
     "./checkIfUserModulesKeysValid": "./dist/modules/module_orchestration/util/checkIfUserModulesKeysValid.js",
     "./seperateModuleTypes": "./dist/modules/module_orchestration/util/seperateModuleTypes.js",
     "./storeBuilder": "./dist/modules/module_orchestration/storeBuilder.js",
-    "./storeConfig": "./dist/modules/module_orchestration/storeConfig.js",
     "./storeConfigBuilder": "./dist/modules/module_orchestration/storeConfigBuilder.js",
     "./dummyAuthenticatorModule": "./dist/modules/default_modules/auth/dummyAuthenticatorModule.js",
     "./authenticatorModule": "./dist/types/modules/auth/authenticatorModule.js",
@@ -140,9 +139,6 @@
       ],
       "./storeBuilder": [
         "./dist/modules/module_orchestration/storeBuilder.d.ts"
-      ],
-      "./storeConfig": [
-        "./dist/modules/module_orchestration/storeConfig.d.ts"
       ],
       "./storeConfigBuilder": [
         "./dist/modules/module_orchestration/storeConfigBuilder.d.ts"

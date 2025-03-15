@@ -29,7 +29,7 @@ import ColorSettings from "./pages/colorSettings.tsx";
 import ExampleProject from "./pages/exampleProject.tsx";
 import Playground from "./pages/playground.tsx";
 import FAQ from "./pages/faq.tsx";
-import ModulesInDepth from "./pages/modulsInDepth.tsx";
+import ModulesInDepth from "./pages/modulesInDepth.tsx";
 
 const routes = [
     {path: "overview", label: "Quick Overview", element: <Overview/>},

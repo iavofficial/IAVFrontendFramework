@@ -15,7 +15,7 @@
  **/
 
 import makeStyles from "../../../util/makeStyles.tsx";
-import React, {PropsWithChildren} from "react";
+import {PropsWithChildren} from "react";
 
 const useStyles = makeStyles(() => ({
     drawer: {
@@ -29,6 +29,7 @@ const useStyles = makeStyles(() => ({
         zIndex: 1000,
         padding: "20px",
         fontSize: "0.875rem",
+        overflowY: "auto",
         "& ul": {
             listStyle: "none",
             padding: 0,
@@ -48,7 +49,6 @@ const PageNavigation: React.FC<PropsWithChildren> = (props) => {
     const {classes} = useStyles();
 
     return (
-
         <div className={classes.drawer}>
             {props.children}
         </div>

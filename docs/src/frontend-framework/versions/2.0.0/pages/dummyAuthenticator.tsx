@@ -1,5 +1,5 @@
 import Page from "../../../common/page/page";
-import { ModuleProfile } from "../../../common/page/text/moduleProfile";
+import {ModuleProfile} from "../../../common/page/text/module/moduleProfile";
 import Title from "../../../common/page/text/title";
 import Text from "../../../common/page/text/text";
 
@@ -11,17 +11,17 @@ still has to authenticate and thus creating the impression of how the interactio
 will be designed later on.`;
 
 export const DummyAuthenticator = () => {
-  return (
-    <Page>
-      <Title>DummyAuthenticator</Title>
-      <ModuleProfile
-        moduleKey="auth"
-        isDefaultModule
-        shortDescription={DESCRIPTION}
-      />
-      <Text>
-        Hint: This module provides only the necessary state values and methods.
-      </Text>
-    </Page>
-  );
+    return (
+        <Page>
+            <Title>DummyAuthenticator</Title>
+            <ModuleProfile
+                moduleKey="auth"
+                isDefaultModule
+                shortDescription={DESCRIPTION}
+            />
+            <Text>
+                Hint: This module provides only the necessary state values and methods.
+            </Text>
+        </Page>
+    );
 };

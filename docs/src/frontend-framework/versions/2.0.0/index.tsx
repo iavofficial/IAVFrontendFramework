@@ -14,7 +14,7 @@
  * limitations under the License.
  **/
 
-import {Route, Routes} from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import React from "react";
 import PageNavigation from "../../common/drawer/pageNavigation.tsx";
 import Overview from "./pages/overview.tsx";
@@ -27,52 +27,81 @@ import ContentArea from "./pages/contentArea.tsx";
 import ColorSettings from "./pages/colorSettings.tsx";
 import DevProject from "./pages/devProject.tsx";
 import FAQ from "./pages/faq.tsx";
-import PageNavigation from "../../common/drawer/pageNavigation.tsx";
-import NavLinkItem from "../../common/drawer/drawerLink.tsx";
-import { ModulesInDepth } from "./pages/modulesInDepth.tsx";
 import { DummyAuthenticator } from "./pages/dummyAuthenticator.tsx";
-import { RouteDefinition } from "../../common/page/routeDefinition.ts";
-import { GeneralAuthModule } from "./pages/generalAuthModule.tsx";
 import { AwsAuthenticator } from "./pages/awsAuthenticator.tsx";
 import { ReactRouterRouter } from "./pages/reactRouterRouter.tsx";
+import { GroupRoute, PathRoute } from "../../common/page/pathRoute.ts";
+import NavigationRoute from "../../common/drawer/navigationRoute.tsx";
+import { ModulesInDepth } from "./pages/modulesInDepth.tsx";
+import GeneralAuthModule from "./pages/generalAuthModule.tsx";
 import { GeneralRouterModule } from "./pages/generalRouterModule.tsx";
+import NavGroupRoute from "../../common/drawer/navGroupRoute.tsx";
 
 const routes: PathRoute[] = [
-    {path: "overview", label: "Quick Overview", element: <Overview/>},
-    {path: "information", label: "01 - Important Information", element: <Information/>},
-    {path: "installation-guide", label: "02 - Installation", element: <InstallationGuide/>},
-    {path: "interface", label: "03 - Interface", element: <Interface/>},
-    {path: "globaldatalayer", label: "04 - GlobalDataLayer", element: <GlobalDataLayer/>},
-    {path: "uilayer", label: "05 - UILayer", element: <UILayer/>},
-    {path: "content-area", label: "06 - Content Area", element: <ContentArea/>},
-    {path: "color-settings-and-dark-mode", label: "07 - Color Settings and Dark Mode", element: <ColorSettings/>},
-    {path: "modules-in-depth", label: "08 - Modules in depth", element: <ModulesInDepth/>},
-    {path: "dev-project", label: "09 - Development Project", element: <DevProject/>,},
+  { path: "overview", label: "Quick Overview", element: <Overview /> },
+  {
+    path: "information",
+    label: "01 - Important Information",
+    element: <Information />,
+  },
+  {
+    path: "installation-guide",
+    label: "02 - Installation",
+    element: <InstallationGuide />,
+  },
+  { path: "interface", label: "03 - Interface", element: <Interface /> },
+  {
+    path: "globaldatalayer",
+    label: "04 - GlobalDataLayer",
+    element: <GlobalDataLayer />,
+  },
+  { path: "uilayer", label: "05 - UILayer", element: <UILayer /> },
+  {
+    path: "content-area",
+    label: "06 - Content Area",
+    element: <ContentArea />,
+  },
+  {
+    path: "color-settings-and-dark-mode",
+    label: "07 - Color Settings and Dark Mode",
+    element: <ColorSettings />,
+  },
+  {
+    path: "modules-in-depth",
+    label: "08 - Modules in depth",
+    element: <ModulesInDepth />,
+  },
+  {
+    path: "dev-project",
+    label: "09 - Development Project",
+    element: <DevProject />,
+  },
 ];
 
-const modulesRoutes: GroupRoute = {
+const modulesRoutes: GroupRoute[] = [
+  {
     title: "Auth",
     routes: [
-        {
-            path: "general-auth-module",
-            label: "General authentication module",
-            element: <GeneralAuthModule/>,
-        },
-        {
-            path: "dummy-authenticator",
-            label: "DummyAuthenticator",
-            element: <DummyAuthenticator/>,
-        },
-        {
-            path: "aws-authenticator",
-            label: "AwsAuthenticator",
-            element: <AwsAuthenticator/>,
-        },
+      {
+        path: "general-auth-module",
+        label: "General authentication module",
+        element: <GeneralAuthModule />,
+      },
+      {
+        path: "dummy-authenticator",
+        label: "DummyAuthenticator",
+        element: <DummyAuthenticator />,
+      },
+      {
+        path: "aws-authenticator",
+        label: "AwsAuthenticator",
+        element: <AwsAuthenticator />,
+      },
     ],
   },
-  router: {
+  {
     title: "router",
-    modules: [
+    routes: [
       {
         path: "general-router-module",
         label: "General router module",
@@ -83,44 +112,39 @@ const modulesRoutes: GroupRoute = {
         label: "ReactRouterRouter",
         element: <ReactRouterRouter />,
       },
-    ]
-  }
-};
+    ],
+  },
+];
 
 const helpRoutes: PathRoute[] = [
-    {path: "faq", label: "FAQ", element: <FAQ/>},
+  { path: "faq", label: "FAQ", element: <FAQ /> },
 ];
 
 const Version2_0_0 = () => {
-  let allModuleRoutes: RouteDefinition[] = [];
-  Object.values(modulesRoutes).forEach((entry) => {
-    allModuleRoutes = [...allModuleRoutes, ...entry.modules];
+  const allModuleRoutes: PathRoute[] = [];
+  modulesRoutes.forEach((moduleType: GroupRoute) => {
+    moduleType.routes.forEach((route) => allModuleRoutes.push(route));
   });
 
-    const allModuleRoutes: PathRoute[] = [];
-    modulesRoutes.routes.forEach((route: PathRoute) => {
-        allModuleRoutes.push(route)
-    });
-
-    return (
-        <>
-            <PageNavigation>
-                <NavigationRoute routes={routes}/>
-                <h3>Need help?</h3>
-                <NavigationRoute routes={helpRoutes}/>
-                <h3 style={{marginTop: "30px"}}>Modules</h3>
-                <GroupItem group={modulesRoutes}/>
-            </PageNavigation>
-            <Routes>
-                {[...routes, ...allModuleRoutes].map(({path, element}) => (
-                    <Route key={path} path={path} element={element}/>
-                ))}
-                {helpRoutes.map(({path, element}) => (
-                    <Route key={path} path={path} element={element}/>
-                ))}
-            </Routes>
-        </>
-    );
+  return (
+    <>
+      <PageNavigation>
+        <NavigationRoute routes={routes} />
+        <h3>Need help?</h3>
+        <NavigationRoute routes={helpRoutes} />
+        <h3 style={{ marginTop: "30px" }}>Modules</h3>
+        <NavGroupRoute groups={modulesRoutes} />
+      </PageNavigation>
+      <Routes>
+        {[...routes, ...allModuleRoutes].map(({ path, element }) => (
+          <Route key={path} path={path} element={element} />
+        ))}
+        {helpRoutes.map(({ path, element }) => (
+          <Route key={path} path={path} element={element} />
+        ))}
+      </Routes>
+    </>
+  );
 };
 
 export default Version2_0_0;

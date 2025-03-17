@@ -2,7 +2,7 @@ import Page from "../../../common/page/page";
 import {
   MODULE_COMPONENT_TABLE_COLUMNS,
   MODULE_METHOD_TABLE_COLUMNS,
-} from "../../../common/page/text/moduleTableColumns";
+} from "../../../common/page/text/module/moduleTableColumns";
 import SubTitle from "../../../common/page/text/subTitle";
 import Text from "../../../common/page/text/text";
 import Title from "../../../common/page/text/title";

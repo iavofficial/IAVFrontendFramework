@@ -21,8 +21,9 @@ import SubTitle from "../../../common/page/text/subTitle";
 import Text from "../../../common/page/text/text";
 import Title from "../../../common/page/text/title";
 import Code from "../../../common/page/utils/code";
+import Table from "../../../common/page/utils/table";
 
-const ModulesInDepth = () => (
+export const ModulesInDepth = () => (
   <Page>
     <Title>Modules in Depth</Title>
     <Text>
@@ -259,7 +260,7 @@ export type FFStoreModule<TState> = {
 
 const CodeAuthModuleType = (
   <Code
-    style={{ width: "fit-content" }}
+    center
     language="ts"
   >{`export type AuthModule<TAuthState extends AuthState> = {
   fetchAuthed: AsyncThunk<Response, FetchAuthedFunctionArgs, any>;
@@ -269,10 +270,7 @@ const CodeAuthModuleType = (
 );
 
 const CodeRouterModuleType = (
-  <Code
-    style={{ width: "fit-content" }}
-    language="ts"
-  >{`export type RouterModule = {
+  <Code center language="ts">{`export type RouterModule = {
   UiLayerRouter: React.ComponentType<UILayerRouterProps>;
   MainViewRouter: React.ComponentType<MainViewRouterProps>;
   Link: React.ComponentType<LinkProps>;

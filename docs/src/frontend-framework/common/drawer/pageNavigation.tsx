@@ -29,6 +29,7 @@ const useStyles = makeStyles(() => ({
         zIndex: 1000,
         padding: "20px",
         fontSize: "0.875rem",
+        overflowY: "auto",
         "& ul": {
             listStyle: "none",
             padding: 0,

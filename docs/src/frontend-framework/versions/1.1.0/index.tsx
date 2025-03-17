@@ -17,7 +17,7 @@
 import {Route, Routes} from "react-router-dom";
 import React from "react";
 import PageNavigation from "../../common/drawer/pageNavigation.tsx";
-import NavLinkItem from "../../common/drawer/drawerLink.tsx";
+import NavLinkItem from "../../common/drawer/navLinkItem.tsx";
 import Overview from "./pages/overview.tsx";
 import Information from "./pages/information.tsx";
 import InstallationGuide from "./pages/installationGuide.tsx";
@@ -29,8 +29,9 @@ import ColorSettings from "./pages/colorSettings.tsx";
 import ExampleProject from "./pages/exampleProject.tsx";
 import Playground from "./pages/playground.tsx";
 import FAQ from "./pages/faq.tsx";
+import {PathRoute} from "../../common/page/pathRoute.ts";
 
-const routes = [
+const routes: PathRoute[] = [
     {path: "overview", label: "Quick Overview", element: <Overview/>},
     {path: "information", label: "01 - Important Information", element: <Information/>},
     {path: "installation-guide", label: "02 - Installation", element: <InstallationGuide/>},
@@ -43,7 +44,7 @@ const routes = [
     {path: "playground", label: "09 - Playground", element: <Playground/>},
 ];
 
-const helpRoutes = [
+const helpRoutes: PathRoute[] = [
     {path: "faq", label: "FAQ", element: <FAQ/>},
 ];
 

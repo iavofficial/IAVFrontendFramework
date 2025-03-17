@@ -27,26 +27,26 @@ import Text from "../../../common/page/text/text.tsx";
 const Overview: React.FC = () => {
 
     const columns = [
-        {title: "Category"},
-        {title: "Value"},
+        {key: "category", title: "Category"},
+        {key: "value", title: "Value"},
     ] as const;
 
     const tableData: TableData<typeof columns> = [
         {
-            Category: "Programming Language",
-            Value: "JavaScript"
+            category: "Programming Language",
+            value: "JavaScript"
         },
         {
-            Category: "Key dependencies",
-            Value: "React 18, ReactDOM 18, Typescript 5, AWS Amplify 6",
+            category: "Key dependencies",
+            value: "React 18, ReactDOM 18, Typescript 5, AWS Amplify 6",
         },
         {
-            Category: "UI-Component libraries",
-            Value: "PrimeReact, PrimeIcons",
+            category: "UI-Component libraries",
+            value: "PrimeReact, PrimeIcons",
         },
         {
-            Category: "Requirements",
-            Value: "At least npm version 8 and node version 16",
+            category: "Requirements",
+            value: "At least npm version 8 and node version 16",
         },
     ];
 

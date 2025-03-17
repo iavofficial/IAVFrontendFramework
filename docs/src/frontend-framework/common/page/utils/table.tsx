@@ -48,14 +48,14 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-export interface Column {
+interface Column {
     title: string;
     key?: string;
     centerContent?: boolean;
 }
 
 export type TableData<T extends { key: string }[]> = {
-    [K in T[number]["key"]]: string | ReactElement;
+    [K in T[number]["key"]]: string | ReactElement | JSX.Element;
 }[];
 
 interface Props {

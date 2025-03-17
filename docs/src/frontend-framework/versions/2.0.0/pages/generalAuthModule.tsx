@@ -21,29 +21,27 @@ import SubTitle from "../../../common/page/text/subTitle.tsx";
 import Text from "../../../common/page/text/text.tsx";
 import Table, {TableData} from "../../../common/page/utils/table.tsx";
 import Code from "../../../common/page/utils/code.tsx";
+import {
+    MODULE_METHOD_TABLE_COLUMNS,
+    MODULE_STATE_TABLE_COLUMNS
+} from "../../../common/page/text/module/moduleTableColumns.tsx";
 
 const GeneralAuthModule: React.FC = () => {
 
-    const moduleStateTableColumns = [
-        {key: "variableName", title: "Variable Name"},
-        {key: "type", title: "Type"},
-        {key: "description", title: "Description"},
-    ] as const;
-
-    const moduleStateTableData: TableData<typeof moduleStateTableColumns> = [
+    const moduleStateTableData: TableData<typeof MODULE_STATE_TABLE_COLUMNS> = [
         {
-            variableName: "hasAuthenticated",
+            name: "hasAuthenticated",
             type: "boolean",
             description: "Defines whether the user is authenticated.",
         },
         {
-            variableName: "isLoading",
+            name: "isLoading",
             type: "boolean",
             description: `Defines whether the authentication process is ongoing.
          (This is a dummy since no real authentication is done.)`,
         },
         {
-            variableName: "userData",
+            name: "userData",
             type: "UserData | undefined",
             description: `Contains the user information (for this module only the
          user name) when signed in.`,
@@ -55,14 +53,7 @@ const GeneralAuthModule: React.FC = () => {
     const CodeLoginParams = <Code language="ts">{`{credentials: Credentials}`}</Code>
     const CodeLogoutParams = <Code language="ts">{`{error?: unknown} | undefined`}</Code>
 
-    const moduleMethodTableColumns = [
-        {key: "name", title: "Method Name"},
-        {key: "parameters", title: "Parameters"},
-        {key: "returnType", title: "Return Type"},
-        {key: "description", title: "Description"},
-    ] as const;
-
-    const moduleMethodTableData: TableData<typeof moduleMethodTableColumns> = [
+    const moduleMethodTableData: TableData<typeof MODULE_METHOD_TABLE_COLUMNS> = [
         {
             name: "fetchAuthed",
             parameters: CodeFetchAuthedParams,
@@ -96,13 +87,13 @@ const GeneralAuthModule: React.FC = () => {
 
             <SubTitle>Necessary state</SubTitle>
             <Table
-                columns={moduleStateTableColumns}
+                columns={MODULE_STATE_TABLE_COLUMNS}
                 data={moduleStateTableData}
             />
 
             <SubTitle>Necessary Thunks (methods)</SubTitle>
             <Table
-                columns={moduleMethodTableColumns}
+                columns={MODULE_METHOD_TABLE_COLUMNS}
                 data={moduleMethodTableData}
             />
         </Page>

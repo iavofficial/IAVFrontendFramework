@@ -17,7 +17,6 @@
 import {Route, Routes} from "react-router-dom";
 import React from "react";
 import PageNavigation from "../../common/drawer/pageNavigation.tsx";
-import NavLinkItem from "../../common/drawer/drawerLink.tsx";
 import Overview from "./pages/overview.tsx";
 import Information from "./pages/information.tsx";
 import InstallationGuide from "./pages/installationGuide.tsx";
@@ -26,12 +25,17 @@ import GlobalDataLayer from "./pages/globalDataLayer.tsx";
 import UILayer from "./pages/uiLayer.tsx";
 import ContentArea from "./pages/contentArea.tsx";
 import ColorSettings from "./pages/colorSettings.tsx";
-import ExampleProject from "./pages/exampleProject.tsx";
-import Playground from "./pages/playground.tsx";
 import FAQ from "./pages/faq.tsx";
 import ModulesInDepth from "./pages/modulesInDepth.tsx";
+import DevProject from "./pages/devProject.tsx";
+import {GroupRoute, PathRoute} from "../../common/page/pathRoute.ts";
+import GeneralAuthModule from "./pages/generalAuthModule.tsx";
+import {DummyAuthenticator} from "./pages/dummyAuthenticator.tsx";
+import {AwsAuthenticator} from "./pages/awsAuthenticator.tsx";
+import NavigationRoute from "../../common/drawer/navigationRoute.tsx";
+import GroupItem from "../../common/drawer/navGroupRoute.tsx";
 
-const routes = [
+const routes: PathRoute[] = [
     {path: "overview", label: "Quick Overview", element: <Overview/>},
     {path: "information", label: "01 - Important Information", element: <Information/>},
     {path: "installation-guide", label: "02 - Installation", element: <InstallationGuide/>},
@@ -41,57 +45,60 @@ const routes = [
     {path: "content-area", label: "06 - Content Area", element: <ContentArea/>},
     {path: "color-settings-and-dark-mode", label: "07 - Color Settings and Dark Mode", element: <ColorSettings/>},
     {path: "modules-in-depth", label: "08 - Modules in depth", element: <ModulesInDepth/>},
-    {path: "example-project", label: "09 - Example Project", element: <ExampleProject/>},
-    {path: "playground", label: "10 - Playground", element: <Playground/>},
+    {path: "dev-project", label: "09 - Development Project", element: <DevProject/>,},
 ];
 
-const modulesRoutes = [
-    {
-        path: "module-awsauthenticator",
-        label: "AWSAuthenticator",
-        element: <Playground/>,
-    },
-];
+const modulesRoutes: GroupRoute = {
+    title: "Auth",
+    routes: [
+        {
+            path: "general-auth-module",
+            label: "General authentication module",
+            element: <GeneralAuthModule/>,
+        },
+        {
+            path: "dummy-authenticator",
+            label: "DummyAuthenticator",
+            element: <DummyAuthenticator/>,
+        },
+        {
+            path: "aws-authenticator",
+            label: "AwsAuthenticator",
+            element: <AwsAuthenticator/>,
+        },
+    ],
+};
 
-const helpRoutes = [
+const helpRoutes: PathRoute[] = [
     {path: "faq", label: "FAQ", element: <FAQ/>},
 ];
 
 const Version2_0_0 = () => {
+
+    const allModuleRoutes: PathRoute[] = [];
+    modulesRoutes.routes.forEach((route: PathRoute) => {
+        allModuleRoutes.push(route)
+    });
+
     return (
         <>
             <PageNavigation>
-                <ul>
-                    {routes.map(({path, label}) => (
-                        <NavLinkItem to={path} label={label} key={path}/>
-                    ))}
-                </ul>
+                <NavigationRoute routes={routes}/>
                 <h3>Need help?</h3>
-                <ul>
-                    {helpRoutes.map(({path, label}) => (
-                        <NavLinkItem to={path} label={label} key={path}/>
-                    ))}
-                </ul>
-                <h3>Modules</h3>
-                <ul>
-                    {modulesRoutes.map(({path, label}) => (
-                        <NavLinkItem to={path} label={label} key={path}/>
-                    ))}
-                </ul>
+                <NavigationRoute routes={helpRoutes}/>
+                <h3 style={{marginTop: "30px"}}>Modules</h3>
+                <GroupItem group={modulesRoutes}/>
             </PageNavigation>
             <Routes>
-                {routes.map(({path, element}) => (
+                {[...routes, ...allModuleRoutes].map(({path, element}) => (
                     <Route key={path} path={path} element={element}/>
                 ))}
                 {helpRoutes.map(({path, element}) => (
                     <Route key={path} path={path} element={element}/>
                 ))}
-                {modulesRoutes.map(({path, element}) => (
-                    <Route key={path} path={path} element={element}/>
-                ))}
             </Routes>
         </>
-    )
-}
+    );
+};
 
 export default Version2_0_0;

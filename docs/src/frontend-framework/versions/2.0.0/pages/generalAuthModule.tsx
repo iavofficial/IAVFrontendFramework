@@ -49,9 +49,9 @@ const GeneralAuthModule: React.FC = () => {
     ];
 
 
-    const CodeFetchAuthedParams = <Code language="ts">{`{url: string; settings?: object}`}</Code>
-    const CodeLoginParams = <Code language="ts">{`{credentials: Credentials}`}</Code>
-    const CodeLogoutParams = <Code language="ts">{`{error?: unknown} | undefined`}</Code>
+    const CodeFetchAuthedParams = <Code language="typescript" center>{`{url: string; settings?: object}`}</Code>
+    const CodeLoginParams = <Code language="typescript" center>{`{credentials: Credentials}`}</Code>
+    const CodeLogoutParams = <Code language="typescript" center>{`{error?: unknown} | undefined`}</Code>
 
     const moduleMethodTableData: TableData<typeof MODULE_METHOD_TABLE_COLUMNS> = [
         {

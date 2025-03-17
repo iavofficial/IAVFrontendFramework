@@ -50,15 +50,15 @@ export const AwsAuthenticator = () => {
     ];
 
     const CodeFetchAuthedParams = (
-        <Code language="ts">{`{url: string; token?: JWT; settings?: FetchSettings}`}</Code>
+        <Code language="typescript" center>{`{url: string; token?: JWT; settings?: FetchSettings}`}</Code>
     );
 
     const CodeCompletePasswordParams = (
-        <Code language="ts">{`{newPassword: string}`}</Code>
+        <Code language="typescript" center>{`{newPassword: string}`}</Code>
     );
 
     const CodeUseModuleLifecycleParams = (
-        <Code language="ts">{`{renderChildren: boolean}`}</Code>
+        <Code language="typescript" center>{`{renderChildren: boolean}`}</Code>
     );
 
     const moduleMethodTableData: TableData<typeof MODULE_METHOD_TABLE_COLUMNS> = [

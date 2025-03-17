@@ -1,18 +1,32 @@
-export const MODULE_PARAM_TABLE_COLUMNS: { key: string; title: string }[] = [
+type Column = { key: string; title: string };
+
+export const MODULE_PARAM_TABLE_COLUMNS: Column[] = [
   { key: "name", title: "Parameter Name" },
   { key: "type", title: "Type" },
   { key: "description", title: "Description" },
-] as const;
+];
 
-export const MODULE_STATE_TABLE_COLUMNS: { key: string; title: string }[] = [
-  { key: "name", title: "VariableName" },
+export const MODULE_STATE_TABLE_COLUMNS: Column[] = [
+  { key: "name", title: "Variable Name" },
   { key: "type", title: "Type" },
   { key: "description", title: "Description" },
-] as const;
+];
 
-export const MODULE_METHOD_TABLE_COLUMNS: { key: string; title: string }[] = [
+export const MODULE_THUNKS_TABLE_COLUMNS: Column[] = [
   { key: "name", title: "Method Name" },
   { key: "parameters", title: "Parameters" },
-  { key: "returnType", title: "Return Type" },
+  { key: "return_type", title: "Return Type" },
   { key: "description", title: "Description" },
-] as const;
+];
+
+export const MODULE_METHOD_TABLE_COLUMNS: Column[] = [
+  { key: "name", title: "Method Name" },
+  { key: "type", title: "Type" },
+  { key: "description", title: "Description" },
+];
+
+export const MODULE_COMPONENT_TABLE_COLUMNS: Column[] = [
+  { key: "name", title: "Method Name" },
+  { key: "component_type", title: "Type of the Component" },
+  { key: "description", title: "Description" },
+];

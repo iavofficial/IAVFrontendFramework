@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { GroupRoute } from "../page/pathRoute.ts";
 import makeStyles from "../../../util/makeStyles.tsx";
 import NavigationRoute from "./navigationRoute.tsx";
-import { BLUE0 } from "@iavofficial/frontend-framework/constants";
+import { BLUE0 } from "../../../constants.ts";
 
 const useStyles = makeStyles(() => ({
   groupTitle: {

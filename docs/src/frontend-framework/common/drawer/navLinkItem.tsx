@@ -17,7 +17,7 @@
 import React, {PropsWithChildren} from "react";
 import {Link, useLocation} from "react-router-dom";
 import makeStyles from "../../../util/makeStyles.tsx";
-import {GREY2} from "@iavofficial/frontend-framework/constants";
+import { GREY2 } from "../../../constants.ts";
 
 const useStyles = makeStyles(() => ({
     link: {

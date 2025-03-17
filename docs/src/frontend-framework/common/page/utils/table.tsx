@@ -16,7 +16,7 @@
 
 import React, {ReactElement} from "react";
 import makeStyles from "../../../../util/makeStyles.tsx";
-import {BLUE3, GREY1} from "@iavofficial/frontend-framework/constants";
+import { BLUE3, GREY1 } from "../../../../constants.ts";
 
 const useStyles = makeStyles(() => ({
     table: {

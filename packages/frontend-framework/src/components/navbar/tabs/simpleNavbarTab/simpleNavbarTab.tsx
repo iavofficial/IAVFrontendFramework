@@ -17,7 +17,6 @@
  */
 
 import React, {ReactElement, useContext, useMemo, useState} from "react";
-import {Link, useLocation} from "react-router-dom";
 import {useTranslator} from "../../../internationalization/translators";
 import "../tabs.css";
 import {GroupableNavbarTab, NavbarTabProps} from "../typesNavbarTab";
@@ -34,6 +33,11 @@ import {
   NAVBAR_WIDTH_UNFOLDED,
 } from "@iavofficial/frontend-framework-shared/constants";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
+import {useModuleContext} from "@iavofficial/frontend-framework-shared/moduleContext";
+import {
+  AllDefaultModules,
+} from "@iavofficial/frontend-framework-shared/moduleDefaults";
+import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
 
 export interface NestedNavbarTabProps {
   additionalClassNames: string;
@@ -47,6 +51,9 @@ export interface NestedNavbarTabProps {
 export const SimpleNavbarTab: GroupableNavbarTab = (
   props: NavbarTabProps<InjectedOptionsGroupableByWrapperToTab> & {},
 ) => {
+  const {modules} = useModuleContext<AllDefaultModules>();
+  const routerModule = modules[MandatoryModuleNames.Router];
+
   const navbarCollapsed = props.frameworkInjectedOptions.navbarCollapsed;
   const path = props.frameworkInjectedOptions.path;
   const insideActiveGroup = props.frameworkInjectedOptions.groupActive;
@@ -55,16 +62,7 @@ export const SimpleNavbarTab: GroupableNavbarTab = (
   const colorSettingsContext = useContext(ColorSettingsContext);
   const t = useTranslator();
 
-  const regex = useMemo(() => {
-    let regexString = path;
-    // Escape slashes
-    regexString = regexString.replaceAll("/", "\\/");
-    // Add start (^) and boundary condition with trailing /.*
-    regexString = `^${regexString}(\\/.*)?$`;
-    return new RegExp(regexString);
-  }, [path]);
-
-  const active = regex.test(useLocation().pathname);
+  const {isActive} = routerModule.useIsTabActive(path);
 
   const tabBackgroundDefaultColor =
     colorSettingsContext.currentColors.navbar.content.default
@@ -95,7 +93,7 @@ export const SimpleNavbarTab: GroupableNavbarTab = (
     colorSettingsContext.currentColors.navbar.content.active.tabIconActiveColor;
 
   const tabState = {
-    isActive: active,
+    isActive: isActive,
     isHovering: hovering,
     isDisabled: props.disabled,
     isInsideActiveGroup: insideActiveGroup,
@@ -124,7 +122,7 @@ export const SimpleNavbarTab: GroupableNavbarTab = (
     width: navbarCollapsed
       ? `${DEFAULT_ELEMENTSIZE}px`
       : `${NAVBAR_WIDTH_UNFOLDED - 2 * GAB_NAVBAR_UNFOLDED}px`,
-    cursor: active || props.disabled ? "default" : "pointer",
+    cursor: isActive || props.disabled ? "default" : "pointer",
     backgroundColor: backgroundColor,
     color: fontColor,
     opacity: props.disabled ? 0.5 : 1,
@@ -148,6 +146,8 @@ export const SimpleNavbarTab: GroupableNavbarTab = (
   );
 
   const styleHidden = props.hidden ? {display: "none"} : {};
+
+  const Link = routerModule.Link;
 
   return (
     <div style={styleHidden}>

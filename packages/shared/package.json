@@ -37,7 +37,9 @@
   ],
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.1",
-    "react-redux": "^9.2.0"
+    "react-redux": "^9.2.0",
+    "react-router": "^7.3.0",
+    "react-router-dom": "^7.3.0"
   },
   "peerDependencies": {
     "react": "^18.2.0",
@@ -89,6 +91,7 @@
     "./dummyAuthenticatorModule": "./dist/modules/default_modules/auth/dummyAuthenticatorModule.js",
     "./authenticatorModule": "./dist/types/modules/auth/authenticatorModule.js",
     "./authenticationViewProps": "./dist/types/modules/auth/authenticationViewProps.js",
+    "./routerModule": "./dist/types/modules/router/routerModule.js",
     "./colorOptionTypes": "./dist/types/color/colorOptionTypes.js",
     "./requiredMutable": "./dist/types/util-types/requiredMutable.js",
     "./componentTypeMinProps": "./dist/types/util-types/componentTypeMinProps.js",
@@ -151,6 +154,9 @@
       ],
       "./authenticationViewProps": [
         "./dist/types/modules/auth/authenticationViewProps.d.ts"
+      ],
+      "./routerModule": [
+        "./dist/types/modules/router/routerModule.d.ts"
       ],
       "./colorOptionTypes": [
         "./dist/types/color/colorOptionTypes.d.ts"

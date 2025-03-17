@@ -51,9 +51,7 @@ export const seperateModuleTypes = <TModules extends Record<string, object>>(
       userNonStoreModules = {...userNonStoreModules, [key]: module};
     }
   });
-
-  console.log(frameworkStoreModules);
-
+  
   return {
     frameworkStoreModules: frameworkStoreModules,
     userStoreModules: userStoreModules,

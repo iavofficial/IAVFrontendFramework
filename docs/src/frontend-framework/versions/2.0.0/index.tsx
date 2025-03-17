@@ -25,15 +25,17 @@ import GlobalDataLayer from "./pages/globalDataLayer.tsx";
 import UILayer from "./pages/uiLayer.tsx";
 import ContentArea from "./pages/contentArea.tsx";
 import ColorSettings from "./pages/colorSettings.tsx";
-import FAQ from "./pages/faq.tsx";
-import ModulesInDepth from "./pages/modulesInDepth.tsx";
 import DevProject from "./pages/devProject.tsx";
-import {GroupRoute, PathRoute} from "../../common/page/pathRoute.ts";
-import GeneralAuthModule from "./pages/generalAuthModule.tsx";
-import {DummyAuthenticator} from "./pages/dummyAuthenticator.tsx";
-import {AwsAuthenticator} from "./pages/awsAuthenticator.tsx";
-import NavigationRoute from "../../common/drawer/navigationRoute.tsx";
-import GroupItem from "../../common/drawer/navGroupRoute.tsx";
+import FAQ from "./pages/faq.tsx";
+import PageNavigation from "../../common/drawer/pageNavigation.tsx";
+import NavLinkItem from "../../common/drawer/drawerLink.tsx";
+import { ModulesInDepth } from "./pages/modulesInDepth.tsx";
+import { DummyAuthenticator } from "./pages/dummyAuthenticator.tsx";
+import { RouteDefinition } from "../../common/page/routeDefinition.ts";
+import { GeneralAuthModule } from "./pages/generalAuthModule.tsx";
+import { AwsAuthenticator } from "./pages/awsAuthenticator.tsx";
+import { ReactRouterRouter } from "./pages/reactRouterRouter.tsx";
+import { GeneralRouterModule } from "./pages/generalRouterModule.tsx";
 
 const routes: PathRoute[] = [
     {path: "overview", label: "Quick Overview", element: <Overview/>},
@@ -67,6 +69,22 @@ const modulesRoutes: GroupRoute = {
             element: <AwsAuthenticator/>,
         },
     ],
+  },
+  router: {
+    title: "router",
+    modules: [
+      {
+        path: "general-router-module",
+        label: "General router module",
+        element: <GeneralRouterModule />,
+      },
+      {
+        path: "react-router-router",
+        label: "ReactRouterRouter",
+        element: <ReactRouterRouter />,
+      },
+    ]
+  }
 };
 
 const helpRoutes: PathRoute[] = [
@@ -74,6 +92,10 @@ const helpRoutes: PathRoute[] = [
 ];
 
 const Version2_0_0 = () => {
+  let allModuleRoutes: RouteDefinition[] = [];
+  Object.values(modulesRoutes).forEach((entry) => {
+    allModuleRoutes = [...allModuleRoutes, ...entry.modules];
+  });
 
     const allModuleRoutes: PathRoute[] = [];
     modulesRoutes.routes.forEach((route: PathRoute) => {

@@ -17,7 +17,6 @@
  */
 
 import React, {useContext} from "react";
-import {Link} from "react-router-dom";
 import "./navbar.css";
 import {TabAndContentWrapper} from "./wrappers/typesWrappers";
 import {useTranslator} from "../internationalization/translators";
@@ -34,6 +33,9 @@ import {
 } from "@iavofficial/frontend-framework-shared/constants";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 import {generateHashOfLength} from "@iavofficial/frontend-framework-shared/hash";
+import {useModuleContext} from "@iavofficial/frontend-framework-shared/moduleContext";
+import {AllDefaultModules} from "@iavofficial/frontend-framework-shared/moduleDefaults";
+import { MandatoryModuleNames } from "@iavofficial/frontend-framework-shared/moduleNames";
 
 interface Props {
   tabAndContentWrappers: TabAndContentWrapper[];
@@ -43,6 +45,8 @@ interface Props {
 
 export const Navbar = (props: Props) => {
   const t = useTranslator();
+
+  const {modules} = useModuleContext<AllDefaultModules>();
   const colorSettingsContext = useContext(ColorSettingsContext);
   const navbarSettingsContext = useContext(NavbarSettingsContext);
 
@@ -56,6 +60,8 @@ export const Navbar = (props: Props) => {
 
   const scrollbarColor =
     colorSettingsContext.currentColors.navbar.scrollbarColor;
+
+  const Link = modules[MandatoryModuleNames.Router].Link;
 
   const identifier = generateHashOfLength(4);
   const identifierLegal = "a" + identifier;

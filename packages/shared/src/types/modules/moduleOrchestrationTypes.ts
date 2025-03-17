@@ -27,6 +27,7 @@ import {StoreConfigBuilder} from "../../modules/module_orchestration/storeConfig
 import {Exact, ExactPartial} from "../util-types/exact";
 import {RestrictKeyToPrefix} from "../util-types/restrictKeyToPrefix";
 import {DefaultNonStoreModules} from "../../modules/module_orchestration/moduleDefaults";
+import {RouterModule} from "./router/routerModule";
 
 export type FFStoreModules<TModulesState = unknown> = {
   [K in keyof TModulesState]: FFStoreModule<TModulesState[K]>;
@@ -51,7 +52,9 @@ export type FFMandatoryStoreModules<
 };
 
 // The types of all default M mandatory modules without a state for the store.
-export type FFMandatoryNonStoreModules = {};
+export type FFMandatoryNonStoreModules = {
+  [MandatoryModuleNames.Router]: RouterModule;
+};
 
 export type FFAllMandatoryModules<
   TModulesState extends FFMandatoryState = FFMandatoryState,

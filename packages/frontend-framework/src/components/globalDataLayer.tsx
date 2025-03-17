@@ -24,7 +24,6 @@ import {
   LanguageOptions,
 } from "./internationalization/defaultLanguageProvider";
 import {ColorProvider, ColorProviderProps} from "../coloring/colorProvider";
-import {BrowserRouter} from "react-router-dom";
 import {EnhancedStore} from "@reduxjs/toolkit";
 import {Provider} from "react-redux";
 import {ModuleContextProvider} from "../contexts/providers/moduleContextProvider";
@@ -100,7 +99,7 @@ export const GlobalDataLayer = <
               initI18Next={props.initI18Next}
             >
               <ColorProvider {...props.colorSettings}>
-                <BrowserRouter>{props.children}</BrowserRouter>
+                {props.children}
               </ColorProvider>
             </DefaultLanguageProvider>
           </CookiesProvider>

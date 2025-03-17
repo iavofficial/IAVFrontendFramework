@@ -236,7 +236,7 @@ const Layout = (props: Props) => {
         },
       }}
       tabAndContentWrappers={views}
-      startingPoint="/"
+      initialPath="/"
       authenticationView={props.authenticationView}
       settingsMenuOptions={settingsMenuOptions}
       documentsLabelKey="Legal_documents"

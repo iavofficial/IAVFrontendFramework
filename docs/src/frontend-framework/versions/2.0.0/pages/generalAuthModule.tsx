@@ -25,28 +25,28 @@ import Code from "../../../common/page/utils/code.tsx";
 const GeneralAuthModule: React.FC = () => {
 
     const moduleStateTableColumns = [
-        {title: "Variable Name"},
-        {title: "Type"},
-        {title: "Description"},
+        {key: "variableName", title: "Variable Name"},
+        {key: "type", title: "Type"},
+        {key: "description", title: "Description"},
     ] as const;
 
     const moduleStateTableData: TableData<typeof moduleStateTableColumns> = [
         {
-            "Variable Name": "hasAuthenticated",
-            Type: "boolean",
-            Description: "Defines whether the user is authenticated.",
+            variableName: "hasAuthenticated",
+            type: "boolean",
+            description: "Defines whether the user is authenticated.",
         },
         {
-            "Variable Name": "isLoading",
-            Type: "boolean",
-            Description: `Defines whether the authentication process is ongoing.
-             (This is a dummy since no real authentication is done.)`,
+            variableName: "isLoading",
+            type: "boolean",
+            description: `Defines whether the authentication process is ongoing.
+         (This is a dummy since no real authentication is done.)`,
         },
         {
-            "Variable Name": "userData",
-            Type: "UserData | undefined",
-            Description: `Contains the user information (for this module only the
-             user name) when signed in.`,
+            variableName: "userData",
+            type: "UserData | undefined",
+            description: `Contains the user information (for this module only the
+         user name) when signed in.`,
         },
     ];
 
@@ -56,32 +56,32 @@ const GeneralAuthModule: React.FC = () => {
     const CodeLogoutParams = <Code language="ts">{`{error?: unknown} | undefined`}</Code>
 
     const moduleMethodTableColumns = [
-        {title: "Method Name"},
-        {title: "Parameters"},
-        {title: "Return Type"},
-        {title: "Description"},
+        {key: "name", title: "Method Name"},
+        {key: "parameters", title: "Parameters"},
+        {key: "returnType", title: "Return Type"},
+        {key: "description", title: "Description"},
     ] as const;
 
     const moduleMethodTableData: TableData<typeof moduleMethodTableColumns> = [
         {
-            "Method Name": "fetchAuthed",
-            Parameters: CodeFetchAuthedParams,
-            "Return Type": "Response (from fetch API)",
-            Description: `This method should execute a fetch and retry if it fails
-         (for example because of a need for token refresh.)`,
+            name: "fetchAuthed",
+            parameters: CodeFetchAuthedParams,
+            returnType: "Response (from fetch API)",
+            description: `This method should execute a fetch and retry if it fails
+            (for example because of a need for token refresh.)`,
         },
         {
-            "Method Name": "login",
-            Parameters: CodeLoginParams,
-            "Return Type": "void",
-            Description: `This method should execute a login process based on the
-         passed credentials.`,
+            name: "login",
+            parameters: CodeLoginParams,
+            returnType: "void",
+            description: `This method should execute a login process based on the
+            passed credentials.`,
         },
         {
-            "Method Name": "logout",
-            Parameters: CodeLogoutParams,
-            "Return Type": "void",
-            Description: `This method should execute the logout process.`,
+            name: "logout",
+            parameters: CodeLogoutParams,
+            returnType: "void",
+            description: `This method should execute the logout process.`,
         },
     ];
 

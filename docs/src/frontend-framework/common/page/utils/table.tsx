@@ -48,13 +48,14 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-interface Column {
-    title: string | ReactElement;
+export interface Column {
+    title: string;
+    key?: string;
     centerContent?: boolean;
 }
 
-export type TableData<T extends { title: string }[]> = {
-    [K in T[number]["title"]]: string | ReactElement;
+export type TableData<T extends { key: string }[]> = {
+    [K in T[number]["key"]]: string | ReactElement;
 }[];
 
 interface Props {
@@ -91,9 +92,9 @@ const Table: React.FC<Props> = (props) => {
                                     display: "flex",
                                     alignItems: "center",
                                     justifyContent: "center"
-                                }}>{row[col.title]}</div>
+                                }}>{row[col.key ?? col.title]}</div>
                             ) : (
-                                row[col.title]
+                                row[col.key ?? col.title]
                             )}
                         </td>
                     ))}

@@ -1,19 +1,3 @@
-/**
- * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- **/
-
 import Page from "../../../common/page/page";
 import BulletList from "../../../common/page/text/bulletList";
 import SubSubTitle from "../../../common/page/text/subSubTitle";
@@ -31,7 +15,7 @@ export const ModulesInDepth = () => (
       system.
     </Text>
     <SubTitle>
-      The different kinds of modules and the method createModulesSeparately
+      The different kinds of modules and the method createModulesSeperately
     </SubTitle>
     <Text>
       For precise typing and other processing reasons the Framework splits the
@@ -46,10 +30,10 @@ export const ModulesInDepth = () => (
       items={[
         `frameworkStoreModules: These are all modules which have default implementations
         and provide a Slice for the Redux store. You can override the default implementations
-        with other existing modules (like AWSAuthenticator for authentication) or with custom
+        with other existing modules (like AwsAuthenticator for authentication) or with custom
         ones.`,
         `userStoreModules: These modules are modules that don't have default implementations
-        and because of this aren't relevant for the Framework itself. Furthermore, they are
+        and because of this aren't relevant for the Framework itself. However, they are
         relevant for the store and because of that provide a Slice.`,
         `frameworkNonStoreModules: These are modules which have default implementations but
         aren't relevant for the store. Like with frameworkStoreModules you can override them.`,
@@ -59,13 +43,12 @@ export const ModulesInDepth = () => (
     />
     <Text>
       For most use cases the <i>createModules</i> method will do just fine.
-      Because internally the framework works with the described distinctions of
-      module types <i>createModules</i> internally splits up the provided
-      modules object into the different types of modules. However, if you want
-      to split them up by yourself you can use the method{" "}
-      <i>createModulesSeperately</i> which takes four different objects for the
-      different types of modules. The following example shows the usage of this
-      method.
+      Because the framework works with the described distinctions of module
+      types internally, <i>createModules</i> splits up the provided modules
+      object into the different types of modules. However, if you want to split
+      them up by yourself you can use the method <i>createModulesSeperately</i>{" "}
+      which takes four different objects for the different types of modules. The
+      following example shows the usage of this method.
     </Text>
     <Code language="ts" title="Example usage of createModulesSeperately">
       {`const frameworkStoreModules = {
@@ -102,7 +85,7 @@ export const store = new StoreBuilder(modules.storeModules).build();`}
     <SubTitle>StoreBuilder</SubTitle>
     <Text>
       The StoreBuilder allows you to adapt the way framework modules and user
-      modules are processed for addition tom the store. To modify this behaviour
+      modules are processed for addition to the store. To modify this behaviour
       you can define so called processors and add them for specific modules. The
       following example shows you how to add a processor for a framework module.
     </Text>
@@ -130,14 +113,14 @@ export const store = new StoreBuilder(modules.storeModules).build();`}
       StoreConfigBuilder are included in a later section. You can add custom
       processors for user modules in the same way, but using the method{" "}
       <i>setUserModuleProcessor</i>. However, in most use cases the default
-      processing of modules may be sufficient.
+      processing of modules will be sufficient.
     </Text>
     <Text>
-      Fruthermore, you can adapt the way the store is build. You do this by
+      Furthermore, you can adapt the way the store is build. You do this by
       defining a so called storeBuilder method. The storeBuilder method gets the
       StoreConfig which contains all information of the modules. Besides this,
-      the method has to return an instance of a Redux Store. The following code
-      snippet shows you an example.
+      the method has to return an instance of a Redux Store which will be used
+      as the global store. The following code snippet shows you an example.
     </Text>
     <Code
       language="ts"
@@ -161,9 +144,9 @@ export const store = new StoreBuilder(modules.storeModules).build();`}
       in your processors you can add it using the <i>setExtas</i> method of the
       StoreConfigBuilder instance. You can then process these extras inside a
       custom storeBuilder. You may also want to define an own storeBuilder when
-      you want to use the Redux Store for other purposes too.
+      you want to use the Redux Store for other purposes then processing modules
+      too.
     </Text>
-
     <SubSubTitle>Methods of StoreConfigBuilder</SubSubTitle>
     <Text>
       The following code snippet shows the method definitions of

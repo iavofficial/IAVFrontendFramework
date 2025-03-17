@@ -1,4 +1,4 @@
-type Column = { key: string; title: string };
+export type Column = { key: string; title: string };
 
 export const MODULE_PARAM_TABLE_COLUMNS: Column[] = [
   { key: "name", title: "Parameter Name" },

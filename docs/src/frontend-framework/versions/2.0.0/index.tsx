@@ -33,7 +33,7 @@ import { ReactRouterRouter } from "./pages/reactRouterRouter.tsx";
 import { GroupRoute, PathRoute } from "../../common/page/pathRoute.ts";
 import NavigationRoute from "../../common/drawer/navigationRoute.tsx";
 import { ModulesInDepth } from "./pages/modulesInDepth.tsx";
-import GeneralAuthModule from "./pages/generalAuthModule.tsx";
+import { GeneralAuthModule } from "./pages/generalAuthModule.tsx";
 import { GeneralRouterModule } from "./pages/generalRouterModule.tsx";
 import NavGroupRoute from "../../common/drawer/navGroupRoute.tsx";
 

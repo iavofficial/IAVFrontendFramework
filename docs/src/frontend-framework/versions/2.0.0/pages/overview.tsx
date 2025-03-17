@@ -1,19 +1,3 @@
-/**
- * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- **/
-
 import React from "react";
 import Page from "../../../common/page/page.tsx";
 import Title from "../../../common/page/text/title.tsx";
@@ -23,32 +7,32 @@ import BulletList from "../../../common/page/text/bulletList.tsx";
 import PageLink from "../../../common/page/text/pageLink.tsx";
 import Image from "../../../common/page/utils/image.tsx";
 import Text from "../../../common/page/text/text.tsx";
+import { Column } from "../../../common/page/text/module/moduleTableColumns.tsx";
 
 const Overview: React.FC = () => {
-  const columns: { key: string; title: string }[] = [
-    { key: "category", title: "Category" },
-    { key: "value", title: "Value" },
+  const columns: Column[] = [
+    { key: "Category", title: "Category" },
+    { key: "Value", title: "Value" },
   ] as const;
 
   const tableData: TableData<typeof columns> = [
     {
-      category: "Programming Language",
-      value: "JavaScript",
+      Category: "Programming Language",
+      Value: "JavaScript",
     },
     {
-      category: "Key dependencies",
-      value: "React 18, ReactDOM 18, Typescript 5, AWS Amplify 6",
+      Category: "Key dependencies",
+      Value: "React 18, ReactDOM 18, Typescript 5, AWS Amplify 6",
     },
     {
-      category: "UI-Component libraries",
-      value: "PrimeReact, PrimeIcons",
+      Category: "UI-Component libraries",
+      Value: "PrimeReact, PrimeIcons",
     },
     {
-      category: "Requirements",
-      value: "At least npm version 8 and node version 16",
+      Category: "Requirements",
+      Value: "At least npm version 8 and node version 16",
     },
   ];
-
   return (
     <Page>
       <Title>Quick Overview</Title>

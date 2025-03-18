@@ -17,11 +17,11 @@
  */
 
 import {
-  ActualMandatoryStateFromModules,
-  FFMandatoryNonStoreModules,
-  FFMandatoryState,
-  FFMandatoryStoreModules,
-  TParamAllModulesPartial,
+    ActualMandatoryStateFromModules,
+    FFMandatoryNonStoreModules,
+    FFMandatoryState,
+    FFMandatoryStoreModules,
+    TParamAllModulesPartial,
 } from "../../types/modules/moduleOrchestrationTypes";
 import {mergeModules} from "./util/mergeModules";
 import {seperateModuleTypes} from "./util/seperateModuleTypes";
@@ -36,21 +36,20 @@ import {seperateModuleTypes} from "./util/seperateModuleTypes";
 // cannot be added since it introduces other errors.
 // However, just providing object inside the Record is not very critical
 // as the user will get an error when he passes the modules to the
-// GlobalDataLayer if module types mismatch with FFModule.
+// PageGlobalDataLayer if module types mismatch with FFModule.
 export const createModules = <
-  TModules extends Partial<
-    FFMandatoryStoreModules<TFrameworkStoreModulesState>
-  > &
-    Partial<FFMandatoryNonStoreModules> &
-    Record<string, object>,
-  TFrameworkStoreModulesState extends
-    FFMandatoryState = ActualMandatoryStateFromModules<TModules>,
+    TModules extends Partial<
+        FFMandatoryStoreModules<TFrameworkStoreModulesState>
+    > &
+        Partial<FFMandatoryNonStoreModules> &
+        Record<string, object>,
+    TFrameworkStoreModulesState extends FFMandatoryState = ActualMandatoryStateFromModules<TModules>,
 >(
-  paramModules?: TParamAllModulesPartial<TModules, TFrameworkStoreModulesState>,
+    paramModules?: TParamAllModulesPartial<TModules, TFrameworkStoreModulesState>,
 ) => {
-  const modules = paramModules ?? ({} as TModules);
+    const modules = paramModules ?? ({} as TModules);
 
-  const seperatedModules = seperateModuleTypes(modules);
+    const seperatedModules = seperateModuleTypes(modules);
 
-  return mergeModules(seperatedModules);
+    return mergeModules(seperatedModules);
 };

@@ -62,5 +62,5 @@
 }
 
 .legal-doc-link:hover {
-  color: var(--blue-3);
+  color: var(--blue-3) !important;
 }

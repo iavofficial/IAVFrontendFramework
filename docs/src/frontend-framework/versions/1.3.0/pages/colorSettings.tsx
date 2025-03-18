@@ -147,7 +147,7 @@ const ColorSettings: React.FC = () => {
                 {`export interface NavbarColorOptions {
     backgroundColor?: string;
     navbarCollapseArrowColor?: string;
-    legalDocumentsLinkColor?: string;
+    legalDocumentsIconColor?: string;
     scrollbarColor?: string;
     content?: TabColorOptionsOptional; // Color settings for the navigation tabs
 }`}
@@ -240,6 +240,7 @@ const ColorSettings: React.FC = () => {
     headerBackgroundColor?: string;
     loginButtonBackgroundColor?: string;
     loginButtonTextColor?: string;
+    legalNoticeIconColor?: string;
     loginFormBackgroundColor?: string;
     fullScreenBackgroundColor?: string; // If fullscreenBackgroundcolor is defined, this color will replace the background image inside the authentication view.
     companyTextColor?: string;
@@ -248,7 +249,6 @@ const ColorSettings: React.FC = () => {
     inputFieldTextColor?: string;
     passwortRequirementsTextColor?: string; // Defines the color of the text for the requirements to set a new password of the AWS authentication view.
     themeTogglerColor?: string;
-    legalLinkColor?: string;
 }
 export interface AuthenticationColorType {
     headerBackgroundColor?: string;

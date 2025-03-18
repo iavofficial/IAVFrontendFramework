@@ -47,7 +47,7 @@ import {
 import {AwsAuthenticatorExtras} from "../awsAuthenticatorTypes";
 import {AuthModule} from "@iavofficial/frontend-framework-shared/authenticatorModule";
 import {useModuleContext} from "@iavofficial/frontend-framework-shared/moduleContext";
-import { MandatoryModuleNames } from "@iavofficial/frontend-framework-shared/moduleNames";
+import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
 
 type NecessaryModuleAttributes = {
   extras: AwsAuthenticatorExtras;
@@ -111,6 +111,8 @@ export const AwsAuthenticationView = <
     colorSettingsContext.currentColors.authenticationView.companyTextColor;
   const themeTogglerColor =
     colorSettingsContext.currentColors.authenticationView.themeTogglerColor;
+  const legalLinkColor =
+    colorSettingsContext.currentColors.authenticationView.legalLinkColor;
 
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -391,50 +393,55 @@ export const AwsAuthenticationView = <
           {isNewPasswordRequired ? NewPasswordForm : LoginForm}
         </div>
 
-        {!props.hideLegalDocuments && (
-          <Link
-            style={{
-              position: "absolute",
-              bottom: "12px",
-              left: `${PADDING_GAB}px`,
-              textDecoration: "none",
-            }}
-            to="/documents"
-            target="_blank"
-          >
-            <span
-              className={"pi pi-info-circle " + identifierLegal}
-              style={{
-                fontSize: "medium",
-                fontWeight: "bold",
-                color: legalNoticeIconColor,
-              }}
-            />
-          </Link>
-        )}
-
-        <Tooltip
-          content={t(
-            props.authOptions?.documentsLabelKey
-              ? props.authOptions?.documentsLabelKey
-              : "Imprint",
-          )}
-          target={identifierWithDot}
-          id="hover-image"
-        />
-        <span
+        <div
+          className="flex"
           style={{
             alignSelf: "center",
             padding: "24px",
-            fontSize: "11px",
-            color: companyTextColor,
+            fontSize: "12px",
+            gap: "20px",
+            alignItems: "center",
           }}
         >
-          &copy;{" "}
-          {props.authOptions?.companyText
-            ? props.authOptions?.companyText
-            : "Company 2025"}
-        </span>
+          <span
+            style={{
+              color: companyTextColor,
+            }}
+          >
+            &copy;{" "}
+            {props.authOptions?.companyText
+              ? props.authOptions?.companyText
+              : "Company 2025"}
+          </span>
+          <span style={{color: "var(--grey-2)"}}>|</span>
+          {!props.hideLegalDocuments && (
+            <div
+              className="flex"
+              style={{
+                alignItems: "center",
+                gap: "4px",
+              }}
+            >
+              <Link
+                className="legal-doc-link"
+                style={{color: legalLinkColor, fontSize: "12px"}}
+                to="/imprint"
+                target="_blank"
+              >
+                {t("Imprint")}
+              </Link>
+              <span style={{color: legalLinkColor, fontSize: "12px"}}>&</span>
+              <Link
+                className="legal-doc-link"
+                style={{color: legalLinkColor, fontSize: "12px"}}
+                to="/privacy-policy"
+                target="_blank"
+              >
+                {t("Privacy_Policy")}
+              </Link>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

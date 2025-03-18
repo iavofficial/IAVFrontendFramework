@@ -96,40 +96,35 @@ export const Navbar = (props: Props) => {
               ? {
                   justifyContent: "center",
                   flexDirection: "column",
+                  width: "44px",
+                  gap: "10px",
                 }
               : {
-                  justifyContent: "space-between",
-
-                  paddingLeft: `${PADDING_GAB}px`,
+                  justifyContent: "center",
                 }
           }
         >
           {!props.hideLegalDocuments && (
-            <Link
+            <div
+              id="legal-doc-links"
               style={{
-                fontSize: "13px",
-                fontWeight: "bolder",
-                textDecoration: "none",
+                flexDirection: navbarSettingsContext.navbarCollapsed
+                  ? "unset"
+                  : "row",
+                writingMode: navbarSettingsContext.navbarCollapsed
+                  ? "sideways-lr"
+                  : "horizontal-tb",
               }}
-              to="/documents"
             >
-              <i
-                style={{
-                  color: legalDocumentsColor,
-                  fontWeight: "bold",
-                }}
-                className={"pi pi-info-circle " + identifierLegal}
-              />
-            </Link>
+              <Link className="legal-doc-link" to="/imprint">
+                {t("Imprint")}
+              </Link>
+              <span style={{color: "var(--blue-0)"}}>&</span>
+              <Link className="legal-doc-link" to="/privacy-policy">
+                {t("Privacy_Policy")}
+              </Link>
+            </div>
           )}
-
-          <Tooltip
-            content={t(
-              props.documentsLabelKey ? props.documentsLabelKey : "Imprint",
-            )}
-            target={identifierWithDot}
-            id="hover-image"
-          />
 
           {navbarSettingsContext.collapsible && (
             <i
@@ -139,12 +134,15 @@ export const Navbar = (props: Props) => {
                 )
               }
               style={{
+                ...(!navbarSettingsContext.navbarCollapsed && {
+                  position: "absolute",
+                  right: 0,
+                }),
                 cursor: "pointer",
                 color: navbarCollapseArrowColor,
-
                 margin: navbarSettingsContext.navbarCollapsed
-                  ? " 8px 0px 0px 0px"
-                  : ` 0px ${PADDING_GAB}px 0px 0px`,
+                  ? "8px 0px 0px 0px"
+                  : `0px ${PADDING_GAB}px 0px 0px`,
               }}
               className={calculateNavbarArrowFunctionColor(
                 navbarSettingsContext.navbarCollapsed!,

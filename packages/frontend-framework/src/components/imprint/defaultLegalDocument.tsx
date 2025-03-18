@@ -17,10 +17,13 @@
  */
 
 import React, {useContext} from "react";
-import {ImprintText} from "./imprintText";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 
-export const DefaultImprint = () => {
+interface DefaultLegalDocumentProps {
+  legalTextComponent: React.ComponentType<any>;
+}
+
+export const DefaultLegalDocument = (props: DefaultLegalDocumentProps) => {
   const colorSettingsContext = useContext(ColorSettingsContext);
 
   return (
@@ -47,7 +50,7 @@ export const DefaultImprint = () => {
           width: "100%",
         }}
       >
-        <ImprintText />
+        {props.legalTextComponent ? <props.legalTextComponent /> : null}
       </div>
     </div>
   );

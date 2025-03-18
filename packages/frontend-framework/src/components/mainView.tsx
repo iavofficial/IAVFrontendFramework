@@ -19,7 +19,9 @@
 import React, {useContext} from "react";
 import {Header, HeaderOptions} from "./header/header";
 import {Navbar} from "./navbar/navbar";
-import {DefaultImprint} from "./imprint/defaultImprint";
+import {DefaultLegalDocument} from "./imprint/defaultLegalDocument";
+import {ImprintText} from "./imprint/imprintText";
+import {PrivacyPolicyText} from "./imprint/privacyPolicyText";
 import {SettingsMenuOptions} from "./header/settingsMenu";
 import {Outlet, Route, Routes} from "react-router-dom";
 import {TabAndContentWrapper} from "./navbar/wrappers/typesWrappers";
@@ -29,7 +31,8 @@ import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/color
 
 interface MainViewProps {
   tabAndContentWrappers: TabAndContentWrapper[];
-  documentsComponent?: React.ComponentType<any>;
+  imprintComponent?: React.ComponentType<any>;
+  privacyPolicyComponent?: React.ComponentType<any>;
   documentsLabelKey?: string;
   hideLegalDocuments?: boolean;
   headerOptions?: HeaderOptions;
@@ -80,12 +83,22 @@ export const MainView = (props: MainViewProps) => {
           {props.tabAndContentWrappers.map((wrapper) => wrapper.getRoutes())}
 
           <Route
-            path="/documents"
+            path="/imprint"
             element={
-              props.documentsComponent ? (
-                <props.documentsComponent />
+              props.imprintComponent ? (
+                <props.imprintComponent />
               ) : (
-                <DefaultImprint />
+                <DefaultLegalDocument legalTextComponent={ImprintText} />
+              )
+            }
+          />
+          <Route
+            path="/privacy-policy"
+            element={
+              props.privacyPolicyComponent ? (
+                <props.privacyPolicyComponent />
+              ) : (
+                <DefaultLegalDocument legalTextComponent={PrivacyPolicyText} />
               )
             }
           />

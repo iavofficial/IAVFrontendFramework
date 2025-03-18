@@ -249,6 +249,7 @@ const ColorSettings: React.FC = () => {
     inputFieldTextColor?: string;
     passwortRequirementsTextColor?: string; // Defines the color of the text for the requirements to set a new password of the AWS authentication view.
     themeTogglerColor?: string;
+    legalLinkColor?: string;
 }
 export interface AuthenticationColorType {
     headerBackgroundColor?: string;

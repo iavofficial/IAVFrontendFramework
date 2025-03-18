@@ -32,16 +32,16 @@ import RoutesMap from "../../common/drawer/routesMap.tsx";
 import NavigationMap from "../../common/drawer/navigationMap.tsx";
 
 const routes: PathRoute[] = [
-    {path: "overview", label: "Quick PageOverview", element: <PageOverview/>},
-    {path: "information", label: "01 - Important PageInformation", element: <PageInformation/>},
+    {path: "overview", label: "Quick Overview", element: <PageOverview/>},
+    {path: "information", label: "01 - Important Information", element: <PageInformation/>},
     {path: "installation-guide", label: "02 - Installation", element: <PageInstallationGuide/>},
-    {path: "interface", label: "03 - PageInterface", element: <PageInterface/>},
-    {path: "globaldatalayer", label: "04 - PageGlobalDataLayer", element: <PageGlobalDataLayer/>},
+    {path: "interface", label: "03 - Interface", element: <PageInterface/>},
+    {path: "globaldatalayer", label: "04 - GlobalDataLayer", element: <PageGlobalDataLayer/>},
     {path: "uilayer", label: "05 - UiLayer", element: <PageUiLayer/>},
     {path: "content-area", label: "06 - Content Area", element: <PageContentArea/>},
     {path: "color-settings-and-dark-mode", label: "07 - Color Settings and Dark Mode", element: <PageColorSettings/>},
     {path: "example-project", label: "08 - Example Project", element: <PageExampleProject/>},
-    {path: "playground", label: "09 - PagePlayground", element: <PagePlayground/>},
+    {path: "playground", label: "09 - Playground", element: <PagePlayground/>},
 ];
 
 const helpRoutes: PathRoute[] = [

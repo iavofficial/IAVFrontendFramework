@@ -1,8 +1,8 @@
 import React, {useState} from "react";
-import {GroupRoute} from "../page/pathRoute.ts";
 import makeStyles from "../../../util/makeStyles.tsx";
 import NavigationMap from "./navigationMap.tsx";
 import {BLUE0} from "../../../constants.ts";
+import {GroupRoute} from "../page/pathRoute.ts";
 
 const useStyles = makeStyles(() => ({
     groupTitle: {
@@ -33,19 +33,39 @@ interface Props {
     groups: GroupRoute[];
 }
 
-const GroupNavigationMap: React.FC<Props> = ({groups}) => {
+const GroupNavigationMap: React.FC<Props> = (props) => {
+    const {groups} = props;
     const {classes} = useStyles();
 
-    const [isOpen, setIsOpen] = useState(false);
+    const [openGroups, setOpenGroups] = useState<string[]>([]);
 
-    return groups.map((group) => (
-        <div key={group.title}>
-            <button className={classes.groupTitle} onClick={() => setIsOpen(!isOpen)}>
-                {group.title}
-            </button>
-            {isOpen && <NavigationMap routes={group.routes}/>}
-        </div>
-    ));
+    const toggleGroup = (title: string) => {
+        setOpenGroups(prev => {
+            if (prev.includes(title)) {
+                return prev.filter(group => group !== title);
+            } else {
+                return [...prev, title];
+            }
+        });
+    };
+
+    return (
+        groups.map((group) => {
+            const isOpen = openGroups.includes(group.title);
+
+            return (
+                <div key={group.title}>
+                    <button
+                        className={classes.groupTitle}
+                        onClick={() => toggleGroup(group.title)}
+                    >
+                        {group.title}
+                    </button>
+                    {isOpen && <NavigationMap routes={group.routes}/>}
+                </div>
+            );
+        })
+    );
 };
 
 export default GroupNavigationMap;

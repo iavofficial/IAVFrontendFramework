@@ -147,7 +147,7 @@ const ColorSettings: React.FC = () => {
                 {`export interface NavbarColorOptions {
     backgroundColor?: string;
     navbarCollapseArrowColor?: string;
-    legalDocumentsIconColor?: string;
+    legalDocumentsLinkColor?: string;
     scrollbarColor?: string;
     content?: TabColorOptionsOptional; // Color settings for the navigation tabs
 }`}

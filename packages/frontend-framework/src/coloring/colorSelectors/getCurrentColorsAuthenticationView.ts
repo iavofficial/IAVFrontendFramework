@@ -73,11 +73,6 @@ export const getCurrentColorsAuthenticationView = (
       DARK_AUTH_LOGIN_BUTTON_TEXT_COLOR,
       authViewColorOptions.loginButtonTextColor,
     ),
-    legalNoticeIconColor: determineColor(
-      LIGHT_AUTH_LEGAL_NOTICE_ICON_COLOR,
-      DARK_AUTH_LEGAL_NOTICE_ICON_COLOR,
-      authViewColorOptions.legalNoticeIconColor,
-    ),
     loginFormBackgroundColor: determineColor(
       LIGHT_AUTH_LOGIN_FORM_BACKGROUND_COLOR,
       DARK_AUTH_LOGIN_FORM_BACKGROUND_COLOR,

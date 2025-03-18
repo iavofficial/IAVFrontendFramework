@@ -105,8 +105,6 @@ export const AwsAuthenticationView = <
   const loginFormBackgroundColor =
     colorSettingsContext.currentColors.authenticationView
       .loginFormBackgroundColor;
-  const legalNoticeIconColor =
-    colorSettingsContext.currentColors.authenticationView.legalNoticeIconColor;
   const companyTextColor =
     colorSettingsContext.currentColors.authenticationView.companyTextColor;
   const themeTogglerColor =

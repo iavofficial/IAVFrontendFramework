@@ -87,8 +87,6 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
       .inputFieldBackgroundColor;
   const inputFieldTextColor =
     colorSettingsContext.currentColors.authenticationView.inputFieldTextColor;
-  const legalNoticeIconColor =
-    colorSettingsContext.currentColors.authenticationView.legalNoticeIconColor;
   const companyTextColor =
     colorSettingsContext.currentColors.authenticationView.companyTextColor;
   const themeTogglerColor =

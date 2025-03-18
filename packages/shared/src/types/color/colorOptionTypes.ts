@@ -104,7 +104,6 @@ export interface AuthenticationViewColorOptions {
   headerBackgroundColor?: string;
   loginButtonBackgroundColor?: string;
   loginButtonTextColor?: string;
-  legalNoticeIconColor?: string;
   loginFormBackgroundColor?: string;
   fullScreenBackgroundColor?: string;
   companyTextColor?: string;

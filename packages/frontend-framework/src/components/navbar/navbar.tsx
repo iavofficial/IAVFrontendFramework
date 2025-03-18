@@ -49,7 +49,7 @@ export const Navbar = (props: Props) => {
   const navbarColor = colorSettingsContext.currentColors.navbar.backgroundColor;
 
   const legalDocumentsColor =
-    colorSettingsContext.currentColors.navbar.legalDocumentsIconColor;
+    colorSettingsContext.currentColors.navbar.legalDocumentsLinkColor;
 
   const navbarCollapseArrowColor =
     colorSettingsContext.currentColors.navbar.navbarCollapseArrowColor;
@@ -116,11 +116,19 @@ export const Navbar = (props: Props) => {
                   : "horizontal-tb",
               }}
             >
-              <Link className="legal-doc-link" to="/imprint">
+              <Link
+                className="legal-doc-link"
+                style={{color: legalDocumentsColor}}
+                to="/imprint"
+              >
                 {t("Imprint")}
               </Link>
-              <span style={{color: "var(--blue-0)"}}>&</span>
-              <Link className="legal-doc-link" to="/privacy-policy">
+              <span style={{color: legalDocumentsColor}}>&</span>
+              <Link
+                className="legal-doc-link"
+                style={{color: legalDocumentsColor}}
+                to="/privacy-policy"
+              >
                 {t("Privacy_Policy")}
               </Link>
             </div>

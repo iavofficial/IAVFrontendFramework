@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {NavbarColorOptions} from "@iavofficial/frontend-framework-shared/colorOptionTypes";
+import { NavbarColorOptions } from "@iavofficial/frontend-framework-shared/colorOptionTypes";
 import {
   DARK_NAVBAR_BACKGROUND_INSIDE_ACTIVE_GROUP_COLOR,
   DARK_NAV_BACKGROUND_COLOR,
@@ -32,7 +32,7 @@ import {
   DARK_NAV_GROUP_ICON_ACTIVE_COLOR,
   DARK_NAV_GROUP_ICON_HOVER_COLOR,
   DARK_NAV_GROUP_ICON_DEFAULT_COLOR,
-  DARK_NAV_LEGAL_DOCS_ICON_COLOR,
+  DARK_NAV_LEGAL_DOCS_LINK_COLOR,
   DARK_NAV_SCROLLBAR_COLOR,
   DARK_NAV_TAB_BACKGROUND_ACTIVE_COLOR,
   DARK_NAV_TAB_BACKGROUND_HOVER_COLOR,
@@ -57,7 +57,7 @@ import {
   LIGHT_NAV_GROUP_ICON_ACTIVE_COLOR,
   LIGHT_NAV_GROUP_ICON_HOVER_COLOR,
   LIGHT_NAV_GROUP_ICON_DEFAULT_COLOR,
-  LIGHT_NAV_LEGAL_DOCS_ICON_COLOR,
+  LIGHT_NAV_LEGAL_DOCS_LINK_COLOR,
   LIGHT_NAV_SCROLLBAR_COLOR,
   LIGHT_NAV_TAB_BACKGROUND_ACTIVE_COLOR,
   LIGHT_NAV_TAB_BACKGROUND_HOVER_COLOR,
@@ -71,7 +71,7 @@ import {
   LIGHT_NAV_GROUP_ARROW_DEFAULT_COLOR,
   DARK_NAV_GROUP_ARROW_DEFAULT_COLOR,
 } from "../defaultColors";
-import {determineSelectedColorHof} from "./determineSelectedColor";
+import { determineSelectedColorHof } from "./determineSelectedColor";
 
 export const getCurrentColorsNavbar = (
   darkmodeIsEnabled: boolean,
@@ -89,10 +89,10 @@ export const getCurrentColorsNavbar = (
       DARK_NAV_BACKGROUND_COLOR,
       navbarColorOptions.backgroundColor,
     ),
-    legalDocumentsIconColor: determineColor(
-      LIGHT_NAV_LEGAL_DOCS_ICON_COLOR,
-      DARK_NAV_LEGAL_DOCS_ICON_COLOR,
-      navbarColorOptions.legalDocumentsIconColor,
+    legalDocumentsLinkColor: determineColor(
+      LIGHT_NAV_LEGAL_DOCS_LINK_COLOR,
+      DARK_NAV_LEGAL_DOCS_LINK_COLOR,
+      navbarColorOptions.legalDocumentsLinkColor,
     ),
     navbarCollapseArrowColor: determineColor(
       LIGHT_NAV_COLLAPSE_ARROW_COLOR,

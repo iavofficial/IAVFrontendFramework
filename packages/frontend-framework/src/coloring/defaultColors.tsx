@@ -21,6 +21,7 @@ import {
   BLUE0,
   BLUE3,
   GREY1,
+  GREY2,
   GREY4,
   GREY5,
   GREY6,
@@ -122,8 +123,8 @@ export const DARK_NAV_GROUP_ARROW_ACTIVE_COLOR = GREY1;
 
 //# Other
 // Legal documents icon
-export const LIGHT_NAV_LEGAL_DOCS_ICON_COLOR = BLUE3;
-export const DARK_NAV_LEGAL_DOCS_ICON_COLOR = BLUE3;
+export const LIGHT_NAV_LEGAL_DOCS_LINK_COLOR = BLUE0;
+export const DARK_NAV_LEGAL_DOCS_LINK_COLOR = GREY2;
 
 export const LIGHT_NAV_SCROLLBAR_COLOR = GREY1;
 export const DARK_NAV_SCROLLBAR_COLOR = GREY1;

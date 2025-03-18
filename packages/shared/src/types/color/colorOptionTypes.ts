@@ -29,7 +29,7 @@ export interface HeaderColorOptions {
 export interface NavbarColorOptions {
   backgroundColor?: string;
   navbarCollapseArrowColor?: string;
-  legalDocumentsIconColor?: string;
+  legalDocumentsLinkColor?: string;
   scrollbarColor?: string;
   content?: TabColorOptionsOptional;
 }

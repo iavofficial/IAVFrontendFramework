@@ -239,8 +239,8 @@ const ColorSettings: React.FC = () => {
                 {`export interface AuthenticationViewColorOptions {
     headerBackgroundColor?: string;
     loginButtonBackgroundColor?: string;
-    legalNoticeIconColor?: string;
     loginButtonTextColor?: string;
+    legalNoticeIconColor?: string;
     loginFormBackgroundColor?: string;
     fullScreenBackgroundColor?: string; // If fullscreenBackgroundcolor is defined, this color will replace the background image inside the authentication view.
     companyTextColor?: string;

@@ -15,24 +15,25 @@
  **/
 
 import React from "react";
-import NavLinkItem from "./navLinkItem.tsx";
 import {PathRoute} from "../page/pathRoute.ts";
+import {Route, Routes} from "react-router-dom";
 
 interface Props {
-    routes: PathRoute[]
+    routes: PathRoute[];
 }
 
-const NavigationRoute: React.FC<Props> = (props) => {
+
+const RoutesMap: React.FC<Props> = (props) => {
 
     const {routes} = props;
 
     return (
-        <ul>
-            {routes.map(({path, label}) => (
-                <NavLinkItem to={path} label={label} key={path}/>
+        <Routes>
+            {routes.map(({path, element}) => (
+                <Route key={path} path={path} element={element}/>
             ))}
-        </ul>
+        </Routes>
     );
 };
 
-export default NavigationRoute;
+export default RoutesMap;

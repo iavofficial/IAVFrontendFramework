@@ -17,7 +17,7 @@
 import React, {PropsWithChildren} from "react";
 import {Link, useLocation} from "react-router-dom";
 import makeStyles from "../../../util/makeStyles.tsx";
-import { GREY2 } from "../../../constants.ts";
+import {GREY2} from "../../../constants.ts";
 
 const useStyles = makeStyles(() => ({
     link: {
@@ -43,7 +43,7 @@ interface Props {
     label: string;
 }
 
-const NavLinkItem: React.FC<PropsWithChildren<Props>> = (props) => {
+const NavigationItem: React.FC<PropsWithChildren<Props>> = (props) => {
 
     const {key, to, label} = props;
 
@@ -63,4 +63,4 @@ const NavLinkItem: React.FC<PropsWithChildren<Props>> = (props) => {
     );
 };
 
-export default NavLinkItem;
+export default NavigationItem;

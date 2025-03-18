@@ -14,10 +14,8 @@
  * limitations under the License.
  **/
 
-import {Route, Routes} from "react-router-dom";
 import React from "react";
 import PageNavigation from "../../common/drawer/pageNavigation.tsx";
-import NavLinkItem from "../../common/drawer/navLinkItem.tsx";
 import PageOverview from "./pages/pageOverview.tsx";
 import PageInformation from "./pages/pageInformation.tsx";
 import PageInstallationGuide from "./pages/pageInstallationGuide.tsx";
@@ -29,7 +27,9 @@ import PageColorSettings from "./pages/pageColorSettings.tsx";
 import PageExampleProject from "./pages/pageExampleProject.tsx";
 import PagePlayground from "./pages/pagePlayground.tsx";
 import PageFaq from "./pages/pageFaq.tsx";
-import {PathRoute} from "../../common/page/pathRoute.ts";
+import {mergeRoutes, PathRoute} from "../../common/page/pathRoute.ts";
+import RoutesMap from "../../common/drawer/routesMap.tsx";
+import NavigationMap from "../../common/drawer/navigationMap.tsx";
 
 const routes: PathRoute[] = [
     {path: "overview", label: "Quick PageOverview", element: <PageOverview/>},
@@ -49,29 +49,17 @@ const helpRoutes: PathRoute[] = [
 ];
 
 const Version1_1_0 = () => {
+
+    const mergedRoutes = mergeRoutes(routes, helpRoutes);
+
     return (
         <>
             <PageNavigation>
-                <ul>
-                    {routes.map(({path, label}) => (
-                        <NavLinkItem to={path} label={label} key={path}/>
-                    ))}
-                </ul>
+                <NavigationMap routes={routes}/>
                 <h3>Need help?</h3>
-                <ul>
-                    {helpRoutes.map(({path, label}) => (
-                        <NavLinkItem to={path} label={label} key={path}/>
-                    ))}
-                </ul>
+                <NavigationMap routes={helpRoutes}/>
             </PageNavigation>
-            <Routes>
-                {routes.map(({path, element}) => (
-                    <Route key={path} path={path} element={element}/>
-                ))}
-                {helpRoutes.map(({path, element}) => (
-                    <Route key={path} path={path} element={element}/>
-                ))}
-            </Routes>
+            <RoutesMap routes={mergedRoutes}/>
         </>
     )
 }

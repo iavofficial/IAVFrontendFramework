@@ -14,7 +14,6 @@
  * limitations under the License.
  **/
 
-import {Route, Routes} from "react-router-dom";
 import React from "react";
 import PageNavigation from "../../common/drawer/pageNavigation.tsx";
 import PageOverview from "./pages/pageOverview.tsx";
@@ -30,12 +29,13 @@ import PageFaq from "./pages/pageFaq.tsx";
 import {PageDummyAuthenticator} from "./pages/pageDummyAuthenticator.tsx";
 import {PageAwsAuthenticator} from "./pages/pageAwsAuthenticator.tsx";
 import {PageReactRouterRouter} from "./pages/pageReactRouterRouter.tsx";
-import {GroupRoute, PathRoute} from "../../common/page/pathRoute.ts";
-import NavigationRoute from "../../common/drawer/navigationRoute.tsx";
+import {GroupRoute, mergeRoutes, PathRoute} from "../../common/page/pathRoute.ts";
+import NavigationMap from "../../common/drawer/navigationMap.tsx";
 import {PageModulesInDepth} from "./pages/pageModulesInDepth.tsx";
 import {PageGeneralAuthModule} from "./pages/pageGeneralAuthModule.tsx";
 import {PageGeneralRouterModule} from "./pages/pageGeneralRouterModule.tsx";
-import NavGroupRoute from "../../common/drawer/navGroupRoute.tsx";
+import GroupNavigationMap from "../../common/drawer/groupNavigationMap.tsx";
+import RoutesMap from "../../common/drawer/routesMap.tsx";
 
 const routes: PathRoute[] = [
     {path: "overview", label: "Quick Overview", element: <PageOverview/>},
@@ -73,28 +73,19 @@ const helpRoutes: PathRoute[] = [
 ];
 
 const Version2_0_0 = () => {
-    const allModuleRoutes: PathRoute[] = [];
-    modulesRoutes.forEach((moduleType: GroupRoute) => {
-        moduleType.routes.forEach((route) => allModuleRoutes.push(route));
-    });
+
+    const mergedRoutes = mergeRoutes(routes, modulesRoutes, helpRoutes)
 
     return (
         <>
             <PageNavigation>
-                <NavigationRoute routes={routes}/>
+                <NavigationMap routes={routes}/>
                 <h3>Need help?</h3>
-                <NavigationRoute routes={helpRoutes}/>
+                <NavigationMap routes={helpRoutes}/>
                 <h3 style={{marginTop: "30px"}}>Modules</h3>
-                <NavGroupRoute groups={modulesRoutes}/>
+                <GroupNavigationMap groups={modulesRoutes}/>
             </PageNavigation>
-            <Routes>
-                {[...routes, ...allModuleRoutes].map(({path, element}) => (
-                    <Route key={path} path={path} element={element}/>
-                ))}
-                {helpRoutes.map(({path, element}) => (
-                    <Route key={path} path={path} element={element}/>
-                ))}
-            </Routes>
+            <RoutesMap routes={mergedRoutes}/>
         </>
     );
 };

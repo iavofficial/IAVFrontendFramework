@@ -19,7 +19,6 @@
 import React, {useContext} from "react";
 import "./navbar.css";
 import {TabAndContentWrapper} from "./wrappers/typesWrappers";
-import {useTranslator} from "../internationalization/translators";
 import {Tooltip} from "primereact/tooltip";
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
@@ -33,9 +32,9 @@ import {
 } from "@iavofficial/frontend-framework-shared/constants";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 import {generateHashOfLength} from "@iavofficial/frontend-framework-shared/hash";
-import {useModuleContext} from "@iavofficial/frontend-framework-shared/moduleContext";
-import {AllDefaultModules} from "@iavofficial/frontend-framework-shared/moduleDefaults";
-import { MandatoryModuleNames } from "@iavofficial/frontend-framework-shared/moduleNames";
+import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
+import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
+import {useModuleTranslation} from "@iavofficial/frontend-framework-shared/useModuleTranslation";
 
 interface Props {
   tabAndContentWrappers: TabAndContentWrapper[];
@@ -44,9 +43,11 @@ interface Props {
 }
 
 export const Navbar = (props: Props) => {
-  const t = useTranslator();
+  const t = useModuleTranslation();
 
-  const {modules} = useModuleContext<AllDefaultModules>();
+  const routerModule = useModule(MandatoryModuleNames.Router);
+  const Link = routerModule.Link;
+
   const colorSettingsContext = useContext(ColorSettingsContext);
   const navbarSettingsContext = useContext(NavbarSettingsContext);
 
@@ -60,8 +61,6 @@ export const Navbar = (props: Props) => {
 
   const scrollbarColor =
     colorSettingsContext.currentColors.navbar.scrollbarColor;
-
-  const Link = modules[MandatoryModuleNames.Router].Link;
 
   const identifier = generateHashOfLength(4);
   const identifierLegal = "a" + identifier;
@@ -130,9 +129,11 @@ export const Navbar = (props: Props) => {
           )}
 
           <Tooltip
-            content={t(
-              props.documentsLabelKey ? props.documentsLabelKey : "Imprint",
-            )}
+            content={t({
+              key: props.documentsLabelKey
+                ? props.documentsLabelKey
+                : "Imprint",
+            })}
             target={identifierWithDot}
             id="hover-image"
           />

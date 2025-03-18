@@ -18,12 +18,10 @@
 
 import React, {FormEvent, useContext, useState} from "react";
 import {Link} from "react-router-dom";
-import {useTranslator} from "@iavofficial/frontend-framework/translators";
 import {AuthenticationViewProps} from "@iavofficial/frontend-framework-shared/authenticationViewProps";
 import loginBackgroundLightMode from "../assets/png/login_background_lightMode.png";
 import loginBackgroundDarkMode from "../assets/png/login_background_darkMode.png";
 import {Dropdown, DropdownChangeEvent} from "primereact/dropdown";
-import {LanguageContext} from "@iavofficial/frontend-framework/language";
 import {parseLanguageResourcesIntoDropdownFormat} from "@iavofficial/frontend-framework-shared/parseLanguageResourcesIntoDropdownFormat";
 import {generateHashOfLength} from "@iavofficial/frontend-framework-shared/hash";
 import {Tooltip} from "primereact/tooltip";
@@ -46,45 +44,56 @@ import {
 } from "@iavofficial/frontend-framework-shared/constants";
 import {AwsAuthenticatorExtras} from "../awsAuthenticatorTypes";
 import {AuthModule} from "@iavofficial/frontend-framework-shared/authenticatorModule";
-import {useModuleContext} from "@iavofficial/frontend-framework-shared/moduleContext";
-import { MandatoryModuleNames } from "@iavofficial/frontend-framework-shared/moduleNames";
+import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
+import {InternationalizationModule} from "../../../shared/dist/types/modules/internationalization/internationalizationModule";
+import {useDefaultSelector} from "@iavofficial/frontend-framework-shared/moduleDefaults";
+import { useModuleContext } from "@iavofficial/frontend-framework-shared/moduleContext";
 
-type NecessaryModuleAttributes = {
+type NecessaryAuthModuleAttributes = {
   extras: AwsAuthenticatorExtras;
 } & Omit<AuthModule<AwsAuthenticatorState>, "useModuleLifecycle">;
 
 export const AwsAuthenticationView = <
   TModules extends {
-    [MandatoryModuleNames.Authentication]: NecessaryModuleAttributes;
-  } = {[MandatoryModuleNames.Authentication]: AwsAuthenticator},
+    [MandatoryModuleNames.Authentication]: NecessaryAuthModuleAttributes;
+    [MandatoryModuleNames.Internationalization]: InternationalizationModule;
+  } = {
+    [MandatoryModuleNames.Authentication]: AwsAuthenticator;
+    [MandatoryModuleNames.Internationalization]: InternationalizationModule;
+  },
 >(
   props: AuthenticationViewProps,
 ) => {
   const {modules} = useModuleContext<TModules>();
   const authenticationModule = modules[MandatoryModuleNames.Authentication];
+  const intModule = modules[MandatoryModuleNames.Internationalization];
 
   const dispatch = useDispatch<AwsAuthenticatorAuthDispatch>();
-  const useAuthSelector: TypedUseSelectorHook<AwsAuthenticatorStoreState> =
+  const useTypedSelector: TypedUseSelectorHook<AwsAuthenticatorStoreState> =
     useSelector;
 
-  const isNewPasswordRequired = useAuthSelector(
+  const isNewPasswordRequired = useTypedSelector(
     (state) =>
       state[MandatoryModuleNames.Authentication].extras.isNewPasswordRequired,
   );
   const loginError =
-    useAuthSelector(
+    useTypedSelector(
       (state) => state[MandatoryModuleNames.Authentication].extras.loginError,
     ) ?? "";
-  const isLoading = useAuthSelector(
+
+  const isLoading = useTypedSelector(
     (state) => state[MandatoryModuleNames.Authentication].isLoading,
+  );
+
+  const activeLang = useDefaultSelector(
+    (state) => state[MandatoryModuleNames.Internationalization].activeLang,
   );
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const langContext = useContext(LanguageContext);
   const colorSettingsContext = useContext(ColorSettingsContext);
 
-  const t = useTranslator();
+  const t = intModule.useTranslation();
 
   const passwortRequirementsTextColor =
     colorSettingsContext.currentColors.authenticationView
@@ -147,12 +156,12 @@ export const AwsAuthenticationView = <
             color: passwortRequirementsTextColor,
           }}
         >
-          <p>{t("replace_temporary_password")}</p>
+          <p>{t({key: "replace_temporary_password"})}</p>
           <ul>
-            <li>{t("password_req_8_characters")}</li>
-            <li>{t("password_req_upper_lower_case")}</li>
-            <li>{t("password_req_special_character")}</li>
-            <li>{t("password_req_one_digit")}</li>
+            <li>{t({key: "password_req_8_characters"})}</li>
+            <li>{t({key: "password_req_upper_lower_case"})}</li>
+            <li>{t({key: "password_req_special_character"})}</li>
+            <li>{t({key: "password_req_one_digit"})}</li>
           </ul>
         </div>
         <form autoComplete="off" onSubmit={submit}>
@@ -166,7 +175,7 @@ export const AwsAuthenticationView = <
               }}
               className={"inputLabel " + (loginError ? "invalid" : "")}
             >
-              {t("New_password")}
+              {t({key: "New_password"})}
             </label>
             <input
               name="password"
@@ -187,7 +196,7 @@ export const AwsAuthenticationView = <
             />
 
             <LoginButtonWithSpinner isLoading={isLoading} />
-            <div className="invalid">{t(loginError)}</div>
+            <div className="invalid">{t({key: loginError})}</div>
           </div>
         </form>
       </div>
@@ -215,7 +224,7 @@ export const AwsAuthenticationView = <
           }}
           className="inputLabel"
         >
-          {t("Email_address")}
+          {t({key: "Email_address"})}
         </label>
         <input
           value={email.valueOf()}
@@ -240,7 +249,7 @@ export const AwsAuthenticationView = <
           }}
           className="inputLabel"
         >
-          {t("Password")}
+          {t({key: "Password"})}
         </label>
         <input
           value={password.valueOf()}
@@ -259,7 +268,7 @@ export const AwsAuthenticationView = <
           <LoginButtonWithSpinner isLoading={isLoading} />
         </div>
         <div style={{marginTop: "20px"}} className="invalid">
-          {t(loginError)}
+          {t({key: loginError})}
         </div>
       </div>
     </form>
@@ -375,14 +384,14 @@ export const AwsAuthenticationView = <
                   color: inputFieldTextColor,
                 }}
                 placeholder={
-                  langContext?.resources[langContext.activeLang].translation
+                  intModule.translationResources[activeLang].translation
                     .option_name
                 }
                 onChange={function (event: DropdownChangeEvent) {
-                  langContext?.selectLanguage(event.value.key);
+                  intModule.selectActiveLang(event.value.key);
                 }}
                 options={parseLanguageResourcesIntoDropdownFormat(
-                  langContext?.resources,
+                  intModule.translationResources,
                 )}
                 optionLabel="label"
               />
@@ -414,11 +423,11 @@ export const AwsAuthenticationView = <
         )}
 
         <Tooltip
-          content={t(
-            props.authOptions?.documentsLabelKey
+          content={t({
+            key: props.authOptions?.documentsLabelKey
               ? props.authOptions?.documentsLabelKey
               : "Imprint",
-          )}
+          })}
           target={identifierWithDot}
           id="hover-image"
         />

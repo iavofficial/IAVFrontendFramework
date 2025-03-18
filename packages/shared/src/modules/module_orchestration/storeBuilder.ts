@@ -102,7 +102,7 @@ export class StoreBuilder<
   >(
     moduleType: K,
     processor: ModuleProcessorFunction<
-      TFrameworkStoreModules[K],
+      (typeof this.frameworkModulesAndProcessors)[K]["module"],
       TFrameworkModulesState
     >,
   ) {
@@ -154,7 +154,7 @@ export class StoreBuilder<
     }
 
     const storeConfig = this.storeConfigBuilder.build();
-    
+
     return this.storeBuilder(storeConfig);
   }
 }

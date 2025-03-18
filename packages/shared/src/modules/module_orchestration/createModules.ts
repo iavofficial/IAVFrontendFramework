@@ -17,6 +17,10 @@
  */
 
 import {
+  createTypedUseModule,
+  useModuleContext,
+} from "../../contexts/moduleContext";
+import {
   ActualMandatoryStateFromModules,
   FFMandatoryNonStoreModules,
   FFMandatoryState,
@@ -52,5 +56,11 @@ export const createModules = <
 
   const seperatedModules = seperateModuleTypes(modules);
 
-  return mergeModules(seperatedModules);
+  const finalModules = mergeModules(seperatedModules);
+
+  return {
+    ...finalModules,
+    useModuleContextTyped: useModuleContext<typeof finalModules.all>,
+    useModuleTyped: createTypedUseModule<typeof finalModules.all>(),
+  };
 };

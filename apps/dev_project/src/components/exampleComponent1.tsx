@@ -22,7 +22,6 @@ import { LayoutBehaviour } from "@iavofficial/frontend-framework/contentLayout";
 import { generateHashOfLength } from "@iavofficial/frontend-framework/hash";
 import { ContentbarExampleWithText } from "./contentbarExampleWithText";
 import { BasicContentbarWrapper } from "@iavofficial/frontend-framework/basicContentbarWrapper";
-import { TranslateFunctionType } from "@iavofficial/frontend-framework/translationFunction";
 import { ContentStyleTemplates } from "@iavofficial/frontend-framework/contentStyle";
 
 const initialState: ExampleArrayObject = {
@@ -113,7 +112,7 @@ export const ExampleComponent1 = () => {
       let hash = index === 0 ? hashOfFirstElement : generateHashOfLength(6);
       let newBasicContentWrapperElement = new BasicContentbarWrapper({
         id: hash,
-        displayName: (t: TranslateFunctionType) => `${t("car")} ${index}`,
+        displayName: (t) => `${t({ key: "car" })} ${index}`,
         onClick: selectElement,
         contentAreaElement: (
           <ContentbarExampleWithText exampleText={`car ${index}`} key={hash} />

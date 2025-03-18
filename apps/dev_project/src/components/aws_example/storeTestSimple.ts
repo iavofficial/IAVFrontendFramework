@@ -24,9 +24,9 @@ import { Amplify } from "aws-amplify";
 import { cognitoUserPoolsTokenProvider } from "aws-amplify/auth/cognito";
 import { CookieStorage } from "aws-amplify/utils";
 import { AwsAuthenticator } from "@iavofficial/frontend-framework-aws-authenticator/awsAuthenticatorModule";
-import { useModuleContext } from "@iavofficial/frontend-framework/moduleContext";
-import { AwsAuthenticationView } from "@iavofficial/frontend-framework-aws-authenticator/awsAuthenticationView";
 import { MandatoryModuleNames } from "@iavofficial/frontend-framework/constants";
+import { I18NextInternationalizer } from "@iavofficial/frontend-framework/defaultModules";
+import { translations } from "./translations";
 
 const cognitoPool = import.meta.env.VITE_COGNITO_POOL;
 const cognitoAppId = import.meta.env.VITE_COGNITO_APP_ID;
@@ -59,6 +59,9 @@ const customModules = {
     failOnNoLegalGroup: true,
     legalGroups: ["ADMIN", "SHOWCASE"],
   }),
+  [MandatoryModuleNames.Internationalization]: new I18NextInternationalizer({
+    translationResources: translations,
+  }),
   userModule: new AwsAuthenticator({
     configureAmplify: configureAmplify,
     failOnNoLegalGroup: true,
@@ -87,7 +90,9 @@ export const store = new StoreBuilder(modules.storeModules)
   })*/
   .build();
 
-export const awsAuthenticationView = AwsAuthenticationView;
-
-// Use this to create a typed module context.
-export const useTypedModuleContext = useModuleContext<typeof modules.all>;
+  export const useModuleContextTyped = modules.useModuleContextTyped;
+  export const useModuleTyped = modules.useModuleTyped;
+  
+  /*const {modules: modulesTest} = useModuleContextTyped();
+  const authModule = useModuleTyped(MandatoryModuleNames.Authentication);
+  const userModule = useModuleTyped("userTest");*/

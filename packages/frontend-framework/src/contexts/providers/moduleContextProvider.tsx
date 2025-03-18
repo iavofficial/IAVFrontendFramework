@@ -18,22 +18,34 @@
 
 import React from "react";
 import {PropsWithChildren} from "react";
-import { ModuleContext } from "@iavofficial/frontend-framework-shared/moduleContext";
-import { FFMandatoryState, FFAllMandatoryModules } from "@iavofficial/frontend-framework-shared/moduleOrchestrationTypes";
-import { FFModule } from "@iavofficial/frontend-framework-shared/generalModule";
+import {
+  ModuleContext,
+  ModuleContextValues,
+} from "@iavofficial/frontend-framework-shared/moduleContext";
+import {
+  FFMandatoryState,
+  FFAllMandatoryModules,
+} from "@iavofficial/frontend-framework-shared/moduleOrchestrationTypes";
+import {FFModule} from "@iavofficial/frontend-framework-shared/generalModule";
 
 export interface Props<TState extends FFMandatoryState> {
   modules: FFAllMandatoryModules<TState> & Record<string, FFModule>;
 }
 
-export const ModuleContextProvider = <TState extends FFMandatoryState>(props: PropsWithChildren<Props<TState>>) => {
+export const ModuleContextProvider = <TState extends FFMandatoryState>(
+  props: PropsWithChildren<Props<TState>>,
+) => {
+  const ModuleContextTyped = ModuleContext as React.Context<
+    ModuleContextValues<typeof props.modules>
+  >;
+
   return (
-    <ModuleContext.Provider
+    <ModuleContextTyped.Provider
       value={{
         modules: props.modules,
       }}
     >
       {props.children}
-    </ModuleContext.Provider>
+    </ModuleContextTyped.Provider>
   );
 };

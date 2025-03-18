@@ -18,19 +18,12 @@
 
 import React, {Fragment, PropsWithChildren, useEffect} from "react";
 import {CookiesProvider} from "react-cookie";
-import {Translations} from "../contexts/language";
-import {
-  DefaultLanguageProvider,
-  LanguageOptions,
-} from "./internationalization/defaultLanguageProvider";
 import {ColorProvider, ColorProviderProps} from "../coloring/colorProvider";
 import {EnhancedStore} from "@reduxjs/toolkit";
 import {Provider} from "react-redux";
 import {ModuleContextProvider} from "../contexts/providers/moduleContextProvider";
-import {DEFAULT_FALLBACK_LANGUAGE} from "@iavofficial/frontend-framework-shared/constants";
 import {
   FFMandatoryState,
-  FFAllMandatoryModules,
   FFMandatoryStoreModules,
   FFMandatoryNonStoreModules,
   ActualMandatoryStateFromModules,
@@ -39,11 +32,6 @@ import {
 import {FFModule} from "@iavofficial/frontend-framework-shared/generalModule";
 import {checkIfUserModulesKeysValid} from "@iavofficial/frontend-framework-shared/checkIfUserModulesKeysValid";
 import {seperateModuleTypes} from "@iavofficial/frontend-framework-shared/seperateModuleTypes";
-
-// Create this type to make fallbackLang optional for the user.
-type GlobalDataLayerLanguageOptions = Omit<LanguageOptions, "fallbackLang"> & {
-  fallbackLang?: string;
-};
 
 interface Props<
   TModules extends FFMandatoryStoreModules<TFrameworkStoreModulesState> &
@@ -54,9 +42,6 @@ interface Props<
 > {
   modules: TParamAllModules<TModules, TFrameworkStoreModulesState>;
   store: EnhancedStore<TFrameworkStoreModulesState>;
-  languageOptions?: GlobalDataLayerLanguageOptions;
-  translations?: Translations;
-  initI18Next?: () => void;
   colorSettings?: ColorProviderProps;
 }
 
@@ -79,29 +64,14 @@ export const GlobalDataLayer = <
     });
   }, [props.modules]);
 
-  const fallbackLang =
-    props.languageOptions?.fallbackLang ?? DEFAULT_FALLBACK_LANGUAGE;
-  const initialLang =
-    props.languageOptions?.initialLang ?? DEFAULT_FALLBACK_LANGUAGE;
-  const languageOptions = {
-    fallbackLang,
-    initialLang,
-  };
-
   return (
     <ModuleContextProvider modules={props.modules}>
       <Provider store={props.store}>
         <ModuleLifecycleCaller modules={props.modules}>
           <CookiesProvider>
-            <DefaultLanguageProvider
-              languageOptions={languageOptions}
-              translations={props.translations}
-              initI18Next={props.initI18Next}
-            >
-              <ColorProvider {...props.colorSettings}>
-                {props.children}
-              </ColorProvider>
-            </DefaultLanguageProvider>
+            <ColorProvider {...props.colorSettings}>
+              {props.children}
+            </ColorProvider>
           </CookiesProvider>
         </ModuleLifecycleCaller>
       </Provider>

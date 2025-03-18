@@ -16,7 +16,6 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useTranslator } from "@iavofficial/frontend-framework/translators";
 import { BLUE3, WHITE } from "@iavofficial/frontend-framework/constants";
 import {
   CellPaddings,
@@ -29,10 +28,11 @@ import {
 import { Button } from "primereact/button";
 import { useState } from "react";
 import { ContentStyleTemplates } from "@iavofficial/frontend-framework/contentStyle";
+import { useModuleTranslation } from "@iavofficial/frontend-framework/moduleHooks";
 
 export const ExampleComponent5 = () => {
   const [translationString, setTranslationString] = useState("");
-  const t = useTranslator();
+  const t = useModuleTranslation();
 
   return (
     <ContentLayout
@@ -40,13 +40,13 @@ export const ExampleComponent5 = () => {
       contentStyle={{ appliedStyles: ContentStyleTemplates.CONTENT_CELLS }}
     >
       <ContentCell colWidth={6} paddings={CellPaddings.FULL}>
-        <h1>{t("translation_and_colormode_example")}</h1>
-        <h3>{t("with_applied_dark_and_lightMode")}</h3>
+        <h1>{t({ key: "translation_and_colormode_example" })}</h1>
+        <h3>{t({ key: "with_applied_dark_and_lightMode" })}</h3>
         <div className="flex align-items-center">
           <h5 className="m-4">
             {translationString === ""
               ? "i am not translated"
-              : t(translationString)}
+              : t({ key: translationString })}
           </h5>
           <Button
             onClick={
@@ -54,7 +54,11 @@ export const ExampleComponent5 = () => {
                 ? () => setTranslationString("i_am_translated")
                 : () => setTranslationString("")
             }
-            label={translationString === "" ? t("translate") : t("reset")}
+            label={
+              translationString === ""
+                ? t({ key: "translate" })
+                : t({ key: "reset" })
+            }
             style={{
               width: "150px",
               height: "40px",
@@ -73,7 +77,7 @@ export const ExampleComponent5 = () => {
           className="mr-3 mt-3 h-full w-full"
           style={{ backgroundColor: "white", width: "100%" }}
         >
-          <h3>{t("without_applied_dark_and_lightMode")}</h3>
+          <h3>{t({ key: "without_applied_dark_and_lightMode" })}</h3>
         </div>
       </ContentCell>
     </ContentLayout>

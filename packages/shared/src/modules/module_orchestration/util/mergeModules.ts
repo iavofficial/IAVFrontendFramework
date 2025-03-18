@@ -31,14 +31,14 @@ export const mergeModules = <
     userStoreModules: modules.userStoreModules,
   };
 
-  type TMergedNonStoreModules = MergeModules<
+  type TMergedFrameworkNonStoreModules = MergeModules<
     DefaultNonStoreModules,
     TFrameworkNonStoreModules
   >;
   const mergedNonStoreModules = {
     ...defaultNonStoreModules,
     ...modules.frameworkNonStoreModules,
-  } as TMergedNonStoreModules;
+  } as TMergedFrameworkNonStoreModules;
 
   /*
     User store modules override modules which are not relevant
@@ -67,7 +67,13 @@ export const mergeModules = <
     ...modules.userStoreModules,
     ...mergedFrameworkStoreModules,
   } as MergeModules<
-    MergeModules<TMergedNonStoreModules, typeof modules.userStoreModules>,
+    MergeModules<
+      MergeModules<
+        typeof modules.userNonStoreModules,
+        TMergedFrameworkNonStoreModules
+      >,
+      typeof modules.userStoreModules
+    >,
     TMergedFrameworkStoreModules
   >;
 

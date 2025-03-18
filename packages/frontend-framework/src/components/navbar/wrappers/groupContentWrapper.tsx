@@ -18,7 +18,6 @@
 
 import React, {ReactElement} from "react";
 import {TabGroup} from "../tabs/tabGroup/tabGroup";
-import {TranslateFunctionType} from "../../../types/translationFunction";
 import {GroupableTabAndContentWrapper} from "./typesWrappers";
 import {
   InjectedOptionsByGroupToWrapper,
@@ -26,12 +25,13 @@ import {
 } from "../types/typesInjectedOptions";
 import {generateHashForValues} from "@iavofficial/frontend-framework-shared/hash";
 import {BasicRoute} from "@iavofficial/frontend-framework-shared/routerModule";
+import { TranslationWrapperFunction } from "@iavofficial/frontend-framework-shared/internationalizationModule";
 
 export class Group implements GroupableTabAndContentWrapper {
   private _insideGroup = false;
 
   constructor(
-    private _name: string | ((t: TranslateFunctionType) => string),
+    private _name: string | TranslationWrapperFunction,
     private _logo: ReactElement,
     private _collapsible: boolean,
     private _contentWrappers: GroupableTabAndContentWrapper[],

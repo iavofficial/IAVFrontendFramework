@@ -44,10 +44,9 @@ import "../css/globalSettings.css";
 import "../css/globalColors.css";
 import "../css/authenticationView.css";
 import {
-  DefaultNonStoreModules,
   useDefaultSelector,
 } from "@iavofficial/frontend-framework-shared/moduleDefaults";
-import {useModuleContext} from "@iavofficial/frontend-framework-shared/moduleContext";
+import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
 
 export interface AuthOptions {
@@ -83,7 +82,7 @@ export interface Props {
 
 export const UILayer = (props: Props) => {
   const {hasAuthenticated} = useDefaultSelector((state) => state.auth);
-  const {modules} = useModuleContext<DefaultNonStoreModules>();
+  const routerModule = useModule(MandatoryModuleNames.Router);
 
   const [, setCookie] = useCookies([ACCEPTED_COOKIES_NAME]);
 
@@ -148,7 +147,7 @@ export const UILayer = (props: Props) => {
     },
   ];
 
-  const UILayerRouter = modules[MandatoryModuleNames.Router].UiLayerRouter;
+  const UILayerRouter = routerModule.UiLayerRouter;
 
   return (
     <NavbarSettingsProvider

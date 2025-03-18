@@ -17,7 +17,6 @@
  */
 
 import React, {ReactElement, useContext, useMemo, useState} from "react";
-import {useTranslator} from "../../../internationalization/translators";
 import "../tabs.css";
 import {GroupableNavbarTab, NavbarTabProps} from "../typesNavbarTab";
 import {SimpleNavbarTabCollapsed} from "./simpleNavbarTabCollapsed";
@@ -33,11 +32,9 @@ import {
   NAVBAR_WIDTH_UNFOLDED,
 } from "@iavofficial/frontend-framework-shared/constants";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
-import {useModuleContext} from "@iavofficial/frontend-framework-shared/moduleContext";
-import {
-  AllDefaultModules,
-} from "@iavofficial/frontend-framework-shared/moduleDefaults";
+import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
+import {useModuleTranslation} from "@iavofficial/frontend-framework-shared/useModuleTranslation";
 
 export interface NestedNavbarTabProps {
   additionalClassNames: string;
@@ -51,8 +48,7 @@ export interface NestedNavbarTabProps {
 export const SimpleNavbarTab: GroupableNavbarTab = (
   props: NavbarTabProps<InjectedOptionsGroupableByWrapperToTab> & {},
 ) => {
-  const {modules} = useModuleContext<AllDefaultModules>();
-  const routerModule = modules[MandatoryModuleNames.Router];
+  const routerModule = useModule(MandatoryModuleNames.Router);
 
   const navbarCollapsed = props.frameworkInjectedOptions.navbarCollapsed;
   const path = props.frameworkInjectedOptions.path;
@@ -60,7 +56,7 @@ export const SimpleNavbarTab: GroupableNavbarTab = (
 
   const [hovering, setHovering] = useState(false);
   const colorSettingsContext = useContext(ColorSettingsContext);
-  const t = useTranslator();
+  const t = useModuleTranslation();
 
   const {isActive} = routerModule.useIsTabActive(path);
 
@@ -134,7 +130,10 @@ export const SimpleNavbarTab: GroupableNavbarTab = (
     style: tabStyleDefault,
     setHovering: setHovering,
     icon: props.icon,
-    name: props.name instanceof Function ? props.name(t) : props.name,
+    name:
+      props.name instanceof Function
+        ? props.name(t)
+        : props.name,
     additionalClassNames: additionalClassNames,
     iconColor: iconColor,
   };

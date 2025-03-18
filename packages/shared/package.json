@@ -39,7 +39,10 @@
     "@reduxjs/toolkit": "^2.5.1",
     "react-redux": "^9.2.0",
     "react-router": "^7.3.0",
-    "react-router-dom": "^7.3.0"
+    "react-router-dom": "^7.3.0",
+    "i18next": "^22.4.13",
+    "i18next-browser-languagedetector": "^7.0.1",
+    "react-i18next": "^12.2.0"
   },
   "peerDependencies": {
     "react": "^18.2.0",
@@ -91,13 +94,19 @@
     "./dummyAuthenticatorModule": "./dist/modules/default_modules/auth/dummyAuthenticatorModule.js",
     "./authenticatorModule": "./dist/types/modules/auth/authenticatorModule.js",
     "./authenticationViewProps": "./dist/types/modules/auth/authenticationViewProps.js",
+    "./reactRouterRouterModule": "./dist/modules/default_modules/router/reactRouterRouterModule.js",
     "./routerModule": "./dist/types/modules/router/routerModule.js",
+    "./i18NextInternationalizerModule": "./dist/modules/default_modules/internationalization/i18NextInternationalizerModule.js",
+    "./useModuleTranslation": "./dist/modules/hooks/useModuleTranslation.js",
+    "./internationalizationModule": "./dist/types/modules/internationalization/internationalizationModule.js",
+    "./initI18nextDefault": "./dist/modules/default_modules/internationalization/initI18nextDefault.js",
     "./colorOptionTypes": "./dist/types/color/colorOptionTypes.js",
     "./requiredMutable": "./dist/types/util-types/requiredMutable.js",
     "./componentTypeMinProps": "./dist/types/util-types/componentTypeMinProps.js",
     "./containsOneOrMoreGroups": "./dist/utils/auth/containsOneOrMoreGroups.js",
     "./parseLanguageResourcesIntoDropdownFormat": "./dist/utils/internationalization/parseLanguageResourcesIntoDropdownFormat.js",
-    "./hash": "./dist/utils/hash.js"
+    "./hash": "./dist/utils/hash.js",
+    "./cookieHooks": "./dist/utils/cookieHooks.js"
   },
   "typesVersions": {
     "*": {
@@ -155,8 +164,23 @@
       "./authenticationViewProps": [
         "./dist/types/modules/auth/authenticationViewProps.d.ts"
       ],
+      "./reactRouterRouterModule": [
+        "./dist/modules/default_modules/router/reactRouterRouterModule.d.ts"
+      ],
       "./routerModule": [
         "./dist/types/modules/router/routerModule.d.ts"
+      ],
+      "./i18NextInternationalizerModule": [
+        "./dist/modules/default_modules/internationalization/i18NextInternationalizerModule.d.ts"
+      ],
+      "./useModuleTranslation": [
+        "./dist/modules/hooks/useModuleTranslation.js"
+      ],
+      "./internationalizationModule": [
+        "./dist/types/modules/internationalization/internationalizationModule.d.ts"
+      ],
+      "./initI18nextDefault": [
+        "./dist/modules/default_modules/internationalization/initI18nextDefault.d.ts"
       ],
       "./colorOptionTypes": [
         "./dist/types/color/colorOptionTypes.d.ts"
@@ -175,6 +199,9 @@
       ],
       "./hash": [
         "./dist/utils/hash.d.ts"
+      ],
+      "./cookieHooks": [
+        "./dist/utils/cookieHooks.js"
       ]
     }
   },

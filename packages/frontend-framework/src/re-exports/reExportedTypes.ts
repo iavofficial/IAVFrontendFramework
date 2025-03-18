@@ -1,0 +1,1 @@
+export * from "@iavofficial/frontend-framework-shared/internationalizationModule";

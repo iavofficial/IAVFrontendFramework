@@ -17,6 +17,10 @@
  */
 
 import {
+  createTypedUseModule,
+  useModuleContext,
+} from "../../contexts/moduleContext";
+import {
   ActualMandatoryStateFromModules,
   FFMandatoryStoreModules,
   FFMandatoryState,
@@ -62,14 +66,20 @@ export function createModulesSeperately<
   const {
     frameworkStoreModules = {} as TFrameworkStoreModules,
     userStoreModules = {} as TUserStoreModules,
-    frameworkNonStoreModules  = {} as TFrameworkNonStoreModules,
+    frameworkNonStoreModules = {} as TFrameworkNonStoreModules,
     userNonStoreModules = {} as TUserNonStoreModules,
   } = params;
 
-  return mergeModules({
+  const finalModules = mergeModules({
     frameworkStoreModules: frameworkStoreModules,
     userStoreModules: userStoreModules,
     frameworkNonStoreModules: frameworkNonStoreModules,
     userNonStoreModules: userNonStoreModules,
   });
+
+  return {
+    ...finalModules,
+    useModuleContextTyped: useModuleContext<typeof finalModules.all>,
+    useModuleTyped: createTypedUseModule<typeof finalModules.all>(),
+  };
 }

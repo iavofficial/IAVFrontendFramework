@@ -21,15 +21,13 @@ import {Header, HeaderOptions} from "./header/header";
 import {Navbar} from "./navbar/navbar";
 import {DefaultImprint} from "./imprint/defaultImprint";
 import {SettingsMenuOptions} from "./header/settingsMenu";
-import {Outlet, Route, Routes} from "react-router-dom";
 import {TabAndContentWrapper} from "./navbar/wrappers/typesWrappers";
 import {UserMenuOptions} from "./header/userMenu";
 import If from "./helper/If";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
-import {useModuleContext} from "@iavofficial/frontend-framework-shared/moduleContext";
+import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
 import {BasicRoute} from "@iavofficial/frontend-framework-shared/routerModule";
-import { DefaultNonStoreModules } from "@iavofficial/frontend-framework-shared/moduleDefaults";
 
 interface MainViewProps {
   tabAndContentWrappers: TabAndContentWrapper[];
@@ -44,7 +42,7 @@ interface MainViewProps {
 
 export const MainView = (props: MainViewProps) => {
   const colorSettingsContext = useContext(ColorSettingsContext);
-  const {modules} = useModuleContext<DefaultNonStoreModules>();
+  const routerModule = useModule(MandatoryModuleNames.Router);
 
   const contentAreaBackground =
     colorSettingsContext.currentColors.contentArea.backgroundColor;
@@ -71,7 +69,7 @@ export const MainView = (props: MainViewProps) => {
     return tabRoutes;
   }, [props.tabAndContentWrappers]);
 
-  const MainViewRouter = modules[MandatoryModuleNames.Router].MainViewRouter;
+  const MainViewRouter = routerModule.MainViewRouter;
 
   return (
     <div

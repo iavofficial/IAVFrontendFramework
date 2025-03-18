@@ -66,7 +66,7 @@ export const PageGeneralRouterModule = () => (
         />
 
         <SubTitle>Other important types</SubTitle>
-        <Code language="ts">{`export type BasicRoute = {
+        <Code language="typescript">{`export type BasicRoute = {
   path: string;
   element: ReactElement;
   disabled?: boolean;
@@ -76,19 +76,19 @@ export const PageGeneralRouterModule = () => (
 );
 
 const CodeUiLayerRouterType = (
-    <Code language="ts">{`React.ComponentType<{
+    <Code language="typescript" center>{`React.ComponentType<{
       routes: BasicRoute[];
       initialPath: string;
       disableLogin: boolean;
   }>`}</Code>
 );
 const CodeMainViewRouterType = (
-    <Code language="ts">{`React.ComponentType<{
+    <Code language="typescript" center>{`React.ComponentType<{
       routes: BasicRoute[];
   }>`}</Code>
 );
 const CodeLinkType = (
-    <Code language="ts">{`React.ComponentType<
+    <Code language="typescript" center>{`React.ComponentType<
       PropsWithChildren<
           {
               to: string;
@@ -100,9 +100,9 @@ const CodeLinkType = (
 );
 
 const CodeUseLocationType = (
-    <Code language="ts">{`() => {pathName: string}`}</Code>
+    <Code language="typescript" center>{`() => {pathName: string}`}</Code>
 );
 
 const CodeUseIsActiveType = (
-    <Code language="ts">{`(tabPath: string) => {isActive: boolean}`}</Code>
+    <Code language="typescript" center>{`(tabPath: string) => {isActive: boolean}`}</Code>
 );

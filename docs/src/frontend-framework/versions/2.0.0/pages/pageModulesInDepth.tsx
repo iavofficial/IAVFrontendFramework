@@ -50,7 +50,7 @@ export const PageModulesInDepth = () => (
             which takes four different objects for the different types of modules. The
             following example shows the usage of this method.
         </Text>
-        <Code language="ts" title="Example usage of createModulesSeperately">
+        <Code language="typescript" title="Example usage of createModulesSeperately">
             {`const frameworkStoreModules = {
   [MandatoryModuleNames.Authentication]: new AWSAuthenticator({
     configureAmplify: configureAmplify,
@@ -90,7 +90,7 @@ export const store = new StoreBuilder(modules.storeModules).build();`}
             following example shows you how to add a processor for a framework module.
         </Text>
         <Code
-            language="ts"
+            language="typescript"
             title="Example for adding a processor for a framework module"
         >
             {`export const store = new StoreBuilder(modules.storeModules)
@@ -123,7 +123,7 @@ export const store = new StoreBuilder(modules.storeModules).build();`}
             as the global store. The following code snippet shows you an example.
         </Text>
         <Code
-            language="ts"
+            language="typescript"
             title="Example for defining a custom storeBuilder method"
         >
             {`export const store = new StoreBuilder(modules.storeModules)
@@ -153,7 +153,7 @@ export const store = new StoreBuilder(modules.storeModules).build();`}
             StoreConfigBuilder which you can use to incrementally add information for
             the store.
         </Text>
-        <Code language="ts" title="Method definitions of StoreConfigBuilder">
+        <Code language="typescript" title="Method definitions of StoreConfigBuilder">
             {`// Adds a reducer for a given key.
 public setReducer<K extends keyof TModulesState>(key: K, reducer: Reducer<TModulesState[K]>)
 
@@ -175,7 +175,7 @@ public setExtras(key: string, value: unknown): this`}
             object. The Framework will detect the Hook and run it. The Hook has to be
             of the following type.
         </Text>
-        <Code language="ts">{`() => {renderChildren: boolean} & Record<string, unknown>`}</Code>
+        <Code language="typescript">{`() => {renderChildren: boolean} & Record<string, unknown>`}</Code>
         <Text>
             You can see that <i>useModuleLifecycle</i> has to return an object which
             contains an attribute called <i>renderChildren</i>. By passing{" "}
@@ -225,7 +225,7 @@ public setExtras(key: string, value: unknown): this`}
             FFModule describes the abstraction of a non store module. FFStoreModule
             extends FFModule and describes the required structure of a store module.
         </Text>
-        <Code language="ts">{`export type ModuleLifecycleHook = () => {renderChildren: boolean} & Record<string, unknown>;
+        <Code language="typescript">{`export type ModuleLifecycleHook = () => {renderChildren: boolean} & Record<string, unknown>;
 
 export type FFModule = {
   useModuleLifecycle?: ModuleLifecycleHook;
@@ -244,7 +244,7 @@ export type FFStoreModule<TState> = {
 const CodeAuthModuleType = (
     <Code
         center
-        language="ts"
+        language="typescript"
     >{`export type AuthModule<TAuthState extends AuthState> = {
   fetchAuthed: AsyncThunk<Response, FetchAuthedFunctionArgs, any>;
   login: AsyncThunk<void, {credentials: Credentials}, any>;
@@ -253,7 +253,7 @@ const CodeAuthModuleType = (
 );
 
 const CodeRouterModuleType = (
-    <Code center language="ts">{`export type RouterModule = {
+    <Code center language="typescript">{`export type RouterModule = {
   UiLayerRouter: React.ComponentType<UILayerRouterProps>;
   MainViewRouter: React.ComponentType<MainViewRouterProps>;
   Link: React.ComponentType<LinkProps>;

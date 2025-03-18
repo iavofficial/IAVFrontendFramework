@@ -75,7 +75,7 @@ const PageInterface: React.FC = () => {
                 The following code snippet shows an example for the use of{" "}
                 <i>createModule</i>.
             </Text>
-            <Code language="ts" title="Example for creating the modules map">
+            <Code language="typescript" title="Example for creating the modules map">
                 {`const customModules = {
   [MandatoryModuleNames.Authentication]: new AWSAuthenticator({
     configureAmplify: configureAmplify,
@@ -98,7 +98,7 @@ const modules = createModules(customModules);`}
                 <i>createModules</i> for you. The following example shows you the
                 recommended way to pass the modules.
             </Text>
-            <Code language="ts" title="Example for the use of StoreBuilder">
+            <Code language="typescript" title="Example for the use of StoreBuilder">
                 {`const store = new StoreBuilder(modules.storeModules).build();`}
             </Code>
             <Text>

@@ -10,6 +10,17 @@ import {
 import Code from "../../../common/page/utils/code";
 
 export const PageGeneralAuthModule = () => {
+
+    const CodeFetchAuthedParams = (
+        <Code language="typescript" center>{`{url: string; settings?: object}`}</Code>
+    );
+    const CodeLoginParams = (
+        <Code language="typescript" center>{`{credentials: Credentials}`}</Code>
+    );
+    const CodeLogoutParams = (
+        <Code language="typescript" center>{`{error?: unknown} | undefined`}</Code>
+    );
+
     return (
         <Page>
             <Title>General structure of an authentication module</Title>
@@ -72,13 +83,3 @@ export const PageGeneralAuthModule = () => {
         </Page>
     );
 };
-
-const CodeFetchAuthedParams = (
-    <Code language="ts">{`{url: string; settings?: object}`}</Code>
-);
-const CodeLoginParams = (
-    <Code language="ts">{`{credentials: Credentials}`}</Code>
-);
-const CodeLogoutParams = (
-    <Code language="ts">{`{error?: unknown} | undefined`}</Code>
-);

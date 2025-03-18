@@ -14,6 +14,18 @@ import {ModuleProfile} from "../../../common/page/text/module/moduleProfile";
 const DESCRIPTION = `This module allows for authentication with AWS-Cognito.`;
 
 export const PageAwsAuthenticator = () => {
+    const CodeFetchAuthedParams = (
+        <Code language="typescript" center>{`{url: string; token?: JWT; settings?: FetchSettings}`}</Code>
+    );
+
+    const CodeCompletePasswordParams = (
+        <Code language="typescript" center>{`{newPassword: string}`}</Code>
+    );
+
+    const CodeUseModuleLifecycleParams = (
+        <Code language="typescript" center>{`{renderChildren: boolean}`}</Code>
+    );
+
     return (
         <Page>
             <Title>AwsAuthenticator</Title>
@@ -165,15 +177,3 @@ export const store = new StoreBuilder(modules.storeModules).build();
         </Page>
     );
 };
-
-const CodeFetchAuthedParams = (
-    <Code language="ts">{`{url: string; token?: JWT; settings?: FetchSettings}`}</Code>
-);
-
-const CodeCompletePasswordParams = (
-    <Code language="ts">{`{newPassword: string}`}</Code>
-);
-
-const CodeUseModuleLifecycleParams = (
-    <Code language="ts">{`{renderChildren: boolean}`}</Code>
-);

@@ -62,9 +62,7 @@ const modulesRoutes: GroupRoute[] = [
     {
         title: "Router",
         routes: [
-            {
-                path: "general-router-module", label: "General router module", element: <PageGeneralRouterModule/>,
-            },
+            {path: "general-router-module", label: "General router module", element: <PageGeneralRouterModule/>,},
             {path: "react-router-router", label: "ReactRouterRouter", element: <PageReactRouterRouter/>,},
         ],
     },

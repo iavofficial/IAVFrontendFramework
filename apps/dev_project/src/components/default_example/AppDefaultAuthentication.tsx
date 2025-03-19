@@ -19,9 +19,7 @@
 import { GlobalDataLayer } from "@iavofficial/frontend-framework/globalDataLayer";
 
 import Layout from "../../Layout.tsx";
-import {
-  defaultStore,
-} from "@iavofficial/frontend-framework/store";
+import { defaultStore } from "@iavofficial/frontend-framework/store";
 import { modules } from "./store.ts";
 
 const store = defaultStore;

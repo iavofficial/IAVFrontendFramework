@@ -20,17 +20,13 @@ import i18next from "i18next";
 import {useTranslation as useTranslationI18next} from "react-i18next";
 import {useEffect, useState} from "react";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {
-  InternationalizationModule,
-  InternationalizationState,
-  LangResources,
-} from "../../../types/modules/internationalization/internationalizationModule";
 import {DEFAULT_TRANSLATION_RESOURCES} from "../../../constants/defaultTranslations";
 import {useDefaultDispatch} from "../../module_orchestration/moduleDefaults";
 import {initI18nextDefault} from "./initI18nextDefault";
 import {useCookiesAccepted} from "../../../utils/cookieHooks";
 import {MandatoryModuleNames} from "../../../constants/moduleNames";
 import {InitI18nextFunction} from "../../../types/modules/internationalization/initI18nextFunction";
+import {LangResources} from "../../../types/modules/internationalization/internationalizationModule";
 
 const DEFAULT_FALLBACK_LANG = "en";
 
@@ -46,9 +42,7 @@ export type I18NextInternationalizerParams = {
   translationResources?: LangResources;
 };
 
-export class I18NextInternationalizer
-  implements InternationalizationModule<InternationalizationState>
-{
+export class I18NextInternationalizer {
   public slice;
   public fallbackLang;
   public translationResources;

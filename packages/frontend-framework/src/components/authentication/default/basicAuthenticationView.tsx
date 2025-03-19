@@ -310,33 +310,44 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
               ? props.authOptions?.companyText
               : "Company 2025"}
           </span>
-          <span style={{color: "var(--grey-2)"}}>|</span>
-          {!props.hideLegalDocuments && (
-            <div
-              className="flex"
-              style={{
-                alignItems: "center",
-                gap: "4px",
-              }}
-            >
-              <Link
-                className="legal-doc-link"
-                style={{color: legalLinkColor, fontSize: "12px"}}
-                to="/imprint"
-                target="_blank"
+
+          {(props.hideImprint && props.hidePrivacyPolicy) === false && (
+            <>
+              <span style={{color: "var(--grey-2)"}}>|</span>
+              <div
+                className="flex"
+                style={{
+                  alignItems: "center",
+                  gap: "4px",
+                }}
               >
-                {t("Imprint")}
-              </Link>
-              <span style={{color: legalLinkColor, fontSize: "12px"}}>&</span>
-              <Link
-                className="legal-doc-link"
-                style={{color: legalLinkColor, fontSize: "12px"}}
-                to="/privacy-policy"
-                target="_blank"
-              >
-                {t("Privacy_Policy")}
-              </Link>
-            </div>
+                {!props.hideImprint && (
+                  <Link
+                    className="legal-doc-link"
+                    style={{color: legalLinkColor, fontSize: "12px"}}
+                    to="/imprint"
+                    target="_blank"
+                  >
+                    {t("Imprint")}
+                  </Link>
+                )}
+                {!props.hideImprint && !props.hidePrivacyPolicy && (
+                  <span style={{color: legalLinkColor, fontSize: "12px"}}>
+                    &
+                  </span>
+                )}
+                {!props.hidePrivacyPolicy && (
+                  <Link
+                    className="legal-doc-link"
+                    style={{color: legalLinkColor, fontSize: "12px"}}
+                    to="/privacy-policy"
+                    target="_blank"
+                  >
+                    {t("Privacy_Policy")}
+                  </Link>
+                )}
+              </div>
+            </>
           )}
         </div>
       </div>

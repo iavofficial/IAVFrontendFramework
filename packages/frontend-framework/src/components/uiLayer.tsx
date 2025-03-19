@@ -75,7 +75,8 @@ export interface Props {
   userMenuOptions?: UserMenuOptions;
   headerOptions?: HeaderOptions;
   authOptions?: AuthOptions;
-  hideLegalDocuments?: boolean;
+  hideImprint?: boolean;
+  hidePrivacyPolicy?: boolean;
   navbarOptions?: NavbarOptions;
   hideNavbar?: boolean;
 }
@@ -122,7 +123,8 @@ export const UILayer = (props: Props) => {
                   props.settingsMenuOptions?.hideLanguageSelection
                 }
                 headerOptions={props.headerOptions}
-                hideLegalDocuments={props.hideLegalDocuments}
+                hideImprint={props.hideImprint}
+                hidePrivacyPolicy={props.hidePrivacyPolicy}
               />
             }
           />
@@ -170,7 +172,8 @@ export const UILayer = (props: Props) => {
                   imprintComponent={props.imprintComponent}
                   privacyPolicyComponent={props.privacyPolicyComponent}
                   tabAndContentWrappers={props.tabAndContentWrappers}
-                  hideLegalDocuments={props.hideLegalDocuments}
+                  hideImprint={props.hideImprint}
+                  hidePrivacyPolicy={props.hidePrivacyPolicy}
                   hideNavbar={props.hideNavbar}
                 />
               }

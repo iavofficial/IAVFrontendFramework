@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {ReactElement} from "react";
+import { ReactElement } from "react";
 
 export type AuthenticationViewProps = {
   authOptions?: {
@@ -35,5 +35,6 @@ export type AuthenticationViewProps = {
     hideRight?: boolean;
   };
   hideLanguageSelection?: boolean;
-  hideLegalDocuments?: boolean;
+  hideImprint?: boolean;
+  hidePrivacyPolicy?: boolean;
 };

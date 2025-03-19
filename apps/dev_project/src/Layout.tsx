@@ -240,7 +240,8 @@ const Layout = (props: Props) => {
       authenticationView={props.authenticationView}
       settingsMenuOptions={settingsMenuOptions}
       documentsLabelKey="Legal_documents"
-      documentsComponent={LegalDocuments}
+      imprintComponent={LegalDocuments}
+      privacyPolicyComponent={LegalDocuments}
       headerOptions={{
         userIcon: <InfoIcon style={{ backgroundColor: WHITE }} />,
         reactElementLeft: <span className="ml-3">Dev application</span>,

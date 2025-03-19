@@ -38,7 +38,8 @@ import {generateHashOfLength} from "@iavofficial/frontend-framework-shared/hash"
 interface Props {
   tabAndContentWrappers: TabAndContentWrapper[];
   documentsLabelKey?: string;
-  hideLegalDocuments?: boolean;
+  hideImprint?: boolean;
+  hidePrivacyPolicy?: boolean;
 }
 
 export const Navbar = (props: Props) => {
@@ -104,7 +105,8 @@ export const Navbar = (props: Props) => {
                 }
           }
         >
-          {!props.hideLegalDocuments && (
+          {(props.hideImprint === true && props.hidePrivacyPolicy === true) ===
+            false && (
             <div
               id="legal-doc-links"
               style={{
@@ -116,21 +118,27 @@ export const Navbar = (props: Props) => {
                   : "horizontal-tb",
               }}
             >
-              <Link
-                className="legal-doc-link"
-                style={{color: legalDocumentsColor}}
-                to="/imprint"
-              >
-                {t("Imprint")}
-              </Link>
-              <span style={{color: legalDocumentsColor}}>&</span>
-              <Link
-                className="legal-doc-link"
-                style={{color: legalDocumentsColor}}
-                to="/privacy-policy"
-              >
-                {t("Privacy_Policy")}
-              </Link>
+              {!props.hideImprint && (
+                <Link
+                  className="legal-doc-link"
+                  style={{color: legalDocumentsColor}}
+                  to="/imprint"
+                >
+                  {t("Imprint")}
+                </Link>
+              )}
+              {!props.hideImprint && !props.hidePrivacyPolicy && (
+                <span style={{color: legalDocumentsColor}}>&</span>
+              )}
+              {!props.hidePrivacyPolicy && (
+                <Link
+                  className="legal-doc-link"
+                  style={{color: legalDocumentsColor}}
+                  to="/privacy-policy"
+                >
+                  {t("Privacy_Policy")}
+                </Link>
+              )}
             </div>
           )}
 

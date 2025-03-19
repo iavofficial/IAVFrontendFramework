@@ -34,7 +34,8 @@ interface MainViewProps {
   imprintComponent?: React.ComponentType<any>;
   privacyPolicyComponent?: React.ComponentType<any>;
   documentsLabelKey?: string;
-  hideLegalDocuments?: boolean;
+  hideImprint?: boolean;
+  hidePrivacyPolicy?: boolean;
   headerOptions?: HeaderOptions;
   settingsMenuOptions?: SettingsMenuOptions;
   userMenuOptions?: UserMenuOptions;
@@ -75,7 +76,8 @@ export const MainView = (props: MainViewProps) => {
           <Navbar
             tabAndContentWrappers={props.tabAndContentWrappers}
             documentsLabelKey={props.documentsLabelKey}
-            hideLegalDocuments={props.hideLegalDocuments}
+            hideImprint={props.hideImprint}
+            hidePrivacyPolicy={props.hidePrivacyPolicy}
           />
         </If>
         <Outlet />

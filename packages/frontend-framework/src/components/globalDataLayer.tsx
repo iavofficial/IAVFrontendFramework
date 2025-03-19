@@ -57,10 +57,10 @@ export const GlobalDataLayer = <
   // Throw an error if user modules do not meet the convention that
   // they have to begin with a specific prefix.
   useEffect(() => {
-    const seperatedModules = separateModuleTypes(props.modules);
+    const separatedModules = separateModuleTypes(props.modules);
     checkIfUserModulesKeysValid({
-      userStoreModules: seperatedModules.userStoreModules,
-      userNonStoreModules: seperatedModules.userNonStoreModules,
+      userStoreModules: separatedModules.userStoreModules,
+      userNonStoreModules: separatedModules.userNonStoreModules,
     });
   }, [props.modules]);
 

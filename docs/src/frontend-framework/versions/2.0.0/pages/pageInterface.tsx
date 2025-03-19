@@ -44,7 +44,7 @@ const PageInterface: React.FC = () => {
             <Title>Module System</Title>
             <Text>
                 With version 2.0.0 we began modularizing the Framework. This means that
-                several sub systems are getting outsourced into seperate packages. These
+                several sub systems are getting outsourced into separate packages. These
                 modules are simple objects {"(generally implemented with classes)"} and
                 managed by a central module orchestration system. An important aspect of
                 this system is the supply of a global state to which modules can add

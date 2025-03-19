@@ -244,7 +244,7 @@ export const LayoutAndContextExampleComponent = applyTranslation(FirstExampleCom
             </Code>
             <SubTitle>Authentication System</SubTitle>
             <Text>
-                The authentication system is seperated into two parts: The so called
+                The authentication system is separated into two parts: The so called
                 Authenticators and Authentication Views. The Authentiatcors represent
                 the authentication logic while the Authentication View gets rendered for
                 authentication. Authenticators are part of the module system and thus

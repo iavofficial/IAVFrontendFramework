@@ -221,12 +221,12 @@ export const LayoutAndContextExampleComponent = applyTranslation(FirstExampleCom
             </Code>
             <SubTitle>Authentication System</SubTitle>
             <Text>
-                The authentication system is seperated into two parts: The so called
+                The authentication system is separated into two parts: The so called
                 AuthenticationProvider and the AuthenticationView. The
                 AuthenticationProvider is the component which handles authentication
                 (login, logout, ...). The AuthenticationView is the view shown to a user
                 when logging in. Because the authentication provider and the view are
-                seperated it&#39;s possible to mix authentication providers and views with
+                separated it&#39;s possible to mix authentication providers and views with
                 each other. You are also able to just develop a new authentication
                 provider without developing a new authentication view.
             </Text>

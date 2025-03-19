@@ -53,9 +53,9 @@ export const createModules = <
 ) => {
     const modules = paramModules ?? ({} as TModules);
 
-  const seperatedModules = separateModuleTypes(modules);
+  const separatedModules = separateModuleTypes(modules);
 
-  const finalModules = mergeModules(seperatedModules);
+  const finalModules = mergeModules(separatedModules);
 
   return {
     ...finalModules,

@@ -20,9 +20,9 @@ import { GlobalDataLayer } from "@iavofficial/frontend-framework/globalDataLayer
 
 import Layout from "../../Layout.tsx";
 import {
-  allDefaultModules,
   defaultStore,
 } from "@iavofficial/frontend-framework/store";
+import { modules } from "./store.ts";
 
 const store = defaultStore;
 
@@ -30,7 +30,7 @@ export const AppDefaultAuthentication = () => {
   return (
     <GlobalDataLayer
       store={store}
-      modules={allDefaultModules}
+      modules={modules.all}
       colorSettings={{
         colorOptions: {},
       }}

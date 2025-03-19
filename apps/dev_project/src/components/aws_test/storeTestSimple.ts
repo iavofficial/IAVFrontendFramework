@@ -94,6 +94,6 @@ export const store = new StoreBuilder(modules.storeModules)
 export const useModuleContextTyped = modules.useModuleContextTyped;
 export const useModuleTyped = modules.useModuleTyped;
 
-const { modules: modulesTest } = useModuleContextTyped();
+/*const { modules: modulesTest } = useModuleContextTyped();
 const authModule = useModuleTyped(MandatoryModuleNames.Authentication);
-const userModule = useModuleTyped("userTest");
+const userModule = useModuleTyped("userTest");*/

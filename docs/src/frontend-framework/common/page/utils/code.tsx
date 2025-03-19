@@ -52,8 +52,6 @@ const Code: React.FC<PropsWithChildren<Props>> = (props) => {
 
     const {language, children, title, center} = props;
 
-    console.log(center)
-
     const {classes} = useStyles({center});
 
     return (

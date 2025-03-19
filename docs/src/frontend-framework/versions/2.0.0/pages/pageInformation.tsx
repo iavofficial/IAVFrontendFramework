@@ -6,6 +6,7 @@ import BulletList from "../../../common/page/text/bulletList.tsx";
 import Image from "../../../common/page/utils/image.tsx";
 import Code from "../../../common/page/utils/code.tsx";
 import Text from "../../../common/page/text/text.tsx";
+import FigmaEmbed from "../../../common/page/utils/figmaEmbed.tsx";
 
 const PageInformation: React.FC = () => {
     const bulletList = [
@@ -93,12 +94,11 @@ const PageInformation: React.FC = () => {
             <Image src={"assets/information/styleguide.png"} fromGhPages/>
             <SubTitle>Styleguide</SubTitle>
             <Text>
-                The following image shows the style guide which is based on the IAV
+                The following figma shows the style guide which is based on the IAV
                 corporate design colors and the extension.
             </Text>
-            <Image
-                src={"assets/information/styleguide-additional-info.png"}
-                fromGhPages
+            <FigmaEmbed
+                src={"https://www.figma.com/embed?embed_host=figma&url=https://www.figma.com/design/wHOYRy2ljmUpIwqO5FyRyl/IAV-Frontend-Framework?node-id=0-1&t=ThUTlCUH0Zl2S39C-1"}
             />
         </Page>
     );

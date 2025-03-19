@@ -311,7 +311,8 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
               : "Company 2025"}
           </span>
 
-          {(props.hideImprint && props.hidePrivacyPolicy) === false && (
+          {(props.hideImprint === true && props.hidePrivacyPolicy === true) ===
+            false && (
             <>
               <span style={{color: "var(--grey-2)"}}>|</span>
               <div

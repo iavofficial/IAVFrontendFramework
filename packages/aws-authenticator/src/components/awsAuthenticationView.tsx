@@ -45,7 +45,7 @@ import {
 import {AwsAuthenticatorExtras} from "../awsAuthenticatorTypes";
 import {AuthModule} from "@iavofficial/frontend-framework-shared/authenticatorModule";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
-import {InternationalizationModule} from "../../../shared/dist/types/modules/internationalization/internationalizationModule";
+import {InternationalizationModule} from "@iavofficial/frontend-framework-shared/internationalizationModule";
 import {useDefaultSelector} from "@iavofficial/frontend-framework-shared/moduleDefaults";
 import { useModuleContext } from "@iavofficial/frontend-framework-shared/moduleContext";
 

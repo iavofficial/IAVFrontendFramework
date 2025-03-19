@@ -38,9 +38,9 @@ const useStyles = makeStyles(() => ({
 }));
 
 interface Props {
+    key?: string;
     to: string;
     label: string;
-    key: string;
 }
 
 const NavigationItem: React.FC<PropsWithChildren<Props>> = (props) => {

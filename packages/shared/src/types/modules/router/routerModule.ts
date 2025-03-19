@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {PropsWithChildren, ReactElement} from "react";
+import React, {CSSProperties, PropsWithChildren, ReactElement} from "react";
 import {FFModule} from "../generalModule";
 
 export type BasicRoute = {
@@ -29,7 +29,7 @@ export type BasicRoute = {
 export type LinkProps = PropsWithChildren<
   {
     to: string;
-    style: Record<string, unknown>;
+    style?: CSSProperties;
     target?: string;
   } & Record<string, unknown>
 >;

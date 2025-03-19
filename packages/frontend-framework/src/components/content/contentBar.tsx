@@ -32,7 +32,7 @@ import {useStyleMap} from "./style_options/useStyleMap";
 import {StyleProps, StylesArray} from "./style_options/styleTypes";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 import {
-  DEFAULT_ELEMENTSIZE,
+  DEFAULT_ELEMENT_SIZE,
   PADDING_GAB,
 } from "@iavofficial/frontend-framework-shared/constants";
 
@@ -221,7 +221,7 @@ export const ContentBar = (props: PropsContentBar) => {
     >
       <div
         style={{
-          height: `${DEFAULT_ELEMENTSIZE}px`,
+          height: `${DEFAULT_ELEMENT_SIZE}px`,
           width: "100%",
           backgroundColor: contentbarBackgroundColor,
         }}
@@ -243,7 +243,7 @@ export const ContentBar = (props: PropsContentBar) => {
                   element.getContentbarElement(
                     calculateWidth(
                       isNavbarCollapsed,
-                      width - (2 * DEFAULT_ELEMENTSIZE + 2 * PADDING_GAB),
+                      width - (2 * DEFAULT_ELEMENT_SIZE + 2 * PADDING_GAB),
                       !!addable,
                       contentElements.length > amountOfRenderedTabElements,
                     ),
@@ -255,7 +255,7 @@ export const ContentBar = (props: PropsContentBar) => {
                 element.getContentbarElement(
                   calculateWidth(
                     isNavbarCollapsed,
-                    width - (2 * DEFAULT_ELEMENTSIZE + 2 * PADDING_GAB),
+                    width - (2 * DEFAULT_ELEMENT_SIZE + 2 * PADDING_GAB),
                     !!addable,
                     contentElements.length > amountOfRenderedTabElements,
                   ),

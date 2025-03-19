@@ -35,6 +35,8 @@ export interface Props<TState extends FFMandatoryState> {
 export const ModuleContextProvider = <TState extends FFMandatoryState>(
   props: PropsWithChildren<Props<TState>>,
 ) => {
+  // The type has to be adapted since the correct type is not known
+  // at creation of the module context.
   const ModuleContextTyped = ModuleContext as React.Context<
     ModuleContextValues<typeof props.modules>
   >;

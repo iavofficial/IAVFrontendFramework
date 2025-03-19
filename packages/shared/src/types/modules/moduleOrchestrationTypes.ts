@@ -17,7 +17,7 @@
  */
 
 import {Reducer} from "@reduxjs/toolkit";
-import {FFStoreModule} from "../../types/modules/generalModule";
+import {FFStoreModule} from "./generalModule";
 import {
   MandatoryModuleNames,
   USER_MODULES_PREFIX,
@@ -69,7 +69,7 @@ export type FFAllMandatoryModules<
 > = FFMandatoryStoreModules<TModulesState> & FFMandatoryNonStoreModules;
 
 // It is concluded that every mandatory state will have a root reducer object.
-// Without the possiblity of changing values (so the existence of reducers)
+// Without the possibility of changing values (so the existence of reducers)
 // state is not sensible.
 export type FFMandatoryReducers<TModulesState extends FFMandatoryState> = {
   [K in keyof TModulesState]: Reducer<TModulesState[K]>;
@@ -79,8 +79,8 @@ export type FFMandatoryReducers<TModulesState extends FFMandatoryState> = {
 // framework itself.
 export type GenericModules = Record<string, FFStoreModule<unknown>>;
 
-// Objects of this type aggragate a module and it's corresponding processor
-// method. The following example shows it's structure:
+// Objects of this type aggregate a module, and it's corresponding processor
+// method. The following example shows its structure:
 // {auth: {module: ..., processor: ...}, ...}
 // The effect of never in this case is that there cannot be a key with a value
 // which does not extend FFStoreModule.
@@ -116,7 +116,7 @@ export type ModuleProcessorFunction<
   config: StoreConfigBuilder<TFrameworkModulesState>,
 ) => void;
 
-// Using this type the State Type of a Module can be iferred.
+// Using this type the State Type of a Module can be inferred.
 export type ExtractModuleState<T> =
   T extends FFStoreModule<infer S> ? S : never;
 
@@ -194,7 +194,7 @@ export type TParamUserNonStoreModules<TUserNonStoreModules> = Exact<
 >;
 
 // An array of all modules should exactly contain all necessary
-// Framework Store Modules and Framework Non Store Modules.
+// Framework Store Modules and Framework Non-Store Modules.
 // As the rest are user modules, they should begin with the
 // corresponding prefix for user modules.
 export type TParamAllModules<

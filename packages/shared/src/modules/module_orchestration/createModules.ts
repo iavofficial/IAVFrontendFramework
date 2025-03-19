@@ -28,7 +28,7 @@ import {
   TParamAllModulesPartial,
 } from "../../types/modules/moduleOrchestrationTypes";
 import {mergeModules} from "./util/mergeModules";
-import {seperateModuleTypes} from "./util/seperateModuleTypes";
+import {separateModuleTypes} from "./util/separateModuleTypes";
 
 // It would be better to use FFModule inside the Record to ensure that
 // the useModuleLifecycle method has the expected type if the module
@@ -54,7 +54,7 @@ export const createModules = <
 ) => {
   const modules = paramModules ?? ({} as TModules);
 
-  const seperatedModules = seperateModuleTypes(modules);
+  const seperatedModules = separateModuleTypes(modules);
 
   const finalModules = mergeModules(seperatedModules);
 

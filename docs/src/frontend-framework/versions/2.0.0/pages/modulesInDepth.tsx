@@ -1,3 +1,21 @@
+/**
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 import Page from "../../../common/page/page";
 import BulletList from "../../../common/page/text/bulletList";
 import SubSubTitle from "../../../common/page/text/subSubTitle";
@@ -15,12 +33,12 @@ export const ModulesInDepth = () => (
       system.
     </Text>
     <SubTitle>
-      The different kinds of modules and the method createModulesSeperately
+      The different kinds of modules and the method createModulesSeparately
     </SubTitle>
     <Text>
       For precise typing and other processing reasons the Framework splits the
       modules into framework modules and user modules. Furthermore, it splits
-      all modules into so called store modules and non store modules. Store
+      all modules into so called store modules and non-store modules. Store
       modules are modules that provide a Slice which should be included inside
       the Redux Store. Non store modules don't provide a Slice. By combining
       these two distinctions you get four types of modules:
@@ -46,11 +64,11 @@ export const ModulesInDepth = () => (
       Because the framework works with the described distinctions of module
       types internally, <i>createModules</i> splits up the provided modules
       object into the different types of modules. However, if you want to split
-      them up by yourself you can use the method <i>createModulesSeperately</i>{" "}
+      them up by yourself you can use the method <i>createModulesSeparately</i>{" "}
       which takes four different objects for the different types of modules. The
       following example shows the usage of this method.
     </Text>
-    <Code language="ts" title="Example usage of createModulesSeperately">
+    <Code language="ts" title="Example usage of createModulesSeparately">
       {`const frameworkStoreModules = {
   [MandatoryModuleNames.Authentication]: new AWSAuthenticator({
     configureAmplify: configureAmplify,
@@ -73,7 +91,7 @@ const userNonStoreModules = {
   userTest: { text: "text"},
 };
 
-export const modules = createModulesSeperately({
+export const modules = createModulesSeparately({
   frameworkStoreModules,
   userStoreModules,
   frameworkNonStoreModules,
@@ -222,7 +240,7 @@ public setExtras(key: string, value: unknown): this`}
     <SubTitle>Other relevant interfaces</SubTitle>
     <Text>
       The following interfaces describe the general structure of modules.
-      FFModule describes the abstraction of a non store module. FFStoreModule
+      FFModule describes the abstraction of a non-store module. FFStoreModule
       extends FFModule and describes the required structure of a store module.
     </Text>
     <Code language="ts">{`export type ModuleLifecycleHook = () => {renderChildren: boolean} & Record<string, unknown>;

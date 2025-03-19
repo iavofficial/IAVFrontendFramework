@@ -17,8 +17,8 @@
  */
 
 import {
-  DEFAULT_ELEMENTSIZE,
-  DEFAULT_WIDTH_CONTENTSECTIONELEMENT,
+  DEFAULT_ELEMENT_SIZE,
+  DEFAULT_WIDTH_CONTENT_SECTION_ELEMENT,
 } from "@iavofficial/frontend-framework-shared/constants";
 
 export function calculateWidth(
@@ -28,11 +28,11 @@ export function calculateWidth(
   overflow: boolean,
 ): number {
   if (!overflow) {
-    return DEFAULT_WIDTH_CONTENTSECTIONELEMENT;
+    return DEFAULT_WIDTH_CONTENT_SECTION_ELEMENT;
   }
 
   if (addable) {
-    width = width - DEFAULT_ELEMENTSIZE;
+    width = width - DEFAULT_ELEMENT_SIZE;
   }
 
   return width / (navbarCollapsed ? 6 : 5);

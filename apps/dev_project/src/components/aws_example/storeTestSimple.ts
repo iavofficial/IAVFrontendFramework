@@ -27,6 +27,7 @@ import { AwsAuthenticator } from "@iavofficial/frontend-framework-aws-authentica
 import { MandatoryModuleNames } from "@iavofficial/frontend-framework/constants";
 import { I18NextInternationalizer } from "@iavofficial/frontend-framework/defaultModules";
 import { translations } from "./translations";
+import { configureStore } from "@reduxjs/toolkit";
 
 const cognitoPool = import.meta.env.VITE_COGNITO_POOL;
 const cognitoAppId = import.meta.env.VITE_COGNITO_APP_ID;
@@ -73,7 +74,7 @@ const customModules = {
 export const modules = createModules(customModules);
 
 export const store = new StoreBuilder(modules.storeModules)
-  /*.setFrameworkModuleProcessor(
+  .setFrameworkModuleProcessor(
     MandatoryModuleNames.Authentication,
     (module, storeConfigBuilder) => {}
   )
@@ -87,12 +88,12 @@ export const store = new StoreBuilder(modules.storeModules)
         getDefaultEnhancers().concat(storeConfig.enhancers),
     });
     return store;
-  })*/
+  })
   .build();
 
-  export const useModuleContextTyped = modules.useModuleContextTyped;
-  export const useModuleTyped = modules.useModuleTyped;
-  
-  /*const {modules: modulesTest} = useModuleContextTyped();
-  const authModule = useModuleTyped(MandatoryModuleNames.Authentication);
-  const userModule = useModuleTyped("userTest");*/
+export const useModuleContextTyped = modules.useModuleContextTyped;
+export const useModuleTyped = modules.useModuleTyped;
+
+const { modules: modulesTest } = useModuleContextTyped();
+const authModule = useModuleTyped(MandatoryModuleNames.Authentication);
+const userModule = useModuleTyped("userTest");

@@ -21,7 +21,7 @@ import {Tooltip} from "primereact/tooltip";
 import "./contentbar.css";
 import {determineCurrentColor} from "../../utils/determineCurrentColor";
 import {
-  DEFAULT_ELEMENTSIZE,
+  DEFAULT_ELEMENT_SIZE,
   GREY5,
   WHITE,
 } from "@iavofficial/frontend-framework-shared/constants";
@@ -90,7 +90,7 @@ export const DefaultContentSelectionElement = (props: Props) => {
       hoverColor: textHoverColor,
       activeColor: textActiveColor,
     }),
-    height: `${DEFAULT_ELEMENTSIZE}px`,
+    height: `${DEFAULT_ELEMENT_SIZE}px`,
     width: `${props.width}px`,
     alignItems: "center",
     borderRight:

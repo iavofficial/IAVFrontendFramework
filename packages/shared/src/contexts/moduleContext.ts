@@ -33,6 +33,10 @@ export const useModuleContext = <TModules = AllDefaultModules>() => {
   return useContext(ModuleContext) as ModuleContextValues<TModules>;
 };
 
+// There seems to be no way for useModule in which it can be used without
+// passing no or both types. As passing the type for K is redundant, this
+// is not prefered. Because of this the createModules functions create a
+// typed useModule Hook using this function.
 export const createTypedUseModule = <TModules = AllDefaultModules>() => {
   return <K extends keyof TModules>(key: K) => {
     const {modules} = useModuleContext<TModules>();

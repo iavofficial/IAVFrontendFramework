@@ -25,7 +25,7 @@ import "simplebar-react/dist/simplebar.min.css";
 import {calculateNavbarArrowFunctionColor} from "../../utils/calculateNavbarArrowColor";
 import {NavbarSettingsContext} from "../../contexts/navbarContext";
 import {
-  DEFAULT_ELEMENTSIZE,
+  DEFAULT_ELEMENT_SIZE,
   GAB_NAVBAR_COLLAPSED,
   NAVBAR_WIDTH_UNFOLDED,
   PADDING_GAB,
@@ -72,7 +72,7 @@ export const Navbar = (props: Props) => {
         <SimpleBar
           style={{
             width: navbarSettingsContext.navbarCollapsed
-              ? `${DEFAULT_ELEMENTSIZE + 2 * GAB_NAVBAR_COLLAPSED}px`
+              ? `${DEFAULT_ELEMENT_SIZE + 2 * GAB_NAVBAR_COLLAPSED}px`
               : `${NAVBAR_WIDTH_UNFOLDED}px`,
             padding: navbarSettingsContext.navbarCollapsed
               ? "0px 2px 0px 2px"

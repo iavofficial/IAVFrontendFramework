@@ -27,7 +27,7 @@ import {
 } from "../../../../utils/determineCurrentColor";
 import {InjectedOptionsGroupableByWrapperToTab} from "../../types/typesInjectedOptions";
 import {
-  DEFAULT_ELEMENTSIZE,
+  DEFAULT_ELEMENT_SIZE,
   GAB_NAVBAR_UNFOLDED,
   NAVBAR_WIDTH_UNFOLDED,
 } from "@iavofficial/frontend-framework-shared/constants";
@@ -116,7 +116,7 @@ export const SimpleNavbarTab: GroupableNavbarTab = (
 
   const tabStyleDefault = {
     width: navbarCollapsed
-      ? `${DEFAULT_ELEMENTSIZE}px`
+      ? `${DEFAULT_ELEMENT_SIZE}px`
       : `${NAVBAR_WIDTH_UNFOLDED - 2 * GAB_NAVBAR_UNFOLDED}px`,
     cursor: isActive || props.disabled ? "default" : "pointer",
     backgroundColor: backgroundColor,

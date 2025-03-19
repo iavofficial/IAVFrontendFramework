@@ -339,6 +339,7 @@ export const AwsAuthenticationView = <
                 ? loginBackgroundDarkMode
                 : loginBackgroundLightMode
           }
+          alt="Background image"
         />
       )}
       <div

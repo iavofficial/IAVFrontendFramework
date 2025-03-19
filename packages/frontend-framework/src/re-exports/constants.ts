@@ -18,3 +18,4 @@
 
 export * from "@iavofficial/frontend-framework-shared/constants";
 export * from "@iavofficial/frontend-framework-shared/moduleNames";
+export * from "@iavofficial/frontend-framework-shared/defaultTranslations";

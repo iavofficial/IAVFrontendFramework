@@ -27,7 +27,7 @@ import {
   determineCurrentColorInsideGroup,
 } from "../../../../utils/determineCurrentColor";
 import {
-  DEFAULT_ELEMENTSIZE,
+  DEFAULT_ELEMENT_SIZE,
   NAVBAR_WIDTH_UNFOLDED,
 } from "@iavofficial/frontend-framework-shared/constants";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
@@ -135,7 +135,7 @@ export const TabGroup = (props: Props) => {
 
   const tabStyleDefault = {
     width: props.navbarCollapsed
-      ? `${DEFAULT_ELEMENTSIZE}px`
+      ? `${DEFAULT_ELEMENT_SIZE}px`
       : `${NAVBAR_WIDTH_UNFOLDED - 8}px`,
     backgroundColor: backgroundColor,
     color: fontColor,

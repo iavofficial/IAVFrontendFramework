@@ -15,4 +15,13 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-export declare function useCookiesAccepted(): boolean;
+
+import {LangResources} from "./internationalizationModule";
+
+export type InitI18nextFunctionParams = {
+  translationResources: LangResources;
+  acceptedCookies: boolean;
+  fallbackLang: string;
+};
+
+export type InitI18nextFunction = (params: InitI18nextFunctionParams) => void;

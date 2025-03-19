@@ -161,7 +161,7 @@ export class AwsAuthenticator implements AuthModule<AwsAuthenticatorState> {
     >(
       MandatoryModuleNames.Authentication + "/thunkFetchAuthed",
       async ({url, token, settings}, {dispatch, getState}) => {
-        dispatch(this.extras.checkIsAuthenticated()).unwrap();
+        await dispatch(this.extras.checkIsAuthenticated()).unwrap();
         return await fetch(
           url,
           generateSettingsWithAuthFrom(getState().auth, token, settings),
@@ -294,7 +294,6 @@ export class AwsAuthenticator implements AuthModule<AwsAuthenticatorState> {
       // Equivalent to ComponentDidUpdate
       useEffect(() => {
         if (hasAuthenticated) {
-          ("running");
           dispatch(this.extras.checkIsAuthenticated());
         }
       }, [hasAuthenticated, dispatch]);

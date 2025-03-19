@@ -34,10 +34,10 @@ import {
 import {DefaultNonStoreModules} from "./moduleDefaults";
 import {mergeModules} from "./util/mergeModules";
 
-export function createModulesSeperately<
+export function createModulesSeparately<
   TUserNonStoreModules extends object,
   // Partial of DefaultNonStoreModules ensures that if TUserStoreModules is used for
-  // overriding default non store modules, the user modules have to statisfy the
+  // overriding default non-store modules, the user modules have to satisfy the
   // corresponding TS constraints.
   TUserStoreModules extends FFStoreModules<TUserModulesState> &
     Partial<DefaultNonStoreModules>,

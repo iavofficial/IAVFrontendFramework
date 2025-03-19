@@ -31,7 +31,7 @@ import {
 } from "@iavofficial/frontend-framework-shared/moduleOrchestrationTypes";
 import {FFModule} from "@iavofficial/frontend-framework-shared/generalModule";
 import {checkIfUserModulesKeysValid} from "@iavofficial/frontend-framework-shared/checkIfUserModulesKeysValid";
-import {seperateModuleTypes} from "@iavofficial/frontend-framework-shared/seperateModuleTypes";
+import {separateModuleTypes} from "@iavofficial/frontend-framework-shared/separateModuleTypes";
 
 interface Props<
   TModules extends FFMandatoryStoreModules<TFrameworkStoreModulesState> &
@@ -57,7 +57,7 @@ export const GlobalDataLayer = <
   // Throw an error if user modules do not meet the convention that
   // they have to begin with a specific prefix.
   useEffect(() => {
-    const seperatedModules = seperateModuleTypes(props.modules);
+    const seperatedModules = separateModuleTypes(props.modules);
     checkIfUserModulesKeysValid({
       userStoreModules: seperatedModules.userStoreModules,
       userNonStoreModules: seperatedModules.userNonStoreModules,

@@ -57,7 +57,6 @@ export class DummyAuthenticator {
       initialState,
       reducers: {
         login: (state, action: PayloadAction<string>) => {
-          // TODO: Check whether this works.
           state.isLoading = true;
           state.hasAuthenticated = true;
           state.userData = {username: action.payload};

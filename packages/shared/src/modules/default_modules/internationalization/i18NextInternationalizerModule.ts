@@ -1,3 +1,21 @@
+/**
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 import i18next from "i18next";
 import {useTranslation as useTranslationI18next} from "react-i18next";
 import {useEffect, useState} from "react";
@@ -12,23 +30,18 @@ import {useDefaultDispatch} from "../../module_orchestration/moduleDefaults";
 import {initI18nextDefault} from "./initI18nextDefault";
 import {useCookiesAccepted} from "../../../utils/cookieHooks";
 import {MandatoryModuleNames} from "../../../constants/moduleNames";
+import {InitI18nextFunction} from "../../../types/modules/internationalization/initI18nextFunction";
 
 const DEFAULT_FALLBACK_LANG = "en";
 
-const selectActiveLangDefault = (lang: string) => {
+const selectActiveLangPlaceholder = (lang: string) => {
   console.error(`The function is not initialized yet. This error
         inidicates an error in your application.`);
 };
 
-type InitI18NextFunction = (params: {
-  resources: LangResources;
-  acceptedCookies: boolean;
-  fallbackLang: string;
-}) => void;
-
-type I18NextInternationalizerParams = {
+export type I18NextInternationalizerParams = {
   fallbackLang?: string;
-  initI18next?: InitI18NextFunction;
+  initI18next?: InitI18nextFunction;
   forcedInitialLang?: string;
   translationResources?: LangResources;
 };
@@ -39,7 +52,7 @@ export class I18NextInternationalizer
   public slice;
   public fallbackLang;
   public translationResources;
-  public selectActiveLang = selectActiveLangDefault;
+  public selectActiveLang = selectActiveLangPlaceholder;
   public useTranslation;
   public useModuleLifecycle;
 
@@ -80,7 +93,7 @@ export class I18NextInternationalizer
             customTranslationResources[key].translation,
           );
         } else {
-          // @ts-ignore Bug: Marks props.translations as possibly undfined although it's not.
+          // @ts-ignore No index signature on json imports
           mergedTranslationResources[key] = customTranslationResources[key];
         }
       });
@@ -110,7 +123,7 @@ export class I18NextInternationalizer
         initI18next({
           acceptedCookies: cookiesAccepted,
           fallbackLang: fallbackLang,
-          resources: mergedTranslationResources,
+          translationResources: mergedTranslationResources,
         });
 
         if (forcedInitialLang) {

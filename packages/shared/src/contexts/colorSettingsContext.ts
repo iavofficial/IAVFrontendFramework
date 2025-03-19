@@ -19,13 +19,13 @@
 import React from "react";
 import {ColorOptions, SelectedColors} from "../types/color/colorOptionTypes";
 
-export interface ColorsettingsType {
+export interface ColorSettingsType {
   darkmode: boolean;
   setDarkmode: (darkmode: boolean) => void;
   colorOptions: ColorOptions;
   currentColors: SelectedColors;
 }
 
-export const ColorSettingsContext = React.createContext<ColorsettingsType>(
-  {} as ColorsettingsType,
+export const ColorSettingsContext = React.createContext<ColorSettingsType>(
+  {} as ColorSettingsType,
 );

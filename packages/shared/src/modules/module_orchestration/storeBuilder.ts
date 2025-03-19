@@ -20,7 +20,7 @@
 // framework. It can include different processor methods which process a corresponding module.
 // While the Builder provides default processing logic via the StoreConfigBuilder, custom processor
 // methods are necessary when specific modules have to be processed another way.
-// Furthermore the Builder contains a storeBuilder method which is used to build the store after
+// Furthermore, the Builder contains a storeBuilder method which is used to build the store after
 // all processor methods were executed. The storeBuilder can be replaced too.
 
 import {configureStore, EnhancedStore} from "@reduxjs/toolkit";
@@ -43,7 +43,7 @@ export class StoreBuilder<
   TFrameworkStoreModules extends
     FFMandatoryStoreModules<TFrameworkModulesState>,
   // Partial of DefaultNonStoreModules ensures that if TUserStoreModules is used for
-  // overriding default non store modules, the user modules have to statisfy the
+  // overriding default non-store modules, the user modules have to satisfy the
   // corresponding TS constraints.
   TUserStoreModules extends FFStoreModules<TUserModulesState> &
     Partial<DefaultNonStoreModules>,
@@ -52,12 +52,12 @@ export class StoreBuilder<
   // Same for TMandatoryStoreModules regarding overriding the default store modules.
   TUserModulesState = ActualUserModulesStateFromModules<TUserStoreModules>,
 > {
-  private storeConfigBuilder: StoreConfigBuilder<TFrameworkModulesState>;
+  private readonly storeConfigBuilder: StoreConfigBuilder<TFrameworkModulesState>;
 
   // These are mandatory modules and processors which are essential for the framework as
   // it uses values and methods of the processed modules.
   private frameworkModulesAndProcessors: ModuleAndProcessorMap<
-    FFMandatoryStoreModules<TFrameworkModulesState>,
+    TFrameworkStoreModules,
     TFrameworkModulesState
   >;
 
@@ -102,7 +102,7 @@ export class StoreBuilder<
   >(
     moduleType: K,
     processor: ModuleProcessorFunction<
-      (typeof this.frameworkModulesAndProcessors)[K]["module"],
+      TFrameworkStoreModules[K],
       TFrameworkModulesState
     >,
   ) {
@@ -118,10 +118,7 @@ export class StoreBuilder<
   >(
     moduleType: K,
     processor: ModuleProcessorFunction<
-      ModuleAndProcessorMap<
-        TUserStoreModules,
-        TFrameworkModulesState
-      >[K]["module"],
+      TUserStoreModules[K],
       TFrameworkModulesState
     >,
   ) {

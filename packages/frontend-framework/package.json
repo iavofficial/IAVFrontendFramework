@@ -78,8 +78,6 @@
   "exports": {
     "./uiLayer": "./dist/components/uiLayer.js",
     "./globalDataLayer": "./dist/components/globalDataLayer.js",
-    "./auth": "./dist/contexts/auth.js",
-    "./dummyAuthenticationProvider": "./dist/components/authentication/default/dummyAuthenticationProvider.js",
     "./basicAuthenticationView": "./dist/components/authentication/default/basicAuthenticationView.js",
     "./navbar": "./dist/components/navbar/navbar.js",
     "./navbarSettingsTypes": "./dist/types/navbarSettingsTypes.js",
@@ -106,7 +104,6 @@
     "./contentCell": "./dist/components/content/contentCell.js",
     "./colorProvider": "./dist/coloring/colorProvider.js",
     "./colorOptionTypes": "./dist/coloring/colorOptionTypes.js",
-    "./language": "./dist/contexts/language.js",
     "./header": "./dist/components/header/header.js",
     "./settingsMenu": "./dist/components/header/settingsMenu.js",
     "./userMenu": "./dist/components/header/userMenu.js",
@@ -137,12 +134,6 @@
       ],
       "./globalDataLayer": [
         "./dist/components/globalDataLayer.d.ts"
-      ],
-      "./auth": [
-        "./dist/contexts/auth.d.ts"
-      ],
-      "./dummyAuthenticationProvider": [
-        "./dist/components/authentication/default/dummyAuthenticationProvider.d.ts"
       ],
       "./basicAuthenticationView": [
         "./dist/components/authentication/default/basicAuthenticationView.d.ts"
@@ -268,10 +259,10 @@
         "./dist/re-exports/defaultModules.d.ts"
       ],
       "./reExportedTypes": [
-        "./dist/re-exports/reExportedTypes.js"
+        "./dist/re-exports/reExportedTypes.d.ts"
       ],
       "./cookieHooks": [
-        "./dist/re-exports/cookieHooks.js"
+        "./dist/re-exports/cookieHooks.d.ts"
       ],
       "./useModuleTranslation": [
         "./dist/re-exports/useModuleTranslation.js"

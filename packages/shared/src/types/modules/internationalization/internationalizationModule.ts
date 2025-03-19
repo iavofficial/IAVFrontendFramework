@@ -1,26 +1,38 @@
+/**
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 import {Slice} from "@reduxjs/toolkit";
 
 export type InternationalizationState = {
   activeLang: string;
 };
 
-export interface TranslationKeys extends Object {
+export type TranslationKeys = {
   option_name: string;
+} & Record<string, string>;
 
-  [key: string]: any;
-}
-
-export interface Translation {
+export type Translation = {
   translation: TranslationKeys;
+} & Record<string, unknown>;
 
-  [translation: string]: any;
-}
-
-export interface Translations {
+export type LangResources = {
   [lang: string]: Translation;
-}
-
-export type LangResources = Translations;
+};
 
 // This definition allows a translation function to have additional
 // params. Because they are additional, the specific function has to
@@ -37,6 +49,8 @@ export type TranslationFunction = (params: TranslationFunctionParams) => string;
 
 export type TranslationWrapperFunction = (t: TranslationFunction) => string;
 
+export type UseTranslationHook = () => TranslationFunction;
+
 export type InternationalizationModule<
   TIntState extends InternationalizationState = InternationalizationState,
 > = {
@@ -44,5 +58,5 @@ export type InternationalizationModule<
   fallbackLang: string;
   translationResources: LangResources;
   selectActiveLang: (lang: string) => void;
-  useTranslation: () => TranslationFunction;
+  useTranslation: UseTranslationHook;
 };

@@ -36,19 +36,10 @@ import {parseLanguageResourcesIntoDropdownFormat} from "@iavofficial/frontend-fr
 import {LoginButtonWithSpinner} from "@iavofficial/frontend-framework-shared/loginButtonWithSpinner";
 import {AppLogoPlaceholder} from "@iavofficial/frontend-framework-shared/appLogoPlaceholder";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
-import {useDispatch} from "react-redux";
-import {ThunkDispatch, Action} from "@reduxjs/toolkit";
 import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
-import {AuthState} from "@iavofficial/frontend-framework-shared/authenticatorModule";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
-import {useDefaultSelector} from "@iavofficial/frontend-framework-shared/moduleDefaults";
+import {useDefaultDispatch, useDefaultSelector} from "@iavofficial/frontend-framework-shared/moduleDefaults";
 import {useModuleTranslation} from "@iavofficial/frontend-framework-shared/useModuleTranslation";
-
-type BasicAuthenticatorAuthDispatch = ThunkDispatch<
-  AuthState,
-  unknown,
-  Action<string>
->;
 
 export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
   const authModule = useModule(MandatoryModuleNames.Authentication);
@@ -56,7 +47,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
 
   const colorSettingsContext = useContext(ColorSettingsContext);
 
-  const dispatch = useDispatch<BasicAuthenticatorAuthDispatch>();
+  const dispatch = useDefaultDispatch();
 
   const isLoading = useDefaultSelector(
     (state) => state[MandatoryModuleNames.Authentication].isLoading,

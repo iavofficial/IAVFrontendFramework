@@ -58,8 +58,8 @@ export const allDefaultModules = {
 };
 
 export type AllDefaultModules = MergeModules<
-  DefaultStoreModules,
-  DefaultNonStoreModules
+  DefaultNonStoreModules,
+  DefaultStoreModules
 >;
 
 export const defaultStore = new StoreBuilder({

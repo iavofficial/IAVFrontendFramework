@@ -12,29 +12,28 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- * SPDX-License-Identifier: Apache-2.0
- */
+ **/
 
-import {ReactElement} from "react";
+import React from "react";
+import {PathRoute} from "../page/pathRoute.ts";
+import {Route, Routes} from "react-router-dom";
 
-export type PathRoute = {
-    path: string;
-    label: string;
-    element: ReactElement;
-}
-
-export type GroupRoute = {
-    title: string;
+interface Props {
     routes: PathRoute[];
 }
 
-export const mergeRoutes = (...routeGroups: (PathRoute[] | GroupRoute[])[]): PathRoute[] => {
-    return routeGroups.flatMap(group =>
-        group.flatMap(route => isGroupRoute(route) ? route.routes : [route])
+
+const RoutesMap: React.FC<Props> = (props) => {
+
+    const {routes} = props;
+
+    return (
+        <Routes>
+            {routes.map(({path, element}) => (
+                <Route key={path} path={path} element={element}/>
+            ))}
+        </Routes>
     );
 };
 
-const isGroupRoute = (route: PathRoute | GroupRoute): route is GroupRoute => {
-    return (route as GroupRoute).routes !== undefined;
-};
+export default RoutesMap;

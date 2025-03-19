@@ -25,7 +25,7 @@ const useStyles = makeStyles(() => ({
         top: "61px",
         left: "0",
         width: "200px",
-        height: "100%",
+        height: "calc(100vh - 91px)",
         backgroundColor: "#ffffff",
         borderRight: "1px solid lightgray",
         zIndex: 1000,

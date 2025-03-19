@@ -16,25 +16,25 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {ReactElement} from "react";
+import React from "react";
+import NavigationItem from "./navigationItem.tsx";
+import {PathRoute} from "../page/pathRoute.ts";
 
-export type PathRoute = {
-    path: string;
-    label: string;
-    element: ReactElement;
+interface Props {
+    routes: PathRoute[]
 }
 
-export type GroupRoute = {
-    title: string;
-    routes: PathRoute[];
-}
+const NavigationMap: React.FC<Props> = (props) => {
 
-export const mergeRoutes = (...routeGroups: (PathRoute[] | GroupRoute[])[]): PathRoute[] => {
-    return routeGroups.flatMap(group =>
-        group.flatMap(route => isGroupRoute(route) ? route.routes : [route])
+    const {routes} = props;
+
+    return (
+        <ul>
+            {routes.map(({path, label}) => (
+                <NavigationItem to={path} label={label} key={path}/>
+            ))}
+        </ul>
     );
 };
 
-const isGroupRoute = (route: PathRoute | GroupRoute): route is GroupRoute => {
-    return (route as GroupRoute).routes !== undefined;
-};
+export default NavigationMap;

@@ -20,7 +20,7 @@ import React, {PropsWithChildren} from "react";
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import makeStyles from "../../../../util/makeStyles.tsx";
 import {ocean} from "react-syntax-highlighter/dist/cjs/styles/hljs";
-import { GREY2 } from "../../../../constants.ts";
+import {GREY2} from "../../../../constants.ts";
 
 
 const useStyles = makeStyles(({center}) => ({

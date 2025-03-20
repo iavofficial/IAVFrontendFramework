@@ -38,7 +38,7 @@ export const LegalDocuments = (props: Props) => {
       <div
         className={
           (colorSettingsContext?.darkmode ? "bg-grey-6" : "bg-white-1") +
-          " flex px-3"
+          " flex p-3"
         }
         style={{
           flexDirection: "column",

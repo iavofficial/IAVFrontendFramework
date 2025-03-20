@@ -1,9 +1,12 @@
 name: Format Code
 
 on:
-  push:
+  pull_request:
     branches:
       - "**"
+  pull_request_target:
+    types:
+      - closed
 
 jobs:
   format:
@@ -23,3 +26,17 @@ jobs:
 
       - name: Run Format
         run: npm run format
+
+      - name: Set environment variables
+        run: echo "GITHUB_ACTOR=${{ github.actor }}" >> $GITHUB_ENV
+
+      - name: Set GitHub identity
+        run: |
+          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git config --global user.name "${GITHUB_ACTOR}"
+
+      - name: Commit and Push Changes
+        run: |
+          git add .
+          git commit -m "chore(format): apply automated formatting changes"
+          git push

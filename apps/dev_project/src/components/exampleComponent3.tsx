@@ -20,9 +20,7 @@ import { MandatoryModuleNames } from "@iavofficial/frontend-framework/constants"
 import { useModule } from "@iavofficial/frontend-framework/moduleContext";
 
 export const ExampleComponent3 = () => {
-  const t = useModule(
-    MandatoryModuleNames.Internationalizer,
-  ).useTranslation();
+  const t = useModule(MandatoryModuleNames.Internationalizer).useTranslation();
 
   return <div>{t({ key: "component_deactivated" })}</div>;
 };

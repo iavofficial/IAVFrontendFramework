@@ -19,7 +19,9 @@
 import React, {useContext, useMemo} from "react";
 import {Header, HeaderOptions} from "./header/header";
 import {Navbar} from "./navbar/navbar";
-import {DefaultImprint} from "./imprint/defaultImprint";
+import {DefaultLegalDocument} from "./imprint/defaultLegalDocument";
+import {ImprintText} from "./imprint/imprintText";
+import {PrivacyPolicyText} from "./imprint/privacyPolicyText";
 import {SettingsMenuOptions} from "./header/settingsMenu";
 import {TabAndContentWrapper} from "./navbar/wrappers/typesWrappers";
 import {UserMenuOptions} from "./header/userMenu";
@@ -31,9 +33,11 @@ import {BasicRoute} from "@iavofficial/frontend-framework-shared/routerModule";
 
 interface MainViewProps {
   tabAndContentWrappers: TabAndContentWrapper[];
-  documentsComponent?: React.ComponentType<any>;
+  imprintComponent?: React.ComponentType<any>;
+  privacyPolicyComponent?: React.ComponentType<any>;
   documentsLabelKey?: string;
-  hideLegalDocuments?: boolean;
+  hideImprint?: boolean;
+  hidePrivacyPolicy?: boolean;
   headerOptions?: HeaderOptions;
   settingsMenuOptions?: SettingsMenuOptions;
   userMenuOptions?: UserMenuOptions;
@@ -50,11 +54,19 @@ export const MainView = (props: MainViewProps) => {
   const staticRoutes: BasicRoute[] = useMemo(
     () => [
       {
-        path: "/documents",
-        element: props.documentsComponent ? (
-          <props.documentsComponent />
+        path: "/imprint",
+        element: props.imprintComponent ? (
+          <props.imprintComponent />
         ) : (
-          <DefaultImprint />
+          <DefaultLegalDocument legalTextComponent={ImprintText} />
+        ),
+      },
+      {
+        path: "/privacy-policy",
+        element: props.privacyPolicyComponent ? (
+          <props.privacyPolicyComponent />
+        ) : (
+          <DefaultLegalDocument legalTextComponent={PrivacyPolicyText} />
         ),
       },
     ],
@@ -99,7 +111,8 @@ export const MainView = (props: MainViewProps) => {
           <Navbar
             tabAndContentWrappers={props.tabAndContentWrappers}
             documentsLabelKey={props.documentsLabelKey}
-            hideLegalDocuments={props.hideLegalDocuments}
+            hideImprint={props.hideImprint}
+            hidePrivacyPolicy={props.hidePrivacyPolicy}
           />
         </If>
         {<MainViewRouter routes={[...staticRoutes, ...tabRoutes]} />}

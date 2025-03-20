@@ -25,7 +25,7 @@ import {BasicAuthenticationView} from "./authentication/default/basicAuthenticat
 import {SettingsMenuOptions} from "./header/settingsMenu";
 import {CookieBanner} from "./cookie/cookieBanner";
 import {MainView} from "./mainView";
-import {DefaultImprint} from "./imprint/defaultImprint";
+import {DefaultLegalDocument} from "./imprint/defaultLegalDocument";
 import {TabAndContentWrapper} from "./navbar/wrappers/typesWrappers";
 import {NavbarSettingsProvider} from "../contexts/providers/navbarSettingsProvider";
 import {StaticCollapsedState} from "../types/navbarSettingsTypes";
@@ -46,6 +46,8 @@ import "../css/authenticationView.css";
 import {useDefaultSelector} from "@iavofficial/frontend-framework-shared/moduleDefaults";
 import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
+import {ImprintText} from "./imprint/imprintText";
+import {PrivacyPolicyText} from "./imprint/privacyPolicyText";
 
 export interface AuthOptions {
   backgroundImage?: string;
@@ -67,13 +69,15 @@ export interface Props {
   disableLogin?: boolean;
   disableCookieBanner?: boolean;
   authenticationView?: React.ComponentType<AuthenticationViewProps & any>;
-  documentsComponent?: React.ComponentType<any>;
+  imprintComponent?: React.ComponentType<any>;
+  privacyPolicyComponent?: React.ComponentType<any>;
   documentsLabelKey?: string;
   settingsMenuOptions?: SettingsMenuOptions;
   userMenuOptions?: UserMenuOptions;
   headerOptions?: HeaderOptions;
   authOptions?: AuthOptions;
-  hideLegalDocuments?: boolean;
+  hideImprint?: boolean;
+  hidePrivacyPolicy?: boolean;
   navbarOptions?: NavbarOptions;
   hideNavbar?: boolean;
 }
@@ -113,17 +117,27 @@ export const UILayer = (props: Props) => {
             props.settingsMenuOptions?.hideLanguageSelection
           }
           headerOptions={props.headerOptions}
-          hideLegalDocuments={props.hideLegalDocuments}
+          hideImprint={props.hideImprint}
+          hidePrivacyPolicy={props.hidePrivacyPolicy}
         />
       ),
     },
     {
-      path: "/documents",
-      disabled: disableLogin || hasAuthenticated,
-      element: props.documentsComponent ? (
-        <props.documentsComponent />
+      path: "/imprint",
+      disabled: false,
+      element: props.imprintComponent ? (
+        <props.imprintComponent />
       ) : (
-        <DefaultImprint />
+        <DefaultLegalDocument legalTextComponent={ImprintText} />
+      ),
+    },
+    {
+      path: "/privacy-policy",
+      disabled: false,
+      element: props.privacyPolicyComponent ? (
+        <props.privacyPolicyComponent />
+      ) : (
+        <DefaultLegalDocument legalTextComponent={PrivacyPolicyText} />
       ),
     },
     // Maybe include !props.disableLogin && !hasAuthenticated with <Route path="/*" element={<></>} />
@@ -136,9 +150,11 @@ export const UILayer = (props: Props) => {
           settingsMenuOptions={props.settingsMenuOptions}
           userMenuOptions={userMenuOptions}
           documentsLabelKey={props.documentsLabelKey}
-          documentsComponent={props.documentsComponent}
+          imprintComponent={props.imprintComponent}
+          privacyPolicyComponent={props.privacyPolicyComponent}
           tabAndContentWrappers={props.tabAndContentWrappers}
-          hideLegalDocuments={props.hideLegalDocuments}
+          hideImprint={props.hideImprint}
+          hidePrivacyPolicy={props.hidePrivacyPolicy}
           hideNavbar={props.hideNavbar}
         />
       ),

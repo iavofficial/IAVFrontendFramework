@@ -39,7 +39,8 @@ import {useModuleTranslation} from "@iavofficial/frontend-framework-shared/useMo
 interface Props {
   tabAndContentWrappers: TabAndContentWrapper[];
   documentsLabelKey?: string;
-  hideLegalDocuments?: boolean;
+  hideImprint?: boolean;
+  hidePrivacyPolicy?: boolean;
 }
 
 export const Navbar = (props: Props) => {
@@ -54,7 +55,7 @@ export const Navbar = (props: Props) => {
   const navbarColor = colorSettingsContext.currentColors.navbar.backgroundColor;
 
   const legalDocumentsColor =
-    colorSettingsContext.currentColors.navbar.legalDocumentsIconColor;
+    colorSettingsContext.currentColors.navbar.legalDocumentsLinkColor;
 
   const navbarCollapseArrowColor =
     colorSettingsContext.currentColors.navbar.navbarCollapseArrowColor;
@@ -101,42 +102,50 @@ export const Navbar = (props: Props) => {
               ? {
                   justifyContent: "center",
                   flexDirection: "column",
+                  width: "44px",
+                  gap: "10px",
                 }
               : {
-                  justifyContent: "space-between",
-
-                  paddingLeft: `${PADDING_GAB}px`,
+                  justifyContent: "center",
                 }
           }
         >
-          {!props.hideLegalDocuments && (
-            <Link
+          {(props.hideImprint === true && props.hidePrivacyPolicy === true) ===
+            false && (
+            <div
+              id="legal-doc-links"
               style={{
-                fontSize: "13px",
-                fontWeight: "bolder",
-                textDecoration: "none",
+                flexDirection: navbarSettingsContext.navbarCollapsed
+                  ? "unset"
+                  : "row",
+                writingMode: navbarSettingsContext.navbarCollapsed
+                  ? "sideways-lr"
+                  : "horizontal-tb",
               }}
-              to="/documents"
             >
-              <i
-                style={{
-                  color: legalDocumentsColor,
-                  fontWeight: "bold",
-                }}
-                className={"pi pi-info-circle " + identifierLegal}
-              />
-            </Link>
+              {!props.hideImprint && (
+                <Link
+                  className="legal-doc-link"
+                  style={{color: legalDocumentsColor}}
+                  to="/imprint"
+                >
+                  {t({key: "Imprint"})}
+                </Link>
+              )}
+              {!props.hideImprint && !props.hidePrivacyPolicy && (
+                <span style={{color: legalDocumentsColor}}>&</span>
+              )}
+              {!props.hidePrivacyPolicy && (
+                <Link
+                  className="legal-doc-link"
+                  style={{color: legalDocumentsColor}}
+                  to="/privacy-policy"
+                >
+                  {t({key: "Privacy_Policy"})}
+                </Link>
+              )}
+            </div>
           )}
-
-          <Tooltip
-            content={t({
-              key: props.documentsLabelKey
-                ? props.documentsLabelKey
-                : "Imprint",
-            })}
-            target={identifierWithDot}
-            id="hover-image"
-          />
 
           {navbarSettingsContext.collapsible && (
             <i
@@ -146,12 +155,15 @@ export const Navbar = (props: Props) => {
                 )
               }
               style={{
+                ...(!navbarSettingsContext.navbarCollapsed && {
+                  position: "absolute",
+                  right: 0,
+                }),
                 cursor: "pointer",
                 color: navbarCollapseArrowColor,
-
                 margin: navbarSettingsContext.navbarCollapsed
-                  ? " 8px 0px 0px 0px"
-                  : ` 0px ${PADDING_GAB}px 0px 0px`,
+                  ? "8px 0px 0px 0px"
+                  : `0px ${PADDING_GAB}px 0px 0px`,
               }}
               className={calculateNavbarArrowFunctionColor(
                 navbarSettingsContext.navbarCollapsed!,

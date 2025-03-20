@@ -16,22 +16,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import Page from "../../../common/page/page";
-import { ModuleProfile } from "../../../common/page/text/module/moduleProfile";
-import Text from "../../../common/page/text/text";
-import Title from "../../../common/page/text/title";
+import { PrivacyPolicyText } from "@iavofficial/frontend-framework/privacyPolicy";
+import { LegalDocuments } from "./legalDocuments";
 
-export const PageReactRouterRouter = () => (
-  <Page>
-    <Title>ReactRouterRouter</Title>
-    <ModuleProfile
-      moduleKey="router"
-      isDefaultModule
-      shortDescription="This module provides routing functionality using React Router."
-    />
-    <Text>
-      Since this module is the default Router module it provides exactly the
-      functionality described on the page for the general structure.
-    </Text>
-  </Page>
-);
+export const PrivacyPolicyDocument = () => {
+  return <LegalDocuments legalDocument={PrivacyPolicyText} />;
+};

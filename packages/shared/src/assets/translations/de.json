@@ -1,7 +1,8 @@
 {
   "option_name": "German",
   "Date": "Datum",
-  "Imprint": "Impressum / Datenschutz / Kontakt",
+  "Imprint": "Impressum",
+  "Privacy_Policy": "Datenschutz",
   "Germany": "Deutschland",
   "Internet": "Internet",
   "Headquarter": "Sitz",

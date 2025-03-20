@@ -174,9 +174,9 @@ export const store = new StoreBuilder(modules.storeModules).build();`}
         itself the correct type of your modules is not known at creation time of
         the Context. To allow for correct typing the Framework provides some
         generic Hooks. The <i>createModules</i> function creates correctly typed
-        versions of these Hooks and returns inside the returned object. If you
-        want to use the module context you should export them from your store.ts
-        file. The following code snippet shows an example.
+        versions of these Hooks and returns them inside the returned object. If
+        you want to use the <i>ModuleContext</i> you should export them from
+        your store.ts file. The following code snippet shows an example.
       </Text>
       <Code
         language="typescript"
@@ -188,7 +188,33 @@ export const useModuleTyped = modules.useModuleTyped;`}</Code>
         The following code snippet shows you how to do this.
       </Text>
       <Code language="typescript">{`export const useModuleContextTyped = useModuleContext<typeof modules.all>;
-export const useModuleTyped = createTypedUseModule<typeof finalModules.all>()`}</Code>
+export const useModuleTyped = createTypedUseModule<typeof modules.all>()`}</Code>
+
+      <SubTitle>Important: Configuration of Modules</SubTitle>
+      <Text>
+        If you need to configure modules, you will have to create them as a
+        custom module and pass it to the createModules function. This is
+        especially the case for the default internationalizer module as you will
+        want to provide translations. The following code snippet shows this for
+        some provided modules which should be / have to be configured.
+      </Text>
+      <Code language="typescript">{`const customModules = {
+  [MandatoryModuleNames.Authentication]: new AwsAuthenticator({
+    configureAmplify: configureAmplify,
+    failOnNoLegalGroup: true,
+    legalGroups: ["ADMIN", "SHOWCASE"],
+  }),
+  [MandatoryModuleNames.Internationalization]: new I18NextInternationalizer({
+    translationResources: translations,
+  })
+};
+
+export const modules = createModules(customModules);`}</Code>
+      <Text>
+        We highly recommend to read the modules in depth chapter. Furthermore
+        you can consult the <strong>Modules</strong> section of the
+        documentation to get more information about the modules.
+      </Text>
     </Page>
   );
 };

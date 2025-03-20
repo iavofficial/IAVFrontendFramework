@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {LangResources} from "./internationalizationModule";
+import {LangResources} from "./internationalizerModule";
 
 export type InitI18nextFunctionParams = {
   translationResources: LangResources;

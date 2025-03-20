@@ -45,7 +45,7 @@ import {
 import {AwsAuthenticatorExtras} from "../awsAuthenticatorTypes";
 import {AuthModule} from "@iavofficial/frontend-framework-shared/authenticatorModule";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
-import {InternationalizationModule} from "@iavofficial/frontend-framework-shared/internationalizationModule";
+import {InternationalizerModule} from "@iavofficial/frontend-framework-shared/internationalizerModule";
 import {useDefaultSelector} from "@iavofficial/frontend-framework-shared/moduleDefaults";
 import {useModuleContext} from "@iavofficial/frontend-framework-shared/moduleContext";
 
@@ -56,10 +56,10 @@ type NecessaryAuthModuleAttributes = {
 export const AwsAuthenticationView = <
   TModules extends {
     [MandatoryModuleNames.Authentication]: NecessaryAuthModuleAttributes;
-    [MandatoryModuleNames.Internationalization]: InternationalizationModule;
+    [MandatoryModuleNames.Internationalization]: InternationalizerModule;
   } = {
     [MandatoryModuleNames.Authentication]: AwsAuthenticator;
-    [MandatoryModuleNames.Internationalization]: InternationalizationModule;
+    [MandatoryModuleNames.Internationalization]: InternationalizerModule;
   },
 >(
   props: AuthenticationViewProps,

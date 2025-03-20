@@ -26,7 +26,7 @@ import {initI18nextDefault} from "./initI18nextDefault";
 import {useCookiesAccepted} from "../../../utils/cookieHooks";
 import {MandatoryModuleNames} from "../../../constants/moduleNames";
 import {InitI18nextFunction} from "../../../types/modules/internationalization/initI18nextFunction";
-import {LangResources} from "../../../types/modules/internationalization/internationalizationModule";
+import {LangResources} from "../../../types/modules/internationalization/internationalizerModule";
 
 const DEFAULT_FALLBACK_LANG = "en";
 

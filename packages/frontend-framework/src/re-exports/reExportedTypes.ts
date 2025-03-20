@@ -24,4 +24,4 @@ export * from "@iavofficial/frontend-framework-shared/authenticatorModule";
 
 export * from "@iavofficial/frontend-framework-shared/routerModule";
 
-export * from "@iavofficial/frontend-framework-shared/internationalizationModule";
+export * from "@iavofficial/frontend-framework-shared/internationalizerModule";

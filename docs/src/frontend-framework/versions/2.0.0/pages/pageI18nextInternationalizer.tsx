@@ -16,12 +16,25 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import Page from "../../../common/page/page"
+import Page from "../../../common/page/page";
+import { ModuleProfile } from "../../../common/page/text/module/moduleProfile";
+import Text from "../../../common/page/text/text";
+import Title from "../../../common/page/text/title";
 
 export const PageI18nextInternationalizer = () => {
-    return (
-        <Page>
-
-        </Page>
-    )
-}
+  return (
+    <Page>
+      <Title>I18nextInternationalizer</Title>
+      <ModuleProfile
+        moduleKey="internationalizer"
+        isDefaultModule
+        shortDescription="This module provides internationalization using I18Next."
+      />
+      <Text>
+        Since this module is the default internationalizer module it provides
+        exactly the functionality described on the page for the general
+        structure.
+      </Text>
+    </Page>
+  );
+};

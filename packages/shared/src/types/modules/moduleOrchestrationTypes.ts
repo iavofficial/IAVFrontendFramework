@@ -29,9 +29,9 @@ import {RestrictKeyToPrefix} from "../util-types/restrictKeyToPrefix";
 import {DefaultNonStoreModules} from "../../modules/module_orchestration/moduleDefaults";
 import {RouterModule} from "./router/routerModule";
 import {
-  InternationalizationModule,
-  InternationalizationState,
-} from "./internationalization/internationalizationModule";
+  InternationalizerModule,
+  InternationalizerState,
+} from "./internationalization/internationalizerModule";
 
 export type FFStoreModules<TModulesState = unknown> = {
   [K in keyof TModulesState]: FFStoreModule<TModulesState[K]>;
@@ -40,7 +40,7 @@ export type FFStoreModules<TModulesState = unknown> = {
 // The (default) mandatory state (which will be the state of different module's slices)
 export type FFMandatoryState = {
   [MandatoryModuleNames.Authentication]: AuthState;
-  [MandatoryModuleNames.Internationalization]: InternationalizationState;
+  [MandatoryModuleNames.Internationalization]: InternationalizerState;
 };
 
 // All mandatory modules with minimal setup which is needed by the framework.
@@ -54,7 +54,7 @@ export type FFMandatoryStoreModules<
   [MandatoryModuleNames.Authentication]: AuthModule<
     TModulesState[typeof MandatoryModuleNames.Authentication]
   >;
-  [MandatoryModuleNames.Internationalization]: InternationalizationModule<
+  [MandatoryModuleNames.Internationalization]: InternationalizerModule<
     TModulesState[typeof MandatoryModuleNames.Internationalization]
   >;
 };

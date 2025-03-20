@@ -19,7 +19,7 @@
 export const MandatoryModuleNames = {
   Authentication: "auth",
   Router: "router",
-  Internationalization: "internationalization",
+  Internationalization: "internationalizer",
 } as const;
 
 export type MandatoryModuleName =

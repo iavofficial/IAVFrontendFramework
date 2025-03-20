@@ -17,8 +17,9 @@
  */
 
 import {Slice} from "@reduxjs/toolkit";
+import {FFStoreModule} from "../generalModule";
 
-export type InternationalizationState = {
+export type InternationalizerState = {
   activeLang: string;
 };
 
@@ -51,12 +52,12 @@ export type TranslationWrapperFunction = (t: TranslationFunction) => string;
 
 export type UseTranslationHook = () => TranslationFunction;
 
-export type InternationalizationModule<
-  TIntState extends InternationalizationState = InternationalizationState,
+export type InternationalizerModule<
+  TIntState extends InternationalizerState = InternationalizerState,
 > = {
   slice: Slice<TIntState>;
   fallbackLang: string;
   translationResources: LangResources;
   selectActiveLang: (lang: string) => void;
   useTranslation: UseTranslationHook;
-};
+} & FFStoreModule<TIntState>;

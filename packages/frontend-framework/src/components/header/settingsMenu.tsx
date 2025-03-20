@@ -24,7 +24,7 @@ import {useModuleTranslation} from "@iavofficial/frontend-framework-shared/useMo
 import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
 import {useDefaultSelector} from "@iavofficial/frontend-framework-shared/moduleDefaults";
-import {LangResources} from "@iavofficial/frontend-framework-shared/internationalizationModule";
+import {LangResources} from "@iavofficial/frontend-framework-shared/internationalizerModule";
 
 // ##############################################
 // Notice: The enclosed imports are copied from 'primereact/menuitem/MenuItem' as the path could not be resolved by the gitlab builder

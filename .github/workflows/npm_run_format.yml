@@ -40,4 +40,5 @@ jobs:
           git add .
           git commit -m "chore(format): apply automated formatting changes"
           git fetch origin ${{ github.head_ref }}
-          git push origin HEAD:${{ github.head_ref }}
+          git pull origin ${{ github.head_ref }}
+          git push origin ${{ github.head_ref }}

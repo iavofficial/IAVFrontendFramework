@@ -54,13 +54,15 @@
   align-items: center;
   gap: 4px;
 }
-.legal-doc-link {
+.legal-doc-link,
+#legal-doc-links a {
   font-size: 14px;
   font-weight: 400;
   text-decoration: none;
   color: var(--blue-0);
 }
 
-.legal-doc-link:hover {
+.legal-doc-link:hover,
+#legal-doc-links a:hover {
   color: var(--blue-3) !important;
 }

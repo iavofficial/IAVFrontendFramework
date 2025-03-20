@@ -43,9 +43,7 @@ import "../css/globalChangesOnPrimeReactComponents.css";
 import "../css/globalSettings.css";
 import "../css/globalColors.css";
 import "../css/authenticationView.css";
-import {
-  useDefaultSelector,
-} from "@iavofficial/frontend-framework-shared/moduleDefaults";
+import {useDefaultSelector} from "@iavofficial/frontend-framework-shared/moduleDefaults";
 import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
 import {ImprintText} from "./imprint/imprintText";
@@ -126,7 +124,7 @@ export const UILayer = (props: Props) => {
     },
     {
       path: "/imprint",
-      disabled: disableLogin || hasAuthenticated,
+      disabled: false,
       element: props.imprintComponent ? (
         <props.imprintComponent />
       ) : (
@@ -135,7 +133,7 @@ export const UILayer = (props: Props) => {
     },
     {
       path: "/privacy-policy",
-      disabled: disableLogin || hasAuthenticated,
+      disabled: false,
       element: props.privacyPolicyComponent ? (
         <props.privacyPolicyComponent />
       ) : (

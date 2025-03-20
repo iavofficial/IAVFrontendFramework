@@ -16,25 +16,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { ReactElement } from "react";
+import { PrivacyPolicyText } from '@iavofficial/frontend-framework/privacyPolicy';
+import { LegalDocuments } from './legalDocuments';
 
-export type AuthenticationViewProps = {
-  authOptions?: {
-    backgroundImage?: string;
-    companyText?: string;
-    documentsLabelKey?: string;
-    preventDarkmode?: boolean;
-    errorMessages?: {
-      passwordErrorMessage?: string;
-    };
-  };
-  headerOptions?: {
-    reactElementLeft?: ReactElement;
-    reactElementRight?: ReactElement;
-    hideLeft?: boolean;
-    hideRight?: boolean;
-  };
-  hideLanguageSelection?: boolean;
-  hideImprint?: boolean;
-  hidePrivacyPolicy?: boolean;
+export const PrivacyPolicyDocument = () => {
+  return <LegalDocuments legalDocument={PrivacyPolicyText} />;
 };

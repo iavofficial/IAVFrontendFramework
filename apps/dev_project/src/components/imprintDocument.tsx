@@ -16,25 +16,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { ReactElement } from "react";
+import { ImprintText } from '@iavofficial/frontend-framework/imprint';
+import { LegalDocuments } from './legalDocuments';
 
-export type AuthenticationViewProps = {
-  authOptions?: {
-    backgroundImage?: string;
-    companyText?: string;
-    documentsLabelKey?: string;
-    preventDarkmode?: boolean;
-    errorMessages?: {
-      passwordErrorMessage?: string;
-    };
-  };
-  headerOptions?: {
-    reactElementLeft?: ReactElement;
-    reactElementRight?: ReactElement;
-    hideLeft?: boolean;
-    hideRight?: boolean;
-  };
-  hideLanguageSelection?: boolean;
-  hideImprint?: boolean;
-  hidePrivacyPolicy?: boolean;
+export const ImprintDocument = () => {
+  return <LegalDocuments legalDocument={ImprintText} />;
 };

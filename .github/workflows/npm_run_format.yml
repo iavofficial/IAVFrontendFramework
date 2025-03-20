@@ -27,8 +27,8 @@ jobs:
       - name: Run Format
         run: |
           npm run format
-          git fetch origin ${{ github.head_ref }}
-          git checkout origin ${{ github.head_ref }}
+          git fetch --all
+          git checkout "origin/${{ github.head_ref }}"
           git pull origin ${{ github.head_ref }}
 
       - name: Set environment variables

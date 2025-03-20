@@ -25,7 +25,7 @@ import {
 } from "../types/typesInjectedOptions";
 import {generateHashForValues} from "@iavofficial/frontend-framework-shared/hash";
 import {BasicRoute} from "@iavofficial/frontend-framework-shared/routerModule";
-import { TranslationWrapperFunction } from "@iavofficial/frontend-framework-shared/internationalizationModule";
+import {TranslationWrapperFunction} from "@iavofficial/frontend-framework-shared/internationalizationModule";
 
 export class Group implements GroupableTabAndContentWrapper {
   private _insideGroup = false;

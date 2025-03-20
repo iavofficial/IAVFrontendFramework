@@ -52,8 +52,8 @@ export type FFMandatoryStoreModules<
   TModulesState extends FFMandatoryState = FFMandatoryState,
 > = {
   [MandatoryModuleNames.Authentication]: AuthModule<
-  TModulesState[typeof MandatoryModuleNames.Authentication]
->;
+    TModulesState[typeof MandatoryModuleNames.Authentication]
+  >;
   [MandatoryModuleNames.Internationalization]: InternationalizationModule<
     TModulesState[typeof MandatoryModuleNames.Internationalization]
   >;

@@ -24,7 +24,7 @@ import {useModuleTranslation} from "@iavofficial/frontend-framework-shared/useMo
 import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
 import {useDefaultSelector} from "@iavofficial/frontend-framework-shared/moduleDefaults";
-import { LangResources } from "@iavofficial/frontend-framework-shared/internationalizationModule";
+import {LangResources} from "@iavofficial/frontend-framework-shared/internationalizationModule";
 
 // ##############################################
 // Notice: The enclosed imports are copied from 'primereact/menuitem/MenuItem' as the path could not be resolved by the gitlab builder
@@ -107,9 +107,12 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
           // language is equal to key.
           const activeLangSplit = activeLang.replaceAll("-", "_");
           const active =
-          activeLangSplit === key ||
+            activeLangSplit === key ||
             (isDialectOf(activeLangSplit, key) &&
-              !containsLanguage(activeLangSplit, intModule.translationResources));
+              !containsLanguage(
+                activeLangSplit,
+                intModule.translationResources,
+              ));
           languageOptions.push({
             label: intModule.translationResources[key].translation.option_name,
             icon: active ? "pi pi-check" : "",

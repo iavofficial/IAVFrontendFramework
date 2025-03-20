@@ -130,10 +130,7 @@ export const SimpleNavbarTab: GroupableNavbarTab = (
     style: tabStyleDefault,
     setHovering: setHovering,
     icon: props.icon,
-    name:
-      props.name instanceof Function
-        ? props.name(t)
-        : props.name,
+    name: props.name instanceof Function ? props.name(t) : props.name,
     additionalClassNames: additionalClassNames,
     iconColor: iconColor,
   };

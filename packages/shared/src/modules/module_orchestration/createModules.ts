@@ -42,16 +42,17 @@ import {separateModuleTypes} from "./util/separateModuleTypes";
 // as the user will get an error when he passes the modules to the
 // PageGlobalDataLayer if module types mismatch with FFModule.
 export const createModules = <
-    TModules extends Partial<
-        FFMandatoryStoreModules<TFrameworkStoreModulesState>
-    > &
-        Partial<FFMandatoryNonStoreModules> &
-        Record<string, object>,
-    TFrameworkStoreModulesState extends FFMandatoryState = ActualMandatoryStateFromModules<TModules>,
+  TModules extends Partial<
+    FFMandatoryStoreModules<TFrameworkStoreModulesState>
+  > &
+    Partial<FFMandatoryNonStoreModules> &
+    Record<string, object>,
+  TFrameworkStoreModulesState extends
+    FFMandatoryState = ActualMandatoryStateFromModules<TModules>,
 >(
-    paramModules?: TParamAllModulesPartial<TModules, TFrameworkStoreModulesState>,
+  paramModules?: TParamAllModulesPartial<TModules, TFrameworkStoreModulesState>,
 ) => {
-    const modules = paramModules ?? ({} as TModules);
+  const modules = paramModules ?? ({} as TModules);
 
   const separatedModules = separateModuleTypes(modules);
 

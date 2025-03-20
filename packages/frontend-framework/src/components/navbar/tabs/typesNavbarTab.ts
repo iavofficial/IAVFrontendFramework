@@ -18,7 +18,7 @@
 
 import React, {ReactElement} from "react";
 import {InjectedOptionsGroupableByWrapperToTab} from "../types/typesInjectedOptions";
-import { TranslationWrapperFunction } from "@iavofficial/frontend-framework-shared/internationalizationModule";
+import {TranslationWrapperFunction} from "@iavofficial/frontend-framework-shared/internationalizationModule";
 
 /**
  * This interface contains the properties which have to be passed to a navigation tab.

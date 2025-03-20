@@ -19,16 +19,11 @@
 import React from "react";
 import {Fragment} from "react/jsx-dev-runtime";
 import {useEffect} from "react";
-import {
-  Route,
-  Routes,
-  useLocation,
-  useNavigate,
-} from "react-router";
+import {Route, Routes, useLocation, useNavigate} from "react-router";
 import {generateHash} from "../../../../utils/hash";
 import {useDefaultSelector} from "../../../module_orchestration/moduleDefaults";
-import { BrowserRouter } from "react-router-dom";
-import { UILayerRouterProps } from "../../../../types/modules/router/routerModule";
+import {BrowserRouter} from "react-router-dom";
+import {UILayerRouterProps} from "../../../../types/modules/router/routerModule";
 
 export const UILayerRouter = (props: UILayerRouterProps) => {
   const enabledRoutes = props.routes.filter((route) => !route.disabled);

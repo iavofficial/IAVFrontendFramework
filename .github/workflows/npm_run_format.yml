@@ -47,5 +47,5 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "chore(format): apply automated formatting changes"
-            git push --set-upstream origin ${{ github.head_ref }}
+            git push --set-upstream origin ${{ github.base_ref }}
           fi

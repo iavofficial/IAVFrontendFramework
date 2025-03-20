@@ -14,8 +14,7 @@
  * limitations under the License.
  *
  * SPDX-License-Identifier: Apache-2.0
- */tations under the License.
- **/
+ */
 
 import {StrictMode} from 'react'
 import {createRoot} from 'react-dom/client'

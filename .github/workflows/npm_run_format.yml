@@ -25,7 +25,11 @@ jobs:
         run: npm ci
 
       - name: Run Format
-        run: npm run format
+        run: |
+          npm run format
+          git fetch origin ${{ github.head_ref }}
+          git checkout origin ${{ github.head_ref }}
+          git pull origin ${{ github.head_ref }}
 
       - name: Set environment variables
         run: echo "GITHUB_ACTOR=${{ github.actor }}" >> $GITHUB_ENV
@@ -39,6 +43,4 @@ jobs:
         run: |
           git add .
           git commit -m "chore(format): apply automated formatting changes"
-          git fetch origin ${{ github.head_ref }}
-          git pull origin ${{ github.head_ref }}
-          git push origin ${{ github.head_ref }}
+          git push --set-upstream origin ${{ github.head_ref }}

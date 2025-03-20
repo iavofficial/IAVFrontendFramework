@@ -19,9 +19,9 @@
 import React from "react";
 import {ContextMenu} from "primereact/contextmenu";
 import {MenuItem} from "./settingsMenu";
-import {  useModule } from "@iavofficial/frontend-framework-shared/moduleContext";
-import { useDefaultDispatch } from "@iavofficial/frontend-framework-shared/moduleDefaults";
-import { MandatoryModuleNames } from "@iavofficial/frontend-framework-shared/moduleNames";
+import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
+import {useDefaultDispatch} from "@iavofficial/frontend-framework-shared/moduleDefaults";
+import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
 
 export interface Props {
   hideMenu: (e: React.KeyboardEvent) => void;

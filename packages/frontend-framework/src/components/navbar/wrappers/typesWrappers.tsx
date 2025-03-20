@@ -21,7 +21,7 @@ import {
   InjectedOptionsByGroupToWrapper,
   InjectedOptionsByNavbarToWrapper,
 } from "../types/typesInjectedOptions";
-import { BasicRoute } from "@iavofficial/frontend-framework-shared/routerModule";
+import {BasicRoute} from "@iavofficial/frontend-framework-shared/routerModule";
 
 export interface TabAndContentWrapper {
   getRoutes(): BasicRoute[];

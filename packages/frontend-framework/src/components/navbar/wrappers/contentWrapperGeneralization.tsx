@@ -38,7 +38,7 @@ export class ContentWrapperGeneralization {
       {
         key: this.getKey(),
         path: this._path,
-        element: <this._component/>,
+        element: <this._component />,
       },
     ];
   };

@@ -68,7 +68,7 @@ const Layout = (props: Props) => {
         name: "Example without Translation",
         icon: <InfoIcon />,
       }),
-      ExampleComponent1
+      ExampleComponent1,
     ),
     new BasicContentWrapper(
       "/2",
@@ -77,7 +77,7 @@ const Layout = (props: Props) => {
         name: "Example for Redux Store",
         icon: <InfoIcon />,
       }),
-      ExampleComponent7
+      ExampleComponent7,
     ),
     new Group(
       (t) => t({ key: "Test_group_not_collapsible" }),
@@ -91,9 +91,9 @@ const Layout = (props: Props) => {
             disabled: false,
             icon: <InfoIcon />,
           }),
-          ExampleComponent2
+          ExampleComponent2,
         ),
-      ]
+      ],
     ),
     new BasicContentWrapper(
       "/group-example3/",
@@ -103,7 +103,7 @@ const Layout = (props: Props) => {
         permittedGroups: ["ADMIN"],
         icon: <InfoIcon />,
       }),
-      ExampleComponent3
+      ExampleComponent3,
     ),
     new BasicContentWrapper(
       "/group-example4/",
@@ -112,7 +112,7 @@ const Layout = (props: Props) => {
         disabled: false,
         icon: <InfoIcon />,
       }),
-      ExampleComponent4
+      ExampleComponent4,
     ),
     new Group((t) => t({ key: "Test_group_collapsible" }), <InfoIcon />, true, [
       new Group("Untergruppe", <InfoIcon />, true, [
@@ -124,7 +124,7 @@ const Layout = (props: Props) => {
             disabled: false,
             icon: <InfoIcon />,
           }),
-          ExampleComponent3
+          ExampleComponent3,
         ),
       ]),
       new BasicContentWrapper(
@@ -134,7 +134,7 @@ const Layout = (props: Props) => {
           disabled: false,
           icon: <InfoIcon />,
         }),
-        ExampleComponent4
+        ExampleComponent4,
       ),
       new BasicContentWrapper(
         "/group-example53/",
@@ -143,7 +143,7 @@ const Layout = (props: Props) => {
           disabled: true,
           icon: <InfoIcon />,
         }),
-        ExampleComponent3
+        ExampleComponent3,
       ),
     ]),
     new BasicContentWrapper(
@@ -153,7 +153,7 @@ const Layout = (props: Props) => {
         disabled: false,
         icon: <InfoIcon />,
       }),
-      ExampleComponent5
+      ExampleComponent5,
     ),
     new BasicContentWrapper(
       "/group-example7/",
@@ -162,7 +162,7 @@ const Layout = (props: Props) => {
         disabled: false,
         icon: <InfoIcon />,
       }),
-      ExampleComponent6
+      ExampleComponent6,
     ),
     new BasicContentWrapper(
       "/nested-route/example1/",
@@ -171,7 +171,7 @@ const Layout = (props: Props) => {
         disabled: false,
         icon: <InfoIcon />,
       }),
-      ExampleComponent6
+      ExampleComponent6,
     ),
   ];
 

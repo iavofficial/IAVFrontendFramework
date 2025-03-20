@@ -31,109 +31,109 @@ import {LangResources} from "../../../types/modules/internationalization/interna
 const DEFAULT_FALLBACK_LANG = "en";
 
 const selectActiveLangPlaceholder = (lang: string) => {
-  console.error(`The function is not initialized yet. This error
-        inidicates an error in your application.`);
+    console.error(`The function is not initialized yet. This error
+        indicates an error in your application.`);
 };
 
 export type I18NextInternationalizerParams = {
-  fallbackLang?: string;
-  initI18next?: InitI18nextFunction;
-  forcedInitialLang?: string;
-  translationResources?: LangResources;
+    fallbackLang?: string;
+    initI18next?: InitI18nextFunction;
+    forcedInitialLang?: string;
+    translationResources?: LangResources;
 };
 
 export class I18NextInternationalizer {
-  public slice;
-  public fallbackLang;
-  public translationResources;
-  public selectActiveLang = selectActiveLangPlaceholder;
-  public useTranslation;
-  public useModuleLifecycle;
+    public slice;
+    public fallbackLang;
+    public translationResources;
+    public selectActiveLang = selectActiveLangPlaceholder;
+    public useTranslation;
+    public useModuleLifecycle;
 
-  constructor(params?: I18NextInternationalizerParams) {
-    const fallbackLang = params?.fallbackLang ?? DEFAULT_FALLBACK_LANG;
-    const initI18next = params?.initI18next ?? initI18nextDefault;
-    const forcedInitialLang = params?.forcedInitialLang;
-    const customTranslationResources = params?.translationResources;
+    constructor(params?: I18NextInternationalizerParams) {
+        const fallbackLang = params?.fallbackLang ?? DEFAULT_FALLBACK_LANG;
+        const initI18next = params?.initI18next ?? initI18nextDefault;
+        const forcedInitialLang = params?.forcedInitialLang;
+        const customTranslationResources = params?.translationResources;
 
-    this.fallbackLang = fallbackLang;
+        this.fallbackLang = fallbackLang;
 
-    const initialState = {
-      activeLang: forcedInitialLang ?? fallbackLang,
-    };
-
-    this.slice = createSlice({
-      name: MandatoryModuleNames.Internationalization,
-      initialState: initialState,
-      reducers: {
-        setActiveLang: (state, action: PayloadAction<string>) => {
-          state.activeLang = action.payload;
-        },
-      },
-    });
-
-    const {setActiveLang} = this.slice.actions;
-
-    const mergedTranslationResources = structuredClone(
-      DEFAULT_TRANSLATION_RESOURCES,
-    );
-
-    if (customTranslationResources) {
-      Object.keys(customTranslationResources).forEach((key) => {
-        if (Object.keys(mergedTranslationResources).includes(key)) {
-          type keyType = keyof typeof mergedTranslationResources;
-          Object.assign(
-            mergedTranslationResources[key as keyType].translation,
-            customTranslationResources[key].translation,
-          );
-        } else {
-          // @ts-ignore No index signature on json imports
-          mergedTranslationResources[key] = customTranslationResources[key];
-        }
-      });
-    }
-
-    this.translationResources = mergedTranslationResources;
-
-    this.useTranslation = () => {
-      const [t] = useTranslationI18next();
-      return (params: {key: string; options?: Record<string, unknown>}) => {
-        const options = params?.options ?? {};
-        return t(params.key, options);
-      };
-    };
-
-    this.useModuleLifecycle = () => {
-      const [isInitialized, setIsInitialized] = useState(false);
-      const cookiesAccepted = useCookiesAccepted();
-      const dispatch = useDefaultDispatch();
-
-      useEffect(() => {
-        this.selectActiveLang = (lang: string) => {
-          i18next.changeLanguage(lang);
-          dispatch(setActiveLang(lang));
+        const initialState = {
+            activeLang: forcedInitialLang ?? fallbackLang,
         };
 
-        initI18next({
-          acceptedCookies: cookiesAccepted,
-          fallbackLang: fallbackLang,
-          translationResources: mergedTranslationResources,
+        this.slice = createSlice({
+            name: MandatoryModuleNames.Internationalization,
+            initialState: initialState,
+            reducers: {
+                setActiveLang: (state, action: PayloadAction<string>) => {
+                    state.activeLang = action.payload;
+                },
+            },
         });
 
-        if (forcedInitialLang) {
-          this.selectActiveLang(forcedInitialLang);
-        } else {
-          this.selectActiveLang(
-            i18next.language === "de-DE" ? "de" : i18next.language,
-          );
+        const {setActiveLang} = this.slice.actions;
+
+        const mergedTranslationResources = structuredClone(
+            DEFAULT_TRANSLATION_RESOURCES,
+        );
+
+        if (customTranslationResources) {
+            Object.keys(customTranslationResources).forEach((key) => {
+                if (Object.keys(mergedTranslationResources).includes(key)) {
+                    type keyType = keyof typeof mergedTranslationResources;
+                    Object.assign(
+                        mergedTranslationResources[key as keyType].translation,
+                        customTranslationResources[key].translation,
+                    );
+                } else {
+                    // @ts-ignore No index signature on json imports
+                    mergedTranslationResources[key] = customTranslationResources[key];
+                }
+            });
         }
 
-        setIsInitialized(true);
-      });
+        this.translationResources = mergedTranslationResources;
 
-      return {
-        renderChildren: isInitialized,
-      };
-    };
-  }
+        this.useTranslation = () => {
+            const [t] = useTranslationI18next();
+            return (params: { key: string; options?: Record<string, unknown> }) => {
+                const options = params?.options ?? {};
+                return t(params.key, options);
+            };
+        };
+
+        this.useModuleLifecycle = () => {
+            const [isInitialized, setIsInitialized] = useState(false);
+            const cookiesAccepted = useCookiesAccepted();
+            const dispatch = useDefaultDispatch();
+
+            useEffect(() => {
+                this.selectActiveLang = (lang: string) => {
+                    i18next.changeLanguage(lang);
+                    dispatch(setActiveLang(lang));
+                };
+
+                initI18next({
+                    acceptedCookies: cookiesAccepted,
+                    fallbackLang: fallbackLang,
+                    translationResources: mergedTranslationResources,
+                });
+
+                if (forcedInitialLang) {
+                    this.selectActiveLang(forcedInitialLang);
+                } else {
+                    this.selectActiveLang(
+                        i18next.language === "de-DE" ? "de" : i18next.language,
+                    );
+                }
+
+                setIsInitialized(true);
+            });
+
+            return {
+                renderChildren: isInitialized,
+            };
+        };
+    }
 }

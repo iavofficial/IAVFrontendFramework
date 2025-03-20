@@ -32,7 +32,7 @@ import {
 } from "@iavofficial/frontend-framework-shared/constants";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 import {useModuleTranslation} from "@iavofficial/frontend-framework-shared/useModuleTranslation";
-import {TranslationWrapperFunction} from "@iavofficial/frontend-framework-shared/internationalizationModule";
+import {TranslationWrapperFunction} from "@iavofficial/frontend-framework-shared/internationalizerModule";
 
 interface Props {
   name: string | TranslationWrapperFunction;

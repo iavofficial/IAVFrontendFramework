@@ -29,7 +29,7 @@ export interface HeaderColorOptions {
 export interface NavbarColorOptions {
   backgroundColor?: string;
   navbarCollapseArrowColor?: string;
-  legalDocumentsIconColor?: string;
+  legalDocumentsLinkColor?: string;
   scrollbarColor?: string;
   content?: TabColorOptionsOptional;
 }
@@ -104,7 +104,6 @@ export interface AuthenticationViewColorOptions {
   headerBackgroundColor?: string;
   loginButtonBackgroundColor?: string;
   loginButtonTextColor?: string;
-  legalNoticeIconColor?: string;
   loginFormBackgroundColor?: string;
   fullScreenBackgroundColor?: string;
   companyTextColor?: string;
@@ -113,6 +112,7 @@ export interface AuthenticationViewColorOptions {
   inputFieldTextColor?: string;
   passwortRequirementsTextColor?: string;
   themeTogglerColor?: string;
+  legalLinkColor?: string;
 }
 
 //# Aggregated color options

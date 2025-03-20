@@ -28,7 +28,7 @@ import {
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 import {generateHashOfLength} from "@iavofficial/frontend-framework-shared/hash";
 import {useModuleTranslation} from "@iavofficial/frontend-framework-shared/useModuleTranslation";
-import {TranslationWrapperFunction} from "@iavofficial/frontend-framework-shared/internationalizationModule";
+import {TranslationWrapperFunction} from "@iavofficial/frontend-framework-shared/internationalizerModule";
 
 export interface Props {
   displayName: string | TranslationWrapperFunction;

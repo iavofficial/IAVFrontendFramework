@@ -18,26 +18,26 @@
 
 import {MandatoryModuleNames} from "../../constants/moduleNames";
 import {useModule} from "../../contexts/moduleContext";
-import {UseTranslationHook} from "../../types/modules/internationalization/internationalizationModule";
+import {UseTranslationHook} from "../../types/modules/internationalization/internationalizerModule";
 import {MergeModules} from "../../types/modules/moduleOrchestrationTypes";
 import {I18NextInternationalizer} from "../default_modules/internationalization/i18NextInternationalizerModule";
 import {AllDefaultModules} from "../module_orchestration/moduleDefaults";
 
 export const useModuleTranslation = <
-  TInternationalizationModule extends {
+  TInternationalizerModule extends {
     useTranslation: UseTranslationHook;
   } = I18NextInternationalizer,
 >() => {
   type TModules = MergeModules<
     AllDefaultModules,
     {
-      [MandatoryModuleNames.Internationalization]: TInternationalizationModule;
+      [MandatoryModuleNames.Internationalizer]: TInternationalizerModule;
     }
   >;
 
   const intModule = useModule<
-    typeof MandatoryModuleNames.Internationalization,
+    typeof MandatoryModuleNames.Internationalizer,
     TModules
-  >(MandatoryModuleNames.Internationalization);
+  >(MandatoryModuleNames.Internationalizer);
   return intModule.useTranslation();
 };

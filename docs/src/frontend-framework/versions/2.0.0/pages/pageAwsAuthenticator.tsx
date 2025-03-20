@@ -172,7 +172,7 @@ export const PageAwsAuthenticator = () => {
 };
 
 const customModules = {
-  [MandatoryModuleNames.Authentication]: new PageAwsAuthenticator({
+  [MandatoryModuleNames.Authenticator]: new PageAwsAuthenticator({
     configureAmplify: configureAmplify,
     failOnNoLegalGroup: true,
     legalGroups: ["ADMIN", "SHOWCASE"],

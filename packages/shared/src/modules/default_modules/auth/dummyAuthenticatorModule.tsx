@@ -53,7 +53,7 @@ export class DummyAuthenticator {
 
   constructor() {
     this.slice = createSlice({
-      name: MandatoryModuleNames.Authentication,
+      name: MandatoryModuleNames.Authenticator,
       initialState,
       reducers: {
         login: (state, action: PayloadAction<string>) => {
@@ -74,23 +74,23 @@ export class DummyAuthenticator {
     this.fetchAuthed = createAsyncThunk<
       Response,
       {url: string; settings?: object},
-      {state: {[MandatoryModuleNames.Authentication]: DummyAuthenticatorState}}
+      {state: {[MandatoryModuleNames.Authenticator]: DummyAuthenticatorState}}
     >(
-      MandatoryModuleNames.Authentication + "/fetchAuthed",
+      MandatoryModuleNames.Authenticator + "/fetchAuthed",
       async ({url, settings}) => {
         return fetch(url, settings);
       },
     );
 
     this.login = createAsyncThunk(
-      MandatoryModuleNames.Authentication + "/login",
+      MandatoryModuleNames.Authenticator + "/login",
       async ({credentials}: {credentials: Credentials}, {dispatch}) => {
         dispatch(login(credentials.email));
       },
     );
 
     this.logout = createAsyncThunk<void, {error?: unknown} | undefined, {}>(
-      MandatoryModuleNames.Authentication + "/logout",
+      MandatoryModuleNames.Authenticator + "/logout",
       async ({error}: {error?: unknown} = {}, {dispatch}) => {
         dispatch(logout());
       },

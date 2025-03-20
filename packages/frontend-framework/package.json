@@ -110,6 +110,7 @@
     "./cookieBanner": "./dist/components/cookie/cookieBanner.js",
     "./defaultContentSelectionElement": "./dist/components/content/defaultContentSelectionElement.js",
     "./imprint": "./dist/components/imprint/imprintText.js",
+    "./privacyPolicy": "./dist/components/imprint/privacyPolicyText.js",
     "./headerPanelElement": "./dist/components/header/headerPanelElement.js",
     "./headerMenuElement": "./dist/components/header/headerMenuElement.js",
     "./store": "./dist/re-exports/store.js",
@@ -230,6 +231,9 @@
       ],
       "./imprint": [
         "./dist/components/imprint/imprintText.d.ts"
+      ],
+      "./privacyPolicy": [
+        "./dist/components/imprint/privacyPolicyText.d.ts"
       ],
       "./headerPanelElement": [
         "./dist/components/header/headerPanelElement.d.ts"

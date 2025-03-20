@@ -22,7 +22,8 @@ import { UILayer } from "@iavofficial/frontend-framework/uiLayer";
 import { BasicContentWrapper } from "@iavofficial/frontend-framework/basicContentWrapper";
 import { Group } from "@iavofficial/frontend-framework/group";
 import InfoIcon from "./assets/infoIcon.svg?react";
-import { LegalDocuments } from "./components/legalDocuments";
+import { ImprintDocument } from "./components/imprintDocument";
+import { PrivacyPolicyDocument } from "./components/privacyPolicyDocument";
 import { ExampleComponent1 } from "./components/exampleComponent1";
 import { ExampleComponent6 } from "./components/exampleComponent6";
 import { ExampleComponent3 } from "./components/exampleComponent3";
@@ -226,7 +227,8 @@ const Layout = (props: Props) => {
       authenticationView={props.authenticationView}
       settingsMenuOptions={settingsMenuOptions}
       documentsLabelKey="Legal_documents"
-      documentsComponent={LegalDocuments}
+      imprintComponent={ImprintDocument}
+      privacyPolicyComponent={PrivacyPolicyDocument}
       headerOptions={{
         userIcon: <InfoIcon style={{ backgroundColor: WHITE }} />,
         reactElementLeft: <span className="ml-3">Dev application</span>,

@@ -43,7 +43,7 @@ const translations = {
 };
 
 const customModules = {
-  [MandatoryModuleNames.Internationalization]: new I18NextInternationalizer({
+  [MandatoryModuleNames.Internationalizer]: new I18NextInternationalizer({
     translationResources: translations,
   }),
 };
@@ -56,4 +56,4 @@ export const useModuleContextTyped = modules.useModuleContextTyped;
 export const useModuleTyped = modules.useModuleTyped;
 
 /*const {modules: modulesTest} = useModuleContextTyped();
-const authModule = useModuleTyped(MandatoryModuleNames.Authentication);*/
+const authModule = useModuleTyped(MandatoryModuleNames.Authenticator);*/

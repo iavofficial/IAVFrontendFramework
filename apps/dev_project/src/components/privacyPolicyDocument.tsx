@@ -16,12 +16,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-export * from "@iavofficial/frontend-framework-shared/generalModule";
-export * from "@iavofficial/frontend-framework-shared/moduleOrchestrationTypes";
+import { PrivacyPolicyText } from "@iavofficial/frontend-framework/privacyPolicy";
+import { LegalDocuments } from "./legalDocuments";
 
-export * from "@iavofficial/frontend-framework-shared/authenticationViewProps";
-export * from "@iavofficial/frontend-framework-shared/authenticatorModule";
-
-export * from "@iavofficial/frontend-framework-shared/routerModule";
-
-export * from "@iavofficial/frontend-framework-shared/internationalizerModule";
+export const PrivacyPolicyDocument = () => {
+  return <LegalDocuments legalDocument={PrivacyPolicyText} />;
+};

@@ -45,7 +45,8 @@ const PageUiLayer: React.FC = () => {
     headerOptions?: HeaderOptions; // Optional property to customize the header of the main view and the authentication view. The object will be explained later in this chapter.
     authOptions?: AuthOptions;  // Optional property to customize the authentication view. The object will be explained later in this chapter.
     documentsLabelKey?: string; // Optional parameter to replace the text for the legal documents which is shown when hovering over the info icon inside the authentication view and at the bottom of the navigation bar. You have to pass a string which is the key of corresponding translations in your translation files.
-    hideLegalDocuments?: boolean; // Option to hide the link for the legal documents. This could be of use if you develop a desktop application like electron.
+    hideImprint?: boolean; // Option to hide the link for the imprint document. This could be of use if you develop a desktop application like electron.
+    hidePrivacyPolicy?: boolean; // Option to hide the link for the privacy policy document. This could be of use if you develop a desktop application like electron.
     navbarOptions?: NavbarOptions; // Option to configure the navigation bar. This is explained later.
     disableCookieBanner?: boolean; // Option to disable / hide the provided cookie banner / disclaimer.
     disableLogin?: boolean; // Option to disable the login and logout.
@@ -341,7 +342,8 @@ export interface AuthenticationViewProps {
         hideRight?: boolean;
     };
     hideLanguageSelection?: boolean;
-    hideLegalDocuments?: boolean;
+    hideImprint?: boolean;
+    hidePrivacyPolicy?: boolean;
 }`}
       </Code>
       <SubSubTitle>

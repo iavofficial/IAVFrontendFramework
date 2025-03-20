@@ -40,8 +40,8 @@ export type DefaultThunkDispatch = ThunkDispatch<
 
 // This object contains the default modules which can be replaced.
 export const defaultStoreModules: FFMandatoryStoreModules = {
-  [MandatoryModuleNames.Authentication]: new DummyAuthenticator(),
-  [MandatoryModuleNames.Internationalization]: new I18NextInternationalizer(),
+  [MandatoryModuleNames.Authenticator]: new DummyAuthenticator(),
+  [MandatoryModuleNames.Internationalizer]: new I18NextInternationalizer(),
 };
 
 export type DefaultStoreModules = typeof defaultStoreModules;

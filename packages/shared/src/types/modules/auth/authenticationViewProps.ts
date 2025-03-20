@@ -35,5 +35,6 @@ export type AuthenticationViewProps = {
     hideRight?: boolean;
   };
   hideLanguageSelection?: boolean;
-  hideLegalDocuments?: boolean;
+  hideImprint?: boolean;
+  hidePrivacyPolicy?: boolean;
 };

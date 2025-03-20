@@ -45,7 +45,7 @@ import {
 import {AwsAuthenticatorExtras} from "../awsAuthenticatorTypes";
 import {AuthModule} from "@iavofficial/frontend-framework-shared/authenticatorModule";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
-import {InternationalizationModule} from "@iavofficial/frontend-framework-shared/internationalizationModule";
+import {InternationalizerModule} from "@iavofficial/frontend-framework-shared/internationalizerModule";
 import {useDefaultSelector} from "@iavofficial/frontend-framework-shared/moduleDefaults";
 import {useModuleContext} from "@iavofficial/frontend-framework-shared/moduleContext";
 
@@ -55,18 +55,18 @@ type NecessaryAuthModuleAttributes = {
 
 export const AwsAuthenticationView = <
   TModules extends {
-    [MandatoryModuleNames.Authentication]: NecessaryAuthModuleAttributes;
-    [MandatoryModuleNames.Internationalization]: InternationalizationModule;
+    [MandatoryModuleNames.Authenticator]: NecessaryAuthModuleAttributes;
+    [MandatoryModuleNames.Internationalizer]: InternationalizerModule;
   } = {
-    [MandatoryModuleNames.Authentication]: AwsAuthenticator;
-    [MandatoryModuleNames.Internationalization]: InternationalizationModule;
+    [MandatoryModuleNames.Authenticator]: AwsAuthenticator;
+    [MandatoryModuleNames.Internationalizer]: InternationalizerModule;
   },
 >(
   props: AuthenticationViewProps,
 ) => {
   const {modules} = useModuleContext<TModules>();
-  const authenticationModule = modules[MandatoryModuleNames.Authentication];
-  const intModule = modules[MandatoryModuleNames.Internationalization];
+  const authenticationModule = modules[MandatoryModuleNames.Authenticator];
+  const intModule = modules[MandatoryModuleNames.Internationalizer];
 
   const dispatch = useDispatch<AwsAuthenticatorAuthDispatch>();
   const useTypedSelector: TypedUseSelectorHook<AwsAuthenticatorStoreState> =
@@ -74,19 +74,19 @@ export const AwsAuthenticationView = <
 
   const isNewPasswordRequired = useTypedSelector(
     (state) =>
-      state[MandatoryModuleNames.Authentication].extras.isNewPasswordRequired,
+      state[MandatoryModuleNames.Authenticator].extras.isNewPasswordRequired,
   );
   const loginError =
     useTypedSelector(
-      (state) => state[MandatoryModuleNames.Authentication].extras.loginError,
+      (state) => state[MandatoryModuleNames.Authenticator].extras.loginError,
     ) ?? "";
 
   const isLoading = useTypedSelector(
-    (state) => state[MandatoryModuleNames.Authentication].isLoading,
+    (state) => state[MandatoryModuleNames.Authenticator].isLoading,
   );
 
   const activeLang = useDefaultSelector(
-    (state) => state[MandatoryModuleNames.Internationalization].activeLang,
+    (state) => state[MandatoryModuleNames.Internationalizer].activeLang,
   );
 
   const [email, setEmail] = useState("");
@@ -114,12 +114,12 @@ export const AwsAuthenticationView = <
   const loginFormBackgroundColor =
     colorSettingsContext.currentColors.authenticationView
       .loginFormBackgroundColor;
-  const legalNoticeIconColor =
-    colorSettingsContext.currentColors.authenticationView.legalNoticeIconColor;
   const companyTextColor =
     colorSettingsContext.currentColors.authenticationView.companyTextColor;
   const themeTogglerColor =
     colorSettingsContext.currentColors.authenticationView.themeTogglerColor;
+  const legalLinkColor =
+    colorSettingsContext.currentColors.authenticationView.legalLinkColor;
 
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -401,50 +401,67 @@ export const AwsAuthenticationView = <
           {isNewPasswordRequired ? NewPasswordForm : LoginForm}
         </div>
 
-        {!props.hideLegalDocuments && (
-          <Link
-            style={{
-              position: "absolute",
-              bottom: "12px",
-              left: `${PADDING_GAB}px`,
-              textDecoration: "none",
-            }}
-            to="/documents"
-            target="_blank"
-          >
-            <span
-              className={"pi pi-info-circle " + identifierLegal}
-              style={{
-                fontSize: "medium",
-                fontWeight: "bold",
-                color: legalNoticeIconColor,
-              }}
-            />
-          </Link>
-        )}
-
-        <Tooltip
-          content={t({
-            key: props.authOptions?.documentsLabelKey
-              ? props.authOptions?.documentsLabelKey
-              : "Imprint",
-          })}
-          target={identifierWithDot}
-          id="hover-image"
-        />
-        <span
+        <div
+          className="flex"
           style={{
             alignSelf: "center",
             padding: "24px",
-            fontSize: "11px",
-            color: companyTextColor,
+            fontSize: "12px",
+            gap: "20px",
+            alignItems: "center",
           }}
         >
-          &copy;{" "}
-          {props.authOptions?.companyText
-            ? props.authOptions?.companyText
-            : "Company 2025"}
-        </span>
+          <span
+            style={{
+              color: companyTextColor,
+            }}
+          >
+            &copy;{" "}
+            {props.authOptions?.companyText
+              ? props.authOptions?.companyText
+              : "Company 2025"}
+          </span>
+
+          {(props.hideImprint === true && props.hidePrivacyPolicy === true) ===
+            false && (
+            <>
+              <span style={{color: "var(--grey-2)"}}>|</span>
+              <div
+                className="flex"
+                style={{
+                  alignItems: "center",
+                  gap: "4px",
+                }}
+              >
+                {!props.hideImprint && (
+                  <Link
+                    className="legal-doc-link"
+                    style={{color: legalLinkColor, fontSize: "12px"}}
+                    to="/imprint"
+                    target="_blank"
+                  >
+                    {t({key: "Imprint"})}
+                  </Link>
+                )}
+                {!props.hideImprint && !props.hidePrivacyPolicy && (
+                  <span style={{color: legalLinkColor, fontSize: "12px"}}>
+                    &
+                  </span>
+                )}
+                {!props.hidePrivacyPolicy && (
+                  <Link
+                    className="legal-doc-link"
+                    style={{color: legalLinkColor, fontSize: "12px"}}
+                    to="/privacy-policy"
+                    target="_blank"
+                  >
+                    {t({key: "Privacy_Policy"})}
+                  </Link>
+                )}
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

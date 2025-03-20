@@ -73,7 +73,7 @@ export const PageModulesInDepth = () => (
       title="Example usage of createModulesSeperately"
     >
       {`const frameworkStoreModules = {
-  [MandatoryModuleNames.Authentication]: new AWSAuthenticator({
+  [MandatoryModuleNames.Authenticator]: new AWSAuthenticator({
     configureAmplify: configureAmplify,
     failOnNoLegalGroup: true,
     legalGroups: ["ADMIN", "SHOWCASE"],
@@ -116,10 +116,10 @@ export const store = new StoreBuilder(modules.storeModules).build();`}
     >
       {`export const store = new StoreBuilder(modules.storeModules)
   .setFrameworkModuleProcessor(
-    MandatoryModuleNames.Authentication,
+    MandatoryModuleNames.Authenticator,
     (module, storeConfigBuilder) => {
       storeConfigBuilder.setReducer(
-        MandatoryModuleNames.Authentication,
+        MandatoryModuleNames.Authenticator,
         module.slice.reducer
       );
     }
@@ -232,7 +232,7 @@ public setExtras(key: string, value: unknown): this`}
         {
           key: "auth",
           type_of_module: "Framework Store Module",
-          default_module: "DummyAuthenticationProvider",
+          default_module: "DummyAuthenticator",
           ts_type: CodeAuthModuleType,
         },
         {
@@ -240,6 +240,12 @@ public setExtras(key: string, value: unknown): this`}
           type_of_module: "Framework Non Store Module",
           default_module: "ReactRouterRouter",
           ts_type: CodeRouterModuleType,
+        },
+        {
+          key: "internationalizer",
+          type_of_module: "Framework Store module",
+          default_module: "I18nextInternationalizer",
+          ts_type: CodeInternationalizerModuleType,
         },
       ]}
     />
@@ -266,23 +272,38 @@ export type FFStoreModule<TState> = {
 );
 
 const CodeAuthModuleType = (
-  <Code
-    center
-    language="typescript"
-  >{`export type AuthModule<TAuthState extends AuthState> = {
+  <Code center language="typescript">
+    {`export type AuthModule<TAuthState extends AuthState> = {
   fetchAuthed: AsyncThunk<Response, FetchAuthedFunctionArgs, any>;
   login: AsyncThunk<void, {credentials: Credentials}, any>;
   logout: AsyncThunk<void, {error?: unknown} | undefined, any>;
-} & FFStoreModule<TAuthState>;`}</Code>
+} & FFStoreModule<TAuthState>;`}
+  </Code>
 );
 
 const CodeRouterModuleType = (
-  <Code center language="typescript">{`export type RouterModule = {
+  <Code center language="typescript">
+    {`export type RouterModule = {
   UiLayerRouter: React.ComponentType<UILayerRouterProps>;
   MainViewRouter: React.ComponentType<MainViewRouterProps>;
   Link: React.ComponentType<LinkProps>;
   useLocation: useLocationType;
   useIsTabActive: useIsTabActiveType;
 } & FFModule;
-`}</Code>
+`}
+  </Code>
+);
+
+const CodeInternationalizerModuleType = (
+  <Code center language="typescript">
+    {`export type InternationalizerModule<
+  TIntState extends InternationalizerState = InternationalizerState,
+> = {
+  slice: Slice<TIntState>;
+  fallbackLang: string;
+  translationResources: LangResources;
+  selectActiveLang: (lang: string) => void;
+  useTranslation: UseTranslationHook;
+} & FFStoreModule<TIntState>;`}
+  </Code>
 );

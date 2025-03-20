@@ -32,7 +32,7 @@ import {
 } from "@iavofficial/frontend-framework-shared/constants";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 import {useModuleTranslation} from "@iavofficial/frontend-framework-shared/useModuleTranslation";
-import { TranslationWrapperFunction } from "@iavofficial/frontend-framework-shared/internationalizationModule";
+import {TranslationWrapperFunction} from "@iavofficial/frontend-framework-shared/internationalizationModule";
 
 interface Props {
   name: string | TranslationWrapperFunction;
@@ -148,10 +148,7 @@ export const TabGroup = (props: Props) => {
   }
 
   const tabComponentProperties = {
-    name:
-      props.name instanceof Function
-        ? props.name(t)
-        : props.name,
+    name: props.name instanceof Function ? props.name(t) : props.name,
     hovering: hovering,
     logo: props.logo,
     groupTabCollapsed: groupTabCollapsed,

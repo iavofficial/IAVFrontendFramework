@@ -27,7 +27,7 @@ import {
   signOut,
 } from "aws-amplify/auth";
 import {JWTPojo} from "./awsAuthenticatorTypes";
-import { Credentials } from "@iavofficial/frontend-framework-shared/authenticatorModule";
+import {Credentials} from "@iavofficial/frontend-framework-shared/authenticatorModule";
 
 export async function cognitoLogin(
   credentials: Credentials,

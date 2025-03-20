@@ -38,7 +38,10 @@ import {AppLogoPlaceholder} from "@iavofficial/frontend-framework-shared/appLogo
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
-import {useDefaultDispatch, useDefaultSelector} from "@iavofficial/frontend-framework-shared/moduleDefaults";
+import {
+  useDefaultDispatch,
+  useDefaultSelector,
+} from "@iavofficial/frontend-framework-shared/moduleDefaults";
 import {useModuleTranslation} from "@iavofficial/frontend-framework-shared/useModuleTranslation";
 
 export const BasicAuthenticationView = (props: AuthenticationViewProps) => {

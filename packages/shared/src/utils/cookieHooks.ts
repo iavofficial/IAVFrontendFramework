@@ -17,7 +17,7 @@
  */
 
 import {useCookies} from "react-cookie";
-import { ACCEPTED_COOKIES_NAME } from "../constants/constants";
+import {ACCEPTED_COOKIES_NAME} from "../constants/constants";
 
 export function useCookiesAccepted() {
   const [cookies] = useCookies([ACCEPTED_COOKIES_NAME]);

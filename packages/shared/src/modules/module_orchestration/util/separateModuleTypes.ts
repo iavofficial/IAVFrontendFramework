@@ -69,7 +69,7 @@ export const separateModuleTypes = <TModules extends Record<string, object>>(
       userNonStoreModules = {...userNonStoreModules, [key]: module};
     }
   });
-  
+
   return {
     frameworkStoreModules: frameworkStoreModules,
     userStoreModules: userStoreModules,

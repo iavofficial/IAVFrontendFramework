@@ -42,6 +42,8 @@ import { PageGeneralAuthModule } from "./pages/pageGeneralAuthModule.tsx";
 import { PageGeneralRouterModule } from "./pages/pageGeneralRouterModule.tsx";
 import GroupNavigationMap from "../../common/drawer/groupNavigationMap.tsx";
 import RoutesMap from "../../common/drawer/routesMap.tsx";
+import { PageGeneralInternationalizationModule } from "./pages/pageGeneralInternationalizationModule.tsx";
+import { PageI18nextInternationalizer } from "./pages/pageI18nextInternationalizer.tsx";
 
 const routes: PathRoute[] = [
   { path: "overview", label: "Quick Overview", element: <PageOverview /> },
@@ -120,6 +122,21 @@ const modulesRoutes: GroupRoute[] = [
       },
     ],
   },
+  {
+    title: "Internationalization",
+    routes: [
+      {
+        path: "general-internationalization-module",
+        label: "General internationalization module",
+        element: <PageGeneralInternationalizationModule />,
+      },
+      {
+        path: "i18nextInternationalizer",
+        label: "I18nextInternationalizer",
+        element: <PageI18nextInternationalizer />,
+      },
+    ]
+  }
 ];
 
 const helpRoutes: PathRoute[] = [

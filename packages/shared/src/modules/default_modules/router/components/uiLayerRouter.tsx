@@ -68,7 +68,7 @@ const Redirector = (props: RedirectorProps) => {
 
   useEffect(() => {
     if (!hasAuthenticated) {
-      if (currentPath !== "/documents") {
+      if (currentPath !== "/imprint" && currentPath != "/privacy-policy") {
         navigate("/login");
       }
     } else {

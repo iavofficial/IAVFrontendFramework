@@ -43,5 +43,8 @@ jobs:
       - name: Commit and Push Changes
         run: |
           git add .
-          git commit -m "chore(format): apply automated formatting changes"
-          git push --set-upstream origin ${{ github.head_ref }}
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore(format): apply automated formatting changes"
+            git push --set-upstream origin ${{ github.head_ref }}

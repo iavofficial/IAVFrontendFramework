@@ -17,11 +17,11 @@
  */
 
 import React, {useContext} from "react";
-import {useTranslator} from "../internationalization/translators";
+import {useModuleTranslation} from "@iavofficial/frontend-framework-shared/useModuleTranslation";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 
 export const PrivacyPolicyText = () => {
-  const t = useTranslator();
+  const t = useModuleTranslation();
   const colorSettingsContext = useContext(ColorSettingsContext);
 
   return (
@@ -32,19 +32,19 @@ export const PrivacyPolicyText = () => {
           : "bg-white-1 color-black"
       }
     >
-      <p className={"font-bold"}>{t("Privacy_Policy")}</p>
+      <p className={"font-bold"}>{t({key: "Privacy_Policy"})}</p>
       <span>Max Mustermann, Musterunternehmen</span>
       <br />
       <span>Musterstraße 1</span>
       <br />
       <span>12345 Musterstadt</span> <br />
-      <span>{t("Germany")}</span> <br />
+      <span>{t({key: "Germany"})}</span> <br />
       <br />
       <span>Tel.: +49 123 456789</span> <br />
       <span>Fax: +49 123 456789-99</span> <br />
       <span lang="EN-GB">E-Mail: kontakt[at]musterunternehmen.com</span> <br />
       <span>
-        {t("Internet")}:{" "}
+        {t({key: "Internet"})}:{" "}
         <a
           href="http://www.musterunternehmen.com"
           className={colorSettingsContext?.darkmode ? "color-blue-3" : ""}
@@ -53,15 +53,15 @@ export const PrivacyPolicyText = () => {
         </a>
       </span>{" "}
       <br /> <br />
-      <span>{t("Headquarter")}: Musterstadt</span> <br />
-      <span>{t("Register_court")}: Amtsgericht Musterstadt</span> <br />
-      <span>{t("Registration_number")}: HRB 123456</span> <br />
-      <span>{t("USt_Ident_Number")}: DE 123456789</span> <br /> <br />
-      <span>{t("Managing_directors")}</span> <br />
-      <span>Max Mustermann ({t("Chairman")})</span> <br />
+      <span>{t({key: "Headquarter"})}: Musterstadt</span> <br />
+      <span>{t({key: "Register_court"})}: Amtsgericht Musterstadt</span> <br />
+      <span>{t({key: "Registration_number"})}: HRB 123456</span> <br />
+      <span>{t({key: "USt_Ident_Number"})}: DE 123456789</span> <br /> <br />
+      <span>{t({key: "Managing_directors"})}</span> <br />
+      <span>Max Mustermann ({t({key: "Chairman"})})</span> <br />
       <span>Erika Mustermann</span> <br />
       <span>Hans Beispiel</span> <br />
-      <span>{t("Chairman_supervisory_board")}</span> <br />
+      <span>{t({key: "Chairman_supervisory_board"})}</span> <br />
       <span>Dr. Johann Muster</span> <br />
     </div>
   );

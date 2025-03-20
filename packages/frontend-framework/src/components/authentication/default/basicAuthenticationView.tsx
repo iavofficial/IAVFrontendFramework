@@ -38,7 +38,10 @@ import {AppLogoPlaceholder} from "@iavofficial/frontend-framework-shared/appLogo
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
-import {useDefaultDispatch, useDefaultSelector} from "@iavofficial/frontend-framework-shared/moduleDefaults";
+import {
+  useDefaultDispatch,
+  useDefaultSelector,
+} from "@iavofficial/frontend-framework-shared/moduleDefaults";
 import {useModuleTranslation} from "@iavofficial/frontend-framework-shared/useModuleTranslation";
 
 export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
@@ -317,7 +320,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                     to="/imprint"
                     target="_blank"
                   >
-                    {t("Imprint")}
+                    {t({key: "Imprint"})}
                   </Link>
                 )}
                 {!props.hideImprint && !props.hidePrivacyPolicy && (
@@ -332,7 +335,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                     to="/privacy-policy"
                     target="_blank"
                   >
-                    {t("Privacy_Policy")}
+                    {t({key: "Privacy_Policy"})}
                   </Link>
                 )}
               </div>

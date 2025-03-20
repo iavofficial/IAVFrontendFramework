@@ -63,7 +63,7 @@ export class I18NextInternationalizer {
     };
 
     this.slice = createSlice({
-      name: MandatoryModuleNames.Internationalization,
+      name: MandatoryModuleNames.Internationalizer,
       initialState: initialState,
       reducers: {
         setActiveLang: (state, action: PayloadAction<string>) => {

@@ -55,12 +55,12 @@ const configureAmplify = () => {
 };
 
 const frameworkStoreModules = {
-  [MandatoryModuleNames.Authentication]: new AwsAuthenticator({
+  [MandatoryModuleNames.Authenticator]: new AwsAuthenticator({
     configureAmplify: configureAmplify,
     failOnNoLegalGroup: true,
     legalGroups: ["ADMIN", "SHOWCASE"],
   }),
-  [MandatoryModuleNames.Internationalization]: new I18NextInternationalizer({
+  [MandatoryModuleNames.Internationalizer]: new I18NextInternationalizer({
     translationResources: translations,
   }),
 };
@@ -92,10 +92,10 @@ modules.storeModules.frameworkStoreModules.auth.slice.actions.logout;
 
 export const store = new StoreBuilder(modules.storeModules)
   .setFrameworkModuleProcessor(
-    MandatoryModuleNames.Authentication,
+    MandatoryModuleNames.Authenticator,
     (module, storeConfigBuilder) => {
       storeConfigBuilder.setReducer(
-        MandatoryModuleNames.Authentication,
+        MandatoryModuleNames.Authenticator,
         module.slice.reducer,
       );
     },
@@ -117,5 +117,5 @@ export const useModuleContextTyped = modules.useModuleContextTyped;
 export const useModuleTyped = modules.useModuleTyped;
 
 /*const {modules: modulesTest} = useModuleContextTyped();
-const authModule = useModuleTyped(MandatoryModuleNames.Authentication);
+const authModule = useModuleTyped(MandatoryModuleNames.Authenticator);
 const userModule = useModuleTyped("userTest");*/

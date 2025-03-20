@@ -39,8 +39,8 @@ export type FFStoreModules<TModulesState = unknown> = {
 
 // The (default) mandatory state (which will be the state of different module's slices)
 export type FFMandatoryState = {
-  [MandatoryModuleNames.Authentication]: AuthState;
-  [MandatoryModuleNames.Internationalization]: InternationalizerState;
+  [MandatoryModuleNames.Authenticator]: AuthState;
+  [MandatoryModuleNames.Internationalizer]: InternationalizerState;
 };
 
 // All mandatory modules with minimal setup which is needed by the framework.
@@ -51,11 +51,11 @@ export type FFMandatoryState = {
 export type FFMandatoryStoreModules<
   TModulesState extends FFMandatoryState = FFMandatoryState,
 > = {
-  [MandatoryModuleNames.Authentication]: AuthModule<
-    TModulesState[typeof MandatoryModuleNames.Authentication]
+  [MandatoryModuleNames.Authenticator]: AuthModule<
+    TModulesState[typeof MandatoryModuleNames.Authenticator]
   >;
-  [MandatoryModuleNames.Internationalization]: InternationalizerModule<
-    TModulesState[typeof MandatoryModuleNames.Internationalization]
+  [MandatoryModuleNames.Internationalizer]: InternationalizerModule<
+    TModulesState[typeof MandatoryModuleNames.Internationalizer]
   >;
 };
 

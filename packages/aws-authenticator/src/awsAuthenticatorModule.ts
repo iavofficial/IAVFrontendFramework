@@ -58,7 +58,7 @@ export interface AwsAuthenticatorState extends AuthState {
 }
 
 export interface AwsAuthenticatorStoreState {
-  [MandatoryModuleNames.Authentication]: AwsAuthenticatorState;
+  [MandatoryModuleNames.Authenticator]: AwsAuthenticatorState;
 }
 
 export interface AwsAuthenticatorParameters {
@@ -105,7 +105,7 @@ export class AwsAuthenticator implements AuthModule<AwsAuthenticatorState> {
     };
 
     this.slice = createSlice({
-      name: MandatoryModuleNames.Authentication,
+      name: MandatoryModuleNames.Authenticator,
       initialState,
       reducers: {
         // The Redux store demands that objects in action payloads are POJOs
@@ -157,9 +157,9 @@ export class AwsAuthenticator implements AuthModule<AwsAuthenticatorState> {
     this.fetchAuthed = createAsyncThunk<
       Response,
       {url: string; token?: JWT; settings?: FetchSettings},
-      {state: {[MandatoryModuleNames.Authentication]: AwsAuthenticatorState}}
+      {state: {[MandatoryModuleNames.Authenticator]: AwsAuthenticatorState}}
     >(
-      MandatoryModuleNames.Authentication + "/thunkFetchAuthed",
+      MandatoryModuleNames.Authenticator + "/thunkFetchAuthed",
       async ({url, token, settings}, {dispatch, getState}) => {
         await dispatch(this.extras.checkIsAuthenticated()).unwrap();
         return await fetch(
@@ -177,7 +177,7 @@ export class AwsAuthenticator implements AuthModule<AwsAuthenticatorState> {
     );
 
     this.login = createAsyncThunk(
-      MandatoryModuleNames.Authentication + "/thunkLogin",
+      MandatoryModuleNames.Authenticator + "/thunkLogin",
       async ({credentials}: {credentials: Credentials}, {dispatch}) => {
         dispatch(setLoadingForLogin(true));
         return await cognitoLogin(
@@ -203,7 +203,7 @@ export class AwsAuthenticator implements AuthModule<AwsAuthenticatorState> {
     );
 
     this.logout = createAsyncThunk<void, {error?: unknown} | undefined, {}>(
-      MandatoryModuleNames.Authentication + "/thunkLogout",
+      MandatoryModuleNames.Authenticator + "/thunkLogout",
       async ({error}: {error?: unknown} = {}, {dispatch}) => {
         dispatch(setLoading(true));
         return await cognitoLogout()
@@ -218,7 +218,7 @@ export class AwsAuthenticator implements AuthModule<AwsAuthenticatorState> {
 
     this.extras = {
       checkIsAuthenticated: createAsyncThunk(
-        MandatoryModuleNames.Authentication + "/thunkCheckIsAuthenticated",
+        MandatoryModuleNames.Authenticator + "/thunkCheckIsAuthenticated",
         async (_, {dispatch}) => {
           return await cognitoCheckIsAuthenticated(
             this.config.failOnNoLegalGroup,
@@ -235,7 +235,7 @@ export class AwsAuthenticator implements AuthModule<AwsAuthenticatorState> {
         },
       ),
       completePassword: createAsyncThunk(
-        MandatoryModuleNames.Authentication + "/thunkCompletePassword",
+        MandatoryModuleNames.Authenticator + "/thunkCompletePassword",
         async ({newPassword}: {newPassword: string}, {dispatch}) => {
           dispatch(setLoading(true));
           return await cognitoCompletePassword(
@@ -257,7 +257,7 @@ export class AwsAuthenticator implements AuthModule<AwsAuthenticatorState> {
         },
       ),
       refreshSession: createAsyncThunk(
-        MandatoryModuleNames.Authentication + "/thunkRefreshSession",
+        MandatoryModuleNames.Authenticator + "/thunkRefreshSession",
         async (_, {dispatch}) => {
           return await cognitoRefreshToken(
             this.config.failOnNoLegalGroup,

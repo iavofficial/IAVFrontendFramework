@@ -273,12 +273,12 @@ export const LayoutAndContextExampleComponent = applyTranslation(FirstExampleCom
   Action<string>
 >;
 type BasicAuthenticatorStoreState = {
-  [MandatoryModuleNames.Authentication]: AuthState;
+  [MandatoryModuleNames.Authenticator]: AuthState;
 };
 
 export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
   const {modules} = useModuleContext();
-  const authModule = modules[MandatoryModuleNames.Authentication];
+  const authModule = modules[MandatoryModuleNames.Authenticator];
 
   const colorSettingsContext = useContext(ColorSettingsContext);
 
@@ -287,7 +287,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
     useSelector;
 
   const isLoading = useAuthSelector(
-    (state) => state[MandatoryModuleNames.Authentication].isLoading,
+    (state) => state[MandatoryModuleNames.Authenticator].isLoading,
   );
 
   const [triedToSubmit, setTriedToSubmit] = useState<boolean>(false);

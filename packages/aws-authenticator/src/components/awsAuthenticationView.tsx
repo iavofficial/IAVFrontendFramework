@@ -55,18 +55,18 @@ type NecessaryAuthModuleAttributes = {
 
 export const AwsAuthenticationView = <
   TModules extends {
-    [MandatoryModuleNames.Authentication]: NecessaryAuthModuleAttributes;
-    [MandatoryModuleNames.Internationalization]: InternationalizerModule;
+    [MandatoryModuleNames.Authenticator]: NecessaryAuthModuleAttributes;
+    [MandatoryModuleNames.Internationalizer]: InternationalizerModule;
   } = {
-    [MandatoryModuleNames.Authentication]: AwsAuthenticator;
-    [MandatoryModuleNames.Internationalization]: InternationalizerModule;
+    [MandatoryModuleNames.Authenticator]: AwsAuthenticator;
+    [MandatoryModuleNames.Internationalizer]: InternationalizerModule;
   },
 >(
   props: AuthenticationViewProps,
 ) => {
   const {modules} = useModuleContext<TModules>();
-  const authenticationModule = modules[MandatoryModuleNames.Authentication];
-  const intModule = modules[MandatoryModuleNames.Internationalization];
+  const authenticationModule = modules[MandatoryModuleNames.Authenticator];
+  const intModule = modules[MandatoryModuleNames.Internationalizer];
 
   const dispatch = useDispatch<AwsAuthenticatorAuthDispatch>();
   const useTypedSelector: TypedUseSelectorHook<AwsAuthenticatorStoreState> =
@@ -74,19 +74,19 @@ export const AwsAuthenticationView = <
 
   const isNewPasswordRequired = useTypedSelector(
     (state) =>
-      state[MandatoryModuleNames.Authentication].extras.isNewPasswordRequired,
+      state[MandatoryModuleNames.Authenticator].extras.isNewPasswordRequired,
   );
   const loginError =
     useTypedSelector(
-      (state) => state[MandatoryModuleNames.Authentication].extras.loginError,
+      (state) => state[MandatoryModuleNames.Authenticator].extras.loginError,
     ) ?? "";
 
   const isLoading = useTypedSelector(
-    (state) => state[MandatoryModuleNames.Authentication].isLoading,
+    (state) => state[MandatoryModuleNames.Authenticator].isLoading,
   );
 
   const activeLang = useDefaultSelector(
-    (state) => state[MandatoryModuleNames.Internationalization].activeLang,
+    (state) => state[MandatoryModuleNames.Internationalizer].activeLang,
   );
 
   const [email, setEmail] = useState("");

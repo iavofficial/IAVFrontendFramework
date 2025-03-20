@@ -35,7 +35,7 @@ export interface UserMenuOptions {
 
 //eslint-disable-next-line
 export const UserMenu = React.forwardRef<ContextMenu, Props>((props, ref) => {
-  const authModule = useModule(MandatoryModuleNames.Authentication);
+  const authModule = useModule(MandatoryModuleNames.Authenticator);
 
   const dispatch = useDefaultDispatch();
 

@@ -31,13 +31,13 @@ export const useModuleTranslation = <
   type TModules = MergeModules<
     AllDefaultModules,
     {
-      [MandatoryModuleNames.Internationalization]: TInternationalizerModule;
+      [MandatoryModuleNames.Internationalizer]: TInternationalizerModule;
     }
   >;
 
   const intModule = useModule<
-    typeof MandatoryModuleNames.Internationalization,
+    typeof MandatoryModuleNames.Internationalizer,
     TModules
-  >(MandatoryModuleNames.Internationalization);
+  >(MandatoryModuleNames.Internationalizer);
   return intModule.useTranslation();
 };

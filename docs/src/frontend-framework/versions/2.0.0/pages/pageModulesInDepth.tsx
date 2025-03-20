@@ -73,7 +73,7 @@ export const PageModulesInDepth = () => (
       title="Example usage of createModulesSeperately"
     >
       {`const frameworkStoreModules = {
-  [MandatoryModuleNames.Authentication]: new AWSAuthenticator({
+  [MandatoryModuleNames.Authenticator]: new AWSAuthenticator({
     configureAmplify: configureAmplify,
     failOnNoLegalGroup: true,
     legalGroups: ["ADMIN", "SHOWCASE"],
@@ -116,10 +116,10 @@ export const store = new StoreBuilder(modules.storeModules).build();`}
     >
       {`export const store = new StoreBuilder(modules.storeModules)
   .setFrameworkModuleProcessor(
-    MandatoryModuleNames.Authentication,
+    MandatoryModuleNames.Authenticator,
     (module, storeConfigBuilder) => {
       storeConfigBuilder.setReducer(
-        MandatoryModuleNames.Authentication,
+        MandatoryModuleNames.Authenticator,
         module.slice.reducer
       );
     }
@@ -232,7 +232,7 @@ public setExtras(key: string, value: unknown): this`}
         {
           key: "auth",
           type_of_module: "Framework Store Module",
-          default_module: "DummyAuthenticationProvider",
+          default_module: "DummyAuthenticator",
           ts_type: CodeAuthModuleType,
         },
         {

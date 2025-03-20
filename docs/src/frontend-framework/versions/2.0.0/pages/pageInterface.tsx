@@ -51,7 +51,6 @@ const PageInterface: React.FC = () => {
       <SubTitle>An example for this situation</SubTitle>
       <Code language={"typescript"}>
         {`return (
-// If you don't want to use the default authentication provider, you would have to render another authentication provider at this position. Authentication providers will be explained later on.
     <GlobalDataLayer ...properties...>
     // Your react contexts go here.
         <UILayer ...properties... />
@@ -95,7 +94,7 @@ const PageInterface: React.FC = () => {
       </Text>
       <Code language="typescript" title="Example for creating the modules map">
         {`const customModules = {
-  [MandatoryModuleNames.Authentication]: new AWSAuthenticator({
+  [MandatoryModuleNames.Authenticator]: new AWSAuthenticator({
     configureAmplify: configureAmplify,
     failOnNoLegalGroup: true,
     legalGroups: ["ADMIN", "SHOWCASE"],
@@ -146,7 +145,7 @@ const modules = createModules(customModules);`}
       </Text>
       <Code language="tsx" title="Example for store.ts">
         {`const customModules = {
-  [MandatoryModuleNames.Authentication]: new AWSAuthenticator({
+  [MandatoryModuleNames.Authenticator]: new AWSAuthenticator({
     configureAmplify: configureAmplify,
     failOnNoLegalGroup: true,
     legalGroups: ["ADMIN", "SHOWCASE"],
@@ -199,12 +198,12 @@ export const useModuleTyped = createTypedUseModule<typeof modules.all>()`}</Code
         some provided modules which should be / have to be configured.
       </Text>
       <Code language="typescript">{`const customModules = {
-  [MandatoryModuleNames.Authentication]: new AwsAuthenticator({
+  [MandatoryModuleNames.Authenticator]: new AwsAuthenticator({
     configureAmplify: configureAmplify,
     failOnNoLegalGroup: true,
     legalGroups: ["ADMIN", "SHOWCASE"],
   }),
-  [MandatoryModuleNames.Internationalization]: new I18NextInternationalizer({
+  [MandatoryModuleNames.Internationalizer]: new I18NextInternationalizer({
     translationResources: translations,
   })
 };

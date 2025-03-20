@@ -85,14 +85,14 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
   (props, ref) => {
     const colorSettingsContext = useContext(ColorSettingsContext);
 
-    const intModule = useModule(MandatoryModuleNames.Internationalization);
+    const intModule = useModule(MandatoryModuleNames.Internationalizer);
     const t = useModuleTranslation();
 
     const basicOptions: MenuItem[] = [];
     let notFallbackLang = false;
 
     const activeLang = useDefaultSelector(
-      (state) => state.internationalization.activeLang,
+      (state) => state[MandatoryModuleNames.Internationalizer].activeLang,
     );
 
     if (!props.menuOptions?.hideLanguageSelection) {

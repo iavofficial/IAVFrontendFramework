@@ -45,20 +45,20 @@ import {
 import {useModuleTranslation} from "@iavofficial/frontend-framework-shared/useModuleTranslation";
 
 export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
-  const authModule = useModule(MandatoryModuleNames.Authentication);
-  const intModule = useModule(MandatoryModuleNames.Internationalization);
+  const authModule = useModule(MandatoryModuleNames.Authenticator);
+  const intModule = useModule(MandatoryModuleNames.Internationalizer);
 
   const colorSettingsContext = useContext(ColorSettingsContext);
 
   const dispatch = useDefaultDispatch();
 
   const isLoading = useDefaultSelector(
-    (state) => state[MandatoryModuleNames.Authentication].isLoading,
+    (state) => state[MandatoryModuleNames.Authenticator].isLoading,
   );
 
   const t = useModuleTranslation();
   const activeLang = useDefaultSelector(
-    (state) => state.internationalization.activeLang,
+    (state) => state[MandatoryModuleNames.Internationalizer].activeLang,
   );
 
   const [triedToSubmit, setTriedToSubmit] = useState<boolean>(false);

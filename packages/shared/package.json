@@ -102,7 +102,7 @@
     "./routerModule": "./dist/types/modules/router/routerModule.js",
     "./i18NextInternationalizerModule": "./dist/modules/default_modules/internationalization/i18NextInternationalizerModule.js",
     "./useModuleTranslation": "./dist/modules/hooks/useModuleTranslation.js",
-    "./internationalizerModule": "./dist/types/modules/internationalization/internationalizationModule.js",
+    "./internationalizerModule": "./dist/types/modules/internationalization/internationalizerModule.js",
     "./initI18nextFunction": "./dist/types/modules/internationalization/initI18nextFunction.js",
     "./initI18nextDefault": "./dist/modules/default_modules/internationalization/initI18nextDefault.js",
     "./colorOptionTypes": "./dist/types/color/colorOptionTypes.js",
@@ -194,7 +194,7 @@
         "./dist/modules/hooks/useModuleTranslation.js"
       ],
       "./internationalizerModule": [
-        "./dist/types/modules/internationalization/internationalizationModule.d.ts"
+        "./dist/types/modules/internationalization/internationalizerModule.d.ts"
       ],
       "./initI18nextFunction": [
         "./dist/types/modules/internationalization/initI18nextFunction.d.ts"

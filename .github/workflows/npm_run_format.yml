@@ -10,33 +10,33 @@ on:
 
 jobs:
   format:
-  runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-  steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v4
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: "20"
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
 
-    - name: Install Dependencies
-      run: npm ci
+      - name: Install Dependencies
+        run: npm ci
 
-    - name: Run Format
-      run: npm run format
+      - name: Run Format
+        run: npm run format
 
-    - name: Set environment variables
-      run: echo "GITHUB_ACTOR=${{ github.actor }}" >> $GITHUB_ENV
+      - name: Set environment variables
+        run: echo "GITHUB_ACTOR=${{ github.actor }}" >> $GITHUB_ENV
 
-    - name: Set GitHub identity
-      run: |
-        git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-        git config --global user.name "${GITHUB_ACTOR}"
+      - name: Set GitHub identity
+        run: |
+          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git config --global user.name "${GITHUB_ACTOR}"
 
-    - name: Commit and Push Changes
-      run: |
-        git add .
-        git commit -m "chore(format): apply automated formatting changes"
-        git push origin HEAD:${{ github.ref }}
+      - name: Commit and Push Changes
+        run: |
+          git add .
+          git commit -m "chore(format): apply automated formatting changes"
+          git push origin HEAD:${{ github.ref }}

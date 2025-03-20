@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { AuthenticationViewColorOptions } from "@iavofficial/frontend-framework-shared/colorOptionTypes";
+import {AuthenticationViewColorOptions} from "@iavofficial/frontend-framework-shared/colorOptionTypes";
 import {
   DARK_AUTH_COMPANY_TEXT_COLOR,
   DARK_AUTH_FULL_SCREEN_BACKGROUND_COLOR,
@@ -45,7 +45,7 @@ import {
   LIGHT_AUTH_LEGAL_LINK_COLOR,
   DARK_AUTH_LEGAL_LINK_COLOR,
 } from "../defaultColors";
-import { determineSelectedColorHof } from "./determineSelectedColor";
+import {determineSelectedColorHof} from "./determineSelectedColor";
 
 export const getCurrentColorsAuthenticationView = (
   darkmodeIsEnabled: boolean,

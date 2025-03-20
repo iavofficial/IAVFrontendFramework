@@ -33,8 +33,8 @@ export const PageGeneralInternationalizerModule = () => {
       <Title>General structure of an internationalizer module</Title>
       <Text>
         This page describes the general structure of an internationalizer
-        module. Every internationalizer module has to provide the listed
-        state values and methods.
+        module. Every internationalizer module has to provide the listed state
+        values and methods.
       </Text>
 
       <SubTitle>Necessary State</SubTitle>

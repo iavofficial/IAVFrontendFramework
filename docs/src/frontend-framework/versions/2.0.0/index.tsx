@@ -135,8 +135,8 @@ const modulesRoutes: GroupRoute[] = [
         label: "I18nextInternationalizer",
         element: <PageI18nextInternationalizer />,
       },
-    ]
-  }
+    ],
+  },
 ];
 
 const helpRoutes: PathRoute[] = [

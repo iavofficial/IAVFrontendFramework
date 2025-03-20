@@ -16,8 +16,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { PrivacyPolicyText } from '@iavofficial/frontend-framework/privacyPolicy';
-import { LegalDocuments } from './legalDocuments';
+import { PrivacyPolicyText } from "@iavofficial/frontend-framework/privacyPolicy";
+import { LegalDocuments } from "./legalDocuments";
 
 export const PrivacyPolicyDocument = () => {
   return <LegalDocuments legalDocument={PrivacyPolicyText} />;

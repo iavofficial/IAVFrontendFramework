@@ -16,8 +16,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { ImprintText } from '@iavofficial/frontend-framework/imprint';
-import { LegalDocuments } from './legalDocuments';
+import { ImprintText } from "@iavofficial/frontend-framework/imprint";
+import { LegalDocuments } from "./legalDocuments";
 
 export const ImprintDocument = () => {
   return <LegalDocuments legalDocument={ImprintText} />;

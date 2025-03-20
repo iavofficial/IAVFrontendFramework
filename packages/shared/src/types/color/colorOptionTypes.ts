@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { DeepRequired } from "../util-types/requiredMutable";
+import {DeepRequired} from "../util-types/requiredMutable";
 
 //# Header color options
 export interface HeaderColorOptions {

@@ -19,41 +19,36 @@
 import makeStyles from "../../../../util/makeStyles.tsx";
 
 const useStyles = makeStyles(() => ({
-    wrapper: {
-        position: "relative",
-        paddingTop: "56.25%",
-        height: 0,
-        overflow: "hidden"
-    },
-    frame: {
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        border: "none"
-    }
+  wrapper: {
+    position: "relative",
+    paddingTop: "56.25%",
+    height: 0,
+    overflow: "hidden",
+  },
+  frame: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    border: "none",
+  },
 }));
 
 interface Props {
-    src: string;
+  src: string;
 }
 
 const FigmaEmbed: React.FC<Props> = (props) => {
+  const { src } = props;
 
-    const {src} = props;
+  const { classes } = useStyles();
 
-    const {classes} = useStyles();
-
-    return (
-        <div className={classes.wrapper}>
-            <iframe
-                className={classes.frame}
-                src={src}
-                allowFullScreen
-            />
-        </div>
-    );
+  return (
+    <div className={classes.wrapper}>
+      <iframe className={classes.frame} src={src} allowFullScreen />
+    </div>
+  );
 };
 
 export default FigmaEmbed;

@@ -17,25 +17,23 @@
  */
 
 import React from "react";
-import {PathRoute} from "../page/pathRoute.ts";
-import {Route, Routes} from "react-router-dom";
+import { PathRoute } from "../page/pathRoute.ts";
+import { Route, Routes } from "react-router-dom";
 
 interface Props {
-    routes: PathRoute[];
+  routes: PathRoute[];
 }
 
-
 const RoutesMap: React.FC<Props> = (props) => {
+  const { routes } = props;
 
-    const {routes} = props;
-
-    return (
-        <Routes>
-            {routes.map(({path, element}) => (
-                <Route key={path} path={path} element={element}/>
-            ))}
-        </Routes>
-    );
+  return (
+    <Routes>
+      {routes.map(({ path, element }) => (
+        <Route key={path} path={path} element={element} />
+      ))}
+    </Routes>
+  );
 };
 
 export default RoutesMap;

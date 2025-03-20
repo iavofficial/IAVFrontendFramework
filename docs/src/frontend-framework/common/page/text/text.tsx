@@ -16,50 +16,50 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, {PropsWithChildren} from "react";
-import {classNames} from "primereact/utils";
+import React, { PropsWithChildren } from "react";
+import { classNames } from "primereact/utils";
 import makeStyles from "../../../../util/makeStyles.tsx";
 
 const useStyles = makeStyles(() => ({
-    typography: {
-        fontFamily: "Arial, sans-serif",
-    },
-    h1: {
-        fontSize: "2rem", // Example size for h1
-        fontWeight: "bold",
-        margin: "16px 0",
-    },
-    h2: {
-        fontSize: "1.5rem", // Example size for h2
-        fontWeight: "bold",
-        margin: "14px 0",
-    },
-    h3: {
-        fontSize: "1rem", // Example size for h3
-        fontWeight: "bold",
-        margin: "12px 0",
-    },
-    p: {
-        fontSize: "1rem",
-        margin: "8px 0 20px 0",
-        lineHeight: "1.5"
-    },
+  typography: {
+    fontFamily: "Arial, sans-serif",
+  },
+  h1: {
+    fontSize: "2rem", // Example size for h1
+    fontWeight: "bold",
+    margin: "16px 0",
+  },
+  h2: {
+    fontSize: "1.5rem", // Example size for h2
+    fontWeight: "bold",
+    margin: "14px 0",
+  },
+  h3: {
+    fontSize: "1rem", // Example size for h3
+    fontWeight: "bold",
+    margin: "12px 0",
+  },
+  p: {
+    fontSize: "1rem",
+    margin: "8px 0 20px 0",
+    lineHeight: "1.5",
+  },
 }));
 
 interface Props {
-    className?: string;
+  className?: string;
 }
 
 const Text: React.FC<PropsWithChildren<Props>> = (props) => {
+  const { className, children } = props;
 
-    const {className, children} = props;
+  const { classes } = useStyles();
 
-    const {classes} = useStyles();
-
-
-    return (
-        <p className={classNames(className, classes.typography, classes.p)}>{children}</p>
-    );
+  return (
+    <p className={classNames(className, classes.typography, classes.p)}>
+      {children}
+    </p>
+  );
 };
 
 export default Text;

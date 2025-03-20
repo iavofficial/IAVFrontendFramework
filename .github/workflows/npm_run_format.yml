@@ -25,8 +25,8 @@ jobs:
         run: |
           npm run format
           git fetch --all
-          git checkout "origin/${{ github.head_ref }}"
-          git pull origin ${{ github.head_ref }}
+          git checkout "origin/${{ github.base_ref }}"  # Verwende den Ziel-Branch
+          git pull origin ${{ github.base_ref }}
 
       - name: Set environment variables
         run: echo "GITHUB_ACTOR=${{ github.actor }}" >> $GITHUB_ENV
@@ -42,6 +42,9 @@ jobs:
 
       - name: Commit and Push Changes
         run: |
-          git add .
-          git commit -m "chore(format): apply automated formatting changes"
-          git push --set-upstream origin ${{ github.head_ref }}
+          git add . 
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore(format): apply automated formatting changes"
+            git push --set-upstream origin ${{ github.base_ref }}

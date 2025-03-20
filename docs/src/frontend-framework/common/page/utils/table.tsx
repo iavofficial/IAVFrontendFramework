@@ -12,19 +12,24 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- **/
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
 
 import React, {ReactElement} from "react";
 import makeStyles from "../../../../util/makeStyles.tsx";
-import {BLUE3, GREY1} from "@iavofficial/frontend-framework/constants";
+import {BLUE3, GREY1} from "../../../../constants.ts";
 
 const useStyles = makeStyles(() => ({
+    container: {
+        overflow: "auto",
+        marginBottom: "1.5em"
+    },
     table: {
         width: "100%",
         borderCollapse: "collapse",
-        marginBottom: "1.5em",
         borderRadius: "8px",
-        overflow: "hidden",
+        overflowX: "auto"
     },
     thead: {
         backgroundColor: BLUE3,
@@ -68,40 +73,42 @@ const Table: React.FC<Props> = (props) => {
     const {classes} = useStyles();
 
     return (
-        <table className={classes.table}>
-            <thead className={classes.thead}>
-            <tr>
-                {columns.map((col) => (
-                    <th key={col.title} className={classes.th}>
-                        {col.title}
-                    </th>
-                ))}
-            </tr>
-            </thead>
-            <tbody className={classes.tbody}>
-            {data.map((row, index) => (
-                <tr
-                    key={index}
-                    className={index % 2 === 0 ? classes.grey1 : undefined}
-                >
+        <div className={classes.container}>
+            <table className={classes.table}>
+                <thead className={classes.thead}>
+                <tr>
                     {columns.map((col) => (
-                        <td key={col.title} className={classes.td}>
-                            {col.centerContent ? (
-                                <div style={{
-                                    width: "100%",
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center"
-                                }}>{row[col.key ?? col.title]}</div>
-                            ) : (
-                                row[col.key ?? col.title]
-                            )}
-                        </td>
+                        <th key={col.title} className={classes.th}>
+                            {col.title}
+                        </th>
                     ))}
                 </tr>
-            ))}
-            </tbody>
-        </table>
+                </thead>
+                <tbody className={classes.tbody}>
+                {data.map((row, index) => (
+                    <tr
+                        key={index}
+                        className={index % 2 === 0 ? classes.grey1 : undefined}
+                    >
+                        {columns.map((col) => (
+                            <td key={col.title} className={classes.td}>
+                                {col.centerContent ? (
+                                    <div style={{
+                                        width: "100%",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center"
+                                    }}>{row[col.key ?? col.title]}</div>
+                                ) : (
+                                    row[col.key ?? col.title]
+                                )}
+                            </td>
+                        ))}
+                    </tr>
+                ))}
+                </tbody>
+            </table>
+        </div>
     );
 };
 

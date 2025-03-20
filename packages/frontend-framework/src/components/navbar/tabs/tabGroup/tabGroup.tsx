@@ -18,8 +18,6 @@
 
 import React, {ReactElement, useContext, useEffect, useState} from "react";
 import "../../navbar.css";
-import {useTranslator} from "../../../internationalization/translators";
-import {TranslateFunctionType} from "../../../../types/translationFunction";
 import {TabGroupCollapsed} from "./tabGroupCollapsed";
 import {TabGroupUnfolded} from "./tabGroupUnfolded";
 import {GroupableTabAndContentWrapper} from "../../wrappers/typesWrappers";
@@ -29,13 +27,15 @@ import {
   determineCurrentColorInsideGroup,
 } from "../../../../utils/determineCurrentColor";
 import {
-  DEFAULT_ELEMENTSIZE,
+  DEFAULT_ELEMENT_SIZE,
   NAVBAR_WIDTH_UNFOLDED,
 } from "@iavofficial/frontend-framework-shared/constants";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
+import {useModuleTranslation} from "@iavofficial/frontend-framework-shared/useModuleTranslation";
+import { TranslationWrapperFunction } from "@iavofficial/frontend-framework-shared/internationalizationModule";
 
 interface Props {
-  name: string | ((t: TranslateFunctionType) => string);
+  name: string | TranslationWrapperFunction;
   navbarCollapsed: boolean;
   wrappers: GroupableTabAndContentWrapper[];
   frameworkInjectedOptions: InjectedOptionsByGroupToWrapper;
@@ -44,7 +44,7 @@ interface Props {
 }
 
 export const TabGroup = (props: Props) => {
-  const t = useTranslator();
+  const t = useModuleTranslation();
   const colorSettingsContext = useContext(ColorSettingsContext);
   const [hovering, setHovering] = useState(false);
   const [groupTabCollapsed, setGroupTabCollapsed] = useState(true);
@@ -135,7 +135,7 @@ export const TabGroup = (props: Props) => {
 
   const tabStyleDefault = {
     width: props.navbarCollapsed
-      ? `${DEFAULT_ELEMENTSIZE}px`
+      ? `${DEFAULT_ELEMENT_SIZE}px`
       : `${NAVBAR_WIDTH_UNFOLDED - 8}px`,
     backgroundColor: backgroundColor,
     color: fontColor,
@@ -148,7 +148,10 @@ export const TabGroup = (props: Props) => {
   }
 
   const tabComponentProperties = {
-    name: props.name instanceof Function ? props.name(t) : props.name,
+    name:
+      props.name instanceof Function
+        ? props.name(t)
+        : props.name,
     hovering: hovering,
     logo: props.logo,
     groupTabCollapsed: groupTabCollapsed,

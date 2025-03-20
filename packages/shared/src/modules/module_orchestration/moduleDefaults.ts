@@ -24,8 +24,11 @@ import {StoreBuilder} from "./storeBuilder";
 import {
   AppDispatch,
   FFMandatoryStoreModules,
+  MergeModules,
   RootState,
 } from "../../types/modules/moduleOrchestrationTypes";
+import {ReactRouterRouter} from "../default_modules/router/reactRouterRouterModule";
+import {I18NextInternationalizer} from "../default_modules/internationalization/i18NextInternationalizerModule";
 
 export type DefaultRootState = RootState<DefaultStoreState>;
 export type DefaultAppDispatch = AppDispatch<DefaultStoreDispatch>;
@@ -38,11 +41,14 @@ export type DefaultThunkDispatch = ThunkDispatch<
 // This object contains the default modules which can be replaced.
 export const defaultStoreModules: FFMandatoryStoreModules = {
   [MandatoryModuleNames.Authentication]: new DummyAuthenticator(),
+  [MandatoryModuleNames.Internationalization]: new I18NextInternationalizer(),
 };
 
 export type DefaultStoreModules = typeof defaultStoreModules;
 
-export const defaultNonStoreModules = {};
+export const defaultNonStoreModules = {
+  [MandatoryModuleNames.Router]: new ReactRouterRouter(),
+};
 
 export type DefaultNonStoreModules = typeof defaultNonStoreModules;
 
@@ -51,7 +57,10 @@ export const allDefaultModules = {
   ...defaultNonStoreModules,
 };
 
-export type AllDefaultModules = typeof allDefaultModules;
+export type AllDefaultModules = MergeModules<
+  DefaultNonStoreModules,
+  DefaultStoreModules
+>;
 
 export const defaultStore = new StoreBuilder({
   frameworkStoreModules: defaultStoreModules,

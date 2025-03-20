@@ -24,11 +24,9 @@ import {
   PADDING_GAB,
   WHITE,
 } from "@iavofficial/frontend-framework-shared/constants";
-import {useTranslator} from "../../internationalization/translators";
 import loginBackgroundLightMode from "../../../assets/png/login_background_lightMode.png";
 import loginBackgroundDarkMode from "../../../assets/png/login_background_darkMode.png";
 import {Dropdown, DropdownChangeEvent} from "primereact/dropdown";
-import {LanguageContext} from "../../../contexts/language";
 import {Tooltip} from "primereact/tooltip";
 import CompanyLogo from "../../../assets/svg/companyLogo";
 import TextField from "../../helper/textfield/TextField";
@@ -38,41 +36,31 @@ import {parseLanguageResourcesIntoDropdownFormat} from "@iavofficial/frontend-fr
 import {LoginButtonWithSpinner} from "@iavofficial/frontend-framework-shared/loginButtonWithSpinner";
 import {AppLogoPlaceholder} from "@iavofficial/frontend-framework-shared/appLogoPlaceholder";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
-import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
-import {ThunkDispatch, Action} from "@reduxjs/toolkit";
-import {useModuleContext} from "@iavofficial/frontend-framework-shared/moduleContext";
-import {AuthState} from "@iavofficial/frontend-framework-shared/authenticatorModule";
+import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
-
-type BasicAuthenticatorAuthDispatch = ThunkDispatch<
-  AuthState,
-  unknown,
-  Action<string>
->;
-type BasicAuthenticatorStoreState = {
-  [MandatoryModuleNames.Authentication]: AuthState;
-};
+import {useDefaultDispatch, useDefaultSelector} from "@iavofficial/frontend-framework-shared/moduleDefaults";
+import {useModuleTranslation} from "@iavofficial/frontend-framework-shared/useModuleTranslation";
 
 export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
-  const {modules} = useModuleContext();
-  const authModule = modules[MandatoryModuleNames.Authentication];
+  const authModule = useModule(MandatoryModuleNames.Authentication);
+  const intModule = useModule(MandatoryModuleNames.Internationalization);
 
   const colorSettingsContext = useContext(ColorSettingsContext);
 
-  const dispatch = useDispatch<BasicAuthenticatorAuthDispatch>();
-  const useAuthSelector: TypedUseSelectorHook<BasicAuthenticatorStoreState> =
-    useSelector;
+  const dispatch = useDefaultDispatch();
 
-  const isLoading = useAuthSelector(
+  const isLoading = useDefaultSelector(
     (state) => state[MandatoryModuleNames.Authentication].isLoading,
+  );
+
+  const t = useModuleTranslation();
+  const activeLang = useDefaultSelector(
+    (state) => state.internationalization.activeLang,
   );
 
   const [triedToSubmit, setTriedToSubmit] = useState<boolean>(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const langContext = useContext(LanguageContext);
-
-  const t = useTranslator();
 
   const headerBackgroundColor =
     colorSettingsContext.currentColors.authenticationView.headerBackgroundColor;
@@ -234,14 +222,14 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                   color: inputFieldTextColor,
                 }}
                 placeholder={
-                  langContext?.resources[langContext.activeLang].translation
+                  intModule.translationResources[activeLang].translation
                     .option_name
                 }
                 onChange={function (event: DropdownChangeEvent) {
-                  langContext?.selectLanguage(event.value.key);
+                  intModule.selectActiveLang(event.value.key);
                 }}
                 options={parseLanguageResourcesIntoDropdownFormat(
-                  langContext?.resources,
+                  intModule.translationResources,
                 )}
                 optionLabel="label"
               />
@@ -265,7 +253,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                   backgroundColor: inputFieldBackgroundColor,
                   color: inputFieldTextColor,
                 }}
-                label={t("Email_address")}
+                label={t({key: "Email_address"})}
                 id="email"
                 name="email"
                 required={true}
@@ -274,7 +262,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                 onChange={(event) => setEmail(event.target.value)}
               />
               <TextField
-                label={t("Password")}
+                label={t({key: "Password"})}
                 id="password"
                 name="password"
                 type="password"
@@ -282,7 +270,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                 error={triedToSubmit && !isLoading}
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
-                helperText={passwordErrorMessage || t("wrong_password")}
+                helperText={passwordErrorMessage || t({key: "wrong_password"})}
               />
               <div>
                 <LoginButtonWithSpinner isLoading={isLoading} />

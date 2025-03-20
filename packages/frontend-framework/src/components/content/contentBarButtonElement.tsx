@@ -17,7 +17,7 @@
  */
 
 import React, {useContext, useState} from "react";
-import {DEFAULT_ELEMENTSIZE} from "@iavofficial/frontend-framework-shared/constants";
+import {DEFAULT_ELEMENT_SIZE} from "@iavofficial/frontend-framework-shared/constants";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 
 export interface Props {
@@ -49,8 +49,8 @@ export const ContentBarButtonElement = ({
       onMouseLeave={() => setHover(false)}
       onClick={handleOnClickEvent}
       style={{
-        height: `${DEFAULT_ELEMENTSIZE}px`,
-        width: `${DEFAULT_ELEMENTSIZE}px`,
+        height: `${DEFAULT_ELEMENT_SIZE}px`,
+        width: `${DEFAULT_ELEMENT_SIZE}px`,
         cursor: "pointer",
         backgroundColor: hover ? buttonHoverColor : buttonDefaultColor,
       }}

@@ -17,8 +17,6 @@
  */
 
 import React, {ReactElement, useContext, useMemo, useState} from "react";
-import {Link, useLocation} from "react-router-dom";
-import {useTranslator} from "../../../internationalization/translators";
 import "../tabs.css";
 import {GroupableNavbarTab, NavbarTabProps} from "../typesNavbarTab";
 import {SimpleNavbarTabCollapsed} from "./simpleNavbarTabCollapsed";
@@ -29,11 +27,14 @@ import {
 } from "../../../../utils/determineCurrentColor";
 import {InjectedOptionsGroupableByWrapperToTab} from "../../types/typesInjectedOptions";
 import {
-  DEFAULT_ELEMENTSIZE,
+  DEFAULT_ELEMENT_SIZE,
   GAB_NAVBAR_UNFOLDED,
   NAVBAR_WIDTH_UNFOLDED,
 } from "@iavofficial/frontend-framework-shared/constants";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
+import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
+import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
+import {useModuleTranslation} from "@iavofficial/frontend-framework-shared/useModuleTranslation";
 
 export interface NestedNavbarTabProps {
   additionalClassNames: string;
@@ -47,24 +48,17 @@ export interface NestedNavbarTabProps {
 export const SimpleNavbarTab: GroupableNavbarTab = (
   props: NavbarTabProps<InjectedOptionsGroupableByWrapperToTab> & {},
 ) => {
+  const routerModule = useModule(MandatoryModuleNames.Router);
+
   const navbarCollapsed = props.frameworkInjectedOptions.navbarCollapsed;
   const path = props.frameworkInjectedOptions.path;
   const insideActiveGroup = props.frameworkInjectedOptions.groupActive;
 
   const [hovering, setHovering] = useState(false);
   const colorSettingsContext = useContext(ColorSettingsContext);
-  const t = useTranslator();
+  const t = useModuleTranslation();
 
-  const regex = useMemo(() => {
-    let regexString = path;
-    // Escape slashes
-    regexString = regexString.replaceAll("/", "\\/");
-    // Add start (^) and boundary condition with trailing /.*
-    regexString = `^${regexString}(\\/.*)?$`;
-    return new RegExp(regexString);
-  }, [path]);
-
-  const active = regex.test(useLocation().pathname);
+  const {isActive} = routerModule.useIsTabActive(path);
 
   const tabBackgroundDefaultColor =
     colorSettingsContext.currentColors.navbar.content.default
@@ -95,7 +89,7 @@ export const SimpleNavbarTab: GroupableNavbarTab = (
     colorSettingsContext.currentColors.navbar.content.active.tabIconActiveColor;
 
   const tabState = {
-    isActive: active,
+    isActive: isActive,
     isHovering: hovering,
     isDisabled: props.disabled,
     isInsideActiveGroup: insideActiveGroup,
@@ -122,9 +116,9 @@ export const SimpleNavbarTab: GroupableNavbarTab = (
 
   const tabStyleDefault = {
     width: navbarCollapsed
-      ? `${DEFAULT_ELEMENTSIZE}px`
+      ? `${DEFAULT_ELEMENT_SIZE}px`
       : `${NAVBAR_WIDTH_UNFOLDED - 2 * GAB_NAVBAR_UNFOLDED}px`,
-    cursor: active || props.disabled ? "default" : "pointer",
+    cursor: isActive || props.disabled ? "default" : "pointer",
     backgroundColor: backgroundColor,
     color: fontColor,
     opacity: props.disabled ? 0.5 : 1,
@@ -136,7 +130,10 @@ export const SimpleNavbarTab: GroupableNavbarTab = (
     style: tabStyleDefault,
     setHovering: setHovering,
     icon: props.icon,
-    name: props.name instanceof Function ? props.name(t) : props.name,
+    name:
+      props.name instanceof Function
+        ? props.name(t)
+        : props.name,
     additionalClassNames: additionalClassNames,
     iconColor: iconColor,
   };
@@ -148,6 +145,8 @@ export const SimpleNavbarTab: GroupableNavbarTab = (
   );
 
   const styleHidden = props.hidden ? {display: "none"} : {};
+
+  const Link = routerModule.Link;
 
   return (
     <div style={styleHidden}>

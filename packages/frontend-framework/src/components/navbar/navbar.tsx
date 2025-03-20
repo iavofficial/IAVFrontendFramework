@@ -17,23 +17,24 @@
  */
 
 import React, {useContext} from "react";
-import {Link} from "react-router-dom";
 import "./navbar.css";
 import {TabAndContentWrapper} from "./wrappers/typesWrappers";
-import {useTranslator} from "../internationalization/translators";
 import {Tooltip} from "primereact/tooltip";
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
 import {calculateNavbarArrowFunctionColor} from "../../utils/calculateNavbarArrowColor";
 import {NavbarSettingsContext} from "../../contexts/navbarContext";
 import {
-  DEFAULT_ELEMENTSIZE,
+  DEFAULT_ELEMENT_SIZE,
   GAB_NAVBAR_COLLAPSED,
   NAVBAR_WIDTH_UNFOLDED,
   PADDING_GAB,
 } from "@iavofficial/frontend-framework-shared/constants";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 import {generateHashOfLength} from "@iavofficial/frontend-framework-shared/hash";
+import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
+import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
+import {useModuleTranslation} from "@iavofficial/frontend-framework-shared/useModuleTranslation";
 
 interface Props {
   tabAndContentWrappers: TabAndContentWrapper[];
@@ -43,7 +44,11 @@ interface Props {
 }
 
 export const Navbar = (props: Props) => {
-  const t = useTranslator();
+  const t = useModuleTranslation();
+
+  const routerModule = useModule(MandatoryModuleNames.Router);
+  const Link = routerModule.Link;
+
   const colorSettingsContext = useContext(ColorSettingsContext);
   const navbarSettingsContext = useContext(NavbarSettingsContext);
 
@@ -68,7 +73,7 @@ export const Navbar = (props: Props) => {
         <SimpleBar
           style={{
             width: navbarSettingsContext.navbarCollapsed
-              ? `${DEFAULT_ELEMENTSIZE + 2 * GAB_NAVBAR_COLLAPSED}px`
+              ? `${DEFAULT_ELEMENT_SIZE + 2 * GAB_NAVBAR_COLLAPSED}px`
               : `${NAVBAR_WIDTH_UNFOLDED}px`,
             padding: navbarSettingsContext.navbarCollapsed
               ? "0px 2px 0px 2px"
@@ -124,7 +129,7 @@ export const Navbar = (props: Props) => {
                   style={{color: legalDocumentsColor}}
                   to="/imprint"
                 >
-                  {t("Imprint")}
+                  {t({key: "Imprint"})}
                 </Link>
               )}
               {!props.hideImprint && !props.hidePrivacyPolicy && (
@@ -136,7 +141,7 @@ export const Navbar = (props: Props) => {
                   style={{color: legalDocumentsColor}}
                   to="/privacy-policy"
                 >
-                  {t("Privacy_Policy")}
+                  {t({key: "Privacy_Policy"})}
                 </Link>
               )}
             </div>

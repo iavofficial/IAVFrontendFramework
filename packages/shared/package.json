@@ -37,7 +37,12 @@
   ],
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.1",
-    "react-redux": "^9.2.0"
+    "react-redux": "^9.2.0",
+    "react-router": "^7.3.0",
+    "react-router-dom": "^7.3.0",
+    "i18next": "^22.4.13",
+    "i18next-browser-languagedetector": "^7.0.1",
+    "react-i18next": "^12.2.0"
   },
   "peerDependencies": {
     "react": "^18.2.0",
@@ -77,24 +82,36 @@
     "./authenticationView.css": "./dist/css/authenticationView.css",
     "./constants": "./dist/constants/constants.js",
     "./moduleNames": "./dist/constants/moduleNames.js",
+    "./defaultTranslations": "./dist/constants/defaultTranslations.js",
     "./generalModule": "./dist/types/modules/generalModule.js",
     "./moduleDefaults": "./dist/modules/module_orchestration/moduleDefaults.js",
     "./moduleOrchestrationTypes": "./dist/types/modules/moduleOrchestrationTypes.js",
     "./createModules": "./dist/modules/module_orchestration/createModules.js",
-    "./createModulesSeperately": "./dist/modules/module_orchestration/createModulesSeperately.js",
+    "./createModulesSeparately": "./dist/modules/module_orchestration/createModulesSeparately.js",
     "./checkIfUserModulesKeysValid": "./dist/modules/module_orchestration/util/checkIfUserModulesKeysValid.js",
-    "./seperateModuleTypes": "./dist/modules/module_orchestration/util/seperateModuleTypes.js",
+    "./separateModuleTypes": "./dist/modules/module_orchestration/util/separateModuleTypes.js",
     "./storeBuilder": "./dist/modules/module_orchestration/storeBuilder.js",
     "./storeConfigBuilder": "./dist/modules/module_orchestration/storeConfigBuilder.js",
     "./dummyAuthenticatorModule": "./dist/modules/default_modules/auth/dummyAuthenticatorModule.js",
     "./authenticatorModule": "./dist/types/modules/auth/authenticatorModule.js",
     "./authenticationViewProps": "./dist/types/modules/auth/authenticationViewProps.js",
+    "./reactRouterRouterModule": "./dist/modules/default_modules/router/reactRouterRouterModule.js",
+    "./link": "./dist/modules/default_modules/router/components/link.js",
+    "./mainViewRouter": "./dist/modules/default_modules/router/components/mainViewRouter.js",
+    "./uiLayerRouter": "./dist/modules/default_modules/router/components/uiLayerRouter.js",
+    "./routerModule": "./dist/types/modules/router/routerModule.js",
+    "./i18NextInternationalizerModule": "./dist/modules/default_modules/internationalization/i18NextInternationalizerModule.js",
+    "./useModuleTranslation": "./dist/modules/hooks/useModuleTranslation.js",
+    "./internationalizationModule": "./dist/types/modules/internationalization/internationalizationModule.js",
+    "./initI18nextFunction": "./dist/types/modules/internationalization/initI18nextFunction.js",
+    "./initI18nextDefault": "./dist/modules/default_modules/internationalization/initI18nextDefault.js",
     "./colorOptionTypes": "./dist/types/color/colorOptionTypes.js",
     "./requiredMutable": "./dist/types/util-types/requiredMutable.js",
     "./componentTypeMinProps": "./dist/types/util-types/componentTypeMinProps.js",
     "./containsOneOrMoreGroups": "./dist/utils/auth/containsOneOrMoreGroups.js",
     "./parseLanguageResourcesIntoDropdownFormat": "./dist/utils/internationalization/parseLanguageResourcesIntoDropdownFormat.js",
-    "./hash": "./dist/utils/hash.js"
+    "./hash": "./dist/utils/hash.js",
+    "./cookieHooks": "./dist/utils/cookieHooks.js"
   },
   "typesVersions": {
     "*": {
@@ -116,6 +133,9 @@
       "./moduleNames": [
         "./dist/constants/moduleNames.d.ts"
       ],
+      "./defaultTranslations": [
+        "./dist/constants/defaultTranslations.d.ts"
+      ],
       "./generalModule": [
         "./dist/types/modules/generalModule.d.ts"
       ],
@@ -128,14 +148,14 @@
       "./createModules": [
         "./dist/modules/module_orchestration/createModules.d.ts"
       ],
-      "./createModulesSeperately": [
-        "./dist/modules/module_orchestration/createModulesSeperately.js"
+      "./createModulesSeparately": [
+        "./dist/modules/module_orchestration/createModulesSeparately.js"
       ],
       "./checkIfUserModulesKeysValid": [
         "./dist/modules/module_orchestration/util/checkIfUserModulesKeysValid.d.ts"
       ],
-      "./seperateModuleTypes": [
-        "./dist/modules/module_orchestration/util/seperateModuleTypes.d.ts"
+      "./separateModuleTypes": [
+        "./dist/modules/module_orchestration/util/separateModuleTypes.d.ts"
       ],
       "./storeBuilder": [
         "./dist/modules/module_orchestration/storeBuilder.d.ts"
@@ -151,6 +171,33 @@
       ],
       "./authenticationViewProps": [
         "./dist/types/modules/auth/authenticationViewProps.d.ts"
+      ],
+      "./reactRouterRouterModule": [
+        "./dist/modules/default_modules/router/reactRouterRouterModule.d.ts"
+      ],
+      "./link": [
+        "./dist/modules/default_modules/router/components/link.d.ts"
+      ],
+      "./mainViewRouter": [
+        "./dist/modules/default_modules/router/components/mainViewRouter.d.ts"
+      ],
+      "./uiLayerRouter": [
+        "./dist/modules/default_modules/router/components/uiLayerRouter.d.ts"
+      ],
+      "./routerModule": [
+        "./dist/types/modules/router/routerModule.d.ts"
+      ],
+      "./i18NextInternationalizerModule": [
+        "./dist/modules/default_modules/internationalization/i18NextInternationalizerModule.d.ts"
+      ],
+      "./useModuleTranslation": [
+        "./dist/modules/hooks/useModuleTranslation.js"
+      ],
+      "./internationalizationModule": [
+        "./dist/types/modules/internationalization/internationalizationModule.d.ts"
+      ],
+      "./initI18nextFunction": [
+        "./dist/types/modules/internationalization/initI18nextFunction.d.ts"
       ],
       "./colorOptionTypes": [
         "./dist/types/color/colorOptionTypes.d.ts"
@@ -169,6 +216,9 @@
       ],
       "./hash": [
         "./dist/utils/hash.d.ts"
+      ],
+      "./cookieHooks": [
+        "./dist/utils/cookieHooks.d.ts"
       ]
     }
   },

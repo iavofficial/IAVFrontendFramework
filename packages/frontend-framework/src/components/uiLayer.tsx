@@ -21,7 +21,6 @@ import "primereact/resources/themes/nova/theme.css";
 import "primereact/resources/primereact.css";
 import "primeicons/primeicons.css";
 import React, {useEffect} from "react";
-import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import {BasicAuthenticationView} from "./authentication/default/basicAuthenticationView";
 import {SettingsMenuOptions} from "./header/settingsMenu";
 import {CookieBanner} from "./cookie/cookieBanner";
@@ -44,7 +43,11 @@ import "../css/globalChangesOnPrimeReactComponents.css";
 import "../css/globalSettings.css";
 import "../css/globalColors.css";
 import "../css/authenticationView.css";
-import {useDefaultSelector} from "@iavofficial/frontend-framework-shared/moduleDefaults";
+import {
+  useDefaultSelector,
+} from "@iavofficial/frontend-framework-shared/moduleDefaults";
+import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
+import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
 import {ImprintText} from "./imprint/imprintText";
 import {PrivacyPolicyText} from "./imprint/privacyPolicyText";
 
@@ -64,7 +67,7 @@ export interface NavbarOptions {
 export interface Props {
   // This indicates that the passed objects should have the type's properties at least.
   tabAndContentWrappers: TabAndContentWrapper[];
-  startingPoint: string;
+  initialPath: string;
   disableLogin?: boolean;
   disableCookieBanner?: boolean;
   authenticationView?: React.ComponentType<AuthenticationViewProps & any>;
@@ -83,8 +86,11 @@ export interface Props {
 
 export const UILayer = (props: Props) => {
   const {hasAuthenticated} = useDefaultSelector((state) => state.auth);
+  const routerModule = useModule(MandatoryModuleNames.Router);
 
   const [, setCookie] = useCookies([ACCEPTED_COOKIES_NAME]);
+
+  const disableLogin = !!props.disableLogin;
 
   const AuthenticationView = props.authenticationView
     ? props.authenticationView
@@ -102,125 +108,76 @@ export const UILayer = (props: Props) => {
     }
   }, [props.disableCookieBanner, setCookie]);
 
+  const routes = [
+    {
+      path: "/login",
+      disabled: disableLogin,
+      element: (
+        <AuthenticationView
+          authOptions={props.authOptions}
+          hideLanguageSelection={
+            props.settingsMenuOptions?.hideLanguageSelection
+          }
+          headerOptions={props.headerOptions}
+          hideImprint={props.hideImprint}
+          hidePrivacyPolicy={props.hidePrivacyPolicy}
+        />
+      ),
+    },
+    {
+      path: "/imprint",
+      disabled: disableLogin || hasAuthenticated,
+      element: props.imprintComponent ? (
+        <props.imprintComponent />
+      ) : (
+        <DefaultLegalDocument legalTextComponent={ImprintText} />
+      ),
+    },
+    {
+      path: "/privacy-policy",
+      disabled: disableLogin || hasAuthenticated,
+      element: props.privacyPolicyComponent ? (
+        <props.privacyPolicyComponent />
+      ) : (
+        <DefaultLegalDocument legalTextComponent={PrivacyPolicyText} />
+      ),
+    },
+    // Maybe include !props.disableLogin && !hasAuthenticated with <Route path="/*" element={<></>} />
+    {
+      path: "/*",
+      disabled: !disableLogin && !hasAuthenticated,
+      element: (
+        <MainView
+          headerOptions={props.headerOptions}
+          settingsMenuOptions={props.settingsMenuOptions}
+          userMenuOptions={userMenuOptions}
+          documentsLabelKey={props.documentsLabelKey}
+          imprintComponent={props.imprintComponent}
+          privacyPolicyComponent={props.privacyPolicyComponent}
+          tabAndContentWrappers={props.tabAndContentWrappers}
+          hideImprint={props.hideImprint}
+          hidePrivacyPolicy={props.hidePrivacyPolicy}
+          hideNavbar={props.hideNavbar}
+        />
+      ),
+    },
+  ];
+
+  const UILayerRouter = routerModule.UiLayerRouter;
+
   return (
     <NavbarSettingsProvider
       staticCollapsedState={props.navbarOptions?.staticCollapsedState}
     >
       {!props.disableCookieBanner && <CookieBanner />}
-      <Redirector
-        startingPoint={props.startingPoint}
-        disableLogin={props.disableLogin}
-      />
 
-      <Routes>
-        {!props.disableLogin && (
-          <Route
-            path="/login"
-            element={
-              <AuthenticationView
-                authOptions={props.authOptions}
-                hideLanguageSelection={
-                  props.settingsMenuOptions?.hideLanguageSelection
-                }
-                headerOptions={props.headerOptions}
-                hideImprint={props.hideImprint}
-                hidePrivacyPolicy={props.hidePrivacyPolicy}
-              />
-            }
-          />
-        )}
-
-        {!props.disableLogin && !hasAuthenticated && (
-          <>
-            <Route
-              path="/imprint"
-              element={
-                props.imprintComponent ? (
-                  <props.imprintComponent />
-                ) : (
-                  <DefaultLegalDocument legalTextComponent={ImprintText} />
-                )
-              }
-            />
-            <Route
-              path="/privacy-policy"
-              element={
-                props.privacyPolicyComponent ? (
-                  <props.privacyPolicyComponent />
-                ) : (
-                  <DefaultLegalDocument
-                    legalTextComponent={PrivacyPolicyText}
-                  />
-                )
-              }
-            />
-          </>
-        )}
-
-        {!props.disableLogin && !hasAuthenticated ? (
-          <Route path="/*" element={<></>} />
-        ) : (
-          <>
-            <Route
-              path="/*"
-              element={
-                <MainView
-                  headerOptions={props.headerOptions}
-                  settingsMenuOptions={props.settingsMenuOptions}
-                  userMenuOptions={userMenuOptions}
-                  documentsLabelKey={props.documentsLabelKey}
-                  imprintComponent={props.imprintComponent}
-                  privacyPolicyComponent={props.privacyPolicyComponent}
-                  tabAndContentWrappers={props.tabAndContentWrappers}
-                  hideImprint={props.hideImprint}
-                  hidePrivacyPolicy={props.hidePrivacyPolicy}
-                  hideNavbar={props.hideNavbar}
-                />
-              }
-            />
-          </>
-        )}
-      </Routes>
+      {
+        <UILayerRouter
+          routes={routes}
+          disableLogin={disableLogin}
+          initialPath={props.initialPath}
+        />
+      }
     </NavbarSettingsProvider>
   );
-};
-
-interface RedirectorProps {
-  startingPoint: string;
-  disableLogin?: boolean;
-}
-
-/**
- * This component is needed because the useLocation hook can only be used inside a Router-component
- * environment.
- * @param props
- * @constructor
- */
-const Redirector = (props: RedirectorProps) => {
-  const {hasAuthenticated} = useDefaultSelector((state) => state.auth);
-
-  const disableLogin = props.disableLogin;
-
-  const currentPath = useLocation().pathname;
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!disableLogin && !hasAuthenticated) {
-      if (currentPath !== "/imprint" && currentPath !== "/privacy-policy") {
-        navigate("/login");
-      }
-    } else {
-      if (currentPath === "/login" || currentPath === "/") {
-        navigate(props.startingPoint.valueOf());
-      }
-    }
-  }, [
-    disableLogin,
-    currentPath,
-    hasAuthenticated,
-    navigate,
-    props.startingPoint,
-  ]);
-
-  return <React.Fragment />;
 };

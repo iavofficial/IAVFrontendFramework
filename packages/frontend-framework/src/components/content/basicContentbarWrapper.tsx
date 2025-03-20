@@ -19,12 +19,12 @@
 import React from "react";
 import {ContentbarWrapperInterface} from "./contentbarWrapperInterface";
 import {DefaultContentSelectionElement} from "./defaultContentSelectionElement";
-import {TranslationFunction} from "../../types/translationFunction";
 import {generateHashOfLength} from "@iavofficial/frontend-framework-shared/hash";
+import {TranslationWrapperFunction} from "@iavofficial/frontend-framework-shared/internationalizationModule";
 
 interface ConstructorArgs {
   id: string;
-  displayName: string | TranslationFunction;
+  displayName: string | TranslationWrapperFunction;
   onClick: (id: string) => any;
   contentAreaElement: React.ReactElement;
   closable?: boolean;

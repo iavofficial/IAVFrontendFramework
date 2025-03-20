@@ -16,10 +16,13 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useTranslator } from "@iavofficial/frontend-framework/translators";
+import { MandatoryModuleNames } from "@iavofficial/frontend-framework/constants";
+import { useModule } from "@iavofficial/frontend-framework/moduleContext";
 
 export const ExampleComponent3 = () => {
-  const t = useTranslator();
+  const t = useModule(
+    MandatoryModuleNames.Internationalization
+  ).useTranslation();
 
-  return <div>{t("component_deactivated")}</div>;
+  return <div>{t({ key: "component_deactivated" })}</div>;
 };

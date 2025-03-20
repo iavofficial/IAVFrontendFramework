@@ -12,7 +12,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- **/
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
 
 import makeStyles from "../../../util/makeStyles.tsx";
 import {PropsWithChildren} from "react";
@@ -23,7 +25,7 @@ const useStyles = makeStyles(() => ({
         top: "61px",
         left: "0",
         width: "200px",
-        height: "100%",
+        height: "calc(100vh - 91px)",
         backgroundColor: "#ffffff",
         borderRight: "1px solid lightgray",
         zIndex: 1000,

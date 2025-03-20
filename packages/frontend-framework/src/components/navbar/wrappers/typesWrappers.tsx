@@ -17,14 +17,14 @@
  */
 
 import {ReactElement} from "react";
-import {RouteProps} from "react-router-dom";
 import {
   InjectedOptionsByGroupToWrapper,
   InjectedOptionsByNavbarToWrapper,
 } from "../types/typesInjectedOptions";
+import { BasicRoute } from "@iavofficial/frontend-framework-shared/routerModule";
 
 export interface TabAndContentWrapper {
-  getRoutes(): ReactElement<RouteProps>[];
+  getRoutes(): BasicRoute[];
 
   getNavbarComponent(
     navbarInjectedOptions: InjectedOptionsByNavbarToWrapper,

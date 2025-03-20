@@ -19,7 +19,6 @@
 import { SelectButton } from "primereact/selectbutton";
 import { useState } from "react";
 import { UILayer } from "@iavofficial/frontend-framework/uiLayer";
-import { TranslateFunctionType } from "@iavofficial/frontend-framework/translationFunction";
 import { BasicContentWrapper } from "@iavofficial/frontend-framework/basicContentWrapper";
 import { Group } from "@iavofficial/frontend-framework/group";
 import InfoIcon from "./assets/infoIcon.svg?react";
@@ -81,15 +80,14 @@ const Layout = (props: Props) => {
       ExampleComponent7
     ),
     new Group(
-      (t: TranslateFunctionType) => t("Test_group_not_collapsible"),
+      (t) => t({ key: "Test_group_not_collapsible" }),
       <InfoIcon />,
       false,
       [
         new BasicContentWrapper(
           "/group-example2/",
           simpleNavbarTabFactory({
-            name: (t: TranslateFunctionType) =>
-              t("example_component", { count: 2 }),
+            name: (t) => t({ key: "example_component", options: { count: 2 } }),
             disabled: false,
             icon: <InfoIcon />,
           }),
@@ -100,8 +98,7 @@ const Layout = (props: Props) => {
     new BasicContentWrapper(
       "/group-example3/",
       privilegedNavbarTabFactory({
-        name: (t: TranslateFunctionType) =>
-          t("example_component", { count: 3 }),
+        name: (t) => t({ key: "example_component", options: { count: 3 } }),
         disabled: false,
         permittedGroups: ["ADMIN"],
         icon: <InfoIcon />,
@@ -111,57 +108,48 @@ const Layout = (props: Props) => {
     new BasicContentWrapper(
       "/group-example4/",
       simpleNavbarTabFactory({
-        name: (t: TranslateFunctionType) =>
-          t("example_component", { count: 4 }),
+        name: (t) => t({ key: "example_component", options: { count: 4 } }),
         disabled: false,
         icon: <InfoIcon />,
       }),
       ExampleComponent4
     ),
-    new Group(
-      (t: TranslateFunctionType) => t("Test_group_collapsible"),
-      <InfoIcon />,
-      true,
-      [
-        new Group("Untergruppe", <InfoIcon />, true, [
-          new BasicContentWrapper(
-            "/group-example51/",
-            simpleNavbarTabFactory({
-              name: (t: TranslateFunctionType) =>
-                t("example_component", { count: 5.1 }),
-              disabled: false,
-              icon: <InfoIcon />,
-            }),
-            ExampleComponent3
-          ),
-        ]),
+    new Group((t) => t({ key: "Test_group_collapsible" }), <InfoIcon />, true, [
+      new Group("Untergruppe", <InfoIcon />, true, [
         new BasicContentWrapper(
-          "/group-example52/",
+          "/group-example51/",
           simpleNavbarTabFactory({
-            name: (t: TranslateFunctionType) =>
-              t("example_component", { count: 5.2 }),
+            name: (t) =>
+              t({ key: "example_component", options: { count: 5.1 } }),
             disabled: false,
-            icon: <InfoIcon />,
-          }),
-          ExampleComponent4
-        ),
-        new BasicContentWrapper(
-          "/group-example53/",
-          simpleNavbarTabFactory({
-            name: (t: TranslateFunctionType) =>
-              t("example_component", { count: 5.3 }),
-            disabled: true,
             icon: <InfoIcon />,
           }),
           ExampleComponent3
         ),
-      ]
-    ),
+      ]),
+      new BasicContentWrapper(
+        "/group-example52/",
+        simpleNavbarTabFactory({
+          name: (t) => t({ key: "example_component", options: { count: 5.2 } }),
+          disabled: false,
+          icon: <InfoIcon />,
+        }),
+        ExampleComponent4
+      ),
+      new BasicContentWrapper(
+        "/group-example53/",
+        simpleNavbarTabFactory({
+          name: (t) => t({ key: "example_component", options: { count: 5.3 } }),
+          disabled: true,
+          icon: <InfoIcon />,
+        }),
+        ExampleComponent3
+      ),
+    ]),
     new BasicContentWrapper(
       "/group-example6/",
       simpleNavbarTabFactory({
-        name: (t: TranslateFunctionType) =>
-          t("example_component", { count: 6 }),
+        name: (t) => t({ key: "example_component", options: { count: 6 } }),
         disabled: false,
         icon: <InfoIcon />,
       }),
@@ -170,8 +158,7 @@ const Layout = (props: Props) => {
     new BasicContentWrapper(
       "/group-example7/",
       simpleNavbarTabFactory({
-        name: (t: TranslateFunctionType) =>
-          t("example_component", { count: 7 }),
+        name: (t) => t({ key: "example_component", options: { count: 7 } }),
         disabled: false,
         icon: <InfoIcon />,
       }),
@@ -180,8 +167,7 @@ const Layout = (props: Props) => {
     new BasicContentWrapper(
       "/nested-route/example1/",
       simpleNavbarTabFactory({
-        name: (t: TranslateFunctionType) =>
-          t("example_component", { count: 8 }),
+        name: (t) => t({ key: "example_component", options: { count: 8 } }),
         disabled: false,
         icon: <InfoIcon />,
       }),
@@ -236,7 +222,7 @@ const Layout = (props: Props) => {
         },
       }}
       tabAndContentWrappers={views}
-      startingPoint="/"
+      initialPath="/"
       authenticationView={props.authenticationView}
       settingsMenuOptions={settingsMenuOptions}
       documentsLabelKey="Legal_documents"

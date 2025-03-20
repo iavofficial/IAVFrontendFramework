@@ -17,21 +17,21 @@
  */
 
 import React, {ReactElement} from "react";
-import {RouteProps} from "react-router-dom";
 import {TabGroup} from "../tabs/tabGroup/tabGroup";
-import {TranslateFunctionType} from "../../../types/translationFunction";
 import {GroupableTabAndContentWrapper} from "./typesWrappers";
 import {
   InjectedOptionsByGroupToWrapper,
   InjectedOptionsByNavbarToWrapper,
 } from "../types/typesInjectedOptions";
 import {generateHashForValues} from "@iavofficial/frontend-framework-shared/hash";
+import {BasicRoute} from "@iavofficial/frontend-framework-shared/routerModule";
+import { TranslationWrapperFunction } from "@iavofficial/frontend-framework-shared/internationalizationModule";
 
 export class Group implements GroupableTabAndContentWrapper {
   private _insideGroup = false;
 
   constructor(
-    private _name: string | ((t: TranslateFunctionType) => string),
+    private _name: string | TranslationWrapperFunction,
     private _logo: ReactElement,
     private _collapsible: boolean,
     private _contentWrappers: GroupableTabAndContentWrapper[],
@@ -49,9 +49,9 @@ export class Group implements GroupableTabAndContentWrapper {
   };
 
   getRoutes = () => {
-    const routes: ReactElement<RouteProps>[] = [];
-    this._contentWrappers.forEach((view) => {
-      view.getRoutes().forEach((route) => {
+    const routes: BasicRoute[] = [];
+    this._contentWrappers.forEach((wrapper) => {
+      wrapper.getRoutes().forEach((route) => {
         routes.push(route);
       });
     });

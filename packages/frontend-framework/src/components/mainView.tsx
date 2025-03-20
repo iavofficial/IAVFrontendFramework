@@ -16,18 +16,20 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, {useContext} from "react";
+import React, {useContext, useMemo} from "react";
 import {Header, HeaderOptions} from "./header/header";
 import {Navbar} from "./navbar/navbar";
 import {DefaultLegalDocument} from "./imprint/defaultLegalDocument";
 import {ImprintText} from "./imprint/imprintText";
 import {PrivacyPolicyText} from "./imprint/privacyPolicyText";
 import {SettingsMenuOptions} from "./header/settingsMenu";
-import {Outlet, Route, Routes} from "react-router-dom";
 import {TabAndContentWrapper} from "./navbar/wrappers/typesWrappers";
 import {UserMenuOptions} from "./header/userMenu";
 import If from "./helper/If";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
+import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
+import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
+import {BasicRoute} from "@iavofficial/frontend-framework-shared/routerModule";
 
 interface MainViewProps {
   tabAndContentWrappers: TabAndContentWrapper[];
@@ -44,9 +46,42 @@ interface MainViewProps {
 
 export const MainView = (props: MainViewProps) => {
   const colorSettingsContext = useContext(ColorSettingsContext);
+  const routerModule = useModule(MandatoryModuleNames.Router);
 
   const contentAreaBackground =
     colorSettingsContext.currentColors.contentArea.backgroundColor;
+
+  const staticRoutes: BasicRoute[] = useMemo(
+    () => [
+      {
+        path: "/imprint",
+        element: props.imprintComponent ? (
+          <props.imprintComponent />
+        ) : (
+          <DefaultLegalDocument legalTextComponent={ImprintText} />
+        ),
+      },
+      {
+        path: "/privacy-policy",
+        element: props.privacyPolicyComponent ? (
+          <props.privacyPolicyComponent />
+        ) : (
+          <DefaultLegalDocument legalTextComponent={PrivacyPolicyText} />
+        ),
+      },
+    ],
+    [],
+  );
+
+  const tabRoutes = useMemo(() => {
+    let tabRoutes: BasicRoute[] = [];
+    props.tabAndContentWrappers.forEach((wrapper) => {
+      tabRoutes = [...tabRoutes, ...wrapper.getRoutes()];
+    });
+    return tabRoutes;
+  }, [props.tabAndContentWrappers]);
+
+  const MainViewRouter = routerModule.MainViewRouter;
 
   return (
     <div
@@ -80,31 +115,7 @@ export const MainView = (props: MainViewProps) => {
             hidePrivacyPolicy={props.hidePrivacyPolicy}
           />
         </If>
-        <Outlet />
-        <Routes>
-          {props.tabAndContentWrappers.map((wrapper) => wrapper.getRoutes())}
-
-          <Route
-            path="/imprint"
-            element={
-              props.imprintComponent ? (
-                <props.imprintComponent />
-              ) : (
-                <DefaultLegalDocument legalTextComponent={ImprintText} />
-              )
-            }
-          />
-          <Route
-            path="/privacy-policy"
-            element={
-              props.privacyPolicyComponent ? (
-                <props.privacyPolicyComponent />
-              ) : (
-                <DefaultLegalDocument legalTextComponent={PrivacyPolicyText} />
-              )
-            }
-          />
-        </Routes>
+        {<MainViewRouter routes={[...staticRoutes, ...tabRoutes]} />}
       </div>
     </div>
   );

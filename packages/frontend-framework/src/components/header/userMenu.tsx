@@ -19,7 +19,7 @@
 import React from "react";
 import {ContextMenu} from "primereact/contextmenu";
 import {MenuItem} from "./settingsMenu";
-import {  useModuleContext } from "@iavofficial/frontend-framework-shared/moduleContext";
+import {  useModule } from "@iavofficial/frontend-framework-shared/moduleContext";
 import { useDefaultDispatch } from "@iavofficial/frontend-framework-shared/moduleDefaults";
 import { MandatoryModuleNames } from "@iavofficial/frontend-framework-shared/moduleNames";
 
@@ -35,7 +35,7 @@ export interface UserMenuOptions {
 
 //eslint-disable-next-line
 export const UserMenu = React.forwardRef<ContextMenu, Props>((props, ref) => {
-  const {modules} = useModuleContext();
+  const authModule = useModule(MandatoryModuleNames.Authentication);
 
   const dispatch = useDefaultDispatch();
 
@@ -46,7 +46,7 @@ export const UserMenu = React.forwardRef<ContextMenu, Props>((props, ref) => {
       label: "Logout",
       icon: "pi pi-sign-out",
       command: () => {
-        dispatch(modules[MandatoryModuleNames.Authentication].logout());
+        dispatch(authModule.logout());
       },
     });
   }

@@ -17,6 +17,10 @@
  */
 
 import {
+  createTypedUseModule,
+  useModuleContext,
+} from "../../contexts/moduleContext";
+import {
   ActualMandatoryStateFromModules,
   FFMandatoryNonStoreModules,
   FFMandatoryState,
@@ -24,7 +28,7 @@ import {
   TParamAllModulesPartial,
 } from "../../types/modules/moduleOrchestrationTypes";
 import {mergeModules} from "./util/mergeModules";
-import {seperateModuleTypes} from "./util/seperateModuleTypes";
+import {separateModuleTypes} from "./util/separateModuleTypes";
 
 // It would be better to use FFModule inside the Record to ensure that
 // the useModuleLifecycle method has the expected type if the module
@@ -36,21 +40,26 @@ import {seperateModuleTypes} from "./util/seperateModuleTypes";
 // cannot be added since it introduces other errors.
 // However, just providing object inside the Record is not very critical
 // as the user will get an error when he passes the modules to the
-// GlobalDataLayer if module types mismatch with FFModule.
+// PageGlobalDataLayer if module types mismatch with FFModule.
 export const createModules = <
-  TModules extends Partial<
-    FFMandatoryStoreModules<TFrameworkStoreModulesState>
-  > &
-    Partial<FFMandatoryNonStoreModules> &
-    Record<string, object>,
-  TFrameworkStoreModulesState extends
-    FFMandatoryState = ActualMandatoryStateFromModules<TModules>,
+    TModules extends Partial<
+        FFMandatoryStoreModules<TFrameworkStoreModulesState>
+    > &
+        Partial<FFMandatoryNonStoreModules> &
+        Record<string, object>,
+    TFrameworkStoreModulesState extends FFMandatoryState = ActualMandatoryStateFromModules<TModules>,
 >(
-  paramModules?: TParamAllModulesPartial<TModules, TFrameworkStoreModulesState>,
+    paramModules?: TParamAllModulesPartial<TModules, TFrameworkStoreModulesState>,
 ) => {
-  const modules = paramModules ?? ({} as TModules);
+    const modules = paramModules ?? ({} as TModules);
 
-  const seperatedModules = seperateModuleTypes(modules);
+  const separatedModules = separateModuleTypes(modules);
 
-  return mergeModules(seperatedModules);
+  const finalModules = mergeModules(separatedModules);
+
+  return {
+    ...finalModules,
+    useModuleContextTyped: useModuleContext<typeof finalModules.all>,
+    useModuleTyped: createTypedUseModule<typeof finalModules.all>(),
+  };
 };

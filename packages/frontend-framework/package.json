@@ -36,21 +36,16 @@
   "dependencies": {
     "@iavofficial/frontend-framework-shared": "*",
     "@reduxjs/toolkit": "^2.5.1",
-    "i18next": "^22.4.13",
-    "i18next-browser-languagedetector": "^7.0.1",
     "primeflex": "^3.3.0",
     "primeicons": "^6.0.1",
     "primereact": "^10.3.3",
     "react-cookie": "^7.2.1",
-    "react-i18next": "^12.2.0",
     "react-redux": "^9.2.0",
     "simplebar-react": "^3.2.3"
   },
   "peerDependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router": "^6.9.0",
-    "react-router-dom": "^6.9.0",
     "react-transition-group": "^4.4.5"
   },
   "devDependencies": {
@@ -83,8 +78,6 @@
   "exports": {
     "./uiLayer": "./dist/components/uiLayer.js",
     "./globalDataLayer": "./dist/components/globalDataLayer.js",
-    "./auth": "./dist/contexts/auth.js",
-    "./dummyAuthenticationProvider": "./dist/components/authentication/default/dummyAuthenticationProvider.js",
     "./basicAuthenticationView": "./dist/components/authentication/default/basicAuthenticationView.js",
     "./navbar": "./dist/components/navbar/navbar.js",
     "./navbarSettingsTypes": "./dist/types/navbarSettingsTypes.js",
@@ -111,10 +104,6 @@
     "./contentCell": "./dist/components/content/contentCell.js",
     "./colorProvider": "./dist/coloring/colorProvider.js",
     "./colorOptionTypes": "./dist/coloring/colorOptionTypes.js",
-    "./i18n": "./dist/components/internationalization/i18n.js",
-    "./language": "./dist/contexts/language.js",
-    "./translationFunction": "./dist/types/translationFunction.js",
-    "./translators": "./dist/components/internationalization/translators.js",
     "./header": "./dist/components/header/header.js",
     "./settingsMenu": "./dist/components/header/settingsMenu.js",
     "./userMenu": "./dist/components/header/userMenu.js",
@@ -128,6 +117,11 @@
     "./hash": "./dist/re-exports/hash.js",
     "./colorSettingsContext": "./dist/re-exports/colorSettingsContext.js",
     "./moduleContext": "./dist/re-exports/moduleContext.js",
+    "./moduleHooks": "./dist/re-exports/moduleHooks.js",
+    "./defaultModules": "./dist/re-exports/defaultModules.js",
+    "./reExportedTypes": "./dist/re-exports/reExportedTypes.js",
+    "./cookieHooks": "./dist/re-exports/cookieHooks.js",
+    "./useModuleTranslation": "./dist/re-exports/useModuleTranslation.js",
     "./constants.css": "./dist/css/constants.css",
     "./mainPage.css": "./dist/css/mainPage.css",
     "./framework.css": "./dist/css/framework.css",
@@ -140,12 +134,6 @@
       ],
       "./globalDataLayer": [
         "./dist/components/globalDataLayer.d.ts"
-      ],
-      "./auth": [
-        "./dist/contexts/auth.d.ts"
-      ],
-      "./dummyAuthenticationProvider": [
-        "./dist/components/authentication/default/dummyAuthenticationProvider.d.ts"
       ],
       "./basicAuthenticationView": [
         "./dist/components/authentication/default/basicAuthenticationView.d.ts"
@@ -225,18 +213,6 @@
       "./colorOptionTypes": [
         "./dist/coloring/colorOptionTypes.d.ts"
       ],
-      "./i18n": [
-        "./dist/components/internationalization/i18n.d.ts"
-      ],
-      "./language": [
-        "./dist/contexts/language.d.ts"
-      ],
-      "./translationFunction": [
-        "./dist/types/translationFunction.d.ts"
-      ],
-      "./translators": [
-        "./dist/components/internationalization/translators.d.ts"
-      ],
       "./header": [
         "./dist/components/header/header.d.ts"
       ],
@@ -275,6 +251,21 @@
       ],
       "./moduleContext": [
         "./dist/re-exports/moduleContext.d.ts"
+      ],
+      "./moduleHooks": [
+        "./dist/re-exports/moduleHooks.d.ts"
+      ],
+      "./defaultModules": [
+        "./dist/re-exports/defaultModules.d.ts"
+      ],
+      "./reExportedTypes": [
+        "./dist/re-exports/reExportedTypes.d.ts"
+      ],
+      "./cookieHooks": [
+        "./dist/re-exports/cookieHooks.d.ts"
+      ],
+      "./useModuleTranslation": [
+        "./dist/re-exports/useModuleTranslation.js"
       ]
     }
   },

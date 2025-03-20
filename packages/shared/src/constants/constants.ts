@@ -52,8 +52,8 @@ export const GREEN = "#80d800";
 
 //The following constants are constants regarding the layout
 export const PADDING_GAB = 16;
-export const DEFAULT_ELEMENTSIZE = 40;
-export const DEFAULT_WIDTH_CONTENTSECTIONELEMENT = 300;
+export const DEFAULT_ELEMENT_SIZE = 40;
+export const DEFAULT_WIDTH_CONTENT_SECTION_ELEMENT = 300;
 export const NAVBAR_WIDTH_UNFOLDED = 240;
 export const GAB_NAVBAR_COLLAPSED = 2;
 export const GAB_NAVBAR_UNFOLDED = 4;

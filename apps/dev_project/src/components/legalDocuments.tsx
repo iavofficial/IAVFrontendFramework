@@ -16,13 +16,13 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useTranslator } from "@iavofficial/frontend-framework/translators";
 import { ImprintText } from "@iavofficial/frontend-framework/imprint";
 import { useContext } from "react";
 import { ColorSettingsContext } from "@iavofficial/frontend-framework/colorSettingsContext";
+import { useModuleTranslation } from "@iavofficial/frontend-framework/moduleHooks";
 
 export const LegalDocuments = () => {
-  const t = useTranslator();
+  const t = useModuleTranslation();
   const colorSettingsContext = useContext(ColorSettingsContext);
 
   return (
@@ -54,7 +54,7 @@ export const LegalDocuments = () => {
             fontWeight: "bolder",
           }}
         >
-          {t("Customized_legal_documents")}
+          {t({ key: "Customized_legal_documents" })}
         </div>
         <ImprintText />
       </div>

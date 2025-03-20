@@ -12,12 +12,14 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- **/
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
 
 import React, {HTMLAttributeAnchorTarget} from "react";
 import {Link} from "react-router-dom";
 import makeStyles from "../../../../util/makeStyles.tsx";
-import {BLUE3} from "@iavofficial/frontend-framework/constants";
+import { BLUE3 } from "../../../../constants.ts";
 
 const useStyles = makeStyles(() => ({
     link: {

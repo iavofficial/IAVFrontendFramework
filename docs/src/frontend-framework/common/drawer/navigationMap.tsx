@@ -18,23 +18,22 @@
 
 import React from "react";
 import NavigationItem from "./navigationItem.tsx";
-import {PathRoute} from "../page/pathRoute.ts";
+import { PathRoute } from "../page/pathRoute.ts";
 
 interface Props {
-    routes: PathRoute[]
+  routes: PathRoute[];
 }
 
 const NavigationMap: React.FC<Props> = (props) => {
+  const { routes } = props;
 
-    const {routes} = props;
-
-    return (
-        <ul>
-            {routes.map(({path, label}) => (
-                <NavigationItem to={path} label={label} key={path}/>
-            ))}
-        </ul>
-    );
+  return (
+    <ul>
+      {routes.map(({ path, label }) => (
+        <NavigationItem to={path} label={label} key={path} />
+      ))}
+    </ul>
+  );
 };
 
 export default NavigationMap;

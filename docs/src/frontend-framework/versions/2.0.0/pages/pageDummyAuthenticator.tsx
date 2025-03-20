@@ -19,7 +19,7 @@
 import Page from "../../../common/page/page";
 import Title from "../../../common/page/text/title";
 import Text from "../../../common/page/text/text";
-import {ModuleProfile} from "../../../common/page/text/module/moduleProfile";
+import { ModuleProfile } from "../../../common/page/text/module/moduleProfile";
 
 const DESCRIPTION = `The DummyAuthenticator module is a place holder for real
 authentication. By using this default implementation you can begin developing
@@ -29,17 +29,17 @@ still has to authenticate and thus creating the impression of how the interactio
 will be designed later on.`;
 
 export const PageDummyAuthenticator = () => {
-    return (
-        <Page>
-            <Title>DummyAuthenticator</Title>
-            <ModuleProfile
-                moduleKey="auth"
-                isDefaultModule
-                shortDescription={DESCRIPTION}
-            />
-            <Text>
-                Hint: This module provides only the necessary state values and methods.
-            </Text>
-        </Page>
-    );
+  return (
+    <Page>
+      <Title>DummyAuthenticator</Title>
+      <ModuleProfile
+        moduleKey="auth"
+        isDefaultModule
+        shortDescription={DESCRIPTION}
+      />
+      <Text>
+        Hint: This module provides only the necessary state values and methods.
+      </Text>
+    </Page>
+  );
 };

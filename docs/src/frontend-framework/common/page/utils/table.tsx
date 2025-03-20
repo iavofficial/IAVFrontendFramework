@@ -16,100 +16,104 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, {ReactElement} from "react";
+import React, { ReactElement } from "react";
 import makeStyles from "../../../../util/makeStyles.tsx";
-import {BLUE3, GREY1} from "../../../../constants.ts";
+import { BLUE3, GREY1 } from "../../../../constants.ts";
 
 const useStyles = makeStyles(() => ({
-    container: {
-        overflow: "auto",
-        marginBottom: "1.5em"
-    },
-    table: {
-        width: "100%",
-        borderCollapse: "collapse",
-        borderRadius: "8px",
-        overflowX: "auto"
-    },
-    thead: {
-        backgroundColor: BLUE3,
-        color: "#fff",
-    },
-    tbody: {
-        backgroundColor: "#fff",
-    },
-    th: {
-        border: "1px solid #dee2e6",
-        padding: "10px",
-        textAlign: "left",
-    },
-    td: {
-        border: "1px solid #dee2e6",
-        padding: "10px",
-        textAlign: "left",
-    },
-    grey1: {
-        backgroundColor: GREY1,
-    },
+  container: {
+    overflow: "auto",
+    marginBottom: "1.5em",
+  },
+  table: {
+    width: "100%",
+    borderCollapse: "collapse",
+    borderRadius: "8px",
+    overflowX: "auto",
+  },
+  thead: {
+    backgroundColor: BLUE3,
+    color: "#fff",
+  },
+  tbody: {
+    backgroundColor: "#fff",
+  },
+  th: {
+    border: "1px solid #dee2e6",
+    padding: "10px",
+    textAlign: "left",
+  },
+  td: {
+    border: "1px solid #dee2e6",
+    padding: "10px",
+    textAlign: "left",
+  },
+  grey1: {
+    backgroundColor: GREY1,
+  },
 }));
 
 interface Column {
-    title: string;
-    key?: string;
-    centerContent?: boolean;
+  title: string;
+  key?: string;
+  centerContent?: boolean;
 }
 
 export type TableData<T extends { key: string }[]> = {
-    [K in T[number]["key"]]: string | ReactElement | JSX.Element;
+  [K in T[number]["key"]]: string | ReactElement | JSX.Element;
 }[];
 
 interface Props {
-    columns: Column[];
-    data: Array<Record<string, string | ReactElement>>;
+  columns: Column[];
+  data: Array<Record<string, string | ReactElement>>;
 }
 
 const Table: React.FC<Props> = (props) => {
-    const {columns, data} = props;
-    const {classes} = useStyles();
+  const { columns, data } = props;
+  const { classes } = useStyles();
 
-    return (
-        <div className={classes.container}>
-            <table className={classes.table}>
-                <thead className={classes.thead}>
-                <tr>
-                    {columns.map((col) => (
-                        <th key={col.title} className={classes.th}>
-                            {col.title}
-                        </th>
-                    ))}
-                </tr>
-                </thead>
-                <tbody className={classes.tbody}>
-                {data.map((row, index) => (
-                    <tr
-                        key={index}
-                        className={index % 2 === 0 ? classes.grey1 : undefined}
+  return (
+    <div className={classes.container}>
+      <table className={classes.table}>
+        <thead className={classes.thead}>
+          <tr>
+            {columns.map((col) => (
+              <th key={col.title} className={classes.th}>
+                {col.title}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody className={classes.tbody}>
+          {data.map((row, index) => (
+            <tr
+              key={index}
+              className={index % 2 === 0 ? classes.grey1 : undefined}
+            >
+              {columns.map((col) => (
+                <td key={col.title} className={classes.td}>
+                  {col.centerContent ? (
+                    <div
+                      style={{
+                        width: "100%",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
                     >
-                        {columns.map((col) => (
-                            <td key={col.title} className={classes.td}>
-                                {col.centerContent ? (
-                                    <div style={{
-                                        width: "100%",
-                                        display: "flex",
-                                        alignItems: "center",
-                                        justifyContent: "center"
-                                    }}>{row[col.key ?? col.title]}</div>
-                                ) : (
-                                    row[col.key ?? col.title]
-                                )}
-                            </td>
-                        ))}
-                    </tr>
-                ))}
-                </tbody>
-            </table>
-        </div>
-    );
+                      {row[col.key ?? col.title]}
+                    </div>
+                  ) : (
+                    row[col.key ?? col.title]
+                  )}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 };
 
 export default Table;

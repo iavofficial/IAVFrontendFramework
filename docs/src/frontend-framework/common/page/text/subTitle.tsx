@@ -16,31 +16,28 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, {PropsWithChildren} from "react";
+import React, { PropsWithChildren } from "react";
 import makeStyles from "../../../../util/makeStyles.tsx";
-import {classNames} from "primereact/utils";
+import { classNames } from "primereact/utils";
 
 const useStyles = makeStyles(() => ({
-    h2: {
-        fontSize: "1.5rem",
-        fontWeight: "bold",
-        margin: "20px 0 16px 0",
-    },
+  h2: {
+    fontSize: "1.5rem",
+    fontWeight: "bold",
+    margin: "20px 0 16px 0",
+  },
 }));
 
 interface Props {
-    className?: string;
+  className?: string;
 }
 
 const SubTitle: React.FC<PropsWithChildren<Props>> = (props) => {
+  const { className, children } = props;
 
-    const {className, children} = props;
+  const { classes } = useStyles();
 
-    const {classes} = useStyles();
-
-    return (
-        <h2 className={classNames(className, classes.h2)}>{children}</h2>
-    );
-}
+  return <h2 className={classNames(className, classes.h2)}>{children}</h2>;
+};
 
 export default SubTitle;

@@ -16,53 +16,53 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, {PropsWithChildren} from "react";
-import {Link, useLocation} from "react-router-dom";
+import React, { PropsWithChildren } from "react";
+import { Link, useLocation } from "react-router-dom";
 import makeStyles from "../../../util/makeStyles.tsx";
-import {GREY2} from "../../../constants.ts";
+import { GREY2 } from "../../../constants.ts";
 
 const useStyles = makeStyles(() => ({
-    link: {
-        cursor: "pointer",
-        display: "block",
-        textDecoration: "none",
-        color: "var(--primary-color)",
-        padding: "8px",
-        borderRadius: "4px",
-        "&:hover": {
-            backgroundColor: "#333",
-            color: "#fff",
-        },
+  link: {
+    cursor: "pointer",
+    display: "block",
+    textDecoration: "none",
+    color: "var(--primary-color)",
+    padding: "8px",
+    borderRadius: "4px",
+    "&:hover": {
+      backgroundColor: "#333",
+      color: "#fff",
     },
-    activeLink: {
-        backgroundColor: GREY2,
-    },
+  },
+  activeLink: {
+    backgroundColor: GREY2,
+  },
 }));
 
 interface Props {
-    key?: string;
-    to: string;
-    label: string;
+  key?: string;
+  to: string;
+  label: string;
 }
 
 const NavigationItem: React.FC<PropsWithChildren<Props>> = (props) => {
+  const { to, label } = props;
 
-    const {to, label} = props;
+  const { classes } = useStyles();
+  const location = useLocation();
 
-    const {classes} = useStyles();
-    const location = useLocation();
+  const isActive = location.pathname.includes(to);
 
-    const isActive = location.pathname.includes(to);
-
-    return (
-        <li key={to}>
-            <Link
-                to={to}
-                className={`${classes.link} ${isActive ? classes.activeLink : ""}`}>
-                {label}
-            </Link>
-        </li>
-    );
+  return (
+    <li key={to}>
+      <Link
+        to={to}
+        className={`${classes.link} ${isActive ? classes.activeLink : ""}`}
+      >
+        {label}
+      </Link>
+    </li>
+  );
 };
 
 export default NavigationItem;

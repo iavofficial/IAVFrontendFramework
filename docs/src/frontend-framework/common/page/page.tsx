@@ -16,44 +16,41 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, {PropsWithChildren, useEffect} from "react";
+import React, { PropsWithChildren, useEffect } from "react";
 import makeStyles from "../../../util/makeStyles.tsx";
 import Footer from "../footer/footer.tsx";
 import OnThisPage from "../drawer/onThisPage.tsx";
 
 const useStyles = makeStyles(() => ({
-    wrapper: {
-        height: "100vh",
-        width: "100%",
-        display: "flex",
-        flexDirection: "column"
-    },
-    page: {
-        flex: 1,
-        padding: "20px",
-        margin: "60px auto 20px auto",
-        width: "60%",
-        textAlign: "justify"
-    }
+  wrapper: {
+    height: "100vh",
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+  },
+  page: {
+    flex: 1,
+    padding: "20px",
+    margin: "60px auto 20px auto",
+    width: "60%",
+    textAlign: "justify",
+  },
 }));
 
 const Page: React.FC<PropsWithChildren> = (props) => {
+  const { classes } = useStyles();
 
-    const {classes} = useStyles();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
-
-    return (
-        <div className={classes.wrapper}>
-            <OnThisPage/>
-            <div className={classes.page}>
-                {props.children}
-            </div>
-            <Footer/>
-        </div>
-    );
-}
+  return (
+    <div className={classes.wrapper}>
+      <OnThisPage />
+      <div className={classes.page}>{props.children}</div>
+      <Footer />
+    </div>
+  );
+};
 
 export default Page;

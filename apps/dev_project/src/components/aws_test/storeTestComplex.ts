@@ -50,7 +50,7 @@ const configureAmplify = () => {
       // @ts-ignore
       secure: domain !== "localhost",
       sameSite: "lax",
-    })
+    }),
   );
 };
 
@@ -96,9 +96,9 @@ export const store = new StoreBuilder(modules.storeModules)
     (module, storeConfigBuilder) => {
       storeConfigBuilder.setReducer(
         MandatoryModuleNames.Authentication,
-        module.slice.reducer
+        module.slice.reducer,
       );
-    }
+    },
   )
   .setUserModuleProcessor("userModule", (module, StoreConfigBuilder) => {})
   .setStoreBuilder((storeConfig) => {

@@ -16,6 +16,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-export * from "@iavofficial/frontend-framework-shared/dummyAuthenticatorModule";
-export * from "@iavofficial/frontend-framework-shared/reactRouterRouterModule";
-export * from "@iavofficial/frontend-framework-shared/i18NextInternationalizerModule";
+import Page from "../../../common/page/page"
+
+export const PageI18nextInternationalizer = () => {
+    return (
+        <Page>
+
+        </Page>
+    )
+}

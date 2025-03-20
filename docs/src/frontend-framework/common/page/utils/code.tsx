@@ -16,54 +16,52 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, {PropsWithChildren} from "react";
-import SyntaxHighlighter from 'react-syntax-highlighter';
+import React, { PropsWithChildren } from "react";
+import SyntaxHighlighter from "react-syntax-highlighter";
 import makeStyles from "../../../../util/makeStyles.tsx";
-import {ocean} from "react-syntax-highlighter/dist/cjs/styles/hljs";
-import {GREY2} from "../../../../constants.ts";
+import { ocean } from "react-syntax-highlighter/dist/cjs/styles/hljs";
+import { GREY2 } from "../../../../constants.ts";
 
-
-const useStyles = makeStyles(({center}) => ({
-    codeBlock: {
-        width: "100%",
-        padding: "2px",
-        borderRadius: "8px",
-        overflowX: "auto",
-        whiteSpace: "pre-wrap",
-        fontSize: "0.875rem",
-        lineHeight: "1.5",
-        background: "#2b303b",
-        paddingLeft: center ? "0px" : "8px",
-        margin: "8px 0",
-    },
-    title: {
-        padding: "2px 0",
-        color: GREY2,
-        fontSize: "0.8rem",
-        fontWeight: "bold",
-    }
+const useStyles = makeStyles(({ center }) => ({
+  codeBlock: {
+    width: "100%",
+    padding: "2px",
+    borderRadius: "8px",
+    overflowX: "auto",
+    whiteSpace: "pre-wrap",
+    fontSize: "0.875rem",
+    lineHeight: "1.5",
+    background: "#2b303b",
+    paddingLeft: center ? "0px" : "8px",
+    margin: "8px 0",
+  },
+  title: {
+    padding: "2px 0",
+    color: GREY2,
+    fontSize: "0.8rem",
+    fontWeight: "bold",
+  },
 }));
 
 interface Props {
-    language: string;
-    title?: string;
-    center?: boolean;
+  language: string;
+  title?: string;
+  center?: boolean;
 }
 
 const Code: React.FC<PropsWithChildren<Props>> = (props) => {
+  const { language, children, title, center } = props;
 
-    const {language, children, title, center} = props;
+  const { classes } = useStyles({ center });
 
-    const {classes} = useStyles({center});
-
-    return (
-        <div className={classes.codeBlock}>
-            {title && <div className={classes.title}>{title}</div>}
-            <SyntaxHighlighter language={language} style={ocean}>
-                {children}
-            </SyntaxHighlighter>
-        </div>
-    );
+  return (
+    <div className={classes.codeBlock}>
+      {title && <div className={classes.title}>{title}</div>}
+      <SyntaxHighlighter language={language} style={ocean}>
+        {children}
+      </SyntaxHighlighter>
+    </div>
+  );
 };
 
 export default Code;

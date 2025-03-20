@@ -17,44 +17,39 @@
  */
 
 import makeStyles from "../../../util/makeStyles.tsx";
-import {PropsWithChildren} from "react";
+import { PropsWithChildren } from "react";
 
 const useStyles = makeStyles(() => ({
-    drawer: {
-        position: "fixed",
-        top: "61px",
-        left: "0",
-        width: "200px",
-        height: "calc(100vh - 91px)",
-        backgroundColor: "#ffffff",
-        borderRight: "1px solid lightgray",
-        zIndex: 1000,
-        padding: "20px",
-        fontSize: "0.875rem",
-        overflowY: "auto",
-        "& ul": {
-            listStyle: "none",
-            padding: 0,
-            margin: 0
-        },
-        "& li": {
-            marginBottom: "8px",
-            padding: "3px 0px",
-            borderRadius: "4px",
-            transition: "background-color 0.3s ease",
-        },
+  drawer: {
+    position: "fixed",
+    top: "61px",
+    left: "0",
+    width: "200px",
+    height: "calc(100vh - 91px)",
+    backgroundColor: "#ffffff",
+    borderRight: "1px solid lightgray",
+    zIndex: 1000,
+    padding: "20px",
+    fontSize: "0.875rem",
+    overflowY: "auto",
+    "& ul": {
+      listStyle: "none",
+      padding: 0,
+      margin: 0,
     },
+    "& li": {
+      marginBottom: "8px",
+      padding: "3px 0px",
+      borderRadius: "4px",
+      transition: "background-color 0.3s ease",
+    },
+  },
 }));
 
 const PageNavigation: React.FC<PropsWithChildren> = (props) => {
+  const { classes } = useStyles();
 
-    const {classes} = useStyles();
-
-    return (
-        <div className={classes.drawer}>
-            {props.children}
-        </div>
-    );
+  return <div className={classes.drawer}>{props.children}</div>;
 };
 
 export default PageNavigation;

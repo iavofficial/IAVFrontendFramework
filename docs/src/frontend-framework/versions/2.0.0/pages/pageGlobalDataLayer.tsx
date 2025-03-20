@@ -26,27 +26,27 @@ import SubSubTitle from "../../../common/page/text/subSubTitle.tsx";
 import Text from "../../../common/page/text/text.tsx";
 
 const PageGlobalDataLayer: React.FC = () => {
-    return (
-        <Page>
-            <Title>
-                GlobalDataLayer: Internationalization and Authentication system
-            </Title>
-            <SubTitle>Internationalization</SubTitle>
-            <Text>
-                The framework uses react-i18next for internationalization and provides a
-                default initialization which automatically gets executed when the
-                GlobalDataLayer component mounts. It also provides translations in
-                english and german for texts of framework components. You are able to
-                extend the translations for framework components with other languages by
-                providing translations with the translation keys used by the
-                framework&#39;s components.
-            </Text>
-            <Text>
-                The GlobalDataLayer component provides the following interface for
-                internationalization:
-            </Text>
-            <Code title={"PageInterface PageGlobalDataLayer"} language={"typescript"}>
-                {`interface Props {
+  return (
+    <Page>
+      <Title>
+        GlobalDataLayer: Internationalization and Authentication system
+      </Title>
+      <SubTitle>Internationalization</SubTitle>
+      <Text>
+        The framework uses react-i18next for internationalization and provides a
+        default initialization which automatically gets executed when the
+        GlobalDataLayer component mounts. It also provides translations in
+        english and german for texts of framework components. You are able to
+        extend the translations for framework components with other languages by
+        providing translations with the translation keys used by the
+        framework&#39;s components.
+      </Text>
+      <Text>
+        The GlobalDataLayer component provides the following interface for
+        internationalization:
+      </Text>
+      <Code title={"PageInterface PageGlobalDataLayer"} language={"typescript"}>
+        {`interface Props {
   modules: FFAllMandatoryModules<TState> & Record<string, FFModule>;
   store: EnhancedStore<TState>;
   languageOptions?: GlobalDataLayerLanguageOptions;
@@ -54,14 +54,14 @@ const PageGlobalDataLayer: React.FC = () => {
   initI18Next?: () => void;
   colorSettings?: ColorProviderProps;
 }`}
-            </Code>
-            <Text>
-                To define and use custom translations you have to define an object of
-                the structure seen in the following code snippet. After defining the
-                object you have to pass it to GlobalDataLayer.
-            </Text>
-            <Code title={"Internationalization Example"} language={"typescript"}>
-                {`const translations = {
+      </Code>
+      <Text>
+        To define and use custom translations you have to define an object of
+        the structure seen in the following code snippet. After defining the
+        object you have to pass it to GlobalDataLayer.
+      </Text>
+      <Code title={"Internationalization Example"} language={"typescript"}>
+        {`const translations = {
      en: {
          translation: importedJsonFileEnglish
     },
@@ -80,24 +80,24 @@ return (
     />
     ...
 );`}
-            </Code>
-            <Text>
-                The .json files have to include simple key value pairs like this:
-            </Text>
-            <Code title={"Language Object Example"} language={"json"}>
-                {`{
+      </Code>
+      <Text>
+        The .json files have to include simple key value pairs like this:
+      </Text>
+      <Code title={"Language Object Example"} language={"json"}>
+        {`{
     "optioName": "German",
     "greeting": "hello",
     "promoteProgramming": "Programming is fun!"
 }`}
-            </Code>
-            <Text>
-                When defining a new language you should define the following
-                translations as the following keys are used by the framework's
-                components:
-            </Text>
-            <Code title={"Mandatory keys"} language={"json"}>
-                {`{
+      </Code>
+      <Text>
+        When defining a new language you should define the following
+        translations as the following keys are used by the framework's
+        components:
+      </Text>
+      <Code title={"Mandatory keys"} language={"json"}>
+        {`{
     "auth": {
         "invalidAccessConfiguration": "Invalid access configuration",
         "invalidUsernameOrPassword": "Invalid username or password",
@@ -138,46 +138,46 @@ return (
         "language": "Language"
     }
 }`}
-            </Code>
-            <Text>
-                To specify dialects like the german dialect in Switzerland use the
-                following name schema for the translations object (underscore is
-                important):
-            </Text>
-            <Code language={"json"}>
-                {`Key for german: "de"
+      </Code>
+      <Text>
+        To specify dialects like the german dialect in Switzerland use the
+        following name schema for the translations object (underscore is
+        important):
+      </Text>
+      <Code language={"json"}>
+        {`Key for german: "de"
 Key for the german dialect in Switzerland: "de_CH"`}
-            </Code>
-            <Text>
-                To get a translation by it&#39;s key you should use the useTranslator
-                hook from .../iav-core/translators. This hook returns a function which
-                generates the translation by passing the corresponding key. The hook
-                returns a function in order to allow the user to translate text inside
-                the whole component. If the hook itself generated the translation it
-                would make things more complicated as hook calls have to be executed in
-                the same order in every render. Translations in conditional renderings
-                would be impossible. An example:
-            </Text>
-            <Code
-                title={"Example use case in a functional component"}
-                language={"typescript"}
-            >
-                {`const t = useTranslator();
+      </Code>
+      <Text>
+        To get a translation by it&#39;s key you should use the useTranslator
+        hook from .../iav-core/translators. This hook returns a function which
+        generates the translation by passing the corresponding key. The hook
+        returns a function in order to allow the user to translate text inside
+        the whole component. If the hook itself generated the translation it
+        would make things more complicated as hook calls have to be executed in
+        the same order in every render. Translations in conditional renderings
+        would be impossible. An example:
+      </Text>
+      <Code
+        title={"Example use case in a functional component"}
+        language={"typescript"}
+      >
+        {`const t = useTranslator();
 ...
 return (
    <div>Example translation: {t("company.imprint")}</div>
 )`}
-            </Code>
-            <Text>
-                You can also use a HOC (higher order component) for translations in
-                class components. The HOC will inject a translation function as a
-                property. The following code snippet shows an example.
-            </Text>
-            <Code
-                title={"Example use case in a class component"}
-                language={"typescript"}
-            >
-                {`class FirstExampleComponentUnprocessed extends Component<AppliedTranslationProps, State> {
+      </Code>
+      <Text>
+        You can also use a HOC (higher order component) for translations in
+        class components. The HOC will inject a translation function as a
+        property. The following code snippet shows an example.
+      </Text>
+      <Code
+        title={"Example use case in a class component"}
+        language={"typescript"}
+      >
+        {`class FirstExampleComponentUnprocessed extends Component<AppliedTranslationProps, State> {
     // ...
     render() {
         return(
@@ -187,31 +187,31 @@ return (
 }
 
 export const LayoutAndContextExampleComponent = applyTranslation(FirstExampleComponentUnprocessed);`}
-            </Code>
-            <Text>
-                You may have seen that the component has the interface
-                AppliedTranslationProps as it&#39;s properties type. This interface id
-                provided by the framework. It&#39;s mandatory to use this interface in
-                order to ensure that your components takes the translation function t.
-                However, the property&#39;s type could also be a type which extends
-                AppliedTranslationProps. This is necessary if there are other properties
-                which should be passed to your component.
-            </Text>
-            <Text>
-                If you want to initialize i18next your own way (for example to specify
-                an interpolation function) you can define an initialization function and
-                pass it to the GlobalDataLayer component by using the initI18Next
-                property. If the user hasn&#39;t accepted cookies, i18next will be
-                initialized by the framework although this property is specified. The
-                initI18Next function will be executed when the user accepts cookies. The
-                following code snippet shows an example of a custom i18next
-                initialization function:
-            </Text>
-            <Code
-                title={"Example configuration of the initFunction"}
-                language={"typescript"}
-            >
-                {`const initFunction = () => {
+      </Code>
+      <Text>
+        You may have seen that the component has the interface
+        AppliedTranslationProps as it&#39;s properties type. This interface id
+        provided by the framework. It&#39;s mandatory to use this interface in
+        order to ensure that your components takes the translation function t.
+        However, the property&#39;s type could also be a type which extends
+        AppliedTranslationProps. This is necessary if there are other properties
+        which should be passed to your component.
+      </Text>
+      <Text>
+        If you want to initialize i18next your own way (for example to specify
+        an interpolation function) you can define an initialization function and
+        pass it to the GlobalDataLayer component by using the initI18Next
+        property. If the user hasn&#39;t accepted cookies, i18next will be
+        initialized by the framework although this property is specified. The
+        initI18Next function will be executed when the user accepts cookies. The
+        following code snippet shows an example of a custom i18next
+        initialization function:
+      </Text>
+      <Code
+        title={"Example configuration of the initFunction"}
+        language={"typescript"}
+      >
+        {`const initFunction = () => {
     i18n
         .use(initReactI18next)
         .use(LanguageDetector)
@@ -225,49 +225,49 @@ export const LayoutAndContextExampleComponent = applyTranslation(FirstExampleCom
             }
         });
 }`}
-            </Code>
-            <Text>
-                You can find more information about I18next{" "}
-                <PageLink
-                    to={"https://react.i18next.com/"}
-                    label={"here"}
-                    target={"_blank"}
-                />
-                .
-            </Text>
-            <SubSubTitle>GlobalDataLayerLanguageOptions</SubSubTitle>
-            <Code language={"typescript"}>
-                {`interface GlobalDataLayerLanguageOptions {
+      </Code>
+      <Text>
+        You can find more information about I18next{" "}
+        <PageLink
+          to={"https://react.i18next.com/"}
+          label={"here"}
+          target={"_blank"}
+        />
+        .
+      </Text>
+      <SubSubTitle>GlobalDataLayerLanguageOptions</SubSubTitle>
+      <Code language={"typescript"}>
+        {`interface GlobalDataLayerLanguageOptions {
     fallbackLang?: string; // The key of the language which will be used for translations where no translation is defined. The default is en for english.
     initialLang?: string; // The key of the language which will be initially used if no language cookie is set yet. For example this option can be used to define the used language when the language selection is hidden.
 }`}
-            </Code>
-            <SubTitle>Authentication System</SubTitle>
-            <Text>
-                The authentication system is separated into two parts: The so called
-                Authenticators and Authentication Views. The Authentiatcors represent
-                the authentication logic while the Authentication View gets rendered for
-                authentication. Authenticators are part of the module system and thus
-                can be replaced. For detailed information consult the modules section of
-                this documentation.
-            </Text>
+      </Code>
+      <SubTitle>Authentication System</SubTitle>
+      <Text>
+        The authentication system is separated into two parts: The so called
+        Authenticators and Authentication Views. The Authentiatcors represent
+        the authentication logic while the Authentication View gets rendered for
+        authentication. Authenticators are part of the module system and thus
+        can be replaced. For detailed information consult the modules section of
+        this documentation.
+      </Text>
 
-            <SubSubTitle>AuthenticationViews</SubSubTitle>
-            <Text>
-                For basic authentication the Framework provides an Authentication View
-                called <i>BasicAuthenticationView</i> which gets used by default. In
-                order to change the authentication view you have to pass it to the
-                <em>UILayer</em> component using the <em>authenticationView</em>{" "}
-                property. You are also able to develop custom authentication views and
-                pass it to UILayer using this property.
-            </Text>
-            <Text>
-                The following code snippet shows an example for the implementation of an
-                authentication view. It uses the Thunks of the configured Authenticator
-                module.
-            </Text>
-            <Code language={"typescript"}>
-                {`type BasicAuthenticatorAuthDispatch = ThunkDispatch<
+      <SubSubTitle>AuthenticationViews</SubSubTitle>
+      <Text>
+        For basic authentication the Framework provides an Authentication View
+        called <i>BasicAuthenticationView</i> which gets used by default. In
+        order to change the authentication view you have to pass it to the
+        <em>UILayer</em> component using the <em>authenticationView</em>{" "}
+        property. You are also able to develop custom authentication views and
+        pass it to UILayer using this property.
+      </Text>
+      <Text>
+        The following code snippet shows an example for the implementation of an
+        authentication view. It uses the Thunks of the configured Authenticator
+        module.
+      </Text>
+      <Code language={"typescript"}>
+        {`type BasicAuthenticatorAuthDispatch = ThunkDispatch<
   AuthState,
   unknown,
   Action<string>
@@ -563,9 +563,9 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
   );
 };
 `}
-            </Code>
-        </Page>
-    );
+      </Code>
+    </Page>
+  );
 };
 
 export default PageGlobalDataLayer;

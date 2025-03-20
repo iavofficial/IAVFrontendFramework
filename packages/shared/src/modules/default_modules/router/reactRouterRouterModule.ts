@@ -18,9 +18,9 @@
 
 import {useLocation as useLocationReactRouter} from "react-router";
 import {RouterModule} from "../../../types/modules/router/routerModule";
-import { UILayerRouter } from "../internationalization/components/uiLayerRouter";
-import { MainViewRouter } from "../internationalization/components/mainViewRouter";
-import { Link } from "../internationalization/components/link";
+import {UILayerRouter} from "./components/uiLayerRouter";
+import {MainViewRouter} from "./components/mainViewRouter";
+import {Link} from "./components/link";
 
 export class ReactRouterRouter implements RouterModule {
   public UiLayerRouter;

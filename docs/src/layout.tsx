@@ -16,46 +16,57 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {Navigate, Route, Routes, useLocation, useNavigate} from "react-router-dom";
+import {
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import Header from "./frontend-framework/common/header/header.tsx";
 import VersionLayout from "./frontend-framework/components/versionLayout.tsx";
-import {versionMappings} from "./frontend-framework/versionMappings.ts";
-import {useEffect} from "react";
+import { versionMappings } from "./frontend-framework/versionMappings.ts";
+import { useEffect } from "react";
 import Imprint from "./frontend-framework/common/page/utils/imprint.tsx";
 
 function Layout() {
+  const navigate = useNavigate();
+  const location = useLocation();
 
-    const navigate = useNavigate();
-    const location = useLocation();
+  const currentVersion = Object.keys(versionMappings).reverse()[0];
+  const projectName = "IAVFrontendFramework";
+  const basePath = `${projectName}/${currentVersion}`;
 
-    const currentVersion = Object.keys(versionMappings).reverse()[0];
-    const projectName = "IAVFrontendFramework";
-    const basePath = `${projectName}/${currentVersion}`;
+  useEffect(() => {
+    if (location.pathname.endsWith(".html")) {
+      navigate(location.pathname.replace(/\.html$/, ""), { replace: true });
+    }
+  }, [location, navigate]);
 
-    useEffect(() => {
-        if (location.pathname.endsWith(".html")) {
-            navigate(location.pathname.replace(/\.html$/, ""), {replace: true});
-        }
-    }, [location, navigate]);
-
-    return (
-        <>
-            <Routes>
-                <Route path="/" element={<Navigate to={`/${basePath}/overview`} replace/>}/>
-                <Route path="/:projectName/imprint" element={<Imprint/>}/>
-                <Route
-                    path=":projectName/:version/*"
-                    element={
-                        <>
-                            <Header projectName={projectName}/>
-                            <VersionLayout/>
-                        </>
-                    }
-                />
-                <Route path="*" element={<Navigate to={`/${basePath}/overview`} replace/>}/>
-            </Routes>
-        </>
-    );
+  return (
+    <>
+      <Routes>
+        <Route
+          path="/"
+          element={<Navigate to={`/${basePath}/overview`} replace />}
+        />
+        <Route path="/:projectName/imprint" element={<Imprint />} />
+        <Route
+          path=":projectName/:version/*"
+          element={
+            <>
+              <Header projectName={projectName} />
+              <VersionLayout />
+            </>
+          }
+        />
+        <Route
+          path="*"
+          element={<Navigate to={`/${basePath}/overview`} replace />}
+        />
+      </Routes>
+    </>
+  );
 }
 
 export default Layout;

@@ -19,31 +19,30 @@
 import React from "react";
 import makeStyles from "../../../util/makeStyles.tsx";
 import PageLink from "../page/text/pageLink.tsx";
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
-    footer: {
-        width: "100%",
-        padding: "16px 0",
-        backgroundColor: "#ffffff",
-        borderTop: "1px solid lightgray",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-    }
+  footer: {
+    width: "100%",
+    padding: "16px 0",
+    backgroundColor: "#ffffff",
+    borderTop: "1px solid lightgray",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
 }));
 
 const Footer = () => {
+  const { classes } = useStyles();
 
-    const {classes} = useStyles()
+  const { projectName } = useParams<{ projectName: string }>();
 
-    const {projectName} = useParams<{ projectName: string }>();
-
-    return (
-        <div className={classes.footer}>
-            <PageLink to={`/${projectName}/imprint`} label={"Imprint"}/>
-        </div>
-    );
-}
+  return (
+    <div className={classes.footer}>
+      <PageLink to={`/${projectName}/imprint`} label={"Imprint"} />
+    </div>
+  );
+};
 
 export default Footer;

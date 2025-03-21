@@ -17,17 +17,21 @@
  */
 
 import React, {useContext, useState} from "react";
-import {DEFAULT_ELEMENTSIZE, GREY5, WHITE} from "../../constants";
-import {generateHashOfLength} from "../../utils/hash";
 import {Tooltip} from "primereact/tooltip";
 import "./contentbar.css";
-import {ColorSettingsContext} from "../../contexts/colorsettings";
-import {TranslationFunction} from "../../types/translationFunction";
-import {useTranslator} from "../internationalization/translators";
 import {determineCurrentColor} from "../../utils/determineCurrentColor";
+import {
+  DEFAULT_ELEMENT_SIZE,
+  GREY5,
+  WHITE,
+} from "@iavofficial/frontend-framework-shared/constants";
+import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
+import {generateHashOfLength} from "@iavofficial/frontend-framework-shared/hash";
+import {useModuleTranslation} from "@iavofficial/frontend-framework-shared/useModuleTranslation";
+import {TranslationWrapperFunction} from "@iavofficial/frontend-framework-shared/internationalizerModule";
 
 export interface Props {
-  displayName: string | TranslationFunction;
+  displayName: string | TranslationWrapperFunction;
   width: number;
   id: string;
   selected?: boolean;
@@ -38,9 +42,11 @@ export interface Props {
 }
 
 export const DefaultContentSelectionElement = (props: Props) => {
-  const [hovering, setHovering] = useState(false);
-  const translationFunction = useTranslator();
+  const t = useModuleTranslation();
+
   const colorSettingsContext = useContext(ColorSettingsContext);
+
+  const [hovering, setHovering] = useState(false);
 
   const tabBackgroundDefaultColor =
     colorSettingsContext.currentColors.contentbar.tabs.backgroundDefaultColor;
@@ -70,7 +76,7 @@ export const DefaultContentSelectionElement = (props: Props) => {
   const name =
     typeof props.displayName === "string"
       ? props.displayName
-      : props.displayName(translationFunction);
+      : props.displayName(t);
 
   const tabStyle = {
     cursor: props.selected ? "default" : "pointer",
@@ -84,7 +90,7 @@ export const DefaultContentSelectionElement = (props: Props) => {
       hoverColor: textHoverColor,
       activeColor: textActiveColor,
     }),
-    height: `${DEFAULT_ELEMENTSIZE}px`,
+    height: `${DEFAULT_ELEMENT_SIZE}px`,
     width: `${props.width}px`,
     alignItems: "center",
     borderRight:

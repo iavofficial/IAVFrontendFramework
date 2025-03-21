@@ -17,8 +17,8 @@
  */
 
 import React, {ReactElement} from "react";
-import {TranslateFunctionType} from "../../../types/translationFunction";
 import {InjectedOptionsGroupableByWrapperToTab} from "../types/typesInjectedOptions";
+import {TranslationWrapperFunction} from "@iavofficial/frontend-framework-shared/internationalizerModule";
 
 /**
  * This interface contains the properties which have to be passed to a navigation tab.
@@ -26,7 +26,7 @@ import {InjectedOptionsGroupableByWrapperToTab} from "../types/typesInjectedOpti
  * can be groupable or not.
  */
 export interface NavbarTabProps<OptionType> {
-  name: string | ((t: TranslateFunctionType) => string);
+  name: string | TranslationWrapperFunction;
   disabled: boolean;
   frameworkInjectedOptions: OptionType;
   hidden?: boolean;

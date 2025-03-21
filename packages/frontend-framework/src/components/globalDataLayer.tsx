@@ -16,59 +16,99 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, {PropsWithChildren, useContext} from "react";
+import React, {Fragment, PropsWithChildren, useEffect} from "react";
 import {CookiesProvider} from "react-cookie";
-import {AuthContext} from "../contexts/auth";
-import {Translations} from "../contexts/language";
-import {
-  DefaultLanguageProvider,
-  LanguageOptions,
-} from "./internationalization/defaultLanguageProvider";
-import {DummyAuthenticationProvider} from "./authentication/default/dummyAuthenticationProvider";
 import {ColorProvider, ColorProviderProps} from "../coloring/colorProvider";
-import {DEFAULT_FALLBACK_LANGUAGE} from "../constants";
-import {BrowserRouter} from "react-router-dom";
+import {EnhancedStore} from "@reduxjs/toolkit";
+import {Provider} from "react-redux";
+import {ModuleContextProvider} from "../contexts/providers/moduleContextProvider";
+import {
+  FFMandatoryState,
+  FFMandatoryStoreModules,
+  FFMandatoryNonStoreModules,
+  ActualMandatoryStateFromModules,
+  TParamAllModules,
+} from "@iavofficial/frontend-framework-shared/moduleOrchestrationTypes";
+import {FFModule} from "@iavofficial/frontend-framework-shared/generalModule";
+import {checkIfUserModulesKeysValid} from "@iavofficial/frontend-framework-shared/checkIfUserModulesKeysValid";
+import {separateModuleTypes} from "@iavofficial/frontend-framework-shared/separateModuleTypes";
 
-// Create this type to make fallbackLang optional for the user.
-type GlobalDataLayerLanguageOptions = Omit<LanguageOptions, "fallbackLang"> & {
-  fallbackLang?: string;
-};
-
-interface Props {
-  languageOptions?: GlobalDataLayerLanguageOptions;
-  translations?: Translations;
-  initI18Next?: () => void;
+interface Props<
+  TModules extends FFMandatoryStoreModules<TFrameworkStoreModulesState> &
+    FFMandatoryNonStoreModules &
+    Record<string, object>,
+  TFrameworkStoreModulesState extends
+    FFMandatoryState = ActualMandatoryStateFromModules<TModules>,
+> {
+  modules: TParamAllModules<TModules, TFrameworkStoreModulesState>;
+  store: EnhancedStore<TFrameworkStoreModulesState>;
   colorSettings?: ColorProviderProps;
 }
 
-export const GlobalDataLayer = (props: PropsWithChildren<Props>) => {
-  const authContext = useContext(AuthContext);
-  const AuthenticationProvider = authContext
-    ? React.Fragment
-    : DummyAuthenticationProvider;
-
-  const fallbackLang =
-    props.languageOptions?.fallbackLang ?? DEFAULT_FALLBACK_LANGUAGE;
-  const initialLang =
-    props.languageOptions?.initialLang ?? DEFAULT_FALLBACK_LANGUAGE;
-  const languageOptions = {
-    fallbackLang: fallbackLang,
-    initialLang: initialLang,
-  };
+export const GlobalDataLayer = <
+  TModules extends FFMandatoryStoreModules<TFrameworkStoreModulesState> &
+    FFMandatoryNonStoreModules &
+    Record<string, object>,
+  TFrameworkStoreModulesState extends
+    FFMandatoryState = ActualMandatoryStateFromModules<TModules>,
+>(
+  props: PropsWithChildren<Props<TModules, TFrameworkStoreModulesState>>,
+) => {
+  // Throw an error if user modules do not meet the convention that
+  // they have to begin with a specific prefix.
+  useEffect(() => {
+    const separatedModules = separateModuleTypes(props.modules);
+    checkIfUserModulesKeysValid({
+      userStoreModules: separatedModules.userStoreModules,
+      userNonStoreModules: separatedModules.userNonStoreModules,
+    });
+  }, [props.modules]);
 
   return (
-    <CookiesProvider>
-      <AuthenticationProvider>
-        <DefaultLanguageProvider
-          languageOptions={languageOptions}
-          translations={props.translations}
-          initI18Next={props.initI18Next}
-        >
-          <ColorProvider {...props.colorSettings}>
-            <BrowserRouter>{props.children}</BrowserRouter>
-          </ColorProvider>
-        </DefaultLanguageProvider>
-      </AuthenticationProvider>
-    </CookiesProvider>
+    <ModuleContextProvider modules={props.modules}>
+      <Provider store={props.store}>
+        <ModuleLifecycleCaller modules={props.modules}>
+          <CookiesProvider>
+            <ColorProvider {...props.colorSettings}>
+              {props.children}
+            </ColorProvider>
+          </CookiesProvider>
+        </ModuleLifecycleCaller>
+      </Provider>
+    </ModuleContextProvider>
   );
+};
+
+const ModuleLifecycleCaller = (
+  props: PropsWithChildren<{
+    modules: Record<string, FFModule>;
+  }>,
+) => {
+  // React hooks have to be called in the same order at every render.
+  // Because of this the sort method is used to create an array of the
+  // modules in a stable order.
+  const moduleKeys = React.useMemo(
+    () => Object.keys(props.modules).sort(),
+    [props.modules],
+  );
+
+  let renderChildren = true;
+
+  // Call the useModuleLifecycle Hook for every module.
+  // This approach is only safe if moduleKeys is stable (because of the
+  // Hook rules).
+  moduleKeys.forEach((key) => {
+    const useModuleLifecycle =
+      props.modules[key].useModuleLifecycle ??
+      (() => ({
+        renderChildren: true,
+      }));
+    const lifecycleReturnVal = useModuleLifecycle();
+
+    if (!lifecycleReturnVal.renderChildren) {
+      renderChildren = lifecycleReturnVal.renderChildren;
+    }
+  });
+
+  return renderChildren ? props.children : <Fragment />;
 };

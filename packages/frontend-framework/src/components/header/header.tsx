@@ -18,18 +18,22 @@
 
 import React, {ReactElement, useContext} from "react";
 import "./header.css";
-import "../css/globalColors.css";
 import {ContextMenu} from "primereact/contextmenu";
 import UserIcon from "../../assets/svg/userIcon";
 import CompanyLogo from "../../assets/svg/companyLogo";
 import SettingsIcon from "../../assets/svg/settingsIcon";
-import {BLUE3, PADDING_GAB, WHITE} from "../../constants";
 import {SettingsMenu, SettingsMenuOptions} from "./settingsMenu";
 import {UserMenu, UserMenuOptions} from "./userMenu";
-import {ColorSettingsContext} from "../../contexts/colorsettings";
-import {AppLogoPlaceholder} from "../appLogoPlaceholder";
 import HeaderIcon from "./headerIcon";
 import makeStyles from "../content/style_options/makeStyles";
+import {
+  APPLICATION_LOGO_PLACEHOLDER,
+  BLUE3,
+  PADDING_GAB,
+  WHITE,
+} from "@iavofficial/frontend-framework-shared/constants";
+import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
+import {AppLogoPlaceholder} from "@iavofficial/frontend-framework-shared/appLogoPlaceholder";
 
 const useStyles = makeStyles(() => ({
   wrapper: {
@@ -46,7 +50,7 @@ export interface HeaderOptions {
   reactElementLeft?: ReactElement;
   hideLeft?: boolean;
   hideRight?: boolean;
-  userIcon: ReactElement;
+  userIcon?: ReactElement;
   hideUserIcon?: boolean;
   headerElements?: ReactElement[];
 }
@@ -109,7 +113,9 @@ export const Header = (props: Props) => {
         {props.headerOptions?.reactElementLeft ? (
           props.headerOptions?.reactElementLeft
         ) : (
-          <AppLogoPlaceholder />
+          <AppLogoPlaceholder
+            appLogoPlaceholder={APPLICATION_LOGO_PLACEHOLDER}
+          />
         )}
       </div>
 

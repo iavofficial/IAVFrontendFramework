@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {ContentbarColorOptions} from "../colorOptionTypes";
+import {ContentbarColorOptions} from "@iavofficial/frontend-framework-shared/colorOptionTypes";
 import {
   DARK_CONTENT_BAR_BACKGROUND_COLOR,
   DARK_CONTENT_BAR_BUTTON_DEFAULT_COLOR,

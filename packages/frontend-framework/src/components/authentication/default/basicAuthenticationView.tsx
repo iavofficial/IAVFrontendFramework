@@ -18,35 +18,52 @@
 
 import React, {FormEvent, useContext, useState} from "react";
 import {Link} from "react-router-dom";
-import {BLUE3, PADDING_GAB, WHITE} from "../../../constants";
-import {AuthContext} from "../../../contexts/auth";
-import {LoginButtonWithSpinner} from "../loginButtonWithSpinner";
-import {useTranslator} from "../../internationalization/translators";
-import {AuthenticationViewProps} from "../authenticationViewProps";
-import "../authenticationView.css";
-import "../../css/globalColors.css";
+import {
+  APPLICATION_LOGO_PLACEHOLDER,
+  BLUE3,
+  PADDING_GAB,
+  WHITE,
+} from "@iavofficial/frontend-framework-shared/constants";
 import loginBackgroundLightMode from "../../../assets/png/login_background_lightMode.png";
 import loginBackgroundDarkMode from "../../../assets/png/login_background_darkMode.png";
 import {Dropdown, DropdownChangeEvent} from "primereact/dropdown";
-import {LanguageContext} from "../../../contexts/language";
-import {parseLanguageResourcesIntoDropdownFormat} from "../../../utils/parseLanguageResourcesIntoDropdownFormat";
-import {ColorSettingsContext} from "../../../contexts/colorsettings";
-import {generateHashOfLength} from "../../../utils/hash";
 import {Tooltip} from "primereact/tooltip";
-import {AppLogoPlaceholder} from "../../appLogoPlaceholder";
 import CompanyLogo from "../../../assets/svg/companyLogo";
 import TextField from "../../helper/textfield/TextField";
+import {AuthenticationViewProps} from "@iavofficial/frontend-framework-shared/authenticationViewProps";
+import {generateHashOfLength} from "@iavofficial/frontend-framework-shared/hash";
+import {parseLanguageResourcesIntoDropdownFormat} from "@iavofficial/frontend-framework-shared/parseLanguageResourcesIntoDropdownFormat";
+import {LoginButtonWithSpinner} from "@iavofficial/frontend-framework-shared/loginButtonWithSpinner";
+import {AppLogoPlaceholder} from "@iavofficial/frontend-framework-shared/appLogoPlaceholder";
+import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
+import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
+import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
+import {
+  useDefaultDispatch,
+  useDefaultSelector,
+} from "@iavofficial/frontend-framework-shared/moduleDefaults";
+import {useModuleTranslation} from "@iavofficial/frontend-framework-shared/useModuleTranslation";
 
 export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
+  const authModule = useModule(MandatoryModuleNames.Authenticator);
+  const intModule = useModule(MandatoryModuleNames.Internationalizer);
+
   const colorSettingsContext = useContext(ColorSettingsContext);
+
+  const dispatch = useDefaultDispatch();
+
+  const isLoading = useDefaultSelector(
+    (state) => state[MandatoryModuleNames.Authenticator].isLoading,
+  );
+
+  const t = useModuleTranslation();
+  const activeLang = useDefaultSelector(
+    (state) => state[MandatoryModuleNames.Internationalizer].activeLang,
+  );
 
   const [triedToSubmit, setTriedToSubmit] = useState<boolean>(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const langContext = useContext(LanguageContext);
-
-  const authContext = useContext(AuthContext);
-  const t = useTranslator();
 
   const headerBackgroundColor =
     colorSettingsContext.currentColors.authenticationView.headerBackgroundColor;
@@ -61,12 +78,12 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
       .inputFieldBackgroundColor;
   const inputFieldTextColor =
     colorSettingsContext.currentColors.authenticationView.inputFieldTextColor;
-  const legalNoticeIconColor =
-    colorSettingsContext.currentColors.authenticationView.legalNoticeIconColor;
   const companyTextColor =
     colorSettingsContext.currentColors.authenticationView.companyTextColor;
   const themeTogglerColor =
     colorSettingsContext.currentColors.authenticationView.themeTogglerColor;
+  const legalLinkColor =
+    colorSettingsContext.currentColors.authenticationView.legalLinkColor;
 
   const {passwordErrorMessage} = props.authOptions?.errorMessages || {};
 
@@ -74,7 +91,9 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
   const submit = (event: FormEvent<HTMLFormElement>) => {
     setTriedToSubmit(true);
     event.preventDefault();
-    authContext?.login({email: email, password: password});
+    dispatch(
+      authModule.login({credentials: {email: email, password: password}}),
+    );
   };
 
   const companyLogoDefault = (props: AuthenticationViewProps) => (
@@ -106,7 +125,9 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
         {props.headerOptions?.reactElementLeft ? (
           props.headerOptions?.reactElementLeft
         ) : (
-          <AppLogoPlaceholder />
+          <AppLogoPlaceholder
+            appLogoPlaceholder={APPLICATION_LOGO_PLACEHOLDER}
+          />
         )}
       </div>
 
@@ -204,14 +225,14 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                   color: inputFieldTextColor,
                 }}
                 placeholder={
-                  langContext?.resources[langContext.activeLang].translation
+                  intModule.translationResources[activeLang].translation
                     .option_name
                 }
                 onChange={function (event: DropdownChangeEvent) {
-                  langContext?.selectLanguage(event.value.key);
+                  intModule.selectActiveLang(event.value.key);
                 }}
                 options={parseLanguageResourcesIntoDropdownFormat(
-                  langContext?.resources,
+                  intModule.translationResources,
                 )}
                 optionLabel="label"
               />
@@ -235,7 +256,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                   backgroundColor: inputFieldBackgroundColor,
                   color: inputFieldTextColor,
                 }}
-                label={t("Email_address")}
+                label={t({key: "Email_address"})}
                 id="email"
                 name="email"
                 required={true}
@@ -244,72 +265,83 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                 onChange={(event) => setEmail(event.target.value)}
               />
               <TextField
-                label={t("Password")}
+                label={t({key: "Password"})}
                 id="password"
                 name="password"
                 type="password"
                 required={true}
-                error={
-                  triedToSubmit &&
-                  (authContext?.isRefreshing
-                    ? !authContext.isRefreshing()
-                    : false)
-                }
+                error={triedToSubmit && !isLoading}
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
-                helperText={passwordErrorMessage || t("wrong_password")}
+                helperText={passwordErrorMessage || t({key: "wrong_password"})}
               />
               <div>
-                <LoginButtonWithSpinner isLoading={authContext?.isLoading} />
+                <LoginButtonWithSpinner isLoading={isLoading} />
               </div>
             </div>
           </form>
         </div>
-
-        {!props.hideLegalDocuments && (
-          <Link
-            style={{
-              position: "absolute",
-              bottom: "12px",
-              left: `${PADDING_GAB}px`,
-              textDecoration: "none",
-            }}
-            to="/documents"
-            target="_blank"
-          >
-            <span
-              className={"pi pi-info-circle " + identifierLegal}
-              style={{
-                fontSize: "medium",
-                fontWeight: "bold",
-                color: legalNoticeIconColor,
-              }}
-            />
-          </Link>
-        )}
-
-        <Tooltip
-          content={t(
-            props.authOptions?.documentsLabelKey
-              ? props.authOptions?.documentsLabelKey
-              : "Imprint",
-          )}
-          target={identifierWithDot}
-          id="hover-image"
-        />
-        <span
+        <div
+          className="flex"
           style={{
             alignSelf: "center",
             padding: "24px",
-            fontSize: "11px",
-            color: companyTextColor,
+            fontSize: "12px",
+            gap: "20px",
+            alignItems: "center",
           }}
         >
-          &copy;{" "}
-          {props.authOptions?.companyText
-            ? props.authOptions?.companyText
-            : "Company 2025"}
-        </span>
+          <span
+            style={{
+              color: companyTextColor,
+            }}
+          >
+            &copy;{" "}
+            {props.authOptions?.companyText
+              ? props.authOptions?.companyText
+              : "Company 2025"}
+          </span>
+
+          {(props.hideImprint === true && props.hidePrivacyPolicy === true) ===
+            false && (
+            <>
+              <span style={{color: "var(--grey-2)"}}>|</span>
+              <div
+                className="flex"
+                style={{
+                  alignItems: "center",
+                  gap: "4px",
+                }}
+              >
+                {!props.hideImprint && (
+                  <Link
+                    className="legal-doc-link"
+                    style={{color: legalLinkColor, fontSize: "12px"}}
+                    to="/imprint"
+                    target="_blank"
+                  >
+                    {t({key: "Imprint"})}
+                  </Link>
+                )}
+                {!props.hideImprint && !props.hidePrivacyPolicy && (
+                  <span style={{color: legalLinkColor, fontSize: "12px"}}>
+                    &
+                  </span>
+                )}
+                {!props.hidePrivacyPolicy && (
+                  <Link
+                    className="legal-doc-link"
+                    style={{color: legalLinkColor, fontSize: "12px"}}
+                    to="/privacy-policy"
+                    target="_blank"
+                  >
+                    {t({key: "Privacy_Policy"})}
+                  </Link>
+                )}
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

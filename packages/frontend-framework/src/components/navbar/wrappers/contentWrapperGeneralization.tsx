@@ -17,8 +17,7 @@
  */
 
 import React from "react";
-import {Route} from "react-router";
-import {generateHash} from "../../../utils/hash";
+import {generateHash} from "@iavofficial/frontend-framework-shared/hash";
 
 /**
  * This class is the base for all simple content wrappers.
@@ -36,11 +35,11 @@ export class ContentWrapperGeneralization {
 
   getRoutes = () => {
     return [
-      <Route
-        key={this.getKey()}
-        path={`${this._path}*`}
-        element={<this._component />}
-      />,
+      {
+        key: this.getKey(),
+        path: this._path,
+        element: <this._component />,
+      },
     ];
   };
 }

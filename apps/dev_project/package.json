@@ -32,12 +32,12 @@
   },
   "dependencies": {
     "@iavofficial/frontend-framework": "*",
+    "@iavofficial/frontend-framework-aws-authenticator": "*",
+    "aws-amplify": "^6.7.0",
+    "primereact": "^10.3.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router": "^6.9.0",
-    "react-router-dom": "^6.9.0",
-    "react-transition-group": "^4.4.5",
-    "primereact": "^10.3.3"
+    "react-transition-group": "^4.4.5"
   },
   "devDependencies": {
     "@babel/cli": "^7.21.0",

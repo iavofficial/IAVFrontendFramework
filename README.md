@@ -43,14 +43,18 @@ information about the section can be found [here](https://github.com/iavofficial
 
 Here's a quick look of an example of the IAV Frontend Framework:
 
-<img src="assets/login.png"/>
+<img src="https://iavofficial.github.io/IAVFrontendFramework/assets/login.png"/>
 
-<img src="assets/menu.png"/>
+<img src="https://iavofficial.github.io/IAVFrontendFramework/assets/menu.png"/>
 
 ## License
 
 This project is licensed under the **Apache-2.0** license. The full license text is included in
 the [root of the repository](./LICENSE).
+
+## SBOM
+As this project is a monorepo, the SBOM.spdx files are contained inside the specific package folders. You can find these
+folders inside the packages folder.
 
 ## Contributing
 

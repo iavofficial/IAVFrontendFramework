@@ -20,30 +20,34 @@ import "primeflex/primeflex.css";
 import "primereact/resources/themes/nova/theme.css";
 import "primereact/resources/primereact.css";
 import "primeicons/primeicons.css";
-import React, {useContext, useEffect} from "react";
-import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
-import "./css/constants.css";
-import "./css/globalChangesOnPrimeReactComponents.css";
-import "./css/globalSettings.css";
+import React, {useEffect} from "react";
 import {BasicAuthenticationView} from "./authentication/default/basicAuthenticationView";
 import {SettingsMenuOptions} from "./header/settingsMenu";
 import {CookieBanner} from "./cookie/cookieBanner";
-import {AuthContext} from "../contexts/auth";
-import {AuthenticationViewProps} from "./authentication/authenticationViewProps";
 import {MainView} from "./mainView";
-import {DefaultImprint} from "./imprint/defaultImprint";
+import {DefaultLegalDocument} from "./imprint/defaultLegalDocument";
 import {TabAndContentWrapper} from "./navbar/wrappers/typesWrappers";
-import {NavbarSettingsProvider} from "../providers/navbarSettingsProvider";
+import {NavbarSettingsProvider} from "../contexts/providers/navbarSettingsProvider";
 import {StaticCollapsedState} from "../types/navbarSettingsTypes";
-
-import "./uiLayer.css";
-import "./css/fonts.css";
-import "./css/darkModeInputsWorkAround.css";
 import {HeaderOptions} from "./header/header";
 import {UserMenuOptions} from "./header/userMenu";
 import {setAcceptCookies} from "../utils/setAcceptCookies";
 import {useCookies} from "react-cookie";
-import {ACCEPTED_COOKIES_NAME} from "../constants";
+import {ACCEPTED_COOKIES_NAME} from "@iavofficial/frontend-framework-shared/constants";
+import {AuthenticationViewProps} from "@iavofficial/frontend-framework-shared/authenticationViewProps";
+import "./uiLayer.css";
+import "../css/fonts.css";
+import "../css/darkModeInputsWorkAround.css";
+import "../css/constants.css";
+import "../css/globalChangesOnPrimeReactComponents.css";
+import "../css/globalSettings.css";
+import "../css/globalColors.css";
+import "../css/authenticationView.css";
+import {useDefaultSelector} from "@iavofficial/frontend-framework-shared/moduleDefaults";
+import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
+import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
+import {ImprintText} from "./imprint/imprintText";
+import {PrivacyPolicyText} from "./imprint/privacyPolicyText";
 
 export interface AuthOptions {
   backgroundImage?: string;
@@ -61,25 +65,30 @@ export interface NavbarOptions {
 export interface Props {
   // This indicates that the passed objects should have the type's properties at least.
   tabAndContentWrappers: TabAndContentWrapper[];
-  startingPoint: string;
+  initialPath: string;
   disableLogin?: boolean;
   disableCookieBanner?: boolean;
   authenticationView?: React.ComponentType<AuthenticationViewProps & any>;
-  documentsComponent?: React.ComponentType<any>;
+  imprintComponent?: React.ComponentType<any>;
+  privacyPolicyComponent?: React.ComponentType<any>;
   documentsLabelKey?: string;
   settingsMenuOptions?: SettingsMenuOptions;
   userMenuOptions?: UserMenuOptions;
   headerOptions?: HeaderOptions;
   authOptions?: AuthOptions;
-  hideLegalDocuments?: boolean;
+  hideImprint?: boolean;
+  hidePrivacyPolicy?: boolean;
   navbarOptions?: NavbarOptions;
   hideNavbar?: boolean;
 }
 
 export const UILayer = (props: Props) => {
-  const authContext = useContext(AuthContext);
+  const {hasAuthenticated} = useDefaultSelector((state) => state.auth);
+  const routerModule = useModule(MandatoryModuleNames.Router);
 
   const [, setCookie] = useCookies([ACCEPTED_COOKIES_NAME]);
+
+  const disableLogin = !!props.disableLogin;
 
   const AuthenticationView = props.authenticationView
     ? props.authenticationView
@@ -97,109 +106,76 @@ export const UILayer = (props: Props) => {
     }
   }, [props.disableCookieBanner, setCookie]);
 
+  const routes = [
+    {
+      path: "/login",
+      disabled: disableLogin,
+      element: (
+        <AuthenticationView
+          authOptions={props.authOptions}
+          hideLanguageSelection={
+            props.settingsMenuOptions?.hideLanguageSelection
+          }
+          headerOptions={props.headerOptions}
+          hideImprint={props.hideImprint}
+          hidePrivacyPolicy={props.hidePrivacyPolicy}
+        />
+      ),
+    },
+    {
+      path: "/imprint",
+      disabled: false,
+      element: props.imprintComponent ? (
+        <props.imprintComponent />
+      ) : (
+        <DefaultLegalDocument legalTextComponent={ImprintText} />
+      ),
+    },
+    {
+      path: "/privacy-policy",
+      disabled: false,
+      element: props.privacyPolicyComponent ? (
+        <props.privacyPolicyComponent />
+      ) : (
+        <DefaultLegalDocument legalTextComponent={PrivacyPolicyText} />
+      ),
+    },
+    // Maybe include !props.disableLogin && !hasAuthenticated with <Route path="/*" element={<></>} />
+    {
+      path: "/*",
+      disabled: !disableLogin && !hasAuthenticated,
+      element: (
+        <MainView
+          headerOptions={props.headerOptions}
+          settingsMenuOptions={props.settingsMenuOptions}
+          userMenuOptions={userMenuOptions}
+          documentsLabelKey={props.documentsLabelKey}
+          imprintComponent={props.imprintComponent}
+          privacyPolicyComponent={props.privacyPolicyComponent}
+          tabAndContentWrappers={props.tabAndContentWrappers}
+          hideImprint={props.hideImprint}
+          hidePrivacyPolicy={props.hidePrivacyPolicy}
+          hideNavbar={props.hideNavbar}
+        />
+      ),
+    },
+  ];
+
+  const UILayerRouter = routerModule.UiLayerRouter;
+
   return (
     <NavbarSettingsProvider
       staticCollapsedState={props.navbarOptions?.staticCollapsedState}
     >
       {!props.disableCookieBanner && <CookieBanner />}
-      <Redirector
-        startingPoint={props.startingPoint}
-        disableLogin={props.disableLogin}
-      />
 
-      <Routes>
-        {!props.disableLogin && (
-          <Route
-            path="/login"
-            element={
-              <AuthenticationView
-                authOptions={props.authOptions}
-                hideLanguageSelection={
-                  props.settingsMenuOptions?.hideLanguageSelection
-                }
-                headerOptions={props.headerOptions}
-                hideLegalDocuments={props.hideLegalDocuments}
-              />
-            }
-          />
-        )}
-
-        {!props.disableLogin && !authContext?.hasAuthenticated() && (
-          <Route
-            path="/documents"
-            element={
-              props.documentsComponent ? (
-                <props.documentsComponent />
-              ) : (
-                <DefaultImprint />
-              )
-            }
-          />
-        )}
-
-        {!props.disableLogin && !authContext?.hasAuthenticated() ? (
-          <Route path="/*" element={<></>} />
-        ) : (
-          <>
-            <Route
-              path="/*"
-              element={
-                <MainView
-                  headerOptions={props.headerOptions}
-                  settingsMenuOptions={props.settingsMenuOptions}
-                  userMenuOptions={userMenuOptions}
-                  documentsLabelKey={props.documentsLabelKey}
-                  documentsComponent={props.documentsComponent}
-                  tabAndContentWrappers={props.tabAndContentWrappers}
-                  hideLegalDocuments={props.hideLegalDocuments}
-                  hideNavbar={props.hideNavbar}
-                />
-              }
-            />
-          </>
-        )}
-      </Routes>
+      {
+        <UILayerRouter
+          routes={routes}
+          disableLogin={disableLogin}
+          initialPath={props.initialPath}
+        />
+      }
     </NavbarSettingsProvider>
   );
-};
-
-interface RedirectorProps {
-  startingPoint: string;
-  disableLogin?: boolean;
-}
-
-/**
- * This component is needed because the useLocation hook can only be used inside a Router-component
- * environment.
- * @param props
- * @constructor
- */
-const Redirector = (props: RedirectorProps) => {
-  const disableLogin = props.disableLogin;
-
-  const authContext = useContext(AuthContext);
-  const userIsAuthenticated = authContext!.hasAuthenticated();
-
-  const currentPath = useLocation().pathname;
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!disableLogin && !userIsAuthenticated) {
-      if (currentPath !== "/documents") {
-        navigate("/login");
-      }
-    } else {
-      if (currentPath === "/login" || currentPath === "/") {
-        navigate(props.startingPoint.valueOf());
-      }
-    }
-  }, [
-    disableLogin,
-    currentPath,
-    userIsAuthenticated,
-    navigate,
-    props.startingPoint,
-  ]);
-
-  return <React.Fragment />;
 };

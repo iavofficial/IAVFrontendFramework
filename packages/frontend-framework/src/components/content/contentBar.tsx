@@ -23,16 +23,18 @@ import React, {
   useRef,
   useState,
 } from "react";
-import "../css/globalColors.css";
-import {ColorSettingsContext} from "../../contexts/colorsettings";
 import {BasicContentbarWrapper} from "./basicContentbarWrapper";
 import {CustomContentbarWrapper} from "./customContentbarWrapper";
 import {NavbarSettingsContext} from "../../contexts/navbarContext";
 import {calculateWidth} from "../../utils/calculateWidth";
 import {ContentBarButtonElement} from "./contentBarButtonElement";
-import {DEFAULT_ELEMENTSIZE, PADDING_GAB} from "../../constants";
 import {useStyleMap} from "./style_options/useStyleMap";
 import {StyleProps, StylesArray} from "./style_options/styleTypes";
+import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
+import {
+  DEFAULT_ELEMENT_SIZE,
+  PADDING_GAB,
+} from "@iavofficial/frontend-framework-shared/constants";
 
 export const ContentBarStyles = {
   SPACING: "SPACING",
@@ -87,7 +89,7 @@ export const ContentBar = (props: PropsContentBar) => {
   const styleDependencies = {
     [ContentBarStyles.SET_SPACING_COLOR]: [ContentBarStyles.SPACING],
   };
-  //@ts-ignore
+
   const [classNames, styles] = useStyleMap(
     classesMap,
     stylesMap,
@@ -219,7 +221,7 @@ export const ContentBar = (props: PropsContentBar) => {
     >
       <div
         style={{
-          height: `${DEFAULT_ELEMENTSIZE}px`,
+          height: `${DEFAULT_ELEMENT_SIZE}px`,
           width: "100%",
           backgroundColor: contentbarBackgroundColor,
         }}
@@ -241,7 +243,7 @@ export const ContentBar = (props: PropsContentBar) => {
                   element.getContentbarElement(
                     calculateWidth(
                       isNavbarCollapsed,
-                      width - (2 * DEFAULT_ELEMENTSIZE + 2 * PADDING_GAB),
+                      width - (2 * DEFAULT_ELEMENT_SIZE + 2 * PADDING_GAB),
                       !!addable,
                       contentElements.length > amountOfRenderedTabElements,
                     ),
@@ -253,7 +255,7 @@ export const ContentBar = (props: PropsContentBar) => {
                 element.getContentbarElement(
                   calculateWidth(
                     isNavbarCollapsed,
-                    width - (2 * DEFAULT_ELEMENTSIZE + 2 * PADDING_GAB),
+                    width - (2 * DEFAULT_ELEMENT_SIZE + 2 * PADDING_GAB),
                     !!addable,
                     contentElements.length > amountOfRenderedTabElements,
                   ),

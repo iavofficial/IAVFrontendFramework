@@ -21,12 +21,13 @@ import {
   BLUE0,
   BLUE3,
   GREY1,
+  GREY2,
   GREY4,
   GREY5,
   GREY6,
   GREY_MENU_SPECIAL_1,
   WHITE,
-} from "../constants";
+} from "@iavofficial/frontend-framework-shared/constants";
 
 //. Header
 export const LIGHT_HEADER_BACKGROUND_COLOR = BLUE0;
@@ -122,8 +123,8 @@ export const DARK_NAV_GROUP_ARROW_ACTIVE_COLOR = GREY1;
 
 //# Other
 // Legal documents icon
-export const LIGHT_NAV_LEGAL_DOCS_ICON_COLOR = BLUE3;
-export const DARK_NAV_LEGAL_DOCS_ICON_COLOR = BLUE3;
+export const LIGHT_NAV_LEGAL_DOCS_LINK_COLOR = BLUE0;
+export const DARK_NAV_LEGAL_DOCS_LINK_COLOR = GREY2;
 
 export const LIGHT_NAV_SCROLLBAR_COLOR = GREY1;
 export const DARK_NAV_SCROLLBAR_COLOR = GREY1;
@@ -223,3 +224,6 @@ export const DARK_AUTH_PW_REQUIREMENTS_COLOR = WHITE;
 
 export const LIGHT_AUTH_THEME_TOGGLER_COLOR = BLACK;
 export const DARK_AUTH_THEME_TOGGLER_COLOR = WHITE;
+
+export const LIGHT_AUTH_LEGAL_LINK_COLOR = BLUE0;
+export const DARK_AUTH_LEGAL_LINK_COLOR = WHITE;

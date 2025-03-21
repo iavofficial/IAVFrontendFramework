@@ -20,6 +20,8 @@ import React, {useContext, useState} from "react";
 import {Dialog} from "primereact/dialog";
 import {Button} from "primereact/button";
 import {useCookies} from "react-cookie";
+import {setAcceptCookies} from "../../utils/setAcceptCookies";
+import makeStyles from "../content/style_options/makeStyles";
 import {
   ACCEPTED_COOKIES_NAME,
   BLACK,
@@ -29,12 +31,10 @@ import {
   GREY5,
   GREY6,
   WHITE,
-} from "../../constants";
-import {useCookiesAccepted} from "./cookieHooks";
-import {useTranslator} from "../internationalization/translators";
-import {setAcceptCookies} from "../../utils/setAcceptCookies";
-import {ColorSettingsContext} from "../../contexts/colorsettings";
-import makeStyles from "../content/style_options/makeStyles";
+} from "@iavofficial/frontend-framework-shared/constants";
+import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
+import {useCookiesAccepted} from "@iavofficial/frontend-framework-shared/cookieHooks";
+import {useModuleTranslation} from "@iavofficial/frontend-framework-shared/useModuleTranslation";
 
 const useStyles = makeStyles(({darkMode}: {darkMode: boolean}) => ({
   dialog: {
@@ -58,12 +58,12 @@ const useStyles = makeStyles(({darkMode}: {darkMode: boolean}) => ({
 
 export const CookieBanner = () => {
   const colorContext = useContext(ColorSettingsContext);
+  const t = useModuleTranslation();
 
   const {classes} = useStyles({darkMode: colorContext.darkmode});
 
   const [visible, setVisible] = useState(!useCookiesAccepted());
 
-  const t = useTranslator();
   const [, setCookie] = useCookies([ACCEPTED_COOKIES_NAME]);
 
   const acceptCookies = () => {
@@ -75,7 +75,7 @@ export const CookieBanner = () => {
   return (
     <Dialog
       className={classes.dialog}
-      header={t("allow_cookies_header")}
+      header={t({key: "allow_cookies_header"})}
       position={"bottom"}
       visible={visible}
       modal
@@ -86,7 +86,7 @@ export const CookieBanner = () => {
         <div style={{display: "flex", justifyContent: "flex-end"}}>
           <Button
             icon="pi pi-check"
-            label={t("allow_cookies_button")}
+            label={t({key: "allow_cookies_button"})}
             onClick={acceptCookies}
             style={{backgroundColor: BLUE1, border: "none"}}
           />
@@ -98,7 +98,7 @@ export const CookieBanner = () => {
           className={"pi pi-info-circle"}
           style={{marginRight: "10px", fontSize: "xx-large"}}
         />
-        <span>{t("allow_cookies_disclaimer")}</span>
+        <span>{t({key: "allow_cookies_disclaimer"})}</span>
       </div>
     </Dialog>
   );

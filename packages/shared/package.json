@@ -111,7 +111,8 @@
     "./containsOneOrMoreGroups": "./dist/utils/auth/containsOneOrMoreGroups.js",
     "./parseLanguageResourcesIntoDropdownFormat": "./dist/utils/internationalization/parseLanguageResourcesIntoDropdownFormat.js",
     "./hash": "./dist/utils/hash.js",
-    "./cookieHooks": "./dist/utils/cookieHooks.js"
+    "./cookieHooks": "./dist/utils/cookieHooks.js",
+    "./makeStyles": "./dist/utils/makeStyles.js"
   },
   "typesVersions": {
     "*": {
@@ -219,6 +220,9 @@
       ],
       "./cookieHooks": [
         "./dist/utils/cookieHooks.d.ts"
+      ],
+      "./makeStyles": [
+        "./dist/utils/makeStyles.d.ts"
       ]
     }
   },

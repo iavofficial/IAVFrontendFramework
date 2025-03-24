@@ -22,25 +22,25 @@ import {AuthenticationViewProps} from "@iavofficial/frontend-framework-shared/au
 import loginBackgroundLightMode from "../assets/png/login_background_lightMode.png";
 import loginBackgroundDarkMode from "../assets/png/login_background_darkMode.png";
 import {Dropdown, DropdownChangeEvent} from "primereact/dropdown";
-import {parseLanguageResourcesIntoDropdownFormat} from "@iavofficial/frontend-framework-shared/parseLanguageResourcesIntoDropdownFormat";
+import {
+    parseLanguageResourcesIntoDropdownFormat
+} from "@iavofficial/frontend-framework-shared/parseLanguageResourcesIntoDropdownFormat";
 import {generateHashOfLength} from "@iavofficial/frontend-framework-shared/hash";
-import {Tooltip} from "primereact/tooltip";
 import CompanyLogo from "../assets/svg/companyLogo";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {
-  AwsAuthenticatorAuthDispatch,
-  AwsAuthenticatorStoreState,
-  AwsAuthenticatorState,
-  AwsAuthenticator,
+    AwsAuthenticator,
+    AwsAuthenticatorAuthDispatch,
+    AwsAuthenticatorState,
+    AwsAuthenticatorStoreState,
 } from "../awsAuthenticatorModule";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
-import {LoginButtonWithSpinner} from "@iavofficial/frontend-framework-shared/loginButtonWithSpinner";
 import {AppLogoPlaceholder} from "@iavofficial/frontend-framework-shared/appLogoPlaceholder";
 import {
-  APPLICATION_LOGO_PLACEHOLDER,
-  BLUE3,
-  PADDING_GAB,
-  WHITE,
+    APPLICATION_LOGO_PLACEHOLDER,
+    BLUE3,
+    PADDING_GAB,
+    WHITE,
 } from "@iavofficial/frontend-framework-shared/constants";
 import {AwsAuthenticatorExtras} from "../awsAuthenticatorTypes";
 import {AuthModule} from "@iavofficial/frontend-framework-shared/authenticatorModule";
@@ -48,421 +48,317 @@ import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/modul
 import {InternationalizerModule} from "@iavofficial/frontend-framework-shared/internationalizerModule";
 import {useDefaultSelector} from "@iavofficial/frontend-framework-shared/moduleDefaults";
 import {useModuleContext} from "@iavofficial/frontend-framework-shared/moduleContext";
+import {NewPasswordForm} from "./auth_view/newPasswordForm";
+import {LoginForm} from "./auth_view/loginForm";
 
 type NecessaryAuthModuleAttributes = {
-  extras: AwsAuthenticatorExtras;
+    extras: AwsAuthenticatorExtras;
 } & Omit<AuthModule<AwsAuthenticatorState>, "useModuleLifecycle">;
 
 export const AwsAuthenticationView = <
-  TModules extends {
-    [MandatoryModuleNames.Authenticator]: NecessaryAuthModuleAttributes;
-    [MandatoryModuleNames.Internationalizer]: InternationalizerModule;
-  } = {
-    [MandatoryModuleNames.Authenticator]: AwsAuthenticator;
-    [MandatoryModuleNames.Internationalizer]: InternationalizerModule;
-  },
+    TModules extends {
+        [MandatoryModuleNames.Authenticator]: NecessaryAuthModuleAttributes;
+        [MandatoryModuleNames.Internationalizer]: InternationalizerModule;
+    } = {
+        [MandatoryModuleNames.Authenticator]: AwsAuthenticator;
+        [MandatoryModuleNames.Internationalizer]: InternationalizerModule;
+    },
 >(
-  props: AuthenticationViewProps,
+    props: AuthenticationViewProps,
 ) => {
-  const {modules} = useModuleContext<TModules>();
-  const authenticationModule = modules[MandatoryModuleNames.Authenticator];
-  const intModule = modules[MandatoryModuleNames.Internationalizer];
+    const {modules} = useModuleContext<TModules>();
+    const authenticationModule = modules[MandatoryModuleNames.Authenticator];
+    const intModule = modules[MandatoryModuleNames.Internationalizer];
 
-  const dispatch = useDispatch<AwsAuthenticatorAuthDispatch>();
-  const useTypedSelector: TypedUseSelectorHook<AwsAuthenticatorStoreState> =
-    useSelector;
+    const dispatch = useDispatch<AwsAuthenticatorAuthDispatch>();
+    const useTypedSelector: TypedUseSelectorHook<AwsAuthenticatorStoreState> =
+        useSelector;
 
-  const isNewPasswordRequired = useTypedSelector(
-    (state) =>
-      state[MandatoryModuleNames.Authenticator].extras.isNewPasswordRequired,
-  );
-  const loginError =
-    useTypedSelector(
-      (state) => state[MandatoryModuleNames.Authenticator].extras.loginError,
-    ) ?? "";
+    const isNewPasswordRequired = useTypedSelector(
+        (state) =>
+            state[MandatoryModuleNames.Authenticator].extras.isNewPasswordRequired,
+    );
+    const loginError =
+        useTypedSelector(
+            (state) => state[MandatoryModuleNames.Authenticator].extras.loginError,
+        ) ?? "";
 
-  const isLoading = useTypedSelector(
-    (state) => state[MandatoryModuleNames.Authenticator].isLoading,
-  );
+    const isLoading = useTypedSelector(
+        (state) => state[MandatoryModuleNames.Authenticator].isLoading,
+    );
 
-  const activeLang = useDefaultSelector(
-    (state) => state[MandatoryModuleNames.Internationalizer].activeLang,
-  );
+    const activeLang = useDefaultSelector(
+        (state) => state[MandatoryModuleNames.Internationalizer].activeLang,
+    );
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const colorSettingsContext = useContext(ColorSettingsContext);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const colorSettingsContext = useContext(ColorSettingsContext);
 
-  const t = intModule.useTranslation();
+    const t = intModule.useTranslation();
 
-  const passwortRequirementsTextColor =
-    colorSettingsContext.currentColors.authenticationView
-      .passwortRequirementsTextColor;
-  const inputFieldDescriptionTextColor =
-    colorSettingsContext.currentColors.authenticationView
-      .inputFieldDescriptionTextColor;
-  const inputFieldBackgroundColor =
-    colorSettingsContext.currentColors.authenticationView
-      .inputFieldBackgroundColor;
-  const inputFieldTextColor =
-    colorSettingsContext.currentColors.authenticationView.inputFieldTextColor;
-  const headerBackgroundColor =
-    colorSettingsContext.currentColors.authenticationView.headerBackgroundColor;
-  const fullScreenBackgroundColor =
-    colorSettingsContext.currentColors.authenticationView
-      .fullScreenBackgroundColor;
-  const loginFormBackgroundColor =
-    colorSettingsContext.currentColors.authenticationView
-      .loginFormBackgroundColor;
-  const companyTextColor =
-    colorSettingsContext.currentColors.authenticationView.companyTextColor;
-  const themeTogglerColor =
-    colorSettingsContext.currentColors.authenticationView.themeTogglerColor;
-  const legalLinkColor =
-    colorSettingsContext.currentColors.authenticationView.legalLinkColor;
+    const passwortRequirementsTextColor =
+        colorSettingsContext.currentColors.authenticationView
+            .passwortRequirementsTextColor;
+    const inputFieldDescriptionTextColor =
+        colorSettingsContext.currentColors.authenticationView
+            .inputFieldDescriptionTextColor;
+    const inputFieldBackgroundColor =
+        colorSettingsContext.currentColors.authenticationView
+            .inputFieldBackgroundColor;
+    const inputFieldTextColor =
+        colorSettingsContext.currentColors.authenticationView.inputFieldTextColor;
+    const headerBackgroundColor =
+        colorSettingsContext.currentColors.authenticationView.headerBackgroundColor;
+    const fullScreenBackgroundColor =
+        colorSettingsContext.currentColors.authenticationView
+            .fullScreenBackgroundColor;
+    const loginFormBackgroundColor =
+        colorSettingsContext.currentColors.authenticationView
+            .loginFormBackgroundColor;
+    const companyTextColor =
+        colorSettingsContext.currentColors.authenticationView.companyTextColor;
+    const themeTogglerColor =
+        colorSettingsContext.currentColors.authenticationView.themeTogglerColor;
+    const legalLinkColor =
+        colorSettingsContext.currentColors.authenticationView.legalLinkColor;
 
-  const submit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (isNewPasswordRequired) {
-      dispatch(
-        authenticationModule.extras.completePassword({newPassword: password}),
-      );
-    } else {
-      dispatch(
-        authenticationModule.login({
-          credentials: {email: email, password: password},
-        }),
-      );
-    }
-  };
+    const submit = (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        if (isNewPasswordRequired) {
+            dispatch(
+                authenticationModule.extras.completePassword({newPassword: password}),
+            );
+        } else {
+            dispatch(
+                authenticationModule.login({
+                    credentials: {email: email, password: password},
+                }),
+            );
+        }
+    };
 
-  const companyLogoDefault = (props: AuthenticationViewProps) => (
-    <div
-      style={{
-        display: props.headerOptions?.hideRight ? "none" : "flex",
-        alignItems: "center",
-        paddingRight: `${PADDING_GAB}px`,
-      }}
-    >
-      <CompanyLogo fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE} />
-    </div>
-  );
-
-  const NewPasswordForm = (
-    <div style={{width: "100%", height: "100%"}}>
-      <div style={{margin: "0px 24px 0px 24px"}} className={"flex flex-column"}>
+    const companyLogoDefault = (props: AuthenticationViewProps) => (
         <div
-          style={{
-            color: passwortRequirementsTextColor,
-          }}
-        >
-          <p>{t({key: "replace_temporary_password"})}</p>
-          <ul>
-            <li>{t({key: "password_req_8_characters"})}</li>
-            <li>{t({key: "password_req_upper_lower_case"})}</li>
-            <li>{t({key: "password_req_special_character"})}</li>
-            <li>{t({key: "password_req_one_digit"})}</li>
-          </ul>
-        </div>
-        <form autoComplete="off" onSubmit={submit}>
-          <div>
-            <label
-              style={{
-                fontWeight: "normal",
-                marginBottom: "2px",
-                fontSize: "12px",
-                color: inputFieldDescriptionTextColor,
-              }}
-              className={"inputLabel " + (loginError ? "invalid" : "")}
-            >
-              {t({key: "New_password"})}
-            </label>
-            <input
-              name="password"
-              type="password"
-              id="inputPassword"
-              style={{
-                marginBottom: "40px",
-                width: "100%",
-                backgroundColor: inputFieldBackgroundColor,
-                color: inputFieldTextColor,
-              }}
-              className={
-                "form-control p-inputtext " + (loginError ? "invalid" : "")
-              }
-              onChange={(ev) => setPassword(ev.target.value)}
-              required
-              autoFocus
-            />
-
-            <LoginButtonWithSpinner isLoading={isLoading} />
-            <div className="invalid">{t({key: loginError})}</div>
-          </div>
-        </form>
-      </div>
-    </div>
-  );
-
-  const LoginForm = (
-    <form
-      style={{
-        width: "100%",
-        height: "100%",
-      }}
-      onSubmit={submit}
-    >
-      <div
-        style={{margin: "40px 24px 0px 24px"}}
-        className={"flex flex-column"}
-      >
-        <label
-          style={{
-            fontWeight: "normal",
-            marginBottom: "2px",
-            fontSize: "12px",
-            color: inputFieldDescriptionTextColor,
-          }}
-          className="inputLabel"
-        >
-          {t({key: "Email_address"})}
-        </label>
-        <input
-          value={email.valueOf()}
-          onChange={(ev) => setEmail(ev.target.value)}
-          name="email"
-          type="email"
-          className="p-inputtext"
-          required
-          autoFocus
-          style={{
-            marginBottom: "40px",
-            backgroundColor: inputFieldBackgroundColor,
-            color: inputFieldTextColor,
-          }}
-        />
-        <label
-          style={{
-            fontWeight: "normal",
-            marginBottom: "2px",
-            fontSize: "12px",
-            color: inputFieldDescriptionTextColor,
-          }}
-          className="inputLabel"
-        >
-          {t({key: "Password"})}
-        </label>
-        <input
-          value={password.valueOf()}
-          onChange={(ev) => setPassword(ev.target.value)}
-          name="password"
-          type="password"
-          className="p-inputtext"
-          required
-          style={{
-            marginBottom: "40px",
-            backgroundColor: inputFieldBackgroundColor,
-            color: inputFieldTextColor,
-          }}
-        />
-        <div>
-          <LoginButtonWithSpinner isLoading={isLoading} />
-        </div>
-        <div style={{marginTop: "20px"}} className="invalid">
-          {t({key: loginError})}
-        </div>
-      </div>
-    </form>
-  );
-
-  const header = (props: AuthenticationViewProps) => (
-    <div
-      className="flex justify-content-between"
-      style={{
-        backgroundColor: headerBackgroundColor,
-        color: "white",
-        alignItems: "center",
-        height: "56px",
-      }}
-    >
-      <div
-        id="left-element-authentication"
-        className="flex align-items-center default-app-logo-text-style"
-      >
-        {props.headerOptions?.reactElementLeft ? (
-          props.headerOptions?.reactElementLeft
-        ) : (
-          <AppLogoPlaceholder
-            appLogoPlaceholder={APPLICATION_LOGO_PLACEHOLDER}
-          />
-        )}
-      </div>
-      <div
-        id="right-element-authentication"
-        className="flex justify-content-end align-items-center default-app-logo-text-style"
-      >
-        {props.headerOptions?.reactElementRight
-          ? props.headerOptions?.reactElementRight
-          : companyLogoDefault(props)}
-      </div>
-    </div>
-  );
-
-  const identifier = generateHashOfLength(4);
-  const identifierLegal = "a" + identifier;
-  const identifierWithDot = "." + identifierLegal;
-  return (
-    <div
-      className="flex"
-      style={{
-        height: "100%",
-        background: "",
-        backgroundColor: fullScreenBackgroundColor,
-      }}
-    >
-      {colorSettingsContext?.colorOptions.authenticationView
-        ?.fullScreenBackgroundColor ? (
-        <></>
-      ) : (
-        <img
-          style={{
-            inset: "0px",
-            position: "absolute",
-            zIndex: "-100",
-            height: "100vh",
-            width: "100vw",
-            objectFit: "cover",
-          }}
-          src={
-            props.authOptions?.backgroundImage
-              ? props.authOptions?.backgroundImage
-              : colorSettingsContext?.darkmode
-                ? loginBackgroundDarkMode
-                : loginBackgroundLightMode
-          }
-          alt="Background image"
-        />
-      )}
-      <div
-        className="flex flex-column shadow-6"
-        style={{
-          width: "620px",
-          margin: "auto",
-          position: "relative",
-          backgroundColor: loginFormBackgroundColor,
-        }}
-      >
-        <div>{header(props)}</div>
-        <div className="flex flex-column" style={{justifyContent: "center"}}>
-          <div
-            style={{width: "100%", padding: "24px 24px 0px 0px"}}
-            className="flex align-items-center justify-content-end"
-          >
-            {props.authOptions?.preventDarkmode === true ? (
-              <></>
-            ) : (
-              <>
-                <i
-                  onClick={() =>
-                    colorSettingsContext?.setDarkmode(
-                      !colorSettingsContext.darkmode,
-                    )
-                  }
-                  style={{
-                    color: themeTogglerColor,
-                  }}
-                  className={`switch-colormode-logos pi ${
-                    colorSettingsContext.darkmode ? "pi-moon" : "pi-sun"
-                  }`}
-                />
-              </>
-            )}
-
-            {!props.hideLanguageSelection && (
-              <Dropdown
-                style={{
-                  width: "160px",
-                  backgroundColor: inputFieldBackgroundColor,
-                  color: inputFieldTextColor,
-                }}
-                placeholder={
-                  intModule.translationResources[activeLang].translation
-                    .option_name
-                }
-                onChange={function (event: DropdownChangeEvent) {
-                  intModule.selectActiveLang(event.value.key);
-                }}
-                options={parseLanguageResourcesIntoDropdownFormat(
-                  intModule.translationResources,
-                )}
-                optionLabel="label"
-              />
-            )}
-          </div>
-          {isNewPasswordRequired ? NewPasswordForm : LoginForm}
-        </div>
-
-        <div
-          className="flex"
-          style={{
-            alignSelf: "center",
-            padding: "24px",
-            fontSize: "12px",
-            gap: "20px",
-            alignItems: "center",
-          }}
-        >
-          <span
             style={{
-              color: companyTextColor,
+                display: props.headerOptions?.hideRight ? "none" : "flex",
+                alignItems: "center",
+                paddingRight: `${PADDING_GAB}px`,
             }}
+        >
+            <CompanyLogo fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE}/>
+        </div>
+    );
+
+    const header = (props: AuthenticationViewProps) => (
+        <div
+            className="flex justify-content-between"
+            style={{
+                backgroundColor: headerBackgroundColor,
+                color: "white",
+                alignItems: "center",
+                height: "56px",
+            }}
+        >
+            <div
+                id="left-element-authentication"
+                className="flex align-items-center default-app-logo-text-style"
+            >
+                {props.headerOptions?.reactElementLeft ? (
+                    props.headerOptions?.reactElementLeft
+                ) : (
+                    <AppLogoPlaceholder
+                        appLogoPlaceholder={APPLICATION_LOGO_PLACEHOLDER}
+                    />
+                )}
+            </div>
+            <div
+                id="right-element-authentication"
+                className="flex justify-content-end align-items-center default-app-logo-text-style"
+            >
+                {props.headerOptions?.reactElementRight
+                    ? props.headerOptions?.reactElementRight
+                    : companyLogoDefault(props)}
+            </div>
+        </div>
+    );
+
+    const identifier = generateHashOfLength(4);
+    const identifierLegal = "a" + identifier;
+    const identifierWithDot = "." + identifierLegal;
+    return (
+        <div
+            className="flex"
+            style={{
+                height: "100%",
+                background: "",
+                backgroundColor: fullScreenBackgroundColor,
+            }}
+        >
+            {colorSettingsContext?.colorOptions.authenticationView
+                ?.fullScreenBackgroundColor ? (
+                <></>
+            ) : (
+                <img
+                    style={{
+                        inset: "0px",
+                        position: "absolute",
+                        zIndex: "-100",
+                        height: "100vh",
+                        width: "100vw",
+                        objectFit: "cover",
+                    }}
+                    src={
+                        props.authOptions?.backgroundImage
+                            ? props.authOptions?.backgroundImage
+                            : colorSettingsContext?.darkmode
+                                ? loginBackgroundDarkMode
+                                : loginBackgroundLightMode
+                    }
+                    alt="Background image"
+                />
+            )}
+            <div
+                className="flex flex-column shadow-6"
+                style={{
+                    width: "620px",
+                    margin: "auto",
+                    position: "relative",
+                    backgroundColor: loginFormBackgroundColor,
+                }}
+            >
+                <div>{header(props)}</div>
+                <div className="flex flex-column" style={{justifyContent: "center"}}>
+                    <div
+                        style={{width: "100%", padding: "24px 24px 0px 0px"}}
+                        className="flex align-items-center justify-content-end"
+                    >
+                        {props.authOptions?.preventDarkmode === true ? (
+                            <></>
+                        ) : (
+                            <>
+                                <i
+                                    onClick={() =>
+                                        colorSettingsContext?.setDarkmode(
+                                            !colorSettingsContext.darkmode,
+                                        )
+                                    }
+                                    style={{
+                                        color: themeTogglerColor,
+                                    }}
+                                    className={`switch-colormode-logos pi ${
+                                        colorSettingsContext.darkmode ? "pi-moon" : "pi-sun"
+                                    }`}
+                                />
+                            </>
+                        )}
+
+                        {!props.hideLanguageSelection && (
+                            <Dropdown
+                                style={{
+                                    width: "160px",
+                                    backgroundColor: inputFieldBackgroundColor,
+                                    color: inputFieldTextColor,
+                                }}
+                                placeholder={
+                                    intModule.translationResources[activeLang].translation
+                                        .option_name
+                                }
+                                onChange={function (event: DropdownChangeEvent) {
+                                    intModule.selectActiveLang(event.value.key);
+                                }}
+                                options={parseLanguageResourcesIntoDropdownFormat(
+                                    intModule.translationResources,
+                                )}
+                                optionLabel="label"
+                            />
+                        )}
+                    </div>
+                    {isNewPasswordRequired ?
+                        <NewPasswordForm
+                            passwortRequirementsTextColor={passwortRequirementsTextColor}
+                            inputFieldDescriptionTextColor={inputFieldDescriptionTextColor} t={t}
+                            submit={submit} loginError={loginError}
+                            inputFieldBackgroundColor={inputFieldBackgroundColor}
+                            inputFieldTextColor={inputFieldTextColor} setPassword={setPassword}
+                            isLoading={isLoading}/> :
+                        <LoginForm
+                            submit={submit}
+                            inputFieldDescriptionTextColor={inputFieldDescriptionTextColor}
+                            email={email}
+                            setEmail={setEmail}
+                            t={t}
+                            inputFieldBackgroundColor={inputFieldBackgroundColor}
+                            inputFieldTextColor={inputFieldTextColor}
+                            password={password}
+                            setPassword={setPassword}
+                            isLoading={isLoading}
+                            loginError={loginError}/>
+                    }
+                </div>
+
+                <div
+                    className="flex"
+                    style={{
+                        alignSelf: "center",
+                        padding: "24px",
+                        fontSize: "12px",
+                        gap: "20px",
+                        alignItems: "center",
+                    }}
+                >
+          <span
+              style={{
+                  color: companyTextColor,
+              }}
           >
             &copy;{" "}
-            {props.authOptions?.companyText
-              ? props.authOptions?.companyText
-              : "Company 2025"}
+              {props.authOptions?.companyText
+                  ? props.authOptions?.companyText
+                  : "Company 2025"}
           </span>
 
-          {(props.hideImprint === true && props.hidePrivacyPolicy === true) ===
-            false && (
-            <>
-              <span style={{color: "var(--grey-2)"}}>|</span>
-              <div
-                className="flex"
-                style={{
-                  alignItems: "center",
-                  gap: "4px",
-                }}
-              >
-                {!props.hideImprint && (
-                  <Link
-                    className="legal-doc-link"
-                    style={{color: legalLinkColor, fontSize: "12px"}}
-                    to="/imprint"
-                    target="_blank"
-                  >
-                    {t({key: "Imprint"})}
-                  </Link>
-                )}
-                {!props.hideImprint && !props.hidePrivacyPolicy && (
-                  <span style={{color: legalLinkColor, fontSize: "12px"}}>
+                    {(props.hideImprint === true && props.hidePrivacyPolicy === true) ===
+                        false && (
+                            <>
+                                <span style={{color: "var(--grey-2)"}}>|</span>
+                                <div
+                                    className="flex"
+                                    style={{
+                                        alignItems: "center",
+                                        gap: "4px",
+                                    }}
+                                >
+                                    {!props.hideImprint && (
+                                        <Link
+                                            className="legal-doc-link"
+                                            style={{color: legalLinkColor, fontSize: "12px"}}
+                                            to="/imprint"
+                                            target="_blank"
+                                        >
+                                            {t({key: "Imprint"})}
+                                        </Link>
+                                    )}
+                                    {!props.hideImprint && !props.hidePrivacyPolicy && (
+                                        <span style={{color: legalLinkColor, fontSize: "12px"}}>
                     &
                   </span>
-                )}
-                {!props.hidePrivacyPolicy && (
-                  <Link
-                    className="legal-doc-link"
-                    style={{color: legalLinkColor, fontSize: "12px"}}
-                    to="/privacy-policy"
-                    target="_blank"
-                  >
-                    {t({key: "Privacy_Policy"})}
-                  </Link>
-                )}
-              </div>
-            </>
-          )}
+                                    )}
+                                    {!props.hidePrivacyPolicy && (
+                                        <Link
+                                            className="legal-doc-link"
+                                            style={{color: legalLinkColor, fontSize: "12px"}}
+                                            to="/privacy-policy"
+                                            target="_blank"
+                                        >
+                                            {t({key: "Privacy_Policy"})}
+                                        </Link>
+                                    )}
+                                </div>
+                            </>
+                        )}
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 };

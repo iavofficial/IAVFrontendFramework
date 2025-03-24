@@ -16,8 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, {FormEvent, useContext, useState} from "react";
-import {Link} from "react-router-dom";
+import React, {FormEvent, useContext, useMemo, useState} from "react";
 import {AuthenticationViewProps} from "@iavofficial/frontend-framework-shared/authenticationViewProps";
 import loginBackgroundLightMode from "../assets/png/login_background_lightMode.png";
 import loginBackgroundDarkMode from "../assets/png/login_background_darkMode.png";
@@ -25,7 +24,6 @@ import {Dropdown, DropdownChangeEvent} from "primereact/dropdown";
 import {
     parseLanguageResourcesIntoDropdownFormat
 } from "@iavofficial/frontend-framework-shared/parseLanguageResourcesIntoDropdownFormat";
-import {generateHashOfLength} from "@iavofficial/frontend-framework-shared/hash";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {
     AwsAuthenticator,
@@ -44,25 +42,57 @@ import {NewPasswordForm} from "./auth_view/newPasswordForm";
 import {LoginForm} from "./auth_view/loginForm";
 import makeStyles from "@iavofficial/frontend-framework-shared/makeStyles";
 import {Header} from "./auth_view/header";
+import {ImprintLoginContainer} from "@iavofficial/frontend-framework-shared/imprintLoginContainer";
 
-const useStyles = makeStyles(({props}: { props }) => ({
+const useStyles = makeStyles(({
+                                  fullScreenBackgroundColor,
+                                  loginFormBackgroundColor,
+                                  themeTogglerColor,
+                                  companyTextColor
+                              }: {
+    fullScreenBackgroundColor: string;
+    loginFormBackgroundColor: string;
+    themeTogglerColor: string;
+    companyTextColor: string;
+}) => ({
     container: {
+        height: "100%",
+        background: "",
+        backgroundColor: fullScreenBackgroundColor,
+    },
+    backgroundImage: {
+        inset: "0px",
+        position: "absolute",
+        zIndex: "-100",
+        height: "100vh",
+        width: "100vw",
+        objectFit: "cover",
+    },
+    loginFormContainer: {
+        width: "620px",
+        margin: "auto",
+        position: "relative",
+        backgroundColor: loginFormBackgroundColor
+    },
+    loginFormContentContainer: {
+        justifyContent: "center"
+    },
+    dropdownContainer: {
         width: "100%",
-        height: "100%"
+        padding: "24px 24px 0px 0px"
     },
-    inputLabel: {
-        fontWeight: "normal",
-        marginBottom: "2px",
+    darkModeIcon: {
+        color: themeTogglerColor
+    },
+    imprintWrapper: {
+        alignSelf: "center",
+        padding: "24px",
         fontSize: "12px",
-        color: props.inputFieldDescriptionTextColor,
+        gap: "20px",
+        alignItems: "center"
     },
-    input: {
-        marginBottom: "40px",
-        backgroundColor: props.inputFieldBackgroundColor,
-        color: props.inputFieldTextColor,
-    },
-    invalid: {
-        marginTop: "20px"
+    companyText: {
+        color: companyTextColor
     }
 }));
 
@@ -138,6 +168,13 @@ export const AwsAuthenticationView = <
     const legalLinkColor =
         colorSettingsContext.currentColors.authenticationView.legalLinkColor;
 
+    const {classes, cx} = useStyles({
+        fullScreenBackgroundColor,
+        loginFormBackgroundColor,
+        companyTextColor,
+        themeTogglerColor
+    })
+
     const submit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (isNewPasswordRequired) {
@@ -153,50 +190,27 @@ export const AwsAuthenticationView = <
         }
     };
 
-    const identifier = generateHashOfLength(4);
-    const identifierLegal = "a" + identifier;
-    const identifierWithDot = "." + identifierLegal;
+    const backgroundImage = useMemo(() => {
+        return props.authOptions?.backgroundImage
+            ? props.authOptions.backgroundImage
+            : colorSettingsContext?.darkmode
+                ? loginBackgroundDarkMode as string
+                : loginBackgroundLightMode as string;
+    }, [props.authOptions?.backgroundImage, colorSettingsContext?.darkmode]);
+
     return (
-        <div
-            className="flex"
-            style={{
-                height: "100%",
-                background: "",
-                backgroundColor: fullScreenBackgroundColor,
-            }}
-        >
+        <div className={cx("flex", classes.container)}>
             {colorSettingsContext?.colorOptions.authenticationView
                 ?.fullScreenBackgroundColor ? (
                 <></>
             ) : (
                 <img
-                    style={{
-                        inset: "0px",
-                        position: "absolute",
-                        zIndex: "-100",
-                        height: "100vh",
-                        width: "100vw",
-                        objectFit: "cover",
-                    }}
-                    src={
-                        props.authOptions?.backgroundImage
-                            ? props.authOptions?.backgroundImage
-                            : colorSettingsContext?.darkmode
-                                ? loginBackgroundDarkMode
-                                : loginBackgroundLightMode
-                    }
+                    className={classes.backgroundImage}
+                    src={backgroundImage}
                     alt="Background image"
                 />
             )}
-            <div
-                className="flex flex-column shadow-6"
-                style={{
-                    width: "620px",
-                    margin: "auto",
-                    position: "relative",
-                    backgroundColor: loginFormBackgroundColor,
-                }}
-            >
+            <div className={cx("flex flex-column shadow-6", classes.loginFormContainer)}>
                 <div>
                     <Header
                         headerBackgroundColor={headerBackgroundColor}
@@ -207,27 +221,17 @@ export const AwsAuthenticationView = <
                         hidePrivacyPolicy={props.hidePrivacyPolicy}
                     />
                 </div>
-                <div className="flex flex-column" style={{justifyContent: "center"}}>
-                    <div
-                        style={{width: "100%", padding: "24px 24px 0px 0px"}}
-                        className="flex align-items-center justify-content-end"
-                    >
+                <div className={cx("flex flex-column", classes.loginFormContentContainer)}>
+                    <div className={cx("flex align-items-center justify-content-end", classes.dropdownContainer)}>
                         {props.authOptions?.preventDarkmode === true ? (
                             <></>
                         ) : (
                             <>
                                 <i
-                                    onClick={() =>
-                                        colorSettingsContext?.setDarkmode(
-                                            !colorSettingsContext.darkmode,
-                                        )
-                                    }
-                                    style={{
-                                        color: themeTogglerColor,
-                                    }}
-                                    className={`switch-colormode-logos pi ${
+                                    onClick={() => colorSettingsContext?.setDarkmode(!colorSettingsContext.darkmode,)}
+                                    className={cx(`switch-colormode-logos pi ${
                                         colorSettingsContext.darkmode ? "pi-moon" : "pi-sun"
-                                    }`}
+                                    }`, classes.darkModeIcon)}
                                 />
                             </>
                         )}
@@ -276,66 +280,19 @@ export const AwsAuthenticationView = <
                     }
                 </div>
 
-                <div
-                    className="flex"
-                    style={{
-                        alignSelf: "center",
-                        padding: "24px",
-                        fontSize: "12px",
-                        gap: "20px",
-                        alignItems: "center",
-                    }}
-                >
-          <span
-              style={{
-                  color: companyTextColor,
-              }}
-          >
+                <div className={cx("flex", classes.imprintWrapper)}>
+          <span className={classes.imprintWrapper}>
             &copy;{" "}
-              {props.authOptions?.companyText
-                  ? props.authOptions?.companyText
-                  : "Company 2025"}
+              {props.authOptions?.companyText ? props.authOptions?.companyText : "Company 2025"}
           </span>
-
-                    {(props.hideImprint === true && props.hidePrivacyPolicy === true) ===
-                        false && (
-                            <>
-                                <span style={{color: "var(--grey-2)"}}>|</span>
-                                <div
-                                    className="flex"
-                                    style={{
-                                        alignItems: "center",
-                                        gap: "4px",
-                                    }}
-                                >
-                                    {!props.hideImprint && (
-                                        <Link
-                                            className="legal-doc-link"
-                                            style={{color: legalLinkColor, fontSize: "12px"}}
-                                            to="/imprint"
-                                            target="_blank"
-                                        >
-                                            {t({key: "Imprint"})}
-                                        </Link>
-                                    )}
-                                    {!props.hideImprint && !props.hidePrivacyPolicy && (
-                                        <span style={{color: legalLinkColor, fontSize: "12px"}}>
-                    &
-                  </span>
-                                    )}
-                                    {!props.hidePrivacyPolicy && (
-                                        <Link
-                                            className="legal-doc-link"
-                                            style={{color: legalLinkColor, fontSize: "12px"}}
-                                            to="/privacy-policy"
-                                            target="_blank"
-                                        >
-                                            {t({key: "Privacy_Policy"})}
-                                        </Link>
-                                    )}
-                                </div>
-                            </>
-                        )}
+                    {!(props.hideImprint === true && props.hidePrivacyPolicy === true) && (
+                        <ImprintLoginContainer
+                            hideImprint={props.hideImprint}
+                            legalLinkColor={legalLinkColor}
+                            hidePrivacyPolicy={props.hidePrivacyPolicy}
+                            t={t}
+                        />
+                    )}
                 </div>
             </div>
         </div>

@@ -76,6 +76,7 @@
   ],
   "exports": {
     "./appLogoPlaceholder": "./dist/components/appLogoPlaceholder.js",
+    "./imprintLoginContainer": "./dist/components/imprintLoginContainer.js",
     "./loginButtonWithSpinner": "./dist/components/loginButtonWithSpinner.js",
     "./colorSettingsContext": "./dist/contexts/colorSettingsContext.js",
     "./moduleContext": "./dist/contexts/moduleContext.js",
@@ -118,6 +119,9 @@
     "*": {
       "./appLogoPlaceholder": [
         "./dist/components/appLogoPlaceholder.d.ts"
+      ],
+      "./imprintLoginContainer": [
+        "./dist/components/imprintLoginContainer.d.ts"
       ],
       "./loginButtonWithSpinner": [
         "./dist/components/loginButtonWithSpinner.d.ts"

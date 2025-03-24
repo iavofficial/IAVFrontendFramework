@@ -17,7 +17,6 @@
  */
 
 import React, {FormEvent, useContext, useState} from "react";
-import {Link} from "react-router-dom";
 import {
     APPLICATION_LOGO_PLACEHOLDER,
     BLUE3,
@@ -41,6 +40,7 @@ import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
 import {useDefaultDispatch, useDefaultSelector,} from "@iavofficial/frontend-framework-shared/moduleDefaults";
 import {useModuleTranslation} from "@iavofficial/frontend-framework-shared/useModuleTranslation";
+import {ImprintLoginContainer} from "@iavofficial/frontend-framework-shared/imprintLoginContainer";
 
 export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
     const authModule = useModule(MandatoryModuleNames.Authenticator);
@@ -299,44 +299,13 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                   ? props.authOptions?.companyText
                   : "Company 2025"}
           </span>
-
                     {!(props.hideImprint === true && props.hidePrivacyPolicy === true) && (
-                        <>
-                            <span style={{color: "var(--grey-2)"}}>|</span>
-                            <div
-                                className="flex"
-                                style={{
-                                    alignItems: "center",
-                                    gap: "4px",
-                                }}
-                            >
-                                {!props.hideImprint && (
-                                    <Link
-                                        className="legal-doc-link"
-                                        style={{color: legalLinkColor, fontSize: "12px"}}
-                                        to="/imprint"
-                                        target="_blank"
-                                    >
-                                        {t({key: "Imprint"})}
-                                    </Link>
-                                )}
-                                {!props.hideImprint && !props.hidePrivacyPolicy && (
-                                    <span style={{color: legalLinkColor, fontSize: "12px"}}>
-                    &
-                  </span>
-                                )}
-                                {!props.hidePrivacyPolicy && (
-                                    <Link
-                                        className="legal-doc-link"
-                                        style={{color: legalLinkColor, fontSize: "12px"}}
-                                        to="/privacy-policy"
-                                        target="_blank"
-                                    >
-                                        {t({key: "Privacy_Policy"})}
-                                    </Link>
-                                )}
-                            </div>
-                        </>
+                        <ImprintLoginContainer
+                            hideImprint={props.hideImprint}
+                            legalLinkColor={legalLinkColor}
+                            hidePrivacyPolicy={props.hidePrivacyPolicy}
+                            t={t}
+                        />
                     )}
                 </div>
             </div>

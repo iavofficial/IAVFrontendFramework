@@ -26,7 +26,6 @@ import {
     parseLanguageResourcesIntoDropdownFormat
 } from "@iavofficial/frontend-framework-shared/parseLanguageResourcesIntoDropdownFormat";
 import {generateHashOfLength} from "@iavofficial/frontend-framework-shared/hash";
-import CompanyLogo from "../assets/svg/companyLogo";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {
     AwsAuthenticator,
@@ -36,12 +35,7 @@ import {
 } from "../awsAuthenticatorModule";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 import {AppLogoPlaceholder} from "@iavofficial/frontend-framework-shared/appLogoPlaceholder";
-import {
-    APPLICATION_LOGO_PLACEHOLDER,
-    BLUE3,
-    PADDING_GAB,
-    WHITE,
-} from "@iavofficial/frontend-framework-shared/constants";
+import {APPLICATION_LOGO_PLACEHOLDER,} from "@iavofficial/frontend-framework-shared/constants";
 import {AwsAuthenticatorExtras} from "../awsAuthenticatorTypes";
 import {AuthModule} from "@iavofficial/frontend-framework-shared/authenticatorModule";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
@@ -50,6 +44,29 @@ import {useDefaultSelector} from "@iavofficial/frontend-framework-shared/moduleD
 import {useModuleContext} from "@iavofficial/frontend-framework-shared/moduleContext";
 import {NewPasswordForm} from "./auth_view/newPasswordForm";
 import {LoginForm} from "./auth_view/loginForm";
+import makeStyles from "@iavofficial/frontend-framework-shared/makeStyles";
+import {CompanyLogoDefault} from "./auth_view/companyLogoDefault";
+
+const useStyles = makeStyles(({props}: { props }) => ({
+    container: {
+        width: "100%",
+        height: "100%"
+    },
+    inputLabel: {
+        fontWeight: "normal",
+        marginBottom: "2px",
+        fontSize: "12px",
+        color: props.inputFieldDescriptionTextColor,
+    },
+    input: {
+        marginBottom: "40px",
+        backgroundColor: props.inputFieldBackgroundColor,
+        color: props.inputFieldTextColor,
+    },
+    invalid: {
+        marginTop: "20px"
+    }
+}));
 
 type NecessaryAuthModuleAttributes = {
     extras: AwsAuthenticatorExtras;
@@ -138,18 +155,6 @@ export const AwsAuthenticationView = <
         }
     };
 
-    const companyLogoDefault = (props: AuthenticationViewProps) => (
-        <div
-            style={{
-                display: props.headerOptions?.hideRight ? "none" : "flex",
-                alignItems: "center",
-                paddingRight: `${PADDING_GAB}px`,
-            }}
-        >
-            <CompanyLogo fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE}/>
-        </div>
-    );
-
     const header = (props: AuthenticationViewProps) => (
         <div
             className="flex justify-content-between"
@@ -178,7 +183,13 @@ export const AwsAuthenticationView = <
             >
                 {props.headerOptions?.reactElementRight
                     ? props.headerOptions?.reactElementRight
-                    : companyLogoDefault(props)}
+                    : <CompanyLogoDefault
+                        hideLanguageSelection={props.hideLanguageSelection}
+                        headerOptions={props.headerOptions}
+                        authOptions={props.authOptions}
+                        hideImprint={props.hideImprint}
+                        hidePrivacyPolicy={props.hidePrivacyPolicy}/>
+                }
             </div>
         </div>
     );

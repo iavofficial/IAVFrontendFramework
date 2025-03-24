@@ -34,8 +34,6 @@ import {
     AwsAuthenticatorStoreState,
 } from "../awsAuthenticatorModule";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
-import {AppLogoPlaceholder} from "@iavofficial/frontend-framework-shared/appLogoPlaceholder";
-import {APPLICATION_LOGO_PLACEHOLDER,} from "@iavofficial/frontend-framework-shared/constants";
 import {AwsAuthenticatorExtras} from "../awsAuthenticatorTypes";
 import {AuthModule} from "@iavofficial/frontend-framework-shared/authenticatorModule";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
@@ -45,7 +43,7 @@ import {useModuleContext} from "@iavofficial/frontend-framework-shared/moduleCon
 import {NewPasswordForm} from "./auth_view/newPasswordForm";
 import {LoginForm} from "./auth_view/loginForm";
 import makeStyles from "@iavofficial/frontend-framework-shared/makeStyles";
-import {CompanyLogoDefault} from "./auth_view/companyLogoDefault";
+import {Header} from "./auth_view/header";
 
 const useStyles = makeStyles(({props}: { props }) => ({
     container: {
@@ -155,45 +153,6 @@ export const AwsAuthenticationView = <
         }
     };
 
-    const header = (props: AuthenticationViewProps) => (
-        <div
-            className="flex justify-content-between"
-            style={{
-                backgroundColor: headerBackgroundColor,
-                color: "white",
-                alignItems: "center",
-                height: "56px",
-            }}
-        >
-            <div
-                id="left-element-authentication"
-                className="flex align-items-center default-app-logo-text-style"
-            >
-                {props.headerOptions?.reactElementLeft ? (
-                    props.headerOptions?.reactElementLeft
-                ) : (
-                    <AppLogoPlaceholder
-                        appLogoPlaceholder={APPLICATION_LOGO_PLACEHOLDER}
-                    />
-                )}
-            </div>
-            <div
-                id="right-element-authentication"
-                className="flex justify-content-end align-items-center default-app-logo-text-style"
-            >
-                {props.headerOptions?.reactElementRight
-                    ? props.headerOptions?.reactElementRight
-                    : <CompanyLogoDefault
-                        hideLanguageSelection={props.hideLanguageSelection}
-                        headerOptions={props.headerOptions}
-                        authOptions={props.authOptions}
-                        hideImprint={props.hideImprint}
-                        hidePrivacyPolicy={props.hidePrivacyPolicy}/>
-                }
-            </div>
-        </div>
-    );
-
     const identifier = generateHashOfLength(4);
     const identifierLegal = "a" + identifier;
     const identifierWithDot = "." + identifierLegal;
@@ -238,7 +197,16 @@ export const AwsAuthenticationView = <
                     backgroundColor: loginFormBackgroundColor,
                 }}
             >
-                <div>{header(props)}</div>
+                <div>
+                    <Header
+                        headerBackgroundColor={headerBackgroundColor}
+                        hideLanguageSelection={props.hideLanguageSelection}
+                        headerOptions={props.headerOptions}
+                        authOptions={props.authOptions}
+                        hideImprint={props.hideImprint}
+                        hidePrivacyPolicy={props.hidePrivacyPolicy}
+                    />
+                </div>
                 <div className="flex flex-column" style={{justifyContent: "center"}}>
                     <div
                         style={{width: "100%", padding: "24px 24px 0px 0px"}}

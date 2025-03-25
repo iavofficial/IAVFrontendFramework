@@ -17,7 +17,7 @@
  */
 
 import React, {useContext, useMemo} from "react";
-import {Header, HeaderOptions} from "./header/header";
+import {Header} from "./header/header";
 import {Navbar} from "./navbar/navbar";
 import {DefaultLegalDocument} from "./imprint/defaultLegalDocument";
 import {ImprintText} from "./imprint/imprintText";
@@ -30,93 +30,94 @@ import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/color
 import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
 import {BasicRoute} from "@iavofficial/frontend-framework-shared/routerModule";
+import {HeaderOptions} from "@iavofficial/frontend-framework-shared/authenticationViewProps";
 
 interface MainViewProps {
-  tabAndContentWrappers: TabAndContentWrapper[];
-  imprintComponent?: React.ComponentType<any>;
-  privacyPolicyComponent?: React.ComponentType<any>;
-  documentsLabelKey?: string;
-  hideImprint?: boolean;
-  hidePrivacyPolicy?: boolean;
-  headerOptions?: HeaderOptions;
-  settingsMenuOptions?: SettingsMenuOptions;
-  userMenuOptions?: UserMenuOptions;
-  hideNavbar?: boolean;
+    tabAndContentWrappers: TabAndContentWrapper[];
+    imprintComponent?: React.ComponentType<any>;
+    privacyPolicyComponent?: React.ComponentType<any>;
+    documentsLabelKey?: string;
+    hideImprint?: boolean;
+    hidePrivacyPolicy?: boolean;
+    headerOptions?: HeaderOptions;
+    settingsMenuOptions?: SettingsMenuOptions;
+    userMenuOptions?: UserMenuOptions;
+    hideNavbar?: boolean;
 }
 
 export const MainView = (props: MainViewProps) => {
-  const colorSettingsContext = useContext(ColorSettingsContext);
-  const routerModule = useModule(MandatoryModuleNames.Router);
+    const colorSettingsContext = useContext(ColorSettingsContext);
+    const routerModule = useModule(MandatoryModuleNames.Router);
 
-  const contentAreaBackground =
-    colorSettingsContext.currentColors.contentArea.backgroundColor;
+    const contentAreaBackground =
+        colorSettingsContext.currentColors.contentArea.backgroundColor;
 
-  const staticRoutes: BasicRoute[] = useMemo(
-    () => [
-      {
-        path: "/imprint",
-        element: props.imprintComponent ? (
-          <props.imprintComponent />
-        ) : (
-          <DefaultLegalDocument legalTextComponent={ImprintText} />
-        ),
-      },
-      {
-        path: "/privacy-policy",
-        element: props.privacyPolicyComponent ? (
-          <props.privacyPolicyComponent />
-        ) : (
-          <DefaultLegalDocument legalTextComponent={PrivacyPolicyText} />
-        ),
-      },
-    ],
-    [],
-  );
+    const staticRoutes: BasicRoute[] = useMemo(
+        () => [
+            {
+                path: "/imprint",
+                element: props.imprintComponent ? (
+                    <props.imprintComponent/>
+                ) : (
+                    <DefaultLegalDocument legalTextComponent={ImprintText}/>
+                ),
+            },
+            {
+                path: "/privacy-policy",
+                element: props.privacyPolicyComponent ? (
+                    <props.privacyPolicyComponent/>
+                ) : (
+                    <DefaultLegalDocument legalTextComponent={PrivacyPolicyText}/>
+                ),
+            },
+        ],
+        [],
+    );
 
-  const tabRoutes = useMemo(() => {
-    let tabRoutes: BasicRoute[] = [];
-    props.tabAndContentWrappers.forEach((wrapper) => {
-      tabRoutes = [...tabRoutes, ...wrapper.getRoutes()];
-    });
-    return tabRoutes;
-  }, [props.tabAndContentWrappers]);
+    const tabRoutes = useMemo(() => {
+        let tabRoutes: BasicRoute[] = [];
+        props.tabAndContentWrappers.forEach((wrapper) => {
+            tabRoutes = [...tabRoutes, ...wrapper.getRoutes()];
+        });
+        return tabRoutes;
+    }, [props.tabAndContentWrappers]);
 
-  const MainViewRouter = routerModule.MainViewRouter;
+    const MainViewRouter = routerModule.MainViewRouter;
 
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        height: "100%",
-        bottom: "0",
-      }}
-    >
-      <div style={{flex: "0 0 auto"}}>
-        <Header
-          headerOptions={props.headerOptions}
-          settingsMenuOptions={props.settingsMenuOptions}
-          userMenuOptions={props.userMenuOptions}
-        />
-      </div>
-      <div
-        style={{
-          display: "flex",
-          flex: "1 1 auto",
-          overflow: "auto",
-          backgroundColor: contentAreaBackground,
-        }}
-      >
-        <If condition={!props.hideNavbar}>
-          <Navbar
-            tabAndContentWrappers={props.tabAndContentWrappers}
-            documentsLabelKey={props.documentsLabelKey}
-            hideImprint={props.hideImprint}
-            hidePrivacyPolicy={props.hidePrivacyPolicy}
-          />
-        </If>
-        {<MainViewRouter routes={[...staticRoutes, ...tabRoutes]} />}
-      </div>
-    </div>
-  );
+    return (
+        <div
+            style={{
+                display: "flex",
+                flexDirection: "column",
+                height: "100%",
+                bottom: "0",
+            }}
+        >
+            <div style={{flex: "0 0 auto"}}>
+                <Header
+                    headerOptions={props.headerOptions}
+                    settingsMenuOptions={props.settingsMenuOptions}
+                    userMenuOptions={props.userMenuOptions}
+                />
+            </div>
+            <div
+                style={{
+                    display: "flex",
+                    flex: "1 1 auto",
+                    overflow: "auto",
+                    backgroundColor: contentAreaBackground,
+                }}
+            >
+                <If condition={!props.hideNavbar}>
+                    <Navbar
+                        tabAndContentWrappers={props.tabAndContentWrappers}
+                        documentsLabelKey={props.documentsLabelKey}
+                        hideImprint={props.hideImprint}
+                        hidePrivacyPolicy={props.hidePrivacyPolicy}
+                    />
+                </If>
+                {<MainViewRouter routes={[...staticRoutes, ...tabRoutes]}/>}
+            </div>
+        </div>
+    );
 };

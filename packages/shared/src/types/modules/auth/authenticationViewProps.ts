@@ -18,23 +18,30 @@
 
 import {ReactElement} from "react";
 
-export type AuthenticationViewProps = {
-  authOptions?: {
+export interface AuthOptions {
     backgroundImage?: string;
     companyText?: string;
     documentsLabelKey?: string;
     preventDarkmode?: boolean;
     errorMessages?: {
-      passwordErrorMessage?: string;
+        passwordErrorMessage?: string;
     };
-  };
-  headerOptions?: {
-    reactElementLeft?: ReactElement;
+}
+
+export interface HeaderOptions {
     reactElementRight?: ReactElement;
+    reactElementLeft?: ReactElement;
     hideLeft?: boolean;
     hideRight?: boolean;
-  };
-  hideLanguageSelection?: boolean;
-  hideImprint?: boolean;
-  hidePrivacyPolicy?: boolean;
+    userIcon?: ReactElement;
+    hideUserIcon?: boolean;
+    headerElements?: ReactElement[];
+}
+
+export type AuthenticationViewProps = {
+    authOptions?: AuthOptions;
+    headerOptions?: HeaderOptions;
+    hideLanguageSelection?: boolean;
+    hideImprint?: boolean;
+    hidePrivacyPolicy?: boolean;
 };

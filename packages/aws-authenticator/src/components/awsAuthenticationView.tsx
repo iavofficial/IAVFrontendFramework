@@ -20,10 +20,6 @@ import React, {FormEvent, useContext, useMemo, useState} from "react";
 import {AuthenticationViewProps} from "@iavofficial/frontend-framework-shared/authenticationViewProps";
 import loginBackgroundLightMode from "../assets/png/login_background_lightMode.png";
 import loginBackgroundDarkMode from "../assets/png/login_background_darkMode.png";
-import {Dropdown, DropdownChangeEvent} from "primereact/dropdown";
-import {
-    parseLanguageResourcesIntoDropdownFormat
-} from "@iavofficial/frontend-framework-shared/parseLanguageResourcesIntoDropdownFormat";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {
     AwsAuthenticator,
@@ -36,13 +32,13 @@ import {AwsAuthenticatorExtras} from "../awsAuthenticatorTypes";
 import {AuthModule} from "@iavofficial/frontend-framework-shared/authenticatorModule";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
 import {InternationalizerModule} from "@iavofficial/frontend-framework-shared/internationalizerModule";
-import {useDefaultSelector} from "@iavofficial/frontend-framework-shared/moduleDefaults";
 import {useModuleContext} from "@iavofficial/frontend-framework-shared/moduleContext";
 import {NewPasswordForm} from "./auth_view/newPasswordForm";
 import {LoginForm} from "./auth_view/loginForm";
 import makeStyles from "@iavofficial/frontend-framework-shared/makeStyles";
 import {Header} from "./auth_view/header";
 import {ImprintLoginContainer} from "@iavofficial/frontend-framework-shared/imprintLoginContainer";
+import {AuthDropdown} from "./auth_view/authDropdown";
 
 const useStyles = makeStyles(({
                                   fullScreenBackgroundColor,
@@ -141,10 +137,6 @@ export const AwsAuthenticationView = <
         (state) => state[MandatoryModuleNames.Authenticator].isLoading,
     );
 
-    const activeLang = useDefaultSelector(
-        (state) => state[MandatoryModuleNames.Internationalizer].activeLang,
-    );
-
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const colorSettingsContext = useContext(ColorSettingsContext);
@@ -231,32 +223,10 @@ export const AwsAuthenticationView = <
                     hidePrivacyPolicy={props.hidePrivacyPolicy}
                 />
                 <div className={cx("flex flex-column", classes.loginFormContentContainer)}>
-                    <div className={cx("flex align-items-center justify-content-end", classes.dropdownContainer)}>
-                        {props.authOptions?.preventDarkmode === true ? (
-                            <></>
-                        ) : (
-                            <>
-                                <i
-                                    onClick={() => colorSettingsContext?.setDarkmode(!colorSettingsContext.darkmode,)}
-                                    className={cx(`switch-colormode-logos pi ${
-                                        colorSettingsContext.darkmode ? "pi-moon" : "pi-sun"
-                                    }`, classes.darkModeIcon)}
-                                />
-                            </>
-                        )}
-
-                        {!props.hideLanguageSelection && (
-                            <Dropdown
-                                className={classes.dropdown}
-                                placeholder={intModule.translationResources[activeLang].translation.option_name}
-                                onChange={function (event: DropdownChangeEvent) {
-                                    intModule.selectActiveLang(event.value.key);
-                                }}
-                                options={parseLanguageResourcesIntoDropdownFormat(intModule.translationResources,)}
-                                optionLabel="label"
-                            />
-                        )}
-                    </div>
+                    <AuthDropdown
+                        authOptions={props.authOptions}
+                        colorSettingsContext={colorSettingsContext}
+                        hideLanguageSelection={props.hideLanguageSelection}/>
                     {isNewPasswordRequired ?
                         <NewPasswordForm
                             passwortRequirementsTextColor={passwortRequirementsTextColor}

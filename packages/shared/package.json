@@ -96,6 +96,8 @@
     "./dummyAuthenticatorModule": "./dist/modules/default_modules/auth/dummyAuthenticatorModule.js",
     "./authenticatorModule": "./dist/types/modules/auth/authenticatorModule.js",
     "./authenticationViewProps": "./dist/types/modules/auth/authenticationViewProps.js",
+    "./authOptions": "./dist/types/modules/auth/authOptions.js",
+    "./headerOptions": "./dist/types/modules/auth/headerOptions.js",
     "./reactRouterRouterModule": "./dist/modules/default_modules/router/reactRouterRouterModule.js",
     "./link": "./dist/modules/default_modules/router/components/link.js",
     "./mainViewRouter": "./dist/modules/default_modules/router/components/mainViewRouter.js",
@@ -176,6 +178,12 @@
       ],
       "./authenticationViewProps": [
         "./dist/types/modules/auth/authenticationViewProps.d.ts"
+      ],
+      "./authOptions": [
+        "./dist/types/modules/auth/authOptions.js"
+      ],
+      "./headerOptions": [
+        "./dist/types/modules/auth/headerOptions.js"
       ],
       "./reactRouterRouterModule": [
         "./dist/modules/default_modules/router/reactRouterRouterModule.d.ts"

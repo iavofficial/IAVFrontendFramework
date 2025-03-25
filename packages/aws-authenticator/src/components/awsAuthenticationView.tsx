@@ -48,12 +48,16 @@ const useStyles = makeStyles(({
                                   fullScreenBackgroundColor,
                                   loginFormBackgroundColor,
                                   themeTogglerColor,
-                                  companyTextColor
+                                  companyTextColor,
+                                  inputFieldBackgroundColor,
+                                  inputFieldTextColor
                               }: {
     fullScreenBackgroundColor: string;
     loginFormBackgroundColor: string;
     themeTogglerColor: string;
     companyTextColor: string;
+    inputFieldBackgroundColor: string;
+    inputFieldTextColor: string;
 }) => ({
     container: {
         height: "100%",
@@ -93,6 +97,11 @@ const useStyles = makeStyles(({
     },
     companyText: {
         color: companyTextColor
+    },
+    dropdown: {
+        width: "160px",
+        backgroundColor: inputFieldBackgroundColor,
+        color: inputFieldTextColor,
     }
 }));
 
@@ -172,7 +181,9 @@ export const AwsAuthenticationView = <
         fullScreenBackgroundColor,
         loginFormBackgroundColor,
         companyTextColor,
-        themeTogglerColor
+        themeTogglerColor,
+        inputFieldBackgroundColor,
+        inputFieldTextColor
     })
 
     const submit = (event: FormEvent<HTMLFormElement>) => {
@@ -211,16 +222,14 @@ export const AwsAuthenticationView = <
                 />
             )}
             <div className={cx("flex flex-column shadow-6", classes.loginFormContainer)}>
-                <div>
-                    <Header
-                        headerBackgroundColor={headerBackgroundColor}
-                        hideLanguageSelection={props.hideLanguageSelection}
-                        headerOptions={props.headerOptions}
-                        authOptions={props.authOptions}
-                        hideImprint={props.hideImprint}
-                        hidePrivacyPolicy={props.hidePrivacyPolicy}
-                    />
-                </div>
+                <Header
+                    headerBackgroundColor={headerBackgroundColor}
+                    hideLanguageSelection={props.hideLanguageSelection}
+                    headerOptions={props.headerOptions}
+                    authOptions={props.authOptions}
+                    hideImprint={props.hideImprint}
+                    hidePrivacyPolicy={props.hidePrivacyPolicy}
+                />
                 <div className={cx("flex flex-column", classes.loginFormContentContainer)}>
                     <div className={cx("flex align-items-center justify-content-end", classes.dropdownContainer)}>
                         {props.authOptions?.preventDarkmode === true ? (
@@ -238,21 +247,12 @@ export const AwsAuthenticationView = <
 
                         {!props.hideLanguageSelection && (
                             <Dropdown
-                                style={{
-                                    width: "160px",
-                                    backgroundColor: inputFieldBackgroundColor,
-                                    color: inputFieldTextColor,
-                                }}
-                                placeholder={
-                                    intModule.translationResources[activeLang].translation
-                                        .option_name
-                                }
+                                className={classes.dropdown}
+                                placeholder={intModule.translationResources[activeLang].translation.option_name}
                                 onChange={function (event: DropdownChangeEvent) {
                                     intModule.selectActiveLang(event.value.key);
                                 }}
-                                options={parseLanguageResourcesIntoDropdownFormat(
-                                    intModule.translationResources,
-                                )}
+                                options={parseLanguageResourcesIntoDropdownFormat(intModule.translationResources,)}
                                 optionLabel="label"
                             />
                         )}

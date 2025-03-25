@@ -121,21 +121,13 @@ export const AwsAuthenticationView = <
     const intModule = modules[MandatoryModuleNames.Internationalizer];
 
     const dispatch = useDispatch<AwsAuthenticatorAuthDispatch>();
-    const useTypedSelector: TypedUseSelectorHook<AwsAuthenticatorStoreState> =
-        useSelector;
+    const useTypedSelector: TypedUseSelectorHook<AwsAuthenticatorStoreState> = useSelector;
 
-    const isNewPasswordRequired = useTypedSelector(
-        (state) =>
-            state[MandatoryModuleNames.Authenticator].extras.isNewPasswordRequired,
-    );
-    const loginError =
-        useTypedSelector(
-            (state) => state[MandatoryModuleNames.Authenticator].extras.loginError,
-        ) ?? "";
+    const authState = useTypedSelector(state => state.auth);
 
-    const isLoading = useTypedSelector(
-        (state) => state[MandatoryModuleNames.Authenticator].isLoading,
-    );
+    const isNewPasswordRequired = authState.extras.isNewPasswordRequired;
+    const loginError = authState.extras.loginError ?? "";
+    const isLoading = authState.isLoading;
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");

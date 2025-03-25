@@ -18,38 +18,41 @@
 
 import React, {useContext} from "react";
 import {AllDefaultModules} from "../modules/module_orchestration/moduleDefaults";
+import {MandatoryModuleNames} from "../constants/moduleNames";
 
 export type ModuleContextValues<TModules> = {
-  modules: TModules;
+    modules: TModules;
 };
 
 export type DefaultModuleContextValues = ModuleContextValues<AllDefaultModules>;
 
 export const ModuleContext = React.createContext<DefaultModuleContextValues>(
-  {} as DefaultModuleContextValues,
+    {} as DefaultModuleContextValues,
 );
 
 export const useModuleContext = <TModules = AllDefaultModules>() => {
-  return useContext(ModuleContext) as ModuleContextValues<TModules>;
+    return useContext(ModuleContext) as ModuleContextValues<TModules>;
 };
 
 // There seems to be no way for useModule in which it can be used without
 // passing no or both types. As passing the type for K is redundant, this
-// is not prefered. Because of this the createModules functions create a
+// is not preferred. Because of this the createModules functions create a
 // typed useModule Hook using this function.
 export const createTypedUseModule = <TModules = AllDefaultModules>() => {
-  return <K extends keyof TModules>(key: K) => {
-    const {modules} = useModuleContext<TModules>();
-    return modules[key];
-  };
+    return <K extends keyof TModules>(key: K) => {
+        const {modules} = useModuleContext<TModules>();
+        return modules[key];
+    };
 };
 
+export type MandatoryModuleValues = typeof MandatoryModuleNames[keyof typeof MandatoryModuleNames];
+
 export const useModule = <
-  K extends keyof TModules,
-  TModules = AllDefaultModules,
+    K extends MandatoryModuleValues,
+    TModules = AllDefaultModules,
 >(
-  key: K,
+    key: K,
 ) => {
-  const {modules} = useModuleContext<TModules>();
-  return modules[key];
+    const {modules} = useModuleContext<TModules>();
+    return modules[key];
 };

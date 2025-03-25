@@ -21,45 +21,44 @@ import {ContextMenu} from "primereact/contextmenu";
 import {MenuItem} from "./settingsMenu";
 import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
 import {useDefaultDispatch} from "@iavofficial/frontend-framework-shared/moduleDefaults";
-import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
 
 export interface Props {
-  hideMenu: (e: React.KeyboardEvent) => void;
-  userMenuOptions?: UserMenuOptions;
+    hideMenu: (e: React.KeyboardEvent) => void;
+    userMenuOptions?: UserMenuOptions;
 }
 
 export interface UserMenuOptions {
-  hideLogoutButton?: boolean;
-  additionalItems?: MenuItem[];
+    hideLogoutButton?: boolean;
+    additionalItems?: MenuItem[];
 }
 
 //eslint-disable-next-line
 export const UserMenu = React.forwardRef<ContextMenu, Props>((props, ref) => {
-  const authModule = useModule(MandatoryModuleNames.Authenticator);
+    const authModule = useModule(MandatoryModuleNames.Authenticator);
 
-  const dispatch = useDefaultDispatch();
+    const dispatch = useDefaultDispatch();
 
-  const basicOptions: MenuItem[] = [];
+    const basicOptions: MenuItem[] = [];
 
-  if (!props.userMenuOptions?.hideLogoutButton) {
-    basicOptions.push({
-      label: "Logout",
-      icon: "pi pi-sign-out",
-      command: () => {
-        dispatch(authModule.logout());
-      },
-    });
-  }
+    if (!props.userMenuOptions?.hideLogoutButton) {
+        basicOptions.push({
+            label: "Logout",
+            icon: "pi pi-sign-out",
+            command: () => {
+                dispatch(authModule.logout());
+            },
+        });
+    }
 
-  const model = props.userMenuOptions?.additionalItems
-    ? [...props.userMenuOptions.additionalItems, ...basicOptions]
-    : basicOptions;
+    const model = props.userMenuOptions?.additionalItems
+        ? [...props.userMenuOptions.additionalItems, ...basicOptions]
+        : basicOptions;
 
-  return basicOptions.length > 0 ? (
-    <div onKeyDown={(e) => props.hideMenu(e)}>
-      <ContextMenu ref={ref} model={model} />
-    </div>
-  ) : (
-    <React.Fragment />
-  );
+    return basicOptions.length > 0 ? (
+        <div onKeyDown={(e) => props.hideMenu(e)}>
+            <ContextMenu ref={ref} model={model}/>
+        </div>
+    ) : (
+        <React.Fragment/>
+    );
 });

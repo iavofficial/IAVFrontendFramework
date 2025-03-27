@@ -21,10 +21,15 @@
     "resolveJsonModule": true,
     "jsx": "react-jsx",
     "rootDir": "src",
-    "outDir": "dist"
+    "outDir": "dist",
+    "paths": {
+      "@iavofficial/*": [
+        "*"
+      ]
+    }
   },
   "include": [
-   "src",
-   "custom.d.ts"
+    "src",
+    "custom.d.ts"
   ]
 }

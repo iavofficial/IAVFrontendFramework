@@ -83,8 +83,8 @@ export const Navbar = (props: Props) => {
             overflowX: "visible",
             marginBottom: "30px",
             flex: "0 1 auto",
-            overflow: "clip",
           }}
+          className="custom-scrollbar"
         >
           <>
             {props.tabAndContentWrappers.map((wrapper: TabAndContentWrapper) =>
@@ -131,9 +131,6 @@ export const Navbar = (props: Props) => {
                 >
                   {t({key: "Imprint"})}
                 </Link>
-              )}
-              {!props.hideImprint && !props.hidePrivacyPolicy && (
-                <span style={{color: legalDocumentsColor}}>&</span>
               )}
               {!props.hidePrivacyPolicy && (
                 <Link

@@ -74,7 +74,7 @@ export interface Props {
     hideLegalDocuments?: boolean;
     navbarOptions?: NavbarOptions;
     hideNavbar?: boolean;
-    customHeader?: React.ReactNode;
+    customHeader?: React.ComponentType<any>;
 }
 
 export const UILayer = (props: Props) => {

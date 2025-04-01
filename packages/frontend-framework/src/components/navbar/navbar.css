@@ -17,61 +17,58 @@
  */
 
 #navbar {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding-top: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 12px;
 }
 
 #navbar-bottom-wrapper {
-  margin-bottom: 16px;
-  align-items: center;
-  position: relative;
+    margin-bottom: 16px;
+    align-items: center;
+    position: relative;
 }
 
 .simplebar-scrollbar {
-  width: 6px;
-  position: absolute !important;
-  inset: 0px 7px !important;
+    width: 6px;
+    position: absolute !important;
+    inset: 0px 7px !important;
 }
 
 .simplebar-content {
-  overflow: visible !important;
-  width: 40px !important;
+    overflow: visible !important;
+    width: 40px !important;
 }
 
 .simplebar-track.simplebar-horizontal {
-  display: none !important;
+    display: none !important;
 }
 
 .group-name {
-  text-transform: uppercase;
-  font-size: 1rem !important;
+    text-transform: uppercase;
+    font-size: 1rem !important;
 }
 
 #legal-doc-links {
-  display: flex;
-  align-items: center;
-  gap: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
+
 .legal-doc-link,
 #legal-doc-links a {
-  font-size: 10px;
-  font-weight: 400;
-  text-decoration: none;
-  color: var(--blue-0);
+    font-size: 10px;
+    font-weight: 400;
+    text-decoration: none;
+    color: var(--blue-0);
 }
 
 .legal-doc-link:hover,
 #legal-doc-links a:hover {
-  color: var(--blue-3) !important;
+    color: var(--blue-3) !important;
 }
 
 .custom-scrollbar {
-  overflow-y: scroll;
-  scrollbar-width: none;
-}
-
-.custom-scrollbar::-webkit-scrollbar {
-  width: 0px;
+    overflow-y: scroll;
+    scrollbar-width: none;
 }

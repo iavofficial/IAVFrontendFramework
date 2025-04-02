@@ -19,7 +19,6 @@
 import React, {useContext} from "react";
 import "./navbar.css";
 import {TabAndContentWrapper} from "./wrappers/typesWrappers";
-import {Tooltip} from "primereact/tooltip";
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
 import {calculateNavbarArrowFunctionColor} from "../../utils/calculateNavbarArrowColor";
@@ -72,6 +71,7 @@ export const Navbar = (props: Props) => {
       <div id="navbar" className="h-full">
         <SimpleBar
           style={{
+            height: "inherit",
             width: navbarSettingsContext.navbarCollapsed
               ? `${DEFAULT_ELEMENT_SIZE + 2 * GAB_NAVBAR_COLLAPSED}px`
               : `${NAVBAR_WIDTH_UNFOLDED}px`,
@@ -83,8 +83,8 @@ export const Navbar = (props: Props) => {
             overflowX: "visible",
             marginBottom: "30px",
             flex: "0 1 auto",
-            overflow: "clip",
           }}
+          className="custom-scrollbar"
         >
           <>
             {props.tabAndContentWrappers.map((wrapper: TabAndContentWrapper) =>
@@ -131,9 +131,6 @@ export const Navbar = (props: Props) => {
                 >
                   {t({key: "Imprint"})}
                 </Link>
-              )}
-              {!props.hideImprint && !props.hidePrivacyPolicy && (
-                <span style={{color: legalDocumentsColor}}>&</span>
               )}
               {!props.hidePrivacyPolicy && (
                 <Link

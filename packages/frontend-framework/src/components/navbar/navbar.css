@@ -52,11 +52,12 @@
 #legal-doc-links {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
 }
+
 .legal-doc-link,
 #legal-doc-links a {
-  font-size: 14px;
+  font-size: 10px;
   font-weight: 400;
   text-decoration: none;
   color: var(--blue-0);
@@ -65,4 +66,9 @@
 .legal-doc-link:hover,
 #legal-doc-links a:hover {
   color: var(--blue-3) !important;
+}
+
+.custom-scrollbar {
+  overflow-y: scroll;
+  scrollbar-width: none;
 }

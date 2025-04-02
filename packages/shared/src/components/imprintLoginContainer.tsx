@@ -19,57 +19,49 @@ import {Link} from "react-router-dom";
 import {TranslationFunctionParams} from "../types/modules/internationalization/internationalizerModule";
 
 interface Props {
-    hideImprint: boolean | undefined;
-    legalLinkColor: string;
-    hidePrivacyPolicy: boolean | undefined;
-    t: (params: TranslationFunctionParams) => string;
+  hideImprint: boolean | undefined;
+  legalLinkColor: string;
+  hidePrivacyPolicy: boolean | undefined;
+  t: (params: TranslationFunctionParams) => string;
 }
 
 export const ImprintLoginContainer = (props: Props) => {
+  const {hideImprint, legalLinkColor, hidePrivacyPolicy, t} = props;
 
-    const {
-        hideImprint,
-        legalLinkColor,
-        hidePrivacyPolicy,
-        t
-    } = props;
-
-    return (
-        <>
-            <span style={{color: "var(--grey-2)"}}>|</span>
-            <div
-                className="flex"
-                style={{
-                    alignItems: "center",
-                    gap: "4px",
-                }}
-            >
-                {!hideImprint && (
-                    <Link
-                        className="legal-doc-link"
-                        style={{color: legalLinkColor, fontSize: "12px"}}
-                        to="/imprint"
-                        target="_blank"
-                    >
-                        {t({key: "Imprint"})}
-                    </Link>
-                )}
-                {!hideImprint && !hidePrivacyPolicy && (
-                    <span style={{color: legalLinkColor, fontSize: "12px"}}>
-                    &
-                  </span>
-                )}
-                {!props.hidePrivacyPolicy && (
-                    <Link
-                        className="legal-doc-link"
-                        style={{color: legalLinkColor, fontSize: "12px"}}
-                        to="/privacy-policy"
-                        target="_blank"
-                    >
-                        {t({key: "Privacy_Policy"})}
-                    </Link>
-                )}
-            </div>
-        </>
-    );
-}
+  return (
+    <>
+      <span style={{color: "var(--grey-2)"}}>|</span>
+      <div
+        className="flex"
+        style={{
+          alignItems: "center",
+          gap: "4px",
+        }}
+      >
+        {!hideImprint && (
+          <Link
+            className="legal-doc-link"
+            style={{color: legalLinkColor, fontSize: "12px"}}
+            to="/imprint"
+            target="_blank"
+          >
+            {t({key: "Imprint"})}
+          </Link>
+        )}
+        {!hideImprint && !hidePrivacyPolicy && (
+          <span style={{color: legalLinkColor, fontSize: "12px"}}>&</span>
+        )}
+        {!props.hidePrivacyPolicy && (
+          <Link
+            className="legal-doc-link"
+            style={{color: legalLinkColor, fontSize: "12px"}}
+            to="/privacy-policy"
+            target="_blank"
+          >
+            {t({key: "Privacy_Policy"})}
+          </Link>
+        )}
+      </div>
+    </>
+  );
+};

@@ -18,67 +18,84 @@
 
 import {MergeModules} from "../../../types/modules/moduleOrchestrationTypes";
 import {
-    defaultNonStoreModules,
-    DefaultNonStoreModules,
-    defaultStoreModules,
-    DefaultStoreModules,
+  defaultNonStoreModules,
+  DefaultNonStoreModules,
+  defaultStoreModules,
+  DefaultStoreModules,
 } from "../moduleDefaults";
 
 type StoreModules<TFrameworkStoreModules, TUserStoreModules> = {
-    userStoreModules: TUserStoreModules;
-    frameworkStoreModules: MergeModules<DefaultStoreModules, TFrameworkStoreModules>;
+  userStoreModules: TUserStoreModules;
+  frameworkStoreModules: MergeModules<
+    DefaultStoreModules,
+    TFrameworkStoreModules
+  >;
 };
 
 type AllModules<
+  TFrameworkStoreModules,
+  TUserStoreModules,
+  TFrameworkNonStoreModules,
+  TUserNonStoreModules,
+> = MergeModules<
+  MergeModules<
+    MergeModules<
+      TUserNonStoreModules,
+      MergeModules<DefaultNonStoreModules, TFrameworkNonStoreModules>
+    >,
+    TUserStoreModules
+  >,
+  MergeModules<DefaultStoreModules, TFrameworkStoreModules>
+>;
+
+export type FinalModules<
+  TFrameworkStoreModules extends object,
+  TUserStoreModules extends object,
+  TFrameworkNonStoreModules extends object,
+  TUserNonStoreModules extends object,
+> = {
+  all: AllModules<
     TFrameworkStoreModules,
     TUserStoreModules,
     TFrameworkNonStoreModules,
     TUserNonStoreModules
-> = MergeModules<
-    MergeModules<
-        MergeModules<TUserNonStoreModules, MergeModules<DefaultNonStoreModules, TFrameworkNonStoreModules>>,
-        TUserStoreModules
-    >,
-    MergeModules<DefaultStoreModules, TFrameworkStoreModules>
->;
-
-export type FinalModules<
-    TFrameworkStoreModules extends object,
-    TUserStoreModules extends object,
-    TFrameworkNonStoreModules extends object,
-    TUserNonStoreModules extends object
-> = {
-    all: AllModules<TFrameworkStoreModules, TUserStoreModules, TFrameworkNonStoreModules, TUserNonStoreModules>;
-    storeModules: StoreModules<TFrameworkStoreModules, TUserStoreModules>;
+  >;
+  storeModules: StoreModules<TFrameworkStoreModules, TUserStoreModules>;
 };
 
 export const mergeModules = <
-    TFrameworkStoreModules extends object,
-    TUserStoreModules extends object,
-    TFrameworkNonStoreModules extends object,
-    TUserNonStoreModules extends object,
+  TFrameworkStoreModules extends object,
+  TUserStoreModules extends object,
+  TFrameworkNonStoreModules extends object,
+  TUserNonStoreModules extends object,
 >(modules: {
-    frameworkStoreModules: TFrameworkStoreModules;
-    userStoreModules: TUserStoreModules;
-    frameworkNonStoreModules: TFrameworkNonStoreModules;
-    userNonStoreModules: TUserNonStoreModules;
-}): FinalModules<TFrameworkStoreModules, TUserStoreModules, TFrameworkNonStoreModules, TUserNonStoreModules> => {
-    const mergedFrameworkStoreModules = {
-        ...defaultStoreModules,
-        ...modules.frameworkStoreModules,
-    } as MergeModules<DefaultStoreModules, TFrameworkStoreModules>;
+  frameworkStoreModules: TFrameworkStoreModules;
+  userStoreModules: TUserStoreModules;
+  frameworkNonStoreModules: TFrameworkNonStoreModules;
+  userNonStoreModules: TUserNonStoreModules;
+}): FinalModules<
+  TFrameworkStoreModules,
+  TUserStoreModules,
+  TFrameworkNonStoreModules,
+  TUserNonStoreModules
+> => {
+  const mergedFrameworkStoreModules = {
+    ...defaultStoreModules,
+    ...modules.frameworkStoreModules,
+  } as MergeModules<DefaultStoreModules, TFrameworkStoreModules>;
 
-    const mergedFrameworkNonStoreModules = {
-        ...defaultNonStoreModules,
-        ...modules.frameworkNonStoreModules,
-    } as MergeModules<DefaultNonStoreModules, TFrameworkNonStoreModules>;
+  const mergedFrameworkNonStoreModules = {
+    ...defaultNonStoreModules,
+    ...modules.frameworkNonStoreModules,
+  } as MergeModules<DefaultNonStoreModules, TFrameworkNonStoreModules>;
 
-    const storeModules: StoreModules<TFrameworkStoreModules, TUserStoreModules> = {
-        userStoreModules: modules.userStoreModules,
-        frameworkStoreModules: mergedFrameworkStoreModules,
+  const storeModules: StoreModules<TFrameworkStoreModules, TUserStoreModules> =
+    {
+      userStoreModules: modules.userStoreModules,
+      frameworkStoreModules: mergedFrameworkStoreModules,
     };
 
-    /*
+  /*
         User store modules override modules which are not relevant
          for the store in case the user wants to implement non store modules but wants to add a state.
          This is necessary because store modules are "more specific" than other modules. For example there
@@ -98,16 +115,20 @@ export const mergeModules = <
          A default implementation without store can be overwritten by custom modules both for and without
          the store.
       */
-    const allModules: AllModules<TFrameworkStoreModules, TUserStoreModules, TFrameworkNonStoreModules, TUserNonStoreModules> =
-        {
-            ...modules.userNonStoreModules,
-            ...mergedFrameworkNonStoreModules,
-            ...modules.userStoreModules,
-            ...mergedFrameworkStoreModules,
-        };
+  const allModules: AllModules<
+    TFrameworkStoreModules,
+    TUserStoreModules,
+    TFrameworkNonStoreModules,
+    TUserNonStoreModules
+  > = {
+    ...modules.userNonStoreModules,
+    ...mergedFrameworkNonStoreModules,
+    ...modules.userStoreModules,
+    ...mergedFrameworkStoreModules,
+  };
 
-    return {
-        storeModules,
-        all: allModules,
-    };
+  return {
+    storeModules,
+    all: allModules,
+  };
 };

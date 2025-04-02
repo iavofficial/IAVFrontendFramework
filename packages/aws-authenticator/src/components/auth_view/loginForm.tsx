@@ -19,94 +19,90 @@ import {LoginButtonWithSpinner} from "@iavofficial/frontend-framework-shared/log
 import {TranslationFunctionParams} from "@iavofficial/frontend-framework-shared/internationalizerModule";
 import makeStyles from "@iavofficial/frontend-framework-shared/makeStyles";
 
-const useStyles = makeStyles(({props}: { props: Props }) => ({
-    container: {
-        width: "100%",
-        height: "100%"
-    },
-    inputLabel: {
-        fontWeight: "normal",
-        marginBottom: "2px",
-        fontSize: "12px",
-        color: props.inputFieldDescriptionTextColor,
-    },
-    input: {
-        marginBottom: "40px",
-        backgroundColor: props.inputFieldBackgroundColor,
-        color: props.inputFieldTextColor,
-    },
-    invalid: {
-        marginTop: "20px"
-    }
+const useStyles = makeStyles(({props}: {props: Props}) => ({
+  container: {
+    width: "100%",
+    height: "100%",
+  },
+  inputLabel: {
+    fontWeight: "normal",
+    marginBottom: "2px",
+    fontSize: "12px",
+    color: props.inputFieldDescriptionTextColor,
+  },
+  input: {
+    marginBottom: "40px",
+    backgroundColor: props.inputFieldBackgroundColor,
+    color: props.inputFieldTextColor,
+  },
+  invalid: {
+    marginTop: "20px",
+  },
 }));
 
 interface Props {
-    submit: (event: FormEvent<HTMLFormElement>) => void;
-    inputFieldDescriptionTextColor: string;
-    email: string,
-    setEmail: (value: string) => void;
-    t: (params: TranslationFunctionParams) => string;
-    inputFieldBackgroundColor: string;
-    inputFieldTextColor: string;
-    password: string;
-    setPassword: (value: string) => void;
-    isLoading: boolean;
-    loginError: string;
+  submit: (event: FormEvent<HTMLFormElement>) => void;
+  inputFieldDescriptionTextColor: string;
+  email: string;
+  setEmail: (value: string) => void;
+  t: (params: TranslationFunctionParams) => string;
+  inputFieldBackgroundColor: string;
+  inputFieldTextColor: string;
+  password: string;
+  setPassword: (value: string) => void;
+  isLoading: boolean;
+  loginError: string;
 }
 
 export const LoginForm = (props: Props) => {
+  const {
+    submit,
+    email,
+    setEmail,
+    t,
+    password,
+    setPassword,
+    isLoading,
+    loginError,
+  } = props;
 
-    const {
-        submit,
-        email,
-        setEmail,
-        t,
-        password,
-        setPassword,
-        isLoading,
-        loginError
-    } = props;
+  const {classes, cx} = useStyles({props});
 
-    const {classes, cx} = useStyles({props});
-
-    return (
-        <form
-            className={classes.container}
-            onSubmit={submit}
-        >
-            <div
-                style={{margin: "40px 24px 0px 24px"}}
-                className={"flex flex-column"}
-            >
-                <label className={cx("inputLabel", classes.inputLabel)}>
-                    {t({key: "Email_address"})}
-                </label>
-                <input
-                    className={cx("p-inputtext", classes.input)}
-                    value={email.valueOf()}
-                    onChange={(ev) => setEmail(ev.target.value)}
-                    name="email"
-                    type="email"
-                    required
-                    autoFocus
-                />
-                <label className={cx("inputLabel", classes.inputLabel)}>
-                    {t({key: "Password"})}
-                </label>
-                <input
-                    className={cx("p-inputtext", classes.input)}
-                    value={password.valueOf()}
-                    onChange={(ev) => setPassword(ev.target.value)}
-                    name="password"
-                    type="password"
-                />
-                <div>
-                    <LoginButtonWithSpinner isLoading={isLoading}/>
-                </div>
-                <div className={cx("invalid", classes.invalid)}>
-                    {t({key: loginError})}
-                </div>
-            </div>
-        </form>
-    )
+  return (
+    <form className={classes.container} onSubmit={submit}>
+      <div
+        style={{margin: "40px 24px 0px 24px"}}
+        className={"flex flex-column"}
+      >
+        <label className={cx("inputLabel", classes.inputLabel)}>
+          {t({key: "Email_address"})}
+        </label>
+        <input
+          className={cx("p-inputtext", classes.input)}
+          value={email.valueOf()}
+          onChange={(ev) => setEmail(ev.target.value)}
+          name="email"
+          type="email"
+          required
+          autoFocus
+        />
+        <label className={cx("inputLabel", classes.inputLabel)}>
+          {t({key: "Password"})}
+        </label>
+        <input
+          className={cx("p-inputtext", classes.input)}
+          value={password.valueOf()}
+          onChange={(ev) => setPassword(ev.target.value)}
+          name="password"
+          type="password"
+        />
+        <div>
+          <LoginButtonWithSpinner isLoading={isLoading} />
+        </div>
+        <div className={cx("invalid", classes.invalid)}>
+          {t({key: loginError})}
+        </div>
+      </div>
+    </form>
+  );
 };

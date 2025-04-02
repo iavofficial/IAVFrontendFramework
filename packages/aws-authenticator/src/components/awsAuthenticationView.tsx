@@ -22,10 +22,10 @@ import loginBackgroundLightMode from "../assets/png/login_background_lightMode.p
 import loginBackgroundDarkMode from "../assets/png/login_background_darkMode.png";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {
-    AwsAuthenticator,
-    AwsAuthenticatorAuthDispatch,
-    AwsAuthenticatorState,
-    AwsAuthenticatorStoreState,
+  AwsAuthenticator,
+  AwsAuthenticatorAuthDispatch,
+  AwsAuthenticatorState,
+  AwsAuthenticatorStoreState,
 } from "../awsAuthenticatorModule";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 import {AwsAuthenticatorExtras} from "../awsAuthenticatorTypes";
@@ -40,223 +40,241 @@ import {Header} from "./auth_view/header";
 import {ImprintLoginContainer} from "@iavofficial/frontend-framework-shared/imprintLoginContainer";
 import {AuthDropdown} from "./auth_view/authDropdown";
 
-const useStyles = makeStyles(({
-                                  fullScreenBackgroundColor,
-                                  loginFormBackgroundColor,
-                                  themeTogglerColor,
-                                  companyTextColor,
-                                  inputFieldBackgroundColor,
-                                  inputFieldTextColor
-                              }: {
+const useStyles = makeStyles(
+  ({
+    fullScreenBackgroundColor,
+    loginFormBackgroundColor,
+    themeTogglerColor,
+    companyTextColor,
+    inputFieldBackgroundColor,
+    inputFieldTextColor,
+  }: {
     fullScreenBackgroundColor: string;
     loginFormBackgroundColor: string;
     themeTogglerColor: string;
     companyTextColor: string;
     inputFieldBackgroundColor: string;
     inputFieldTextColor: string;
-}) => ({
+  }) => ({
     container: {
-        height: "100%",
-        background: "",
-        backgroundColor: fullScreenBackgroundColor,
+      height: "100%",
+      background: "",
+      backgroundColor: fullScreenBackgroundColor,
     },
     backgroundImage: {
-        inset: "0px",
-        position: "absolute",
-        zIndex: "-100",
-        height: "100vh",
-        width: "100vw",
-        objectFit: "cover",
+      inset: "0px",
+      position: "absolute",
+      zIndex: "-100",
+      height: "100vh",
+      width: "100vw",
+      objectFit: "cover",
     },
     loginFormContainer: {
-        width: "620px",
-        margin: "auto",
-        position: "relative",
-        backgroundColor: loginFormBackgroundColor
+      width: "620px",
+      margin: "auto",
+      position: "relative",
+      backgroundColor: loginFormBackgroundColor,
     },
     loginFormContentContainer: {
-        justifyContent: "center"
+      justifyContent: "center",
     },
     dropdownContainer: {
-        width: "100%",
-        padding: "24px 24px 0px 0px"
+      width: "100%",
+      padding: "24px 24px 0px 0px",
     },
     darkModeIcon: {
-        color: themeTogglerColor
+      color: themeTogglerColor,
     },
     imprintWrapper: {
-        alignSelf: "center",
-        padding: "24px",
-        fontSize: "12px",
-        gap: "20px",
-        alignItems: "center"
+      alignSelf: "center",
+      padding: "24px",
+      fontSize: "12px",
+      gap: "20px",
+      alignItems: "center",
     },
     companyText: {
-        color: companyTextColor
+      color: companyTextColor,
     },
     dropdown: {
-        width: "160px",
-        backgroundColor: inputFieldBackgroundColor,
-        color: inputFieldTextColor,
-    }
-}));
+      width: "160px",
+      backgroundColor: inputFieldBackgroundColor,
+      color: inputFieldTextColor,
+    },
+  }),
+);
 
 type NecessaryAuthModuleAttributes = {
-    extras: AwsAuthenticatorExtras;
+  extras: AwsAuthenticatorExtras;
 } & Omit<AuthModule<AwsAuthenticatorState>, "useModuleLifecycle">;
 
 export const AwsAuthenticationView = <
-    TModules extends {
-        [MandatoryModuleNames.Authenticator]: NecessaryAuthModuleAttributes;
-        [MandatoryModuleNames.Internationalizer]: InternationalizerModule;
-    } = {
-        [MandatoryModuleNames.Authenticator]: AwsAuthenticator;
-        [MandatoryModuleNames.Internationalizer]: InternationalizerModule;
-    },
+  TModules extends {
+    [MandatoryModuleNames.Authenticator]: NecessaryAuthModuleAttributes;
+    [MandatoryModuleNames.Internationalizer]: InternationalizerModule;
+  } = {
+    [MandatoryModuleNames.Authenticator]: AwsAuthenticator;
+    [MandatoryModuleNames.Internationalizer]: InternationalizerModule;
+  },
 >(
-    props: AuthenticationViewProps,
+  props: AuthenticationViewProps,
 ) => {
-    const {modules} = useModuleContext<TModules>();
-    const authenticationModule = modules[MandatoryModuleNames.Authenticator];
-    const intModule = modules[MandatoryModuleNames.Internationalizer];
+  const {modules} = useModuleContext<TModules>();
+  const authenticationModule = modules[MandatoryModuleNames.Authenticator];
+  const intModule = modules[MandatoryModuleNames.Internationalizer];
 
-    const dispatch = useDispatch<AwsAuthenticatorAuthDispatch>();
-    const useTypedSelector: TypedUseSelectorHook<AwsAuthenticatorStoreState> = useSelector;
+  const dispatch = useDispatch<AwsAuthenticatorAuthDispatch>();
+  const useTypedSelector: TypedUseSelectorHook<AwsAuthenticatorStoreState> =
+    useSelector;
 
-    const authState = useTypedSelector(state => state.auth);
+  const authState = useTypedSelector((state) => state.auth);
 
-    const isNewPasswordRequired = authState.extras.isNewPasswordRequired;
-    const loginError = authState.extras.loginError ?? "";
-    const isLoading = authState.isLoading;
+  const isNewPasswordRequired = authState.extras.isNewPasswordRequired;
+  const loginError = authState.extras.loginError ?? "";
+  const isLoading = authState.isLoading;
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const colorSettingsContext = useContext(ColorSettingsContext);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const colorSettingsContext = useContext(ColorSettingsContext);
 
-    const t = intModule.useTranslation();
+  const t = intModule.useTranslation();
 
-    const passwortRequirementsTextColor =
-        colorSettingsContext.currentColors.authenticationView
-            .passwortRequirementsTextColor;
-    const inputFieldDescriptionTextColor =
-        colorSettingsContext.currentColors.authenticationView
-            .inputFieldDescriptionTextColor;
-    const inputFieldBackgroundColor =
-        colorSettingsContext.currentColors.authenticationView
-            .inputFieldBackgroundColor;
-    const inputFieldTextColor =
-        colorSettingsContext.currentColors.authenticationView.inputFieldTextColor;
-    const headerBackgroundColor =
-        colorSettingsContext.currentColors.authenticationView.headerBackgroundColor;
-    const fullScreenBackgroundColor =
-        colorSettingsContext.currentColors.authenticationView
-            .fullScreenBackgroundColor;
-    const loginFormBackgroundColor =
-        colorSettingsContext.currentColors.authenticationView
-            .loginFormBackgroundColor;
-    const companyTextColor =
-        colorSettingsContext.currentColors.authenticationView.companyTextColor;
-    const themeTogglerColor =
-        colorSettingsContext.currentColors.authenticationView.themeTogglerColor;
-    const legalLinkColor =
-        colorSettingsContext.currentColors.authenticationView.legalLinkColor;
+  const passwortRequirementsTextColor =
+    colorSettingsContext.currentColors.authenticationView
+      .passwortRequirementsTextColor;
+  const inputFieldDescriptionTextColor =
+    colorSettingsContext.currentColors.authenticationView
+      .inputFieldDescriptionTextColor;
+  const inputFieldBackgroundColor =
+    colorSettingsContext.currentColors.authenticationView
+      .inputFieldBackgroundColor;
+  const inputFieldTextColor =
+    colorSettingsContext.currentColors.authenticationView.inputFieldTextColor;
+  const headerBackgroundColor =
+    colorSettingsContext.currentColors.authenticationView.headerBackgroundColor;
+  const fullScreenBackgroundColor =
+    colorSettingsContext.currentColors.authenticationView
+      .fullScreenBackgroundColor;
+  const loginFormBackgroundColor =
+    colorSettingsContext.currentColors.authenticationView
+      .loginFormBackgroundColor;
+  const companyTextColor =
+    colorSettingsContext.currentColors.authenticationView.companyTextColor;
+  const themeTogglerColor =
+    colorSettingsContext.currentColors.authenticationView.themeTogglerColor;
+  const legalLinkColor =
+    colorSettingsContext.currentColors.authenticationView.legalLinkColor;
 
-    const {classes, cx} = useStyles({
-        fullScreenBackgroundColor,
-        loginFormBackgroundColor,
-        companyTextColor,
-        themeTogglerColor,
-        inputFieldBackgroundColor,
-        inputFieldTextColor
-    })
+  const {classes, cx} = useStyles({
+    fullScreenBackgroundColor,
+    loginFormBackgroundColor,
+    companyTextColor,
+    themeTogglerColor,
+    inputFieldBackgroundColor,
+    inputFieldTextColor,
+  });
 
-    const submit = (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        if (isNewPasswordRequired) {
-            dispatch(
-                authenticationModule.extras.completePassword({newPassword: password}),
-            );
-        } else {
-            dispatch(
-                authenticationModule.login({
-                    credentials: {email: email, password: password},
-                }),
-            );
-        }
-    };
+  const submit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (isNewPasswordRequired) {
+      dispatch(
+        authenticationModule.extras.completePassword({newPassword: password}),
+      );
+    } else {
+      dispatch(
+        authenticationModule.login({
+          credentials: {email: email, password: password},
+        }),
+      );
+    }
+  };
 
-    const backgroundImage = useMemo(() => {
-        return props.authOptions?.backgroundImage
-            ? props.authOptions.backgroundImage
-            : colorSettingsContext?.darkmode
-                ? loginBackgroundDarkMode as string
-                : loginBackgroundLightMode as string;
-    }, [props.authOptions?.backgroundImage, colorSettingsContext?.darkmode]);
+  const backgroundImage = useMemo(() => {
+    return props.authOptions?.backgroundImage
+      ? props.authOptions.backgroundImage
+      : colorSettingsContext?.darkmode
+        ? (loginBackgroundDarkMode as string)
+        : (loginBackgroundLightMode as string);
+  }, [props.authOptions?.backgroundImage, colorSettingsContext?.darkmode]);
 
-    return (
-        <div className={cx("flex", classes.container)}>
-            {colorSettingsContext?.colorOptions.authenticationView
-                ?.fullScreenBackgroundColor ? (
-                <></>
-            ) : (
-                <img
-                    className={classes.backgroundImage}
-                    src={backgroundImage}
-                    alt="Background image"
-                />
-            )}
-            <div className={cx("flex flex-column shadow-6", classes.loginFormContainer)}>
-                <Header
-                    headerBackgroundColor={headerBackgroundColor}
-                    hideLanguageSelection={props.hideLanguageSelection}
-                    headerOptions={props.headerOptions}
-                    authOptions={props.authOptions}
-                    hideImprint={props.hideImprint}
-                    hidePrivacyPolicy={props.hidePrivacyPolicy}
-                />
-                <div className={cx("flex flex-column", classes.loginFormContentContainer)}>
-                    <AuthDropdown
-                        authOptions={props.authOptions}
-                        colorSettingsContext={colorSettingsContext}
-                        hideLanguageSelection={props.hideLanguageSelection}/>
-                    {isNewPasswordRequired ?
-                        <NewPasswordForm
-                            passwortRequirementsTextColor={passwortRequirementsTextColor}
-                            inputFieldDescriptionTextColor={inputFieldDescriptionTextColor} t={t}
-                            submit={submit} loginError={loginError}
-                            inputFieldBackgroundColor={inputFieldBackgroundColor}
-                            inputFieldTextColor={inputFieldTextColor} setPassword={setPassword}
-                            isLoading={isLoading}/> :
-                        <LoginForm
-                            submit={submit}
-                            inputFieldDescriptionTextColor={inputFieldDescriptionTextColor}
-                            email={email}
-                            setEmail={setEmail}
-                            t={t}
-                            inputFieldBackgroundColor={inputFieldBackgroundColor}
-                            inputFieldTextColor={inputFieldTextColor}
-                            password={password}
-                            setPassword={setPassword}
-                            isLoading={isLoading}
-                            loginError={loginError}/>
-                    }
-                </div>
+  return (
+    <div className={cx("flex", classes.container)}>
+      {colorSettingsContext?.colorOptions.authenticationView
+        ?.fullScreenBackgroundColor ? (
+        <></>
+      ) : (
+        <img
+          className={classes.backgroundImage}
+          src={backgroundImage}
+          alt="Background image"
+        />
+      )}
+      <div
+        className={cx("flex flex-column shadow-6", classes.loginFormContainer)}
+      >
+        <Header
+          headerBackgroundColor={headerBackgroundColor}
+          hideLanguageSelection={props.hideLanguageSelection}
+          headerOptions={props.headerOptions}
+          authOptions={props.authOptions}
+          hideImprint={props.hideImprint}
+          hidePrivacyPolicy={props.hidePrivacyPolicy}
+        />
+        <div
+          className={cx("flex flex-column", classes.loginFormContentContainer)}
+        >
+          <AuthDropdown
+            authOptions={props.authOptions}
+            colorSettingsContext={colorSettingsContext}
+            hideLanguageSelection={props.hideLanguageSelection}
+          />
+          {isNewPasswordRequired ? (
+            <NewPasswordForm
+              passwortRequirementsTextColor={passwortRequirementsTextColor}
+              inputFieldDescriptionTextColor={inputFieldDescriptionTextColor}
+              t={t}
+              submit={submit}
+              loginError={loginError}
+              inputFieldBackgroundColor={inputFieldBackgroundColor}
+              inputFieldTextColor={inputFieldTextColor}
+              setPassword={setPassword}
+              isLoading={isLoading}
+            />
+          ) : (
+            <LoginForm
+              submit={submit}
+              inputFieldDescriptionTextColor={inputFieldDescriptionTextColor}
+              email={email}
+              setEmail={setEmail}
+              t={t}
+              inputFieldBackgroundColor={inputFieldBackgroundColor}
+              inputFieldTextColor={inputFieldTextColor}
+              password={password}
+              setPassword={setPassword}
+              isLoading={isLoading}
+              loginError={loginError}
+            />
+          )}
+        </div>
 
-                <div className={cx("flex", classes.imprintWrapper)}>
+        <div className={cx("flex", classes.imprintWrapper)}>
           <span className={classes.imprintWrapper}>
             &copy;{" "}
-              {props.authOptions?.companyText ? props.authOptions?.companyText : "Company 2025"}
+            {props.authOptions?.companyText
+              ? props.authOptions?.companyText
+              : "Company 2025"}
           </span>
-                    {!(props.hideImprint === true && props.hidePrivacyPolicy === true) && (
-                        <ImprintLoginContainer
-                            hideImprint={props.hideImprint}
-                            legalLinkColor={legalLinkColor}
-                            hidePrivacyPolicy={props.hidePrivacyPolicy}
-                            t={t}
-                        />
-                    )}
-                </div>
-            </div>
+          {!(
+            props.hideImprint === true && props.hidePrivacyPolicy === true
+          ) && (
+            <ImprintLoginContainer
+              hideImprint={props.hideImprint}
+              legalLinkColor={legalLinkColor}
+              hidePrivacyPolicy={props.hidePrivacyPolicy}
+              t={t}
+            />
+          )}
         </div>
-    );
+      </div>
+    </div>
+  );
 };

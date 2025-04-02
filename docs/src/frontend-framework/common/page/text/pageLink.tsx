@@ -16,46 +16,45 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, {HTMLAttributeAnchorTarget} from "react";
-import {Link} from "react-router-dom";
+import React, { HTMLAttributeAnchorTarget } from "react";
+import { Link } from "react-router-dom";
 import makeStyles from "../../../../util/makeStyles.tsx";
-import {BLUE3} from "../../../../constants.ts";
+import { BLUE3 } from "../../../../constants.ts";
 
 const useStyles = makeStyles(() => ({
-    link: {
-        textDecoration: "none",
-        color: BLUE3,
-        borderRadius: "4px",
-        transition: "background-color 0.3s ease",
-        display: "inline-block",
-        "&:hover": {
-            textDecoration: "underline",
-        },
+  link: {
+    textDecoration: "none",
+    color: BLUE3,
+    borderRadius: "4px",
+    transition: "background-color 0.3s ease",
+    display: "inline-block",
+    "&:hover": {
+      textDecoration: "underline",
     },
+  },
 }));
 
 interface Props {
-    to: string;
-    label: string;
-    target?: HTMLAttributeAnchorTarget | undefined;
-    className?: string;
+  to: string;
+  label: string;
+  target?: HTMLAttributeAnchorTarget | undefined;
+  className?: string;
 }
 
-
 const PageLink: React.FC<Props> = (props) => {
-    const {to, className, label, target} = props;
+  const { to, className, label, target } = props;
 
-    const {classes} = useStyles();
+  const { classes } = useStyles();
 
-    return (
-        <Link
-            target={target}
-            to={to}
-            className={`${classes.link} ${className ? className : ""}`}
-        >
-            {label}
-        </Link>
-    );
+  return (
+    <Link
+      target={target}
+      to={to}
+      className={`${classes.link} ${className ? className : ""}`}
+    >
+      {label}
+    </Link>
+  );
 };
 
 export default PageLink;

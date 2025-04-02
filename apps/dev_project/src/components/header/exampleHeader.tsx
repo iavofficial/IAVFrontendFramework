@@ -16,19 +16,19 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {useTranslator} from '@iavofficial/frontend-framework/translators';
-import {useContext} from "react";
-import {ColorSettingsContext} from "@iavofficial/frontend-framework/colorSettingsContext";
+import { useTranslator } from "@iavofficial/frontend-framework/translators";
+import { useContext } from "react";
+import { ColorSettingsContext } from "@iavofficial/frontend-framework/colorSettingsContext";
 
 export const ExampleHeader = () => {
-    const t = useTranslator();
+  const t = useTranslator();
 
-    const colorSettingsContext = useContext(ColorSettingsContext)
+  const colorSettingsContext = useContext(ColorSettingsContext);
 
-    const darkModeSwitchHandler = () => {
-        const darkMode = colorSettingsContext.darkmode;
-        colorSettingsContext.setDarkmode(!darkMode);
-    }
+  const darkModeSwitchHandler = () => {
+    const darkMode = colorSettingsContext.darkmode;
+    colorSettingsContext.setDarkmode(!darkMode);
+  };
 
-    return <div onClick={darkModeSwitchHandler}>Click on Dark Mode Header</div>;
+  return <div onClick={darkModeSwitchHandler}>Click on Dark Mode Header</div>;
 };

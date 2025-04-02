@@ -16,14 +16,13 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {PropsWithChildren, useCallback, useState} from "react";
-import {State} from "@iavofficial/frontend-framework/dummyAuthenticationProvider";
-import {AuthContext, Credentials} from "@iavofficial/frontend-framework/auth";
+import { PropsWithChildren, useCallback, useState } from "react";
+import { State } from "@iavofficial/frontend-framework/dummyAuthenticationProvider";
+import { AuthContext, Credentials } from "@iavofficial/frontend-framework/auth";
 
 interface Props {
-    additionalContextValues?: { [key: string]: any };
+  additionalContextValues?: { [key: string]: any };
 }
-
 
 /**
  * The `AuthenticationStore` component handles authentication within the framework.
@@ -33,68 +32,64 @@ interface Props {
  * @constructor
  */
 export const AuthenticationStore = (props: PropsWithChildren<Props>) => {
+  const { children } = props;
 
-    const {
-        children
-    } = props;
+  const [authenticated, setAuthenticated] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+  const [userData, setUserData] = useState<State["userData"]>(undefined);
 
-    const [authenticated, setAuthenticated] = useState(false);
-    const [refreshing, setRefreshing] = useState(false);
-    const [userData, setUserData] = useState<State['userData']>(undefined);
+  const refreshIfAuthenticated = useCallback(() => {
+    setRefreshing(true);
+  }, [setAuthenticated, setRefreshing]);
 
-    const refreshIfAuthenticated = useCallback(() => {
-        setRefreshing(true);
-    }, [setAuthenticated, setRefreshing]);
+  const fetchAuthed = (url: string, settings?: Object) => {
+    return fetch(url, settings);
+  };
 
+  const login = (credentials: Credentials) => {
+    setRefreshing(true);
+    setAuthenticated(false);
+    setUserData({ username: credentials.email });
+    setTimeout(() => {
+      setRefreshing(false);
+      setAuthenticated(false);
+      setUserData({ username: credentials.email });
+    }, 3000);
+  };
 
-    const fetchAuthed = (url: string, settings?: Object) => {
-        return fetch(url, settings);
-    };
+  const logout = () => {
+    setRefreshing(false);
+    setAuthenticated(false);
+    setUserData(undefined);
+  };
 
-    const login = (credentials: Credentials) => {
-        setRefreshing(true);
-        setAuthenticated(false)
-        setUserData({username: credentials.email});
-        setTimeout(() => {
-            setRefreshing(false);
-            setAuthenticated(false)
-            setUserData({username: credentials.email});
-        }, 3000)
-    };
+  const getUserData = () => {
+    return userData?.groups;
+  };
 
-    const logout = () => {
-        setRefreshing(false);
-        setAuthenticated(false)
-        setUserData(undefined);
-    };
+  const hasAuthenticated = () => {
+    return authenticated;
+  };
 
-    const getUserData = () => {
-        return userData?.groups;
-    };
-
-    const hasAuthenticated = () => {
-        return authenticated;
-    }
-
-    return (
-        <AuthContext.Provider value={{
-            ...props,
-            hasAuthenticated,
-            userData,
-            fetchAuthed,
-            login,
-            logout,
-            getUserData,
-            authenticated,
-            setAuthenticated,
-            setRefreshing,
-            refreshIfAuthenticated,
-            refreshing,
-            isRefreshing: () => refreshing
-        }}>
-            {children}
-        </AuthContext.Provider>
-    );
+  return (
+    <AuthContext.Provider
+      value={{
+        ...props,
+        hasAuthenticated,
+        userData,
+        fetchAuthed,
+        login,
+        logout,
+        getUserData,
+        authenticated,
+        setAuthenticated,
+        setRefreshing,
+        refreshIfAuthenticated,
+        refreshing,
+        isRefreshing: () => refreshing,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 };
-
-

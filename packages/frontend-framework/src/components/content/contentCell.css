@@ -17,5 +17,5 @@
  */
 
 div[class*="col-"].content-cell {
-    padding: 0;
+  padding: 0;
 }

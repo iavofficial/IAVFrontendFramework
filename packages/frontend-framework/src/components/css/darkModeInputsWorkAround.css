@@ -27,21 +27,21 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-    transition: none;
+  transition: none;
 }
 
 [color-theme="dark"] input:-webkit-autofill,
 [color-theme="dark"] input:-webkit-autofill:hover,
 [color-theme="dark"] input:-webkit-autofill:focus,
 [color-theme="dark"] input:-webkit-autofill:active {
-    -webkit-text-fill-color: var(--white);
-    -webkit-box-shadow: 0 0 0px 1000px var(--grey-4) inset;
-    caret-color: var(--white);
-    transition: background-color 0s 600000s;
+  -webkit-text-fill-color: var(--white);
+  -webkit-box-shadow: 0 0 0px 1000px var(--grey-4) inset;
+  caret-color: var(--white);
+  transition: background-color 0s 600000s;
 }
 
 /* This property removes the transition for input text fields in dark mode which contain no value from an autofill menu.
 If this option is not set, the input fields will "blink" when a option from an autofill menu is chosen and then edited. */
 [color-theme="dark"] .p-inputtext {
-    transition: none;
+  transition: none;
 }

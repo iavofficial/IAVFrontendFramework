@@ -14,63 +14,59 @@
  * limitations under the License.
  **/
 
-import {useContext, useState} from "react";
-import {Button} from 'primereact/button';
-import {useTranslator} from '@iavofficial/frontend-framework/translators';
-import {ColorSettingsContext} from "@iavofficial/frontend-framework/colorSettingsContext";
+import { useContext, useState } from "react";
+import { Button } from "primereact/button";
+import { useTranslator } from "@iavofficial/frontend-framework/translators";
+import { ColorSettingsContext } from "@iavofficial/frontend-framework/colorSettingsContext";
 
 export const AdvancedExampleHeader = () => {
-    const t = useTranslator();
-    const {darkmode, setDarkmode} = useContext(ColorSettingsContext);
+  const t = useTranslator();
+  const { darkmode, setDarkmode } = useContext(ColorSettingsContext);
 
-    const [clicked, setClicked] = useState(false);
+  const [clicked, setClicked] = useState(false);
 
-    const darkModeSwitchHandler = () => {
-        setDarkmode(!darkmode);
-    };
+  const darkModeSwitchHandler = () => {
+    setDarkmode(!darkmode);
+  };
 
-    const uselessButtonHandler = () => {
-        setClicked(!clicked);
-        console.log('This button does absolutely nothing!');
-    };
+  const uselessButtonHandler = () => {
+    setClicked(!clicked);
+    console.log("This button does absolutely nothing!");
+  };
 
-    return (
-        <header
-            style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: '1rem',
-                backgroundColor: darkmode ? '#222' : '#f5f5f5',
-                color: darkmode ? '#fff' : '#000',
-                fontSize: '1.2rem',
-                transition: 'background-color 0.3s, color 0.3s',
-                borderRadius: '8px'
-            }}
-        >
-            <h1 style={{margin: 0}}>{t('Click to Toggle Dark Mode')}</h1>
-            <div>
-                <Button
-                    label={t('Useless Button 1')}
-                    onClick={uselessButtonHandler}
-                    style={{marginRight: '0.5rem'}}
-                />
-                <Button
-                    label={t('Useless Button 2')}
-                    onClick={uselessButtonHandler}
-                    style={{marginRight: '0.5rem'}}
-                />
-                <Button
-                    label={t('Useless Button 3')}
-                    onClick={uselessButtonHandler}
-                    style={{marginRight: '0.5rem'}}
-                />
-                <Button
-                    label={t('Toggle Dark Mode')}
-                    onClick={darkModeSwitchHandler}
-                />
-            </div>
-        </header>
-    );
+  return (
+    <header
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        padding: "1rem",
+        backgroundColor: darkmode ? "#222" : "#f5f5f5",
+        color: darkmode ? "#fff" : "#000",
+        fontSize: "1.2rem",
+        transition: "background-color 0.3s, color 0.3s",
+        borderRadius: "8px",
+      }}
+    >
+      <h1 style={{ margin: 0 }}>{t("Click to Toggle Dark Mode")}</h1>
+      <div>
+        <Button
+          label={t("Useless Button 1")}
+          onClick={uselessButtonHandler}
+          style={{ marginRight: "0.5rem" }}
+        />
+        <Button
+          label={t("Useless Button 2")}
+          onClick={uselessButtonHandler}
+          style={{ marginRight: "0.5rem" }}
+        />
+        <Button
+          label={t("Useless Button 3")}
+          onClick={uselessButtonHandler}
+          style={{ marginRight: "0.5rem" }}
+        />
+        <Button label={t("Toggle Dark Mode")} onClick={darkModeSwitchHandler} />
+      </div>
+    </header>
+  );
 };
-

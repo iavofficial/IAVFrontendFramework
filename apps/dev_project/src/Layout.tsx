@@ -37,7 +37,6 @@ import {HeaderPanelElement} from "@iavofficial/frontend-framework/headerPanelEle
 import {PrimeIcons} from "primereact/api";
 import {WHITE} from "@iavofficial/frontend-framework/constants";
 import {HeaderMenuElement} from "@iavofficial/frontend-framework/headerMenuElement";
-import {ExampleHeader} from "./components/exampleHeader.tsx";
 
 function Layout() {
     const [selectedButtonOption, setSelectedButtonOption] = useState("Simulated");
@@ -241,7 +240,6 @@ function Layout() {
                 reactElementLeft: appLogo,
                 headerElements: headerElements,
             }}
-            customHeader={ExampleHeader}
         />
     );
 }

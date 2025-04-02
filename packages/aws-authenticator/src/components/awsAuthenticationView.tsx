@@ -430,7 +430,7 @@ export const AwsAuthenticationView = <
                 className="flex"
                 style={{
                   alignItems: "center",
-                  gap: "4px",
+                  gap: "5px",
                 }}
               >
                 {!props.hideImprint && (
@@ -442,11 +442,6 @@ export const AwsAuthenticationView = <
                   >
                     {t({key: "Imprint"})}
                   </Link>
-                )}
-                {!props.hideImprint && !props.hidePrivacyPolicy && (
-                  <span style={{color: legalLinkColor, fontSize: "12px"}}>
-                    &
-                  </span>
                 )}
                 {!props.hidePrivacyPolicy && (
                   <Link

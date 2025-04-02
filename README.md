@@ -43,9 +43,9 @@ information about the section can be found [here](https://github.com/iavofficial
 
 Here's a quick look of an example of the IAV Frontend Framework:
 
-<img src="assets/login.png"/>
+<img src="https://iavofficial.github.io/IAVFrontendFramework/assets/index/login.png"/>
 
-<img src="assets/menu.png"/>
+<img src="https://iavofficial.github.io/IAVFrontendFramework/assets/index/menu.png"/>
 
 ## License
 

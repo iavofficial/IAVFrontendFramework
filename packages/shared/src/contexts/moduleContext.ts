@@ -21,17 +21,17 @@ import {AllDefaultModules} from "../modules/module_orchestration/moduleDefaults"
 import {MandatoryModuleNames} from "../constants/moduleNames";
 
 export type ModuleContextValues<TModules> = {
-    modules: TModules;
+  modules: TModules;
 };
 
 export type DefaultModuleContextValues = ModuleContextValues<AllDefaultModules>;
 
 export const ModuleContext = React.createContext<DefaultModuleContextValues>(
-    {} as DefaultModuleContextValues,
+  {} as DefaultModuleContextValues,
 );
 
 export const useModuleContext = <TModules = AllDefaultModules>() => {
-    return useContext(ModuleContext) as ModuleContextValues<TModules>;
+  return useContext(ModuleContext) as ModuleContextValues<TModules>;
 };
 
 // There seems to be no way for useModule in which it can be used without
@@ -39,20 +39,21 @@ export const useModuleContext = <TModules = AllDefaultModules>() => {
 // is not preferred. Because of this the createModules functions create a
 // typed useModule Hook using this function.
 export const createTypedUseModule = <TModules = AllDefaultModules>() => {
-    return <K extends keyof TModules>(key: K) => {
-        const {modules} = useModuleContext<TModules>();
-        return modules[key];
-    };
-};
-
-export type MandatoryModuleValues = typeof MandatoryModuleNames[keyof typeof MandatoryModuleNames];
-
-export const useModule = <
-    K extends MandatoryModuleValues,
-    TModules = AllDefaultModules,
->(
-    key: K,
-) => {
+  return <K extends keyof TModules>(key: K) => {
     const {modules} = useModuleContext<TModules>();
     return modules[key];
+  };
+};
+
+export type MandatoryModuleValues =
+  (typeof MandatoryModuleNames)[keyof typeof MandatoryModuleNames];
+
+export const useModule = <
+  K extends MandatoryModuleValues,
+  TModules = AllDefaultModules,
+>(
+  key: K,
+) => {
+  const {modules} = useModuleContext<TModules>();
+  return modules[key];
 };

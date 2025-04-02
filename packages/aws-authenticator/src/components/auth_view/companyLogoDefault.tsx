@@ -16,24 +16,26 @@
 
 import React, {useContext} from "react";
 import {AuthenticationViewProps} from "@iavofficial/frontend-framework-shared/authenticationViewProps";
-import {BLUE3, PADDING_GAB, WHITE} from "@iavofficial/frontend-framework-shared/constants";
+import {
+  BLUE3,
+  PADDING_GAB,
+  WHITE,
+} from "@iavofficial/frontend-framework-shared/constants";
 import CompanyLogo from "../../assets/svg/companyLogo";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 
-
 export const CompanyLogoDefault = (props: AuthenticationViewProps) => {
+  const colorSettingsContext = useContext(ColorSettingsContext);
 
-    const colorSettingsContext = useContext(ColorSettingsContext);
-
-    return (
-        <div
-            style={{
-                display: props.headerOptions?.hideRight ? "none" : "flex",
-                alignItems: "center",
-                paddingRight: `${PADDING_GAB}px`,
-            }}
-        >
-            <CompanyLogo fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE}/>
-        </div>
-    )
+  return (
+    <div
+      style={{
+        display: props.headerOptions?.hideRight ? "none" : "flex",
+        alignItems: "center",
+        paddingRight: `${PADDING_GAB}px`,
+      }}
+    >
+      <CompanyLogo fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE} />
+    </div>
+  );
 };

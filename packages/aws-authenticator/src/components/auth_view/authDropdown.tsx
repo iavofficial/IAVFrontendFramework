@@ -16,9 +16,7 @@
 
 import React from "react";
 import {Dropdown, DropdownChangeEvent} from "primereact/dropdown";
-import {
-    parseLanguageResourcesIntoDropdownFormat
-} from "@iavofficial/frontend-framework-shared/parseLanguageResourcesIntoDropdownFormat";
+import {parseLanguageResourcesIntoDropdownFormat} from "@iavofficial/frontend-framework-shared/parseLanguageResourcesIntoDropdownFormat";
 import makeStyles from "@iavofficial/frontend-framework-shared/makeStyles";
 import {AuthOptions} from "@iavofficial/frontend-framework-shared/authenticationViewProps";
 import {ColorSettingsType} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
@@ -27,85 +25,98 @@ import {useModuleContext} from "@iavofficial/frontend-framework-shared/moduleCon
 import {InternationalizerModule} from "@iavofficial/frontend-framework-shared/internationalizerModule";
 import {useDefaultSelector} from "@iavofficial/frontend-framework-shared/moduleDefaults";
 
-const useStyles = makeStyles(({
-                                  themeTogglerColor,
-                                  inputFieldBackgroundColor,
-                                  inputFieldTextColor
-                              }: {
+const useStyles = makeStyles(
+  ({
+    themeTogglerColor,
+    inputFieldBackgroundColor,
+    inputFieldTextColor,
+  }: {
     themeTogglerColor: string;
     inputFieldBackgroundColor: string;
     inputFieldTextColor: string;
-}) => ({
+  }) => ({
     dropdownContainer: {
-        width: "100%",
-        padding: "24px 24px 0px 0px"
+      width: "100%",
+      padding: "24px 24px 0px 0px",
     },
     darkModeIcon: {
-        color: themeTogglerColor
+      color: themeTogglerColor,
     },
     dropdown: {
-        width: "160px",
-        backgroundColor: inputFieldBackgroundColor,
-        color: inputFieldTextColor,
-    }
-}));
+      width: "160px",
+      backgroundColor: inputFieldBackgroundColor,
+      color: inputFieldTextColor,
+    },
+  }),
+);
 
 interface Props {
-    authOptions: AuthOptions | undefined;
-    colorSettingsContext: ColorSettingsType
-    hideLanguageSelection: boolean | undefined;
+  authOptions: AuthOptions | undefined;
+  colorSettingsContext: ColorSettingsType;
+  hideLanguageSelection: boolean | undefined;
 }
 
 export const AuthDropdown = <
-    TModules extends {
-        [MandatoryModuleNames.Internationalizer]: InternationalizerModule;
-    } = {
-        [MandatoryModuleNames.Internationalizer]: InternationalizerModule;
-    },
->(props: Props) => {
+  TModules extends {
+    [MandatoryModuleNames.Internationalizer]: InternationalizerModule;
+  } = {
+    [MandatoryModuleNames.Internationalizer]: InternationalizerModule;
+  },
+>(
+  props: Props,
+) => {
+  const {authOptions, colorSettingsContext, hideLanguageSelection} = props;
 
-    const {
-        authOptions,
-        colorSettingsContext,
-        hideLanguageSelection
-    } = props;
+  const {classes, cx} = useStyles({});
 
-    const {classes, cx} = useStyles({});
+  const {modules} = useModuleContext<TModules>();
 
-    const {modules} = useModuleContext<TModules>();
+  const intModule = modules[MandatoryModuleNames.Internationalizer];
 
-    const intModule = modules[MandatoryModuleNames.Internationalizer];
+  const activeLang = useDefaultSelector(
+    (state) => state[MandatoryModuleNames.Internationalizer].activeLang,
+  );
 
-    const activeLang = useDefaultSelector(
-        (state) => state[MandatoryModuleNames.Internationalizer].activeLang,
-    );
-
-    return (
-        <div className={cx("flex align-items-center justify-content-end", classes.dropdownContainer)}>
-            {authOptions?.preventDarkmode === true ? (
-                <></>
-            ) : (
-                <>
-                    <i
-                        onClick={() => colorSettingsContext?.setDarkmode(!colorSettingsContext.darkmode,)}
-                        className={cx(`switch-colormode-logos pi ${
-                            colorSettingsContext.darkmode ? "pi-moon" : "pi-sun"
-                        }`, classes.darkModeIcon)}
-                    />
-                </>
+  return (
+    <div
+      className={cx(
+        "flex align-items-center justify-content-end",
+        classes.dropdownContainer,
+      )}
+    >
+      {authOptions?.preventDarkmode === true ? (
+        <></>
+      ) : (
+        <>
+          <i
+            onClick={() =>
+              colorSettingsContext?.setDarkmode(!colorSettingsContext.darkmode)
+            }
+            className={cx(
+              `switch-colormode-logos pi ${
+                colorSettingsContext.darkmode ? "pi-moon" : "pi-sun"
+              }`,
+              classes.darkModeIcon,
             )}
+          />
+        </>
+      )}
 
-            {!hideLanguageSelection && (
-                <Dropdown
-                    className={classes.dropdown}
-                    placeholder={intModule.translationResources[activeLang].translation.option_name}
-                    onChange={function (event: DropdownChangeEvent) {
-                        intModule.selectActiveLang(event.value.key);
-                    }}
-                    options={parseLanguageResourcesIntoDropdownFormat(intModule.translationResources,)}
-                    optionLabel="label"
-                />
-            )}
-        </div>
-    );
-}
+      {!hideLanguageSelection && (
+        <Dropdown
+          className={classes.dropdown}
+          placeholder={
+            intModule.translationResources[activeLang].translation.option_name
+          }
+          onChange={function (event: DropdownChangeEvent) {
+            intModule.selectActiveLang(event.value.key);
+          }}
+          options={parseLanguageResourcesIntoDropdownFormat(
+            intModule.translationResources,
+          )}
+          optionLabel="label"
+        />
+      )}
+    </div>
+  );
+};

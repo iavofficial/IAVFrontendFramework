@@ -19,29 +19,29 @@
 import {ReactElement} from "react";
 
 export interface AuthOptions {
-    backgroundImage?: string;
-    companyText?: string;
-    documentsLabelKey?: string;
-    preventDarkmode?: boolean;
-    errorMessages?: {
-        passwordErrorMessage?: string;
-    };
+  backgroundImage?: string;
+  companyText?: string;
+  documentsLabelKey?: string;
+  preventDarkmode?: boolean;
+  errorMessages?: {
+    passwordErrorMessage?: string;
+  };
 }
 
 export interface HeaderOptions {
-    reactElementRight?: ReactElement;
-    reactElementLeft?: ReactElement;
-    hideLeft?: boolean;
-    hideRight?: boolean;
-    userIcon?: ReactElement;
-    hideUserIcon?: boolean;
-    headerElements?: ReactElement[];
+  reactElementRight?: ReactElement;
+  reactElementLeft?: ReactElement;
+  hideLeft?: boolean;
+  hideRight?: boolean;
+  userIcon?: ReactElement;
+  hideUserIcon?: boolean;
+  headerElements?: ReactElement[];
 }
 
 export type AuthenticationViewProps = {
-    authOptions?: AuthOptions;
-    headerOptions?: HeaderOptions;
-    hideLanguageSelection?: boolean;
-    hideImprint?: boolean;
-    hidePrivacyPolicy?: boolean;
+  authOptions?: AuthOptions;
+  headerOptions?: HeaderOptions;
+  hideLanguageSelection?: boolean;
+  hideImprint?: boolean;
+  hidePrivacyPolicy?: boolean;
 };

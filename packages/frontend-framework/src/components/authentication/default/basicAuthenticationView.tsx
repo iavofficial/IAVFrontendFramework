@@ -86,7 +86,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
 
   const {passwordErrorMessage} = props.authOptions?.errorMessages || {};
 
-  const isAtLeastOneDocumentVisible = !!props.legalDocuments?.some(
+  const isAtLeastOneDocumentVisible = props.legalDocuments?.some(
     (document) => !document.isHidden,
   );
   // These two functions life on the class instance not on the prototype thanks to @babel/plugin-proposal-class-properties.

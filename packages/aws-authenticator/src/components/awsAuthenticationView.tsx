@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {FormEvent, useContext, useState} from "react";
+import React, {FormEvent, useContext, useState} from "react";
 import {Link} from "react-router-dom";
 import {AuthenticationViewProps} from "@iavofficial/frontend-framework-shared/authenticationViewProps";
 import loginBackgroundLightMode from "../assets/png/login_background_lightMode.png";
@@ -120,7 +120,7 @@ export const AwsAuthenticationView = <
   const legalLinkColor =
     colorSettingsContext.currentColors.authenticationView.legalLinkColor;
 
-  const isAtLeastOneDocumentVisible = !!props.legalDocuments?.some(
+  const isAtLeastOneDocumentVisible = props.legalDocuments?.some(
     (document) => !document.isHidden,
   );
   const submit = (event: FormEvent<HTMLFormElement>) => {

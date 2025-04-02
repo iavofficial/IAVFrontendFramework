@@ -44,12 +44,11 @@ const PageUiLayer: React.FC = () => {
     documentsComponent?: React.ComponentType<any>; // Optional property to replace the default imprint with a custom component. This allows you to display a customized list of legal documents.
     headerOptions?: HeaderOptions; // Optional property to customize the header of the main view and the authentication view. The object will be explained later in this chapter.
     authOptions?: AuthOptions;  // Optional property to customize the authentication view. The object will be explained later in this chapter.
-    hideLegalDocuments?: boolean; // Option to hide the link for the legal documents. This could be of use if you develop a desktop application like electron.
     navbarOptions?: NavbarOptions; // Option to configure the navigation bar. This is explained later.
     disableCookieBanner?: boolean; // Option to disable / hide the provided cookie banner / disclaimer.
     disableLogin?: boolean; // Option to disable the login and logout.
     hideNavbar?: boolean; // Option to hide the navigation bar.
-    legalDocuments?: LegalDocument[]; // Option to configure legal documents which are being displayed in the AuthenticationView and navigation bar.
+    legalDocuments?: LegalDocument[]; // Optional configuration for legal documents displayed in the AuthenticationView and navigation bar.
 }`}
       </Code>
       <SubTitle>TabAndContentWrappers: Navigation tabs and content</SubTitle>

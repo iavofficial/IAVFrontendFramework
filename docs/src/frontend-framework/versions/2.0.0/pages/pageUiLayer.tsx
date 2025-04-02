@@ -37,18 +37,19 @@ const PageUiLayer: React.FC = () => {
       <Code title={"PageInterface PageUiLayer"} language={"typescript"}>
         {`export interface Props {
     tabAndContentWrappers: TabAndContentWrapper[]; // Mandatory: Array of BasicContentWrappers and groups (or other wrappers) to provide in order to render tabs in the navigation bar and the associated component. This is explained in the following sections.
-    startingPoint: string; // Mandatory: This is the "entry URL" of your application. The user will be redirected to this URL after successful authentication.
+    initialPath: string; // Mandatory: This is the "entry URL" of your application. The user will be redirected to this URL after successful authentication.
     settingsMenuOptions?: SettingsMenuOptions; // Optional object to configure the settings menu. The object will be explained later in this chapter.
     userMenuOptions?: // Optional object to configure the user menu. The object will be explained later in this chapter.
     authenticationView?: React.ComponentType<AuthenticationViewProps & any>; // Optional property to set a custom authentication view.
     documentsComponent?: React.ComponentType<any>; // Optional property to replace the default imprint with a custom component. This allows you to display a customized list of legal documents.
     headerOptions?: HeaderOptions; // Optional property to customize the header of the main view and the authentication view. The object will be explained later in this chapter.
     authOptions?: AuthOptions;  // Optional property to customize the authentication view. The object will be explained later in this chapter.
-    documentsLabelKey?: string; // Optional parameter to replace the text for the legal documents which is shown when hovering over the info icon inside the authentication view and at the bottom of the navigation bar. You have to pass a string which is the key of corresponding translations in your translation files.
     hideLegalDocuments?: boolean; // Option to hide the link for the legal documents. This could be of use if you develop a desktop application like electron.
     navbarOptions?: NavbarOptions; // Option to configure the navigation bar. This is explained later.
     disableCookieBanner?: boolean; // Option to disable / hide the provided cookie banner / disclaimer.
     disableLogin?: boolean; // Option to disable the login and logout.
+    hideNavbar?: boolean; // Option to hide the navigation bar.
+    legalDocuments?: LegalDocument[]; // Option to configure legal documents which are being displayed in the AuthenticationView and navigation bar.
 }`}
       </Code>
       <SubTitle>TabAndContentWrappers: Navigation tabs and content</SubTitle>
@@ -337,8 +338,10 @@ export interface AuthenticationViewProps {
     authOptions?: {
         backgroundImage?: string;
         companyText?: string;
-        documentsLabelKey?: string;
         preventDarkmode?: boolean;
+        errorMessages?: {
+          passwordErrorMessage?: string;
+        };
     };
     headerOptions?: {
         reactElementLeft?: ReactElement;
@@ -347,7 +350,7 @@ export interface AuthenticationViewProps {
         hideRight?: boolean;
     };
     hideLanguageSelection?: boolean;
-    hideLegalDocuments?: boolean;
+    legalDocuments?: LegalDocument[];
 }`}
       </Code>
       <SubSubTitle>
@@ -362,6 +365,39 @@ enum StaticCollapsedState {
     Collapsed,
     Unfolded
 }`}
+      </Code>
+      <SubSubTitle>
+      LegalDocuments: How to configure the legal documents?
+      </SubSubTitle>
+      <Code language={"typescript"}>
+        {`export interface LegalDocument {
+      path: string; // Required property to configure the URL path of the legal document (e.g. "/imprint").
+      titleTranslationKey: string; // Required property to set the title for the legal document's link which is placed in the authentication view and at the bottom of the navigation bar. You have to pass a string which is the key of corresponding translations in your translation files.
+      component: React.ComponentType<any>; // Required property to set a custom authentication view.
+      isHidden?: boolean; // Optional property to hide the legal document's link and disable the URL path associated with it.
+}`}
+      </Code>
+      <Text>The following example shows how to configure the legal documents</Text>
+      <Code language={"typescript"}>
+        {`  const legalDocuments: LegalDocument[] = [
+    {
+      path: '/imprint',
+      titleTranslationKey: 'Imprint',
+      component: ImprintDocument,
+      isHidden: false,
+    },
+    {
+      path: '/privacy-policy',
+      titleTranslationKey: 'Privacy_Policy',
+      component: PrivacyPolicyDocument,
+      isHidden: false,
+    },
+  ];
+
+    <UILayer
+      // other options...
+      legalDocuments={legalDocuments}
+    />`}
       </Code>
     </Page>
   );

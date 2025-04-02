@@ -25,7 +25,6 @@ import {BasicAuthenticationView} from "./authentication/default/basicAuthenticat
 import {SettingsMenuOptions} from "./header/settingsMenu";
 import {CookieBanner} from "./cookie/cookieBanner";
 import {MainView} from "./mainView";
-import {DefaultLegalDocument} from "./imprint/defaultLegalDocument";
 import {TabAndContentWrapper} from "./navbar/wrappers/typesWrappers";
 import {NavbarSettingsProvider} from "../contexts/providers/navbarSettingsProvider";
 import {StaticCollapsedState} from "../types/navbarSettingsTypes";
@@ -46,8 +45,7 @@ import "../css/authenticationView.css";
 import {useDefaultSelector} from "@iavofficial/frontend-framework-shared/moduleDefaults";
 import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
-import {ImprintText} from "./imprint/imprintText";
-import {PrivacyPolicyText} from "./imprint/privacyPolicyText";
+import {LegalDocument} from "./imprint/legalDocument";
 
 export interface AuthOptions {
   backgroundImage?: string;
@@ -69,15 +67,11 @@ export interface Props {
   disableLogin?: boolean;
   disableCookieBanner?: boolean;
   authenticationView?: React.ComponentType<AuthenticationViewProps & any>;
-  imprintComponent?: React.ComponentType<any>;
-  privacyPolicyComponent?: React.ComponentType<any>;
-  documentsLabelKey?: string;
+  legalDocuments?: LegalDocument[];
   settingsMenuOptions?: SettingsMenuOptions;
   userMenuOptions?: UserMenuOptions;
   headerOptions?: HeaderOptions;
   authOptions?: AuthOptions;
-  hideImprint?: boolean;
-  hidePrivacyPolicy?: boolean;
   navbarOptions?: NavbarOptions;
   hideNavbar?: boolean;
 }
@@ -106,7 +100,14 @@ export const UILayer = (props: Props) => {
     }
   }, [props.disableCookieBanner, setCookie]);
 
-  const routes = [
+  const dynamicRoutes =
+    props.legalDocuments?.map((doc) => ({
+      path: doc.path,
+      disabled: doc.isHidden ?? false,
+      element: <doc.component />,
+    })) || [];
+
+  const fixedRoutes = [
     {
       path: "/login",
       disabled: disableLogin,
@@ -117,27 +118,8 @@ export const UILayer = (props: Props) => {
             props.settingsMenuOptions?.hideLanguageSelection
           }
           headerOptions={props.headerOptions}
-          hideImprint={props.hideImprint}
-          hidePrivacyPolicy={props.hidePrivacyPolicy}
+          legalDocuments={props.legalDocuments}
         />
-      ),
-    },
-    {
-      path: "/imprint",
-      disabled: false,
-      element: props.imprintComponent ? (
-        <props.imprintComponent />
-      ) : (
-        <DefaultLegalDocument legalTextComponent={ImprintText} />
-      ),
-    },
-    {
-      path: "/privacy-policy",
-      disabled: false,
-      element: props.privacyPolicyComponent ? (
-        <props.privacyPolicyComponent />
-      ) : (
-        <DefaultLegalDocument legalTextComponent={PrivacyPolicyText} />
       ),
     },
     // Maybe include !props.disableLogin && !hasAuthenticated with <Route path="/*" element={<></>} />
@@ -149,19 +131,21 @@ export const UILayer = (props: Props) => {
           headerOptions={props.headerOptions}
           settingsMenuOptions={props.settingsMenuOptions}
           userMenuOptions={userMenuOptions}
-          documentsLabelKey={props.documentsLabelKey}
-          imprintComponent={props.imprintComponent}
-          privacyPolicyComponent={props.privacyPolicyComponent}
+          legalDocuments={props.legalDocuments}
           tabAndContentWrappers={props.tabAndContentWrappers}
-          hideImprint={props.hideImprint}
-          hidePrivacyPolicy={props.hidePrivacyPolicy}
           hideNavbar={props.hideNavbar}
         />
       ),
     },
   ];
 
+  const routes = [...dynamicRoutes, ...fixedRoutes];
+
   const UILayerRouter = routerModule.UiLayerRouter;
+
+  const legalDocumentsPaths = (props.legalDocuments ?? []).map(
+    (doc) => doc.path,
+  );
 
   return (
     <NavbarSettingsProvider
@@ -174,6 +158,7 @@ export const UILayer = (props: Props) => {
           routes={routes}
           disableLogin={disableLogin}
           initialPath={props.initialPath}
+          legalDocumentsPaths={legalDocumentsPaths}
         />
       }
     </NavbarSettingsProvider>

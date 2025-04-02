@@ -1,3 +1,10 @@
+## [@iavofficial/frontend-framework-v1.4.0-dev.6](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.0-dev.5...@iavofficial/frontend-framework-v1.4.0-dev.6) (2025-04-02)
+
+### Bug Fixes
+
+* add "?" for userIcon ([e3b79eb](https://github.com/iavofficial/IAVFrontendFramework/commit/e3b79eb39a217c9573d29587496648768cad221d))
+* add background color ([3191011](https://github.com/iavofficial/IAVFrontendFramework/commit/31910118927ad9f974cff860a4c3e25b57a29054))
+
 ## [@iavofficial/frontend-framework-v1.4.0-dev.5](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.0-dev.4...@iavofficial/frontend-framework-v1.4.0-dev.5) (2025-02-20)
 
 ### Bug Fixes

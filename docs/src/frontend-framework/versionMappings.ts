@@ -16,8 +16,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-export const versionMappings = {
-    "1.1.0": () => import("./versions/1.1.0"),
-    "1.3.0": () => import("./versions/1.3.0"),
-    "1.4.0": () => import("./versions/1.4.0"),
-};
+const versions = ["1.1.0", "1.3.0", "1.4.0", "2.0.0"];
+
+export const versionMappings = Object.fromEntries(
+    versions.map((version) => [version, () => import(`./versions/${version}`)])
+);

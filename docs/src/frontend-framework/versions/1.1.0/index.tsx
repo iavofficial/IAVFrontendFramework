@@ -29,64 +29,77 @@ import PageColorSettings from "./pages/pageColorSettings.tsx";
 import PageExampleProject from "./pages/pageExampleProject.tsx";
 import PagePlayground from "./pages/pagePlayground.tsx";
 import PageFaq from "./pages/pageFaq.tsx";
-import { mergeRoutes, PathRoute } from "../../common/page/pathRoute.ts";
+import {mergeRoutes, PathRoute} from "../../common/page/pathRoute.ts";
 import RoutesMap from "../../common/drawer/routesMap.tsx";
 import NavigationMap from "../../common/drawer/navigationMap.tsx";
 
+const pages = import.meta.glob('./pages/*.tsx');
+
+export const getPages = async () => {
+    const loadedPages = [];
+
+    for (const path in pages) {
+        const module = await pages[path]();
+        loadedPages.push(module.default);
+    }
+
+    return loadedPages;
+};
+
 const routes: PathRoute[] = [
-  { path: "overview", label: "Quick Overview", element: <PageOverview /> },
-  {
-    path: "information",
-    label: "01 - Important Information",
-    element: <PageInformation />,
-  },
-  {
-    path: "installation-guide",
-    label: "02 - Installation",
-    element: <PageInstallationGuide />,
-  },
-  { path: "interface", label: "03 - Interface", element: <PageInterface /> },
-  {
-    path: "globaldatalayer",
-    label: "04 - GlobalDataLayer",
-    element: <PageGlobalDataLayer />,
-  },
-  { path: "uilayer", label: "05 - UiLayer", element: <PageUiLayer /> },
-  {
-    path: "content-area",
-    label: "06 - Content Area",
-    element: <PageContentArea />,
-  },
-  {
-    path: "color-settings-and-dark-mode",
-    label: "07 - Color Settings and Dark Mode",
-    element: <PageColorSettings />,
-  },
-  {
-    path: "example-project",
-    label: "08 - Example Project",
-    element: <PageExampleProject />,
-  },
-  { path: "playground", label: "09 - Playground", element: <PagePlayground /> },
+    {path: "overview", label: "Quick Overview", element: <PageOverview/>},
+    {
+        path: "information",
+        label: "01 - Important Information",
+        element: <PageInformation/>,
+    },
+    {
+        path: "installation-guide",
+        label: "02 - Installation",
+        element: <PageInstallationGuide/>,
+    },
+    {path: "interface", label: "03 - Interface", element: <PageInterface/>},
+    {
+        path: "globaldatalayer",
+        label: "04 - GlobalDataLayer",
+        element: <PageGlobalDataLayer/>,
+    },
+    {path: "uilayer", label: "05 - UiLayer", element: <PageUiLayer/>},
+    {
+        path: "content-area",
+        label: "06 - Content Area",
+        element: <PageContentArea/>,
+    },
+    {
+        path: "color-settings-and-dark-mode",
+        label: "07 - Color Settings and Dark Mode",
+        element: <PageColorSettings/>,
+    },
+    {
+        path: "example-project",
+        label: "08 - Example Project",
+        element: <PageExampleProject/>,
+    },
+    {path: "playground", label: "09 - Playground", element: <PagePlayground/>},
 ];
 
 const helpRoutes: PathRoute[] = [
-  { path: "faq", label: "FAQ", element: <PageFaq /> },
+    {path: "faq", label: "FAQ", element: <PageFaq/>},
 ];
 
 const Version1_1_0 = () => {
-  const mergedRoutes = mergeRoutes(routes, helpRoutes);
+    const mergedRoutes = mergeRoutes(routes, helpRoutes);
 
-  return (
-    <>
-      <PageNavigation>
-        <NavigationMap routes={routes} />
-        <h3>Need help?</h3>
-        <NavigationMap routes={helpRoutes} />
-      </PageNavigation>
-      <RoutesMap routes={mergedRoutes} />
-    </>
-  );
+    return (
+        <>
+            <PageNavigation>
+                <NavigationMap routes={routes}/>
+                <h3>Need help?</h3>
+                <NavigationMap routes={helpRoutes}/>
+            </PageNavigation>
+            <RoutesMap routes={mergedRoutes}/>
+        </>
+    );
 };
 
 export default Version1_1_0;

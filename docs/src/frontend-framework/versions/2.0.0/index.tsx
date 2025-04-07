@@ -33,7 +33,7 @@ import {PageAwsAuthenticator} from "./pages/pageAwsAuthenticator.tsx";
 import {PageReactRouterRouter} from "./pages/pageReactRouterRouter.tsx";
 import {GroupRoute, mergeRoutes, PathRoute,} from "../../common/page/pathRoute.ts";
 import NavigationMap from "../../common/drawer/navigationMap.tsx";
-import {PageModulesInDepth} from "./pages/pageModulesInDepth.tsx";
+import PageModulesInDepth from "./pages/pageModulesInDepth.tsx";
 import {PageGeneralAuthModule} from "./pages/pageGeneralAuthModule.tsx";
 import {PageGeneralRouterModule} from "./pages/pageGeneralRouterModule.tsx";
 import GroupNavigationMap from "../../common/drawer/groupNavigationMap.tsx";
@@ -55,43 +55,43 @@ export const getPages = async () => {
 };
 
 const routes: PathRoute[] = [
-    {path: "overview", label: "Quick Overview", element: <PageOverview/>},
+    {path: "overview", label: "Quick Overview", element: PageOverview},
     {
         path: "information",
         label: "01 - Important Information",
-        element: <PageInformation/>,
+        element: PageInformation,
     },
     {
         path: "installation-guide",
         label: "02 - Installation",
-        element: <PageInstallationGuide/>,
+        element: PageInstallationGuide,
     },
-    {path: "interface", label: "03 - Interface", element: <PageInterface/>},
+    {path: "interface", label: "03 - Interface", element: PageInterface},
     {
         path: "globaldatalayer",
         label: "04 - PageGlobalDataLayer",
-        element: <PageGlobalDataLayer/>,
+        element: PageGlobalDataLayer,
     },
-    {path: "uilayer", label: "05 - UiLayer", element: <PageUiLayer/>},
+    {path: "uilayer", label: "05 - UiLayer", element: PageUiLayer},
     {
         path: "content-area",
         label: "06 - Content Area",
-        element: <PageContentArea/>,
+        element: PageContentArea,
     },
     {
         path: "color-settings-and-dark-mode",
         label: "07 - Color Settings and Dark Mode",
-        element: <PageColorSettings/>,
+        element: PageColorSettings,
     },
     {
         path: "modules-in-depth",
         label: "08 - Modules in depth",
-        element: <PageModulesInDepth/>,
+        element: PageModulesInDepth,
     },
     {
         path: "dev-project",
         label: "09 - Development Project",
-        element: <PageDevProject/>,
+        element: PageDevProject,
     },
 ];
 
@@ -102,17 +102,17 @@ const modulesRoutes: GroupRoute[] = [
             {
                 path: "general-auth-module",
                 label: "General authentication module",
-                element: <PageGeneralAuthModule/>,
+                element: PageGeneralAuthModule,
             },
             {
                 path: "dummy-authenticator",
                 label: "DummyAuthenticator",
-                element: <PageDummyAuthenticator/>,
+                element: PageDummyAuthenticator,
             },
             {
                 path: "aws-authenticator",
                 label: "AwsAuthenticator",
-                element: <PageAwsAuthenticator/>,
+                element: PageAwsAuthenticator,
             },
         ],
     },
@@ -122,12 +122,12 @@ const modulesRoutes: GroupRoute[] = [
             {
                 path: "general-router-module",
                 label: "General router module",
-                element: <PageGeneralRouterModule/>,
+                element: PageGeneralRouterModule,
             },
             {
                 path: "react-router-router",
                 label: "ReactRouterRouter",
-                element: <PageReactRouterRouter/>,
+                element: PageReactRouterRouter,
             },
         ],
     },
@@ -137,12 +137,12 @@ const modulesRoutes: GroupRoute[] = [
             {
                 path: "general-internationalization-module",
                 label: "General internationalizer module",
-                element: <PageGeneralInternationalizerModule/>,
+                element: PageGeneralInternationalizerModule,
             },
             {
                 path: "i18nextInternationalizer",
                 label: "I18nextInternationalizer",
-                element: <PageI18nextInternationalizer/>,
+                element: PageI18nextInternationalizer,
             },
         ],
     },

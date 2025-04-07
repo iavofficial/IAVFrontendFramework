@@ -47,44 +47,44 @@ export const getPages = async () => {
 };
 
 const routes: PathRoute[] = [
-    {path: "overview", label: "Quick Overview", element: <PageOverview/>},
+    {path: "overview", label: "Quick Overview", element: PageOverview},
     {
         path: "information",
         label: "01 - Important Information",
-        element: <PageInformation/>,
+        element: PageInformation,
     },
     {
         path: "installation-guide",
         label: "02 - Installation",
-        element: <PageInstallationGuide/>,
+        element: PageInstallationGuide,
     },
-    {path: "interface", label: "03 - Interface", element: <PageInterface/>},
+    {path: "interface", label: "03 - Interface", element: PageInterface},
     {
         path: "globaldatalayer",
         label: "04 - GlobalDataLayer",
-        element: <PageGlobalDataLayer/>,
+        element: PageGlobalDataLayer,
     },
-    {path: "uilayer", label: "05 - UiLayer", element: <PageUiLayer/>},
+    {path: "uilayer", label: "05 - UiLayer", element: PageUiLayer},
     {
         path: "content-area",
         label: "06 - Content Area",
-        element: <PageContentArea/>,
+        element: PageContentArea,
     },
     {
         path: "color-settings-and-dark-mode",
         label: "07 - Color Settings and Dark Mode",
-        element: <PageColorSettings/>,
+        element: PageColorSettings,
     },
     {
         path: "example-project",
         label: "08 - Example Project",
-        element: <PageExampleProject/>,
+        element: PageExampleProject,
     },
-    {path: "playground", label: "09 - Playground", element: <PagePlayground/>},
+    {path: "playground", label: "09 - Playground", element: PagePlayground},
 ];
 
 const helpRoutes: PathRoute[] = [
-    {path: "faq", label: "FAQ", element: <PageFaq/>},
+    {path: "faq", label: "FAQ", element: PageFaq},
 ];
 
 const Version1_1_0 = () => {

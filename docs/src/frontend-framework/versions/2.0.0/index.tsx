@@ -28,14 +28,14 @@ import PageContentArea from "./pages/pageContentArea.tsx";
 import PageColorSettings from "./pages/pageColorSettings.tsx";
 import PageDevProject from "./pages/pageDevProject.tsx";
 import PageFaq from "./pages/pageFaq.tsx";
-import {PageDummyAuthenticator} from "./pages/pageDummyAuthenticator.tsx";
-import {PageAwsAuthenticator} from "./pages/pageAwsAuthenticator.tsx";
-import {PageReactRouterRouter} from "./pages/pageReactRouterRouter.tsx";
+import PageDummyAuthenticator from "./pages/pageDummyAuthenticator.tsx";
+import PageAwsAuthenticator from "./pages/pageAwsAuthenticator.tsx";
+import PageReactRouterRouter from "./pages/pageReactRouterRouter.tsx";
 import {GroupRoute, mergeRoutes, PathRoute,} from "../../common/page/pathRoute.ts";
 import NavigationMap from "../../common/drawer/navigationMap.tsx";
 import PageModulesInDepth from "./pages/pageModulesInDepth.tsx";
-import {PageGeneralAuthModule} from "./pages/pageGeneralAuthModule.tsx";
-import {PageGeneralRouterModule} from "./pages/pageGeneralRouterModule.tsx";
+import PageGeneralAuthModule from "./pages/pageGeneralAuthModule.tsx";
+import PageGeneralRouterModule from "./pages/pageGeneralRouterModule.tsx";
 import GroupNavigationMap from "../../common/drawer/groupNavigationMap.tsx";
 import RoutesMap from "../../common/drawer/routesMap.tsx";
 import {PageI18nextInternationalizer} from "./pages/pageI18nextInternationalizer.tsx";
@@ -149,7 +149,7 @@ const modulesRoutes: GroupRoute[] = [
 ];
 
 const helpRoutes: PathRoute[] = [
-    {path: "faq", label: "FAQ", element: <PageFaq/>},
+    {path: "faq", label: "FAQ", element: PageFaq},
 ];
 
 const Version2_0_0 = () => {

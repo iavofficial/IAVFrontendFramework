@@ -19,7 +19,8 @@
 import Page from "../../../common/page/page";
 import Title from "../../../common/page/text/title";
 import Text from "../../../common/page/text/text";
-import { ModuleProfile } from "../../../common/page/text/module/moduleProfile";
+import {ModuleProfile} from "../../../common/page/text/module/moduleProfile";
+import React from "react";
 
 const DESCRIPTION = `The DummyAuthenticator module is a place holder for real
 authentication. By using this default implementation you can begin developing
@@ -28,18 +29,20 @@ from the start. This is useful for presentations early in the project as the use
 still has to authenticate and thus creating the impression of how the interaction
 will be designed later on.`;
 
-export const PageDummyAuthenticator = () => {
-  return (
-    <Page>
-      <Title>DummyAuthenticator</Title>
-      <ModuleProfile
-        moduleKey="auth"
-        isDefaultModule
-        shortDescription={DESCRIPTION}
-      />
-      <Text>
-        Hint: This module provides only the necessary state values and methods.
-      </Text>
-    </Page>
-  );
+const PageDummyAuthenticator: React.FC = () => {
+    return (
+        <Page>
+            <Title>DummyAuthenticator</Title>
+            <ModuleProfile
+                moduleKey="auth"
+                isDefaultModule
+                shortDescription={DESCRIPTION}
+            />
+            <Text>
+                Hint: This module provides only the necessary state values and methods.
+            </Text>
+        </Page>
+    );
 };
+
+export default PageDummyAuthenticator;

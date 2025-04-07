@@ -61,10 +61,7 @@ export const Navbar = (props: Props) => {
   const scrollbarColor =
     colorSettingsContext.currentColors.navbar.scrollbarColor;
 
-  const identifier = generateHashOfLength(4);
-  const identifierLegal = "a" + identifier;
-  const identifierWithDot = "." + identifierLegal;
-  const isAtLeastOneDocumentVisible = !!props.legalDocuments?.some(
+  const isAtLeastOneDocumentVisible = props.legalDocuments?.some(
     (document) => !document.isHidden,
   );
 
@@ -102,14 +99,11 @@ export const Navbar = (props: Props) => {
           style={
             navbarSettingsContext.navbarCollapsed
               ? {
-                  justifyContent: "center",
                   flexDirection: "column",
                   width: "44px",
                   gap: "10px",
                 }
-              : {
-                  justifyContent: "center",
-                }
+              : {}
           }
         >
           {isAtLeastOneDocumentVisible && (
@@ -122,6 +116,9 @@ export const Navbar = (props: Props) => {
                 writingMode: navbarSettingsContext.navbarCollapsed
                   ? "sideways-lr"
                   : "horizontal-tb",
+                paddingLeft: navbarSettingsContext.navbarCollapsed
+                  ? "0px"
+                  : "12px",
               }}
             >
               {props.legalDocuments

@@ -16,8 +16,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, {ReactElement, useContext, useMemo, useState} from "react";
-import {Link, useLocation} from "react-router-dom";
+import React, {ReactElement, useContext, useState} from "react";
+import {Link, useMatch} from "react-router-dom";
 import {useTranslator} from "../../../internationalization/translators";
 import "../tabs.css";
 import {GroupableNavbarTab, NavbarTabProps} from "../typesNavbarTab";
@@ -55,16 +55,7 @@ export const SimpleNavbarTab: GroupableNavbarTab = (
   const colorSettingsContext = useContext(ColorSettingsContext);
   const t = useTranslator();
 
-  const regex = useMemo(() => {
-    let regexString = path;
-    // Escape slashes
-    regexString = regexString.replaceAll("/", "\\/");
-    // Add start (^) and boundary condition with trailing /.*
-    regexString = `^${regexString}(\\/.*)?$`;
-    return new RegExp(regexString);
-  }, [path]);
-
-  const active = regex.test(useLocation().pathname);
+  const active = !!useMatch(`${props.basePath || "/"}${path}`);
 
   const tabBackgroundDefaultColor =
     colorSettingsContext.currentColors.navbar.content.default

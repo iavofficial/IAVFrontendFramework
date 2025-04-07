@@ -26,13 +26,14 @@ import {InjectedOptionsGroupableByWrapperToTab} from "../types/typesInjectedOpti
  * can be groupable or not.
  */
 export interface NavbarTabProps<OptionType> {
-  name: string | ((t: TranslateFunctionType) => string);
-  disabled: boolean;
-  frameworkInjectedOptions: OptionType;
-  hidden?: boolean;
-  icon?: ReactElement;
-  collapsed?: boolean;
-  active?: boolean;
+    name: string | ((t: TranslateFunctionType) => string);
+    disabled: boolean;
+    frameworkInjectedOptions: OptionType;
+    hidden?: boolean;
+    icon?: ReactElement;
+    collapsed?: boolean;
+    active?: boolean;
+    basePath?: string;
 }
 
 /**
@@ -40,5 +41,5 @@ export interface NavbarTabProps<OptionType> {
  */
 //eslint-disable-next-line
 export type GroupableNavbarTab<additional = {}> = React.FunctionComponent<
-  NavbarTabProps<InjectedOptionsGroupableByWrapperToTab> & additional
+    NavbarTabProps<InjectedOptionsGroupableByWrapperToTab> & additional
 >;

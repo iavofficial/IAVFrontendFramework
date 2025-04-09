@@ -416,7 +416,7 @@ export const AwsAuthenticationView = <
           <span
             style={{
               color: companyTextColor,
-              minWidth: "94px"
+              minWidth: "94px",
             }}
           >
             &copy;{" "}

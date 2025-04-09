@@ -296,7 +296,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
           <span
             style={{
               color: companyTextColor,
-              minWidth: "94px"
+              minWidth: "94px",
             }}
           >
             &copy;{" "}

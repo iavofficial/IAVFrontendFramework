@@ -366,7 +366,7 @@ enum StaticCollapsedState {
 }`}
       </Code>
       <SubSubTitle>
-      LegalDocuments: How to configure the legal documents?
+        LegalDocuments: How to configure the legal documents?
       </SubSubTitle>
       <Code language={"typescript"}>
         {`export interface LegalDocument {
@@ -376,7 +376,9 @@ enum StaticCollapsedState {
       isHidden?: boolean; // Optional property to hide the legal document's link and disable the URL path associated with it.
 }`}
       </Code>
-      <Text>The following example shows how to configure the legal documents</Text>
+      <Text>
+        The following example shows how to configure the legal documents
+      </Text>
       <Code language={"typescript"}>
         {`  const legalDocuments: LegalDocument[] = [
     {

@@ -215,17 +215,17 @@ const Layout = (props: Props) => {
       iconstyle={{ color: WHITE }}
     />,
   ];
-  
+
   const legalDocuments: LegalDocument[] = [
     {
-      path: '/imprint',
-      titleTranslationKey: 'Imprint',
+      path: "/imprint",
+      titleTranslationKey: "Imprint",
       component: ImprintDocument,
       isHidden: false,
     },
     {
-      path: '/privacy-policy',
-      titleTranslationKey: 'Privacy_Policy',
+      path: "/privacy-policy",
+      titleTranslationKey: "Privacy_Policy",
       component: PrivacyPolicyDocument,
       isHidden: false,
     },

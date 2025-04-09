@@ -20,8 +20,9 @@ import Page from "../../../common/page/page";
 import {ModuleProfile} from "../../../common/page/text/module/moduleProfile";
 import Text from "../../../common/page/text/text";
 import Title from "../../../common/page/text/title";
+import React from "react";
 
-const PageReactRouterRouter = () => (
+const PageReactRouterRouter: React.FC = () => (
     <Page>
         <Title>ReactRouterRouter</Title>
         <ModuleProfile

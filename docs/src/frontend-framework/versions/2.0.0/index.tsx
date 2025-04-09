@@ -38,19 +38,20 @@ import PageGeneralAuthModule from "./pages/pageGeneralAuthModule.tsx";
 import PageGeneralRouterModule from "./pages/pageGeneralRouterModule.tsx";
 import GroupNavigationMap from "../../common/drawer/groupNavigationMap.tsx";
 import RoutesMap from "../../common/drawer/routesMap.tsx";
-import {PageI18nextInternationalizer} from "./pages/pageI18nextInternationalizer.tsx";
-import {PageGeneralInternationalizerModule} from "./pages/pageGeneralInternationalizerModule.tsx";
+import PageI18nextInternationalizer from "./pages/pageI18nextInternationalizer.tsx";
+import PageGeneralInternationalizerModule from "./pages/pageGeneralInternationalizerModule.tsx";
+import {SearchHeader} from "../../common/header/searchHeaders.tsx";
 
 const pages = import.meta.glob('./pages/*.tsx');
 
 export const getPages = async () => {
-    const loadedPages = [];
-
+    const loadedPages: SearchHeader[] = [];
+    const allRoutes = [...routes, ...helpRoutes, ...modulesRoutes.flatMap(group => group.routes)];
     for (const path in pages) {
         const module = await pages[path]();
-        loadedPages.push(module.default);
+        const route = allRoutes.find(route => module.default.name === route.element.name)?.path;
+        loadedPages.push({module: module.default, route: route});
     }
-
     return loadedPages;
 };
 

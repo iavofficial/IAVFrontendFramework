@@ -32,17 +32,18 @@ import PageFaq from "./pages/pageFaq.tsx";
 import {mergeRoutes, PathRoute} from "../../common/page/pathRoute.ts";
 import RoutesMap from "../../common/drawer/routesMap.tsx";
 import NavigationMap from "../../common/drawer/navigationMap.tsx";
+import {SearchHeader} from "../../common/header/searchHeaders.tsx";
 
 const pages = import.meta.glob('./pages/*.tsx');
 
 export const getPages = async () => {
-    const loadedPages = [];
-
+    const loadedPages: SearchHeader[] = [];
+    const allRoutes = [...routes, ...helpRoutes];
     for (const path in pages) {
         const module = await pages[path]();
-        loadedPages.push(module.default);
+        const route = allRoutes.find(route => module.default.name === route.element.name)?.path;
+        loadedPages.push({module: module.default, route: route});
     }
-
     return loadedPages;
 };
 

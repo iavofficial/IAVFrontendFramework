@@ -17,24 +17,27 @@
  */
 
 import Page from "../../../common/page/page";
-import { ModuleProfile } from "../../../common/page/text/module/moduleProfile";
+import {ModuleProfile} from "../../../common/page/text/module/moduleProfile";
 import Text from "../../../common/page/text/text";
 import Title from "../../../common/page/text/title";
+import React from "react";
 
-export const PageI18nextInternationalizer = () => {
-  return (
-    <Page>
-      <Title>I18nextInternationalizer</Title>
-      <ModuleProfile
-        moduleKey="internationalizer"
-        isDefaultModule
-        shortDescription="This module provides internationalization using I18Next."
-      />
-      <Text>
-        Since this module is the default internationalizer module it provides
-        exactly the functionality described on the page for the general
-        structure.
-      </Text>
-    </Page>
-  );
+const PageI18nextInternationalizer: React.FC = () => {
+    return (
+        <Page>
+            <Title>I18nextInternationalizer</Title>
+            <ModuleProfile
+                moduleKey="internationalizer"
+                isDefaultModule
+                shortDescription="This module provides internationalization using I18Next."
+            />
+            <Text>
+                Since this module is the default internationalizer module it provides
+                exactly the functionality described on the page for the general
+                structure.
+            </Text>
+        </Page>
+    );
 };
+
+export default PageI18nextInternationalizer;

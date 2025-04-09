@@ -3,6 +3,7 @@ import ReactDOMServer from 'react-dom/server';
 import {versionMappings} from "../../versionMappings.ts";
 import {Link, MemoryRouter, useNavigate, useParams} from "react-router-dom"
 import makeStyles from "../../../util/makeStyles.tsx";
+import {BLUE2, BLUE3, GREY1, WHITE} from "@iavofficial/frontend-framework/constants"
 
 const useStyles = makeStyles(() => ({
     container: {
@@ -15,7 +16,7 @@ const useStyles = makeStyles(() => ({
         paddingLeft: "10px",
         width: '100%',
         maxWidth: '600px',
-        backgroundColor: '#fff',
+        backgroundColor: WHITE,
         borderRadius: '8px',
         flexDirection: 'column',
     },
@@ -29,16 +30,16 @@ const useStyles = makeStyles(() => ({
         marginRight: '10px',
     },
     button: {
-        padding: '8px 16px',
-        backgroundColor: '#007bff',
-        color: '#fff',
+        padding: '10px 16px',
+        backgroundColor: BLUE3,
+        color: WHITE,
         border: 'none',
         borderRadius: '5px',
         fontSize: '14px',
         cursor: 'pointer',
         transition: 'background-color 0.3s',
         '&:hover': {
-            backgroundColor: '#0056b3',
+            backgroundColor: BLUE2,
         },
     },
     resultContainer: {
@@ -59,16 +60,11 @@ const useStyles = makeStyles(() => ({
         cursor: "pointer",
         transition: "background-color 0.2s ease",
         '&:hover': {
-            backgroundColor: "#f5f5f5",
-        },
-        '& strong': {
-            marginRight: '6px',
-            color: '#333',
-            fontWeight: 600,
+            backgroundColor: GREY1,
         },
         '& a': {
             textDecoration: 'none',
-            color: '#007bff',
+            color: BLUE3,
             '&:hover': {
                 textDecoration: 'underline',
             },

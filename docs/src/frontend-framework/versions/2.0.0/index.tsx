@@ -49,7 +49,7 @@ export const getPages = async () => {
     const allRoutes = [...routes, ...helpRoutes, ...modulesRoutes.flatMap(group => group.routes)];
     for (const path in pages) {
         const module = await pages[path]();
-        const route = allRoutes.find(route => module.default.name === route.element.name)?.path;
+        const route = allRoutes.find(route => module.default.name === route.element.name)?.path || "";
         loadedPages.push({module: module.default, route: route});
     }
     return loadedPages;
@@ -165,7 +165,7 @@ const Version2_0_0 = () => {
                 <h3 style={{marginTop: "30px"}}>Modules</h3>
                 <GroupNavigationMap groups={modulesRoutes}/>
             </PageNavigation>
-            <RoutesMap routes={mergedRoutes}/>
+            <RoutesMap routes={mergedRoutes} getPages={getPages}/>
         </>
     );
 };

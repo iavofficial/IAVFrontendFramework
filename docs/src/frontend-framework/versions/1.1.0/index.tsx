@@ -36,12 +36,11 @@ import {SearchHeader} from "../../common/header/searchHeaders.tsx";
 
 const pages = import.meta.glob('./pages/*.tsx');
 
-export const getPages = async () => {
+export const getPages = async (allRoutes: PathRoute[]) => {
     const loadedPages: SearchHeader[] = [];
-    const allRoutes = [...routes, ...helpRoutes];
     for (const path in pages) {
         const module = await pages[path]();
-        const route = allRoutes.find(route => module.default.name === route.element.name)?.path;
+        const route = allRoutes.find(route => module.default.name === route.element.name)?.path || "";
         loadedPages.push({module: module.default, route: route});
     }
     return loadedPages;
@@ -98,7 +97,7 @@ const Version1_1_0 = () => {
                 <h3>Need help?</h3>
                 <NavigationMap routes={helpRoutes}/>
             </PageNavigation>
-            <RoutesMap routes={mergedRoutes}/>
+            <RoutesMap routes={mergedRoutes} getPages={getPages}/>
         </>
     );
 };

@@ -26,6 +26,10 @@ jobs:
 
       - run: find ./scripts/unix/ -type f -exec chmod +x {} \;
 
+      # SBOM Update Step - Add Fonts
+      - name: Add Google Fonts to SBOM
+        run: ./scripts/unix/sbom_entries/add_fonts_to_sbom.sh
+
       # Install Turborepo
       - run: npm i
 

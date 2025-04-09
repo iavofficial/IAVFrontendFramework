@@ -19,9 +19,6 @@
 import React, {useContext, useMemo} from "react";
 import {Header, HeaderOptions} from "./header/header";
 import {Navbar} from "./navbar/navbar";
-import {DefaultLegalDocument} from "./imprint/defaultLegalDocument";
-import {ImprintText} from "./imprint/imprintText";
-import {PrivacyPolicyText} from "./imprint/privacyPolicyText";
 import {SettingsMenuOptions} from "./header/settingsMenu";
 import {TabAndContentWrapper} from "./navbar/wrappers/typesWrappers";
 import {UserMenuOptions} from "./header/userMenu";
@@ -30,14 +27,11 @@ import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/color
 import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
 import {BasicRoute} from "@iavofficial/frontend-framework-shared/routerModule";
+import {LegalDocument} from "./imprint/legalDocument";
 
 interface MainViewProps {
   tabAndContentWrappers: TabAndContentWrapper[];
-  imprintComponent?: React.ComponentType<any>;
-  privacyPolicyComponent?: React.ComponentType<any>;
-  documentsLabelKey?: string;
-  hideImprint?: boolean;
-  hidePrivacyPolicy?: boolean;
+  legalDocuments?: LegalDocument[];
   headerOptions?: HeaderOptions;
   settingsMenuOptions?: SettingsMenuOptions;
   userMenuOptions?: UserMenuOptions;
@@ -52,25 +46,12 @@ export const MainView = (props: MainViewProps) => {
     colorSettingsContext.currentColors.contentArea.backgroundColor;
 
   const staticRoutes: BasicRoute[] = useMemo(
-    () => [
-      {
-        path: "/imprint",
-        element: props.imprintComponent ? (
-          <props.imprintComponent />
-        ) : (
-          <DefaultLegalDocument legalTextComponent={ImprintText} />
-        ),
-      },
-      {
-        path: "/privacy-policy",
-        element: props.privacyPolicyComponent ? (
-          <props.privacyPolicyComponent />
-        ) : (
-          <DefaultLegalDocument legalTextComponent={PrivacyPolicyText} />
-        ),
-      },
-    ],
-    [],
+    () =>
+      props.legalDocuments?.map((doc) => ({
+        path: doc.path,
+        element: <doc.component />,
+      })) || [],
+    [props.legalDocuments],
   );
 
   const tabRoutes = useMemo(() => {
@@ -110,9 +91,7 @@ export const MainView = (props: MainViewProps) => {
         <If condition={!props.hideNavbar}>
           <Navbar
             tabAndContentWrappers={props.tabAndContentWrappers}
-            documentsLabelKey={props.documentsLabelKey}
-            hideImprint={props.hideImprint}
-            hidePrivacyPolicy={props.hidePrivacyPolicy}
+            legalDocuments={props.legalDocuments}
           />
         </If>
         {<MainViewRouter routes={[...staticRoutes, ...tabRoutes]} />}

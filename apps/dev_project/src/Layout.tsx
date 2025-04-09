@@ -37,6 +37,7 @@ import { PrimeIcons } from "primereact/api";
 import { WHITE } from "@iavofficial/frontend-framework/constants";
 import { HeaderMenuElement } from "@iavofficial/frontend-framework/headerMenuElement";
 import { ExampleComponent7 } from "./components/exampleComponent7";
+import { LegalDocument } from "@iavofficial/frontend-framework/legalDocument";
 
 interface Props {
   authenticationView?: React.ComponentType;
@@ -214,6 +215,21 @@ const Layout = (props: Props) => {
       iconstyle={{ color: WHITE }}
     />,
   ];
+  
+  const legalDocuments: LegalDocument[] = [
+    {
+      path: '/imprint',
+      titleTranslationKey: 'Imprint',
+      component: ImprintDocument,
+      isHidden: false,
+    },
+    {
+      path: '/privacy-policy',
+      titleTranslationKey: 'Privacy_Policy',
+      component: PrivacyPolicyDocument,
+      isHidden: false,
+    },
+  ];
 
   return (
     <UILayer
@@ -226,9 +242,7 @@ const Layout = (props: Props) => {
       initialPath="/"
       authenticationView={props.authenticationView}
       settingsMenuOptions={settingsMenuOptions}
-      documentsLabelKey="Legal_documents"
-      imprintComponent={ImprintDocument}
-      privacyPolicyComponent={PrivacyPolicyDocument}
+      legalDocuments={legalDocuments}
       headerOptions={{
         userIcon: <InfoIcon style={{ backgroundColor: WHITE }} />,
         reactElementLeft: <span className="ml-3">Dev application</span>,

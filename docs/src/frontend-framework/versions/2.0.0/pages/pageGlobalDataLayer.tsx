@@ -316,9 +316,14 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
     colorSettingsContext.currentColors.authenticationView.companyTextColor;
   const themeTogglerColor =
     colorSettingsContext.currentColors.authenticationView.themeTogglerColor;
+  const legalLinkColor =
+    colorSettingsContext.currentColors.authenticationView.legalLinkColor;
 
   const {passwordErrorMessage} = props.authOptions?.errorMessages || {};
 
+    const isAtLeastOneDocumentVisible = props.legalDocuments?.some(
+    (document) => !document.isHidden,
+  );
   // These two functions life on the class instance not on the prototype thanks to @babel/plugin-proposal-class-properties.
   const submit = (event: FormEvent<HTMLFormElement>) => {
     setTriedToSubmit(true);
@@ -558,6 +563,33 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
             ? props.authOptions?.companyText
             : "Company 2025"}
         </span>
+
+        {isAtLeastOneDocumentVisible && (
+        <>
+          <span style={{color: "var(--grey-2)"}}>|</span>
+          <div
+            className="flex"
+            style={{
+              alignItems: "center",
+              gap: "5px",
+            }}
+          >
+            {props.legalDocuments
+              ?.filter((document) => !document.isHidden)
+              .map((document) => (
+                <Link
+                  key={document.path}
+                  className="legal-doc-link"
+                  style={{color: legalLinkColor, fontSize: "12px"}}
+                  to={document.path}
+                  target="_blank"
+                >
+                  {t({key: document.titleTranslationKey})}
+                </Link>
+              ))}
+          </div>
+        </>
+        )}
       </div>
     </div>
   );

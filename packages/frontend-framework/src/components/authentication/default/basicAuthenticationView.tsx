@@ -27,7 +27,6 @@ import {
 import loginBackgroundLightMode from "../../../assets/png/login_background_lightMode.png";
 import loginBackgroundDarkMode from "../../../assets/png/login_background_darkMode.png";
 import {Dropdown, DropdownChangeEvent} from "primereact/dropdown";
-import {Tooltip} from "primereact/tooltip";
 import CompanyLogo from "../../../assets/svg/companyLogo";
 import TextField from "../../helper/textfield/TextField";
 import {AuthenticationViewProps} from "@iavofficial/frontend-framework-shared/authenticationViewProps";
@@ -87,6 +86,9 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
 
   const {passwordErrorMessage} = props.authOptions?.errorMessages || {};
 
+  const isAtLeastOneDocumentVisible = props.legalDocuments?.some(
+    (document) => !document.isHidden,
+  );
   // These two functions life on the class instance not on the prototype thanks to @babel/plugin-proposal-class-properties.
   const submit = (event: FormEvent<HTMLFormElement>) => {
     setTriedToSubmit(true);
@@ -294,6 +296,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
           <span
             style={{
               color: companyTextColor,
+              minWidth: "94px"
             }}
           >
             &copy;{" "}
@@ -302,8 +305,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
               : "Company 2025"}
           </span>
 
-          {(props.hideImprint === true && props.hidePrivacyPolicy === true) ===
-            false && (
+          {isAtLeastOneDocumentVisible && (
             <>
               <span style={{color: "var(--grey-2)"}}>|</span>
               <div
@@ -313,26 +315,19 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                   gap: "5px",
                 }}
               >
-                {!props.hideImprint && (
-                  <Link
-                    className="legal-doc-link"
-                    style={{color: legalLinkColor, fontSize: "12px"}}
-                    to="/imprint"
-                    target="_blank"
-                  >
-                    {t({key: "Imprint"})}
-                  </Link>
-                )}
-                {!props.hidePrivacyPolicy && (
-                  <Link
-                    className="legal-doc-link"
-                    style={{color: legalLinkColor, fontSize: "12px"}}
-                    to="/privacy-policy"
-                    target="_blank"
-                  >
-                    {t({key: "Privacy_Policy"})}
-                  </Link>
-                )}
+                {props.legalDocuments
+                  ?.filter((document) => !document.isHidden)
+                  .map((document) => (
+                    <Link
+                      key={document.path}
+                      className="legal-doc-link"
+                      style={{color: legalLinkColor, fontSize: "12px"}}
+                      to={document.path}
+                      target="_blank"
+                    >
+                      {t({key: document.titleTranslationKey})}
+                    </Link>
+                  ))}
               </div>
             </>
           )}

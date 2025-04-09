@@ -32,6 +32,7 @@ export const UILayerRouter = (props: UILayerRouterProps) => {
       <Redirector
         initialPath={props.initialPath}
         disableLogin={props.disableLogin}
+        legalDocumentsPaths={props.legalDocumentsPaths}
       />
 
       <Routes>
@@ -50,6 +51,7 @@ export const UILayerRouter = (props: UILayerRouterProps) => {
 interface RedirectorProps {
   initialPath: string;
   disableLogin?: boolean;
+  legalDocumentsPaths?: string[];
 }
 
 /**
@@ -68,7 +70,8 @@ const Redirector = (props: RedirectorProps) => {
 
   useEffect(() => {
     if (!hasAuthenticated) {
-      if (currentPath !== "/imprint" && currentPath != "/privacy-policy") {
+      const legalDocumentsPaths = props.legalDocumentsPaths || [];
+      if (!legalDocumentsPaths.includes(currentPath)) {
         navigate("/login");
       }
     } else {

@@ -41,6 +41,7 @@ import RoutesMap from "../../common/drawer/routesMap.tsx";
 import PageI18nextInternationalizer from "./pages/pageI18nextInternationalizer.tsx";
 import PageGeneralInternationalizerModule from "./pages/pageGeneralInternationalizerModule.tsx";
 import {SearchHeader} from "../../common/header/searchHeaders.tsx";
+import BadgeHeader from "../../common/drawer/badge/badgeHeader.tsx";
 
 const pages = import.meta.glob('./pages/*.tsx');
 
@@ -67,7 +68,7 @@ const routes: PathRoute[] = [
         label: "02 - Installation",
         element: PageInstallationGuide,
     },
-    {path: "interface", label: "03 - Interface", element: PageInterface},
+    {path: "interface", label: "03 - Interface", element: PageInterface, isNew: true},
     {
         path: "globaldatalayer",
         label: "04 - PageGlobalDataLayer",
@@ -88,6 +89,7 @@ const routes: PathRoute[] = [
         path: "modules-in-depth",
         label: "08 - Modules in depth",
         element: PageModulesInDepth,
+        isNew: true
     },
     {
         path: "dev-project",
@@ -162,7 +164,7 @@ const Version2_0_0 = () => {
                 <NavigationMap routes={routes}/>
                 <h3>Need help?</h3>
                 <NavigationMap routes={helpRoutes}/>
-                <h3 style={{marginTop: "30px"}}>Modules</h3>
+                <BadgeHeader title={"Modules"}/>
                 <GroupNavigationMap groups={modulesRoutes}/>
             </PageNavigation>
             <RoutesMap routes={mergedRoutes} getPages={getPages}/>

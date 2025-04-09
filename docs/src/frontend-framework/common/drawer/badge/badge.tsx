@@ -12,28 +12,35 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- * SPDX-License-Identifier: Apache-2.0
- */
+ **/
 
 import React from "react";
-import NavigationItem from "./navigationItem.tsx";
-import {PathRoute} from "../page/pathRoute.ts";
+import makeStyles from "../../../../util/makeStyles.tsx";
+import {MAGENTA1} from "@iavofficial/frontend-framework/constants";
+
+const useStyles = makeStyles(() => ({
+    badge: {
+        marginLeft: '4px',
+        padding: '2px 6px',
+        backgroundColor: MAGENTA1,
+        color: 'white',
+        borderRadius: '6px',
+        fontSize: '12px',
+        fontWeight: "bold"
+    },
+}));
 
 interface Props {
-    routes: PathRoute[];
+    className?: string;
 }
 
-const NavigationMap: React.FC<Props> = (props) => {
-    const {routes} = props;
+const Badge: React.FC<Props> = (props) => {
+
+    const {classes} = useStyles();
 
     return (
-        <ul>
-            {routes.map(({path, label, isNew}) => (
-                <NavigationItem to={path} label={label} key={path} isNew={isNew}/>
-            ))}
-        </ul>
-    );
-};
+        <span className={`${classes.badge} ${props.className}`}>New</span>
+    )
+}
 
-export default NavigationMap;
+export default Badge;

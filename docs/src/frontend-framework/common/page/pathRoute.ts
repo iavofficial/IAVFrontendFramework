@@ -21,11 +21,13 @@ export type PathRoute = {
     path: string;
     label: string;
     element: FunctionComponent;
+    isNew?: boolean;
 };
 
 export type GroupRoute = {
     title: string;
     routes: PathRoute[];
+    isNew?: boolean;
 };
 
 export const mergeRoutes = (

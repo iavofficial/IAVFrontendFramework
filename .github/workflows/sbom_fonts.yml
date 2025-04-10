@@ -4,7 +4,6 @@ on:
   workflow_dispatch: # Allows manual triggering of the workflow
   push: 
     branches:
-      - develop 
       - IAV-FF-feature-sbom-pipeline-225
 
 jobs:

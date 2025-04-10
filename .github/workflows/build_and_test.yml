@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [ 20.x, 22.x ]
+        node-version: [20.x, 22.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -25,6 +25,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+
+      # SBOM Update Step - Add Fonts
+      # This does not belong here. It's only for testing.
+      - name: Add Google Fonts to SBOM
+        run: ./scripts/unix/sbom_entries/add_fonts_to_sbom.sh
 
       # Install Turborepo
       - run: npm i

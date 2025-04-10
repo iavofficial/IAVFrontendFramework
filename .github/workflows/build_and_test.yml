@@ -1,5 +1,7 @@
 name: Build and test
 on:
+  # This will be removed
+  workflow_dispatch:
   push:
     branches-ignore:
       - 'main'

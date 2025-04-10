@@ -1,4 +1,5 @@
 #!/bin/bash
+# Test run on push
 
 # Path to the SBOM file
 SBOM_FILE="packages/frontend-framework/SBOM.spdx"

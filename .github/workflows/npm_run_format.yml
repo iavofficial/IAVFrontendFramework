@@ -1,9 +1,7 @@
 name: Format Code
 
 on:
-  pull_request_target:
-    types:
-      - closed
+  push:
 
 jobs:
   format:
@@ -22,19 +20,12 @@ jobs:
         run: npm ci
 
       - name: Run Format
-        run: |
-          git fetch --all
-          git checkout ${{ github.base_ref }}
-          git pull origin ${{ github.base_ref }}
-          npm run format
-
-      - name: Set environment variables
-        run: echo "GITHUB_ACTOR=${{ github.actor }}" >> $GITHUB_ENV
+        run: npm run format
 
       - name: Set GitHub identity
         run: |
-          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-          git config --global user.name "${GITHUB_ACTOR}"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
 
       - name: Commit and Push Changes
         run: |
@@ -43,5 +34,5 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "chore(format): apply automated formatting changes"
-            git push origin ${{ github.base_ref }}
+            git push
           fi

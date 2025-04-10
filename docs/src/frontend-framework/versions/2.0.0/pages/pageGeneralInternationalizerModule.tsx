@@ -18,8 +18,8 @@
 
 import Page from "../../../common/page/page";
 import {
-    MODULE_METHOD_TABLE_COLUMNS,
-    MODULE_STATE_TABLE_COLUMNS,
+  MODULE_METHOD_TABLE_COLUMNS,
+  MODULE_STATE_TABLE_COLUMNS,
 } from "../../../common/page/text/module/moduleTableColumns";
 import SubTitle from "../../../common/page/text/subTitle";
 import Text from "../../../common/page/text/text";
@@ -29,68 +29,68 @@ import Table from "../../../common/page/utils/table";
 import React from "react";
 
 const PageGeneralInternationalizerModule: React.FC = () => {
-    return (
-        <Page>
-            <Title>General structure of an internationalizer module</Title>
-            <Text>
-                This page describes the general structure of an internationalizer
-                module. Every internationalizer module has to provide the listed state
-                values and methods.
-            </Text>
+  return (
+    <Page>
+      <Title>General structure of an internationalizer module</Title>
+      <Text>
+        This page describes the general structure of an internationalizer
+        module. Every internationalizer module has to provide the listed state
+        values and methods.
+      </Text>
 
-            <SubTitle>Necessary State</SubTitle>
-            <Table
-                columns={MODULE_STATE_TABLE_COLUMNS}
-                data={[
-                    {
-                        name: "activeLang",
-                        type: "string",
-                        description: "Defines the currently used language.",
-                    },
-                ]}
-            />
+      <SubTitle>Necessary State</SubTitle>
+      <Table
+        columns={MODULE_STATE_TABLE_COLUMNS}
+        data={[
+          {
+            name: "activeLang",
+            type: "string",
+            description: "Defines the currently used language.",
+          },
+        ]}
+      />
 
-            <SubTitle>Necessary attributes</SubTitle>
-            <Text>
-                The following table shows all attributes which have to statically exist
-                on the module object.
-            </Text>
-            <Table
-                columns={MODULE_STATE_TABLE_COLUMNS}
-                data={[
-                    {
-                        name: "fallbackLang",
-                        type: "string",
-                        description: "Defines the fallback language.",
-                    },
-                    {
-                        name: "translationResources",
-                        type: "LangResources",
-                        description: "Has to contain all translations.",
-                    },
-                ]}
-            />
+      <SubTitle>Necessary attributes</SubTitle>
+      <Text>
+        The following table shows all attributes which have to statically exist
+        on the module object.
+      </Text>
+      <Table
+        columns={MODULE_STATE_TABLE_COLUMNS}
+        data={[
+          {
+            name: "fallbackLang",
+            type: "string",
+            description: "Defines the fallback language.",
+          },
+          {
+            name: "translationResources",
+            type: "LangResources",
+            description: "Has to contain all translations.",
+          },
+        ]}
+      />
 
-            <SubTitle>Necessary methods and Hooks</SubTitle>
-            <Table
-                columns={MODULE_METHOD_TABLE_COLUMNS}
-                data={[
-                    {
-                        name: "selectActiveLang",
-                        type: "(lang: string => void)",
-                        description: `This method is called to select a language.`,
-                    },
-                    {
-                        name: "useTranslation",
-                        type: "UseTranslationHook",
-                        description: `This Hook is called to get
+      <SubTitle>Necessary methods and Hooks</SubTitle>
+      <Table
+        columns={MODULE_METHOD_TABLE_COLUMNS}
+        data={[
+          {
+            name: "selectActiveLang",
+            type: "(lang: string => void)",
+            description: `This method is called to select a language.`,
+          },
+          {
+            name: "useTranslation",
+            type: "UseTranslationHook",
+            description: `This Hook is called to get
             translations for a given key.`,
-                    },
-                ]}
-            />
+          },
+        ]}
+      />
 
-            <SubTitle>Relevant types</SubTitle>
-            <Code language="typescript">{`export type InternationalizerState = {
+      <SubTitle>Relevant types</SubTitle>
+      <Code language="typescript">{`export type InternationalizerState = {
   activeLang: string;
 };
 
@@ -115,8 +115,8 @@ export type TranslationFunction = (params: TranslationFunctionParams) => string;
 export type TranslationWrapperFunction = (t: TranslationFunction) => string;
 
 export type UseTranslationHook = () => TranslationFunction;`}</Code>
-        </Page>
-    );
+    </Page>
+  );
 };
 
 export default PageGeneralInternationalizerModule;

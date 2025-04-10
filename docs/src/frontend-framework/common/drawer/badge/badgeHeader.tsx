@@ -14,43 +14,42 @@
  * limitations under the License.
  **/
 
-import React from "react"
+import React from "react";
 import Badge from "./badge.tsx";
 import makeStyles from "../../../../util/makeStyles.tsx";
 
 const useStyles = makeStyles(() => ({
-    headerContainer: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        marginTop: '30px',
-    },
-    badge: {
-        marginLeft: '8px',
-        padding: '4px 8px',
-        backgroundColor: 'red',
-        color: 'white',
-        borderRadius: '12px',
-        fontSize: '12px',
-    },
+  headerContainer: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    marginTop: "30px",
+  },
+  badge: {
+    marginLeft: "8px",
+    padding: "4px 8px",
+    backgroundColor: "red",
+    color: "white",
+    borderRadius: "12px",
+    fontSize: "12px",
+  },
 }));
 
 interface Props {
-    title: string;
+  title: string;
 }
 
 const BadgeHeader: React.FC<Props> = (props) => {
+  const { title, badgeText } = props;
 
-    const {title, badgeText} = props;
+  const { classes } = useStyles();
 
-    const {classes} = useStyles();
-
-    return (
-        <div className={classes.headerContainer}>
-            <h3>{title}</h3>
-            <Badge/>
-        </div>
-    );
+  return (
+    <div className={classes.headerContainer}>
+      <h3>{title}</h3>
+      <Badge />
+    </div>
+  );
 };
 
 export default BadgeHeader;

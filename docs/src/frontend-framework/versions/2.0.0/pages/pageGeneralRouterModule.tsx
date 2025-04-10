@@ -18,8 +18,8 @@
 
 import Page from "../../../common/page/page";
 import {
-    MODULE_COMPONENT_TABLE_COLUMNS,
-    MODULE_METHOD_TABLE_COLUMNS,
+  MODULE_COMPONENT_TABLE_COLUMNS,
+  MODULE_METHOD_TABLE_COLUMNS,
 } from "../../../common/page/text/module/moduleTableColumns";
 import SubTitle from "../../../common/page/text/subTitle";
 import Text from "../../../common/page/text/text";
@@ -29,85 +29,85 @@ import Table from "../../../common/page/utils/table";
 import React from "react";
 
 const PageGeneralRouterModule: React.FC = () => (
-    <Page>
-        <Title>General structure of a router module</Title>
-        <Text>
-            This page describes the general structure of a router module. Since the
-            default router module has no global state there is no necessary state.
-        </Text>
-        <SubTitle>Necessary components</SubTitle>
-        <Text>
-            A router module has to provide the following components. For more
-            information consult the types and default implementation inside the{" "}
-            package <i>shared</i>.
-        </Text>
-        <Table
-            columns={MODULE_COMPONENT_TABLE_COLUMNS}
-            data={[
-                {
-                    name: "UiLayerRouter",
-                    component_type: CodeUiLayerRouterType,
-                    description: `This component gets rendered inside the UILayer and has
+  <Page>
+    <Title>General structure of a router module</Title>
+    <Text>
+      This page describes the general structure of a router module. Since the
+      default router module has no global state there is no necessary state.
+    </Text>
+    <SubTitle>Necessary components</SubTitle>
+    <Text>
+      A router module has to provide the following components. For more
+      information consult the types and default implementation inside the{" "}
+      package <i>shared</i>.
+    </Text>
+    <Table
+      columns={MODULE_COMPONENT_TABLE_COLUMNS}
+      data={[
+        {
+          name: "UiLayerRouter",
+          component_type: CodeUiLayerRouterType,
+          description: `This component gets rendered inside the UILayer and has
           to implement the routing for the passed parameters.`,
-                },
-                {
-                    name: "MainViewRouter",
-                    component_type: CodeMainViewRouterType,
-                    description: `This component gets rendered inside the MainView component
+        },
+        {
+          name: "MainViewRouter",
+          component_type: CodeMainViewRouterType,
+          description: `This component gets rendered inside the MainView component
           and has to implement the routing for the passed routes.`,
-                },
-                {
-                    name: "Link",
-                    component_type: CodeLinkType,
-                    description: `This component has to trigger a "load" of the passed
+        },
+        {
+          name: "Link",
+          component_type: CodeLinkType,
+          description: `This component has to trigger a "load" of the passed
           link. Optionally a target like "_blank" can be passed.`,
-                },
-            ]}
-        />
+        },
+      ]}
+    />
 
-        <SubTitle>Necessary methods</SubTitle>
-        <Table
-            columns={MODULE_METHOD_TABLE_COLUMNS}
-            data={[
-                {
-                    name: "useLocation",
-                    type: CodeUseLocationType,
-                    description: `This Hook has to return the current location as a string
+    <SubTitle>Necessary methods</SubTitle>
+    <Table
+      columns={MODULE_METHOD_TABLE_COLUMNS}
+      data={[
+        {
+          name: "useLocation",
+          type: CodeUseLocationType,
+          description: `This Hook has to return the current location as a string
           (inside an object).`,
-                },
-                {
-                    name: "useIsTabActive",
-                    type: CodeUseIsActiveType,
-                    description: `This Hook has to return if the tab corresponding to the
+        },
+        {
+          name: "useIsTabActive",
+          type: CodeUseIsActiveType,
+          description: `This Hook has to return if the tab corresponding to the
           path is active (inside an object).`,
-                },
-            ]}
-        />
+        },
+      ]}
+    />
 
-        <SubTitle>Other important types</SubTitle>
-        <Code language="typescript">{`export type BasicRoute = {
+    <SubTitle>Other important types</SubTitle>
+    <Code language="typescript">{`export type BasicRoute = {
   path: string;
   element: ReactElement;
   disabled?: boolean;
   key?: string;
 } & Record<string, unknown>;`}</Code>
-    </Page>
+  </Page>
 );
 
 const CodeUiLayerRouterType = (
-    <Code language="typescript" center>{`React.ComponentType<{
+  <Code language="typescript" center>{`React.ComponentType<{
       routes: BasicRoute[];
       initialPath: string;
       disableLogin: boolean;
   }>`}</Code>
 );
 const CodeMainViewRouterType = (
-    <Code language="typescript" center>{`React.ComponentType<{
+  <Code language="typescript" center>{`React.ComponentType<{
       routes: BasicRoute[];
   }>`}</Code>
 );
 const CodeLinkType = (
-    <Code language="typescript" center>{`React.ComponentType<
+  <Code language="typescript" center>{`React.ComponentType<
       PropsWithChildren<
           {
               to: string;
@@ -119,14 +119,14 @@ const CodeLinkType = (
 );
 
 const CodeUseLocationType = (
-    <Code language="typescript" center>{`() => {pathName: string}`}</Code>
+  <Code language="typescript" center>{`() => {pathName: string}`}</Code>
 );
 
 const CodeUseIsActiveType = (
-    <Code
-        language="typescript"
-        center
-    >{`(tabPath: string) => {isActive: boolean}`}</Code>
+  <Code
+    language="typescript"
+    center
+  >{`(tabPath: string) => {isActive: boolean}`}</Code>
 );
 
 export default PageGeneralRouterModule;

@@ -16,31 +16,30 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, {useEffect} from "react";
-import {PathRoute} from "../page/pathRoute.ts";
-import {Route, Routes} from "react-router-dom";
-import {SearchHeader} from "../header/searchHeaders.tsx";
+import React, { useEffect } from "react";
+import { PathRoute } from "../page/pathRoute.ts";
+import { Route, Routes } from "react-router-dom";
+import { SearchHeader } from "../header/searchHeaders.tsx";
 
 interface Props {
-    routes: PathRoute[];
-    getPages: (routes: PathRoute[]) => Promise<SearchHeader[]>
+  routes: PathRoute[];
+  getPages: (routes: PathRoute[]) => Promise<SearchHeader[]>;
 }
 
 const RoutesMap: React.FC<Props> = (props) => {
+  const { routes } = props;
 
-    const {routes} = props;
+  useEffect(() => {
+    props.getPages(props.routes);
+  }, [props]);
 
-    useEffect(() => {
-        props.getPages(props.routes)
-    }, [props]);
-
-    return (
-        <Routes>
-            {routes.map(({path, element: Component}) => (
-                <Route key={path} path={path} element={<Component/>}/>
-            ))}
-        </Routes>
-    );
+  return (
+    <Routes>
+      {routes.map(({ path, element: Component }) => (
+        <Route key={path} path={path} element={<Component />} />
+      ))}
+    </Routes>
+  );
 };
 
 export default RoutesMap;

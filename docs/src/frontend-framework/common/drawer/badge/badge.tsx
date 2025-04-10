@@ -16,31 +16,28 @@
 
 import React from "react";
 import makeStyles from "../../../../util/makeStyles.tsx";
-import {MAGENTA1} from "@iavofficial/frontend-framework/constants";
+import { MAGENTA1 } from "@iavofficial/frontend-framework/constants";
 
 const useStyles = makeStyles(() => ({
-    badge: {
-        marginLeft: '4px',
-        padding: '2px 6px',
-        backgroundColor: MAGENTA1,
-        color: 'white',
-        borderRadius: '6px',
-        fontSize: '12px',
-        fontWeight: "bold"
-    },
+  badge: {
+    marginLeft: "4px",
+    padding: "2px 6px",
+    backgroundColor: MAGENTA1,
+    color: "white",
+    borderRadius: "6px",
+    fontSize: "12px",
+    fontWeight: "bold",
+  },
 }));
 
 interface Props {
-    className?: string;
+  className?: string;
 }
 
 const Badge: React.FC<Props> = (props) => {
+  const { classes } = useStyles();
 
-    const {classes} = useStyles();
-
-    return (
-        <span className={`${classes.badge} ${props.className}`}>New</span>
-    )
-}
+  return <span className={`${classes.badge} ${props.className}`}>New</span>;
+};
 
 export default Badge;

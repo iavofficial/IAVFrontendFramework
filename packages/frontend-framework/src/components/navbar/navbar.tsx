@@ -34,12 +34,11 @@ import {generateHashOfLength} from "@iavofficial/frontend-framework-shared/hash"
 import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
 import {useModuleTranslation} from "@iavofficial/frontend-framework-shared/useModuleTranslation";
+import {LegalDocument} from "../imprint/legalDocument";
 
 interface Props {
   tabAndContentWrappers: TabAndContentWrapper[];
-  documentsLabelKey?: string;
-  hideImprint?: boolean;
-  hidePrivacyPolicy?: boolean;
+  legalDocuments?: LegalDocument[];
 }
 
 export const Navbar = (props: Props) => {
@@ -62,9 +61,9 @@ export const Navbar = (props: Props) => {
   const scrollbarColor =
     colorSettingsContext.currentColors.navbar.scrollbarColor;
 
-  const identifier = generateHashOfLength(4);
-  const identifierLegal = "a" + identifier;
-  const identifierWithDot = "." + identifierLegal;
+  const isAtLeastOneDocumentVisible = props.legalDocuments?.some(
+    (document) => !document.isHidden,
+  );
 
   return (
     <div className="h-full" style={{backgroundColor: navbarColor}}>
@@ -100,18 +99,14 @@ export const Navbar = (props: Props) => {
           style={
             navbarSettingsContext.navbarCollapsed
               ? {
-                  justifyContent: "center",
                   flexDirection: "column",
                   width: "44px",
                   gap: "10px",
                 }
-              : {
-                  justifyContent: "center",
-                }
+              : {}
           }
         >
-          {(props.hideImprint === true && props.hidePrivacyPolicy === true) ===
-            false && (
+          {isAtLeastOneDocumentVisible && (
             <div
               id="legal-doc-links"
               style={{
@@ -121,26 +116,23 @@ export const Navbar = (props: Props) => {
                 writingMode: navbarSettingsContext.navbarCollapsed
                   ? "sideways-lr"
                   : "horizontal-tb",
+                paddingLeft: navbarSettingsContext.navbarCollapsed
+                  ? "0px"
+                  : "12px",
               }}
             >
-              {!props.hideImprint && (
-                <Link
-                  className="legal-doc-link"
-                  style={{color: legalDocumentsColor}}
-                  to="/imprint"
-                >
-                  {t({key: "Imprint"})}
-                </Link>
-              )}
-              {!props.hidePrivacyPolicy && (
-                <Link
-                  className="legal-doc-link"
-                  style={{color: legalDocumentsColor}}
-                  to="/privacy-policy"
-                >
-                  {t({key: "Privacy_Policy"})}
-                </Link>
-              )}
+              {props.legalDocuments
+                ?.filter((document) => !document.isHidden)
+                .map((document) => (
+                  <Link
+                    key={document.path}
+                    className="legal-doc-link"
+                    style={{color: legalDocumentsColor}}
+                    to={document.path}
+                  >
+                    {t({key: document.titleTranslationKey})}
+                  </Link>
+                ))}
             </div>
           )}
 

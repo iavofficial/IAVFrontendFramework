@@ -53,6 +53,8 @@
   display: flex;
   align-items: center;
   gap: 5px;
+  width: 200px;
+  flex-wrap: wrap;
 }
 
 .legal-doc-link,

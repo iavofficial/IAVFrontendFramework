@@ -38,6 +38,7 @@ export type UILayerRouterProps = {
   routes: BasicRoute[];
   initialPath: string;
   disableLogin: boolean;
+  legalDocumentsPaths?: string[];
 };
 
 export type MainViewRouterProps = {

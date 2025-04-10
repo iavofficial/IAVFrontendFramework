@@ -21,7 +21,7 @@ import { ColorSettingsContext } from "@iavofficial/frontend-framework/colorSetti
 import { useModuleTranslation } from "@iavofficial/frontend-framework/moduleHooks";
 
 interface Props {
-  legalDocument: React.ComponentType;
+  legalDocument: React.ComponentType<any>;
 }
 
 export const LegalDocuments = (props: Props) => {

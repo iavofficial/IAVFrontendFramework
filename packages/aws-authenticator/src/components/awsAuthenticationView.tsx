@@ -24,7 +24,6 @@ import loginBackgroundDarkMode from "../assets/png/login_background_darkMode.png
 import {Dropdown, DropdownChangeEvent} from "primereact/dropdown";
 import {parseLanguageResourcesIntoDropdownFormat} from "@iavofficial/frontend-framework-shared/parseLanguageResourcesIntoDropdownFormat";
 import {generateHashOfLength} from "@iavofficial/frontend-framework-shared/hash";
-import {Tooltip} from "primereact/tooltip";
 import CompanyLogo from "../assets/svg/companyLogo";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {
@@ -121,6 +120,9 @@ export const AwsAuthenticationView = <
   const legalLinkColor =
     colorSettingsContext.currentColors.authenticationView.legalLinkColor;
 
+  const isAtLeastOneDocumentVisible = props.legalDocuments?.some(
+    (document) => !document.isHidden,
+  );
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (isNewPasswordRequired) {
@@ -414,6 +416,7 @@ export const AwsAuthenticationView = <
           <span
             style={{
               color: companyTextColor,
+              minWidth: "94px",
             }}
           >
             &copy;{" "}
@@ -422,8 +425,7 @@ export const AwsAuthenticationView = <
               : "Company 2025"}
           </span>
 
-          {(props.hideImprint === true && props.hidePrivacyPolicy === true) ===
-            false && (
+          {isAtLeastOneDocumentVisible && (
             <>
               <span style={{color: "var(--grey-2)"}}>|</span>
               <div
@@ -433,26 +435,19 @@ export const AwsAuthenticationView = <
                   gap: "5px",
                 }}
               >
-                {!props.hideImprint && (
-                  <Link
-                    className="legal-doc-link"
-                    style={{color: legalLinkColor, fontSize: "12px"}}
-                    to="/imprint"
-                    target="_blank"
-                  >
-                    {t({key: "Imprint"})}
-                  </Link>
-                )}
-                {!props.hidePrivacyPolicy && (
-                  <Link
-                    className="legal-doc-link"
-                    style={{color: legalLinkColor, fontSize: "12px"}}
-                    to="/privacy-policy"
-                    target="_blank"
-                  >
-                    {t({key: "Privacy_Policy"})}
-                  </Link>
-                )}
+                {props.legalDocuments
+                  ?.filter((document) => !document.isHidden)
+                  .map((document) => (
+                    <Link
+                      key={document.path}
+                      className="legal-doc-link"
+                      style={{color: legalLinkColor, fontSize: "12px"}}
+                      to={document.path}
+                      target="_blank"
+                    >
+                      {t({key: document.titleTranslationKey})}
+                    </Link>
+                  ))}
               </div>
             </>
           )}

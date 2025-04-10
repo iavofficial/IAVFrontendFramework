@@ -1,3 +1,9 @@
+## [@iavofficial/frontend-framework-v1.4.0-dev.7](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.0-dev.6...@iavofficial/frontend-framework-v1.4.0-dev.7) (2025-04-07)
+
+### Bug Fixes
+
+* add useMatch for highlighting navbar ([e172706](https://github.com/iavofficial/IAVFrontendFramework/commit/e172706213edd77aa71c81d02a32955b1c58ecb2))
+
 ## [@iavofficial/frontend-framework-v1.4.0-dev.6](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.0-dev.5...@iavofficial/frontend-framework-v1.4.0-dev.6) (2025-04-02)
 
 ### Bug Fixes

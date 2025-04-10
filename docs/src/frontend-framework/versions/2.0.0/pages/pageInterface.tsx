@@ -66,7 +66,7 @@ const PageInterface: React.FC = () => {
                 managed by a central module orchestration system. An important aspect of
                 this system is the supply of a global state to which modules can add
                 their own values. The global state is implemented using a Redux Store.
-                Because we use Redux a basic understanding of this library is necessary.
+                Because we use Redux, a basic understanding of this library is necessary.
             </Text>
             <Text>
                 To facilitate the use of the module system the Framework provides two

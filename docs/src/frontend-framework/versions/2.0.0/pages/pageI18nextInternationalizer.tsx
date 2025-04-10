@@ -20,8 +20,9 @@ import Page from "../../../common/page/page";
 import { ModuleProfile } from "../../../common/page/text/module/moduleProfile";
 import Text from "../../../common/page/text/text";
 import Title from "../../../common/page/text/title";
+import React from "react";
 
-export const PageI18nextInternationalizer = () => {
+const PageI18nextInternationalizer: React.FC = () => {
   return (
     <Page>
       <Title>I18nextInternationalizer</Title>
@@ -38,3 +39,5 @@ export const PageI18nextInternationalizer = () => {
     </Page>
   );
 };
+
+export default PageI18nextInternationalizer;

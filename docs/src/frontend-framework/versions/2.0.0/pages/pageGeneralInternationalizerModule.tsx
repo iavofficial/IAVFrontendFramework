@@ -26,8 +26,9 @@ import Text from "../../../common/page/text/text";
 import Title from "../../../common/page/text/title";
 import Code from "../../../common/page/utils/code";
 import Table from "../../../common/page/utils/table";
+import React from "react";
 
-export const PageGeneralInternationalizerModule = () => {
+const PageGeneralInternationalizerModule: React.FC = () => {
   return (
     <Page>
       <Title>General structure of an internationalizer module</Title>
@@ -117,3 +118,5 @@ export type UseTranslationHook = () => TranslationFunction;`}</Code>
     </Page>
   );
 };
+
+export default PageGeneralInternationalizerModule;

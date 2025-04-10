@@ -32,46 +32,61 @@ import PageFaq from "./pages/pageFaq.tsx";
 import { mergeRoutes, PathRoute } from "../../common/page/pathRoute.ts";
 import RoutesMap from "../../common/drawer/routesMap.tsx";
 import NavigationMap from "../../common/drawer/navigationMap.tsx";
+import { SearchHeader } from "../../common/header/searchHeaders.tsx";
+
+const pages = import.meta.glob("./pages/*.tsx");
+
+export const getPages = async (allRoutes: PathRoute[]) => {
+  const loadedPages: SearchHeader[] = [];
+  for (const path in pages) {
+    const module = await pages[path]();
+    const route =
+      allRoutes.find((route) => module.default.name === route.element.name)
+        ?.path || "";
+    loadedPages.push({ module: module.default, route: route });
+  }
+  return loadedPages;
+};
 
 const routes: PathRoute[] = [
-  { path: "overview", label: "Quick Overview", element: <PageOverview /> },
+  { path: "overview", label: "Quick Overview", element: PageOverview },
   {
     path: "information",
     label: "01 - Important Information",
-    element: <PageInformation />,
+    element: PageInformation,
   },
   {
     path: "installation-guide",
     label: "02 - Installation",
-    element: <PageInstallationGuide />,
+    element: PageInstallationGuide,
   },
-  { path: "interface", label: "03 - Interface", element: <PageInterface /> },
+  { path: "interface", label: "03 - Interface", element: PageInterface },
   {
     path: "globaldatalayer",
     label: "04 - GlobalDataLayer",
-    element: <PageGlobalDataLayer />,
+    element: PageGlobalDataLayer,
   },
-  { path: "uilayer", label: "05 - UiLayer", element: <PageUiLayer /> },
+  { path: "uilayer", label: "05 - UiLayer", element: PageUiLayer },
   {
     path: "content-area",
     label: "06 - Content Area",
-    element: <PageContentArea />,
+    element: PageContentArea,
   },
   {
     path: "color-settings-and-dark-mode",
     label: "07 - Color Settings and Dark Mode",
-    element: <PageColorSettings />,
+    element: PageColorSettings,
   },
   {
     path: "example-project",
     label: "08 - Example Project",
-    element: <PageExampleProject />,
+    element: PageExampleProject,
   },
-  { path: "playground", label: "09 - Playground", element: <PagePlayground /> },
+  { path: "playground", label: "09 - Playground", element: PagePlayground },
 ];
 
 const helpRoutes: PathRoute[] = [
-  { path: "faq", label: "FAQ", element: <PageFaq /> },
+  { path: "faq", label: "FAQ", element: PageFaq },
 ];
 
 const Version1_3_0 = () => {
@@ -84,7 +99,7 @@ const Version1_3_0 = () => {
         <h3>Need help?</h3>
         <NavigationMap routes={helpRoutes} />
       </PageNavigation>
-      <RoutesMap routes={mergedRoutes} />
+      <RoutesMap routes={mergedRoutes} getPages={getPages} />
     </>
   );
 };

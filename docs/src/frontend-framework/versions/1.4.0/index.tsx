@@ -40,9 +40,9 @@ export const getPages = async (allRoutes: PathRoute[]) => {
   const loadedPages: SearchHeader[] = [];
   for (const path in pages) {
     const module = await pages[path]();
-    const route =
-      allRoutes.find((route) => module.default.name === route.element.name)
-        ?.path || "";
+    const route = allRoutes.find(
+      (route) => module.default.name === route.element.name,
+    )?.path;
     loadedPages.push({ module: module.default, route: route });
   }
   return loadedPages;
@@ -89,7 +89,7 @@ const helpRoutes: PathRoute[] = [
   { path: "faq", label: "FAQ", element: PageFaq },
 ];
 
-const Version1_1_0 = () => {
+const Version1_4_0 = () => {
   const mergedRoutes = mergeRoutes(routes, helpRoutes);
 
   return (
@@ -104,4 +104,4 @@ const Version1_1_0 = () => {
   );
 };
 
-export default Version1_1_0;
+export default Version1_4_0;

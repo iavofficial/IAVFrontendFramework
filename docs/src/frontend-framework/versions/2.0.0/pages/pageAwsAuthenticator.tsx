@@ -28,10 +28,11 @@ import Code from "../../../common/page/utils/code";
 import Table from "../../../common/page/utils/table";
 import Text from "../../../common/page/text/text";
 import { ModuleProfile } from "../../../common/page/text/module/moduleProfile";
+import React from "react";
 
 const DESCRIPTION = `This module allows for authentication with AWS-Cognito.`;
 
-export const PageAwsAuthenticator = () => {
+const PageAwsAuthenticator: React.FC = () => {
   const CodeFetchAuthedParams = (
     <Code
       language="typescript"
@@ -198,3 +199,5 @@ export const store = new StoreBuilder(modules.storeModules).build();
     </Page>
   );
 };
+
+export default PageAwsAuthenticator;

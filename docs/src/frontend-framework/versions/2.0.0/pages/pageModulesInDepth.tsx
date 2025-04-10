@@ -24,8 +24,9 @@ import Text from "../../../common/page/text/text";
 import Title from "../../../common/page/text/title";
 import Code from "../../../common/page/utils/code";
 import Table from "../../../common/page/utils/table";
+import React from "react";
 
-export const PageModulesInDepth = () => (
+const PageModulesInDepth: React.FC = () => (
   <Page>
     <Title>Modules in Depth</Title>
     <Text>
@@ -307,3 +308,5 @@ const CodeInternationalizerModuleType = (
 } & FFStoreModule<TIntState>;`}
   </Code>
 );
+
+export default PageModulesInDepth;

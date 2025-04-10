@@ -15,18 +15,19 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-
-import { ReactElement } from "react";
+import { FunctionComponent } from "react";
 
 export type PathRoute = {
   path: string;
   label: string;
-  element: ReactElement;
+  element: FunctionComponent;
+  isNew?: boolean;
 };
 
 export type GroupRoute = {
   title: string;
   routes: PathRoute[];
+  isNew?: boolean;
 };
 
 export const mergeRoutes = (

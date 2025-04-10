@@ -26,8 +26,9 @@ import {
   MODULE_THUNKS_TABLE_COLUMNS,
 } from "../../../common/page/text/module/moduleTableColumns";
 import Code from "../../../common/page/utils/code";
+import React from "react";
 
-export const PageGeneralAuthModule = () => {
+const PageGeneralAuthModule: React.FC = () => {
   const CodeFetchAuthedParams = (
     <Code
       language="typescript"
@@ -103,3 +104,5 @@ export const PageGeneralAuthModule = () => {
     </Page>
   );
 };
+
+export default PageGeneralAuthModule;

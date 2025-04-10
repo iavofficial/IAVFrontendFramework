@@ -35,6 +35,8 @@
     "setup:root": "npm i",
     "checkout-docs:root": "./scripts/unix/docs_generation/copy-root-docs-and-prepare.sh",
     "dev": "turbo run dev build-live",
+    "docs": "cd docs && npm run dev",
+    "build:docs": "cd docs && npm run build",
     "test": "turbo run test",
     "build": "turbo run build",
     "format": "prettier --write \"{packages,apps,docs}/**/src/**/*.{ts,tsx,js,jsx,json,html,css}\"",

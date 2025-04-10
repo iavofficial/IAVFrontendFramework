@@ -12,28 +12,44 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- * SPDX-License-Identifier: Apache-2.0
- */
+ **/
 
 import React from "react";
-import NavigationItem from "./navigationItem.tsx";
-import { PathRoute } from "../page/pathRoute.ts";
+import Badge from "./badge.tsx";
+import makeStyles from "../../../../util/makeStyles.tsx";
+
+const useStyles = makeStyles(() => ({
+  headerContainer: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    marginTop: "30px",
+  },
+  badge: {
+    marginLeft: "8px",
+    padding: "4px 8px",
+    backgroundColor: "red",
+    color: "white",
+    borderRadius: "12px",
+    fontSize: "12px",
+  },
+}));
 
 interface Props {
-  routes: PathRoute[];
+  title: string;
 }
 
-const NavigationMap: React.FC<Props> = (props) => {
-  const { routes } = props;
+const BadgeHeader: React.FC<Props> = (props) => {
+  const { title, badgeText } = props;
+
+  const { classes } = useStyles();
 
   return (
-    <ul>
-      {routes.map(({ path, label, isNew }) => (
-        <NavigationItem to={path} label={label} key={path} isNew={isNew} />
-      ))}
-    </ul>
+    <div className={classes.headerContainer}>
+      <h3>{title}</h3>
+      <Badge />
+    </div>
   );
 };
 
-export default NavigationMap;
+export default BadgeHeader;

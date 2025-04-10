@@ -19,8 +19,8 @@
 import React, { useState } from "react";
 import makeStyles from "../../../util/makeStyles.tsx";
 import NavigationMap from "./navigationMap.tsx";
-import { BLUE0 } from "../../../constants.ts";
 import { GroupRoute } from "../page/pathRoute.ts";
+import Badge from "./badge/badge.tsx";
 
 const useStyles = makeStyles(() => ({
   groupTitle: {
@@ -28,11 +28,14 @@ const useStyles = makeStyles(() => ({
     cursor: "pointer",
     padding: "8px 0",
     marginBottom: "8px",
-    display: "block",
+    display: "flex", // Flexbox, um Text und Badge nebeneinander zu positionieren
+    alignItems: "center", // Vertikale Ausrichtung auf der gleichen Höhe
+    justifyContent: "center", // Horizontal zentrieren des gesamten Inhalts
     fontWeight: "bold",
     border: "none",
+    position: "relative", // Damit das Badge rechts positioniert werden kann
     "&:hover": {
-      backgroundColor: BLUE0,
+      backgroundColor: "#007bff",
       color: "#fff",
     },
     borderRadius: "8px",
@@ -44,6 +47,12 @@ const useStyles = makeStyles(() => ({
   },
   groupItem: {
     paddingLeft: "16px",
+  },
+  badge: {
+    position: "absolute",
+    right: "10px",
+    top: "50%",
+    transform: "translateY(-50%)", // Vertikale Zentrierung des Badges
   },
 }));
 
@@ -77,6 +86,7 @@ const GroupNavigationMap: React.FC<Props> = (props) => {
           onClick={() => toggleGroup(group.title)}
         >
           {group.title}
+          {group.isNew && <Badge className={classes.badge} />}
         </button>
         {isOpen && <NavigationMap routes={group.routes} />}
       </div>

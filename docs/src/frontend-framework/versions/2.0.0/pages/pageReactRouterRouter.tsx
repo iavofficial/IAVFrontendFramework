@@ -20,8 +20,9 @@ import Page from "../../../common/page/page";
 import { ModuleProfile } from "../../../common/page/text/module/moduleProfile";
 import Text from "../../../common/page/text/text";
 import Title from "../../../common/page/text/title";
+import React from "react";
 
-export const PageReactRouterRouter = () => (
+const PageReactRouterRouter: React.FC = () => (
   <Page>
     <Title>ReactRouterRouter</Title>
     <ModuleProfile
@@ -35,3 +36,5 @@ export const PageReactRouterRouter = () => (
     </Text>
   </Page>
 );
+
+export default PageReactRouterRouter;

@@ -21,6 +21,7 @@ import makeStyles from "../../../util/makeStyles.tsx";
 import Title from "../page/text/title.tsx";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { versionMappings } from "../../versionMappings.ts";
+import SearchHeaders from "./searchHeaders.tsx";
 
 const useStyles = makeStyles(() => ({
   header: {
@@ -198,6 +199,7 @@ const Header: React.FC<Props> = (props) => {
           </select>
         </label>
       </div>
+      <SearchHeaders versionMappings={versionMappings} />
     </header>
   );
 };

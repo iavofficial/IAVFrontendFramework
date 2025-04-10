@@ -26,8 +26,9 @@ import Text from "../../../common/page/text/text";
 import Title from "../../../common/page/text/title";
 import Code from "../../../common/page/utils/code";
 import Table from "../../../common/page/utils/table";
+import React from "react";
 
-export const PageGeneralRouterModule = () => (
+const PageGeneralRouterModule: React.FC = () => (
   <Page>
     <Title>General structure of a router module</Title>
     <Text>
@@ -127,3 +128,5 @@ const CodeUseIsActiveType = (
     center
   >{`(tabPath: string) => {isActive: boolean}`}</Code>
 );
+
+export default PageGeneralRouterModule;

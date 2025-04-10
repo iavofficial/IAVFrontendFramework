@@ -16,21 +16,16 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {
-  ContentLayout,
-  LayoutBehaviour,
-} from "@iavofficial/frontend-framework/contentLayout";
-import { ContentStyleTemplates } from "@iavofficial/frontend-framework/contentStyle";
+import { useContext } from "react";
+import { ColorSettingsContext } from "@iavofficial/frontend-framework/colorSettingsContext";
 
-export const ExampleComponent6 = () => {
-  return (
-    <ContentLayout
-      layoutBehaviour={LayoutBehaviour.FLEX}
-      contentStyle={{ appliedStyles: ContentStyleTemplates.DEFAULT }}
-    >
-      <div className="w-full" style={{ backgroundColor: "white" }}>
-        Example component 6
-      </div>
-    </ContentLayout>
-  );
+export const ExampleHeader = () => {
+  const colorSettingsContext = useContext(ColorSettingsContext);
+
+  const darkModeSwitchHandler = () => {
+    const darkMode = colorSettingsContext.darkmode;
+    colorSettingsContext.setDarkmode(!darkMode);
+  };
+
+  return <div onClick={darkModeSwitchHandler}>Click on Dark Mode Header</div>;
 };

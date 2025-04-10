@@ -17,32 +17,32 @@
  */
 
 const getDirName = () => {
-    const parts = window.location.pathname.split('/');
-    const index = parts.indexOf('packages');
-    return index !== -1 && parts.length > index + 1 ? parts[index + 1] : null;
+  const parts = window.location.pathname.split("/");
+  const index = parts.indexOf("packages");
+  return index !== -1 && parts.length > index + 1 ? parts[index + 1] : null;
 };
 
 const basePath = `/IAVFrontendFramework/packages/${getDirName()}`;
 const localVersion = "docs-version";
 
-document.addEventListener('DOMContentLoaded', async () => {
-    const newestVersion = await getOptionalVersionList();
-    const path = `${basePath}/${newestVersion}/index.html`;
-    pushWindowState(path);
+document.addEventListener("DOMContentLoaded", async () => {
+  const newestVersion = await getOptionalVersionList();
+  const path = `${basePath}/${newestVersion}/index.html`;
+  pushWindowState(path);
 });
 
 const getOptionalVersionList = async () => {
-    const response = await fetch("./version-list.md");
-    if (response.ok) {
-        const data = await response.text();
-        const versions = data.trim().split('\n');
-        return versions[versions.length - 1];
-    } else {
-        return localVersion;
-    }
+  const response = await fetch("./version-list.md");
+  if (response.ok) {
+    const data = await response.text();
+    const versions = data.trim().split("\n");
+    return versions[versions.length - 1];
+  } else {
+    return localVersion;
+  }
 };
 
 const pushWindowState = (path) => {
-    const newUrl = new URL(path, window.location.origin);
-    window.location.href = newUrl.pathname + newUrl.search;
+  const newUrl = new URL(path, window.location.origin);
+  window.location.href = newUrl.pathname + newUrl.search;
 };

@@ -74,6 +74,7 @@ export interface Props {
   hideLegalDocuments?: boolean;
   navbarOptions?: NavbarOptions;
   hideNavbar?: boolean;
+  customHeader?: React.ComponentType<any>;
 }
 
 export const UILayer = (props: Props) => {
@@ -153,6 +154,7 @@ export const UILayer = (props: Props) => {
                   tabAndContentWrappers={props.tabAndContentWrappers}
                   hideLegalDocuments={props.hideLegalDocuments}
                   hideNavbar={props.hideNavbar}
+                  customHeader={props.customHeader}
                 />
               }
             />

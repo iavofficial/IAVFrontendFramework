@@ -35,6 +35,7 @@ interface MainViewProps {
   settingsMenuOptions?: SettingsMenuOptions;
   userMenuOptions?: UserMenuOptions;
   hideNavbar?: boolean;
+  customHeader?: React.ComponentType<any>;
 }
 
 export const MainView = (props: MainViewProps) => {
@@ -48,11 +49,15 @@ export const MainView = (props: MainViewProps) => {
       }}
     >
       <div style={{flex: "0 0 auto"}}>
-        <Header
-          headerOptions={props.headerOptions}
-          settingsMenuOptions={props.settingsMenuOptions}
-          userMenuOptions={props.userMenuOptions}
-        />
+        {props.customHeader ? (
+          <props.customHeader />
+        ) : (
+          <Header
+            headerOptions={props.headerOptions}
+            settingsMenuOptions={props.settingsMenuOptions}
+            userMenuOptions={props.userMenuOptions}
+          />
+        )}
       </div>
       <div
         style={{

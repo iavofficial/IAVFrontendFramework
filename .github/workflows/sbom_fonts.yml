@@ -14,10 +14,19 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Ensure full history is available for commits
 
       - name: Make Script Executable
         run: chmod +x ./scripts/unix/sbom_entries/add_fonts_to_sbom.sh
 
-      # Step 3: Run the target shell script
       - name: Add Google Fonts to SBOM
         run: ./scripts/unix/sbom_entries/add_fonts_to_sbom.sh
+
+      - name: Commit Changes
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add .
+          git commit -m "Added Roboto-Regular font entry to SBOM files" || true
+          git push

@@ -15,29 +15,29 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-import {FunctionComponent} from "react";
+import { FunctionComponent } from "react";
 
 export type PathRoute = {
-    path: string;
-    label: string;
-    element: FunctionComponent;
-    isNew?: boolean;
+  path: string;
+  label: string;
+  element: FunctionComponent;
+  isNew?: boolean;
 };
 
 export type GroupRoute = {
-    title: string;
-    routes: PathRoute[];
-    isNew?: boolean;
+  title: string;
+  routes: PathRoute[];
+  isNew?: boolean;
 };
 
 export const mergeRoutes = (
-    ...routeGroups: (PathRoute[] | GroupRoute[])[]
+  ...routeGroups: (PathRoute[] | GroupRoute[])[]
 ): PathRoute[] => {
-    return routeGroups.flatMap((group) =>
-        group.flatMap((route) => (isGroupRoute(route) ? route.routes : [route])),
-    );
+  return routeGroups.flatMap((group) =>
+    group.flatMap((route) => (isGroupRoute(route) ? route.routes : [route])),
+  );
 };
 
 const isGroupRoute = (route: PathRoute | GroupRoute): route is GroupRoute => {
-    return (route as GroupRoute).routes !== undefined;
+  return (route as GroupRoute).routes !== undefined;
 };

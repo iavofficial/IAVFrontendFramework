@@ -16,39 +16,42 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {createModules, StoreBuilder,} from "@iavofficial/frontend-framework/store";
-import {Amplify} from "aws-amplify";
-import {cognitoUserPoolsTokenProvider} from "aws-amplify/auth/cognito";
-import {CookieStorage} from "aws-amplify/utils";
-import {AwsAuthenticator} from "@iavofficial/frontend-framework-aws-authenticator/awsAuthenticatorModule";
-import {MandatoryModuleNames} from "@iavofficial/frontend-framework/constants";
-import {I18NextInternationalizer} from "@iavofficial/frontend-framework/defaultModules";
-import {translations} from "./translations";
-import {configureStore} from "@reduxjs/toolkit";
+import {
+  createModules,
+  StoreBuilder,
+} from "@iavofficial/frontend-framework/store";
+import { Amplify } from "aws-amplify";
+import { cognitoUserPoolsTokenProvider } from "aws-amplify/auth/cognito";
+import { CookieStorage } from "aws-amplify/utils";
+import { AwsAuthenticator } from "@iavofficial/frontend-framework-aws-authenticator/awsAuthenticatorModule";
+import { MandatoryModuleNames } from "@iavofficial/frontend-framework/constants";
+import { I18NextInternationalizer } from "@iavofficial/frontend-framework/defaultModules";
+import { translations } from "./translations";
+import { configureStore } from "@reduxjs/toolkit";
 
 const cognitoPool = import.meta.env.VITE_COGNITO_POOL;
 const cognitoAppId = import.meta.env.VITE_COGNITO_APP_ID;
 const domain = import.meta.env.VITE_DOMAIN;
 
 const configureAmplify = () => {
-    Amplify.configure({
-        Auth: {
-            Cognito: {
-                userPoolId: cognitoPool,
-                userPoolClientId: cognitoAppId,
-            },
-        },
-    });
-    cognitoUserPoolsTokenProvider.setKeyValueStorage(
-        new CookieStorage({
-            domain: domain,
-            path: "/",
-            expires: 365,
-            // @ts-ignore
-            secure: domain !== "localhost",
-            sameSite: "lax",
-        }),
-    );
+  Amplify.configure({
+    Auth: {
+      Cognito: {
+        userPoolId: cognitoPool,
+        userPoolClientId: cognitoAppId,
+      },
+    },
+  });
+  cognitoUserPoolsTokenProvider.setKeyValueStorage(
+    new CookieStorage({
+      domain: domain,
+      path: "/",
+      expires: 365,
+      // @ts-ignore
+      secure: domain !== "localhost",
+      sameSite: "lax",
+    }),
+  );
 };
 
 const customModules = {
@@ -57,38 +60,36 @@ const customModules = {
     failOnNoLegalGroup: true,
     legalGroups: ["ADMIN", "SHOWCASE"],
   }),
-    [MandatoryModuleNames.Internationalizer]: new I18NextInternationalizer({
-        translationResources: translations,
-    }),
-    userModule: new AwsAuthenticator({
-        configureAmplify: configureAmplify,
-        failOnNoLegalGroup: true,
-        legalGroups: ["ADMIN", "SHOWCASE"],
-    }),
-    userTest: {text: "text"},
+  [MandatoryModuleNames.Internationalizer]: new I18NextInternationalizer({
+    translationResources: translations,
+  }),
+  userModule: new AwsAuthenticator({
+    configureAmplify: configureAmplify,
+    failOnNoLegalGroup: true,
+    legalGroups: ["ADMIN", "SHOWCASE"],
+  }),
+  userTest: { text: "text" },
 };
 
 export const modules = createModules(customModules);
 
 export const store = new StoreBuilder(modules.storeModules)
-    .setFrameworkModuleProcessor(
-        MandatoryModuleNames.Authenticator,
-        (module, storeConfigBuilder) => {
-        },
-    )
-    .setUserModuleProcessor("userModule", (module, StoreConfigBuilder) => {
-    })
-    .setStoreBuilder((storeConfig) => {
-        const store = configureStore({
-            reducer: storeConfig.reducers,
-            middleware: (getDefaultMiddleware: Function) =>
-                getDefaultMiddleware().concat(storeConfig.middleware),
-            enhancers: (getDefaultEnhancers: Function) =>
-                getDefaultEnhancers().concat(storeConfig.enhancers),
-        });
-        return store;
-    })
-    .build();
+  .setFrameworkModuleProcessor(
+    MandatoryModuleNames.Authenticator,
+    (module, storeConfigBuilder) => {},
+  )
+  .setUserModuleProcessor("userModule", (module, StoreConfigBuilder) => {})
+  .setStoreBuilder((storeConfig) => {
+    const store = configureStore({
+      reducer: storeConfig.reducers,
+      middleware: (getDefaultMiddleware: Function) =>
+        getDefaultMiddleware().concat(storeConfig.middleware),
+      enhancers: (getDefaultEnhancers: Function) =>
+        getDefaultEnhancers().concat(storeConfig.enhancers),
+    });
+    return store;
+  })
+  .build();
 
 export const useModuleContextTyped = modules.useModuleContextTyped;
 export const useModuleTyped = modules.useModuleTyped;

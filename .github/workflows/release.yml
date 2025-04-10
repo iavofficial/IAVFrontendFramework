@@ -26,9 +26,20 @@ jobs:
 
       - run: find ./scripts/unix/ -type f -exec chmod +x {} \;
 
-      # SBOM Update Step - Add Fonts
+      # Add Fonts to SBOM
+      - name: Make Script Executable
+        run: chmod +x ./scripts/unix/sbom_entries/add_fonts_to_sbom.sh
+
       - name: Add Google Fonts to SBOM
         run: ./scripts/unix/sbom_entries/add_fonts_to_sbom.sh
+
+      - name: Commit Changes to SBOM
+        run: |
+          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git config --global user.name "${GITHUB_ACTOR}"
+          git add .
+          git commit -m "Added Roboto-Regular font entry to SBOM files" || true
+          git push
 
       # Install Turborepo
       - run: npm i

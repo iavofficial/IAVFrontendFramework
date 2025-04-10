@@ -1,3 +1,10 @@
+## [@iavofficial/frontend-framework-v1.4.0-dev.8](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.0-dev.7...@iavofficial/frontend-framework-v1.4.0-dev.8) (2025-04-10)
+
+### Features
+
+* add custom header prop ([0a85c07](https://github.com/iavofficial/IAVFrontendFramework/commit/0a85c077e8251067125a730f8979868ea5156690))
+* add example header in dev ([a55fbe5](https://github.com/iavofficial/IAVFrontendFramework/commit/a55fbe5462fc07102884fdd0036aa3b654ce9655))
+
 ## [@iavofficial/frontend-framework-v1.4.0-dev.7](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.0-dev.6...@iavofficial/frontend-framework-v1.4.0-dev.7) (2025-04-07)
 
 ### Bug Fixes

@@ -15,16 +15,6 @@
   ],
   "packages": [
     {
-      "name": "Roboto-Regular",
-      "SPDXID": "SPDXRef-Package-roboto-regular-0.0.0",
-      "versionInfo": "0.0.0",
-      "packageFileName": "Roboto-Regular",
-      "description": "Download version of free fonts",
-      "downloadLocation": "https://github.com/openmaptiles/fonts/blob/master/roboto/Roboto-Regular.ttf",
-      "homepage": "https://github.com/openmaptiles/fonts/blob/master/roboto/Roboto-Regular.ttf",
-      "licenseDeclared": "Apache-2.0"
-    },
-    {
       "name": "@iavofficial/frontend-framework",
       "SPDXID": "SPDXRef-Package-iavofficial.frontend-framework-1.0.0",
       "versionInfo": "1.0.0",

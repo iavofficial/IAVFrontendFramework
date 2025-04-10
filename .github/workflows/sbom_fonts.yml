@@ -1,0 +1,23 @@
+name: Add Google Fonts to SBOM
+
+on:
+  workflow_dispatch: # Allows manual triggering of the workflow
+  push: 
+    branches:
+      - develop 
+
+jobs:
+  add_fonts_to_sbom:
+    name: Add Fonts to SBOM
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Make Script Executable
+        run: chmod +x ./scripts/unix/sbom_entries/add_fonts_to_sbom.sh
+
+      # Step 3: Run the target shell script
+      - name: Add Google Fonts to SBOM
+        run: ./scripts/unix/sbom_entries/add_fonts_to_sbom.sh

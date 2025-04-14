@@ -7,10 +7,10 @@ on:
       - main
       - develop
     paths-ignore:
-      - "SBOM.json"
-      - "*.md"
-      - ".github/**/*"
-      - "docs/**/*"
+      - 'SBOM.json'
+      - '*.md'
+      - '.github/**/*'
+      - 'docs/**/*'
 
 jobs:
   release:
@@ -22,7 +22,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "22.x"
+          node-version: '22.x'
 
       - run: find ./scripts/unix/ -type f -exec chmod +x {} \;
 
@@ -33,12 +33,12 @@ jobs:
       - name: Add Google Fonts to SBOM
         run: ./scripts/unix/sbom_entries/add_fonts_to_sbom.sh
 
-      - name: Commit Changes to SBOM
+      - name: Commit Changes to SBOM with Semantic Release Style
         run: |
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
           git config --global user.name "${GITHUB_ACTOR}"
           git add .
-          git commit -m "Added Roboto-Regular font entry to SBOM files" || true
+          git commit -m "chore(sbom): update SBOM with Roboto-Regular font entry" || true
           git push
 
       # Install Turborepo

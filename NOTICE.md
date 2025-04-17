@@ -6,7 +6,7 @@ This content is produced and maintained by IAV GmbH Ingenieurgesellschaft Auto u
 
 ## Copyright
 
-Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
 
 ## Declared Project Licenses
 
@@ -24,13 +24,10 @@ The project maintains the following source code repositories:
 
 ## Open Source Software Projects
 
-For the list of open source software projects the IAV Frontend Framework leverages, we refer to the package.json in the
-root directory.
+For the list of open source software projects the IAV Frontend Framework leverages, we refer to the package.json in the root directory.
 
-The framework applies the open source component caniuse-lite in version 1.0.30001632 with CC-BY-4.0 licence.
-The component is dynamically linked with its binary form. The main homepage is https://caniuse.com/, whereas the source
-code can be found at https://github.com/browserslist/caniuse-lite.
+The framework applies the open source component caniuse-lite in version 1.0.30001632 with CC-BY-4.0 licence. 
+The component is dynamically linked with its binary form. The main homepage is https://caniuse.com/, whereas the source code can be found at https://github.com/browserslist/caniuse-lite.
 
-The framework applies the open source component mdn-data in version 2.0.14 with CC0-1.0 licence.
-The component is dynamically linked with its binary form. The main homepage is https://developer.mozilla.org, whereas
-the source code can be found at https://github.com/mdn/data.
+The framework applies the open source component mdn-data in version 2.0.14 with CC0-1.0 licence. 
+The component is dynamically linked with its binary form. The main homepage is https://developer.mozilla.org, whereas the source code can be found at https://github.com/mdn/data.

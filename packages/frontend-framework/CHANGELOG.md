@@ -51,6 +51,13 @@
 * add user icon as ReactElement ([184508f](https://github.com/iavofficial/IAVFrontendFramework/commit/184508fb8ab6fd3582de6cae097ec70d52fcf54b))
 * add width and height for icon ([c680e0b](https://github.com/iavofficial/IAVFrontendFramework/commit/c680e0bf1c10b3e23485cca08a18932a1f594c91))
 
+## [1.3.1](https://github.com/iavofficial/IAVFrontendFramework/compare/v1.3.0...v1.3.1) (2025-02-20)
+
+### Bug Fixes
+
+* content with bar ([c745b80](https://github.com/iavofficial/IAVFrontendFramework/commit/c745b80131d38446cac28aff84b68af94d8139ce))
+* **content:** back to old state ([#61](https://github.com/iavofficial/IAVFrontendFramework/issues/61)) ([a27531c](https://github.com/iavofficial/IAVFrontendFramework/commit/a27531c53e95c4389e781b1e736cfc8a0f962130))
+
 ## [@iavofficial/frontend-framework-v1.3.1-dev.2](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.3.1-dev.1...@iavofficial/frontend-framework-v1.3.1-dev.2) (2025-02-20)
 
 ### Bug Fixes

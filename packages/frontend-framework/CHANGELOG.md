@@ -1,3 +1,26 @@
+## [@iavofficial/frontend-framework-v1.4.0](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.3.0...@iavofficial/frontend-framework-v1.4.0) (2025-04-17)
+
+### Features
+
+* add class for div ([83e6273](https://github.com/iavofficial/IAVFrontendFramework/commit/83e6273aceb680ae7f8241a081a4f1bccf467992))
+* add custom header prop ([0a85c07](https://github.com/iavofficial/IAVFrontendFramework/commit/0a85c077e8251067125a730f8979868ea5156690))
+* add example header in dev ([a55fbe5](https://github.com/iavofficial/IAVFrontendFramework/commit/a55fbe5462fc07102884fdd0036aa3b654ce9655))
+* add user icon as ReactElement ([184508f](https://github.com/iavofficial/IAVFrontendFramework/commit/184508fb8ab6fd3582de6cae097ec70d52fcf54b))
+* add width and height for icon ([c680e0b](https://github.com/iavofficial/IAVFrontendFramework/commit/c680e0bf1c10b3e23485cca08a18932a1f594c91))
+
+### Bug Fixes
+
+* add "?" for userIcon ([e3b79eb](https://github.com/iavofficial/IAVFrontendFramework/commit/e3b79eb39a217c9573d29587496648768cad221d))
+* add background color ([3191011](https://github.com/iavofficial/IAVFrontendFramework/commit/31910118927ad9f974cff860a4c3e25b57a29054))
+* add background in mainVíew.tsx ([eabf8d3](https://github.com/iavofficial/IAVFrontendFramework/commit/eabf8d3341ef2ce75c834c8a8a1bc4d0c72c9473))
+* add default icon ([6e3fce3](https://github.com/iavofficial/IAVFrontendFramework/commit/6e3fce37ff99e3bd9f27e8412022767c2e98a60d))
+* add useMatch for highlighting navbar ([e172706](https://github.com/iavofficial/IAVFrontendFramework/commit/e172706213edd77aa71c81d02a32955b1c58ecb2))
+* back to old state ([743731f](https://github.com/iavofficial/IAVFrontendFramework/commit/743731f512a0f5d0b603d93e22ed63382742cdaf))
+* package.json ([2619409](https://github.com/iavofficial/IAVFrontendFramework/commit/261940914b1d5afc53cbcce3cd90b62c0a72ab74))
+* remove setInitial in useEffect ([2149e2a](https://github.com/iavofficial/IAVFrontendFramework/commit/2149e2a05da0bfc974051a326ab4561efe0385eb))
+* routing useEffect ([2399090](https://github.com/iavofficial/IAVFrontendFramework/commit/2399090ee0203b005170ad471958cdda534a1e45))
+* width ([eb3a893](https://github.com/iavofficial/IAVFrontendFramework/commit/eb3a8933b58f6fd13d3bb2d496ee52a2da33b26c))
+
 ## [@iavofficial/frontend-framework-v1.4.0-dev.8](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.0-dev.7...@iavofficial/frontend-framework-v1.4.0-dev.8) (2025-04-10)
 
 ### Features

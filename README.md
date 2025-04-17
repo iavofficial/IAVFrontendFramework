@@ -43,9 +43,9 @@ information about the section can be found [here](https://github.com/iavofficial
 
 Here's a quick look of an example of the IAV Frontend Framework:
 
-<img src="login.png"/>
+<img src="https://iavofficial.github.io/IAVFrontendFramework/assets/index/login.png"/>
 
-<img src="menu.png"/>
+<img src="https://iavofficial.github.io/IAVFrontendFramework/assets/index/menu.png"/>
 
 ## License
 
@@ -56,3 +56,4 @@ the [root of the repository](./LICENSE).
 
 Contributions are welcome! Please read the [contributing guidelines](./CONTRIBUTING.md) before submitting a pull
 request.
+

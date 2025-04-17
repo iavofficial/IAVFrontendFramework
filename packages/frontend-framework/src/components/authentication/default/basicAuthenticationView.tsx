@@ -70,7 +70,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
 
   const {passwordErrorMessage} = props.authOptions?.errorMessages || {};
 
-  // These two functions life on the class instance not on the prototype thanks to @babel/plugin-proposal-class-properties.
+  // These two functions life on the class instance not on the prototype thanks to @babel/plugin-transform-class-properties.
   const submit = (event: FormEvent<HTMLFormElement>) => {
     setTriedToSubmit(true);
     event.preventDefault();

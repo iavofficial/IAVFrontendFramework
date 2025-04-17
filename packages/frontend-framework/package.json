@@ -51,12 +51,12 @@
     "react-transition-group": "^4.4.5"
   },
   "devDependencies": {
-    "@babel/cli": "^7.21.0",
-    "@babel/core": "^7.22.10",
-    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/cli": "^7.27.0",
+    "@babel/core": "^7.26.10",
+    "@babel/plugin-transform-class-properties": "^7.25.9",
     "@babel/preset-env": "^7.25.4",
-    "@babel/preset-react": "^7.22.5",
-    "@babel/preset-typescript": "^7.21.0",
+    "@babel/preset-react": "^7.26.3",
+    "@babel/preset-typescript": "^7.27.0",
     "@svgr/babel-plugin-transform-svg-component": "^8.0.0",
     "@types/lodash": "^4.14.191",
     "@types/node": "^18.15.5",

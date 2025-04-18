@@ -1,0 +1,434 @@
+<!--
+ Copyright © 2024 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+
+ SPDX-License-Identifier: Apache-2.0
+-->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Main Components</title>
+    <script src="./pages/script/nav.js" type="application/javascript"></script>
+    <link href="./pages/styles/styles.css" rel="stylesheet" />
+    <link href="./pages/styles/pages.css" rel="stylesheet" />
+  </head>
+  <body>
+    <h1 id="color-settings-and-dark-mode">Color Settings and Dark Mode</h1>
+
+    <h2 id="introduction">Introduction</h2>
+    <p class="cell">
+      Color and theme (dark / light mode) information is stored and provided by
+      the React context called <strong>ColorSettings</strong>
+      context. The ColorSettings context`s provider component is embedded inside
+      the ColorProvider component. The ColorProvider itself is contained in
+      GlobalDataLayer. Your interface to the ColorProvider component is the
+      colorSettings property of the GlobalDataLayer component. This property
+      will be explained later on.
+    </p>
+    <p class="cell">
+      Using these options you are able to set custom colors (especially for
+      framework components). Furthermore, the ColorSettings context provides you
+      the information whether the dark mode is activated. This allows you to
+      implement a dark mode four your components.
+    </p>
+    <p class="cell">
+      All colors are exported by the framework&#39;s contstants file. The
+      following code snippet shows you how to import these colors:
+    </p>
+    <p class="cell">
+      <strong>Example exported color</strong>
+    </p>
+    <pre
+      class="cell"
+    ><code class="lang-typescript"><span class="hljs-keyword">import</span> {BLUE0} <span
+        class="hljs-keyword">from</span> <span
+        class="hljs-string">"@iavofficial/frontend-framework/constants"</span>;
+</code></pre>
+    <h1 id="overwrite-default-colors">Overwrite default colors</h1>
+    <h2 id="css">CSS</h2>
+    <p class="cell">
+      Besides providing the colors as JS constants, all colors are defined as
+      CSS constants within the root and can be used within the css files of the
+      project. The following code snippet shows you how to use these colors
+      inside css files:
+    </p>
+    <p class="cell">
+      <strong>Example exported css constants and variables definition</strong>
+    </p>
+    <pre class="cell"><code class="lang-typescript"><span
+        class="hljs-comment">// Example for exported color by the framework:</span>
+:root {
+   --blue-0: <span class="hljs-number">#001a54</span>;
+}
+
+<span class="hljs-selector-class">.your-class</span> {
+   <span class="hljs-attribute">color</span>: var(--blue-<span class="hljs-number">0</span>);
+}
+</code></pre>
+    <p class="cell">
+      The framework provides CSS classes for styling your components. This is
+      inspired by PrimeReact. The classes are defined in the globalColors.css
+      file and globally exported. The following code snippet illustrates the
+      structure of these classe&#39;s names.
+    </p>
+    <p class="cell">
+      <strong>Global CSS colors</strong>
+    </p>
+    <pre
+      class="cell"
+    ><code class="lang-typescript"><span class="hljs-comment">/* BACKGROUND CLASSES*/</span>
+.bg-white<span class="hljs-number">-1</span>{<span class="hljs-comment">//because of nameconflicts with primereact this name is an execption</span>
+  <span class="hljs-built_in">background</span>-<span class="hljs-built_in">color</span>: var(--white);
+}
+
+.bg-<span class="hljs-built_in">blue</span><span class="hljs-number">-0</span>{
+  <span class="hljs-built_in">background</span>-<span class="hljs-built_in">color</span>: var(--<span
+            class="hljs-built_in">blue</span><span class="hljs-number">-0</span>);
+}
+
+<span class="hljs-comment">/* COLOR CLASSES*/</span>
+.<span class="hljs-built_in">color</span>-white{
+  <span class="hljs-built_in">color</span>: var(--white);
+}
+
+.<span class="hljs-built_in">color</span>-<span class="hljs-built_in">blue</span><span class="hljs-number">-0</span>{
+  <span class="hljs-built_in">color</span>: var(--<span class="hljs-built_in">blue</span><span
+            class="hljs-number">-0</span>);
+}
+</code></pre>
+    <h2 id="colorsettings-property-of-globaldatalayer">
+      colorSettings property of GlobalDataLayer
+    </h2>
+    <p class="cell">
+      Using the colorSettings property you can pass an object of the following
+      structure:
+    </p>
+    <pre
+      class="cell"
+    ><code class="lang-typescript"><span class="hljs-class"><span
+        class="hljs-keyword">export interface</span> <span
+        class="hljs-title">ColorProviderProps</span> {</span>
+    <span class="hljs-symbol">colorOptions?:</span> ColorOptions; <span class="hljs-comment">// Options to overwrite the default framework component's default colors.</span>
+    <span class="hljs-symbol">disableCustomColorsForLightMode?:</span> <span class="hljs-keyword">boolean</span>; <span
+            class="hljs-comment">// Option to disable your color settings for the light mode.</span>
+    <span class="hljs-symbol">disableCustomColorsForDarkMode?:</span> <span class="hljs-keyword">boolean</span>; <span
+            class="hljs-comment">// Option to disable your color settings for the dark mode.</span>
+}
+</code></pre>
+    <p class="cell">
+      If you want to overwrite the colors of framework components you can do so
+      using GlobalDataLayer&#39;s colorSettings property. The colors should be
+      defined in HEX representation. The following code snippet shows the
+      options object to overwrite the default colors. The specific interfaces
+      are listed later on.
+    </p>
+    <p class="cell">
+      <strong>Interface colorObject</strong>
+    </p>
+    <pre
+      class="cell"
+    ><code class="lang-typescript"><span class="hljs-class"><span
+        class="hljs-keyword">export interface</span> <span
+        class="hljs-title">ColorOptions</span> {</span>
+    <span class="hljs-symbol">header?:</span> HeaderColorOptions;
+    <span class="hljs-symbol">navbar?:</span> NavbarColorOptions;
+    <span class="hljs-symbol">contentArea?:</span> ContentAreaColorOptions;
+    <span class="hljs-symbol">contentbar?:</span> ContentbarColorOptions;
+    <span class="hljs-symbol">contentCell?:</span> ContentCellColorOptions;
+    <span class="hljs-symbol">authenticationView?:</span> AuthenticationViewColorOptions;
+}
+</code></pre>
+    <p class="cell">
+      The following interfaces show that most settings are divided by the state
+      of the corresponding element: default, hovering and active.
+    </p>
+    <h3>Color options of the header</h3>
+    <p class="cell">
+      Using these options you can define the colors of the main view&#39;s
+      header.
+    </p>
+    <p class="cell">
+      <strong>Interface HeaderColorType</strong>
+    </p>
+    <pre
+      class="cell"
+    ><code class="lang-typescript"><span class="hljs-keyword">export</span> <span
+        class="hljs-keyword">interface</span> HeaderColorOptions {
+    <span class="hljs-symbol">backgroundColor?:</span> <span class="hljs-built_in">string</span>;
+    <span class="hljs-symbol">settingsIconColor?:</span> <span class="hljs-built_in">string</span>;
+    <span class="hljs-symbol">userIconColor?:</span> <span class="hljs-built_in">string</span>;
+}
+</code></pre>
+    <h3>Color options of the navigation bar (including the navigation tabs)</h3>
+    <p class="cell">
+      Using these options you can define the colors of the main view&#39;s
+      navigation bar.
+    </p>
+    <p class="cell">
+      <strong>Interface NavbarColorType</strong>
+    </p>
+    <pre
+      class="cell"
+    ><code class="lang-typescript"><span class="hljs-class"><span
+        class="hljs-keyword">export interface</span> <span
+        class="hljs-title">NavbarColorOptions</span> {</span>
+    <span class="hljs-symbol">backgroundColor?:</span> string;
+    <span class="hljs-symbol">navbarCollapseArrowColor?:</span> string;
+    <span class="hljs-symbol">legalDocumentsIconColor?:</span> string;
+    <span class="hljs-symbol">scrollbarColor?:</span> string;
+    <span class="hljs-symbol">content?:</span> TabColorOptionsOptional; <span class="hljs-comment">// Color settings for the navigation tabs</span>
+}
+</code></pre>
+    <pre
+      class="cell"
+    ><code class="lang-typescript"><span class="hljs-class"><span
+        class="hljs-keyword">export interface</span> <span
+        class="hljs-title">TabColorOptionsOptional</span> {</span>
+  <span class="hljs-symbol">insideActiveGroupColor?:</span> string;
+  <span class="hljs-keyword">default</span>?: {
+    <span class="hljs-symbol">tabBackgroundDefaultColor?:</span> string;
+    <span class="hljs-symbol">tabFontDefaultColor?:</span> string;
+    <span class="hljs-symbol">tabIconDefaultColor?:</span> string;
+    <span class="hljs-symbol">groupBackgroundDefaultColor?:</span> string;
+    <span class="hljs-symbol">groupFontDefaultColor?:</span> string;
+    <span class="hljs-symbol">groupIconDefaultColor?:</span> string;
+    <span class="hljs-symbol">groupArrowDefaultColor?:</span> string;
+  };
+  <span class="hljs-symbol">hover?:</span> {
+    <span class="hljs-symbol">tabBackgroundHoverColor?:</span> string;
+    <span class="hljs-symbol">tabFontHoverColor?:</span> string;
+    <span class="hljs-symbol">tabIconHoverColor?:</span> string;
+    <span class="hljs-symbol">groupBackgroundHoverColor?:</span> string;
+    <span class="hljs-symbol">groupFontHoverColor?:</span> string;
+    <span class="hljs-symbol">groupIconHoverColor?:</span> string;
+    <span class="hljs-symbol">groupArrowHoverColor?:</span> string;
+  };
+  <span class="hljs-symbol">active?:</span> {
+    <span class="hljs-symbol">tabBackgroundActiveColor?:</span> string;
+    <span class="hljs-symbol">tabFontActiveColor?:</span> string;
+    <span class="hljs-symbol">tabIconActiveColor?:</span> string;
+    <span class="hljs-symbol">groupBackgroundActiveColor?:</span> string;
+    <span class="hljs-symbol">groupFontActiveColor?:</span> string;
+    <span class="hljs-symbol">groupIconActiveColor?:</span> string;
+    <span class="hljs-symbol">groupArrowActiveColor?:</span> string;
+  };
+}
+</code></pre>
+    <h3>Color options of the content area</h3>
+    <p class="cell">
+      Using these options you can set the colors of the content area:
+    </p>
+    <p class="cell">
+      <strong>ContentColorType</strong>
+    </p>
+    <pre
+      class="cell"
+    ><code class="lang-typescript"><span class="hljs-keyword">export</span> <span
+        class="hljs-keyword">interface</span> ContentAreaColorOptions {
+    <span class="hljs-symbol">backgroundColor?:</span> <span class="hljs-built_in">string</span>;
+}
+</code></pre>
+    <h3>Color options of the content bar (including tabs)</h3>
+    <p class="cell">
+      Using these options you can set the colors of the tabs of the content bar:
+    </p>
+    <p class="cell">
+      <strong>ContentbarTabColorType</strong>
+    </p>
+    <pre
+      class="cell"
+    ><code class="lang-typescript"><span class="hljs-class"><span
+        class="hljs-keyword">export interface</span> <span
+        class="hljs-title">ContentbarColorOptions</span> {</span>
+    <span class="hljs-symbol">backgroundColor?:</span> string;
+    <span class="hljs-symbol">iconDefaultColor?:</span> string;
+    <span class="hljs-symbol">iconHoverColor?:</span> string;
+    <span class="hljs-symbol">buttonDefaultColor?:</span> string;
+    <span class="hljs-symbol">buttonHoverColor?:</span> string;
+    <span class="hljs-symbol">tabs?:</span> ContentbarTabColorType; <span class="hljs-comment">// Color settings of the tabs</span>
+}
+</code></pre>
+    <pre
+      class="cell"
+    ><code class="lang-typescript"><span class="hljs-keyword">export interface</span> ContentbarTabColorType {
+    <span class="hljs-symbol">backgroundDefaultColor?: </span><span class="hljs-keyword">string;
+</span>    <span class="hljs-symbol">backgroundHoverColor?: </span><span class="hljs-keyword">string;
+</span>    <span class="hljs-symbol">backgroundActiveColor?: </span><span class="hljs-keyword">string;
+</span>    <span class="hljs-symbol">textDefaultColor?:</span> <span class="hljs-keyword">string;
+</span>    <span class="hljs-symbol">textHoverColor?:</span> <span class="hljs-keyword">string;
+</span>    <span class="hljs-symbol">textActiveColor?:</span> <span class="hljs-keyword">string;
+</span>    <span class="hljs-symbol">iconDefaultColor?:</span> <span class="hljs-keyword">string;
+</span>    <span class="hljs-symbol">iconHoverColor?:</span> <span class="hljs-keyword">string;
+</span>    <span class="hljs-symbol">iconActiveColor?:</span> <span class="hljs-keyword">string;
+</span>}
+</code></pre>
+    <h3>Color options for content cells</h3>
+    <p class="cell">
+      Using these options you can set the colors of content cells:
+    </p>
+    <pre
+      class="cell"
+    ><code class="lang-typescript"><span class="hljs-keyword">export</span> <span
+        class="hljs-keyword">interface</span> ContentCellColorOptions {
+    backgroundColor?: <span class="hljs-built_in">string</span>;
+}
+</code></pre>
+    <h3 id="color-options-for-the-authentication-view">
+      Color options for the authentication view
+    </h3>
+    <p class="cell">
+      Using these options you can set the colors of the authentication view:
+    </p>
+    <p class="cell">
+      <strong>Interfaces ContentElements</strong>
+    </p>
+    <pre
+      class="cell"
+    ><code class="lang-typescript"><span class="hljs-keyword">export</span> <span
+        class="hljs-keyword">interface</span> AuthenticationViewColorOptions {
+    <span class="hljs-symbol">headerBackgroundColor?:</span> <span class="hljs-built_in">string</span>;
+    <span class="hljs-symbol">loginButtonBackgroundColor?:</span> <span class="hljs-built_in">string</span>;
+    <span class="hljs-symbol">loginButtonTextColor?:</span> <span class="hljs-built_in">string</span>;
+    <span class="hljs-symbol">legalNoticeIconColor?:</span> <span class="hljs-built_in">string</span>;
+    <span class="hljs-symbol">loginFormBackgroundColor?:</span> <span class="hljs-built_in">string</span>;
+    <span class="hljs-symbol">fullScreenBackgroundColor?:</span> <span class="hljs-built_in">string</span>; <span
+            class="hljs-comment">// If fullscreenBackgroundcolor is defined, this color will replace the background image inside the authentication view.</span>
+    <span class="hljs-symbol">companyTextColor?:</span> <span class="hljs-built_in">string</span>;
+    <span class="hljs-symbol">inputFieldDescriptionTextColor?:</span> <span class="hljs-built_in">string</span>;
+    <span class="hljs-symbol">inputFieldBackgroundColor?:</span> <span class="hljs-built_in">string</span>;
+    <span class="hljs-symbol">inputFieldTextColor?:</span> <span class="hljs-built_in">string</span>;
+    <span class="hljs-symbol">passwortRequirementsTextColor?:</span> <span class="hljs-built_in">string</span>; <span
+            class="hljs-comment">// Defines the color of the text for the requirements to set a new password of the AWS authentication view.</span>
+    <span class="hljs-symbol">themeTogglerColor?:</span> <span class="hljs-built_in">string</span>;
+}
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> AuthenticationColorType {
+    <span class="hljs-symbol">headerBackgroundColor?:</span> <span class="hljs-built_in">string</span>;
+    <span class="hljs-symbol">loginButtonBackgroundColor?:</span> <span class="hljs-built_in">string</span>;
+    <span class="hljs-symbol">loginButtonTextColor?:</span> <span class="hljs-built_in">string</span>;
+    <span class="hljs-symbol">legalNoticeIconColor?:</span> <span class="hljs-built_in">string</span>;
+    <span class="hljs-symbol">loginFormBackgroundColor?:</span> <span class="hljs-built_in">string</span>;
+    <span class="hljs-symbol">fullScreenBackgroundColor?:</span> <span class="hljs-built_in">string</span>;
+    <span class="hljs-symbol">companyTextColor?:</span> <span class="hljs-built_in">string</span>;
+    <span class="hljs-symbol">inputFieldDescriptionTextColor?:</span> <span class="hljs-built_in">string</span>;
+    <span class="hljs-symbol">inputFieldBackgroundColor?:</span> <span class="hljs-built_in">string</span>;
+    <span class="hljs-symbol">inputFieldTextColor?:</span> <span class="hljs-built_in">string</span>;
+    <span class="hljs-symbol">passwortRequirementsTextColor?:</span> <span class="hljs-built_in">string</span>; <span
+            class="hljs-comment">// Defines the color of the text for the requirements to set a new password of the AWS authentication view.</span>
+}
+</code></pre>
+    <h1 id="other-color-options">Other color options</h1>
+    <p class="cell">
+      To change the color of the PrimeReact components DropDown and ContextMenu
+      you have to overwrite the following css variables:
+    </p>
+    <p class="cell">
+      <strong>CSS Properties</strong>
+    </p>
+    <pre><code class="lang-typescript">:root {
+    -<span class="ruby">-<span class="hljs-symbol">contextmenubgmaincolor:</span> ... /<span class="hljs-regexp">/ Background color of the contextsubmenu (settingsmenu and loginmenu).
+</span></span>    -<span class="ruby"><span class="hljs-regexp">-highlightcolor: ... /</span><span class="hljs-regexp">/ Background color of the contextsubmenu if hovered or selected (settingsmenu and loginmenu).
+</span></span>    -<span class="ruby"><span class="hljs-regexp">-textAndIconMainColor: ... /</span><span
+            class="hljs-regexp">/ Main text and icon color.
+</span></span>    -<span class="ruby"><span class="hljs-regexp">-textAndIconHighlightColor: ... /</span><span
+            class="hljs-regexp">/ Text and icon color if hovered or selected.
+</span></span>    -<span class="ruby"><span class="hljs-regexp">-dropdownBg: ... /</span><span class="hljs-regexp">/ Background of the DropDown component.
+</span></span>    -<span class="ruby"><span class="hljs-regexp">-dropdownBgHighlight: ... /</span><span
+            class="hljs-regexp">/ Color of the text's highlighting if hovered of selected.
+</span></span>}
+</code></pre>
+    <h1 id="example-for-using-custom-colors">
+      Example for using custom colors
+    </h1>
+    <p>
+      Using these options you can for example create a view like the following.
+    </p>
+    <p><img alt="DISA" src="./assets/color-settings/custom-coloring.png" /></p>
+    <h1 id="how-to-implement-a-dark-mode-in-custom-components">
+      How to implement a dark mode in custom components
+    </h1>
+    <h2 id="implement-dark-mode-using-the-colorsettings-context">
+      Implement dark mode using the ColorSettings context
+    </h2>
+    <p class="cell">
+      If you want to implement a component including a dark mode you will have
+      to know whether the dark mode is activated at first. You are able to get
+      this information by reading the darkmode attribute of the ColorSettings
+      context. The following code snippet shows an example:
+    </p>
+    <p><strong>Interfaces ContentElements</strong></p>
+    <pre><code class="lang-typescript"><span class="hljs-keyword">import</span> React, { useContext } <span
+        class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> { ColorSettingsContext } <span class="hljs-keyword">from</span> <span
+            class="hljs-string">'disa-framework/colorSettingsContext'</span>;
+<span class="hljs-keyword">import</span> <span
+            class="hljs-string">'@iavofficial/frontend-framework/globalColors.css'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> ExampleComponent = <span
+            class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    <span class="hljs-keyword">const</span> colorSettingsContext = useContext(ColorSettingsContext);
+
+    <span class="hljs-keyword">return</span> (
+        <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span
+                class="hljs-attr">style</span>=<span class="hljs-string">{{</span> <span class="hljs-attr">width:</span> '<span
+                class="hljs-attr">100</span>%' }}
+            <span class="hljs-attr">className</span>=<span class="hljs-string">{colorSettingsContext?.darkmode</span> ? '<span
+                    class="hljs-attr">color-white</span> <span class="hljs-attr">bg-black</span>' <span
+                    class="hljs-attr">:</span> '<span class="hljs-attr">color-black</span> <span class="hljs-attr">bg-white</span>'}&gt;</span>
+            ExampleComponent
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+    );
+};
+</code></pre>
+    <p class="cell">
+      However, deciding which colors should be used regarding the theme inside
+      your components is a bad practice. Instead you should maintain the
+      currently used colors in a central place like the framework does. Consult
+      the framework implementation (especially the ColorProvider component) for
+      further details.
+    </p>
+    <h3>Implement dark mode using the color-theme html attribute</h3>
+    <p class="cell">
+      If the user activates the dark mode the &quot;color-theme&quot; html
+      attribute will be set (at html body). This enables you to style your
+      components for the light and dark mode using CSS attribute selectors like
+      so:
+    </p>
+    <pre
+      class="cell"
+    ><code class="lang-typescript"><span class="hljs-selector-class">.example</span> {
+    <span class="hljs-attribute">background-color</span>: white;
+}
+
+<span class="hljs-selector-attr">[color-theme="dark"]</span> <span class="hljs-selector-class">.example</span> {
+    <span class="hljs-attribute">background-color</span>: black;
+}
+</code></pre>
+    <p class="cell">
+      This CSS will set a white background for the class &quot;example&quot; if
+      the color-theme is not &quot;dark&quot; (light mode is activated). If the
+      color-theme is set to &quot;dark&quot; (dark mode is activated) it will
+      set the background to black.
+    </p>
+    <h1 id="how-to-disable-the-dark-mode">How to disable the dark mode</h1>
+    <p class="cell">
+      To disable the dark mode use the <em>hideColorThemeToggler</em> option
+      inside <em>settingsMenuOptions</em>
+      of the UILayer component. This will prevent the user from changing the
+      theme.
+    </p>
+  </body>
+</html>

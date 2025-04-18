@@ -20,6 +20,21 @@
 
 [![license](https://img.shields.io/badge/license-Apache--2.0-blue)](./LICENSE)
 
+> 🎉 **Version 1.4.0 is now available!**
+>
+> This release includes new features and important fixes:
+>
+> **Features**
+> - Introduced an interface for setting a custom header component
+> - Embedded the styleguide from Figma in the documentation
+>
+> **Fixes & Improvements**
+> - Fixed an overflow issue by adding a background to the `contentWithBar` layout
+> - Made the user icon in the header optional
+> - Improved scroll behavior for navigation elements
+> - Updated image sources in the README
+> - Active element highlighting in the navbar now works correctly even when the UI layer is not located at the root path
+
 ## About the Project
 
 The IAV Frontend Framework is designed to simplify the development of modern, scalable, and reusable frontend
@@ -52,8 +67,12 @@ Here's a quick look of an example of the IAV Frontend Framework:
 This project is licensed under the **Apache-2.0** license. The full license text is included in
 the [root of the repository](./LICENSE).
 
+## SBOM
+
+As this project is a monorepo, the SBOM.spdx files are contained inside the specific package folders. You can find these
+folders inside the packages folder.
+
 ## Contributing
 
 Contributions are welcome! Please read the [contributing guidelines](./CONTRIBUTING.md) before submitting a pull
 request.
-

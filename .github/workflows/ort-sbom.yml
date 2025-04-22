@@ -64,7 +64,7 @@ jobs:
       # Upload Generated SBOMs as Artifacts (for testing)
       # ---------------------------------------
       - name: Upload SBOM Files
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: sbom-files
           path: ./shared-results-sbom

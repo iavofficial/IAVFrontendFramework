@@ -35,8 +35,16 @@ jobs:
           # Download and unzip ORT
           curl -sSfL https://github.com/oss-review-toolkit/ort/releases/download/55.3.0/ort-55.3.0.zip -o ort.zip
           unzip ort.zip -d ort/
-          export PATH=$PATH:$PWD/ort
-          ./ort/ort --version
+          
+          # Ensure the binary is executable
+          chmod +x ./ort/ort-55.3.0/bin/ort
+          
+          # Add ORT to PATH
+          export PATH=$PATH:$PWD/ort/ort-55.3.0/bin
+      
+          # Test installation
+          ort --version
+
 
       # ---------------------------------------
       # Run ORT Analyze

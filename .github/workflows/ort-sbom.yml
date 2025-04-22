@@ -1,0 +1,80 @@
+name: ORT SBOM
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - IAV-FF-feature-foss-check-integration-192
+
+jobs:
+  ort-sbom:
+    runs-on: ubuntu-latest
+
+    steps:
+      # ---------------------------------------
+      # Check out the repository
+      # ---------------------------------------
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ---------------------------------------
+      # Install ORT Dependencies
+      # ---------------------------------------
+      - name: Install ORT Dependencies
+        run: |
+          sudo apt-get update
+          # Install Java (ORT requires Java to run)
+          sudo apt-get install -y openjdk-11-jdk curl unzip
+          java -version
+
+      # ---------------------------------------
+      # Install OSS Review Toolkit (ORT)
+      # ---------------------------------------
+      - name: Install OSS Review Toolkit (ORT)
+        run: |
+          # Download and unzip ORT
+          curl -sSfL https://github.com/oss-review-toolkit/ort/releases/download/55.3.0/ort-55.3.0.zip -o ort.zip
+          unzip ort.zip -d ort/
+          export PATH=$PATH:$PWD/ort
+          ./ort/ort --version
+
+      # ---------------------------------------
+      # Run ORT Analyze
+      # ---------------------------------------
+      - name: Run ORT Analyze
+        run: |
+          mkdir -p shared-results
+          java -jar ./ort/ort.jar analyze \
+            -i ./packages/shared \
+            -o ./shared-results
+        working-directory: IAVFrontendFramework
+
+      # ---------------------------------------
+      # Run ORT Report
+      # ---------------------------------------
+      - name: Generate SBOM and Report
+        run: |
+          mkdir -p shared-results-sbom
+          java -jar ./ort/ort.jar report \
+            -i ./shared-results/analyzer-result.yml \
+            -o ./shared-results-sbom \
+            -f CycloneDX,SpdxDocument
+
+      # ---------------------------------------
+      # Upload Generated SBOMs as Artifacts (for testing)
+      # ---------------------------------------
+      - name: Upload SBOM Files
+        uses: actions/upload-artifact@v3
+        with:
+          name: sbom-files
+          path: ./shared-results-sbom
+
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git config --global user.name "${GITHUB_ACTOR}"
+          git add .
+          git commit -m "chore(ci): Commit changes made during CI/CD pipeline" || echo "No changes to commit"
+          git push origin ${GITHUB_REF#refs/heads/}
+

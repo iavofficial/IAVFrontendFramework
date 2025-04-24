@@ -59,16 +59,21 @@ jobs:
             packageDir=$(dirname "$packageFile")
             echo "Running license-checker for: $packageDir"
 
+            # Ensure all dependencies are installed before running license-checker
+            cd $packageDir
+            npm install
+            cd -
+
             # Generate the license-checker report
-            license-checker --production --json > $packageDir-dependency-licenses.json --start $packageDir
+            license-checker --json --production --start $packageDir > $packageDir-dependency-licenses.json
 
             # Output the license report for debugging
             echo "Dependency license report for $packageDir:"
             cat $packageDir-dependency-licenses.json
 
-            # Check if there are any disallowed licenses
+            # Check for disallowed licenses in the report
             for license in $(echo $DISALLOWED_LICENSES | sed 's/,/ /g'); do
-              MATCH_COUNT=$(grep -o $license $packageDir-dependency-licenses.json | wc -l)
+              MATCH_COUNT=$(grep -o "\"licenses\": \"$license\"" $packageDir-dependency-licenses.json | wc -l)
               if [ $MATCH_COUNT -gt 0 ]; then
                 echo "❌ Disallowed license detected: $license in $packageDir-dependency-licenses.json"
                 exit 1

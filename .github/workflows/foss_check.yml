@@ -35,13 +35,18 @@ jobs:
       # Step 6: Check for license compliance using Licensee
       - name: License Compliance Check
         run: |
+          # Install Licensee gem locally
           gem install licensee --user-install
-          export PATH="$PATH:$HOME/.gem/ruby/3.2.0/bin"
+
+          # Add the gem executables directory to the PATH
+          export PATH="$HOME/.local/share/gem/ruby/3.2.0/bin:$PATH"
+
+          # Run Licensee tool
           licensee detect . --json > license-compliance-report.json
 
+          # Output the report for debugging purposes
+          cat license-compliance-report.json
 
-          # Run Licensee on the repository
-          licensee detect . --json > license-compliance-report.json
 
           # Check exit code (licensee returns non-zero if issues are found)
         continue-on-error: false # Fail the workflow if licenses are non-compliant

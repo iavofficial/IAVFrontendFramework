@@ -55,7 +55,8 @@ jobs:
 
           echo "Checking licenses in the root package-lock.json file..."
 
-          jq -r '.dependencies | to_entries[] | "\(.key):\(.value.license // "MISSING LICENSE")"' package-lock.json | while read dependency; do
+          # Parse package-lock.json safely, handling missing and null fields gracefully
+          jq -r '.dependencies | to_entries[] | select(.value.license != null) | "\(.key):\(.value.license // "MISSING LICENSE")"' package-lock.json | while read dependency; do
             DEP_NAME=$(echo "$dependency" | cut -d':' -f1)
             DEP_LICENSE=$(echo "$dependency" | cut -d':' -f2)
 
@@ -72,7 +73,10 @@ jobs:
                 exit 1
               fi
             done
-          done
+          done || {
+            echo "❌ Failed to process the package-lock.json file due to malformed entries."
+            exit 1
+          }
 
           echo "✅ All dependency licenses validated successfully."
 

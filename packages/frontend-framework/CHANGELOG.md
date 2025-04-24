@@ -1,3 +1,9 @@
+## [@iavofficial/frontend-framework-v1.4.1](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.0...@iavofficial/frontend-framework-v1.4.1) (2025-04-18)
+
+### Bug Fixes
+
+* readme ([34d6921](https://github.com/iavofficial/IAVFrontendFramework/commit/34d69219069479f42ef78f06ff8be91688914b2d))
+
 ## [@iavofficial/frontend-framework-v1.4.1-dev.1](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.0...@iavofficial/frontend-framework-v1.4.1-dev.1) (2025-04-18)
 
 ### Bug Fixes

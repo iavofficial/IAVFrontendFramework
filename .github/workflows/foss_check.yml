@@ -45,43 +45,37 @@ jobs:
             cd "$packageDir" && npm install && npm audit --audit-level=high && cd -
           done
 
-      ### Step 6: Dependency License Compliance Check
-      - name: Dependency License Checker
+      ### Step 6: Check Licenses Using npm list + jq
+      - name: Dependency License Compliance Check
         run: |
-          # Install license-checker globally
-          npm install -g license-checker
-
           # Define disallowed licenses
           DISALLOWED_LICENSES="GPL,AGPL-3.0,CC-BY-4.0"
 
-          echo "Running license-checker for all workspaces..."
+          echo "Checking licenses for all workspaces..."
           find packages -name "package.json" -not -path "*/node_modules/*" | while read packageFile; do
             packageDir=$(dirname "$packageFile")
-            echo "Running license-checker for: $packageDir"
+            echo "Checking licenses for workspace: $packageDir"
 
-            # Ensure all dependencies are installed for the workspace
+            # Install dependencies for the workspace
             cd $packageDir
             npm install
             cd -
 
-            # Generate the license-checker report, including all dependencies (direct and transitive)
-            license-checker --json --production --all --start $packageDir > $packageDir-dependency-licenses.json
+            # Use npm list to generate dependency trees and licenses
+            npm list --json > $packageDir-dependencies.json
 
-            # Debugging: Output the full report for inspection
-            echo "Dependency license report for $packageDir:"
-            cat $packageDir-dependency-licenses.json
-
-            # Check for disallowed licenses in the report
-            for license in $(echo $DISALLOWED_LICENSES | sed 's/,/ /g'); do
-              MATCH_COUNT=$(grep -o "\"licenses\": \"$license\"" $packageDir-dependency-licenses.json | wc -l)
-              if [ $MATCH_COUNT -gt 0 ]; then
-                echo "❌ Disallowed license detected: $license in $packageDir-dependency-licenses.json"
-                exit 1
-              fi
+            # Extract licenses using jq and check for disallowed ones
+            jq -r '.dependencies | to_entries[] | .value | {"name": .name, "license": .license}' $packageDir-dependencies.json | while read dependency; do
+              for license in $(echo $DISALLOWED_LICENSES | sed 's/,/ /g'); do
+                if echo $dependency | grep -q "$license"; then
+                  echo "❌ Disallowed license detected in $dependency"
+                  exit 1
+                fi
+              done
             done
           done
 
-          echo "All dependency licenses validated successfully."
+          echo "✅ All dependency licenses validated successfully."
 
       ### Step 7: Check Root Project License with Licensee
       - name: Project License Compliance with Licensee

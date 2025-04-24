@@ -22,8 +22,9 @@ jobs:
 
       ### Step 3: Install Dependencies
       - name: Install Dependencies (Root-Level)
-        run: npm install
-        run: sudo apt-get install jq -y
+        run: |
+          npm install
+          sudo apt-get install jq -y
 
       ### Step 4: Generate Individual SBOMs for Each Turbo Workspace
       - name: Generate SBOMs for Workspaces
@@ -53,7 +54,7 @@ jobs:
           DISALLOWED_LICENSES="GPL,AGPL-3.0,CC-BY-4.0"
 
           echo "Checking licenses in the root package-lock.json file..."
-          
+
           # Parse package-lock.json and validate licenses
           jq -r '.dependencies | to_entries[] | "\(.key):\(.value.license)"' package-lock.json | while read dependency; do
             for license in $(echo $DISALLOWED_LICENSES | sed 's/,/ /g'); do

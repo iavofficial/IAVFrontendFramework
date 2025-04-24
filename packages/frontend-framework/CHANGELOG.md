@@ -1,3 +1,9 @@
+## [@iavofficial/frontend-framework-v1.4.2-dev.1](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.1...@iavofficial/frontend-framework-v1.4.2-dev.1) (2025-04-24)
+
+### Bug Fixes
+
+* add npm readme ([dcd2cd2](https://github.com/iavofficial/IAVFrontendFramework/commit/dcd2cd2f6f0f0551d4f3e9fab819b25daff46a88))
+
 ## [@iavofficial/frontend-framework-v1.4.1-dev.2](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.1-dev.1...@iavofficial/frontend-framework-v1.4.1-dev.2) (2025-04-24)
 
 ### Bug Fixes

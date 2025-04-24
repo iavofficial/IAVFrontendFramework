@@ -51,9 +51,10 @@ jobs:
           # Install license-checker for validating licenses
           npm install -g license-checker
 
-          DISALLOWED_LICENSES='GPL,AGPL-3.0,CC-BY-4.0'
+          # Define disallowed licenses
+          DISALLOWED_LICENSES="GPL,AGPL-3.0,CC-BY-4.0"
 
-          # Loop through workspaces and check dependency licenses
+          echo "Running license-checker for all workspaces..."
           find packages -name "package.json" -not -path "*/node_modules/*" | while read packageFile; do
             packageDir=$(dirname "$packageFile")
             echo "Running license-checker for: $packageDir"
@@ -61,10 +62,10 @@ jobs:
             # Generate the license-checker report
             license-checker --production --json > $packageDir-dependency-licenses.json --start $packageDir
 
-            # Check if there are any licenses in the disallowed list
+            # Check for disallowed licenses
             for license in $(echo $DISALLOWED_LICENSES | sed 's/,/ /g'); do
-              if grep -q $license $packageDir-dependency-licenses.json; then
-                echo "Disallowed license detected: $license in $packageDir-dependency-licenses.json"
+              if grep -q "\"licenses\": \"$license\"" $packageDir-dependency-licenses.json; then
+                echo "❌ Disallowed license detected: $license in $packageDir"
                 exit 1
               fi
             done

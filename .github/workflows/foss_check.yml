@@ -35,9 +35,10 @@ jobs:
       # Step 6: Check for license compliance using Licensee
       - name: License Compliance Check
         run: |
-          # Install Dependency for Licensee
-          sudo apt-get install -y ruby-full
-          gem install licensee
+          gem install licensee --user-install
+          export PATH="$PATH:$HOME/.gem/ruby/3.2.0/bin"
+          licensee detect . --json > license-compliance-report.json
+
 
           # Run Licensee on the repository
           licensee detect . --json > license-compliance-report.json

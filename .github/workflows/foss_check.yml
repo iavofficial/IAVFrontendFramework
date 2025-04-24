@@ -10,49 +10,73 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      ### Step 1: Checkout Repository
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      ### Step 2: Set up Node.js
+      - name: Set up Node.js Environment
         uses: actions/setup-node@v3
         with:
           node-version: '20'
 
-      - name: Install dependencies
+      ### Step 3: Install Dependencies
+      - name: Install Dependencies (Root-Level)
         run: npm install
 
-      # Step 4: Generate SBOM for the project
-      - name: Generate SBOM
+      ### Step 4: Generate Individual SBOMs for Each Turbo Workspace
+      - name: Generate SBOMs for Workspaces
         run: |
-          cd packages/frontend-framework && npm sbom --sbom-format spdx --output SBOM.spdx
+          # Loop through each workspace and generate its SBOM
+          find packages -name "package.json" -not -path "*/node_modules/*" | while read packageFile; do
+            packageDir=$(dirname "$packageFile")
+            echo "Generating SBOM for: $packageDir"
+            cd "$packageDir" && npm sbom --sbom-format spdx --output SBOM-$packageDir.spdx && cd -
+          done
         env:
           NODE_OPTIONS: '--max_old_space_size=4096'
 
-      # Step 5: Run npm audit for security vulnerability checks
-      - name: Run npm audit
-        run: npm install && npm audit --audit-level=high
+      ### Step 5: Run NPM Audit for Vulnerabilities (All Workspaces)
+      - name: Security Vulnerability Checks
+        run: |
+          find packages -name "package.json" -not -path "*/node_modules/*" | while read packageFile; do
+            packageDir=$(dirname "$packageFile")
+            echo "Running npm audit for: $packageDir"
+            cd "$packageDir" && npm install && npm audit --audit-level=high && cd -
+          done
 
-      # Step 6: Check for license compliance using Licensee
-      - name: License Compliance Check
+      ### Step 6: Dependency License Compliance Check
+      - name: Dependency License Checker
+        run: |
+          # Run license-checker for dependency licenses in all workspaces
+          npm install -g license-checker
+
+          find packages -name "package.json" -not -path "*/node_modules/*" | while read packageFile; do
+            packageDir=$(dirname "$packageFile")
+            echo "Running license-checker for: $packageDir"
+            license-checker --production --json --out $packageDir-dependency-licenses.json --start $packageDir || exit 1
+          done
+
+          echo "All dependency licenses validated successfully."
+
+      ### Step 7: Check Root Project License with Licensee
+      - name: Project License Compliance with Licensee
         run: |
           # Install Licensee gem locally
           gem install licensee --user-install
 
-          # Add the gem executables directory to the PATH
+          # Add gem's executables directory to PATH
           export PATH="$HOME/.local/share/gem/ruby/3.2.0/bin:$PATH"
 
-          # Run Licensee tool
+          # Run Licensee to validate the main project's license
           licensee detect . --json > license-compliance-report.json
 
-          # Output the report for debugging purposes
+          # Output the license report
           cat license-compliance-report.json
 
-
-          # Check exit code (licensee returns non-zero if issues are found)
-        continue-on-error: false # Fail the workflow if licenses are non-compliant
-
-      # Notify on failure
-      - name: Email Notification (failure alerts)
-        if: failure()
+      ### Step 8: Notify on Failure (Notifications Placeholder)
+      - name: Failure Notifications
+        if: failure() # Run this step only if the pipeline fails
         run: |
-          echo "FOSS checks failed for the latest push. Email alerts will be integrated later here."
+          echo "FOSS checks failed! Sending notifications..."
+          # Here we would integrate an email notification system.

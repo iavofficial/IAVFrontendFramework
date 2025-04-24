@@ -55,11 +55,20 @@ jobs:
 
           echo "Checking licenses in the root package-lock.json file..."
 
-          # Parse package-lock.json and validate licenses
-          jq -r '.dependencies | to_entries[] | "\(.key):\(.value.license)"' package-lock.json | while read dependency; do
+          jq -r '.dependencies | to_entries[] | "\(.key):\(.value.license // "MISSING LICENSE")"' package-lock.json | while read dependency; do
+            DEP_NAME=$(echo "$dependency" | cut -d':' -f1)
+            DEP_LICENSE=$(echo "$dependency" | cut -d':' -f2)
+
+            # Log dependencies with missing licenses
+            if [ "$DEP_LICENSE" = "MISSING LICENSE" ]; then
+              echo "⚠️ Dependency \"$DEP_NAME\" has no declared license."
+              continue
+            fi
+
+            # Check for disallowed licenses
             for license in $(echo $DISALLOWED_LICENSES | sed 's/,/ /g'); do
-              if echo "$dependency" | grep -q "$license"; then
-                echo "❌ Disallowed license detected: $dependency"
+              if [ "$DEP_LICENSE" = "$license" ]; then
+                echo "❌ Disallowed license detected: $DEP_NAME ($DEP_LICENSE)"
                 exit 1
               fi
             done

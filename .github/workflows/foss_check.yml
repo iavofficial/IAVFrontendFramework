@@ -48,7 +48,7 @@ jobs:
       ### Step 6: Dependency License Compliance Check
       - name: Dependency License Checker
         run: |
-          # Install license-checker for validating licenses
+          # Install license-checker globally
           npm install -g license-checker
 
           # Define disallowed licenses
@@ -59,15 +59,15 @@ jobs:
             packageDir=$(dirname "$packageFile")
             echo "Running license-checker for: $packageDir"
 
-            # Ensure all dependencies are installed before running license-checker
+            # Ensure all dependencies are installed for the workspace
             cd $packageDir
             npm install
             cd -
 
-            # Generate the license-checker report
-            license-checker --json --production --start $packageDir > $packageDir-dependency-licenses.json
+            # Generate the license-checker report, including all dependencies (direct and transitive)
+            license-checker --json --production --all --start $packageDir > $packageDir-dependency-licenses.json
 
-            # Output the license report for debugging
+            # Debugging: Output the full report for inspection
             echo "Dependency license report for $packageDir:"
             cat $packageDir-dependency-licenses.json
 

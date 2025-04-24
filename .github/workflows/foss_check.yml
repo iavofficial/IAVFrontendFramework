@@ -23,6 +23,7 @@ jobs:
       ### Step 3: Install Dependencies
       - name: Install Dependencies (Root-Level)
         run: npm install
+        run: sudo apt-get install jq -y
 
       ### Step 4: Generate Individual SBOMs for Each Turbo Workspace
       - name: Generate SBOMs for Workspaces
@@ -45,33 +46,21 @@ jobs:
             cd "$packageDir" && npm install && npm audit --audit-level=high && cd -
           done
 
-      ### Step 6: Check Licenses Using npm list + jq
+      ### Step 6: Validate Licenses in package-lock.json
       - name: Dependency License Compliance Check
         run: |
           # Define disallowed licenses
           DISALLOWED_LICENSES="GPL,AGPL-3.0,CC-BY-4.0"
 
-          echo "Checking licenses for all workspaces..."
-          find packages -name "package.json" -not -path "*/node_modules/*" | while read packageFile; do
-            packageDir=$(dirname "$packageFile")
-            echo "Checking licenses for workspace: $packageDir"
-
-            # Install dependencies for the workspace
-            cd $packageDir
-            npm install
-            cd -
-
-            # Use npm list to generate dependency trees and licenses
-            npm list --json > $packageDir-dependencies.json
-
-            # Extract licenses using jq and check for disallowed ones
-            jq -r '.dependencies | to_entries[] | .value | {"name": .name, "license": .license}' $packageDir-dependencies.json | while read dependency; do
-              for license in $(echo $DISALLOWED_LICENSES | sed 's/,/ /g'); do
-                if echo $dependency | grep -q "$license"; then
-                  echo "❌ Disallowed license detected in $dependency"
-                  exit 1
-                fi
-              done
+          echo "Checking licenses in the root package-lock.json file..."
+          
+          # Parse package-lock.json and validate licenses
+          jq -r '.dependencies | to_entries[] | "\(.key):\(.value.license)"' package-lock.json | while read dependency; do
+            for license in $(echo $DISALLOWED_LICENSES | sed 's/,/ /g'); do
+              if echo "$dependency" | grep -q "$license"; then
+                echo "❌ Disallowed license detected: $dependency"
+                exit 1
+              fi
             done
           done
 

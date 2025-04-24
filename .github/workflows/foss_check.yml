@@ -30,7 +30,7 @@ jobs:
 
       # Step 5: Run npm audit for security vulnerability checks
       - name: Run npm audit
-        run: cd .. && cd .. && npm audit --audit-level=high
+        run: cd .. && cd .. && npm install && npm audit --audit-level=high
 
       # Step 6: Check for license compliance using Licensee
       - name: License Compliance Check

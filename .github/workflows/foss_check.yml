@@ -39,8 +39,26 @@ jobs:
       - name: ORT License & Policy Check
         uses: oss-review-toolkit/ort-ci-github-action@v1
         with:
+          # “clone this repo into the container”
+          vcs-type: 'git'
+          vcs-url: 'https://github.com/${{ github.repository }}.git'
+          vcs-revision: ${{ github.sha }}
+
+          # run the analyzer, advisor (CVE), evaluator (license), reporter & upload
+          run: >
+            analyzer,
+            advisor,
+            evaluator,
+            reporter,
+            upload-results
+
+          # fail if any license violations were detected
           fail-on: 'violations'
+
+          # allow no-lockfile packages (your .vite/deps)
           allow-dynamic-versions: 'true'
+
+          # point ORT at your local repo config
           ort-yml-path: '.ort.yml'
 
       - name: Upload Compliance Artifacts

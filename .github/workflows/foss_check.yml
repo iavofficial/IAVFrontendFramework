@@ -44,17 +44,18 @@ jobs:
           exit 1
 
   ort-check:
-    name: ORT License & Policy Check
     runs-on: ubuntu-latest
     needs: scan
     steps:
-      - name: Run ORT
+      - name: ORT License & Policy Check
         uses: oss-review-toolkit/ort-ci-github-action@v1
         with:
+          # Clean git clone
           vcs-type: 'git'
           vcs-url: 'https://github.com/${{ github.repository }}.git'
           vcs-revision: ${{ github.sha }}
 
+          # Full pipeline
           run: >
             analyzer,
             advisor,
@@ -62,12 +63,9 @@ jobs:
             reporter,
             upload-results
 
+          # Fail on license violations
           fail-on: 'violations'
+
+          # Point at your fixed .ort.yml
           ort-yml-path: '.ort.yml'
           allow-dynamic-versions: 'true'
-
-      - name: Upload ORT Reports
-        uses: actions/upload-artifact@v4
-        with:
-          name: ort-reports
-          path: ort-reports/**

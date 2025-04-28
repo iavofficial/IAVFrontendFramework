@@ -1,6 +1,7 @@
 analyzer:
-  working-dir: '.'
-  allowDynamicVersions: true # avoid “No lockfile found” errors
+  allow_dynamic_versions: true
+
+  skip_excluded: true
 
 excludes:
   paths:

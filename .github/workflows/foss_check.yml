@@ -56,13 +56,15 @@ jobs:
           mkdir -p /home/runner/.ort/config
           cat <<EOF > /home/runner/.ort/config/config.yml
           analyzer:
-            workspace_handling: "IGNORE"
             package_manager_configs:
               NPM:
                 options:
                   resolve_scopes: false
                   ignore_dev_dependencies: true
           EOF
+
+      - name: Install dependencies
+        run: npm install
 
       - name: Run ORT
         id: ort

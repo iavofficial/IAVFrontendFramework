@@ -32,6 +32,18 @@ jobs:
           only-fixed: true
           output-format: sarif
 
+      - name: Generate full Grype JSON report
+        run: |
+          # ensure grype is installed at v0.80.0
+          curl -sSL https://raw.githubusercontent.com/anchore/grype/v0.80.0/install.sh | sh
+          ./grype dir:. -o json > grype-report.json
+
+      - name: Upload full Grype JSON report
+        uses: actions/upload-artifact@v3
+        with:
+          name: grype-json
+          path: grype-report.json
+
       # ─── 4) Upload SARIF to GitHub Code Scanning ────────────────────────
       - name: Upload Grype SARIF report
         uses: github/codeql-action/upload-sarif@v3

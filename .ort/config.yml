@@ -1,5 +1,6 @@
 analyzer:
   working-dir: .
+  allowDynamicVersions: true
 
 scanner:
   license:
@@ -19,3 +20,9 @@ scanner:
 advisor:
   advisory:
     severity-threshold: medium
+
+excludes:
+  paths:
+    - pattern: 'docs/.vite/deps/**'
+      reason: 'BUILD_TOOL_OF'
+      comment: 'Ignore Vite-generated dependency folder'

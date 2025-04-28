@@ -6,10 +6,11 @@ on:
       - IAV-FF-feature-foss-check-integration-192
 
 jobs:
-  foss-check:
+  scan:
+    name: SBOM & Vulnerability Scan
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Generate SBOM (CycloneDX JSON)
@@ -36,15 +37,24 @@ jobs:
           name: grype-sarif
           path: ${{ steps.scan.outputs.sarif }}
 
-      - name: ORT License & Policy Check
+      - name: Fail on High/Critical Vulnerabilities
+        if: ${{ steps.scan.conclusion == 'failure' }}
+        run: |
+          echo "::error ::High/Critical vulnerabilities detected! Failing job."
+          exit 1
+
+  ort-check:
+    name: ORT License & Policy Check
+    runs-on: ubuntu-latest
+    needs: scan
+    steps:
+      - name: Run ORT
         uses: oss-review-toolkit/ort-ci-github-action@v1
         with:
-          # 1) Tell ORT to clone your repo (an empty directory, no conflicts)
           vcs-type: 'git'
           vcs-url: 'https://github.com/${{ github.repository }}.git'
           vcs-revision: ${{ github.sha }}
 
-          # 2) Run all phases, including upload of results
           run: >
             analyzer,
             advisor,
@@ -52,24 +62,12 @@ jobs:
             reporter,
             upload-results
 
-          # 3) Fail if any deny-listed license is found
           fail-on: 'violations'
-
-          # 4) Point at your .ort.yml (must be in your repo root)
           ort-yml-path: '.ort.yml'
           allow-dynamic-versions: 'true'
 
-      - name: Upload Compliance Artifacts
+      - name: Upload ORT Reports
         uses: actions/upload-artifact@v4
         with:
-          name: foss-reports
-          path: |
-            sbom.cdx.json
-            *.sarif
-            ort-reports/**
-
-      - name: Fail on Vulnerabilities
-        if: ${{ steps.scan.conclusion == 'failure' }}
-        run: |
-          echo "::error ::High/Critical vulnerabilities detected! Failing job."
-          exit 1
+          name: ort-reports
+          path: ort-reports/**

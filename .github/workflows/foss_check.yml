@@ -36,18 +36,67 @@ jobs:
           name: grype-sarif
           path: ${{ steps.scan.outputs.sarif }}
 
-      - name: ORT License & Policy Check
-        uses: oss-review-toolkit/ort-ci-github-action@v1
-        with:
-          fail-on: 'violations'
-          allow-dynamic-versions: 'true'
-          ort-yml-path: '.ort.yml'
+      # ─── MANUAL ORT SCAN (replaces the composite Action) ───────────────
+      - name: Run full ORT scan via Docker
+        shell: bash
+        env:
+          # point ORT at your local repo config
+          ORT_REPO_CONFIG: './.ort.yml'
+        run: |
+          set -euo pipefail
 
-          project-path: '/home/ort/work/IAVFrontendFramework/IAVFrontendFramework'
+          # 1) Pull the latest ORT image
+          docker pull oss-review-toolkit/ort:latest
 
-          docker-cli-args: >
-            --mount
-            type=bind,source=${{ github.workspace }},target=/home/ort/work/IAVFrontendFramework
+          # 2) Analyze (with dynamic Versions and your .ort.yml)
+          docker run --rm \
+            -v "${GITHUB_WORKSPACE}:/project" \
+            -w /project \
+            -e ORT_ALLOW_DYNAMIC_VERSIONS=true \
+            oss-review-toolkit/ort:latest \
+            analyze \
+              -i . \
+              -o /project/ort-results \
+              --repository-configuration-file "${ORT_REPO_CONFIG}"
+
+          # 3) Advise (CVE advisor)
+          docker run --rm \
+            -v "${GITHUB_WORKSPACE}:/project" \
+            -w /project \
+            oss-review-toolkit/ort:latest \
+            advise \
+              -i /project/ort-results \
+              -o /project/ort-results \
+              -f JSON
+
+          # 4) Evaluate (license policy)
+          docker run --rm \
+            -v "${GITHUB_WORKSPACE}:/project" \
+            -w /project \
+            oss-review-toolkit/ort:latest \
+            evaluate \
+              -i /project/ort-results \
+              -o /project/ort-results \
+              --repository-configuration-file "${ORT_REPO_CONFIG}" \
+              -f JSON
+
+          # 5) Report (generate SBOM & HTML)
+          docker run --rm \
+            -v "${GITHUB_WORKSPACE}:/project" \
+            -w /project \
+            oss-review-toolkit/ort:latest \
+            report \
+              -i /project/ort-results \
+              -o /project/ort-results \
+              -O CycloneDX=output.file.formats=json \
+              -O SpdxDocument=output.file.formats=json,html
+
+          # 6) Fail if any license violations occurred
+          #    (exit code 2 = policy violations in ORT evaluate)
+          if grep -q '"ruleViolationsTotal":[^0]' ort-results/evaluation-result.json; then
+            echo "::error ::License policy violations found!"
+            exit 1
+          fi
 
       - name: Upload Compliance Artifacts
         uses: actions/upload-artifact@v4

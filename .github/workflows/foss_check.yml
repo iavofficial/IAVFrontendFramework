@@ -10,110 +10,42 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      ### Step 1: Checkout Repository
+      # ─── 1) Git SSH → HTTPS for ORT ──────────────────────────────────────
+      - name: Configure Git for ORT
+        run: |
+          git config --global url."https://github.com/".insteadOf "ssh://git@github.com/"
+
+      # ─── 2) Checkout Your Code ─────────────────────────────────────────
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
-      ### Step 2: Set up Node.js
-      - name: Set up Node.js Environment
-        uses: actions/setup-node@v3
+      # ─── 3) Generate SBOM (Syft) ────────────────────────────────────────
+      - name: Generate SBOM (SPDX-JSON)
+        uses: anchore/sbom-action@v0
         with:
-          node-version: '20'
+          format: spdx-json
+          output-file: sbom.spdx.json
+          upload-artifact: false
 
-      ### Step 3: Install Dependencies
-      - name: Create Local GPL Stub (for CI test only)
-        run: |
-          mkdir -p packages/test-gpl-dep
-          cat > packages/test-gpl-dep/package.json << 'EOF'
-          {
-            "name": "test-gpl-dep",
-            "version": "1.0.0",
-            "license": "GPL",
-            "main": "index.js"
-          }
-          EOF
-          # Add it to root package.json (if not already present)
-          jq '.dependencies["test-gpl-dep"]="*"' package.json > tmp.json && mv tmp.json package.json
+      # ─── 4) Scan for Vulnerabilities (Grype) ────────────────────────────
+      - name: Scan for Vulnerabilities
+        uses: anchore/scan-action@v4
+        with:
+          path: .
+          fail-build: true
 
-      - name: Install Dependencies (Root-Level)
-        run: |
-          npm install
-          sudo apt-get install jq -y
+      # ─── 5) License & Policy Check (ORT) ───────────────────────────────
+      - name: ORT License & Policy Check
+        uses: oss-review-toolkit/ort-ci-github-action@v1
+        with:
+          fail-on: 'violations' # abort on any policy violation
 
-      ### Step 4: Generate Individual SBOMs for Each Turbo Workspace
-      - name: Generate SBOMs for Workspaces
-        run: |
-          # Loop through each workspace and generate its SBOM
-          find packages -name "package.json" -not -path "*/node_modules/*" | while read packageFile; do
-            packageDir=$(dirname "$packageFile")
-            echo "Generating SBOM for: $packageDir"
-            cd "$packageDir" && npm sbom --sbom-format spdx --output SBOM-$packageDir.spdx && cd -
-          done
-        env:
-          NODE_OPTIONS: '--max_old_space_size=4096'
-
-      ### Step 5: Run NPM Audit for Vulnerabilities (All Workspaces)
-      - name: Security Vulnerability Checks
-        run: |
-          find packages -name "package.json" -not -path "*/node_modules/*" | while read packageFile; do
-            packageDir=$(dirname "$packageFile")
-            echo "Running npm audit for: $packageDir"
-            cd "$packageDir" && npm install && npm audit --audit-level=high && cd -
-          done
-
-      ### Step 6: Validate Licenses in package-lock.json
-      - name: Dependency License Compliance Check
-        shell: bash
-        run: |
-          set -euo pipefail
-          DISALLOWED=(GPL AGPL-3.0 CC-BY-4.0)
-
-          echo "Scanning package-lock.json for disallowed licenses…"
-          jq -r '
-            .packages
-            | to_entries[]
-            | select(.key != "")
-            | .value
-            | { name: .name + "@" + (.version//"?"),
-                license:
-                  (.license
-                   // (.licenses[0].type // empty)
-                   // "MISSING") }
-            | "\(.name) \(.license)"
-          ' package-lock.json |
-          while read -r dep lic; do
-            if [[ "$lic" == "MISSING" ]]; then
-              echo "⚠️  $dep has no declared license."
-              continue
-            fi
-            for dis in "${DISALLOWED[@]}"; do
-              if [[ "$lic" == "$dis" ]]; then
-                echo "❌ Disallowed license: $dep ($lic)"
-                exit 1
-              fi
-            done
-          done
-
-          echo "✅ All checked licenses are compliant."
-
-      ### Step 7: Check Root Project License with Licensee
-      - name: Project License Compliance with Licensee
-        run: |
-          # Install Licensee gem locally
-          gem install licensee --user-install
-
-          # Add gem's executables directory to PATH
-          export PATH="$HOME/.local/share/gem/ruby/3.2.0/bin:$PATH"
-
-          # Run Licensee to validate the main project's license
-          licensee detect . --json > license-compliance-report.json
-
-          # Output the license report
-          cat license-compliance-report.json
-
-      ### Step 8: Notify on Failure (Notifications Placeholder)
-      - name: Failure Notifications
-        if: failure() # Run this step only if the pipeline fails
-        run: |
-          echo "FOSS checks failed! Sending notifications..."
-          # Here we would integrate an email notification system.
+      # ─── 6) Upload All Artifacts ────────────────────────────────────────
+      - name: Upload Compliance Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: foss-reports
+          path: |
+            sbom.spdx.json
+            grype-report.*
+            ort-reports/**

@@ -16,6 +16,8 @@
 
 # IAV Frontend Framework Documentation
 
+[![license](https://img.shields.io/badge/license-Apache--2.0-blue)](./LICENSE)
+
 ## React Project
 
 This is the IAV Frontend Framework, built using React.
@@ -39,3 +41,21 @@ To build the project, run:
 
 ```bash
 npm run build
+```
+
+## License
+
+This project is licensed under the **Apache-2.0** license. The full license text is included in
+the [root of the repository](./LICENSE).
+
+## SBOM
+
+As this project is a monorepo, the SBOM.spdx files are contained inside the specific package folders. You can find these
+folders inside the packages folder.
+
+## Contributing
+
+Contributions are welcome! Please read
+the [contributing guidelines](https://iavofficial.github.io/IAVFrontendFramework/CONTRIBUTING.md) before submitting a
+pull
+request.

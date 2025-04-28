@@ -9,11 +9,9 @@ jobs:
   foss-check:
     runs-on: ubuntu-latest
     steps:
-      # ─── 1) Checkout Your Code ───────────────────────────────────────────
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
 
-      # ─── 2) Generate SBOM (Syft) ────────────────────────────────────────
       - name: Generate SBOM (CycloneDX JSON)
         uses: anchore/sbom-action@v0
         with:
@@ -21,42 +19,37 @@ jobs:
           output-file: sbom.cdx.json
           upload-artifact: false
 
-      # ─── 3) Scan for Vulnerabilities (Grype) ────────────────────────────
       - name: Scan for Vulnerabilities
         id: scan
         uses: anchore/scan-action@v4
         continue-on-error: true
         with:
-          path: '.'
+          path: .
           fail-build: true
           severity-cutoff: high
           only-fixed: true
           output-format: sarif
 
-      # ─── 4) Upload SARIF as an Artifact ─────────────────────────────────
       - name: Upload Grype SARIF report
         uses: actions/upload-artifact@v4
         with:
           name: grype-sarif
           path: ${{ steps.scan.outputs.sarif }}
 
-      # ─── 5) License & Policy Check (ORT) ────────────────────────────────
       - name: ORT License & Policy Check
         uses: oss-review-toolkit/ort-ci-github-action@v1
         with:
           fail-on: 'violations'
 
-      # ─── 6) Upload All Compliance Artifacts ──────────────────────────────
       - name: Upload Compliance Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: foss-reports
           path: |
-            sbom.spdx.json
+            sbom.cdx.json
             *.sarif
             ort-reports/**
 
-      # ─── 7) Finally: Fail If CVEs Were Detected ─────────────────────────
       - name: Fail on Vulnerabilities
         if: ${{ steps.scan.conclusion == 'failure' }}
         run: |

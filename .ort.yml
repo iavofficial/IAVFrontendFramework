@@ -1,0 +1,9 @@
+analyzer:
+  working-dir: '.'
+  allowDynamicVersions: true # avoid “No lockfile found” errors
+
+excludes:
+  paths:
+    - pattern: 'docs/.vite/deps/**'
+      reason: 'BUILD_TOOL_OF'
+      comment: 'Ignore Vite-generated dependency folder'

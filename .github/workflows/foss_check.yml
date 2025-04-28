@@ -40,6 +40,8 @@ jobs:
         uses: oss-review-toolkit/ort-ci-github-action@v1
         with:
           fail-on: 'violations'
+          allow-dynamic-versions: 'true'
+          ort-yml-path: '.ort.yml'
 
       - name: Upload Compliance Artifacts
         uses: actions/upload-artifact@v4

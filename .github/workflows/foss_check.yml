@@ -39,7 +39,7 @@ jobs:
           ./grype dir:. -o json > grype-report.json
 
       - name: Upload full Grype JSON report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: grype-json
           path: grype-report.json

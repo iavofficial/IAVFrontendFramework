@@ -60,7 +60,7 @@ jobs:
               NPM:
                 options:
                   resolve_scopes: false
-                  ignore_dev_dependencies: true
+                  ignore_dev_dependencies: false  # Changed from true to false
           EOF
 
       - name: Install dependencies

@@ -39,12 +39,8 @@ jobs:
       - name: ORT License & Policy Check
         uses: oss-review-toolkit/ort-ci-github-action@v1
         with:
-          # “clone this repo into the container”
-          vcs-type: 'git'
-          vcs-url: 'https://github.com/${{ github.repository }}.git'
-          vcs-revision: ${{ github.sha }}
+          sw-name: 'IAVFrontendFramework'
 
-          # run the analyzer, advisor (CVE), evaluator (license), reporter & upload
           run: >
             analyzer,
             advisor,
@@ -52,14 +48,14 @@ jobs:
             reporter,
             upload-results
 
-          # fail if any license violations were detected
           fail-on: 'violations'
 
-          # allow no-lockfile packages (your .vite/deps)
           allow-dynamic-versions: 'true'
-
-          # point ORT at your local repo config
           ort-yml-path: '.ort.yml'
+
+          docker-cli-args: >-
+            --mount
+            type=bind,source=${{ github.workspace }},target=/home/ort/work/IAVFrontendFramework
 
       - name: Upload Compliance Artifacts
         uses: actions/upload-artifact@v4

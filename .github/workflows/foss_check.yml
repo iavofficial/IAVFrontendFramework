@@ -8,18 +8,12 @@ on:
 jobs:
   foss-check:
     runs-on: ubuntu-latest
-
     steps:
-      # ─── 1) Git SSH → HTTPS for ORT ──────────────────────────────────────
-      - name: Configure Git for ORT
-        run: |
-          git config --global url."https://github.com/".insteadOf "ssh://git@github.com/"
+      # ─── 1) Checkout ─────────────────────────────────────────────────────
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      # ─── 2) Checkout Your Code ─────────────────────────────────────────
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      # ─── 3) Generate SBOM (Syft) ────────────────────────────────────────
+      # ─── 2) SBOM via Syft ─────────────────────────────────────────────────
       - name: Generate SBOM (SPDX-JSON)
         uses: anchore/sbom-action@v0
         with:
@@ -27,26 +21,35 @@ jobs:
           output-file: sbom.spdx.json
           upload-artifact: false
 
-      # ─── 4) Scan for Vulnerabilities (Grype) ────────────────────────────
-      - name: Scan for Vulnerabilities
+      # ─── 3) Vulnerability Scan via Grype ─────────────────────────────────
+      - name: Scan for Vulnerabilities (Grype)
         uses: anchore/scan-action@v4
         with:
-          path: .
+          path: '.'
           fail-build: true
           severity-cutoff: high
+          only-fixed: true
+          output-format: sarif
+          output-file: grype-report.sarif
 
-      # ─── 5) License & Policy Check (ORT) ───────────────────────────────
+      # ─── 4) Upload SARIF to GitHub Code Scanning ─────────────────────────
+      - name: Upload Grype SARIF to GitHub
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: grype-report.sarif
+
+      # ─── 5) License & Policy Check via ORT ───────────────────────────────
       - name: ORT License & Policy Check
         uses: oss-review-toolkit/ort-ci-github-action@v1
         with:
-          fail-on: 'violations' # abort on any policy violation
+          fail-on: 'violations' # abort if any deny-listed license appears
 
-      # ─── 6) Upload All Artifacts ────────────────────────────────────────
+      # ─── 6) Upload All FOSS Artifacts ───────────────────────────────────
       - name: Upload Compliance Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: foss-reports
           path: |
             sbom.spdx.json
-            grype-report.*
+            grype-report.sarif
             ort-reports/**

@@ -1,4 +1,10 @@
 analyzer:
+  package_manager_configs:
+    NPM:
+      options:
+        use_package_lock: true
+        workspaces: true
+        ignore_dev_dependencies: false
   allow_dynamic_versions: true
   skip_excluded: true
 

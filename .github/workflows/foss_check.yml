@@ -51,6 +51,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Install dependencies
+        run: npm install
+
+      - name: Verify glob installation
+        run: |
+          if [ -d "node_modules/glob" ]; then
+            echo "glob is installed."
+            cat node_modules/glob/package.json | grep version
+          else
+            echo "glob is not installed."
+          fi
+
+      - name: Check glob versions
+        run: npm list glob
+
       - name: Create ORT global config
         run: |
           mkdir -p /home/runner/.ort/config
@@ -59,12 +74,10 @@ jobs:
             package_manager_configs:
               NPM:
                 options:
-                  resolve_scopes: false
-                  ignore_dev_dependencies: false  # Changed from true to false
+                  workspaces: true
+                  use_package_lock: true
+                  ignore_dev_dependencies: false
           EOF
-
-      - name: Install dependencies
-        run: npm install
 
       - name: Run ORT
         id: ort

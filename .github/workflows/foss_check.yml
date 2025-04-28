@@ -43,32 +43,32 @@ jobs:
           echo "::error ::High/Critical vulnerabilities detected! Failing job."
           exit 1
 
-ort-check:
-  runs-on: ubuntu-latest
-  needs: scan
-  steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+  ort-check:
+    runs-on: ubuntu-latest
+    needs: scan
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Create ORT global config
-      run: |
-        mkdir -p /home/runner/.ort/config
-        echo '
-        analyzer {
-          workspaceHandling = "IGNORE"
-        }
-        ' > /home/runner/.ort/config/ort.conf
+      - name: Create ORT global config
+        run: |
+          mkdir -p /home/runner/.ort/config
+          echo '
+          analyzer {
+            workspaceHandling = "IGNORE"
+          }
+          ' > /home/runner/.ort/config/ort.conf
 
-    - name: ORT License & Policy Check
-      uses: oss-review-toolkit/ort-ci-github-action@v1
-      with:
-        run: >
-          analyzer,
-          advisor,
-          evaluator,
-          reporter,
-          upload-results
+      - name: ORT License & Policy Check
+        uses: oss-review-toolkit/ort-ci-github-action@v1
+        with:
+          run: >
+            analyzer,
+            advisor,
+            evaluator,
+            reporter,
+            upload-results
 
-        fail-on: 'violations'
-        ort-yml-path: '.ort.yml'
-        allow-dynamic-versions: 'true'
+          fail-on: 'violations'
+          ort-yml-path: '.ort.yml'
+          allow-dynamic-versions: 'true'

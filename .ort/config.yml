@@ -1,35 +1,21 @@
-repository:
-  # enable package curations (optional)
-  package-curations:
-    enable: true
-
 analyzer:
-  # scan all sub-projects
   working-dir: .
 
-advisor:
-  # treat medium+ as severe in ORT advisor (CVE)
-  advisory:
-    # severity levels: low, medium, high, critical
-    severity-threshold: medium
-
 scanner:
-  # enable license scanning
   license:
-    # whitelist SPDX IDs
     allow:
       - MIT
       - Apache-2.0
       - BSD-3-Clause
-
-    # deny anything GPL family or other copyleft
     deny:
       - GPL-2.0-only
       - GPL-3.0-only
       - AGPL-3.0-only
       - LGPL-2.1-only
       - LGPL-3.0-only
+    fail-on:
+      licenses: deny
 
-  # fail the build if any denied license is found
-  fail-on:
-    licenses: deny
+advisor:
+  advisory:
+    severity-threshold: medium

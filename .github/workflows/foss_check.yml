@@ -43,29 +43,41 @@ jobs:
           echo "::error ::High/Critical vulnerabilities detected! Failing job."
           exit 1
 
-  ort-check:
-    runs-on: ubuntu-latest
-    needs: scan
-    steps:
-      - name: ORT License & Policy Check
-        uses: oss-review-toolkit/ort-ci-github-action@v1
-        with:
-          # Clean git clone
-          vcs-type: 'git'
-          vcs-url: 'https://github.com/${{ github.repository }}.git'
-          vcs-revision: ${{ github.sha }}
+ort-check:
+  runs-on: ubuntu-latest
+  needs: scan
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v4
 
-          # Full pipeline
-          run: >
-            analyzer,
-            advisor,
-            evaluator,
-            reporter,
-            upload-results
+    - name: Create ORT global config
+      run: |
+        mkdir -p /home/runner/.ort/config
+        echo '
+        analyzer {
+          workspaceHandling = "IGNORE"
+        }
+        ' > /home/runner/.ort/config/ort.conf
 
-          # Fail on license violations
-          fail-on: 'violations'
+    - name: ORT License & Policy Check
+      uses: oss-review-toolkit/ort-ci-github-action@v1
+      with:
+        # Clean git clone
+        vcs-type: 'git'
+        vcs-url: 'https://github.com/${{ github.repository }}.git'
+        vcs-revision: ${{ github.sha }}
 
-          # Point at your fixed .ort.yml
-          ort-yml-path: '.ort.yml'
-          allow-dynamic-versions: 'true'
+        # Full pipeline
+        run: >
+          analyzer,
+          advisor,
+          evaluator,
+          reporter,
+          upload-results
+
+        # Fail on license violations
+        fail-on: 'violations'
+
+        # Use your .ort.yml
+        ort-yml-path: '.ort.yml'
+        allow-dynamic-versions: 'true'

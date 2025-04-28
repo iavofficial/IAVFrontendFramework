@@ -21,6 +21,20 @@ jobs:
           node-version: '20'
 
       ### Step 3: Install Dependencies
+      - name: Create Local GPL Stub (for CI test only)
+        run: |
+          mkdir -p packages/test-gpl-dep
+          cat > packages/test-gpl-dep/package.json << 'EOF'
+          {
+            "name": "test-gpl-dep",
+            "version": "1.0.0",
+            "license": "GPL",
+            "main": "index.js"
+          }
+          EOF
+          # Add it to root package.json (if not already present)
+          jq '.dependencies["test-gpl-dep"]="*"' package.json > tmp.json && mv tmp.json package.json
+
       - name: Install Dependencies (Root-Level)
         run: |
           npm install
@@ -48,15 +62,39 @@ jobs:
           done
 
       ### Step 6: Validate Licenses in package-lock.json
-      - name: Install license-checker
-        run: npm install -g license-checker
-
-      - name: Audit Licenses with license-checker
+      - name: Dependency License Compliance Check
+        shell: bash
         run: |
-          license-checker --production --json \
-            | jq -r 'to_entries[]
-                     | "\(.key) \(.value.licenses|tostring)"' \
-            | grep -E "GPL|AGPL-3.0|CC-BY-4.0" && exit 1 || true
+          set -euo pipefail
+          DISALLOWED=(GPL AGPL-3.0 CC-BY-4.0)
+
+          echo "Scanning package-lock.json for disallowed licenses…"
+          jq -r '
+            .packages
+            | to_entries[]
+            | select(.key != "")
+            | .value
+            | { name: .name + "@" + (.version//"?"),
+                license:
+                  (.license
+                   // (.licenses[0].type // empty)
+                   // "MISSING") }
+            | "\(.name) \(.license)"
+          ' package-lock.json |
+          while read -r dep lic; do
+            if [[ "$lic" == "MISSING" ]]; then
+              echo "⚠️  $dep has no declared license."
+              continue
+            fi
+            for dis in "${DISALLOWED[@]}"; do
+              if [[ "$lic" == "$dis" ]]; then
+                echo "❌ Disallowed license: $dep ($lic)"
+                exit 1
+              fi
+            done
+          done
+
+          echo "✅ All checked licenses are compliant."
 
       ### Step 7: Check Root Project License with Licensee
       - name: Project License Compliance with Licensee

@@ -54,11 +54,15 @@ jobs:
       - name: Create ORT global config
         run: |
           mkdir -p /home/runner/.ort/config
-          echo '
-          analyzer {
-            workspaceHandling = "IGNORE"
-          }
-          ' > /home/runner/.ort/config/ort.conf
+          cat <<EOF > /home/runner/.ort/config/config.yml
+          analyzer:
+            workspace_handling: "IGNORE"
+            package_manager_configs:
+              NPM:
+                options:
+                  resolve_scopes: false
+                  ignore_dev_dependencies: true
+          EOF
 
       - name: Run ORT
         id: ort
@@ -75,9 +79,9 @@ jobs:
           allow-dynamic-versions: 'true'
 
       - name: Upload ORT Result Artifacts
-        if: always() # <- important! Upload results even if previous step failed
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: ort-results
           path: |
-            ort-ci/ # <- default output directory of the Action (where the reports land)
+            ort-ci/

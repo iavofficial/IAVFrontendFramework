@@ -1,10 +1,6 @@
 analyzer:
-  packageManagers:
-    NPM:
-      resolveScopes: false
-      ignoreDevDependencies: true
-  allowDynamicVersions: true
-  skipExcluded: true
+  allow_dynamic_versions: true
+  skip_excluded: true
 
 excludes:
   paths:

@@ -48,37 +48,15 @@ jobs:
           done
 
       ### Step 6: Validate Licenses in package-lock.json
-      - name: Dependency License Compliance Check
+      - name: Install license-checker
+        run: npm install -g license-checker
+
+      - name: Audit Licenses with license-checker
         run: |
-          # Define disallowed licenses
-          DISALLOWED_LICENSES="GPL,AGPL-3.0,CC-BY-4.0"
-
-          echo "Checking licenses in the root package-lock.json file..."
-
-          # Parse package-lock.json safely, handling missing and null fields gracefully
-          jq -r '.dependencies | to_entries[] | select(.value.license != null) | "\(.key):\(.value.license // "MISSING LICENSE")"' package-lock.json | while read dependency; do
-            DEP_NAME=$(echo "$dependency" | cut -d':' -f1)
-            DEP_LICENSE=$(echo "$dependency" | cut -d':' -f2)
-
-            # Log dependencies with missing licenses
-            if [ "$DEP_LICENSE" = "MISSING LICENSE" ]; then
-              echo "⚠️ Dependency \"$DEP_NAME\" has no declared license."
-              continue
-            fi
-
-            # Check for disallowed licenses
-            for license in $(echo $DISALLOWED_LICENSES | sed 's/,/ /g'); do
-              if [ "$DEP_LICENSE" = "$license" ]; then
-                echo "❌ Disallowed license detected: $DEP_NAME ($DEP_LICENSE)"
-                exit 1
-              fi
-            done
-          done || {
-            echo "❌ Failed to process the package-lock.json file due to malformed entries."
-            exit 1
-          }
-
-          echo "✅ All dependency licenses validated successfully."
+          license-checker --production --json \
+            | jq -r 'to_entries[]
+                     | "\(.key) \(.value.licenses|tostring)"' \
+            | grep -E "GPL|AGPL-3.0|CC-BY-4.0" && exit 1 || true
 
       ### Step 7: Check Root Project License with Licensee
       - name: Project License Compliance with Licensee

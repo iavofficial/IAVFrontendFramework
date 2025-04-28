@@ -44,6 +44,7 @@ jobs:
           exit 1
 
   ort-check:
+    name: ORT License & Policy Check
     runs-on: ubuntu-latest
     needs: scan
     steps:
@@ -59,7 +60,8 @@ jobs:
           }
           ' > /home/runner/.ort/config/ort.conf
 
-      - name: ORT License & Policy Check
+      - name: Run ORT
+        id: ort
         uses: oss-review-toolkit/ort-ci-github-action@v1
         with:
           run: >
@@ -68,7 +70,14 @@ jobs:
             evaluator,
             reporter,
             upload-results
-
           fail-on: 'violations'
           ort-yml-path: '.ort.yml'
           allow-dynamic-versions: 'true'
+
+      - name: Upload ORT Result Artifacts
+        if: always() # <- important! Upload results even if previous step failed
+        uses: actions/upload-artifact@v4
+        with:
+          name: ort-results
+          path: |
+            ort-ci/ # <- default output directory of the Action (where the reports land)

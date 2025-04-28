@@ -17,7 +17,7 @@ jobs:
 
       # ─── 2) Checkout Your Code ─────────────────────────────────────────
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # ─── 3) Generate SBOM (Syft) ────────────────────────────────────────
       - name: Generate SBOM (SPDX-JSON)
@@ -42,7 +42,7 @@ jobs:
 
       # ─── 6) Upload All Artifacts ────────────────────────────────────────
       - name: Upload Compliance Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: foss-reports
           path: |

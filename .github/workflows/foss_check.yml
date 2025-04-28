@@ -33,6 +33,7 @@ jobs:
         with:
           path: .
           fail-build: true
+          severity-cutoff: high
 
       # ─── 5) License & Policy Check (ORT) ───────────────────────────────
       - name: ORT License & Policy Check

@@ -39,21 +39,13 @@ jobs:
       - name: ORT License & Policy Check
         uses: oss-review-toolkit/ort-ci-github-action@v1
         with:
-          sw-name: 'IAVFrontendFramework'
-
-          run: >
-            analyzer,
-            advisor,
-            evaluator,
-            reporter,
-            upload-results
-
           fail-on: 'violations'
-
           allow-dynamic-versions: 'true'
           ort-yml-path: '.ort.yml'
 
-          docker-cli-args: >-
+          project-path: '/home/ort/work/IAVFrontendFramework/IAVFrontendFramework'
+
+          docker-cli-args: >
             --mount
             type=bind,source=${{ github.workspace }},target=/home/ort/work/IAVFrontendFramework
 

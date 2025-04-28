@@ -29,8 +29,7 @@
     "semantic-release": "^24.2.1",
     "semantic-release-monorepo": "^8.0.2",
     "cross-env": "^7.0.3",
-    "turbo": "^2.3.3",
-    "made-up-gpl-dep": "1.0.0"
+    "turbo": "^2.3.3"
   },
   "scripts": {
     "setup:root": "npm i",

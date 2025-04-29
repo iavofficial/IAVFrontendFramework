@@ -65,12 +65,18 @@ jobs:
           mkdir -p .ort/config
           cat <<EOF > .ort/config/config.yml
           analyzer:
-            package_manager_configs:
-              NPM:
-                options:
-                  workspaces: true
-                  use_package_lock: false
-                  ignore_dev_dependencies: false
+            allow_dynamic_versions: true
+            skip_excluded: true
+
+          excludes:
+            paths:
+              - pattern: '@iavofficial/**'
+                reason: 'BUILD_TOOL_OF'
+                comment: 'Ignore internal packages'
+            paths:
+              - pattern: 'docs/.vite/deps/**'
+                reason: 'BUILD_TOOL_OF'
+                comment: 'Ignore Vite-generated dependency folder'
           EOF
 
       - name: Run ORT

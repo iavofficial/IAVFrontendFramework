@@ -42,7 +42,8 @@
     "react-cookie": "^7.2.1",
     "react-redux": "^9.2.0",
     "simplebar-react": "^3.2.3",
-    "@mapbox/mapbox-sdk": "0.13.7"
+    "@mapbox/mapbox-sdk": "0.13.7",
+    "glob": "^10.4.5"
   },
   "peerDependencies": {
     "react": "^18.2.0",

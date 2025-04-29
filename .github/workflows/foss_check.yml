@@ -13,6 +13,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Install dependencies at root
+        run: npm ci
+
       - name: Generate SBOM (CycloneDX JSON)
         uses: anchore/sbom-action@v0
         with:
@@ -48,23 +51,20 @@ jobs:
     runs-on: ubuntu-latest
     needs: scan
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install dependencies
+      - name: Install root dependencies
         run: npm ci
 
-      - name: Verify glob installation
-        run: |
-          if [ -d "node_modules/glob" ]; then
-            echo "glob is installed."
-            cat node_modules/glob/package.json | grep version
-          else
-            echo "glob is not installed."
-          fi
+      - name: Ensure glob is explicitly installed
+        run: npm install --save-dev glob@10.4.5
 
-      - name: Check glob versions
-        run: npm list glob
+      - name: Log full dependency tree
+        run: npm ls --all || true
+
+      - name: Log glob versions
+        run: npm list glob || true
 
       - name: Create ORT global config
         run: |
@@ -75,7 +75,7 @@ jobs:
               NPM:
                 options:
                   workspaces: true
-                  use_package_lock: true
+                  use_package_lock: false
                   ignore_dev_dependencies: false
           EOF
 
@@ -83,6 +83,7 @@ jobs:
         id: ort
         uses: oss-review-toolkit/ort-ci-github-action@v1
         with:
+          ort-version: latest
           run: >
             analyzer,
             advisor,

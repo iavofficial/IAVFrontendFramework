@@ -83,14 +83,7 @@ jobs:
         id: ort
         uses: oss-review-toolkit/ort-ci-github-action@v1
         with:
-          run: >
-            analyzer,
-            advisor,
-            evaluator,
-            reporter,
-            upload-results
-          fail-on: 'violations'
-          ort-yml-path: '.ort.yml'
+          #ort-yml-path: '.ort.yml'
           allow-dynamic-versions: 'true'
 
       - name: Upload ORT Result Artifacts

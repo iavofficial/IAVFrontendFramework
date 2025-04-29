@@ -34,7 +34,7 @@
     "iav-core"
   ],
   "dependencies": {
-    "@iavofficial/frontend-framework-shared": "workspace:*",
+    "@iavofficial/frontend-framework-shared": "*",
     "@reduxjs/toolkit": "^2.5.1",
     "primeflex": "^3.3.0",
     "primeicons": "^6.0.1",

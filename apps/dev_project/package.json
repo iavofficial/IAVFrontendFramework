@@ -31,8 +31,8 @@
     ]
   },
   "dependencies": {
-    "@iavofficial/frontend-framework": "workspace:*",
-    "@iavofficial/frontend-framework-aws-authenticator": "workspace:*",
+    "@iavofficial/frontend-framework": "*",
+    "@iavofficial/frontend-framework-aws-authenticator": "*",
     "aws-amplify": "^6.7.0",
     "primereact": "^10.3.3",
     "react": "^18.2.0",

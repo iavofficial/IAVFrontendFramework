@@ -57,19 +57,13 @@ jobs:
       - name: Install root dependencies
         run: npm ci
 
-      - name: Ensure glob is explicitly installed
-        run: npm install --save-dev glob@10.4.5
-
-      - name: Log full dependency tree
+      - name: Log dependency tree
         run: npm ls --all || true
 
-      - name: Log glob versions
-        run: npm list glob || true
-
-      - name: Create ORT global config
+      - name: Add ORT config to repo
         run: |
-          mkdir -p /home/runner/.ort/config
-          cat <<EOF > /home/runner/.ort/config/config.yml
+          mkdir -p .ort/config
+          cat <<EOF > .ort/config/config.yml
           analyzer:
             package_manager_configs:
               NPM:
@@ -83,7 +77,6 @@ jobs:
         id: ort
         uses: oss-review-toolkit/ort-ci-github-action@v1
         with:
-          ort-version: latest
           run: >
             analyzer,
             advisor,

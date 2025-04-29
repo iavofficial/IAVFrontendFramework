@@ -1,6 +1,10 @@
 analyzer:
   allow_dynamic_versions: true
   skip_excluded: true
+  ignore:
+    projects:
+      - '@iavofficial/frontend-framework-aws-authenticator'
+      - '@iavofficial/frontend-framework-shared'
 
 excludes:
   paths:

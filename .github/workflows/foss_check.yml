@@ -70,7 +70,7 @@ jobs:
 
           excludes:
             paths:
-              - pattern: '@iavofficial/**'
+              - pattern: 'packages/**'
                 reason: 'BUILD_TOOL_OF'
                 comment: 'Ignore internal packages'
             paths:

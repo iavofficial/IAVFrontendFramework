@@ -1,12 +1,12 @@
 analyzer:
   allow_dynamic_versions: true
   skip_excluded: true
-  ignore:
-    projects:
-      - '@iavofficial/frontend-framework-aws-authenticator'
-      - '@iavofficial/frontend-framework-shared'
 
 excludes:
+  paths:
+    - pattern: '@iavofficial/**'
+      reason: 'BUILD_TOOL_OF'
+      comment: 'Ignore internal packages'
   paths:
     - pattern: 'docs/.vite/deps/**'
       reason: 'BUILD_TOOL_OF'

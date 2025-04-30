@@ -91,12 +91,12 @@ jobs:
               if [ -f "$package_path/package.json" ]; then
                 echo "Generating SBOM for $package_path"
 
-                # Use Syft (Docker) to generate SBOM in CycloneDX format
+                # Use Syft (Docker) to generate SBOM with metadata from package.json
                 docker run --rm \
                   -v "$PWD/$package_path":/scan \
                   -v "$PWD/sboms":/output \
                   anchore/syft:latest \
-                  scan /scan -o cyclonedx-json=/output/"$(basename $package_path)_sbom.cdx.json"
+                  scan /scan --package-manager npm -o cyclonedx-json=/output/"$(basename $package_path)_sbom.cdx.json"
               else
                 echo "Skipping $package_path. No package.json detected."
               fi

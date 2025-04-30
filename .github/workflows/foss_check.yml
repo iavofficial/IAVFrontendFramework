@@ -106,7 +106,7 @@ jobs:
   ort-check:
     name: ORT License & Policy Check
     runs-on: ubuntu-latest
-    needs: [scan, per-package-sboms]
+    needs: [scan, per-package-sbom]
     steps:
       # Step 1: Checkout code
       - name: Checkout code

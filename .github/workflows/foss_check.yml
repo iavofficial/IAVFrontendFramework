@@ -66,13 +66,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Debug Info
-        run: |
-          npm workspaces list --json
-          npm --version
-          npm workspaces list --json | jq
-          cat package.json | jq '.workspaces'
-
       - name: Install dependencies for workspaces
         run: npm ci
 
@@ -82,26 +75,32 @@ jobs:
           rm -rf sboms
           mkdir -p sboms
 
-          # Get the list of valid workspace directories
-          echo "Fetching workspace directories..."
-          workspace_dirs=$(npm workspaces list --json | jq -r 'keys[]')
+          # Extract workspace patterns from package.json
+          echo "Extracting workspace patterns from package.json..."
+          workspace_patterns=$(cat package.json | jq -r '.workspaces[]')
 
-          for package_path in $workspace_dirs; do
-            echo "Processing package: $package_path"
+          # Loop through extracted workspace patterns and process each valid package
+          for pattern in $workspace_patterns; do
+            echo "Processing workspace pattern: $pattern"
 
-            # Ensure the directory contains a package.json file
-            if [ -f "$package_path/package.json" ]; then
-              echo "Generating SBOM for workspace: $package_path"
+            # Find top-level directories matching the workspace pattern
+            for package_path in $(find $pattern -maxdepth 1 -mindepth 1 -type d); do
+              echo "Checking directory: $package_path"
 
-              # Use Syft (Docker) to generate SBOM in CycloneDX format
-              docker run --rm \
-                -v "$PWD/$package_path":/scan \
-                -v "$PWD/sboms":/output \
-                anchore/syft:latest \
-                scan /scan -o cyclonedx-json=/output/"$(basename $package_path)_sbom.cdx.json"
-            else
-              echo "Skipping $package_path. No package.json detected."
-            fi
+              # Ensure it contains a package.json file
+              if [ -f "$package_path/package.json" ]; then
+                echo "Generating SBOM for $package_path"
+
+                # Use Syft (Docker) to generate SBOM in CycloneDX format
+                docker run --rm \
+                  -v "$PWD/$package_path":/scan \
+                  -v "$PWD/sboms":/output \
+                  anchore/syft:latest \
+                  scan /scan -o cyclonedx-json=/output/"$(basename $package_path)_sbom.cdx.json"
+              else
+                echo "Skipping $package_path. No package.json detected."
+              fi
+            done
           done
 
       - name: Upload SBOMs

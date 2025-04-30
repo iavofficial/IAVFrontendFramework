@@ -78,27 +78,28 @@ jobs:
           mkdir -p sboms
 
           # Iterate over workspace packages
-          for package_path in $(npm pkg get workspaces | tr -d '[:space:]"[],' | xargs -n1); do
-            # Normalize the package path
-            package="${package_path/\*/}" # Replace '*' with package folder name
-            echo "Processing package: $package"
+          for package_pattern in $(npm pkg get workspaces | \
+            jq -r '.[]'); do
 
-            # Check if package.json exists in the workspace directory
-            if [ -f "$package/package.json" ]; then
-              echo "Generating SBOM for workspace: $package"
+            # Expand the workspace pattern to actual directories
+            for package_path in $(find $package_pattern -type d -maxdepth 1); do
+              echo "Processing package: $package_path"
 
-              # Navigate to the package directory
-              cd "$package"
+              # Check if package.json exists in the workspace directory
+              if [ -f "$package_path/package.json" ]; then
+                echo "Generating SBOM for workspace: $package_path"
 
-              # Generate the SBOM for this package
-              anchore-cli sbom generate --input . --format cyclonedx-json --output "${package/\//-}_sbom.cdx.json"
+                # Generate the SBOM for this package
+                cd "$package_path"
+                anchore-cli sbom generate --input . --format cyclonedx-json --output "${package_path//\//-}_sbom.cdx.json"
 
-              # Move the SBOM to the output directory
-              mv "${package/\//-}_sbom.cdx.json" ../sboms/
-              cd -
-            else
-              echo "Skipping $package. No package.json detected."
-            fi
+                # Move the SBOM to the output directory
+                mv "${package_path//\//-}_sbom.cdx.json" ../../sboms/
+                cd -
+              else
+                echo "Skipping $package_path. No package.json detected."
+              fi
+            done
           done
 
       # Step 4: Upload SBOMs for all workspace packages

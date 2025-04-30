@@ -76,9 +76,9 @@ jobs:
           mkdir -p sboms
 
           # Loop through workspace patterns (apps/*, packages/*)
-          for package_pattern in $(npm pkg get workspaces | jq -r '.[]'); do
-            # Expand patterns to directories
-            for package_path in $(find $package_pattern -type d -maxdepth 1); do
+          for workspace in $(npm pkg get workspaces | jq -r '.[]'); do
+            # Find only directories directly matching the workspace pattern
+            for package_path in $(find $workspace -maxdepth 1 -mindepth 1 -type d); do
               echo "Processing package: $package_path"
 
               # Check if package.json exists to confirm it's a valid package
@@ -90,7 +90,7 @@ jobs:
                   -v "$PWD/$package_path":/scan \
                   -v "$PWD/sboms":/output \
                   anchore/syft:latest \
-                  /scan -o cyclonedx-json=/output/"$(basename $package_path)_sbom.cdx.json"
+                  packages /scan -o cyclonedx-json=/output/"$(basename $package_path)_sbom.cdx.json"
               else
                 echo "Skipping $package_path. No package.json detected."
               fi

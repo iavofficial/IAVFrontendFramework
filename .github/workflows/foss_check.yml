@@ -60,54 +60,68 @@ jobs:
           exit 1
 
   per-package-sbom:
-    name: Generate SBOMs for Workspace Packages
+    name: SBOM & Vulnerability Scan for All Packages
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install dependencies for workspaces
+      - name: Install dependencies using workspaces
         run: npm ci
 
-      - name: Generate SBOMs for each workspace package
+      - name: Get list of workspaces
+        id: workspaces
         run: |
-          # Cleanup any existing SBOM files
-          rm -rf sboms
-          mkdir -p sboms
+          echo "workspaces=$(jq -rc '.workspaces | join(" ")' package.json)" >> $GITHUB_OUTPUT
 
-          # Extract workspace patterns from package.json
-          echo "Extracting workspace patterns from package.json..."
-          workspace_patterns=$(cat package.json | jq -r '.workspaces[]')
-
-          # Iterate over each workspace pattern
-          for pattern in $workspace_patterns; do
-            echo "Processing workspace pattern: $pattern"
-
-            # Expand glob pattern using 'ls -d' (strict directory matching, no recursion)
-            for package_path in $(ls -d $pattern 2>/dev/null); do
-              echo "Checking directory: $package_path"
-
-              # Ensure it contains a package.json file and is NOT a subdirectory like 'src/'
-              if [ -f "$package_path/package.json" ]; then
-                echo "Generating SBOM for $package_path"
-
-                # Use Syft (Docker) to generate SBOM with metadata from package.json
-                docker run --rm \
-                  -v "$PWD/$package_path":/scan \
-                  -v "$PWD/sboms":/output \
-                  anchore/syft:latest \
-                  scan /scan --package-manager npm -o cyclonedx-json=/output/"$(basename $package_path)_sbom.cdx.json"
-              else
-                echo "Skipping $package_path. No package.json detected."
-              fi
+      - name: List all packages in workspaces
+        id: packages
+        run: |
+          packages=""
+          for pattern in ${{ steps.workspaces.outputs.workspaces }}; do
+            for pkg in $(find $pattern -name package.json -not -path "*/node_modules/*"); do
+              dir=$(dirname "$pkg")
+              packages="$packages $dir"
             done
           done
+          echo "dirs=$packages" >> $GITHUB_OUTPUT
 
-      - name: Upload SBOMs
+      - name: Generate & scan SBOM for each package
+        run: |
+          mkdir -p sbom-output
+          mkdir -p sarif-output
+          failed=0
+          for dir in ${{ steps.packages.outputs.dirs }}; do
+            pkg=$(basename "$dir")
+            echo "📦 Processing $pkg in $dir"
+
+            sbom_file="sbom-output/${pkg}.cdx.json"
+            sarif_file="sarif-output/${pkg}.sarif"
+
+            anchore sbom $dir -o cyclonedx-json > "$sbom_file" || { echo "::warning::SBOM failed for $pkg"; continue; }
+
+            grype sbom:"$sbom_file" -o sarif -q > "$sarif_file" || {
+              echo "::error file=$dir::Vulnerabilities found in $pkg"
+              failed=1
+            }
+          done
+
+          if [ "$failed" -ne 0 ]; then
+            echo "❌ One or more scans failed"
+            exit 1
+          fi
+
+      - name: Upload all SBOMs
         uses: actions/upload-artifact@v4
         with:
-          name: workspace-sboms
-          path: sboms/
+          name: all-sboms-cyclonedx
+          path: sbom-output/
+
+      - name: Upload all SARIF reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: all-sarif-reports
+          path: sarif-output/
 
   ort-check:
     name: ORT License & Policy Check

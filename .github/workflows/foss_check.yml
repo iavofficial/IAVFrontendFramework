@@ -77,14 +77,11 @@ jobs:
 
           # Loop through workspace patterns (apps/*, packages/*)
           for workspace in $(npm pkg get workspaces | jq -r '.[]'); do
-            # Find only directories directly matching the workspace pattern
-            for package_path in $(find $workspace -maxdepth 1 -mindepth 1 -type d); do
-              echo "Processing package: $package_path"
-
-              # Check if package.json exists to confirm it's a valid package
+            # Expand the workspace pattern to match only the first level of directories
+            for package_path in $(find $workspace -maxdepth 1 -type d); do
+              # Ensure we only check for `package.json` in the root of directories
               if [ -f "$package_path/package.json" ]; then
-                echo "Generating SBOM for workspace: $package_path"
-
+                echo "Processing package: $package_path"
                 # Use Syft (Docker) to generate the SBOM in CycloneDX format
                 docker run --rm \
                   -v "$PWD/$package_path":/scan \

@@ -86,13 +86,4 @@ jobs:
         id: ort
         uses: oss-review-toolkit/ort-ci-github-action@v1
         with:
-          #ort-yml-path: '.ort.yml'
           allow-dynamic-versions: 'true'
-
-      - name: Upload ORT Result Artifacts
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: ort-results
-          path: |
-            ort-ci/

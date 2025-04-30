@@ -63,33 +63,35 @@ jobs:
     name: SBOMs for Workspace Packages
     runs-on: ubuntu-latest
     steps:
-      # Step 1: Checkout code
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Step 2: Install all dependencies with workspaces
       - name: Install dependencies using npm workspaces
         run: npm ci
 
-      # Step 3: Generate SBOMs for each workspace package
+      - name: Install Anchore CLI
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y python3-pip
+          pip3 install anchorecli
+
       - name: Generate SBOMs for each workspace package
         run: |
-          # Prepare a directory to store SBOMs
+          # Cleanup any existing SBOM files
+          rm -rf sboms
           mkdir -p sboms
 
           # Iterate over workspace packages
-          for package_pattern in $(npm pkg get workspaces | \
-            jq -r '.[]'); do
-
-            # Expand the workspace pattern to actual directories
+          for package_pattern in $(npm pkg get workspaces | jq -r '.[]'); do
+            # Expand patterns to directories
             for package_path in $(find $package_pattern -type d -maxdepth 1); do
               echo "Processing package: $package_path"
 
-              # Check if package.json exists in the workspace directory
+              # Check if package.json exists in the package directory
               if [ -f "$package_path/package.json" ]; then
                 echo "Generating SBOM for workspace: $package_path"
 
-                # Generate the SBOM for this package
+                # Generate the SBOM
                 cd "$package_path"
                 anchore-cli sbom generate --input . --format cyclonedx-json --output "${package_path//\//-}_sbom.cdx.json"
 
@@ -102,7 +104,6 @@ jobs:
             done
           done
 
-      # Step 4: Upload SBOMs for all workspace packages
       - name: Upload SBOMs for workspace packages
         uses: actions/upload-artifact@v4
         with:

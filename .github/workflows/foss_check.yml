@@ -66,6 +66,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Debug Info
+        run: |
+          npm workspaces list --json
+          npm --version
+          npm workspaces list --json | jq
+          cat package.json | jq '.workspaces'
+
       - name: Install dependencies for workspaces
         run: npm ci
 

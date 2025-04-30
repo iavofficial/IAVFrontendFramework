@@ -79,15 +79,15 @@ jobs:
           echo "Extracting workspace patterns from package.json..."
           workspace_patterns=$(cat package.json | jq -r '.workspaces[]')
 
-          # Loop through extracted workspace patterns and process each valid package
+          # Iterate over each workspace pattern
           for pattern in $workspace_patterns; do
             echo "Processing workspace pattern: $pattern"
 
-            # Find top-level directories matching the workspace pattern
-            for package_path in $(find $pattern -maxdepth 1 -mindepth 1 -type d); do
+            # Expand glob pattern using 'ls -d' (strict directory matching, no recursion)
+            for package_path in $(ls -d $pattern 2>/dev/null); do
               echo "Checking directory: $package_path"
 
-              # Ensure it contains a package.json file
+              # Ensure it contains a package.json file and is NOT a subdirectory like 'src/'
               if [ -f "$package_path/package.json" ]; then
                 echo "Generating SBOM for $package_path"
 
@@ -107,6 +107,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: workspace-sboms
+          path: sboms/sboms
           path: sboms/
 
   ort-check:

@@ -76,8 +76,24 @@ jobs:
                 comment: 'Ignore Vite-generated dependency folder'
           EOF
 
+          cat <<EOF > .ort/config/rules.kts
+          licenseRule("DisallowedLicenses") {
+              disallowed {
+                  license("GPL")
+                  license("AGPL")
+              }
+          }
+          EOF
+
       - name: Run ORT
         id: ort
         uses: oss-review-toolkit/ort-ci-github-action@v1
         with:
           allow-dynamic-versions: 'true'
+
+      - name: Check ORT Results for License Issues
+        run: |
+          if grep -q "DISALLOWED" results.yml; then
+              echo "::error ::Disallowed licenses found in ORT analysis"
+              exit 1
+          fi

@@ -36,14 +36,14 @@
   "dependencies": {
     "@iavofficial/frontend-framework-shared": "*",
     "@reduxjs/toolkit": "^2.5.1",
+    "glob": "^10.4.5",
+    "my-gpl-package": "^1.0.0",
     "primeflex": "^3.3.0",
     "primeicons": "^6.0.1",
     "primereact": "^10.3.3",
     "react-cookie": "^7.2.1",
     "react-redux": "^9.2.0",
-    "simplebar-react": "^3.2.3",
-    "@mapbox/mapbox-sdk": "0.13.7",
-    "glob": "^10.4.5"
+    "simplebar-react": "^3.2.3"
   },
   "peerDependencies": {
     "react": "^18.2.0",

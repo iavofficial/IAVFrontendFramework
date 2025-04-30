@@ -81,14 +81,14 @@ jobs:
         with:
           path: ${{ matrix.project }}
           format: cyclonedx-json
-          output-file: sbom-${{ matrix.project }}.cdx.json
+          output-file: sbom-${{ matrix.project.replace('/', '-') }}.cdx.json
           upload-artifact: false
 
       - name: Upload SBOM artifact
         uses: actions/upload-artifact@v4
         with:
-          name: sbom-${{ matrix.project }}
-          path: sbom-${{ matrix.project }}.cdx.json
+          name: sbom-${{ matrix.project.replace('/', '-') }}
+          path: sbom-${{ matrix.project.replace('/', '-') }}.cdx.json
 
       - name: Scan SBOM
         id: scan
@@ -104,7 +104,7 @@ jobs:
       - name: Upload Grype SARIF report
         uses: actions/upload-artifact@v4
         with:
-          name: sarif-${{ matrix.project }}
+          name: sarif-${{ matrix.project.replace('/', '-') }}
           path: ${{ steps.scan.outputs.sarif }}
 
       - name: Fail on High/Critical Vulnerabilities

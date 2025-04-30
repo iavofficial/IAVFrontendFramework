@@ -59,60 +59,48 @@ jobs:
           echo "::error ::High/Critical vulnerabilities detected! Failing job."
           exit 1
 
-  per-package-sboms:
+  per-package-sbom:
     name: Generate SBOMs for Workspace Packages
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Fix: Update Python tooling (`pip`, `setuptools`, etc.)
-      - name: Upgrade pip, setuptools, and wheel
-        run: |
-          sudo apt-get update -y
-          sudo apt-get install -y python3 python3-pip python3-venv
-          python3 -m pip install --upgrade pip setuptools wheel Cython
+      - name: Install dependencies for workspaces
+        run: npm ci
 
-      # Fix: Install Anchore CLI
-      - name: Install Anchore CLI
-        run: |
-          pip3 install anchorecli
-
-      # Generate SBOMs per package in the workspaces
       - name: Generate SBOMs for each workspace package
         run: |
           # Cleanup any existing SBOM files
           rm -rf sboms
           mkdir -p sboms
 
-          # Properly parse workspace patterns
+          # Loop through workspace patterns (apps/*, packages/*)
           for package_pattern in $(npm pkg get workspaces | jq -r '.[]'); do
             # Expand patterns to directories
             for package_path in $(find $package_pattern -type d -maxdepth 1); do
               echo "Processing package: $package_path"
 
-              # Check if package.json exists in the package directory
+              # Check if package.json exists to confirm it's a valid package
               if [ -f "$package_path/package.json" ]; then
                 echo "Generating SBOM for workspace: $package_path"
 
-                # Generate the SBOM
-                cd "$package_path"
-                anchore-cli sbom generate --input . --format cyclonedx-json --output "${package_path//\//-}_sbom.cdx.json"
-
-                # Move the SBOM to the output directory
-                mv "${package_path//\//-}_sbom.cdx.json" ../../sboms/
-                cd -
+                # Use Syft (Docker) to generate the SBOM in CycloneDX format
+                docker run --rm \
+                  -v "$PWD/$package_path":/scan \
+                  -v "$PWD/sboms":/output \
+                  anchore/syft:latest \
+                  /scan -o cyclonedx-json=/output/"$(basename $package_path)_sbom.cdx.json"
               else
                 echo "Skipping $package_path. No package.json detected."
               fi
             done
           done
 
-      # Upload SBOMs for all workspace packages
-      - name: Upload SBOMs for workspace packages
+      - name: Upload SBOMs
         uses: actions/upload-artifact@v4
         with:
-          name: workspace-package-sboms
+          name: workspace-sboms
           path: sboms/
 
   ort-check:

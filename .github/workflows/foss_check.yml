@@ -23,6 +23,12 @@ jobs:
           output-file: sbom.cdx.json
           upload-artifact: false
 
+      - name: Upload SBOM as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom-cyclonedx
+          path: sbom.cdx.json
+
       - name: Scan for Vulnerabilities
         id: scan
         uses: anchore/scan-action@v4

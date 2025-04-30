@@ -59,79 +59,64 @@ jobs:
           echo "::error ::High/Critical vulnerabilities detected! Failing job."
           exit 1
 
-  per-package-sbom:
-    name: SBOM & Vulnerability Scan for All Packages
+  scan-workspaces:
+    name: SBOM & Scan for Each Workspace
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        project:
+          - packages/aws-authenticator
+          - packages/frontend-framework
+          - packages/shared
+          - apps/dev_project
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install dependencies using workspaces
+      - name: Install dependencies
         run: npm ci
 
-      - name: Install Anchore tools
-        run: |
-          curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
-          curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
+      - name: Generate SBOM
+        uses: anchore/sbom-action@v0
+        with:
+          path: ${{ matrix.project }}
+          format: cyclonedx-json
+          output-file: sbom-${{ matrix.project }}.cdx.json
+          upload-artifact: false
 
-      - name: Get list of workspaces
-        id: workspaces
-        run: |
-          echo "workspaces=$(jq -rc '.workspaces | join(" ")' package.json)" >> $GITHUB_OUTPUT
-
-      - name: List all packages in workspaces
-        id: packages
-        run: |
-          packages=""
-          for pattern in ${{ steps.workspaces.outputs.workspaces }}; do
-            for pkg in $(find $pattern -name package.json -not -path "*/node_modules/*"); do
-              dir=$(dirname "$pkg")
-              packages="$packages $dir"
-            done
-          done
-          echo "dirs=$packages" >> $GITHUB_OUTPUT
-
-      - name: Generate & scan SBOM for each package
-        run: |
-          mkdir -p sbom-output
-          mkdir -p sarif-output
-          failed=0
-          for dir in ${{ steps.packages.outputs.dirs }}; do
-            pkg=$(basename "$dir")
-            echo "📦 Processing $pkg in $dir"
-
-            sbom_file="sbom-output/${pkg}.cdx.json"
-            sarif_file="sarif-output/${pkg}.sarif"
-
-            anchore sbom $dir -o cyclonedx-json > "$sbom_file" || { echo "::warning::SBOM failed for $pkg"; continue; }
-
-            grype sbom:"$sbom_file" -o sarif -q > "$sarif_file" || {
-              echo "::error file=$dir::Vulnerabilities found in $pkg"
-              failed=1
-            }
-          done
-
-          if [ "$failed" -ne 0 ]; then
-            echo "❌ One or more scans failed"
-            exit 1
-          fi
-
-      - name: Upload all SBOMs
+      - name: Upload SBOM artifact
         uses: actions/upload-artifact@v4
         with:
-          name: all-sboms-cyclonedx
-          path: sbom-output/
+          name: sbom-${{ matrix.project }}
+          path: sbom-${{ matrix.project }}.cdx.json
 
-      - name: Upload all SARIF reports
+      - name: Scan SBOM
+        id: scan
+        uses: anchore/scan-action@v4
+        continue-on-error: true
+        with:
+          path: ${{ matrix.project }}
+          fail-build: true
+          severity-cutoff: high
+          only-fixed: true
+          output-format: sarif
+
+      - name: Upload Grype SARIF report
         uses: actions/upload-artifact@v4
         with:
-          name: all-sarif-reports
-          path: sarif-output/
+          name: sarif-${{ matrix.project }}
+          path: ${{ steps.scan.outputs.sarif }}
+
+      - name: Fail on High/Critical Vulnerabilities
+        if: ${{ steps.scan.conclusion == 'failure' }}
+        run: |
+          echo "::error ::High/Critical vulnerabilities detected in ${{ matrix.project }}! Failing job."
+          exit 1
 
   ort-check:
     name: ORT License & Policy Check
     runs-on: ubuntu-latest
-    needs: [scan, per-package-sbom]
+    needs: [scan, scan-workspaces]
     steps:
       # Step 1: Checkout code
       - name: Checkout code

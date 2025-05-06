@@ -98,7 +98,6 @@ jobs:
   scan-workspaces:
     name: SBOM Each Workspace
     runs-on: ubuntu-latest
-    # needs: ort-check
     strategy:
       matrix:
         project:
@@ -123,17 +122,31 @@ jobs:
       - name: Generate SBOM
         run: |
           echo "Generating SBOM for workspace: ${{ matrix.project }}"
-          npm sbom --sbom-format spdx --output SBOM.spdx >> SBOM.spdx
-          # Check if the SBOM was generated
+          npm sbom --sbom-format spdx --output SBOM.spdx
           if [ ! -f SBOM.spdx ]; then
             echo "::error ::SBOM generation failed for ${{ matrix.project }}. File SBOM.spdx not found."
             exit 1
           fi
 
+      - name: Check If SBOM Has Changed
+        run: |
+          sbom_path="${{ matrix.project }}/SBOM.spdx"
+          echo "Checking if SBOM has changed for ${{ matrix.project }}"
+          if [ -f "${sbom_path}" ]; then
+            if diff SBOM.spdx "${sbom_path}" > /dev/null; then
+              echo "SBOM has not changed. Skipping staging."
+              exit 0
+            fi
+          fi
+          echo "New or updated SBOM detected. Proceeding to stage."
+          mkdir -p $(dirname "${sbom_path}")
+          mv SBOM.spdx "${sbom_path}"
+        shell: bash
+
       - name: Upload Workspace SBOM as Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: sbom-${{ matrix.project }}
+          name: sbom-${{ env.SANITIZED_NAME }}
           path: ${{ matrix.project }}/SBOM.spdx
 
   commit-changes:
@@ -147,7 +160,16 @@ jobs:
       - name: Download SBOM Artifacts
         uses: actions/download-artifact@v4
         with:
-          path: .
+          path: ./sboms
+
+      - name: Restore SBOM Files to Original Paths
+        run: |
+          for artifact in ./sboms/*; do
+            sanitized_name=$(basename "$artifact")
+            original_path=$(echo "$sanitized_name" | sed 's|-|/|g' | sed 's|sbom-||')
+            mkdir -p "$original_path"
+            mv "$artifact" "$original_path/SBOM.spdx"
+          done
 
       - name: Pull latest changes to avoid conflicts
         run: git pull origin ${{ github.head_ref }}

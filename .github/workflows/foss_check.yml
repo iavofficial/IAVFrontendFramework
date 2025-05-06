@@ -98,7 +98,7 @@ jobs:
   scan-workspaces:
     name: SBOM Each Workspace
     runs-on: ubuntu-latest
-    #needs: ort-check
+   # needs: ort-check
     strategy:
       matrix:
         project:
@@ -117,27 +117,28 @@ jobs:
       - name: Sanitize workspace name
         id: sanitize-name
         run: |
-          # Replace slashes "/" in project name with dashes "-"
           sanitized_name=$(echo "${{ matrix.project }}" | sed 's|/|-|g')
           echo "SANITIZED_NAME=${sanitized_name}" >> $GITHUB_ENV
 
       - name: Generate SBOM
         run: |
           echo "Generating SBOM for workspace: ${{ matrix.project }}"
-          npm sbom --sbom-format spdx --output SBOM.spdx >> SBOM.spdx
-
-      - name: Move SBOM to target project folder
-        run: |
-          # Define the target path for the SBOM file
-          sbom_path="${{ matrix.project }}/SBOM.spdx"
-          mkdir -p $(dirname "${sbom_path}")
-          mv SBOM.spdx "${sbom_path}"
+          npm sbom --sbom-format spdx --output SBOM.spdx
+          # Check if the SBOM was generated
+          if [ ! -f SBOM.spdx ]; then
+            echo "::error ::SBOM generation failed for ${{ matrix.project }}. File SBOM.spdx not found."
+            exit 1
+          fi
 
       - name: Check If SBOM Has Changed
         run: |
           sbom_path="${{ matrix.project }}/SBOM.spdx"
+          echo "Checking if SBOM has changed for ${{ matrix.project }}"
+          if [ ! -f SBOM.spdx ]; then
+            echo "::error ::SBOM not found for workspace ${{ matrix.project }}. Failing step."
+            exit 1
+          fi
           if [ -f "${sbom_path}" ]; then
-            echo "Checking if SBOM has changed for ${{ matrix.project }}"
             if diff SBOM.spdx "${sbom_path}" > /dev/null; then
               echo "SBOM has not changed. Skipping staging."
               exit 0
@@ -150,7 +151,6 @@ jobs:
 
       - name: Defer git commit
         run: |
-          # Stage the updated files but don't commit yet
           git add "${{ matrix.project }}/SBOM.spdx"
 
   commit-changes:

@@ -78,27 +78,27 @@ jobs:
           name: anchore-scan-logs
           path: /path/to/scan/logs.log
 
-  #  ort-check:
-  #    name: ORT License & Policy Check
-  #    runs-on: ubuntu-latest
-  #    needs: scan
-  #    steps:
-  #      - name: Checkout code
-  #        uses: actions/checkout@v4
-  #
-  #      - name: Install dependencies using npm workspaces
-  #        run: npm ci
-  #
-  #      - name: Run ORT
-  #        id: ort
-  #        uses: oss-review-toolkit/ort-ci-github-action@v1
-  #        with:
-  #          allow-dynamic-versions: 'true'
+  ort-check:
+    name: ORT License & Policy Check
+    runs-on: ubuntu-latest
+    needs: scan
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies using npm workspaces
+        run: npm ci
+
+      - name: Run ORT
+        id: ort
+        uses: oss-review-toolkit/ort-ci-github-action@v1
+        with:
+          allow-dynamic-versions: 'true'
 
   scan-workspaces:
     name: SBOM Each Workspace
     runs-on: ubuntu-latest
-    # needs: ort-check
+    needs: ort-check
     strategy:
       matrix:
         project:

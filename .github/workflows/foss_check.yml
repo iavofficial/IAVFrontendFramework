@@ -98,6 +98,7 @@ jobs:
   scan-workspaces:
     name: SBOM Each Workspace
     runs-on: ubuntu-latest
+    # needs: ort-check
     strategy:
       matrix:
         project:
@@ -122,26 +123,12 @@ jobs:
       - name: Generate SBOM
         run: |
           echo "Generating SBOM for workspace: ${{ matrix.project }}"
-          npm sbom --sbom-format spdx --output SBOM.spdx
+          npm sbom --sbom-format spdx --output SBOM.spdx >> SBOM.spdx
+          # Check if the SBOM was generated
           if [ ! -f SBOM.spdx ]; then
             echo "::error ::SBOM generation failed for ${{ matrix.project }}. File SBOM.spdx not found."
             exit 1
           fi
-
-      - name: Check If SBOM Has Changed
-        run: |
-          sbom_path="${{ matrix.project }}/SBOM.spdx"
-          echo "Checking if SBOM has changed for ${{ matrix.project }}"
-          if [ -f "${sbom_path}" ]; then
-            if diff SBOM.spdx "${sbom_path}" > /dev/null; then
-              echo "SBOM has not changed. Skipping staging."
-              exit 0
-            fi
-          fi
-          echo "New or updated SBOM detected. Proceeding to stage."
-          mkdir -p $(dirname "${sbom_path}")
-          mv SBOM.spdx "${sbom_path}"
-        shell: bash
 
       - name: Upload Workspace SBOM as Artifact
         uses: actions/upload-artifact@v4

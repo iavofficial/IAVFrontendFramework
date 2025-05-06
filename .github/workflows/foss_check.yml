@@ -12,7 +12,6 @@ on:
 
 jobs:
   scan:
-    if: ${{ !contains(github.event.head_commit.message, 'chore(ci): add SBOMs for workspaces') }}
     name: SBOM & Vulnerability Scan for Root
     runs-on: ubuntu-latest
     steps:

@@ -130,44 +130,36 @@ jobs:
             exit 1
           fi
 
-      - name: Check If SBOM Has Changed
-        run: |
-          sbom_path="${{ matrix.project }}/SBOM.spdx"
-          echo "Checking if SBOM has changed for ${{ matrix.project }}"
-          if [ ! -f SBOM.spdx ]; then
-            echo "::error ::SBOM not found for workspace ${{ matrix.project }}. Failing step."
-            exit 1
-          fi
-          if [ -f "${sbom_path}" ]; then
-            if diff SBOM.spdx "${sbom_path}" > /dev/null; then
-              echo "SBOM has not changed. Skipping staging."
-              exit 0
-            fi
-          fi
-          echo "New or updated SBOM detected. Proceeding to stage."
-          mkdir -p $(dirname "${sbom_path}")
-          mv SBOM.spdx "${sbom_path}"
-        shell: bash
-
-      - name: Defer git commit
-        run: |
-          git add "${{ matrix.project }}/SBOM.spdx"
+      - name: Upload Workspace SBOM as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom-${{ matrix.project }}
+          path: ${{ matrix.project }}/SBOM.spdx
 
   commit-changes:
     name: Commit All SBOMs
     runs-on: ubuntu-latest
-    needs: scan-workspaces # Ensure this runs after all SBOMs are generated
+    needs: scan-workspaces
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Download SBOM Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: .
+
       - name: Pull latest changes to avoid conflicts
-        run: git pull origin ${{ github.event.ref }}
+        run: git pull origin ${{ github.head_ref }}
 
       - name: Commit all SBOMs in one commit
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git add .
+          if git diff --staged --quiet; then
+            echo "No changes to commit. Exiting."
+            exit 0
+          fi
           git commit -m "chore(ci): add SBOMs for workspaces"
           git push

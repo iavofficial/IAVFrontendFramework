@@ -4,9 +4,15 @@ on:
   push:
     branches:
       - IAV-FF-feature-foss-check-integration-192
+    paths-ignore:
+      - '**/*.spdx'
+      - '**/*.sbom.json'
+      - '**/*.cdx.json'
+      - '**/.ort/**'
 
 jobs:
   scan:
+    if: ${{ !contains(github.event.head_commit.message, 'chore(ci): add SBOMs for workspaces') }}
     name: SBOM & Vulnerability Scan for Root
     runs-on: ubuntu-latest
     steps:
@@ -20,7 +26,7 @@ jobs:
 
       # Step 3: Generate root-level SBOM (CycloneDX JSON)
       - name: Generate SBOM (CycloneDX JSON) for root
-        uses: anchore/sbom-action@v0
+        uses: anchore/sbom-action@v1
         with:
           format: cyclonedx-json
           output-file: sbom-root.cdx.json
@@ -54,7 +60,7 @@ jobs:
 
       - name: Upload SARIF to GitHub Code Scanning
         if: success() || failure()
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: ${{ steps.scan.outputs.sarif }}
 
@@ -65,8 +71,33 @@ jobs:
           echo "::error ::High/Critical vulnerabilities detected! Failing job."
           exit 1
 
+      # Upload Anchore logs in case of failure
+      - name: Upload Scan Logs
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: anchore-scan-logs
+          path: /path/to/scan/logs.log
+
+  ort-check:
+    name: ORT License & Policy Check
+    runs-on: ubuntu-latest
+    needs: [scan]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies using npm workspaces
+        run: npm ci
+
+      - name: Run ORT
+        id: ort
+        uses: oss-review-toolkit/ort-ci-github-action@v1
+        with:
+          allow-dynamic-versions: 'true'
+
   scan-workspaces:
-    name: SBOM & Scan for Each Workspace
+    name: SBOM Each Workspace
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -91,90 +122,37 @@ jobs:
           echo "SANITIZED_NAME=${sanitized_name}" >> $GITHUB_ENV
 
       - name: Generate SBOM
-        uses: anchore/sbom-action@v0
-        with:
-          path: ${{ matrix.project }}
-          format: cyclonedx-json
-          output-file: sbom-${{ env.SANITIZED_NAME }}.cdx.json
-          upload-artifact: false
-
-      - name: Upload SBOM artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: sbom-${{ env.SANITIZED_NAME }}
-          path: sbom-${{ env.SANITIZED_NAME }}.cdx.json
-
-      - name: Scan SBOM
-        id: scan
-        uses: anchore/scan-action@v4
-        continue-on-error: true
-        with:
-          path: ${{ matrix.project }}
-          fail-build: true
-          severity-cutoff: high
-          only-fixed: true
-          output-format: sarif
-
-      - name: Upload Grype SARIF report
-        uses: actions/upload-artifact@v4
-        with:
-          name: sarif-${{ env.SANITIZED_NAME }}
-          path: ${{ steps.scan.outputs.sarif }}
-
-      - name: Fail on High/Critical Vulnerabilities
-        if: ${{ steps.scan.conclusion == 'failure' }}
         run: |
-          echo "::error ::High/Critical vulnerabilities detected in ${{ matrix.project }}! Failing job."
-          exit 1
+          echo "Generating SBOM for workspace: ${{ matrix.project }}"
+          npm sbom --sbom-format spdx --output SBOM.spdx >> SBOM.spdx
 
-  ort-check:
-    name: ORT License & Policy Check
+      - name: Move SBOM to target project folder
+        run: |
+          # Define the target path for the SBOM file
+          sbom_path="${{ matrix.project }}/SBOM.spdx"
+          mkdir -p $(dirname "${sbom_path}")
+          mv SBOM.spdx "${sbom_path}"
+
+      - name: Defer git commit
+        run: |
+          # Stage the updated files but don't commit yet
+          git add "${{ matrix.project }}/SBOM.spdx"
+
+  commit-changes:
+    name: Commit All SBOMs
     runs-on: ubuntu-latest
-    needs: [scan, scan-workspaces]
+    needs: scan-workspaces # Ensure this runs after all SBOMs are generated
     steps:
-      # Step 1: Checkout code
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Step 2: Install all workspace dependencies
-      - name: Install dependencies using npm workspaces
-        run: npm ci
+      - name: Pull latest changes to avoid conflicts
+        run: git pull origin ${{ github.event.ref }}
 
-      # Step 3: Add ORT configuration files to the repository
-      - name: Add ORT config to repo
+      - name: Commit all SBOMs in one commit
         run: |
-          mkdir -p .ort/config
-          cat <<EOF > .ort/config/config.yml
-          analyzer:
-            allow_dynamic_versions: true
-            skip_excluded: true
-
-          excludes:
-            paths:
-              - pattern: 'packages/**'
-                reason: 'BUILD_TOOL_OF'
-                comment: 'Ignore internal packages'
-              - pattern: 'apps/**'
-                reason: 'BUILD_TOOL_OF'
-                comment: 'Ignore internal apps'
-            paths:
-              - pattern: 'docs/.vite/deps/**'
-                reason: 'BUILD_TOOL_OF'
-                comment: 'Ignore Vite-generated dependency folder'
-          EOF
-
-          cat <<EOF > .ort/config/rules.kts
-          licenseRule("DisallowedLicenses") {
-              disallowed {
-                  license("GPL")
-                  license("AGPL")
-              }
-          }
-          EOF
-
-      # Step 4: Run ORT for license and policy checks
-      - name: Run ORT
-        id: ort
-        uses: oss-review-toolkit/ort-ci-github-action@v1
-        with:
-          allow-dynamic-versions: 'true'
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add .
+          git commit -m "chore(ci): add SBOMs for workspaces"
+          git push

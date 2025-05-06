@@ -52,6 +52,12 @@ jobs:
           name: grype-sarif
           path: ${{ steps.scan.outputs.sarif }}
 
+      - name: Upload SARIF to GitHub Code Scanning
+        if: success() || failure()
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: ${{ steps.scan.outputs.sarif }}
+
       # Step 7: Fail build on high/critical vulnerabilities
       - name: Fail on High/Critical Vulnerabilities
         if: ${{ steps.scan.conclusion == 'failure' }}
@@ -69,6 +75,7 @@ jobs:
           - packages/frontend-framework
           - packages/shared
           - apps/dev_project
+          - docs
     steps:
       - name: Checkout code
         uses: actions/checkout@v4

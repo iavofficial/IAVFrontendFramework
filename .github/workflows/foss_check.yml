@@ -81,7 +81,7 @@ jobs:
   ort-check:
     name: ORT License & Policy Check
     runs-on: ubuntu-latest
-    needs: [scan]
+    needs: scan
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -98,6 +98,7 @@ jobs:
   scan-workspaces:
     name: SBOM Each Workspace
     runs-on: ubuntu-latest
+    needs: ort-check
     strategy:
       matrix:
         project:
@@ -131,6 +132,21 @@ jobs:
           sbom_path="${{ matrix.project }}/SBOM.spdx"
           mkdir -p $(dirname "${sbom_path}")
           mv SBOM.spdx "${sbom_path}"
+
+      - name: Check If SBOM Has Changed
+        run: |
+          sbom_path="${{ matrix.project }}/SBOM.spdx"
+          if [ -f "${sbom_path}" ]; then
+            echo "Checking if SBOM has changed for ${{ matrix.project }}"
+            if diff SBOM.spdx "${sbom_path}" > /dev/null; then
+              echo "SBOM has not changed. Skipping staging."
+              exit 0
+            fi
+          fi
+          echo "New or updated SBOM detected. Proceeding to stage."
+          mkdir -p $(dirname "${sbom_path}")
+          mv SBOM.spdx "${sbom_path}"
+        shell: bash
 
       - name: Defer git commit
         run: |

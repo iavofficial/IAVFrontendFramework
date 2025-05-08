@@ -1,3 +1,9 @@
+## [@iavofficial/frontend-framework-v1.4.2-dev.2](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.2-dev.1...@iavofficial/frontend-framework-v1.4.2-dev.2) (2025-05-08)
+
+### Bug Fixes
+
+* add language to localstorage ([ddee067](https://github.com/iavofficial/IAVFrontendFramework/commit/ddee067a4f657d66f4401ae99695dffc3b5b1f8d))
+
 ## [@iavofficial/frontend-framework-v1.4.2-dev.1](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.1...@iavofficial/frontend-framework-v1.4.2-dev.1) (2025-04-24)
 
 ### Bug Fixes

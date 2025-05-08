@@ -69,6 +69,10 @@ export const DefaultLanguageProvider = (
     if (initialLang) {
       selectLanguage(initialLang);
     } else {
+      localStorage.setItem(
+        "language",
+        i18n.language === "de-DE" ? "de" : i18n.language,
+      );
       setActiveLang(i18n.language === "de-DE" ? "de" : i18n.language);
     }
 
@@ -110,6 +114,7 @@ export const DefaultLanguageProvider = (
 
   const selectLanguage = (lang: string) => {
     i18n.changeLanguage(lang);
+    localStorage.setItem("language", lang);
     setActiveLang(lang);
   };
 

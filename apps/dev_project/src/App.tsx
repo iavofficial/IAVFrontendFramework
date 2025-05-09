@@ -17,43 +17,43 @@
  */
 
 import translationES from "./assets/translations/es.json";
-import { GlobalDataLayer } from "@iavofficial/frontend-framework/globalDataLayer";
-import { DummyAuthenticationProvider } from "@iavofficial/frontend-framework/dummyAuthenticationProvider";
+import {GlobalDataLayer} from "@iavofficial/frontend-framework/globalDataLayer";
+import {AWSAuthenticationProvider} from "@iavofficial/frontend-framework/awsAuthenticationProvider";
 import translationEN from "./assets/translations/en.json";
 import translationDE from "./assets/translations/de.json";
 import translationDECH from "./assets/translations/de-CH.json";
 import Layout from "./Layout.tsx";
 
 function App() {
-  const translations = {
-    es: {
-      translation: translationES,
-    },
-    en: {
-      translation: translationEN,
-    },
-    de: {
-      translation: translationDE,
-    },
-    de_CH: {
-      translation: translationDECH,
-    },
-  };
+    const translations = {
+        es: {
+            translation: translationES,
+        },
+        en: {
+            translation: translationEN,
+        },
+        de: {
+            translation: translationDE,
+        },
+        de_CH: {
+            translation: translationDECH,
+        },
+    };
 
-  return (
-    <DummyAuthenticationProvider
-      additionalContextValues={{ getUserGroups: () => [] }}
-    >
-      <GlobalDataLayer
-        translations={translations}
-        colorSettings={{
-          colorOptions: {},
-        }}
-      >
-        <Layout />
-      </GlobalDataLayer>
-    </DummyAuthenticationProvider>
-  );
+    return (
+        <AWSAuthenticationProvider
+            configureAmplify={() => console.log("configureAmplify()")}
+        >
+            <GlobalDataLayer
+                translations={translations}
+                colorSettings={{
+                    colorOptions: {},
+                }}
+            >
+                <Layout/>
+            </GlobalDataLayer>
+        </AWSAuthenticationProvider>
+    );
 }
 
 export default App;

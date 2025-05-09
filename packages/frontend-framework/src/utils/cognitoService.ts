@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {AuthError, confirmSignIn, fetchAuthSession, JWT, signIn, signOut,} from "aws-amplify/auth";
+import {AuthError, confirmSignIn, fetchAuthSession, getCurrentUser, JWT, signIn, signOut,} from "aws-amplify/auth";
 import {Credentials} from "../contexts/auth";
 import {containsOneOrMoreGroups} from "./groupChecker";
 
@@ -54,10 +54,14 @@ export async function cognitoLogout() {
 
 export async function cognitoCheckIsAuthenticated(
     failOnNoLegalGroup?: boolean,
-    legalGroups?: string[]
+    legalGroups?: string[],
 ) {
     try {
-        return await handleSessionResult(failOnNoLegalGroup, legalGroups);
+        const response = await getCurrentUser();
+
+        if (response.username) {
+            return await handleSessionResult(failOnNoLegalGroup, legalGroups);
+        }
     } catch (error: any) {
         throw new AuthError(error);
     }

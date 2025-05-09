@@ -19,12 +19,12 @@
 import React, {Component} from "react";
 import {AuthContext, AWSAuthenticationProviderType, AWSUserData, Credentials,} from "../../../contexts/auth";
 import {
-  cognitoCheckIsAuthenticated,
-  cognitoCompletePassword,
-  cognitoLogin,
-  cognitoLogout,
-  cognitoRefreshToken,
-  ValidUserInformation,
+    cognitoCheckIsAuthenticated,
+    cognitoCompletePassword,
+    cognitoLogin,
+    cognitoLogout,
+    cognitoRefreshToken,
+    ValidUserInformation,
 } from "../../../utils/cognitoService";
 import {JWT} from "aws-amplify/auth";
 
@@ -76,7 +76,6 @@ export class AWSAuthenticationProvider
     componentDidMount() {
         this.props.configureAmplify();
         this.checkIsAuthenticated();
-
         this.sessionRefreshInterval = setInterval(() => {
             this.refreshSession();
         }, RENEWING_SESSION_INTERVAL);

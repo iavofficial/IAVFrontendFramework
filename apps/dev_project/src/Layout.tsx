@@ -20,7 +20,7 @@ import { SelectButton } from "primereact/selectbutton";
 import { useState } from "react";
 import { UILayer } from "@iavofficial/frontend-framework/uiLayer";
 import { TranslateFunctionType } from "@iavofficial/frontend-framework/translationFunction";
-import { BasicAuthenticationView } from "@iavofficial/frontend-framework/basicAuthenticationView";
+import { AWSAuthenticationView } from "@iavofficial/frontend-framework/awsAuthenticationView";
 import { BasicContentWrapper } from "@iavofficial/frontend-framework/basicContentWrapper";
 import { Group } from "@iavofficial/frontend-framework/group";
 import InfoIcon from "./assets/infoIcon.svg?react";
@@ -226,7 +226,7 @@ function Layout() {
       }}
       tabAndContentWrappers={views}
       startingPoint="/"
-      authenticationView={BasicAuthenticationView}
+      authenticationView={AWSAuthenticationView}
       settingsMenuOptions={settingsMenuOptions}
       documentsLabelKey="Legal_documents"
       documentsComponent={LegalDocuments}

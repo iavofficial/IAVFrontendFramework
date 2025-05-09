@@ -53,6 +53,8 @@ interface FetchSettings {
   [key: string]: any;
 }
 
+const RENEWING_SESSION_INTERVAL = 1000 * 60 * 12; // every 12 minutes
+
 export class AWSAuthenticationProvider
   extends Component<React.PropsWithChildren<Props>, State>
   implements AWSAuthenticationProviderType
@@ -61,6 +63,8 @@ export class AWSAuthenticationProvider
     failOnNoLegalGroup: false,
     legalGroups: [],
   };
+
+  private sessionRefreshInterval?: ReturnType<typeof setInterval>;
 
   constructor(props: Props) {
     super(props);
@@ -77,6 +81,15 @@ export class AWSAuthenticationProvider
   componentDidMount() {
     this.props.configureAmplify();
     this.checkIsAuthenticated();
+    this.sessionRefreshInterval = setInterval(() => {
+      this.refreshSession();
+    }, RENEWING_SESSION_INTERVAL);
+  }
+
+  componentWillUnmount() {
+    if (this.sessionRefreshInterval) {
+      clearInterval(this.sessionRefreshInterval);
+    }
   }
 
   componentDidUpdate() {

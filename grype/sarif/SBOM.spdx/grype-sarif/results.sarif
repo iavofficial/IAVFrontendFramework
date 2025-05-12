@@ -1,0 +1,1903 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://docs.oasis-open.org/sarif/sarif/v2.1.0/errata01/os/schemas/sarif-schema-2.1.0.json",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "grype",
+          "version": "0.80.0",
+          "informationUri": "https://github.com/anchore/grype",
+          "rules": [
+            {
+              "id": "CVE-2023-24531-stdlib",
+              "name": "GoModuleMatcherCpeMatch",
+              "shortDescription": {
+                "text": "CVE-2023-24531 critical vulnerability for stdlib package"
+              },
+              "fullDescription": {
+                "text": "Command go env is documented as outputting a shell script containing the Go environment. However, go env doesn't sanitize values, so executing its output as a shell script can cause various bad bahaviors, including executing arbitrary commands or inserting new environment variables. This issue is relatively minor because, in general, if an attacker can set arbitrary environment variables on a system, they have better attack vectors than making \"go env\" print them out."
+              },
+              "helpUri": "https://github.com/anchore/grype",
+              "help": {
+                "text": "Vulnerability CVE-2023-24531\nSeverity: critical\nPackage: stdlib\nVersion: go1.20.12\nFix Version: 1.21.0-0\nType: go-module\nLocation: /node_modules/esbuild/bin/esbuild\nData Namespace: nvd:cpe\nLink: [CVE-2023-24531](https://nvd.nist.gov/vuln/detail/CVE-2023-24531)",
+                "markdown": "**Vulnerability CVE-2023-24531**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| critical  | stdlib  | go1.20.12  | 1.21.0-0  | go-module  | /node_modules/esbuild/bin/esbuild  | nvd:cpe  | [CVE-2023-24531](https://nvd.nist.gov/vuln/detail/CVE-2023-24531)  |\n"
+              },
+              "properties": {
+                "security-severity": "9.8"
+              }
+            },
+            {
+              "id": "CVE-2023-45288-stdlib",
+              "name": "GoModuleMatcherCpeMatch",
+              "shortDescription": {
+                "text": "CVE-2023-45288 high vulnerability for stdlib package"
+              },
+              "fullDescription": {
+                "text": "An attacker may cause an HTTP/2 endpoint to read arbitrary amounts of header data by sending an excessive number of CONTINUATION frames. Maintaining HPACK state requires parsing and processing all HEADERS and CONTINUATION frames on a connection. When a request's headers exceed MaxHeaderBytes, no memory is allocated to store the excess headers, but they are still parsed. This permits an attacker to cause an HTTP/2 endpoint to read arbitrary amounts of header data, all associated with a request which is going to be rejected. These headers can include Huffman-encoded data which is significantly more expensive for the receiver to decode than for an attacker to send. The fix sets a limit on the amount of excess header frames we will process before closing a connection."
+              },
+              "helpUri": "https://github.com/anchore/grype",
+              "help": {
+                "text": "Vulnerability CVE-2023-45288\nSeverity: high\nPackage: stdlib\nVersion: go1.20.12\nFix Version: 1.21.9,1.22.2\nType: go-module\nLocation: /node_modules/esbuild/bin/esbuild\nData Namespace: nvd:cpe\nLink: [CVE-2023-45288](https://nvd.nist.gov/vuln/detail/CVE-2023-45288)",
+                "markdown": "**Vulnerability CVE-2023-45288**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| high  | stdlib  | go1.20.12  | 1.21.9,1.22.2  | go-module  | /node_modules/esbuild/bin/esbuild  | nvd:cpe  | [CVE-2023-45288](https://nvd.nist.gov/vuln/detail/CVE-2023-45288)  |\n"
+              },
+              "properties": {
+                "security-severity": "7.5"
+              }
+            },
+            {
+              "id": "CVE-2023-45289-stdlib",
+              "name": "GoModuleMatcherCpeMatch",
+              "shortDescription": {
+                "text": "CVE-2023-45289 medium vulnerability for stdlib package"
+              },
+              "fullDescription": {
+                "text": "When following an HTTP redirect to a domain which is not a subdomain match or exact match of the initial domain, an http.Client does not forward sensitive headers such as \"Authorization\" or \"Cookie\". For example, a redirect from foo.com to www.foo.com will forward the Authorization header, but a redirect to bar.com will not. A maliciously crafted HTTP redirect could cause sensitive headers to be unexpectedly forwarded."
+              },
+              "helpUri": "https://github.com/anchore/grype",
+              "help": {
+                "text": "Vulnerability CVE-2023-45289\nSeverity: medium\nPackage: stdlib\nVersion: go1.20.12\nFix Version: 1.21.8,1.22.1\nType: go-module\nLocation: /node_modules/esbuild/bin/esbuild\nData Namespace: nvd:cpe\nLink: [CVE-2023-45289](https://nvd.nist.gov/vuln/detail/CVE-2023-45289)",
+                "markdown": "**Vulnerability CVE-2023-45289**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| medium  | stdlib  | go1.20.12  | 1.21.8,1.22.1  | go-module  | /node_modules/esbuild/bin/esbuild  | nvd:cpe  | [CVE-2023-45289](https://nvd.nist.gov/vuln/detail/CVE-2023-45289)  |\n"
+              },
+              "properties": {
+                "security-severity": "4.3"
+              }
+            },
+            {
+              "id": "CVE-2023-45290-stdlib",
+              "name": "GoModuleMatcherCpeMatch",
+              "shortDescription": {
+                "text": "CVE-2023-45290 medium vulnerability for stdlib package"
+              },
+              "fullDescription": {
+                "text": "When parsing a multipart form (either explicitly with Request.ParseMultipartForm or implicitly with Request.FormValue, Request.PostFormValue, or Request.FormFile), limits on the total size of the parsed form were not applied to the memory consumed while reading a single form line. This permits a maliciously crafted input containing very long lines to cause allocation of arbitrarily large amounts of memory, potentially leading to memory exhaustion. With fix, the ParseMultipartForm function now correctly limits the maximum size of form lines."
+              },
+              "helpUri": "https://github.com/anchore/grype",
+              "help": {
+                "text": "Vulnerability CVE-2023-45290\nSeverity: medium\nPackage: stdlib\nVersion: go1.20.12\nFix Version: 1.21.8,1.22.1\nType: go-module\nLocation: /node_modules/esbuild/bin/esbuild\nData Namespace: nvd:cpe\nLink: [CVE-2023-45290](https://nvd.nist.gov/vuln/detail/CVE-2023-45290)",
+                "markdown": "**Vulnerability CVE-2023-45290**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| medium  | stdlib  | go1.20.12  | 1.21.8,1.22.1  | go-module  | /node_modules/esbuild/bin/esbuild  | nvd:cpe  | [CVE-2023-45290](https://nvd.nist.gov/vuln/detail/CVE-2023-45290)  |\n"
+              },
+              "properties": {
+                "security-severity": "6.5"
+              }
+            },
+            {
+              "id": "CVE-2024-24783-stdlib",
+              "name": "GoModuleMatcherCpeMatch",
+              "shortDescription": {
+                "text": "CVE-2024-24783 medium vulnerability for stdlib package"
+              },
+              "fullDescription": {
+                "text": "Verifying a certificate chain which contains a certificate with an unknown public key algorithm will cause Certificate.Verify to panic. This affects all crypto/tls clients, and servers that set Config.ClientAuth to VerifyClientCertIfGiven or RequireAndVerifyClientCert. The default behavior is for TLS servers to not verify client certificates."
+              },
+              "helpUri": "https://github.com/anchore/grype",
+              "help": {
+                "text": "Vulnerability CVE-2024-24783\nSeverity: medium\nPackage: stdlib\nVersion: go1.20.12\nFix Version: 1.21.8,1.22.1\nType: go-module\nLocation: /node_modules/esbuild/bin/esbuild\nData Namespace: nvd:cpe\nLink: [CVE-2024-24783](https://nvd.nist.gov/vuln/detail/CVE-2024-24783)",
+                "markdown": "**Vulnerability CVE-2024-24783**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| medium  | stdlib  | go1.20.12  | 1.21.8,1.22.1  | go-module  | /node_modules/esbuild/bin/esbuild  | nvd:cpe  | [CVE-2024-24783](https://nvd.nist.gov/vuln/detail/CVE-2024-24783)  |\n"
+              },
+              "properties": {
+                "security-severity": "5.9"
+              }
+            },
+            {
+              "id": "CVE-2024-24784-stdlib",
+              "name": "GoModuleMatcherCpeMatch",
+              "shortDescription": {
+                "text": "CVE-2024-24784 high vulnerability for stdlib package"
+              },
+              "fullDescription": {
+                "text": "The ParseAddressList function incorrectly handles comments (text within parentheses) within display names. Since this is a misalignment with conforming address parsers, it can result in different trust decisions being made by programs using different parsers."
+              },
+              "helpUri": "https://github.com/anchore/grype",
+              "help": {
+                "text": "Vulnerability CVE-2024-24784\nSeverity: high\nPackage: stdlib\nVersion: go1.20.12\nFix Version: 1.21.8,1.22.1\nType: go-module\nLocation: /node_modules/esbuild/bin/esbuild\nData Namespace: nvd:cpe\nLink: [CVE-2024-24784](https://nvd.nist.gov/vuln/detail/CVE-2024-24784)",
+                "markdown": "**Vulnerability CVE-2024-24784**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| high  | stdlib  | go1.20.12  | 1.21.8,1.22.1  | go-module  | /node_modules/esbuild/bin/esbuild  | nvd:cpe  | [CVE-2024-24784](https://nvd.nist.gov/vuln/detail/CVE-2024-24784)  |\n"
+              },
+              "properties": {
+                "security-severity": "7.5"
+              }
+            },
+            {
+              "id": "CVE-2024-24785-stdlib",
+              "name": "GoModuleMatcherCpeMatch",
+              "shortDescription": {
+                "text": "CVE-2024-24785 medium vulnerability for stdlib package"
+              },
+              "fullDescription": {
+                "text": "If errors returned from MarshalJSON methods contain user controlled data, they may be used to break the contextual auto-escaping behavior of the html/template package, allowing for subsequent actions to inject unexpected content into templates."
+              },
+              "helpUri": "https://github.com/anchore/grype",
+              "help": {
+                "text": "Vulnerability CVE-2024-24785\nSeverity: medium\nPackage: stdlib\nVersion: go1.20.12\nFix Version: 1.21.8,1.22.1\nType: go-module\nLocation: /node_modules/esbuild/bin/esbuild\nData Namespace: nvd:cpe\nLink: [CVE-2024-24785](https://nvd.nist.gov/vuln/detail/CVE-2024-24785)",
+                "markdown": "**Vulnerability CVE-2024-24785**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| medium  | stdlib  | go1.20.12  | 1.21.8,1.22.1  | go-module  | /node_modules/esbuild/bin/esbuild  | nvd:cpe  | [CVE-2024-24785](https://nvd.nist.gov/vuln/detail/CVE-2024-24785)  |\n"
+              },
+              "properties": {
+                "security-severity": "5.4"
+              }
+            },
+            {
+              "id": "CVE-2024-24787-stdlib",
+              "name": "GoModuleMatcherCpeMatch",
+              "shortDescription": {
+                "text": "CVE-2024-24787 medium vulnerability for stdlib package"
+              },
+              "fullDescription": {
+                "text": "On Darwin, building a Go module which contains CGO can trigger arbitrary code execution when using the Apple version of ld, due to usage of the -lto_library flag in a \"#cgo LDFLAGS\" directive."
+              },
+              "helpUri": "https://github.com/anchore/grype",
+              "help": {
+                "text": "Vulnerability CVE-2024-24787\nSeverity: medium\nPackage: stdlib\nVersion: go1.20.12\nFix Version: 1.21.10,1.22.3\nType: go-module\nLocation: /node_modules/esbuild/bin/esbuild\nData Namespace: nvd:cpe\nLink: [CVE-2024-24787](https://nvd.nist.gov/vuln/detail/CVE-2024-24787)",
+                "markdown": "**Vulnerability CVE-2024-24787**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| medium  | stdlib  | go1.20.12  | 1.21.10,1.22.3  | go-module  | /node_modules/esbuild/bin/esbuild  | nvd:cpe  | [CVE-2024-24787](https://nvd.nist.gov/vuln/detail/CVE-2024-24787)  |\n"
+              },
+              "properties": {
+                "security-severity": "6.4"
+              }
+            },
+            {
+              "id": "CVE-2024-24789-stdlib",
+              "name": "GoModuleMatcherCpeMatch",
+              "shortDescription": {
+                "text": "CVE-2024-24789 medium vulnerability for stdlib package"
+              },
+              "fullDescription": {
+                "text": "The archive/zip package's handling of certain types of invalid zip files differs from the behavior of most zip implementations. This misalignment could be exploited to create an zip file with contents that vary depending on the implementation reading the file. The archive/zip package now rejects files containing these errors."
+              },
+              "helpUri": "https://github.com/anchore/grype",
+              "help": {
+                "text": "Vulnerability CVE-2024-24789\nSeverity: medium\nPackage: stdlib\nVersion: go1.20.12\nFix Version: 1.21.11,1.22.4\nType: go-module\nLocation: /node_modules/esbuild/bin/esbuild\nData Namespace: nvd:cpe\nLink: [CVE-2024-24789](https://nvd.nist.gov/vuln/detail/CVE-2024-24789)",
+                "markdown": "**Vulnerability CVE-2024-24789**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| medium  | stdlib  | go1.20.12  | 1.21.11,1.22.4  | go-module  | /node_modules/esbuild/bin/esbuild  | nvd:cpe  | [CVE-2024-24789](https://nvd.nist.gov/vuln/detail/CVE-2024-24789)  |\n"
+              },
+              "properties": {
+                "security-severity": "5.5"
+              }
+            },
+            {
+              "id": "CVE-2024-24790-stdlib",
+              "name": "GoModuleMatcherCpeMatch",
+              "shortDescription": {
+                "text": "CVE-2024-24790 critical vulnerability for stdlib package"
+              },
+              "fullDescription": {
+                "text": "The various Is methods (IsPrivate, IsLoopback, etc) did not work as expected for IPv4-mapped IPv6 addresses, returning false for addresses which would return true in their traditional IPv4 forms."
+              },
+              "helpUri": "https://github.com/anchore/grype",
+              "help": {
+                "text": "Vulnerability CVE-2024-24790\nSeverity: critical\nPackage: stdlib\nVersion: go1.20.12\nFix Version: 1.21.11,1.22.4\nType: go-module\nLocation: /node_modules/esbuild/bin/esbuild\nData Namespace: nvd:cpe\nLink: [CVE-2024-24790](https://nvd.nist.gov/vuln/detail/CVE-2024-24790)",
+                "markdown": "**Vulnerability CVE-2024-24790**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| critical  | stdlib  | go1.20.12  | 1.21.11,1.22.4  | go-module  | /node_modules/esbuild/bin/esbuild  | nvd:cpe  | [CVE-2024-24790](https://nvd.nist.gov/vuln/detail/CVE-2024-24790)  |\n"
+              },
+              "properties": {
+                "security-severity": "9.8"
+              }
+            },
+            {
+              "id": "CVE-2024-24791-stdlib",
+              "name": "GoModuleMatcherCpeMatch",
+              "shortDescription": {
+                "text": "CVE-2024-24791 high vulnerability for stdlib package"
+              },
+              "fullDescription": {
+                "text": "The net/http HTTP/1.1 client mishandled the case where a server responds to a request with an \"Expect: 100-continue\" header with a non-informational (200 or higher) status. This mishandling could leave a client connection in an invalid state, where the next request sent on the connection will fail. An attacker sending a request to a net/http/httputil.ReverseProxy proxy can exploit this mishandling to cause a denial of service by sending \"Expect: 100-continue\" requests which elicit a non-informational response from the backend. Each such request leaves the proxy with an invalid connection, and causes one subsequent request using that connection to fail."
+              },
+              "helpUri": "https://github.com/anchore/grype",
+              "help": {
+                "text": "Vulnerability CVE-2024-24791\nSeverity: high\nPackage: stdlib\nVersion: go1.20.12\nFix Version: 1.21.12,1.22.5\nType: go-module\nLocation: /node_modules/esbuild/bin/esbuild\nData Namespace: nvd:cpe\nLink: [CVE-2024-24791](https://nvd.nist.gov/vuln/detail/CVE-2024-24791)",
+                "markdown": "**Vulnerability CVE-2024-24791**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| high  | stdlib  | go1.20.12  | 1.21.12,1.22.5  | go-module  | /node_modules/esbuild/bin/esbuild  | nvd:cpe  | [CVE-2024-24791](https://nvd.nist.gov/vuln/detail/CVE-2024-24791)  |\n"
+              },
+              "properties": {
+                "security-severity": "7.5"
+              }
+            },
+            {
+              "id": "CVE-2024-34155-stdlib",
+              "name": "GoModuleMatcherCpeMatch",
+              "shortDescription": {
+                "text": "CVE-2024-34155 medium vulnerability for stdlib package"
+              },
+              "fullDescription": {
+                "text": "Calling any of the Parse functions on Go source code which contains deeply nested literals can cause a panic due to stack exhaustion."
+              },
+              "helpUri": "https://github.com/anchore/grype",
+              "help": {
+                "text": "Vulnerability CVE-2024-34155\nSeverity: medium\nPackage: stdlib\nVersion: go1.20.12\nFix Version: 1.22.7,1.23.1\nType: go-module\nLocation: /node_modules/esbuild/bin/esbuild\nData Namespace: nvd:cpe\nLink: [CVE-2024-34155](https://nvd.nist.gov/vuln/detail/CVE-2024-34155)",
+                "markdown": "**Vulnerability CVE-2024-34155**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| medium  | stdlib  | go1.20.12  | 1.22.7,1.23.1  | go-module  | /node_modules/esbuild/bin/esbuild  | nvd:cpe  | [CVE-2024-34155](https://nvd.nist.gov/vuln/detail/CVE-2024-34155)  |\n"
+              },
+              "properties": {
+                "security-severity": "4.3"
+              }
+            },
+            {
+              "id": "CVE-2024-34156-stdlib",
+              "name": "GoModuleMatcherCpeMatch",
+              "shortDescription": {
+                "text": "CVE-2024-34156 high vulnerability for stdlib package"
+              },
+              "fullDescription": {
+                "text": "Calling Decoder.Decode on a message which contains deeply nested structures can cause a panic due to stack exhaustion. This is a follow-up to CVE-2022-30635."
+              },
+              "helpUri": "https://github.com/anchore/grype",
+              "help": {
+                "text": "Vulnerability CVE-2024-34156\nSeverity: high\nPackage: stdlib\nVersion: go1.20.12\nFix Version: 1.22.7,1.23.1\nType: go-module\nLocation: /node_modules/esbuild/bin/esbuild\nData Namespace: nvd:cpe\nLink: [CVE-2024-34156](https://nvd.nist.gov/vuln/detail/CVE-2024-34156)",
+                "markdown": "**Vulnerability CVE-2024-34156**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| high  | stdlib  | go1.20.12  | 1.22.7,1.23.1  | go-module  | /node_modules/esbuild/bin/esbuild  | nvd:cpe  | [CVE-2024-34156](https://nvd.nist.gov/vuln/detail/CVE-2024-34156)  |\n"
+              },
+              "properties": {
+                "security-severity": "7.5"
+              }
+            },
+            {
+              "id": "CVE-2024-34158-stdlib",
+              "name": "GoModuleMatcherCpeMatch",
+              "shortDescription": {
+                "text": "CVE-2024-34158 high vulnerability for stdlib package"
+              },
+              "fullDescription": {
+                "text": "Calling Parse on a \"// +build\" build tag line with deeply nested expressions can cause a panic due to stack exhaustion."
+              },
+              "helpUri": "https://github.com/anchore/grype",
+              "help": {
+                "text": "Vulnerability CVE-2024-34158\nSeverity: high\nPackage: stdlib\nVersion: go1.20.12\nFix Version: 1.22.7,1.23.1\nType: go-module\nLocation: /node_modules/esbuild/bin/esbuild\nData Namespace: nvd:cpe\nLink: [CVE-2024-34158](https://nvd.nist.gov/vuln/detail/CVE-2024-34158)",
+                "markdown": "**Vulnerability CVE-2024-34158**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| high  | stdlib  | go1.20.12  | 1.22.7,1.23.1  | go-module  | /node_modules/esbuild/bin/esbuild  | nvd:cpe  | [CVE-2024-34158](https://nvd.nist.gov/vuln/detail/CVE-2024-34158)  |\n"
+              },
+              "properties": {
+                "security-severity": "7.5"
+              }
+            },
+            {
+              "id": "CVE-2024-45336-stdlib",
+              "name": "GoModuleMatcherCpeMatch",
+              "shortDescription": {
+                "text": "CVE-2024-45336 medium vulnerability for stdlib package"
+              },
+              "fullDescription": {
+                "text": "The HTTP client drops sensitive headers after following a cross-domain redirect. For example, a request to a.com/ containing an Authorization header which is redirected to b.com/ will not send that header to b.com. In the event that the client received a subsequent same-domain redirect, however, the sensitive headers would be restored. For example, a chain of redirects from a.com/, to b.com/1, and finally to b.com/2 would incorrectly send the Authorization header to b.com/2."
+              },
+              "helpUri": "https://github.com/anchore/grype",
+              "help": {
+                "text": "Vulnerability CVE-2024-45336\nSeverity: medium\nPackage: stdlib\nVersion: go1.20.12\nFix Version: 1.22.11,1.23.5,1.24.0-rc.2\nType: go-module\nLocation: /node_modules/esbuild/bin/esbuild\nData Namespace: nvd:cpe\nLink: [CVE-2024-45336](https://nvd.nist.gov/vuln/detail/CVE-2024-45336)",
+                "markdown": "**Vulnerability CVE-2024-45336**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| medium  | stdlib  | go1.20.12  | 1.22.11,1.23.5,1.24.0-rc.2  | go-module  | /node_modules/esbuild/bin/esbuild  | nvd:cpe  | [CVE-2024-45336](https://nvd.nist.gov/vuln/detail/CVE-2024-45336)  |\n"
+              },
+              "properties": {
+                "security-severity": "6.1"
+              }
+            },
+            {
+              "id": "CVE-2024-45341-stdlib",
+              "name": "GoModuleMatcherCpeMatch",
+              "shortDescription": {
+                "text": "CVE-2024-45341 medium vulnerability for stdlib package"
+              },
+              "fullDescription": {
+                "text": "A certificate with a URI which has a IPv6 address with a zone ID may incorrectly satisfy a URI name constraint that applies to the certificate chain. Certificates containing URIs are not permitted in the web PKI, so this only affects users of private PKIs which make use of URIs."
+              },
+              "helpUri": "https://github.com/anchore/grype",
+              "help": {
+                "text": "Vulnerability CVE-2024-45341\nSeverity: medium\nPackage: stdlib\nVersion: go1.20.12\nFix Version: 1.22.11,1.23.5,1.24.0-rc.2\nType: go-module\nLocation: /node_modules/esbuild/bin/esbuild\nData Namespace: nvd:cpe\nLink: [CVE-2024-45341](https://nvd.nist.gov/vuln/detail/CVE-2024-45341)",
+                "markdown": "**Vulnerability CVE-2024-45341**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| medium  | stdlib  | go1.20.12  | 1.22.11,1.23.5,1.24.0-rc.2  | go-module  | /node_modules/esbuild/bin/esbuild  | nvd:cpe  | [CVE-2024-45341](https://nvd.nist.gov/vuln/detail/CVE-2024-45341)  |\n"
+              },
+              "properties": {
+                "security-severity": "6.1"
+              }
+            },
+            {
+              "id": "CVE-2025-22866-stdlib",
+              "name": "GoModuleMatcherCpeMatch",
+              "shortDescription": {
+                "text": "CVE-2025-22866 medium vulnerability for stdlib package"
+              },
+              "fullDescription": {
+                "text": "Due to the usage of a variable time instruction in the assembly implementation of an internal function, a small number of bits of secret scalars are leaked on the ppc64le architecture. Due to the way this function is used, we do not believe this leakage is enough to allow recovery of the private key when P-256 is used in any well known protocols."
+              },
+              "helpUri": "https://github.com/anchore/grype",
+              "help": {
+                "text": "Vulnerability CVE-2025-22866\nSeverity: medium\nPackage: stdlib\nVersion: go1.20.12\nFix Version: 1.22.12,1.23.6,1.24.0-rc.3\nType: go-module\nLocation: /node_modules/esbuild/bin/esbuild\nData Namespace: nvd:cpe\nLink: [CVE-2025-22866](https://nvd.nist.gov/vuln/detail/CVE-2025-22866)",
+                "markdown": "**Vulnerability CVE-2025-22866**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| medium  | stdlib  | go1.20.12  | 1.22.12,1.23.6,1.24.0-rc.3  | go-module  | /node_modules/esbuild/bin/esbuild  | nvd:cpe  | [CVE-2025-22866](https://nvd.nist.gov/vuln/detail/CVE-2025-22866)  |\n"
+              },
+              "properties": {
+                "security-severity": "4.0"
+              }
+            },
+            {
+              "id": "CVE-2025-22871-stdlib",
+              "name": "GoModuleMatcherCpeMatch",
+              "shortDescription": {
+                "text": "CVE-2025-22871 critical vulnerability for stdlib package"
+              },
+              "fullDescription": {
+                "text": "The net/http package improperly accepts a bare LF as a line terminator in chunked data chunk-size lines. This can permit request smuggling if a net/http server is used in conjunction with a server that incorrectly accepts a bare LF as part of a chunk-ext."
+              },
+              "helpUri": "https://github.com/anchore/grype",
+              "help": {
+                "text": "Vulnerability CVE-2025-22871\nSeverity: critical\nPackage: stdlib\nVersion: go1.20.12\nFix Version: 1.23.8,1.24.2\nType: go-module\nLocation: /node_modules/esbuild/bin/esbuild\nData Namespace: nvd:cpe\nLink: [CVE-2025-22871](https://nvd.nist.gov/vuln/detail/CVE-2025-22871)",
+                "markdown": "**Vulnerability CVE-2025-22871**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| critical  | stdlib  | go1.20.12  | 1.23.8,1.24.2  | go-module  | /node_modules/esbuild/bin/esbuild  | nvd:cpe  | [CVE-2025-22871](https://nvd.nist.gov/vuln/detail/CVE-2025-22871)  |\n"
+              },
+              "properties": {
+                "security-severity": "9.1"
+              }
+            },
+            {
+              "id": "GHSA-356w-63v5-8wf4-vite",
+              "name": "JavascriptMatcherExactDirectMatch",
+              "shortDescription": {
+                "text": "GHSA-356w-63v5-8wf4 medium vulnerability for vite package"
+              },
+              "fullDescription": {
+                "text": "Vite has an `server.fs.deny` bypass with an invalid `request-target`"
+              },
+              "helpUri": "https://github.com/anchore/grype",
+              "help": {
+                "text": "Vulnerability GHSA-356w-63v5-8wf4\nSeverity: medium\nPackage: vite\nVersion: 5.4.14\nFix Version: 5.4.18\nType: npm\nLocation: /package-lock.json\nData Namespace: github:language:javascript\nLink: [GHSA-356w-63v5-8wf4](https://github.com/advisories/GHSA-356w-63v5-8wf4)",
+                "markdown": "**Vulnerability GHSA-356w-63v5-8wf4**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| medium  | vite  | 5.4.14  | 5.4.18  | npm  | /package-lock.json  | github:language:javascript  | [GHSA-356w-63v5-8wf4](https://github.com/advisories/GHSA-356w-63v5-8wf4)  |\n"
+              },
+              "properties": {
+                "security-severity": "6.0"
+              }
+            },
+            {
+              "id": "GHSA-4r4m-qw57-chr8-vite",
+              "name": "JavascriptMatcherExactDirectMatch",
+              "shortDescription": {
+                "text": "GHSA-4r4m-qw57-chr8 medium vulnerability for vite package"
+              },
+              "fullDescription": {
+                "text": "Vite has a `server.fs.deny` bypassed for `inline` and `raw` with `?import` query"
+              },
+              "helpUri": "https://github.com/anchore/grype",
+              "help": {
+                "text": "Vulnerability GHSA-4r4m-qw57-chr8\nSeverity: medium\nPackage: vite\nVersion: 5.4.14\nFix Version: 5.4.16\nType: npm\nLocation: /package-lock.json\nData Namespace: github:language:javascript\nLink: [GHSA-4r4m-qw57-chr8](https://github.com/advisories/GHSA-4r4m-qw57-chr8)",
+                "markdown": "**Vulnerability GHSA-4r4m-qw57-chr8**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| medium  | vite  | 5.4.14  | 5.4.16  | npm  | /package-lock.json  | github:language:javascript  | [GHSA-4r4m-qw57-chr8](https://github.com/advisories/GHSA-4r4m-qw57-chr8)  |\n"
+              },
+              "properties": {
+                "security-severity": "5.3"
+              }
+            },
+            {
+              "id": "GHSA-67mh-4wv8-2f99-esbuild",
+              "name": "JavascriptMatcherExactDirectMatch",
+              "shortDescription": {
+                "text": "GHSA-67mh-4wv8-2f99 medium vulnerability for esbuild package"
+              },
+              "fullDescription": {
+                "text": "esbuild enables any website to send any requests to the development server and read the response"
+              },
+              "helpUri": "https://github.com/anchore/grype",
+              "help": {
+                "text": "Vulnerability GHSA-67mh-4wv8-2f99\nSeverity: medium\nPackage: esbuild\nVersion: 0.21.5\nFix Version: 0.25.0\nType: npm\nLocation: /package-lock.json\nData Namespace: github:language:javascript\nLink: [GHSA-67mh-4wv8-2f99](https://github.com/advisories/GHSA-67mh-4wv8-2f99)",
+                "markdown": "**Vulnerability GHSA-67mh-4wv8-2f99**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| medium  | esbuild  | 0.21.5  | 0.25.0  | npm  | /package-lock.json  | github:language:javascript  | [GHSA-67mh-4wv8-2f99](https://github.com/advisories/GHSA-67mh-4wv8-2f99)  |\n"
+              },
+              "properties": {
+                "security-severity": "5.3"
+              }
+            },
+            {
+              "id": "GHSA-859w-5945-r5v3-vite",
+              "name": "JavascriptMatcherExactDirectMatch",
+              "shortDescription": {
+                "text": "GHSA-859w-5945-r5v3 medium vulnerability for vite package"
+              },
+              "fullDescription": {
+                "text": "Vite's server.fs.deny bypassed with /. for files under project root"
+              },
+              "helpUri": "https://github.com/anchore/grype",
+              "help": {
+                "text": "Vulnerability GHSA-859w-5945-r5v3\nSeverity: medium\nPackage: vite\nVersion: 5.4.14\nFix Version: 5.4.19\nType: npm\nLocation: /package-lock.json\nData Namespace: github:language:javascript\nLink: [GHSA-859w-5945-r5v3](https://github.com/advisories/GHSA-859w-5945-r5v3)",
+                "markdown": "**Vulnerability GHSA-859w-5945-r5v3**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| medium  | vite  | 5.4.14  | 5.4.19  | npm  | /package-lock.json  | github:language:javascript  | [GHSA-859w-5945-r5v3](https://github.com/advisories/GHSA-859w-5945-r5v3)  |\n"
+              },
+              "properties": {
+                "security-severity": "6.0"
+              }
+            },
+            {
+              "id": "GHSA-968p-4wvh-cqc8-@babel/helpers",
+              "name": "JavascriptMatcherExactDirectMatch",
+              "shortDescription": {
+                "text": "GHSA-968p-4wvh-cqc8 medium vulnerability for @babel/helpers package"
+              },
+              "fullDescription": {
+                "text": "Babel has inefficient RegExp complexity in generated code with .replace when transpiling named capturing groups"
+              },
+              "helpUri": "https://github.com/anchore/grype",
+              "help": {
+                "text": "Vulnerability GHSA-968p-4wvh-cqc8\nSeverity: medium\nPackage: @babel/helpers\nVersion: 7.26.9\nFix Version: 7.26.10\nType: npm\nLocation: /docs/package-lock.json\nData Namespace: github:language:javascript\nLink: [GHSA-968p-4wvh-cqc8](https://github.com/advisories/GHSA-968p-4wvh-cqc8)",
+                "markdown": "**Vulnerability GHSA-968p-4wvh-cqc8**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| medium  | @babel/helpers  | 7.26.9  | 7.26.10  | npm  | /docs/package-lock.json  | github:language:javascript  | [GHSA-968p-4wvh-cqc8](https://github.com/advisories/GHSA-968p-4wvh-cqc8)  |\n"
+              },
+              "properties": {
+                "security-severity": "6.2"
+              }
+            },
+            {
+              "id": "GHSA-968p-4wvh-cqc8-@babel/runtime",
+              "name": "JavascriptMatcherExactDirectMatch",
+              "shortDescription": {
+                "text": "GHSA-968p-4wvh-cqc8 medium vulnerability for @babel/runtime package"
+              },
+              "fullDescription": {
+                "text": "Babel has inefficient RegExp complexity in generated code with .replace when transpiling named capturing groups"
+              },
+              "helpUri": "https://github.com/anchore/grype",
+              "help": {
+                "text": "Vulnerability GHSA-968p-4wvh-cqc8\nSeverity: medium\nPackage: @babel/runtime\nVersion: 7.26.9\nFix Version: 7.26.10\nType: npm\nLocation: /docs/package-lock.json\nData Namespace: github:language:javascript\nLink: [GHSA-968p-4wvh-cqc8](https://github.com/advisories/GHSA-968p-4wvh-cqc8)",
+                "markdown": "**Vulnerability GHSA-968p-4wvh-cqc8**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| medium  | @babel/runtime  | 7.26.9  | 7.26.10  | npm  | /docs/package-lock.json  | github:language:javascript  | [GHSA-968p-4wvh-cqc8](https://github.com/advisories/GHSA-968p-4wvh-cqc8)  |\n"
+              },
+              "properties": {
+                "security-severity": "6.2"
+              }
+            },
+            {
+              "id": "GHSA-c2qf-rxjj-qqgw-semver",
+              "name": "JavascriptMatcherExactDirectMatch",
+              "shortDescription": {
+                "text": "GHSA-c2qf-rxjj-qqgw high vulnerability for semver package"
+              },
+              "fullDescription": {
+                "text": "semver vulnerable to Regular Expression Denial of Service"
+              },
+              "helpUri": "https://github.com/anchore/grype",
+              "help": {
+                "text": "Vulnerability GHSA-c2qf-rxjj-qqgw\nSeverity: high\nPackage: semver\nVersion: 4.3.6\nFix Version: 5.7.2\nType: npm\nLocation: /package-lock.json\nData Namespace: github:language:javascript\nLink: [GHSA-c2qf-rxjj-qqgw](https://github.com/advisories/GHSA-c2qf-rxjj-qqgw)",
+                "markdown": "**Vulnerability GHSA-c2qf-rxjj-qqgw**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| high  | semver  | 4.3.6  | 5.7.2  | npm  | /package-lock.json  | github:language:javascript  | [GHSA-c2qf-rxjj-qqgw](https://github.com/advisories/GHSA-c2qf-rxjj-qqgw)  |\n"
+              },
+              "properties": {
+                "security-severity": "7.5"
+              }
+            },
+            {
+              "id": "GHSA-cpj6-fhp6-mr6j-react-router",
+              "name": "JavascriptMatcherExactDirectMatch",
+              "shortDescription": {
+                "text": "GHSA-cpj6-fhp6-mr6j high vulnerability for react-router package"
+              },
+              "fullDescription": {
+                "text": "React Router allows pre-render data spoofing on React-Router framework mode"
+              },
+              "helpUri": "https://github.com/anchore/grype",
+              "help": {
+                "text": "Vulnerability GHSA-cpj6-fhp6-mr6j\nSeverity: high\nPackage: react-router\nVersion: 7.3.0\nFix Version: 7.5.2\nType: npm\nLocation: /package-lock.json\nData Namespace: github:language:javascript\nLink: [GHSA-cpj6-fhp6-mr6j](https://github.com/advisories/GHSA-cpj6-fhp6-mr6j)",
+                "markdown": "**Vulnerability GHSA-cpj6-fhp6-mr6j**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| high  | react-router  | 7.3.0  | 7.5.2  | npm  | /package-lock.json  | github:language:javascript  | [GHSA-cpj6-fhp6-mr6j](https://github.com/advisories/GHSA-cpj6-fhp6-mr6j)  |\n"
+              },
+              "properties": {
+                "security-severity": "8.2"
+              }
+            },
+            {
+              "id": "GHSA-f46r-rw29-r322-react-router",
+              "name": "JavascriptMatcherExactDirectMatch",
+              "shortDescription": {
+                "text": "GHSA-f46r-rw29-r322 high vulnerability for react-router package"
+              },
+              "fullDescription": {
+                "text": "React Router allows a DoS via cache poisoning by forcing SPA mode"
+              },
+              "helpUri": "https://github.com/anchore/grype",
+              "help": {
+                "text": "Vulnerability GHSA-f46r-rw29-r322\nSeverity: high\nPackage: react-router\nVersion: 7.3.0\nFix Version: 7.5.2\nType: npm\nLocation: /package-lock.json\nData Namespace: github:language:javascript\nLink: [GHSA-f46r-rw29-r322](https://github.com/advisories/GHSA-f46r-rw29-r322)",
+                "markdown": "**Vulnerability GHSA-f46r-rw29-r322**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| high  | react-router  | 7.3.0  | 7.5.2  | npm  | /package-lock.json  | github:language:javascript  | [GHSA-f46r-rw29-r322](https://github.com/advisories/GHSA-f46r-rw29-r322)  |\n"
+              },
+              "properties": {
+                "security-severity": "7.5"
+              }
+            },
+            {
+              "id": "GHSA-x574-m823-4x7w-vite",
+              "name": "JavascriptMatcherExactDirectMatch",
+              "shortDescription": {
+                "text": "GHSA-x574-m823-4x7w medium vulnerability for vite package"
+              },
+              "fullDescription": {
+                "text": "Vite bypasses server.fs.deny when using ?raw??"
+              },
+              "helpUri": "https://github.com/anchore/grype",
+              "help": {
+                "text": "Vulnerability GHSA-x574-m823-4x7w\nSeverity: medium\nPackage: vite\nVersion: 5.4.14\nFix Version: 5.4.15\nType: npm\nLocation: /package-lock.json\nData Namespace: github:language:javascript\nLink: [GHSA-x574-m823-4x7w](https://github.com/advisories/GHSA-x574-m823-4x7w)",
+                "markdown": "**Vulnerability GHSA-x574-m823-4x7w**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| medium  | vite  | 5.4.14  | 5.4.15  | npm  | /package-lock.json  | github:language:javascript  | [GHSA-x574-m823-4x7w](https://github.com/advisories/GHSA-x574-m823-4x7w)  |\n"
+              },
+              "properties": {
+                "security-severity": "5.3"
+              }
+            },
+            {
+              "id": "GHSA-x7hr-w5r2-h6wg-prismjs",
+              "name": "JavascriptMatcherExactDirectMatch",
+              "shortDescription": {
+                "text": "GHSA-x7hr-w5r2-h6wg medium vulnerability for prismjs package"
+              },
+              "fullDescription": {
+                "text": "PrismJS DOM Clobbering vulnerability"
+              },
+              "helpUri": "https://github.com/anchore/grype",
+              "help": {
+                "text": "Vulnerability GHSA-x7hr-w5r2-h6wg\nSeverity: medium\nPackage: prismjs\nVersion: 1.27.0\nFix Version: 1.30.0\nType: npm\nLocation: /docs/package-lock.json\nData Namespace: github:language:javascript\nLink: [GHSA-x7hr-w5r2-h6wg](https://github.com/advisories/GHSA-x7hr-w5r2-h6wg)",
+                "markdown": "**Vulnerability GHSA-x7hr-w5r2-h6wg**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| medium  | prismjs  | 1.27.0  | 1.30.0  | npm  | /docs/package-lock.json  | github:language:javascript  | [GHSA-x7hr-w5r2-h6wg](https://github.com/advisories/GHSA-x7hr-w5r2-h6wg)  |\n"
+              },
+              "properties": {
+                "security-severity": "4.9"
+              }
+            },
+            {
+              "id": "GHSA-xcj6-pq6g-qj4x-vite",
+              "name": "JavascriptMatcherExactDirectMatch",
+              "shortDescription": {
+                "text": "GHSA-xcj6-pq6g-qj4x medium vulnerability for vite package"
+              },
+              "fullDescription": {
+                "text": "Vite allows server.fs.deny to be bypassed with .svg or relative paths"
+              },
+              "helpUri": "https://github.com/anchore/grype",
+              "help": {
+                "text": "Vulnerability GHSA-xcj6-pq6g-qj4x\nSeverity: medium\nPackage: vite\nVersion: 5.4.14\nFix Version: 5.4.17\nType: npm\nLocation: /package-lock.json\nData Namespace: github:language:javascript\nLink: [GHSA-xcj6-pq6g-qj4x](https://github.com/advisories/GHSA-xcj6-pq6g-qj4x)",
+                "markdown": "**Vulnerability GHSA-xcj6-pq6g-qj4x**\n| Severity | Package | Version | Fix Version | Type | Location | Data Namespace | Link |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n| medium  | vite  | 5.4.14  | 5.4.17  | npm  | /package-lock.json  | github:language:javascript  | [GHSA-xcj6-pq6g-qj4x](https://github.com/advisories/GHSA-xcj6-pq6g-qj4x)  |\n"
+              },
+              "properties": {
+                "security-severity": "5.3"
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "CVE-2023-24531-stdlib",
+          "message": {
+            "text": "A critical vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/bin/esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/bin/esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "12c3e814e93916f376b869dd954281f257a64bfeb885757ee50438767be5ad0d:1"
+          }
+        },
+        {
+          "ruleId": "CVE-2023-24531-stdlib",
+          "message": {
+            "text": "A critical vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "a8debc9567fd127b82b3e6dccd13a8e7dcb5ba9aca5aea0da565eedc49b5deca:1"
+          }
+        },
+        {
+          "ruleId": "CVE-2023-45288-stdlib",
+          "message": {
+            "text": "A high vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/bin/esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/bin/esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "12c3e814e93916f376b869dd954281f257a64bfeb885757ee50438767be5ad0d:1"
+          }
+        },
+        {
+          "ruleId": "CVE-2023-45288-stdlib",
+          "message": {
+            "text": "A high vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "a8debc9567fd127b82b3e6dccd13a8e7dcb5ba9aca5aea0da565eedc49b5deca:1"
+          }
+        },
+        {
+          "ruleId": "CVE-2023-45289-stdlib",
+          "message": {
+            "text": "A medium vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/bin/esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/bin/esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "12c3e814e93916f376b869dd954281f257a64bfeb885757ee50438767be5ad0d:1"
+          }
+        },
+        {
+          "ruleId": "CVE-2023-45289-stdlib",
+          "message": {
+            "text": "A medium vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "a8debc9567fd127b82b3e6dccd13a8e7dcb5ba9aca5aea0da565eedc49b5deca:1"
+          }
+        },
+        {
+          "ruleId": "CVE-2023-45290-stdlib",
+          "message": {
+            "text": "A medium vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/bin/esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/bin/esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "12c3e814e93916f376b869dd954281f257a64bfeb885757ee50438767be5ad0d:1"
+          }
+        },
+        {
+          "ruleId": "CVE-2023-45290-stdlib",
+          "message": {
+            "text": "A medium vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "a8debc9567fd127b82b3e6dccd13a8e7dcb5ba9aca5aea0da565eedc49b5deca:1"
+          }
+        },
+        {
+          "ruleId": "CVE-2024-24783-stdlib",
+          "message": {
+            "text": "A medium vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/bin/esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/bin/esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "12c3e814e93916f376b869dd954281f257a64bfeb885757ee50438767be5ad0d:1"
+          }
+        },
+        {
+          "ruleId": "CVE-2024-24783-stdlib",
+          "message": {
+            "text": "A medium vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "a8debc9567fd127b82b3e6dccd13a8e7dcb5ba9aca5aea0da565eedc49b5deca:1"
+          }
+        },
+        {
+          "ruleId": "CVE-2024-24784-stdlib",
+          "message": {
+            "text": "A high vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/bin/esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/bin/esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "12c3e814e93916f376b869dd954281f257a64bfeb885757ee50438767be5ad0d:1"
+          }
+        },
+        {
+          "ruleId": "CVE-2024-24784-stdlib",
+          "message": {
+            "text": "A high vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "a8debc9567fd127b82b3e6dccd13a8e7dcb5ba9aca5aea0da565eedc49b5deca:1"
+          }
+        },
+        {
+          "ruleId": "CVE-2024-24785-stdlib",
+          "message": {
+            "text": "A medium vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/bin/esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/bin/esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "12c3e814e93916f376b869dd954281f257a64bfeb885757ee50438767be5ad0d:1"
+          }
+        },
+        {
+          "ruleId": "CVE-2024-24785-stdlib",
+          "message": {
+            "text": "A medium vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "a8debc9567fd127b82b3e6dccd13a8e7dcb5ba9aca5aea0da565eedc49b5deca:1"
+          }
+        },
+        {
+          "ruleId": "CVE-2024-24787-stdlib",
+          "message": {
+            "text": "A medium vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/bin/esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/bin/esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "12c3e814e93916f376b869dd954281f257a64bfeb885757ee50438767be5ad0d:1"
+          }
+        },
+        {
+          "ruleId": "CVE-2024-24787-stdlib",
+          "message": {
+            "text": "A medium vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "a8debc9567fd127b82b3e6dccd13a8e7dcb5ba9aca5aea0da565eedc49b5deca:1"
+          }
+        },
+        {
+          "ruleId": "CVE-2024-24789-stdlib",
+          "message": {
+            "text": "A medium vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/bin/esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/bin/esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "12c3e814e93916f376b869dd954281f257a64bfeb885757ee50438767be5ad0d:1"
+          }
+        },
+        {
+          "ruleId": "CVE-2024-24789-stdlib",
+          "message": {
+            "text": "A medium vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "a8debc9567fd127b82b3e6dccd13a8e7dcb5ba9aca5aea0da565eedc49b5deca:1"
+          }
+        },
+        {
+          "ruleId": "CVE-2024-24790-stdlib",
+          "message": {
+            "text": "A critical vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/bin/esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/bin/esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "12c3e814e93916f376b869dd954281f257a64bfeb885757ee50438767be5ad0d:1"
+          }
+        },
+        {
+          "ruleId": "CVE-2024-24790-stdlib",
+          "message": {
+            "text": "A critical vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "a8debc9567fd127b82b3e6dccd13a8e7dcb5ba9aca5aea0da565eedc49b5deca:1"
+          }
+        },
+        {
+          "ruleId": "CVE-2024-24791-stdlib",
+          "message": {
+            "text": "A high vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/bin/esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/bin/esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "12c3e814e93916f376b869dd954281f257a64bfeb885757ee50438767be5ad0d:1"
+          }
+        },
+        {
+          "ruleId": "CVE-2024-24791-stdlib",
+          "message": {
+            "text": "A high vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "a8debc9567fd127b82b3e6dccd13a8e7dcb5ba9aca5aea0da565eedc49b5deca:1"
+          }
+        },
+        {
+          "ruleId": "CVE-2024-34155-stdlib",
+          "message": {
+            "text": "A medium vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/bin/esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/bin/esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "12c3e814e93916f376b869dd954281f257a64bfeb885757ee50438767be5ad0d:1"
+          }
+        },
+        {
+          "ruleId": "CVE-2024-34155-stdlib",
+          "message": {
+            "text": "A medium vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "a8debc9567fd127b82b3e6dccd13a8e7dcb5ba9aca5aea0da565eedc49b5deca:1"
+          }
+        },
+        {
+          "ruleId": "CVE-2024-34156-stdlib",
+          "message": {
+            "text": "A high vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/bin/esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/bin/esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "12c3e814e93916f376b869dd954281f257a64bfeb885757ee50438767be5ad0d:1"
+          }
+        },
+        {
+          "ruleId": "CVE-2024-34156-stdlib",
+          "message": {
+            "text": "A high vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "a8debc9567fd127b82b3e6dccd13a8e7dcb5ba9aca5aea0da565eedc49b5deca:1"
+          }
+        },
+        {
+          "ruleId": "CVE-2024-34158-stdlib",
+          "message": {
+            "text": "A high vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/bin/esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/bin/esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "12c3e814e93916f376b869dd954281f257a64bfeb885757ee50438767be5ad0d:1"
+          }
+        },
+        {
+          "ruleId": "CVE-2024-34158-stdlib",
+          "message": {
+            "text": "A high vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "a8debc9567fd127b82b3e6dccd13a8e7dcb5ba9aca5aea0da565eedc49b5deca:1"
+          }
+        },
+        {
+          "ruleId": "CVE-2024-45336-stdlib",
+          "message": {
+            "text": "A medium vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/bin/esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/bin/esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "12c3e814e93916f376b869dd954281f257a64bfeb885757ee50438767be5ad0d:1"
+          }
+        },
+        {
+          "ruleId": "CVE-2024-45336-stdlib",
+          "message": {
+            "text": "A medium vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "a8debc9567fd127b82b3e6dccd13a8e7dcb5ba9aca5aea0da565eedc49b5deca:1"
+          }
+        },
+        {
+          "ruleId": "CVE-2024-45341-stdlib",
+          "message": {
+            "text": "A medium vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/bin/esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/bin/esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "12c3e814e93916f376b869dd954281f257a64bfeb885757ee50438767be5ad0d:1"
+          }
+        },
+        {
+          "ruleId": "CVE-2024-45341-stdlib",
+          "message": {
+            "text": "A medium vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "a8debc9567fd127b82b3e6dccd13a8e7dcb5ba9aca5aea0da565eedc49b5deca:1"
+          }
+        },
+        {
+          "ruleId": "CVE-2025-22866-stdlib",
+          "message": {
+            "text": "A medium vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/bin/esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/bin/esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "12c3e814e93916f376b869dd954281f257a64bfeb885757ee50438767be5ad0d:1"
+          }
+        },
+        {
+          "ruleId": "CVE-2025-22866-stdlib",
+          "message": {
+            "text": "A medium vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "a8debc9567fd127b82b3e6dccd13a8e7dcb5ba9aca5aea0da565eedc49b5deca:1"
+          }
+        },
+        {
+          "ruleId": "CVE-2025-22871-stdlib",
+          "message": {
+            "text": "A critical vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/bin/esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/bin/esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "12c3e814e93916f376b869dd954281f257a64bfeb885757ee50438767be5ad0d:1"
+          }
+        },
+        {
+          "ruleId": "CVE-2025-22871-stdlib",
+          "message": {
+            "text": "A critical vulnerability in go-module package: stdlib, version go1.20.12 was found at: /node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/node_modules/esbuild/lib/downloaded-@esbuild-linux-x64-esbuild"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "a8debc9567fd127b82b3e6dccd13a8e7dcb5ba9aca5aea0da565eedc49b5deca:1"
+          }
+        },
+        {
+          "ruleId": "GHSA-356w-63v5-8wf4-vite",
+          "message": {
+            "text": "A medium vulnerability in npm package: vite, version 5.4.14 was found at: /package-lock.json"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/package-lock.json"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "a09b81f85fc6cd906b835577d64fb31a1b315b4549897e7687530735aff2ce65:1"
+          }
+        },
+        {
+          "ruleId": "GHSA-356w-63v5-8wf4-vite",
+          "message": {
+            "text": "A medium vulnerability in npm package: vite, version 6.2.0 was found at: /docs/package-lock.json"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/docs/package-lock.json"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "9688110c01aba55417a4bc44ca19b4935be7a41f166499ca51d8394e9f871cac:1"
+          }
+        },
+        {
+          "ruleId": "GHSA-4r4m-qw57-chr8-vite",
+          "message": {
+            "text": "A medium vulnerability in npm package: vite, version 5.4.14 was found at: /package-lock.json"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/package-lock.json"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "a09b81f85fc6cd906b835577d64fb31a1b315b4549897e7687530735aff2ce65:1"
+          }
+        },
+        {
+          "ruleId": "GHSA-4r4m-qw57-chr8-vite",
+          "message": {
+            "text": "A medium vulnerability in npm package: vite, version 6.2.0 was found at: /docs/package-lock.json"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/docs/package-lock.json"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "9688110c01aba55417a4bc44ca19b4935be7a41f166499ca51d8394e9f871cac:1"
+          }
+        },
+        {
+          "ruleId": "GHSA-67mh-4wv8-2f99-esbuild",
+          "message": {
+            "text": "A medium vulnerability in npm package: esbuild, version 0.21.5 was found at: /package-lock.json"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/package-lock.json"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "8374729afc4ec2c42eb860699aa2b3290fba67d6c8c1803f83865d93e9bbc211:1"
+          }
+        },
+        {
+          "ruleId": "GHSA-859w-5945-r5v3-vite",
+          "message": {
+            "text": "A medium vulnerability in npm package: vite, version 5.4.14 was found at: /package-lock.json"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/package-lock.json"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "a09b81f85fc6cd906b835577d64fb31a1b315b4549897e7687530735aff2ce65:1"
+          }
+        },
+        {
+          "ruleId": "GHSA-859w-5945-r5v3-vite",
+          "message": {
+            "text": "A medium vulnerability in npm package: vite, version 6.2.0 was found at: /docs/package-lock.json"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/docs/package-lock.json"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "9688110c01aba55417a4bc44ca19b4935be7a41f166499ca51d8394e9f871cac:1"
+          }
+        },
+        {
+          "ruleId": "GHSA-968p-4wvh-cqc8-@babel/helpers",
+          "message": {
+            "text": "A medium vulnerability in npm package: @babel/helpers, version 7.26.9 was found at: /docs/package-lock.json"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/docs/package-lock.json"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "30fffd8bf1004298837f39003f66d1d613f16e6a6299bfd2c3e0d9ee7a7a310e:1"
+          }
+        },
+        {
+          "ruleId": "GHSA-968p-4wvh-cqc8-@babel/helpers",
+          "message": {
+            "text": "A medium vulnerability in npm package: @babel/helpers, version 7.26.9 was found at: /package-lock.json"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/package-lock.json"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "280629a1804792c7961d75aaa34dc38e6bb49a616704bb9b6d1361deea27715c:1"
+          }
+        },
+        {
+          "ruleId": "GHSA-968p-4wvh-cqc8-@babel/runtime",
+          "message": {
+            "text": "A medium vulnerability in npm package: @babel/runtime, version 7.26.9 was found at: /docs/package-lock.json"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/docs/package-lock.json"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "87ae32e92d2d7c35fc8558497b020d6392d698a33d044ebeae89962eeed22f23:1"
+          }
+        },
+        {
+          "ruleId": "GHSA-968p-4wvh-cqc8-@babel/runtime",
+          "message": {
+            "text": "A medium vulnerability in npm package: @babel/runtime, version 7.26.9 was found at: /package-lock.json"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/package-lock.json"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "ebba7adc180ed952c5723fd0c4cd35c4147afb2de5a5c7feb95198cc0edc0bd2:1"
+          }
+        },
+        {
+          "ruleId": "GHSA-c2qf-rxjj-qqgw-semver",
+          "message": {
+            "text": "A high vulnerability in npm package: semver, version 4.3.6 was found at: /package-lock.json"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/package-lock.json"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "812151a4a2c19890fe7b63bcb9b3e82bb37bf907d768f8ca86c4d900ff2874d9:1"
+          }
+        },
+        {
+          "ruleId": "GHSA-cpj6-fhp6-mr6j-react-router",
+          "message": {
+            "text": "A high vulnerability in npm package: react-router, version 7.3.0 was found at: /package-lock.json"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/package-lock.json"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "35e4709cb8c51afc7d05ad273de52fff7eb425040a05b4676fe2dcf8cd770500:1"
+          }
+        },
+        {
+          "ruleId": "GHSA-f46r-rw29-r322-react-router",
+          "message": {
+            "text": "A high vulnerability in npm package: react-router, version 7.3.0 was found at: /package-lock.json"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/package-lock.json"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "35e4709cb8c51afc7d05ad273de52fff7eb425040a05b4676fe2dcf8cd770500:1"
+          }
+        },
+        {
+          "ruleId": "GHSA-x574-m823-4x7w-vite",
+          "message": {
+            "text": "A medium vulnerability in npm package: vite, version 5.4.14 was found at: /package-lock.json"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/package-lock.json"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "a09b81f85fc6cd906b835577d64fb31a1b315b4549897e7687530735aff2ce65:1"
+          }
+        },
+        {
+          "ruleId": "GHSA-x574-m823-4x7w-vite",
+          "message": {
+            "text": "A medium vulnerability in npm package: vite, version 6.2.0 was found at: /docs/package-lock.json"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/docs/package-lock.json"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "9688110c01aba55417a4bc44ca19b4935be7a41f166499ca51d8394e9f871cac:1"
+          }
+        },
+        {
+          "ruleId": "GHSA-x7hr-w5r2-h6wg-prismjs",
+          "message": {
+            "text": "A medium vulnerability in npm package: prismjs, version 1.27.0 was found at: /docs/package-lock.json"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/docs/package-lock.json"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "c3968f68863eeb9e1d9587987c3533ae86af1ae29be2c7ed173fa9e968dd6974:1"
+          }
+        },
+        {
+          "ruleId": "GHSA-x7hr-w5r2-h6wg-prismjs",
+          "message": {
+            "text": "A medium vulnerability in npm package: prismjs, version 1.29.0 was found at: /docs/package-lock.json"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/docs/package-lock.json"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "94f6f20ca3f6a17fe0348109df0c385322ba2871501a5da44e618c8d78f839db:1"
+          }
+        },
+        {
+          "ruleId": "GHSA-xcj6-pq6g-qj4x-vite",
+          "message": {
+            "text": "A medium vulnerability in npm package: vite, version 5.4.14 was found at: /package-lock.json"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/package-lock.json"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "a09b81f85fc6cd906b835577d64fb31a1b315b4549897e7687530735aff2ce65:1"
+          }
+        },
+        {
+          "ruleId": "GHSA-xcj6-pq6g-qj4x-vite",
+          "message": {
+            "text": "A medium vulnerability in npm package: vite, version 6.2.0 was found at: /docs/package-lock.json"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/docs/package-lock.json"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "9688110c01aba55417a4bc44ca19b4935be7a41f166499ca51d8394e9f871cac:1"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "name": "@iavofficial/frontend-framework",
   "version": "1.0.0",
-  "private": true,
+  "private": false,
   "license": "Apache-2.0",
   "contributors": [
     {
@@ -48,8 +48,5 @@
     "apps/*",
     "packages/*"
   ],
-  "packageManager": "npm@11.0.0",
-  "dependencies": {
-    "extjs-gpl": "^6.2.0"
-  }
+  "packageManager": "npm@11.0.0"
 }

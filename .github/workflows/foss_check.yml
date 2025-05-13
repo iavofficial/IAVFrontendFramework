@@ -144,9 +144,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Download SBOM Artifacts
+      - name: Download workspace SBOM artifacts only
         uses: actions/download-artifact@v4
         with:
+          pattern: sbom-*
           path: ./sboms
 
       - name: Debug artifact contents
@@ -156,9 +157,10 @@ jobs:
         run: |
           for artifact in ./sboms/*; do
             sanitized_name=$(basename "$artifact")
-            original_path=$(echo "$sanitized_name" | sed 's|-|/|g' | sed 's|sbom-||')
+            original_path=$(echo "$sanitized_name" | sed 's|sbom-||' | sed 's|-|/|g')
+            echo "Restoring SBOM to: $original_path/SBOM.spdx"
             mkdir -p "$original_path"
-            mv "$artifact" "$original_path/SBOM.spdx"
+            mv "$artifact/SBOM.spdx" "$original_path/SBOM.spdx"
           done
 
       - name: Set environment variables

@@ -157,7 +157,7 @@ jobs:
         run: |
           for artifact in ./sboms/*; do
             sanitized_name=$(basename "$artifact")
-            original_path=$(echo "$sanitized_name" | sed 's|sbom-||' | sed 's|-|/|g')
+            original_path=$(echo "$sanitized_name" | sed 's|^sbom-||')
             echo "Restoring SBOM to: $original_path/SBOM.spdx"
             mkdir -p "$original_path"
             mv "$artifact/SBOM.spdx" "$original_path/SBOM.spdx"

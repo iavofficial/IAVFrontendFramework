@@ -3,6 +3,7 @@ name: FOSS Check
 on:
   push:
     branches:
+      - IAV-FF-fix-critical-vulnerabilities-383
       - IAV-FF-feature-foss-check-integration-192
     paths-ignore:
       - '**/*.spdx'

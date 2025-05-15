@@ -1,10 +1,16 @@
-name: Release (Dry Run on Test Branch)
+name: Release
 
 on:
   workflow_dispatch:
   push:
     branches:
-      - ci-github-app-release-304
+      - main
+      - develop
+    paths-ignore:
+      - 'SBOM.json'
+      - '*.md'
+      - '.github/**/*'
+      - 'docs/**/*'
 
 permissions:
   contents: write
@@ -40,8 +46,8 @@ jobs:
           private_key: ${{ secrets.GH_APP_PRIVATE_KEY }}
           installation_id: ${{ secrets.GH_APP_INSTALLATION_ID }}
 
-      - name: Semantic Release Dry Run
+      - name: Release using semantic-release
         env:
           GH_TOKEN: ${{ steps.generate_token.outputs.token }}
-          NPM_TOKEN: dummy
-        run: npx semantic-release --dry-run --ci
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm run release

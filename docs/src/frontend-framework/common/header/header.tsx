@@ -78,9 +78,6 @@ const useStyles = makeStyles(() => ({
       boxShadow: "0 0 5px rgba(0, 123, 255, 0.5)",
     },
   },
-  versionBanner: {
-    marginLeft: "40px",
-  },
 }));
 
 interface Props {

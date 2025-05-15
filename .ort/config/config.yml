@@ -1,0 +1,16 @@
+analyzer:
+  allow_dynamic_versions: true
+  skip_excluded: true
+
+excludes:
+  paths:
+    - pattern: 'packages/**'
+      reason: 'BUILD_TOOL_OF'
+      comment: 'Ignore internal packages'
+    - pattern: 'apps/**'
+      reason: 'BUILD_TOOL_OF'
+      comment: 'Ignore internal apps'
+  paths:
+    - pattern: 'docs/.vite/deps/**'
+      reason: 'BUILD_TOOL_OF'
+      comment: 'Ignore Vite-generated dependency folder'

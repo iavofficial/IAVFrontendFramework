@@ -38,7 +38,8 @@
   "dependencies": {
     "@iavofficial/frontend-framework-shared": "*",
     "@reduxjs/toolkit": "^2.5.1",
-    "react-redux": "^9.2.0"
+    "react-redux": "^9.2.0",
+    "glob": "^10.4.5"
   },
   "peerDependencies": {
     "react": "^18.2.0",

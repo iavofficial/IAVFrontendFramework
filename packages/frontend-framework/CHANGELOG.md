@@ -1,3 +1,12 @@
+## [@iavofficial/frontend-framework-v1.4.2](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.1...@iavofficial/frontend-framework-v1.4.2) (2025-05-17)
+
+### Bug Fixes
+
+* add 12 minutes for aws session ([30f397c](https://github.com/iavofficial/IAVFrontendFramework/commit/30f397cb7ecc40457d16f4fb864c2d59ea1c4ce3))
+* add language to localstorage ([ddee067](https://github.com/iavofficial/IAVFrontendFramework/commit/ddee067a4f657d66f4401ae99695dffc3b5b1f8d))
+* add npm readme ([dcd2cd2](https://github.com/iavofficial/IAVFrontendFramework/commit/dcd2cd2f6f0f0551d4f3e9fab819b25daff46a88))
+* add timer for aws session ([e4f98fb](https://github.com/iavofficial/IAVFrontendFramework/commit/e4f98fb95ab80f8176dfd2f450be473056638950))
+
 ## [@iavofficial/frontend-framework-v1.4.2-dev.3](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.2-dev.2...@iavofficial/frontend-framework-v1.4.2-dev.3) (2025-05-15)
 
 ### Bug Fixes

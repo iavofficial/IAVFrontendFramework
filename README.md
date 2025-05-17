@@ -20,7 +20,7 @@
 
 [![license](https://img.shields.io/badge/license-Apache--2.0-blue)](./LICENSE)
 
-> 🎉 **Version 1.4.0 is now available!**
+> 🎉 **Version 1.4.2 is now available!**
 >
 > This release includes new features and important fixes:
 >
@@ -29,10 +29,10 @@
 > - Embedded the styleguide from Figma in the documentation
 >
 > **Fixes & Improvements**
+> - Selected Language is now saved
 > - Fixed an overflow issue by adding a background to the `contentWithBar` layout
 > - Made the user icon in the header optional
 > - Improved scroll behavior for navigation elements
-> - Updated image sources in the README
 > - Active element highlighting in the navbar now works correctly even when the UI layer is not located at the root path
 
 ## About the Project

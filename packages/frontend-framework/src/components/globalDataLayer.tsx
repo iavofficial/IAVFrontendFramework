@@ -50,7 +50,9 @@ export const GlobalDataLayer = (props: PropsWithChildren<Props>) => {
   const fallbackLang =
     props.languageOptions?.fallbackLang ?? DEFAULT_FALLBACK_LANGUAGE;
   const initialLang =
-    props.languageOptions?.initialLang ?? DEFAULT_FALLBACK_LANGUAGE;
+    props.languageOptions?.initialLang ??
+    localStorage.getItem("language") ??
+    DEFAULT_FALLBACK_LANGUAGE;
   const languageOptions = {
     fallbackLang: fallbackLang,
     initialLang: initialLang,

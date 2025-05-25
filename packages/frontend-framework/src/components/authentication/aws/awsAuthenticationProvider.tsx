@@ -19,263 +19,266 @@
 import React, {Component} from "react";
 import {JWT} from "aws-amplify/auth";
 import {
-    cognitoCheckIsAuthenticated,
-    cognitoCompletePassword,
-    cognitoLogin,
-    cognitoLogout,
-    cognitoRefreshToken,
-    ValidUserInformation,
+  cognitoCheckIsAuthenticated,
+  cognitoCompletePassword,
+  cognitoLogin,
+  cognitoLogout,
+  cognitoRefreshToken,
+  ValidUserInformation,
 } from "../../../utils/cognitoService";
-import {AuthContext, AWSAuthenticationProviderType, Credentials,} from "@iavofficial/frontend-framework/auth";
+import {
+  AuthContext,
+  AWSAuthenticationProviderType,
+  Credentials,
+} from "@iavofficial/frontend-framework/auth";
 
 interface FetchSettings {
-    headers?: Headers;
+  headers?: Headers;
 
-    [key: string]: any;
+  [key: string]: any;
 }
 
 export type UserData = {
-    username: string;
-    userGroups?: string[];
-    extras?: object;
+  username: string;
+  userGroups?: string[];
+  extras?: object;
 };
 
 export type AuthState = {
-    hasAuthenticated: boolean;
-    isLoading: boolean;
-    userData: UserData | undefined;
-    extras?: object;
+  hasAuthenticated: boolean;
+  isLoading: boolean;
+  userData: UserData | undefined;
+  extras?: object;
 };
 
 const RENEWING_SESSION_INTERVAL = 1000 * 60 * 12;
 
 export interface Props {
-    configureAmplify: () => void;
-    failOnNoLegalGroup?: boolean;
-    legalGroups?: string[];
+  configureAmplify: () => void;
+  failOnNoLegalGroup?: boolean;
+  legalGroups?: string[];
 }
 
 export class AuthenticationProvider
-    extends Component<React.PropsWithChildren<Props>, AuthState>
-    implements AWSAuthenticationProviderType {
-    static defaultProps = {
-        failOnNoLegalGroup: false,
-        legalGroups: [],
+  extends Component<React.PropsWithChildren<Props>, AuthState>
+  implements AWSAuthenticationProviderType
+{
+  static defaultProps = {
+    failOnNoLegalGroup: false,
+    legalGroups: [],
+  };
+  private sessionRefreshInterval?: ReturnType<typeof setInterval>;
+
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      hasAuthenticated: false, // true if user is authenticated
+      isNewPasswordRequired: false, // true if user logs in for the first time with his temp password and has to set a new one
+      isLoading: false, // true if user is in process of logging in
+      userData: undefined, // contains user information; undefined if no user is logged in
+      loginError: undefined,
     };
-    private sessionRefreshInterval?: ReturnType<typeof setInterval>;
+  }
 
-    constructor(props: Props) {
-        super(props);
+  componentDidMount() {
+    this.props.configureAmplify();
+    this.checkIsAuthenticated();
 
-        this.state = {
-            hasAuthenticated: false, // true if user is authenticated
-            isNewPasswordRequired: false, // true if user logs in for the first time with his temp password and has to set a new one
-            isLoading: false, // true if user is in process of logging in
-            userData: undefined, // contains user information; undefined if no user is logged in
-            loginError: undefined,
-        };
+    this.sessionRefreshInterval = setInterval(() => {
+      this.checkIsAuthenticated();
+    }, RENEWING_SESSION_INTERVAL);
+  }
+
+  componentWillUnmount() {
+    if (this.sessionRefreshInterval) {
+      clearInterval(this.sessionRefreshInterval);
     }
+  }
 
-    componentDidMount() {
-        this.props.configureAmplify();
-        this.checkIsAuthenticated();
-
-        this.sessionRefreshInterval = setInterval(() => {
-            this.checkIsAuthenticated();
-        }, RENEWING_SESSION_INTERVAL);
-    }
-
-    componentWillUnmount() {
-        if (this.sessionRefreshInterval) {
-            clearInterval(this.sessionRefreshInterval);
-        }
-    }
-
-    checkIsAuthenticated = async () => {
-        try {
-            const result: ValidUserInformation | undefined =
-                await cognitoCheckIsAuthenticated(
-                    this.props.failOnNoLegalGroup,
-                    this.props.legalGroups
-                );
-            this.processSuccessfulAuth(result!);
-            //eslint-disable-next-line
-        } catch (error: any) {
-            this.logout();
-        }
-    };
-
-    generateSettingsWithAuthFrom = (token?: JWT, settings?: FetchSettings) => {
-        if (settings !== undefined) {
-            if ("headers" in settings) {
-                if (!settings.headers?.has("Authorization")) {
-                    const settingsWithAuth = Object.assign({}, settings);
-                    settingsWithAuth.headers?.set(
-                        "Authorization",
-                        "Bearer " +
-                        (token ? token : this.state.userData?.idToken.toString())
-                    );
-                    return settingsWithAuth;
-                }
-            } else {
-                return Object.assign(settings, {
-                    headers: new Headers({
-                        Authorization:
-                            "Bearer " + (token ? token : this.state.userData?.idToken),
-                    }),
-                });
-            }
-        } else {
-            return {
-                headers: new Headers({
-                    Authorization:
-                        "Bearer " + (token ? token : this.state.userData?.idToken),
-                }),
-            };
-        }
-    };
-
-    //In Amplify 6 the fetchAuthedSession Function handles the renewing of sessions
-    fetchAuthed = (url: string, token?: JWT, settings?: FetchSettings) => {
-        try {
-            this.checkIsAuthenticated();
-
-            return fetch(
-                url,
-                this.generateSettingsWithAuthFrom(token, settings)
-            ).then((response) => {
-                return response;
-            });
-            //eslint-disable-next-line
-        } catch (error) {
-            this.logout();
-            return new Promise<Response>((resolve) => {
-                resolve(
-                    new Response(null, {status: 401, statusText: "Unauthorized"})
-                );
-            });
-        }
-    };
-
-    hasAuthenticated = () => {
-        return this.state.hasAuthenticated;
-    };
-
-    getUserData = () => {
-        return this.state.userData;
-    };
-
-    getUserGroups = () => {
-        return this.state.userData ? this.state.userData.groups : [];
-    };
-
-    login = async (credentials: Credentials) => {
-        this.setState({
-            isLoading: true,
-            loginError: undefined,
-        });
-        try {
-            const result: ValidUserInformation | object = await cognitoLogin(
-                credentials,
-                this.props.failOnNoLegalGroup,
-                this.props.legalGroups
-            );
-            if (result instanceof ValidUserInformation) {
-                this.processSuccessfulAuth(result);
-            } else {
-                this.setState({
-                    hasAuthenticated: false,
-                    isNewPasswordRequired: true,
-                });
-            }
-        } catch (error: any) {
-            await this.logout(error);
-        } finally {
-            this.setState({
-                isLoading: false,
-            });
-        }
-    };
-
-    processSuccessfulAuth = (userData: ValidUserInformation) => {
-        this.setState({
-            hasAuthenticated: true,
-            isNewPasswordRequired: false,
-            userData: userData,
-            loginError: undefined,
-        });
-        console.log("token in userdata have been updated");
-    };
-
-    logout = async (error?: any) => {
-        this.setState({
-            isLoading: true,
-        });
-
-        cognitoLogout()
-            .catch((err: any) => {
-                console.log("error signing out: ", err);
-            })
-            .finally(() => {
-                this.setState({
-                    isLoading: false,
-                    hasAuthenticated: false,
-                    userData: undefined,
-                    loginError: error ? error : undefined,
-                });
-            });
-    };
-
-    completePassword = (newPassword: string) => {
-        this.setState({
-            isLoading: true,
-        });
-        cognitoCompletePassword(
-            newPassword,
-            this.props.failOnNoLegalGroup as boolean,
-            this.props.legalGroups as string[]
-        )
-            .then((result: any) => this.processSuccessfulAuth(result))
-            .catch((error: any) => this.logout(error))
-            .then(() => {
-                this.setState({
-                    isLoading: false,
-                });
-            });
-    };
-
-    refreshSession = async () => {
-        try {
-            const response = await cognitoRefreshToken(
-                this.props.failOnNoLegalGroup,
-                this.props.legalGroups
-            );
-
-            if (response instanceof ValidUserInformation) {
-                this.processSuccessfulAuth(response);
-            }
-        } catch (error) {
-            this.logout(error);
-        }
-    };
-
-    render() {
-        return (
-            <AuthContext.Provider
-                value={{
-                    ...this.state,
-                    login: this.login,
-                    completePassword: this.completePassword,
-                    logout: this.logout,
-                    getUserData: this.getUserData,
-                    getUserGroups: this.getUserGroups,
-                    refreshSession: this.refreshSession,
-                    hasAuthenticated: this.hasAuthenticated,
-                    fetchAuthed: this.fetchAuthed,
-                }}
-            >
-                {this.props.children}
-            </AuthContext.Provider>
+  checkIsAuthenticated = async () => {
+    try {
+      const result: ValidUserInformation | undefined =
+        await cognitoCheckIsAuthenticated(
+          this.props.failOnNoLegalGroup,
+          this.props.legalGroups,
         );
+      this.processSuccessfulAuth(result!);
+      //eslint-disable-next-line
+    } catch (error: any) {
+      this.logout();
     }
+  };
+
+  generateSettingsWithAuthFrom = (token?: JWT, settings?: FetchSettings) => {
+    if (settings !== undefined) {
+      if ("headers" in settings) {
+        if (!settings.headers?.has("Authorization")) {
+          const settingsWithAuth = Object.assign({}, settings);
+          settingsWithAuth.headers?.set(
+            "Authorization",
+            "Bearer " +
+              (token ? token : this.state.userData?.idToken.toString()),
+          );
+          return settingsWithAuth;
+        }
+      } else {
+        return Object.assign(settings, {
+          headers: new Headers({
+            Authorization:
+              "Bearer " + (token ? token : this.state.userData?.idToken),
+          }),
+        });
+      }
+    } else {
+      return {
+        headers: new Headers({
+          Authorization:
+            "Bearer " + (token ? token : this.state.userData?.idToken),
+        }),
+      };
+    }
+  };
+
+  //In Amplify 6 the fetchAuthedSession Function handles the renewing of sessions
+  fetchAuthed = (url: string, token?: JWT, settings?: FetchSettings) => {
+    try {
+      this.checkIsAuthenticated();
+
+      return fetch(
+        url,
+        this.generateSettingsWithAuthFrom(token, settings),
+      ).then((response) => {
+        return response;
+      });
+      //eslint-disable-next-line
+    } catch (error) {
+      this.logout();
+      return new Promise<Response>((resolve) => {
+        resolve(new Response(null, {status: 401, statusText: "Unauthorized"}));
+      });
+    }
+  };
+
+  hasAuthenticated = () => {
+    return this.state.hasAuthenticated;
+  };
+
+  getUserData = () => {
+    return this.state.userData;
+  };
+
+  getUserGroups = () => {
+    return this.state.userData ? this.state.userData.groups : [];
+  };
+
+  login = async (credentials: Credentials) => {
+    this.setState({
+      isLoading: true,
+      loginError: undefined,
+    });
+    try {
+      const result: ValidUserInformation | object = await cognitoLogin(
+        credentials,
+        this.props.failOnNoLegalGroup,
+        this.props.legalGroups,
+      );
+      if (result instanceof ValidUserInformation) {
+        this.processSuccessfulAuth(result);
+      } else {
+        this.setState({
+          hasAuthenticated: false,
+          isNewPasswordRequired: true,
+        });
+      }
+    } catch (error: any) {
+      await this.logout(error);
+    } finally {
+      this.setState({
+        isLoading: false,
+      });
+    }
+  };
+
+  processSuccessfulAuth = (userData: ValidUserInformation) => {
+    this.setState({
+      hasAuthenticated: true,
+      isNewPasswordRequired: false,
+      userData: userData,
+      loginError: undefined,
+    });
+    console.log("token in userdata have been updated");
+  };
+
+  logout = async (error?: any) => {
+    this.setState({
+      isLoading: true,
+    });
+
+    cognitoLogout()
+      .catch((err: any) => {
+        console.log("error signing out: ", err);
+      })
+      .finally(() => {
+        this.setState({
+          isLoading: false,
+          hasAuthenticated: false,
+          userData: undefined,
+          loginError: error ? error : undefined,
+        });
+      });
+  };
+
+  completePassword = (newPassword: string) => {
+    this.setState({
+      isLoading: true,
+    });
+    cognitoCompletePassword(
+      newPassword,
+      this.props.failOnNoLegalGroup as boolean,
+      this.props.legalGroups as string[],
+    )
+      .then((result: any) => this.processSuccessfulAuth(result))
+      .catch((error: any) => this.logout(error))
+      .then(() => {
+        this.setState({
+          isLoading: false,
+        });
+      });
+  };
+
+  refreshSession = async () => {
+    try {
+      const response = await cognitoRefreshToken(
+        this.props.failOnNoLegalGroup,
+        this.props.legalGroups,
+      );
+
+      if (response instanceof ValidUserInformation) {
+        this.processSuccessfulAuth(response);
+      }
+    } catch (error) {
+      this.logout(error);
+    }
+  };
+
+  render() {
+    return (
+      <AuthContext.Provider
+        value={{
+          ...this.state,
+          login: this.login,
+          completePassword: this.completePassword,
+          logout: this.logout,
+          getUserData: this.getUserData,
+          getUserGroups: this.getUserGroups,
+          refreshSession: this.refreshSession,
+          hasAuthenticated: this.hasAuthenticated,
+          fetchAuthed: this.fetchAuthed,
+        }}
+      >
+        {this.props.children}
+      </AuthContext.Provider>
+    );
+  }
 }

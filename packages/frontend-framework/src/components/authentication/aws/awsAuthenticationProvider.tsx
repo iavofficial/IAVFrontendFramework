@@ -17,7 +17,12 @@
  */
 
 import React, {Component} from "react";
-import {JWT} from "aws-amplify/auth";
+import {
+  AuthContext,
+  AWSAuthenticationProviderType,
+  AWSUserData,
+  Credentials,
+} from "../../../contexts/auth";
 import {
   cognitoCheckIsAuthenticated,
   cognitoCompletePassword,
@@ -26,32 +31,7 @@ import {
   cognitoRefreshToken,
   ValidUserInformation,
 } from "../../../utils/cognitoService";
-import {
-  AuthContext,
-  AWSAuthenticationProviderType,
-  Credentials,
-} from "../../../contexts/auth";
-
-interface FetchSettings {
-  headers?: Headers;
-
-  [key: string]: any;
-}
-
-export type UserData = {
-  username: string;
-  userGroups?: string[];
-  extras?: object;
-};
-
-export type AuthState = {
-  hasAuthenticated: boolean;
-  isLoading: boolean;
-  userData: UserData | undefined;
-  extras?: object;
-};
-
-const RENEWING_SESSION_INTERVAL = 1000 * 60 * 12;
+import {JWT} from "aws-amplify/auth";
 
 export interface Props {
   configureAmplify: () => void;
@@ -59,14 +39,31 @@ export interface Props {
   legalGroups?: string[];
 }
 
+export interface State {
+  hasAuthenticated: boolean;
+  isNewPasswordRequired: boolean;
+  isLoading: boolean;
+  userData: AWSUserData | undefined;
+  loginError: undefined | {[key: string]: any} | string;
+}
+
+interface FetchSettings {
+  headers?: Headers;
+
+  [key: string]: any;
+}
+
+const RENEWING_SESSION_INTERVAL = 1000 * 60 * 12;
+
 export class AWSAuthenticationProvider
-  extends Component<React.PropsWithChildren<Props>, AuthState>
+  extends Component<React.PropsWithChildren<Props>, State>
   implements AWSAuthenticationProviderType
 {
   static defaultProps = {
     failOnNoLegalGroup: false,
     legalGroups: [],
   };
+
   private sessionRefreshInterval?: ReturnType<typeof setInterval>;
 
   constructor(props: Props) {
@@ -84,7 +81,6 @@ export class AWSAuthenticationProvider
   componentDidMount() {
     this.props.configureAmplify();
     this.checkIsAuthenticated();
-
     this.sessionRefreshInterval = setInterval(() => {
       this.checkIsAuthenticated();
     }, RENEWING_SESSION_INTERVAL);
@@ -96,6 +92,12 @@ export class AWSAuthenticationProvider
     }
   }
 
+  componentDidUpdate() {
+    if (this.state.hasAuthenticated) {
+      this.checkIsAuthenticated();
+    }
+  }
+
   checkIsAuthenticated = async () => {
     try {
       const result: ValidUserInformation | undefined =
@@ -103,6 +105,7 @@ export class AWSAuthenticationProvider
           this.props.failOnNoLegalGroup,
           this.props.legalGroups,
         );
+
       this.processSuccessfulAuth(result!);
       //eslint-disable-next-line
     } catch (error: any) {

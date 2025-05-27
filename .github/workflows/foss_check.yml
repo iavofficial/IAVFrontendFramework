@@ -1,0 +1,182 @@
+name: FOSS Check
+
+on:
+  push:
+    paths-ignore:
+      - '**/*.spdx'
+      - '**/*.sbom.json'
+      - '**/*.cdx.json'
+      - '**/.ort/**'
+
+jobs:
+  scan:
+    name: SBOM & Vulnerability Scan for Root
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Install all dependencies using workspaces
+      - name: Install all dependencies with workspaces
+        run: npm ci
+
+      # Step 3: Generate root-level SBOM (CycloneDX JSON)
+      - name: Generate SBOM (CycloneDX JSON) for root
+        uses: anchore/sbom-action@v0
+        with:
+          format: cyclonedx-json
+          output-file: sbom-root.cdx.json
+          upload-artifact: false
+
+      # Step 4: Upload root-level SBOM as an artifact
+      - name: Upload root-level SBOM as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: root-sbom-cyclonedx
+          path: sbom-root.cdx.json
+
+      # Step 5: Scan the root-level SBOM for vulnerabilities
+      - name: Scan SBOM for Vulnerabilities
+        id: scan
+        uses: anchore/scan-action@v4
+        continue-on-error: true
+        with:
+          path: .
+          fail-build: true
+          severity-cutoff: high
+          only-fixed: true
+          output-format: sarif
+
+      # Step 6: Upload Grype SARIF report
+      - name: Upload Grype SARIF report
+        uses: actions/upload-artifact@v4
+        with:
+          name: grype-sarif
+          path: ${{ steps.scan.outputs.sarif }}
+
+      - name: Upload SARIF to GitHub Code Scanning
+        if: success() || failure()
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: ${{ steps.scan.outputs.sarif }}
+
+      # Upload Anchore logs in case of failure
+      - name: Upload Scan Logs
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: anchore-scan-logs
+          path: /path/to/scan/logs.log
+
+  ort-check:
+    name: ORT License & Policy Check
+    runs-on: ubuntu-latest
+    needs: scan
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies using npm workspaces
+        run: npm ci
+
+      - name: Run ORT
+        id: ort
+        uses: oss-review-toolkit/ort-ci-github-action@v1
+        with:
+          allow-dynamic-versions: 'true'
+
+  scan-workspaces:
+    name: SBOM Each Workspace
+    runs-on: ubuntu-latest
+    needs: ort-check
+    strategy:
+      matrix:
+        project:
+          - packages/aws-authenticator
+          - packages/frontend-framework
+          - packages/shared
+          - apps/dev_project
+          - docs
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Sanitize workspace name
+        id: sanitize-name
+        run: |
+          sanitized_name=$(echo "${{ matrix.project }}" | sed 's|/|-|g')
+          echo "SANITIZED_NAME=${sanitized_name}" >> $GITHUB_ENV
+
+      - name: Generate SBOM
+        run: |
+          echo "Generating SBOM for workspace: ${{ matrix.project }}"
+          npm sbom --sbom-format spdx --output SBOM.spdx >> SBOM.spdx
+          # Check if the SBOM was generated
+          if [ ! -f SBOM.spdx ]; then
+            echo "::error ::SBOM generation failed for ${{ matrix.project }}. File SBOM.spdx not found."
+            exit 1
+          fi
+
+      - name: Upload Workspace SBOM as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom-${{ env.SANITIZED_NAME }}
+          path: ${{ matrix.project }}/SBOM.spdx
+
+  commit-changes:
+    name: Commit All SBOMs
+    runs-on: ubuntu-latest
+    needs: scan-workspaces
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download workspace SBOM artifacts only
+        uses: actions/download-artifact@v4
+        with:
+          pattern: sbom-*
+          path: ./sboms
+
+      - name: Debug artifact contents
+        run: ls -R ./sboms
+
+      - name: Restore SBOM Files to Original Paths
+        run: |
+          for artifact in ./sboms/*; do
+            sanitized_name=$(basename "$artifact")
+            if [[ "$sanitized_name" =~ ^sbom-([^/-]+)-(.+)$ ]]; then
+              original_path="${BASH_REMATCH[1]}/${BASH_REMATCH[2]}"
+            else
+              original_path=$(echo "$sanitized_name" | sed 's|^sbom-||')
+            fi
+            echo "Restoring SBOM to: $original_path/SBOM.spdx"
+            mkdir -p "$original_path"
+            mv "$artifact/SBOM.spdx" "$original_path/SBOM.spdx"
+          done
+
+      - name: Set environment variables
+        run: echo "GITHUB_ACTOR=${{ github.actor }}" >> $GITHUB_ENV
+
+      - name: Set GitHub identity
+        run: |
+          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git config --global user.name "${GITHUB_ACTOR}"
+
+      - name: Pull latest changes to avoid conflicts
+        run: git pull origin ${{ github.head_ref }}
+
+      - name: Commit all SBOMs in one commit
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add .
+          if git diff --staged --quiet; then
+            echo "No changes to commit. Exiting."
+            exit 0
+          fi
+          git commit -m "chore(ci): add SBOMs for workspaces"
+          git push

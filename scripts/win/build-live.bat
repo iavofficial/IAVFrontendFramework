@@ -20,7 +20,14 @@ mkdir dist
 rem Using this expression to start the asynchronous tasks after package installation.
 
 call npm i && (
-start /b npx babel ./src --out-dir ./dist --extensions .ts,.tsx --watch --copy-files
-start /b npx babel ./package.json --out-dir ./dist --watch --copy-files
-start /b npx tsc --watch --outDir ./dist
+  start /b npx babel ./src --out-dir ./dist --extensions .ts,.tsx --watch --copy-files
+  start /b npx babel ./package.json --out-dir ./dist --watch --copy-files
+  start /b npx tsc --watch --outDir ./dist
 )
+
+rem Copy asset files from the shared package to the build output.
+rem Copy CSS assets
+xcopy "..\..\packages\shared\assets\css" "dist\assets\css" /E /I /Y
+rem Copy image assets (such as authentication view background images)
+xcopy "..\..\packages\shared\assets\png" "dist\assets\png" /E /I /Y
+xcopy "..\..\packages\shared\assets\svg" "dist\assets\svg" /E /I /Y

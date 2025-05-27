@@ -75,11 +75,13 @@
     "./README.md"
   ],
   "exports": {
+    "./css/*": "./dist/assets/css/*",
+    "./svg/*": "./dist/assets/svg/*",
+    "./png/*": "./dist/assets/png/*",
     "./appLogoPlaceholder": "./dist/components/appLogoPlaceholder.js",
     "./loginButtonWithSpinner": "./dist/components/loginButtonWithSpinner.js",
     "./colorSettingsContext": "./dist/contexts/colorSettingsContext.js",
     "./moduleContext": "./dist/contexts/moduleContext.js",
-    "./authenticationView.css": "./dist/css/authenticationView.css",
     "./constants": "./dist/constants/constants.js",
     "./moduleNames": "./dist/constants/moduleNames.js",
     "./defaultTranslations": "./dist/constants/defaultTranslations.js",

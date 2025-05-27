@@ -41,7 +41,7 @@ import "../css/constants.css";
 import "../css/globalChangesOnPrimeReactComponents.css";
 import "../css/globalSettings.css";
 import "../css/globalColors.css";
-import "../css/authenticationView.css";
+import "@iavofficial/frontend-framework-shared/css/authenticationView.css";
 import {useDefaultSelector} from "@iavofficial/frontend-framework-shared/moduleDefaults";
 import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";

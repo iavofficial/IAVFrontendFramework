@@ -19,12 +19,12 @@
 import React, {FormEvent, useContext, useState} from "react";
 import {Link} from "react-router-dom";
 import {AuthenticationViewProps} from "@iavofficial/frontend-framework-shared/authenticationViewProps";
-import loginBackgroundLightMode from "../assets/png/login_background_lightMode.png";
-import loginBackgroundDarkMode from "../assets/png/login_background_darkMode.png";
+import loginBackgroundLightMode from "@iavofficial/frontend-framework-shared/png/login_background_lightMode.png";
+import loginBackgroundDarkMode from "@iavofficial/frontend-framework-shared/png/login_background_darkMode.png";
 import {Dropdown, DropdownChangeEvent} from "primereact/dropdown";
 import {parseLanguageResourcesIntoDropdownFormat} from "@iavofficial/frontend-framework-shared/parseLanguageResourcesIntoDropdownFormat";
 import {generateHashOfLength} from "@iavofficial/frontend-framework-shared/hash";
-import CompanyLogo from "../assets/svg/companyLogo";
+import CompanyLogo from "@iavofficial/frontend-framework-shared/svg/companyLogo";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {
   AwsAuthenticatorAuthDispatch,

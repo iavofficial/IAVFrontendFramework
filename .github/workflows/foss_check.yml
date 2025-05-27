@@ -89,7 +89,7 @@ jobs:
   scan-workspaces:
     name: SBOM Each Workspace
     runs-on: ubuntu-latest
-    # needs: ort-check
+    needs: ort-check
     strategy:
       matrix:
         project:

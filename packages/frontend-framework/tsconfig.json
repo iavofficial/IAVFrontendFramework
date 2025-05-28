@@ -19,5 +19,5 @@
     "rootDir": "src",
     "outDir": "dist"
   },
-  "include": ["src", "custom.d.ts"]
+  "include": ["src", "custom.d.ts", "../shared/assets/svg/companyLogo.d.ts", "../shared/assets/svg/companyLogo.tsx"]
 }

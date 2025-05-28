@@ -20,7 +20,6 @@ import {
   AuthError,
   confirmSignIn,
   fetchAuthSession,
-  getCurrentUser,
   JWT,
   signIn,
   signOut,
@@ -65,11 +64,7 @@ export async function cognitoCheckIsAuthenticated(
   legalGroups?: string[],
 ) {
   try {
-    const response = await getCurrentUser();
-
-    if (response.username) {
-      return await handleSessionResult(failOnNoLegalGroup, legalGroups);
-    }
+    return await handleSessionResult(failOnNoLegalGroup, legalGroups);
   } catch (error: any) {
     throw new AuthError(error);
   }
@@ -95,7 +90,12 @@ export async function cognitoRefreshToken(
   legalGroups?: string[],
 ) {
   try {
-    return await handleSessionResult(failOnNoLegalGroup, legalGroups);
+    const forceRefresh = true;
+    return await handleSessionResult(
+      failOnNoLegalGroup,
+      legalGroups,
+      forceRefresh,
+    );
   } catch (error: any) {
     throw new AuthError(error);
   }
@@ -108,6 +108,7 @@ async function handleSessionResult(
 ) {
   try {
     const {tokens} = await fetchAuthSession({forceRefresh: forceRefresh});
+
     const idToken = tokens?.idToken;
     const accessToken = tokens?.accessToken;
     const groups = idToken?.payload["cognito:groups"];

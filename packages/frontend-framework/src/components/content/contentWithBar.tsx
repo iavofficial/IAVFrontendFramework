@@ -16,94 +16,110 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, {useContext, useMemo} from "react";
+import React, {useContext, useEffect, useMemo, useState} from "react";
 import "../css/globalColors.css";
-import {
-  ContentBar,
-  ContentBarStyles,
-  ContentBarStylesArray,
-} from "./contentBar";
+import {ContentBar, ContentBarStyles, ContentBarStylesArray,} from "./contentBar";
 import {BasicContentbarWrapper} from "./basicContentbarWrapper";
 import {CustomContentbarWrapper} from "./customContentbarWrapper";
 import {ContentLayout, ContentLayoutAndStyleProps} from "./contentLayout";
 import {ColorSettingsContext} from "../../contexts/colorsettings";
 
 export type ContentWithBarProps = {
-  contentWrappers: BasicContentbarWrapper[] | CustomContentbarWrapper[];
-  selectedId: string;
-  addable?: boolean;
-  jumpToEndOfContentBar?: boolean;
-  onClickAddButton?: () => any;
-  onClickLeftSlideButton?: () => any;
-  onClickRightSlideButton?: () => any;
+    contentWrappers: BasicContentbarWrapper[] | CustomContentbarWrapper[];
+    selectedId: string;
+    addable?: boolean;
+    jumpToEndOfContentBar?: boolean;
+    onClickAddButton?: () => any;
+    onClickLeftSlideButton?: () => any;
+    onClickRightSlideButton?: () => any;
 };
 
 export type ContentLayoutAndStyleAndWithBarProps = ContentLayoutAndStyleProps &
-  ContentWithBarProps;
+    ContentWithBarProps;
 
 export const ContentWithBar = (
-  props: React.PropsWithChildren<ContentLayoutAndStyleAndWithBarProps>,
+    props: React.PropsWithChildren<ContentLayoutAndStyleAndWithBarProps>,
 ) => {
-  const colorSettingsContext = useContext(ColorSettingsContext);
+    const colorSettingsContext = useContext(ColorSettingsContext);
+    const storageKey = "ContentWithBar:selectedId";
 
-  const contentAreaBackground =
-    colorSettingsContext.currentColors.contentArea.backgroundColor;
-
-  const selectedContentWrapper = useMemo(() => {
-    return props.contentWrappers.find(
-      (currentWrapper) => currentWrapper.getId() === props.selectedId,
-    );
-  }, [props.contentWrappers, props.selectedId]);
-
-  const contentBarStyles = useMemo(() => {
-    const tempContentbarStyles: ContentBarStylesArray = [];
-    Object.values(ContentBarStyles).forEach((contentBarStyle) => {
-      if (props.contentStyle?.appliedStyles?.includes(contentBarStyle)) {
-        tempContentbarStyles.push(contentBarStyle);
-        if (contentBarStyle === ContentBarStyles.SET_SPACING_COLOR) {
-          tempContentbarStyles.push(ContentBarStyles.SPACING);
-        }
-      }
+    const [persistedSelectedId, setPersistedSelectedId] = useState(() => {
+        return localStorage.getItem(storageKey) || props.selectedId;
     });
-    return tempContentbarStyles;
-  }, [props.contentStyle]);
 
-  return (
-    <div
-      className="flex flex-column"
-      style={{
-        width: "100%",
-        overflow: "auto",
-        background: contentAreaBackground,
-      }}
-    >
-      {props.contentWrappers.length >= 1 && (
-        <ContentBar
-          selectedId={props.selectedId}
-          onClickLeftSlideButton={props.onClickLeftSlideButton}
-          onClickRightSlideButton={props.onClickRightSlideButton}
-          onClickAddButton={props.onClickAddButton}
-          addable={props.addable}
-          jumpToEndOfContentBar={props.jumpToEndOfContentBar}
-          contentElements={props.contentWrappers}
-          appliedStyles={contentBarStyles}
-        />
-      )}
+    useEffect(() => {
+        localStorage.setItem(storageKey, persistedSelectedId);
+    }, [persistedSelectedId]);
 
-      <div
-        className="w-full"
-        style={{
-          height: "100%",
-          overflow: "auto",
-        }}
-      >
-        <ContentLayout
-          layoutBehaviour={props.layoutBehaviour}
-          contentStyle={props.contentStyle}
+    useEffect(() => {
+        if (props.selectedId !== persistedSelectedId) {
+            setPersistedSelectedId(props.selectedId);
+        }
+    }, [props.selectedId]);
+
+    const contentAreaBackground =
+        colorSettingsContext.currentColors.contentArea.backgroundColor;
+
+    const contentBarStyles = useMemo(() => {
+        const tempContentbarStyles: ContentBarStylesArray = [];
+        Object.values(ContentBarStyles).forEach((contentBarStyle) => {
+            if (props.contentStyle?.appliedStyles?.includes(contentBarStyle)) {
+                tempContentbarStyles.push(contentBarStyle);
+                if (contentBarStyle === ContentBarStyles.SET_SPACING_COLOR) {
+                    tempContentbarStyles.push(ContentBarStyles.SPACING);
+                }
+            }
+        });
+        return tempContentbarStyles;
+    }, [props.contentStyle]);
+
+    return (
+        <div
+            className="flex flex-column"
+            style={{
+                width: "100%",
+                overflow: "auto",
+                background: contentAreaBackground,
+            }}
         >
-          {selectedContentWrapper?.getContentAreaElement()}
-        </ContentLayout>
-      </div>
-    </div>
-  );
+            {props.contentWrappers.length >= 1 && (
+                <ContentBar
+                    selectedId={persistedSelectedId}
+                    onClickLeftSlideButton={props.onClickLeftSlideButton}
+                    onClickRightSlideButton={props.onClickRightSlideButton}
+                    onClickAddButton={props.onClickAddButton}
+                    addable={props.addable}
+                    jumpToEndOfContentBar={props.jumpToEndOfContentBar}
+                    contentElements={props.contentWrappers}
+                    appliedStyles={contentBarStyles}
+                />
+            )}
+
+            <div
+                className="w-full"
+                style={{
+                    height: "100%",
+                    overflow: "auto",
+                }}
+            >
+                <ContentLayout
+                    layoutBehaviour={props.layoutBehaviour}
+                    contentStyle={props.contentStyle}
+                >
+                    {props.contentWrappers.map((tab) => (
+                        <div
+                            key={tab.getId()}
+                            style={{
+                                height: "100%",
+                                display: persistedSelectedId === tab.getId() ? "block" : "none",
+                            }}
+                        >
+                            {tab.getContentAreaElement()}
+                        </div>
+                    ))}
+
+                </ContentLayout>
+            </div>
+        </div>
+    );
 };

@@ -43,7 +43,9 @@ export const ContentWithBar = (
     const colorSettingsContext = useContext(ColorSettingsContext);
     const storageKey = "ContentWithBar:selectedId";
 
-    const [persistedSelectedId, setPersistedSelectedId] = useState<string | null>(null);
+    const [persistedSelectedId, setPersistedSelectedId] = useState<string | null>(
+        null,
+    );
 
     useEffect(() => {
         const storedId = localStorage.getItem(storageKey);
@@ -87,7 +89,7 @@ export const ContentWithBar = (
         >
             {props.contentWrappers.length >= 1 && (
                 <ContentBar
-                    selectedId={persistedSelectedId}
+                    selectedId={persistedSelectedId || props.selectedId}
                     onClickLeftSlideButton={props.onClickLeftSlideButton}
                     onClickRightSlideButton={props.onClickRightSlideButton}
                     onClickAddButton={props.onClickAddButton}
@@ -126,5 +128,3 @@ export const ContentWithBar = (
         </div>
     );
 };
-
-

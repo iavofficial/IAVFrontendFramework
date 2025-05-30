@@ -43,19 +43,22 @@ export const ContentWithBar = (
     const colorSettingsContext = useContext(ColorSettingsContext);
     const storageKey = "ContentWithBar:selectedId";
 
-    const [persistedSelectedId, setPersistedSelectedId] = useState(() => {
-        return localStorage.getItem(storageKey) || props.selectedId;
-    });
+    const [persistedSelectedId, setPersistedSelectedId] = useState<string | null>(null);
 
     useEffect(() => {
-        localStorage.setItem(storageKey, persistedSelectedId);
-    }, [persistedSelectedId]);
-
-    useEffect(() => {
-        if (props.selectedId !== persistedSelectedId) {
+        const storedId = localStorage.getItem(storageKey);
+        if (storedId) {
+            setPersistedSelectedId(storedId);
+        } else {
             setPersistedSelectedId(props.selectedId);
         }
-    }, [props.selectedId]);
+    }, []);
+
+    useEffect(() => {
+        if (persistedSelectedId) {
+            localStorage.setItem(storageKey, persistedSelectedId);
+        }
+    }, [persistedSelectedId]);
 
     const contentAreaBackground =
         colorSettingsContext.currentColors.contentArea.backgroundColor;
@@ -92,6 +95,7 @@ export const ContentWithBar = (
                     jumpToEndOfContentBar={props.jumpToEndOfContentBar}
                     contentElements={props.contentWrappers}
                     appliedStyles={contentBarStyles}
+                    onSelectTab={(id) => setPersistedSelectedId(id)}
                 />
             )}
 
@@ -117,9 +121,10 @@ export const ContentWithBar = (
                             {tab.getContentAreaElement()}
                         </div>
                     ))}
-
                 </ContentLayout>
             </div>
         </div>
     );
 };
+
+

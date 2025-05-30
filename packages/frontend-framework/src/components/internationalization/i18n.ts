@@ -23,28 +23,23 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import {Translations} from "../../contexts/language";
 
 export const initI18next = (
-    resources: Translations,
-    acceptedCookies: boolean,
-    fallbackLang: string,
-    initialLang?: string
+  resources: Translations,
+  acceptedCookies: boolean,
+  fallbackLang: string,
+  initialLang?: string,
 ) => {
-    i18n
-        .use(LanguageDetector)
-        .use(initReactI18next)
-        .init({
-            debug: false,
-            fallbackLng: fallbackLang,
-            resources: resources,
-            detection: {
-                order: ['cookie', 'localStorage', 'navigator'],
-                lookupCookie: 'i18next',
-                cookieMinutes: 525600,
-                ...(
-                    acceptedCookies
-                        ? {caches: ['cookie']}
-                        : {caches: []}
-                ),
-            },
-        });
+  i18n
+    .use(LanguageDetector)
+    .use(initReactI18next)
+    .init({
+      debug: false,
+      fallbackLng: fallbackLang,
+      resources: resources,
+      detection: {
+        order: ["cookie", "localStorage", "navigator"],
+        lookupCookie: "i18next",
+        cookieMinutes: 525600,
+        ...(acceptedCookies ? {caches: ["cookie"]} : {caches: []}),
+      },
+    });
 };
-

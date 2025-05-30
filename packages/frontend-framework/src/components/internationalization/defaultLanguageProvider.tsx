@@ -27,108 +27,108 @@ import {useCookiesAccepted} from "../cookie/cookieHooks";
 import {LanguageContext, Translations} from "../../contexts/language";
 
 export interface LanguageOptions {
-    fallbackLang: string;
-    initialLang?: string;
+  fallbackLang: string;
+  initialLang?: string;
 }
 
 interface Props {
-    languageOptions: LanguageOptions;
-    translations?: Translations;
-    initI18Next?: () => void;
+  languageOptions: LanguageOptions;
+  translations?: Translations;
+  initI18Next?: () => void;
 }
 
 export const DefaultLanguageProvider = (
-    props: React.PropsWithChildren<Props>,
+  props: React.PropsWithChildren<Props>,
 ) => {
-    const {fallbackLang, initialLang} = props.languageOptions;
+  const {fallbackLang, initialLang} = props.languageOptions;
 
-    const [resources, setResources] = useState({
-        en: {
-            translation: translationEN,
-        },
-        de: {
-            translation: translationDE,
-        },
-    });
+  const [resources, setResources] = useState({
+    en: {
+      translation: translationEN,
+    },
+    de: {
+      translation: translationDE,
+    },
+  });
 
-    const [activeLang, setActiveLang] = useState(initialLang ?? fallbackLang);
+  const [activeLang, setActiveLang] = useState(initialLang ?? fallbackLang);
 
-    const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
-    const cookiesAccepted = useCookiesAccepted();
+  const cookiesAccepted = useCookiesAccepted();
 
-    useEffect(() => {
-        if (!cookiesAccepted) {
-            initI18next(resources, cookiesAccepted, fallbackLang);
-        } else if (!props.initI18Next) {
-            initI18next(resources, cookiesAccepted, fallbackLang);
+  useEffect(() => {
+    if (!cookiesAccepted) {
+      initI18next(resources, cookiesAccepted, fallbackLang);
+    } else if (!props.initI18Next) {
+      initI18next(resources, cookiesAccepted, fallbackLang);
+    } else {
+      props.initI18Next();
+    }
+
+    setLoaded(true);
+  }, [
+    props.initI18Next,
+    fallbackLang,
+    initialLang,
+    cookiesAccepted,
+    props,
+    resources,
+  ]);
+
+  useEffect(() => {
+    if (props.translations) {
+      Object.keys(props.translations).forEach((key) => {
+        type keyType = keyof typeof resources;
+        if (Object.keys(resources).includes(key)) {
+          Object.assign(
+            resources[key as keyType].translation,
+            // @ts-ignore Bug: Marks props.translations as possibly undfined although it's not.
+            props.translations[key].translation,
+          );
         } else {
-            props.initI18Next();
+          // @ts-ignore Bug: Marks props.translations as possibly undfined although it's not.
+          resources[key] = props.translations[key];
         }
+      });
+      setResources(resources);
+    }
+  }, [props.translations, resources]);
 
-        setLoaded(true);
-    }, [
-        props.initI18Next,
-        fallbackLang,
-        initialLang,
-        cookiesAccepted,
-        props,
-        resources,
-    ]);
-
-    useEffect(() => {
-        if (props.translations) {
-            Object.keys(props.translations).forEach((key) => {
-                type keyType = keyof typeof resources;
-                if (Object.keys(resources).includes(key)) {
-                    Object.assign(
-                        resources[key as keyType].translation,
-                        // @ts-ignore Bug: Marks props.translations as possibly undfined although it's not.
-                        props.translations[key].translation,
-                    );
-                } else {
-                    // @ts-ignore Bug: Marks props.translations as possibly undfined although it's not.
-                    resources[key] = props.translations[key];
-                }
-            });
-            setResources(resources);
-        }
-    }, [props.translations, resources]);
-
-    const useTranslationFunction = () => {
-        const [t] = useTranslation();
-        return function (key: string, ...translationParams: any[]) {
-            return t(key, ...(translationParams as []));
-        };
+  const useTranslationFunction = () => {
+    const [t] = useTranslation();
+    return function (key: string, ...translationParams: any[]) {
+      return t(key, ...(translationParams as []));
     };
+  };
 
-    const selectLanguage = (lang: string) => {
-        i18n.changeLanguage(lang);
-        setActiveLang(lang);
+  const selectLanguage = (lang: string) => {
+    i18n.changeLanguage(lang);
+    setActiveLang(lang);
+  };
+
+  useEffect(() => {
+    const handleLanguageChanged = (lng: string) => {
+      setActiveLang(lng);
     };
+    i18n.on("languageChanged", handleLanguageChanged);
+    setActiveLang(i18n.language);
+    return () => {
+      i18n.off("languageChanged", handleLanguageChanged);
+    };
+  }, []);
 
-    useEffect(() => {
-        const handleLanguageChanged = (lng: string) => {
-            setActiveLang(lng);
-        };
-        i18n.on('languageChanged', handleLanguageChanged);
-        setActiveLang(i18n.language);
-        return () => {
-            i18n.off('languageChanged', handleLanguageChanged);
-        };
-    }, []);
-
-    return (
-        <LanguageContext.Provider
-            value={{
-                fallbackLang: fallbackLang,
-                resources: resources,
-                activeLang: activeLang,
-                selectLanguage: selectLanguage,
-                useTranslationFunction: useTranslationFunction,
-            }}
-        >
-            {loaded && props.children}
-        </LanguageContext.Provider>
-    );
+  return (
+    <LanguageContext.Provider
+      value={{
+        fallbackLang: fallbackLang,
+        resources: resources,
+        activeLang: activeLang,
+        selectLanguage: selectLanguage,
+        useTranslationFunction: useTranslationFunction,
+      }}
+    >
+      {loaded && props.children}
+    </LanguageContext.Provider>
+  );
 };

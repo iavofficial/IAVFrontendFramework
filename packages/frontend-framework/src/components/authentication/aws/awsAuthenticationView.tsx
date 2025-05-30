@@ -357,7 +357,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
                   color: inputFieldTextColor,
                 }}
                 placeholder={
-                  langContext?.resources[langContext.activeLang].translation
+                  langContext?.resources[langContext?.activeLang].translation
                     .option_name
                 }
                 onChange={function (event: DropdownChangeEvent) {

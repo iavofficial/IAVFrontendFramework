@@ -26,17 +26,20 @@ export const initI18next = (
   resources: Translations,
   acceptedCookies: boolean,
   fallbackLang: string,
+  initialLang?: string,
 ) => {
   i18n
-    .use(initReactI18next) // pass the i18n instance to react-i18next.
     .use(LanguageDetector)
+    .use(initReactI18next)
     .init({
       debug: false,
       fallbackLng: fallbackLang,
       resources: resources,
       detection: {
-        caches: [acceptedCookies ? "cookie" : ""],
+        order: ["cookie", "localStorage", "navigator"],
+        lookupCookie: "i18next",
         cookieMinutes: 525600,
+        ...(acceptedCookies ? {caches: ["cookie"]} : {caches: []}),
       },
     });
 };

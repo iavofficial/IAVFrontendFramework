@@ -22,66 +22,65 @@ import {IconWithContext} from "./iconWithContext";
 import makeStyles from "../content/style_options/makeStyles";
 
 const useStyles = makeStyles(() => ({
-    openLeft: {
-        transform: "rotate(180deg)",
-    }
+  openLeft: {
+    transform: "rotate(180deg)",
+  },
 }));
 
 interface Props extends ContextMenuProps {
-    icon: string;
-    iconClassName?: string;
-    iconstyle?: React.CSSProperties;
-    menuClassName?: string;
+  icon: string;
+  iconClassName?: string;
+  iconstyle?: React.CSSProperties;
+  menuClassName?: string;
 }
 
 export const HeaderMenuElement: React.FC<Props> = (props) => {
-    const {icon, iconClassName, iconstyle, menuClassName} = props;
-    const {classes} = useStyles();
-    const ref = useRef<ContextMenu>(null);
+  const {icon, iconClassName, iconstyle, menuClassName} = props;
+  const {classes} = useStyles();
+  const ref = useRef<ContextMenu>(null);
 
-    useEffect(() => {
-        const observer = new MutationObserver(() => {
-            const submenuParents = document.querySelectorAll(".p-menuitem");
-            submenuParents.forEach((menuitem) => {
-                const submenu = menuitem.querySelector(".p-submenu-list") as HTMLElement | null;
-                const icon = menuitem.querySelector(".p-submenu-icon") as HTMLElement | null;
-                if (submenu && icon) {
-                    icon.classList.forEach((className) => {
-                        if (className.startsWith("openLeft-")) {
-                            icon.classList.remove(className);
-                        }
-                    });
-                    const left = submenu.style.left;
-                    if (left.startsWith("-")) {
-                        icon.classList.add(classes.openLeft);
-                    }
-                }
-            });
-        });
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      const submenuParents = document.querySelectorAll(".p-menuitem");
+      submenuParents.forEach((menuitem) => {
+        const submenu = menuitem.querySelector(
+          ".p-submenu-list",
+        ) as HTMLElement | null;
+        const icon = menuitem.querySelector(
+          ".p-submenu-icon",
+        ) as HTMLElement | null;
+        if (submenu && icon) {
+          icon.classList.forEach((className) => {
+            if (className.startsWith("openLeft-")) {
+              icon.classList.remove(className);
+            }
+          });
+          const left = submenu.style.left;
+          if (left.startsWith("-")) {
+            icon.classList.add(classes.openLeft);
+          }
+        }
+      });
+    });
 
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true,
-            attributes: true,
-            attributeFilter: ["style"],
-        });
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["style"],
+    });
 
-        return () => observer.disconnect();
-    }, []);
+    return () => observer.disconnect();
+  }, []);
 
-    return (
-        <IconWithContext
-            icon={icon}
-            iconClassName={iconClassName}
-            style={iconstyle}
-            onClick={(event) => ref.current?.show(event)}
-        >
-            <ContextMenu
-                {...props}
-                ref={ref}
-                className={menuClassName}
-            />
-        </IconWithContext>
-    );
+  return (
+    <IconWithContext
+      icon={icon}
+      iconClassName={iconClassName}
+      style={iconstyle}
+      onClick={(event) => ref.current?.show(event)}
+    >
+      <ContextMenu {...props} ref={ref} className={menuClassName} />
+    </IconWithContext>
+  );
 };
-

@@ -199,7 +199,6 @@ export class AWSAuthenticationProvider
             userData: userData,
             loginError: undefined,
         });
-        console.log("token in userdata have been updated");
     };
 
     logout = async (error?: any) => {

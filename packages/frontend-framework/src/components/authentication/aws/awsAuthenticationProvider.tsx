@@ -32,6 +32,7 @@ export interface Props {
     configureAmplify: () => void;
     failOnNoLegalGroup?: boolean;
     legalGroups?: string[];
+    renewingSessionInterval?: number;
 }
 
 export interface State {
@@ -48,7 +49,7 @@ interface FetchSettings {
     [key: string]: any;
 }
 
-const RENEWING_SESSION_INTERVAL = 1000 * 60 * 12;
+const RENEWING_SESSION_INTERVAL = 1000 * 60 * 12; // every 12 minutes
 
 export class AWSAuthenticationProvider
     extends Component<React.PropsWithChildren<Props>, State>
@@ -77,7 +78,7 @@ export class AWSAuthenticationProvider
 
         this.sessionRefreshInterval = setInterval(() => {
             this.checkIsAuthenticated();
-        }, RENEWING_SESSION_INTERVAL);
+        }, this.props.renewingSessionInterval ?? RENEWING_SESSION_INTERVAL);
     }
 
     componentWillUnmount() {

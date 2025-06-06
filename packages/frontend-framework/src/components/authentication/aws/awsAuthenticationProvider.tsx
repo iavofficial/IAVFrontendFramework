@@ -37,6 +37,7 @@ export interface Props {
   configureAmplify: () => void;
   failOnNoLegalGroup?: boolean;
   legalGroups?: string[];
+  renewingSessionInterval?: number;
 }
 
 export interface State {
@@ -63,7 +64,6 @@ export class AWSAuthenticationProvider
     failOnNoLegalGroup: false,
     legalGroups: [],
   };
-
   private sessionRefreshInterval?: ReturnType<typeof setInterval>;
 
   constructor(props: Props) {
@@ -81,20 +81,15 @@ export class AWSAuthenticationProvider
   componentDidMount() {
     this.props.configureAmplify();
     this.checkIsAuthenticated();
+
     this.sessionRefreshInterval = setInterval(() => {
-      this.refreshSession();
-    }, RENEWING_SESSION_INTERVAL);
+      this.checkIsAuthenticated();
+    }, this.props.renewingSessionInterval ?? RENEWING_SESSION_INTERVAL);
   }
 
   componentWillUnmount() {
     if (this.sessionRefreshInterval) {
       clearInterval(this.sessionRefreshInterval);
-    }
-  }
-
-  componentDidUpdate() {
-    if (this.state.hasAuthenticated) {
-      this.checkIsAuthenticated();
     }
   }
 
@@ -105,7 +100,6 @@ export class AWSAuthenticationProvider
           this.props.failOnNoLegalGroup,
           this.props.legalGroups,
         );
-
       this.processSuccessfulAuth(result!);
       //eslint-disable-next-line
     } catch (error: any) {
@@ -204,21 +198,21 @@ export class AWSAuthenticationProvider
   };
 
   processSuccessfulAuth = (userData: ValidUserInformation) => {
-    if (!this.state.hasAuthenticated || this.state.isNewPasswordRequired) {
-      this.setState({
-        hasAuthenticated: true,
-        isNewPasswordRequired: false,
-        userData: userData,
-        loginError: undefined,
-      });
-    }
+    this.setState({
+      hasAuthenticated: true,
+      isNewPasswordRequired: false,
+      userData: userData,
+      loginError: undefined,
+    });
   };
 
   logout = async (error?: any) => {
     this.setState({
       isLoading: true,
     });
-
+    if (this.sessionRefreshInterval) {
+      clearInterval(this.sessionRefreshInterval);
+    }
     cognitoLogout()
       .catch((err: any) => {
         console.log("error signing out: ", err);

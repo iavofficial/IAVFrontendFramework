@@ -73,10 +73,10 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
 
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (authService.isNewPasswordRequired) {
-      authService.completePassword(password);
+    if (authContext?.isNewPasswordRequired) {
+      authContext?.completePassword(password);
     } else {
-      authService.login({email: email.toLowerCase(), password: password});
+      authContext?.login({email: email.toLowerCase(), password: password});
     }
   };
 

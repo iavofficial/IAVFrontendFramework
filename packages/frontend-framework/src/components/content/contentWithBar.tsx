@@ -49,12 +49,6 @@ export const ContentWithBar = (
   const contentAreaBackground =
     colorSettingsContext.currentColors.contentArea.backgroundColor;
 
-  const selectedContentWrapper = useMemo(() => {
-    return props.contentWrappers.find(
-      (currentWrapper) => currentWrapper.getId() === props.selectedId,
-    );
-  }, [props.contentWrappers, props.selectedId]);
-
   const contentBarStyles = useMemo(() => {
     const tempContentbarStyles: ContentBarStylesArray = [];
     Object.values(ContentBarStyles).forEach((contentBarStyle) => {
@@ -101,7 +95,17 @@ export const ContentWithBar = (
           layoutBehaviour={props.layoutBehaviour}
           contentStyle={props.contentStyle}
         >
-          {selectedContentWrapper?.getContentAreaElement()}
+          {props.contentWrappers.map((tab) => (
+            <div
+              key={tab.getId()}
+              style={{
+                height: "100%",
+                display: props.selectedId === tab.getId() ? "block" : "none",
+              }}
+            >
+              {tab.getContentAreaElement()}
+            </div>
+          ))}
         </ContentLayout>
       </div>
     </div>

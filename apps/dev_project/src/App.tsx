@@ -18,39 +18,11 @@
 
 import translationES from "./assets/translations/es.json";
 import { GlobalDataLayer } from "@iavofficial/frontend-framework/globalDataLayer";
-import { AWSAuthenticationProvider } from "@iavofficial/frontend-framework/awsAuthenticationProvider";
+import { DummyAuthenticationProvider } from "@iavofficial/frontend-framework/dummyAuthenticationProvider";
 import translationEN from "./assets/translations/en.json";
 import translationDE from "./assets/translations/de.json";
 import translationDECH from "./assets/translations/de-CH.json";
 import Layout from "./Layout.tsx";
-import { Amplify } from "aws-amplify";
-import { cognitoUserPoolsTokenProvider } from "aws-amplify/auth/cognito";
-import { CookieStorage } from "aws-amplify/utils";
-
-const cognitoPool = import.meta.env.VITE_COGNITO_POOL;
-const cognitoAppId = import.meta.env.VITE_COGNITO_APP_ID;
-const domain = import.meta.env.VITE_DOMAIN;
-
-const configureAmplify = () => {
-  Amplify.configure({
-    Auth: {
-      Cognito: {
-        userPoolId: cognitoPool,
-        userPoolClientId: cognitoAppId,
-      },
-    },
-  });
-  cognitoUserPoolsTokenProvider.setKeyValueStorage(
-    new CookieStorage({
-      domain: domain,
-      path: "/",
-      expires: 365,
-      // @ts-ignore
-      secure: domain !== "localhost",
-      sameSite: "lax",
-    }),
-  );
-};
 
 function App() {
   const translations = {
@@ -69,7 +41,9 @@ function App() {
   };
 
   return (
-    <AWSAuthenticationProvider configureAmplify={configureAmplify}>
+    <DummyAuthenticationProvider
+      additionalContextValues={{ getUserGroups: () => [] }}
+    >
       <GlobalDataLayer
         translations={translations}
         colorSettings={{
@@ -78,7 +52,7 @@ function App() {
       >
         <Layout />
       </GlobalDataLayer>
-    </AWSAuthenticationProvider>
+    </DummyAuthenticationProvider>
   );
 }
 

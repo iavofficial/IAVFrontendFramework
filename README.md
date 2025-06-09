@@ -20,20 +20,17 @@
 
 [![license](https://img.shields.io/badge/license-Apache--2.0-blue)](./LICENSE)
 
-> 🎉 **Version 1.4.2 is now available!**
+> 🎉 **Version 1.5.0 is now available!**
 >
 > This release includes new features and important fixes:
 >
 > **Features**
-> - Introduced an interface for setting a custom header component
-> - Embedded the styleguide from Figma in the documentation
+> - Add State System in ContentWithBar
+> - Add Renewing Session Interval for AWSAuthProvider
 >
 > **Fixes & Improvements**
 > - Selected Language is now saved
-> - Fixed an overflow issue by adding a background to the `contentWithBar` layout
-> - Made the user icon in the header optional
-> - Improved scroll behavior for navigation elements
-> - Active element highlighting in the navbar now works correctly even when the UI layer is not located at the root path
+> - Add getUserGroups as property in every AuthProvider
 
 ## About the Project
 

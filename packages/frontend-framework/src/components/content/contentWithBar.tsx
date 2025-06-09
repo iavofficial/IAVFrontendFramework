@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, {useContext, useMemo} from "react";
+import React, {useContext, useEffect, useMemo, useState} from "react";
 import "../css/globalColors.css";
 import {
   ContentBar,
@@ -45,6 +45,26 @@ export const ContentWithBar = (
   props: React.PropsWithChildren<ContentLayoutAndStyleAndWithBarProps>,
 ) => {
   const colorSettingsContext = useContext(ColorSettingsContext);
+  const storageKey = "ContentWithBar:selectedId";
+
+  const [persistedSelectedId, setPersistedSelectedId] = useState<string | null>(
+    null,
+  );
+
+  useEffect(() => {
+    const storedId = localStorage.getItem(storageKey);
+    if (storedId) {
+      setPersistedSelectedId(storedId);
+    } else {
+      setPersistedSelectedId(props.selectedId);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (persistedSelectedId) {
+      localStorage.setItem(storageKey, persistedSelectedId);
+    }
+  }, [persistedSelectedId]);
 
   const contentAreaBackground =
     colorSettingsContext.currentColors.contentArea.backgroundColor;
@@ -73,7 +93,7 @@ export const ContentWithBar = (
     >
       {props.contentWrappers.length >= 1 && (
         <ContentBar
-          selectedId={props.selectedId}
+          selectedId={persistedSelectedId || props.selectedId}
           onClickLeftSlideButton={props.onClickLeftSlideButton}
           onClickRightSlideButton={props.onClickRightSlideButton}
           onClickAddButton={props.onClickAddButton}
@@ -81,6 +101,7 @@ export const ContentWithBar = (
           jumpToEndOfContentBar={props.jumpToEndOfContentBar}
           contentElements={props.contentWrappers}
           appliedStyles={contentBarStyles}
+          onSelectTab={(id) => setPersistedSelectedId(id)}
         />
       )}
 
@@ -100,7 +121,7 @@ export const ContentWithBar = (
               key={tab.getId()}
               style={{
                 height: "100%",
-                display: props.selectedId === tab.getId() ? "block" : "none",
+                display: persistedSelectedId === tab.getId() ? "block" : "none",
               }}
             >
               {tab.getContentAreaElement()}

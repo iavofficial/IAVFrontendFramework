@@ -1,3 +1,9 @@
+## [@iavofficial/frontend-framework-v1.5.0-dev.2](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.5.0-dev.1...@iavofficial/frontend-framework-v1.5.0-dev.2) (2025-06-09)
+
+### Bug Fixes
+
+* set default lang correctly ([058fef7](https://github.com/iavofficial/IAVFrontendFramework/commit/058fef79fee80d4d95854ff37946550c9c738e51))
+
 ## [@iavofficial/frontend-framework-v1.5.0-dev.1](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.3-dev.2...@iavofficial/frontend-framework-v1.5.0-dev.1) (2025-06-09)
 
 ### Features

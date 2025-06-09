@@ -1,3 +1,11 @@
+## [@iavofficial/frontend-framework-v1.4.3-dev.2](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.3-dev.1...@iavofficial/frontend-framework-v1.4.3-dev.2) (2025-06-09)
+
+### Bug Fixes
+
+* default selected id ([28f2b84](https://github.com/iavofficial/IAVFrontendFramework/commit/28f2b8440b983354a1fe8032a1bf70b6677cd4a5))
+* keep selected id ([96a5753](https://github.com/iavofficial/IAVFrontendFramework/commit/96a5753367cba665904e79b5bb89205bf84ca789))
+* keep selected id ([799c7e2](https://github.com/iavofficial/IAVFrontendFramework/commit/799c7e2fe6b6d66090fcef8c09c83cd3d071a794))
+
 ## [@iavofficial/frontend-framework-v1.4.3-dev.1](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.2...@iavofficial/frontend-framework-v1.4.3-dev.1) (2025-06-09)
 
 ### Bug Fixes

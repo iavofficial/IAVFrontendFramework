@@ -41,9 +41,7 @@ function App() {
   };
 
   return (
-    <DummyAuthenticationProvider
-      additionalContextValues={{ getUserGroups: () => [] }}
-    >
+    <DummyAuthenticationProvider>
       <GlobalDataLayer
         translations={translations}
         colorSettings={{

@@ -1,3 +1,10 @@
+## [@iavofficial/frontend-framework-v1.4.3-dev.1](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.2...@iavofficial/frontend-framework-v1.4.3-dev.1) (2025-06-09)
+
+### Bug Fixes
+
+* add renewing interval session ([bf17560](https://github.com/iavofficial/IAVFrontendFramework/commit/bf17560a23e8b03f88a621a6ea3604cce33d0c87))
+* set email to lower case ([13d6158](https://github.com/iavofficial/IAVFrontendFramework/commit/13d615811bbc72bfbec5f73a11b9b09791c72f93))
+
 ## [@iavofficial/frontend-framework-v1.4.2](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.1...@iavofficial/frontend-framework-v1.4.2) (2025-05-17)
 
 ### Bug Fixes

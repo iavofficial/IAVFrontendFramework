@@ -107,16 +107,15 @@ export const ExampleComponent1 = () => {
 
   const generateExampleArray = () => {
     let temporaryExampleArray = [];
-    let hashOfFirstElement = generateHashOfLength(6);
 
     for (let index = 0; index < 6; index++) {
-      let hash = index === 0 ? hashOfFirstElement : generateHashOfLength(6);
+      let id = `car-${index}`;
       let newBasicContentWrapperElement = new BasicContentbarWrapper({
-        id: hash,
+        id: id,
         displayName: (t: TranslateFunctionType) => `${t("car")} ${index}`,
         onClick: selectElement,
         contentAreaElement: (
-          <ContentbarExampleWithText exampleText={`car ${index}`} key={hash} />
+          <ContentbarExampleWithText exampleText={`car ${index}`} key={id} />
         ),
         closable: index < 1 ? false : true,
         onClose: onCloseElement,
@@ -125,8 +124,8 @@ export const ExampleComponent1 = () => {
     }
 
     return {
-      temporaryExampleArray: temporaryExampleArray,
-      idOfFirstElement: hashOfFirstElement,
+      temporaryExampleArray,
+      idOfFirstElement: "car-0",
     };
   };
 

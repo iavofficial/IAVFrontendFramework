@@ -54,6 +54,8 @@ export interface AuthenticationProvider {
 
   getUserData(): UserDataBasic | undefined;
 
+  getUserGroups(): string[];
+
   isRefreshing?(): boolean;
 }
 

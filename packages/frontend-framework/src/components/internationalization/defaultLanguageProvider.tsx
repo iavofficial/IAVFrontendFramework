@@ -66,16 +66,6 @@ export const DefaultLanguageProvider = (
       props.initI18Next();
     }
 
-    if (initialLang) {
-      selectLanguage(initialLang);
-    } else {
-      localStorage.setItem(
-        "language",
-        i18n.language === "de-DE" ? "de" : i18n.language,
-      );
-      setActiveLang(i18n.language === "de-DE" ? "de" : i18n.language);
-    }
-
     setLoaded(true);
   }, [
     props.initI18Next,
@@ -114,9 +104,19 @@ export const DefaultLanguageProvider = (
 
   const selectLanguage = (lang: string) => {
     i18n.changeLanguage(lang);
-    localStorage.setItem("language", lang);
     setActiveLang(lang);
   };
+
+  useEffect(() => {
+    const handleLanguageChanged = (lng: string) => {
+      setActiveLang(lng);
+    };
+    i18n.on("languageChanged", handleLanguageChanged);
+    setActiveLang(i18n.language);
+    return () => {
+      i18n.off("languageChanged", handleLanguageChanged);
+    };
+  }, []);
 
   return (
     <LanguageContext.Provider

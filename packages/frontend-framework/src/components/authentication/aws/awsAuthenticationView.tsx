@@ -76,7 +76,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
     if (authContext?.isNewPasswordRequired) {
       authContext?.completePassword(password);
     } else {
-      authContext?.login({email: email, password: password});
+      authContext?.login({email: email.toLowerCase(), password: password});
     }
   };
 
@@ -357,7 +357,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
                   color: inputFieldTextColor,
                 }}
                 placeholder={
-                  langContext?.resources[langContext.activeLang].translation
+                  langContext?.resources[langContext?.activeLang].translation
                     .option_name
                 }
                 onChange={function (event: DropdownChangeEvent) {

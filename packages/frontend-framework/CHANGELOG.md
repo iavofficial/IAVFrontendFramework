@@ -1,3 +1,9 @@
+## [@iavofficial/frontend-framework-v1.5.0-dev.3](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.5.0-dev.2...@iavofficial/frontend-framework-v1.5.0-dev.3) (2025-06-09)
+
+### Bug Fixes
+
+* add state ([39d5b99](https://github.com/iavofficial/IAVFrontendFramework/commit/39d5b990036c4cd277354399ee987c7892e7a873))
+
 ## [@iavofficial/frontend-framework-v1.5.0-dev.2](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.5.0-dev.1...@iavofficial/frontend-framework-v1.5.0-dev.2) (2025-06-09)
 
 ### Bug Fixes

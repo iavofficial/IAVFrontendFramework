@@ -1,3 +1,14 @@
+## [@iavofficial/frontend-framework-v1.5.0-dev.1](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.3-dev.2...@iavofficial/frontend-framework-v1.5.0-dev.1) (2025-06-09)
+
+### Features
+
+* add user Groups ([8eeeeed](https://github.com/iavofficial/IAVFrontendFramework/commit/8eeeeed6b637ae7deebbeee44e1780f8a2445022))
+
+### Bug Fixes
+
+* add getUserGroups to AuthenticationProvider ([9b87ee4](https://github.com/iavofficial/IAVFrontendFramework/commit/9b87ee492de68d1b6c571dbfb1ba3abdde4b0745))
+* add user group ([e4990d2](https://github.com/iavofficial/IAVFrontendFramework/commit/e4990d23dfbb52c3415d9cb014a7ed028207d75c))
+
 ## [@iavofficial/frontend-framework-v1.4.3-dev.2](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.3-dev.1...@iavofficial/frontend-framework-v1.4.3-dev.2) (2025-06-09)
 
 ### Bug Fixes

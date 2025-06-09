@@ -76,7 +76,7 @@ export const AWSAuthenticationView = (props: AuthenticationViewProps) => {
     if (authContext?.isNewPasswordRequired) {
       authContext?.completePassword(password);
     } else {
-      authContext?.login({email: email, password: password});
+      authContext?.login({email: email.toLowerCase(), password: password});
     }
   };
 

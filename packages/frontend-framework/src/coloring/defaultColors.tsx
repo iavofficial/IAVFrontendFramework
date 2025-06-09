@@ -28,7 +28,7 @@ import {
   WHITE,
 } from "../constants";
 
-//. Header
+// Header
 export const LIGHT_HEADER_BACKGROUND_COLOR = BLUE0;
 export const DARK_HEADER_BACKGROUND_COLOR = GREY6;
 

@@ -51,6 +51,10 @@ export class DummyAuthenticationProvider
     return fetch(url, settings);
   };
 
+  getUserGroups = () => {
+    return [];
+  };
+
   login = (credentials: Credentials) => {
     this.setState({
       isRefreshing: true,
@@ -89,6 +93,7 @@ export class DummyAuthenticationProvider
             login: this.login,
             logout: this.logout,
             getUserData: this.getUserData,
+            getUserGroups: this.getUserGroups,
             fetchAuthed: this.fetchAuthed,
             isRefreshing: this.isRefreshing,
           },

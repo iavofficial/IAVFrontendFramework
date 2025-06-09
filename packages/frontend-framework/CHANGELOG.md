@@ -1,3 +1,21 @@
+## [@iavofficial/frontend-framework-v1.5.0](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.2...@iavofficial/frontend-framework-v1.5.0) (2025-06-09)
+
+### Features
+
+* add user Groups ([8eeeeed](https://github.com/iavofficial/IAVFrontendFramework/commit/8eeeeed6b637ae7deebbeee44e1780f8a2445022))
+
+### Bug Fixes
+
+* add getUserGroups to AuthenticationProvider ([9b87ee4](https://github.com/iavofficial/IAVFrontendFramework/commit/9b87ee492de68d1b6c571dbfb1ba3abdde4b0745))
+* add renewing interval session ([bf17560](https://github.com/iavofficial/IAVFrontendFramework/commit/bf17560a23e8b03f88a621a6ea3604cce33d0c87))
+* add state ([39d5b99](https://github.com/iavofficial/IAVFrontendFramework/commit/39d5b990036c4cd277354399ee987c7892e7a873))
+* add user group ([e4990d2](https://github.com/iavofficial/IAVFrontendFramework/commit/e4990d23dfbb52c3415d9cb014a7ed028207d75c))
+* default selected id ([28f2b84](https://github.com/iavofficial/IAVFrontendFramework/commit/28f2b8440b983354a1fe8032a1bf70b6677cd4a5))
+* keep selected id ([96a5753](https://github.com/iavofficial/IAVFrontendFramework/commit/96a5753367cba665904e79b5bb89205bf84ca789))
+* keep selected id ([799c7e2](https://github.com/iavofficial/IAVFrontendFramework/commit/799c7e2fe6b6d66090fcef8c09c83cd3d071a794))
+* set default lang correctly ([058fef7](https://github.com/iavofficial/IAVFrontendFramework/commit/058fef79fee80d4d95854ff37946550c9c738e51))
+* set email to lower case ([13d6158](https://github.com/iavofficial/IAVFrontendFramework/commit/13d615811bbc72bfbec5f73a11b9b09791c72f93))
+
 ## [@iavofficial/frontend-framework-v1.5.0-dev.3](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.5.0-dev.2...@iavofficial/frontend-framework-v1.5.0-dev.3) (2025-06-09)
 
 ### Bug Fixes

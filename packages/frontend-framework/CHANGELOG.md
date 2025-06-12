@@ -1,3 +1,9 @@
+## [@iavofficial/frontend-framework-v1.5.1-dev.1](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.5.0...@iavofficial/frontend-framework-v1.5.1-dev.1) (2025-06-12)
+
+### Bug Fixes
+
+* contentWithBar.tsx ([6d04c1e](https://github.com/iavofficial/IAVFrontendFramework/commit/6d04c1e243aebeeeab520596289495eb949055e1))
+
 ## [@iavofficial/frontend-framework-v1.5.0](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.2...@iavofficial/frontend-framework-v1.5.0) (2025-06-09)
 
 ### Features

@@ -16,7 +16,25 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, {useContext, useEffect, useMemo, useState} from "react";
+/**
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+import React, {useContext, useMemo} from "react";
 import "../css/globalColors.css";
 import {
   ContentBar,
@@ -45,29 +63,15 @@ export const ContentWithBar = (
   props: React.PropsWithChildren<ContentLayoutAndStyleAndWithBarProps>,
 ) => {
   const colorSettingsContext = useContext(ColorSettingsContext);
-  const storageKey = "ContentWithBar:selectedId";
-
-  const [persistedSelectedId, setPersistedSelectedId] = useState<string | null>(
-    null,
-  );
-
-  useEffect(() => {
-    const storedId = localStorage.getItem(storageKey);
-    if (storedId) {
-      setPersistedSelectedId(storedId);
-    } else {
-      setPersistedSelectedId(props.selectedId);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (persistedSelectedId) {
-      localStorage.setItem(storageKey, persistedSelectedId);
-    }
-  }, [persistedSelectedId]);
 
   const contentAreaBackground =
     colorSettingsContext.currentColors.contentArea.backgroundColor;
+
+  const selectedContentWrapper = useMemo(() => {
+    return props.contentWrappers.find(
+      (currentWrapper) => currentWrapper.getId() === props.selectedId,
+    );
+  }, [props.contentWrappers, props.selectedId]);
 
   const contentBarStyles = useMemo(() => {
     const tempContentbarStyles: ContentBarStylesArray = [];
@@ -93,7 +97,7 @@ export const ContentWithBar = (
     >
       {props.contentWrappers.length >= 1 && (
         <ContentBar
-          selectedId={persistedSelectedId || props.selectedId}
+          selectedId={props.selectedId}
           onClickLeftSlideButton={props.onClickLeftSlideButton}
           onClickRightSlideButton={props.onClickRightSlideButton}
           onClickAddButton={props.onClickAddButton}
@@ -101,7 +105,6 @@ export const ContentWithBar = (
           jumpToEndOfContentBar={props.jumpToEndOfContentBar}
           contentElements={props.contentWrappers}
           appliedStyles={contentBarStyles}
-          onSelectTab={(id) => setPersistedSelectedId(id)}
         />
       )}
 
@@ -116,17 +119,7 @@ export const ContentWithBar = (
           layoutBehaviour={props.layoutBehaviour}
           contentStyle={props.contentStyle}
         >
-          {props.contentWrappers.map((tab) => (
-            <div
-              key={tab.getId()}
-              style={{
-                height: "100%",
-                display: persistedSelectedId === tab.getId() ? "block" : "none",
-              }}
-            >
-              {tab.getContentAreaElement()}
-            </div>
-          ))}
+          {selectedContentWrapper?.getContentAreaElement()}
         </ContentLayout>
       </div>
     </div>

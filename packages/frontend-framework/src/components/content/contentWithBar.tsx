@@ -88,16 +88,16 @@ export const ContentWithBar = (
     colorSettingsContext.currentColors.contentArea.backgroundColor;
 
   const contentBarStyles = useMemo(() => {
-    const tempContentbarStyles: ContentBarStylesArray = [];
+    const tempContentBarStyles: ContentBarStylesArray = [];
     Object.values(ContentBarStyles).forEach((contentBarStyle) => {
       if (props.contentStyle?.appliedStyles?.includes(contentBarStyle)) {
-        tempContentbarStyles.push(contentBarStyle);
+        tempContentBarStyles.push(contentBarStyle);
         if (contentBarStyle === ContentBarStyles.SET_SPACING_COLOR) {
-          tempContentbarStyles.push(ContentBarStyles.SPACING);
+          tempContentBarStyles.push(ContentBarStyles.SPACING);
         }
       }
     });
-    return tempContentbarStyles;
+    return tempContentBarStyles;
   }, [props.contentStyle]);
 
   return (

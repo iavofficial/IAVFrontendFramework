@@ -1,6 +1,7 @@
 {
   "name": "docs",
   "private": true,
+  "license": "Apache-2.0",
   "version": "1.4.0",
   "type": "module",
   "scripts": {
@@ -32,6 +33,6 @@
     "vite": "^6.2.0"
   },
   "overrides": {
-  "prismjs": "^1.30.0"
-}
+    "prismjs": "^1.30.0"
+  }
 }

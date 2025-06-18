@@ -24874,6 +24874,11 @@
   ],
   "relationships": [
     {
+      "spdxElementId": "SPDXRef-Package-roboto-regular-0.0.0",
+      "relatedSpdxElement": "SPDXRef-Package-iavofficial.frontend-framework-1.0.0",
+      "relationshipType": "DEPENDENCY_OF"
+    },
+    {
       "spdxElementId": "SPDXRef-DOCUMENT",
       "relatedSpdxElement": "SPDXRef-Package-iavofficial.frontend-framework-1.0.0",
       "relationshipType": "DESCRIBES"

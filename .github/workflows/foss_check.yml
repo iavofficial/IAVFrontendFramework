@@ -158,6 +158,13 @@ jobs:
             mv "$artifact/SBOM.spdx" "$original_path/SBOM.spdx"
           done
 
+      # Add Fonts to SBOM
+      - name: Make Script Executable
+        run: chmod +x ./scripts/unix/sbom_entries/add_fonts_to_sbom.sh
+
+      - name: Add Google Fonts to SBOM
+        run: ./scripts/unix/sbom_entries/add_fonts_to_sbom.sh
+
       - name: Set environment variables
         run: echo "GITHUB_ACTOR=${{ github.actor }}" >> $GITHUB_ENV
 

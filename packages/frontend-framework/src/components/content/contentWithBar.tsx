@@ -34,7 +34,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, {useContext, useEffect, useMemo, useState} from "react";
+import React, {useContext, useMemo} from "react";
 import "../css/globalColors.css";
 import {
   ContentBar,
@@ -43,7 +43,11 @@ import {
 } from "./contentBar";
 import {BasicContentbarWrapper} from "./basicContentbarWrapper";
 import {CustomContentbarWrapper} from "./customContentbarWrapper";
-import {ContentLayout, ContentLayoutAndStyleProps} from "./contentLayout";
+import {
+  ContentLayout,
+  ContentLayoutAndStyleProps,
+  LayoutBehaviour,
+} from "./contentLayout";
 import {ColorSettingsContext} from "../../contexts/colorsettings";
 
 export type ContentWithBarProps = {
@@ -63,42 +67,34 @@ export const ContentWithBar = (
   props: React.PropsWithChildren<ContentLayoutAndStyleAndWithBarProps>,
 ) => {
   const colorSettingsContext = useContext(ColorSettingsContext);
-  const storageKey = "ContentWithBar:selectedId";
-
-  const [persistedSelectedId, setPersistedSelectedId] = useState<string | null>(
-    null,
-  );
-
-  useEffect(() => {
-    const storedId = localStorage.getItem(storageKey);
-    if (storedId) {
-      setPersistedSelectedId(storedId);
-    } else {
-      setPersistedSelectedId(props.selectedId);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (persistedSelectedId) {
-      localStorage.setItem(storageKey, persistedSelectedId);
-    }
-  }, [persistedSelectedId]);
 
   const contentAreaBackground =
     colorSettingsContext.currentColors.contentArea.backgroundColor;
 
   const contentBarStyles = useMemo(() => {
-    const tempContentBarStyles: ContentBarStylesArray = [];
+    const tempContentbarStyles: ContentBarStylesArray = [];
     Object.values(ContentBarStyles).forEach((contentBarStyle) => {
       if (props.contentStyle?.appliedStyles?.includes(contentBarStyle)) {
-        tempContentBarStyles.push(contentBarStyle);
+        tempContentbarStyles.push(contentBarStyle);
         if (contentBarStyle === ContentBarStyles.SET_SPACING_COLOR) {
-          tempContentBarStyles.push(ContentBarStyles.SPACING);
+          tempContentbarStyles.push(ContentBarStyles.SPACING);
         }
       }
     });
-    return tempContentBarStyles;
+    return tempContentbarStyles;
   }, [props.contentStyle]);
+
+  const getDisplayForSelected = (layoutBehaviour: LayoutBehaviour) => {
+    switch (layoutBehaviour) {
+      case LayoutBehaviour.FLEX:
+      case LayoutBehaviour.FLEX_COL:
+        return "flex";
+      case LayoutBehaviour.GRID:
+        return "flex";
+      default:
+        return "block";
+    }
+  };
 
   return (
     <div
@@ -111,7 +107,7 @@ export const ContentWithBar = (
     >
       {props.contentWrappers.length >= 1 && (
         <ContentBar
-          selectedId={persistedSelectedId || props.selectedId}
+          selectedId={props.selectedId}
           onClickLeftSlideButton={props.onClickLeftSlideButton}
           onClickRightSlideButton={props.onClickRightSlideButton}
           onClickAddButton={props.onClickAddButton}
@@ -119,7 +115,6 @@ export const ContentWithBar = (
           jumpToEndOfContentBar={props.jumpToEndOfContentBar}
           contentElements={props.contentWrappers}
           appliedStyles={contentBarStyles}
-          onSelectTab={(id) => setPersistedSelectedId(id)}
         />
       )}
 
@@ -134,17 +129,32 @@ export const ContentWithBar = (
           layoutBehaviour={props.layoutBehaviour}
           contentStyle={props.contentStyle}
         >
-          {props.contentWrappers.map((tab) => (
-            <div
-              key={tab.getId()}
-              style={{
-                height: "100%",
-                display: persistedSelectedId === tab.getId() ? "flex" : "none",
-              }}
-            >
-              {tab.getContentAreaElement()}
-            </div>
-          ))}
+          {props.contentWrappers.map((wrapper) => {
+            const isSelected = wrapper.getId() === props.selectedId;
+
+            const displayStyle = isSelected
+              ? getDisplayForSelected(
+                  props.layoutBehaviour ?? LayoutBehaviour.NONE,
+                )
+              : "none";
+
+            const style: React.CSSProperties = {
+              display: displayStyle,
+              flexGrow: 1,
+              height: "100%",
+              width: "100%",
+              overflow: "auto",
+              ...(props.layoutBehaviour === LayoutBehaviour.FLEX_COL
+                ? {flexDirection: "column"}
+                : {}),
+            };
+
+            return (
+              <div key={wrapper.getId()} style={style}>
+                {wrapper.getContentAreaElement()}
+              </div>
+            );
+          })}
         </ContentLayout>
       </div>
     </div>

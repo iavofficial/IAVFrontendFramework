@@ -1,3 +1,9 @@
+## [@iavofficial/frontend-framework-v1.5.2-dev.2](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.5.2-dev.1...@iavofficial/frontend-framework-v1.5.2-dev.2) (2025-06-20)
+
+### Bug Fixes
+
+* different displays for each layout behavior ([89841b9](https://github.com/iavofficial/IAVFrontendFramework/commit/89841b93d76baa5cbc5e118b2b2a02462d437b04))
+
 ## [@iavofficial/frontend-framework-v1.5.2-dev.1](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.5.1...@iavofficial/frontend-framework-v1.5.2-dev.1) (2025-06-13)
 
 ### Bug Fixes

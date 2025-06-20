@@ -1,3 +1,17 @@
+## [@iavofficial/frontend-framework-v1.5.2-dev.2](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.5.2-dev.1...@iavofficial/frontend-framework-v1.5.2-dev.2) (2025-06-20)
+
+### Bug Fixes
+
+* different displays for each layout behavior ([89841b9](https://github.com/iavofficial/IAVFrontendFramework/commit/89841b93d76baa5cbc5e118b2b2a02462d437b04))
+
+## [@iavofficial/frontend-framework-v1.5.2-dev.1](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.5.1...@iavofficial/frontend-framework-v1.5.2-dev.1) (2025-06-13)
+
+### Bug Fixes
+
+* **contentwitbar:** use display flex instead of block for selected tab ([2ca0270](https://github.com/iavofficial/IAVFrontendFramework/commit/2ca027037fb27f9fee4b09ae9eae03af52b005f4))
+* contentWithBar.tsx url ([41c3477](https://github.com/iavofficial/IAVFrontendFramework/commit/41c3477f7176a1db7e9140711270e78e95fcedd5))
+* use display flex instead of block for selected tab ([d83b04f](https://github.com/iavofficial/IAVFrontendFramework/commit/d83b04f9b6d98b05835ee523a3cced8cba6a059c))
+
 ## [@iavofficial/frontend-framework-v1.5.1](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.5.0...@iavofficial/frontend-framework-v1.5.1) (2025-06-12)
 
 ### Bug Fixes

@@ -206,6 +206,14 @@ export const ContentBar = (props: PropsContentBar) => {
 
   const isNavbarCollapsed = navbarSettingsContext?.navbarCollapsed ?? false;
 
+  const visibleElements =
+    contentElements.length > amountOfRenderedTabElements
+      ? contentElements.slice(
+          startRenderElements,
+          startRenderElements + amountOfRenderedTabElements,
+        )
+      : contentElements;
+
   return (
     <div
       ref={contentRef}
@@ -231,26 +239,11 @@ export const ContentBar = (props: PropsContentBar) => {
             icon={"pi pi-angle-left"}
             isVisible={contentElements.length > amountOfRenderedTabElements}
           />
-          {contentElements.length > amountOfRenderedTabElements
-            ? contentElements
-                .slice(
-                  startRenderElements,
-                  startRenderElements + amountOfRenderedTabElements,
-                )
-                .map((element) =>
-                  element.getContentbarElement(
-                    calculateWidth(
-                      isNavbarCollapsed,
-                      width - (2 * DEFAULT_ELEMENTSIZE + 2 * PADDING_GAB),
-                      !!addable,
-                      contentElements.length > amountOfRenderedTabElements,
-                    ),
-                    selectedId,
-                    contentElements[0].getId(),
-                  ),
-                )
-            : contentElements.map((element) =>
-                element.getContentbarElement(
+          {visibleElements.map((element) => {
+            const id = element.getId();
+            return (
+              <div key={id} style={{cursor: "pointer"}}>
+                {element.getContentbarElement(
                   calculateWidth(
                     isNavbarCollapsed,
                     width - (2 * DEFAULT_ELEMENTSIZE + 2 * PADDING_GAB),
@@ -259,8 +252,10 @@ export const ContentBar = (props: PropsContentBar) => {
                   ),
                   selectedId,
                   contentElements[0].getId(),
-                ),
-              )}
+                )}
+              </div>
+            );
+          })}
         </div>
         <div className="flex align-items-center">
           <ContentBarButtonElement

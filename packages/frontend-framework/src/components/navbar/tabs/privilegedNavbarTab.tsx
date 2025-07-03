@@ -32,7 +32,7 @@ export const PrivilegedNavbarTab: GroupableNavbarTab<Props> = (
 ) => {
   const authContext = useContext(AuthContext);
   const permitted = containsOneOrMoreGroups(
-    authContext?.getUserGroups(),
+    authContext?.getUserGroups() ?? [],
     props.permittedGroups,
   );
   return permitted ? (

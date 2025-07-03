@@ -75,3 +75,18 @@
 .p-contextmenu .p-menuitem-link .p-menuitem-icon {
   color: var(--textAndIconMainColor, var(--textAndIconMainColorfb));
 }
+
+.p-contextmenu
+  .p-menuitem:not(.p-menuitem-highlight):not(.p-disabled)
+  > .p-menuitem-content {
+  background: var(--contextmenubgmaincolorfb, var(--contextmenubgmaincolorfb));
+}
+
+.p-contextmenu
+  .p-menuitem:not(.p-menuitem-highlight):not(.p-disabled)
+  > .p-menuitem-content:hover {
+  background: var(
+    --contextmenubghovermaincolorfb,
+    var(--contextmenubghovermaincolorfb)
+  );
+}

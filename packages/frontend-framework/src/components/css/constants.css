@@ -45,10 +45,11 @@
   --yellow: #ffd800;
   --green: #80d800;
   --red: #f80000;
-  /* fb: FallbackValue 
-       bg: Background
-    */
+  /* fb: FallbackValue
+         bg: Background
+      */
   --contextmenubgmaincolorfb: var(--white);
+  --contextmenubghovermaincolorfb: var(--grey-1);
   --highlightcolorfb: var(--blue-0);
   --textAndIconMainColorfb: var(--black);
   --textAndIconHighlightColorfb: var(--white);
@@ -58,6 +59,7 @@
 
 [color-theme="dark"] {
   --contextmenubgmaincolorfb: var(--grey-5);
+  --contextmenubghovermaincolorfb: var(--grey-4);
   --highlightcolorfb: var(--grey-3);
   --textAndIconMainColorfb: var(--white);
   --textAndIconHighlightColorfb: var(--white);

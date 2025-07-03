@@ -21,24 +21,30 @@ import React from "react";
 const generateClassName = (prefix: string): string =>
   `${prefix}-${Math.random().toString(36).substr(2, 9)}`;
 
-const createCSS = (styles: React.CSSProperties): string =>
-  Object.entries(styles)
-    .map(([key, value]) => {
-      if (
-        typeof value === "object" &&
-        value !== null &&
-        !Array.isArray(value)
-      ) {
-        return `${key} { ${createCSS(value as React.CSSProperties)} }`;
-      }
-      return `${key.replace(/([A-Z])/g, "-$1").toLowerCase()}:${value};`;
-    })
-    .join("");
+const createCSS = (className: string, styles: any): string => {
+  let cssString = "";
+
+  for (const key in styles) {
+    const value = styles[key];
+    if (typeof value === "object" && value !== null && !Array.isArray(value)) {
+      const selector = key.replace("&", `.${className}`);
+      cssString += `${selector} { ${createCSS(className, value)} } `;
+    } else {
+      const cssProp = key.replace(/([A-Z])/g, "-$1").toLowerCase();
+      cssString += `${cssProp}: ${value}; `;
+    }
+  }
+  return cssString;
+};
+
+type NestedCSSProperties = React.CSSProperties & {
+  [selector: string]: React.CSSProperties | NestedCSSProperties | undefined;
+};
 
 const makeStyles = <
   T extends Record<
     string,
-    React.CSSProperties | ((props?: any) => React.CSSProperties)
+    NestedCSSProperties | ((props?: any) => NestedCSSProperties)
   >,
 >(
   styles: (props?: any) => T,
@@ -55,9 +61,7 @@ const makeStyles = <
           ? styleDefinition(props || {})
           : styleDefinition;
 
-      const styleString = createCSS(
-        styleWithDynamicValues as React.CSSProperties,
-      );
+      const styleString = createCSS(className, styleWithDynamicValues);
       const styleElement = document.createElement("style");
       styleElement.textContent = `.${className} { ${styleString} }`;
       document.head.appendChild(styleElement);

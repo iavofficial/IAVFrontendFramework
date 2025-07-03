@@ -75,3 +75,7 @@
 .p-contextmenu .p-menuitem-link .p-menuitem-icon {
   color: var(--textAndIconMainColor, var(--textAndIconMainColorfb));
 }
+
+.p-contextmenu .p-menuitem-link .p-submenu-icon {
+  color: var(--textAndIconMainColor, var(--textAndIconMainColorfb));
+}

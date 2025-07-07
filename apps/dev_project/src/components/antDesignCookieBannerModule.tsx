@@ -16,13 +16,16 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { AppAwsAuthentication } from './components/aws_test/AppAwsAuthentication';
-import { AppDefaultAuthentication } from './components/default_example/AppDefaultAuthentication';
+import { CookieBannerModule } from '@iavofficial/frontend-framework-shared/uiModuleInterfaces';
+import { CookieBannerOrchestrator } from '@iavofficial/frontend-framework-shared/cookieBannerOrchestrator';
+import { AntDesignCookieBanner } from './antDesignCookieBanner';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <AppDefaultAuthentication />
-  </React.StrictMode>
-);
+export class CustomCookieBanner implements CookieBannerModule {
+  public UiLayerCookieBanner: React.FC;
+
+  constructor() {
+    this.UiLayerCookieBanner = () => (
+      <CookieBannerOrchestrator uiComponent={AntDesignCookieBanner} />
+    );
+  }
+}

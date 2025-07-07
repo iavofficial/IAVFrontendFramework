@@ -1,6 +1,5 @@
 /**
  * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,14 +14,8 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { AppAwsAuthentication } from './components/aws_test/AppAwsAuthentication';
-import { AppDefaultAuthentication } from './components/default_example/AppDefaultAuthentication';
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <AppDefaultAuthentication />
-  </React.StrictMode>
-);
+import React from "react";
+declare const makeStyles: <T extends Record<string, React.CSSProperties | ((props?: any) => React.CSSProperties)>>(styles: (props?: any) => T) => (props?: any) => {
+    classes: Record<keyof T, string>;
+};
+export default makeStyles;

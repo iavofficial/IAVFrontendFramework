@@ -16,13 +16,13 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { AppAwsAuthentication } from './components/aws_test/AppAwsAuthentication';
-import { AppDefaultAuthentication } from './components/default_example/AppDefaultAuthentication';
+import { CookieBannerModule } from "../../../../types/modules/ui/uiModuleInterfaces";
+import { UICookieBanner } from "../../cookie/uiCookieBanner";
+import { CookieBannerOrchestrator } from "./cookieBannerOrchestrator";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <AppDefaultAuthentication />
-  </React.StrictMode>
-);
+export class CookieBanner implements CookieBannerModule {
+  public UiLayerCookieBanner;
+  constructor() {
+    this.UiLayerCookieBanner = CookieBannerOrchestrator;
+  }
+}

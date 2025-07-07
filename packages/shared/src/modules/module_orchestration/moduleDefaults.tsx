@@ -21,6 +21,7 @@ import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {MandatoryModuleNames} from "../../constants/moduleNames";
 import {DummyAuthenticator} from "../default_modules/auth/dummyAuthenticatorModule";
 import {StoreBuilder} from "./storeBuilder";
+
 import {
   AppDispatch,
   FFMandatoryStoreModules,
@@ -29,7 +30,8 @@ import {
 } from "../../types/modules/moduleOrchestrationTypes";
 import {ReactRouterRouter} from "../default_modules/router/reactRouterRouterModule";
 import {I18NextInternationalizer} from "../default_modules/internationalization/i18NextInternationalizerModule";
-
+import {CookieBanner} from "../default_modules/ui/cookiebanner/cookieBannerModule";
+//import {CookieBanner} from "../default_modules/cookie/cookieBanner";
 export type DefaultRootState = RootState<DefaultStoreState>;
 export type DefaultAppDispatch = AppDispatch<DefaultStoreDispatch>;
 export type DefaultThunkDispatch = ThunkDispatch<
@@ -48,6 +50,10 @@ export type DefaultStoreModules = typeof defaultStoreModules;
 
 export const defaultNonStoreModules = {
   [MandatoryModuleNames.Router]: new ReactRouterRouter(),
+  /* [MandatoryModuleNames.Header]: Header,
+  [MandatoryModuleNames.Navbar]: Navbar,
+  [MandatoryModuleNames.ContentWithBar]: ContentWithBar, */
+  [MandatoryModuleNames.CookieBanner]: new CookieBanner(),
 };
 
 export type DefaultNonStoreModules = typeof defaultNonStoreModules;

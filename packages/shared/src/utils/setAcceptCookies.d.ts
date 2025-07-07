@@ -15,14 +15,4 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { AppAwsAuthentication } from './components/aws_test/AppAwsAuthentication';
-import { AppDefaultAuthentication } from './components/default_example/AppDefaultAuthentication';
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <AppDefaultAuthentication />
-  </React.StrictMode>
-);
+export declare const setAcceptCookies: (setCookie: (name: "acceptedCookies", value: any, options?: any) => void) => void;

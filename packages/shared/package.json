@@ -104,6 +104,7 @@
     "./uiLayerRouter": "./dist/modules/default_modules/router/components/uiLayerRouter.js",
     "./routerModule": "./dist/types/modules/router/routerModule.js",
     "./i18NextInternationalizerModule": "./dist/modules/default_modules/internationalization/i18NextInternationalizerModule.js",
+    "./cookieBanner": "./dist/modules/default_modules/cookie/cookieBanner.js",
     "./useModuleTranslation": "./dist/modules/hooks/useModuleTranslation.js",
     "./internationalizerModule": "./dist/types/modules/internationalization/internationalizerModule.js",
     "./initI18nextFunction": "./dist/types/modules/internationalization/initI18nextFunction.js",
@@ -114,7 +115,10 @@
     "./containsOneOrMoreGroups": "./dist/utils/auth/containsOneOrMoreGroups.js",
     "./parseLanguageResourcesIntoDropdownFormat": "./dist/utils/internationalization/parseLanguageResourcesIntoDropdownFormat.js",
     "./hash": "./dist/utils/hash.js",
-    "./cookieHooks": "./dist/utils/cookieHooks.js"
+    "./cookieHooks": "./dist/utils/cookieHooks.js",
+    "./setAcceptCookies": "./dist/utils/setAcceptCookies.js",
+    "./uiModuleInterfaces": "./dist/types/modules/ui/uiModuleInterfaces.js",
+    "./cookieBannerOrchestrator": "./dist/modules/default_modules/ui/cookiebanner/cookieBannerOrchestrator.js"
   },
   "typesVersions": {
     "*": {
@@ -193,6 +197,9 @@
       "./i18NextInternationalizerModule": [
         "./dist/modules/default_modules/internationalization/i18NextInternationalizerModule.d.ts"
       ],
+      "./cookieBanner": [
+        "./dist/modules/default_modules/cookie/cookieBanner.d.ts"
+      ],
       "./useModuleTranslation": [
         "./dist/modules/hooks/useModuleTranslation.js"
       ],
@@ -222,6 +229,15 @@
       ],
       "./cookieHooks": [
         "./dist/utils/cookieHooks.d.ts"
+      ],
+      "./setAcceptCookies": [
+        "./dist/utils/setAcceptCookies.d.ts"
+      ],
+      "./uiModuleInterfaces": [
+        "./dist/types/modules/ui/uiModuleInterfaces.d.ts"
+      ],
+      "./cookieBannerOrchestrator": [
+        "./dist/modules/default_modules/ui/cookiebanner/cookieBannerOrchestrator.d.ts"
       ]
     }
   },

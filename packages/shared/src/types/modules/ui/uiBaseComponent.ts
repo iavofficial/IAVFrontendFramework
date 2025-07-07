@@ -1,4 +1,9 @@
-import { ContentBarProps, CookieBannerModule, HeaderProps, NavbarProps } from "./uiModuleInterfaces";
+import {
+  ContentBarProps,
+  CookieBannerModule,
+  HeaderProps,
+  NavbarProps,
+} from "./uiModuleInterfaces";
 
 /**
  * Base interface for all UI modules
@@ -8,7 +13,8 @@ export interface UIComponent<TProps> {
 }
 
 // Navbar example extending the base
-export interface NavbarComponent extends UIComponent<NavbarProps> { }
-export interface HeaderComponent extends UIComponent<HeaderProps> { }
-export interface ContentBarComponent extends UIComponent<ContentBarProps> { }
-export interface CookieBannerComponent extends UIComponent<CookieBannerModule> { }
+export interface NavbarComponent extends UIComponent<NavbarProps> {}
+export interface HeaderComponent extends UIComponent<HeaderProps> {}
+export interface ContentBarComponent extends UIComponent<ContentBarProps> {}
+export interface CookieBannerComponent
+  extends UIComponent<CookieBannerModule> {}

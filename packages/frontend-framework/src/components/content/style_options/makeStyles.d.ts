@@ -15,7 +15,14 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 import React from "react";
-declare const makeStyles: <T extends Record<string, React.CSSProperties | ((props?: any) => React.CSSProperties)>>(styles: (props?: any) => T) => (props?: any) => {
-    classes: Record<keyof T, string>;
+declare const makeStyles: <
+  T extends Record<
+    string,
+    React.CSSProperties | ((props?: any) => React.CSSProperties)
+  >,
+>(
+  styles: (props?: any) => T,
+) => (props?: any) => {
+  classes: Record<keyof T, string>;
 };
 export default makeStyles;

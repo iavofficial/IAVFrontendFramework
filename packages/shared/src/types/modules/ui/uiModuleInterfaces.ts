@@ -3,7 +3,7 @@
  * These interfaces are meant to be implemented by UI components to ensure flexibility and modularity.
  */
 
-import { FFModule } from "../generalModule";
+import {FFModule} from "../generalModule";
 
 // Navbar Module Interface
 export interface NavbarComponent {
@@ -56,7 +56,6 @@ export interface ContentBarItem {
   label: string;
   icon?: React.ReactNode;
 }
-
 
 export interface UICookieBannerProps {
   header: React.ReactNode;

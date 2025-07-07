@@ -16,11 +16,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { GlobalDataLayer } from '@iavofficial/frontend-framework/globalDataLayer';
+import { GlobalDataLayer } from "@iavofficial/frontend-framework/globalDataLayer";
 
-import Layout from '../../Layout.tsx';
-import { defaultStore } from '@iavofficial/frontend-framework/store';
-import { modules } from './store.tsx';
+import Layout from "../../Layout.tsx";
+import { defaultStore } from "@iavofficial/frontend-framework/store";
+import { modules } from "./store.tsx";
 
 const store = defaultStore;
 

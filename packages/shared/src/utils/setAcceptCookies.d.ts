@@ -15,4 +15,6 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-export declare const setAcceptCookies: (setCookie: (name: "acceptedCookies", value: any, options?: any) => void) => void;
+export declare const setAcceptCookies: (
+  setCookie: (name: "acceptedCookies", value: any, options?: any) => void,
+) => void;

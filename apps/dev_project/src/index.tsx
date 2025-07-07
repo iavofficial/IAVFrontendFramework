@@ -16,13 +16,13 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { AppAwsAuthentication } from './components/aws_test/AppAwsAuthentication';
-import { AppDefaultAuthentication } from './components/default_example/AppDefaultAuthentication';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { AppAwsAuthentication } from "./components/aws_test/AppAwsAuthentication";
+import { AppDefaultAuthentication } from "./components/default_example/AppDefaultAuthentication";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <AppDefaultAuthentication />
-  </React.StrictMode>
+  </React.StrictMode>,
 );

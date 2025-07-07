@@ -16,21 +16,21 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Reducer } from "@reduxjs/toolkit";
-import { FFStoreModule } from "./generalModule";
+import {Reducer} from "@reduxjs/toolkit";
+import {FFStoreModule} from "./generalModule";
 import {
   MandatoryModuleNames,
   USER_MODULES_PREFIX,
 } from "../../constants/moduleNames";
-import { AuthModule, AuthState } from "./auth/authenticatorModule";
-import { StoreConfigBuilder } from "../../modules/module_orchestration/storeConfigBuilder";
-import { Exact, ExactPartial } from "../util-types/exact";
-import { RestrictKeyToPrefix } from "../util-types/restrictKeyToPrefix";
-import { DefaultNonStoreModules } from "../../modules/module_orchestration/moduleDefaults";
-import { RouterModule } from "./router/routerModule";
-import { CookieBannerModule, NavbarComponent } from "./ui/uiModuleInterfaces";
-import { HeaderComponent } from "./ui/uiModuleInterfaces";
-import { ContentBarComponent } from "./ui/uiModuleInterfaces";
+import {AuthModule, AuthState} from "./auth/authenticatorModule";
+import {StoreConfigBuilder} from "../../modules/module_orchestration/storeConfigBuilder";
+import {Exact, ExactPartial} from "../util-types/exact";
+import {RestrictKeyToPrefix} from "../util-types/restrictKeyToPrefix";
+import {DefaultNonStoreModules} from "../../modules/module_orchestration/moduleDefaults";
+import {RouterModule} from "./router/routerModule";
+import {CookieBannerModule, NavbarComponent} from "./ui/uiModuleInterfaces";
+import {HeaderComponent} from "./ui/uiModuleInterfaces";
+import {ContentBarComponent} from "./ui/uiModuleInterfaces";
 import {
   InternationalizerModule,
   InternationalizerState,
@@ -69,7 +69,7 @@ export type FFMandatoryNonStoreModules = {
     [MandatoryModuleNames.Navbar]: NavbarComponent;
     [MandatoryModuleNames.ContentWithBar]: ContentBarComponent; */
   [MandatoryModuleNames.CookieBanner]: CookieBannerModule;
-}
+};
 
 export type FFAllMandatoryModules<
   TModulesState extends FFMandatoryState = FFMandatoryState,
@@ -95,12 +95,12 @@ export type ModuleAndProcessorMap<
   TModules extends FFStoreModules,
   TFrameworkModulesState extends FFMandatoryState,
 > = {
-    [K in keyof TModules]: TModules[K] extends FFStoreModule<
-      ExtractModuleState<TModules[K]>
-    >
+  [K in keyof TModules]: TModules[K] extends FFStoreModule<
+    ExtractModuleState<TModules[K]>
+  >
     ? ModuleEntry<TModules[K], TFrameworkModulesState>
     : never;
-  };
+};
 
 // This type defines the structure of one entry inside the ModuleAndProcessorMap.
 export interface ModuleEntry<
@@ -132,10 +132,10 @@ export type ExtractModuleState<T> =
 export type ActualMandatoryStateFromModules<
   TModules extends Partial<FFMandatoryStoreModules>,
 > = {
-    [K in keyof FFMandatoryStoreModules]: K extends keyof TModules
+  [K in keyof FFMandatoryStoreModules]: K extends keyof TModules
     ? ExtractModuleState<TModules[K]>
     : ExtractModuleState<FFMandatoryStoreModules[K]>;
-  };
+};
 
 export type ActualUserModulesStateFromModules<TModules> = {
   [K in keyof TModules]: ExtractModuleState<TModules[K]>;
@@ -177,7 +177,7 @@ export type TParamFrameworkStoreModulesPartial<
 // user modules can be avoided.
 export type TParamUserStoreModules<
   TUserStoreModules extends FFStoreModules<TUserModulesState> &
-  Partial<DefaultNonStoreModules>,
+    Partial<DefaultNonStoreModules>,
   TUserModulesState,
 > = Exact<
   RestrictKeyToPrefix<
@@ -206,14 +206,14 @@ export type TParamUserNonStoreModules<TUserNonStoreModules> = Exact<
 // corresponding prefix for user modules.
 export type TParamAllModules<
   TModules extends FFMandatoryStoreModules<TFrameworkStoreModulesState> &
-  FFMandatoryNonStoreModules &
-  Record<string, object>,
+    FFMandatoryNonStoreModules &
+    Record<string, object>,
   TFrameworkStoreModulesState extends
-  FFMandatoryState = ActualMandatoryStateFromModules<TModules>,
+    FFMandatoryState = ActualMandatoryStateFromModules<TModules>,
 > = Exact<
   FFMandatoryStoreModules<TFrameworkStoreModulesState> &
-  FFMandatoryNonStoreModules &
-  RestrictKeyToPrefix<TModules, typeof USER_MODULES_PREFIX>,
+    FFMandatoryNonStoreModules &
+    RestrictKeyToPrefix<TModules, typeof USER_MODULES_PREFIX>,
   TModules
 >;
 
@@ -221,13 +221,13 @@ export type TParamAllModulesPartial<
   TModules extends Partial<
     FFMandatoryStoreModules<TFrameworkStoreModulesState>
   > &
-  Partial<FFMandatoryNonStoreModules> &
-  Record<string, object>,
+    Partial<FFMandatoryNonStoreModules> &
+    Record<string, object>,
   TFrameworkStoreModulesState extends
-  FFMandatoryState = ActualMandatoryStateFromModules<TModules>,
+    FFMandatoryState = ActualMandatoryStateFromModules<TModules>,
 > = Exact<
   Partial<FFMandatoryStoreModules<TFrameworkStoreModulesState>> &
-  Partial<FFMandatoryNonStoreModules> &
-  RestrictKeyToPrefix<TModules, typeof USER_MODULES_PREFIX>,
+    Partial<FFMandatoryNonStoreModules> &
+    RestrictKeyToPrefix<TModules, typeof USER_MODULES_PREFIX>,
   TModules
 >;

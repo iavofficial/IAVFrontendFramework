@@ -248,6 +248,12 @@ public setExtras(key: string, value: unknown): this`}
           default_module: 'I18nextInternationalizer',
           ts_type: CodeInternationalizerModuleType,
         },
+        {
+          key: 'cookiebanner',
+          type_of_module: 'Framework Non Store Module',
+          default_module: 'UICookieBanner',
+          ts_type: CodeCookieBannerModuleType,
+        },
       ]}
     />
     <SubTitle>The Cookie Banner Module</SubTitle>
@@ -380,6 +386,14 @@ const CodeInternationalizerModuleType = (
   selectActiveLang: (lang: string) => void;
   useTranslation: UseTranslationHook;
 } & FFStoreModule<TIntState>;`}
+  </Code>
+);
+
+const CodeCookieBannerModuleType = (
+  <Code center language='typescript'>
+    {`export type CookieBannerModule = {
+    UiLayerCookieBanner: React.ComponentType;
+} & FFModule;;`}
   </Code>
 );
 

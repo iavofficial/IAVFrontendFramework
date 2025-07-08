@@ -249,9 +249,9 @@ public setExtras(key: string, value: unknown): this`}
           ts_type: CodeInternationalizerModuleType,
         },
         {
-          key: 'cookiebanner',
-          type_of_module: 'Framework Non Store Module',
-          default_module: 'UICookieBanner',
+          key: "cookiebanner",
+          type_of_module: "Framework Non Store Module",
+          default_module: "UICookieBanner",
           ts_type: CodeCookieBannerModuleType,
         },
       ]}
@@ -390,7 +390,7 @@ const CodeInternationalizerModuleType = (
 );
 
 const CodeCookieBannerModuleType = (
-  <Code center language='typescript'>
+  <Code center language="typescript">
     {`export type CookieBannerModule = {
     UiLayerCookieBanner: React.ComponentType;
 } & FFModule;;`}

@@ -23,7 +23,6 @@ import "primeicons/primeicons.css";
 import React, {useEffect} from "react";
 import {BasicAuthenticationView} from "./authentication/default/basicAuthenticationView";
 import {SettingsMenuOptions} from "./header/settingsMenu";
-/* import {CookieBanner} from "@iavofficial/frontend-framework-shared/cookieBanner"; */
 import {MainView} from "./mainView";
 import {TabAndContentWrapper} from "./navbar/wrappers/typesWrappers";
 import {NavbarSettingsProvider} from "../contexts/providers/navbarSettingsProvider";

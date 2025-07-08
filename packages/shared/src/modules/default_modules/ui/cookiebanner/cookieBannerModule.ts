@@ -17,7 +17,6 @@
  */
 
 import {CookieBannerModule} from "../../../../types/modules/ui/uiModuleInterfaces";
-import {UICookieBanner} from "../../cookie/uiCookieBanner";
 import {CookieBannerOrchestrator} from "./cookieBannerOrchestrator";
 
 export class CookieBanner implements CookieBannerModule {

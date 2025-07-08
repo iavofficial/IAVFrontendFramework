@@ -8,4 +8,4 @@ cp ../../NOTICE.md ./NOTICE.md
 cp -R ../../packages/shared/assets/css ./dist/assets/css
 # Copy image assets (e.g. authentication view background images)
 cp -R ../../packages/shared/assets/png ./dist/png
-cp -R ../../packages/shared/assets/svg ./dist/svgnpm
+cp -R ../../packages/shared/assets/svg ./dist/svg

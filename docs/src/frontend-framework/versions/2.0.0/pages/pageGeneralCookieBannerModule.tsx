@@ -16,15 +16,15 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import Page from '../../../common/page/page';
-import BulletList from '../../../common/page/text/bulletList';
-import SubSubTitle from '../../../common/page/text/subSubTitle';
-import SubTitle from '../../../common/page/text/subTitle';
-import Text from '../../../common/page/text/text';
-import Title from '../../../common/page/text/title';
-import Code from '../../../common/page/utils/code';
-import Table from '../../../common/page/utils/table';
-import React from 'react';
+import Page from "../../../common/page/page";
+import BulletList from "../../../common/page/text/bulletList";
+import SubSubTitle from "../../../common/page/text/subSubTitle";
+import SubTitle from "../../../common/page/text/subTitle";
+import Text from "../../../common/page/text/text";
+import Title from "../../../common/page/text/title";
+import Code from "../../../common/page/utils/code";
+import Table from "../../../common/page/utils/table";
+import React from "react";
 
 const PageGeneralCookieBannerModule: React.FC = () => (
   <Page>
@@ -43,16 +43,16 @@ const PageGeneralCookieBannerModule: React.FC = () => (
     </Text>
     <Table
       columns={[
-        { key: 'name', title: 'Name' },
-        { key: 'component_type', title: 'Component Type' },
-        { key: 'description', title: 'Description' },
+        { key: "name", title: "Name" },
+        { key: "component_type", title: "Component Type" },
+        { key: "description", title: "Description" },
       ]}
       data={[
         {
-          name: 'UiLayerCookieBanner',
+          name: "UiLayerCookieBanner",
           component_type: CodeUiLayerCookieBannerType,
           description:
-            'This component is rendered in the UILayer and displays the cookie consent banner, handling user interaction.',
+            "This component is rendered in the UILayer and displays the cookie consent banner, handling user interaction.",
         },
       ]}
     />
@@ -62,13 +62,13 @@ const PageGeneralCookieBannerModule: React.FC = () => (
       the <i>UiLayerCookieBanner</i> React component. You may either:
     </Text>
     <BulletList
-      bulletType='bullet'
+      bulletType="bullet"
       items={[
-        'Extend the default module and override the UiLayerCookieBanner property.',
-        'Implement a new class or object matching the CookieBannerModule interface.',
+        "Extend the default module and override the UiLayerCookieBanner property.",
+        "Implement a new class or object matching the CookieBannerModule interface.",
       ]}
     />
-    <Code language='typescript' title='Custom Cookie Banner Example'>
+    <Code language="typescript" title="Custom Cookie Banner Example">
       {`class CustomCookieBanner implements CookieBannerModule {
       UiLayerCookieBanner = MySpecialCookieBanner;
       // Optionally, useModuleLifecycle if you need custom logic.
@@ -78,7 +78,7 @@ const PageGeneralCookieBannerModule: React.FC = () => (
       Then register your customized module under <i>frameworkNonStoreModules</i>
       :
     </Text>
-    <Code language='typescript' title='Registering custom module'>
+    <Code language="typescript" title="Registering custom module">
       {`const frameworkNonStoreModules = {
       cookieBanner: new CustomCookieBanner(),
       // ...other non-store modules
@@ -103,10 +103,10 @@ const PageGeneralCookieBannerModule: React.FC = () => (
       modules-in-depth page. This can be used to block app rendering until
       consent logic is finished.
     </Text>
-    <Code language='typescript'>{`() => {renderChildren: boolean} & Record<string, unknown>`}</Code>
+    <Code language="typescript">{`() => {renderChildren: boolean} & Record<string, unknown>`}</Code>
 
     <SubTitle>Other important types</SubTitle>
-    <Code language='typescript'>{`export interface UICookieBannerProps {
+    <Code language="typescript">{`export interface UICookieBannerProps {
   header: React.ReactNode;
   message: React.ReactNode;
   visible: boolean;
@@ -115,7 +115,7 @@ const PageGeneralCookieBannerModule: React.FC = () => (
   styles?: Record<string, any>;
   darkMode: boolean;
 };`}</Code>
-    <Code language='typescript'>{`export type CookieBannerModule = {
+    <Code language="typescript">{`export type CookieBannerModule = {
   UiLayerCookieBanner: React.ComponentType<UICookieBannerProps>;
   useModuleLifecycle?: ModuleLifecycleHook;
 } & FFModule;`}</Code>
@@ -124,7 +124,7 @@ const PageGeneralCookieBannerModule: React.FC = () => (
 
 const CodeUiLayerCookieBannerType = (
   <Code
-    language='typescript'
+    language="typescript"
     center
   >{`React.ComponentType<UICookieBannerProps>`}</Code>
 );

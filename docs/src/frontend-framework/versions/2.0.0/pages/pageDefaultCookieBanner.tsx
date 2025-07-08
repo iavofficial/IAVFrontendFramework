@@ -16,19 +16,19 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import Page from '../../../common/page/page';
-import { ModuleProfile } from '../../../common/page/text/module/moduleProfile';
-import Text from '../../../common/page/text/text';
-import Title from '../../../common/page/text/title';
-import React from 'react';
+import Page from "../../../common/page/page";
+import { ModuleProfile } from "../../../common/page/text/module/moduleProfile";
+import Text from "../../../common/page/text/text";
+import Title from "../../../common/page/text/title";
+import React from "react";
 
 const PageDefaultCookieBanner: React.FC = () => (
   <Page>
     <Title>UICookieBanner</Title>
     <ModuleProfile
-      moduleKey='cookieBanner'
+      moduleKey="cookieBanner"
       isDefaultModule
-      shortDescription='This module provides the default cookie consent banner following the required contract.'
+      shortDescription="This module provides the default cookie consent banner following the required contract."
     />
     <Text>
       As the default Cookie Banner module, this implementation provides the

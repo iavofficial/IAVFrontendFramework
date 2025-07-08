@@ -16,15 +16,15 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import Page from "../../../common/page/page";
-import BulletList from "../../../common/page/text/bulletList";
-import SubSubTitle from "../../../common/page/text/subSubTitle";
-import SubTitle from "../../../common/page/text/subTitle";
-import Text from "../../../common/page/text/text";
-import Title from "../../../common/page/text/title";
-import Code from "../../../common/page/utils/code";
-import Table from "../../../common/page/utils/table";
-import React from "react";
+import Page from '../../../common/page/page';
+import BulletList from '../../../common/page/text/bulletList';
+import SubSubTitle from '../../../common/page/text/subSubTitle';
+import SubTitle from '../../../common/page/text/subTitle';
+import Text from '../../../common/page/text/text';
+import Title from '../../../common/page/text/title';
+import Code from '../../../common/page/utils/code';
+import Table from '../../../common/page/utils/table';
+import React from 'react';
 
 const PageModulesInDepth: React.FC = () => (
   <Page>
@@ -45,7 +45,7 @@ const PageModulesInDepth: React.FC = () => (
       these two distinctions you get four types of modules:
     </Text>
     <BulletList
-      bulletType="bullet"
+      bulletType='bullet'
       items={[
         `frameworkStoreModules: These are all modules which have default implementations
         and provide a Slice for the Redux store. You can override the default implementations
@@ -65,13 +65,13 @@ const PageModulesInDepth: React.FC = () => (
       Because the framework works with the described distinctions of module
       types internally, <i>createModules</i> splits up the provided modules
       object into the different types of modules. However, if you want to split
-      them up by yourself you can use the method <i>createModulesSeperately</i>{" "}
+      them up by yourself you can use the method <i>createModulesSeperately</i>{' '}
       which takes four different objects for the different types of modules. The
       following example shows the usage of this method.
     </Text>
     <Code
-      language="typescript"
-      title="Example usage of createModulesSeperately"
+      language='typescript'
+      title='Example usage of createModulesSeperately'
     >
       {`const frameworkStoreModules = {
   [MandatoryModuleNames.Authenticator]: new AWSAuthenticator({
@@ -112,8 +112,8 @@ export const store = new StoreBuilder(modules.storeModules).build();`}
       following example shows you how to add a processor for a framework module.
     </Text>
     <Code
-      language="typescript"
-      title="Example for adding a processor for a framework module"
+      language='typescript'
+      title='Example for adding a processor for a framework module'
     >
       {`export const store = new StoreBuilder(modules.storeModules)
   .setFrameworkModuleProcessor(
@@ -133,7 +133,7 @@ export const store = new StoreBuilder(modules.storeModules).build();`}
       This instance gets passed to all processors and allows to add information
       which will later be added to the store. The method definitions of
       StoreConfigBuilder are included in a later section. You can add custom
-      processors for user modules in the same way, but using the method{" "}
+      processors for user modules in the same way, but using the method{' '}
       <i>setUserModuleProcessor</i>. However, in most use cases the default
       processing of modules will be sufficient.
     </Text>
@@ -145,8 +145,8 @@ export const store = new StoreBuilder(modules.storeModules).build();`}
       as the global store. The following code snippet shows you an example.
     </Text>
     <Code
-      language="typescript"
-      title="Example for defining a custom storeBuilder method"
+      language='typescript'
+      title='Example for defining a custom storeBuilder method'
     >
       {`export const store = new StoreBuilder(modules.storeModules)
   .setStoreBuilder((storeConfig) => {
@@ -176,8 +176,8 @@ export const store = new StoreBuilder(modules.storeModules).build();`}
       the store.
     </Text>
     <Code
-      language="typescript"
-      title="Method definitions of StoreConfigBuilder"
+      language='typescript'
+      title='Method definitions of StoreConfigBuilder'
     >
       {`// Adds a reducer for a given key.
 public setReducer<K extends keyof TModulesState>(key: K, reducer: Reducer<TModulesState[K]>)
@@ -200,10 +200,10 @@ public setExtras(key: string, value: unknown): this`}
       object. The Framework will detect the Hook and run it. The Hook has to be
       of the following type.
     </Text>
-    <Code language="typescript">{`() => {renderChildren: boolean} & Record<string, unknown>`}</Code>
+    <Code language='typescript'>{`() => {renderChildren: boolean} & Record<string, unknown>`}</Code>
     <Text>
       You can see that <i>useModuleLifecycle</i> has to return an object which
-      contains an attribute called <i>renderChildren</i>. By passing{" "}
+      contains an attribute called <i>renderChildren</i>. By passing{' '}
       <i>false</i> as it's value you can prevent that all other UI components
       get rendered. This may be necessary if you have to make sure that before
       rendering certain initialization logic has to be finished.
@@ -224,28 +224,28 @@ public setExtras(key: string, value: unknown): this`}
     </Text>
     <Table
       columns={[
-        { key: "key", title: "Key" },
-        { key: "type_of_module", title: "Type of module" },
-        { key: "default_module", title: "Default module" },
-        { key: "ts_type", title: "TS type", centerContent: true },
+        { key: 'key', title: 'Key' },
+        { key: 'type_of_module', title: 'Type of module' },
+        { key: 'default_module', title: 'Default module' },
+        { key: 'ts_type', title: 'TS type', centerContent: true },
       ]}
       data={[
         {
-          key: "auth",
-          type_of_module: "Framework Store Module",
-          default_module: "DummyAuthenticator",
+          key: 'auth',
+          type_of_module: 'Framework Store Module',
+          default_module: 'DummyAuthenticator',
           ts_type: CodeAuthModuleType,
         },
         {
-          key: "router",
-          type_of_module: "Framework Non Store Module",
-          default_module: "ReactRouterRouter",
+          key: 'router',
+          type_of_module: 'Framework Non Store Module',
+          default_module: 'ReactRouterRouter',
           ts_type: CodeRouterModuleType,
         },
         {
-          key: "internationalizer",
-          type_of_module: "Framework Store module",
-          default_module: "I18nextInternationalizer",
+          key: 'internationalizer',
+          type_of_module: 'Framework Store module',
+          default_module: 'I18nextInternationalizer',
           ts_type: CodeInternationalizerModuleType,
         },
         {
@@ -256,87 +256,14 @@ public setExtras(key: string, value: unknown): this`}
         },
       ]}
     />
-    <SubTitle>The Cookie Banner Module</SubTitle>
-    <Text>
-      The Cookie Banner module displays and manages user consent for cookies and
-      tracking in your application. It is a Framework Non Store Module; this
-      means it does not add state to the Redux store, but can be
-      customized/replaced as needed.
-    </Text>
 
-    <SubSubTitle>Default Implementation & API</SubSubTitle>
-    <Text>
-      The Framework provides a default banner implementation through the{" "}
-      <i>shared</i> package. The Cookie Banner module interface is as follows:
-    </Text>
-    <Code language="typescript" title="CookieBannerModule type">
-      {`
-export type CookieBannerModule = {
-  UiLayerCookieBanner: React.ComponentType<UiLayerCookieBannerProps>;
-  // Optionally, a useModuleLifecycle hook:
-  useModuleLifecycle?: ModuleLifecycleHook;
-} & FFModule;
-`}
-    </Code>
-
-    <SubSubTitle>Customizing the Banner</SubSubTitle>
-    <Text>
-      To override the default Cookie Banner, provide your own implementation of
-      the <i>UiLayerCookieBanner</i> React component. You may either:
-    </Text>
-    <BulletList
-      bulletType="bullet"
-      items={[
-        "Extend the default module and override the UiLayerCookieBanner property.",
-        "Implement a new class or object matching the CookieBannerModule interface.",
-      ]}
-    />
-    <Code language="typescript" title="Custom Cookie Banner Example">
-      {`
-class CustomCookieBanner implements CookieBannerModule {
-  UiLayerCookieBanner = MySpecialCookieBanner;
-  // Optionally, useModuleLifecycle if you need custom logic.
-}
-`}
-    </Code>
-    <Text>
-      Then register your customized module under <i>frameworkNonStoreModules</i>
-      :
-    </Text>
-    <Code language="typescript" title="Registering custom module">
-      {`
-const frameworkNonStoreModules = {
-  cookieBanner: new CustomCookieBanner(),
-  // ...other non-store modules
-};
-
-export const modules = createModulesSeperately({
-  // ...other module groups
-  frameworkNonStoreModules,
-});
-`}
-    </Code>
-
-    <SubSubTitle>Lifecycle Integration</SubSubTitle>
-    <Text>
-      If your banner needs to ensure consent before the main application
-      renders, you can implement the optional useModuleLifecycle hook. See{" "}
-      <i>The useModuleLifecycle Hook</i> section above.
-    </Text>
-
-    <SubSubTitle>Tips & Best Practices</SubSubTitle>
-    <Text>
-      Most projects can use the default cookie banner out of the box. If you
-      need branding, i18n, or legal customization, use your own
-      UiLayerCookieBanner, but preserve the interface.
-    </Text>
     <SubTitle>Other relevant interfaces</SubTitle>
     <Text>
       The following interfaces describe the general structure of modules.
       FFModule describes the abstraction of a non store module. FFStoreModule
       extends FFModule and describes the required structure of a store module.
     </Text>
-    <Code language="typescript">{`export type ModuleLifecycleHook = () => {renderChildren: boolean} & Record<string, unknown>;
+    <Code language='typescript'>{`export type ModuleLifecycleHook = () => {renderChildren: boolean} & Record<string, unknown>;
 
 export type FFModule = {
   useModuleLifecycle?: ModuleLifecycleHook;
@@ -353,7 +280,7 @@ export type FFStoreModule<TState> = {
 );
 
 const CodeAuthModuleType = (
-  <Code center language="typescript">
+  <Code center language='typescript'>
     {`export type AuthModule<TAuthState extends AuthState> = {
   fetchAuthed: AsyncThunk<Response, FetchAuthedFunctionArgs, any>;
   login: AsyncThunk<void, {credentials: Credentials}, any>;
@@ -363,7 +290,7 @@ const CodeAuthModuleType = (
 );
 
 const CodeRouterModuleType = (
-  <Code center language="typescript">
+  <Code center language='typescript'>
     {`export type RouterModule = {
   UiLayerRouter: React.ComponentType<UILayerRouterProps>;
   MainViewRouter: React.ComponentType<MainViewRouterProps>;
@@ -376,7 +303,7 @@ const CodeRouterModuleType = (
 );
 
 const CodeInternationalizerModuleType = (
-  <Code center language="typescript">
+  <Code center language='typescript'>
     {`export type InternationalizerModule<
   TIntState extends InternationalizerState = InternationalizerState,
 > = {

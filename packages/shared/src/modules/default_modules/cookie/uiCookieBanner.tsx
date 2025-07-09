@@ -29,7 +29,7 @@ import {
   WHITE,
   BLUE1,
 } from "../../../constants/constants";
-import {UICookieBannerProps} from "../../../types/modules/ui/uiModuleInterfaces";
+import {UICookieBannerProps} from "../../../types/modules/ui/cookieBannerModuleInterfaces";
 
 const useStyles = makeStyles(({darkMode}: {darkMode: boolean}) => ({
   dialog: {

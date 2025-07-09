@@ -16,12 +16,18 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { CookieBannerModule } from "../../../../types/modules/ui/cookieBannerModuleInterfaces";
-import { CookieBannerOrchestrator } from "./cookieBannerOrchestrator";
+import { FFModule } from "../generalModule";
 
-export class CookieBanner implements CookieBannerModule {
-  public UiLayerCookieBanner;
-  constructor() {
-    this.UiLayerCookieBanner = CookieBannerOrchestrator;
-  }
+export interface UICookieBannerProps {
+  header: React.ReactNode;
+  message: React.ReactNode;
+  visible: boolean;
+  acceptButtonLabel: string;
+  onAccept: () => void;
+  styles?: Record<string, any>;
+  darkMode: boolean;
 }
+
+export type CookieBannerModule = {
+  UiLayerCookieBanner: React.ComponentType;
+} & FFModule;

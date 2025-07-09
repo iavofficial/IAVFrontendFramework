@@ -16,24 +16,18 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { GlobalDataLayer } from "@iavofficial/frontend-framework/globalDataLayer";
+import {FFModule} from "../generalModule";
 
-import Layout from "../../Layout.tsx";
-import { defaultStore } from "@iavofficial/frontend-framework/store";
-import { modules } from "./store.tsx";
+export interface UICookieBannerProps {
+  header: React.ReactNode;
+  message: React.ReactNode;
+  visible: boolean;
+  acceptButtonLabel: string;
+  onAccept: () => void;
+  styles?: Record<string, any>;
+  darkMode: boolean;
+}
 
-const store = defaultStore;
-
-export const AppDefaultAuthentication = () => {
-  return (
-    <GlobalDataLayer
-      store={store}
-      modules={modules.all}
-      colorSettings={{
-        colorOptions: {},
-      }}
-    >
-      <Layout />
-    </GlobalDataLayer>
-  );
-};
+export type CookieBannerModule = {
+  UiLayerCookieBanner: React.ComponentType;
+} & FFModule;

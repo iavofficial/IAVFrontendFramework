@@ -16,24 +16,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { GlobalDataLayer } from "@iavofficial/frontend-framework/globalDataLayer";
+import {CookieBannerModule} from "../../../../types/modules/ui/cookieBannerModuleInterfaces";
+import {CookieBannerOrchestrator} from "./cookieBannerOrchestrator";
 
-import Layout from "../../Layout.tsx";
-import { defaultStore } from "@iavofficial/frontend-framework/store";
-import { modules } from "./store.tsx";
-
-const store = defaultStore;
-
-export const AppDefaultAuthentication = () => {
-  return (
-    <GlobalDataLayer
-      store={store}
-      modules={modules.all}
-      colorSettings={{
-        colorOptions: {},
-      }}
-    >
-      <Layout />
-    </GlobalDataLayer>
-  );
-};
+export class CookieBanner implements CookieBannerModule {
+  public UiLayerCookieBanner;
+  constructor() {
+    this.UiLayerCookieBanner = CookieBannerOrchestrator;
+  }
+}

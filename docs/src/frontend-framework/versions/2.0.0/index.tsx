@@ -46,6 +46,8 @@ import PageI18nextInternationalizer from "./pages/pageI18nextInternationalizer.t
 import PageGeneralInternationalizerModule from "./pages/pageGeneralInternationalizerModule.tsx";
 import { SearchHeader } from "../../common/header/searchHeaders.tsx";
 import BadgeHeader from "../../common/drawer/badge/badgeHeader.tsx";
+import PageGeneralCookieBannerModule from "./pages/pageGeneralCookieBannerModule.tsx";
+import PageDefaultCookieBanner from "./pages/pageDefaultCookieBanner";
 
 const pages = import.meta.glob("./pages/*.tsx");
 
@@ -161,6 +163,21 @@ const modulesRoutes: GroupRoute[] = [
         path: "i18nextInternationalizer",
         label: "I18nextInternationalizer",
         element: PageI18nextInternationalizer,
+      },
+    ],
+  },
+  {
+    title: "Cookie Banner",
+    routes: [
+      {
+        path: "general-cookie-banner-module",
+        label: "General cookie banner module",
+        element: PageGeneralCookieBannerModule,
+      },
+      {
+        path: "default-cookie-banner",
+        label: "DefaultCookieBanner",
+        element: PageDefaultCookieBanner,
       },
     ],
   },

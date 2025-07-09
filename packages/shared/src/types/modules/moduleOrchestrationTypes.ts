@@ -29,6 +29,12 @@ import {RestrictKeyToPrefix} from "../util-types/restrictKeyToPrefix";
 import {DefaultNonStoreModules} from "../../modules/module_orchestration/moduleDefaults";
 import {RouterModule} from "./router/routerModule";
 import {
+  CookieBannerModule,
+  NavbarComponent,
+} from "./ui/cookieBannerModuleInterfaces";
+import {HeaderComponent} from "./ui/cookieBannerModuleInterfaces";
+import {ContentBarComponent} from "./ui/cookieBannerModuleInterfaces";
+import {
   InternationalizerModule,
   InternationalizerState,
 } from "./internationalization/internationalizerModule";
@@ -62,6 +68,10 @@ export type FFMandatoryStoreModules<
 // The types of all default M mandatory modules without a state for the store.
 export type FFMandatoryNonStoreModules = {
   [MandatoryModuleNames.Router]: RouterModule;
+  /*  [MandatoryModuleNames.Header]: HeaderComponent;
+    [MandatoryModuleNames.Navbar]: NavbarComponent;
+    [MandatoryModuleNames.ContentWithBar]: ContentBarComponent; */
+  [MandatoryModuleNames.CookieBanner]: CookieBannerModule;
 };
 
 export type FFAllMandatoryModules<

@@ -16,24 +16,16 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { GlobalDataLayer } from "@iavofficial/frontend-framework/globalDataLayer";
+import { CookieBannerModule } from "@iavofficial/frontend-framework-shared/uiModuleInterfaces";
+import { CookieBannerOrchestrator } from "@iavofficial/frontend-framework-shared/cookieBannerOrchestrator";
+import { AntDesignCookieBanner } from "./antDesignCookieBanner";
 
-import Layout from "../../Layout.tsx";
-import { defaultStore } from "@iavofficial/frontend-framework/store";
-import { modules } from "./store.tsx";
+export class CustomCookieBanner implements CookieBannerModule {
+  public UiLayerCookieBanner: React.FC;
 
-const store = defaultStore;
-
-export const AppDefaultAuthentication = () => {
-  return (
-    <GlobalDataLayer
-      store={store}
-      modules={modules.all}
-      colorSettings={{
-        colorOptions: {},
-      }}
-    >
-      <Layout />
-    </GlobalDataLayer>
-  );
-};
+  constructor() {
+    this.UiLayerCookieBanner = () => (
+      <CookieBannerOrchestrator uiComponent={AntDesignCookieBanner} />
+    );
+  }
+}

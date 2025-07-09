@@ -15,25 +15,6 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-
-import { GlobalDataLayer } from "@iavofficial/frontend-framework/globalDataLayer";
-
-import Layout from "../../Layout.tsx";
-import { defaultStore } from "@iavofficial/frontend-framework/store";
-import { modules } from "./store.tsx";
-
-const store = defaultStore;
-
-export const AppDefaultAuthentication = () => {
-  return (
-    <GlobalDataLayer
-      store={store}
-      modules={modules.all}
-      colorSettings={{
-        colorOptions: {},
-      }}
-    >
-      <Layout />
-    </GlobalDataLayer>
-  );
-};
+export declare const setAcceptCookies: (
+  setCookie: (name: "acceptedCookies", value: any, options?: any) => void,
+) => void;

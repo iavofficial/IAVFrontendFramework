@@ -16,25 +16,20 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, {useContext, useState} from "react";
+import React from "react";
 import {Dialog} from "primereact/dialog";
 import {Button} from "primereact/button";
-import {useCookies} from "react-cookie";
-import {setAcceptCookies} from "../../utils/setAcceptCookies";
-import makeStyles from "../content/style_options/makeStyles";
+import makeStyles from "@iavofficial/frontend-framework/makeStyles";
 import {
-  ACCEPTED_COOKIES_NAME,
-  BLACK,
-  BLUE1,
-  GREY1,
-  GREY2,
   GREY5,
+  GREY2,
+  BLACK,
+  GREY1,
   GREY6,
   WHITE,
-} from "@iavofficial/frontend-framework-shared/constants";
-import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
-import {useCookiesAccepted} from "@iavofficial/frontend-framework-shared/cookieHooks";
-import {useModuleTranslation} from "@iavofficial/frontend-framework-shared/useModuleTranslation";
+  BLUE1,
+} from "../../../constants/constants";
+import {UICookieBannerProps} from "../../../types/modules/ui/cookieBannerModuleInterfaces";
 
 const useStyles = makeStyles(({darkMode}: {darkMode: boolean}) => ({
   dialog: {
@@ -56,26 +51,23 @@ const useStyles = makeStyles(({darkMode}: {darkMode: boolean}) => ({
   },
 }));
 
-export const CookieBanner = () => {
-  const colorContext = useContext(ColorSettingsContext);
-  const t = useModuleTranslation();
+export const UICookieBanner: React.FC<
+  UICookieBannerProps & {darkMode: boolean}
+> = ({
+  header,
+  message,
+  visible,
+  acceptButtonLabel,
+  onAccept,
+  styles = {},
+  darkMode,
+}) => {
+  const {classes} = useStyles({darkMode});
 
-  const {classes} = useStyles({darkMode: colorContext.darkmode});
-
-  const [visible, setVisible] = useState(!useCookiesAccepted());
-
-  const [, setCookie] = useCookies([ACCEPTED_COOKIES_NAME]);
-
-  const acceptCookies = () => {
-    setAcceptCookies(setCookie);
-    setVisible(false);
-  };
-
-  // Dialog has to have the onHide property. Otherwise the typescript compiler will throw an error.
   return (
     <Dialog
       className={classes.dialog}
-      header={t({key: "allow_cookies_header"})}
+      header={header}
       position={"bottom"}
       visible={visible}
       modal
@@ -86,19 +78,20 @@ export const CookieBanner = () => {
         <div style={{display: "flex", justifyContent: "flex-end"}}>
           <Button
             icon="pi pi-check"
-            label={t({key: "allow_cookies_button"})}
-            onClick={acceptCookies}
+            label={acceptButtonLabel}
+            onClick={onAccept}
             style={{backgroundColor: BLUE1, border: "none"}}
           />
         </div>
       }
+      style={styles}
     >
       <div style={{display: "flex", alignItems: "center"}}>
         <span
           className={"pi pi-info-circle"}
           style={{marginRight: "10px", fontSize: "xx-large"}}
         />
-        <span>{t({key: "allow_cookies_disclaimer"})}</span>
+        <span>{message}</span>
       </div>
     </Dialog>
   );

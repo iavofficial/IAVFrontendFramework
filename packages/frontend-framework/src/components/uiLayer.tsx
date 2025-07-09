@@ -23,14 +23,13 @@ import "primeicons/primeicons.css";
 import React, {useEffect} from "react";
 import {BasicAuthenticationView} from "./authentication/default/basicAuthenticationView";
 import {SettingsMenuOptions} from "./header/settingsMenu";
-import {CookieBanner} from "./cookie/cookieBanner";
 import {MainView} from "./mainView";
 import {TabAndContentWrapper} from "./navbar/wrappers/typesWrappers";
 import {NavbarSettingsProvider} from "../contexts/providers/navbarSettingsProvider";
 import {StaticCollapsedState} from "../types/navbarSettingsTypes";
 import {HeaderOptions} from "./header/header";
 import {UserMenuOptions} from "./header/userMenu";
-import {setAcceptCookies} from "../utils/setAcceptCookies";
+import {setAcceptCookies} from "@iavofficial/frontend-framework-shared/setAcceptCookies";
 import {useCookies} from "react-cookie";
 import {ACCEPTED_COOKIES_NAME} from "@iavofficial/frontend-framework-shared/constants";
 import {AuthenticationViewProps} from "@iavofficial/frontend-framework-shared/authenticationViewProps";
@@ -79,6 +78,7 @@ export interface Props {
 export const UILayer = (props: Props) => {
   const {hasAuthenticated} = useDefaultSelector((state) => state.auth);
   const routerModule = useModule(MandatoryModuleNames.Router);
+  const cookieBannerModule = useModule(MandatoryModuleNames.CookieBanner);
 
   const [, setCookie] = useCookies([ACCEPTED_COOKIES_NAME]);
 
@@ -142,7 +142,7 @@ export const UILayer = (props: Props) => {
   const routes = [...dynamicRoutes, ...fixedRoutes];
 
   const UILayerRouter = routerModule.UiLayerRouter;
-
+  const CookieBanner = cookieBannerModule.UiLayerCookieBanner;
   const legalDocumentsPaths = (props.legalDocuments ?? []).map(
     (doc) => doc.path,
   );

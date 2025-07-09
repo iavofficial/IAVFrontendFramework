@@ -20,6 +20,10 @@ export const MandatoryModuleNames = {
   Authenticator: "auth",
   Router: "router",
   Internationalizer: "internationalizer",
+  Header: "header",
+  Navbar: "navbar",
+  ContentWithBar: "contentbar",
+  CookieBanner: "cookiebanner",
 } as const;
 
 export type MandatoryModuleName =

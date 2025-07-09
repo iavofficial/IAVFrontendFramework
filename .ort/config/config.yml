@@ -10,7 +10,9 @@ excludes:
     - pattern: 'apps/**'
       reason: 'BUILD_TOOL_OF'
       comment: 'Ignore internal apps'
-  paths:
     - pattern: 'docs/.vite/deps/**'
       reason: 'BUILD_TOOL_OF'
       comment: 'Ignore Vite-generated dependency folder'
+    - pattern: '**/.vite/**'
+      reason: 'BUILD_CACHE'
+      comment: 'Ignore all Vite cache'

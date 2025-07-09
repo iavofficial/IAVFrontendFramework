@@ -25,11 +25,11 @@ import {useModule} from "../../../../contexts/moduleContext";
 import {
   CookieBannerModule,
   UICookieBannerProps,
-} from "../../../../types/modules/ui/cookieBannerModuleInterfaces";
+} from "../../../../types/modules/ui/cookieBanner/cookieBannerModuleInterfaces";
 import {useModuleTranslation} from "../../../hooks/useModuleTranslation";
 import {useCookiesAccepted} from "../../../../utils/cookieHooks";
 import {setAcceptCookies} from "../../../../utils/setAcceptCookies";
-import {UICookieBanner} from "../../cookie/uiCookieBanner";
+import {UICookieBanner} from "./uiCookieBanner";
 
 type CookieBannerOrchestratorProps = {
   uiComponent?: React.ComponentType<UICookieBannerProps>;

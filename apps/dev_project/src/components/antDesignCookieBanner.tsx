@@ -16,9 +16,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React from 'react';
-import { Layout, Button } from 'antd';
-import { UICookieBannerProps } from '@iavofficial/frontend-framework-shared/uiModuleInterfaces';
+import React from "react";
+import { Layout, Button } from "antd";
+import { UICookieBannerProps } from "@iavofficial/frontend-framework-shared/uiModuleInterfaces";
 
 const { Footer } = Layout;
 
@@ -36,17 +36,17 @@ export const AntDesignCookieBanner: React.FC<UICookieBannerProps> = ({
   return (
     <Footer
       style={{
-        backgroundColor: darkMode ? '#001529' : '#f0f2f5',
-        color: darkMode ? '#fff' : '#000',
-        textAlign: 'center',
+        backgroundColor: darkMode ? "#001529" : "#f0f2f5",
+        color: darkMode ? "#fff" : "#000",
+        textAlign: "center",
         ...styles?.dialog,
       }}
     >
       <div
         style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
         }}
       >
         <div>
@@ -55,7 +55,7 @@ export const AntDesignCookieBanner: React.FC<UICookieBannerProps> = ({
           )}
           <span>{message}</span>
         </div>
-        <Button type='primary' onClick={onAccept} style={{ ...styles?.button }}>
+        <Button type="primary" onClick={onAccept} style={{ ...styles?.button }}>
           {acceptButtonLabel}
         </Button>
       </div>

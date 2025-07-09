@@ -16,8 +16,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { CookieBannerModule } from "../../../../types/modules/ui/cookieBannerModuleInterfaces";
-import { CookieBannerOrchestrator } from "./cookieBannerOrchestrator";
+import {CookieBannerModule} from "../../../../types/modules/ui/cookieBannerModuleInterfaces";
+import {CookieBannerOrchestrator} from "./cookieBannerOrchestrator";
 
 export class CookieBanner implements CookieBannerModule {
   public UiLayerCookieBanner;

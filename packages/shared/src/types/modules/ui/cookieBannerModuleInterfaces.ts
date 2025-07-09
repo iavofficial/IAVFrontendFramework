@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { FFModule } from "../generalModule";
+import {FFModule} from "../generalModule";
 
 export interface UICookieBannerProps {
   header: React.ReactNode;

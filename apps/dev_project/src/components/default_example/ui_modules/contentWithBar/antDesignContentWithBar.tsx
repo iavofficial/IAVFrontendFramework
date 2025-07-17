@@ -110,16 +110,6 @@ export const AntDesignContentWithBar: React.FC<UIContentWithBarProps> = ({
           />
         )}
       </div>
-      <Content
-        style={{
-          background: contentAreaBackground,
-          width: '100%',
-          height: '100%',
-          overflow: 'auto',
-        }}
-      >
-        {tabItems.find((item) => item.key === selectedId)?.children}
-      </Content>
     </Layout>
   );
 };

@@ -26,123 +26,80 @@ import { ContentStyleTemplates } from '@iavofficial/frontend-framework/contentSt
 import { useModule } from '@iavofficial/frontend-framework/moduleContext';
 import { MandatoryModuleNames } from '@iavofficial/frontend-framework-shared/moduleNames';
 
-const initialState: ExampleArrayObject = {
-  exampleArray: [],
-  selectedId: '',
-};
-
-type ExampleArrayObject = {
-  exampleArray?: BasicContentbarWrapper[];
-  selectedId?: string;
-  addElement?: BasicContentbarWrapper;
-};
-
-interface Action {
-  type: 'create' | 'update' | 'delete' | 'initialize';
-  payload: ExampleArrayObject;
+function getInitialTabs(): { tabs: BasicContentbarWrapper[]; selectedId: string } {
+  const tabs: BasicContentbarWrapper[] = [];
+  let firstId = "";
+  for (let i = 0; i < 6; i++) {
+    const hash = generateHashOfLength(6);
+    if (i === 0) firstId = hash;
+    tabs.push(
+      new BasicContentbarWrapper({
+        id: hash,
+        displayName: (t) => `${t({ key: 'car' })} ${i}`,
+        onClick: () => {},
+        contentAreaElement: (
+          <ContentbarExampleWithText exampleText={`car ${i}`} key={hash} />
+        ),
+        closable: i > 0,
+        onClose: () => {},
+      })
+    );
+  }
+  return { tabs, selectedId: firstId };
 }
 
-function reducer(state: ExampleArrayObject, action: Action) {
+const initialStuff = getInitialTabs();
+
+type State = {
+  exampleArray: BasicContentbarWrapper[];
+  selectedId: string;
+};
+
+type Action =
+  | { type: 'create'; addElement: BasicContentbarWrapper }
+  | { type: 'update'; selectedId: string }
+  | { type: 'delete'; selectedId: string };
+
+function reducer(state: State, action: Action): State {
   switch (action.type) {
-    case 'initialize': {
+    case 'create':
       return {
-        ...state,
-        exampleArray: action.payload?.exampleArray,
-        selectedId: action.payload.selectedId,
+        exampleArray: [...state.exampleArray, action.addElement],
+        selectedId: action.addElement.getId(),
       };
-    }
-    case 'create': {
-      let temporaryExampleArray = [...state.exampleArray!];
-      temporaryExampleArray.push(action.payload?.addElement!);
-
+    case 'update':
+      return { ...state, selectedId: action.selectedId };
+    case 'delete':
+      const arr = state.exampleArray.filter(el => el.getId() !== action.selectedId);
       return {
-        ...state,
-        exampleArray: temporaryExampleArray,
-        selectedId: action.payload?.addElement?.getId(),
+        exampleArray: arr,
+        selectedId: arr.length > 0
+          ? arr[0].getId()
+          : "",
       };
-    }
-
-    case 'update': {
-      return {
-        ...state,
-        selectedId: action.payload?.selectedId,
-      };
-    }
-    case 'delete': {
-      let temporaryExampleArray = [...state.exampleArray!];
-
-      temporaryExampleArray.forEach((element, index) => {
-        if (element.getId() === action.payload?.selectedId) {
-          temporaryExampleArray.splice(index, 1);
-        }
-      });
-
-      return {
-        ...state,
-        exampleArray: temporaryExampleArray,
-        selectedId:
-          action.payload?.selectedId === state.selectedId
-            ? temporaryExampleArray[0].getId()
-            : state.selectedId,
-      };
-    }
-
     default:
       return state;
   }
 }
 
 export const ExampleComponent8 = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
-
-  useEffect(() => {
-    let returnElement = generateExampleArray();
-    dispatch({
-      type: 'initialize',
-      payload: {
-        exampleArray: returnElement.temporaryExampleArray,
-        selectedId: returnElement.idOfFirstElement,
-      },
-    });
-  }, []);
-
-  const generateExampleArray = () => {
-    let temporaryExampleArray = [];
-    let hashOfFirstElement = generateHashOfLength(6);
-
-    for (let index = 0; index < 6; index++) {
-      let hash = index === 0 ? hashOfFirstElement : generateHashOfLength(6);
-      let newBasicContentWrapperElement = new BasicContentbarWrapper({
-        id: hash,
-        displayName: (t) => `${t({ key: 'car' })} ${index}`,
-        onClick: selectElement,
-        contentAreaElement: (
-          <ContentbarExampleWithText exampleText={`car ${index}`} key={hash} />
-        ),
-        closable: index < 1 ? false : true,
-        onClose: onCloseElement,
-      });
-      temporaryExampleArray.push(newBasicContentWrapperElement);
-    }
-
-    return {
-      temporaryExampleArray: temporaryExampleArray,
-      idOfFirstElement: hashOfFirstElement,
-    };
-  };
+  const [state, dispatch] = useReducer(reducer, {
+    exampleArray: initialStuff.tabs,
+    selectedId: initialStuff.selectedId,
+  });
 
   const selectElement = (value: string) => {
-    dispatch({ type: 'update', payload: { selectedId: value } });
+    dispatch({ type: 'update', selectedId: value });
   };
 
   const onCloseElement = (value: string) => {
-    dispatch({ type: 'delete', payload: { selectedId: value } });
+    dispatch({ type: 'delete', selectedId: value });
   };
 
   const onAddElement = () => {
-    let hash = generateHashOfLength(6);
-    let name = 'test' + state.exampleArray?.length;
-    let newBasicContentWrapperElement = new BasicContentbarWrapper({
+    const hash = generateHashOfLength(6);
+    const name = 'test' + state.exampleArray.length;
+    const newTab = new BasicContentbarWrapper({
       id: hash,
       displayName: name,
       onClick: selectElement,
@@ -152,10 +109,7 @@ export const ExampleComponent8 = () => {
       closable: true,
       onClose: onCloseElement,
     });
-    dispatch({
-      type: 'create',
-      payload: { addElement: newBasicContentWrapperElement },
-    });
+    dispatch({ type: 'create', addElement: newTab });
   };
 
   const contentWithBarModule = useModule(MandatoryModuleNames.ContentWithBar);
@@ -165,10 +119,11 @@ export const ExampleComponent8 = () => {
     <ContentWithBar
       onClickAddButton={onAddElement}
       layoutBehaviour={LayoutBehaviour.GRID}
-      contentWrappers={state.exampleArray!}
+      contentWrappers={state.exampleArray}
       jumpToEndOfContentBar={true}
       addable={true}
-      selectedId={state.selectedId ? state.selectedId : ''}
+      selectedId={state.selectedId}
+      onSelect={selectElement}
       contentStyle={{ appliedStyles: ContentStyleTemplates.CONTENT_CELLS }}
     />
   );

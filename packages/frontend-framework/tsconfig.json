@@ -16,8 +16,9 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "jsx": "react-jsx",
-    "rootDir": "src",
-    "outDir": "dist"
+    "rootDir": "./src",
+    "outDir": "./dist"
   },
-  "include": ["src", "custom.d.ts", "../shared/assets/svg/companyLogo.d.ts", "../shared/assets/svg/companyLogo.tsx"]
+  "include": ["src", "custom.d.ts", "../shared/assets/svg/companyLogo.d.ts", "../shared/assets/svg/companyLogo.tsx"],
+  "exclude": ["./dist/**/*"]
 }

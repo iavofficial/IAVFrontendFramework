@@ -19,13 +19,8 @@
 import React, {useContext, useState} from "react";
 import {useCookies} from "react-cookie";
 import {ACCEPTED_COOKIES_NAME, BLUE1} from "../../../../constants/constants";
-import {MandatoryModuleNames} from "../../../../constants/moduleNames";
 import {ColorSettingsContext} from "../../../../contexts/colorSettingsContext";
-import {useModule} from "../../../../contexts/moduleContext";
-import {
-  CookieBannerModule,
-  UICookieBannerProps,
-} from "../../../../types/modules/ui/cookieBanner/cookieBannerModuleInterfaces";
+import {UICookieBannerProps} from "../../../../types/modules/ui/cookieBanner/cookieBannerModuleInterfaces";
 import {useModuleTranslation} from "../../../hooks/useModuleTranslation";
 import {useCookiesAccepted} from "../../../../utils/cookieHooks";
 import {setAcceptCookies} from "../../../../utils/setAcceptCookies";
@@ -51,7 +46,6 @@ export const CookieBannerOrchestrator: React.FC<
   };
 
   const UI = CustomUI || UICookieBanner;
-
   // Supply all required UI props
   const uiProps: UICookieBannerProps = {
     header: t({key: "allow_cookies_header"}),

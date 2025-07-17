@@ -16,17 +16,18 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { MandatoryModuleNames } from "@iavofficial/frontend-framework/constants";
-import { I18NextInternationalizer } from "@iavofficial/frontend-framework/defaultModules";
+import { MandatoryModuleNames } from '@iavofficial/frontend-framework/constants';
+import { I18NextInternationalizer } from '@iavofficial/frontend-framework/defaultModules';
 import {
   createModules,
   StoreBuilder,
-} from "@iavofficial/frontend-framework/store";
-import translationES from "../../assets/translations/es.json";
-import translationEN from "../../assets/translations/en.json";
-import translationDE from "../../assets/translations/de.json";
-import translationDECH from "../../assets/translations/de-CH.json";
-import { CustomCookieBanner } from "../antDesignCookieBannerModule";
+} from '@iavofficial/frontend-framework/store';
+import translationES from '../../assets/translations/es.json';
+import translationEN from '../../assets/translations/en.json';
+import translationDE from '../../assets/translations/de.json';
+import translationDECH from '../../assets/translations/de-CH.json';
+import { CustomCookieBanner } from './ui_modules/cookieBanner/antDesignCookieBannerModule';
+import { AntDesignContentWithBarModule } from './ui_modules/contentWithBar/antDesignContentWithBarModule';
 
 const translations = {
   es: {
@@ -47,7 +48,8 @@ const customModules = {
   [MandatoryModuleNames.Internationalizer]: new I18NextInternationalizer({
     translationResources: translations,
   }),
-  //[MandatoryModuleNames.CookieBanner]: new CustomCookieBanner(),
+  [MandatoryModuleNames.CookieBanner]: new CustomCookieBanner(),
+  [MandatoryModuleNames.ContentWithBar]: new AntDesignContentWithBarModule(),
 };
 
 export const modules = createModules(customModules);

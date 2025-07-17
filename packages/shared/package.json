@@ -117,8 +117,10 @@
     "./hash": "./dist/utils/hash.js",
     "./cookieHooks": "./dist/utils/cookieHooks.js",
     "./setAcceptCookies": "./dist/utils/setAcceptCookies.js",
-    "./uiModuleInterfaces": "./dist/types/modules/ui/uiModuleInterfaces.js",
-    "./cookieBannerOrchestrator": "./dist/modules/default_modules/ui/cookiebanner/cookieBannerOrchestrator.js"
+    "./cookieBannerModuleInterfaces": "./dist/types/modules/ui/cookieBanner/cookieBannerModuleInterfaces.js",
+    "./cookieBannerOrchestrator": "./dist/modules/default_modules/ui/cookiebanner/cookieBannerOrchestrator.js",
+    "./contentWithBarModuleInterfaces": "./dist/types/modules/ui/contentWithBar/contentWithBarModuleInterfaces.js",
+    "./contentWithBarOrchestrator": "./dist/modules/default_modules/ui/contentWithBar/contentWithBarOrchestrator.js"
   },
   "typesVersions": {
     "*": {
@@ -233,11 +235,17 @@
       "./setAcceptCookies": [
         "./dist/utils/setAcceptCookies.d.ts"
       ],
-      "./uiModuleInterfaces": [
-        "./dist/types/modules/ui/uiModuleInterfaces.d.ts"
+      "./cookieBannerModuleInterfaces": [
+        "./dist/types/modules/ui/cookieBanner/cookieBannerModuleInterfaces.d.ts"
       ],
       "./cookieBannerOrchestrator": [
         "./dist/modules/default_modules/ui/cookiebanner/cookieBannerOrchestrator.d.ts"
+      ],
+      "./contentWithBarModuleInterfaces": [
+        "./dist/types/modules/ui/contentWithBar/contentWithBarModuleInterfaces.d.ts"
+      ],
+      "./contentWithBarOrchestrator": [
+        "./dist/modules/default_modules/ui/contentWithBar/contentWithBarOrchestrator.d.ts"
       ]
     }
   },

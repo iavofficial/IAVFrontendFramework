@@ -15,4 +15,19 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-export declare const CookieBanner: () => import("react/jsx-runtime").JSX.Element;
+
+import { ContentWithBarOrchestrator } from '@iavofficial/frontend-framework-shared/contentWithBarOrchestrator';
+import { AntDesignContentWithBar } from './antDesignContentWithBar';
+import { ContentWithBarModule } from '@iavofficial/frontend-framework-shared/contentWithBarModuleInterfaces';
+
+export class AntDesignContentWithBarModule implements ContentWithBarModule {
+  UiLayerContentWithBar: React.FC;
+  constructor() {
+    this.UiLayerContentWithBar = (props) => (
+      <ContentWithBarOrchestrator
+        {...props}
+        uiComponent={AntDesignContentWithBar}
+      />
+    );
+  }
+}

@@ -176,7 +176,7 @@ const Layout = (props: Props) => {
       }),
       ExampleComponent6
     ),
-    new Group((t) => t({ key: 'Group_modules' }), <InfoIcon />, true, [
+    new Group((t) => t({ key: 'modules' }), <InfoIcon />, true, [
       new BasicContentWrapper(
         '/content-with-bar-example-1/',
         simpleNavbarTabFactory({

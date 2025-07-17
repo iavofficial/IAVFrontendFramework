@@ -25,12 +25,12 @@ import { FFModule } from "../../generalModule";
 export type UIContentWithBarProps = ContentLayoutAndStyleProps & {
   contentWrappers: BasicContentbarWrapper[] | CustomContentbarWrapper[];
   selectedId: string;
+  onSelect: (key: string) => void;
   addable?: boolean;
   jumpToEndOfContentBar?: boolean;
   onClickAddButton?: () => any;
   onClickLeftSlideButton?: () => any;
   onClickRightSlideButton?: () => any;
-  onSelect?: (key: string) => void;
   children?: React.ReactNode;
 };
 

@@ -16,45 +16,45 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { SelectButton } from 'primereact/selectbutton';
-import { useState } from 'react';
-import { UILayer } from '@iavofficial/frontend-framework/uiLayer';
-import { BasicContentWrapper } from '@iavofficial/frontend-framework/basicContentWrapper';
-import { Group } from '@iavofficial/frontend-framework/group';
-import InfoIcon from './assets/infoIcon.svg?react';
-import { ImprintDocument } from './components/imprintDocument';
-import { PrivacyPolicyDocument } from './components/privacyPolicyDocument';
-import { ExampleComponent1 } from './components/exampleComponent1';
-import { ExampleComponent6 } from './components/exampleComponent6';
-import { ExampleComponent3 } from './components/exampleComponent3';
-import { ExampleComponent4 } from './components/exampleComponent4';
-import { ExampleComponent5 } from './components/exampleComponent5';
-import { simpleNavbarTabFactory } from '@iavofficial/frontend-framework/simpleNavbarTabFactory';
-import { privilegedNavbarTabFactory } from '@iavofficial/frontend-framework/privilegedNavbarTabFactory';
-import { ExampleComponent2 } from './components/exampleComponent2';
-import { HeaderPanelElement } from '@iavofficial/frontend-framework/headerPanelElement';
-import { PrimeIcons } from 'primereact/api';
-import { WHITE } from '@iavofficial/frontend-framework/constants';
-import { HeaderMenuElement } from '@iavofficial/frontend-framework/headerMenuElement';
-import { ExampleComponent7 } from './components/exampleComponent7';
-import { LegalDocument } from '@iavofficial/frontend-framework/legalDocument';
-import { ExampleComponent8 } from './components/exampleComponent8';
-import { ExampleComponent9 } from './components/exampleComponent9';
+import { SelectButton } from "primereact/selectbutton";
+import { useState } from "react";
+import { UILayer } from "@iavofficial/frontend-framework/uiLayer";
+import { BasicContentWrapper } from "@iavofficial/frontend-framework/basicContentWrapper";
+import { Group } from "@iavofficial/frontend-framework/group";
+import InfoIcon from "./assets/infoIcon.svg?react";
+import { ImprintDocument } from "./components/imprintDocument";
+import { PrivacyPolicyDocument } from "./components/privacyPolicyDocument";
+import { ExampleComponent1 } from "./components/exampleComponent1";
+import { ExampleComponent6 } from "./components/exampleComponent6";
+import { ExampleComponent3 } from "./components/exampleComponent3";
+import { ExampleComponent4 } from "./components/exampleComponent4";
+import { ExampleComponent5 } from "./components/exampleComponent5";
+import { simpleNavbarTabFactory } from "@iavofficial/frontend-framework/simpleNavbarTabFactory";
+import { privilegedNavbarTabFactory } from "@iavofficial/frontend-framework/privilegedNavbarTabFactory";
+import { ExampleComponent2 } from "./components/exampleComponent2";
+import { HeaderPanelElement } from "@iavofficial/frontend-framework/headerPanelElement";
+import { PrimeIcons } from "primereact/api";
+import { WHITE } from "@iavofficial/frontend-framework/constants";
+import { HeaderMenuElement } from "@iavofficial/frontend-framework/headerMenuElement";
+import { ExampleComponent7 } from "./components/exampleComponent7";
+import { LegalDocument } from "@iavofficial/frontend-framework/legalDocument";
+import { ExampleComponent8 } from "./components/exampleComponent8";
+import { ExampleComponent9 } from "./components/exampleComponent9";
 
 interface Props {
   authenticationView?: React.ComponentType;
 }
 
 const Layout = (props: Props) => {
-  const [selectedButtonOption, setSelectedButtonOption] = useState('Simulated');
+  const [selectedButtonOption, setSelectedButtonOption] = useState("Simulated");
 
   const settingsMenuOptions = {
     additionalItems: [
       {
         template: (
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <div style={{ display: "flex", justifyContent: "center" }}>
             <SelectButton
-              options={['Simulated', 'Real']}
+              options={["Simulated", "Real"]}
               value={selectedButtonOption}
               onChange={(ev) => setSelectedButtonOption(ev.value)}
             />
@@ -66,155 +66,155 @@ const Layout = (props: Props) => {
 
   const views = [
     new BasicContentWrapper(
-      '/',
+      "/",
       simpleNavbarTabFactory({
         disabled: false,
-        name: 'Example without Translation',
+        name: "Example without Translation",
         icon: <InfoIcon />,
       }),
-      ExampleComponent1
+      ExampleComponent1,
     ),
     new BasicContentWrapper(
-      '/2',
+      "/2",
       simpleNavbarTabFactory({
         disabled: false,
-        name: 'Example for Redux Store',
+        name: "Example for Redux Store",
         icon: <InfoIcon />,
       }),
-      ExampleComponent7
+      ExampleComponent7,
     ),
     new Group(
-      (t) => t({ key: 'Test_group_not_collapsible' }),
+      (t) => t({ key: "Test_group_not_collapsible" }),
       <InfoIcon />,
       false,
       [
         new BasicContentWrapper(
-          '/group-example2/',
+          "/group-example2/",
           simpleNavbarTabFactory({
-            name: (t) => t({ key: 'example_component', options: { count: 2 } }),
+            name: (t) => t({ key: "example_component", options: { count: 2 } }),
             disabled: false,
             icon: <InfoIcon />,
           }),
-          ExampleComponent2
+          ExampleComponent2,
         ),
-      ]
+      ],
     ),
     new BasicContentWrapper(
-      '/group-example3/',
+      "/group-example3/",
       privilegedNavbarTabFactory({
-        name: (t) => t({ key: 'example_component', options: { count: 3 } }),
+        name: (t) => t({ key: "example_component", options: { count: 3 } }),
         disabled: false,
-        permittedGroups: ['ADMIN'],
+        permittedGroups: ["ADMIN"],
         icon: <InfoIcon />,
       }),
-      ExampleComponent3
+      ExampleComponent3,
     ),
     new BasicContentWrapper(
-      '/group-example4/',
+      "/group-example4/",
       simpleNavbarTabFactory({
-        name: (t) => t({ key: 'example_component', options: { count: 4 } }),
+        name: (t) => t({ key: "example_component", options: { count: 4 } }),
         disabled: false,
         icon: <InfoIcon />,
       }),
-      ExampleComponent4
+      ExampleComponent4,
     ),
-    new Group((t) => t({ key: 'Test_group_collapsible' }), <InfoIcon />, true, [
-      new Group('Untergruppe', <InfoIcon />, true, [
+    new Group((t) => t({ key: "Test_group_collapsible" }), <InfoIcon />, true, [
+      new Group("Untergruppe", <InfoIcon />, true, [
         new BasicContentWrapper(
-          '/group-example51/',
+          "/group-example51/",
           simpleNavbarTabFactory({
             name: (t) =>
-              t({ key: 'example_component', options: { count: 5.1 } }),
+              t({ key: "example_component", options: { count: 5.1 } }),
             disabled: false,
             icon: <InfoIcon />,
           }),
-          ExampleComponent3
+          ExampleComponent3,
         ),
       ]),
       new BasicContentWrapper(
-        '/group-example52/',
+        "/group-example52/",
         simpleNavbarTabFactory({
-          name: (t) => t({ key: 'example_component', options: { count: 5.2 } }),
+          name: (t) => t({ key: "example_component", options: { count: 5.2 } }),
           disabled: false,
           icon: <InfoIcon />,
         }),
-        ExampleComponent4
+        ExampleComponent4,
       ),
       new BasicContentWrapper(
-        '/group-example53/',
+        "/group-example53/",
         simpleNavbarTabFactory({
-          name: (t) => t({ key: 'example_component', options: { count: 5.3 } }),
+          name: (t) => t({ key: "example_component", options: { count: 5.3 } }),
           disabled: true,
           icon: <InfoIcon />,
         }),
-        ExampleComponent3
+        ExampleComponent3,
       ),
     ]),
     new BasicContentWrapper(
-      '/group-example6/',
+      "/group-example6/",
       simpleNavbarTabFactory({
-        name: (t) => t({ key: 'example_component', options: { count: 6 } }),
+        name: (t) => t({ key: "example_component", options: { count: 6 } }),
         disabled: false,
         icon: <InfoIcon />,
       }),
-      ExampleComponent5
+      ExampleComponent5,
     ),
     new BasicContentWrapper(
-      '/group-example7/',
+      "/group-example7/",
       simpleNavbarTabFactory({
-        name: (t) => t({ key: 'example_component', options: { count: 7 } }),
+        name: (t) => t({ key: "example_component", options: { count: 7 } }),
         disabled: false,
         icon: <InfoIcon />,
       }),
-      ExampleComponent6
+      ExampleComponent6,
     ),
     new BasicContentWrapper(
-      '/nested-route/example1/',
+      "/nested-route/example1/",
       simpleNavbarTabFactory({
-        name: (t) => t({ key: 'example_component', options: { count: 8 } }),
+        name: (t) => t({ key: "example_component", options: { count: 8 } }),
         disabled: false,
         icon: <InfoIcon />,
       }),
-      ExampleComponent6
+      ExampleComponent6,
     ),
-    new Group((t) => t({ key: 'modules' }), <InfoIcon />, true, [
+    new Group((t) => t({ key: "modules" }), <InfoIcon />, true, [
       new BasicContentWrapper(
-        '/content-with-bar-example-1/',
+        "/content-with-bar-example-1/",
         simpleNavbarTabFactory({
-          name: (t) => t({ key: 'example_component', options: { count: 9 } }),
+          name: (t) => t({ key: "example_component", options: { count: 9 } }),
           disabled: false,
           icon: <InfoIcon />,
         }),
-        ExampleComponent8
+        ExampleComponent8,
       ),
       new BasicContentWrapper(
-        '/content-with-bar-example-2/',
+        "/content-with-bar-example-2/",
         simpleNavbarTabFactory({
-          name: (t) => t({ key: 'example_component', options: { count: 10 } }),
+          name: (t) => t({ key: "example_component", options: { count: 10 } }),
           disabled: false,
           icon: <InfoIcon />,
         }),
-        ExampleComponent9
+        ExampleComponent9,
       ),
     ]),
   ];
 
   const items = [
     {
-      label: 'Translate',
-      icon: 'pi pi-language',
+      label: "Translate",
+      icon: "pi pi-language",
     },
     {
-      label: 'Speech',
-      icon: 'pi pi-volume-up',
+      label: "Speech",
+      icon: "pi pi-volume-up",
       items: [
         {
-          label: 'Start',
-          icon: 'pi pi-caret-right',
+          label: "Start",
+          icon: "pi pi-caret-right",
         },
         {
-          label: 'Stop',
-          icon: 'pi pi-pause',
+          label: "Stop",
+          icon: "pi pi-pause",
         },
       ],
     },
@@ -222,8 +222,8 @@ const Layout = (props: Props) => {
       separator: true,
     },
     {
-      label: 'Print',
-      icon: 'pi pi-print',
+      label: "Print",
+      icon: "pi pi-print",
     },
   ];
 
@@ -240,14 +240,14 @@ const Layout = (props: Props) => {
 
   const legalDocuments: LegalDocument[] = [
     {
-      path: '/imprint',
-      titleTranslationKey: 'Imprint',
+      path: "/imprint",
+      titleTranslationKey: "Imprint",
       component: ImprintDocument,
       isHidden: false,
     },
     {
-      path: '/privacy-policy',
-      titleTranslationKey: 'Privacy_Policy',
+      path: "/privacy-policy",
+      titleTranslationKey: "Privacy_Policy",
       component: PrivacyPolicyDocument,
       isHidden: false,
     },
@@ -257,17 +257,17 @@ const Layout = (props: Props) => {
     <UILayer
       authOptions={{
         errorMessages: {
-          passwordErrorMessage: 'Invalid password. Please try again.',
+          passwordErrorMessage: "Invalid password. Please try again.",
         },
       }}
       tabAndContentWrappers={views}
-      initialPath='/'
+      initialPath="/"
       authenticationView={props.authenticationView}
       settingsMenuOptions={settingsMenuOptions}
       legalDocuments={legalDocuments}
       headerOptions={{
         userIcon: <InfoIcon style={{ backgroundColor: WHITE }} />,
-        reactElementLeft: <span className='ml-3'>Dev application</span>,
+        reactElementLeft: <span className="ml-3">Dev application</span>,
         headerElements: headerElements,
         hideUserIcon: false,
       }}

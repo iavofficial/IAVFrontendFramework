@@ -6,7 +6,7 @@ import {
 } from "@iavofficial/frontend-framework/contentBar";
 import {ContentLayout} from "@iavofficial/frontend-framework/contentLayout";
 import {UIContentWithBarProps} from "../../../../types/modules/ui/contentWithBar/contentWIthBarModuleInterfaces";
-import { ColorSettingsContext } from "../../../../contexts/colorSettingsContext";
+import {ColorSettingsContext} from "../../../../contexts/colorSettingsContext";
 
 // UI layer component - can be replaced in another project to use different UI library (e.g., Ant Design)
 export const UIContentWithBar: React.FC<UIContentWithBarProps> = (props) => {

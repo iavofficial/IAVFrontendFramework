@@ -16,9 +16,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { ContentWithBarOrchestrator } from '@iavofficial/frontend-framework-shared/contentWithBarOrchestrator';
-import { AntDesignContentWithBar } from './antDesignContentWithBar';
-import { ContentWithBarModule } from '@iavofficial/frontend-framework-shared/contentWithBarModuleInterfaces';
+import { ContentWithBarOrchestrator } from "@iavofficial/frontend-framework-shared/contentWithBarOrchestrator";
+import { AntDesignContentWithBar } from "./antDesignContentWithBar";
+import { ContentWithBarModule } from "@iavofficial/frontend-framework-shared/contentWithBarModuleInterfaces";
 
 export class AntDesignContentWithBarModule implements ContentWithBarModule {
   UiLayerContentWithBar: React.FC;

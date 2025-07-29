@@ -16,17 +16,20 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useEffect, useReducer } from 'react';
+import { useEffect, useReducer } from "react";
 //import { ContentWithBar } from '@iavofficial/frontend-framework/contentWithBar';
-import { LayoutBehaviour } from '@iavofficial/frontend-framework/contentLayout';
-import { generateHashOfLength } from '@iavofficial/frontend-framework/hash';
-import { ContentbarExampleWithText } from './contentbarExampleWithText';
-import { BasicContentbarWrapper } from '@iavofficial/frontend-framework/basicContentbarWrapper';
-import { ContentStyleTemplates } from '@iavofficial/frontend-framework/contentStyle';
-import { useModule } from '@iavofficial/frontend-framework/moduleContext';
-import { MandatoryModuleNames } from '@iavofficial/frontend-framework-shared/moduleNames';
+import { LayoutBehaviour } from "@iavofficial/frontend-framework/contentLayout";
+import { generateHashOfLength } from "@iavofficial/frontend-framework/hash";
+import { ContentbarExampleWithText } from "./contentbarExampleWithText";
+import { BasicContentbarWrapper } from "@iavofficial/frontend-framework/basicContentbarWrapper";
+import { ContentStyleTemplates } from "@iavofficial/frontend-framework/contentStyle";
+import { useModule } from "@iavofficial/frontend-framework/moduleContext";
+import { MandatoryModuleNames } from "@iavofficial/frontend-framework-shared/moduleNames";
 
-function getInitialTabs(): { tabs: BasicContentbarWrapper[]; selectedId: string } {
+function getInitialTabs(): {
+  tabs: BasicContentbarWrapper[];
+  selectedId: string;
+} {
   const tabs: BasicContentbarWrapper[] = [];
   let firstId = "";
   for (let i = 0; i < 6; i++) {
@@ -35,14 +38,14 @@ function getInitialTabs(): { tabs: BasicContentbarWrapper[]; selectedId: string 
     tabs.push(
       new BasicContentbarWrapper({
         id: hash,
-        displayName: (t) => `${t({ key: 'car' })} ${i}`,
+        displayName: (t) => `${t({ key: "car" })} ${i}`,
         onClick: () => {},
         contentAreaElement: (
           <ContentbarExampleWithText exampleText={`car ${i}`} key={hash} />
         ),
         closable: i > 0,
         onClose: () => {},
-      })
+      }),
     );
   }
   return { tabs, selectedId: firstId };
@@ -56,26 +59,26 @@ type State = {
 };
 
 type Action =
-  | { type: 'create'; addElement: BasicContentbarWrapper }
-  | { type: 'update'; selectedId: string }
-  | { type: 'delete'; selectedId: string };
+  | { type: "create"; addElement: BasicContentbarWrapper }
+  | { type: "update"; selectedId: string }
+  | { type: "delete"; selectedId: string };
 
 function reducer(state: State, action: Action): State {
   switch (action.type) {
-    case 'create':
+    case "create":
       return {
         exampleArray: [...state.exampleArray, action.addElement],
         selectedId: action.addElement.getId(),
       };
-    case 'update':
+    case "update":
       return { ...state, selectedId: action.selectedId };
-    case 'delete':
-      const arr = state.exampleArray.filter(el => el.getId() !== action.selectedId);
+    case "delete":
+      const arr = state.exampleArray.filter(
+        (el) => el.getId() !== action.selectedId,
+      );
       return {
         exampleArray: arr,
-        selectedId: arr.length > 0
-          ? arr[0].getId()
-          : "",
+        selectedId: arr.length > 0 ? arr[0].getId() : "",
       };
     default:
       return state;
@@ -89,16 +92,16 @@ export const ExampleComponent8 = () => {
   });
 
   const selectElement = (value: string) => {
-    dispatch({ type: 'update', selectedId: value });
+    dispatch({ type: "update", selectedId: value });
   };
 
   const onCloseElement = (value: string) => {
-    dispatch({ type: 'delete', selectedId: value });
+    dispatch({ type: "delete", selectedId: value });
   };
 
   const onAddElement = () => {
     const hash = generateHashOfLength(6);
-    const name = 'test' + state.exampleArray.length;
+    const name = "test" + state.exampleArray.length;
     const newTab = new BasicContentbarWrapper({
       id: hash,
       displayName: name,
@@ -109,7 +112,7 @@ export const ExampleComponent8 = () => {
       closable: true,
       onClose: onCloseElement,
     });
-    dispatch({ type: 'create', addElement: newTab });
+    dispatch({ type: "create", addElement: newTab });
   };
 
   const contentWithBarModule = useModule(MandatoryModuleNames.ContentWithBar);

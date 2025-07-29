@@ -16,11 +16,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { BasicContentbarWrapper } from "@iavofficial/frontend-framework/basicContentbarWrapper";
-import { CustomContentbarWrapper } from "@iavofficial/frontend-framework/customContentbarWrapper";
-import { ContentLayoutAndStyleProps } from "@iavofficial/frontend-framework/contentLayout";
-import { FFModule } from "../../generalModule";
-
+import {BasicContentbarWrapper} from "@iavofficial/frontend-framework/basicContentbarWrapper";
+import {CustomContentbarWrapper} from "@iavofficial/frontend-framework/customContentbarWrapper";
+import {ContentLayoutAndStyleProps} from "@iavofficial/frontend-framework/contentLayout";
+import {FFModule} from "../../generalModule";
 
 export type UIContentWithBarProps = ContentLayoutAndStyleProps & {
   contentWrappers: BasicContentbarWrapper[] | CustomContentbarWrapper[];

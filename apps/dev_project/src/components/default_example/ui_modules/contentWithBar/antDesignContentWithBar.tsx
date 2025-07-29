@@ -16,12 +16,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useMemo, useContext } from 'react';
-import { Tabs, Button, Layout } from 'antd';
-import { UIContentWithBarProps } from '@iavofficial/frontend-framework-shared/contentWithBarModuleInterfaces';
-import { ColorSettingsContext } from '@iavofficial/frontend-framework-shared/colorSettingsContext';
-import { BasicContentbarWrapper } from '@iavofficial/frontend-framework/basicContentbarWrapper';
-import { CustomContentbarWrapper } from '@iavofficial/frontend-framework/customContentbarWrapper';
+import React, { useMemo, useContext } from "react";
+import { Tabs, Button, Layout } from "antd";
+import { UIContentWithBarProps } from "@iavofficial/frontend-framework-shared/contentWithBarModuleInterfaces";
+import { ColorSettingsContext } from "@iavofficial/frontend-framework-shared/colorSettingsContext";
+import { BasicContentbarWrapper } from "@iavofficial/frontend-framework/basicContentbarWrapper";
+import { CustomContentbarWrapper } from "@iavofficial/frontend-framework/customContentbarWrapper";
 
 const { Content } = Layout;
 
@@ -47,7 +47,7 @@ export const AntDesignContentWithBar: React.FC<UIContentWithBarProps> = ({
 }) => {
   const colorSettingsContext = useContext(ColorSettingsContext);
   const contentAreaBackground =
-    colorSettingsContext?.currentColors?.contentArea?.backgroundColor || '#fff';
+    colorSettingsContext?.currentColors?.contentArea?.backgroundColor || "#fff";
 
   // Prepare tab items
   const tabItems = useMemo(
@@ -57,26 +57,26 @@ export const AntDesignContentWithBar: React.FC<UIContentWithBarProps> = ({
         label: wrapper.getId(),
         children: wrapper.getContentAreaElement(),
       })),
-    [contentWrappers]
+    [contentWrappers],
   );
 
   return (
-    <Layout style={{ height: '100%' }}>
+    <Layout style={{ height: "100%" }}>
       <div
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          background: '#fafafa',
-          padding: '0 8px',
-          borderBottom: '1px solid #f0f0f0',
+          display: "flex",
+          alignItems: "center",
+          background: "#fafafa",
+          padding: "0 8px",
+          borderBottom: "1px solid #f0f0f0",
         }}
       >
         {onClickLeftSlideButton && (
           <Button
             onClick={onClickLeftSlideButton}
-            shape='circle'
-            icon='<'
-            size='small'
+            shape="circle"
+            icon="<"
+            size="small"
             style={{ marginRight: 8 }}
           />
         )}
@@ -89,8 +89,8 @@ export const AntDesignContentWithBar: React.FC<UIContentWithBarProps> = ({
             addable && (
               <Button
                 onClick={onClickAddButton}
-                type='primary'
-                size='small'
+                type="primary"
+                size="small"
                 style={{ marginLeft: 8 }}
               >
                 +
@@ -103,9 +103,9 @@ export const AntDesignContentWithBar: React.FC<UIContentWithBarProps> = ({
         {onClickRightSlideButton && (
           <Button
             onClick={onClickRightSlideButton}
-            shape='circle'
-            icon='>'
-            size='small'
+            shape="circle"
+            icon=">"
+            size="small"
             style={{ marginLeft: 8 }}
           />
         )}

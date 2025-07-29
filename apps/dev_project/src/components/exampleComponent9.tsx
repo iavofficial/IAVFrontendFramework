@@ -16,19 +16,19 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { generateHashOfLength } from '@iavofficial/frontend-framework/hash';
-import { useModule } from '@iavofficial/frontend-framework/moduleContext';
-import { MandatoryModuleNames } from '@iavofficial/frontend-framework-shared/moduleNames';
-import { CustomContentbarWrapper } from '@iavofficial/frontend-framework/customContentbarWrapper';
-import React, { useState } from 'react';
-import { Typography } from 'antd';
+import { generateHashOfLength } from "@iavofficial/frontend-framework/hash";
+import { useModule } from "@iavofficial/frontend-framework/moduleContext";
+import { MandatoryModuleNames } from "@iavofficial/frontend-framework-shared/moduleNames";
+import { CustomContentbarWrapper } from "@iavofficial/frontend-framework/customContentbarWrapper";
+import React, { useState } from "react";
+import { Typography } from "antd";
 
 export const ExampleComponent9 = () => {
   const contentWithBarModule = useModule(MandatoryModuleNames.ContentWithBar);
   const ContentWithBar = contentWithBarModule.UiLayerContentWithBar;
 
   const initialTabs: CustomContentbarWrapper[] = [];
-  let initialId = '';
+  let initialId = "";
   for (let i = 0; i < 3; i++) {
     const id = generateHashOfLength(6);
     if (i === 0) initialId = id;
@@ -44,8 +44,8 @@ export const ExampleComponent9 = () => {
               module.
             </Typography>
           </div>
-        )
-      )
+        ),
+      ),
     );
   }
   const [tabs] = useState<CustomContentbarWrapper[]>(initialTabs);

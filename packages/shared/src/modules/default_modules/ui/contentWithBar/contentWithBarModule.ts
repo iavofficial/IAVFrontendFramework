@@ -16,8 +16,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { ContentWithBarModule } from "../../../../types/modules/ui/contentWithBar/contentWIthBarModuleInterfaces";
-import { ContentWithBarOrchestrator } from "./contentWithBarOrchestrator";
+import {ContentWithBarModule} from "../../../../types/modules/ui/contentWithBar/contentWIthBarModuleInterfaces";
+import {ContentWithBarOrchestrator} from "./contentWithBarOrchestrator";
 
 export class DefaultContentWithBarModule implements ContentWithBarModule {
   public UiLayerContentWithBar;

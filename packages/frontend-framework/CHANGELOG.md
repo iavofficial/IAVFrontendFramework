@@ -1,3 +1,9 @@
+## [@iavofficial/frontend-framework-v1.5.2-dev.3](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.5.2-dev.2...@iavofficial/frontend-framework-v1.5.2-dev.3) (2025-08-18)
+
+### Bug Fixes
+
+* styling ([c45265a](https://github.com/iavofficial/IAVFrontendFramework/commit/c45265ac5bcd47e4a6e67ffa106e964d5f453a58))
+
 ## [@iavofficial/frontend-framework-v1.5.2-dev.2](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.5.2-dev.1...@iavofficial/frontend-framework-v1.5.2-dev.2) (2025-06-20)
 
 ### Bug Fixes

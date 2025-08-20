@@ -4,22 +4,20 @@ import {
   ContentBarStyles,
   ContentBarStylesArray,
 } from "@iavofficial/frontend-framework/contentBar";
-import {ContentLayout} from "@iavofficial/frontend-framework/contentLayout";
+import {
+  ContentLayout,
+  LayoutBehaviour,
+} from "@iavofficial/frontend-framework/contentLayout";
 import {UIContentWithBarProps} from "../../../../types/modules/ui/contentWithBar/contentWIthBarModuleInterfaces";
 import {ColorSettingsContext} from "../../../../contexts/colorSettingsContext";
 
-// UI layer component - can be replaced in another project to use different UI library (e.g., Ant Design)
-export const UIContentWithBar: React.FC<UIContentWithBarProps> = (props) => {
+export const UIContentWithBar = (
+  props: React.PropsWithChildren<UIContentWithBarProps>,
+) => {
   const colorSettingsContext = useContext(ColorSettingsContext);
 
   const contentAreaBackground =
     colorSettingsContext.currentColors.contentArea.backgroundColor;
-
-  const selectedContentWrapper = useMemo(() => {
-    return props.contentWrappers.find(
-      (currentWrapper) => currentWrapper.getId() === props.selectedId,
-    );
-  }, [props.contentWrappers, props.selectedId]);
 
   const contentBarStyles = useMemo(() => {
     const tempContentbarStyles: ContentBarStylesArray = [];
@@ -33,6 +31,18 @@ export const UIContentWithBar: React.FC<UIContentWithBarProps> = (props) => {
     });
     return tempContentbarStyles;
   }, [props.contentStyle]);
+
+  const getDisplayForSelected = (layoutBehaviour: LayoutBehaviour) => {
+    switch (layoutBehaviour) {
+      case LayoutBehaviour.FLEX:
+      case LayoutBehaviour.FLEX_COL:
+        return "flex";
+      case LayoutBehaviour.GRID:
+        return "flex";
+      default:
+        return "block";
+    }
+  };
 
   return (
     <div
@@ -67,7 +77,32 @@ export const UIContentWithBar: React.FC<UIContentWithBarProps> = (props) => {
           layoutBehaviour={props.layoutBehaviour}
           contentStyle={props.contentStyle}
         >
-          {selectedContentWrapper?.getContentAreaElement()}
+          {props.contentWrappers.map((wrapper) => {
+            const isSelected = wrapper.getId() === props.selectedId;
+
+            const displayStyle = isSelected
+              ? getDisplayForSelected(
+                  props.layoutBehaviour ?? LayoutBehaviour.NONE,
+                )
+              : "none";
+
+            const style: React.CSSProperties = {
+              display: displayStyle,
+              flexGrow: 1,
+              height: "100%",
+              width: "100%",
+              overflow: "auto",
+              ...(props.layoutBehaviour === LayoutBehaviour.FLEX_COL
+                ? {flexDirection: "column"}
+                : {}),
+            };
+
+            return (
+              <div key={wrapper.getId()} style={style}>
+                {wrapper.getContentAreaElement()}
+              </div>
+            );
+          })}
         </ContentLayout>
       </div>
     </div>

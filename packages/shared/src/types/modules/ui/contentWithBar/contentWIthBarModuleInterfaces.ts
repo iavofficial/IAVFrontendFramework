@@ -22,15 +22,15 @@ import {ContentLayoutAndStyleProps} from "@iavofficial/frontend-framework/conten
 import {FFModule} from "../../generalModule";
 
 export type UIContentWithBarProps = ContentLayoutAndStyleProps & {
+  children?: React.ReactNode;
+  contentAreaBackground?: string;
   contentWrappers: BasicContentbarWrapper[] | CustomContentbarWrapper[];
   selectedId: string;
-  onSelect: (key: string) => void;
   addable?: boolean;
   jumpToEndOfContentBar?: boolean;
   onClickAddButton?: () => any;
   onClickLeftSlideButton?: () => any;
   onClickRightSlideButton?: () => any;
-  children?: React.ReactNode;
 };
 
 export type ContentWithBarModule = {

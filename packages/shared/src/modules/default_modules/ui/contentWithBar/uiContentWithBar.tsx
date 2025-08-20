@@ -11,6 +11,7 @@ import {
 import {UIContentWithBarProps} from "../../../../types/modules/ui/contentWithBar/contentWIthBarModuleInterfaces";
 import {ColorSettingsContext} from "../../../../contexts/colorSettingsContext";
 
+// UI layer component - can be replaced in another project to use different UI library (e.g., Ant Design)
 export const UIContentWithBar = (
   props: React.PropsWithChildren<UIContentWithBarProps>,
 ) => {
@@ -18,6 +19,8 @@ export const UIContentWithBar = (
 
   const contentAreaBackground =
     colorSettingsContext.currentColors.contentArea.backgroundColor;
+
+  console.log(props);
 
   const contentBarStyles = useMemo(() => {
     const tempContentbarStyles: ContentBarStylesArray = [];

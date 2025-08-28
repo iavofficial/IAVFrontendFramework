@@ -129,7 +129,10 @@
     "./constants.css": "./dist/css/constants.css",
     "./mainPage.css": "./dist/css/mainPage.css",
     "./framework.css": "./dist/css/framework.css",
-    "./globalColors.css": "./dist/css/globalColors.css"
+    "./globalColors.css": "./dist/css/globalColors.css",
+    "./headerIcon": "./dist/components/header/headerIcon.js",
+    "./userIcon": "./dist/assets/svg/userIcon.js",
+    "./settingsIcon": "./dist/assets/svg/settingsIcon.js"
   },
   "typesVersions": {
     "*": {
@@ -279,6 +282,15 @@
       ],
       "./useModuleTranslation": [
         "./dist/re-exports/useModuleTranslation.js"
+      ],
+      "./headerIcon": [
+        "./dist/components/header/headerIcon.d.ts"
+      ],
+      "./userIcon": [
+        "./dist/assets/svg/userIcon.d.ts"
+      ],
+      "./settingsIcon": [
+        "./dist/assets/svg/settingsIcon.d.ts"
       ]
     }
   },

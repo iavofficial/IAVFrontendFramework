@@ -31,6 +31,7 @@ import {
 import {ReactRouterRouter} from "../default_modules/router/reactRouterRouterModule";
 import {I18NextInternationalizer} from "../default_modules/internationalization/i18NextInternationalizerModule";
 import {CookieBanner} from "../default_modules/ui/cookiebanner/cookieBannerModule";
+import {DefaultHeaderModule} from "../default_modules/ui/header/headerModule";
 //import {CookieBanner} from "../default_modules/cookie/cookieBanner";
 export type DefaultRootState = RootState<DefaultStoreState>;
 export type DefaultAppDispatch = AppDispatch<DefaultStoreDispatch>;
@@ -50,9 +51,10 @@ export type DefaultStoreModules = typeof defaultStoreModules;
 
 export const defaultNonStoreModules = {
   [MandatoryModuleNames.Router]: new ReactRouterRouter(),
-  /* [MandatoryModuleNames.Header]: Header,
-  [MandatoryModuleNames.Navbar]: Navbar,
-  [MandatoryModuleNames.ContentWithBar]: ContentWithBar, */
+  [MandatoryModuleNames.Header]: new DefaultHeaderModule(),
+  /*
+    [MandatoryModuleNames.Navbar]: Navbar,
+    [MandatoryModuleNames.ContentWithBar]: ContentWithBar, */
   [MandatoryModuleNames.CookieBanner]: new CookieBanner(),
 };
 

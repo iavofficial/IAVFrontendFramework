@@ -17,7 +17,7 @@
  */
 
 import React from "react";
-import {UIHeaderProps} from "../../../../types/modules/ui/header/headerInterfaces";
+import {UIHeaderProps} from "../../../../types/modules/ui/header/headerModuleInterfaces";
 import {UIHeader} from "./uiHeader";
 
 type HeaderOrchestratorProps = UIHeaderProps & {

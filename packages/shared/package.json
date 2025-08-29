@@ -120,7 +120,9 @@
     "./cookieBannerModuleInterfaces": "./dist/types/modules/ui/cookieBanner/cookieBannerModuleInterfaces.js",
     "./cookieBannerOrchestrator": "./dist/modules/default_modules/ui/cookiebanner/cookieBannerOrchestrator.js",
     "./contentWithBarModuleInterfaces": "./dist/types/modules/ui/contentWithBar/contentWithBarModuleInterfaces.js",
-    "./contentWithBarOrchestrator": "./dist/modules/default_modules/ui/contentWithBar/contentWithBarOrchestrator.js"
+    "./contentWithBarOrchestrator": "./dist/modules/default_modules/ui/contentWithBar/contentWithBarOrchestrator.js",
+    "./headerModuleInterfaces": "./dist/types/modules/ui/header/headerModuleInterfaces.js",
+    "./headerOrchestrator": "./dist/modules/default_modules/ui/header/headerOrchestrator.js"
   },
   "typesVersions": {
     "*": {
@@ -246,6 +248,12 @@
       ],
       "./contentWithBarOrchestrator": [
         "./dist/modules/default_modules/ui/contentWithBar/contentWithBarOrchestrator.d.ts"
+      ],
+      "./headerModuleInterfaces": [
+        "./dist/types/modules/ui/header/headerModuleInterfaces.d.ts"
+      ],
+      "./headerOrchestrator": [
+        "./dist/modules/default_modules/ui/header/headerOrchestrator.d.ts"
       ]
     }
   },

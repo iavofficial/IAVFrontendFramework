@@ -17,7 +17,7 @@
  */
 
 import React, {useContext, useRef} from "react";
-import {UIHeaderProps} from "../../../../types/modules/ui/header/headerInterfaces";
+import {UIHeaderProps} from "../../../../types/modules/ui/header/headerModuleInterfaces";
 import {
   APPLICATION_LOGO_PLACEHOLDER,
   BLUE3,

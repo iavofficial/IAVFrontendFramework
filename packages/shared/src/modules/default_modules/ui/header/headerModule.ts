@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {HeaderModule} from "../../../../types/modules/ui/header/headerInterfaces";
+import {HeaderModule} from "../../../../types/modules/ui/header/headerModuleInterfaces";
 import {HeaderOrchestrator} from "./headerOrchestrator";
 
 export class DefaultHeaderModule implements HeaderModule {

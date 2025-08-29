@@ -15,4 +15,17 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-export declare const CookieBanner: () => import("react/jsx-runtime").JSX.Element;
+
+import { CookieBannerModule } from "@iavofficial/frontend-framework-shared/cookieBannerModuleInterfaces";
+import { CookieBannerOrchestrator } from "@iavofficial/frontend-framework-shared/cookieBannerOrchestrator";
+import { AntDesignCookieBanner } from "./antDesignCookieBanner";
+
+export class CustomCookieBanner implements CookieBannerModule {
+  public UiLayerCookieBanner: React.FC;
+
+  constructor() {
+    this.UiLayerCookieBanner = () => (
+      <CookieBannerOrchestrator uiComponent={AntDesignCookieBanner} />
+    );
+  }
+}

@@ -16,18 +16,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {FFModule} from "../generalModule";
+import {ContentWithBarModule} from "../../../../types/modules/ui/contentWithBar/contentWIthBarModuleInterfaces";
+import {ContentWithBarOrchestrator} from "./contentWithBarOrchestrator";
 
-export interface UICookieBannerProps {
-  header: React.ReactNode;
-  message: React.ReactNode;
-  visible: boolean;
-  acceptButtonLabel: string;
-  onAccept: () => void;
-  styles?: Record<string, any>;
-  darkMode: boolean;
+export class DefaultContentWithBarModule implements ContentWithBarModule {
+  public UiLayerContentWithBar;
+  constructor() {
+    this.UiLayerContentWithBar = ContentWithBarOrchestrator;
+  }
 }
-
-export type CookieBannerModule = {
-  UiLayerCookieBanner: React.ComponentType;
-} & FFModule;

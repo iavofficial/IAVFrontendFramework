@@ -28,16 +28,12 @@ import {Exact, ExactPartial} from "../util-types/exact";
 import {RestrictKeyToPrefix} from "../util-types/restrictKeyToPrefix";
 import {DefaultNonStoreModules} from "../../modules/module_orchestration/moduleDefaults";
 import {RouterModule} from "./router/routerModule";
-import {
-  CookieBannerModule,
-  NavbarComponent,
-} from "./ui/cookieBannerModuleInterfaces";
-import {HeaderComponent} from "./ui/cookieBannerModuleInterfaces";
-import {ContentBarComponent} from "./ui/cookieBannerModuleInterfaces";
+import {CookieBannerModule} from "./ui/cookieBanner/cookieBannerModuleInterfaces";
 import {
   InternationalizerModule,
   InternationalizerState,
 } from "./internationalization/internationalizerModule";
+import {ContentWithBarModule} from "./ui/contentWithBar/contentWIthBarModuleInterfaces";
 
 export type FFStoreModules<TModulesState = unknown> = {
   [K in keyof TModulesState]: FFStoreModule<TModulesState[K]>;
@@ -69,8 +65,8 @@ export type FFMandatoryStoreModules<
 export type FFMandatoryNonStoreModules = {
   [MandatoryModuleNames.Router]: RouterModule;
   /*  [MandatoryModuleNames.Header]: HeaderComponent;
-    [MandatoryModuleNames.Navbar]: NavbarComponent;
-    [MandatoryModuleNames.ContentWithBar]: ContentBarComponent; */
+    [MandatoryModuleNames.Navbar]: NavbarComponent;*/
+  [MandatoryModuleNames.ContentWithBar]: ContentWithBarModule;
   [MandatoryModuleNames.CookieBanner]: CookieBannerModule;
 };
 

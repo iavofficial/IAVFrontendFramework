@@ -26,7 +26,7 @@ import translationES from "../../assets/translations/es.json";
 import translationEN from "../../assets/translations/en.json";
 import translationDE from "../../assets/translations/de.json";
 import translationDECH from "../../assets/translations/de-CH.json";
-import { CustomCookieBanner } from "../antDesignCookieBannerModule";
+import { CustomCookieBanner } from "./ui_modules/cookieBanner/antDesignCookieBannerModule";
 
 const translations = {
   es: {
@@ -47,7 +47,7 @@ const customModules = {
   [MandatoryModuleNames.Internationalizer]: new I18NextInternationalizer({
     translationResources: translations,
   }),
-  //[MandatoryModuleNames.CookieBanner]: new CustomCookieBanner(),
+  [MandatoryModuleNames.CookieBanner]: new CustomCookieBanner(),
 };
 
 export const modules = createModules(customModules);

@@ -16,12 +16,18 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {CookieBannerModule} from "../../../../types/modules/ui/cookieBanner/cookieBannerModuleInterfaces";
-import {CookieBannerOrchestrator} from "./cookieBannerOrchestrator";
+import { ContentWithBarOrchestrator } from "@iavofficial/frontend-framework-shared/contentWithBarOrchestrator";
+import { AntDesignContentWithBar } from "./antDesignContentWithBar";
+import { ContentWithBarModule } from "@iavofficial/frontend-framework-shared/contentWithBarModuleInterfaces";
 
-export class CookieBanner implements CookieBannerModule {
-  public UiLayerCookieBanner;
+export class AntDesignContentWithBarModule implements ContentWithBarModule {
+  UiLayerContentWithBar: React.FC;
   constructor() {
-    this.UiLayerCookieBanner = CookieBannerOrchestrator;
+    this.UiLayerContentWithBar = (props) => (
+      <ContentWithBarOrchestrator
+        {...props}
+        uiComponent={AntDesignContentWithBar}
+      />
+    );
   }
 }

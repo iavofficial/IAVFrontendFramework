@@ -18,7 +18,7 @@
 
 import React from "react";
 import { Layout, Button } from "antd";
-import { UICookieBannerProps } from "@iavofficial/frontend-framework-shared/uiModuleInterfaces";
+import { UICookieBannerProps } from "@iavofficial/frontend-framework-shared/cookieBannerModuleInterfaces";
 
 const { Footer } = Layout;
 

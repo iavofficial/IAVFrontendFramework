@@ -46,7 +46,6 @@ export const CookieBannerOrchestrator: React.FC<
   };
 
   const UI = CustomUI || UICookieBanner;
-
   // Supply all required UI props
   const uiProps: UICookieBannerProps = {
     header: t({key: "allow_cookies_header"}),

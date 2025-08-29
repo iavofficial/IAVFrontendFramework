@@ -38,6 +38,8 @@ import { WHITE } from "@iavofficial/frontend-framework/constants";
 import { HeaderMenuElement } from "@iavofficial/frontend-framework/headerMenuElement";
 import { ExampleComponent7 } from "./components/exampleComponent7";
 import { LegalDocument } from "@iavofficial/frontend-framework/legalDocument";
+import { ExampleComponent8 } from "./components/exampleComponent8";
+import { ExampleComponent9 } from "./components/exampleComponent9";
 
 interface Props {
   authenticationView?: React.ComponentType;
@@ -175,6 +177,26 @@ const Layout = (props: Props) => {
       }),
       ExampleComponent6,
     ),
+    new Group((t) => t({ key: "modules" }), <InfoIcon />, true, [
+      new BasicContentWrapper(
+        "/content-with-bar-example-1/",
+        simpleNavbarTabFactory({
+          name: (t) => t({ key: "example_component", options: { count: 9 } }),
+          disabled: false,
+          icon: <InfoIcon />,
+        }),
+        ExampleComponent8,
+      ),
+      new BasicContentWrapper(
+        "/content-with-bar-example-2/",
+        simpleNavbarTabFactory({
+          name: (t) => t({ key: "example_component", options: { count: 10 } }),
+          disabled: false,
+          icon: <InfoIcon />,
+        }),
+        ExampleComponent9,
+      ),
+    ]),
   ];
 
   const items = [

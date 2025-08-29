@@ -16,16 +16,18 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { CookieBannerModule } from "@iavofficial/frontend-framework-shared/uiModuleInterfaces";
-import { CookieBannerOrchestrator } from "@iavofficial/frontend-framework-shared/cookieBannerOrchestrator";
-import { AntDesignCookieBanner } from "./antDesignCookieBanner";
+import {FFModule} from "../../generalModule";
 
-export class CustomCookieBanner implements CookieBannerModule {
-  public UiLayerCookieBanner: React.FC;
-
-  constructor() {
-    this.UiLayerCookieBanner = () => (
-      <CookieBannerOrchestrator uiComponent={AntDesignCookieBanner} />
-    );
-  }
+export interface UICookieBannerProps {
+  header: React.ReactNode;
+  message: React.ReactNode;
+  visible: boolean;
+  acceptButtonLabel: string;
+  onAccept: () => void;
+  styles?: Record<string, any>;
+  darkMode: boolean;
 }
+
+export type CookieBannerModule = {
+  UiLayerCookieBanner: React.ComponentType;
+} & FFModule;

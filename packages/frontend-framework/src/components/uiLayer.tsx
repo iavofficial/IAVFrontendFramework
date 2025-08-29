@@ -76,6 +76,8 @@ export interface Props {
   customHeader?: React.ComponentType<any>;
 }
 
+const COOKIE_NAMES = [ACCEPTED_COOKIES_NAME, "i18next", "i18nextLng"] as const;
+
 export const UILayer = (props: Props) => {
   const authContext = useContext(AuthContext);
 
@@ -90,8 +92,6 @@ export const UILayer = (props: Props) => {
   if (props.disableLogin) {
     userMenuOptions.hideLogoutButton = true;
   }
-
-  const COOKIE_NAMES = [ACCEPTED_COOKIES_NAME, "i18next", "i18nextLng"];
 
   useEffect(() => {
     if (props.disableCookieBanner) {

@@ -20,11 +20,11 @@ import React, {useContext, useState} from "react";
 import {useCookies} from "react-cookie";
 import {ACCEPTED_COOKIES_NAME, BLUE1} from "../../../../constants/constants";
 import {ColorSettingsContext} from "../../../../contexts/colorSettingsContext";
-import {UICookieBannerProps} from "../../../../types/modules/ui/cookieBannerModuleInterfaces";
 import {useModuleTranslation} from "../../../hooks/useModuleTranslation";
 import {useCookiesAccepted} from "../../../../utils/cookieHooks";
 import {setAcceptCookies} from "../../../../utils/setAcceptCookies";
-import {UICookieBanner} from "../../cookie/uiCookieBanner";
+import {UICookieBannerProps} from "../../../../types/modules/ui/cookieBanner/cookieBannerModuleInterfaces";
+import {UICookieBanner} from "./uiCookieBanner";
 
 type CookieBannerOrchestratorProps = {
   uiComponent?: React.ComponentType<UICookieBannerProps>;

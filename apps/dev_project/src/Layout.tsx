@@ -224,6 +224,7 @@ function Layout() {
           passwordErrorMessage: "Invalid password. Please try again.",
         },
       }}
+      disableCookieBanner={false}
       tabAndContentWrappers={views}
       startingPoint="/"
       authenticationView={BasicAuthenticationView}

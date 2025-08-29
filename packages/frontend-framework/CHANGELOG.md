@@ -1,3 +1,9 @@
+## [@iavofficial/frontend-framework-v1.5.2-dev.5](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.5.2-dev.4...@iavofficial/frontend-framework-v1.5.2-dev.5) (2025-08-29)
+
+### Bug Fixes
+
+* placeholder in awsAuthenticationView.tsx ([6bfc2c8](https://github.com/iavofficial/IAVFrontendFramework/commit/6bfc2c8ce8a834e799f5f2b6ddd282f74d5adeec))
+
 ## [@iavofficial/frontend-framework-v1.5.2-dev.4](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.5.2-dev.3...@iavofficial/frontend-framework-v1.5.2-dev.4) (2025-08-29)
 
 ### Bug Fixes

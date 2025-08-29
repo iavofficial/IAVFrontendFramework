@@ -1,3 +1,11 @@
+## [@iavofficial/frontend-framework-v1.5.2-dev.4](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.5.2-dev.3...@iavofficial/frontend-framework-v1.5.2-dev.4) (2025-08-29)
+
+### Bug Fixes
+
+* add removeKnownCookies ([d1c5c7c](https://github.com/iavofficial/IAVFrontendFramework/commit/d1c5c7ce6d4770c42219aa76d613403e186806ba))
+* **cookies:** remove cookies if banner is disabled ([bb183c1](https://github.com/iavofficial/IAVFrontendFramework/commit/bb183c17f0009d0797c8c2eb8241ea83c8faf818))
+* re-ordering of variables ([801260d](https://github.com/iavofficial/IAVFrontendFramework/commit/801260d27d09767db2e1057d4a5b32ba7f3fe65e))
+
 ## [@iavofficial/frontend-framework-v1.5.2-dev.3](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.5.2-dev.2...@iavofficial/frontend-framework-v1.5.2-dev.3) (2025-08-18)
 
 ### Bug Fixes

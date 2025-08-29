@@ -41,7 +41,6 @@ import "./css/fonts.css";
 import "./css/darkModeInputsWorkAround.css";
 import {HeaderOptions} from "./header/header";
 import {UserMenuOptions} from "./header/userMenu";
-import {setAcceptCookies} from "../utils/setAcceptCookies";
 import {useCookies} from "react-cookie";
 import {ACCEPTED_COOKIES_NAME} from "../constants";
 
@@ -80,7 +79,7 @@ export interface Props {
 export const UILayer = (props: Props) => {
   const authContext = useContext(AuthContext);
 
-  const [, setCookie] = useCookies([ACCEPTED_COOKIES_NAME]);
+  const [, , removeCookie] = useCookies([ACCEPTED_COOKIES_NAME]);
 
   const AuthenticationView = props.authenticationView
     ? props.authenticationView
@@ -92,17 +91,21 @@ export const UILayer = (props: Props) => {
     userMenuOptions.hideLogoutButton = true;
   }
 
+  const COOKIE_NAMES = [ACCEPTED_COOKIES_NAME, "i18next", "i18nextLng"];
+
   useEffect(() => {
     if (props.disableCookieBanner) {
-      setAcceptCookies(setCookie);
+      const opts = {path: "/" as const};
+      COOKIE_NAMES.forEach((name) => removeCookie(name, opts));
     }
-  }, [props.disableCookieBanner, setCookie]);
-
+  }, [props.disableCookieBanner, removeCookie]);
   return (
     <NavbarSettingsProvider
       staticCollapsedState={props.navbarOptions?.staticCollapsedState}
     >
+      {/* Banner nur zeigen, wenn er nicht deaktiviert ist */}
       {!props.disableCookieBanner && <CookieBanner />}
+
       <Redirector
         startingPoint={props.startingPoint}
         disableLogin={props.disableLogin}
@@ -141,24 +144,22 @@ export const UILayer = (props: Props) => {
         {!props.disableLogin && !authContext?.hasAuthenticated() ? (
           <Route path="/*" element={<></>} />
         ) : (
-          <>
-            <Route
-              path="/*"
-              element={
-                <MainView
-                  headerOptions={props.headerOptions}
-                  settingsMenuOptions={props.settingsMenuOptions}
-                  userMenuOptions={userMenuOptions}
-                  documentsLabelKey={props.documentsLabelKey}
-                  documentsComponent={props.documentsComponent}
-                  tabAndContentWrappers={props.tabAndContentWrappers}
-                  hideLegalDocuments={props.hideLegalDocuments}
-                  hideNavbar={props.hideNavbar}
-                  customHeader={props.customHeader}
-                />
-              }
-            />
-          </>
+          <Route
+            path="/*"
+            element={
+              <MainView
+                headerOptions={props.headerOptions}
+                settingsMenuOptions={props.settingsMenuOptions}
+                userMenuOptions={userMenuOptions}
+                documentsLabelKey={props.documentsLabelKey}
+                documentsComponent={props.documentsComponent}
+                tabAndContentWrappers={props.tabAndContentWrappers}
+                hideLegalDocuments={props.hideLegalDocuments}
+                hideNavbar={props.hideNavbar}
+                customHeader={props.customHeader}
+              />
+            }
+          />
         )}
       </Routes>
     </NavbarSettingsProvider>

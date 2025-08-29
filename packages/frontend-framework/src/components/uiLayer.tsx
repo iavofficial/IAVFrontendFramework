@@ -41,8 +41,7 @@ import "./css/fonts.css";
 import "./css/darkModeInputsWorkAround.css";
 import {HeaderOptions} from "./header/header";
 import {UserMenuOptions} from "./header/userMenu";
-import {useCookies} from "react-cookie";
-import {ACCEPTED_COOKIES_NAME} from "../constants";
+import {useRemoveKnownCookies} from "./cookie/cookieHooks";
 
 export interface AuthOptions {
   backgroundImage?: string;
@@ -76,12 +75,10 @@ export interface Props {
   customHeader?: React.ComponentType<any>;
 }
 
-const COOKIE_NAMES = [ACCEPTED_COOKIES_NAME, "i18next", "i18nextLng"] as const;
-
 export const UILayer = (props: Props) => {
   const authContext = useContext(AuthContext);
 
-  const [, , removeCookie] = useCookies([ACCEPTED_COOKIES_NAME]);
+  const removeKnownCookies = useRemoveKnownCookies();
 
   const AuthenticationView = props.authenticationView
     ? props.authenticationView
@@ -95,10 +92,9 @@ export const UILayer = (props: Props) => {
 
   useEffect(() => {
     if (props.disableCookieBanner) {
-      const opts = {path: "/" as const};
-      COOKIE_NAMES.forEach((name) => removeCookie(name, opts));
+      removeKnownCookies({path: "/"});
     }
-  }, [props.disableCookieBanner, removeCookie]);
+  }, [props.disableCookieBanner, removeKnownCookies]);
   return (
     <NavbarSettingsProvider
       staticCollapsedState={props.navbarOptions?.staticCollapsedState}

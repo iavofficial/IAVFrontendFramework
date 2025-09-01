@@ -32,7 +32,7 @@ export const ContentbarExampleWithText = (props: Props) => {
 
   return (
     <>
-      <div className="col-8 grid grid-nogutter">
+      <div className="grid grid-nogutter">
         <ContentCell colWidth={6} paddings={CellPaddings.FULL}>
           <span>First row left</span>
           <h2>{props.exampleText}</h2>

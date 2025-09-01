@@ -20,6 +20,21 @@ import {useCookies} from "react-cookie";
 
 import {ACCEPTED_COOKIES_NAME} from "../../constants";
 
+export const COOKIE_NAMES = [
+  ACCEPTED_COOKIES_NAME,
+  "i18next",
+  "i18nextLng",
+] as const;
+
+export type CookieName = (typeof COOKIE_NAMES)[number];
+
+export const useRemoveKnownCookies = () => {
+  const [, , removeCookie] = useCookies<CookieName>([...COOKIE_NAMES]);
+  return (opts: {path?: string; domain?: string} = {path: "/"}) => {
+    COOKIE_NAMES.forEach((name) => removeCookie(name, opts));
+  };
+};
+
 export function useCookiesAccepted() {
   const [cookies] = useCookies([ACCEPTED_COOKIES_NAME]);
   return (

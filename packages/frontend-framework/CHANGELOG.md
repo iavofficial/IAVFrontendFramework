@@ -1,3 +1,37 @@
+## [@iavofficial/frontend-framework-v1.5.2-dev.5](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.5.2-dev.4...@iavofficial/frontend-framework-v1.5.2-dev.5) (2025-08-29)
+
+### Bug Fixes
+
+* placeholder in awsAuthenticationView.tsx ([6bfc2c8](https://github.com/iavofficial/IAVFrontendFramework/commit/6bfc2c8ce8a834e799f5f2b6ddd282f74d5adeec))
+
+## [@iavofficial/frontend-framework-v1.5.2-dev.4](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.5.2-dev.3...@iavofficial/frontend-framework-v1.5.2-dev.4) (2025-08-29)
+
+### Bug Fixes
+
+* add removeKnownCookies ([d1c5c7c](https://github.com/iavofficial/IAVFrontendFramework/commit/d1c5c7ce6d4770c42219aa76d613403e186806ba))
+* **cookies:** remove cookies if banner is disabled ([bb183c1](https://github.com/iavofficial/IAVFrontendFramework/commit/bb183c17f0009d0797c8c2eb8241ea83c8faf818))
+* re-ordering of variables ([801260d](https://github.com/iavofficial/IAVFrontendFramework/commit/801260d27d09767db2e1057d4a5b32ba7f3fe65e))
+
+## [@iavofficial/frontend-framework-v1.5.2-dev.3](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.5.2-dev.2...@iavofficial/frontend-framework-v1.5.2-dev.3) (2025-08-18)
+
+### Bug Fixes
+
+* styling ([c45265a](https://github.com/iavofficial/IAVFrontendFramework/commit/c45265ac5bcd47e4a6e67ffa106e964d5f453a58))
+
+## [@iavofficial/frontend-framework-v1.5.2-dev.2](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.5.2-dev.1...@iavofficial/frontend-framework-v1.5.2-dev.2) (2025-06-20)
+
+### Bug Fixes
+
+* different displays for each layout behavior ([89841b9](https://github.com/iavofficial/IAVFrontendFramework/commit/89841b93d76baa5cbc5e118b2b2a02462d437b04))
+
+## [@iavofficial/frontend-framework-v1.5.2-dev.1](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.5.1...@iavofficial/frontend-framework-v1.5.2-dev.1) (2025-06-13)
+
+### Bug Fixes
+
+* **contentwitbar:** use display flex instead of block for selected tab ([2ca0270](https://github.com/iavofficial/IAVFrontendFramework/commit/2ca027037fb27f9fee4b09ae9eae03af52b005f4))
+* contentWithBar.tsx url ([41c3477](https://github.com/iavofficial/IAVFrontendFramework/commit/41c3477f7176a1db7e9140711270e78e95fcedd5))
+* use display flex instead of block for selected tab ([d83b04f](https://github.com/iavofficial/IAVFrontendFramework/commit/d83b04f9b6d98b05835ee523a3cced8cba6a059c))
+
 ## [@iavofficial/frontend-framework-v1.5.1](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.5.0...@iavofficial/frontend-framework-v1.5.1) (2025-06-12)
 
 ### Bug Fixes

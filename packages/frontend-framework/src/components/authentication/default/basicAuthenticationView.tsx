@@ -45,6 +45,12 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
   const [password, setPassword] = useState("");
   const langContext = useContext(LanguageContext);
 
+  const currentLang = langContext?.activeLang;
+  const resources = langContext?.resources;
+  const currentRes =
+    currentLang && resources ? resources[currentLang] : undefined;
+  const placeholder = currentRes?.translation?.option_name ?? "";
+
   const authContext = useContext(AuthContext);
   const t = useTranslator();
 
@@ -203,10 +209,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                   backgroundColor: inputFieldBackgroundColor,
                   color: inputFieldTextColor,
                 }}
-                placeholder={
-                  langContext?.resources[langContext.activeLang].translation
-                    .option_name
-                }
+                placeholder={placeholder}
                 onChange={function (event: DropdownChangeEvent) {
                   langContext?.selectLanguage(event.value.key);
                 }}

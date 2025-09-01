@@ -52,7 +52,6 @@ export type PropsContentBar = StyleProps<typeof ContentBarStyles> & {
   onClickAddButton?: () => any;
   onClickLeftSlideButton?: () => any;
   onClickRightSlideButton?: () => any;
-  onSelectTab?: (id: string) => void;
 };
 
 export const ContentBar = (props: PropsContentBar) => {
@@ -243,11 +242,7 @@ export const ContentBar = (props: PropsContentBar) => {
           {visibleElements.map((element) => {
             const id = element.getId();
             return (
-              <div
-                key={id}
-                onClick={() => props.onSelectTab && props.onSelectTab(id)}
-                style={{cursor: "pointer"}}
-              >
+              <div key={id} style={{cursor: "pointer"}}>
                 {element.getContentbarElement(
                   calculateWidth(
                     isNavbarCollapsed,

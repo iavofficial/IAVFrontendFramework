@@ -122,7 +122,9 @@
     "./contentWithBarModuleInterfaces": "./dist/types/modules/ui/contentWithBar/contentWithBarModuleInterfaces.js",
     "./contentWithBarOrchestrator": "./dist/modules/default_modules/ui/contentWithBar/contentWithBarOrchestrator.js",
     "./headerModuleInterfaces": "./dist/types/modules/ui/header/headerModuleInterfaces.js",
-    "./headerOrchestrator": "./dist/modules/default_modules/ui/header/headerOrchestrator.js"
+    "./headerOrchestrator": "./dist/modules/default_modules/ui/header/headerOrchestrator.js",
+    "./uiModuleInterfaces": "./dist/types/modules/ui/uiModuleInterfaces.js",
+    "./uiOrchestrator": "./dist/modules/default_modules/ui/uiOrchestrator.js"
   },
   "typesVersions": {
     "*": {

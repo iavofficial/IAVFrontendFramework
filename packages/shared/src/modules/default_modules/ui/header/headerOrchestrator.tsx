@@ -20,7 +20,7 @@ import React from "react";
 import {UIHeaderProps} from "../../../../types/modules/ui/header/headerModuleInterfaces";
 import {UIHeader} from "./uiHeader";
 
-type HeaderOrchestratorProps = UIHeaderProps & {
+export type HeaderOrchestratorProps = UIHeaderProps & {
   uiComponent?: React.ComponentType<UIHeaderProps>;
 };
 

@@ -40,6 +40,7 @@ import { ExampleComponent7 } from "./components/exampleComponent7";
 import { LegalDocument } from "@iavofficial/frontend-framework/legalDocument";
 import { ExampleComponent8 } from "./components/exampleComponent8";
 import { ExampleComponent9 } from "./components/exampleComponent9";
+import { ExampleComponent10 } from "./components/exampleComponent10.tsx";
 
 interface Props {
   authenticationView?: React.ComponentType;
@@ -195,6 +196,15 @@ const Layout = (props: Props) => {
           icon: <InfoIcon />,
         }),
         ExampleComponent9,
+      ),
+      new BasicContentWrapper(
+        "/header-example-1/",
+        simpleNavbarTabFactory({
+          name: (t) => t({ key: "example_component", options: { count: 11 } }),
+          disabled: false,
+          icon: <InfoIcon />,
+        }),
+        ExampleComponent10,
       ),
     ]),
   ];

@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {UIContentWithBarProps} from "../../../../types/modules/ui/contentWithBar/contentWIthBarModuleInterfaces";
 import {UIContentWithBar} from "./uiContentWithBar";
 
-type ContentWithBarOrchestratorProps = Partial<UIContentWithBarProps> & {
+export type ContentWithBarOrchestratorProps = Partial<UIContentWithBarProps> & {
   uiComponent?: React.ComponentType<UIContentWithBarProps>;
 };
 

@@ -16,18 +16,16 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-export const MandatoryModuleNames = {
-  Authenticator: "auth",
-  Router: "router",
-  Internationalizer: "internationalizer",
-  UI: "UI",
-  Header: "header",
-  Navbar: "navbar",
-  ContentWithBar: "contentbar",
-  CookieBanner: "cookiebanner",
-} as const;
+import { HeaderModule } from "@iavofficial/frontend-framework-shared/headerModuleInterfaces";
+import { HeaderOrchestrator } from "@iavofficial/frontend-framework-shared/headerOrchestrator";
+import { AntDesignHeader } from "./antDesignHeader.tsx";
 
-export type MandatoryModuleName =
-  (typeof MandatoryModuleNames)[keyof typeof MandatoryModuleNames];
+export class CustomHeader implements HeaderModule {
+  public UILayerHeader: React.FC;
 
-export const USER_MODULES_PREFIX = "user";
+  constructor() {
+    this.UILayerHeader = () => (
+      <HeaderOrchestrator uiComponent={AntDesignHeader} />
+    );
+  }
+}

@@ -43,7 +43,8 @@
     "i18next": "^22.4.13",
     "i18next-browser-languagedetector": "^7.0.1",
     "react-i18next": "^12.2.0",
-    "glob": "^10.4.5"
+    "glob": "^10.4.5",
+    "simplebar-react": "^2.4.3"
   },
   "peerDependencies": {
     "react": "^18.2.0",
@@ -104,7 +105,6 @@
     "./uiLayerRouter": "./dist/modules/default_modules/router/components/uiLayerRouter.js",
     "./routerModule": "./dist/types/modules/router/routerModule.js",
     "./i18NextInternationalizerModule": "./dist/modules/default_modules/internationalization/i18NextInternationalizerModule.js",
-    "./cookieBanner": "./dist/modules/default_modules/cookie/cookieBanner.js",
     "./useModuleTranslation": "./dist/modules/hooks/useModuleTranslation.js",
     "./internationalizerModule": "./dist/types/modules/internationalization/internationalizerModule.js",
     "./initI18nextFunction": "./dist/types/modules/internationalization/initI18nextFunction.js",
@@ -118,11 +118,13 @@
     "./cookieHooks": "./dist/utils/cookieHooks.js",
     "./setAcceptCookies": "./dist/utils/setAcceptCookies.js",
     "./cookieBannerModuleInterfaces": "./dist/types/modules/ui/cookieBanner/cookieBannerModuleInterfaces.js",
-    "./cookieBannerOrchestrator": "./dist/modules/default_modules/ui/cookiebanner/cookieBannerOrchestrator.js",
+    "./cookieBannerOrchestrator": "./dist/modules/default_modules/ui/cookieBanner/cookieBannerOrchestrator.js",
     "./contentWithBarModuleInterfaces": "./dist/types/modules/ui/contentWithBar/contentWithBarModuleInterfaces.js",
     "./contentWithBarOrchestrator": "./dist/modules/default_modules/ui/contentWithBar/contentWithBarOrchestrator.js",
     "./headerModuleInterfaces": "./dist/types/modules/ui/header/headerModuleInterfaces.js",
     "./headerOrchestrator": "./dist/modules/default_modules/ui/header/headerOrchestrator.js",
+    "./navbarModuleInterfaces": "./dist/types/modules/ui/navbar/navbarModuleInterfaces.js",
+    "./navbarOrchestrator": "./dist/modules/default_modules/ui/navbar/navbarOrchestrator.js",
     "./uiModuleInterfaces": "./dist/types/modules/ui/uiModuleInterfaces.js",
     "./uiOrchestrator": "./dist/modules/default_modules/ui/uiOrchestrator.js"
   },
@@ -203,47 +205,11 @@
       "./i18NextInternationalizerModule": [
         "./dist/modules/default_modules/internationalization/i18NextInternationalizerModule.d.ts"
       ],
-      "./cookieBanner": [
-        "./dist/modules/default_modules/cookie/cookieBanner.d.ts"
-      ],
-      "./useModuleTranslation": [
-        "./dist/modules/hooks/useModuleTranslation.js"
-      ],
-      "./internationalizerModule": [
-        "./dist/types/modules/internationalization/internationalizerModule.d.ts"
-      ],
-      "./initI18nextFunction": [
-        "./dist/types/modules/internationalization/initI18nextFunction.d.ts"
-      ],
-      "./colorOptionTypes": [
-        "./dist/types/color/colorOptionTypes.d.ts"
-      ],
-      "./requiredMutable": [
-        "./dist/types/util-types/requiredMutable.d.ts"
-      ],
-      "./componentTypeMinProps": [
-        "./dist/types/util-types/componentTypeMinProps.d.ts"
-      ],
-      "./containsOneOrMoreGroups": [
-        "./dist/utils/auth/containsOneOrMoreGroups.d.ts"
-      ],
-      "./parseLanguageResourcesIntoDropdownFormat": [
-        "./dist/utils/internationalization/parseLanguageResourcesIntoDropdownFormat.d.ts"
-      ],
-      "./hash": [
-        "./dist/utils/hash.d.ts"
-      ],
-      "./cookieHooks": [
-        "./dist/utils/cookieHooks.d.ts"
-      ],
-      "./setAcceptCookies": [
-        "./dist/utils/setAcceptCookies.d.ts"
-      ],
       "./cookieBannerModuleInterfaces": [
         "./dist/types/modules/ui/cookieBanner/cookieBannerModuleInterfaces.d.ts"
       ],
       "./cookieBannerOrchestrator": [
-        "./dist/modules/default_modules/ui/cookiebanner/cookieBannerOrchestrator.d.ts"
+        "./dist/modules/default_modules/ui/cookieBanner/cookieBannerOrchestrator.d.ts"
       ],
       "./contentWithBarModuleInterfaces": [
         "./dist/types/modules/ui/contentWithBar/contentWithBarModuleInterfaces.d.ts"
@@ -256,6 +222,18 @@
       ],
       "./headerOrchestrator": [
         "./dist/modules/default_modules/ui/header/headerOrchestrator.d.ts"
+      ],
+      "./navbarModuleInterfaces": [
+        "./dist/types/modules/ui/navbar/navbarModuleInterfaces.d.ts"
+      ],
+      "./navbarOrchestrator": [
+        "./dist/modules/default_modules/ui/navbar/navbarOrchestrator.d.ts"
+      ],
+      "./uiModuleInterfaces": [
+        "./dist/types/modules/ui/uiModuleInterfaces.d.ts"
+      ],
+      "./uiOrchestrator": [
+        "./dist/modules/default_modules/ui/uiOrchestrator.d.ts"
       ]
     }
   },

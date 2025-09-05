@@ -30,10 +30,8 @@ import {
 } from "../../types/modules/moduleOrchestrationTypes";
 import {ReactRouterRouter} from "../default_modules/router/reactRouterRouterModule";
 import {I18NextInternationalizer} from "../default_modules/internationalization/i18NextInternationalizerModule";
-import {CookieBanner} from "../default_modules/ui/cookiebanner/cookieBannerModule";
-import {DefaultHeaderModule} from "../default_modules/ui/header/headerModule";
-import {DefaultContentWithBarModule} from "../default_modules/ui/contentWithBar/contentWithBarModule";
 import {DefaultUIModule} from "../default_modules/ui/uiModule";
+import {UIOrchestrator} from "../default_modules/ui/uiOrchestrator";
 
 //import {CookieBanner} from "../default_modules/cookie/cookieBanner";
 export type DefaultRootState = RootState<DefaultStoreState>;
@@ -48,6 +46,7 @@ export type DefaultThunkDispatch = ThunkDispatch<
 export const defaultStoreModules: FFMandatoryStoreModules = {
   [MandatoryModuleNames.Authenticator]: new DummyAuthenticator(),
   [MandatoryModuleNames.Internationalizer]: new I18NextInternationalizer(),
+  [MandatoryModuleNames.UI]: new UIOrchestrator(),
 };
 
 export type DefaultStoreModules = typeof defaultStoreModules;
@@ -55,13 +54,6 @@ export type DefaultStoreModules = typeof defaultStoreModules;
 export const defaultNonStoreModules = {
   [MandatoryModuleNames.Router]: new ReactRouterRouter(),
   [MandatoryModuleNames.UI]: new DefaultUIModule(),
-  [MandatoryModuleNames.Header]: new DefaultHeaderModule(),
-  [MandatoryModuleNames.ContentWithBar]: new DefaultContentWithBarModule(),
-
-  /*
-        [MandatoryModuleNames.Navbar]: Navbar,
-        [MandatoryModuleNames.ContentWithBar]: ContentWithBar, */
-  [MandatoryModuleNames.CookieBanner]: new CookieBanner(),
 };
 
 export type DefaultNonStoreModules = typeof defaultNonStoreModules;

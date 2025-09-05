@@ -22,7 +22,7 @@ import { useModule } from "@iavofficial/frontend-framework/moduleContext";
 import { MandatoryModuleNames } from "@iavofficial/frontend-framework-shared/moduleNames";
 
 export const ExampleComponent10 = () => {
-  const headerModule = useModule(MandatoryModuleNames.Header);
+  const headerModule = useModule(MandatoryModuleNames.UI).UiLayerHeader;
   const Header = headerModule.UILayerHeader;
 
   if (!Header) {

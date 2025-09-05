@@ -18,11 +18,10 @@
 
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { AppAwsAuthentication } from "./components/aws_test/AppAwsAuthentication";
-import { AppDefaultAuthentication } from "./components/default_example/AppDefaultAuthentication";
+import AppUI from "./components/ui_test/AppUI.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <AppDefaultAuthentication />
+    <AppUI />
   </React.StrictMode>,
 );

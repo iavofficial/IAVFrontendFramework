@@ -16,12 +16,13 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {CookieBannerModule} from "../../../../types/modules/ui/cookieBanner/cookieBannerModuleInterfaces";
-import {CookieBannerOrchestrator} from "./cookieBannerOrchestrator";
-
-export class CookieBanner implements CookieBannerModule {
-  public UiLayerCookieBanner;
-  constructor() {
-    this.UiLayerCookieBanner = CookieBannerOrchestrator;
+export function calculateNavbarArrowFunctionColor(navbarCollapsed: boolean) {
+  let returnValue = "";
+  if (navbarCollapsed) {
+    returnValue = "pi pi-chevron-right";
+  } else {
+    returnValue = "pi pi-chevron-left";
   }
+
+  return returnValue;
 }

@@ -15,8 +15,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-import React, {ReactElement} from "react";
-import {FFModule} from "../../generalModule";
+import {ReactElement} from "react";
 import {SettingsMenuOptions} from "@iavofficial/frontend-framework/dist/components/header/settingsMenu";
 import {UserMenuOptions} from "@iavofficial/frontend-framework/dist/components/header/userMenu";
 
@@ -35,7 +34,3 @@ export interface UIHeaderProps {
   settingsMenuOptions?: SettingsMenuOptions;
   userMenuOptions?: UserMenuOptions;
 }
-
-export type HeaderModule = {
-  UILayerHeader: React.ComponentType;
-} & FFModule;

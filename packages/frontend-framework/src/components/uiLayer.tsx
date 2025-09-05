@@ -1,18 +1,5 @@
 /**
  * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -21,18 +8,21 @@ import "primereact/resources/themes/nova/theme.css";
 import "primereact/resources/primereact.css";
 import "primeicons/primeicons.css";
 import React, {useEffect} from "react";
-import {BasicAuthenticationView} from "./authentication/default/basicAuthenticationView";
-import {SettingsMenuOptions} from "./header/settingsMenu";
-import {MainView} from "./mainView";
-import {TabAndContentWrapper} from "./navbar/wrappers/typesWrappers";
+import {useCookies} from "react-cookie";
+import {setAcceptCookies} from "@iavofficial/frontend-framework-shared/setAcceptCookies";
+import {ACCEPTED_COOKIES_NAME} from "@iavofficial/frontend-framework-shared/constants";
+import {useDefaultSelector} from "@iavofficial/frontend-framework-shared/moduleDefaults";
+import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
+import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
 import {NavbarSettingsProvider} from "../contexts/providers/navbarSettingsProvider";
+import {AuthenticationViewProps} from "@iavofficial/frontend-framework-shared/authenticationViewProps";
 import {StaticCollapsedState} from "../types/navbarSettingsTypes";
+import {SettingsMenuOptions} from "./header/settingsMenu";
 import {HeaderOptions} from "./header/header";
 import {UserMenuOptions} from "./header/userMenu";
-import {setAcceptCookies} from "@iavofficial/frontend-framework-shared/setAcceptCookies";
-import {useCookies} from "react-cookie";
-import {ACCEPTED_COOKIES_NAME} from "@iavofficial/frontend-framework-shared/constants";
-import {AuthenticationViewProps} from "@iavofficial/frontend-framework-shared/authenticationViewProps";
+import {LegalDocument} from "./imprint/legalDocument";
+import {BasicAuthenticationView} from "./authentication/default/basicAuthenticationView";
+import {MainView} from "./mainView";
 import "./uiLayer.css";
 import "../css/fonts.css";
 import "../css/darkModeInputsWorkAround.css";
@@ -41,26 +31,26 @@ import "../css/globalChangesOnPrimeReactComponents.css";
 import "../css/globalSettings.css";
 import "../css/globalColors.css";
 import "@iavofficial/frontend-framework-shared/css/authenticationView.css";
-import {useDefaultSelector} from "@iavofficial/frontend-framework-shared/moduleDefaults";
-import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
-import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
-import {LegalDocument} from "./imprint/legalDocument";
+import {TabAndContentWrapper} from "./navbar/wrappers/typesWrappers";
 
 export interface AuthOptions {
   backgroundImage?: string;
   companyText?: string;
   preventDarkmode?: boolean;
-  errorMessages?: {
-    passwordErrorMessage?: string;
-  };
+  errorMessages?: {passwordErrorMessage?: string};
 }
 
 export interface NavbarOptions {
   staticCollapsedState?: StaticCollapsedState;
 }
 
+export interface UIComponentOverrides {
+  Header?: React.ComponentType<any>;
+  Navbar?: React.ComponentType<any>;
+  CookieBanner?: React.ComponentType<any>;
+}
+
 export interface Props {
-  // This indicates that the passed objects should have the type's properties at least.
   tabAndContentWrappers: TabAndContentWrapper[];
   initialPath: string;
   disableLogin?: boolean;
@@ -73,31 +63,35 @@ export interface Props {
   authOptions?: AuthOptions;
   navbarOptions?: NavbarOptions;
   hideNavbar?: boolean;
+  uiComponents?: UIComponentOverrides;
 }
 
-export const UILayer = (props: Props) => {
-  const {hasAuthenticated} = useDefaultSelector((state) => state.auth);
+export const UILayer: React.FC<Props> = (props) => {
+  const {hasAuthenticated} = useDefaultSelector((s) => s.auth);
   const routerModule = useModule(MandatoryModuleNames.Router);
-  const cookieBannerModule = useModule(MandatoryModuleNames.CookieBanner);
+  const uiModule = useModule(MandatoryModuleNames.UI);
+
+  const UILayerRouter =
+    (routerModule as any)?.UiLayerRouter ??
+    (routerModule as any)?.UILayerRouter;
+
+  const DefaultCookieBanner =
+    (uiModule as any)?.UiLayerCookieBanner ??
+    (uiModule as any)?.UILayerCookieBanner;
+
+  const CookieBanner = props.uiComponents?.CookieBanner ?? DefaultCookieBanner;
 
   const [, setCookie] = useCookies([ACCEPTED_COOKIES_NAME]);
 
   const disableLogin = !!props.disableLogin;
+  const AuthenticationView =
+    props.authenticationView ?? BasicAuthenticationView;
 
-  const AuthenticationView = props.authenticationView
-    ? props.authenticationView
-    : BasicAuthenticationView;
-
-  // If the login is disabled, the user should not be able to log out.
   const userMenuOptions = {...props.userMenuOptions};
-  if (props.disableLogin) {
-    userMenuOptions.hideLogoutButton = true;
-  }
+  if (props.disableLogin) userMenuOptions.hideLogoutButton = true;
 
   useEffect(() => {
-    if (props.disableCookieBanner) {
-      setAcceptCookies(setCookie);
-    }
+    if (props.disableCookieBanner) setAcceptCookies(setCookie);
   }, [props.disableCookieBanner, setCookie]);
 
   const dynamicRoutes =
@@ -122,7 +116,6 @@ export const UILayer = (props: Props) => {
         />
       ),
     },
-    // Maybe include !props.disableLogin && !hasAuthenticated with <Route path="/*" element={<></>} />
     {
       path: "/*",
       disabled: !disableLogin && !hasAuthenticated,
@@ -134,33 +127,38 @@ export const UILayer = (props: Props) => {
           legalDocuments={props.legalDocuments}
           tabAndContentWrappers={props.tabAndContentWrappers}
           hideNavbar={props.hideNavbar}
+          uiComponents={props.uiComponents}
         />
       ),
     },
   ];
 
   const routes = [...dynamicRoutes, ...fixedRoutes];
-
-  const UILayerRouter = routerModule.UiLayerRouter;
-  const CookieBanner = cookieBannerModule.UiLayerCookieBanner;
-  const legalDocumentsPaths = (props.legalDocuments ?? []).map(
-    (doc) => doc.path,
-  );
+  const legalDocumentsPaths = (props.legalDocuments ?? []).map((d) => d.path);
 
   return (
     <NavbarSettingsProvider
       staticCollapsedState={props.navbarOptions?.staticCollapsedState}
     >
-      {!props.disableCookieBanner && <CookieBanner />}
-
-      {
+      {!props.disableCookieBanner && CookieBanner && <CookieBanner />}
+      {UILayerRouter ? (
         <UILayerRouter
           routes={routes}
           disableLogin={disableLogin}
           initialPath={props.initialPath}
           legalDocumentsPaths={legalDocumentsPaths}
         />
-      }
+      ) : (
+        <MainView
+          headerOptions={props.headerOptions}
+          settingsMenuOptions={props.settingsMenuOptions}
+          userMenuOptions={userMenuOptions}
+          legalDocuments={props.legalDocuments}
+          tabAndContentWrappers={props.tabAndContentWrappers}
+          hideNavbar={props.hideNavbar}
+          uiComponents={props.uiComponents}
+        />
+      )}
     </NavbarSettingsProvider>
   );
 };

@@ -24,7 +24,9 @@ import React, { useState } from "react";
 import { Typography } from "antd";
 
 export const ExampleComponent9 = () => {
-  const contentWithBarModule = useModule(MandatoryModuleNames.ContentWithBar);
+  const contentWithBarModule = useModule(
+    MandatoryModuleNames.UI,
+  ).UiLayerContentWithBar;
   const ContentWithBar = contentWithBarModule.UiLayerContentWithBar;
 
   const initialTabs: CustomContentbarWrapper[] = [];

@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useEffect, useReducer } from "react";
+import { useReducer } from "react";
 //import { ContentWithBar } from '@iavofficial/frontend-framework/contentWithBar';
 import { LayoutBehaviour } from "@iavofficial/frontend-framework/contentLayout";
 import { generateHashOfLength } from "@iavofficial/frontend-framework/hash";
@@ -115,7 +115,9 @@ export const ExampleComponent8 = () => {
     dispatch({ type: "create", addElement: newTab });
   };
 
-  const contentWithBarModule = useModule(MandatoryModuleNames.ContentWithBar);
+  const contentWithBarModule = useModule(
+    MandatoryModuleNames.UI,
+  ).UiLayerContentWithBar;
   const ContentWithBar = contentWithBarModule.UiLayerContentWithBar;
 
   return (

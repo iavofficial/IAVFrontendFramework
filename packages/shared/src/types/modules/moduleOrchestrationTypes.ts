@@ -28,12 +28,11 @@ import {Exact, ExactPartial} from "../util-types/exact";
 import {RestrictKeyToPrefix} from "../util-types/restrictKeyToPrefix";
 import {DefaultNonStoreModules} from "../../modules/module_orchestration/moduleDefaults";
 import {RouterModule} from "./router/routerModule";
-import {CookieBannerModule} from "./ui/cookieBanner/cookieBannerModuleInterfaces";
 import {
   InternationalizerModule,
   InternationalizerState,
 } from "./internationalization/internationalizerModule";
-import {ContentWithBarModule} from "./ui/contentWithBar/contentWIthBarModuleInterfaces";
+import {UIModule} from "./ui/uiModuleInterfaces";
 
 export type FFStoreModules<TModulesState = unknown> = {
   [K in keyof TModulesState]: FFStoreModule<TModulesState[K]>;
@@ -59,15 +58,15 @@ export type FFMandatoryStoreModules<
   [MandatoryModuleNames.Internationalizer]: InternationalizerModule<
     TModulesState[typeof MandatoryModuleNames.Internationalizer]
   >;
+  [MandatoryModuleNames.UI]: UIModule<
+    TModulesState[typeof MandatoryModuleNames.UI]
+  >;
 };
 
 // The types of all default M mandatory modules without a state for the store.
 export type FFMandatoryNonStoreModules = {
   [MandatoryModuleNames.Router]: RouterModule;
-  /*  [MandatoryModuleNames.Header]: HeaderComponent;
-    [MandatoryModuleNames.Navbar]: NavbarComponent;*/
-  [MandatoryModuleNames.ContentWithBar]: ContentWithBarModule;
-  [MandatoryModuleNames.CookieBanner]: CookieBannerModule;
+  [MandatoryModuleNames.UI]: UIModule;
 };
 
 export type FFAllMandatoryModules<

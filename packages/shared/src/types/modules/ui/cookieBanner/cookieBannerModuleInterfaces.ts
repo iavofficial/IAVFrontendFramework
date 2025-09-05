@@ -16,8 +16,6 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {FFModule} from "../../generalModule";
-
 export interface UICookieBannerProps {
   header: React.ReactNode;
   message: React.ReactNode;
@@ -27,7 +25,3 @@ export interface UICookieBannerProps {
   styles?: Record<string, any>;
   darkMode: boolean;
 }
-
-export type CookieBannerModule = {
-  UiLayerCookieBanner: React.ComponentType;
-} & FFModule;

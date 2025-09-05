@@ -19,7 +19,6 @@
 import {BasicContentbarWrapper} from "@iavofficial/frontend-framework/basicContentbarWrapper";
 import {CustomContentbarWrapper} from "@iavofficial/frontend-framework/customContentbarWrapper";
 import {ContentLayoutAndStyleProps} from "@iavofficial/frontend-framework/contentLayout";
-import {FFModule} from "../../generalModule";
 
 export type UIContentWithBarProps = ContentLayoutAndStyleProps & {
   children?: React.ReactNode;
@@ -32,7 +31,3 @@ export type UIContentWithBarProps = ContentLayoutAndStyleProps & {
   onClickLeftSlideButton?: () => any;
   onClickRightSlideButton?: () => any;
 };
-
-export type ContentWithBarModule = {
-  UiLayerContentWithBar: React.ComponentType;
-} & FFModule;

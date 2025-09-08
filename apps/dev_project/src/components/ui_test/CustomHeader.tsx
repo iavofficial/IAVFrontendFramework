@@ -1,17 +1,8 @@
 import React from "react";
 import { Button, Space, Typography } from "antd";
+import { UIHeaderProps } from "@iavofficial/frontend-framework-shared/headerModuleInterfaces";
 
-type Props = {
-  headerOptions?: {
-    reactElementLeft?: React.ReactNode;
-    headerElements?: React.ReactNode[];
-    reactElementRight?: React.ReactNode;
-  };
-  settingsMenuOptions?: any;
-  userMenuOptions?: any;
-};
-
-const CustomHeader: React.FC<Props> = ({ headerOptions }) => {
+const CustomHeader = (props: UIHeaderProps) => {
   return (
     <div
       style={{
@@ -24,17 +15,17 @@ const CustomHeader: React.FC<Props> = ({ headerOptions }) => {
       }}
     >
       <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-        {headerOptions?.reactElementLeft ?? (
+        {props.headerOptions?.reactElementLeft ?? (
           <Typography.Text strong>App</Typography.Text>
         )}
       </div>
       <Space size={12}>
-        {(headerOptions?.headerElements ?? []).map((el, i) => (
+        {(props.headerOptions?.headerElements ?? []).map((el, i) => (
           <span key={i}>{el}</span>
         ))}
       </Space>
       <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-        {headerOptions?.reactElementRight ?? (
+        {props.headerOptions?.reactElementRight ?? (
           <Button type="primary">Action</Button>
         )}
       </div>

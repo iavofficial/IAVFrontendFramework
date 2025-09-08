@@ -1,27 +1,14 @@
 /**
- * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr,
+ * All Rights Reserved.
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useMemo, useState} from "react";
 import {useCookies} from "react-cookie";
 import {ACCEPTED_COOKIES_NAME, BLUE1} from "../../../../constants/constants";
 import {ColorSettingsContext} from "../../../../contexts/colorSettingsContext";
 import {useModuleTranslation} from "../../../hooks/useModuleTranslation";
-import {useCookiesAccepted} from "../../../../utils/cookieHooks";
 import {setAcceptCookies} from "../../../../utils/setAcceptCookies";
 import {UICookieBannerProps} from "../../../../types/modules/ui/cookieBanner/cookieBannerModuleInterfaces";
 import {UICookieBanner} from "./uiCookieBanner";
@@ -36,25 +23,36 @@ export const CookieBannerOrchestrator: React.FC<
   const colorContext = useContext(ColorSettingsContext);
   const t = useModuleTranslation();
 
-  const [visible, setVisible] = useState(!useCookiesAccepted());
+  // Keine externen Hooks mehr wie useCookiesAccepted() -> vermeidet "Invalid hook call".
+  const [cookies, setCookie] = useCookies([ACCEPTED_COOKIES_NAME]);
 
-  const [, setCookie] = useCookies([ACCEPTED_COOKIES_NAME]);
+  // Sichtbarkeit leitet sich direkt aus dem Cookie ab
+  const isAccepted = useMemo(
+    () => Boolean(cookies[ACCEPTED_COOKIES_NAME]),
+    [cookies],
+  );
+  const [visible, setVisible] = useState<boolean>(() => !isAccepted);
 
-  const acceptCookies = () => {
+  // Reagiere auf externe Cookie-Änderungen
+  useEffect(() => {
+    setVisible(!isAccepted);
+  }, [isAccepted]);
+
+  const onAccept = () => {
     setAcceptCookies(setCookie);
     setVisible(false);
   };
 
   const UI = CustomUI || UICookieBanner;
-  // Supply all required UI props
+
   const uiProps: UICookieBannerProps = {
     header: t({key: "allow_cookies_header"}),
     message: t({key: "allow_cookies_disclaimer"}),
     acceptButtonLabel: t({key: "allow_cookies_button"}),
     visible,
-    onAccept: acceptCookies,
+    onAccept,
     styles: {backgroundColor: colorContext?.darkmode ? "#222" : BLUE1},
-    darkMode: colorContext.darkmode,
+    darkMode: colorContext?.darkmode,
   };
 
   return <UI {...uiProps} />;

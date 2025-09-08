@@ -39,10 +39,20 @@ export class UIOrchestrator implements UIModule<UIState> {
   public enhancers = [];
   public useModuleLifecycle;
 
-  public UILayerHeader: React.ComponentType<UIHeaderProps>;
-  public UILayerContentWithBar: React.ComponentType<ContentWithBarOrchestratorProps>;
-  public UILayerCookieBanner: React.ComponentType;
-  public UILayerNavbar: React.ComponentType<NavbarOrchestratorProps>;
+  public UILayerHeader: React.ComponentType<
+    UIHeaderProps & {uiComponent?: React.ComponentType<UIHeaderProps>}
+  >;
+  public UILayerContentWithBar: React.ComponentType<
+    ContentWithBarOrchestratorProps & {
+      uiComponent?: React.ComponentType<UIContentWithBarProps>;
+    }
+  >;
+  public UILayerCookieBanner: React.ComponentType<{
+    uiComponent?: React.ComponentType<UICookieBannerProps>;
+  }>;
+  public UILayerNavbar: React.ComponentType<
+    NavbarOrchestratorProps & {uiComponent?: React.ComponentType<UINavbarProps>}
+  >;
 
   public extras: UIExtras;
 
@@ -67,23 +77,31 @@ export class UIOrchestrator implements UIModule<UIState> {
       this.slice.actions;
     this.extras = {setNavbarCollapsed, toggleNavbar, setCollapsible};
 
-    this.UILayerHeader = (props: UIHeaderProps) => (
-      <HeaderOrchestrator uiComponent={overrides?.Header} {...props} />
-    );
-
-    this.UILayerContentWithBar = (props: ContentWithBarOrchestratorProps) => (
-      <ContentWithBarOrchestrator
-        uiComponent={overrides?.ContentWithBar}
-        {...props}
+    this.UILayerHeader = (p) => (
+      <HeaderOrchestrator
+        uiComponent={p.uiComponent ?? overrides?.Header}
+        {...p}
       />
     );
 
-    this.UILayerCookieBanner = () => (
-      <CookieBannerOrchestrator uiComponent={overrides?.CookieBanner} />
+    this.UILayerContentWithBar = (p) => (
+      <ContentWithBarOrchestrator
+        uiComponent={p.uiComponent ?? overrides?.ContentWithBar}
+        {...p}
+      />
     );
 
-    this.UILayerNavbar = (props: NavbarOrchestratorProps) => (
-      <NavbarOrchestrator uiComponent={overrides?.Navbar} {...props} />
+    this.UILayerCookieBanner = (p) => (
+      <CookieBannerOrchestrator
+        uiComponent={p.uiComponent ?? overrides?.CookieBanner}
+      />
+    );
+
+    this.UILayerNavbar = (p) => (
+      <NavbarOrchestrator
+        uiComponent={p.uiComponent ?? overrides?.Navbar}
+        {...p}
+      />
     );
 
     this.useModuleLifecycle = () => ({renderChildren: true});

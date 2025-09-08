@@ -2,28 +2,9 @@ import React from "react";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { useModule } from "@iavofficial/frontend-framework-shared/moduleContext";
 import { MandatoryModuleNames } from "@iavofficial/frontend-framework-shared/moduleNames";
+import { UINavbarProps } from "@iavofficial/frontend-framework-shared/navbarModuleInterfaces";
 
-type TabAndContentWrapperLike = {
-  getNavbarComponent: (args: {
-    navbarCollapsed: boolean;
-  }) => React.ReactElement;
-};
-
-type LegalDocLike = {
-  path: string;
-  titleTranslationKey: string;
-  isHidden?: boolean;
-};
-
-type Props = {
-  tabAndContentWrappers: TabAndContentWrapperLike[];
-  legalDocuments?: LegalDocLike[];
-};
-
-const CustomNavbar: React.FC<Props> = ({
-  tabAndContentWrappers,
-  legalDocuments,
-}) => {
+const CustomNavbar = (props: UINavbarProps) => {
   const ui = useModule(MandatoryModuleNames.UI) as any;
   const router = useModule(MandatoryModuleNames.Router) as any;
   const Link = router?.Link;
@@ -60,7 +41,7 @@ const CustomNavbar: React.FC<Props> = ({
         {collapsed ? ">" : "<"}
       </button>
       <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-        {tabAndContentWrappers.map((w, i) => (
+        {props.tabAndContentWrappers.map((w, i) => (
           <div key={i}>
             {w.getNavbarComponent({ navbarCollapsed: !!collapsed })}
           </div>
@@ -74,7 +55,7 @@ const CustomNavbar: React.FC<Props> = ({
           gap: 4,
         }}
       >
-        {(legalDocuments ?? [])
+        {(props.legalDocuments ?? [])
           .filter((d) => !d.isHidden)
           .map((d) =>
             Link ? (

@@ -1,12 +1,11 @@
 import React from "react";
-import { useCookies } from "react-cookie";
-import { ACCEPTED_COOKIES_NAME } from "@iavofficial/frontend-framework-shared/constants";
-import { setAcceptCookies } from "@iavofficial/frontend-framework-shared/setAcceptCookies";
+import { UICookieBannerProps } from "@iavofficial/frontend-framework-shared/cookieBannerModuleInterfaces";
 
-const CustomCookieBanner: React.FC = () => {
-  const [, setCookie] = useCookies([ACCEPTED_COOKIES_NAME]);
+const CustomCookieBanner = (props: UICookieBannerProps) => {
+  const { header, message, acceptButtonLabel, visible, onAccept, styles } =
+    props;
 
-  const accept = () => setAcceptCookies(setCookie);
+  if (!visible) return null;
 
   return (
     <div
@@ -16,27 +15,37 @@ const CustomCookieBanner: React.FC = () => {
         right: 16,
         bottom: 16,
         padding: 12,
-        background: "#111",
+        background: styles?.backgroundColor ?? "#111",
         color: "#fff",
         borderRadius: 8,
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
         gap: 12,
+        zIndex: 9999,
       }}
+      role="region"
+      aria-label={header ?? "Cookie Hinweis"}
     >
-      <span>Wir verwenden Cookies.</span>
+      <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+        <strong>{header ?? "Cookies"}</strong>
+        <span>{message ?? "Wir verwenden Cookies."}</span>
+      </div>
+
       <button
-        onClick={accept}
+        onClick={onAccept}
         style={{
           padding: "8px 12px",
           background: "#fff",
+          color: "#111",
           border: 0,
           borderRadius: 6,
           cursor: "pointer",
+          fontWeight: 600,
         }}
+        aria-label={acceptButtonLabel ?? "Cookies akzeptieren"}
       >
-        OK
+        {acceptButtonLabel ?? "OK"}
       </button>
     </div>
   );

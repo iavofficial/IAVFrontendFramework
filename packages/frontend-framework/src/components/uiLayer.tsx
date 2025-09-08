@@ -1,5 +1,6 @@
 /**
- * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr,
+ * All Rights Reserved.
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -32,6 +33,7 @@ import "../css/globalSettings.css";
 import "../css/globalColors.css";
 import "@iavofficial/frontend-framework-shared/css/authenticationView.css";
 import {TabAndContentWrapper} from "./navbar/wrappers/typesWrappers";
+import {UICookieBannerProps} from "@iavofficial/frontend-framework-shared/cookieBannerModuleInterfaces";
 
 export interface AuthOptions {
   backgroundImage?: string;
@@ -47,7 +49,8 @@ export interface NavbarOptions {
 export interface UIComponentOverrides {
   Header?: React.ComponentType<any>;
   Navbar?: React.ComponentType<any>;
-  CookieBanner?: React.ComponentType<any>;
+  CookieBanner?: React.ComponentType<UICookieBannerProps>;
+  ContentWithBar?: React.ComponentType<any>;
 }
 
 export interface Props {
@@ -75,11 +78,10 @@ export const UILayer: React.FC<Props> = (props) => {
     (routerModule as any)?.UiLayerRouter ??
     (routerModule as any)?.UILayerRouter;
 
-  const DefaultCookieBanner =
+  // Orchestrator-Komponenten aus dem UI-Modul
+  const UILayerCookieBanner =
     (uiModule as any)?.UiLayerCookieBanner ??
     (uiModule as any)?.UILayerCookieBanner;
-
-  const CookieBanner = props.uiComponents?.CookieBanner ?? DefaultCookieBanner;
 
   const [, setCookie] = useCookies([ACCEPTED_COOKIES_NAME]);
 
@@ -140,7 +142,10 @@ export const UILayer: React.FC<Props> = (props) => {
     <NavbarSettingsProvider
       staticCollapsedState={props.navbarOptions?.staticCollapsedState}
     >
-      {!props.disableCookieBanner && CookieBanner && <CookieBanner />}
+      {!props.disableCookieBanner && UILayerCookieBanner && (
+        <UILayerCookieBanner uiComponent={props.uiComponents?.CookieBanner} />
+      )}
+
       {UILayerRouter ? (
         <UILayerRouter
           routes={routes}

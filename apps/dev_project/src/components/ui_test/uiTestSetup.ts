@@ -14,22 +14,7 @@ import { I18NextInternationalizer } from "@iavofficial/frontend-framework/defaul
 import { ReactRouterRouter } from "@iavofficial/frontend-framework-shared/reactRouterRouterModule";
 
 import { MandatoryModuleNames } from "@iavofficial/frontend-framework/constants";
-
-// minimale Translations (Navbar-Links etc.)
-const translations = {
-  en: {
-    translation: {
-      imprint: "Imprint",
-      privacy_policy: "Privacy policy",
-    },
-  },
-  de: {
-    translation: {
-      imprint: "Impressum",
-      privacy_policy: "Datenschutzerklärung",
-    },
-  },
-};
+import { translations } from "../aws_test/translations.ts";
 
 const frameworkStoreModules = {
   [MandatoryModuleNames.UI]: new UIOrchestrator(),
@@ -47,7 +32,6 @@ export const modules = createModulesSeparately({
   frameworkNonStoreModules,
 });
 
-// Reducer mounten (wie im Auth-Test)
 export const store = new StoreBuilder(modules.storeModules)
   .setFrameworkModuleProcessor(
     MandatoryModuleNames.UI,
@@ -56,9 +40,6 @@ export const store = new StoreBuilder(modules.storeModules)
         MandatoryModuleNames.UI,
         module.slice.reducer,
       );
-      // optional: Middleware/Enhancer, falls ihr später was ergänzt
-      // module.middleware && storeConfigBuilder.addMiddleware(...module.middleware)
-      // module.enhancers && storeConfigBuilder.addEnhancers(...module.enhancers)
     },
   )
   .setFrameworkModuleProcessor(

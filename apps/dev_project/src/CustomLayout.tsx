@@ -15,9 +15,6 @@ import { ExampleComponent4 } from "./components/exampleComponent4";
 import { ExampleComponent5 } from "./components/exampleComponent5";
 import { ExampleComponent6 } from "./components/exampleComponent6";
 import { ExampleComponent7 } from "./components/exampleComponent7";
-import { ExampleComponent8 } from "./components/exampleComponent8";
-import { ExampleComponent9 } from "./components/exampleComponent9";
-import { ExampleComponent10 } from "./components/exampleComponent10";
 import CustomHeader from "./components/ui_test/CustomHeader";
 import CustomNavbar from "./components/ui_test/CustomNavbar";
 import CustomCookieBanner from "./components/ui_test/CustomCookieBanner";
@@ -87,33 +84,6 @@ const CustomLayout: React.FC = () => {
           icon: <InfoIcon />,
         }),
         ExampleComponent7,
-      ),
-      new BasicContentWrapper(
-        "/cwb-1",
-        simpleNavbarTabFactory({
-          disabled: false,
-          name: "Content With Bar 1",
-          icon: <InfoIcon />,
-        }),
-        ExampleComponent8,
-      ),
-      new BasicContentWrapper(
-        "/cwb-2",
-        simpleNavbarTabFactory({
-          disabled: false,
-          name: "Content With Bar 2",
-          icon: <InfoIcon />,
-        }),
-        ExampleComponent9,
-      ),
-      new BasicContentWrapper(
-        "/header-example",
-        simpleNavbarTabFactory({
-          disabled: false,
-          name: "Header Example",
-          icon: <InfoIcon />,
-        }),
-        ExampleComponent10,
       ),
     ],
     [],

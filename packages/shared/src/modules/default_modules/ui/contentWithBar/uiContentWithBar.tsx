@@ -38,8 +38,6 @@ export const UIContentWithBar = (
   const contentAreaBackground =
     colorSettingsContext.currentColors.contentArea.backgroundColor;
 
-  console.log(props);
-
   const contentBarStyles = useMemo(() => {
     const tempContentbarStyles: ContentBarStylesArray = [];
     Object.values(ContentBarStyles).forEach((contentBarStyle) => {

@@ -47,8 +47,6 @@ export const MainView: React.FC<MainViewProps> = (props) => {
   const DefaultHeader = ui.UILayerHeader;
   const DefaultNavbar = ui.UILayerNavbar;
 
-  console.log(props.uiComponents);
-
   const Header = props.uiComponents?.UILayerHeader ?? DefaultHeader;
   const Navbar = props.uiComponents?.UILayerNavbar ?? DefaultNavbar;
 

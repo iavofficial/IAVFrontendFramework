@@ -19,6 +19,7 @@
 import {BasicContentbarWrapper} from "@iavofficial/frontend-framework/basicContentbarWrapper";
 import {CustomContentbarWrapper} from "@iavofficial/frontend-framework/customContentbarWrapper";
 import {ContentLayoutAndStyleProps} from "@iavofficial/frontend-framework/contentLayout";
+import React from "react";
 
 export type UIContentWithBarProps = ContentLayoutAndStyleProps & {
   children?: React.ReactNode;

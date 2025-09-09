@@ -33,7 +33,7 @@ import "../css/globalSettings.css";
 import "../css/globalColors.css";
 import "@iavofficial/frontend-framework-shared/css/authenticationView.css";
 import {TabAndContentWrapper} from "./navbar/wrappers/typesWrappers";
-import {UICookieBannerProps} from "@iavofficial/frontend-framework-shared/cookieBannerModuleInterfaces";
+import {UIModule} from "@iavofficial/frontend-framework-shared/dist/types/modules/ui/uiModuleInterfaces";
 
 export interface AuthOptions {
   backgroundImage?: string;
@@ -44,13 +44,6 @@ export interface AuthOptions {
 
 export interface NavbarOptions {
   staticCollapsedState?: StaticCollapsedState;
-}
-
-export interface UIComponentOverrides {
-  Header?: React.ComponentType<any>;
-  Navbar?: React.ComponentType<any>;
-  CookieBanner?: React.ComponentType<UICookieBannerProps>;
-  ContentWithBar?: React.ComponentType<any>;
 }
 
 export interface Props {
@@ -66,7 +59,7 @@ export interface Props {
   authOptions?: AuthOptions;
   navbarOptions?: NavbarOptions;
   hideNavbar?: boolean;
-  uiComponents?: UIComponentOverrides;
+  uiComponents?: UIModule;
 }
 
 export const UILayer: React.FC<Props> = (props) => {
@@ -74,14 +67,9 @@ export const UILayer: React.FC<Props> = (props) => {
   const routerModule = useModule(MandatoryModuleNames.Router);
   const uiModule = useModule(MandatoryModuleNames.UI);
 
-  const UILayerRouter =
-    (routerModule as any)?.UiLayerRouter ??
-    (routerModule as any)?.UILayerRouter;
+  const UILayerRouter = routerModule.UiLayerRouter;
 
-  // Orchestrator-Komponenten aus dem UI-Modul
-  const UILayerCookieBanner =
-    (uiModule as any)?.UiLayerCookieBanner ??
-    (uiModule as any)?.UILayerCookieBanner;
+  const UILayerCookieBanner = uiModule.UILayerCookieBanner;
 
   const [, setCookie] = useCookies([ACCEPTED_COOKIES_NAME]);
 

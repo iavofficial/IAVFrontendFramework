@@ -46,7 +46,21 @@ export type UIOverrides = {
   Navbar?: React.ComponentType<UINavbarProps>;
 };
 
-const initialState: UIState = {navbarCollapsed: false, collapsible: true};
+const LOCALSTORAGE_KEY = "navbarCollapsed";
+
+const getInitialNavbarCollapsed = (): boolean => {
+  try {
+    const value = localStorage.getItem(LOCALSTORAGE_KEY);
+    return value ? JSON.parse(value) : false;
+  } catch {
+    return false;
+  }
+};
+
+const initialState: UIState = {
+  navbarCollapsed: getInitialNavbarCollapsed(),
+  collapsible: true,
+};
 
 export class UIOrchestrator implements UIModule<UIState> {
   public id = "ui-orchestrator";
@@ -81,9 +95,19 @@ export class UIOrchestrator implements UIModule<UIState> {
       reducers: {
         setNavbarCollapsed: (state, action: PayloadAction<boolean>) => {
           state.navbarCollapsed = action.payload;
+          localStorage.setItem(
+            LOCALSTORAGE_KEY,
+            JSON.stringify(state.navbarCollapsed),
+          );
         },
         toggleNavbar: (state) => {
-          if (state.collapsible) state.navbarCollapsed = !state.navbarCollapsed;
+          if (state.collapsible) {
+            state.navbarCollapsed = !state.navbarCollapsed;
+            localStorage.setItem(
+              LOCALSTORAGE_KEY,
+              JSON.stringify(state.navbarCollapsed),
+            );
+          }
         },
         setCollapsible: (state, action: PayloadAction<boolean>) => {
           state.collapsible = action.payload;

@@ -131,7 +131,9 @@ export const UILayer: React.FC<Props> = (props) => {
       staticCollapsedState={props.navbarOptions?.staticCollapsedState}
     >
       {!props.disableCookieBanner && UILayerCookieBanner && (
-        <UILayerCookieBanner uiComponent={props.uiComponents?.CookieBanner} />
+        <UILayerCookieBanner
+          uiComponent={props.uiComponents?.UILayerCookieBanner}
+        />
       )}
 
       {UILayerRouter ? (

@@ -21,16 +21,24 @@ import {
   StoreBuilder,
 } from "@iavofficial/frontend-framework/store";
 import { configureStore } from "@reduxjs/toolkit";
-
-import { UIOrchestrator } from "@iavofficial/frontend-framework-shared/uiOrchestrator";
 import { I18NextInternationalizer } from "@iavofficial/frontend-framework/defaultModules";
 import { ReactRouterRouter } from "@iavofficial/frontend-framework-shared/reactRouterRouterModule";
 
 import { MandatoryModuleNames } from "@iavofficial/frontend-framework/constants";
 import { translations } from "../aws_test/translations.ts";
+import { UIModule } from "@iavofficial/frontend-framework-shared/uiModule";
+import CustomHeader from "./CustomHeader.tsx";
+import CustomNavbar from "./CustomNavbar.tsx";
+import CustomCookieBanner from "./CustomCookieBanner.tsx";
+import CustomContentBar from "./CustomContentBar.tsx";
 
 const frameworkStoreModules = {
-  [MandatoryModuleNames.UI]: new UIOrchestrator(),
+  [MandatoryModuleNames.UI]: new UIModule({
+    UILayerHeader: CustomHeader,
+    UILayerNavbar: CustomNavbar,
+    UILayerCookieBanner: CustomCookieBanner,
+    UILayerContentBar: CustomContentBar,
+  }),
   [MandatoryModuleNames.Internationalizer]: new I18NextInternationalizer({
     translationResources: translations,
   }),

@@ -18,10 +18,6 @@
 
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {UIHeaderProps} from "../../../types/modules/ui/header/headerModuleInterfaces";
-import {
-  ContentWithBarOrchestrator,
-  ContentWithBarOrchestratorProps,
-} from "./contentWithBar/contentWithBarOrchestrator";
 import {HeaderOrchestrator} from "./header/headerOrchestrator";
 import {CookieBannerOrchestrator} from "./cookiebanner/cookieBannerOrchestrator";
 import {
@@ -30,18 +26,22 @@ import {
 } from "./navbar/navbarOrchestrator";
 import {
   UIExtras,
-  UIModule,
+  UIModuleType,
   UIState,
 } from "../../../types/modules/ui/uiModuleInterfaces";
 import {MandatoryModuleNames} from "../../../constants/moduleNames";
 import {UINavbarProps} from "../../../types/modules/ui/navbar/navbarModuleInterfaces";
 import {UICookieBannerProps} from "../../../types/modules/ui/cookieBanner/cookieBannerModuleInterfaces";
-import {UIContentWithBarProps} from "../../../types/modules/ui/contentWithBar/contentWIthBarModuleInterfaces";
 import React from "react";
+import {
+  ContentBarOrchestrator,
+  ContentBarOrchestratorProps,
+} from "./contentBar/contentBarOrchestrator";
+import {UIContentBarProps} from "../../../types/modules/ui/contentBar/contentBarModuleInterfaces";
 
 export type UIOverrides = {
   Header?: React.ComponentType<UIHeaderProps>;
-  ContentWithBar?: React.ComponentType<UIContentWithBarProps>;
+  ContentBar?: React.ComponentType<UIContentBarProps>;
   CookieBanner?: React.ComponentType<UICookieBannerProps>;
   Navbar?: React.ComponentType<UINavbarProps>;
 };
@@ -62,7 +62,7 @@ const initialState: UIState = {
   collapsible: true,
 };
 
-export class UIOrchestrator implements UIModule<UIState> {
+export class UIOrchestrator implements UIModuleType<UIState> {
   public id = "ui-orchestrator";
   public name = "UI Orchestrator";
 
@@ -74,9 +74,9 @@ export class UIOrchestrator implements UIModule<UIState> {
   public UILayerHeader: React.ComponentType<
     UIHeaderProps & {uiComponent?: React.ComponentType<UIHeaderProps>}
   >;
-  public UILayerContentWithBar: React.ComponentType<
-    ContentWithBarOrchestratorProps & {
-      uiComponent?: React.ComponentType<UIContentWithBarProps>;
+  public UILayerContentBar: React.ComponentType<
+    ContentBarOrchestratorProps & {
+      uiComponent?: React.ComponentType<UIContentBarProps>;
     }
   >;
   public UILayerCookieBanner: React.ComponentType<{
@@ -126,9 +126,9 @@ export class UIOrchestrator implements UIModule<UIState> {
       />
     );
 
-    this.UILayerContentWithBar = (p) => (
-      <ContentWithBarOrchestrator
-        uiComponent={p.uiComponent ?? overrides?.ContentWithBar}
+    this.UILayerContentBar = (p) => (
+      <ContentBarOrchestrator
+        uiComponent={p.uiComponent ?? overrides?.ContentBar}
         {...p}
       />
     );

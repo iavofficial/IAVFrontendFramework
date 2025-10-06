@@ -1,9 +1,3 @@
-/**
- * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr,
- * All Rights Reserved.
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import "primeflex/primeflex.css";
 import "primereact/resources/themes/nova/theme.css";
 import "primereact/resources/primereact.css";
@@ -33,7 +27,6 @@ import "../css/globalSettings.css";
 import "../css/globalColors.css";
 import "@iavofficial/frontend-framework-shared/css/authenticationView.css";
 import {TabAndContentWrapper} from "./navbar/wrappers/typesWrappers";
-import {UIModule} from "@iavofficial/frontend-framework-shared/dist/types/modules/ui/uiModuleInterfaces";
 
 export interface AuthOptions {
   backgroundImage?: string;
@@ -59,7 +52,6 @@ export interface Props {
   authOptions?: AuthOptions;
   navbarOptions?: NavbarOptions;
   hideNavbar?: boolean;
-  uiComponents?: UIModule;
 }
 
 export const UILayer: React.FC<Props> = (props) => {
@@ -68,7 +60,6 @@ export const UILayer: React.FC<Props> = (props) => {
   const uiModule = useModule(MandatoryModuleNames.UI);
 
   const UILayerRouter = routerModule.UiLayerRouter;
-
   const UILayerCookieBanner = uiModule.UILayerCookieBanner;
 
   const [, setCookie] = useCookies([ACCEPTED_COOKIES_NAME]);
@@ -117,7 +108,6 @@ export const UILayer: React.FC<Props> = (props) => {
           legalDocuments={props.legalDocuments}
           tabAndContentWrappers={props.tabAndContentWrappers}
           hideNavbar={props.hideNavbar}
-          uiComponents={props.uiComponents}
         />
       ),
     },
@@ -131,9 +121,7 @@ export const UILayer: React.FC<Props> = (props) => {
       staticCollapsedState={props.navbarOptions?.staticCollapsedState}
     >
       {!props.disableCookieBanner && UILayerCookieBanner && (
-        <UILayerCookieBanner
-          uiComponent={props.uiComponents?.UILayerCookieBanner}
-        />
+        <UILayerCookieBanner />
       )}
 
       {UILayerRouter ? (
@@ -151,7 +139,6 @@ export const UILayer: React.FC<Props> = (props) => {
           legalDocuments={props.legalDocuments}
           tabAndContentWrappers={props.tabAndContentWrappers}
           hideNavbar={props.hideNavbar}
-          uiComponents={props.uiComponents}
         />
       )}
     </NavbarSettingsProvider>

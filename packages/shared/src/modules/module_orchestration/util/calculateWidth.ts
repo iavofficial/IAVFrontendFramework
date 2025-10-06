@@ -15,19 +15,24 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
+import {
+  DEFAULT_ELEMENT_SIZE,
+  DEFAULT_WIDTH_CONTENT_SECTION_ELEMENT,
+} from "../../../constants/constants";
 
-import { ContentWithBarOrchestrator } from "@iavofficial/frontend-framework-shared/contentWithBarOrchestrator";
-import { AntDesignContentWithBar } from "./antDesignContentWithBar";
-import { ContentWithBarModule } from "@iavofficial/frontend-framework-shared/contentWithBarModuleInterfaces";
-
-export class AntDesignContentWithBarModule implements ContentWithBarModule {
-  UiLayerContentWithBar: React.FC;
-  constructor() {
-    this.UiLayerContentWithBar = (props) => (
-      <ContentWithBarOrchestrator
-        {...props}
-        uiComponent={AntDesignContentWithBar}
-      />
-    );
+export function calculateWidth(
+  navbarCollapsed: boolean,
+  width: number,
+  addable: boolean,
+  overflow: boolean,
+): number {
+  if (!overflow) {
+    return DEFAULT_WIDTH_CONTENT_SECTION_ELEMENT;
   }
+
+  if (addable) {
+    width = width - DEFAULT_ELEMENT_SIZE;
+  }
+
+  return width / (navbarCollapsed ? 6 : 5);
 }

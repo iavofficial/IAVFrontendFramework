@@ -33,7 +33,7 @@ import {calculateNavbarArrowFunctionColor} from "../../../../utils/ui/navbar/cal
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {
   UIExtras,
-  UIModule as IUIModule,
+  UIModuleType as IUIModule,
   UIStoreState,
 } from "../../../../types/modules/ui/uiModuleInterfaces";
 

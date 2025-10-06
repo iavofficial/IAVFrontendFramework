@@ -119,14 +119,15 @@
     "./setAcceptCookies": "./dist/utils/setAcceptCookies.js",
     "./cookieBannerModuleInterfaces": "./dist/types/modules/ui/cookieBanner/cookieBannerModuleInterfaces.js",
     "./cookieBannerOrchestrator": "./dist/modules/default_modules/ui/cookieBanner/cookieBannerOrchestrator.js",
-    "./contentWithBarModuleInterfaces": "./dist/types/modules/ui/contentWithBar/contentWithBarModuleInterfaces.js",
-    "./contentWithBarOrchestrator": "./dist/modules/default_modules/ui/contentWithBar/contentWithBarOrchestrator.js",
+    "./contentBarModuleInterfaces": "./dist/types/modules/ui/contentBar/contentBarModuleInterfaces.js",
+    "./contentBarOrchestrator": "./dist/modules/default_modules/ui/contentBar/contentBarOrchestrator.js",
     "./headerModuleInterfaces": "./dist/types/modules/ui/header/headerModuleInterfaces.js",
     "./headerOrchestrator": "./dist/modules/default_modules/ui/header/headerOrchestrator.js",
     "./navbarModuleInterfaces": "./dist/types/modules/ui/navbar/navbarModuleInterfaces.js",
     "./navbarOrchestrator": "./dist/modules/default_modules/ui/navbar/navbarOrchestrator.js",
     "./uiModuleInterfaces": "./dist/types/modules/ui/uiModuleInterfaces.js",
-    "./uiOrchestrator": "./dist/modules/default_modules/ui/uiOrchestrator.js"
+    "./uiOrchestrator": "./dist/modules/default_modules/ui/uiOrchestrator.js",
+    "./uiModule": "./dist/modules/default_modules/ui/uiModule.js"
   },
   "typesVersions": {
     "*": {
@@ -211,11 +212,11 @@
       "./cookieBannerOrchestrator": [
         "./dist/modules/default_modules/ui/cookieBanner/cookieBannerOrchestrator.d.ts"
       ],
-      "./contentWithBarModuleInterfaces": [
-        "./dist/types/modules/ui/contentWithBar/contentWithBarModuleInterfaces.d.ts"
+      "./contentBarModuleInterfaces": [
+        "./dist/types/modules/ui/contentBar/contentBarModuleInterfaces.d.ts"
       ],
-      "./contentWithBarOrchestrator": [
-        "./dist/modules/default_modules/ui/contentWithBar/contentWithBarOrchestrator.d.ts"
+      "./contentBarOrchestrator": [
+        "./dist/modules/default_modules/ui/contentBar/contentBarOrchestrator.d.ts"
       ],
       "./headerModuleInterfaces": [
         "./dist/types/modules/ui/header/headerModuleInterfaces.d.ts"
@@ -234,6 +235,9 @@
       ],
       "./uiOrchestrator": [
         "./dist/modules/default_modules/ui/uiOrchestrator.d.ts"
+      ],
+      "./uiModule": [
+        "./dist/modules/default_modules/ui/uiModule.d.ts"
       ]
     }
   },

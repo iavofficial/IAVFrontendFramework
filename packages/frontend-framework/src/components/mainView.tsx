@@ -1,21 +1,3 @@
-/**
- * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import React, {useContext, useMemo} from "react";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
@@ -27,7 +9,6 @@ import {UserMenuOptions} from "./header/userMenu";
 import {TabAndContentWrapper} from "./navbar/wrappers/typesWrappers";
 import {LegalDocument} from "./imprint/legalDocument";
 import If from "./helper/If";
-import {UIModule} from "@iavofficial/frontend-framework-shared/uiModuleInterfaces";
 
 interface MainViewProps {
   tabAndContentWrappers: TabAndContentWrapper[];
@@ -36,7 +17,6 @@ interface MainViewProps {
   settingsMenuOptions?: SettingsMenuOptions;
   userMenuOptions?: UserMenuOptions;
   hideNavbar?: boolean;
-  uiComponents?: UIModule;
 }
 
 export const MainView: React.FC<MainViewProps> = (props) => {
@@ -44,11 +24,8 @@ export const MainView: React.FC<MainViewProps> = (props) => {
   const routerModule = useModule(MandatoryModuleNames.Router);
   const ui = useModule(MandatoryModuleNames.UI);
 
-  const DefaultHeader = ui.UILayerHeader;
-  const DefaultNavbar = ui.UILayerNavbar;
-
-  const Header = props.uiComponents?.UILayerHeader ?? DefaultHeader;
-  const Navbar = props.uiComponents?.UILayerNavbar ?? DefaultNavbar;
+  const Header = ui.UILayerHeader;
+  const Navbar = ui.UILayerNavbar;
 
   const contentAreaBackground =
     colorSettingsContext.currentColors.contentArea.backgroundColor;

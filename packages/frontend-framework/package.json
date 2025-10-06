@@ -99,6 +99,7 @@
     "./typesWrappers": "./dist/components/navbar/wrappers/typesWrappers.js",
     "./customContentbarWrapper": "./dist/components/content/customContentbarWrapper.js",
     "./basicContentbarWrapper": "./dist/components/content/basicContentbarWrapper.js",
+    "./contentBarButtonElement": "./dist/components/content/contentBarButtonElement.js",
     "./contentBar": "./dist/components/content/contentBar.js",
     "./contentWithBar": "./dist/components/content/contentWithBar.js",
     "./contentLayout": "./dist/components/content/contentLayout.js",
@@ -202,6 +203,9 @@
       ],
       "./basicContentbarWrapper": [
         "./dist/components/content/basicContentbarWrapper.d.ts"
+      ],
+      "./contentBarButtonElement": [
+        "./dist/components/content/contentBarButtonElement.d.ts"
       ],
       "./contentBar": [
         "./dist/components/content/contentBar.d.ts"

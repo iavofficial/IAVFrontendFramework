@@ -30,7 +30,6 @@ import {
 } from "../../types/modules/moduleOrchestrationTypes";
 import {ReactRouterRouter} from "../default_modules/router/reactRouterRouterModule";
 import {I18NextInternationalizer} from "../default_modules/internationalization/i18NextInternationalizerModule";
-import {DefaultUIModule} from "../default_modules/ui/uiModule";
 import {UIOrchestrator} from "../default_modules/ui/uiOrchestrator";
 
 //import {CookieBanner} from "../default_modules/cookie/cookieBanner";
@@ -53,7 +52,6 @@ export type DefaultStoreModules = typeof defaultStoreModules;
 
 export const defaultNonStoreModules = {
   [MandatoryModuleNames.Router]: new ReactRouterRouter(),
-  [MandatoryModuleNames.UI]: new DefaultUIModule(),
 };
 
 export type DefaultNonStoreModules = typeof defaultNonStoreModules;

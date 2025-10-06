@@ -23,9 +23,9 @@ import {MandatoryModuleNames} from "../../../constants/moduleNames";
 import {UIHeaderProps} from "./header/headerModuleInterfaces";
 import {UINavbarProps} from "./navbar/navbarModuleInterfaces";
 import {UICookieBannerProps} from "./cookieBanner/cookieBannerModuleInterfaces";
-import {UIContentWithBarProps} from "./contentWithBar/contentWIthBarModuleInterfaces";
 import {NavbarOrchestratorProps} from "../../../modules/default_modules/ui/navbar/navbarOrchestrator";
-import {ContentWithBarOrchestratorProps} from "../../../modules/default_modules/ui/contentWithBar/contentWithBarOrchestrator";
+import {ContentBarOrchestratorProps} from "../../../modules/default_modules/ui/contentBar/contentBarOrchestrator";
+import {UIContentBarProps} from "./contentBar/contentBarModuleInterfaces";
 
 export type UIState = {
   navbarCollapsed: boolean;
@@ -42,13 +42,13 @@ export type UIExtras = {
   setCollapsible: (payload: boolean) => {type: string; payload: boolean};
 };
 
-export type UIModule<TState extends UIState = UIState> = {
+export type UIModuleType<TState extends UIState = UIState> = {
   UILayerHeader: React.ComponentType<
     UIHeaderProps & {uiComponent?: React.ComponentType<UIHeaderProps>}
   >;
-  UILayerContentWithBar: React.ComponentType<
-    ContentWithBarOrchestratorProps & {
-      uiComponent?: React.ComponentType<UIContentWithBarProps>;
+  UILayerContentBar: React.ComponentType<
+    ContentBarOrchestratorProps & {
+      uiComponent?: React.ComponentType<UIContentBarProps>;
     }
   >;
   UILayerCookieBanner: React.ComponentType<{

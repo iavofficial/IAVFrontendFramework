@@ -32,7 +32,7 @@ import {
   InternationalizerModule,
   InternationalizerState,
 } from "./internationalization/internationalizerModule";
-import {UIModule} from "./ui/uiModuleInterfaces";
+import {UIModuleType} from "./ui/uiModuleInterfaces";
 
 export type FFStoreModules<TModulesState = unknown> = {
   [K in keyof TModulesState]: FFStoreModule<TModulesState[K]>;
@@ -58,7 +58,7 @@ export type FFMandatoryStoreModules<
   [MandatoryModuleNames.Internationalizer]: InternationalizerModule<
     TModulesState[typeof MandatoryModuleNames.Internationalizer]
   >;
-  [MandatoryModuleNames.UI]: UIModule<
+  [MandatoryModuleNames.UI]: UIModuleType<
     TModulesState[typeof MandatoryModuleNames.UI]
   >;
 };
@@ -66,7 +66,7 @@ export type FFMandatoryStoreModules<
 // The types of all default M mandatory modules without a state for the store.
 export type FFMandatoryNonStoreModules = {
   [MandatoryModuleNames.Router]: RouterModule;
-  [MandatoryModuleNames.UI]: UIModule;
+  [MandatoryModuleNames.UI]: UIModuleType;
 };
 
 export type FFAllMandatoryModules<

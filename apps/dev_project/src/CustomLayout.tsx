@@ -33,9 +33,6 @@ import { ExampleComponent4 } from "./components/exampleComponent4";
 import { ExampleComponent5 } from "./components/exampleComponent5";
 import { ExampleComponent6 } from "./components/exampleComponent6";
 import { ExampleComponent7 } from "./components/exampleComponent7";
-import CustomHeader from "./components/ui_test/CustomHeader";
-import CustomNavbar from "./components/ui_test/CustomNavbar";
-import CustomCookieBanner from "./components/ui_test/CustomCookieBanner";
 
 const CustomLayout: React.FC = () => {
   const views = useMemo(
@@ -163,11 +160,6 @@ const CustomLayout: React.FC = () => {
         reactElementLeft: <span className="ml-3">Dev application</span>,
         headerElements: headerElements,
         hideUserIcon: false,
-      }}
-      uiComponents={{
-        UILayerHeader: CustomHeader,
-        UILayerNavbar: CustomNavbar,
-        UILayerCookieBanner: CustomCookieBanner,
       }}
     />
   );

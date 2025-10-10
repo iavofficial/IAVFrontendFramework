@@ -20,7 +20,7 @@ import React, {ReactElement, useContext} from "react";
 import "./header.css";
 import {ContextMenu} from "primereact/contextmenu";
 import UserIcon from "../../assets/svg/userIcon";
-import CompanyLogo from "../../assets/svg/companyLogo";
+import CompanyLogo from "@iavofficial/frontend-framework-shared/svg/companyLogo.js";
 import SettingsIcon from "../../assets/svg/settingsIcon";
 import {SettingsMenu, SettingsMenuOptions} from "./settingsMenu";
 import {UserMenu, UserMenuOptions} from "./userMenu";

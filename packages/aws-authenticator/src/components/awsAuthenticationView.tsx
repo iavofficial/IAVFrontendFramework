@@ -24,7 +24,7 @@ import loginBackgroundDarkMode from "@iavofficial/frontend-framework-shared/png/
 import {Dropdown, DropdownChangeEvent} from "primereact/dropdown";
 import {parseLanguageResourcesIntoDropdownFormat} from "@iavofficial/frontend-framework-shared/parseLanguageResourcesIntoDropdownFormat";
 import {generateHashOfLength} from "@iavofficial/frontend-framework-shared/hash";
-//import CompanyLogo from "@iavofficial/frontend-framework-shared/svg/companyLogo";
+import CompanyLogo from "@iavofficial/frontend-framework-shared/svg/companyLogo.js";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {
   AwsAuthenticatorAuthDispatch,
@@ -146,7 +146,7 @@ export const AwsAuthenticationView = <
         paddingRight: `${PADDING_GAB}px`,
       }}
     >
-      {/*<CompanyLogo fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE} />*/}
+      <CompanyLogo fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE} />
     </div>
   );
 

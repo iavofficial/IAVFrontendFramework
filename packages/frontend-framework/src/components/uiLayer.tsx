@@ -44,7 +44,7 @@ import {useDefaultSelector} from "@iavofficial/frontend-framework-shared/moduleD
 import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
 import {LegalDocument} from "./imprint/legalDocument";
-import {useRemoveKnownCookies} from "./cookie/cookieHooks";
+import {useRemoveKnownCookies} from "@iavofficial/frontend-framework-shared/cookieHooks";
 
 export interface AuthOptions {
   backgroundImage?: string;

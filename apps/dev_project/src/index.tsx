@@ -23,6 +23,6 @@ import { AppDefaultAuthentication } from "./components/default_example/AppDefaul
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <AppAwsAuthentication />
+    <AppDefaultAuthentication />
   </React.StrictMode>,
 );

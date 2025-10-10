@@ -94,6 +94,12 @@ export const AwsAuthenticationView = <
 
   const t = intModule.useTranslation();
 
+  const currentLang = langContext?.activeLang;
+  const resources = langContext?.resources;
+  const currentRes =
+    currentLang && resources ? resources[currentLang] : undefined;
+  const placeholder = currentRes?.translation?.option_name ?? "";
+
   const passwortRequirementsTextColor =
     colorSettingsContext.currentColors.authenticationView
       .passwortRequirementsTextColor;

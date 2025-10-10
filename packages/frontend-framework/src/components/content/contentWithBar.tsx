@@ -48,12 +48,6 @@ export const ContentWithBar = (
   const contentAreaBackground =
     colorSettingsContext.currentColors.contentArea.backgroundColor;
 
-  const selectedContentWrapper = useMemo(() => {
-    return props.contentWrappers.find(
-      (currentWrapper) => currentWrapper.getId() === props.selectedId,
-    );
-  }, [props.contentWrappers, props.selectedId]);
-
   const contentBarStyles = useMemo(() => {
     const tempContentbarStyles: ContentBarStylesArray = [];
     Object.values(ContentBarStyles).forEach((contentBarStyle) => {
@@ -66,6 +60,18 @@ export const ContentWithBar = (
     });
     return tempContentbarStyles;
   }, [props.contentStyle]);
+
+  const getDisplayForSelected = (layoutBehaviour: LayoutBehaviour) => {
+    switch (layoutBehaviour) {
+      case LayoutBehaviour.FLEX:
+      case LayoutBehaviour.FLEX_COL:
+        return "flex";
+      case LayoutBehaviour.GRID:
+        return "flex";
+      default:
+        return "block";
+    }
+  };
 
   return (
     <div
@@ -100,7 +106,32 @@ export const ContentWithBar = (
           layoutBehaviour={props.layoutBehaviour}
           contentStyle={props.contentStyle}
         >
-          {selectedContentWrapper?.getContentAreaElement()}
+          {props.contentWrappers.map((wrapper) => {
+            const isSelected = wrapper.getId() === props.selectedId;
+
+            const displayStyle = isSelected
+              ? getDisplayForSelected(
+                  props.layoutBehaviour ?? LayoutBehaviour.NONE,
+                )
+              : "none";
+
+            const style: React.CSSProperties = {
+              display: displayStyle,
+              flexGrow: 1,
+              height: "100%",
+              width: "100%",
+              overflow: "auto",
+              ...(props.layoutBehaviour === LayoutBehaviour.FLEX_COL
+                ? {flexDirection: "column"}
+                : {}),
+            };
+
+            return (
+              <div key={wrapper.getId()} style={style}>
+                {wrapper.getContentAreaElement()}
+              </div>
+            );
+          })}
         </ContentLayout>
       </div>
     </div>

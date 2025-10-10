@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, {ReactElement, useContext, useMemo, useState} from "react";
+import React, {ReactElement, useContext, useState} from "react";
 import "../tabs.css";
 import {GroupableNavbarTab, NavbarTabProps} from "../typesNavbarTab";
 import {SimpleNavbarTabCollapsed} from "./simpleNavbarTabCollapsed";

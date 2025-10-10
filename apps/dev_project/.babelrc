@@ -10,9 +10,13 @@
     ]
   ],
   "plugins": [
-    ["@babel/plugin-transform-typescript", {}],
-
-    "@babel/plugin-proposal-class-properties"
+    [
+      "@babel/plugin-transform-typescript",
+      {}
+    ],
+    "@babel/plugin-transform-class-properties"
   ],
-  "ignore": ["src/**/*.d.ts"]
+  "ignore": [
+    "src/**/*.d.ts"
+  ]
 }

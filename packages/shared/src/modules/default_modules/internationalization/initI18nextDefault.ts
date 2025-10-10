@@ -31,8 +31,10 @@ export const initI18nextDefault = (params: InitI18nextFunctionParams) => {
       fallbackLng: fallbackLang,
       resources: translationResources,
       detection: {
-        caches: [acceptedCookies ? "cookie" : ""],
+        order: ["cookie", "localStorage", "navigator"],
+        lookupCookie: "i18next",
         cookieMinutes: 525600,
+        ...(acceptedCookies ? {caches: ["cookie"]} : {caches: []}),
       },
     });
 };

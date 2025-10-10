@@ -29,7 +29,7 @@ import {
   WHITE,
 } from "@iavofficial/frontend-framework-shared/constants";
 
-//. Header
+// Header
 export const LIGHT_HEADER_BACKGROUND_COLOR = BLUE0;
 export const DARK_HEADER_BACKGROUND_COLOR = GREY6;
 

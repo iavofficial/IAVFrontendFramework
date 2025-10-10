@@ -208,6 +208,14 @@ export const ContentBar = (props: PropsContentBar) => {
 
   const isNavbarCollapsed = navbarSettingsContext?.navbarCollapsed ?? false;
 
+  const visibleElements =
+    contentElements.length > amountOfRenderedTabElements
+      ? contentElements.slice(
+          startRenderElements,
+          startRenderElements + amountOfRenderedTabElements,
+        )
+      : contentElements;
+
   return (
     <div
       ref={contentRef}
@@ -261,8 +269,10 @@ export const ContentBar = (props: PropsContentBar) => {
                   ),
                   selectedId,
                   contentElements[0].getId(),
-                ),
-              )}
+                )}
+              </div>
+            );
+          })}
         </div>
         <div className="flex align-items-center">
           <ContentBarButtonElement

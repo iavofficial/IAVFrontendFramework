@@ -33,6 +33,7 @@ export interface NavbarTabProps<OptionType> {
   icon?: ReactElement;
   collapsed?: boolean;
   active?: boolean;
+  basePath?: string;
 }
 
 /**

@@ -30,8 +30,6 @@ import {NavbarSettingsProvider} from "../contexts/providers/navbarSettingsProvid
 import {StaticCollapsedState} from "../types/navbarSettingsTypes";
 import {HeaderOptions} from "./header/header";
 import {UserMenuOptions} from "./header/userMenu";
-import {setAcceptCookies} from "../utils/setAcceptCookies";
-import {useCookies} from "react-cookie";
 import {ACCEPTED_COOKIES_NAME} from "@iavofficial/frontend-framework-shared/constants";
 import {AuthenticationViewProps} from "@iavofficial/frontend-framework-shared/authenticationViewProps";
 import "./uiLayer.css";
@@ -46,6 +44,7 @@ import {useDefaultSelector} from "@iavofficial/frontend-framework-shared/moduleD
 import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
 import {LegalDocument} from "./imprint/legalDocument";
+import {useRemoveKnownCookies} from "./cookie/cookieHooks";
 
 export interface AuthOptions {
   backgroundImage?: string;
@@ -74,13 +73,14 @@ export interface Props {
   authOptions?: AuthOptions;
   navbarOptions?: NavbarOptions;
   hideNavbar?: boolean;
+  customHeader?: React.ComponentType<any>;
 }
 
 export const UILayer = (props: Props) => {
   const {hasAuthenticated} = useDefaultSelector((state) => state.auth);
   const routerModule = useModule(MandatoryModuleNames.Router);
 
-  const [, setCookie] = useCookies([ACCEPTED_COOKIES_NAME]);
+  const removeKnownCookies = useRemoveKnownCookies();
 
   const disableLogin = !!props.disableLogin;
 
@@ -96,9 +96,9 @@ export const UILayer = (props: Props) => {
 
   useEffect(() => {
     if (props.disableCookieBanner) {
-      setAcceptCookies(setCookie);
+      removeKnownCookies({path: "/"});
     }
-  }, [props.disableCookieBanner, setCookie]);
+  }, [props.disableCookieBanner, removeKnownCookies]);
 
   const dynamicRoutes =
     props.legalDocuments?.map((doc) => ({
@@ -151,6 +151,7 @@ export const UILayer = (props: Props) => {
     <NavbarSettingsProvider
       staticCollapsedState={props.navbarOptions?.staticCollapsedState}
     >
+      {/* Banner nur zeigen, wenn er nicht deaktiviert ist */}
       {!props.disableCookieBanner && <CookieBanner />}
 
       {

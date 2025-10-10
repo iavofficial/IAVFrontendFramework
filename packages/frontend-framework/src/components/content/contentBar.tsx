@@ -269,8 +269,8 @@ export const ContentBar = (props: PropsContentBar) => {
                   ),
                   selectedId,
                   contentElements[0].getId(),
-                ))
-          }
+                ),
+              )}
         </div>
         <div className="flex align-items-center">
           <ContentBarButtonElement

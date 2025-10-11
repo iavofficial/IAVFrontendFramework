@@ -113,7 +113,8 @@ export const ExampleComponent1 = () => {
       let hash = index === 0 ? hashOfFirstElement : generateHashOfLength(6);
       let newBasicContentWrapperElement = new BasicContentbarWrapper({
         id: hash,
-        displayName: (t: TranslationFunction) => `${t({ key: "car" })} ${index}`,
+        displayName: (t: TranslationFunction) =>
+          `${t({ key: "car" })} ${index}`,
         onClick: selectElement,
         contentAreaElement: (
           <ContentbarExampleWithText exampleText={`car ${index}`} key={hash} />

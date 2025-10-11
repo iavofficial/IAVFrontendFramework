@@ -24,7 +24,11 @@ import {
 } from "./contentBar";
 import {BasicContentbarWrapper} from "./basicContentbarWrapper";
 import {CustomContentbarWrapper} from "./customContentbarWrapper";
-import {ContentLayout, ContentLayoutAndStyleProps, LayoutBehaviour} from "./contentLayout";
+import {
+  ContentLayout,
+  ContentLayoutAndStyleProps,
+  LayoutBehaviour,
+} from "./contentLayout";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 
 export type ContentWithBarProps = {

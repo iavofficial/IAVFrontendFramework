@@ -29,7 +29,7 @@ import translationDECH from "../../assets/translations/de-CH.json";
 import CustomHeader from "../ui_test/CustomHeader.tsx";
 import CustomNavbar from "../ui_test/CustomNavbar.tsx";
 import CustomCookieBanner from "../ui_test/CustomCookieBanner.tsx";
-import { UIModule } from "@iavofficial/frontend-framework-shared/uiModule";
+import { UIModule } from "@iavofficial/frontend-framework-shared/dist/modules/default_modules/ui/uiModule.tsx";
 
 const translations = {
   es: {

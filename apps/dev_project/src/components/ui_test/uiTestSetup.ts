@@ -26,7 +26,7 @@ import { ReactRouterRouter } from "@iavofficial/frontend-framework-shared/reactR
 
 import { MandatoryModuleNames } from "@iavofficial/frontend-framework/constants";
 import { translations } from "../aws_test/translations.ts";
-import { UIModule } from "@iavofficial/frontend-framework-shared/uiModule";
+import { UIModule } from "@iavofficial/frontend-framework-shared/dist/modules/default_modules/ui/uiModule.tsx";
 import CustomHeader from "./CustomHeader.tsx";
 import CustomNavbar from "./CustomNavbar.tsx";
 import CustomCookieBanner from "./CustomCookieBanner.tsx";

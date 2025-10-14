@@ -17,7 +17,11 @@
  */
 
 import React from "react";
+import { Button, Layout, Space, theme, Typography } from "antd";
+import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { UINavbarProps } from "@iavofficial/frontend-framework-shared/navbarModuleInterfaces";
+
+const { Sider } = Layout;
 
 const CustomNavbar: React.FC<UINavbarProps> = ({
   items,
@@ -29,54 +33,59 @@ const CustomNavbar: React.FC<UINavbarProps> = ({
   dims,
   arrowClassName,
 }) => {
+  const { token } = theme.useToken();
+
   return (
-    <div
+    <Sider
+      collapsible={collapsible}
+      collapsed={collapsed}
+      trigger={null}
+      width={dims.unfoldedWidth}
+      collapsedWidth={dims.collapsedWidth}
       style={{
-        width: collapsed ? dims.collapsedWidth : dims.unfoldedWidth,
-        borderRight: "1px solid #eee",
+        background: colors.navbarBg ?? token.colorBgContainer,
         padding: collapsed ? dims.paddingCollapsed : dims.paddingUnfolded,
+        overflow: "auto",
+        borderRight: `1px solid ${token.colorBorderSecondary}`,
         display: "flex",
         flexDirection: "column",
         gap: 8,
-        background: colors.navbarBg,
-        overflow: "auto",
       }}
     >
       {collapsible && (
-        <button
+        <Button
+          type="text"
           onClick={onToggleCollapse}
           className={arrowClassName}
+          icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
           style={{
-            padding: 8,
-            border: "1px solid #ddd",
-            background: "#fff",
-            cursor: "pointer",
+            alignSelf: "flex-end",
+            marginBottom: 8,
           }}
-        ></button>
+        />
       )}
 
-      <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+      <Space direction="vertical" size={6} style={{ width: "100%" }}>
         {items.map((node, i) => (
           <div key={i}>{node}</div>
         ))}
-      </div>
+      </Space>
 
       {!!legalLinks.length && (
-        <div
+        <Space
+          direction="vertical"
+          size={4}
           style={{
             marginTop: "auto",
-            display: "flex",
-            flexDirection: "column",
-            gap: 4,
-            color: colors.legalLink,
+            color: colors.legalLink ?? token.colorTextSecondary,
           }}
         >
           {legalLinks.map((linkNode, i) => (
-            <div key={i}>{linkNode}</div>
+            <Typography.Text key={i}>{linkNode}</Typography.Text>
           ))}
-        </div>
+        </Space>
       )}
-    </div>
+    </Sider>
   );
 };
 

@@ -17,19 +17,24 @@
  */
 
 import React from "react";
-import { Button, Space, Typography } from "antd";
+import { Button, Layout, Space, theme, Typography } from "antd";
 import { UIHeaderProps } from "@iavofficial/frontend-framework-shared/headerModuleInterfaces";
 
+const { Header } = Layout;
+
 const CustomHeader = (props: UIHeaderProps) => {
+  const { token } = theme.useToken();
+
   return (
-    <div
+    <Header
       style={{
         height: 64,
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
         padding: "0 16px",
-        borderBottom: "1px solid #eee",
+        borderBottom: `1px solid ${token.colorBorderSecondary}`,
+        background: token.colorBgContainer,
       }}
     >
       <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
@@ -37,17 +42,19 @@ const CustomHeader = (props: UIHeaderProps) => {
           <Typography.Text strong>App</Typography.Text>
         )}
       </div>
+
       <Space size={12}>
         {(props.headerOptions?.headerElements ?? []).map((el, i) => (
           <span key={i}>{el}</span>
         ))}
       </Space>
+
       <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
         {props.headerOptions?.reactElementRight ?? (
           <Button type="primary">Action</Button>
         )}
       </div>
-    </div>
+    </Header>
   );
 };
 

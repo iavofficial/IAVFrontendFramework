@@ -17,6 +17,8 @@
  */
 
 import React from "react";
+import { Button, theme } from "antd";
+import { LeftOutlined, PlusOutlined, RightOutlined } from "@ant-design/icons";
 import { ContentBarViewProps } from "@iavofficial/frontend-framework-shared/contentBarModuleInterfaces";
 
 const CustomContentBar = (props: ContentBarViewProps) => {
@@ -36,32 +38,32 @@ const CustomContentBar = (props: ContentBarViewProps) => {
     hasSpacing,
   } = props;
 
+  const { token } = theme.useToken();
+
   return (
     <div
       style={{
         height: 56,
         minHeight: 56,
         padding: hasSpacing ? "12px 12px 0 12px" : 0,
-        backgroundColor: containerBg,
+        backgroundColor: containerBg ?? token.colorBgContainer,
         display: "flex",
         alignItems: "center",
         gap: 8,
       }}
     >
-      <button
+      <Button
+        icon={<LeftOutlined />}
         onClick={slideLeft}
         disabled={!canSlideLeft}
         style={{
           height: 32,
           minWidth: 32,
-          border: "none",
           borderRadius: 8,
-          background: barBg,
-          cursor: canSlideLeft ? "pointer" : "default",
+          background: barBg ?? token.colorBgElevated,
         }}
-      >
-        ‹
-      </button>
+      />
+
       <div
         style={{
           flex: 1,
@@ -70,7 +72,7 @@ const CustomContentBar = (props: ContentBarViewProps) => {
           alignItems: "center",
           gap: 8,
           padding: "0 16px",
-          background: barBg,
+          background: barBg ?? token.colorBgElevated,
           height: 40,
           borderRadius: 8,
         }}
@@ -79,34 +81,31 @@ const CustomContentBar = (props: ContentBarViewProps) => {
           el.getContentbarElement(elementWidth, selectedId, firstId),
         )}
       </div>
+
       {addable && (
-        <button
+        <Button
+          icon={<PlusOutlined />}
           onClick={onAdd}
           style={{
             height: 32,
             minWidth: 32,
-            border: "none",
             borderRadius: 8,
-            background: barBg,
+            background: barBg ?? token.colorBgElevated,
           }}
-        >
-          +
-        </button>
+        />
       )}
-      <button
+
+      <Button
+        icon={<RightOutlined />}
         onClick={slideRight}
         disabled={!canSlideRight}
         style={{
           height: 32,
           minWidth: 32,
-          border: "none",
           borderRadius: 8,
-          background: barBg,
-          cursor: canSlideRight ? "pointer" : "default",
+          background: barBg ?? token.colorBgElevated,
         }}
-      >
-        ›
-      </button>
+      />
     </div>
   );
 };

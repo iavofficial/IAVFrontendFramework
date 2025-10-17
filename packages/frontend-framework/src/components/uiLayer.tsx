@@ -45,6 +45,7 @@ import "../css/globalSettings.css";
 import "../css/globalColors.css";
 import "@iavofficial/frontend-framework-shared/css/authenticationView.css";
 import {TabAndContentWrapper} from "./navbar/wrappers/typesWrappers";
+import {useRemoveKnownCookies} from "@iavofficial/frontend-framework-shared/cookieHooks";
 
 export interface AuthOptions {
   backgroundImage?: string;
@@ -58,6 +59,7 @@ export interface NavbarOptions {
 }
 
 export interface Props {
+  // This indicates that the passed objects should have the type's properties at least.
   tabAndContentWrappers: TabAndContentWrapper[];
   initialPath: string;
   disableLogin?: boolean;
@@ -80,7 +82,7 @@ export const UILayer: React.FC<Props> = (props) => {
   const UILayerRouter = routerModule.UiLayerRouter;
   const UILayerCookieBanner = uiModule.UILayerCookieBanner;
 
-  const [, setCookie] = useCookies([ACCEPTED_COOKIES_NAME]);
+  const removeKnownCookies = useRemoveKnownCookies();
 
   const disableLogin = !!props.disableLogin;
   const AuthenticationView =
@@ -90,8 +92,10 @@ export const UILayer: React.FC<Props> = (props) => {
   if (props.disableLogin) userMenuOptions.hideLogoutButton = true;
 
   useEffect(() => {
-    if (props.disableCookieBanner) setAcceptCookies(setCookie);
-  }, [props.disableCookieBanner, setCookie]);
+    if (props.disableCookieBanner) {
+      removeKnownCookies({path: "/"});
+    }
+  }, [props.disableCookieBanner, removeKnownCookies]);
 
   const dynamicRoutes =
     props.legalDocuments?.map((doc) => ({

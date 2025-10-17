@@ -25,7 +25,7 @@ export interface HeaderColorOptions {
   userIconColor?: string;
 }
 
-//# Navbar color options
+// Navbar color options
 export interface NavbarColorOptions {
   backgroundColor?: string;
   navbarCollapseArrowColor?: string;

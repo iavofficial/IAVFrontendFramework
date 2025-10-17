@@ -20,6 +20,18 @@
 
 [![license](https://img.shields.io/badge/license-Apache--2.0-blue)](./LICENSE)
 
+> 🎉 **Version 1.5.0 is now available!**
+>
+> This release includes new features and important fixes:
+>
+> **Features**
+> - Add State System in ContentWithBar
+> - Add Renewing Session Interval for AWSAuthProvider
+>
+> **Fixes & Improvements**
+> - Selected Language is now saved
+> - Add getUserGroups as property in every AuthProvider
+
 ## About the Project
 
 The IAV Frontend Framework is designed to simplify the development of modern, scalable, and reusable frontend
@@ -43,9 +55,9 @@ information about the section can be found [here](https://github.com/iavofficial
 
 Here's a quick look of an example of the IAV Frontend Framework:
 
-<img src="https://iavofficial.github.io/IAVFrontendFramework/assets/login.png"/>
+<img src="https://iavofficial.github.io/IAVFrontendFramework/assets/index/login.png"/>
 
-<img src="https://iavofficial.github.io/IAVFrontendFramework/assets/menu.png"/>
+<img src="https://iavofficial.github.io/IAVFrontendFramework/assets/index/menu.png"/>
 
 ## License
 

@@ -1,3 +1,208 @@
+## [@iavofficial/frontend-framework-v1.5.2](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.5.1...@iavofficial/frontend-framework-v1.5.2) (2025-09-01)
+
+### Bug Fixes
+
+* add removeKnownCookies ([d1c5c7c](https://github.com/iavofficial/IAVFrontendFramework/commit/d1c5c7ce6d4770c42219aa76d613403e186806ba))
+* **contentwitbar:** use display flex instead of block for selected tab ([2ca0270](https://github.com/iavofficial/IAVFrontendFramework/commit/2ca027037fb27f9fee4b09ae9eae03af52b005f4))
+* contentWithBar.tsx url ([41c3477](https://github.com/iavofficial/IAVFrontendFramework/commit/41c3477f7176a1db7e9140711270e78e95fcedd5))
+* **cookies:** remove cookies if banner is disabled ([bb183c1](https://github.com/iavofficial/IAVFrontendFramework/commit/bb183c17f0009d0797c8c2eb8241ea83c8faf818))
+* different displays for each layout behavior ([89841b9](https://github.com/iavofficial/IAVFrontendFramework/commit/89841b93d76baa5cbc5e118b2b2a02462d437b04))
+* placeholder in awsAuthenticationView.tsx ([6bfc2c8](https://github.com/iavofficial/IAVFrontendFramework/commit/6bfc2c8ce8a834e799f5f2b6ddd282f74d5adeec))
+* re-ordering of variables ([801260d](https://github.com/iavofficial/IAVFrontendFramework/commit/801260d27d09767db2e1057d4a5b32ba7f3fe65e))
+* styling ([c45265a](https://github.com/iavofficial/IAVFrontendFramework/commit/c45265ac5bcd47e4a6e67ffa106e964d5f453a58))
+* use display flex instead of block for selected tab ([d83b04f](https://github.com/iavofficial/IAVFrontendFramework/commit/d83b04f9b6d98b05835ee523a3cced8cba6a059c))
+
+## [@iavofficial/frontend-framework-v1.5.2-dev.5](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.5.2-dev.4...@iavofficial/frontend-framework-v1.5.2-dev.5) (2025-08-29)
+
+### Bug Fixes
+
+* placeholder in awsAuthenticationView.tsx ([6bfc2c8](https://github.com/iavofficial/IAVFrontendFramework/commit/6bfc2c8ce8a834e799f5f2b6ddd282f74d5adeec))
+
+## [@iavofficial/frontend-framework-v1.5.2-dev.4](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.5.2-dev.3...@iavofficial/frontend-framework-v1.5.2-dev.4) (2025-08-29)
+
+### Bug Fixes
+
+* add removeKnownCookies ([d1c5c7c](https://github.com/iavofficial/IAVFrontendFramework/commit/d1c5c7ce6d4770c42219aa76d613403e186806ba))
+* **cookies:** remove cookies if banner is disabled ([bb183c1](https://github.com/iavofficial/IAVFrontendFramework/commit/bb183c17f0009d0797c8c2eb8241ea83c8faf818))
+* re-ordering of variables ([801260d](https://github.com/iavofficial/IAVFrontendFramework/commit/801260d27d09767db2e1057d4a5b32ba7f3fe65e))
+
+## [@iavofficial/frontend-framework-v1.5.2-dev.3](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.5.2-dev.2...@iavofficial/frontend-framework-v1.5.2-dev.3) (2025-08-18)
+
+### Bug Fixes
+
+* styling ([c45265a](https://github.com/iavofficial/IAVFrontendFramework/commit/c45265ac5bcd47e4a6e67ffa106e964d5f453a58))
+
+## [@iavofficial/frontend-framework-v1.5.2-dev.2](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.5.2-dev.1...@iavofficial/frontend-framework-v1.5.2-dev.2) (2025-06-20)
+
+### Bug Fixes
+
+* different displays for each layout behavior ([89841b9](https://github.com/iavofficial/IAVFrontendFramework/commit/89841b93d76baa5cbc5e118b2b2a02462d437b04))
+
+## [@iavofficial/frontend-framework-v1.5.2-dev.1](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.5.1...@iavofficial/frontend-framework-v1.5.2-dev.1) (2025-06-13)
+
+### Bug Fixes
+
+* **contentwitbar:** use display flex instead of block for selected tab ([2ca0270](https://github.com/iavofficial/IAVFrontendFramework/commit/2ca027037fb27f9fee4b09ae9eae03af52b005f4))
+* contentWithBar.tsx url ([41c3477](https://github.com/iavofficial/IAVFrontendFramework/commit/41c3477f7176a1db7e9140711270e78e95fcedd5))
+* use display flex instead of block for selected tab ([d83b04f](https://github.com/iavofficial/IAVFrontendFramework/commit/d83b04f9b6d98b05835ee523a3cced8cba6a059c))
+
+## [@iavofficial/frontend-framework-v1.5.1](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.5.0...@iavofficial/frontend-framework-v1.5.1) (2025-06-12)
+
+### Bug Fixes
+
+* contentWithBar.tsx ([6d04c1e](https://github.com/iavofficial/IAVFrontendFramework/commit/6d04c1e243aebeeeab520596289495eb949055e1))
+
+## [@iavofficial/frontend-framework-v1.5.1-dev.1](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.5.0...@iavofficial/frontend-framework-v1.5.1-dev.1) (2025-06-12)
+
+### Bug Fixes
+
+* contentWithBar.tsx ([6d04c1e](https://github.com/iavofficial/IAVFrontendFramework/commit/6d04c1e243aebeeeab520596289495eb949055e1))
+
+## [@iavofficial/frontend-framework-v1.5.0](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.2...@iavofficial/frontend-framework-v1.5.0) (2025-06-09)
+
+### Features
+
+* add user Groups ([8eeeeed](https://github.com/iavofficial/IAVFrontendFramework/commit/8eeeeed6b637ae7deebbeee44e1780f8a2445022))
+
+### Bug Fixes
+
+* add getUserGroups to AuthenticationProvider ([9b87ee4](https://github.com/iavofficial/IAVFrontendFramework/commit/9b87ee492de68d1b6c571dbfb1ba3abdde4b0745))
+* add renewing interval session ([bf17560](https://github.com/iavofficial/IAVFrontendFramework/commit/bf17560a23e8b03f88a621a6ea3604cce33d0c87))
+* add state ([39d5b99](https://github.com/iavofficial/IAVFrontendFramework/commit/39d5b990036c4cd277354399ee987c7892e7a873))
+* add user group ([e4990d2](https://github.com/iavofficial/IAVFrontendFramework/commit/e4990d23dfbb52c3415d9cb014a7ed028207d75c))
+* default selected id ([28f2b84](https://github.com/iavofficial/IAVFrontendFramework/commit/28f2b8440b983354a1fe8032a1bf70b6677cd4a5))
+* keep selected id ([96a5753](https://github.com/iavofficial/IAVFrontendFramework/commit/96a5753367cba665904e79b5bb89205bf84ca789))
+* keep selected id ([799c7e2](https://github.com/iavofficial/IAVFrontendFramework/commit/799c7e2fe6b6d66090fcef8c09c83cd3d071a794))
+* set default lang correctly ([058fef7](https://github.com/iavofficial/IAVFrontendFramework/commit/058fef79fee80d4d95854ff37946550c9c738e51))
+* set email to lower case ([13d6158](https://github.com/iavofficial/IAVFrontendFramework/commit/13d615811bbc72bfbec5f73a11b9b09791c72f93))
+
+## [@iavofficial/frontend-framework-v1.5.0-dev.3](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.5.0-dev.2...@iavofficial/frontend-framework-v1.5.0-dev.3) (2025-06-09)
+
+### Bug Fixes
+
+* add state ([39d5b99](https://github.com/iavofficial/IAVFrontendFramework/commit/39d5b990036c4cd277354399ee987c7892e7a873))
+
+## [@iavofficial/frontend-framework-v1.5.0-dev.2](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.5.0-dev.1...@iavofficial/frontend-framework-v1.5.0-dev.2) (2025-06-09)
+
+### Bug Fixes
+
+* set default lang correctly ([058fef7](https://github.com/iavofficial/IAVFrontendFramework/commit/058fef79fee80d4d95854ff37946550c9c738e51))
+
+## [@iavofficial/frontend-framework-v1.5.0-dev.1](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.3-dev.2...@iavofficial/frontend-framework-v1.5.0-dev.1) (2025-06-09)
+
+### Features
+
+* add user Groups ([8eeeeed](https://github.com/iavofficial/IAVFrontendFramework/commit/8eeeeed6b637ae7deebbeee44e1780f8a2445022))
+
+### Bug Fixes
+
+* add getUserGroups to AuthenticationProvider ([9b87ee4](https://github.com/iavofficial/IAVFrontendFramework/commit/9b87ee492de68d1b6c571dbfb1ba3abdde4b0745))
+* add user group ([e4990d2](https://github.com/iavofficial/IAVFrontendFramework/commit/e4990d23dfbb52c3415d9cb014a7ed028207d75c))
+
+## [@iavofficial/frontend-framework-v1.4.3-dev.2](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.3-dev.1...@iavofficial/frontend-framework-v1.4.3-dev.2) (2025-06-09)
+
+### Bug Fixes
+
+* default selected id ([28f2b84](https://github.com/iavofficial/IAVFrontendFramework/commit/28f2b8440b983354a1fe8032a1bf70b6677cd4a5))
+* keep selected id ([96a5753](https://github.com/iavofficial/IAVFrontendFramework/commit/96a5753367cba665904e79b5bb89205bf84ca789))
+* keep selected id ([799c7e2](https://github.com/iavofficial/IAVFrontendFramework/commit/799c7e2fe6b6d66090fcef8c09c83cd3d071a794))
+
+## [@iavofficial/frontend-framework-v1.4.3-dev.1](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.2...@iavofficial/frontend-framework-v1.4.3-dev.1) (2025-06-09)
+
+### Bug Fixes
+
+* add renewing interval session ([bf17560](https://github.com/iavofficial/IAVFrontendFramework/commit/bf17560a23e8b03f88a621a6ea3604cce33d0c87))
+* set email to lower case ([13d6158](https://github.com/iavofficial/IAVFrontendFramework/commit/13d615811bbc72bfbec5f73a11b9b09791c72f93))
+
+## [@iavofficial/frontend-framework-v1.4.2](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.1...@iavofficial/frontend-framework-v1.4.2) (2025-05-17)
+
+### Bug Fixes
+
+* add 12 minutes for aws session ([30f397c](https://github.com/iavofficial/IAVFrontendFramework/commit/30f397cb7ecc40457d16f4fb864c2d59ea1c4ce3))
+* add language to localstorage ([ddee067](https://github.com/iavofficial/IAVFrontendFramework/commit/ddee067a4f657d66f4401ae99695dffc3b5b1f8d))
+* add npm readme ([dcd2cd2](https://github.com/iavofficial/IAVFrontendFramework/commit/dcd2cd2f6f0f0551d4f3e9fab819b25daff46a88))
+* add timer for aws session ([e4f98fb](https://github.com/iavofficial/IAVFrontendFramework/commit/e4f98fb95ab80f8176dfd2f450be473056638950))
+
+## [@iavofficial/frontend-framework-v1.4.2-dev.3](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.2-dev.2...@iavofficial/frontend-framework-v1.4.2-dev.3) (2025-05-15)
+
+### Bug Fixes
+
+* add 12 minutes for aws session ([30f397c](https://github.com/iavofficial/IAVFrontendFramework/commit/30f397cb7ecc40457d16f4fb864c2d59ea1c4ce3))
+* add timer for aws session ([e4f98fb](https://github.com/iavofficial/IAVFrontendFramework/commit/e4f98fb95ab80f8176dfd2f450be473056638950))
+
+## [@iavofficial/frontend-framework-v1.4.2-dev.2](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.2-dev.1...@iavofficial/frontend-framework-v1.4.2-dev.2) (2025-05-08)
+
+### Bug Fixes
+
+* add language to localstorage ([ddee067](https://github.com/iavofficial/IAVFrontendFramework/commit/ddee067a4f657d66f4401ae99695dffc3b5b1f8d))
+
+## [@iavofficial/frontend-framework-v1.4.2-dev.1](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.1...@iavofficial/frontend-framework-v1.4.2-dev.1) (2025-04-24)
+
+### Bug Fixes
+
+* add npm readme ([dcd2cd2](https://github.com/iavofficial/IAVFrontendFramework/commit/dcd2cd2f6f0f0551d4f3e9fab819b25daff46a88))
+
+## [@iavofficial/frontend-framework-v1.4.1-dev.2](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.1-dev.1...@iavofficial/frontend-framework-v1.4.1-dev.2) (2025-04-24)
+
+### Bug Fixes
+
+* add npm readme ([dcd2cd2](https://github.com/iavofficial/IAVFrontendFramework/commit/dcd2cd2f6f0f0551d4f3e9fab819b25daff46a88))
+
+## [@iavofficial/frontend-framework-v1.4.1](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.0...@iavofficial/frontend-framework-v1.4.1) (2025-04-18)
+
+### Bug Fixes
+
+* readme ([34d6921](https://github.com/iavofficial/IAVFrontendFramework/commit/34d69219069479f42ef78f06ff8be91688914b2d))
+
+## [@iavofficial/frontend-framework-v1.4.1-dev.1](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.0...@iavofficial/frontend-framework-v1.4.1-dev.1) (2025-04-18)
+
+### Bug Fixes
+
+* readme ([34d6921](https://github.com/iavofficial/IAVFrontendFramework/commit/34d69219069479f42ef78f06ff8be91688914b2d))
+
+## [@iavofficial/frontend-framework-v1.4.0](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.3.0...@iavofficial/frontend-framework-v1.4.0) (2025-04-17)
+
+### Features
+
+* add class for div ([83e6273](https://github.com/iavofficial/IAVFrontendFramework/commit/83e6273aceb680ae7f8241a081a4f1bccf467992))
+* add custom header prop ([0a85c07](https://github.com/iavofficial/IAVFrontendFramework/commit/0a85c077e8251067125a730f8979868ea5156690))
+* add example header in dev ([a55fbe5](https://github.com/iavofficial/IAVFrontendFramework/commit/a55fbe5462fc07102884fdd0036aa3b654ce9655))
+* add user icon as ReactElement ([184508f](https://github.com/iavofficial/IAVFrontendFramework/commit/184508fb8ab6fd3582de6cae097ec70d52fcf54b))
+* add width and height for icon ([c680e0b](https://github.com/iavofficial/IAVFrontendFramework/commit/c680e0bf1c10b3e23485cca08a18932a1f594c91))
+
+### Bug Fixes
+
+* add "?" for userIcon ([e3b79eb](https://github.com/iavofficial/IAVFrontendFramework/commit/e3b79eb39a217c9573d29587496648768cad221d))
+* add background color ([3191011](https://github.com/iavofficial/IAVFrontendFramework/commit/31910118927ad9f974cff860a4c3e25b57a29054))
+* add background in mainVíew.tsx ([eabf8d3](https://github.com/iavofficial/IAVFrontendFramework/commit/eabf8d3341ef2ce75c834c8a8a1bc4d0c72c9473))
+* add default icon ([6e3fce3](https://github.com/iavofficial/IAVFrontendFramework/commit/6e3fce37ff99e3bd9f27e8412022767c2e98a60d))
+* add useMatch for highlighting navbar ([e172706](https://github.com/iavofficial/IAVFrontendFramework/commit/e172706213edd77aa71c81d02a32955b1c58ecb2))
+* back to old state ([743731f](https://github.com/iavofficial/IAVFrontendFramework/commit/743731f512a0f5d0b603d93e22ed63382742cdaf))
+* package.json ([2619409](https://github.com/iavofficial/IAVFrontendFramework/commit/261940914b1d5afc53cbcce3cd90b62c0a72ab74))
+* remove setInitial in useEffect ([2149e2a](https://github.com/iavofficial/IAVFrontendFramework/commit/2149e2a05da0bfc974051a326ab4561efe0385eb))
+* routing useEffect ([2399090](https://github.com/iavofficial/IAVFrontendFramework/commit/2399090ee0203b005170ad471958cdda534a1e45))
+* width ([eb3a893](https://github.com/iavofficial/IAVFrontendFramework/commit/eb3a8933b58f6fd13d3bb2d496ee52a2da33b26c))
+
+## [@iavofficial/frontend-framework-v1.4.0-dev.8](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.0-dev.7...@iavofficial/frontend-framework-v1.4.0-dev.8) (2025-04-10)
+
+### Features
+
+* add custom header prop ([0a85c07](https://github.com/iavofficial/IAVFrontendFramework/commit/0a85c077e8251067125a730f8979868ea5156690))
+* add example header in dev ([a55fbe5](https://github.com/iavofficial/IAVFrontendFramework/commit/a55fbe5462fc07102884fdd0036aa3b654ce9655))
+
+## [@iavofficial/frontend-framework-v1.4.0-dev.7](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.0-dev.6...@iavofficial/frontend-framework-v1.4.0-dev.7) (2025-04-07)
+
+### Bug Fixes
+
+* add useMatch for highlighting navbar ([e172706](https://github.com/iavofficial/IAVFrontendFramework/commit/e172706213edd77aa71c81d02a32955b1c58ecb2))
+
+## [@iavofficial/frontend-framework-v1.4.0-dev.6](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.0-dev.5...@iavofficial/frontend-framework-v1.4.0-dev.6) (2025-04-02)
+
+### Bug Fixes
+
+* add "?" for userIcon ([e3b79eb](https://github.com/iavofficial/IAVFrontendFramework/commit/e3b79eb39a217c9573d29587496648768cad221d))
+* add background color ([3191011](https://github.com/iavofficial/IAVFrontendFramework/commit/31910118927ad9f974cff860a4c3e25b57a29054))
+
 ## [@iavofficial/frontend-framework-v1.4.0-dev.5](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.4.0-dev.4...@iavofficial/frontend-framework-v1.4.0-dev.5) (2025-02-20)
 
 ### Bug Fixes
@@ -30,6 +235,13 @@
 * add class for div ([83e6273](https://github.com/iavofficial/IAVFrontendFramework/commit/83e6273aceb680ae7f8241a081a4f1bccf467992))
 * add user icon as ReactElement ([184508f](https://github.com/iavofficial/IAVFrontendFramework/commit/184508fb8ab6fd3582de6cae097ec70d52fcf54b))
 * add width and height for icon ([c680e0b](https://github.com/iavofficial/IAVFrontendFramework/commit/c680e0bf1c10b3e23485cca08a18932a1f594c91))
+
+## [1.3.1](https://github.com/iavofficial/IAVFrontendFramework/compare/v1.3.0...v1.3.1) (2025-02-20)
+
+### Bug Fixes
+
+* content with bar ([c745b80](https://github.com/iavofficial/IAVFrontendFramework/commit/c745b80131d38446cac28aff84b68af94d8139ce))
+* **content:** back to old state ([#61](https://github.com/iavofficial/IAVFrontendFramework/issues/61)) ([a27531c](https://github.com/iavofficial/IAVFrontendFramework/commit/a27531c53e95c4389e781b1e736cfc8a0f962130))
 
 ## [@iavofficial/frontend-framework-v1.3.1-dev.2](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.3.1-dev.1...@iavofficial/frontend-framework-v1.3.1-dev.2) (2025-02-20)
 

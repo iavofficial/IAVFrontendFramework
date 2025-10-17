@@ -29,6 +29,9 @@ jobs:
       # Install Turborepo
       - run: npm i
 
+      - name: Copy root README to frontend-framework package
+        run: cp README.md packages/frontend-framework/README.md
+
       - run: npm run build
 
       - run: npm run test

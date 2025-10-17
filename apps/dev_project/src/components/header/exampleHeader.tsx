@@ -16,13 +16,16 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { AppAwsAuthentication } from "./components/aws_test/AppAwsAuthentication";
-import { AppDefaultAuthentication } from "./components/default_example/AppDefaultAuthentication";
+import { useContext } from "react";
+import { ColorSettingsContext } from "@iavofficial/frontend-framework/colorSettingsContext";
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <AppDefaultAuthentication />
-  </React.StrictMode>,
-);
+export const ExampleHeader = () => {
+  const colorSettingsContext = useContext(ColorSettingsContext);
+
+  const darkModeSwitchHandler = () => {
+    const darkMode = colorSettingsContext.darkmode;
+    colorSettingsContext.setDarkmode(!darkMode);
+  };
+
+  return <div onClick={darkModeSwitchHandler}>Click on Dark Mode Header</div>;
+};

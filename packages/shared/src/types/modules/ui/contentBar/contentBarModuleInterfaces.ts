@@ -22,7 +22,6 @@ export interface StyleProps<T> {
   appliedStyles?: StylesArray<T>;
 }
 
-// Array of values of a type T
 export type StylesArray<T> = T[keyof T][];
 
 export const ContentBarStyles = {
@@ -32,7 +31,6 @@ export const ContentBarStyles = {
 
 export type ContentBarStylesArray =
   (typeof ContentBarStyles)[keyof typeof ContentBarStyles][];
-export type ContentStyleStylesArray = StylesArray<typeof ContentBarStyles>;
 
 export type ContentBarElement = {
   getId: () => string;
@@ -67,8 +65,4 @@ export type ContentBarViewProps = {
   containerBg?: string;
   barBg?: string;
   hasSpacing: boolean;
-};
-
-export type UIModuleContentBarProps = UIContentBarProps & {
-  uiComponent?: React.ComponentType<ContentBarViewProps>;
 };

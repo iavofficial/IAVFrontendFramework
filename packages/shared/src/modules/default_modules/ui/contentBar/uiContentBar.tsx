@@ -43,7 +43,7 @@ import {
 
 export const UIContentBar: React.FC<UIContentBarProps> = (props) => {
   const {
-    contentElements,
+    contentElements = [],
     addable,
     jumpToEndOfContentBar,
     selectedId,

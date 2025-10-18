@@ -19,7 +19,11 @@
 import React, {useContext, useMemo} from "react";
 import {BasicContentbarWrapper} from "./basicContentbarWrapper";
 import {CustomContentbarWrapper} from "./customContentbarWrapper";
-import {ContentLayout, ContentLayoutAndStyleProps} from "./contentLayout";
+import {
+  ContentLayout,
+  ContentLayoutAndStyleProps,
+  LayoutBehaviour,
+} from "./contentLayout";
 import {ContentBarStyles, ContentBarStylesArray} from "./contentBar";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
@@ -90,7 +94,7 @@ export const ContentWithBar = (
           onClickAddButton={props.onClickAddButton}
           addable={props.addable}
           jumpToEndOfContentBar={props.jumpToEndOfContentBar}
-          contentElements={props.contentWrappers}
+          contentElements={props.contentWrappers ?? []}
           appliedStyles={contentBarStyles}
         />
       )}

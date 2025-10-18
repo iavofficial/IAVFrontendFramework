@@ -35,16 +35,18 @@ import {
 } from "../../../../types/modules/ui/contentBar/contentBarModuleInterfaces";
 import {UIContentBar} from "./uiContentBar";
 
-export type ContentBarOrchestratorProps = UIContentBarProps & {
-  uiComponent?: React.ComponentType<UIContentBarProps>;
-};
-
 const VISIBLE_MAX = 6;
 const MIN_ITEM_WIDTH = 120;
 
-export const ContentBarOrchestrator = (props: ContentBarOrchestratorProps) => {
+export type ContentBarOrchestratorProps = UIContentBarProps & {
+  uiComponent?: React.ComponentType<ContentBarViewProps>;
+};
+
+export const ContentBarOrchestrator: React.FC<ContentBarOrchestratorProps> = (
+  props,
+) => {
   const {
-    contentElements,
+    contentElements = [],
     addable,
     jumpToEndOfContentBar,
     selectedId,
@@ -54,16 +56,40 @@ export const ContentBarOrchestrator = (props: ContentBarOrchestratorProps) => {
     appliedStyles,
     uiComponent,
   } = props;
-  const View = uiComponent ?? UIContentBar;
+
+  if (!uiComponent)
+    return (
+      <UIContentBar
+        contentElements={contentElements}
+        addable={addable}
+        jumpToEndOfContentBar={jumpToEndOfContentBar}
+        selectedId={selectedId}
+        onClickAddButton={onClickAddButton}
+        onClickLeftSlideButton={onClickLeftSlideButton}
+        onClickRightSlideButton={onClickRightSlideButton}
+        appliedStyles={appliedStyles}
+      />
+    );
+
+  const View = uiComponent;
+
   const {currentColors} = useContext(ColorSettingsContext);
-  const containerRef = useRef<HTMLDivElement | null>(null);
   const useTypedSelector: TypedUseSelectorHook<UIStoreState> = useSelector;
   const collapsed =
     useTypedSelector((s) => s[MandatoryModuleNames.UI].navbarCollapsed) ??
     false;
 
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const [containerWidth, setContainerWidth] = useState(1200);
   const [startIndex, setStartIndex] = useState(0);
+
+  const hasSpacing = appliedStyles?.includes(ContentBarStyles.SPACING) ?? false;
+  const containerBg = appliedStyles?.includes(
+    ContentBarStyles.SET_SPACING_COLOR,
+  )
+    ? currentColors.contentArea.backgroundColor
+    : "transparent";
+  const barBg = currentColors.contentbar.backgroundColor;
 
   const handleResize = useCallback(() => {
     const el = containerRef.current;
@@ -75,19 +101,12 @@ export const ContentBarOrchestrator = (props: ContentBarOrchestratorProps) => {
     return () => window.removeEventListener("resize", handleResize);
   }, [handleResize]);
 
-  const hasSpacing = appliedStyles?.includes(ContentBarStyles.SPACING) ?? false;
-  const containerBg = appliedStyles?.includes(
-    ContentBarStyles.SET_SPACING_COLOR,
-  )
-    ? currentColors.contentArea.backgroundColor
-    : "transparent";
-  const barBg = currentColors.contentbar.backgroundColor;
-
+  const total = contentElements.length;
   const visibleCount = useMemo(
-    () =>
-      Math.min(VISIBLE_MAX, contentElements.length || 0) - (collapsed ? 1 : 0),
-    [contentElements.length, collapsed],
+    () => Math.min(VISIBLE_MAX, total) - (collapsed ? 1 : 0),
+    [total, collapsed],
   );
+
   const inner = Math.max(0, containerWidth - 2 * 16 - 96);
   const elementWidth = Math.max(
     MIN_ITEM_WIDTH,
@@ -95,39 +114,35 @@ export const ContentBarOrchestrator = (props: ContentBarOrchestratorProps) => {
   );
 
   const canSlideLeft = startIndex > 0;
-  const canSlideRight = startIndex + visibleCount < contentElements.length;
+  const canSlideRight = startIndex + visibleCount < total;
 
   useEffect(() => {
-    if (jumpToEndOfContentBar && contentElements.length > visibleCount)
-      setStartIndex(contentElements.length - visibleCount);
-  }, [jumpToEndOfContentBar, contentElements.length, visibleCount]);
+    if (jumpToEndOfContentBar && total > visibleCount)
+      setStartIndex(total - visibleCount);
+  }, [jumpToEndOfContentBar, total, visibleCount]);
 
   const slideLeft = useCallback(() => {
     if (!canSlideLeft) return;
     onClickLeftSlideButton?.();
     setStartIndex((s) => Math.max(0, s - 1));
   }, [canSlideLeft, onClickLeftSlideButton]);
+
   const slideRight = useCallback(() => {
     if (!canSlideRight) return;
     onClickRightSlideButton?.();
-    setStartIndex((s) =>
-      Math.min(contentElements.length - visibleCount, s + 1),
-    );
-  }, [
-    canSlideRight,
-    onClickRightSlideButton,
-    contentElements.length,
-    visibleCount,
-  ]);
+    setStartIndex((s) => Math.min(total - visibleCount, s + 1));
+  }, [canSlideRight, onClickRightSlideButton, total, visibleCount]);
+
   const onAdd = useCallback(() => onClickAddButton?.(), [onClickAddButton]);
 
   const visibleElements = useMemo(
     () =>
-      contentElements.length <= visibleCount
+      total <= visibleCount
         ? contentElements
         : contentElements.slice(startIndex, startIndex + visibleCount),
-    [contentElements, startIndex, visibleCount],
+    [contentElements, startIndex, visibleCount, total],
   );
+
   const firstId = contentElements[0]?.getId?.() ?? selectedId;
 
   const viewProps: ContentBarViewProps = {

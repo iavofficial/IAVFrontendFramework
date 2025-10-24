@@ -4,13 +4,9 @@ on:
   workflow_dispatch:
   push:
     branches-ignore:
+      - gh-pages-dev
       - main
       - develop
-    paths-ignore:
-      - 'SBOM.json'
-      - '*.md'
-      - '.github/**/*'
-      - 'docs/**/*'
 
 jobs:
   preview-docs:

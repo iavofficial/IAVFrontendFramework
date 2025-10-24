@@ -2,6 +2,15 @@ name: Docs Preview (gh-pages-dev)
 
 on:
   workflow_dispatch:
+  push:
+    branches-ignore:
+      - main
+      - develop
+    paths-ignore:
+      - 'SBOM.json'
+      - '*.md'
+      - '.github/**/*'
+      - 'docs/**/*'
 
 jobs:
   preview-docs:
@@ -34,7 +43,7 @@ jobs:
 
       - name: Copy preview
         run: |
-          BRANCH="${GITHUB_REF_NAME//\//-}"   # ersetzt "/" durch "-" im Ordnernamen
+          BRANCH="${GITHUB_REF_NAME}"
           mkdir -p "site/previews/$BRANCH"
           bash src/scripts/unix/docs_generation/process-and-copy-docs-generic.sh "src/generated_docs" "site/previews/$BRANCH"
 

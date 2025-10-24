@@ -1,0 +1,54 @@
+name: Docs Preview (gh-pages-dev)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  preview-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          path: src
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+
+      - run: find ./src/scripts/unix/ -type f -exec chmod +x {} \;
+
+      - name: Generate docs
+        working-directory: src
+        run: |
+          npm i
+          npm run generate-docs
+
+      - name: Checkout gh-pages-dev
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages-dev
+          path: site
+          fetch-depth: 0
+
+      - name: Copy preview
+        run: |
+          BRANCH="${GITHUB_REF_NAME//\//-}"   # ersetzt "/" durch "-" im Ordnernamen
+          mkdir -p "site/previews/$BRANCH"
+          bash src/scripts/unix/docs_generation/process-and-copy-docs-generic.sh "src/generated_docs" "site/previews/$BRANCH"
+
+      - name: Commit preview
+        working-directory: site
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+        run: |
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git config user.name "${GITHUB_ACTOR}"
+          git add .
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            git commit -m "docs(preview-dev): ${GITHUB_REF_NAME}"
+            git push origin gh-pages-dev
+          fi

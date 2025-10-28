@@ -16,7 +16,7 @@
 
 import React from "react";
 import makeStyles from "../../../../util/makeStyles.tsx";
-import { MAGENTA1 } from "@iavofficial/frontend-framework/constants";
+import { MAGENTA1 } from "../../../../constants.ts";
 
 const useStyles = makeStyles(() => ({
   badge: {

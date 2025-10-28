@@ -3,12 +3,7 @@ import ReactDOMServer from "react-dom/server";
 import { versionMappings } from "../../versionMappings.ts";
 import { Link, MemoryRouter, useNavigate, useParams } from "react-router-dom";
 import makeStyles from "../../../util/makeStyles.tsx";
-import {
-  BLUE2,
-  BLUE3,
-  GREY1,
-  WHITE,
-} from "@iavofficial/frontend-framework/constants";
+import { BLUE2, BLUE3, GREY1, WHITE } from "../../utils/constants.ts";
 
 const useStyles = makeStyles(() => ({
   container: {

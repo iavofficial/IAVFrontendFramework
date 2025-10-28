@@ -1,0 +1,35 @@
+name: Deploy docs to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install & build
+        working-directory: docs
+        run: |
+          npm ci
+          npm run build
+      - name: Deploy to gh-pages
+        uses: JamesIves/gh-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: docs/dist
+          clean: true
+          single-commit: true

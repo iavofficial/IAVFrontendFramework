@@ -286,8 +286,9 @@ export class AwsAuthenticator implements AuthModule<AwsAuthenticatorState> {
       useEffect(() => {
         if (!isInitialized) {
           this.config.configureAmplify();
-          dispatch(this.extras.checkIsAuthenticated());
-          setIsInitialized(true);
+          dispatch(this.extras.checkIsAuthenticated()).then(() =>
+            setIsInitialized(true),
+          );
         }
       }, [dispatch, isInitialized]);
 

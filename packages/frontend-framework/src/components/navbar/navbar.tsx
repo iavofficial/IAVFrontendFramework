@@ -129,6 +129,7 @@ export const Navbar = (props: Props) => {
                     className="legal-doc-link"
                     style={{color: legalDocumentsColor}}
                     to={document.path}
+                    target="_blank"
                   >
                     {t({key: document.titleTranslationKey})}
                   </Link>

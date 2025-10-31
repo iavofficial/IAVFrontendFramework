@@ -6,10 +6,16 @@ excludes:
   paths:
     - pattern: 'apps/**'
       reason: 'BUILD_TOOL_OF'
-      comment: 'Ignore dev app; not intended for distribution'
+      comment: 'Dev-App, nicht für Distribution'
+    - pattern: 'packages/aws-authenticator/**'
+      reason: 'BUILD_TOOL_OF'
     - pattern: 'docs/.vite/deps/**'
       reason: 'BUILD_TOOL_OF'
-      comment: 'Ignore Vite-generated dependency folder'
+      comment: 'Vite-Cache'
     - pattern: '**/.vite/**'
       reason: 'BUILD_CACHE'
-      comment: 'Ignore all Vite cache'
+      comment: 'Vite-Cache'
+
+  projects:
+    - pattern: 'apps/dev_project/package.json'
+      reason: 'BUILD_TOOL_OF'

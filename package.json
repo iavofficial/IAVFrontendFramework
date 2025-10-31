@@ -1,39 +1,16 @@
 {
-  "name": "@iavofficial/frontend-framework",
+  "name": "@iavofficial/frontend-framework-monorepo",
   "version": "1.0.0",
-  "private": false,
+  "private": true,
   "license": "Apache-2.0",
   "contributors": [
-    {
-      "name": "Joerg Jonas Krahn",
-      "email": "joerg.jonas.krahn@iav.de"
-    },
-    {
-      "name": "Daniel Helfenstein",
-      "email": "daniel.helfenstein@iav.de"
-    },
-    {
-      "name": "Christian Becke",
-      "email": "christian.becke@iav.de"
-    },
-    {
-      "name": "Mike Wegele",
-      "email": "mike.wegele@iav.de"
-    }
+    { "name": "Joerg Jonas Krahn", "email": "joerg.jonas.krahn@iav.de" },
+    { "name": "Daniel Helfenstein", "email": "daniel.helfenstein@iav.de" },
+    { "name": "Christian Becke", "email": "christian.becke@iav.de" },
+    { "name": "Mike Wegele", "email": "mike.wegele@iav.de" }
   ],
-  "devDependencies": {
-    "@semantic-release/changelog": "^6.0.3",
-    "@semantic-release/commit-analyzer": "^13.0.0",
-    "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^10.3.3",
-    "cross-env": "^7.0.3",
-    "glob": "^10.4.5",
-    "semantic-release": "^24.2.1",
-    "semantic-release-monorepo": "^8.0.2",
-    "turbo": "^2.3.3"
-  },
   "scripts": {
-    "setup:root": "npm i",
+    "setup:root": "node -e \"const fs=require('fs');process.exit(fs.existsSync('package-lock.json')?0:1)\" && npm ci || npm install",
     "checkout-docs:root": "./scripts/unix/docs_generation/copy-root-docs-and-prepare.sh",
     "dev": "turbo run dev build-live",
     "docs": "cd docs && npm run dev",
@@ -48,5 +25,17 @@
     "apps/*",
     "packages/*"
   ],
-  "packageManager": "npm@11.0.0"
+  "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^13.0.0",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^10.3.3",
+    "cross-env": "^7.0.3",
+    "glob": "^10.4.5",
+    "semantic-release": "^24.2.1",
+    "semantic-release-monorepo": "^8.0.2",
+    "turbo": "^2.3.3",
+    "prettier": "^3.3.2"
+  },
+  "packageManager": "npm@10.8.2"
 }

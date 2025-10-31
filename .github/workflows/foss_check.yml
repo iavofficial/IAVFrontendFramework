@@ -13,15 +13,12 @@ jobs:
     name: SBOM & Vulnerability Scan for Root
     runs-on: ubuntu-latest
     steps:
-      # Step 1: Checkout code
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Step 2: Install all dependencies using workspaces
       - name: Install all dependencies with workspaces
         run: npm ci
 
-      # Step 3: Generate root-level SBOM (CycloneDX JSON)
       - name: Generate SBOM (CycloneDX JSON) for root
         uses: anchore/sbom-action@v0
         with:
@@ -29,15 +26,14 @@ jobs:
           output-file: sbom-root.cdx.json
           upload-artifact: false
 
-      # Step 4: Upload root-level SBOM as an artifact
       - name: Upload root-level SBOM as artifact
         uses: actions/upload-artifact@v4
         with:
           name: root-sbom-cyclonedx
           path: sbom-root.cdx.json
+          if-no-files-found: error
 
-      # Step 5: Scan the root-level SBOM for vulnerabilities
-      - name: Scan SBOM for Vulnerabilities
+      - name: Scan SBOM for Vulnerabilities (Anchore/Grype)
         id: scan
         uses: anchore/scan-action@v4
         continue-on-error: true
@@ -48,26 +44,23 @@ jobs:
           only-fixed: true
           output-format: sarif
 
-      # Step 6: Upload Grype SARIF report
-      - name: Upload Grype SARIF report
+      - name: Echo SARIF output path (debug)
+        run: echo "sarif=${{ steps.scan.outputs.sarif }}"
+        shell: bash
+
+      - name: Upload Grype SARIF report (artifact)
+        if: ${{ steps.scan.outputs.sarif != '' }}
         uses: actions/upload-artifact@v4
         with:
           name: grype-sarif
           path: ${{ steps.scan.outputs.sarif }}
+          if-no-files-found: ignore
 
       - name: Upload SARIF to GitHub Code Scanning
-        if: success() || failure()
+        if: ${{ steps.scan.outputs.sarif != '' }}
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: ${{ steps.scan.outputs.sarif }}
-
-      # Upload Anchore logs in case of failure
-      - name: Upload Scan Logs
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: anchore-scan-logs
-          path: /path/to/scan/logs.log
 
   ort-check:
     name: ORT License & Policy Check
@@ -85,6 +78,7 @@ jobs:
         uses: oss-review-toolkit/ort-ci-github-action@v1
         with:
           allow-dynamic-versions: 'true'
+          ort-cli-args: '--config .ort/config.yml'
 
   scan-workspaces:
     name: SBOM Each Workspace
@@ -112,20 +106,18 @@ jobs:
           echo "SANITIZED_NAME=${sanitized_name}" >> $GITHUB_ENV
 
       - name: Generate SBOM
+        working-directory: ${{ matrix.project }}
         run: |
           echo "Generating SBOM for workspace: ${{ matrix.project }}"
           npm sbom --sbom-format spdx --output SBOM.spdx >> SBOM.spdx
-          # Check if the SBOM was generated
-          if [ ! -f SBOM.spdx ]; then
-            echo "::error ::SBOM generation failed for ${{ matrix.project }}. File SBOM.spdx not found."
-            exit 1
-          fi
+          test -f SBOM.spdx
 
       - name: Upload Workspace SBOM as Artifact
         uses: actions/upload-artifact@v4
         with:
           name: sbom-${{ env.SANITIZED_NAME }}
           path: ${{ matrix.project }}/SBOM.spdx
+          if-no-files-found: error
 
   commit-changes:
     name: Commit All SBOMs
@@ -146,40 +138,35 @@ jobs:
 
       - name: Restore SBOM Files to Original Paths
         run: |
+          set -euo pipefail
           for artifact in ./sboms/*; do
-            sanitized_name=$(basename "$artifact")
-            if [[ "$sanitized_name" =~ ^sbom-([^/-]+)-(.+)$ ]]; then
-              original_path="${BASH_REMATCH[1]}/${BASH_REMATCH[2]}"
-            else
-              original_path=$(echo "$sanitized_name" | sed 's|^sbom-||')
-            fi
+            sanitized_name="$(basename "$artifact")"
+            # strip "sbom-"
+            original="${sanitized_name#sbom-}"
+            # restore slashes (we replaced / by - when naming artifacts)
+            # falls dein Repo-Pfad-Schema anders ist, hier anpassen
+            original_path="$(echo "$original" | sed 's|-|/|')"
             echo "Restoring SBOM to: $original_path/SBOM.spdx"
             mkdir -p "$original_path"
             mv "$artifact/SBOM.spdx" "$original_path/SBOM.spdx"
           done
 
-      # Add Fonts to SBOM
       - name: Make Script Executable
         run: chmod +x ./scripts/unix/sbom_entries/add_fonts_to_sbom.sh
 
       - name: Add Google Fonts to SBOM
         run: ./scripts/unix/sbom_entries/add_fonts_to_sbom.sh
 
-      - name: Set environment variables
-        run: echo "GITHUB_ACTOR=${{ github.actor }}" >> $GITHUB_ENV
-
       - name: Set GitHub identity
         run: |
-          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-          git config --global user.name "${GITHUB_ACTOR}"
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
 
       - name: Pull latest changes to avoid conflicts
-        run: git pull origin ${{ github.head_ref }}
+        run: git pull --ff-only
 
       - name: Commit all SBOMs in one commit
         run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
           git add .
           if git diff --staged --quiet; then
             echo "No changes to commit. Exiting."

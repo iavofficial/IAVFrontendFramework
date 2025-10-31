@@ -1,22 +1,15 @@
 analyzer:
   allow_dynamic_versions: true
   skip_excluded: true
-  enabled_package_managers:
-    - NPM
 
 excludes:
   paths:
-    - pattern: "docs/.vite/**"
-      reason: BUILD_TOOL_OF
-      comment: Exclude Vite optimized deps cache
-    - pattern: "**/.vite/**"
-      reason: BUILD_CACHE
-      comment: Exclude any Vite cache directories
-    - pattern: "**/dist/**"
-      reason: BUILD_TOOL_OF
-      comment: Exclude build artifacts
-
-  scopes:
-    - name: devDependencies
-      reason: TEST_DEPENDENCY_OF
-      comment: Ignore dev-only dependencies for license/policy checks
+    - pattern: 'apps/**'
+      reason: 'BUILD_TOOL_OF'
+      comment: 'Ignore dev app; not intended for distribution'
+    - pattern: 'docs/.vite/deps/**'
+      reason: 'BUILD_TOOL_OF'
+      comment: 'Ignore Vite-generated dependency folder'
+    - pattern: '**/.vite/**'
+      reason: 'BUILD_CACHE'
+      comment: 'Ignore all Vite cache'

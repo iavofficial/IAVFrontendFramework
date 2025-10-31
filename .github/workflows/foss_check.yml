@@ -13,15 +13,12 @@ jobs:
     name: SBOM & Vulnerability Scan for Root
     runs-on: ubuntu-latest
     steps:
-      # Step 1: Checkout code
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Step 2: Install all dependencies using workspaces
       - name: Install all dependencies with workspaces
         run: npm ci
 
-      # Step 3: Generate root-level SBOM (CycloneDX JSON)
       - name: Generate SBOM (CycloneDX JSON) for root
         uses: anchore/sbom-action@v0
         with:
@@ -29,14 +26,12 @@ jobs:
           output-file: sbom-root.cdx.json
           upload-artifact: false
 
-      # Step 4: Upload root-level SBOM as an artifact
       - name: Upload root-level SBOM as artifact
         uses: actions/upload-artifact@v4
         with:
           name: root-sbom-cyclonedx
           path: sbom-root.cdx.json
 
-      # Step 5: Scan the root-level SBOM for vulnerabilities
       - name: Scan SBOM for Vulnerabilities
         id: scan
         uses: anchore/scan-action@v4
@@ -48,7 +43,6 @@ jobs:
           only-fixed: true
           output-format: sarif
 
-      # Step 6: Upload Grype SARIF report
       - name: Upload Grype SARIF report
         uses: actions/upload-artifact@v4
         with:
@@ -61,8 +55,7 @@ jobs:
         with:
           sarif_file: ${{ steps.scan.outputs.sarif }}
 
-      # Upload Anchore logs in case of failure
-      - name: Upload Scan Logs
+      - name: Upload Scan Logs (on failure)
         if: failure()
         uses: actions/upload-artifact@v4
         with:
@@ -85,6 +78,7 @@ jobs:
         uses: oss-review-toolkit/ort-ci-github-action@v1
         with:
           allow-dynamic-versions: 'true'
+          ort-cli-args: '--config .ort/config.yml'
 
   scan-workspaces:
     name: SBOM Each Workspace
@@ -115,7 +109,6 @@ jobs:
         run: |
           echo "Generating SBOM for workspace: ${{ matrix.project }}"
           npm sbom --sbom-format spdx --output SBOM.spdx >> SBOM.spdx
-          # Check if the SBOM was generated
           if [ ! -f SBOM.spdx ]; then
             echo "::error ::SBOM generation failed for ${{ matrix.project }}. File SBOM.spdx not found."
             exit 1
@@ -158,7 +151,6 @@ jobs:
             mv "$artifact/SBOM.spdx" "$original_path/SBOM.spdx"
           done
 
-      # Add Fonts to SBOM
       - name: Make Script Executable
         run: chmod +x ./scripts/unix/sbom_entries/add_fonts_to_sbom.sh
 

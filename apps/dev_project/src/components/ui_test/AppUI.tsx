@@ -18,7 +18,7 @@
 
 import React from "react";
 import { GlobalDataLayer } from "@iavofficial/frontend-framework/globalDataLayer";
-import { modules, store } from "./uiTestSetup";
+import { modules, store } from "./store.ts";
 import CustomLayout from "../../CustomLayout.tsx";
 
 export const AppUI = () => {

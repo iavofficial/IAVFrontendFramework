@@ -114,27 +114,19 @@ export class UIModule implements UIModuleType<UIState> {
     this.extras = {setNavbarCollapsed, toggleNavbar, setCollapsible};
 
     this.UILayerHeader = (p) => (
-      <HeaderOrchestrator
-        {...p}
-        uiComponent={p.uiComponent ?? params?.UILayerHeader}
-      />
+      <HeaderOrchestrator {...p} uiComponent={params?.UILayerHeader} />
     );
     this.UILayerContentBar = (p) => (
-      <ContentBarOrchestrator
-        {...p}
-        uiComponent={p.uiComponent ?? params?.UILayerContentBar}
-      />
+      <ContentBarOrchestrator {...p} uiComponent={params?.UILayerContentBar} />
     );
     this.UILayerCookieBanner = (p) => (
       <CookieBannerOrchestrator
-        uiComponent={p.uiComponent ?? params?.UILayerCookieBanner}
+        {...p}
+        uiComponent={params?.UILayerCookieBanner}
       />
     );
     this.UILayerNavbar = (p) => (
-      <NavbarOrchestrator
-        {...p}
-        uiComponent={p.uiComponent ?? params?.UILayerNavbar}
-      />
+      <NavbarOrchestrator {...p} uiComponent={params?.UILayerNavbar} />
     );
 
     this.useModuleLifecycle = () => ({renderChildren: true});

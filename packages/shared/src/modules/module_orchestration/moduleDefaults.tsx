@@ -30,7 +30,7 @@ import {
 } from "../../types/modules/moduleOrchestrationTypes";
 import {ReactRouterRouter} from "../default_modules/router/reactRouterRouterModule";
 import {I18NextInternationalizer} from "../default_modules/internationalization/i18NextInternationalizerModule";
-import {UIOrchestrator} from "../default_modules/ui/uiOrchestrator";
+import {UIModule} from "../default_modules/ui/uiModule";
 
 //import {CookieBanner} from "../default_modules/cookie/cookieBanner";
 export type DefaultRootState = RootState<DefaultStoreState>;
@@ -45,7 +45,7 @@ export type DefaultThunkDispatch = ThunkDispatch<
 export const defaultStoreModules: FFMandatoryStoreModules = {
   [MandatoryModuleNames.Authenticator]: new DummyAuthenticator(),
   [MandatoryModuleNames.Internationalizer]: new I18NextInternationalizer(),
-  [MandatoryModuleNames.UI]: new UIOrchestrator(),
+  [MandatoryModuleNames.UI]: new UIModule(),
 };
 
 export type DefaultStoreModules = typeof defaultStoreModules;

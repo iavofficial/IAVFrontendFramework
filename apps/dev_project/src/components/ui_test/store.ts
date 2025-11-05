@@ -33,12 +33,6 @@ import CustomCookieBanner from "./CustomCookieBanner.tsx";
 import CustomContentBar from "./CustomContentBar.tsx";
 
 const frameworkStoreModules = {
-  [MandatoryModuleNames.UI]: new UIModule({
-    UILayerHeader: CustomHeader,
-    UILayerNavbar: CustomNavbar,
-    UILayerCookieBanner: CustomCookieBanner,
-    UILayerContentBar: CustomContentBar,
-  }),
   [MandatoryModuleNames.Internationalizer]: new I18NextInternationalizer({
     translationResources: translations,
   }),

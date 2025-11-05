@@ -53,9 +53,9 @@ export type NavbarOrchestratorProps = {
   uiComponent?: React.ComponentType<UINavbarProps>;
 };
 
-export const NavbarOrchestrator: React.FC<NavbarOrchestratorProps> = (
-  props,
-) => {
+export const NavbarOrchestrator = (props: NavbarOrchestratorProps) => {
+  const {tabAndContentWrappers, legalDocuments, uiComponent} = props;
+
   const t = useModuleTranslation();
   const routerModule = useModule(MandatoryModuleNames.Router);
   const Link = routerModule.Link;
@@ -75,12 +75,12 @@ export const NavbarOrchestrator: React.FC<NavbarOrchestratorProps> = (
     extras: UIExtras;
   };
 
-  const items = props.tabAndContentWrappers.map((w) =>
+  const items = tabAndContentWrappers.map((w) =>
     w.getNavbarComponent({navbarCollapsed: collapsed}),
   );
 
   const legalLinks =
-    props.legalDocuments
+    legalDocuments
       ?.filter((d) => !d.isHidden)
       .map((d) => (
         <Link
@@ -114,7 +114,7 @@ export const NavbarOrchestrator: React.FC<NavbarOrchestratorProps> = (
   };
 
   const arrowClassName = calculateNavbarArrowFunctionColor(collapsed);
-  const UI = props.uiComponent ?? UINavbar;
+  const UI = uiComponent ?? UINavbar;
 
   const onToggleCollapse = () => dispatch(uiModule.extras.toggleNavbar());
 

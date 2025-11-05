@@ -24,11 +24,8 @@ export type HeaderOrchestratorProps = UIHeaderProps & {
   uiComponent?: React.ComponentType<UIHeaderProps>;
 };
 
-export const HeaderOrchestrator: React.FC<HeaderOrchestratorProps> = ({
-  uiComponent: CustomUI,
-  ...uiProps
-}) => {
-  const UI = CustomUI ?? UIHeader;
-
+export const HeaderOrchestrator = (props: HeaderOrchestratorProps) => {
+  const {uiComponent, ...uiProps} = props;
+  const UI = uiComponent ?? UIHeader;
   return <UI {...uiProps} />;
 };

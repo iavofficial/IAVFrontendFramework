@@ -38,13 +38,11 @@ import {UIContentBar} from "./uiContentBar";
 const VISIBLE_MAX = 6;
 const MIN_ITEM_WIDTH = 120;
 
-export type ContentBarOrchestratorProps = UIContentBarProps & {
-  uiComponent?: React.ComponentType<ContentBarViewProps>;
+export type ContentBarOrchestratorProps = {
+  uiComponent?: React.ComponentType<UIContentBarProps>;
 };
 
-export const ContentBarOrchestrator: React.FC<ContentBarOrchestratorProps> = (
-  props,
-) => {
+export const ContentBarOrchestrator = (props: ContentBarOrchestratorProps) => {
   const {
     contentElements = [],
     addable,
@@ -57,21 +55,7 @@ export const ContentBarOrchestrator: React.FC<ContentBarOrchestratorProps> = (
     uiComponent,
   } = props;
 
-  if (!uiComponent)
-    return (
-      <UIContentBar
-        contentElements={contentElements}
-        addable={addable}
-        jumpToEndOfContentBar={jumpToEndOfContentBar}
-        selectedId={selectedId}
-        onClickAddButton={onClickAddButton}
-        onClickLeftSlideButton={onClickLeftSlideButton}
-        onClickRightSlideButton={onClickRightSlideButton}
-        appliedStyles={appliedStyles}
-      />
-    );
-
-  const View = uiComponent;
+  const UI = uiComponent ?? UIContentBar;
 
   const {currentColors} = useContext(ColorSettingsContext);
   const useTypedSelector: TypedUseSelectorHook<UIStoreState> = useSelector;
@@ -95,6 +79,7 @@ export const ContentBarOrchestrator: React.FC<ContentBarOrchestratorProps> = (
     const el = containerRef.current;
     if (el) setContainerWidth(el.clientWidth);
   }, []);
+
   useEffect(() => {
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -145,7 +130,7 @@ export const ContentBarOrchestrator: React.FC<ContentBarOrchestratorProps> = (
 
   const firstId = contentElements[0]?.getId?.() ?? selectedId;
 
-  const viewProps: ContentBarViewProps = {
+  const uiProps: ContentBarViewProps = {
     visibleElements,
     elementWidth,
     canSlideLeft,
@@ -163,7 +148,7 @@ export const ContentBarOrchestrator: React.FC<ContentBarOrchestratorProps> = (
 
   return (
     <div ref={containerRef} style={{width: "100%"}}>
-      <View {...viewProps} />
+      <UI {...uiProps} />
     </div>
   );
 };

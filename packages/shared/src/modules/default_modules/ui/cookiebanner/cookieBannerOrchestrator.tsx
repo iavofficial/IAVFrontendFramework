@@ -25,18 +25,19 @@ import {setAcceptCookies} from "../../../../utils/setAcceptCookies";
 import {UICookieBannerProps} from "../../../../types/modules/ui/cookieBanner/cookieBannerModuleInterfaces";
 import {UICookieBanner} from "./uiCookieBanner";
 
-type CookieBannerOrchestratorProps = {
+export type CookieBannerOrchestratorProps = {
   uiComponent?: React.ComponentType<UICookieBannerProps>;
 };
 
-export const CookieBannerOrchestrator: React.FC<
-  CookieBannerOrchestratorProps
-> = ({uiComponent: CustomUI}) => {
+export const CookieBannerOrchestrator = (
+  props: CookieBannerOrchestratorProps,
+) => {
+  const {uiComponent} = props;
+
   const colorContext = useContext(ColorSettingsContext);
   const t = useModuleTranslation();
 
   const [cookies, setCookie] = useCookies([ACCEPTED_COOKIES_NAME]);
-
   const isAccepted = useMemo(
     () => Boolean(cookies[ACCEPTED_COOKIES_NAME]),
     [cookies],
@@ -52,7 +53,7 @@ export const CookieBannerOrchestrator: React.FC<
     setVisible(false);
   };
 
-  const UI = CustomUI || UICookieBanner;
+  const UI = uiComponent ?? UICookieBanner;
 
   const uiProps: UICookieBannerProps = {
     header: t({key: "allow_cookies_header"}),
@@ -61,7 +62,7 @@ export const CookieBannerOrchestrator: React.FC<
     visible,
     onAccept,
     styles: {backgroundColor: colorContext?.darkmode ? "#222" : BLUE1},
-    darkMode: colorContext?.darkmode,
+    darkMode: colorContext?.darkmode ?? false,
   };
 
   return <UI {...uiProps} />;

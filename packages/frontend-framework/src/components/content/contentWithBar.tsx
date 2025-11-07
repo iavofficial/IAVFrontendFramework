@@ -24,10 +24,17 @@ import {
   ContentLayoutAndStyleProps,
   LayoutBehaviour,
 } from "./contentLayout";
-import {ContentBarStyles, ContentBarStylesArray} from "./contentBar";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
+
+const ContentBarStyles = {
+  SPACING: "SPACING",
+  SET_SPACING_COLOR: "SET_SPACING_COLOR",
+} as const;
+
+type ContentBarStylesArray =
+  (typeof ContentBarStyles)[keyof typeof ContentBarStyles][];
 
 export type ContentWithBarProps = {
   contentWrappers: BasicContentbarWrapper[] | CustomContentbarWrapper[];

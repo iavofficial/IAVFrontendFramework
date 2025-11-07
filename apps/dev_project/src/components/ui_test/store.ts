@@ -26,12 +26,23 @@ import { ReactRouterRouter } from "@iavofficial/frontend-framework-shared/reactR
 
 import { MandatoryModuleNames } from "@iavofficial/frontend-framework/constants";
 import { translations } from "../aws_test/translations.ts";
+import CustomHeader from "./CustomHeader.tsx";
+import CustomNavbar from "./CustomNavbar.tsx";
+import CustomCookieBanner from "./CustomCookieBanner.tsx";
+import CustomContentBar from "./CustomContentBar.tsx";
+import { UIModule } from "@iavofficial/frontend-framework-shared/uiModule";
 
 const customModules = {
   [MandatoryModuleNames.Internationalizer]: new I18NextInternationalizer({
     translationResources: translations,
   }),
   [MandatoryModuleNames.Router]: new ReactRouterRouter(),
+  [MandatoryModuleNames.UI]: new UIModule({
+    UILayerHeader: CustomHeader,
+    UILayerNavbar: CustomNavbar,
+    UILayerCookieBanner: CustomCookieBanner,
+    UILayerContentBar: CustomContentBar,
+  }),
 };
 
 export const modules = createModules(customModules);

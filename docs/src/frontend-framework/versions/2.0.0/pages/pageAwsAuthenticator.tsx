@@ -37,7 +37,7 @@ const PageAwsAuthenticator: React.FC = () => {
     <Code
       language="typescript"
       center
-    >{`{url: string2; token?: JWT; settings?: FetchSettings}`}</Code>
+    >{`{url: string; token?: JWT; settings?: FetchSettings}`}</Code>
   );
 
   const CodeCompletePasswordParams = (

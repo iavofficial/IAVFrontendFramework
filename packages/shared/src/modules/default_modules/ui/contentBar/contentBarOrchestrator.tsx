@@ -17,6 +17,7 @@
  */
 
 import React, {
+  ReactElement,
   useCallback,
   useContext,
   useEffect,
@@ -30,6 +31,7 @@ import {MandatoryModuleNames} from "../../../../constants/moduleNames";
 import {ColorSettingsContext} from "../../../../contexts/colorSettingsContext";
 import {
   ContentBarStyles,
+  ContentBarStylesArray,
   ContentBarViewProps,
   UIContentBarProps,
 } from "../../../../types/modules/ui/contentBar/contentBarModuleInterfaces";
@@ -39,12 +41,13 @@ const VISIBLE_MAX = 6;
 const MIN_ITEM_WIDTH = 120;
 
 export type ContentBarOrchestratorProps = {
+  appliedStyles: ContentBarStylesArray;
   uiComponent?: React.ComponentType<UIContentBarProps>;
-};
+} & UIContentBarProps;
 
 export const ContentBarOrchestrator = (props: ContentBarOrchestratorProps) => {
   const {
-    contentElements = [],
+    contentElements,
     addable,
     jumpToEndOfContentBar,
     selectedId,
@@ -130,7 +133,7 @@ export const ContentBarOrchestrator = (props: ContentBarOrchestratorProps) => {
 
   const firstId = contentElements[0]?.getId?.() ?? selectedId;
 
-  const uiProps: ContentBarViewProps = {
+  const uiProps = {
     visibleElements,
     elementWidth,
     canSlideLeft,
@@ -144,6 +147,7 @@ export const ContentBarOrchestrator = (props: ContentBarOrchestratorProps) => {
     containerBg,
     barBg,
     hasSpacing,
+    contentElements
   };
 
   return (

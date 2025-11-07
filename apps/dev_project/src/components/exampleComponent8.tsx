@@ -115,15 +115,14 @@ export const ExampleComponent8 = () => {
     dispatch({ type: "create", addElement: newTab });
   };
 
-  const contentWithBarModule = useModule(
+  const uiModule = useModule(
     MandatoryModuleNames.UI,
-  ).UiLayerContentWithBar;
-  const ContentWithBar = contentWithBarModule.UiLayerContentWithBar;
+  );
+  const ContentWithBar = uiModule.UILayerContentBar;
 
   return (
     <ContentWithBar
       onClickAddButton={onAddElement}
-      layoutBehaviour={LayoutBehaviour.GRID}
       contentWrappers={state.exampleArray}
       jumpToEndOfContentBar={true}
       addable={true}

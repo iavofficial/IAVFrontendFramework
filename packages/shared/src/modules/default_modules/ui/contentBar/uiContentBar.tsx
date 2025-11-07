@@ -30,8 +30,6 @@ import {
 import {TypedUseSelectorHook, useSelector} from "react-redux";
 import {UIStoreState} from "../../../../types/modules/ui/uiModuleInterfaces";
 import {MandatoryModuleNames} from "../../../../constants/moduleNames";
-import {BasicContentbarWrapper} from "@iavofficial/frontend-framework/basicContentbarWrapper";
-import {CustomContentbarWrapper} from "@iavofficial/frontend-framework/customContentbarWrapper";
 import {useStyleMap} from "../../../module_orchestration/util/useStyleMap";
 import {calculateWidth} from "../../../module_orchestration/util/calculateWidth";
 import {ContentBarButtonElement} from "../../../module_orchestration/util/contentBarButtonElement";
@@ -203,7 +201,7 @@ export const UIContentBar: React.FC<UIContentBarProps> = (props) => {
                   startRenderElements + amountOfRenderedTabElements,
                 )
                 .map(
-                  (element: BasicContentbarWrapper | CustomContentbarWrapper) =>
+                  (element) =>
                     element.getContentbarElement(
                       calculateWidth(
                         isNavbarCollapsed,
@@ -216,7 +214,7 @@ export const UIContentBar: React.FC<UIContentBarProps> = (props) => {
                     ),
                 )
             : contentElements.map(
-                (element: BasicContentbarWrapper | CustomContentbarWrapper) =>
+                (element) =>
                   element.getContentbarElement(
                     calculateWidth(
                       isNavbarCollapsed,

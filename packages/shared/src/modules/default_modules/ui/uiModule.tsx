@@ -64,8 +64,6 @@ const safeSet = (val: boolean) => {
 const initialState: UIState = {navbarCollapsed: safeGet(), collapsible: true};
 
 export class UIModule implements UIModuleType<UIState> {
-  public id = "ui-orchestrator";
-  public name = "UI Orchestrator";
   public slice;
   public middleware = [];
   public enhancers = [];

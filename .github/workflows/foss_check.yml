@@ -24,7 +24,7 @@ jobs:
           node-version: "20"
           registry-url: "https://registry.npmjs.org"
 
-      - name: Install all dependencies with workspaces
+      - name: Install all dependencies
         run: npm ci
 
       - name: Generate SBOM (CycloneDX JSON) for root
@@ -75,7 +75,7 @@ jobs:
           node-version: "20"
           registry-url: "https://registry.npmjs.org"
 
-      - name: Install dependencies using npm workspaces
+      - name: Install dependencies
         run: npm ci
 
       - name: Clean caches
@@ -109,7 +109,7 @@ jobs:
           node-version: "20"
           registry-url: "https://registry.npmjs.org"
 
-      - name: Install dependencies
+      - name: Install root dependencies
         run: npm ci
 
       - name: Sanitize workspace name
@@ -118,11 +118,12 @@ jobs:
           sanitized_name=$(echo "${{ matrix.project }}" | sed 's|/|-|g')
           echo "SANITIZED_NAME=${sanitized_name}" >> $GITHUB_ENV
 
-      - name: Generate SBOM (per workspace)
+      - name: Generate SBOM for each workspace
+        working-directory: ${{ matrix.project }}
         run: |
           echo "Generating SBOM for workspace: ${{ matrix.project }}"
-          npm --workspace ${{ matrix.project }} install --include=dev
-          npm --workspace ${{ matrix.project }} sbom --sbom-format spdx > ${{ matrix.project }}/SBOM.spdx
+          npm install --include=dev
+          npm sbom --sbom-format spdx > SBOM.spdx
 
       - name: Upload Workspace SBOM as Artifact
         uses: actions/upload-artifact@v4

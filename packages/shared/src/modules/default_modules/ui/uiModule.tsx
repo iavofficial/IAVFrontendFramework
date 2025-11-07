@@ -37,7 +37,7 @@ import {
   ContentBarOrchestrator,
   ContentBarOrchestratorProps,
 } from "./contentBar/contentBarOrchestrator";
-import { CookieBannerOrchestrator } from "./cookiebanner/cookieBannerOrchestrator";
+import {CookieBannerOrchestrator} from "./cookiebanner/cookieBannerOrchestrator";
 
 type UIParams = {
   UILayerHeader?: (props: UIHeaderProps) => React.ReactNode;

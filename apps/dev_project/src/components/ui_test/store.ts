@@ -31,8 +31,8 @@ const customModules = {
   [MandatoryModuleNames.Internationalizer]: new I18NextInternationalizer({
     translationResources: translations,
   }),
-    [MandatoryModuleNames.Router]: new ReactRouterRouter(),
-}
+  [MandatoryModuleNames.Router]: new ReactRouterRouter(),
+};
 
 export const modules = createModules(customModules);
 

@@ -22,8 +22,8 @@ import { LayoutBehaviour } from "@iavofficial/frontend-framework/contentLayout";
 import { generateHashOfLength } from "@iavofficial/frontend-framework/hash";
 import { ContentbarExampleWithText } from "./contentbarExampleWithText";
 import { BasicContentbarWrapper } from "@iavofficial/frontend-framework/basicContentbarWrapper";
-import { TranslateFunctionType } from "@iavofficial/frontend-framework/translationFunction";
 import { ContentStyleTemplates } from "@iavofficial/frontend-framework/contentStyle";
+import { TranslationFunction } from "@iavofficial/frontend-framework/reExportedTypes";
 
 const initialState: ExampleArrayObject = {
   exampleArray: [],
@@ -107,15 +107,17 @@ export const ExampleComponent1 = () => {
 
   const generateExampleArray = () => {
     let temporaryExampleArray = [];
+    let hashOfFirstElement = generateHashOfLength(6);
 
     for (let index = 0; index < 6; index++) {
-      let id = `car-${index}`;
+      let hash = index === 0 ? hashOfFirstElement : generateHashOfLength(6);
       let newBasicContentWrapperElement = new BasicContentbarWrapper({
-        id: id,
-        displayName: (t: TranslateFunctionType) => `${t("car")} ${index}`,
+        id: hash,
+        displayName: (t: TranslationFunction) =>
+          `${t({ key: "car" })} ${index}`,
         onClick: selectElement,
         contentAreaElement: (
-          <ContentbarExampleWithText exampleText={`car ${index}`} key={id} />
+          <ContentbarExampleWithText exampleText={`car ${index}`} key={hash} />
         ),
         closable: index < 1 ? false : true,
         onClose: onCloseElement,
@@ -124,8 +126,8 @@ export const ExampleComponent1 = () => {
     }
 
     return {
-      temporaryExampleArray,
-      idOfFirstElement: "car-0",
+      temporaryExampleArray: temporaryExampleArray,
+      idOfFirstElement: hashOfFirstElement,
     };
   };
 

@@ -16,14 +16,16 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useTranslator } from "@iavofficial/frontend-framework/translators";
-import { ImprintText } from "@iavofficial/frontend-framework/imprint";
 import { useContext } from "react";
 import { ColorSettingsContext } from "@iavofficial/frontend-framework/colorSettingsContext";
-import "@iavofficial/frontend-framework/globalColors.css";
+import { useModuleTranslation } from "@iavofficial/frontend-framework/moduleHooks";
 
-export const LegalDocuments = () => {
-  const t = useTranslator();
+interface Props {
+  legalDocument: React.ComponentType<any>;
+}
+
+export const LegalDocuments = (props: Props) => {
+  const t = useModuleTranslation();
   const colorSettingsContext = useContext(ColorSettingsContext);
 
   return (
@@ -36,7 +38,7 @@ export const LegalDocuments = () => {
       <div
         className={
           (colorSettingsContext?.darkmode ? "bg-grey-6" : "bg-white-1") +
-          " flex px-3"
+          " flex p-3"
         }
         style={{
           flexDirection: "column",
@@ -55,9 +57,9 @@ export const LegalDocuments = () => {
             fontWeight: "bolder",
           }}
         >
-          {t("Customized_legal_documents")}
+          {t({ key: "Customized_legal_documents" })}
         </div>
-        <ImprintText />
+        <props.legalDocument />
       </div>
     </div>
   );

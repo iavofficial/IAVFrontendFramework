@@ -20,36 +20,38 @@ import "primeflex/primeflex.css";
 import "primereact/resources/themes/nova/theme.css";
 import "primereact/resources/primereact.css";
 import "primeicons/primeicons.css";
-import React, {useContext, useEffect} from "react";
-import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
-import "./css/constants.css";
-import "./css/globalChangesOnPrimeReactComponents.css";
-import "./css/globalSettings.css";
-import {BasicAuthenticationView} from "./authentication/default/basicAuthenticationView";
-import {SettingsMenuOptions} from "./header/settingsMenu";
-import {CookieBanner} from "./cookie/cookieBanner";
-import {AuthContext} from "../contexts/auth";
-import {AuthenticationViewProps} from "./authentication/authenticationViewProps";
-import {MainView} from "./mainView";
-import {DefaultImprint} from "./imprint/defaultImprint";
-import {TabAndContentWrapper} from "./navbar/wrappers/typesWrappers";
-import {NavbarSettingsProvider} from "../providers/navbarSettingsProvider";
+import React, {useEffect} from "react";
+import {useCookies} from "react-cookie";
+import {setAcceptCookies} from "@iavofficial/frontend-framework-shared/setAcceptCookies";
+import {ACCEPTED_COOKIES_NAME} from "@iavofficial/frontend-framework-shared/constants";
+import {useDefaultSelector} from "@iavofficial/frontend-framework-shared/moduleDefaults";
+import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
+import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
+import {NavbarSettingsProvider} from "../contexts/providers/navbarSettingsProvider";
+import {AuthenticationViewProps} from "@iavofficial/frontend-framework-shared/authenticationViewProps";
 import {StaticCollapsedState} from "../types/navbarSettingsTypes";
-
-import "./uiLayer.css";
-import "./css/fonts.css";
-import "./css/darkModeInputsWorkAround.css";
+import {SettingsMenuOptions} from "./header/settingsMenu";
 import {HeaderOptions} from "./header/header";
 import {UserMenuOptions} from "./header/userMenu";
-import {useRemoveKnownCookies} from "./cookie/cookieHooks";
+import {LegalDocument} from "./imprint/legalDocument";
+import {BasicAuthenticationView} from "./authentication/default/basicAuthenticationView";
+import {MainView} from "./mainView";
+import "./uiLayer.css";
+import "../css/fonts.css";
+import "../css/darkModeInputsWorkAround.css";
+import "../css/constants.css";
+import "../css/globalChangesOnPrimeReactComponents.css";
+import "../css/globalSettings.css";
+import "../css/globalColors.css";
+import "@iavofficial/frontend-framework-shared/css/authenticationView.css";
+import {TabAndContentWrapper} from "./navbar/wrappers/typesWrappers";
+import {useRemoveKnownCookies} from "@iavofficial/frontend-framework-shared/cookieHooks";
 
 export interface AuthOptions {
   backgroundImage?: string;
   companyText?: string;
   preventDarkmode?: boolean;
-  errorMessages?: {
-    passwordErrorMessage?: string;
-  };
+  errorMessages?: {passwordErrorMessage?: string};
 }
 
 export interface NavbarOptions {
@@ -59,146 +61,108 @@ export interface NavbarOptions {
 export interface Props {
   // This indicates that the passed objects should have the type's properties at least.
   tabAndContentWrappers: TabAndContentWrapper[];
-  startingPoint: string;
+  initialPath: string;
   disableLogin?: boolean;
   disableCookieBanner?: boolean;
   authenticationView?: React.ComponentType<AuthenticationViewProps & any>;
-  documentsComponent?: React.ComponentType<any>;
-  documentsLabelKey?: string;
+  legalDocuments?: LegalDocument[];
   settingsMenuOptions?: SettingsMenuOptions;
   userMenuOptions?: UserMenuOptions;
   headerOptions?: HeaderOptions;
   authOptions?: AuthOptions;
-  hideLegalDocuments?: boolean;
   navbarOptions?: NavbarOptions;
   hideNavbar?: boolean;
-  customHeader?: React.ComponentType<any>;
 }
 
-export const UILayer = (props: Props) => {
-  const authContext = useContext(AuthContext);
+export const UILayer: React.FC<Props> = (props) => {
+  const {hasAuthenticated} = useDefaultSelector((s) => s.auth);
+  const routerModule = useModule(MandatoryModuleNames.Router);
+  const uiModule = useModule(MandatoryModuleNames.UI);
+
+  const UILayerRouter = routerModule.UiLayerRouter;
+  const UILayerCookieBanner = uiModule.UILayerCookieBanner;
 
   const removeKnownCookies = useRemoveKnownCookies();
 
-  const AuthenticationView = props.authenticationView
-    ? props.authenticationView
-    : BasicAuthenticationView;
+  const disableLogin = !!props.disableLogin;
+  const AuthenticationView =
+    props.authenticationView ?? BasicAuthenticationView;
 
-  // If the login is disabled, the user should not be able to log out.
   const userMenuOptions = {...props.userMenuOptions};
-  if (props.disableLogin) {
-    userMenuOptions.hideLogoutButton = true;
-  }
+  if (props.disableLogin) userMenuOptions.hideLogoutButton = true;
 
   useEffect(() => {
     if (props.disableCookieBanner) {
       removeKnownCookies({path: "/"});
     }
   }, [props.disableCookieBanner, removeKnownCookies]);
+
+  const dynamicRoutes =
+    props.legalDocuments?.map((doc) => ({
+      path: doc.path,
+      disabled: doc.isHidden ?? false,
+      element: <doc.component />,
+    })) || [];
+
+  const fixedRoutes = [
+    {
+      path: "/login",
+      disabled: disableLogin,
+      element: (
+        <AuthenticationView
+          authOptions={props.authOptions}
+          hideLanguageSelection={
+            props.settingsMenuOptions?.hideLanguageSelection
+          }
+          headerOptions={props.headerOptions}
+          legalDocuments={props.legalDocuments}
+        />
+      ),
+    },
+    {
+      path: "/*",
+      disabled: !disableLogin && !hasAuthenticated,
+      element: (
+        <MainView
+          headerOptions={props.headerOptions}
+          settingsMenuOptions={props.settingsMenuOptions}
+          userMenuOptions={userMenuOptions}
+          legalDocuments={props.legalDocuments}
+          tabAndContentWrappers={props.tabAndContentWrappers}
+          hideNavbar={props.hideNavbar}
+        />
+      ),
+    },
+  ];
+
+  const routes = [...dynamicRoutes, ...fixedRoutes];
+  const legalDocumentsPaths = (props.legalDocuments ?? []).map((d) => d.path);
+
   return (
     <NavbarSettingsProvider
       staticCollapsedState={props.navbarOptions?.staticCollapsedState}
     >
-      {/* Banner nur zeigen, wenn er nicht deaktiviert ist */}
-      {!props.disableCookieBanner && <CookieBanner />}
+      {!props.disableCookieBanner && UILayerCookieBanner && (
+        <UILayerCookieBanner />
+      )}
 
-      <Redirector
-        startingPoint={props.startingPoint}
-        disableLogin={props.disableLogin}
-      />
-
-      <Routes>
-        {!props.disableLogin && (
-          <Route
-            path="/login"
-            element={
-              <AuthenticationView
-                authOptions={props.authOptions}
-                hideLanguageSelection={
-                  props.settingsMenuOptions?.hideLanguageSelection
-                }
-                headerOptions={props.headerOptions}
-                hideLegalDocuments={props.hideLegalDocuments}
-              />
-            }
-          />
-        )}
-
-        {!props.disableLogin && !authContext?.hasAuthenticated() && (
-          <Route
-            path="/documents"
-            element={
-              props.documentsComponent ? (
-                <props.documentsComponent />
-              ) : (
-                <DefaultImprint />
-              )
-            }
-          />
-        )}
-
-        {!props.disableLogin && !authContext?.hasAuthenticated() ? (
-          <Route path="/*" element={<></>} />
-        ) : (
-          <Route
-            path="/*"
-            element={
-              <MainView
-                headerOptions={props.headerOptions}
-                settingsMenuOptions={props.settingsMenuOptions}
-                userMenuOptions={userMenuOptions}
-                documentsLabelKey={props.documentsLabelKey}
-                documentsComponent={props.documentsComponent}
-                tabAndContentWrappers={props.tabAndContentWrappers}
-                hideLegalDocuments={props.hideLegalDocuments}
-                hideNavbar={props.hideNavbar}
-                customHeader={props.customHeader}
-              />
-            }
-          />
-        )}
-      </Routes>
+      {UILayerRouter ? (
+        <UILayerRouter
+          routes={routes}
+          disableLogin={disableLogin}
+          initialPath={props.initialPath}
+          legalDocumentsPaths={legalDocumentsPaths}
+        />
+      ) : (
+        <MainView
+          headerOptions={props.headerOptions}
+          settingsMenuOptions={props.settingsMenuOptions}
+          userMenuOptions={userMenuOptions}
+          legalDocuments={props.legalDocuments}
+          tabAndContentWrappers={props.tabAndContentWrappers}
+          hideNavbar={props.hideNavbar}
+        />
+      )}
     </NavbarSettingsProvider>
   );
-};
-
-interface RedirectorProps {
-  startingPoint: string;
-  disableLogin?: boolean;
-}
-
-/**
- * This component is needed because the useLocation hook can only be used inside a Router-component
- * environment.
- * @param props
- * @constructor
- */
-const Redirector = (props: RedirectorProps) => {
-  const disableLogin = props.disableLogin;
-
-  const authContext = useContext(AuthContext);
-  const userIsAuthenticated = authContext!.hasAuthenticated();
-
-  const currentPath = useLocation().pathname;
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!disableLogin && !userIsAuthenticated) {
-      if (currentPath !== "/documents") {
-        navigate("/login");
-      }
-    } else {
-      if (currentPath === "/login" || currentPath === "/") {
-        navigate(props.startingPoint.valueOf());
-      }
-    }
-  }, [
-    disableLogin,
-    currentPath,
-    userIsAuthenticated,
-    navigate,
-    props.startingPoint,
-  ]);
-
-  return <React.Fragment />;
 };

@@ -16,42 +16,61 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React from "react";
-import {Header, HeaderOptions} from "./header/header";
-import {Navbar} from "./navbar/navbar";
-import {DefaultImprint} from "./imprint/defaultImprint";
+import React, {useContext, useMemo} from "react";
+import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
+import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
+import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
+import {BasicRoute} from "@iavofficial/frontend-framework-shared/routerModule";
+import {HeaderOptions} from "./header/header";
 import {SettingsMenuOptions} from "./header/settingsMenu";
-import {Outlet, Route, Routes} from "react-router-dom";
-import {TabAndContentWrapper} from "./navbar/wrappers/typesWrappers";
 import {UserMenuOptions} from "./header/userMenu";
+import {TabAndContentWrapper} from "./navbar/wrappers/typesWrappers";
+import {LegalDocument} from "./imprint/legalDocument";
 import If from "./helper/If";
 
 interface MainViewProps {
   tabAndContentWrappers: TabAndContentWrapper[];
-  documentsComponent?: React.ComponentType<any>;
-  documentsLabelKey?: string;
-  hideLegalDocuments?: boolean;
+  legalDocuments?: LegalDocument[];
   headerOptions?: HeaderOptions;
   settingsMenuOptions?: SettingsMenuOptions;
   userMenuOptions?: UserMenuOptions;
   hideNavbar?: boolean;
-  customHeader?: React.ComponentType<any>;
 }
 
-export const MainView = (props: MainViewProps) => {
+export const MainView: React.FC<MainViewProps> = (props) => {
+  const colorSettingsContext = useContext(ColorSettingsContext);
+  const routerModule = useModule(MandatoryModuleNames.Router);
+  const ui = useModule(MandatoryModuleNames.UI);
+
+  const Header = ui.UILayerHeader;
+  const Navbar = ui.UILayerNavbar;
+
+  const contentAreaBackground =
+    colorSettingsContext.currentColors.contentArea.backgroundColor;
+
+  const staticRoutes: BasicRoute[] = useMemo(
+    () =>
+      props.legalDocuments?.map((doc) => ({
+        path: doc.path,
+        element: <doc.component />,
+      })) || [],
+    [props.legalDocuments],
+  );
+
+  const tabRoutes = useMemo(() => {
+    let routes: BasicRoute[] = [];
+    props.tabAndContentWrappers.forEach((w) => {
+      routes = [...routes, ...w.getRoutes()];
+    });
+    return routes;
+  }, [props.tabAndContentWrappers]);
+
+  const MainViewRouter = routerModule.MainViewRouter;
+
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        height: "100%",
-        bottom: "0",
-      }}
-    >
+    <div style={{display: "flex", flexDirection: "column", height: "100%"}}>
       <div style={{flex: "0 0 auto"}}>
-        {props.customHeader ? (
-          <props.customHeader />
-        ) : (
+        {Header && (
           <Header
             headerOptions={props.headerOptions}
             settingsMenuOptions={props.settingsMenuOptions}
@@ -59,35 +78,27 @@ export const MainView = (props: MainViewProps) => {
           />
         )}
       </div>
+
       <div
         style={{
           display: "flex",
           flex: "1 1 auto",
           overflow: "auto",
+          backgroundColor: contentAreaBackground,
         }}
       >
-        <If condition={!props.hideNavbar}>
-          <Navbar
-            tabAndContentWrappers={props.tabAndContentWrappers}
-            documentsLabelKey={props.documentsLabelKey}
-            hideLegalDocuments={props.hideLegalDocuments}
-          />
+        <If condition={!props.hideNavbar && !!Navbar}>
+          {Navbar && (
+            <Navbar
+              tabAndContentWrappers={props.tabAndContentWrappers}
+              legalDocuments={props.legalDocuments}
+            />
+          )}
         </If>
-        <Outlet />
-        <Routes>
-          {props.tabAndContentWrappers.map((wrapper) => wrapper.getRoutes())}
 
-          <Route
-            path="/documents"
-            element={
-              props.documentsComponent ? (
-                <props.documentsComponent />
-              ) : (
-                <DefaultImprint />
-              )
-            }
-          />
-        </Routes>
+        {MainViewRouter && (
+          <MainViewRouter routes={[...staticRoutes, ...tabRoutes]} />
+        )}
       </div>
     </div>
   );

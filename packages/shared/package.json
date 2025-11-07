@@ -1,0 +1,248 @@
+{
+  "name": "@iavofficial/frontend-framework-shared",
+  "version": "1.0.0",
+  "private": false,
+  "license": "Apache-2.0",
+  "description": "This package provides react components, contexts, types, utils etc. for use in multiple frontend framework packages.",
+  "scripts": {
+    "setup": "npm i",
+    "build": "cross-env-shell \"../../scripts/unix/packages/build.sh || echo \"Not implemented yet.\"\"",
+    "build-live": "cross-env-shell \"..\\..\\scripts\\win\\build-live.bat || echo \"Not implemented yet.\"\"",
+    "test": "jest --passWithNoTests",
+    "lint": "eslint src/**/*.{js,ts,tsx}",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json}\" && prettier --write \"docs/*\"",
+    "release": "npx semantic-release",
+    "generate-docs": "../../scripts/unix/docs_generation/generate-docs-for-package.sh"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "keywords": [
+    "iav-frontendframework",
+    "aws authenticator"
+  ],
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.5.1",
+    "glob": "^10.4.5",
+    "i18next": "^22.4.13",
+    "i18next-browser-languagedetector": "^7.0.1",
+    "react-i18next": "^12.2.0",
+    "react-redux": "^9.2.0",
+    "react-router": "^7.3.0",
+    "react-router-dom": "^7.3.0",
+    "simplebar": "^5.3.9",
+    "simplebar-react": "^2.4.3"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.21.0",
+    "@babel/core": "^7.22.10",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/preset-env": "^7.25.4",
+    "@babel/preset-react": "^7.22.5",
+    "@babel/preset-typescript": "^7.21.0",
+    "@svgr/babel-plugin-transform-svg-component": "^8.0.0",
+    "@types/lodash": "^4.14.191",
+    "@types/node": "^18.15.5",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "@vitejs/plugin-react": "^4.3.4",
+    "babel-plugin-inline-react-svg": "^2.0.2",
+    "jest": "^29.7.0",
+    "prettier": "^3.3.2",
+    "typescript": "^5.0.2"
+  },
+  "files": [
+    "./dist",
+    "./package.json",
+    "./LICENSE",
+    "./NOTICE.md",
+    "./SBOM.spdx",
+    "./README.md"
+  ],
+  "exports": {
+    "./css/*": "./dist/assets/css/*",
+    "./svg/*": "./dist/assets/svg/*",
+    "./png/*": "./dist/assets/png/*",
+    "./appLogoPlaceholder": "./dist/components/appLogoPlaceholder.js",
+    "./loginButtonWithSpinner": "./dist/components/loginButtonWithSpinner.js",
+    "./colorSettingsContext": "./dist/contexts/colorSettingsContext.js",
+    "./moduleContext": "./dist/contexts/moduleContext.js",
+    "./constants": "./dist/constants/constants.js",
+    "./moduleNames": "./dist/constants/moduleNames.js",
+    "./defaultTranslations": "./dist/constants/defaultTranslations.js",
+    "./generalModule": "./dist/types/modules/generalModule.js",
+    "./moduleDefaults": "./dist/modules/module_orchestration/moduleDefaults.js",
+    "./moduleOrchestrationTypes": "./dist/types/modules/moduleOrchestrationTypes.js",
+    "./createModules": "./dist/modules/module_orchestration/createModules.js",
+    "./createModulesSeparately": "./dist/modules/module_orchestration/createModulesSeparately.js",
+    "./checkIfUserModulesKeysValid": "./dist/modules/module_orchestration/util/checkIfUserModulesKeysValid.js",
+    "./separateModuleTypes": "./dist/modules/module_orchestration/util/separateModuleTypes.js",
+    "./storeBuilder": "./dist/modules/module_orchestration/storeBuilder.js",
+    "./storeConfigBuilder": "./dist/modules/module_orchestration/storeConfigBuilder.js",
+    "./dummyAuthenticatorModule": "./dist/modules/default_modules/auth/dummyAuthenticatorModule.js",
+    "./authenticatorModule": "./dist/types/modules/auth/authenticatorModule.js",
+    "./authenticationViewProps": "./dist/types/modules/auth/authenticationViewProps.js",
+    "./reactRouterRouterModule": "./dist/modules/default_modules/router/reactRouterRouterModule.js",
+    "./link": "./dist/modules/default_modules/router/components/link.js",
+    "./mainViewRouter": "./dist/modules/default_modules/router/components/mainViewRouter.js",
+    "./uiLayerRouter": "./dist/modules/default_modules/router/components/uiLayerRouter.js",
+    "./routerModule": "./dist/types/modules/router/routerModule.js",
+    "./i18NextInternationalizerModule": "./dist/modules/default_modules/internationalization/i18NextInternationalizerModule.js",
+    "./useModuleTranslation": "./dist/modules/hooks/useModuleTranslation.js",
+    "./internationalizerModule": "./dist/types/modules/internationalization/internationalizerModule.js",
+    "./initI18nextFunction": "./dist/types/modules/internationalization/initI18nextFunction.js",
+    "./initI18nextDefault": "./dist/modules/default_modules/internationalization/initI18nextDefault.js",
+    "./colorOptionTypes": "./dist/types/color/colorOptionTypes.js",
+    "./requiredMutable": "./dist/types/util-types/requiredMutable.js",
+    "./componentTypeMinProps": "./dist/types/util-types/componentTypeMinProps.js",
+    "./containsOneOrMoreGroups": "./dist/utils/auth/containsOneOrMoreGroups.js",
+    "./parseLanguageResourcesIntoDropdownFormat": "./dist/utils/internationalization/parseLanguageResourcesIntoDropdownFormat.js",
+    "./hash": "./dist/utils/hash.js",
+    "./cookieHooks": "./dist/utils/cookieHooks.js",
+    "./setAcceptCookies": "./dist/utils/setAcceptCookies.js",
+    "./cookieBannerModuleInterfaces": "./dist/types/modules/ui/cookieBanner/cookieBannerModuleInterfaces.js",
+    "./cookieBannerOrchestrator": "./dist/modules/default_modules/ui/cookieBanner/cookieBannerOrchestrator.js",
+    "./contentBarModuleInterfaces": "./dist/types/modules/ui/contentBar/contentBarModuleInterfaces.js",
+    "./contentBarOrchestrator": "./dist/modules/default_modules/ui/contentBar/contentBarOrchestrator.js",
+    "./headerModuleInterfaces": "./dist/types/modules/ui/header/headerModuleInterfaces.js",
+    "./headerOrchestrator": "./dist/modules/default_modules/ui/header/headerOrchestrator.js",
+    "./navbarModuleInterfaces": "./dist/types/modules/ui/navbar/navbarModuleInterfaces.js",
+    "./navbarOrchestrator": "./dist/modules/default_modules/ui/navbar/navbarOrchestrator.js",
+    "./uiModuleInterfaces": "./dist/types/modules/ui/uiModuleInterfaces.js",
+    "./uiOrchestrator": "./dist/modules/default_modules/ui/uiOrchestrator.js",
+    "./uiModule": "./dist/modules/default_modules/ui/uiModule.js"
+  },
+  "typesVersions": {
+    "*": {
+      "./appLogoPlaceholder": [
+        "./dist/components/appLogoPlaceholder.d.ts"
+      ],
+      "./loginButtonWithSpinner": [
+        "./dist/components/loginButtonWithSpinner.d.ts"
+      ],
+      "./colorSettingsContext": [
+        "./dist/contexts/colorSettingsContext.d.ts"
+      ],
+      "./moduleContext": [
+        "./dist/contexts/moduleContext.d.ts"
+      ],
+      "./constants": [
+        "./dist/constants/constants.d.ts"
+      ],
+      "./moduleNames": [
+        "./dist/constants/moduleNames.d.ts"
+      ],
+      "./defaultTranslations": [
+        "./dist/constants/defaultTranslations.d.ts"
+      ],
+      "./generalModule": [
+        "./dist/types/modules/generalModule.d.ts"
+      ],
+      "./moduleDefaults": [
+        "./dist/modules/module_orchestration/moduleDefaults.d.ts"
+      ],
+      "./moduleOrchestrationTypes": [
+        "./dist/types/modules/moduleOrchestrationTypes.d.ts"
+      ],
+      "./createModules": [
+        "./dist/modules/module_orchestration/createModules.d.ts"
+      ],
+      "./createModulesSeparately": [
+        "./dist/modules/module_orchestration/createModulesSeparately.js"
+      ],
+      "./checkIfUserModulesKeysValid": [
+        "./dist/modules/module_orchestration/util/checkIfUserModulesKeysValid.d.ts"
+      ],
+      "./separateModuleTypes": [
+        "./dist/modules/module_orchestration/util/separateModuleTypes.d.ts"
+      ],
+      "./storeBuilder": [
+        "./dist/modules/module_orchestration/storeBuilder.d.ts"
+      ],
+      "./storeConfigBuilder": [
+        "./dist/modules/module_orchestration/storeConfigBuilder.d.ts"
+      ],
+      "./dummyAuthenticatorModule": [
+        "./dist/modules/default_modules/auth/dummyAuthenticatorModule.d.ts"
+      ],
+      "./authenticatorModule": [
+        "./dist/types/modules/auth/authenticatorModule.d.ts"
+      ],
+      "./authenticationViewProps": [
+        "./dist/types/modules/auth/authenticationViewProps.d.ts"
+      ],
+      "./reactRouterRouterModule": [
+        "./dist/modules/default_modules/router/reactRouterRouterModule.d.ts"
+      ],
+      "./link": [
+        "./dist/modules/default_modules/router/components/link.d.ts"
+      ],
+      "./mainViewRouter": [
+        "./dist/modules/default_modules/router/components/mainViewRouter.d.ts"
+      ],
+      "./uiLayerRouter": [
+        "./dist/modules/default_modules/router/components/uiLayerRouter.d.ts"
+      ],
+      "./routerModule": [
+        "./dist/types/modules/router/routerModule.d.ts"
+      ],
+      "./i18NextInternationalizerModule": [
+        "./dist/modules/default_modules/internationalization/i18NextInternationalizerModule.d.ts"
+      ],
+      "./cookieBannerModuleInterfaces": [
+        "./dist/types/modules/ui/cookieBanner/cookieBannerModuleInterfaces.d.ts"
+      ],
+      "./cookieBannerOrchestrator": [
+        "./dist/modules/default_modules/ui/cookieBanner/cookieBannerOrchestrator.d.ts"
+      ],
+      "./contentBarModuleInterfaces": [
+        "./dist/types/modules/ui/contentBar/contentBarModuleInterfaces.d.ts"
+      ],
+      "./contentBarOrchestrator": [
+        "./dist/modules/default_modules/ui/contentBar/contentBarOrchestrator.d.ts"
+      ],
+      "./headerModuleInterfaces": [
+        "./dist/types/modules/ui/header/headerModuleInterfaces.d.ts"
+      ],
+      "./headerOrchestrator": [
+        "./dist/modules/default_modules/ui/header/headerOrchestrator.d.ts"
+      ],
+      "./navbarModuleInterfaces": [
+        "./dist/types/modules/ui/navbar/navbarModuleInterfaces.d.ts"
+      ],
+      "./navbarOrchestrator": [
+        "./dist/modules/default_modules/ui/navbar/navbarOrchestrator.d.ts"
+      ],
+      "./uiModuleInterfaces": [
+        "./dist/types/modules/ui/uiModuleInterfaces.d.ts"
+      ],
+      "./uiOrchestrator": [
+        "./dist/modules/default_modules/ui/uiOrchestrator.d.ts"
+      ],
+      "./uiModule": [
+        "./dist/modules/default_modules/ui/uiModule.d.ts"
+      ]
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

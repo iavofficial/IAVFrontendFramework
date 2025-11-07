@@ -19,12 +19,11 @@
 import { SelectButton } from "primereact/selectbutton";
 import { useState } from "react";
 import { UILayer } from "@iavofficial/frontend-framework/uiLayer";
-import { TranslateFunctionType } from "@iavofficial/frontend-framework/translationFunction";
-import { BasicAuthenticationView } from "@iavofficial/frontend-framework/basicAuthenticationView";
 import { BasicContentWrapper } from "@iavofficial/frontend-framework/basicContentWrapper";
 import { Group } from "@iavofficial/frontend-framework/group";
 import InfoIcon from "./assets/infoIcon.svg?react";
-import { LegalDocuments } from "./components/legalDocuments";
+import { ImprintDocument } from "./components/imprintDocument";
+import { PrivacyPolicyDocument } from "./components/privacyPolicyDocument";
 import { ExampleComponent1 } from "./components/exampleComponent1";
 import { ExampleComponent6 } from "./components/exampleComponent6";
 import { ExampleComponent3 } from "./components/exampleComponent3";
@@ -37,8 +36,17 @@ import { HeaderPanelElement } from "@iavofficial/frontend-framework/headerPanelE
 import { PrimeIcons } from "primereact/api";
 import { WHITE } from "@iavofficial/frontend-framework/constants";
 import { HeaderMenuElement } from "@iavofficial/frontend-framework/headerMenuElement";
+import { ExampleComponent7 } from "./components/exampleComponent7";
+import { LegalDocument } from "@iavofficial/frontend-framework/legalDocument";
+import { ExampleComponent8 } from "./components/exampleComponent8";
+import { ExampleComponent9 } from "./components/exampleComponent9";
+import { ExampleComponent10 } from "./components/exampleComponent10.tsx";
 
-function Layout() {
+interface Props {
+  authenticationView?: React.ComponentType;
+}
+
+const Layout = (props: Props) => {
   const [selectedButtonOption, setSelectedButtonOption] = useState("Simulated");
 
   const settingsMenuOptions = {
@@ -67,16 +75,24 @@ function Layout() {
       }),
       ExampleComponent1,
     ),
+    new BasicContentWrapper(
+      "/2",
+      simpleNavbarTabFactory({
+        disabled: false,
+        name: "Example for Redux Store",
+        icon: <InfoIcon />,
+      }),
+      ExampleComponent7,
+    ),
     new Group(
-      (t: TranslateFunctionType) => t("Test_group_not_collapsible"),
+      (t) => t({ key: "Test_group_not_collapsible" }),
       <InfoIcon />,
       false,
       [
         new BasicContentWrapper(
           "/group-example2/",
           simpleNavbarTabFactory({
-            name: (t: TranslateFunctionType) =>
-              t("example_component", { count: 2 }),
+            name: (t) => t({ key: "example_component", options: { count: 2 } }),
             disabled: false,
             icon: <InfoIcon />,
           }),
@@ -87,8 +103,7 @@ function Layout() {
     new BasicContentWrapper(
       "/group-example3/",
       privilegedNavbarTabFactory({
-        name: (t: TranslateFunctionType) =>
-          t("example_component", { count: 3 }),
+        name: (t) => t({ key: "example_component", options: { count: 3 } }),
         disabled: false,
         permittedGroups: ["ADMIN"],
         icon: <InfoIcon />,
@@ -98,57 +113,48 @@ function Layout() {
     new BasicContentWrapper(
       "/group-example4/",
       simpleNavbarTabFactory({
-        name: (t: TranslateFunctionType) =>
-          t("example_component", { count: 4 }),
+        name: (t) => t({ key: "example_component", options: { count: 4 } }),
         disabled: false,
         icon: <InfoIcon />,
       }),
       ExampleComponent4,
     ),
-    new Group(
-      (t: TranslateFunctionType) => t("Test_group_collapsible"),
-      <InfoIcon />,
-      true,
-      [
-        new Group("Untergruppe", <InfoIcon />, true, [
-          new BasicContentWrapper(
-            "/group-example51/",
-            simpleNavbarTabFactory({
-              name: (t: TranslateFunctionType) =>
-                t("example_component", { count: 5.1 }),
-              disabled: false,
-              icon: <InfoIcon />,
-            }),
-            ExampleComponent3,
-          ),
-        ]),
+    new Group((t) => t({ key: "Test_group_collapsible" }), <InfoIcon />, true, [
+      new Group("Untergruppe", <InfoIcon />, true, [
         new BasicContentWrapper(
-          "/group-example52/",
+          "/group-example51/",
           simpleNavbarTabFactory({
-            name: (t: TranslateFunctionType) =>
-              t("example_component", { count: 5.2 }),
+            name: (t) =>
+              t({ key: "example_component", options: { count: 5.1 } }),
             disabled: false,
-            icon: <InfoIcon />,
-          }),
-          ExampleComponent4,
-        ),
-        new BasicContentWrapper(
-          "/group-example53/",
-          simpleNavbarTabFactory({
-            name: (t: TranslateFunctionType) =>
-              t("example_component", { count: 5.3 }),
-            disabled: true,
             icon: <InfoIcon />,
           }),
           ExampleComponent3,
         ),
-      ],
-    ),
+      ]),
+      new BasicContentWrapper(
+        "/group-example52/",
+        simpleNavbarTabFactory({
+          name: (t) => t({ key: "example_component", options: { count: 5.2 } }),
+          disabled: false,
+          icon: <InfoIcon />,
+        }),
+        ExampleComponent4,
+      ),
+      new BasicContentWrapper(
+        "/group-example53/",
+        simpleNavbarTabFactory({
+          name: (t) => t({ key: "example_component", options: { count: 5.3 } }),
+          disabled: true,
+          icon: <InfoIcon />,
+        }),
+        ExampleComponent3,
+      ),
+    ]),
     new BasicContentWrapper(
       "/group-example6/",
       simpleNavbarTabFactory({
-        name: (t: TranslateFunctionType) =>
-          t("example_component", { count: 6 }),
+        name: (t) => t({ key: "example_component", options: { count: 6 } }),
         disabled: false,
         icon: <InfoIcon />,
       }),
@@ -157,8 +163,7 @@ function Layout() {
     new BasicContentWrapper(
       "/group-example7/",
       simpleNavbarTabFactory({
-        name: (t: TranslateFunctionType) =>
-          t("example_component", { count: 7 }),
+        name: (t) => t({ key: "example_component", options: { count: 7 } }),
         disabled: false,
         icon: <InfoIcon />,
       }),
@@ -167,13 +172,41 @@ function Layout() {
     new BasicContentWrapper(
       "/nested-route/example1/",
       simpleNavbarTabFactory({
-        name: (t: TranslateFunctionType) =>
-          t("example_component", { count: 8 }),
+        name: (t) => t({ key: "example_component", options: { count: 8 } }),
         disabled: false,
         icon: <InfoIcon />,
       }),
       ExampleComponent6,
     ),
+    new Group((t) => t({ key: "modules" }), <InfoIcon />, true, [
+      new BasicContentWrapper(
+        "/content-with-bar-example-1/",
+        simpleNavbarTabFactory({
+          name: (t) => t({ key: "example_component", options: { count: 9 } }),
+          disabled: false,
+          icon: <InfoIcon />,
+        }),
+        ExampleComponent8,
+      ),
+      new BasicContentWrapper(
+        "/content-with-bar-example-2/",
+        simpleNavbarTabFactory({
+          name: (t) => t({ key: "example_component", options: { count: 10 } }),
+          disabled: false,
+          icon: <InfoIcon />,
+        }),
+        ExampleComponent9,
+      ),
+      new BasicContentWrapper(
+        "/header-example-1/",
+        simpleNavbarTabFactory({
+          name: (t) => t({ key: "example_component", options: { count: 11 } }),
+          disabled: false,
+          icon: <InfoIcon />,
+        }),
+        ExampleComponent10,
+      ),
+    ]),
   ];
 
   const items = [
@@ -215,7 +248,20 @@ function Layout() {
     />,
   ];
 
-  const appLogo = <span className="ml-3">Example application</span>;
+  const legalDocuments: LegalDocument[] = [
+    {
+      path: "/imprint",
+      titleTranslationKey: "Imprint",
+      component: ImprintDocument,
+      isHidden: false,
+    },
+    {
+      path: "/privacy-policy",
+      titleTranslationKey: "Privacy_Policy",
+      component: PrivacyPolicyDocument,
+      isHidden: false,
+    },
+  ];
 
   return (
     <UILayer
@@ -224,19 +270,19 @@ function Layout() {
           passwordErrorMessage: "Invalid password. Please try again.",
         },
       }}
-      disableCookieBanner={false}
       tabAndContentWrappers={views}
-      startingPoint="/"
-      authenticationView={BasicAuthenticationView}
+      initialPath="/"
+      authenticationView={props.authenticationView}
       settingsMenuOptions={settingsMenuOptions}
-      documentsLabelKey="Legal_documents"
-      documentsComponent={LegalDocuments}
+      legalDocuments={legalDocuments}
       headerOptions={{
-        reactElementLeft: appLogo,
+        userIcon: <InfoIcon style={{ backgroundColor: WHITE }} />,
+        reactElementLeft: <span className="ml-3">Dev application</span>,
         headerElements: headerElements,
+        hideUserIcon: false,
       }}
     />
   );
-}
+};
 
 export default Layout;

@@ -1,0 +1,21 @@
+analyzer:
+  allow_dynamic_versions: true
+  skip_excluded: true
+
+excludes:
+  paths:
+    - pattern: 'apps/**'
+      reason: 'BUILD_TOOL_OF'
+      comment: 'Dev-App, nicht für Distribution'
+    - pattern: 'packages/aws-authenticator/**'
+      reason: 'BUILD_TOOL_OF'
+    - pattern: 'docs/.vite/deps/**'
+      reason: 'BUILD_TOOL_OF'
+      comment: 'Vite-Cache'
+    - pattern: '**/.vite/**'
+      reason: 'BUILD_CACHE'
+      comment: 'Vite-Cache'
+
+  projects:
+    - pattern: 'apps/dev_project/package.json'
+      reason: 'BUILD_TOOL_OF'

@@ -17,12 +17,6 @@
  */
 
 import React, {useContext, useMemo} from "react";
-import "../css/globalColors.css";
-import {
-  ContentBar,
-  ContentBarStyles,
-  ContentBarStylesArray,
-} from "./contentBar";
 import {BasicContentbarWrapper} from "./basicContentbarWrapper";
 import {CustomContentbarWrapper} from "./customContentbarWrapper";
 import {
@@ -30,7 +24,17 @@ import {
   ContentLayoutAndStyleProps,
   LayoutBehaviour,
 } from "./contentLayout";
-import {ColorSettingsContext} from "../../contexts/colorsettings";
+import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
+import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
+import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
+
+const ContentBarStyles = {
+  SPACING: "SPACING",
+  SET_SPACING_COLOR: "SET_SPACING_COLOR",
+} as const;
+
+type ContentBarStylesArray =
+  (typeof ContentBarStyles)[keyof typeof ContentBarStyles][];
 
 export type ContentWithBarProps = {
   contentWrappers: BasicContentbarWrapper[] | CustomContentbarWrapper[];
@@ -49,6 +53,8 @@ export const ContentWithBar = (
   props: React.PropsWithChildren<ContentLayoutAndStyleAndWithBarProps>,
 ) => {
   const colorSettingsContext = useContext(ColorSettingsContext);
+  const ui = useModule(MandatoryModuleNames.UI);
+  const ContentBarLayer = ui.UILayerContentBar;
 
   const contentAreaBackground =
     colorSettingsContext.currentColors.contentArea.backgroundColor;
@@ -87,15 +93,15 @@ export const ContentWithBar = (
         background: contentAreaBackground,
       }}
     >
-      {props.contentWrappers.length >= 1 && (
-        <ContentBar
+      {props.contentWrappers.length >= 1 && ContentBarLayer && (
+        <ContentBarLayer
           selectedId={props.selectedId}
           onClickLeftSlideButton={props.onClickLeftSlideButton}
           onClickRightSlideButton={props.onClickRightSlideButton}
           onClickAddButton={props.onClickAddButton}
           addable={props.addable}
           jumpToEndOfContentBar={props.jumpToEndOfContentBar}
-          contentElements={props.contentWrappers}
+          contentElements={props.contentWrappers ?? []}
           appliedStyles={contentBarStyles}
         />
       )}

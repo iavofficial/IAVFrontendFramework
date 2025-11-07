@@ -24,6 +24,9 @@ jobs:
         with:
           node-version: '22.x'
 
+      - run: find ./scripts/unix/ -type f -exec chmod +x {} \;
+
+      # Install Turborepo
       - run: npm i
 
       - name: Copy root README to frontend-framework package

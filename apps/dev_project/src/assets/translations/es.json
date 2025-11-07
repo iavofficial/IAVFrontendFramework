@@ -16,7 +16,6 @@
   "allow_cookies_header": "La aplicación web usas cookies.",
   "allow_cookies_disclaimer": "La aplicación web necesita permiso para usar cookies.",
   "allow_cookies_button": "Permitir cookies",
-
   "Password": "Contraseña",
   "New_password": "Nueva contraseña",
   "bytes_example": "{{count}} son 1KiB",
@@ -39,5 +38,6 @@
   "with_applied_dark_and_lightMode": "Con aplicado Modo de color",
   "without_applied_dark_and_lightMode": "Sin aplicado Modo de color",
   "car": "coche",
-  "wrong_password": "El nombre de usuario o la contraseña son incorrectos. Por favor, inténtelo de nuevo."
+  "wrong_password": "El nombre de usuario o la contraseña son incorrectos. Por favor, inténtelo de nuevo.",
+  "modules": "Módulos"
 }

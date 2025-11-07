@@ -65,7 +65,6 @@ This project is licensed under the **Apache-2.0** license. The full license text
 the [root of the repository](./LICENSE).
 
 ## SBOM
-
 As this project is a monorepo, the SBOM.spdx files are contained inside the specific package folders. You can find these
 folders inside the packages folder.
 

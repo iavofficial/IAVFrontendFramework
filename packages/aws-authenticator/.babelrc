@@ -1,0 +1,19 @@
+{
+    "presets": [
+        "@babel/preset-react",
+        [
+            "@babel/preset-typescript",
+            {
+                "isTSX": true,
+                "allExtensions": true
+            }
+        ]
+    ],
+    "plugins": [
+        "inline-react-svg",
+        "@babel/plugin-proposal-class-properties"
+    ],
+    "ignore": [
+        "src/**/*.d.ts"
+    ]
+}

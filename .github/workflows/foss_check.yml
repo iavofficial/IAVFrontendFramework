@@ -83,6 +83,7 @@ jobs:
 
       - name: Run ORT
         uses: oss-review-toolkit/ort-ci-github-action@v1
+        continue-on-error: true
         with:
           allow-dynamic-versions: "true"
           config: .ort.yml

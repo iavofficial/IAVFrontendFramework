@@ -1,3 +1,29 @@
+## [@iavofficial/frontend-framework-v1.6.0-dev.1](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.5.2...@iavofficial/frontend-framework-v1.6.0-dev.1) (2025-11-07)
+
+### Features
+
+* add dynamic legal document configuration ([dead935](https://github.com/iavofficial/IAVFrontendFramework/commit/dead9354ea51e28cd8999d49ba8817f1b513f23d))
+* add options to hide imprint and privacy policy ([b7bc694](https://github.com/iavofficial/IAVFrontendFramework/commit/b7bc6946f49a97a666adaaea871c2f4bb95e8444))
+* allow legal doc links to wrap when space is limited ([d9d6602](https://github.com/iavofficial/IAVFrontendFramework/commit/d9d6602cf1f2a5eba7327f8d90fc07c26767f636))
+* **build:** adapt build process to include shared assets in build-lifecycle ([6503882](https://github.com/iavofficial/IAVFrontendFramework/commit/65038829d6d678fd942354e1cee505e2922f2a15))
+* **sbom_fonts:** update script, update SBOM files encoding ([71efcfc](https://github.com/iavofficial/IAVFrontendFramework/commit/71efcfc564defe3e9576f03c0be43f08c63b8dd7))
+* separate imprint and privacy policy routes & pages ([3791118](https://github.com/iavofficial/IAVFrontendFramework/commit/3791118a6eaaf2f1ce83ca1dc09c1c09ff1c4eb2))
+* separate imprint and privacy policy translations ([636cb66](https://github.com/iavofficial/IAVFrontendFramework/commit/636cb6621473a17bf8cf8cb4672bae3c7f8ef55a))
+* **uimodule:** convert contentWithBar into UI Module ([f116c66](https://github.com/iavofficial/IAVFrontendFramework/commit/f116c660785c2059598bc0d8a4d621bda4123dcd))
+* **uimodule:** convert cookie banner to a pluggable UI module ([75c8d98](https://github.com/iavofficial/IAVFrontendFramework/commit/75c8d982748876905238c3bd168ae4103510299f))
+* **uimodule:** first working prototype of contentwithbar module ([d9d15f6](https://github.com/iavofficial/IAVFrontendFramework/commit/d9d15f672482f9728ea202d916b4d56cd3b5cb21))
+* update basic auth view layout separate legal links ([fe192f5](https://github.com/iavofficial/IAVFrontendFramework/commit/fe192f57ee523bc6797aba235b42648f31195eb2))
+* update imprint and privacy policy layout and styles in navbar ([f6f8aef](https://github.com/iavofficial/IAVFrontendFramework/commit/f6f8aef5e16db03dcdb10181a863bcb9818b9b90))
+* update legal docs link color in navbar (based on colormode) ([306bf03](https://github.com/iavofficial/IAVFrontendFramework/commit/306bf03da2e40ecb89a63c54ec29f78febb9ebc1))
+* update legal documents components in dev_project ([9306ecd](https://github.com/iavofficial/IAVFrontendFramework/commit/9306ecd6b63454814b69a10b04a4b2966c1aea98))
+
+### Bug Fixes
+
+* correct conditional logic for document visibility ([108a230](https://github.com/iavofficial/IAVFrontendFramework/commit/108a230ad4711db085b5a007b2b6f9a83e4b76f4))
+* height inherit for navbar.tsx ([f1179d3](https://github.com/iavofficial/IAVFrontendFramework/commit/f1179d36035393b5bc78e88b782ec408f60bb7b9))
+* height inherit for navbar.tsx ([c559951](https://github.com/iavofficial/IAVFrontendFramework/commit/c55995122e493ce927c72df359afb8811313220f))
+* **imprint:** adjust layout and remove '&' separator, add scrollability ([74cad89](https://github.com/iavofficial/IAVFrontendFramework/commit/74cad8982bbbb1d910037e6cf8ae9a70e2f9f9bc))
+
 ## [@iavofficial/frontend-framework-v1.5.2](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.5.1...@iavofficial/frontend-framework-v1.5.2) (2025-09-01)
 
 ### Bug Fixes

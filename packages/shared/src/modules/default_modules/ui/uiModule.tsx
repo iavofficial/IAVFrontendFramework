@@ -28,7 +28,6 @@ import {
   UIState,
 } from "../../../types/modules/ui/uiModuleInterfaces";
 import {HeaderOrchestrator} from "./header/headerOrchestrator";
-import {CookieBannerOrchestrator} from "./cookieBanner/cookieBannerOrchestrator";
 import {
   NavbarOrchestrator,
   NavbarOrchestratorProps,
@@ -38,6 +37,7 @@ import {
   ContentBarOrchestrator,
   ContentBarOrchestratorProps,
 } from "./contentBar/contentBarOrchestrator";
+import { CookieBannerOrchestrator } from "./cookiebanner/cookieBannerOrchestrator";
 
 type UIParams = {
   UILayerHeader?: (props: UIHeaderProps) => React.ReactNode;

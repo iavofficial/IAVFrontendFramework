@@ -17,7 +17,7 @@
  */
 
 import {
-  createModulesSeparately,
+  createModules,
   StoreBuilder,
 } from "@iavofficial/frontend-framework/store";
 import { configureStore } from "@reduxjs/toolkit";
@@ -26,26 +26,15 @@ import { ReactRouterRouter } from "@iavofficial/frontend-framework-shared/reactR
 
 import { MandatoryModuleNames } from "@iavofficial/frontend-framework/constants";
 import { translations } from "../aws_test/translations.ts";
-import { UIModule } from "@iavofficial/frontend-framework-shared/uiModule";
-import CustomHeader from "./CustomHeader.tsx";
-import CustomNavbar from "./CustomNavbar.tsx";
-import CustomCookieBanner from "./CustomCookieBanner.tsx";
-import CustomContentBar from "./CustomContentBar.tsx";
 
-const frameworkStoreModules = {
+const customModules = {
   [MandatoryModuleNames.Internationalizer]: new I18NextInternationalizer({
     translationResources: translations,
   }),
-};
+    [MandatoryModuleNames.Router]: new ReactRouterRouter(),
+}
 
-const frameworkNonStoreModules = {
-  [MandatoryModuleNames.Router]: new ReactRouterRouter(),
-};
-
-export const modules = createModulesSeparately({
-  frameworkStoreModules,
-  frameworkNonStoreModules,
-});
+export const modules = createModules(customModules);
 
 export const store = new StoreBuilder(modules.storeModules)
   .setFrameworkModuleProcessor(

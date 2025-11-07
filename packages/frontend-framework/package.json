@@ -20,7 +20,7 @@
   },
   "keywords": ["iav-core"],
   "dependencies": {
-    "@iavofficial/frontend-framework-shared": "^1.0.0",
+    "@iavofficial/frontend-framework-shared": "*",
     "@reduxjs/toolkit": "^2.5.1",
     "glob": "^10.4.5",
     "primeflex": "^3.3.0",

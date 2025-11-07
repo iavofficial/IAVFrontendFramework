@@ -115,9 +115,7 @@ export const ExampleComponent8 = () => {
     dispatch({ type: "create", addElement: newTab });
   };
 
-  const uiModule = useModule(
-    MandatoryModuleNames.UI,
-  );
+  const uiModule = useModule(MandatoryModuleNames.UI);
   const ContentWithBar = uiModule.UILayerContentBar;
 
   return (

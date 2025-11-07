@@ -147,7 +147,7 @@ export const ContentBarOrchestrator = (props: ContentBarOrchestratorProps) => {
     containerBg,
     barBg,
     hasSpacing,
-    contentElements
+    contentElements,
   };
 
   return (

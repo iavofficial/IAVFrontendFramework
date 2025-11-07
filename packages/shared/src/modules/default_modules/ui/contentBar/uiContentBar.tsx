@@ -200,21 +200,7 @@ export const UIContentBar: React.FC<UIContentBarProps> = (props) => {
                   startRenderElements,
                   startRenderElements + amountOfRenderedTabElements,
                 )
-                .map(
-                  (element) =>
-                    element.getContentbarElement(
-                      calculateWidth(
-                        isNavbarCollapsed,
-                        width - (2 * DEFAULT_ELEMENT_SIZE + 2 * PADDING_GAB),
-                        !!addable,
-                        contentElements.length > amountOfRenderedTabElements,
-                      ),
-                      selectedId,
-                      contentElements[0].getId(),
-                    ),
-                )
-            : contentElements.map(
-                (element) =>
+                .map((element) =>
                   element.getContentbarElement(
                     calculateWidth(
                       isNavbarCollapsed,
@@ -225,6 +211,18 @@ export const UIContentBar: React.FC<UIContentBarProps> = (props) => {
                     selectedId,
                     contentElements[0].getId(),
                   ),
+                )
+            : contentElements.map((element) =>
+                element.getContentbarElement(
+                  calculateWidth(
+                    isNavbarCollapsed,
+                    width - (2 * DEFAULT_ELEMENT_SIZE + 2 * PADDING_GAB),
+                    !!addable,
+                    contentElements.length > amountOfRenderedTabElements,
+                  ),
+                  selectedId,
+                  contentElements[0].getId(),
+                ),
               )}
         </div>
         <div className="flex align-items-center">

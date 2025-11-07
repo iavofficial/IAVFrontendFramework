@@ -16,7 +16,7 @@
 
 import React from "react";
 import Badge from "./badge.tsx";
-import makeStyles from "../../../../util/makeStyles.tsx";
+import { makeStyles } from "../../../../util/makeStyles.tsx";
 
 const useStyles = makeStyles(() => ({
   headerContainer: {

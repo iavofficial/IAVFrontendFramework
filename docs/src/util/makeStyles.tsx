@@ -35,7 +35,7 @@ const createCSS = (styles: React.CSSProperties): string =>
     })
     .join("");
 
-const makeStyles = <
+export const makeStyles = <
   T extends Record<
     string,
     React.CSSProperties | ((props?: any) => React.CSSProperties)
@@ -67,4 +67,6 @@ const makeStyles = <
   };
 };
 
-export default makeStyles;
+export function classNames(...args: any[]): string {
+  return args.flat(Infinity).filter(Boolean).join(" ");
+}

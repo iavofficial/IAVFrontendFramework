@@ -17,8 +17,7 @@
  */
 
 import React, { PropsWithChildren } from "react";
-import makeStyles from "../../../../util/makeStyles.tsx";
-import { classNames } from "primereact/utils";
+import { makeStyles, classNames } from "../../../../util/makeStyles.tsx";
 
 const useStyles = makeStyles(() => ({
   h1: {

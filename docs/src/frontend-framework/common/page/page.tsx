@@ -17,7 +17,7 @@
  */
 
 import React, { PropsWithChildren, useEffect } from "react";
-import makeStyles from "../../../util/makeStyles.tsx";
+import { makeStyles } from "../../../util/makeStyles.tsx";
 import Footer from "../footer/footer.tsx";
 import OnThisPage from "../drawer/onThisPage.tsx";
 

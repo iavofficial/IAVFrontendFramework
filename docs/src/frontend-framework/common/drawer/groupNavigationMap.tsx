@@ -17,7 +17,7 @@
  */
 
 import React, { useState } from "react";
-import makeStyles from "../../../util/makeStyles.tsx";
+import { makeStyles } from "../../../util/makeStyles.tsx";
 import NavigationMap from "./navigationMap.tsx";
 import { GroupRoute } from "../page/pathRoute.ts";
 import Badge from "./badge/badge.tsx";

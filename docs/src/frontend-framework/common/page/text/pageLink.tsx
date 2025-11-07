@@ -18,7 +18,7 @@
 
 import React, { HTMLAttributeAnchorTarget } from "react";
 import { Link } from "react-router-dom";
-import makeStyles from "../../../../util/makeStyles.tsx";
+import { makeStyles } from "../../../../util/makeStyles.tsx";
 import { BLUE3 } from "../../../../constants.ts";
 
 const useStyles = makeStyles(() => ({

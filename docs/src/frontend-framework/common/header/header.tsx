@@ -17,7 +17,7 @@
  */
 
 import React, { useCallback, useEffect, useState } from "react";
-import makeStyles from "../../../util/makeStyles.tsx";
+import { makeStyles } from "../../../util/makeStyles.tsx";
 import Title from "../page/text/title.tsx";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { versionMappings } from "../../versionMappings.ts";

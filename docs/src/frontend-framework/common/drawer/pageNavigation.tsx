@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import makeStyles from "../../../util/makeStyles.tsx";
+import { makeStyles } from "../../../util/makeStyles.tsx";
 import { PropsWithChildren } from "react";
 
 const useStyles = makeStyles(() => ({

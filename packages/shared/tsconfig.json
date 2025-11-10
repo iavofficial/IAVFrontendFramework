@@ -4,7 +4,11 @@
     "emitDeclarationOnly": true,
     "isolatedModules": true,
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -16,9 +20,16 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "jsx": "react-jsx",
-    "rootDir": "./src",
-    "outDir": "./dist"
+    "rootDir": "src",
+    "outDir": "dist",
+    "declarationDir": "dist/types"
   },
-  "include": ["src", "custom.d.ts"],
-  "exclude": ["./dist/**/*"]
+  "include": [
+    "src/**/*",
+    "custom.d.ts"
+  ],
+  "exclude": [
+    "dist",
+    "**/dist/**"
+  ]
 }

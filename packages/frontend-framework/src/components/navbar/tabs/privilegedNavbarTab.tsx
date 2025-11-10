@@ -19,7 +19,7 @@
 import React, {useContext} from "react";
 import {SimpleNavbarTab} from "./simpleNavbarTab/simpleNavbarTab";
 import {GroupableNavbarTab, NavbarTabProps} from "./typesNavbarTab";
-import {InjectedOptionsGroupableByWrapperToTab} from "../types/typesInjectedOptions";
+import {InjectedOptionsGroupableByWrapperToTab} from "@iavofficial/frontend-framework-shared/typesInjectedOptions";
 import {containsOneOrMoreGroups} from "@iavofficial/frontend-framework-shared/containsOneOrMoreGroups";
 import {useDefaultSelector} from "@iavofficial/frontend-framework-shared/moduleDefaults";
 

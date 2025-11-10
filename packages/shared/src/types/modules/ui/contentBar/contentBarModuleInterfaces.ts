@@ -17,6 +17,7 @@
  */
 
 import React from "react";
+import {BasicContentWrapper} from "./wrapper/basicContentWrapper";
 
 export interface StyleProps<T> {
   appliedStyles?: StylesArray<T>;
@@ -42,27 +43,11 @@ export type ContentBarElement = {
 };
 
 export type UIContentBarProps = StyleProps<typeof ContentBarStyles> & {
-  contentElements: ContentBarElement[];
+  contentWrappers: BasicContentWrapper[];
   addable?: boolean;
   jumpToEndOfContentBar?: boolean;
   selectedId?: string;
   onClickAddButton?: () => void;
   onClickLeftSlideButton?: () => void;
   onClickRightSlideButton?: () => void;
-};
-
-export type ContentBarViewProps = {
-  visibleElements: ContentBarElement[];
-  elementWidth: number;
-  canSlideLeft: boolean;
-  canSlideRight: boolean;
-  slideLeft: () => void;
-  slideRight: () => void;
-  addable: boolean;
-  onAdd?: () => void;
-  selectedId?: string;
-  firstId?: string;
-  containerBg?: string;
-  barBg?: string;
-  hasSpacing: boolean;
 };

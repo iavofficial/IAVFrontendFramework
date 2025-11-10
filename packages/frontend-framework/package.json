@@ -84,9 +84,9 @@
     "./navbar": "./dist/components/navbar/navbar.js",
     "./navbarSettingsTypes": "./dist/types/navbarSettingsTypes.js",
     "./navbarSettingsContext": "./dist/types/navbarContext.js",
-    "./basicContentWrapper": "./dist/components/navbar/wrappers/basicContentWrapper.js",
+    "./basicContentWrapper": "./dist/re-exports/basicContentWrapper.js",
     "./group": "./dist/components/navbar/wrappers/groupContentWrapper.js",
-    "./contentWrapperGeneralization": "./dist/components/navbar/wrappers/contentWrapperGeneralization.js",
+    "./contentWrapperGeneralization": "./dist/re-exports/contentWrapperGeneralization.js",
     "./simpleNavbarTab": "./dist/components/navbar/tabs/simpleNavbarTab/simpleNavbarTab.js",
     "./privilegedNavbarTab": "./dist/components/navbar/tabs/privilegedNavbarTab.js",
     "./tabGroup": "./dist/components/navbar/tabs/tabGroup/tabGroup.js",
@@ -96,7 +96,7 @@
     "./typesSimpleNavbarTab": "./dist/components/navbar/tabs/simpleNavbarTab/typesSimpleNavbarTab.js",
     "./typesTabGroup": "./dist/components/navbar/tabs/tabGroup/typesTabGroup.js",
     "./typesNavbarTab": "./dist/components/navbar/tabs/typesNavbarTab.js",
-    "./typesInjectedOptions": "./dist/components/navbar/types/typesInjectedOptions.js",
+    "./typesInjectedOptions": "./dist/re-exports/typesInjectedOptions.js",
     "./typesWrappers": "./dist/components/navbar/wrappers/typesWrappers.js",
     "./customContentbarWrapper": "./dist/components/content/customContentbarWrapper.js",
     "./basicContentbarWrapper": "./dist/components/content/basicContentbarWrapper.js",
@@ -158,13 +158,13 @@
         "./dist/types/navbarContext.d.ts"
       ],
       "./basicContentWrapper": [
-        "./dist/components/navbar/wrappers/basicContentWrapper.d.ts"
+        "./dist/re-exports/basicContentWrapper.d.ts"
       ],
       "./group": [
         "./dist/components/navbar/wrappers/groupContentWrapper.d.ts"
       ],
       "./contentWrapperGeneralization": [
-        "./dist/components/navbar/wrappers/contentWrapperGeneralization.d.ts"
+        "./dist/re-exports/contentWrapperGeneralization.d.ts"
       ],
       "./simpleNavbarTab": [
         "./dist/components/navbar/tabs/simpleNavbarTab/simpleNavbarTab.d.ts"
@@ -194,7 +194,7 @@
         "./dist/components/navbar/tabs/typesNavbarTab.d.ts"
       ],
       "./typesInjectedOptions": [
-        "./dist/components/navbar/types/typesInjectedOptions.d.ts"
+        "./dist/re-exports/typesInjectedOptions.d.ts"
       ],
       "./typesWrappers": [
         "./dist/components/navbar/wrappers/typesWrappers.d.ts"
@@ -290,7 +290,7 @@
         "./dist/re-exports/cookieHooks.d.ts"
       ],
       "./useModuleTranslation": [
-        "./dist/re-exports/useModuleTranslation.js"
+        "./dist/re-exports/useModuleTranslation.d.ts"
       ],
       "./headerIcon": [
         "./dist/components/header/headerIcon.d.ts"

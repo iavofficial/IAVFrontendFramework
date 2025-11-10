@@ -17,24 +17,29 @@
  */
 
 import React from "react";
-import {PrivilegedNavbarTab} from "../tabs/privilegedNavbarTab";
-import {InjectedOptionsGroupableByWrapperToTab} from "@iavofficial/frontend-framework-shared/typesInjectedOptions";
+import {generateHash} from "../../../../../utils/hash";
 
-export const privilegedNavbarTabFactory = (
-  tabProps: Omit<
-    React.ComponentProps<typeof PrivilegedNavbarTab>,
-    "frameworkInjectedOptions"
-  >,
-) => {
-  //eslint-disable-next-line
-  return (props: {
-    frameworkInjectedOptions: InjectedOptionsGroupableByWrapperToTab;
-  }) => {
-    return (
-      <PrivilegedNavbarTab
-        frameworkInjectedOptions={props.frameworkInjectedOptions}
-        {...tabProps}
-      />
-    );
+/**
+ * This class is the base for all simple content wrappers.
+ */
+export class ContentWrapperGeneralization {
+  constructor(
+    protected _path: string,
+    protected _component: React.ComponentType<any>,
+  ) {}
+
+  // Generate unique key based on the view's url.
+  getKey = () => {
+    return generateHash(this._path);
   };
-};
+
+  getRoutes = () => {
+    return [
+      {
+        key: this.getKey(),
+        path: this._path,
+        element: <this._component />,
+      },
+    ];
+  };
+}

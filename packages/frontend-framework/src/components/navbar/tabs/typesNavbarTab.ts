@@ -17,7 +17,7 @@
  */
 
 import React, {ReactElement} from "react";
-import {InjectedOptionsGroupableByWrapperToTab} from "../types/typesInjectedOptions";
+import {InjectedOptionsGroupableByWrapperToTab} from "@iavofficial/frontend-framework-shared/typesInjectedOptions";
 import {TranslationWrapperFunction} from "@iavofficial/frontend-framework-shared/internationalizerModule";
 
 /**

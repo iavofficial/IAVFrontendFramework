@@ -18,11 +18,11 @@
 
 import React, {ReactElement} from "react";
 import {TabGroup} from "../tabs/tabGroup/tabGroup";
-import {GroupableTabAndContentWrapper} from "./typesWrappers";
+import {GroupableTabAndContentWrapper} from "@iavofficial/frontend-framework/typesWrappers";
 import {
   InjectedOptionsByGroupToWrapper,
   InjectedOptionsByNavbarToWrapper,
-} from "../types/typesInjectedOptions";
+} from "@iavofficial/frontend-framework-shared/typesInjectedOptions";
 import {generateHashForValues} from "@iavofficial/frontend-framework-shared/hash";
 import {BasicRoute} from "@iavofficial/frontend-framework-shared/routerModule";
 import {TranslationWrapperFunction} from "@iavofficial/frontend-framework-shared/internationalizerModule";

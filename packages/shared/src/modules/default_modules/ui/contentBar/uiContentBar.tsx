@@ -1,18 +1,6 @@
 /**
  * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -41,7 +29,7 @@ import {
 
 export const UIContentBar: React.FC<UIContentBarProps> = (props) => {
   const {
-    contentElements = [],
+    contentWrappers = [],
     addable,
     jumpToEndOfContentBar,
     selectedId,
@@ -87,86 +75,38 @@ export const UIContentBar: React.FC<UIContentBarProps> = (props) => {
   const [amountOfRenderedTabElements, setAmountOfRenderedTabElements] =
     useState(collapsed ? 6 : 5);
 
-  const handleJumpToEnd = useCallback(() => {
-    if (
-      contentElements.length > amountOfRenderedTabElements &&
-      !preventInitialJumpToEnd
-    ) {
-      return contentElements.length - amountOfRenderedTabElements;
-    } else {
-      return startRenderElements;
-    }
-  }, [
-    amountOfRenderedTabElements,
-    preventInitialJumpToEnd,
-    contentElements.length,
-    startRenderElements,
-  ]);
-
-  useEffect(() => {
-    if (jumpToEndOfContentBar) {
-      setStartRenderElements(handleJumpToEnd);
-      setPreventInitialJumpToEnd(false);
-    }
-  }, [contentElements.length]);
-
-  useEffect(() => {
-    window.addEventListener("resize", handleDivResize);
-    return () => {
-      window.removeEventListener("resize", handleDivResize);
-    };
-  }, []);
-
-  const lastElementIsVisible = useCallback(() => {
-    return (
-      startRenderElements + amountOfRenderedTabElements ===
-        contentElements.length &&
-      contentElements.length > amountOfRenderedTabElements
-    );
-  }, [
-    amountOfRenderedTabElements,
-    contentElements.length,
-    startRenderElements,
-  ]);
-
   const handleDivResize = useCallback(() => {
     const currentContentRef = contentRef.current;
     if (currentContentRef) setWidth(currentContentRef.clientWidth);
   }, []);
 
   useEffect(() => {
-    if (collapsed) {
-      setStartRenderElements((s) => (lastElementIsVisible() ? s - 1 : s));
-      setAmountOfRenderedTabElements(6);
-      handleDivResize();
-    } else {
-      setAmountOfRenderedTabElements(5);
-      handleDivResize();
-    }
-  }, [handleDivResize, lastElementIsVisible, collapsed]);
+    window.addEventListener("resize", handleDivResize);
+    return () => window.removeEventListener("resize", handleDivResize);
+  }, [handleDivResize]);
 
   const handleSlideLeftEvent = useCallback(() => {
     if (startRenderElements > 0) {
-      if (onClickLeftSlideButton) onClickLeftSlideButton();
+      onClickLeftSlideButton?.();
       setStartRenderElements((s) => s - 1);
     }
   }, [startRenderElements, onClickLeftSlideButton]);
 
   const handleOnClickAddEvent = useCallback(() => {
-    if (onClickAddButton) onClickAddButton();
+    onClickAddButton?.();
   }, [onClickAddButton]);
 
   const handleSlideRightEvent = useCallback(() => {
     if (
       startRenderElements + amountOfRenderedTabElements <
-      contentElements.length
+      contentWrappers.length
     ) {
-      if (onClickRightSlideButton) onClickRightSlideButton();
+      onClickRightSlideButton?.();
       setStartRenderElements((s) => s + 1);
     }
   }, [
     amountOfRenderedTabElements,
-    contentElements.length,
+    contentWrappers.length,
     onClickRightSlideButton,
     startRenderElements,
   ]);
@@ -191,50 +131,37 @@ export const UIContentBar: React.FC<UIContentBarProps> = (props) => {
         <div className="flex align-items-center">
           <ContentBarButtonElement
             handleOnClickEvent={handleSlideLeftEvent}
-            icon={"pi pi-angle-left"}
-            isVisible={contentElements.length > amountOfRenderedTabElements}
+            icon="pi pi-angle-left"
+            isVisible={contentWrappers.length > amountOfRenderedTabElements}
           />
-          {contentElements.length > amountOfRenderedTabElements
-            ? contentElements
-                .slice(
-                  startRenderElements,
-                  startRenderElements + amountOfRenderedTabElements,
-                )
-                .map((element) =>
-                  element.getContentbarElement(
-                    calculateWidth(
-                      isNavbarCollapsed,
-                      width - (2 * DEFAULT_ELEMENT_SIZE + 2 * PADDING_GAB),
-                      !!addable,
-                      contentElements.length > amountOfRenderedTabElements,
-                    ),
-                    selectedId,
-                    contentElements[0].getId(),
-                  ),
-                )
-            : contentElements.map((element) =>
-                element.getContentbarElement(
-                  calculateWidth(
-                    isNavbarCollapsed,
-                    width - (2 * DEFAULT_ELEMENT_SIZE + 2 * PADDING_GAB),
-                    !!addable,
-                    contentElements.length > amountOfRenderedTabElements,
-                  ),
-                  selectedId,
-                  contentElements[0].getId(),
+          {contentWrappers
+            .slice(
+              startRenderElements,
+              startRenderElements + amountOfRenderedTabElements,
+            )
+            .map((element) =>
+              element.getContentbarElement(
+                calculateWidth(
+                  isNavbarCollapsed,
+                  width - (2 * DEFAULT_ELEMENT_SIZE + 2 * PADDING_GAB),
+                  !!addable,
+                  contentWrappers.length > amountOfRenderedTabElements,
                 ),
-              )}
+                selectedId,
+                contentWrappers[0].getId(),
+              ),
+            )}
         </div>
         <div className="flex align-items-center">
           <ContentBarButtonElement
             handleOnClickEvent={handleOnClickAddEvent}
-            icon={"pi pi-plus"}
+            icon="pi pi-plus"
             isVisible={addable}
           />
           <ContentBarButtonElement
             handleOnClickEvent={handleSlideRightEvent}
-            icon={"pi pi-angle-right"}
-            isVisible={contentElements.length > amountOfRenderedTabElements}
+            icon="pi pi-angle-right"
+            isVisible={contentWrappers.length > amountOfRenderedTabElements}
           />
         </div>
       </div>

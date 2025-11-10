@@ -27,7 +27,7 @@ import {
 import loginBackgroundLightMode from "@iavofficial/frontend-framework-shared/png/login_background_lightMode.png";
 import loginBackgroundDarkMode from "@iavofficial/frontend-framework-shared/png/login_background_darkMode.png";
 import {Dropdown, DropdownChangeEvent} from "primereact/dropdown";
-import CompanyLogo from "@iavofficial/frontend-framework-shared/svg/companyLogo.js";
+import CompanyLogo from "@iavofficial/frontend-framework-shared/svg/companyLogo";
 import TextField from "../../helper/textfield/TextField";
 import {AuthenticationViewProps} from "@iavofficial/frontend-framework-shared/authenticationViewProps";
 import {generateHashOfLength} from "@iavofficial/frontend-framework-shared/hash";

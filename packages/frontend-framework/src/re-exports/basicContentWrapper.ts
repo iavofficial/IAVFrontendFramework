@@ -16,30 +16,4 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React from "react";
-import {generateHash} from "@iavofficial/frontend-framework-shared/hash";
-
-/**
- * This class is the base for all simple content wrappers.
- */
-export class ContentWrapperGeneralization {
-  constructor(
-    protected _path: string,
-    protected _component: React.ComponentType<any>,
-  ) {}
-
-  // Generate unique key based on the view's url.
-  getKey = () => {
-    return generateHash(this._path);
-  };
-
-  getRoutes = () => {
-    return [
-      {
-        key: this.getKey(),
-        path: this._path,
-        element: <this._component />,
-      },
-    ];
-  };
-}
+export * from "@iavofficial/frontend-framework-shared/basicContentWrapper";

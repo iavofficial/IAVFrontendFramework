@@ -44,7 +44,7 @@ import "../css/globalChangesOnPrimeReactComponents.css";
 import "../css/globalSettings.css";
 import "../css/globalColors.css";
 import "@iavofficial/frontend-framework-shared/css/authenticationView.css";
-import {TabAndContentWrapper} from "./navbar/wrappers/typesWrappers";
+import {TabAndContentWrapper} from "@iavofficial/frontend-framework/typesWrappers";
 import {useRemoveKnownCookies} from "@iavofficial/frontend-framework-shared/cookieHooks";
 
 export interface AuthOptions {

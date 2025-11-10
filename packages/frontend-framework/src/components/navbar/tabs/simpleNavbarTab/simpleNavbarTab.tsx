@@ -25,7 +25,7 @@ import {
   determineCurrentColor,
   determineCurrentColorInsideGroup,
 } from "../../../../utils/determineCurrentColor";
-import {InjectedOptionsGroupableByWrapperToTab} from "../../types/typesInjectedOptions";
+import {InjectedOptionsGroupableByWrapperToTab} from "@iavofficial/frontend-framework-shared/typesInjectedOptions";
 import {
   DEFAULT_ELEMENT_SIZE,
   GAB_NAVBAR_UNFOLDED,

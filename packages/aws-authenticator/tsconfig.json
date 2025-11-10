@@ -21,10 +21,15 @@
     "resolveJsonModule": true,
     "jsx": "react-jsx",
     "rootDir": "src",
-    "outDir": "dist"
+    "outDir": "dist",
+    "declarationDir": "dist/types"
   },
   "include": [
-   "src",
-   "custom.d.ts"
+    "src/**/*",
+    "custom.d.ts"
+  ],
+  "exclude": [
+    "dist",
+    "**/dist/**"
   ]
 }

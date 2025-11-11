@@ -25,7 +25,7 @@ import {InjectedOptionsByGroupToWrapper} from "@iavofficial/frontend-framework-s
 import {
   determineCurrentColor,
   determineCurrentColorInsideGroup,
-} from "../../../../utils/determineCurrentColor";
+} from "@iavofficial/frontend-framework-shared/determineCurrentColor";
 import {
   DEFAULT_ELEMENT_SIZE,
   NAVBAR_WIDTH_UNFOLDED,

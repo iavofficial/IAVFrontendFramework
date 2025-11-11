@@ -26,6 +26,7 @@ export function calculateWidth(
   addable: boolean,
   overflow: boolean,
 ): number {
+  console.log(navbarCollapsed, width, addable, overflow);
   if (!overflow) {
     return DEFAULT_WIDTH_CONTENT_SECTION_ELEMENT;
   }

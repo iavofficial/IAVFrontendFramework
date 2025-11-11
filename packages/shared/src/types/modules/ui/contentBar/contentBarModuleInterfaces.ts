@@ -33,15 +33,6 @@ export const ContentBarStyles = {
 export type ContentBarStylesArray =
   (typeof ContentBarStyles)[keyof typeof ContentBarStyles][];
 
-export type ContentBarElement = {
-  getId: () => string;
-  getContentbarElement: (
-    width: number,
-    selectedId?: string,
-    firstId?: string,
-  ) => React.ReactNode;
-};
-
 export type UIContentBarProps = StyleProps<typeof ContentBarStyles> & {
   contentWrappers: BasicContentbarWrapper[];
   addable?: boolean;

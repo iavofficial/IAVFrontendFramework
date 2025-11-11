@@ -1,52 +1,29 @@
-/**
- * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import React from "react";
 import { Button, theme } from "antd";
 import { LeftOutlined, PlusOutlined, RightOutlined } from "@ant-design/icons";
-import { ContentBarViewProps } from "@iavofficial/frontend-framework-shared/contentBarModuleInterfaces";
+import { UIContentBarProps } from "@iavofficial/frontend-framework-shared/contentBarModuleInterfaces";
 
-const CustomContentBar = (props: ContentBarViewProps) => {
+const CustomContentBar: React.FC<UIContentBarProps> = (props) => {
   const {
-    visibleElements,
-    elementWidth,
-    canSlideLeft,
-    canSlideRight,
-    slideLeft,
-    slideRight,
+    contentWrappers = [],
     addable,
-    onAdd,
     selectedId,
-    firstId,
-    containerBg,
-    barBg,
-    hasSpacing,
+    onClickAddButton,
+    onClickLeftSlideButton,
+    onClickRightSlideButton,
   } = props;
 
   const { token } = theme.useToken();
+  const firstId = contentWrappers[0]?.id;
+  const elementWidth = 160;
 
   return (
     <div
       style={{
         height: 56,
         minHeight: 56,
-        padding: hasSpacing ? "12px 12px 0 12px" : 0,
-        backgroundColor: containerBg ?? token.colorBgContainer,
+        padding: "12px 12px 0 12px",
+        backgroundColor: token.colorBgContainer,
         display: "flex",
         alignItems: "center",
         gap: 8,
@@ -54,13 +31,12 @@ const CustomContentBar = (props: ContentBarViewProps) => {
     >
       <Button
         icon={<LeftOutlined />}
-        onClick={slideLeft}
-        disabled={!canSlideLeft}
+        onClick={onClickLeftSlideButton}
         style={{
           height: 32,
           minWidth: 32,
           borderRadius: 8,
-          background: barBg ?? token.colorBgElevated,
+          background: token.colorBgElevated,
         }}
       />
 
@@ -72,12 +48,11 @@ const CustomContentBar = (props: ContentBarViewProps) => {
           alignItems: "center",
           gap: 8,
           padding: "0 16px",
-          background: barBg ?? token.colorBgElevated,
           height: 40,
           borderRadius: 8,
         }}
       >
-        {visibleElements.map((el) =>
+        {contentWrappers.map((el) =>
           el.getContentbarElement(elementWidth, selectedId, firstId),
         )}
       </div>
@@ -85,25 +60,24 @@ const CustomContentBar = (props: ContentBarViewProps) => {
       {addable && (
         <Button
           icon={<PlusOutlined />}
-          onClick={onAdd}
+          onClick={onClickAddButton}
           style={{
             height: 32,
             minWidth: 32,
             borderRadius: 8,
-            background: barBg ?? token.colorBgElevated,
+            background: token.colorBgElevated,
           }}
         />
       )}
 
       <Button
         icon={<RightOutlined />}
-        onClick={slideRight}
-        disabled={!canSlideRight}
+        onClick={onClickRightSlideButton}
         style={{
           height: 32,
           minWidth: 32,
           borderRadius: 8,
-          background: barBg ?? token.colorBgElevated,
+          background: token.colorBgElevated,
         }}
       />
     </div>

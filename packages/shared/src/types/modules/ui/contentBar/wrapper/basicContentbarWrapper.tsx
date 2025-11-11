@@ -19,8 +19,8 @@
 import React from "react";
 import {ContentbarWrapperInterface} from "./contentbarWrapperInterface";
 import {DefaultContentSelectionElement} from "./defaultContentSelectionElement";
-import {generateHashOfLength} from "@iavofficial/frontend-framework-shared/hash";
-import {TranslationWrapperFunction} from "@iavofficial/frontend-framework-shared/internationalizerModule";
+import {TranslationWrapperFunction} from "../../../internationalization/internationalizerModule";
+import {generateHashOfLength} from "../../../../../utils/hash";
 
 interface ConstructorArgs {
   id: string;

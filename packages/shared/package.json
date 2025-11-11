@@ -122,12 +122,15 @@
     "./uiOrchestrator": "./dist/modules/default_modules/ui/uiOrchestrator.js",
     "./uiModule": "./dist/modules/default_modules/ui/uiModule.js",
     "./typesInjectedOptions": "./dist/types/modules/ui/contentBar/typesInjectedOptions.js",
-    "./typesWrappers": "./dist/components/navbar/wrappers/typesWrappers.js",
-    "./basicContentWrapper": "./dist/types/modules/ui/navbar/wrapper/basicContentWrapper.js",
-    "./contentWrapperGeneralization": "./dist/types/modules/ui/navbar/wrapper/contentWrapperGeneralization.js",
+    "./typesWrappers": "./dist/types/modules/ui/navbar/types/typesWrappers.js",
+    "./basicContentWrapper": "./dist/types/modules/ui/navbar/types/basicContentWrapper.js",
+    "./contentWrapperGeneralization": "./dist/types/modules/ui/navbar/types/contentWrapperGeneralization.js",
     "./basicContentbarWrapper": "./dist/types/modules/ui/contentBar/wrapper/basicContentbarWrapper.js",
     "./customContentbarWrapper": "./dist/types/modules/ui/contentBar/wrapper/customContentbarWrapper.js",
-    "./contentbarWrapperInterface": "./dist/types/modules/ui/contentBar/wrapper/contentbarWrapperInterface.js"
+    "./contentbarWrapperInterface": "./dist/types/modules/ui/contentBar/wrapper/contentbarWrapperInterface.js",
+    "./contentbarCss": "./dist/types/modules/ui/contentBar/contentbar.css",
+    "./defaultContentSelectionElement": "./dist/types/modules/ui/contentBar/wrapper/defaultContentSelectionElement.js",
+    "./determineCurrentColor": "./dist/types/modules/ui/contentBar/wrapper/determineCurrentColor.js"
   },
   "typesVersions": {
     "*": {
@@ -243,16 +246,25 @@
         "./dist/types/modules/ui/contentBar/typesInjectedOptions.d.ts"
       ],
       "./typesWrappers": [
-        "./dist/components/navbar/wrappers/typesWrappers.d.ts"
+        "./dist/types/modules/ui/navbar/types/typesWrappers.d.ts"
       ],
       "./basicContentWrapper": [
-        "./dist/types/modules/ui/navbar/wrapper/basicContentWrapper.d.ts"
+        "./dist/types/modules/ui/navbar/types/basicContentWrapper.d.ts"
       ],
       "./contentWrapperGeneralization": [
-        "./dist/types/modules/ui/navbar/wrapper/contentWrapperGeneralization.d.ts"
+        "./dist/types/modules/ui/navbar/types/contentWrapperGeneralization.d.ts"
       ],
       "./svg/companyLogo": [
         "./dist/assets/svg/companyLogo.d.ts"
+      ],
+      "./contentbarCss": [
+        "./dist/types/modules/ui/contentBar/contentbar.css"
+      ],
+      "./defaultContentSelectionElement": [
+        "./dist/types/modules/ui/contentBar/wrapper/defaultContentSelectionElement.d.ts"
+      ],
+      "./determineCurrentColor": [
+        "./dist/types/modules/ui/contentBar/wrapper/determineCurrentColor.d.ts"
       ]
     }
   },

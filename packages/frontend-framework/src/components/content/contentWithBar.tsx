@@ -101,7 +101,7 @@ export const ContentWithBar = (
           onClickAddButton={props.onClickAddButton}
           addable={props.addable}
           jumpToEndOfContentBar={props.jumpToEndOfContentBar}
-          contentElements={props.contentWrappers ?? []}
+          contentWrappers={props.contentWrappers ?? []}
           appliedStyles={contentBarStyles}
         />
       )}

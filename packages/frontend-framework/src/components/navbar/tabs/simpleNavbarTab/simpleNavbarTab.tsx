@@ -24,7 +24,7 @@ import {SimpleNavbarTabUnfolded} from "./simpleNavbarTabUnfolded";
 import {
   determineCurrentColor,
   determineCurrentColorInsideGroup,
-} from "../../../../utils/determineCurrentColor";
+} from "@iavofficial/frontend-framework-shared/determineCurrentColor";
 import {InjectedOptionsGroupableByWrapperToTab} from "@iavofficial/frontend-framework-shared/typesInjectedOptions";
 import {
   DEFAULT_ELEMENT_SIZE,

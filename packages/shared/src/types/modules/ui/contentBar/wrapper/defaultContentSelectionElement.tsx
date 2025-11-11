@@ -19,16 +19,16 @@
 import React, {useContext, useState} from "react";
 import {Tooltip} from "primereact/tooltip";
 import "./contentbar.css";
-import {determineCurrentColor} from "../../utils/determineCurrentColor";
+import {TranslationWrapperFunction} from "../../../internationalization/internationalizerModule";
+import {useModuleTranslation} from "../../../../../modules/hooks/useModuleTranslation";
+import {ColorSettingsContext} from "../../../../../contexts/colorSettingsContext";
+import {generateHashOfLength} from "../../../../../utils/hash";
+import {determineCurrentColor} from "./determineCurrentColor";
 import {
   DEFAULT_ELEMENT_SIZE,
   GREY5,
   WHITE,
-} from "@iavofficial/frontend-framework-shared/constants";
-import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
-import {generateHashOfLength} from "@iavofficial/frontend-framework-shared/hash";
-import {useModuleTranslation} from "@iavofficial/frontend-framework-shared/useModuleTranslation";
-import {TranslationWrapperFunction} from "@iavofficial/frontend-framework-shared/internationalizerModule";
+} from "../../../../../constants/constants";
 
 export interface Props {
   displayName: string | TranslationWrapperFunction;

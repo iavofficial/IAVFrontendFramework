@@ -1,9 +1,3 @@
-/**
- * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
- *
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import React, {
   useCallback,
   useContext,
@@ -69,8 +63,7 @@ export const UIContentBar: React.FC<UIContentBarProps> = (props) => {
     (s) => s[MandatoryModuleNames.UI].navbarCollapsed,
   );
 
-  const [preventInitialJumpToEnd, setPreventInitialJumpToEnd] = useState(true);
-  const [width, setWidth] = useState(1648);
+  const [width, setWidth] = useState(0);
   const [startRenderElements, setStartRenderElements] = useState(0);
   const [amountOfRenderedTabElements, setAmountOfRenderedTabElements] =
     useState(collapsed ? 6 : 5);
@@ -81,6 +74,7 @@ export const UIContentBar: React.FC<UIContentBarProps> = (props) => {
   }, []);
 
   useEffect(() => {
+    handleDivResize();
     window.addEventListener("resize", handleDivResize);
     return () => window.removeEventListener("resize", handleDivResize);
   }, [handleDivResize]);
@@ -112,47 +106,61 @@ export const UIContentBar: React.FC<UIContentBarProps> = (props) => {
   ]);
 
   const isNavbarCollapsed = collapsed ?? false;
+  const hasOverflow =
+    contentWrappers.length > amountOfRenderedTabElements && width > 0;
+  const availableWidth = width - (2 * DEFAULT_ELEMENT_SIZE + 2 * PADDING_GAB);
+  const elementWidth = hasOverflow
+    ? calculateWidth(isNavbarCollapsed, availableWidth, !!addable, true)
+    : calculateWidth(isNavbarCollapsed, availableWidth, !!addable, false);
 
   return (
     <div
       ref={contentRef}
       id="contentbar"
       className={`flex ${classNames}`}
-      style={{height: "56px", minHeight: "56px", ...styles}}
+      style={{
+        height: "56px",
+        minHeight: "56px",
+        overflow: "hidden",
+        ...styles,
+      }}
     >
       <div
         style={{
           height: `${DEFAULT_ELEMENT_SIZE}px`,
           width: "100%",
           backgroundColor: contentbarBackgroundColor,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          minWidth: 0,
         }}
-        className="flex align-items-center justify-content-between"
       >
-        <div className="flex align-items-center">
+        <div
+          className="flex align-items-center"
+          style={{minWidth: 0, gap: PADDING_GAB}}
+        >
           <ContentBarButtonElement
             handleOnClickEvent={handleSlideLeftEvent}
             icon="pi pi-angle-left"
             isVisible={contentWrappers.length > amountOfRenderedTabElements}
           />
-          {contentWrappers
-            .slice(
-              startRenderElements,
-              startRenderElements + amountOfRenderedTabElements,
-            )
-            .map((element) =>
-              element.getContentbarElement(
-                calculateWidth(
-                  isNavbarCollapsed,
-                  width - (2 * DEFAULT_ELEMENT_SIZE + 2 * PADDING_GAB),
-                  !!addable,
-                  contentWrappers.length > amountOfRenderedTabElements,
+          <div className="flex" style={{minWidth: 0, gap: PADDING_GAB}}>
+            {contentWrappers
+              .slice(
+                startRenderElements,
+                startRenderElements + amountOfRenderedTabElements,
+              )
+              .map((element) =>
+                element.getContentbarElement(
+                  elementWidth,
+                  selectedId,
+                  contentWrappers[0].getId(),
                 ),
-                selectedId,
-                contentWrappers[0].getId(),
-              ),
-            )}
+              )}
+          </div>
         </div>
-        <div className="flex align-items-center">
+        <div className="flex align-items-center" style={{gap: PADDING_GAB}}>
           <ContentBarButtonElement
             handleOnClickEvent={handleOnClickAddEvent}
             icon="pi pi-plus"

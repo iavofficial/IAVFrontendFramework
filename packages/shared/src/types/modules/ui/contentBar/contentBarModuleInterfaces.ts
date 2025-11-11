@@ -17,7 +17,7 @@
  */
 
 import React from "react";
-import { BasicContentbarWrapper } from "./wrapper/basicContentbarWrapper";
+import {BasicContentbarWrapper} from "./wrapper/basicContentbarWrapper";
 
 export interface StyleProps<T> {
   appliedStyles?: StylesArray<T>;

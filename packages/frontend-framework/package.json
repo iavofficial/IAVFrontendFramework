@@ -84,9 +84,7 @@
     "./navbar": "./dist/components/navbar/navbar.js",
     "./navbarSettingsTypes": "./dist/types/navbarSettingsTypes.js",
     "./navbarSettingsContext": "./dist/types/navbarContext.js",
-    "./basicContentWrapper": "./dist/re-exports/basicContentWrapper.js",
     "./group": "./dist/components/navbar/wrappers/groupContentWrapper.js",
-    "./contentWrapperGeneralization": "./dist/re-exports/contentWrapperGeneralization.js",
     "./simpleNavbarTab": "./dist/components/navbar/tabs/simpleNavbarTab/simpleNavbarTab.js",
     "./privilegedNavbarTab": "./dist/components/navbar/tabs/privilegedNavbarTab.js",
     "./tabGroup": "./dist/components/navbar/tabs/tabGroup/tabGroup.js",
@@ -98,8 +96,6 @@
     "./typesNavbarTab": "./dist/components/navbar/tabs/typesNavbarTab.js",
     "./typesInjectedOptions": "./dist/re-exports/typesInjectedOptions.js",
     "./typesWrappers": "./dist/components/navbar/wrappers/typesWrappers.js",
-    "./customContentbarWrapper": "./dist/components/content/customContentbarWrapper.js",
-    "./basicContentbarWrapper": "./dist/components/content/basicContentbarWrapper.js",
     "./contentBarButtonElement": "./dist/components/content/contentBarButtonElement.js",
     "./contentBar": "./dist/components/content/contentBar.js",
     "./contentWithBar": "./dist/components/content/contentWithBar.js",
@@ -129,6 +125,11 @@
     "./reExportedTypes": "./dist/re-exports/reExportedTypes.js",
     "./cookieHooks": "./dist/re-exports/cookieHooks.js",
     "./useModuleTranslation": "./dist/re-exports/useModuleTranslation.js",
+    "./basicContentWrapper": "./dist/re-exports/basicContentWrapper.js",
+    "./contentWrapperGeneralization": "./dist/re-exports/contentWrapperGeneralization.js",
+    "./customContentbarWrapper": "./dist/re-exports/customContentbarWrapper.js",
+    "./basicContentbarWrapper": "./dist/re-exports/basicContentbarWrapper.js",
+    "./contentbarWrapperInterface": "./dist/re-exports/contentbarWrapperInterface.js",
     "./constants.css": "./dist/css/constants.css",
     "./mainPage.css": "./dist/css/mainPage.css",
     "./framework.css": "./dist/css/framework.css",
@@ -198,12 +199,6 @@
       ],
       "./typesWrappers": [
         "./dist/components/navbar/wrappers/typesWrappers.d.ts"
-      ],
-      "./customContentbarWrapper": [
-        "./dist/components/content/customContentbarWrapper.d.ts"
-      ],
-      "./basicContentbarWrapper": [
-        "./dist/components/content/basicContentbarWrapper.d.ts"
       ],
       "./contentBarButtonElement": [
         "./dist/components/content/contentBarButtonElement.d.ts"
@@ -291,6 +286,15 @@
       ],
       "./useModuleTranslation": [
         "./dist/re-exports/useModuleTranslation.d.ts"
+      ],
+      "./customContentbarWrapper": [
+        "./dist/re-exports/customContentbarWrapper.d.ts"
+      ],
+      "./basicContentbarWrapper": [
+        "./dist/re-exports/basicContentbarWrapper.d.ts"
+      ],
+      "./contentbarWrapperInterface": [
+        "./dist/re-exports/contentbarWrapperInterface.d.ts"
       ],
       "./headerIcon": [
         "./dist/components/header/headerIcon.d.ts"

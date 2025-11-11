@@ -17,7 +17,7 @@
  */
 
 import React from "react";
-import {BasicContentWrapper} from "./wrapper/basicContentWrapper";
+import { BasicContentbarWrapper } from "./wrapper/basicContentbarWrapper";
 
 export interface StyleProps<T> {
   appliedStyles?: StylesArray<T>;
@@ -43,7 +43,7 @@ export type ContentBarElement = {
 };
 
 export type UIContentBarProps = StyleProps<typeof ContentBarStyles> & {
-  contentWrappers: BasicContentWrapper[];
+  contentWrappers: BasicContentbarWrapper[];
   addable?: boolean;
   jumpToEndOfContentBar?: boolean;
   selectedId?: string;

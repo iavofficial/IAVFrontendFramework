@@ -16,24 +16,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {ReactElement} from "react";
-import {LegalDocument} from "../../../components/imprint/legalDocument";
+import React from "react";
 
-export type AuthenticationViewProps = {
-  authOptions?: {
-    backgroundImage?: string;
-    companyText?: string;
-    preventDarkmode?: boolean;
-    errorMessages?: {
-      passwordErrorMessage?: string;
-    };
-  };
-  headerOptions?: {
-    reactElementLeft?: ReactElement;
-    reactElementRight?: ReactElement;
-    hideLeft?: boolean;
-    hideRight?: boolean;
-  };
-  hideLanguageSelection?: boolean;
-  legalDocuments?: LegalDocument[];
-};
+export interface LegalDocument {
+  path: string;
+  titleTranslationKey: string;
+  component: React.ComponentType<any>;
+  isHidden?: boolean;
+}

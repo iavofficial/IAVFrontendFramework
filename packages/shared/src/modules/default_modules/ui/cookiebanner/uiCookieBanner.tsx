@@ -19,7 +19,6 @@
 import React from "react";
 import {Dialog} from "primereact/dialog";
 import {Button} from "primereact/button";
-import makeStyles from "@iavofficial/frontend-framework/makeStyles";
 import {
   GREY5,
   GREY2,
@@ -30,6 +29,7 @@ import {
   BLUE1,
 } from "../../../../constants/constants";
 import {UICookieBannerProps} from "../../../../types/modules/ui/cookieBanner/cookieBannerModuleInterfaces";
+import makeStyles from "../../../../utils/styles/makeStyles";
 
 const useStyles = makeStyles(({darkMode}: {darkMode: boolean}) => ({
   dialog: {

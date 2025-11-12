@@ -42,7 +42,7 @@ import {
   WHITE,
 } from "@iavofficial/frontend-framework-shared/constants";
 import {AwsAuthenticatorExtras} from "../awsAuthenticatorTypes";
-import type {AuthModule} from "@iavofficial/frontend-framework-shared/authenticatorModule";
+import {AuthModule} from "@iavofficial/frontend-framework-shared/authenticatorModule";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
 import {InternationalizerModule} from "@iavofficial/frontend-framework-shared/internationalizerModule";
 import {useDefaultSelector} from "@iavofficial/frontend-framework-shared/moduleDefaults";

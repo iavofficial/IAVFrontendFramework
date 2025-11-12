@@ -17,11 +17,12 @@
  */
 
 import {ReactElement} from "react";
+
+import {BasicRoute} from "../../../router/routerModule";
 import {
   InjectedOptionsByGroupToWrapper,
   InjectedOptionsByNavbarToWrapper,
-} from "../types/typesInjectedOptions";
-import {BasicRoute} from "../../../router/routerModule";
+} from "../../contentBar/types/typesInjectedOptions";
 
 export interface TabAndContentWrapper {
   getRoutes(): BasicRoute[];

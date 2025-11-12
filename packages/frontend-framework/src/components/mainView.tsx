@@ -21,10 +21,10 @@ import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/color
 import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
 import {BasicRoute} from "@iavofficial/frontend-framework-shared/routerModule";
-import {HeaderOptions} from "./header/header";
-import {SettingsMenuOptions} from "./header/settingsMenu";
-import {UserMenuOptions} from "./header/userMenu";
-import {TabAndContentWrapper} from "./navbar/wrappers/typesWrappers";
+import {HeaderOptions} from "@iavofficial/frontend-framework-shared/headerModuleInterfaces";
+import {SettingsMenuOptions} from "@iavofficial/frontend-framework-shared/settingsMenuOptions";
+import {UserMenuOptions} from "@iavofficial/frontend-framework-shared/userMenuOptions";
+import {TabAndContentWrapper} from "@iavofficial/frontend-framework-shared/typesWrappers";
 import {LegalDocument} from "./imprint/legalDocument";
 import If from "./helper/If";
 

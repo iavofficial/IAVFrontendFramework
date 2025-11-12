@@ -17,13 +17,15 @@
  */
 
 import React from "react";
-import {InjectedOptionsByGroupToWrapper} from "../types/typesInjectedOptions";
-import {InjectedOptionsGroupableByWrapperToTab} from "../types/typesInjectedOptions";
-import {InjectedOptionsByNavbarToWrapper} from "../types/typesInjectedOptions";
 import {ContentWrapperGeneralization} from "./contentWrapperGeneralization";
 import {GroupableTabAndContentWrapper} from "./typesWrappers";
-import {InjectedOptionsObject} from "../types/typesInjectedOptions";
 import {ComponentTypeMinProps} from "../../../../util-types/componentTypeMinProps";
+import {
+  InjectedOptionsByGroupToWrapper,
+  InjectedOptionsByNavbarToWrapper,
+  InjectedOptionsGroupableByWrapperToTab,
+  InjectedOptionsObject,
+} from "../../contentBar/types/typesInjectedOptions";
 
 export class BasicContentWrapper
   extends ContentWrapperGeneralization

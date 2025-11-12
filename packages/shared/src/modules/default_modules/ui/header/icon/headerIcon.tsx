@@ -17,8 +17,8 @@
  */
 
 import React, {PropsWithChildren} from "react";
-import makeStyles from "../content/style_options/makeStyles";
 import {classNames} from "primereact/utils";
+import makeStyles from "../../../../../utils/styles/makeStyles";
 
 const useStyles = makeStyles(() => ({
   wrapper: {

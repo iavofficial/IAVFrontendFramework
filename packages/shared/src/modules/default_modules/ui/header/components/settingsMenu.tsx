@@ -19,12 +19,12 @@
 import React, {useContext} from "react";
 import {ContextMenu} from "primereact/contextmenu";
 import {RadioButton} from "primereact/radiobutton";
-import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
-import {useModuleTranslation} from "@iavofficial/frontend-framework-shared/useModuleTranslation";
-import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
-import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
-import {useDefaultSelector} from "@iavofficial/frontend-framework-shared/moduleDefaults";
-import {LangResources} from "@iavofficial/frontend-framework-shared/internationalizerModule";
+import {ColorSettingsContext} from "../../../../../contexts/colorSettingsContext";
+import {useModule} from "../../../../../contexts/moduleContext";
+import {MandatoryModuleNames} from "../../../../../constants/moduleNames";
+import {useModuleTranslation} from "../../../../hooks/useModuleTranslation";
+import {useDefaultSelector} from "../../../../module_orchestration/moduleDefaults";
+import {LangResources} from "../../../../../types/modules/internationalization/internationalizerModule";
 
 // ##############################################
 // Notice: The enclosed imports are copied from 'primereact/menuitem/MenuItem' as the path could not be resolved by the gitlab builder

@@ -28,12 +28,13 @@ import {AppLogoPlaceholder} from "../../../../components/appLogoPlaceholder";
 import {ColorSettingsContext} from "../../../../contexts/colorSettingsContext";
 import {ContextMenu} from "primereact/contextmenu";
 import CompanyLogo from "../../../../../assets/svg/companyLogo";
-import HeaderIcon from "@iavofficial/frontend-framework/headerIcon";
-import SettingsIcon from "@iavofficial/frontend-framework/settingsIcon";
-import {UserMenu} from "@iavofficial/frontend-framework/userMenu";
-import {SettingsMenu} from "@iavofficial/frontend-framework/settingsMenu";
-import makeStyles from "@iavofficial/frontend-framework/makeStyles";
-import UserIcon from "@iavofficial/frontend-framework/userIcon";
+
+import makeStyles from "../../../../utils/styles/makeStyles";
+import HeaderIcon from "./icon/headerIcon";
+import SettingsIcon from "./icon/settingsIcon";
+import UserIcon from "./icon/userIcon";
+import {SettingsMenu} from "./components/settingsMenu";
+import {UserMenu} from "./components/userMenu";
 
 const useStyles = makeStyles(
   ({darkMode, headerBg}: {darkMode: boolean; headerBg: string}) => ({

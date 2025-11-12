@@ -25,7 +25,7 @@ import { HeaderPanelElement } from "@iavofficial/frontend-framework/headerPanelE
 import { HeaderMenuElement } from "@iavofficial/frontend-framework/headerMenuElement";
 import { PrimeIcons } from "primereact/api";
 import { WHITE } from "@iavofficial/frontend-framework/constants";
-import { LegalDocument } from "@iavofficial/frontend-framework/legalDocument";
+import type { LegalDocument } from "@iavofficial/frontend-framework/legalDocument";
 import { ExampleComponent1 } from "./components/exampleComponent1";
 import { ExampleComponent2 } from "./components/exampleComponent2";
 import { ExampleComponent3 } from "./components/exampleComponent3";

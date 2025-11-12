@@ -17,6 +17,7 @@
  */
 
 import {ReactElement} from "react";
+// TODO
 import {LegalDocument} from "@iavofficial/frontend-framework/legalDocument";
 
 export type AuthenticationViewProps = {

@@ -17,8 +17,8 @@
  */
 
 import {ReactElement} from "react";
-import {SettingsMenuOptions} from "./types/settingsMenuOptions";
-import {UserMenuOptions} from "./types/userMenuOptions";
+import {SettingsMenuOptions} from "../../../../modules/default_modules/ui/header/components/settingsMenu";
+import {UserMenuOptions} from "../../../../modules/default_modules/ui/header/components/userMenu";
 
 export interface HeaderOptions {
   reactElementRight?: ReactElement;

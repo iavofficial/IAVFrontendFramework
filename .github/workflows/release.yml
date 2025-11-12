@@ -2,6 +2,12 @@ name: Release
 
 on:
   workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Start Dry Run'
+        required: false
+        default: true
+        type: boolean
   push:
     branches:
       - main
@@ -15,6 +21,7 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -24,20 +31,28 @@ jobs:
         with:
           node-version: '22.x'
 
-      - run: find ./scripts/unix/ -type f -exec chmod +x {} \;
+      - name: Make scripts executable
+        run: find ./scripts/unix/ -type f -exec chmod +x {} \;
 
-      # Install Turborepo
-      - run: npm i
+      - name: Install dependencies
+        run: npm i
 
       - name: Copy root README to frontend-framework package
         run: cp README.md packages/frontend-framework/README.md
 
-      - run: npm run build
+      - name: Build project
+        run: npm run build
 
-      - run: npm run test
+      - name: Run tests
+        run: npm run test
 
       - name: Build all packages and release them
+        if: ${{ !(github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run == 'true') }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm run release
+
+      - name: Skip release (Dry Run mode)
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run == 'true' }}
+        run: echo "Dry Run activated - Skipping Release"

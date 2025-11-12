@@ -34,7 +34,7 @@ import {
 } from "./cognitoService";
 import {useDispatch, useSelector} from "react-redux";
 import {AwsAuthenticatorExtras, AwsUserData} from "./awsAuthenticatorTypes";
-import {
+import type {
   AuthModule,
   AuthState,
   Credentials,
@@ -49,11 +49,11 @@ export interface FetchSettings {
 
 interface AwsAuthenticatorStateExtras {
   loginError: string | undefined;
-  isNewPasswordRequired: boolean; // true if user logs in for the first time with his temp password and has to set a new one
+  isNewPasswordRequired: boolean;
 }
 
 export interface AwsAuthenticatorState extends AuthState {
-  userData: AwsUserData | undefined; // contains user information; undefined if no user is logged in
+  userData: AwsUserData | undefined;
   extras: AwsAuthenticatorStateExtras;
 }
 
@@ -108,8 +108,6 @@ export class AwsAuthenticator implements AuthModule<AwsAuthenticatorState> {
       name: MandatoryModuleNames.Authenticator,
       initialState,
       reducers: {
-        // The Redux store demands that objects in action payloads are POJOs
-        // (for example they cannot have functions).
         processSuccessfulAuth: (
           state,
           action: PayloadAction<ValidUserInformation>,
@@ -152,8 +150,6 @@ export class AwsAuthenticator implements AuthModule<AwsAuthenticatorState> {
       logout,
     } = this.slice.actions;
 
-    // Side effect functions
-    //In Amplify 6 the fetchAuthedSession Function handles the renewing of sessions
     this.fetchAuthed = createAsyncThunk<
       Response,
       {url: string; token?: JWT; settings?: FetchSettings},
@@ -164,7 +160,11 @@ export class AwsAuthenticator implements AuthModule<AwsAuthenticatorState> {
         await dispatch(this.extras.checkIsAuthenticated()).unwrap();
         return await fetch(
           url,
-          generateSettingsWithAuthFrom(getState().auth, token, settings),
+          generateSettingsWithAuthFrom(
+            getState()[MandatoryModuleNames.Authenticator],
+            token,
+            settings,
+          ),
         ).catch(() => {
           dispatch(this.logout());
           return new Promise<Response>((resolve) => {
@@ -279,8 +279,9 @@ export class AwsAuthenticator implements AuthModule<AwsAuthenticatorState> {
       const [isInitialized, setIsInitialized] = useState(false);
 
       const dispatch = useDispatch<AwsAuthenticatorAuthDispatch>();
-      const hasAuthenticated = useSelector<AwsAuthenticatorStoreState>(
-        (state) => state.auth.hasAuthenticated,
+      const hasAuthenticated = useSelector(
+        (state: AwsAuthenticatorStoreState) =>
+          state[MandatoryModuleNames.Authenticator].hasAuthenticated,
       );
 
       useEffect(() => {
@@ -292,7 +293,6 @@ export class AwsAuthenticator implements AuthModule<AwsAuthenticatorState> {
         }
       }, [dispatch, isInitialized]);
 
-      // Equivalent to ComponentDidUpdate
       useEffect(() => {
         if (hasAuthenticated) {
           dispatch(this.extras.checkIsAuthenticated());
@@ -306,7 +306,6 @@ export class AwsAuthenticator implements AuthModule<AwsAuthenticatorState> {
   }
 }
 
-// Utility functions
 const generateSettingsWithAuthFrom = (
   state: AwsAuthenticatorState,
   token?: JWT,
@@ -324,7 +323,7 @@ const generateSettingsWithAuthFrom = (
         return settingsWithAuth;
       }
     } else {
-      return Object.assign(settings, {
+      return Object.assign({}, settings, {
         headers: new Headers({
           Authorization:
             "Bearer " + (token ? token : state.userData?.extras.idToken),
@@ -350,11 +349,11 @@ function extractMessageFromError(error: unknown) {
     if (typeof error === "object") {
       if (errorObj.code) {
         if (errorObj.code === "UserGroupError") {
-          return "invalid_access_configuration"; // user was not added to a group
+          return "invalid_access_configuration";
         } else if (errorObj.code === "NotAuthorizedException") {
-          return "invalid_username_or_password"; // invalid user credentials
+          return "invalid_username_or_password";
         } else if (errorObj.code === "InvalidPasswordException") {
-          return "password_requirements_not_met"; // set password does not conform to password policy
+          return "password_requirements_not_met";
         } else {
           return "server_error";
         }

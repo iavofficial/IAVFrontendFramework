@@ -34,7 +34,7 @@ import {
 } from "./cognitoService";
 import {useDispatch, useSelector} from "react-redux";
 import {AwsAuthenticatorExtras, AwsUserData} from "./awsAuthenticatorTypes";
-import {
+import type {
   AuthModule,
   AuthState,
   Credentials,

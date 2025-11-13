@@ -96,12 +96,12 @@ export const ContentWithBar = (
       {props.contentWrappers.length >= 1 && ContentBarLayer && (
         <ContentBarLayer
           selectedId={props.selectedId}
+          contentWrappers={props.contentWrappers ?? []}
           onClickLeftSlideButton={props.onClickLeftSlideButton}
           onClickRightSlideButton={props.onClickRightSlideButton}
           onClickAddButton={props.onClickAddButton}
           addable={props.addable}
           jumpToEndOfContentBar={props.jumpToEndOfContentBar}
-          contentWrappers={props.contentWrappers ?? []}
           appliedStyles={contentBarStyles}
         />
       )}

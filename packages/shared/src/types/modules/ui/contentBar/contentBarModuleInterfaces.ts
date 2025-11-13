@@ -18,6 +18,7 @@
 
 import React from "react";
 import {BasicContentbarWrapper} from "./wrapper/basicContentbarWrapper";
+import { ContentbarWrapperInterface } from "./wrapper/contentbarWrapperInterface";
 
 export interface StyleProps<T> {
   appliedStyles?: StylesArray<T>;
@@ -35,7 +36,7 @@ export type ContentBarStylesArray =
 
 export type UIContentBarProps = StyleProps<typeof ContentBarStyles> & {
   selectedId: string;
-  contentWrappers: BasicContentbarWrapper[];
+  contentWrappers: ContentbarWrapperInterface[];
   addable?: boolean;
   jumpToEndOfContentBar?: boolean;
   onClickAddButton?: () => void;

@@ -61,7 +61,7 @@ export class I18NextInternationalizer {
     const initialState = {
       activeLang: forcedInitialLang ?? fallbackLang,
     };
-
+    
     this.slice = createSlice({
       name: MandatoryModuleNames.Internationalizer,
       initialState: initialState,
@@ -123,9 +123,13 @@ export class I18NextInternationalizer {
         if (forcedInitialLang) {
           this.selectActiveLang(forcedInitialLang);
         } else {
-          this.selectActiveLang(
-            i18next.language === "de-DE" ? "de" : i18next.language,
-          );
+          if(i18next.language === "de-DE") {
+            this.selectActiveLang("de");
+          }else if(i18next.language === "en-US") {
+            this.selectActiveLang("en");
+          }else{
+            this.selectActiveLang(i18next.language)
+          }
         }
 
         setIsInitialized(true);

@@ -59,9 +59,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
   const activeLang = useDefaultSelector(
     (state) => state[MandatoryModuleNames.Internationalizer].activeLang,
   );
-
-  console.log("ACTIVE:", activeLang);
-
+  
   const [triedToSubmit, setTriedToSubmit] = useState<boolean>(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

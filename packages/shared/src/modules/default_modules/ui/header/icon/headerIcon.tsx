@@ -30,7 +30,7 @@ const useStyles = makeStyles(() => ({
  * Props for the HeaderIcon component.
  */
 interface Props {
-    /**
+  /**
    * Inline styles to customize the component.
    */
   style?: React.CSSProperties;
@@ -68,7 +68,7 @@ const HeaderIcon: React.FC<PropsWithChildren<Props>> = (props) => {
       className={classNames(
         "flex align-items-center justify-content-end",
         classes.wrapper,
-        className
+        className,
       )}
       style={style}
       onClick={onClick}

@@ -17,9 +17,6 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Configure npm registry
-        run: npm config set registry "https://artifactory.iav.com/artifactory/api/npm/npm/"
-
       - name: Install Dependencies
         run: npm ci
 

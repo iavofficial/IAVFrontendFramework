@@ -39,7 +39,7 @@ import type {
   AuthState,
   Credentials,
 } from "@iavofficial/frontend-framework-shared/authenticatorModule";
-import {JWT} from "aws-amplify/auth";
+import {JWT} from "@aws-amplify/auth";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
 
 export interface FetchSettings {

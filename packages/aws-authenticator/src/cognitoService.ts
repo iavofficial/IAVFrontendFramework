@@ -25,7 +25,7 @@ import {
   JWT,
   signIn,
   signOut,
-} from "aws-amplify/auth";
+} from "@aws-amplify/auth";
 import {JWTPojo} from "./awsAuthenticatorTypes";
 import type {Credentials} from "@iavofficial/frontend-framework-shared/authenticatorModule";
 

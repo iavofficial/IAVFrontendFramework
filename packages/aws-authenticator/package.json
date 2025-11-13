@@ -36,9 +36,9 @@
     "aws authenticator"
   ],
   "dependencies": {
+    "@aws-amplify/auth": "^6.17.0",
     "@iavofficial/frontend-framework-shared": "*",
     "@reduxjs/toolkit": "^2.5.1",
-    "aws-amplify": "^6.15.8",
     "glob": "^10.4.5",
     "react-redux": "^9.2.0"
   },

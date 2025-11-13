@@ -144,8 +144,6 @@ export const UIHeader: React.FC<UIHeaderProps> = (props) => {
           ))}
 
           <HeaderIcon
-            tabIndex={0}
-            role="button"
             className={classes.icon}
             onClick={(e: any) => menuRef.current?.show(e)}
             onKeyDown={hideSettingsMenu}
@@ -154,8 +152,6 @@ export const UIHeader: React.FC<UIHeaderProps> = (props) => {
           </HeaderIcon>
 
           <HeaderIcon
-            tabIndex={0}
-            role="button"
             className={classes.iconUser}
             onClick={(e: any) => userRef.current?.show(e)}
             onKeyDown={hideUserMenu}

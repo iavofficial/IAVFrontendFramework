@@ -30,6 +30,16 @@ const useStyles = makeStyles(() => ({
  * Props for the HeaderIcon component.
  */
 interface Props {
+    /**
+   * Inline styles to customize the component.
+   */
+  style?: React.CSSProperties;
+
+  /**
+   * Inline styles to customize the component.
+   */
+  className?: string;
+
   /**
    * Callback triggered when the element is clicked.
    */
@@ -39,11 +49,6 @@ interface Props {
    * Callback triggered when a key is pressed.
    */
   onKeyDown?: (event: React.KeyboardEvent) => void;
-
-  /**
-   * Inline styles to customize the component.
-   */
-  style?: React.CSSProperties;
 }
 
 /**
@@ -54,7 +59,7 @@ interface Props {
  * for icon-based headers.
  */
 const HeaderIcon: React.FC<PropsWithChildren<Props>> = (props) => {
-  const {onClick, onKeyDown, style, children} = props;
+  const {onClick, onKeyDown, style, children, className} = props;
 
   const {classes} = useStyles();
 
@@ -63,6 +68,7 @@ const HeaderIcon: React.FC<PropsWithChildren<Props>> = (props) => {
       className={classNames(
         "flex align-items-center justify-content-end",
         classes.wrapper,
+        className
       )}
       style={style}
       onClick={onClick}

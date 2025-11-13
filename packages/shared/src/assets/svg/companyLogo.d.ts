@@ -15,30 +15,9 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-
 import React from "react";
-import {BasicContentbarWrapper} from "./wrapper/basicContentbarWrapper";
-
-export interface StyleProps<T> {
-  appliedStyles?: StylesArray<T>;
+interface Props {
+    fill: string;
 }
-
-export type StylesArray<T> = T[keyof T][];
-
-export const ContentBarStyles = {
-  SPACING: "SPACING",
-  SET_SPACING_COLOR: "SET_SPACING_COLOR",
-} as const;
-
-export type ContentBarStylesArray =
-  (typeof ContentBarStyles)[keyof typeof ContentBarStyles][];
-
-export type UIContentBarProps = StyleProps<typeof ContentBarStyles> & {
-  selectedId: string;
-  contentWrappers: BasicContentbarWrapper[];
-  addable?: boolean;
-  jumpToEndOfContentBar?: boolean;
-  onClickAddButton?: () => void;
-  onClickLeftSlideButton?: () => void;
-  onClickRightSlideButton?: () => void;
-};
+declare const CompanyLogo: React.FC<Props>;
+export default CompanyLogo;

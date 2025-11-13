@@ -49,12 +49,7 @@ const translations = {
 const customModules = {
   [MandatoryModuleNames.Internationalizer]: new I18NextInternationalizer({
     translationResources: translations,
-  }),
-  [MandatoryModuleNames.UI]: new UIModule({
-    UILayerHeader: CustomHeader,
-    UILayerNavbar: CustomNavbar,
-    UILayerCookieBanner: CustomCookieBanner,
-  }),
+  })
 };
 
 export const modules = createModules(customModules);

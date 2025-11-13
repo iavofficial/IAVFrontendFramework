@@ -17,8 +17,8 @@
  */
 
 import {AsyncThunk} from "@reduxjs/toolkit";
-import {JWT} from "@aws-amplify/auth";
-import type {UserData} from "@iavofficial/frontend-framework-shared/authenticatorModule";
+import {UserData} from "@iavofficial/frontend-framework-shared/authenticatorModule";
+import {JWT} from "aws-amplify/auth";
 
 export interface JWTPojo {
   payload: JWT["payload"];

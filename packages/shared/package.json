@@ -121,7 +121,7 @@
     "./uiModuleInterfaces": "./dist/types/modules/ui/uiModuleInterfaces.js",
     "./uiOrchestrator": "./dist/modules/default_modules/ui/uiOrchestrator.js",
     "./uiModule": "./dist/modules/default_modules/ui/uiModule.js",
-    "./typesInjectedOptions": "./dist/types/modules/ui/contentBar/typesInjectedOptions.js",
+    "./typesInjectedOptions": "./dist/types/modules/ui/navbar/types/typesInjectedOptions.js",
     "./typesWrappers": "./dist/types/modules/ui/navbar/types/typesWrappers.js",
     "./basicContentWrapper": "./dist/types/modules/ui/navbar/types/basicContentWrapper.js",
     "./contentWrapperGeneralization": "./dist/types/modules/ui/navbar/types/contentWrapperGeneralization.js",
@@ -245,7 +245,7 @@
         "./dist/modules/default_modules/ui/uiModule.d.ts"
       ],
       "./typesInjectedOptions": [
-        "./dist/types/modules/ui/contentBar/typesInjectedOptions.d.ts"
+        "./dist/types/modules/ui/navbar/types/typesInjectedOptions.d.ts"
       ],
       "./typesWrappers": [
         "./dist/types/modules/ui/navbar/types/typesWrappers.d.ts"

@@ -18,7 +18,7 @@
 
 import React, {ReactElement} from "react";
 import {TabGroup} from "../tabs/tabGroup/tabGroup";
-import {GroupableTabAndContentWrapper} from "@iavofficial/frontend-framework/typesWrappers";
+import {GroupableTabAndContentWrapper} from "@iavofficial/frontend-framework-shared/typesWrappers";
 import {
   InjectedOptionsByGroupToWrapper,
   InjectedOptionsByNavbarToWrapper,

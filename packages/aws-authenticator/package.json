@@ -14,20 +14,35 @@
     "release": "npx semantic-release",
     "generate-docs": "../../scripts/unix/docs_generation/generate-docs-for-package.sh"
   },
-  "eslintConfig": { "extends": ["react-app"] },
-  "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all"],
-    "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
   },
-  "keywords": ["iav-frontendframework", "aws authenticator"],
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "keywords": [
+    "iav-frontendframework",
+    "aws authenticator"
+  ],
   "dependencies": {
     "@iavofficial/frontend-framework-shared": "*",
     "@reduxjs/toolkit": "^2.5.1",
+    "aws-amplify": "^6.15.8",
     "glob": "^10.4.5",
     "react-redux": "^9.2.0"
   },
   "peerDependencies": {
-    "aws-amplify": "^6.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -65,11 +80,21 @@
   },
   "typesVersions": {
     "*": {
-      "./awsAuthenticatorModule": ["./dist/awsAuthenticatorModule.d.ts"],
-      "./cognitoService": ["./dist/cognitoService.d.ts"],
-      "./awsAuthenticatorTypes": ["./dist/awsAuthenticatorTypes.d.ts"],
-      "./awsAuthenticationView": ["./dist/components/awsAuthenticationView.d.ts"]
+      "./awsAuthenticatorModule": [
+        "./dist/awsAuthenticatorModule.d.ts"
+      ],
+      "./cognitoService": [
+        "./dist/cognitoService.d.ts"
+      ],
+      "./awsAuthenticatorTypes": [
+        "./dist/awsAuthenticatorTypes.d.ts"
+      ],
+      "./awsAuthenticationView": [
+        "./dist/components/awsAuthenticationView.d.ts"
+      ]
     }
   },
-  "publishConfig": { "access": "public" }
+  "publishConfig": {
+    "access": "public"
+  }
 }

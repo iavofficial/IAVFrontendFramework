@@ -27,6 +27,7 @@ import {
 import {AppLogoPlaceholder} from "../../../../components/appLogoPlaceholder";
 import {ColorSettingsContext} from "../../../../contexts/colorSettingsContext";
 import {ContextMenu} from "primereact/contextmenu";
+// @ts-ignore
 import CompanyLogo from "../../../../../assets/svg/companyLogo";
 
 import makeStyles from "../../../../utils/styles/makeStyles";

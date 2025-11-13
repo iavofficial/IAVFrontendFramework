@@ -22,7 +22,7 @@ import {BasicRoute} from "../../../router/routerModule";
 import {
   InjectedOptionsByGroupToWrapper,
   InjectedOptionsByNavbarToWrapper,
-} from "../../contentBar/types/typesInjectedOptions";
+} from "../../navbar/types/typesInjectedOptions";
 
 export interface TabAndContentWrapper {
   getRoutes(): BasicRoute[];

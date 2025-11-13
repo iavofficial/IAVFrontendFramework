@@ -25,7 +25,7 @@ import {
   InjectedOptionsByNavbarToWrapper,
   InjectedOptionsGroupableByWrapperToTab,
   InjectedOptionsObject,
-} from "../../contentBar/types/typesInjectedOptions";
+} from "../../navbar/types/typesInjectedOptions";
 
 export class BasicContentWrapper
   extends ContentWrapperGeneralization

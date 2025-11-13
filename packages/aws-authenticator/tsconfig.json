@@ -21,8 +21,7 @@
     "resolveJsonModule": true,
     "jsx": "react-jsx",
     "rootDir": "src",
-    "outDir": "dist",
-    "declarationDir": "dist/types"
+    "outDir": "dist"
   },
   "include": [
     "src/**/*",

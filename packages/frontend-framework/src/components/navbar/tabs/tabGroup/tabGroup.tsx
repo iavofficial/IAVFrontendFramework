@@ -20,7 +20,7 @@ import React, {ReactElement, useContext, useEffect, useState} from "react";
 import "../../navbar.css";
 import {TabGroupCollapsed} from "./tabGroupCollapsed";
 import {TabGroupUnfolded} from "./tabGroupUnfolded";
-import {GroupableTabAndContentWrapper} from "@iavofficial/frontend-framework/typesWrappers";
+import {GroupableTabAndContentWrapper} from "@iavofficial/frontend-framework-shared/typesWrappers";
 import {InjectedOptionsByGroupToWrapper} from "@iavofficial/frontend-framework-shared/typesInjectedOptions";
 import {
   determineCurrentColor,

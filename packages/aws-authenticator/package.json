@@ -1,6 +1,6 @@
 {
   "name": "@iavofficial/frontend-framework-aws-authenticator",
-  "version": "1.0.0",
+  "version": "1.0.0-dev.1",
   "private": false,
   "license": "Apache-2.0",
   "description": "This package provides AWS authentication using AWS Cognito.",

@@ -47,10 +47,12 @@ jobs:
         run: npm run test
 
       - name: Build all packages and release them
+        if: ${{ !(github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run == 'true') }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm run release
 
       - name: Skip release (Dry Run mode)
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run == 'true' }}
         run: echo "Dry Run activated - Skipping Release"

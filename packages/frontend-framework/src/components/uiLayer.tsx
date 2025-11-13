@@ -28,7 +28,7 @@ import {NavbarSettingsProvider} from "../contexts/providers/navbarSettingsProvid
 import {AuthenticationViewProps} from "@iavofficial/frontend-framework-shared/authenticationViewProps";
 import {StaticCollapsedState} from "../types/navbarSettingsTypes";
 import {SettingsMenuOptions} from "@iavofficial/frontend-framework-shared/settingsMenu";
-import {HeaderOptions} from "@iavofficial/frontend-framework-shared/headerMenu";
+import {HeaderOptions} from "@iavofficial/frontend-framework-shared/headerModuleInterfaces";
 import {UserMenuOptions} from "./header/userMenu";
 import {LegalDocument} from "./imprint/legalDocument";
 import {BasicAuthenticationView} from "./authentication/default/basicAuthenticationView";

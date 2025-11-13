@@ -18,7 +18,7 @@
 
 import React, {useContext} from "react";
 import "./navbar.css";
-import {TabAndContentWrapper} from "./wrappers/typesWrappers";
+import {TabAndContentWrapper} from "@iavofficial/frontend-framework-shared/typesWrappers";
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
 import {calculateNavbarArrowFunctionColor} from "../../utils/calculateNavbarArrowColor";

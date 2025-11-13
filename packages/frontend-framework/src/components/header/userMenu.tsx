@@ -18,7 +18,7 @@
 
 import React from "react";
 import {ContextMenu} from "primereact/contextmenu";
-import {MenuItem} from "./settingsMenu";
+import {MenuItem} from "@iavofficial/frontend-framework-shared/settingsMenu";
 import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
 import {useDefaultDispatch} from "@iavofficial/frontend-framework-shared/moduleDefaults";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";

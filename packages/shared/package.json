@@ -1,6 +1,6 @@
 {
   "name": "@iavofficial/frontend-framework-shared",
-  "version": "1.0.0-dev.1",
+  "version": "1.0.0-dev.2",
   "private": false,
   "license": "Apache-2.0",
   "description": "This package provides react components, contexts, types, utils etc. for use in multiple frontend framework packages.",
@@ -15,17 +15,26 @@
     "generate-docs": "../../scripts/unix/docs_generation/generate-docs-for-package.sh"
   },
   "eslintConfig": {
-    "extends": ["react-app"]
+    "extends": [
+      "react-app"
+    ]
   },
   "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all"],
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
     ]
   },
-  "keywords": ["iav-frontendframework", "aws authenticator"],
+  "keywords": [
+    "iav-frontendframework",
+    "aws authenticator"
+  ],
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.1",
     "glob": "^10.4.5",

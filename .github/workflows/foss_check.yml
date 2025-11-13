@@ -1,6 +1,7 @@
 name: FOSS Check
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -9,7 +10,6 @@ on:
       - "**/*.sbom.json"
       - "**/*.cdx.json"
       - "**/.ort/**"
-  workflow_dispatch:
 
 permissions:
   contents: read

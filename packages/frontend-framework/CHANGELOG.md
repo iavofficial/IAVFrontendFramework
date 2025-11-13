@@ -1,3 +1,11 @@
+## [@iavofficial/frontend-framework-v2.0.0-dev.1](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.6.0-dev.1...@iavofficial/frontend-framework-v2.0.0-dev.1) (2025-11-13)
+
+### ⚠ BREAKING CHANGES
+
+* Introducing the first modularized version of the frontend framework
+
+* BREAKING CHANGE: Introducing the first modularized version of the frontend framework ([e952a6b](https://github.com/iavofficial/IAVFrontendFramework/commit/e952a6bb9d8a4033a2419dd843ed6869d42a5397))
+
 ## [@iavofficial/frontend-framework-v1.6.0-dev.1](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.5.2...@iavofficial/frontend-framework-v1.6.0-dev.1) (2025-11-07)
 
 ### Features

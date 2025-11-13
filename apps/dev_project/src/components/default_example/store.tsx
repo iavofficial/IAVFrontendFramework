@@ -49,7 +49,7 @@ const translations = {
 const customModules = {
   [MandatoryModuleNames.Internationalizer]: new I18NextInternationalizer({
     translationResources: translations,
-  })
+  }),
 };
 
 export const modules = createModules(customModules);

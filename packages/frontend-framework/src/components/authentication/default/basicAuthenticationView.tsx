@@ -59,7 +59,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
   const activeLang = useDefaultSelector(
     (state) => state[MandatoryModuleNames.Internationalizer].activeLang,
   );
-  
+
   const [triedToSubmit, setTriedToSubmit] = useState<boolean>(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -147,7 +147,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
   const identifier = generateHashOfLength(4);
   const identifierLegal = "a" + identifier;
   const identifierWithDot = "." + identifierLegal;
-  
+
   return (
     <div
       className="flex"

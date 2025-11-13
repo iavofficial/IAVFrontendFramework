@@ -131,8 +131,8 @@
     "./contentbarCss": "./dist/types/modules/ui/contentBar/contentbar.css",
     "./defaultContentSelectionElement": "./dist/types/modules/ui/contentBar/wrapper/defaultContentSelectionElement.js",
     "./determineCurrentColor": "./dist/types/modules/ui/contentBar/wrapper/determineCurrentColor.js",
-    "./settingsMenu": "./dist/modules/default_modules/ui/header/compoents/settingsMenu.js",
-    "./userMenu": "./dist/modules/default_modules/ui/header/compoents/userMenu.js"
+    "./settingsMenu": "./dist/modules/default_modules/ui/header/components/settingsMenu.js",
+    "./userMenu": "./dist/modules/default_modules/ui/header/components/userMenu.js"
   },
   "typesVersions": {
     "*": {
@@ -269,10 +269,10 @@
         "./dist/types/modules/ui/contentBar/wrapper/determineCurrentColor.d.ts"
       ],
       "./settingsMenu": [
-        "./dist/modules/default_modules/ui/header/compoents/settingsMenu.js"
+        "./dist/modules/default_modules/ui/header/components/settingsMenu.js"
       ],
       "./userMenu": [
-        "./dist/modules/default_modules/ui/header/compoents/userMenu.js"
+        "./dist/modules/default_modules/ui/header/components/userMenu.js"
       ]
     }
   },

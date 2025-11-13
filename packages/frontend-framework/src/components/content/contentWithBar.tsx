@@ -17,8 +17,8 @@
  */
 
 import React, {useContext, useMemo} from "react";
-import {BasicContentbarWrapper} from "./basicContentbarWrapper";
-import {CustomContentbarWrapper} from "./customContentbarWrapper";
+import {BasicContentbarWrapper} from "@iavofficial/frontend-framework-shared/basicContentbarWrapper";
+import {CustomContentbarWrapper} from "@iavofficial/frontend-framework-shared/customContentbarWrapper";
 import {
   ContentLayout,
   ContentLayoutAndStyleProps,

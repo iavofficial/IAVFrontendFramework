@@ -16,4 +16,4 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-export * from "@iavofficial/frontend-framework-shared/contentbarWrapperInterfaces";
+export * from "@iavofficial/frontend-framework-shared/contentbarWrapperInterface";

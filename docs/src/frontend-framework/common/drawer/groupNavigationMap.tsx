@@ -17,45 +17,57 @@
  */
 
 import React, { useState } from "react";
+import { toRgba } from "../../../util/toRgba.ts";
 import { makeStyles } from "../../../util/makeStyles.tsx";
 import NavigationMap from "./navigationMap.tsx";
 import { GroupRoute } from "../page/pathRoute.ts";
 import Badge from "./badge/badge.tsx";
+import { BLACK, BLUE3, WHITE } from "../../../constants.ts";
 
 const useStyles = makeStyles(() => ({
   groupTitle: {
     width: "100%",
     cursor: "pointer",
-    padding: "8px 0",
-    marginBottom: "8px",
-    display: "flex", // Flexbox, um Text und Badge nebeneinander zu positionieren
-    alignItems: "center", // Vertikale Ausrichtung auf der gleichen Höhe
-    justifyContent: "center", // Horizontal zentrieren des gesamten Inhalts
-    fontWeight: "bold",
+    padding: "12px 18px",
+    marginBottom: "12px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontWeight: 600,
+    fontSize: "15px",
     border: "none",
-    position: "relative", // Damit das Badge rechts positioniert werden kann
+    position: "relative",
+    borderRadius: "14px",
+    background: toRgba(WHITE, 0.06),
+    backdropFilter: "blur(12px) saturate(160%)",
+    WebkitBackdropFilter: "blur(12px) saturate(160%)",
+    boxShadow: `0 4px 20px ${toRgba(BLACK, 0.15)}`,
+    transition: "all 0.35s ease",
     "&:hover": {
-      backgroundColor: "#007bff",
-      color: "#fff",
+      background: toRgba(BLUE3, 0.35),
+      transform: "translateX(4px)",
+      boxShadow: `0 6px 24px ${toRgba(BLUE3, 0.4)}`,
     },
-    borderRadius: "8px",
   },
   groupList: {
     listStyle: "none",
     padding: 0,
     margin: 0,
+    backdropFilter: "blur(8px)",
+    WebkitBackdropFilter: "blur(8px)",
   },
   groupItem: {
-    paddingLeft: "16px",
+    paddingLeft: "20px",
   },
   badge: {
     position: "absolute",
-    right: "10px",
+    right: "12px",
     top: "50%",
-    transform: "translateY(-50%)", // Vertikale Zentrierung des Badges
+    transform: "translateY(-50%)",
+    backdropFilter: "blur(10px)",
+    WebkitBackdropFilter: "blur(10px)",
   },
 }));
-
 interface Props {
   groups: GroupRoute[];
 }

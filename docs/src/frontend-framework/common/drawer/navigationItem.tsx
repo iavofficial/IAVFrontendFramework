@@ -19,32 +19,48 @@
 import React, { PropsWithChildren } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { makeStyles } from "../../../util/makeStyles.tsx";
-import { GREY2, MAGENTA1 } from "../../../constants.ts";
+import { BLUE3, MAGENTA1, WHITE } from "../../../constants.ts";
 import Badge from "./badge/badge.tsx";
+import { toRgba } from "../../../util/toRgba.ts";
 
 const useStyles = makeStyles(() => ({
   link: {
     cursor: "pointer",
-    display: "block",
+    display: "flex",
+    alignItems: "center",
+    gap: "7px",
     textDecoration: "none",
     color: "var(--primary-color)",
-    padding: "8px",
-    borderRadius: "4px",
+    padding: "11px 16px",
+    borderRadius: "12px",
+    fontSize: "15px",
+    fontWeight: 500,
+    background: toRgba(WHITE, 0.05),
+    backdropFilter: "blur(10px)",
+    WebkitBackdropFilter: "blur(10px)",
+    transition: "all 0.3s ease",
     "&:hover": {
-      backgroundColor: "#333",
-      color: "#fff",
+      background: toRgba(BLUE3, 0.18),
+      transform: "translateX(3px)",
     },
   },
   activeLink: {
-    backgroundColor: GREY2,
+    background: toRgba(BLUE3, 0.35),
+    backdropFilter: "blur(12px)",
+    WebkitBackdropFilter: "blur(12px)",
+    transform: "translateX(3px)",
+    boxShadow: `0 4px 16px ${toRgba(BLUE3, 0.25)}`,
   },
   badge: {
-    marginLeft: "4px",
-    padding: "2px 6px",
+    marginLeft: "6px",
+    padding: "2px 8px",
     backgroundColor: MAGENTA1,
-    color: "white",
-    borderRadius: "6px",
-    fontSize: "12px",
+    color: WHITE,
+    borderRadius: "8px",
+    fontSize: "11px",
+    fontWeight: 600,
+    backdropFilter: "blur(8px)",
+    WebkitBackdropFilter: "blur(8px)",
   },
 }));
 

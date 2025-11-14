@@ -167,16 +167,36 @@ const modulesRoutes: GroupRoute[] = [
     ],
   },
   {
-    title: "Cookie Banner",
+    title: "UI",
     routes: [
       {
         path: "general-cookie-banner-module",
-        label: "General cookie banner module",
+        label: "General ui module",
         element: PageGeneralCookieBannerModule,
       },
       {
         path: "default-cookie-banner",
-        label: "DefaultCookieBanner",
+        label: "UIModule",
+        element: PageDefaultCookieBanner,
+      },
+      {
+        path: "default-cookie-banner",
+        label: "uiCookieBanner",
+        element: PageDefaultCookieBanner,
+      },
+      {
+        path: "default-cookie-banner",
+        label: "uiContentBar",
+        element: PageDefaultCookieBanner,
+      },
+      {
+        path: "default-cookie-banner",
+        label: "uiHeader",
+        element: PageDefaultCookieBanner,
+      },
+      {
+        path: "default-cookie-banner",
+        label: "uiNavbar",
         element: PageDefaultCookieBanner,
       },
     ],

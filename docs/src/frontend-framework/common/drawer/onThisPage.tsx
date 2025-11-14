@@ -18,6 +18,8 @@
 
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "../../../util/makeStyles.tsx";
+import { toRgba } from "../../../util/toRgba.ts";
+import { BLUE3, WHITE } from "../../../constants.ts";
 
 const useStyles = makeStyles(() => ({
   pageNav: {
@@ -25,37 +27,54 @@ const useStyles = makeStyles(() => ({
     top: "61px",
     right: "0",
     width: "200px",
-    height: "100%",
-    backgroundColor: "#ffffff",
-    borderLeft: "1px solid lightgray",
+    height: "calc(100vh - 61px)",
+    padding: "18px 20px",
     zIndex: 1000,
-    padding: "20px",
-    fontSize: "0.875rem",
     overflowY: "auto",
+    fontSize: "0.875rem",
+    background: toRgba(WHITE, 0.06),
+    backdropFilter: "blur(10px)",
+    WebkitBackdropFilter: "blur(10px)",
+    borderLeft: `1px solid ${toRgba(WHITE, 0.2)}`,
   },
   heading: {
-    fontSize: "1.25rem",
-    marginTop: "1em",
-    marginBottom: "1em",
+    fontSize: "0.85rem",
+    fontWeight: 600,
+    textTransform: "uppercase",
+    letterSpacing: "0.08em",
+    marginTop: "0",
+    marginBottom: "1rem",
+    opacity: 0.8,
   },
   list: {
     listStyle: "none",
     padding: 0,
+    margin: 0,
   },
   listItem: {
-    borderRadius: "4px",
-    padding: "0px 10px",
-    transition: "background-color 0.3s ease",
-    marginBottom: "8px",
+    borderRadius: "10px",
+    padding: "6px 10px",
+    marginBottom: "6px",
+    transition: "all 0.25s ease",
+    background: toRgba(WHITE, 0.03),
+    "&:hover": {
+      background: toRgba(BLUE3, 0.18),
+      transform: "translateX(-3px)",
+    },
   },
   listItemH2: {
-    marginLeft: "20px",
+    marginLeft: "16px",
   },
   link: {
+    display: "block",
     textDecoration: "none",
-    color: "#0056b3",
+    color: "var(--primary-color)",
+    fontSize: "0.84rem",
+    whiteSpace: "nowrap",
+    textOverflow: "ellipsis",
+    overflow: "hidden",
     "&:hover": {
-      textDecoration: "underline",
+      textDecoration: "none",
     },
   },
 }));

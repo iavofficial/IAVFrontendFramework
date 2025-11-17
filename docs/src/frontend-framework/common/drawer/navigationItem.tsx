@@ -77,7 +77,7 @@ const NavigationItem: React.FC<PropsWithChildren<Props>> = (props) => {
   const { classes } = useStyles();
   const location = useLocation();
 
-  const isActive = location.pathname.includes(to);
+  const isActive = location.pathname.endsWith(`/${to}`);
 
   return (
     <li key={to}>

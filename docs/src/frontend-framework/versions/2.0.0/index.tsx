@@ -46,8 +46,12 @@ import PageI18nextInternationalizer from "./pages/pageI18nextInternationalizer.t
 import PageGeneralInternationalizerModule from "./pages/pageGeneralInternationalizerModule.tsx";
 import { SearchHeader } from "../../common/header/searchHeaders.tsx";
 import BadgeHeader from "../../common/drawer/badge/badgeHeader.tsx";
-import PageGeneralCookieBannerModule from "./pages/pageGeneralCookieBannerModule.tsx";
-import PageDefaultCookieBanner from "./pages/pageDefaultCookieBanner";
+import PageGeneralUiModule from "./pages/pageGeneralUiModule.tsx";
+import PageUiCookieBanner from "./pages/pageUiCookieBanner.tsx";
+import PageUiModule from "./pages/pageUiModule.tsx";
+import PageUiHeader from "./pages/pageUiHeader.tsx";
+import PageUiNavbar from "./pages/pageUiNavbar.tsx";
+import PageUiContentBar from "./pages/pageUiContentBar.tsx";
 
 const pages = import.meta.glob("./pages/*.tsx");
 
@@ -170,34 +174,34 @@ const modulesRoutes: GroupRoute[] = [
     title: "UI",
     routes: [
       {
-        path: "general-cookie-banner-module",
+        path: "general-ui-module",
         label: "General ui module",
-        element: PageGeneralCookieBannerModule,
+        element: PageGeneralUiModule,
       },
       {
-        path: "default-cookie-banner",
-        label: "UIModule",
-        element: PageDefaultCookieBanner,
+        path: "ui-module",
+        label: "Ui module",
+        element: PageUiModule,
       },
       {
-        path: "default-cookie-banner",
-        label: "uiCookieBanner",
-        element: PageDefaultCookieBanner,
+        path: "ui-header",
+        label: "Header",
+        element: PageUiHeader,
       },
       {
-        path: "default-cookie-banner",
-        label: "uiContentBar",
-        element: PageDefaultCookieBanner,
+        path: "ui-navbar",
+        label: "Navbar",
+        element: PageUiNavbar,
       },
       {
-        path: "default-cookie-banner",
-        label: "uiHeader",
-        element: PageDefaultCookieBanner,
+        path: "ui-cookie-banner",
+        label: "Cookie banner",
+        element: PageUiCookieBanner,
       },
       {
-        path: "default-cookie-banner",
-        label: "uiNavbar",
-        element: PageDefaultCookieBanner,
+        path: "ui-content-bar",
+        label: "Content bar",
+        element: PageUiContentBar,
       },
     ],
   },

@@ -52,9 +52,16 @@ export const SimpleNavbarTabCollapsed = (props: NestedNavbarTabProps) => {
       style={props.style}
     >
       {props.icon ? (
-        <SvgIcon color={props.iconColor} element={props.icon} />
+        <SvgIcon
+          elementId={`${props.elementId}-icon`}
+          color={props.iconColor}
+          element={props.icon}
+        />
       ) : (
-        <DefaultIcon color={props.iconColor} />
+        <DefaultIcon
+          elementId={`${props.elementId}-icon`}
+          color={props.iconColor}
+        />
       )}
       <Tooltip content={props.name} target={ref} id="hover-image" />
     </div>

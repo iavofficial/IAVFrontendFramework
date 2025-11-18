@@ -37,7 +37,7 @@
   ],
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.1",
-    "glob": "^10.4.5",
+    "glob": "^11.1.0",
     "i18next": "^22.4.13",
     "i18next-browser-languagedetector": "^7.0.1",
     "react-i18next": "^12.2.0",

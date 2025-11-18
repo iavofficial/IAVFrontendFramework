@@ -41,6 +41,7 @@ export const PrivilegedNavbarTab: GroupableNavbarTab<Props> = (
       disabled={props.disabled}
       name={props.name}
       frameworkInjectedOptions={props.frameworkInjectedOptions}
+      elementId={props.elementId}
     />
   ) : (
     <></>

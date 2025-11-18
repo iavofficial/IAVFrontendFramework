@@ -44,6 +44,7 @@ export const SimpleNavbarTabCollapsed = (props: NestedNavbarTabProps) => {
 
   return (
     <div
+      id={props.elementId}
       ref={ref}
       onMouseEnter={() => props.setHovering(true)}
       onMouseLeave={() => props.setHovering(false)}

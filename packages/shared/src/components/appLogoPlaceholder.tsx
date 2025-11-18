@@ -19,9 +19,14 @@
 import React from "react";
 
 interface Props {
+  elementId?: string;
   appLogoPlaceholder: string;
 }
 
 export const AppLogoPlaceholder = (props: Props) => {
-  return <span style={{marginLeft: "20px"}}>{props.appLogoPlaceholder}</span>;
+  return (
+    <span id={props.elementId} style={{marginLeft: "20px"}}>
+      {props.appLogoPlaceholder}
+    </span>
+  );
 };

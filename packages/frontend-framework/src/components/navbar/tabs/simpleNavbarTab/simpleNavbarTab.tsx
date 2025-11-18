@@ -43,6 +43,7 @@ export interface NestedNavbarTabProps {
   iconColor: string;
   name: string;
   icon?: ReactElement;
+  elementId: string;
 }
 
 export const SimpleNavbarTab: GroupableNavbarTab = (
@@ -133,6 +134,7 @@ export const SimpleNavbarTab: GroupableNavbarTab = (
     name: props.name instanceof Function ? props.name(t) : props.name,
     additionalClassNames: additionalClassNames,
     iconColor: iconColor,
+    elementId: props.elementId,
   };
 
   const navbarTab = navbarCollapsed ? (

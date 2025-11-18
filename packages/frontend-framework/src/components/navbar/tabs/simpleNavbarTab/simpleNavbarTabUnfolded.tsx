@@ -31,6 +31,7 @@ export const SimpleNavbarTabUnfolded = (props: NestedNavbarTabProps) => {
 
   return (
     <div
+      id={props.elementId}
       className={className}
       style={props.style}
       onMouseEnter={() => props.setHovering(true)}

@@ -46,7 +46,7 @@ const useStyles = makeStyles(() => ({
   },
   button: {
     padding: "8px 16px",
-    background: `linear-gradient(135deg, ${BLUE3}, ${BLUE2})`,
+    background: BLUE3,
     color: WHITE,
     border: "none",
     borderRadius: "999px",

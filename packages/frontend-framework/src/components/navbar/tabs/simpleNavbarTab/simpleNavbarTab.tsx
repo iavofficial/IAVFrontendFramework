@@ -35,6 +35,7 @@ import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/color
 import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
 import {useModuleTranslation} from "@iavofficial/frontend-framework-shared/useModuleTranslation";
+import {generateHashOfLength} from "@iavofficial/frontend-framework-shared/hash";
 
 export interface NestedNavbarTabProps {
   additionalClassNames: string;
@@ -43,7 +44,7 @@ export interface NestedNavbarTabProps {
   iconColor: string;
   name: string;
   icon?: ReactElement;
-  elementId: string;
+  elementId?: string;
 }
 
 export const SimpleNavbarTab: GroupableNavbarTab = (
@@ -134,7 +135,7 @@ export const SimpleNavbarTab: GroupableNavbarTab = (
     name: props.name instanceof Function ? props.name(t) : props.name,
     additionalClassNames: additionalClassNames,
     iconColor: iconColor,
-    elementId: props.elementId,
+    elementId: props.elementId ?? generateHashOfLength(12),
   };
 
   const navbarTab = navbarCollapsed ? (

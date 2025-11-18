@@ -40,13 +40,13 @@ export const SimpleNavbarTabUnfolded = (props: NestedNavbarTabProps) => {
       <div className="flex align-items-center">
         {props.icon ? (
           <SvgIcon
-            elementId={`${props.elementId}-icon`}
+            elementId={props.elementId ? `${props.elementId}-icon` : undefined}
             color={props.iconColor}
             element={props.icon}
           />
         ) : (
           <DefaultIcon
-            elementId={`${props.elementId}-icon`}
+            elementId={props.elementId ? `${props.elementId}-icon` : undefined}
             color={props.iconColor}
           />
         )}

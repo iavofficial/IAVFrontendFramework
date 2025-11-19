@@ -18,7 +18,7 @@
 
 import React from "react";
 import {ContentbarWrapperInterface} from "./contentbarWrapperInterface";
-import {DefaultContentSelectionElement} from "./defaultContentSelectionElement";
+import {DefaultContentSelectionElement} from "../../../../../../../frontend-framework/src/components/content/defaultContentSelectionElement";
 import {TranslationWrapperFunction} from "../../../internationalization/internationalizerModule";
 import {generateHashOfLength} from "../../../../../utils/hash";
 

@@ -78,10 +78,9 @@
     "./README.md"
   ],
   "exports": {
-    "./css/*": "./dist/assets/css/*",
-    "./svg/*": "./dist/assets/svg/*",
-    "./svg/companyLogo": "./dist/assets/svg/companyLogo.js",
-    "./png/*": "./dist/assets/png/*",
+    "./css/*": "./dist/css/*",
+    "./img/*": "./dist/assets/img/*",
+    "./companyLogo": "./dist/components/svgWrapper/companyLogo.js",
     "./appLogoPlaceholder": "./dist/components/appLogoPlaceholder.js",
     "./loginButtonWithSpinner": "./dist/components/loginButtonWithSpinner.js",
     "./colorSettingsContext": "./dist/contexts/colorSettingsContext.js",
@@ -137,7 +136,6 @@
     "./basicContentbarWrapper": "./dist/types/modules/ui/contentBar/wrapper/basicContentbarWrapper.js",
     "./customContentbarWrapper": "./dist/types/modules/ui/contentBar/wrapper/customContentbarWrapper.js",
     "./contentbarWrapperInterface": "./dist/types/modules/ui/contentBar/wrapper/contentbarWrapperInterface.js",
-    "./contentbarCss": "./dist/types/modules/ui/contentBar/contentbar.css",
     "./defaultContentSelectionElement": "./dist/types/modules/ui/contentBar/wrapper/defaultContentSelectionElement.js",
     "./determineCurrentColor": "./dist/types/modules/ui/contentBar/wrapper/determineCurrentColor.js",
     "./settingsMenu": "./dist/modules/default_modules/ui/header/components/settingsMenu.js",
@@ -265,11 +263,8 @@
       "./contentWrapperGeneralization": [
         "./dist/types/modules/ui/navbar/types/contentWrapperGeneralization.d.ts"
       ],
-      "./svg/companyLogo": [
-        "./dist/assets/svg/companyLogo.d.ts"
-      ],
-      "./contentbarCss": [
-        "./dist/types/modules/ui/contentBar/contentbar.css"
+      "./companyLogo": [
+        "./dist/components/svgWrapper/companyLogo.d.ts"
       ],
       "./defaultContentSelectionElement": [
         "./dist/types/modules/ui/contentBar/wrapper/defaultContentSelectionElement.d.ts"
@@ -278,10 +273,10 @@
         "./dist/types/modules/ui/contentBar/wrapper/determineCurrentColor.d.ts"
       ],
       "./settingsMenu": [
-        "./dist/modules/default_modules/ui/header/components/settingsMenu.js"
+        "./dist/modules/default_modules/ui/header/components/settingsMenu.d.ts"
       ],
       "./userMenu": [
-        "./dist/modules/default_modules/ui/header/components/userMenu.js"
+        "./dist/modules/default_modules/ui/header/components/userMenu.d.ts"
       ]
     }
   },

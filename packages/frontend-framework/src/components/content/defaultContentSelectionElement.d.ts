@@ -16,15 +16,17 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 import "./contentbar.css";
-import { TranslationWrapperFunction } from "@iavofficial/frontend-framework-shared/internationalizerModule";
+import {TranslationWrapperFunction} from "@iavofficial/frontend-framework-shared/internationalizerModule";
 export interface Props {
-    displayName: string | TranslationWrapperFunction;
-    width: number;
-    id: string;
-    selected?: boolean;
-    closable?: boolean;
-    onClose?: (id: string, idOfFirstElement: string) => void;
-    onClick: (id: string) => any;
-    idOfFirstElement: string;
+  displayName: string | TranslationWrapperFunction;
+  width: number;
+  id: string;
+  selected?: boolean;
+  closable?: boolean;
+  onClose?: (id: string, idOfFirstElement: string) => void;
+  onClick: (id: string) => any;
+  idOfFirstElement: string;
 }
-export declare const DefaultContentSelectionElement: (props: Props) => import("react/jsx-runtime").JSX.Element;
+export declare const DefaultContentSelectionElement: (
+  props: Props,
+) => import("react/jsx-runtime").JSX.Element;

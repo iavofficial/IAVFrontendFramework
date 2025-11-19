@@ -19,13 +19,13 @@
 import React from "react";
 
 interface Props {
-  elementId?: string;
+  dataTestId?: string;
   appLogoPlaceholder: string;
 }
 
 export const AppLogoPlaceholder = (props: Props) => {
   return (
-    <span id={props.elementId} style={{marginLeft: "20px"}}>
+    <span id={props.dataTestId} style={{marginLeft: "20px"}}>
       {props.appLogoPlaceholder}
     </span>
   );

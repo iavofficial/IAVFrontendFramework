@@ -44,7 +44,7 @@ export const SimpleNavbarTabCollapsed = (props: NestedNavbarTabProps) => {
 
   return (
     <div
-      id={props.elementId}
+      data-testid={props.dataTestId}
       ref={ref}
       onMouseEnter={() => props.setHovering(true)}
       onMouseLeave={() => props.setHovering(false)}
@@ -53,13 +53,13 @@ export const SimpleNavbarTabCollapsed = (props: NestedNavbarTabProps) => {
     >
       {props.icon ? (
         <SvgIcon
-          elementId={props.elementId ? `${props.elementId}-icon` : undefined}
+          dataTestId={props.dataTestId ? `${props.dataTestId}-icon` : undefined}
           color={props.iconColor}
           element={props.icon}
         />
       ) : (
         <DefaultIcon
-          elementId={props.elementId ? `${props.elementId}-icon` : undefined}
+          dataTestId={props.dataTestId ? `${props.dataTestId}-icon` : undefined}
           color={props.iconColor}
         />
       )}

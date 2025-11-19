@@ -39,6 +39,7 @@ interface Props {
   error?: boolean;
   helperText?: string;
   autoFocus?: boolean;
+  dataTestId?: string;
 }
 
 const TextField: React.FC<Props> = (props) => {
@@ -84,6 +85,7 @@ const TextField: React.FC<Props> = (props) => {
         {label}
       </label>
       <InputText
+        data-testid={props.dataTestId}
         id={id}
         type={type}
         name={name}

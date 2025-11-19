@@ -52,7 +52,7 @@ interface Props {
   /**
    * Id for the Header
    */
-  elementId?: string;
+  dataTestId?: string;
 }
 
 /**
@@ -69,7 +69,7 @@ const HeaderIcon: React.FC<PropsWithChildren<Props>> = (props) => {
 
   return (
     <div
-      id={elementId}
+      data-testid={elementId}
       className={classNames(
         "flex align-items-center justify-content-end",
         classes.wrapper,

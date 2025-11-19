@@ -33,15 +33,27 @@ interface AdditionalProps {
 export const TabGroupUnfolded = (
   props: GeneralGroupTabProps & AdditionalProps,
 ) => {
+  const dataTestId = props.dataTestId ?? `navBarGroup-${props.name}`;
+
   return (
     <div className="default-nav-element-unfolded default-nav-group-unfolded flex h-full w-full">
       <div className="unfolded-group-wrapper">
         {props.logo ? (
-          <SvgIcon color={props.colors.iconColor} element={props.logo} />
+          <SvgIcon
+            dataTestId={`${dataTestId}-icon`}
+            color={props.colors.iconColor}
+            element={props.logo}
+          />
         ) : (
-          <DefaultIcon color={props.colors.iconColor} />
+          <DefaultIcon
+            dataTestId={`${dataTestId}-icon`}
+            color={props.colors.iconColor}
+          />
         )}
-        <div className="unfolded-group-name-arrow-wrapper">
+        <div
+          data-testId={dataTestId}
+          className="unfolded-group-name-arrow-wrapper"
+        >
           <span id="navbar-tab-name">{props.name}</span>
           <i
             style={{

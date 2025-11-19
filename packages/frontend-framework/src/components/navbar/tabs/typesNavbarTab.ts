@@ -26,7 +26,7 @@ import {TranslationWrapperFunction} from "@iavofficial/frontend-framework-shared
  * can be groupable or not.
  */
 export interface NavbarTabProps<OptionType> {
-  elementId?: string;
+  dataTestId?: string;
   name: string | TranslationWrapperFunction;
   disabled: boolean;
   frameworkInjectedOptions: OptionType;

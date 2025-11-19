@@ -34,7 +34,7 @@ const useStyles = makeStyles(() => ({
 
 export interface Props {
   color: string;
-  elementId?: string;
+  dataTestId?: string;
 }
 
 export const DefaultIcon = (props: Props) => {
@@ -42,7 +42,7 @@ export const DefaultIcon = (props: Props) => {
 
   return (
     <i
-      id={props.elementId}
+      data-testid={props.dataTestId}
       className={classNames(classes.icon, PrimeIcons.CIRCLE)}
       color={props.color}
     />

@@ -18,7 +18,7 @@
 import React from "react";
 interface Props {
     fill: string;
-    elementId?: string;
+    dataTestId?: string;
 }
 declare const CompanyLogo: React.FC<Props>;
 export default CompanyLogo;

@@ -20,15 +20,15 @@ import React from "react";
 
 interface Props {
   fill: string;
-  elementId?: string
+  dataTestId?: string
 }
 
 const CompanyLogo: React.FC<Props> = (props) => {
-  const {fill, elementId} = props;
+  const {fill, dataTestId} = props;
 
   return (
     <svg
-      id={elementId}
+      data-testid={dataTestId}
       width="104"
       height="56"
       viewBox="0 0 104 56"

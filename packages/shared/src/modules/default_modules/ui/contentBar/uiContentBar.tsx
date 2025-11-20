@@ -12,14 +12,14 @@ import {
 import {TypedUseSelectorHook, useSelector} from "react-redux";
 import {UIStoreState} from "../../../../types/modules/ui/uiModuleInterfaces";
 import {MandatoryModuleNames} from "../../../../constants/moduleNames";
-import {useStyleMap} from "../../../module_orchestration/util/useStyleMap";
-import {calculateWidth} from "../../../module_orchestration/util/calculateWidth";
-import {ContentBarButtonElement} from "../../../module_orchestration/util/contentBarButtonElement";
 import {ColorSettingsContext} from "../../../../contexts/colorSettingsContext";
 import {
   DEFAULT_ELEMENT_SIZE,
   PADDING_GAB,
 } from "../../../../constants/constants";
+import {calculateWidth} from "../../../module_orchestration/util/calculateWidth";
+import {ContentBarButtonElement} from "../../../module_orchestration/util/contentBarButtonElement";
+import {useStyleMap} from "../../../module_orchestration/util/useStyleMap";
 
 export const UIContentBar: React.FC<UIContentBarProps> = (props) => {
   const {

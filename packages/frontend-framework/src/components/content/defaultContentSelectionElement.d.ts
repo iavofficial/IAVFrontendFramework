@@ -15,9 +15,18 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-import React from "react";
-interface Props {
-  fill: string;
+import "./contentbar.css";
+import {TranslationWrapperFunction} from "@iavofficial/frontend-framework-shared/internationalizerModule";
+export interface Props {
+  displayName: string | TranslationWrapperFunction;
+  width: number;
+  id: string;
+  selected?: boolean;
+  closable?: boolean;
+  onClose?: (id: string, idOfFirstElement: string) => void;
+  onClick: (id: string) => any;
+  idOfFirstElement: string;
 }
-declare const CompanyLogo: React.FC<Props>;
-export default CompanyLogo;
+export declare const DefaultContentSelectionElement: (
+  props: Props,
+) => import("react/jsx-runtime").JSX.Element;

@@ -1,3 +1,9 @@
+## [@iavofficial/frontend-framework-v2.0.0-dev.2](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v2.0.0-dev.1...@iavofficial/frontend-framework-v2.0.0-dev.2) (2025-11-20)
+
+### Bug Fixes
+
+* resolve assets folder imports and generation ([7ec7f7b](https://github.com/iavofficial/IAVFrontendFramework/commit/7ec7f7bce6df95bd0ce08458705bfb18090f71e8))
+
 ## [@iavofficial/frontend-framework-v2.0.0-dev.1](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v1.6.0-dev.1...@iavofficial/frontend-framework-v2.0.0-dev.1) (2025-11-13)
 
 ### ⚠ BREAKING CHANGES

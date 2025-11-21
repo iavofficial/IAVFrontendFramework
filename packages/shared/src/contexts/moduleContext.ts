@@ -17,7 +17,7 @@
  */
 
 import React, {useContext} from "react";
-import {AllDefaultModules} from "../modules/module_orchestration/moduleDefaults";
+import type {AllDefaultModules} from "../modules/module_orchestration/moduleDefaults";
 
 export type ModuleContextValues<TModules> = {
   modules: TModules;

@@ -23,7 +23,7 @@ import {ColorSettingsContext} from "../../../../../contexts/colorSettingsContext
 import {useModule} from "../../../../../contexts/moduleContext";
 import {MandatoryModuleNames} from "../../../../../constants/moduleNames";
 import {useModuleTranslation} from "../../../../hooks/useModuleTranslation";
-import {useDefaultSelector} from "../../../../module_orchestration/moduleDefaults";
+import {useSelector} from "react-redux";
 import {LangResources} from "../../../../../types/modules/internationalization/internationalizerModule";
 
 // ##############################################
@@ -91,8 +91,9 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
     const basicOptions: MenuItem[] = [];
     let notFallbackLang = false;
 
-    const activeLang = useDefaultSelector(
-      (state) => state[MandatoryModuleNames.Internationalizer].activeLang,
+    const activeLang = useSelector(
+      //@ts-ignore
+      (state: any) => state[MandatoryModuleNames.Internationalizer].activeLang,
     );
 
     if (!props.menuOptions?.hideLanguageSelection) {

@@ -26,13 +26,13 @@ import {AuthModule, AuthState} from "./auth/authenticatorModule";
 import {StoreConfigBuilder} from "../../modules/module_orchestration/storeConfigBuilder";
 import {Exact, ExactPartial} from "../util-types/exact";
 import {RestrictKeyToPrefix} from "../util-types/restrictKeyToPrefix";
-import {DefaultNonStoreModules} from "../../modules/module_orchestration/moduleDefaults";
 import {RouterModule} from "./router/routerModule";
 import {
   InternationalizerModule,
   InternationalizerState,
 } from "./internationalization/internationalizerModule";
 import {UIModuleType, UIState} from "./ui/uiModuleInterfaces";
+import type {DefaultNonStoreModules} from "../../modules/module_orchestration/moduleDefaults";
 
 export type FFStoreModules<TModulesState = unknown> = {
   [K in keyof TModulesState]: FFStoreModule<TModulesState[K]>;

@@ -26,7 +26,7 @@ import Table from "../../../common/page/utils/table";
 import { ModuleProfile } from "../../../common/page/text/module/moduleProfile";
 import { MODULE_PARAM_TABLE_COLUMNS } from "../../../common/page/text/module/moduleTableColumns";
 
-const DESCRIPTION = `This module provides the default UI integration for the framework. It wires the header, navbar, content bar and cookie banner to the global store and allows you to plug in your own visual components.`;
+const DESCRIPTION = `This module provides the default UI integration for the framework. It wires the header, navbar, content bar and cookie banner to the global store and allows you to plug in your own ui components.`;
 
 const PageUiModule: React.FC = () => {
   const CodeUiParams = (
@@ -63,35 +63,6 @@ const initialState: UIState = {
         wrapped by the framework&apos;s orchestrators.
       </Text>
       {CodeUiParams}
-      <Table
-        columns={MODULE_PARAM_TABLE_COLUMNS}
-        data={[
-          {
-            name: "UILayerHeader?",
-            type: "(props: UIHeaderProps) => React.ReactNode",
-            description:
-              "Optional custom header implementation that is rendered by the HeaderOrchestrator.",
-          },
-          {
-            name: "UILayerContentBar?",
-            type: "(props: UIContentBarProps) => React.ReactNode",
-            description:
-              "Optional custom content bar implementation that is rendered by the ContentBarOrchestrator.",
-          },
-          {
-            name: "UILayerCookieBanner?",
-            type: "(props: UICookieBannerProps) => React.ReactNode",
-            description:
-              "Optional custom cookie banner implementation that is rendered by the CookieBannerOrchestrator.",
-          },
-          {
-            name: "UILayerNavbar?",
-            type: "(props: UINavbarProps) => React.ReactNode",
-            description:
-              "Optional custom navbar implementation that is rendered by the NavbarOrchestrator.",
-          },
-        ]}
-      />
 
       <SubTitle>Behaviour</SubTitle>
       <Text>
@@ -117,7 +88,7 @@ const initialState: UIState = {
         application with the <code>GlobalDataLayer</code>.
       </Text>
 
-      <Code language="tsx">{`import {
+      <Code title={"store.ts"} language="tsx">{`import {
   createModules,
   StoreBuilder,
 } from "@iavofficial/frontend-framework/store";
@@ -154,9 +125,9 @@ export const store = new StoreBuilder(modules.storeModules)
   )
   .build();`}</Code>
 
-      <Code language="tsx">{`export const App = () => (
+      <Code title={"App.tsx"} language="tsx">{`export const App = () => (
   <GlobalDataLayer store={store} modules={modules.all}>
-    <CustomLayout />
+    <Layout />
   </GlobalDataLayer>
 );`}</Code>
     </Page>

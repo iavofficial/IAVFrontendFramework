@@ -28,11 +28,9 @@ const PageUiNavbar: React.FC = () => (
     <Title>Navbar</Title>
 
     <Text>
-      The navbar is responsible for displaying the main navigation items, legal
-      document links and the collapse/expand control. The UI module uses a
-      navbar orchestrator that wires framework state, color settings and routing
-      to a UI component. You can replace the default implementation by providing
-      your own <code>UINavbar</code> component.
+      The UI module uses a navbar orchestrator that wires framework state, color
+      settings and routing to a UI component. You can replace the default
+      implementation by providing your own <code>UINavbar</code> component.
     </Text>
 
     <SubTitle>Props</SubTitle>
@@ -63,13 +61,21 @@ const PageUiNavbar: React.FC = () => (
   arrowClassName: string;
 }`}</Code>
 
+    <SubTitle>Default implementation</SubTitle>
+    <Text>
+      The default <code>UINavbar</code> implementation renders the main
+      navigation items, optional legal links and a collapse/expand control. It
+      uses the provided color and dimension settings from the UI module and
+      keeps the collapsed state in sync with the framework store.
+    </Text>
+
     <SubTitle>Custom implementation example</SubTitle>
     <Text>
       The following example shows a navbar implementation based on Ant Design
       that can be used as a custom <code>UINavbar</code> component:
     </Text>
 
-    <Code language="tsx">{`import React from "react";
+    <Code title={"CustomNavbar.tsx"} language="tsx">{`import React from "react";
 import { Button, Layout, Space, theme, Typography } from "antd";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { UINavbarProps } from "@iavofficial/frontend-framework-shared/navbarModuleInterfaces";
@@ -144,13 +150,16 @@ const CustomNavbar: React.FC<UINavbarProps> = ({
 
 export default CustomNavbar;`}</Code>
 
-    <SubTitle>Registering the custom navbar</SubTitle>
+    <SubTitle>Registering the custom component</SubTitle>
     <Text>
       To use a custom navbar implementation, pass it to the UI module via{" "}
       <code>UILayerNavbar</code> when creating your modules:
     </Text>
 
-    <Code language="tsx">{`import { UIModule } from "@iavofficial/frontend-framework-shared/uiModule";
+    <Code
+      title={"store.ts"}
+      language="tsx"
+    >{`import { UIModule } from "@iavofficial/frontend-framework-shared/uiModule";
 import { MandatoryModuleNames } from "@iavofficial/frontend-framework/constants";
 import { createModules } from "@iavofficial/frontend-framework/store";
 

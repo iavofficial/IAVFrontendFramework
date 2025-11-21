@@ -93,7 +93,7 @@ const routes: PathRoute[] = [
   },
   {
     path: "globaldatalayer",
-    label: "04 - PageGlobalDataLayer",
+    label: "04 - GlobalDataLayer",
     element: PageGlobalDataLayer,
   },
   { path: "uilayer", label: "05 - UiLayer", element: PageUiLayer },
@@ -217,7 +217,12 @@ const helpRoutes: PathRoute[] = [
 ];
 
 const Version2_0_0 = () => {
-  const mergedRoutes = mergeRoutes(routes, modulesRoutes, helpRoutes);
+  const mergedRoutes = mergeRoutes(
+    routes,
+    modulesRoutes,
+    helpRoutes,
+    howToMigrateRoute,
+  );
 
   return (
     <>

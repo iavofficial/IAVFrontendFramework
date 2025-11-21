@@ -34,7 +34,7 @@ const PageGeneralUiModule: React.FC = () => (
     <Text>
       This page describes the general structure of a UI module. A UI module is
       responsible for orchestrating the main UI building blocks like header,
-      navbar, content bar and cookie banner, and for providing a small UI state
+      navbar, content bar and cookie banner and for providing a small UI state
       and actions to control it.
     </Text>
 
@@ -55,8 +55,7 @@ export type UIStoreState = {
     <SubTitle>Necessary components</SubTitle>
     <Text>
       A UI module has to provide a set of components that are rendered inside
-      the UI layer. Each of these components may optionally wrap a concrete UI
-      implementation that is passed via the <i>uiComponent</i> prop.
+      the UI layer.
     </Text>
     <Table
       columns={MODULE_COMPONENT_TABLE_COLUMNS}

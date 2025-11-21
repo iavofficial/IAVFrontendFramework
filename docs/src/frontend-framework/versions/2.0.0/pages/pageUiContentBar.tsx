@@ -35,7 +35,7 @@ const PageUiContentBar: React.FC = () => (
       own <code>UIContentBar</code> component.
     </Text>
 
-    <SubTitle>Styles and props</SubTitle>
+    <SubTitle>Props</SubTitle>
     <Text>
       The content bar supports a simple style mechanism via{" "}
       <code>ContentBarStyles</code> and receives its data and callbacks through{" "}
@@ -73,7 +73,7 @@ export type StylesArray<T> = T[keyof T][];`}</Code>
       element width and selection information.
     </Text>
 
-    <SubTitle>Default behavior</SubTitle>
+    <SubTitle>Default implementation</SubTitle>
     <Text>
       The default <code>UIContentBar</code> implementation:
     </Text>
@@ -93,7 +93,10 @@ export type StylesArray<T> = T[keyof T][];`}</Code>
       that can be used as a custom <code>UIContentBar</code> component:
     </Text>
 
-    <Code language="tsx">{`import React from "react";
+    <Code
+      title={"CustomContentBar.tsx"}
+      language="tsx"
+    >{`import React from "react";
 import { Button, theme } from "antd";
 import { LeftOutlined, PlusOutlined, RightOutlined } from "@ant-design/icons";
 import { UIContentBarProps } from "@iavofficial/frontend-framework-shared/contentBarModuleInterfaces";
@@ -181,13 +184,16 @@ const CustomContentBar: React.FC<UIContentBarProps> = (props) => {
 
 export default CustomContentBar;`}</Code>
 
-    <SubTitle>Registering the custom content bar</SubTitle>
+    <SubTitle>Registering the custom component</SubTitle>
     <Text>
       To use a custom content bar implementation, pass it to the UI module via{" "}
       <code>UILayerContentBar</code> when creating your modules:
     </Text>
 
-    <Code language="tsx">{`import { UIModule } from "@iavofficial/frontend-framework-shared/uiModule";
+    <Code
+      title={"store.ts"}
+      language="tsx"
+    >{`import { UIModule } from "@iavofficial/frontend-framework-shared/uiModule";
 import { MandatoryModuleNames } from "@iavofficial/frontend-framework/constants";
 import { createModules } from "@iavofficial/frontend-framework/store";
 

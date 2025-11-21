@@ -79,7 +79,7 @@ const Code: React.FC<PropsWithChildren<Props>> = (props) => {
         className={`${classes.copyButton} ${copied ? classes.copied : ""}`}
         onClick={copyToClipboard}
       >
-        {copied ? "Copied!" : "Copy Code"}
+        {copied ? "Copied!" : "Copy"}
       </button>
 
       <div className={classes.codeBlock}>

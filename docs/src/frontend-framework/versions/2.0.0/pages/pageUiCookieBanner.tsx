@@ -35,7 +35,7 @@ const PageUiCookieBanner: React.FC = () => (
       implementation.
     </Text>
 
-    <SubTitle>Required props</SubTitle>
+    <SubTitle>Props</SubTitle>
     <Text>
       Any custom cookie banner used with the UI module has to implement the
       following props interface:
@@ -51,6 +51,14 @@ const PageUiCookieBanner: React.FC = () => (
   darkMode: boolean;
 }`}</Code>
 
+    <SubTitle>Default implementation</SubTitle>
+    <Text>
+      The default cookie banner implementation renders a fixed banner at the
+      bottom of the viewport when consent has not yet been given. It uses the
+      header and message provided by the orchestrator, adapts to dark mode and
+      hides itself automatically when the user accepts.
+    </Text>
+
     <SubTitle>Custom implementation example</SubTitle>
     <Text>
       The following example shows a minimal cookie banner implementation based
@@ -58,7 +66,10 @@ const PageUiCookieBanner: React.FC = () => (
       implementation.
     </Text>
 
-    <Code language="tsx">{`import React from "react";
+    <Code
+      title={"CustomCookieBanner.tsx"}
+      language="tsx"
+    >{`import React from "react";
 import { Button, Space, Typography, theme } from "antd";
 import { UICookieBannerProps } from "@iavofficial/frontend-framework-shared/cookieBannerModuleInterfaces";
 
@@ -112,13 +123,16 @@ export const CustomCookieBanner = ({
   );
 };`}</Code>
 
-    <SubTitle>Registering the custom banner</SubTitle>
+    <SubTitle>Registering the custom component</SubTitle>
     <Text>
-      To use a custom cookie banner, pass it to the UI module via
-      <code> UILayerCookieBanner</code> when creating your modules:
+      To use a custom cookie banner, pass it to the UI module via{" "}
+      <code>UILayerCookieBanner</code> when creating your modules:
     </Text>
 
-    <Code language="tsx">{`import { UIModule } from "@iavofficial/frontend-framework-shared/uiModule";
+    <Code
+      title={"store.ts"}
+      language="tsx"
+    >{`import { UIModule } from "@iavofficial/frontend-framework-shared/uiModule";
 import { MandatoryModuleNames } from "@iavofficial/frontend-framework/constants";
 import { createModules, StoreBuilder } from "@iavofficial/frontend-framework/store";
 

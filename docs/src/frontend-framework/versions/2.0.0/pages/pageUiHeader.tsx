@@ -28,17 +28,15 @@ const PageUiHeader: React.FC = () => (
     <Title>Header</Title>
 
     <Text>
-      The header is responsible for displaying application branding, user and
-      settings menus and optional custom header elements. The UI module uses a
-      header orchestrator that wires framework options and menus to a UI
-      component. You can replace the default implementation by providing your
-      own <code>UIHeader</code> component.
+      The UI module uses a header orchestrator that wires framework options and
+      menus to a UI component. You can replace the default implementation by
+      providing your own <code>UIHeader</code> component.
     </Text>
 
-    <SubTitle>Header options and props</SubTitle>
+    <SubTitle>Props</SubTitle>
     <Text>
       The header behavior and content is configured via{" "}
-      <code>HeaderOptions</code> and <code>UIHeaderProps</code>.
+      <code>UIHeaderProps</code>.
     </Text>
 
     <Code language="typescript">{`export interface HeaderOptions {
@@ -57,6 +55,7 @@ export interface UIHeaderProps {
   userMenuOptions?: UserMenuOptions;
 }`}</Code>
 
+    <SubTitle>Default implementation</SubTitle>
     <Text>
       The header orchestrator chooses between the default implementation and an
       optional custom UI component:
@@ -72,7 +71,6 @@ export const HeaderOrchestrator = (props: HeaderOrchestratorProps) => {
   return <UI {...uiProps} />;
 };`}</Code>
 
-    <SubTitle>Default implementation (overview)</SubTitle>
     <Text>
       The default <code>UIHeader</code> implementation:
     </Text>
@@ -94,7 +92,7 @@ export const HeaderOrchestrator = (props: HeaderOrchestratorProps) => {
       component:
     </Text>
 
-    <Code language="tsx">{`import React from "react";
+    <Code title={"CustomHeader.tsx"} language="tsx">{`import React from "react";
 import { Button, Layout, Space, theme, Typography } from "antd";
 import { UIHeaderProps } from "@iavofficial/frontend-framework-shared/headerModuleInterfaces";
 
@@ -138,13 +136,16 @@ const CustomHeader = (props: UIHeaderProps) => {
 
 export default CustomHeader;`}</Code>
 
-    <SubTitle>Registering the custom header</SubTitle>
+    <SubTitle>Registering the custom component</SubTitle>
     <Text>
       To use a custom header implementation, pass it to the UI module via{" "}
       <code>UILayerHeader</code> when creating your modules:
     </Text>
 
-    <Code language="tsx">{`import { UIModule } from "@iavofficial/frontend-framework-shared/uiModule";
+    <Code
+      title={"store.ts"}
+      language="tsx"
+    >{`import { UIModule } from "@iavofficial/frontend-framework-shared/uiModule";
 import { MandatoryModuleNames } from "@iavofficial/frontend-framework/constants";
 import { createModules } from "@iavofficial/frontend-framework/store";
 

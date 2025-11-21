@@ -21,7 +21,7 @@ import {Fragment} from "react/jsx-dev-runtime";
 import {useEffect} from "react";
 import {Route, Routes, useLocation, useNavigate} from "react-router";
 import {generateHash} from "../../../../utils/hash";
-import {useDefaultSelector} from "../../../module_orchestration/moduleDefaults";
+import {useSelector} from "react-redux";
 import {BrowserRouter} from "react-router-dom";
 import {UILayerRouterProps} from "../../../../types/modules/router/routerModule";
 
@@ -61,7 +61,8 @@ interface RedirectorProps {
  * @constructor
  */
 const Redirector = (props: RedirectorProps) => {
-  const {hasAuthenticated} = useDefaultSelector((state) => state.auth);
+  //@ts-ignore
+  const {hasAuthenticated} = useSelector((state: any) => state.auth);
 
   const disableLogin = props.disableLogin;
 

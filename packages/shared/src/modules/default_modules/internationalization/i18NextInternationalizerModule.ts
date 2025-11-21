@@ -107,7 +107,8 @@ export class I18NextInternationalizer {
     this.useModuleLifecycle = () => {
       const [isInitialized, setIsInitialized] = useState(false);
       const cookiesAccepted = useCookiesAccepted();
-      const dispatch = useDispatch<ThunkDispatch<unknown, unknown, Action<string>>>();
+      const dispatch =
+        useDispatch<ThunkDispatch<unknown, unknown, Action<string>>>();
       useEffect(() => {
         this.selectActiveLang = (lang: string) => {
           i18next.changeLanguage(lang);
@@ -141,4 +142,3 @@ export class I18NextInternationalizer {
     };
   }
 }
-

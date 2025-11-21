@@ -22,7 +22,7 @@ import {MenuItem} from "./settingsMenu";
 import {useModule} from "../../../../../contexts/moduleContext";
 import {MandatoryModuleNames} from "../../../../../constants/moduleNames";
 import {useDispatch} from "react-redux";
-import type { DefaultThunkDispatch } from "../../../../../types/modules/moduleDefaultTypes";
+import type {DefaultThunkDispatch} from "../../../../../types/modules/moduleDefaultTypes";
 
 export interface Props {
   hideMenu: (e: React.KeyboardEvent) => void;

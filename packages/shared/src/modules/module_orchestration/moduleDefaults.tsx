@@ -21,13 +21,14 @@ import {MandatoryModuleNames} from "../../constants/moduleNames";
 import {DummyAuthenticator} from "../default_modules/auth/dummyAuthenticatorModule";
 import {StoreBuilder} from "./storeBuilder";
 
-import {
-  FFMandatoryStoreModules,
-} from "../../types/modules/moduleOrchestrationTypes";
+import {FFMandatoryStoreModules} from "../../types/modules/moduleOrchestrationTypes";
 import {ReactRouterRouter} from "../default_modules/router/reactRouterRouterModule";
 import {I18NextInternationalizer} from "../default_modules/internationalization/i18NextInternationalizerModule";
 import {UIModule} from "../default_modules/ui/uiModule";
-import type { DefaultRootState, DefaultThunkDispatch } from "../../types/modules/moduleDefaultTypes";
+import type {
+  DefaultRootState,
+  DefaultThunkDispatch,
+} from "../../types/modules/moduleDefaultTypes";
 
 // This object contains the default modules which can be replaced.
 export const defaultStoreModules: FFMandatoryStoreModules = {

@@ -24,7 +24,7 @@ import {generateHash} from "../../../../utils/hash";
 import {useSelector} from "react-redux";
 import {BrowserRouter} from "react-router-dom";
 import {UILayerRouterProps} from "../../../../types/modules/router/routerModule";
-import type { DefaultRootState } from "../../../../types/modules/moduleDefaultTypes";
+import type {DefaultRootState} from "../../../../types/modules/moduleDefaultTypes";
 
 export const UILayerRouter = (props: UILayerRouterProps) => {
   const enabledRoutes = props.routes.filter((route) => !route.disabled);
@@ -62,7 +62,9 @@ interface RedirectorProps {
  * @constructor
  */
 const Redirector = (props: RedirectorProps) => {
-  const {hasAuthenticated} = useSelector((state: DefaultRootState) => state.auth);
+  const {hasAuthenticated} = useSelector(
+    (state: DefaultRootState) => state.auth,
+  );
 
   const disableLogin = props.disableLogin;
 

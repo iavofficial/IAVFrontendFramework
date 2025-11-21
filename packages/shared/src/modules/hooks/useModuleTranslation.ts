@@ -19,7 +19,7 @@
 import {MandatoryModuleNames} from "../../constants/moduleNames";
 import {useModule} from "../../contexts/moduleContext";
 import type {UseTranslationHook} from "../../types/modules/internationalization/internationalizerModule";
-import type { AllDefaultModules } from "../../types/modules/moduleDefaultTypes";
+import type {AllDefaultModules} from "../../types/modules/moduleDefaultTypes";
 import type {MergeModules} from "../../types/modules/moduleOrchestrationTypes";
 import type {I18NextInternationalizer} from "../default_modules/internationalization/i18NextInternationalizerModule";
 

@@ -132,8 +132,7 @@
     "./constants.css": "./dist/css/constants.css",
     "./mainPage.css": "./dist/css/mainPage.css",
     "./framework.css": "./dist/css/framework.css",
-    "./globalColors.css": "./dist/css/globalColors.css",
-    "./contentbar.css": "./dist/components/content/contentbar.css"
+    "./globalColors.css": "./dist/css/globalColors.css"
   },
   "typesVersions": {
     "*": {

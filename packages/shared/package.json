@@ -139,7 +139,8 @@
     "./defaultContentSelectionElement": "./dist/modules/default_modules/ui/contentBar/defaultContentSelectionElement.js",
     "./determineCurrentColor": "./dist/types/modules/ui/contentBar/wrapper/determineCurrentColor.js",
     "./settingsMenu": "./dist/modules/default_modules/ui/header/components/settingsMenu.js",
-    "./userMenu": "./dist/modules/default_modules/ui/header/components/userMenu.js"
+    "./userMenu": "./dist/modules/default_modules/ui/header/components/userMenu.js",
+    "./contentbar.css": "./dist/modules/default_modules/ui/contentBar/contentbar.css"
   },
   "typesVersions": {
     "*": {

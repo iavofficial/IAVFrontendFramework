@@ -1,3 +1,9 @@
+## [@iavofficial/frontend-framework-aws-authenticator-v1.0.0-dev.3](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-aws-authenticator-v1.0.0-dev.2...@iavofficial/frontend-framework-aws-authenticator-v1.0.0-dev.3) (2025-11-21)
+
+### Bug Fixes
+
+* Fixed Re-Exports ([ecbe0ea](https://github.com/iavofficial/IAVFrontendFramework/commit/ecbe0ea3aeb5bd01b7f632628d5f2f61cf5708a6))
+
 ## [@iavofficial/frontend-framework-aws-authenticator-v1.0.0-dev.2](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-aws-authenticator-v1.0.0-dev.1...@iavofficial/frontend-framework-aws-authenticator-v1.0.0-dev.2) (2025-11-20)
 
 ## @iavofficial/frontend-framework-aws-authenticator-v1.0.0-dev.1 (2025-11-13)

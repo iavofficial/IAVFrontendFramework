@@ -52,6 +52,7 @@ import PageUiModule from "./pages/pageUiModule.tsx";
 import PageUiHeader from "./pages/pageUiHeader.tsx";
 import PageUiNavbar from "./pages/pageUiNavbar.tsx";
 import PageUiContentBar from "./pages/pageUiContentBar.tsx";
+import PageHowToMigrate from "./pages/pageHowToMigrate.tsx";
 
 const pages = import.meta.glob("./pages/*.tsx");
 
@@ -207,6 +208,10 @@ const modulesRoutes: GroupRoute[] = [
   },
 ];
 
+const howToMigrateRoute: PathRoute[] = [
+  { path: "migrate", label: "How to Migrate", element: PageHowToMigrate },
+];
+
 const helpRoutes: PathRoute[] = [
   { path: "faq", label: "FAQ", element: PageFaq },
 ];
@@ -221,6 +226,7 @@ const Version2_0_0 = () => {
         <h3>Need help?</h3>
         <NavigationMap routes={helpRoutes} />
         <BadgeHeader title={"Modules"} />
+        <NavigationMap routes={howToMigrateRoute} />
         <GroupNavigationMap groups={modulesRoutes} />
       </PageNavigation>
       <RoutesMap routes={mergedRoutes} getPages={getPages} />

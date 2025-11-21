@@ -1,3 +1,16 @@
+## [@iavofficial/frontend-framework-v2.0.0-dev.5](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v2.0.0-dev.4...@iavofficial/frontend-framework-v2.0.0-dev.5) (2025-11-21)
+
+### Bug Fixes
+
+* Fixed contentbar.css ([4597a62](https://github.com/iavofficial/IAVFrontendFramework/commit/4597a62c3e127258654495ec28f5fc8614851fd8))
+
+## [@iavofficial/frontend-framework-v2.0.0-dev.4](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v2.0.0-dev.3...@iavofficial/frontend-framework-v2.0.0-dev.4) (2025-11-21)
+
+### Bug Fixes
+
+* Fixed Re-Exports ([ecbe0ea](https://github.com/iavofficial/IAVFrontendFramework/commit/ecbe0ea3aeb5bd01b7f632628d5f2f61cf5708a6))
+* Fixed several package.json problems ([1b22940](https://github.com/iavofficial/IAVFrontendFramework/commit/1b22940ce38eefa8443f7655f0eb4c744c3ceb88))
+
 ## [@iavofficial/frontend-framework-v2.0.0-dev.3](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v2.0.0-dev.2...@iavofficial/frontend-framework-v2.0.0-dev.3) (2025-11-20)
 
 ### Bug Fixes

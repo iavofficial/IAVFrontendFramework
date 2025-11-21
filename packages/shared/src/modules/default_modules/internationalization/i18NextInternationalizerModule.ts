@@ -21,7 +21,8 @@ import {useTranslation as useTranslationI18next} from "react-i18next";
 import {useEffect, useState} from "react";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {DEFAULT_TRANSLATION_RESOURCES} from "../../../constants/defaultTranslations";
-import {useDefaultDispatch} from "../../module_orchestration/moduleDefaults";
+import {useDispatch} from "react-redux";
+import type {Action, ThunkDispatch} from "@reduxjs/toolkit";
 import {initI18nextDefault} from "./initI18nextDefault";
 import {useCookiesAccepted} from "../../../utils/cookieHooks";
 import {MandatoryModuleNames} from "../../../constants/moduleNames";
@@ -106,8 +107,8 @@ export class I18NextInternationalizer {
     this.useModuleLifecycle = () => {
       const [isInitialized, setIsInitialized] = useState(false);
       const cookiesAccepted = useCookiesAccepted();
-      const dispatch = useDefaultDispatch();
-
+      const dispatch =
+        useDispatch<ThunkDispatch<unknown, unknown, Action<string>>>();
       useEffect(() => {
         this.selectActiveLang = (lang: string) => {
           i18next.changeLanguage(lang);

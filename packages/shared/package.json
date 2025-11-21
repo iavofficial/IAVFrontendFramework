@@ -6,8 +6,8 @@
   "description": "This package provides react components, contexts, types, utils etc. for use in multiple frontend framework packages.",
   "scripts": {
     "setup": "npm i",
-    "build": "cross-env-shell \"../../scripts/unix/packages/build.sh || echo \\\"Not implemented yet.\\\"\"",
-    "build-live": "cross-env-shell \"..\\..\\scripts\\win\\build-live.bat || echo \\\"Not implemented yet.\\\"\"",
+    "build": "../../scripts/unix/packages/build.sh",
+    "build-live": "..\\..\\scripts\\win\\build-live.bat",
     "test": "jest --passWithNoTests",
     "lint": "eslint src/**/*.{js,ts,tsx}",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json}\" && prettier --write \"docs/*\"",
@@ -136,7 +136,7 @@
     "./basicContentbarWrapper": "./dist/types/modules/ui/contentBar/wrapper/basicContentbarWrapper.js",
     "./customContentbarWrapper": "./dist/types/modules/ui/contentBar/wrapper/customContentbarWrapper.js",
     "./contentbarWrapperInterface": "./dist/types/modules/ui/contentBar/wrapper/contentbarWrapperInterface.js",
-    "./defaultContentSelectionElement": "./dist/types/modules/ui/contentBar/wrapper/defaultContentSelectionElement.js",
+    "./defaultContentSelectionElement": "./dist/modules/default_modules/ui/contentBar/defaultContentSelectionElement.js",
     "./determineCurrentColor": "./dist/types/modules/ui/contentBar/wrapper/determineCurrentColor.js",
     "./settingsMenu": "./dist/modules/default_modules/ui/header/components/settingsMenu.js",
     "./userMenu": "./dist/modules/default_modules/ui/header/components/userMenu.js"
@@ -267,7 +267,7 @@
         "./dist/components/svgWrapper/companyLogo.d.ts"
       ],
       "./defaultContentSelectionElement": [
-        "./dist/types/modules/ui/contentBar/wrapper/defaultContentSelectionElement.d.ts"
+        "./dist/modules/default_modules/ui/contentBar/defaultContentSelectionElement.d.ts"
       ],
       "./determineCurrentColor": [
         "./dist/types/modules/ui/contentBar/wrapper/determineCurrentColor.d.ts"

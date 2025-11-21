@@ -6,8 +6,8 @@
   "description": "This package provides AWS authentication using AWS Cognito.",
   "scripts": {
     "setup": "npm i",
-    "build": "cross-env-shell \"../../scripts/unix/packages/build.sh || echo \\\"Not implemented yet.\\\"\"",
-    "build-live": "cross-env-shell \"..\\\\..\\\\scripts\\\\win\\\\build-live.bat || echo \\\"Not implemented yet.\\\"\"",
+    "build": "../../scripts/unix/packages/build.sh",
+    "build-live": "..\\..\\scripts\\win\\build-live.bat",
     "test": "jest --passWithNoTests",
     "lint": "eslint src/**/*.{js,ts,tsx}",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json}\" && prettier --write \"docs/*\"",

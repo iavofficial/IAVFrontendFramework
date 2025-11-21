@@ -18,7 +18,6 @@
 
 import React, {ReactElement} from "react";
 import {ContentbarWrapperInterface} from "./contentbarWrapperInterface";
-// import "@iavfrontend-framework/contentbar.css";
 import {generateHashOfLength} from "../../../../../utils/hash";
 
 export class CustomContentbarWrapper implements ContentbarWrapperInterface {

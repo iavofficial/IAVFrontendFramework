@@ -18,7 +18,6 @@
 
 import React, {useContext, useState} from "react";
 import {Tooltip} from "primereact/tooltip";
-import "./contentbar.css";
 import {generateHashOfLength} from "@iavofficial/frontend-framework-shared/hash";
 import {determineCurrentColor} from "@iavofficial/frontend-framework-shared/determineCurrentColor";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
@@ -29,6 +28,7 @@ import {
 } from "@iavofficial/frontend-framework-shared/constants";
 import {useModuleTranslation} from "@iavofficial/frontend-framework-shared/useModuleTranslation";
 import {TranslationWrapperFunction} from "@iavofficial/frontend-framework-shared/internationalizerModule";
+import "./contentbar.css";
 
 export interface Props {
   displayName: string | TranslationWrapperFunction;

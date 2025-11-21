@@ -32,7 +32,7 @@ import {
   TParamFrameworkNonStoreModulesPartial,
 } from "../../types/modules/moduleOrchestrationTypes";
 import {mergeModules} from "./util/mergeModules";
-import type {DefaultNonStoreModules} from "./moduleDefaults";
+import type {DefaultNonStoreModules} from "../../types/modules/moduleDefaultTypes";
 
 export function createModulesSeparately<
   TUserNonStoreModules extends object,

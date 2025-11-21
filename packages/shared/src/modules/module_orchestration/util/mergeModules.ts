@@ -16,13 +16,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {MergeModules} from "../../../types/modules/moduleOrchestrationTypes";
-import {
-  defaultNonStoreModules,
+import type {
   DefaultNonStoreModules,
-  defaultStoreModules,
   DefaultStoreModules,
-} from "../moduleDefaults";
+} from "../../../types/modules/moduleDefaultTypes";
+import {MergeModules} from "../../../types/modules/moduleOrchestrationTypes";
+import {defaultNonStoreModules, defaultStoreModules} from "../moduleDefaults";
 
 export const mergeModules = <
   TFrameworkStoreModules extends object,

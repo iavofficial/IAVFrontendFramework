@@ -32,7 +32,7 @@ import {
   InternationalizerState,
 } from "./internationalization/internationalizerModule";
 import {UIModuleType, UIState} from "./ui/uiModuleInterfaces";
-import type {DefaultNonStoreModules} from "../../modules/module_orchestration/moduleDefaults";
+import type {DefaultNonStoreModules} from "./moduleDefaultTypes";
 
 export type FFStoreModules<TModulesState = unknown> = {
   [K in keyof TModulesState]: FFStoreModule<TModulesState[K]>;

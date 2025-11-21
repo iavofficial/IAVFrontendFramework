@@ -108,7 +108,6 @@
     "./settingsMenu": "./dist/components/header/settingsMenu.js",
     "./userMenu": "./dist/components/header/userMenu.js",
     "./cookieBanner": "./dist/components/cookie/cookieBanner.js",
-    "./defaultContentSelectionElement": "./dist/components/content/defaultContentSelectionElement.js",
     "./makeStyles": "./dist/components/content/style_options/makeStyles.js",
     "./imprint": "./dist/components/imprint/imprintText.js",
     "./legalDocument": "./dist/components/imprint/legalDocument.js",
@@ -129,6 +128,7 @@
     "./basicContentbarWrapper": "./dist/re-exports/basicContentbarWrapper.js",
     "./contentbarWrapperInterface": "./dist/re-exports/contentbarWrapperInterface.js",
     "./componentTypeMinProps": "./dist/re-exports/componentTypeMinProps.js",
+    "./defaultContentSelectionElement": "./dist/re-exports/defaultContentSelectionElement.js",
     "./constants.css": "./dist/css/constants.css",
     "./mainPage.css": "./dist/css/mainPage.css",
     "./framework.css": "./dist/css/framework.css",
@@ -230,9 +230,6 @@
       "./cookieBanner": [
         "./dist/components/cookie/cookieBanner.d.ts"
       ],
-      "./defaultContentSelectionElement": [
-        "./dist/components/content/defaultContentSelectionElement.d.ts"
-      ],
       "./imprint": [
         "./dist/components/imprint/imprintText.d.ts"
       ],
@@ -289,6 +286,9 @@
       ],
       "./componentTypeMinProps": [
         "./dist/re-exports/componentTypeMinProps.d.ts"
+      ],
+      "./defaultContentSelectionElement": [
+        "./dist/re-exports/defaultContentSelectionElement.d.ts"
       ]
     }
   },

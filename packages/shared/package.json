@@ -136,7 +136,7 @@
     "./basicContentbarWrapper": "./dist/types/modules/ui/contentBar/wrapper/basicContentbarWrapper.js",
     "./customContentbarWrapper": "./dist/types/modules/ui/contentBar/wrapper/customContentbarWrapper.js",
     "./contentbarWrapperInterface": "./dist/types/modules/ui/contentBar/wrapper/contentbarWrapperInterface.js",
-    "./defaultContentSelectionElement": "./dist/types/modules/ui/contentBar/wrapper/defaultContentSelectionElement.js",
+    "./defaultContentSelectionElement": "./dist/modules/default_modules/ui/contentBar/defaultContentSelectionElement.js",
     "./determineCurrentColor": "./dist/types/modules/ui/contentBar/wrapper/determineCurrentColor.js",
     "./settingsMenu": "./dist/modules/default_modules/ui/header/components/settingsMenu.js",
     "./userMenu": "./dist/modules/default_modules/ui/header/components/userMenu.js"
@@ -267,7 +267,7 @@
         "./dist/components/svgWrapper/companyLogo.d.ts"
       ],
       "./defaultContentSelectionElement": [
-        "./dist/types/modules/ui/contentBar/wrapper/defaultContentSelectionElement.d.ts"
+        "./dist/modules/default_modules/ui/contentBar/defaultContentSelectionElement.d.ts"
       ],
       "./determineCurrentColor": [
         "./dist/types/modules/ui/contentBar/wrapper/determineCurrentColor.d.ts"

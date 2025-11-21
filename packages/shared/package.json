@@ -1,6 +1,6 @@
 {
   "name": "@iavofficial/frontend-framework-shared",
-  "version": "1.0.0-dev.7",
+  "version": "1.0.0-dev.8",
   "private": false,
   "license": "Apache-2.0",
   "description": "This package provides react components, contexts, types, utils etc. for use in multiple frontend framework packages.",

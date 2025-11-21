@@ -135,9 +135,10 @@ export const SimpleNavbarTab: GroupableNavbarTab = (
     name: props.name instanceof Function ? props.name(t) : props.name,
     additionalClassNames: additionalClassNames,
     iconColor: iconColor,
-    dataTestId:
+    dataTestId: (
       props.dataTestId ??
-      `navBar-${props.name instanceof Function ? props.name(t) : props.name}`,
+      `navBar-${props.name instanceof Function ? props.name(t) : props.name}`
+    ).replace(/\s+/g, ""),
   };
 
   const navbarTab = navbarCollapsed ? (

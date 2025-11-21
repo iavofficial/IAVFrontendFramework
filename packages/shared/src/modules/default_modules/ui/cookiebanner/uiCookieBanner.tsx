@@ -75,23 +75,31 @@ export const UICookieBanner: React.FC<
       closable={false}
       onHide={() => ""}
       footer={
-        <div style={{display: "flex", justifyContent: "flex-end"}}>
+        <div
+          style={{display: "flex", justifyContent: "flex-end"}}
+          data-testid="cookie-banner-footer"
+        >
           <Button
             icon="pi pi-check"
             label={acceptButtonLabel}
             onClick={onAccept}
             style={{backgroundColor: BLUE1, border: "none"}}
+            data-testid="cookie-banner-accept-button"
           />
         </div>
       }
       style={styles}
+      data-testid="cookie-banner-dialog"
     >
-      <div style={{display: "flex", alignItems: "center"}}>
+      <div
+        style={{display: "flex", alignItems: "center"}}
+        data-testid="cookie-banner-content"
+      >
         <span
           className={"pi pi-info-circle"}
           style={{marginRight: "10px", fontSize: "xx-large"}}
         />
-        <span>{message}</span>
+        <span data-testid="cookie-banner-message">{message}</span>
       </div>
     </Dialog>
   );

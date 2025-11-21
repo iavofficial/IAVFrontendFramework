@@ -1,3 +1,21 @@
+/**
+ * Copyright © 2025 IAV GmbH Ingenieurgesellschaft Auto und Verkehr, All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 import React, {
   useCallback,
   useContext,
@@ -124,6 +142,7 @@ export const UIContentBar: React.FC<UIContentBarProps> = (props) => {
         overflow: "hidden",
         ...styles,
       }}
+      data-testid="contentbar-root"
     >
       <div
         style={{
@@ -135,17 +154,23 @@ export const UIContentBar: React.FC<UIContentBarProps> = (props) => {
           justifyContent: "space-between",
           minWidth: 0,
         }}
+        data-testid="contentbar-inner"
       >
         <div
           className="flex align-items-center"
           style={{minWidth: 0, gap: PADDING_GAB}}
+          data-testid="contentbar-left-controls"
         >
           <ContentBarButtonElement
             handleOnClickEvent={handleSlideLeftEvent}
             icon="pi pi-angle-left"
             isVisible={contentWrappers.length > amountOfRenderedTabElements}
           />
-          <div className="flex" style={{minWidth: 0, gap: PADDING_GAB}}>
+          <div
+            className="flex"
+            style={{minWidth: 0, gap: PADDING_GAB}}
+            data-testid="contentbar-items"
+          >
             {contentWrappers
               .slice(
                 startRenderElements,
@@ -160,7 +185,11 @@ export const UIContentBar: React.FC<UIContentBarProps> = (props) => {
               )}
           </div>
         </div>
-        <div className="flex align-items-center" style={{gap: PADDING_GAB}}>
+        <div
+          className="flex align-items-center"
+          style={{gap: PADDING_GAB}}
+          data-testid="contentbar-right-controls"
+        >
           <ContentBarButtonElement
             handleOnClickEvent={handleOnClickAddEvent}
             icon="pi pi-plus"

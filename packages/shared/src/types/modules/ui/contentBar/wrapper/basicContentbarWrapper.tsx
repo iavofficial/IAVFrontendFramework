@@ -20,7 +20,7 @@ import React from "react";
 import {ContentbarWrapperInterface} from "./contentbarWrapperInterface";
 import {TranslationWrapperFunction} from "../../../internationalization/internationalizerModule";
 import {generateHashOfLength} from "../../../../../utils/hash";
-import { DefaultContentSelectionElement } from "../../../../../modules/default_modules/ui/contentBar/defaultContentSelectionElement";
+import {DefaultContentSelectionElement} from "../../../../../modules/default_modules/ui/contentBar/defaultContentSelectionElement";
 
 interface ConstructorArgs {
   id: string;

@@ -1,6 +1,6 @@
 {
   "name": "@iavofficial/frontend-framework",
-  "version": "2.0.0-dev.1",
+  "version": "2.0.0-dev.3",
   "private": false,
   "license": "Apache-2.0",
   "description": "This framework is the foundation of frontend applications to provide maintainability, expandability, unification and an improved developer experience.",
@@ -134,9 +134,7 @@
     "./mainPage.css": "./dist/css/mainPage.css",
     "./framework.css": "./dist/css/framework.css",
     "./globalColors.css": "./dist/css/globalColors.css",
-    "./headerIcon": "./dist/components/header/headerIcon.js",
-    "./userIcon": "./dist/assets/svg/userIcon.js",
-    "./settingsIcon": "./dist/assets/svg/settingsIcon.js"
+    "./contentbar.css": "./dist/components/content/contentbar.css"
   },
   "typesVersions": {
     "*": {
@@ -295,15 +293,6 @@
       ],
       "./contentbarWrapperInterface": [
         "./dist/re-exports/contentbarWrapperInterface.d.ts"
-      ],
-      "./headerIcon": [
-        "./dist/components/header/headerIcon.d.ts"
-      ],
-      "./userIcon": [
-        "./dist/assets/svg/userIcon.d.ts"
-      ],
-      "./settingsIcon": [
-        "./dist/assets/svg/settingsIcon.d.ts"
       ]
     }
   },

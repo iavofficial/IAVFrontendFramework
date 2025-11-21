@@ -27,8 +27,6 @@ import {
 import {AppLogoPlaceholder} from "../../../../components/appLogoPlaceholder";
 import {ColorSettingsContext} from "../../../../contexts/colorSettingsContext";
 import {ContextMenu} from "primereact/contextmenu";
-// @ts-ignore
-import CompanyLogo from "../../../../../assets/svg/companyLogo";
 
 import makeStyles from "../../../../utils/styles/makeStyles";
 import HeaderIcon from "./icon/headerIcon";
@@ -36,6 +34,7 @@ import SettingsIcon from "./icon/settingsIcon";
 import UserIcon from "./icon/userIcon";
 import {SettingsMenu} from "./components/settingsMenu";
 import {UserMenu} from "./components/userMenu";
+import {CompanyLogo} from "../../../../components/svgWrapper/companyLogo";
 
 const useStyles = makeStyles(
   ({darkMode, headerBg}: {darkMode: boolean; headerBg: string}) => ({

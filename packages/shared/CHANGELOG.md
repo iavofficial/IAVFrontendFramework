@@ -1,3 +1,11 @@
+## [@iavofficial/frontend-framework-shared-v1.0.0-dev.4](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-shared-v1.0.0-dev.3...@iavofficial/frontend-framework-shared-v1.0.0-dev.4) (2025-11-20)
+
+### Bug Fixes
+
+* **assets:** Fixed asset generation ([60e49c7](https://github.com/iavofficial/IAVFrontendFramework/commit/60e49c73aa0ff7149f05f9ec0a474a626ab7a4a6))
+
+## [@iavofficial/frontend-framework-shared-v1.0.0-dev.3](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-shared-v1.0.0-dev.2...@iavofficial/frontend-framework-shared-v1.0.0-dev.3) (2025-11-20)
+
 ## [@iavofficial/frontend-framework-shared-v1.0.0-dev.2](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-shared-v1.0.0-dev.1...@iavofficial/frontend-framework-shared-v1.0.0-dev.2) (2025-11-13)
 
 ### ⚠ BREAKING CHANGES

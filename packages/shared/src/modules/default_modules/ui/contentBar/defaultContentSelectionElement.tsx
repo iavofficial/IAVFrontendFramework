@@ -18,16 +18,16 @@
 
 import React, {useContext, useState} from "react";
 import {Tooltip} from "primereact/tooltip";
-import {generateHashOfLength} from "@iavofficial/frontend-framework-shared/hash";
-import {determineCurrentColor} from "@iavofficial/frontend-framework-shared/determineCurrentColor";
-import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
+import {useModuleTranslation} from "../../../hooks/useModuleTranslation";
+import {TranslationWrapperFunction} from "../../../../types/modules/internationalization/internationalizerModule";
+import {ColorSettingsContext} from "../../../../contexts/colorSettingsContext";
+import {determineCurrentColor} from "../../../../types/modules/ui/contentBar/wrapper/determineCurrentColor";
 import {
   DEFAULT_ELEMENT_SIZE,
   GREY5,
   WHITE,
-} from "@iavofficial/frontend-framework-shared/constants";
-import {useModuleTranslation} from "@iavofficial/frontend-framework-shared/useModuleTranslation";
-import {TranslationWrapperFunction} from "@iavofficial/frontend-framework-shared/internationalizerModule";
+} from "../../../../constants/constants";
+import {generateHashOfLength} from "../../../../utils/hash";
 import "./contentbar.css";
 
 export interface Props {

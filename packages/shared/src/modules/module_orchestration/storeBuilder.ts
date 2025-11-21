@@ -37,7 +37,7 @@ import {
 } from "../../types/modules/moduleOrchestrationTypes";
 import {StoreConfig, StoreConfigBuilder} from "./storeConfigBuilder";
 import {transformModulesToProcessorMap} from "./util/transformModulesToProcessorMap";
-import type {DefaultNonStoreModules} from "./moduleDefaults";
+import type { DefaultNonStoreModules } from "../../types/modules/moduleDefaultTypes";
 
 export class StoreBuilder<
   TFrameworkStoreModules extends

@@ -22,6 +22,7 @@ import {MenuItem} from "@iavofficial/frontend-framework-shared/settingsMenu";
 import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
 import { useDispatch } from "react-redux";
+import type { DefaultThunkDispatch } from "@iavofficial/frontend-framework-shared/moduleDefaultTypes";
 
 export interface Props {
   hideMenu: (e: React.KeyboardEvent) => void;
@@ -37,7 +38,7 @@ export interface UserMenuOptions {
 export const UserMenu = React.forwardRef<ContextMenu, Props>((props, ref) => {
   const authModule = useModule(MandatoryModuleNames.Authenticator);
 
-  const dispatch = useDispatch();
+  const dispatch: DefaultThunkDispatch = useDispatch();
 
   const basicOptions: MenuItem[] = [];
 
@@ -46,7 +47,6 @@ export const UserMenu = React.forwardRef<ContextMenu, Props>((props, ref) => {
       label: "Logout",
       icon: "pi pi-sign-out",
       command: () => {
-        // @ts-ignore
         dispatch(authModule.logout());
       },
     });

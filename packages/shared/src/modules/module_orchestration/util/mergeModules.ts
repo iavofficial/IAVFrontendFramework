@@ -16,12 +16,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import type { DefaultNonStoreModules, DefaultStoreModules } from "../../../types/modules/moduleDefaultTypes";
 import {MergeModules} from "../../../types/modules/moduleOrchestrationTypes";
 import {
   defaultNonStoreModules,
-  DefaultNonStoreModules,
   defaultStoreModules,
-  DefaultStoreModules,
 } from "../moduleDefaults";
 
 export const mergeModules = <

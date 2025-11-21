@@ -25,6 +25,7 @@ import {MandatoryModuleNames} from "../../../../../constants/moduleNames";
 import {useModuleTranslation} from "../../../../hooks/useModuleTranslation";
 import {useSelector} from "react-redux";
 import {LangResources} from "../../../../../types/modules/internationalization/internationalizerModule";
+import type { DefaultRootState } from "../../../../../types/modules/moduleDefaultTypes";
 
 // ##############################################
 // Notice: The enclosed imports are copied from 'primereact/menuitem/MenuItem' as the path could not be resolved by the gitlab builder
@@ -92,8 +93,7 @@ export const SettingsMenu = React.forwardRef<ContextMenu, Props>(
     let notFallbackLang = false;
 
     const activeLang = useSelector(
-      //@ts-ignore
-      (state: any) => state[MandatoryModuleNames.Internationalizer].activeLang,
+      (state: DefaultRootState) => state[MandatoryModuleNames.Internationalizer].activeLang,
     );
 
     if (!props.menuOptions?.hideLanguageSelection) {

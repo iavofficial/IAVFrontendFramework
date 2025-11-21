@@ -21,7 +21,7 @@ import {ContextMenu} from "primereact/contextmenu";
 import {MenuItem} from "@iavofficial/frontend-framework-shared/settingsMenu";
 import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
-import { useDispatch } from "react-redux";
+import {useDispatch} from "react-redux";
 
 export interface Props {
   hideMenu: (e: React.KeyboardEvent) => void;

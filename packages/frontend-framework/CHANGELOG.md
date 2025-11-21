@@ -1,3 +1,9 @@
+## [@iavofficial/frontend-framework-v2.0.0-dev.5](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v2.0.0-dev.4...@iavofficial/frontend-framework-v2.0.0-dev.5) (2025-11-21)
+
+### Bug Fixes
+
+* Fixed contentbar.css ([4597a62](https://github.com/iavofficial/IAVFrontendFramework/commit/4597a62c3e127258654495ec28f5fc8614851fd8))
+
 ## [@iavofficial/frontend-framework-v2.0.0-dev.4](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v2.0.0-dev.3...@iavofficial/frontend-framework-v2.0.0-dev.4) (2025-11-21)
 
 ### Bug Fixes

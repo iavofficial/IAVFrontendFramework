@@ -46,8 +46,13 @@ import PageI18nextInternationalizer from "./pages/pageI18nextInternationalizer.t
 import PageGeneralInternationalizerModule from "./pages/pageGeneralInternationalizerModule.tsx";
 import { SearchHeader } from "../../common/header/searchHeaders.tsx";
 import BadgeHeader from "../../common/drawer/badge/badgeHeader.tsx";
-import PageGeneralCookieBannerModule from "./pages/pageGeneralCookieBannerModule.tsx";
-import PageDefaultCookieBanner from "./pages/pageDefaultCookieBanner";
+import PageGeneralUiModule from "./pages/pageGeneralUiModule.tsx";
+import PageUiCookieBanner from "./pages/pageUiCookieBanner.tsx";
+import PageUiModule from "./pages/pageUiModule.tsx";
+import PageUiHeader from "./pages/pageUiHeader.tsx";
+import PageUiNavbar from "./pages/pageUiNavbar.tsx";
+import PageUiContentBar from "./pages/pageUiContentBar.tsx";
+import PageHowToMigrate from "./pages/pageHowToMigrate.tsx";
 
 const pages = import.meta.glob("./pages/*.tsx");
 
@@ -88,7 +93,7 @@ const routes: PathRoute[] = [
   },
   {
     path: "globaldatalayer",
-    label: "04 - PageGlobalDataLayer",
+    label: "04 - GlobalDataLayer",
     element: PageGlobalDataLayer,
   },
   { path: "uilayer", label: "05 - UiLayer", element: PageUiLayer },
@@ -167,20 +172,44 @@ const modulesRoutes: GroupRoute[] = [
     ],
   },
   {
-    title: "Cookie Banner",
+    title: "UI",
     routes: [
       {
-        path: "general-cookie-banner-module",
-        label: "General cookie banner module",
-        element: PageGeneralCookieBannerModule,
+        path: "general-ui-module",
+        label: "General ui module",
+        element: PageGeneralUiModule,
       },
       {
-        path: "default-cookie-banner",
-        label: "DefaultCookieBanner",
-        element: PageDefaultCookieBanner,
+        path: "ui-module",
+        label: "Ui module",
+        element: PageUiModule,
+      },
+      {
+        path: "ui-header",
+        label: "Header",
+        element: PageUiHeader,
+      },
+      {
+        path: "ui-navbar",
+        label: "Navbar",
+        element: PageUiNavbar,
+      },
+      {
+        path: "ui-cookie-banner",
+        label: "Cookie banner",
+        element: PageUiCookieBanner,
+      },
+      {
+        path: "ui-content-bar",
+        label: "Content bar",
+        element: PageUiContentBar,
       },
     ],
   },
+];
+
+const howToMigrateRoute: PathRoute[] = [
+  { path: "migrate", label: "How to Migrate", element: PageHowToMigrate },
 ];
 
 const helpRoutes: PathRoute[] = [
@@ -188,7 +217,12 @@ const helpRoutes: PathRoute[] = [
 ];
 
 const Version2_0_0 = () => {
-  const mergedRoutes = mergeRoutes(routes, modulesRoutes, helpRoutes);
+  const mergedRoutes = mergeRoutes(
+    routes,
+    modulesRoutes,
+    helpRoutes,
+    howToMigrateRoute,
+  );
 
   return (
     <>
@@ -197,6 +231,7 @@ const Version2_0_0 = () => {
         <h3>Need help?</h3>
         <NavigationMap routes={helpRoutes} />
         <BadgeHeader title={"Modules"} />
+        <NavigationMap routes={howToMigrateRoute} />
         <GroupNavigationMap groups={modulesRoutes} />
       </PageNavigation>
       <RoutesMap routes={mergedRoutes} getPages={getPages} />

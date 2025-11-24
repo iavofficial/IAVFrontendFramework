@@ -1,3 +1,15 @@
+## [@iavofficial/frontend-framework-v2.0.0-dev.7](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v2.0.0-dev.6...@iavofficial/frontend-framework-v2.0.0-dev.7) (2025-11-21)
+
+### Bug Fixes
+
+* Fixed imports for defaultContentSelectionElement. Fixed types regarding cyclic dependencies. ([738f3a6](https://github.com/iavofficial/IAVFrontendFramework/commit/738f3a65b650d5d4a2185a70168de63ef0b7808f))
+
+## [@iavofficial/frontend-framework-v2.0.0-dev.6](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v2.0.0-dev.5...@iavofficial/frontend-framework-v2.0.0-dev.6) (2025-11-21)
+
+### Bug Fixes
+
+* Fixed circular dependency ([2a2fd8e](https://github.com/iavofficial/IAVFrontendFramework/commit/2a2fd8e09439a995b3c7a5f16f651961d4b55308))
+
 ## [@iavofficial/frontend-framework-v2.0.0-dev.5](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v2.0.0-dev.4...@iavofficial/frontend-framework-v2.0.0-dev.5) (2025-11-21)
 
 ### Bug Fixes

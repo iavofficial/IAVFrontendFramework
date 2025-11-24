@@ -36,8 +36,8 @@ import {
   TParamUserStoreModules,
 } from "../../types/modules/moduleOrchestrationTypes";
 import {StoreConfig, StoreConfigBuilder} from "./storeConfigBuilder";
-import {DefaultNonStoreModules} from "./moduleDefaults";
 import {transformModulesToProcessorMap} from "./util/transformModulesToProcessorMap";
+import type {DefaultNonStoreModules} from "../../types/modules/moduleDefaultTypes";
 
 export class StoreBuilder<
   TFrameworkStoreModules extends

@@ -20,8 +20,9 @@ import React from "react";
 import {ContextMenu} from "primereact/contextmenu";
 import {MenuItem} from "@iavofficial/frontend-framework-shared/settingsMenu";
 import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
-import {useDefaultDispatch} from "@iavofficial/frontend-framework-shared/moduleDefaults";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
+import {useDispatch} from "react-redux";
+import type {DefaultThunkDispatch} from "@iavofficial/frontend-framework-shared/moduleDefaultTypes";
 
 export interface Props {
   hideMenu: (e: React.KeyboardEvent) => void;
@@ -37,7 +38,7 @@ export interface UserMenuOptions {
 export const UserMenu = React.forwardRef<ContextMenu, Props>((props, ref) => {
   const authModule = useModule(MandatoryModuleNames.Authenticator);
 
-  const dispatch = useDefaultDispatch();
+  const dispatch: DefaultThunkDispatch = useDispatch();
 
   const basicOptions: MenuItem[] = [];
 

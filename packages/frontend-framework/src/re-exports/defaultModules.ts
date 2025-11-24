@@ -19,3 +19,4 @@
 export * from "@iavofficial/frontend-framework-shared/dummyAuthenticatorModule";
 export * from "@iavofficial/frontend-framework-shared/reactRouterRouterModule";
 export * from "@iavofficial/frontend-framework-shared/i18NextInternationalizerModule";
+export * from "@iavofficial/frontend-framework-shared/uiModule";

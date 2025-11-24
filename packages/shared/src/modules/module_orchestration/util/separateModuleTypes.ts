@@ -17,11 +17,8 @@
  */
 
 import {USER_MODULES_PREFIX} from "../../../constants/moduleNames";
-import {
-  defaultNonStoreModules,
-  defaultStoreModules,
-  DefaultStoreModules,
-} from "../moduleDefaults";
+import {defaultNonStoreModules, defaultStoreModules} from "../moduleDefaults";
+import type {DefaultStoreModules} from "../../../types/modules/moduleDefaultTypes";
 
 type WithoutSlice<T> = {
   [K in keyof T as T[K] extends {slice: any} ? never : K]: T[K];

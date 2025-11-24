@@ -1,6 +1,6 @@
 {
   "name": "@iavofficial/frontend-framework-shared",
-  "version": "1.0.0-dev.7",
+  "version": "1.0.0-dev.9",
   "private": false,
   "license": "Apache-2.0",
   "description": "This package provides react components, contexts, types, utils etc. for use in multiple frontend framework packages.",
@@ -90,6 +90,7 @@
     "./defaultTranslations": "./dist/constants/defaultTranslations.js",
     "./generalModule": "./dist/types/modules/generalModule.js",
     "./moduleDefaults": "./dist/modules/module_orchestration/moduleDefaults.js",
+    "./moduleDefaultTypes": "./dist/types/modules/moduleDefaultTypes.js",
     "./moduleOrchestrationTypes": "./dist/types/modules/moduleOrchestrationTypes.js",
     "./createModules": "./dist/modules/module_orchestration/createModules.js",
     "./createModulesSeparately": "./dist/modules/module_orchestration/createModulesSeparately.js",
@@ -170,6 +171,9 @@
       ],
       "./moduleDefaults": [
         "./dist/modules/module_orchestration/moduleDefaults.d.ts"
+      ],
+      "./moduleDefaultTypes": [
+        "./dist/types/modules/moduleDefaultTypes.d.ts"
       ],
       "./moduleOrchestrationTypes": [
         "./dist/types/modules/moduleOrchestrationTypes.d.ts"

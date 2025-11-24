@@ -6,7 +6,7 @@
   "description": "This package provides AWS authentication using AWS Cognito.",
   "scripts": {
     "setup": "npm i",
-    "build": "../../scripts/unix/packages/build.sh",
+    "build": "sh ../../scripts/unix/packages/build.sh",
     "build-live": "..\\..\\scripts\\win\\build-live.bat",
     "test": "jest --passWithNoTests",
     "lint": "eslint src/**/*.{js,ts,tsx}",

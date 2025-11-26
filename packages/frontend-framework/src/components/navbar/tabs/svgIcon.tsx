@@ -21,11 +21,17 @@ import React, {ReactNode} from "react";
 export interface Props {
   element: ReactNode;
   color: string;
+  dataTestId?: string;
 }
 
 export const SvgIcon = (props: Props) => {
   return (
-    <svg width={"24px"} height="24px" fill={props.color}>
+    <svg
+      data-testid={props.dataTestId}
+      width={"24px"}
+      height="24px"
+      fill={props.color}
+    >
       {props.element}
     </svg>
   );

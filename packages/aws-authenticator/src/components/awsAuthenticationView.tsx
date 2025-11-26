@@ -218,6 +218,7 @@ export const AwsAuthenticationView = <
         className={"flex flex-column"}
       >
         <label
+          id={"email-label"}
           style={{
             fontWeight: "normal",
             marginBottom: "2px",
@@ -229,6 +230,7 @@ export const AwsAuthenticationView = <
           {t({key: "Email_address"})}
         </label>
         <input
+          id={"email-input"}
           value={email.valueOf()}
           onChange={(ev) => setEmail(ev.target.value)}
           name="email"
@@ -243,6 +245,7 @@ export const AwsAuthenticationView = <
           }}
         />
         <label
+          id={"password-label"}
           style={{
             fontWeight: "normal",
             marginBottom: "2px",
@@ -254,6 +257,7 @@ export const AwsAuthenticationView = <
           {t({key: "Password"})}
         </label>
         <input
+          id={"password-input"}
           value={password.valueOf()}
           onChange={(ev) => setPassword(ev.target.value)}
           name="password"

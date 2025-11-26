@@ -31,6 +31,7 @@ export const SimpleNavbarTabUnfolded = (props: NestedNavbarTabProps) => {
 
   return (
     <div
+      data-testid={props.dataTestId}
       className={className}
       style={props.style}
       onMouseEnter={() => props.setHovering(true)}
@@ -38,9 +39,20 @@ export const SimpleNavbarTabUnfolded = (props: NestedNavbarTabProps) => {
     >
       <div className="flex align-items-center">
         {props.icon ? (
-          <SvgIcon color={props.iconColor} element={props.icon} />
+          <SvgIcon
+            dataTestId={
+              props.dataTestId ? `${props.dataTestId}-icon` : undefined
+            }
+            color={props.iconColor}
+            element={props.icon}
+          />
         ) : (
-          <DefaultIcon color={props.iconColor} />
+          <DefaultIcon
+            dataTestId={
+              props.dataTestId ? `${props.dataTestId}-icon` : undefined
+            }
+            color={props.iconColor}
+          />
         )}
         <span id="navbar-tab-name">{props.name}</span>
       </div>

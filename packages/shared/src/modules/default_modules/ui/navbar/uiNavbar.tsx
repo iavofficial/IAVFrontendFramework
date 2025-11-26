@@ -31,8 +31,12 @@ export const UINavbar: React.FC<UINavbarProps> = (props) => {
     : `0px ${props.dims.paddingUnfolded}px`;
 
   return (
-    <div className="h-full" style={{backgroundColor: props.colors.navbarBg}}>
-      <div id="navbar" className="h-full">
+    <div
+      className="h-full"
+      style={{backgroundColor: props.colors.navbarBg}}
+      data-testid="navbar-root"
+    >
+      <div id="navbar" className="h-full" data-testid="navbar-container">
         <SimpleBar
           className="custom-scrollbar"
           style={{
@@ -59,6 +63,7 @@ export const UINavbar: React.FC<UINavbarProps> = (props) => {
               ? {flexDirection: "column", width: "44px", gap: "10px"}
               : {}
           }
+          data-testid="navbar-bottom-wrapper"
         >
           {!!props.legalLinks?.length && (
             <div
@@ -68,6 +73,7 @@ export const UINavbar: React.FC<UINavbarProps> = (props) => {
                 writingMode: props.collapsed ? "sideways-lr" : "horizontal-tb",
                 paddingLeft: props.collapsed ? "0px" : "12px",
               }}
+              data-testid="navbar-legal-links"
             >
               {props.legalLinks}
             </div>
@@ -85,6 +91,7 @@ export const UINavbar: React.FC<UINavbarProps> = (props) => {
                   : `0px ${props.dims.paddingGab}px 0px 0px`,
               }}
               className={props.arrowClassName}
+              data-testid="navbar-collapse-toggle"
             />
           )}
         </div>

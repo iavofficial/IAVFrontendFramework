@@ -78,6 +78,13 @@ export const DefaultContentSelectionElement = (props: Props) => {
       ? props.displayName
       : props.displayName(t);
 
+  const normalizedNameForTestId = name
+    .trim()
+    .replace(/\s+/g, "-")
+    .toLowerCase();
+
+  const tabTestId = `contentbar-tab-${normalizedNameForTestId}`;
+
   const tabStyle = {
     cursor: props.selected ? "default" : "pointer",
     backgroundColor: determineCurrentColor(tabState, {
@@ -131,8 +138,9 @@ export const DefaultContentSelectionElement = (props: Props) => {
         onMouseEnter={() => setHovering(true)}
         onMouseLeave={() => setHovering(false)}
         onClick={handleOnClickEvent}
+        data-testid={tabTestId}
       >
-        {props.displayName.length >= 20 ? (
+        {name.length >= 20 ? (
           <div
             style={{
               width: "100%",
@@ -160,6 +168,7 @@ export const DefaultContentSelectionElement = (props: Props) => {
               onClick={(event) => handleOnCloseEvent(event)}
               style={closingIconStyle}
               className="pi pi-times tabelements-only"
+              data-testid={`${tabTestId}-close`}
             />
           </div>
         ) : (

@@ -49,6 +49,10 @@ interface Props {
    * Callback triggered when a key is pressed.
    */
   onKeyDown?: (event: React.KeyboardEvent) => void;
+  /**
+   * Id for the Header
+   */
+  dataTestId?: string;
 }
 
 /**
@@ -59,12 +63,13 @@ interface Props {
  * for icon-based headers.
  */
 const HeaderIcon: React.FC<PropsWithChildren<Props>> = (props) => {
-  const {onClick, onKeyDown, style, children, className} = props;
+  const {onClick, onKeyDown, style, children, className, elementId} = props;
 
   const {classes} = useStyles();
 
   return (
     <div
+      data-testid={elementId}
       className={classNames(
         "flex align-items-center justify-content-end",
         classes.wrapper,

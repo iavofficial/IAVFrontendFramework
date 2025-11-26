@@ -188,8 +188,10 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
           margin: "auto",
           backgroundColor: loginFormBackgroundColor,
         }}
+        data-testid="auth-container"
       >
         <div>{header(props)}</div>
+
         <div
           className="flex flex-column justify-content-center align-items-center"
           style={{marginBottom: "30px"}}
@@ -203,6 +205,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
             ) : (
               <>
                 <i
+                  data-testid="auth-theme-toggle"
                   onClick={() =>
                     colorSettingsContext?.setDarkmode(
                       !colorSettingsContext.darkmode,
@@ -221,6 +224,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
             {!props.hideLanguageSelection && (
               <Dropdown
                 id="change-language-dropdown"
+                data-testid="auth-language-dropdown"
                 style={{
                   width: "160px",
                   backgroundColor: inputFieldBackgroundColor,
@@ -247,12 +251,14 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
               height: "100%",
             }}
             onSubmit={submit}
+            data-testid="auth-form"
           >
             <div
               style={{margin: "40px 24px 0px 24px"}}
               className={"flex flex-column"}
             >
               <TextField
+                dataTestId="auth-email-input"
                 style={{
                   marginBottom: "30px",
                   backgroundColor: inputFieldBackgroundColor,
@@ -266,7 +272,9 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                 value={email.valueOf()}
                 onChange={(event) => setEmail(event.target.value)}
               />
+
               <TextField
+                dataTestId="auth-password-input"
                 label={t({key: "Password"})}
                 id="password"
                 name="password"
@@ -277,12 +285,14 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                 onChange={(event) => setPassword(event.target.value)}
                 helperText={passwordErrorMessage || t({key: "wrong_password"})}
               />
-              <div>
+
+              <div data-testid="auth-submit-button">
                 <LoginButtonWithSpinner isLoading={isLoading} />
               </div>
             </div>
           </form>
         </div>
+
         <div
           className="flex"
           style={{
@@ -324,6 +334,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                       style={{color: legalLinkColor, fontSize: "12px"}}
                       to={document.path}
                       target="_blank"
+                      data-testid={`auth-legal-${document.path}`}
                     >
                       {t({key: document.titleTranslationKey})}
                     </Link>

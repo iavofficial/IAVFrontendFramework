@@ -99,7 +99,10 @@ export const UIHeader: React.FC<UIHeaderProps> = (props) => {
       className={classes.companyLogo}
       style={{display: props.headerOptions?.hideRight ? "none" : "flex"}}
     >
-      <CompanyLogo fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE} />
+      <CompanyLogo
+        dataTestId={"company-logo"}
+        fill={colorSettingsContext?.darkmode ? BLUE3 : WHITE}
+      />
     </div>
   );
 
@@ -121,6 +124,7 @@ export const UIHeader: React.FC<UIHeaderProps> = (props) => {
           props.headerOptions.reactElementLeft
         ) : (
           <AppLogoPlaceholder
+            dataTestId={"app-logo-placeholder"}
             appLogoPlaceholder={APPLICATION_LOGO_PLACEHOLDER}
           />
         )}
@@ -144,6 +148,7 @@ export const UIHeader: React.FC<UIHeaderProps> = (props) => {
           ))}
 
           <HeaderIcon
+            dataTestId="header-settings-icon"
             className={classes.icon}
             onClick={(e: any) => menuRef.current?.show(e)}
             onKeyDown={hideSettingsMenu}
@@ -152,6 +157,7 @@ export const UIHeader: React.FC<UIHeaderProps> = (props) => {
           </HeaderIcon>
 
           <HeaderIcon
+            dataTestId="header-user-icon"
             className={classes.iconUser}
             onClick={(e: any) => userRef.current?.show(e)}
             onKeyDown={hideUserMenu}

@@ -1,13 +1,13 @@
 {
   "name": "@iavofficial/frontend-framework",
-  "version": "2.0.0-dev.3",
+  "version": "2.0.0-dev.7",
   "private": false,
   "license": "Apache-2.0",
   "description": "This framework is the foundation of frontend applications to provide maintainability, expandability, unification and an improved developer experience.",
   "scripts": {
     "setup": "npm i",
-    "build": "cross-env-shell \"../../scripts/unix/packages/build.sh || echo \\\"Not implemented yet.\\\"\"",
-    "build-live": "cross-env-shell \"..\\\\..\\\\scripts\\\\win\\\\build-live.bat || echo \\\"Not implemented yet.\\\"\"",
+    "build": "sh ../../scripts/unix/packages/build.sh",
+    "build-live": "..\\..\\scripts\\win\\build-live.bat",
     "test": "jest --passWithNoTests",
     "lint": "eslint src/**/*.{js,ts,tsx}",
     "release": "npx semantic-release",
@@ -108,7 +108,6 @@
     "./settingsMenu": "./dist/components/header/settingsMenu.js",
     "./userMenu": "./dist/components/header/userMenu.js",
     "./cookieBanner": "./dist/components/cookie/cookieBanner.js",
-    "./defaultContentSelectionElement": "./dist/components/content/defaultContentSelectionElement.js",
     "./makeStyles": "./dist/components/content/style_options/makeStyles.js",
     "./imprint": "./dist/components/imprint/imprintText.js",
     "./legalDocument": "./dist/components/imprint/legalDocument.js",
@@ -124,17 +123,16 @@
     "./defaultModules": "./dist/re-exports/defaultModules.js",
     "./reExportedTypes": "./dist/re-exports/reExportedTypes.js",
     "./cookieHooks": "./dist/re-exports/cookieHooks.js",
-    "./useModuleTranslation": "./dist/re-exports/useModuleTranslation.js",
     "./basicContentWrapper": "./dist/re-exports/basicContentWrapper.js",
-    "./contentWrapperGeneralization": "./dist/re-exports/contentWrapperGeneralization.js",
     "./customContentbarWrapper": "./dist/re-exports/customContentbarWrapper.js",
     "./basicContentbarWrapper": "./dist/re-exports/basicContentbarWrapper.js",
     "./contentbarWrapperInterface": "./dist/re-exports/contentbarWrapperInterface.js",
+    "./componentTypeMinProps": "./dist/re-exports/componentTypeMinProps.js",
+    "./defaultContentSelectionElement": "./dist/re-exports/defaultContentSelectionElement.js",
     "./constants.css": "./dist/css/constants.css",
     "./mainPage.css": "./dist/css/mainPage.css",
     "./framework.css": "./dist/css/framework.css",
-    "./globalColors.css": "./dist/css/globalColors.css",
-    "./contentbar.css": "./dist/components/content/contentbar.css"
+    "./globalColors.css": "./dist/css/globalColors.css"
   },
   "typesVersions": {
     "*": {
@@ -161,9 +159,6 @@
       ],
       "./group": [
         "./dist/components/navbar/wrappers/groupContentWrapper.d.ts"
-      ],
-      "./contentWrapperGeneralization": [
-        "./dist/re-exports/contentWrapperGeneralization.d.ts"
       ],
       "./simpleNavbarTab": [
         "./dist/components/navbar/tabs/simpleNavbarTab/simpleNavbarTab.d.ts"
@@ -234,9 +229,6 @@
       "./cookieBanner": [
         "./dist/components/cookie/cookieBanner.d.ts"
       ],
-      "./defaultContentSelectionElement": [
-        "./dist/components/content/defaultContentSelectionElement.d.ts"
-      ],
       "./imprint": [
         "./dist/components/imprint/imprintText.d.ts"
       ],
@@ -282,9 +274,6 @@
       "./cookieHooks": [
         "./dist/re-exports/cookieHooks.d.ts"
       ],
-      "./useModuleTranslation": [
-        "./dist/re-exports/useModuleTranslation.d.ts"
-      ],
       "./customContentbarWrapper": [
         "./dist/re-exports/customContentbarWrapper.d.ts"
       ],
@@ -293,6 +282,12 @@
       ],
       "./contentbarWrapperInterface": [
         "./dist/re-exports/contentbarWrapperInterface.d.ts"
+      ],
+      "./componentTypeMinProps": [
+        "./dist/re-exports/componentTypeMinProps.d.ts"
+      ],
+      "./defaultContentSelectionElement": [
+        "./dist/re-exports/defaultContentSelectionElement.d.ts"
       ]
     }
   },

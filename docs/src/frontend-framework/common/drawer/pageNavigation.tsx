@@ -17,7 +17,8 @@
  */
 
 import { makeStyles } from "../../../util/makeStyles.tsx";
-import { PropsWithChildren } from "react";
+import React, { PropsWithChildren } from "react";
+import { WHITE } from "../../../constants.ts";
 
 const useStyles = makeStyles(() => ({
   drawer: {
@@ -26,7 +27,7 @@ const useStyles = makeStyles(() => ({
     left: "0",
     width: "200px",
     height: "calc(100vh - 91px)",
-    backgroundColor: "#ffffff",
+    backgroundColor: WHITE,
     borderRight: "1px solid lightgray",
     zIndex: 1000,
     padding: "20px",

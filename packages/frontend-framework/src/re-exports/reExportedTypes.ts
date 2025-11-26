@@ -25,3 +25,5 @@ export * from "@iavofficial/frontend-framework-shared/authenticatorModule";
 export * from "@iavofficial/frontend-framework-shared/routerModule";
 
 export * from "@iavofficial/frontend-framework-shared/internationalizerModule";
+
+export * from "@iavofficial/frontend-framework-shared/moduleDefaultTypes";

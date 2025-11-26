@@ -18,10 +18,10 @@
 
 import {MandatoryModuleNames} from "../../constants/moduleNames";
 import {useModule} from "../../contexts/moduleContext";
-import {UseTranslationHook} from "../../types/modules/internationalization/internationalizerModule";
-import {MergeModules} from "../../types/modules/moduleOrchestrationTypes";
-import {I18NextInternationalizer} from "../default_modules/internationalization/i18NextInternationalizerModule";
-import {AllDefaultModules} from "../module_orchestration/moduleDefaults";
+import type {UseTranslationHook} from "../../types/modules/internationalization/internationalizerModule";
+import type {AllDefaultModules} from "../../types/modules/moduleDefaultTypes";
+import type {MergeModules} from "../../types/modules/moduleOrchestrationTypes";
+import type {I18NextInternationalizer} from "../default_modules/internationalization/i18NextInternationalizerModule";
 
 export const useModuleTranslation = <
   TInternationalizerModule extends {

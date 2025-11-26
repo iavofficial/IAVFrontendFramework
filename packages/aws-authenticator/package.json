@@ -1,13 +1,13 @@
 {
   "name": "@iavofficial/frontend-framework-aws-authenticator",
-  "version": "1.0.0-dev.2",
+  "version": "1.0.0-dev.3",
   "private": false,
   "license": "Apache-2.0",
   "description": "This package provides AWS authentication using AWS Cognito.",
   "scripts": {
     "setup": "npm i",
-    "build": "cross-env-shell \"../../scripts/unix/packages/build.sh || echo \\\"Not implemented yet.\\\"\"",
-    "build-live": "cross-env-shell \"..\\\\..\\\\scripts\\\\win\\\\build-live.bat || echo \\\"Not implemented yet.\\\"\"",
+    "build": "sh ../../scripts/unix/packages/build.sh",
+    "build-live": "..\\..\\scripts\\win\\build-live.bat",
     "test": "jest --passWithNoTests",
     "lint": "eslint src/**/*.{js,ts,tsx}",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json}\" && prettier --write \"docs/*\"",

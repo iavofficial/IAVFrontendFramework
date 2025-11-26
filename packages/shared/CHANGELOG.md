@@ -1,3 +1,36 @@
+## [@iavofficial/frontend-framework-shared-v1.0.0-dev.9](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-shared-v1.0.0-dev.8...@iavofficial/frontend-framework-shared-v1.0.0-dev.9) (2025-11-21)
+
+### Bug Fixes
+
+* Fixed imports for defaultContentSelectionElement. Fixed types regarding cyclic dependencies. ([738f3a6](https://github.com/iavofficial/IAVFrontendFramework/commit/738f3a65b650d5d4a2185a70168de63ef0b7808f))
+
+## [@iavofficial/frontend-framework-shared-v1.0.0-dev.8](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-shared-v1.0.0-dev.7...@iavofficial/frontend-framework-shared-v1.0.0-dev.8) (2025-11-21)
+
+### Bug Fixes
+
+* Fixed circular dependency ([2a2fd8e](https://github.com/iavofficial/IAVFrontendFramework/commit/2a2fd8e09439a995b3c7a5f16f651961d4b55308))
+
+## [@iavofficial/frontend-framework-shared-v1.0.0-dev.7](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-shared-v1.0.0-dev.6...@iavofficial/frontend-framework-shared-v1.0.0-dev.7) (2025-11-21)
+
+### Bug Fixes
+
+* Fix cyclic dependency ([3a49a8e](https://github.com/iavofficial/IAVFrontendFramework/commit/3a49a8eb47da2060c2a5d77695d0f3e85dbb59c4))
+* Fixed cyclic code dependency ([ca6e83e](https://github.com/iavofficial/IAVFrontendFramework/commit/ca6e83ed18aa8b13685926856fad90f94075f0ad))
+* Fixed cyclic dependency ([7b10915](https://github.com/iavofficial/IAVFrontendFramework/commit/7b109155220b0bcf281e90f25f6d41be3485e25e))
+
+## [@iavofficial/frontend-framework-shared-v1.0.0-dev.6](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-shared-v1.0.0-dev.5...@iavofficial/frontend-framework-shared-v1.0.0-dev.6) (2025-11-21)
+
+### Bug Fixes
+
+* Fixed contentbar.css ([4597a62](https://github.com/iavofficial/IAVFrontendFramework/commit/4597a62c3e127258654495ec28f5fc8614851fd8))
+
+## [@iavofficial/frontend-framework-shared-v1.0.0-dev.5](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-shared-v1.0.0-dev.4...@iavofficial/frontend-framework-shared-v1.0.0-dev.5) (2025-11-21)
+
+### Bug Fixes
+
+* Fixed Re-Exports ([ecbe0ea](https://github.com/iavofficial/IAVFrontendFramework/commit/ecbe0ea3aeb5bd01b7f632628d5f2f61cf5708a6))
+* Fixed several package.json problems ([1b22940](https://github.com/iavofficial/IAVFrontendFramework/commit/1b22940ce38eefa8443f7655f0eb4c744c3ceb88))
+
 ## [@iavofficial/frontend-framework-shared-v1.0.0-dev.4](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-shared-v1.0.0-dev.3...@iavofficial/frontend-framework-shared-v1.0.0-dev.4) (2025-11-20)
 
 ### Bug Fixes

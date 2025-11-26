@@ -15,10 +15,5 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-import React from "react";
-interface Props {
-  fill: string;
-  dataTestId?: string;
-}
-declare const CompanyLogo: React.FC<Props>;
-export default CompanyLogo;
+
+export * from "@iavofficial/frontend-framework-shared/defaultContentSelectionElement";

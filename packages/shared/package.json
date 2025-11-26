@@ -1,13 +1,13 @@
 {
   "name": "@iavofficial/frontend-framework-shared",
-  "version": "1.0.0-dev.4",
+  "version": "1.0.0-dev.9",
   "private": false,
   "license": "Apache-2.0",
   "description": "This package provides react components, contexts, types, utils etc. for use in multiple frontend framework packages.",
   "scripts": {
     "setup": "npm i",
-    "build": "cross-env-shell \"../../scripts/unix/packages/build.sh || echo \\\"Not implemented yet.\\\"\"",
-    "build-live": "cross-env-shell \"..\\..\\scripts\\win\\build-live.bat || echo \\\"Not implemented yet.\\\"\"",
+    "build": "sh ../../scripts/unix/packages/build.sh",
+    "build-live": "..\\..\\scripts\\win\\build-live.bat",
     "test": "jest --passWithNoTests",
     "lint": "eslint src/**/*.{js,ts,tsx}",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json}\" && prettier --write \"docs/*\"",
@@ -90,6 +90,7 @@
     "./defaultTranslations": "./dist/constants/defaultTranslations.js",
     "./generalModule": "./dist/types/modules/generalModule.js",
     "./moduleDefaults": "./dist/modules/module_orchestration/moduleDefaults.js",
+    "./moduleDefaultTypes": "./dist/types/modules/moduleDefaultTypes.js",
     "./moduleOrchestrationTypes": "./dist/types/modules/moduleOrchestrationTypes.js",
     "./createModules": "./dist/modules/module_orchestration/createModules.js",
     "./createModulesSeparately": "./dist/modules/module_orchestration/createModulesSeparately.js",
@@ -136,10 +137,11 @@
     "./basicContentbarWrapper": "./dist/types/modules/ui/contentBar/wrapper/basicContentbarWrapper.js",
     "./customContentbarWrapper": "./dist/types/modules/ui/contentBar/wrapper/customContentbarWrapper.js",
     "./contentbarWrapperInterface": "./dist/types/modules/ui/contentBar/wrapper/contentbarWrapperInterface.js",
-    "./defaultContentSelectionElement": "./dist/types/modules/ui/contentBar/wrapper/defaultContentSelectionElement.js",
+    "./defaultContentSelectionElement": "./dist/modules/default_modules/ui/contentBar/defaultContentSelectionElement.js",
     "./determineCurrentColor": "./dist/types/modules/ui/contentBar/wrapper/determineCurrentColor.js",
     "./settingsMenu": "./dist/modules/default_modules/ui/header/components/settingsMenu.js",
-    "./userMenu": "./dist/modules/default_modules/ui/header/components/userMenu.js"
+    "./userMenu": "./dist/modules/default_modules/ui/header/components/userMenu.js",
+    "./contentbar.css": "./dist/modules/default_modules/ui/contentBar/contentbar.css"
   },
   "typesVersions": {
     "*": {
@@ -169,6 +171,9 @@
       ],
       "./moduleDefaults": [
         "./dist/modules/module_orchestration/moduleDefaults.d.ts"
+      ],
+      "./moduleDefaultTypes": [
+        "./dist/types/modules/moduleDefaultTypes.d.ts"
       ],
       "./moduleOrchestrationTypes": [
         "./dist/types/modules/moduleOrchestrationTypes.d.ts"
@@ -267,7 +272,7 @@
         "./dist/components/svgWrapper/companyLogo.d.ts"
       ],
       "./defaultContentSelectionElement": [
-        "./dist/types/modules/ui/contentBar/wrapper/defaultContentSelectionElement.d.ts"
+        "./dist/modules/default_modules/ui/contentBar/defaultContentSelectionElement.d.ts"
       ],
       "./determineCurrentColor": [
         "./dist/types/modules/ui/contentBar/wrapper/determineCurrentColor.d.ts"

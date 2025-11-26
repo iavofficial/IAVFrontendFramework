@@ -16,30 +16,19 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {Action, ThunkDispatch} from "@reduxjs/toolkit";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {MandatoryModuleNames} from "../../constants/moduleNames";
 import {DummyAuthenticator} from "../default_modules/auth/dummyAuthenticatorModule";
 import {StoreBuilder} from "./storeBuilder";
 
-import {
-  AppDispatch,
-  FFMandatoryStoreModules,
-  MergeModules,
-  RootState,
-} from "../../types/modules/moduleOrchestrationTypes";
+import {FFMandatoryStoreModules} from "../../types/modules/moduleOrchestrationTypes";
 import {ReactRouterRouter} from "../default_modules/router/reactRouterRouterModule";
 import {I18NextInternationalizer} from "../default_modules/internationalization/i18NextInternationalizerModule";
 import {UIModule} from "../default_modules/ui/uiModule";
-
-//import {CookieBanner} from "../default_modules/cookie/cookieBanner";
-export type DefaultRootState = RootState<DefaultStoreState>;
-export type DefaultAppDispatch = AppDispatch<DefaultStoreDispatch>;
-export type DefaultThunkDispatch = ThunkDispatch<
+import type {
   DefaultRootState,
-  unknown,
-  Action<string>
->;
+  DefaultThunkDispatch,
+} from "../../types/modules/moduleDefaultTypes";
 
 // This object contains the default modules which can be replaced.
 export const defaultStoreModules: FFMandatoryStoreModules = {
@@ -48,31 +37,18 @@ export const defaultStoreModules: FFMandatoryStoreModules = {
   [MandatoryModuleNames.UI]: new UIModule(),
 };
 
-export type DefaultStoreModules = typeof defaultStoreModules;
-
 export const defaultNonStoreModules = {
   [MandatoryModuleNames.Router]: new ReactRouterRouter(),
 };
-
-export type DefaultNonStoreModules = typeof defaultNonStoreModules;
 
 export const allDefaultModules = {
   ...defaultStoreModules,
   ...defaultNonStoreModules,
 };
 
-export type AllDefaultModules = MergeModules<
-  DefaultNonStoreModules,
-  DefaultStoreModules
->;
-
 export const defaultStore = new StoreBuilder({
   frameworkStoreModules: defaultStoreModules,
 }).build();
-
-export type DefaultStore = typeof defaultStore;
-export type DefaultStoreState = typeof defaultStore.getState;
-export type DefaultStoreDispatch = typeof defaultStore.dispatch;
 
 export const useDefaultDispatch: () => DefaultThunkDispatch = useDispatch;
 export const useDefaultSelector: TypedUseSelectorHook<DefaultRootState> =

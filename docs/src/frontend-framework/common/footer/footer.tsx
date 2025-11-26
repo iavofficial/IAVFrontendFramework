@@ -25,11 +25,13 @@ const useStyles = makeStyles(() => ({
   footer: {
     width: "100%",
     padding: "16px 0",
-    backgroundColor: "#ffffff",
-    borderTop: "1px solid lightgray",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    background: "rgba(255,255,255,0.06)",
+    backdropFilter: "blur(10px)",
+    WebkitBackdropFilter: "blur(10px)",
+    borderTop: "1px solid rgba(255,255,255,0.18)",
   },
 }));
 

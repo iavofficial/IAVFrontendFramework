@@ -19,7 +19,8 @@
     "build": "turbo run build",
     "format": "prettier --write \"{packages,apps,docs}/**/src/**/*.{ts,tsx,js,jsx,json,html,css}\"",
     "release": "turbo run release --concurrency=1",
-    "generate-docs": "turbo run generate-docs"
+    "generate-docs": "turbo run generate-docs",
+    "postinstall": "node scripts/fix-lockfile-registry.js"
   },
   "workspaces": [
     "apps/*",

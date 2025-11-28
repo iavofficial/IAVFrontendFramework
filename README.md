@@ -20,17 +20,19 @@
 
 [![license](https://img.shields.io/badge/license-Apache--2.0-blue)](./LICENSE)
 
-> 🎉 **Version 1.5.0 is now available!**
+> 🎉 **Version 2.0.0 is now available!**
 >
-> This release includes new features and important fixes:
+> This release introduces the new **modular architecture** and several improvements:
 >
 > **Features**
-> - Add State System in ContentWithBar
-> - Add Renewing Session Interval for AWSAuthProvider
+> - Complete migration to a **fully modular framework structure**
+> - Dedicated modules for Authentication, Internationalization, Routing and UI
+> - New UI Module with replaceable Header, Navbar, Cookie Banner & Content Bar
 >
 > **Fixes & Improvements**
-> - Selected Language is now saved
-> - Add getUserGroups as property in every AuthProvider
+> - Cleaner separation of concerns across all framework modules
+> - Stronger type safety and developer tooling for module integration
+> - Improved color and dark mode handling
 
 ## About the Project
 

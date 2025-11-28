@@ -47,8 +47,8 @@ export const createModules = <
   > &
     Partial<FFMandatoryNonStoreModules> &
     object,
-  TFrameworkStoreModulesState extends
-    FFMandatoryState = ActualMandatoryStateFromModules<TModules>,
+  TFrameworkStoreModulesState extends FFMandatoryState =
+    ActualMandatoryStateFromModules<TModules>,
 >(
   paramModules?: TParamAllModulesPartial<TModules, TFrameworkStoreModulesState>,
 ) => {

@@ -206,8 +206,8 @@ export type TParamAllModules<
   TModules extends FFMandatoryStoreModules<TFrameworkStoreModulesState> &
     FFMandatoryNonStoreModules &
     Record<string, object>,
-  TFrameworkStoreModulesState extends
-    FFMandatoryState = ActualMandatoryStateFromModules<TModules>,
+  TFrameworkStoreModulesState extends FFMandatoryState =
+    ActualMandatoryStateFromModules<TModules>,
 > = Exact<
   FFMandatoryStoreModules<TFrameworkStoreModulesState> &
     FFMandatoryNonStoreModules &
@@ -221,8 +221,8 @@ export type TParamAllModulesPartial<
   > &
     Partial<FFMandatoryNonStoreModules> &
     Record<string, object>,
-  TFrameworkStoreModulesState extends
-    FFMandatoryState = ActualMandatoryStateFromModules<TModules>,
+  TFrameworkStoreModulesState extends FFMandatoryState =
+    ActualMandatoryStateFromModules<TModules>,
 > = Exact<
   Partial<FFMandatoryStoreModules<TFrameworkStoreModulesState>> &
     Partial<FFMandatoryNonStoreModules> &

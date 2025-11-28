@@ -46,8 +46,8 @@ export function createModulesSeparately<
   TFrameworkStoreModules extends Partial<
     FFMandatoryStoreModules<TFrameworkModulesState>
   > = {},
-  TFrameworkModulesState extends
-    FFMandatoryState = ActualMandatoryStateFromModules<TFrameworkStoreModules>,
+  TFrameworkModulesState extends FFMandatoryState =
+    ActualMandatoryStateFromModules<TFrameworkStoreModules>,
   TFrameworkNonStoreModules extends Partial<DefaultNonStoreModules> = {},
 >(
   params: {

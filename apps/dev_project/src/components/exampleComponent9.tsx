@@ -32,15 +32,13 @@ export const ExampleComponent9 = () => {
       new CustomContentbarWrapper(
         id,
         <div style={{ padding: 8, minWidth: 75 }}>Tab {i + 1}</div>,
-        (
-          <div key={id}>
-            <h1>Content for tab {i + 1}</h1>
-            <Typography>
-              This is a minimalistic example of how to use the ContentWithBar
-              module.
-            </Typography>
-          </div>
-        ),
+        <div key={id}>
+          <h1>Content for tab {i + 1}</h1>
+          <Typography>
+            This is a minimalistic example of how to use the ContentWithBar
+            module.
+          </Typography>
+        </div>,
       ),
     );
   }

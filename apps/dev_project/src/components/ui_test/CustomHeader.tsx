@@ -22,7 +22,7 @@ import { UIHeaderProps } from "@iavofficial/frontend-framework-shared/headerModu
 
 const { Header } = Layout;
 
-const CustomHeader = (props: UIHeaderProps) => {
+export const CustomHeader = (props: UIHeaderProps) => {
   const { token } = theme.useToken();
 
   return (
@@ -57,5 +57,3 @@ const CustomHeader = (props: UIHeaderProps) => {
     </Header>
   );
 };
-
-export default CustomHeader;

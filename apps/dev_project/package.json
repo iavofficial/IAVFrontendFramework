@@ -34,32 +34,17 @@
   "dependencies": {
     "@iavofficial/frontend-framework": "*",
     "@iavofficial/frontend-framework-aws-authenticator": "*",
-    "antd": "^5.26.3",
-    "aws-amplify": "^6.7.0",
-    "glob": "^10.4.5",
-    "primereact": "^10.3.3",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "antd": "^6.0.0",
+    "aws-amplify": "^6.15.8",
+    "glob": "^13.0.0",
+    "primereact": "^10.9.7",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
     "react-transition-group": "^4.4.5"
   },
   "devDependencies": {
-    "@babel/cli": "^7.27.0",
-    "@babel/core": "^7.26.10",
-    "@babel/plugin-transform-class-properties": "^7.25.9",
-    "@babel/plugin-transform-typescript": "^7.27.0",
-    "@babel/preset-react": "^7.26.3",
-    "@babel/preset-typescript": "^7.27.0",
-    "@rollup/plugin-node-resolve": "^15.1.0",
-    "@types/react": "^18.2.14",
-    "@types/react-dom": "^18.2.6",
-    "@typescript-eslint/eslint-plugin": "^5.61.0",
-    "@typescript-eslint/parser": "^5.61.0",
-    "@vitejs/plugin-react": "^4.0.3",
-    "eslint": "^8.44.0",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.1",
-    "typescript": "^5.0.2",
-    "vite": "^6.3.4",
-    "vite-plugin-svgr": "^4.2.0"
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "typescript": "^5.9.3"
   }
 }

@@ -21,7 +21,7 @@ import { Button, theme } from "antd";
 import { LeftOutlined, PlusOutlined, RightOutlined } from "@ant-design/icons";
 import { UIContentBarProps } from "@iavofficial/frontend-framework-shared/contentBarModuleInterfaces";
 
-const CustomContentBar: React.FC<UIContentBarProps> = (props) => {
+export const CustomContentBar = (props: UIContentBarProps) => {
   const {
     contentWrappers = [],
     addable,
@@ -32,6 +32,7 @@ const CustomContentBar: React.FC<UIContentBarProps> = (props) => {
   } = props;
 
   const { token } = theme.useToken();
+  // TODO
   const firstId = contentWrappers[0]?.id;
   const elementWidth = 160;
 
@@ -101,5 +102,3 @@ const CustomContentBar: React.FC<UIContentBarProps> = (props) => {
     </div>
   );
 };
-
-export default CustomContentBar;

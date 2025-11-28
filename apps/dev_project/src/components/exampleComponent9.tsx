@@ -17,17 +17,12 @@
  */
 
 import { generateHashOfLength } from "@iavofficial/frontend-framework/hash";
-import { useModule } from "@iavofficial/frontend-framework/moduleContext";
-import { MandatoryModuleNames } from "@iavofficial/frontend-framework-shared/moduleNames";
 import { CustomContentbarWrapper } from "@iavofficial/frontend-framework/customContentbarWrapper";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Typography } from "antd";
+import { ContentWithBar } from "@iavofficial/frontend-framework/contentWithBar";
 
 export const ExampleComponent9 = () => {
-  const ContentWithBar = useModule(
-    MandatoryModuleNames.UI,
-  ).UILayerContentWithBar;
-
   const initialTabs: CustomContentbarWrapper[] = [];
   let initialId = "";
   for (let i = 0; i < 3; i++) {
@@ -49,14 +44,15 @@ export const ExampleComponent9 = () => {
       ),
     );
   }
-  const [tabs] = useState<CustomContentbarWrapper[]>(initialTabs);
-  const [selectedId, setSelectedId] = useState(initialId);
 
+  const [tabs] = useState<CustomContentbarWrapper[]>(initialTabs);
+  // TODO
+  const [selectedId, setSelectedId] = useState(initialId);
+  
   return (
     <ContentWithBar
       contentWrappers={tabs}
       selectedId={selectedId}
-      onSelect={setSelectedId}
     />
   );
 };

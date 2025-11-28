@@ -22,8 +22,7 @@ import { useModule } from "@iavofficial/frontend-framework/moduleContext";
 import { MandatoryModuleNames } from "@iavofficial/frontend-framework-shared/moduleNames";
 
 export const ExampleComponent10 = () => {
-  const headerModule = useModule(MandatoryModuleNames.UI).UiLayerHeader;
-  const Header = headerModule.UILayerHeader;
+  const Header = useModule(MandatoryModuleNames.UI).UILayerHeader;
 
   if (!Header) {
     return (
@@ -71,12 +70,15 @@ export const ExampleComponent10 = () => {
     ],
   };
 
+  /*
+  TODO
+  settingsMenuOptions={settingsMenuOptions}
+  userMenuOptions={userMenuOptions}
+  */
   return (
     <div>
       <Header
         headerOptions={headerOptions}
-        settingsMenuOptions={settingsMenuOptions}
-        userMenuOptions={userMenuOptions}
       />
       <div style={{ padding: 16 }}>
         <Typography.Title level={2}>Example Component 10</Typography.Title>

@@ -23,7 +23,7 @@ import { UINavbarProps } from "@iavofficial/frontend-framework-shared/navbarModu
 
 const { Sider } = Layout;
 
-const CustomNavbar: React.FC<UINavbarProps> = ({
+export const CustomNavbar = ({
   items,
   legalLinks = [],
   collapsed,
@@ -32,7 +32,7 @@ const CustomNavbar: React.FC<UINavbarProps> = ({
   colors,
   dims,
   arrowClassName,
-}) => {
+}: UINavbarProps) => {
   const { token } = theme.useToken();
 
   return (
@@ -88,5 +88,3 @@ const CustomNavbar: React.FC<UINavbarProps> = ({
     </Sider>
   );
 };
-
-export default CustomNavbar;

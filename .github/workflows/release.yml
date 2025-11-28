@@ -19,7 +19,7 @@ on:
       - 'docs/**/*'
 
 jobs:
-  release:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -30,6 +30,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22.x'
+          cache: 'npm'
 
       - name: Make scripts executable
         run: find ./scripts/unix/ -type f -exec chmod +x {} \;
@@ -45,6 +46,42 @@ jobs:
 
       - name: Run tests
         run: npm run test
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-output
+          path: |
+            packages/*/dist
+
+  release:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+          cache: 'npm'
+
+      - name: Make scripts executable
+        run: find ./scripts/unix/ -type f -exec chmod +x {} \;
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-output
+          path: .
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Copy root README to frontend-framework package
+        run: cp README.md packages/frontend-framework/README.md
 
       - name: Build all packages and release them
         if: ${{ !(github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run == 'true') }}

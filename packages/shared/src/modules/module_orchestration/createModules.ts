@@ -46,7 +46,7 @@ export const createModules = <
     FFMandatoryStoreModules<TFrameworkStoreModulesState>
   > &
     Partial<FFMandatoryNonStoreModules> &
-    Record<string, object>,
+    object,
   TFrameworkStoreModulesState extends FFMandatoryState =
     ActualMandatoryStateFromModules<TModules>,
 >(

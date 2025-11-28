@@ -30,7 +30,7 @@ type FilterKeys<T, Prefix extends string> = {
   [K in keyof T as K extends `${Prefix}${string}` ? K : never]: T[K];
 };
 
-export const separateModuleTypes = <TModules extends Record<string, object>>(
+export const separateModuleTypes = <TModules extends object>(
   modules: TModules,
 ) => {
   // Using Omit unfortunately does not work.

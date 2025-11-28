@@ -77,9 +77,7 @@ export const ExampleComponent10 = () => {
   */
   return (
     <div>
-      <Header
-        headerOptions={headerOptions}
-      />
+      <Header headerOptions={headerOptions} />
       <div style={{ padding: 16 }}>
         <Typography.Title level={2}>Example Component 10</Typography.Title>
         <Typography.Paragraph>

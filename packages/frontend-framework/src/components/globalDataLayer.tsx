@@ -16,12 +16,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { Fragment, PropsWithChildren, useEffect } from "react";
-import { CookiesProvider } from "react-cookie";
-import { ColorProvider, ColorProviderProps } from "../coloring/colorProvider";
-import { EnhancedStore } from "@reduxjs/toolkit";
-import { Provider } from "react-redux";
-import { ModuleContextProvider } from "../contexts/providers/moduleContextProvider";
+import React, {Fragment, PropsWithChildren, useEffect} from "react";
+import {CookiesProvider} from "react-cookie";
+import {ColorProvider, ColorProviderProps} from "../coloring/colorProvider";
+import {EnhancedStore} from "@reduxjs/toolkit";
+import {Provider} from "react-redux";
+import {ModuleContextProvider} from "../contexts/providers/moduleContextProvider";
 import {
   FFMandatoryState,
   FFMandatoryStoreModules,
@@ -29,16 +29,16 @@ import {
   ActualMandatoryStateFromModules,
   TParamAllModules,
 } from "@iavofficial/frontend-framework-shared/moduleOrchestrationTypes";
-import { FFModule } from "@iavofficial/frontend-framework-shared/generalModule";
-import { checkIfUserModulesKeysValid } from "@iavofficial/frontend-framework-shared/checkIfUserModulesKeysValid";
-import { separateModuleTypes } from "@iavofficial/frontend-framework-shared/separateModuleTypes";
+import {FFModule} from "@iavofficial/frontend-framework-shared/generalModule";
+import {checkIfUserModulesKeysValid} from "@iavofficial/frontend-framework-shared/checkIfUserModulesKeysValid";
+import {separateModuleTypes} from "@iavofficial/frontend-framework-shared/separateModuleTypes";
 
 interface Props<
   TModules extends FFMandatoryStoreModules<TFrameworkStoreModulesState> &
-  FFMandatoryNonStoreModules &
-  Record<string, object>,
-  TFrameworkStoreModulesState extends
-  FFMandatoryState = ActualMandatoryStateFromModules<TModules>,
+    FFMandatoryNonStoreModules &
+    Record<string, object>,
+  TFrameworkStoreModulesState extends FFMandatoryState =
+    ActualMandatoryStateFromModules<TModules>,
 > {
   modules: TParamAllModules<TModules, TFrameworkStoreModulesState>;
   store: EnhancedStore<TFrameworkStoreModulesState>;
@@ -47,10 +47,10 @@ interface Props<
 
 export const GlobalDataLayer = <
   TModules extends FFMandatoryStoreModules<TFrameworkStoreModulesState> &
-  FFMandatoryNonStoreModules &
-  Record<string, object>,
-  TFrameworkStoreModulesState extends
-  FFMandatoryState = ActualMandatoryStateFromModules<TModules>,
+    FFMandatoryNonStoreModules &
+    Record<string, object>,
+  TFrameworkStoreModulesState extends FFMandatoryState =
+    ActualMandatoryStateFromModules<TModules>,
 >(
   props: PropsWithChildren<Props<TModules, TFrameworkStoreModulesState>>,
 ) => {

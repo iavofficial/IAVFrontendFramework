@@ -11,7 +11,7 @@
     ],
     "plugins": [
         "inline-react-svg",
-        "@babel/plugin-proposal-class-properties"
+        "@babel/plugin-transform-class-properties"
     ],
     "ignore": [
         "src/**/*.d.ts"

@@ -20,17 +20,20 @@ import React from "react";
 import { Button, Space, theme, Typography } from "antd";
 import { UICookieBannerProps } from "@iavofficial/frontend-framework-shared/cookieBannerModuleInterfaces";
 
-const CustomCookieBanner = (props: UICookieBannerProps) => {
+export const CustomCookieBanner = (props: UICookieBannerProps) => {
   const { header, message, acceptButtonLabel, visible, onAccept, styles } =
     props;
   const { token } = theme.useToken();
 
   if (!visible) return null;
 
+  /*
+  TODO
+  aria-label={header ?? "Cookie Hinweis"}
+  */
   return (
     <div
       role="region"
-      aria-label={header ?? "Cookie Hinweis"}
       style={{
         position: "fixed",
         left: 16,
@@ -60,5 +63,3 @@ const CustomCookieBanner = (props: UICookieBannerProps) => {
     </div>
   );
 };
-
-export default CustomCookieBanner;

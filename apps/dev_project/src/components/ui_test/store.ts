@@ -26,11 +26,11 @@ import { ReactRouterRouter } from "@iavofficial/frontend-framework-shared/reactR
 
 import { MandatoryModuleNames } from "@iavofficial/frontend-framework/constants";
 import { translations } from "../aws_test/translations.ts";
-import CustomHeader from "./CustomHeader.tsx";
-import CustomNavbar from "./CustomNavbar.tsx";
-import CustomCookieBanner from "./CustomCookieBanner.tsx";
-import CustomContentBar from "./CustomContentBar.tsx";
 import { UIModule } from "@iavofficial/frontend-framework-shared/uiModule";
+import { CustomHeader } from "./CustomHeader.tsx";
+import { CustomNavbar } from "./CustomNavbar.tsx";
+import { CustomCookieBanner } from "./CustomCookieBanner.tsx";
+import { CustomContentBar } from "./CustomContentBar.tsx";
 
 const customModules = {
   [MandatoryModuleNames.Internationalizer]: new I18NextInternationalizer({

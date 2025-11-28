@@ -23,7 +23,7 @@ interface Props {
   dataTestId?: string;
 }
 
-const CompanyLogo: React.FC<Props> = (props) => {
+export const CompanyLogo: React.FC<Props> = (props) => {
   const {fill, dataTestId} = props;
 
   return (

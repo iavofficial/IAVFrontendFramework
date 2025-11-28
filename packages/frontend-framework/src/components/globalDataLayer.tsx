@@ -37,8 +37,8 @@ interface Props<
   TModules extends FFMandatoryStoreModules<TFrameworkStoreModulesState> &
     FFMandatoryNonStoreModules &
     Record<string, object>,
-  TFrameworkStoreModulesState extends FFMandatoryState =
-    ActualMandatoryStateFromModules<TModules>,
+  TFrameworkStoreModulesState extends
+    FFMandatoryState = ActualMandatoryStateFromModules<TModules>,
 > {
   modules: TParamAllModules<TModules, TFrameworkStoreModulesState>;
   store: EnhancedStore<TFrameworkStoreModulesState>;
@@ -49,8 +49,8 @@ export const GlobalDataLayer = <
   TModules extends FFMandatoryStoreModules<TFrameworkStoreModulesState> &
     FFMandatoryNonStoreModules &
     Record<string, object>,
-  TFrameworkStoreModulesState extends FFMandatoryState =
-    ActualMandatoryStateFromModules<TModules>,
+  TFrameworkStoreModulesState extends
+    FFMandatoryState = ActualMandatoryStateFromModules<TModules>,
 >(
   props: PropsWithChildren<Props<TModules, TFrameworkStoreModulesState>>,
 ) => {

@@ -47,8 +47,8 @@ export class StoreBuilder<
   // corresponding TS constraints.
   TUserStoreModules extends FFStoreModules<TUserModulesState> &
     Partial<DefaultNonStoreModules>,
-  TFrameworkModulesState extends FFMandatoryState =
-    ActualMandatoryStateFromModules<TFrameworkStoreModules>,
+  TFrameworkModulesState extends
+    FFMandatoryState = ActualMandatoryStateFromModules<TFrameworkStoreModules>,
   // Same for TMandatoryStoreModules regarding overriding the default store modules.
   TUserModulesState = ActualUserModulesStateFromModules<TUserStoreModules>,
 > {

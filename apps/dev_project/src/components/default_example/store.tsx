@@ -26,10 +26,6 @@ import translationES from "../../assets/translations/es.json";
 import translationEN from "../../assets/translations/en.json";
 import translationDE from "../../assets/translations/de.json";
 import translationDECH from "../../assets/translations/de-CH.json";
-import CustomHeader from "../ui_test/CustomHeader.tsx";
-import CustomNavbar from "../ui_test/CustomNavbar.tsx";
-import CustomCookieBanner from "../ui_test/CustomCookieBanner.tsx";
-import { UIModule } from "@iavofficial/frontend-framework-shared/uiModule";
 
 const translations = {
   es: {
@@ -48,8 +44,8 @@ const translations = {
 
 const customModules = {
   [MandatoryModuleNames.Internationalizer]: new I18NextInternationalizer({
-    translationResources: translations,
-  }),
+    translationResources: translations
+  })
 };
 
 export const modules = createModules(customModules);

@@ -1,3 +1,9 @@
+## [@iavofficial/frontend-framework-aws-authenticator-v1.0.0-dev.5](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-aws-authenticator-v1.0.0-dev.4...@iavofficial/frontend-framework-aws-authenticator-v1.0.0-dev.5) (2025-12-01)
+
+### Bug Fixes
+
+* change to aws-amplify/auth imports; edit babel preset ([fa110c9](https://github.com/iavofficial/IAVFrontendFramework/commit/fa110c9a19e6f577963a802bc2ba421413c38942))
+
 ## [@iavofficial/frontend-framework-aws-authenticator-v1.0.0-dev.4](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-aws-authenticator-v1.0.0-dev.3...@iavofficial/frontend-framework-aws-authenticator-v1.0.0-dev.4) (2025-11-28)
 
 ### Bug Fixes

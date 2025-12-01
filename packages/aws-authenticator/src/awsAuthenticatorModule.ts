@@ -39,7 +39,7 @@ import type {
   AuthState,
   Credentials,
 } from "@iavofficial/frontend-framework-shared/authenticatorModule";
-import {JWT} from "aws-amplify/auth";
+import {decodeJWT, JWT} from "aws-amplify/auth";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
 
 export interface FetchSettings {
@@ -115,7 +115,6 @@ export class AwsAuthenticator implements AuthModule<AwsAuthenticatorState> {
           if (!state.hasAuthenticated || state.extras.isNewPasswordRequired) {
             state.hasAuthenticated = true;
             state.extras.isNewPasswordRequired = false;
-            // @ts-ignore
             state.userData = action.payload;
             state.extras.loginError = undefined;
           }
@@ -317,24 +316,21 @@ const generateSettingsWithAuthFrom = (
         const settingsWithAuth = Object.assign({}, settings);
         settingsWithAuth.headers?.set(
           "Authorization",
-          "Bearer " +
-            (token ? token : state.userData?.extras.idToken.toString()),
+          "Bearer " + (token ? token : state.userData?.idToken),
         );
         return settingsWithAuth;
       }
     } else {
       return Object.assign({}, settings, {
         headers: new Headers({
-          Authorization:
-            "Bearer " + (token ? token : state.userData?.extras.idToken),
+          Authorization: "Bearer " + (token ? token : state.userData?.idToken),
         }),
       });
     }
   } else {
     return {
       headers: new Headers({
-        Authorization:
-          "Bearer " + (token ? token : state.userData?.extras.idToken),
+        Authorization: "Bearer " + (token ? token : state.userData?.idToken),
       }),
     };
   }

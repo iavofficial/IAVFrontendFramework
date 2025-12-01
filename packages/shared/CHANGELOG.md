@@ -1,3 +1,5 @@
+## [@iavofficial/frontend-framework-shared-v1.0.0-dev.13](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-shared-v1.0.0-dev.12...@iavofficial/frontend-framework-shared-v1.0.0-dev.13) (2025-12-01)
+
 ## [@iavofficial/frontend-framework-shared-v1.0.0-dev.12](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-shared-v1.0.0-dev.11...@iavofficial/frontend-framework-shared-v1.0.0-dev.12) (2025-11-28)
 
 ### Bug Fixes

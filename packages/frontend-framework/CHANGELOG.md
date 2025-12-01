@@ -1,3 +1,5 @@
+## [@iavofficial/frontend-framework-v2.0.0-dev.9](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v2.0.0-dev.8...@iavofficial/frontend-framework-v2.0.0-dev.9) (2025-12-01)
+
 ## [@iavofficial/frontend-framework-v2.0.0-dev.8](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v2.0.0-dev.7...@iavofficial/frontend-framework-v2.0.0-dev.8) (2025-11-28)
 
 ### Bug Fixes

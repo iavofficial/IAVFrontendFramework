@@ -25,5 +25,5 @@ import AppUI from "./components/ui_test/AppUI.tsx";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <AppAwsAuthentication />
-  </React.StrictMode>
+  </React.StrictMode>,
 );

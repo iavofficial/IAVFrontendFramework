@@ -41,7 +41,7 @@ export const ExampleComponent6 = () => {
     const token = authState?.userData?.idToken;
 
     const response = await dispatch(
-      authModule.fetchAuthed({ url: url, token: token })
+      authModule.fetchAuthed({ url: url, token: token }),
     ).unwrap();
 
     console.log("testfetch: ", response.body);

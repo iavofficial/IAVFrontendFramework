@@ -21,8 +21,32 @@ import {
   LayoutBehaviour,
 } from "@iavofficial/frontend-framework/contentLayout";
 import { ContentStyleTemplates } from "@iavofficial/frontend-framework/contentStyle";
+import {
+  useModuleTyped,
+  useTypedDispatch,
+  useTypedSelector,
+} from "./aws_test/storeTestSimple";
+import { MandatoryModuleNames } from "@iavofficial/frontend-framework/constants";
+import { Button } from "antd";
+import { useState } from "react";
 
 export const ExampleComponent6 = () => {
+  const authState = useTypedSelector((state) => state.auth);
+  const dispatch = useTypedDispatch();
+  const authModule = useModuleTyped(MandatoryModuleNames.Authenticator);
+  //set a valid url
+  const [url] = useState("");
+
+  const handleTestFetch = async () => {
+    const token = authState?.userData?.idToken;
+
+    const response = await dispatch(
+      authModule.fetchAuthed({ url: url, token: token })
+    ).unwrap();
+
+    console.log("testfetch: ", response.body);
+  };
+
   return (
     <ContentLayout
       layoutBehaviour={LayoutBehaviour.FLEX}
@@ -30,6 +54,7 @@ export const ExampleComponent6 = () => {
     >
       <div className="w-full" style={{ backgroundColor: "white" }}>
         Example component 6
+        <Button onClick={handleTestFetch}>Test fetchAuthed new</Button>
       </div>
     </ContentLayout>
   );

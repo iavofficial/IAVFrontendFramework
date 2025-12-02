@@ -38,8 +38,9 @@ import type {
   AuthModule,
   AuthState,
   Credentials,
+  FetchAuthedReturnType,
 } from "@iavofficial/frontend-framework-shared/authenticatorModule";
-import {decodeJWT, JWT} from "aws-amplify/auth";
+import {JWT} from "aws-amplify/auth";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
 
 export interface FetchSettings {
@@ -150,28 +151,35 @@ export class AwsAuthenticator implements AuthModule<AwsAuthenticatorState> {
     } = this.slice.actions;
 
     this.fetchAuthed = createAsyncThunk<
-      Response,
-      {url: string; token?: JWT; settings?: FetchSettings},
+      FetchAuthedReturnType,
+      {url: string; token?: JWT | string; settings?: FetchSettings},
       {state: {[MandatoryModuleNames.Authenticator]: AwsAuthenticatorState}}
     >(
       MandatoryModuleNames.Authenticator + "/thunkFetchAuthed",
       async ({url, token, settings}, {dispatch, getState}) => {
         await dispatch(this.extras.checkIsAuthenticated()).unwrap();
-        return await fetch(
-          url,
-          generateSettingsWithAuthFrom(
-            getState()[MandatoryModuleNames.Authenticator],
-            token,
-            settings,
-          ),
-        ).catch(() => {
+
+        try {
+          const res = await fetch(
+            url,
+            generateSettingsWithAuthFrom(
+              getState()[MandatoryModuleNames.Authenticator],
+              token,
+              settings,
+            ),
+          );
+
+          return {
+            status: res.status,
+            body: await res.text(),
+          };
+        } catch {
           dispatch(this.logout());
-          return new Promise<Response>((resolve) => {
-            resolve(
-              new Response(null, {status: 401, statusText: "Unauthorized"}),
-            );
-          });
-        });
+          return {
+            status: 401,
+            body: "",
+          };
+        }
       },
     );
 
@@ -307,7 +315,7 @@ export class AwsAuthenticator implements AuthModule<AwsAuthenticatorState> {
 
 const generateSettingsWithAuthFrom = (
   state: AwsAuthenticatorState,
-  token?: JWT,
+  token?: JWT | string,
   settings?: FetchSettings,
 ) => {
   if (settings !== undefined) {

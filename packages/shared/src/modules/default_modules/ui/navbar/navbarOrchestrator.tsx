@@ -30,7 +30,10 @@ import {
 import {useModule} from "../../../../contexts/moduleContext";
 import {MandatoryModuleNames} from "../../../../constants/moduleNames";
 import {calculateNavbarArrowFunctionColor} from "../../../../utils/ui/navbar/calculateNavbarArrowFunctionColor";
-import { useDefaultDispatch, useDefaultSelector } from "../../../module_orchestration/moduleDefaults";
+import {
+  useDefaultDispatch,
+  useDefaultSelector,
+} from "../../../module_orchestration/moduleDefaults";
 
 type TabAndContentWrapperLike = {
   getNavbarComponent: (args: {navbarCollapsed: boolean}) => React.ReactElement;
@@ -66,7 +69,8 @@ export const NavbarOrchestrator = (props: NavbarOrchestratorProps) => {
 
   const dispatch = useDefaultDispatch();
   const uiModule = useModule(MandatoryModuleNames.UI);
-  const onToggleCollapse = () => dispatch(uiModule.slice.actions.toggleNavbar());
+  const onToggleCollapse = () =>
+    dispatch(uiModule.slice.actions.toggleNavbar());
 
   const items = tabAndContentWrappers.map((w) =>
     w.getNavbarComponent({navbarCollapsed: collapsed}),
@@ -122,4 +126,3 @@ export const NavbarOrchestrator = (props: NavbarOrchestratorProps) => {
 
   return <UI {...uiProps} />;
 };
-

@@ -66,26 +66,28 @@ const safeSet = (val: boolean) => {
   } catch {}
 };
 
-const calcInitialNavbarCollapsed = (staticCollapsedState?: StaticCollapsedState) => {
-      let collapsed = safeGet();
+const calcInitialNavbarCollapsed = (
+  staticCollapsedState?: StaticCollapsedState,
+) => {
+  let collapsed = safeGet();
 
-    if (staticCollapsedState !== undefined) {
-      if (staticCollapsedState === StaticCollapsedState.Collapsed) {
-        collapsed = true;
-      }
-      if (staticCollapsedState === StaticCollapsedState.Unfolded) {
-        collapsed = false;
-      }
+  if (staticCollapsedState !== undefined) {
+    if (staticCollapsedState === StaticCollapsedState.Collapsed) {
+      collapsed = true;
     }
+    if (staticCollapsedState === StaticCollapsedState.Unfolded) {
+      collapsed = false;
+    }
+  }
 
-    return collapsed;
-}
+  return collapsed;
+};
 
 const calcInitialState = (staticCollapsedState?: StaticCollapsedState) => {
   return {
     navbarCollapsed: calcInitialNavbarCollapsed(staticCollapsedState),
-    collapsible: staticCollapsedState === undefined
-  }
+    collapsible: staticCollapsedState === undefined,
+  };
 };
 
 export class UIModule implements UIModuleType<UIState> {

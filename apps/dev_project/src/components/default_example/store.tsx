@@ -28,7 +28,10 @@ import translationEN from "../../assets/translations/en.json";
 import translationDE from "../../assets/translations/de.json";
 import translationDECH from "../../assets/translations/de-CH.json";
 import type { ThunkDispatch, Action } from "@reduxjs/toolkit";
-import { TypedDispatchHook, TypedSelectorHook } from "@iavofficial/frontend-framework/reExportedTypes";
+import {
+  TypedDispatchHook,
+  TypedSelectorHook,
+} from "@iavofficial/frontend-framework/reExportedTypes";
 
 const translations = {
   es: {
@@ -63,8 +66,10 @@ export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = ThunkDispatch<RootState, unknown, Action<string>>;
 
 // Typed hooks
-export const useTypedSelector: TypedSelectorHook<typeof store.getState> = useSelector;
-export const useTypedDispatch: TypedDispatchHook<typeof store.getState> = useDispatch;
+export const useTypedSelector: TypedSelectorHook<typeof store.getState> =
+  useSelector;
+export const useTypedDispatch: TypedDispatchHook<typeof store.getState> =
+  useDispatch;
 
 /*const {modules: modulesTest} = useModuleContextTyped();
 const authModule = useModuleTyped(MandatoryModuleNames.Authenticator);*/

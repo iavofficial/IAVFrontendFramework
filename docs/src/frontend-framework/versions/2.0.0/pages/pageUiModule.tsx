@@ -133,10 +133,10 @@ export const store = new StoreBuilder(modules.storeModules)
   </GlobalDataLayer>
 );`}</Code>
 
-        <SectionUiNavbar/>
-        <SectionUiContentBar/>
-        <SectionUiHeader/>
-        <SectionUiCookieBanner/>
+      <SectionUiNavbar />
+      <SectionUiContentBar />
+      <SectionUiHeader />
+      <SectionUiCookieBanner />
     </Page>
   );
 };

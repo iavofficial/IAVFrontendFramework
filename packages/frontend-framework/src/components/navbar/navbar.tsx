@@ -33,7 +33,10 @@ import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
 import {useModuleTranslation} from "@iavofficial/frontend-framework-shared/useModuleTranslation";
 import {LegalDocument} from "../imprint/legalDocument";
-import { useDefaultDispatch, useDefaultSelector } from "@iavofficial/frontend-framework-shared/moduleDefaults";
+import {
+  useDefaultDispatch,
+  useDefaultSelector,
+} from "@iavofficial/frontend-framework-shared/moduleDefaults";
 
 interface Props {
   tabAndContentWrappers: TabAndContentWrapper[];
@@ -49,10 +52,12 @@ export const Navbar = (props: Props) => {
   const Link = routerModule.Link;
 
   const uiModule = useModule(MandatoryModuleNames.UI);
-  const navbarCollapsed = useDefaultSelector(state => state.ui.navbarCollapsed);
-  const collapsible = useDefaultSelector(state => state.ui.collapsible);
-  const setNavbarCollapsed = 
-  (navbarCollapsed: boolean) => dispatch(uiModule.slice.actions.setNavbarCollapsed(navbarCollapsed));
+  const navbarCollapsed = useDefaultSelector(
+    (state) => state.ui.navbarCollapsed,
+  );
+  const collapsible = useDefaultSelector((state) => state.ui.collapsible);
+  const setNavbarCollapsed = (navbarCollapsed: boolean) =>
+    dispatch(uiModule.slice.actions.setNavbarCollapsed(navbarCollapsed));
 
   const colorSettingsContext = useContext(ColorSettingsContext);
 
@@ -80,9 +85,7 @@ export const Navbar = (props: Props) => {
             width: navbarCollapsed
               ? `${DEFAULT_ELEMENT_SIZE + 2 * GAB_NAVBAR_COLLAPSED}px`
               : `${NAVBAR_WIDTH_UNFOLDED}px`,
-            padding: navbarCollapsed
-              ? "0px 2px 0px 2px"
-              : "0px 4px 0px 4px",
+            padding: navbarCollapsed ? "0px 2px 0px 2px" : "0px 4px 0px 4px",
             color: scrollbarColor,
             position: "relative",
             overflowX: "visible",
@@ -116,15 +119,9 @@ export const Navbar = (props: Props) => {
             <div
               id="legal-doc-links"
               style={{
-                flexDirection: navbarCollapsed
-                  ? "unset"
-                  : "row",
-                writingMode: navbarCollapsed
-                  ? "sideways-lr"
-                  : "horizontal-tb",
-                paddingLeft: navbarCollapsed
-                  ? "0px"
-                  : "12px",
+                flexDirection: navbarCollapsed ? "unset" : "row",
+                writingMode: navbarCollapsed ? "sideways-lr" : "horizontal-tb",
+                paddingLeft: navbarCollapsed ? "0px" : "12px",
               }}
             >
               {props.legalDocuments
@@ -145,11 +142,7 @@ export const Navbar = (props: Props) => {
 
           {collapsible && (
             <i
-              onClick={() =>
-                setNavbarCollapsed(
-                  !navbarCollapsed,
-                )
-              }
+              onClick={() => setNavbarCollapsed(!navbarCollapsed)}
               style={{
                 ...(!navbarCollapsed && {
                   position: "absolute",
@@ -161,9 +154,7 @@ export const Navbar = (props: Props) => {
                   ? "8px 0px 0px 0px"
                   : `0px ${PADDING_GAB}px 0px 0px`,
               }}
-              className={calculateNavbarArrowFunctionColor(
-                navbarCollapsed!,
-              )}
+              className={calculateNavbarArrowFunctionColor(navbarCollapsed!)}
             />
           )}
         </div>

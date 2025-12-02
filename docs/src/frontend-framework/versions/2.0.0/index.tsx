@@ -179,7 +179,7 @@ const modulesRoutes: GroupRoute[] = [
         path: "ui-module",
         label: "Ui module",
         element: PageUiModule,
-      }
+      },
     ],
   },
 ];

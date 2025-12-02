@@ -25,20 +25,22 @@ import Code from "../../../common/page/utils/code";
 
 const PageHowToMigrate: React.FC = () => (
   <Page>
-    <Title>How to migrate to the modular frontend framework (1.x.x zu 2.0.0)</Title>
+    <Title>
+      How to migrate to the modular frontend framework (1.x.x zu 2.0.0)
+    </Title>
 
     <Text>
       This page explains how to move from a setup where the framework is used in
-      a non-modular way (version 1.x.x) to the modular architecture based on modules with a
-      shared store.
+      a non-modular way (version 1.x.x) to the modular architecture based on
+      modules with a shared store.
     </Text>
 
     <SubTitle>1. From configuration to composition</SubTitle>
     <Text>
-      In version 1.x.x translations and other information are directly passed into{" "}
-      <code>GlobalDataLayer</code>.
-      In version 2.0.0 <code>GlobalDataLayer</code> gets less information directly.
-      However, the most relevant properties are:
+      In version 1.x.x translations and other information are directly passed
+      into <code>GlobalDataLayer</code>. In version 2.0.0{" "}
+      <code>GlobalDataLayer</code> gets less information directly. However, the
+      most relevant properties are:
     </Text>
     <ul>
       <li>
@@ -80,13 +82,12 @@ const PageHowToMigrate: React.FC = () => (
         provider component.
       </li>
       <li>
-        <b>UI modules</b> wire header, navbar, content bar and cookie banner
-        to the store and and allows you to plug in your own UI
-        components.
+        <b>UI modules</b> wire header, navbar, content bar and cookie banner to
+        the store and and allows you to plug in your own UI components.
       </li>
       <li>
-        <b>Router modules</b> provide routing components and hooks, such as
-        the main router and link elements.
+        <b>Router modules</b> provide routing components and hooks, such as the
+        main router and link elements.
       </li>
     </ul>
     <Text>
@@ -212,8 +213,8 @@ const Layout = () => (
     </Text>
     <ol>
       <li>
-        Use <code>createModules</code> and <code>StoreBuilder</code> and
-        create a centralized <code>store</code> and <code>modules</code> object.
+        Use <code>createModules</code> and <code>StoreBuilder</code> and create
+        a centralized <code>store</code> and <code>modules</code> object.
       </li>
       <li>
         Move translation configuration into an{" "}
@@ -221,13 +222,14 @@ const Layout = () => (
         props from <code>GlobalDataLayer</code>.
       </li>
       <li>
-        If you use <b>custom</b> authentication, move the logic into an Authenticator module
-        and remove authentication provider components from around your app.
+        If you use <b>custom</b> authentication, move the logic into an
+        Authenticator module and remove authentication provider components from
+        around your app.
       </li>
       <li>
-        If you use <b>custom</b> headers etc.: Use the <code>UIModule</code> and provide your header, navbar,
-        cookie banner and content bar components through its constructor instead
-        of configuring them ad hoc.
+        If you use <b>custom</b> headers etc.: Use the <code>UIModule</code> and
+        provide your header, navbar, cookie banner and content bar components
+        through its constructor instead of configuring them ad hoc.
       </li>
       <li>
         Replace the old <code>GlobalDataLayer</code> usage so that it receives{" "}

@@ -38,6 +38,7 @@ import type {
   AuthModule,
   AuthState,
   Credentials,
+  FetchAuthedReturnType,
 } from "@iavofficial/frontend-framework-shared/authenticatorModule";
 import {JWT} from "aws-amplify/auth";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
@@ -115,7 +116,6 @@ export class AwsAuthenticator implements AuthModule<AwsAuthenticatorState> {
           if (!state.hasAuthenticated || state.extras.isNewPasswordRequired) {
             state.hasAuthenticated = true;
             state.extras.isNewPasswordRequired = false;
-            // @ts-ignore
             state.userData = action.payload;
             state.extras.loginError = undefined;
           }
@@ -151,28 +151,35 @@ export class AwsAuthenticator implements AuthModule<AwsAuthenticatorState> {
     } = this.slice.actions;
 
     this.fetchAuthed = createAsyncThunk<
-      Response,
-      {url: string; token?: JWT; settings?: FetchSettings},
+      FetchAuthedReturnType,
+      {url: string; token?: JWT | string; settings?: FetchSettings},
       {state: {[MandatoryModuleNames.Authenticator]: AwsAuthenticatorState}}
     >(
       MandatoryModuleNames.Authenticator + "/thunkFetchAuthed",
       async ({url, token, settings}, {dispatch, getState}) => {
         await dispatch(this.extras.checkIsAuthenticated()).unwrap();
-        return await fetch(
-          url,
-          generateSettingsWithAuthFrom(
-            getState()[MandatoryModuleNames.Authenticator],
-            token,
-            settings,
-          ),
-        ).catch(() => {
+
+        try {
+          const res = await fetch(
+            url,
+            generateSettingsWithAuthFrom(
+              getState()[MandatoryModuleNames.Authenticator],
+              token,
+              settings,
+            ),
+          );
+
+          return {
+            status: res.status,
+            body: await res.text(),
+          };
+        } catch {
           dispatch(this.logout());
-          return new Promise<Response>((resolve) => {
-            resolve(
-              new Response(null, {status: 401, statusText: "Unauthorized"}),
-            );
-          });
-        });
+          return {
+            status: 401,
+            body: "",
+          };
+        }
       },
     );
 
@@ -308,7 +315,7 @@ export class AwsAuthenticator implements AuthModule<AwsAuthenticatorState> {
 
 const generateSettingsWithAuthFrom = (
   state: AwsAuthenticatorState,
-  token?: JWT,
+  token?: JWT | string,
   settings?: FetchSettings,
 ) => {
   if (settings !== undefined) {
@@ -317,24 +324,21 @@ const generateSettingsWithAuthFrom = (
         const settingsWithAuth = Object.assign({}, settings);
         settingsWithAuth.headers?.set(
           "Authorization",
-          "Bearer " +
-            (token ? token : state.userData?.extras.idToken.toString()),
+          "Bearer " + (token ? token : state.userData?.idToken),
         );
         return settingsWithAuth;
       }
     } else {
       return Object.assign({}, settings, {
         headers: new Headers({
-          Authorization:
-            "Bearer " + (token ? token : state.userData?.extras.idToken),
+          Authorization: "Bearer " + (token ? token : state.userData?.idToken),
         }),
       });
     }
   } else {
     return {
       headers: new Headers({
-        Authorization:
-          "Bearer " + (token ? token : state.userData?.extras.idToken),
+        Authorization: "Bearer " + (token ? token : state.userData?.idToken),
       }),
     };
   }

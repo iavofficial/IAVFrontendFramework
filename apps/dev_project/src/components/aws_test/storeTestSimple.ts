@@ -18,6 +18,7 @@
 
 import {
   createModules,
+  RootState,
   StoreBuilder,
 } from "@iavofficial/frontend-framework/store";
 import { Amplify } from "aws-amplify";
@@ -27,7 +28,8 @@ import { AwsAuthenticator } from "@iavofficial/frontend-framework-aws-authentica
 import { MandatoryModuleNames } from "@iavofficial/frontend-framework/constants";
 import { I18NextInternationalizer } from "@iavofficial/frontend-framework/defaultModules";
 import { translations } from "./translations";
-import { configureStore } from "@reduxjs/toolkit";
+import { Action, configureStore, ThunkDispatch } from "@reduxjs/toolkit";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 const cognitoPool = import.meta.env.VITE_COGNITO_POOL;
 const cognitoAppId = import.meta.env.VITE_COGNITO_APP_ID;
@@ -97,3 +99,16 @@ export const useModuleTyped = modules.useModuleTyped;
 /*const { modules: modulesTest } = useModuleContextTyped();
 const authModule = useModuleTyped(MandatoryModuleNames.Authenticator);
 const userModule = useModuleTyped("userTest");*/
+
+export type LocalRootState = ReturnType<typeof store.getState>;
+export type AppDispatch = ThunkDispatch<
+  LocalRootState,
+  unknown,
+  Action<string>
+>;
+
+export const useTypedDispatch: () => AppDispatch = useDispatch;
+
+export const useTypedSelector: TypedUseSelectorHook<
+  RootState<typeof store.getState>
+> = useSelector;

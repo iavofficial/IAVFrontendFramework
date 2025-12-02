@@ -27,3 +27,5 @@ export * from "@iavofficial/frontend-framework-shared/routerModule";
 export * from "@iavofficial/frontend-framework-shared/internationalizerModule";
 
 export * from "@iavofficial/frontend-framework-shared/moduleDefaultTypes";
+
+export * from "@iavofficial/frontend-framework-shared/moduleHelperTypes";

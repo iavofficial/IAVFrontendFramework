@@ -16,6 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 import { MandatoryModuleNames } from "@iavofficial/frontend-framework/constants";
 import { I18NextInternationalizer } from "@iavofficial/frontend-framework/defaultModules";
 import {
@@ -26,6 +27,7 @@ import translationES from "../../assets/translations/es.json";
 import translationEN from "../../assets/translations/en.json";
 import translationDE from "../../assets/translations/de.json";
 import translationDECH from "../../assets/translations/de-CH.json";
+import type { ThunkDispatch, Action } from "@reduxjs/toolkit";
 
 const translations = {
   es: {
@@ -54,6 +56,14 @@ export const store = new StoreBuilder(modules.storeModules).build();
 
 export const useModuleContextTyped = modules.useModuleContextTyped;
 export const useModuleTyped = modules.useModuleTyped;
+
+// RootState and AppDispatch types inferred from the store
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = ThunkDispatch<RootState, unknown, Action<string>>;
+
+// Typed hooks
+export const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
+export const useTypedDispatch: () => AppDispatch = useDispatch;
 
 /*const {modules: modulesTest} = useModuleContextTyped();
 const authModule = useModuleTyped(MandatoryModuleNames.Authenticator);*/

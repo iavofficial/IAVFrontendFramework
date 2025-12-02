@@ -25,28 +25,29 @@ import Code from "../../../common/page/utils/code";
 
 const PageHowToMigrate: React.FC = () => (
   <Page>
-    <Title>How to migrate to the modular frontend framework</Title>
+    <Title>
+      How to migrate to the modular frontend framework (1.x.x zu 2.0.0)
+    </Title>
 
     <Text>
       This page explains how to move from a setup where the framework is used in
-      a non-modular way to the modular architecture based on modules with a
-      shared store.
+      a non-modular way (version 1.x.x) to the modular architecture based on
+      modules with a shared store.
     </Text>
 
     <SubTitle>1. From configuration to composition</SubTitle>
     <Text>
-      In a non-modular setup, it is common to pass translations, color options
-      and sometimes authentication-related pieces directly into{" "}
-      <code>GlobalDataLayer</code> and then render a layout component inside it.
-      In the modular setup, <code>GlobalDataLayer</code> no longer receives
-      these details. Instead, it only gets two things:
+      In version 1.x.x translations and other information are directly passed
+      into <code>GlobalDataLayer</code>. In version 2.0.0{" "}
+      <code>GlobalDataLayer</code> gets less information directly. However, the
+      most relevant properties are:
     </Text>
     <ul>
       <li>
-        a Redux <code>store</code>
+        A Redux <code>store</code>
       </li>
       <li>
-        a <code>modules</code> object that contains all configured modules
+        A <code>modules</code> object that contains all configured modules
       </li>
     </ul>
     <Code
@@ -54,7 +55,6 @@ const PageHowToMigrate: React.FC = () => (
       language="tsx"
     >{`<GlobalDataLayer
   translations={...}
-  colorSettings={...}
 >
   <Layout />
 </GlobalDataLayer>`}</Code>
@@ -72,23 +72,22 @@ const PageHowToMigrate: React.FC = () => (
     </Text>
     <ul>
       <li>
-        The <b>Internationalizer module</b> manages translations and language
+        <b>Internationalizer modules</b> manage translations and language
         switching instead of passing translation objects into{" "}
         <code>GlobalDataLayer</code>.
       </li>
       <li>
-        The <b>Authenticator module</b> manages login state, tokens and related
+        <b>Authenticator modules</b> manage login state, tokens and related
         thunks instead of wrapping the application with an authentication
         provider component.
       </li>
       <li>
-        The <b>UI module</b> wires header, navbar, content bar and cookie banner
-        to the store and color settings and allows you to plug in your own UI
-        components.
+        <b>UI modules</b> wire header, navbar, content bar and cookie banner to
+        the store and and allows you to plug in your own UI components.
       </li>
       <li>
-        The <b>Router module</b> provides routing components and hooks, such as
-        the main router and link elements.
+        <b>Router modules</b> provide routing components and hooks, such as the
+        main router and link elements.
       </li>
     </ul>
     <Text>
@@ -128,35 +127,13 @@ const customModules = {
 
 export const modules = createModules(customModules);
 
-export const store = new StoreBuilder(modules.storeModules)
-  .setFrameworkModuleProcessor(
-    MandatoryModuleNames.UI,
-    (module, storeConfigBuilder) => {
-      storeConfigBuilder.setReducer(
-        MandatoryModuleNames.UI,
-        module.slice.reducer,
-      );
-    },
-  )
-  .setFrameworkModuleProcessor(
-    MandatoryModuleNames.Internationalizer,
-    (module, storeConfigBuilder) => {
-      storeConfigBuilder.setReducer(
-        MandatoryModuleNames.Internationalizer,
-        module.slice.reducer,
-      );
-    },
-  )
-  .setStoreBuilder((storeConfig) =>
-    configureStore({
-      reducer: storeConfig.reducers,
-      middleware: (getDefaultMiddleware: Function) =>
-        getDefaultMiddleware().concat(storeConfig.middleware),
-      enhancers: (getDefaultEnhancers: Function) =>
-        getDefaultEnhancers().concat(storeConfig.enhancers),
-    }),
-  )
-  .build();`}</Code>
+export const store = new StoreBuilder(modules.storeModules).build();
+
+export const useModuleContextTyped = useModuleContext<typeof modules.all>;
+export const useModuleTyped = createTypedUseModule<typeof modules.all>();
+
+export const useTypedSelector: TypedSelectorHook<typeof store.getState> = useSelector;
+export const useTypedDispatch: TypedDispatchHook<typeof store.getState> = useDispatch;`}</Code>
 
     <Text>
       Once this is in place, the only thing left to do at the application
@@ -225,7 +202,7 @@ const Layout = () => (
 
     <Text>
       This means that most of your existing layout code can be kept. The
-      migration work focuses on how translation, authentication and UI wiring
+      migration work focuses on how translation. Authentication and UI wiring
       are provided.
     </Text>
 
@@ -236,8 +213,8 @@ const Layout = () => (
     </Text>
     <ol>
       <li>
-        Introduce <code>createModules</code> and <code>StoreBuilder</code> and
-        create a centralized <code>store</code> and <code>modules</code> object.
+        Use <code>createModules</code> and <code>StoreBuilder</code> and create
+        a centralized <code>store</code> and <code>modules</code> object.
       </li>
       <li>
         Move translation configuration into an{" "}
@@ -245,17 +222,18 @@ const Layout = () => (
         props from <code>GlobalDataLayer</code>.
       </li>
       <li>
-        If you use authentication, move the logic into an Authenticator module
-        and remove authentication provider components from around your app.
+        If you use <b>custom</b> authentication, move the logic into an
+        Authenticator module and remove authentication provider components from
+        around your app.
       </li>
       <li>
-        Introduce a <code>UIModule</code> and provide your header, navbar,
-        cookie banner and content bar components through its constructor instead
-        of configuring them ad hoc.
+        If you use <b>custom</b> headers etc.: Use the <code>UIModule</code> and
+        provide your header, navbar, cookie banner and content bar components
+        through its constructor instead of configuring them ad hoc.
       </li>
       <li>
         Replace the old <code>GlobalDataLayer</code> usage so that it receives{" "}
-        <code>store</code> and <code>modules.all</code> and nothing else.
+        <code>store</code> and <code>modules.all</code>.
       </li>
       <li>
         Update <code>UILayer</code> props to the current names (

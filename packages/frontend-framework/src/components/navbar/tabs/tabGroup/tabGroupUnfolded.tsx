@@ -51,7 +51,7 @@ export const TabGroupUnfolded = (
           />
         )}
         <div
-          data-testId={dataTestId}
+          data-testid={dataTestId}
           className="unfolded-group-name-arrow-wrapper"
         >
           <span id="navbar-tab-name">{props.name}</span>

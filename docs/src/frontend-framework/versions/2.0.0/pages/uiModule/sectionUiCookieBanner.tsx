@@ -17,14 +17,13 @@
  */
 
 import React from "react";
-import Page from "../../../common/page/page";
-import Title from "../../../common/page/text/title";
-import SubTitle from "../../../common/page/text/subTitle";
-import Text from "../../../common/page/text/text";
-import Code from "../../../common/page/utils/code";
+import Title from "../../../../common/page/text/title";
+import SubTitle from "../../../../common/page/text/subTitle";
+import Text from "../../../../common/page/text/text";
+import Code from "../../../../common/page/utils/code";
 
-const PageUiCookieBanner: React.FC = () => (
-  <Page>
+export const SectionUiCookieBanner: React.FC = () => (
+  <div>
     <Title>Cookie banner</Title>
 
     <Text>
@@ -148,7 +147,5 @@ const customModules = {
 export const modules = createModules(customModules);
 
 export const store = new StoreBuilder(modules.storeModules).build();`}</Code>
-  </Page>
+  </div>
 );
-
-export default PageUiCookieBanner;

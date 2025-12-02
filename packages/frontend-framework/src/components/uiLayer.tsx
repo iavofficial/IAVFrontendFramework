@@ -24,7 +24,6 @@ import React, {useEffect} from "react";
 import {useDefaultSelector} from "@iavofficial/frontend-framework-shared/moduleDefaults";
 import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
-import {NavbarSettingsProvider} from "../contexts/providers/navbarSettingsProvider";
 import {AuthenticationViewProps} from "@iavofficial/frontend-framework-shared/authenticationViewProps";
 import {StaticCollapsedState} from "../types/navbarSettingsTypes";
 import {SettingsMenuOptions} from "@iavofficial/frontend-framework-shared/settingsMenu";
@@ -51,10 +50,6 @@ export interface AuthOptions {
   errorMessages?: {passwordErrorMessage?: string};
 }
 
-export interface NavbarOptions {
-  staticCollapsedState?: StaticCollapsedState;
-}
-
 export interface Props {
   // This indicates that the passed objects should have the type's properties at least.
   tabAndContentWrappers: TabAndContentWrapper[];
@@ -67,7 +62,6 @@ export interface Props {
   userMenuOptions?: UserMenuOptions;
   headerOptions?: HeaderOptions;
   authOptions?: AuthOptions;
-  navbarOptions?: NavbarOptions;
   hideNavbar?: boolean;
 }
 
@@ -136,9 +130,7 @@ export const UILayer: React.FC<Props> = (props) => {
   const legalDocumentsPaths = (props.legalDocuments ?? []).map((d) => d.path);
 
   return (
-    <NavbarSettingsProvider
-      staticCollapsedState={props.navbarOptions?.staticCollapsedState}
-    >
+    <>
       {!props.disableCookieBanner && UILayerCookieBanner && (
         <UILayerCookieBanner />
       )}
@@ -160,6 +152,6 @@ export const UILayer: React.FC<Props> = (props) => {
           hideNavbar={props.hideNavbar}
         />
       )}
-    </NavbarSettingsProvider>
+    </>
   );
 };

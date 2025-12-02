@@ -1,3 +1,9 @@
+## [@iavofficial/frontend-framework-aws-authenticator-v1.0.0-dev.6](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-aws-authenticator-v1.0.0-dev.5...@iavofficial/frontend-framework-aws-authenticator-v1.0.0-dev.6) (2025-12-02)
+
+### Bug Fixes
+
+* resolve jwt and userData Object structure and typing issues ([2434caa](https://github.com/iavofficial/IAVFrontendFramework/commit/2434caa6af2cabcb3ae9d3fcb1ca51b3bfeb28eb))
+
 ## [@iavofficial/frontend-framework-aws-authenticator-v1.0.0-dev.5](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-aws-authenticator-v1.0.0-dev.4...@iavofficial/frontend-framework-aws-authenticator-v1.0.0-dev.5) (2025-12-01)
 
 ### Bug Fixes

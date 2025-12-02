@@ -130,6 +130,7 @@
     "./determineCurrentColor": "./dist/types/modules/ui/contentBar/wrapper/determineCurrentColor.js",
     "./settingsMenu": "./dist/modules/default_modules/ui/header/components/settingsMenu.js",
     "./userMenu": "./dist/modules/default_modules/ui/header/components/userMenu.js",
+    "./moduleHelperTypes": "./dist/types/modules/moduleHelperTypes.js",
     "./contentbar.css": "./dist/modules/default_modules/ui/contentBar/contentbar.css"
   },
   "typesVersions": {
@@ -271,6 +272,9 @@
       ],
       "./userMenu": [
         "./dist/modules/default_modules/ui/header/components/userMenu.d.ts"
+      ],
+      "./moduleHelperTypes": [
+        "./dist/types/modules/moduleHelperTypes.d.ts"
       ]
     }
   },

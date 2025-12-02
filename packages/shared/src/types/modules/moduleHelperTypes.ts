@@ -1,6 +1,6 @@
-import type { TypedUseSelectorHook } from "react-redux";
-import type { Action, ThunkDispatch } from "@reduxjs/toolkit";
-import type { RootState } from "./moduleOrchestrationTypes";
+import type {TypedUseSelectorHook} from "react-redux";
+import type {Action, ThunkDispatch} from "@reduxjs/toolkit";
+import type {RootState} from "./moduleOrchestrationTypes";
 
 type GeneralFunction = (...args: any) => any;
 

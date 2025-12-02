@@ -65,6 +65,5 @@ export type AppDispatch = ThunkDispatch<RootState, unknown, Action<string>>;
 export const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
 export const useTypedDispatch: () => AppDispatch = useDispatch;
 
-
 /*const {modules: modulesTest} = useModuleContextTyped();
 const authModule = useModuleTyped(MandatoryModuleNames.Authenticator);*/

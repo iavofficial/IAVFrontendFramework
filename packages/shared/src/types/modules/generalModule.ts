@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {Middleware, Slice, StoreEnhancer} from "@reduxjs/toolkit";
+import {Middleware, Slice, SliceCaseReducers, StoreEnhancer} from "@reduxjs/toolkit";
 
 export type ModuleLifecycleHook = () => {renderChildren: boolean} & Record<
   string,
@@ -27,8 +27,8 @@ export type FFModule = {
   useModuleLifecycle?: ModuleLifecycleHook;
 };
 
-export type FFStoreModule<TState> = {
-  slice: Slice<TState>;
+export type FFStoreModule<TState, TCaseReducers extends SliceCaseReducers<TState> = SliceCaseReducers<TState>> = {
+  slice: Slice<TState, TCaseReducers>;
   middleware?: Middleware[];
   enhancers?: StoreEnhancer[];
   extras?: object;

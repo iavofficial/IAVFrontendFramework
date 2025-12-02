@@ -26,6 +26,7 @@ import {UICookieBannerProps} from "./cookieBanner/cookieBannerModuleInterfaces";
 import {NavbarOrchestratorProps} from "../../../modules/default_modules/ui/navbar/navbarOrchestrator";
 import {ContentBarOrchestratorProps} from "../../../modules/default_modules/ui/contentBar/contentBarOrchestrator";
 import {UIContentBarProps} from "./contentBar/contentBarModuleInterfaces";
+import { CaseReducer, PayloadAction, Slice } from "@reduxjs/toolkit";
 
 export type UIState = {
   navbarCollapsed: boolean;
@@ -36,10 +37,10 @@ export type UIStoreState = {
   [MandatoryModuleNames.UI]: UIState;
 };
 
-export type UIExtras = {
-  setNavbarCollapsed: (payload: boolean) => {type: string; payload: boolean};
-  toggleNavbar: () => {type: string};
-  setCollapsible: (payload: boolean) => {type: string; payload: boolean};
+export type UIReducers<TState extends UIState = UIState> = {
+  toggleNavbar: CaseReducer<TState>;
+  setNavbarCollapsed: CaseReducer<TState, PayloadAction<boolean>>;
+  setCollapsible: CaseReducer<TState, PayloadAction<boolean>>;
 };
 
 export type UIModuleType<TState extends UIState = UIState> = {
@@ -57,5 +58,5 @@ export type UIModuleType<TState extends UIState = UIState> = {
   UILayerNavbar: React.ComponentType<
     NavbarOrchestratorProps & {uiComponent?: React.ComponentType<UINavbarProps>}
   >;
-  extras: UIExtras;
-} & FFStoreModule<TState>;
+} &
+FFStoreModule<TState, UIReducers<TState>>;

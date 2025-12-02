@@ -23,7 +23,6 @@ import PageInformation from "./pages/pageInformation.tsx";
 import PageInstallationGuide from "./pages/pageInstallationGuide.tsx";
 import PageInterface from "./pages/pageInterface.tsx";
 import PageGlobalDataLayer from "./pages/pageGlobalDataLayer.tsx";
-import PageUiLayer from "./pages/pageUiLayer.tsx";
 import PageContentArea from "./pages/pageContentArea.tsx";
 import PageColorSettings from "./pages/pageColorSettings.tsx";
 import PageDevProject from "./pages/pageDevProject.tsx";
@@ -47,12 +46,9 @@ import PageGeneralInternationalizerModule from "./pages/pageGeneralInternational
 import { SearchHeader } from "../../common/header/searchHeaders.tsx";
 import BadgeHeader from "../../common/drawer/badge/badgeHeader.tsx";
 import PageGeneralUiModule from "./pages/pageGeneralUiModule.tsx";
-import PageUiCookieBanner from "./pages/pageUiCookieBanner.tsx";
-import PageUiModule from "./pages/pageUiModule.tsx";
-import PageUiHeader from "./pages/pageUiHeader.tsx";
-import PageUiNavbar from "./pages/pageUiNavbar.tsx";
-import PageUiContentBar from "./pages/pageUiContentBar.tsx";
 import PageHowToMigrate from "./pages/pageHowToMigrate.tsx";
+import PageUiModule from "./pages/pageUiModule.tsx";
+import { PageUiLayer } from "./pages/sectionUiLayer.tsx";
 
 const pages = import.meta.glob("./pages/*.tsx");
 
@@ -183,27 +179,7 @@ const modulesRoutes: GroupRoute[] = [
         path: "ui-module",
         label: "Ui module",
         element: PageUiModule,
-      },
-      {
-        path: "ui-header",
-        label: "Header",
-        element: PageUiHeader,
-      },
-      {
-        path: "ui-navbar",
-        label: "Navbar",
-        element: PageUiNavbar,
-      },
-      {
-        path: "ui-cookie-banner",
-        label: "Cookie banner",
-        element: PageUiCookieBanner,
-      },
-      {
-        path: "ui-content-bar",
-        label: "Content bar",
-        element: PageUiContentBar,
-      },
+      }
     ],
   },
 ];

@@ -22,7 +22,6 @@ import {TabAndContentWrapper} from "@iavofficial/frontend-framework-shared/types
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
 import {calculateNavbarArrowFunctionColor} from "../../utils/calculateNavbarArrowColor";
-import {NavbarSettingsContext} from "../../contexts/navbarContext";
 import {
   DEFAULT_ELEMENT_SIZE,
   GAB_NAVBAR_COLLAPSED,
@@ -30,11 +29,11 @@ import {
   PADDING_GAB,
 } from "@iavofficial/frontend-framework-shared/constants";
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
-import {generateHashOfLength} from "@iavofficial/frontend-framework-shared/hash";
 import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
 import {useModuleTranslation} from "@iavofficial/frontend-framework-shared/useModuleTranslation";
 import {LegalDocument} from "../imprint/legalDocument";
+import { useDefaultDispatch, useDefaultSelector } from "@iavofficial/frontend-framework-shared/moduleDefaults";
 
 interface Props {
   tabAndContentWrappers: TabAndContentWrapper[];
@@ -44,11 +43,18 @@ interface Props {
 export const Navbar = (props: Props) => {
   const t = useModuleTranslation();
 
+  const dispatch = useDefaultDispatch();
+
   const routerModule = useModule(MandatoryModuleNames.Router);
   const Link = routerModule.Link;
 
+  const uiModule = useModule(MandatoryModuleNames.UI);
+  const navbarCollapsed = useDefaultSelector(state => state.ui.navbarCollapsed);
+  const collapsible = useDefaultSelector(state => state.ui.collapsible);
+  const setNavbarCollapsed = 
+  (navbarCollapsed: boolean) => dispatch(uiModule.slice.actions.setNavbarCollapsed(navbarCollapsed));
+
   const colorSettingsContext = useContext(ColorSettingsContext);
-  const navbarSettingsContext = useContext(NavbarSettingsContext);
 
   const navbarColor = colorSettingsContext.currentColors.navbar.backgroundColor;
 
@@ -71,10 +77,10 @@ export const Navbar = (props: Props) => {
         <SimpleBar
           style={{
             height: "inherit",
-            width: navbarSettingsContext.navbarCollapsed
+            width: navbarCollapsed
               ? `${DEFAULT_ELEMENT_SIZE + 2 * GAB_NAVBAR_COLLAPSED}px`
               : `${NAVBAR_WIDTH_UNFOLDED}px`,
-            padding: navbarSettingsContext.navbarCollapsed
+            padding: navbarCollapsed
               ? "0px 2px 0px 2px"
               : "0px 4px 0px 4px",
             color: scrollbarColor,
@@ -88,7 +94,7 @@ export const Navbar = (props: Props) => {
           <>
             {props.tabAndContentWrappers.map((wrapper: TabAndContentWrapper) =>
               wrapper.getNavbarComponent({
-                navbarCollapsed: navbarSettingsContext.navbarCollapsed,
+                navbarCollapsed: navbarCollapsed,
               }),
             )}
           </>
@@ -97,7 +103,7 @@ export const Navbar = (props: Props) => {
           id="navbar-bottom-wrapper"
           className={"text-center flex "}
           style={
-            navbarSettingsContext.navbarCollapsed
+            navbarCollapsed
               ? {
                   flexDirection: "column",
                   width: "44px",
@@ -110,13 +116,13 @@ export const Navbar = (props: Props) => {
             <div
               id="legal-doc-links"
               style={{
-                flexDirection: navbarSettingsContext.navbarCollapsed
+                flexDirection: navbarCollapsed
                   ? "unset"
                   : "row",
-                writingMode: navbarSettingsContext.navbarCollapsed
+                writingMode: navbarCollapsed
                   ? "sideways-lr"
                   : "horizontal-tb",
-                paddingLeft: navbarSettingsContext.navbarCollapsed
+                paddingLeft: navbarCollapsed
                   ? "0px"
                   : "12px",
               }}
@@ -137,26 +143,26 @@ export const Navbar = (props: Props) => {
             </div>
           )}
 
-          {navbarSettingsContext.collapsible && (
+          {collapsible && (
             <i
               onClick={() =>
-                navbarSettingsContext.setNavbarCollapsed(
-                  !navbarSettingsContext.navbarCollapsed,
+                setNavbarCollapsed(
+                  !navbarCollapsed,
                 )
               }
               style={{
-                ...(!navbarSettingsContext.navbarCollapsed && {
+                ...(!navbarCollapsed && {
                   position: "absolute",
                   right: 0,
                 }),
                 cursor: "pointer",
                 color: navbarCollapseArrowColor,
-                margin: navbarSettingsContext.navbarCollapsed
+                margin: navbarCollapsed
                   ? "8px 0px 0px 0px"
                   : `0px ${PADDING_GAB}px 0px 0px`,
               }}
               className={calculateNavbarArrowFunctionColor(
-                navbarSettingsContext.navbarCollapsed!,
+                navbarCollapsed!,
               )}
             />
           )}

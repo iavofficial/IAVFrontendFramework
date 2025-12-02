@@ -71,7 +71,6 @@
     "./basicAuthenticationView": "./dist/components/authentication/default/basicAuthenticationView.js",
     "./navbar": "./dist/components/navbar/navbar.js",
     "./navbarSettingsTypes": "./dist/types/navbarSettingsTypes.js",
-    "./navbarSettingsContext": "./dist/types/navbarContext.js",
     "./group": "./dist/components/navbar/wrappers/groupContentWrapper.js",
     "./simpleNavbarTab": "./dist/components/navbar/tabs/simpleNavbarTab/simpleNavbarTab.js",
     "./privilegedNavbarTab": "./dist/components/navbar/tabs/privilegedNavbarTab.js",
@@ -138,9 +137,6 @@
       ],
       "./navbarSettingsTypes": [
         "./dist/types/navbarSettingsTypes.d.ts"
-      ],
-      "./navbarSettingsContext": [
-        "./dist/types/navbarContext.d.ts"
       ],
       "./basicContentWrapper": [
         "./dist/re-exports/basicContentWrapper.d.ts"

@@ -17,14 +17,13 @@
  */
 
 import React from "react";
-import Page from "../../../common/page/page";
-import Title from "../../../common/page/text/title";
-import SubTitle from "../../../common/page/text/subTitle";
-import Text from "../../../common/page/text/text";
-import Code from "../../../common/page/utils/code";
+import Title from "../../../../common/page/text/title";
+import SubTitle from "../../../../common/page/text/subTitle";
+import Text from "../../../../common/page/text/text";
+import Code from "../../../../common/page/utils/code";
 
-const PageUiNavbar: React.FC = () => (
-  <Page>
+export const SectionUiNavbar: React.FC = () => (
+  <div>
     <Title>Navbar</Title>
 
     <Text>
@@ -172,7 +171,5 @@ const customModules = {
 };
 
 export const modules = createModules(customModules);`}</Code>
-  </Page>
+  </div>
 );
-
-export default PageUiNavbar;

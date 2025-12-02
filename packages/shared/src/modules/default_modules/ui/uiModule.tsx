@@ -22,8 +22,7 @@ import {MandatoryModuleNames} from "../../../constants/moduleNames";
 import {UIHeaderProps} from "../../../types/modules/ui/header/headerModuleInterfaces";
 import {UICookieBannerProps} from "../../../types/modules/ui/cookieBanner/cookieBannerModuleInterfaces";
 import {UINavbarProps} from "../../../types/modules/ui/navbar/navbarModuleInterfaces";
-import {
-  UIExtras,
+import type {
   UIModuleType,
   UIState,
 } from "../../../types/modules/ui/uiModuleInterfaces";
@@ -44,7 +43,13 @@ type UIParams = {
   UILayerContentBar?: (props: UIContentBarProps) => React.ReactNode;
   UILayerCookieBanner?: (props: UICookieBannerProps) => React.ReactNode;
   UILayerNavbar?: (props: UINavbarProps) => React.ReactNode;
+  staticCollapsedState?: StaticCollapsedState;
 };
+
+export enum StaticCollapsedState {
+  Collapsed,
+  Unfolded,
+}
 
 const KEY = "navbarCollapsed";
 const safeGet = () => {
@@ -61,7 +66,27 @@ const safeSet = (val: boolean) => {
   } catch {}
 };
 
-const initialState: UIState = {navbarCollapsed: safeGet(), collapsible: true};
+const calcInitialNavbarCollapsed = (staticCollapsedState?: StaticCollapsedState) => {
+      let collapsed = safeGet();
+
+    if (staticCollapsedState !== undefined) {
+      if (staticCollapsedState === StaticCollapsedState.Collapsed) {
+        collapsed = true;
+      }
+      if (staticCollapsedState === StaticCollapsedState.Unfolded) {
+        collapsed = false;
+      }
+    }
+
+    return collapsed;
+}
+
+const calcInitialState = (staticCollapsedState?: StaticCollapsedState) => {
+  return {
+    navbarCollapsed: calcInitialNavbarCollapsed(staticCollapsedState),
+    collapsible: staticCollapsedState === undefined
+  }
+};
 
 export class UIModule implements UIModuleType<UIState> {
   public slice;
@@ -84,9 +109,9 @@ export class UIModule implements UIModuleType<UIState> {
       uiComponent?: React.ComponentType<UINavbarProps>;
     }
   >;
-  public extras: UIExtras;
 
   constructor(params?: UIParams) {
+    const initialState = calcInitialState(params?.staticCollapsedState);
     this.slice = createSlice({
       name: MandatoryModuleNames.UI,
       initialState,
@@ -106,10 +131,6 @@ export class UIModule implements UIModuleType<UIState> {
         },
       },
     });
-
-    const {setNavbarCollapsed, toggleNavbar, setCollapsible} =
-      this.slice.actions;
-    this.extras = {setNavbarCollapsed, toggleNavbar, setCollapsible};
 
     this.UILayerHeader = (p) => (
       <HeaderOrchestrator {...p} uiComponent={params?.UILayerHeader} />

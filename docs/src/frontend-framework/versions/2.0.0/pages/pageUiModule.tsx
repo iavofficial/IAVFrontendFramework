@@ -22,9 +22,11 @@ import Title from "../../../common/page/text/title";
 import SubTitle from "../../../common/page/text/subTitle";
 import Text from "../../../common/page/text/text";
 import Code from "../../../common/page/utils/code";
-import Table from "../../../common/page/utils/table";
 import { ModuleProfile } from "../../../common/page/text/module/moduleProfile";
-import { MODULE_PARAM_TABLE_COLUMNS } from "../../../common/page/text/module/moduleTableColumns";
+import { SectionUiContentBar } from "./uiModule/sectionUiContentBar";
+import { SectionUiNavbar } from "./uiModule/sectionUiNavbar";
+import { SectionUiHeader } from "./uiModule/sectionUiHeader";
+import { SectionUiCookieBanner } from "./uiModule/sectionUiCookieBanner";
 
 const DESCRIPTION = `This module provides the default UI integration for the framework. It wires the header, navbar, content bar and cookie banner to the global store and allows you to plug in your own ui components.`;
 
@@ -130,6 +132,11 @@ export const store = new StoreBuilder(modules.storeModules)
     <Layout />
   </GlobalDataLayer>
 );`}</Code>
+
+        <SectionUiNavbar/>
+        <SectionUiContentBar/>
+        <SectionUiHeader/>
+        <SectionUiCookieBanner/>
     </Page>
   );
 };

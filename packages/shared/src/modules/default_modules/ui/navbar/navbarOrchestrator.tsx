@@ -30,12 +30,7 @@ import {
 import {useModule} from "../../../../contexts/moduleContext";
 import {MandatoryModuleNames} from "../../../../constants/moduleNames";
 import {calculateNavbarArrowFunctionColor} from "../../../../utils/ui/navbar/calculateNavbarArrowFunctionColor";
-import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
-import {
-  UIExtras,
-  UIModuleType as IUIModule,
-  UIStoreState,
-} from "../../../../types/modules/ui/uiModuleInterfaces";
+import { useDefaultDispatch, useDefaultSelector } from "../../../module_orchestration/moduleDefaults";
 
 type TabAndContentWrapperLike = {
   getNavbarComponent: (args: {navbarCollapsed: boolean}) => React.ReactElement;
@@ -62,18 +57,16 @@ export const NavbarOrchestrator = (props: NavbarOrchestratorProps) => {
 
   const colorSettingsContext = useContext(ColorSettingsContext);
 
-  const useTypedSelector: TypedUseSelectorHook<UIStoreState> = useSelector;
-  const collapsed = useTypedSelector(
+  const collapsed = useDefaultSelector(
     (s) => s[MandatoryModuleNames.UI].navbarCollapsed,
   );
-  const collapsible = useTypedSelector(
+  const collapsible = useDefaultSelector(
     (s) => s[MandatoryModuleNames.UI].collapsible,
   );
 
-  const dispatch = useDispatch();
-  const uiModule = useModule(MandatoryModuleNames.UI) as IUIModule & {
-    extras: UIExtras;
-  };
+  const dispatch = useDefaultDispatch();
+  const uiModule = useModule(MandatoryModuleNames.UI);
+  const onToggleCollapse = () => dispatch(uiModule.slice.actions.toggleNavbar());
 
   const items = tabAndContentWrappers.map((w) =>
     w.getNavbarComponent({navbarCollapsed: collapsed}),
@@ -116,8 +109,6 @@ export const NavbarOrchestrator = (props: NavbarOrchestratorProps) => {
   const arrowClassName = calculateNavbarArrowFunctionColor(collapsed);
   const UI = uiComponent ?? UINavbar;
 
-  const onToggleCollapse = () => dispatch(uiModule.extras.toggleNavbar());
-
   const uiProps: UINavbarProps = {
     items,
     legalLinks,
@@ -131,3 +122,4 @@ export const NavbarOrchestrator = (props: NavbarOrchestratorProps) => {
 
   return <UI {...uiProps} />;
 };
+

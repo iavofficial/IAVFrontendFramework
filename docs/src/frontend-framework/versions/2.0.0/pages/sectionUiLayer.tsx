@@ -17,14 +17,14 @@
  */
 
 import React from "react";
-import Page from "../../../common/page/page.tsx";
 import Title from "../../../common/page/text/title.tsx";
 import SubTitle from "../../../common/page/text/subTitle.tsx";
 import Code from "../../../common/page/utils/code.tsx";
 import SubSubTitle from "../../../common/page/text/subSubTitle.tsx";
 import Text from "../../../common/page/text/text.tsx";
+import Page from "../../../common/page/page.tsx";
 
-const PageUiLayer: React.FC = () => {
+export const PageUiLayer: React.FC = () => {
   return (
     <Page>
       <Title>UILayer: Navigation and Content Area Elements</Title>
@@ -403,5 +403,3 @@ enum StaticCollapsedState {
     </Page>
   );
 };
-
-export default PageUiLayer;

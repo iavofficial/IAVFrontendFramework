@@ -188,7 +188,13 @@ export const useModuleTyped = modules.useModuleTyped;`}</Code>
         The following code snippet shows you how to do this.
       </Text>
       <Code language="typescript">{`export const useModuleContextTyped = useModuleContext<typeof modules.all>;
-export const useModuleTyped = createTypedUseModule<typeof modules.all>()`}</Code>
+export const useModuleTyped = createTypedUseModule<typeof modules.all>();`}</Code>
+      <Text>
+        Furthermore, you will have to create a typed selector and dispatch hook.
+        To do this you can use the helper types provided by the framework.
+      </Text>
+      <Code language="typescript">{`export const useTypedSelector: TypedSelectorHook<typeof store.getState> = useSelector;
+export const useTypedDispatch: TypedDispatchHook<typeof store.getState> = useDispatch;`}</Code>
 
       <SubTitle>Important: Configuration of Modules</SubTitle>
       <Text>

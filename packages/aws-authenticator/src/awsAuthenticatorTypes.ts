@@ -18,20 +18,10 @@
 
 import {AsyncThunk} from "@reduxjs/toolkit";
 import {UserData} from "@iavofficial/frontend-framework-shared/authenticatorModule";
-import {JWT} from "@aws-amplify/auth";
 
-export interface JWTPojo {
-  payload: JWT["payload"];
-}
-
-// The Redux store demands that objects in action payloads are POJOs
-// (for example they cannot have functions).
 export interface AwsUserData extends UserData {
-  extras: {
-    idToken: JWTPojo;
-    accessToken: JWTPojo;
-    groups: string[];
-  };
+  idToken: string;
+  accessToken: string;
 }
 
 export type AwsAuthenticatorExtras = {

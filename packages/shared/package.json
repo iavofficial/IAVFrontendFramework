@@ -1,6 +1,6 @@
 {
   "name": "@iavofficial/frontend-framework-shared",
-  "version": "1.0.0-dev.13",
+  "version": "1.0.0-dev.14",
   "private": false,
   "license": "Apache-2.0",
   "description": "This package provides react components, contexts, types, utils etc. for use in multiple frontend framework packages.",
@@ -130,6 +130,7 @@
     "./determineCurrentColor": "./dist/types/modules/ui/contentBar/wrapper/determineCurrentColor.js",
     "./settingsMenu": "./dist/modules/default_modules/ui/header/components/settingsMenu.js",
     "./userMenu": "./dist/modules/default_modules/ui/header/components/userMenu.js",
+    "./moduleHelperTypes": "./dist/types/modules/moduleHelperTypes.js",
     "./contentbar.css": "./dist/modules/default_modules/ui/contentBar/contentbar.css"
   },
   "typesVersions": {
@@ -271,6 +272,9 @@
       ],
       "./userMenu": [
         "./dist/modules/default_modules/ui/header/components/userMenu.d.ts"
+      ],
+      "./moduleHelperTypes": [
+        "./dist/types/modules/moduleHelperTypes.d.ts"
       ]
     }
   },

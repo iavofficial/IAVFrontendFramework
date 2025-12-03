@@ -93,7 +93,7 @@ export type UIStoreState = {
 
     <SubTitle>Necessary methods (extras)</SubTitle>
     <Text>
-      Besides components, a UI module has to provide a set of actions inside the
+      Besides components, a UI module has to provide a set of actions inside the{" "}
       <i>extras</i> object. These actions are used to modify the UI state in the
       global store.
     </Text>

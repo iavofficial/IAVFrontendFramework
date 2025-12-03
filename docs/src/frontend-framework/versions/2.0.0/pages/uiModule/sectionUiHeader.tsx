@@ -17,14 +17,13 @@
  */
 
 import React from "react";
-import Page from "../../../common/page/page";
-import Title from "../../../common/page/text/title";
-import SubTitle from "../../../common/page/text/subTitle";
-import Text from "../../../common/page/text/text";
-import Code from "../../../common/page/utils/code";
+import Title from "../../../../common/page/text/title";
+import SubTitle from "../../../../common/page/text/subTitle";
+import Text from "../../../../common/page/text/text";
+import Code from "../../../../common/page/utils/code";
 
-const PageUiHeader: React.FC = () => (
-  <Page>
+export const SectionUiHeader: React.FC = () => (
+  <div>
     <Title>Header</Title>
 
     <Text>
@@ -75,14 +74,14 @@ export const HeaderOrchestrator = (props: HeaderOrchestratorProps) => {
       The default <code>UIHeader</code> implementation:
     </Text>
     <ul>
-      <li>uses the color settings context for background and icon colors</li>
-      <li>renders an application logo on the left</li>
-      <li>renders settings and user menus using PrimeReact context menus</li>
+      <li>Uses the color settings context for background and icon colors</li>
+      <li>Renders an application logo on the left</li>
+      <li>Renders settings and user menus using PrimeReact context menus</li>
       <li>
-        allows custom left/right elements and additional{" "}
+        Allows custom left/right elements and additional{" "}
         <code>headerElements</code>
       </li>
-      <li>supports hiding the user icon and/or right section</li>
+      <li>Supports hiding the user icon and/or right section</li>
     </ul>
 
     <SubTitle>Custom implementation example</SubTitle>
@@ -158,7 +157,5 @@ const customModules = {
 };
 
 export const modules = createModules(customModules);`}</Code>
-  </Page>
+  </div>
 );
-
-export default PageUiHeader;

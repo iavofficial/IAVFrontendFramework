@@ -1,6 +1,6 @@
 {
   "name": "@iavofficial/frontend-framework",
-  "version": "2.0.0-dev.9",
+  "version": "2.0.0-dev.10",
   "private": false,
   "license": "Apache-2.0",
   "description": "This framework is the foundation of frontend applications to provide maintainability, expandability, unification and an improved developer experience.",
@@ -71,7 +71,6 @@
     "./basicAuthenticationView": "./dist/components/authentication/default/basicAuthenticationView.js",
     "./navbar": "./dist/components/navbar/navbar.js",
     "./navbarSettingsTypes": "./dist/types/navbarSettingsTypes.js",
-    "./navbarSettingsContext": "./dist/types/navbarContext.js",
     "./group": "./dist/components/navbar/wrappers/groupContentWrapper.js",
     "./simpleNavbarTab": "./dist/components/navbar/tabs/simpleNavbarTab/simpleNavbarTab.js",
     "./privilegedNavbarTab": "./dist/components/navbar/tabs/privilegedNavbarTab.js",
@@ -138,9 +137,6 @@
       ],
       "./navbarSettingsTypes": [
         "./dist/types/navbarSettingsTypes.d.ts"
-      ],
-      "./navbarSettingsContext": [
-        "./dist/types/navbarContext.d.ts"
       ],
       "./basicContentWrapper": [
         "./dist/re-exports/basicContentWrapper.d.ts"

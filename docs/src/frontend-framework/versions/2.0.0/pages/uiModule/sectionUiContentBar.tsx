@@ -17,14 +17,13 @@
  */
 
 import React from "react";
-import Page from "../../../common/page/page";
-import Title from "../../../common/page/text/title";
-import SubTitle from "../../../common/page/text/subTitle";
-import Text from "../../../common/page/text/text";
-import Code from "../../../common/page/utils/code";
+import Title from "../../../../common/page/text/title";
+import SubTitle from "../../../../common/page/text/subTitle";
+import Text from "../../../../common/page/text/text";
+import Code from "../../../../common/page/utils/code";
 
-const PageUiContentBar: React.FC = () => (
-  <Page>
+export const SectionUiContentBar: React.FC = () => (
+  <div>
     <Title>Content bar</Title>
 
     <Text>
@@ -78,13 +77,13 @@ export type StylesArray<T> = T[keyof T][];`}</Code>
       The default <code>UIContentBar</code> implementation:
     </Text>
     <ul>
-      <li>reads the navbar collapsed state from the UI store</li>
-      <li>measures the available width and calculates the tab width</li>
-      <li>handles overflow using left/right slide buttons</li>
+      <li>Reads the navbar collapsed state from the UI store</li>
+      <li>Measures the available width and calculates the tab width</li>
+      <li>Handles overflow using left/right slide buttons</li>
       <li>
-        supports styling via <code>appliedStyles</code>
+        Supports styling via <code>appliedStyles</code>
       </li>
-      <li>uses the current color settings from the color context</li>
+      <li>Uses the current color settings from the color context</li>
     </ul>
 
     <SubTitle>Custom implementation example</SubTitle>
@@ -206,7 +205,5 @@ const customModules = {
 };
 
 export const modules = createModules(customModules);`}</Code>
-  </Page>
+  </div>
 );
-
-export default PageUiContentBar;

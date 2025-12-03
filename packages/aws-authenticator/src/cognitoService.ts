@@ -26,7 +26,6 @@ import {
   signIn,
   signOut,
 } from "aws-amplify/auth";
-import {JWTPojo} from "./awsAuthenticatorTypes";
 import type {Credentials} from "@iavofficial/frontend-framework-shared/authenticatorModule";
 
 export async function cognitoLogin(
@@ -109,15 +108,15 @@ async function handleSessionResult(
   return await fetchAuthSession({forceRefresh: forceRefresh})
     .then((response) => {
       const {tokens} = response;
-      const idToken = tokens?.idToken;
-      const accessToken = tokens?.accessToken;
-      const groups = idToken?.payload["cognito:groups"];
-      const username = idToken?.payload["cognito:username"] as string;
+      const userGroups = tokens?.idToken?.payload["cognito:groups"];
+      const username = tokens?.idToken?.payload["cognito:username"] as string;
+      const idToken = tokens?.idToken?.toString();
+      const accessToken = tokens?.accessToken.toString();
 
       if (failOnNoLegalGroup) {
-        if (!groups || !legalGroups) throw new Error("UserGroupError"); // throw invalid user error (user is valid and authorized, but is not assigned any legal groups)
+        if (!userGroups || !legalGroups) throw new Error("UserGroupError"); // throw invalid user error (user is valid and authorized, but is not assigned any legal groups)
 
-        if (!containsOneOrMoreGroups(groups as string[], legalGroups))
+        if (!containsOneOrMoreGroups(userGroups as string[], legalGroups))
           throw new Error("UserGroupError"); // throw invalid user error (user is valid and authorized, but is not assigned any legal groups)
       }
 
@@ -125,7 +124,7 @@ async function handleSessionResult(
         idToken!,
         accessToken!,
         username.toString(),
-        groups as string[],
+        userGroups as string[],
       );
     })
     .catch((error: Error) => {
@@ -134,20 +133,16 @@ async function handleSessionResult(
 }
 
 export class ValidUserInformation {
-  public idToken: JWTPojo;
-  public accessToken: JWTPojo;
+  public idToken: string;
+  public accessToken: string;
 
   constructor(
-    idToken: JWT,
-    accessToken: JWT,
+    idToken: string,
+    accessToken: string,
     public username: string,
-    public groups: string[],
+    public userGroups: string[],
   ) {
-    this.idToken = {
-      payload: idToken.payload,
-    };
-    this.accessToken = {
-      payload: accessToken.payload,
-    };
+    this.idToken = idToken;
+    this.accessToken = accessToken;
   }
 }

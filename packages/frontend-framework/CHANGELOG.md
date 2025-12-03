@@ -1,3 +1,9 @@
+## [@iavofficial/frontend-framework-v2.0.0-dev.10](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v2.0.0-dev.9...@iavofficial/frontend-framework-v2.0.0-dev.10) (2025-12-02)
+
+### Bug Fixes
+
+* Fixed Ui Module types ([47de40f](https://github.com/iavofficial/IAVFrontendFramework/commit/47de40f5996df2b057b25c5b419b8de8fda8356c))
+
 ## [@iavofficial/frontend-framework-v2.0.0-dev.9](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v2.0.0-dev.8...@iavofficial/frontend-framework-v2.0.0-dev.9) (2025-12-01)
 
 ## [@iavofficial/frontend-framework-v2.0.0-dev.8](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-v2.0.0-dev.7...@iavofficial/frontend-framework-v2.0.0-dev.8) (2025-11-28)

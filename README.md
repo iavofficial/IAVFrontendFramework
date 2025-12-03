@@ -21,6 +21,8 @@
 [![license](https://img.shields.io/badge/license-Apache--2.0-blue)](./LICENSE)
 
 > 🎉 **Version 2.0.0 is now available!**
+> 
+> Important Note: With version 2.0.0, all framework packages have been fully updated and aligned with the new architecture.
 >
 > This release introduces the new **modular architecture** and several improvements:
 >

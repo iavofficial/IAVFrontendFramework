@@ -91,33 +91,6 @@ export type UIStoreState = {
       ]}
     />
 
-    <SubTitle>Necessary methods (extras)</SubTitle>
-    <Text>
-      Besides components, a UI module has to provide a set of actions inside the{" "}
-      <i>extras</i> object. These actions are used to modify the UI state in the
-      global store.
-    </Text>
-    <Table
-      columns={MODULE_METHOD_TABLE_COLUMNS}
-      data={[
-        {
-          name: "setNavbarCollapsed",
-          type: CodeSetNavbarCollapsedType,
-          description: `Sets the collapsed state of the navbar explicitly.`,
-        },
-        {
-          name: "toggleNavbar",
-          type: CodeToggleNavbarType,
-          description: `Toggles the collapsed state of the navbar.`,
-        },
-        {
-          name: "setCollapsible",
-          type: CodeSetCollapsibleType,
-          description: `Controls whether the navbar can be collapsed at all.`,
-        },
-      ]}
-    />
-
     <SubTitle>UI module type</SubTitle>
     <Text>
       All UI modules have to implement the following type. It combines the

@@ -27,6 +27,8 @@ import { SectionUiContentBar } from "./uiModule/sectionUiContentBar";
 import { SectionUiNavbar } from "./uiModule/sectionUiNavbar";
 import { SectionUiHeader } from "./uiModule/sectionUiHeader";
 import { SectionUiCookieBanner } from "./uiModule/sectionUiCookieBanner";
+import Table from "../../../common/page/utils/table.tsx";
+import { MODULE_METHOD_TABLE_COLUMNS } from "../../../common/page/text/module/moduleTableColumns.tsx";
 
 const DESCRIPTION = `This module provides the default UI integration for the framework. It wires the header, navbar, content bar and cookie banner to the global store and allows you to plug in your own ui components.`;
 
@@ -82,6 +84,33 @@ const initialState: UIState = {
         For details on the expected method signatures, see the general UI module
         description.
       </Text>
+
+      <SubTitle>Necessary methods</SubTitle>
+      <Text>
+        Besides components, a UI module has to provide a set of actions inside
+        the <i>extras</i> object. These actions are used to modify the UI state
+        in the global store.
+      </Text>
+      <Table
+        columns={MODULE_METHOD_TABLE_COLUMNS}
+        data={[
+          {
+            name: "setNavbarCollapsed",
+            type: CodeSetNavbarCollapsedType,
+            description: `Sets the collapsed state of the navbar explicitly.`,
+          },
+          {
+            name: "toggleNavbar",
+            type: CodeToggleNavbarType,
+            description: `Toggles the collapsed state of the navbar.`,
+          },
+          {
+            name: "setCollapsible",
+            type: CodeSetCollapsibleType,
+            description: `Controls whether the navbar can be collapsed at all.`,
+          },
+        ]}
+      />
 
       <SubTitle>Example usage</SubTitle>
       <Text>

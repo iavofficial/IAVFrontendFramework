@@ -1,11 +1,24 @@
-const fs = require("fs");
+import fs from 'node:fs';
+import path from 'node:path';
+import url from 'node:url';
 
-const lockfile = "package-lock.json";
-const artifactoryHost = "https://artifactory.iav.com";
-const npmjs = "https://registry.npmjs.org";
+const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+const lockfilePath = path.join(__dirname, '..', 'package-lock.json');
 
-let content = fs.readFileSync(lockfile, 'utf8');
+if (!fs.existsSync(lockfilePath)) {
+    console.log('package-lock.json not found, skipping registry fix');
+    process.exit(0);
+}
 
-content = content.replace(new RegExp(artifactoryHost.replace(/\//g, "\\/"), "g"), npmjs);
+const content = fs.readFileSync(lockfilePath, 'utf8');
 
-fs.writeFileSync(lockfile, content);
+const replaced = content
+    .replace(/https:\/\/artifactory\.iav\.com\/artifactory\/api\/npm\/npm\//g, 'https://registry.npmjs.org/')
+    .replace(/https:\/\/portal\.partner\.iavtech\.net\/F5Networks-SSO-Req[^\s"]*/g, 'https://registry.npmjs.org/');
+
+if (content !== replaced) {
+    fs.writeFileSync(lockfilePath, replaced);
+    console.log('✅ Rewrote Artifactory URLs in package-lock.json');
+} else {
+    console.log('ℹ️ No Artifactory URLs found in package-lock.json – nothing to do.');
+}

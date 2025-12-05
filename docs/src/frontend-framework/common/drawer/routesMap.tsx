@@ -18,13 +18,23 @@
 
 import React, { useEffect } from "react";
 import { PathRoute } from "../page/pathRoute.ts";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useParams } from "react-router-dom";
 import { SearchHeader } from "../header/searchHeaders.tsx";
 
 interface Props {
   routes: PathRoute[];
   getPages: (routes: PathRoute[]) => Promise<SearchHeader[]>;
 }
+
+const FallbackToOverview: React.FC = () => {
+  const { projectName, version } = useParams();
+
+  if (!projectName || !version) {
+    return <Navigate to="/" replace />;
+  }
+
+  return <Navigate to={`/${projectName}/${version}/overview`} replace />;
+};
 
 const RoutesMap: React.FC<Props> = (props) => {
   const { routes } = props;
@@ -38,6 +48,7 @@ const RoutesMap: React.FC<Props> = (props) => {
       {routes.map(({ path, element: Component }) => (
         <Route key={path} path={path} element={<Component />} />
       ))}
+      <Route path="*" element={<FallbackToOverview />} />
     </Routes>
   );
 };

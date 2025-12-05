@@ -171,3 +171,21 @@ export const store = new StoreBuilder(modules.storeModules)
 };
 
 export default PageUiModule;
+
+const CodeSetNavbarCollapsedType = (
+  <Code
+    language="typescript"
+    center
+  >{`(payload: boolean) => { type: string; payload: boolean }`}</Code>
+);
+
+const CodeToggleNavbarType = (
+  <Code language="typescript" center>{`() => { type: string }`}</Code>
+);
+
+const CodeSetCollapsibleType = (
+  <Code
+    language="typescript"
+    center
+  >{`(payload: boolean) => { type: string; payload: boolean }`}</Code>
+);

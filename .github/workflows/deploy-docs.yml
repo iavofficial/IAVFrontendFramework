@@ -20,20 +20,26 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: 'docs/package-lock.json'
 
-      - name: Use public npm registry
+      - name: Install dependencies & build (public npm registry)
         working-directory: docs
-        run: npm config set registry https://registry.npmjs.org/
-
-      - name: Install & build
-        working-directory: docs
+        env:
+          NPM_CONFIG_REGISTRY: https://registry.npmjs.org/
         run: |
+          npm config delete registry || true
+          npm config set registry https://registry.npmjs.org/
           npm ci
           npm run build
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

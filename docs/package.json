@@ -9,7 +9,8 @@
     "build": "vite build",
     "postbuild": "node fix-paths.js",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "postinstall": "node scripts/fix-lockfile-registry.js"
   },
   "dependencies": {
     "react": "^19.2.0",

@@ -24,10 +24,15 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Fix lockfile registry
+        working-directory: docs
+        run: node scripts/fix-lockfile-registry.js
+
       - name: Install & build
         working-directory: docs
+        env:
+          NPM_CONFIG_REGISTRY: https://registry.npmjs.org/
         run: |
-          npm i
           npm ci
           npm run build
       - name: Upload artifact

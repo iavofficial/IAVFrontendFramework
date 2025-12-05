@@ -24,6 +24,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+
+      - name: Use public npm registry
+        working-directory: docs
+        run: npm config set registry https://registry.npmjs.org/
+
       - name: Install & build
         working-directory: docs
         run: |

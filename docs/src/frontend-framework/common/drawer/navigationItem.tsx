@@ -76,13 +76,18 @@ const NavigationItem: React.FC<PropsWithChildren<Props>> = (props) => {
 
   const { classes } = useStyles();
   const location = useLocation();
+  const segments = location.pathname.split("/").filter(Boolean);
 
-  const isActive = location.pathname.endsWith(`/${to}`);
+  const base = segments.slice(0, 2).join("/");
+
+  const target = `/${base}/${to}`;
+
+  const isActive = location.pathname === target;
 
   return (
     <li key={to}>
       <Link
-        to={to}
+        to={target}
         className={`${classes.link} ${isActive ? classes.activeLink : ""}`}
       >
         {label}

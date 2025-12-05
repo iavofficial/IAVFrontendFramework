@@ -48,7 +48,7 @@ const PageOverview: React.FC = () => {
     },
     {
       Category: "Requirements",
-      Value: "At least npm version 8 and node version 16",
+      Value: "At least npm version 10 and node version 22",
     },
   ];
   return (

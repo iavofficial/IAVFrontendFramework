@@ -35,7 +35,7 @@
     "@iavofficial/frontend-framework": "*",
     "@iavofficial/frontend-framework-aws-authenticator": "*",
     "antd": "^6.0.0",
-    "aws-amplify": "^6.15.8",
+    "aws-amplify": "^6.16.4",
     "glob": "^13.0.0",
     "primereact": "^10.9.7",
     "react": "^19.2.0",

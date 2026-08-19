@@ -38,7 +38,7 @@
     "prettier": "^3.7.1",
     "conventional-changelog-conventionalcommits": "^9.1.0",
     "@babel/cli": "^7.28.3",
-    "@babel/core": "^7.28.5",
+    "@babel/core": "^7.29.6",
     "@babel/plugin-transform-class-properties": "^7.27.1",
     "@babel/preset-env": "^7.25.4",
     "@babel/preset-react": "^7.28.5",

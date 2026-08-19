@@ -4,10 +4,22 @@
   "private": true,
   "license": "Apache-2.0",
   "contributors": [
-    { "name": "Joerg Jonas Krahn", "email": "joerg.jonas.krahn@iav.de" },
-    { "name": "Daniel Helfenstein", "email": "daniel.helfenstein@iav.de" },
-    { "name": "Christian Becke", "email": "christian.becke@iav.de" },
-    { "name": "Mike Wegele", "email": "mike.wegele@iav.de" }
+    {
+      "name": "Joerg Jonas Krahn",
+      "email": "joerg.jonas.krahn@iav.de"
+    },
+    {
+      "name": "Daniel Helfenstein",
+      "email": "daniel.helfenstein@iav.de"
+    },
+    {
+      "name": "Christian Becke",
+      "email": "christian.becke@iav.de"
+    },
+    {
+      "name": "Mike Wegele",
+      "email": "mike.wegele@iav.de"
+    }
   ],
   "scripts": {
     "setup:root": "node -e \"const fs=require('fs');process.exit(fs.existsSync('package-lock.json')?0:1)\" && npm ci || npm install",
@@ -20,6 +32,9 @@
     "format": "prettier --write \"{packages,apps,docs}/**/src/**/*.{ts,tsx,js,jsx,json,html,css}\"",
     "release": "turbo run release --concurrency=1",
     "generate-docs": "turbo run generate-docs",
+    "deps:update:minor": "node scripts/npm/update-minor.mjs",
+    "audit:fix": "node scripts/npm/audit-fix.mjs",
+    "audit:fix:force": "npm run audit:fix -- --force",
     "postinstall": "node scripts/fix-lockfile-registry.js"
   },
   "workspaces": [
@@ -27,36 +42,36 @@
     "packages/*"
   ],
   "devDependencies": {
+    "@babel/cli": "^7.29.7",
+    "@babel/core": "^7.29.7",
+    "@babel/plugin-transform-class-properties": "^7.29.7",
+    "@babel/preset-env": "^7.29.7",
+    "@babel/preset-react": "^7.29.7",
+    "@babel/preset-typescript": "^7.29.7",
+    "@eslint/js": "^9.39.5",
+    "@rollup/plugin-node-resolve": "^16.0.3",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^13.0.1",
     "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^12.0.2",
-    "cross-env": "^10.1.0",
-    "semantic-release": "^25.0.2",
-    "semantic-release-monorepo": "^8.0.2",
-    "turbo": "^2.9.14",
-    "prettier": "^3.7.1",
-    "conventional-changelog-conventionalcommits": "^9.1.0",
-    "@babel/cli": "^7.28.3",
-    "@babel/core": "^7.29.6",
-    "@babel/plugin-transform-class-properties": "^7.27.1",
-    "@babel/preset-env": "^7.25.4",
-    "@babel/preset-react": "^7.28.5",
-    "@babel/preset-typescript": "^7.28.5",
+    "@semantic-release/github": "^12.0.9",
     "@svgr/babel-plugin-transform-svg-component": "^8.0.0",
-    "@rollup/plugin-node-resolve": "^16.0.3",
-    "@typescript-eslint/eslint-plugin": "^8.48.0",
-    "@typescript-eslint/parser": "^8.48.0",
+    "@typescript-eslint/eslint-plugin": "^8.67.0",
+    "@typescript-eslint/parser": "^8.67.0",
     "@vitejs/plugin-react": "^5.2.0",
-    "eslint": "^9.39.1",
-    "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-react-refresh": "^0.4.24",
-    "vite": "^8.0.16",
-    "vite-plugin-svgr": "^4.5.0",
     "babel-plugin-inline-react-svg": "^2.0.2",
-    "jest": "^30.2.0",
-    "@eslint/js": "^9.39.1"
-
+    "conventional-changelog-conventionalcommits": "^9.3.1",
+    "cross-env": "^10.1.0",
+    "eslint": "^9.39.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.4",
+    "jest": "^30.4.2",
+    "prettier": "^3.9.6",
+    "semantic-release": "^25.0.9",
+    "semantic-release-monorepo": "^8.0.2",
+    "turbo": "^2.10.11",
+    "vite": "^8.2.1",
+    "vite-plugin-svgr": "^4.5.0",
+    "npm-check-updates": "^18.3.1"
   },
-  "packageManager": "npm@10.8.2"
+  "packageManager": "npm@10.9.9"
 }

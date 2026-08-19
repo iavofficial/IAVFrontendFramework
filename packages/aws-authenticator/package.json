@@ -12,7 +12,9 @@
     "lint": "eslint src/**/*.{js,ts,tsx}",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json}\" && prettier --write \"docs/*\"",
     "release": "npx semantic-release",
-    "generate-docs": "../../scripts/unix/docs_generation/generate-docs-for-package.sh"
+    "generate-docs": "../../scripts/unix/docs_generation/generate-docs-for-package.sh",
+    "deps:update:minor": "npx npm-check-updates --target minor -u",
+    "audit:fix": "npm audit fix"
   },
   "eslintConfig": {
     "extends": [
@@ -37,20 +39,20 @@
   ],
   "dependencies": {
     "@iavofficial/frontend-framework-shared": "*",
-    "@reduxjs/toolkit": "^2.11.0",
-    "aws-amplify": "^6.16.4",
-    "glob": "^13.0.0",
-    "react-redux": "^9.2.0"
+    "@reduxjs/toolkit": "^2.12.0",
+    "aws-amplify": "^6.20.0",
+    "glob": "^13.0.6",
+    "react-redux": "^9.3.0"
   },
   "peerDependencies": {
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
   "devDependencies": {
-    "@types/lodash": "^4.17.21",
-    "@types/node": "^24.10.1",
-    "@types/react": "^19.2.7",
-    "@types/react-dom": "^19.2.3",
+    "@types/lodash": "^4.17.25",
+    "@types/node": "^24.13.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
     "typescript": "^5.9.3"
   },
   "files": [

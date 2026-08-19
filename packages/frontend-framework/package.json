@@ -11,7 +11,9 @@
     "test": "jest --passWithNoTests",
     "lint": "eslint src/**/*.{js,ts,tsx}",
     "release": "npx semantic-release",
-    "generate-docs": "../../scripts/unix/docs_generation/generate-docs-for-package.sh"
+    "generate-docs": "../../scripts/unix/docs_generation/generate-docs-for-package.sh",
+    "deps:update:minor": "npx npm-check-updates --target minor -u",
+    "audit:fix": "npm audit fix"
   },
   "eslintConfig": {
     "extends": [
@@ -35,13 +37,13 @@
   ],
   "dependencies": {
     "@iavofficial/frontend-framework-shared": "*",
-    "@reduxjs/toolkit": "^2.11.0",
-    "glob": "^13.0.0",
+    "@reduxjs/toolkit": "^2.12.0",
+    "glob": "^13.0.6",
     "primeflex": "^4.0.0",
     "primeicons": "^7.0.0",
-    "primereact": "^10.9.7",
-    "react-cookie": "^8.0.1",
-    "react-redux": "^9.2.0",
+    "primereact": "^10.9.8",
+    "react-cookie": "^8.1.2",
+    "react-redux": "^9.3.0",
     "simplebar": "^6.3.3",
     "simplebar-react": "^3.3.2"
   },
@@ -51,10 +53,10 @@
     "react-transition-group": "^4.4.5"
   },
   "devDependencies": {
-    "@types/lodash": "^4.17.21",
-    "@types/node": "^24.10.1",
-    "@types/react": "^19.2.7",
-    "@types/react-dom": "^19.2.3",
+    "@types/lodash": "^4.17.25",
+    "@types/node": "^24.13.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
     "typescript": "^5.9.3"
   },
   "files": [

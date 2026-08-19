@@ -11,7 +11,9 @@
   ],
   "scripts": {
     "setup": "npm i",
-    "dev": "vite"
+    "dev": "vite",
+    "deps:update:minor": "npx npm-check-updates --target minor -u",
+    "audit:fix": "npm audit fix"
   },
   "eslintConfig": {
     "extends": [
@@ -34,17 +36,17 @@
   "dependencies": {
     "@iavofficial/frontend-framework": "*",
     "@iavofficial/frontend-framework-aws-authenticator": "*",
-    "antd": "^6.0.0",
-    "aws-amplify": "^6.16.4",
-    "glob": "^13.0.0",
-    "primereact": "^10.9.7",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
+    "antd": "^6.6.1",
+    "aws-amplify": "^6.20.0",
+    "glob": "^13.0.6",
+    "primereact": "^10.9.8",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
     "react-transition-group": "^4.4.5"
   },
   "devDependencies": {
-    "@types/react": "^19.2.7",
-    "@types/react-dom": "^19.2.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
     "typescript": "^5.9.3"
   }
 }

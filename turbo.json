@@ -10,20 +10,37 @@
       "cache": false
     },
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**"]
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
     },
     "test": {
-      "dependsOn": ["build"],
+      "dependsOn": [
+        "build"
+      ],
       "outputs": [],
       "cache": false
     },
     "release": {
-      "dependsOn": ["build"],
-      "env": ["GITHUB_TOKEN", "NPM_TOKEN"],
+      "dependsOn": [
+        "build"
+      ],
+      "env": [
+        "GITHUB_TOKEN",
+        "NPM_TOKEN"
+      ],
       "cache": false
     },
     "generate-docs": {
+      "cache": false
+    },
+    "deps:update:minor": {
+      "cache": false
+    },
+    "audit:fix": {
       "cache": false
     }
   }

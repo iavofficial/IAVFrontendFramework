@@ -63,8 +63,7 @@ export class Group implements GroupableTabAndContentWrapper {
   // can be of type InjectedOptionsByNavbarToWrapper.
   getNavbarComponent = (
     frameworkInjectedOptions:
-      | InjectedOptionsByNavbarToWrapper
-      | InjectedOptionsByGroupToWrapper,
+      InjectedOptionsByNavbarToWrapper | InjectedOptionsByGroupToWrapper,
   ) => {
     const injectedProperties = {
       navbarCollapsed: frameworkInjectedOptions.navbarCollapsed,

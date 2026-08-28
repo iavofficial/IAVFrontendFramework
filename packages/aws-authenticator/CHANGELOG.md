@@ -1,3 +1,9 @@
+## [@iavofficial/frontend-framework-aws-authenticator-v1.0.0-dev.7](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-aws-authenticator-v1.0.0-dev.6...@iavofficial/frontend-framework-aws-authenticator-v1.0.0-dev.7) (2026-08-28)
+
+### Features
+
+* Added functionality to split the navigation bar ([03d3149](https://github.com/iavofficial/IAVFrontendFramework/commit/03d31494f90239d9b9da7f56a67d344f3c08df7c))
+
 ## [@iavofficial/frontend-framework-aws-authenticator-v1.0.0-dev.6](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-aws-authenticator-v1.0.0-dev.5...@iavofficial/frontend-framework-aws-authenticator-v1.0.0-dev.6) (2025-12-02)
 
 ### Bug Fixes

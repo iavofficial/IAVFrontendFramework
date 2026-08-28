@@ -78,6 +78,10 @@
         },
         "releaseRules": [
           {
+            "type": "feature",
+            "release": "minor"
+          },
+          {
             "type": "style",
             "release": "patch"
           },

@@ -1,3 +1,9 @@
+## [@iavofficial/frontend-framework-shared-v1.0.0-dev.15](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-shared-v1.0.0-dev.14...@iavofficial/frontend-framework-shared-v1.0.0-dev.15) (2026-08-28)
+
+### Features
+
+* Added functionality to split the navigation bar ([03d3149](https://github.com/iavofficial/IAVFrontendFramework/commit/03d31494f90239d9b9da7f56a67d344f3c08df7c))
+
 ## [@iavofficial/frontend-framework-shared-v1.0.0-dev.14](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-shared-v1.0.0-dev.13...@iavofficial/frontend-framework-shared-v1.0.0-dev.14) (2025-12-02)
 
 ### Bug Fixes

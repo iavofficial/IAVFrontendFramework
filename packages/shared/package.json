@@ -4,6 +4,11 @@
   "private": false,
   "license": "Apache-2.0",
   "description": "This package provides react components, contexts, types, utils etc. for use in multiple frontend framework packages.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iavofficial/IAVFrontendFramework",
+    "directory": "packages/shared"
+  },
   "scripts": {
     "setup": "npm i",
     "build": "sh ../../scripts/unix/packages/build.sh",

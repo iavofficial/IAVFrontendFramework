@@ -4,6 +4,11 @@
   "private": false,
   "license": "Apache-2.0",
   "description": "This package provides AWS authentication using AWS Cognito.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iavofficial/IAVFrontendFramework",
+    "directory": "packages/aws-authenticator"
+  },
   "scripts": {
     "setup": "npm i",
     "build": "sh ../../scripts/unix/packages/build.sh",

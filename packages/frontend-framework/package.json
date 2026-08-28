@@ -4,6 +4,11 @@
   "private": false,
   "license": "Apache-2.0",
   "description": "This framework is the foundation of frontend applications to provide maintainability, expandability, unification and an improved developer experience.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iavofficial/IAVFrontendFramework",
+    "directory": "packages/frontend-framework"
+  },
   "scripts": {
     "setup": "npm i",
     "build": "sh ../../scripts/unix/packages/build.sh",

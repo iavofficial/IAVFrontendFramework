@@ -41,7 +41,6 @@ export type GroupableTabAndContentWrapper = TabAndContentWrapper & {
   setInsideGroup(insideGroup: boolean): any;
   getNavbarComponent(
     navbarInjectedOptions:
-      | InjectedOptionsByNavbarToWrapper
-      | InjectedOptionsByGroupToWrapper,
+      InjectedOptionsByNavbarToWrapper | InjectedOptionsByGroupToWrapper,
   ): ReactElement;
 };

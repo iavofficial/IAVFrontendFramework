@@ -48,8 +48,7 @@ export class BasicContentWrapper
   // the options of groups.
   getNavbarComponent = (
     navbarInjectedOptions:
-      | InjectedOptionsByNavbarToWrapper
-      | InjectedOptionsByGroupToWrapper,
+      InjectedOptionsByNavbarToWrapper | InjectedOptionsByGroupToWrapper,
   ) => {
     const NavbarElement = this._navbarTab;
 

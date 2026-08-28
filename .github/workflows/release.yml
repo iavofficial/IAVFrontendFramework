@@ -39,6 +39,11 @@ jobs:
           node-version: '22.x'
           cache: 'npm'
 
+      - name: Update npm
+        run: |
+          npm install -g npm@11.6.2
+          npm --version
+
       - name: Make scripts executable
         run: find ./scripts/unix/ -type f -exec chmod +x {} \;
 
@@ -81,6 +86,11 @@ jobs:
         with:
           node-version: '22.x'
           cache: 'npm'
+
+      - name: Update npm
+        run: |
+          npm install -g npm@11.6.2
+          npm --version
 
       - name: Make scripts executable
         run: find ./scripts/unix/ -type f -exec chmod +x {} \;

@@ -27,6 +27,7 @@ import {UserMenuOptions} from "@iavofficial/frontend-framework-shared/userMenu";
 import {TabAndContentWrapper} from "@iavofficial/frontend-framework-shared/typesWrappers";
 import {LegalDocument} from "./imprint/legalDocument";
 import If from "./helper/If";
+import {NavbarOptions} from "../types/navbarSettingsTypes";
 
 interface MainViewProps {
   tabAndContentWrappers: TabAndContentWrapper[];
@@ -35,6 +36,7 @@ interface MainViewProps {
   settingsMenuOptions?: SettingsMenuOptions;
   userMenuOptions?: UserMenuOptions;
   hideNavbar?: boolean;
+  navbarOptions?: NavbarOptions;
 }
 
 export const MainView: React.FC<MainViewProps> = (props) => {
@@ -92,6 +94,7 @@ export const MainView: React.FC<MainViewProps> = (props) => {
             <Navbar
               tabAndContentWrappers={props.tabAndContentWrappers}
               legalDocuments={props.legalDocuments}
+              navbarOptions={props.navbarOptions}
             />
           )}
         </If>

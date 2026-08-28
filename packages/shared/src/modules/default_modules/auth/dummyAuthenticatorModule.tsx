@@ -24,6 +24,7 @@ import {
 } from "@reduxjs/toolkit";
 import {
   Credentials,
+  FetchAuthedReturnType,
   UserData,
 } from "../../../types/modules/auth/authenticatorModule";
 import {MandatoryModuleNames} from "../../../constants/moduleNames";
@@ -72,7 +73,7 @@ export class DummyAuthenticator {
     const {login, logout} = this.slice.actions;
 
     this.fetchAuthed = createAsyncThunk<
-      Response,
+      FetchAuthedReturnType,
       {url: string; settings?: object},
       {state: {[MandatoryModuleNames.Authenticator]: DummyAuthenticatorState}}
     >(

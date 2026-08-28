@@ -19,10 +19,15 @@
 import React from "react";
 import {Fragment} from "react/jsx-dev-runtime";
 import {useEffect} from "react";
-import {Route, Routes, useLocation, useNavigate} from "react-router";
 import {generateHash} from "../../../../utils/hash";
 import {useSelector} from "react-redux";
-import {BrowserRouter} from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import {UILayerRouterProps} from "../../../../types/modules/router/routerModule";
 import type {DefaultRootState} from "../../../../types/modules/moduleDefaultTypes";
 

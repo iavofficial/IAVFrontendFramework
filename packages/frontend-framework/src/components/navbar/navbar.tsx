@@ -37,10 +37,12 @@ import {
   useDefaultDispatch,
   useDefaultSelector,
 } from "@iavofficial/frontend-framework-shared/moduleDefaults";
+import {NavbarOptions} from "../../types/navbarSettingsTypes";
 
 interface Props {
   tabAndContentWrappers: TabAndContentWrapper[];
   legalDocuments?: LegalDocument[];
+  navbarOptions?: NavbarOptions;
 }
 
 export const Navbar = (props: Props) => {
@@ -76,6 +78,24 @@ export const Navbar = (props: Props) => {
     (document) => !document.isHidden,
   );
 
+  const breakAfterIndex =
+    props.navbarOptions?.breakAfterIndex !== undefined &&
+    Number.isFinite(props.navbarOptions.breakAfterIndex)
+      ? Math.floor(props.navbarOptions.breakAfterIndex)
+      : undefined;
+
+  const bottomItemsStartIndex =
+    breakAfterIndex === undefined
+      ? props.tabAndContentWrappers.length
+      : Math.min(
+          Math.max(breakAfterIndex + 1, 0),
+          props.tabAndContentWrappers.length,
+        );
+
+  const topItems = props.tabAndContentWrappers.slice(0, bottomItemsStartIndex);
+  const bottomItems = props.tabAndContentWrappers.slice(bottomItemsStartIndex);
+  const hasBottomItems = !!bottomItems.length;
+
   return (
     <div className="h-full" style={{backgroundColor: navbarColor}}>
       <div id="navbar" className="h-full">
@@ -95,7 +115,7 @@ export const Navbar = (props: Props) => {
           className="custom-scrollbar"
         >
           <>
-            {props.tabAndContentWrappers.map((wrapper: TabAndContentWrapper) =>
+            {topItems.map((wrapper: TabAndContentWrapper) =>
               wrapper.getNavbarComponent({
                 navbarCollapsed: navbarCollapsed,
               }),
@@ -112,51 +132,78 @@ export const Navbar = (props: Props) => {
                   width: "44px",
                   gap: "10px",
                 }
-              : {}
+              : {
+                  flexDirection: "column",
+                  width: `${NAVBAR_WIDTH_UNFOLDED}px`,
+                }
           }
         >
-          {isAtLeastOneDocumentVisible && (
-            <div
-              id="legal-doc-links"
-              style={{
-                flexDirection: navbarCollapsed ? "unset" : "row",
-                writingMode: navbarCollapsed ? "sideways-lr" : "horizontal-tb",
-                paddingLeft: navbarCollapsed ? "0px" : "12px",
-              }}
-            >
-              {props.legalDocuments
-                ?.filter((document) => !document.isHidden)
-                .map((document) => (
-                  <Link
-                    key={document.path}
-                    className="legal-doc-link"
-                    style={{color: legalDocumentsColor}}
-                    to={document.path}
-                    target="_blank"
-                  >
-                    {t({key: document.titleTranslationKey})}
-                  </Link>
-                ))}
+          {hasBottomItems && (
+            <div id="navbar-bottom-items">
+              {bottomItems.map((wrapper: TabAndContentWrapper) =>
+                wrapper.getNavbarComponent({
+                  navbarCollapsed: navbarCollapsed,
+                }),
+              )}
             </div>
           )}
 
-          {collapsible && (
-            <i
-              onClick={() => setNavbarCollapsed(!navbarCollapsed)}
-              style={{
-                ...(!navbarCollapsed && {
-                  position: "absolute",
-                  right: 0,
-                }),
-                cursor: "pointer",
-                color: navbarCollapseArrowColor,
-                margin: navbarCollapsed
-                  ? "8px 0px 0px 0px"
-                  : `0px ${PADDING_GAB}px 0px 0px`,
-              }}
-              className={calculateNavbarArrowFunctionColor(navbarCollapsed!)}
-            />
-          )}
+          <div
+            id="navbar-bottom-actions"
+            style={{
+              flexDirection: navbarCollapsed ? "column" : "row",
+              gap: navbarCollapsed ? "10px" : "0px",
+              justifyContent: navbarCollapsed
+                ? "center"
+                : isAtLeastOneDocumentVisible
+                  ? "space-between"
+                  : "flex-end",
+            }}
+          >
+            {isAtLeastOneDocumentVisible && (
+              <div
+                id="legal-doc-links"
+                style={{
+                  flexDirection: navbarCollapsed ? "unset" : "row",
+                  writingMode: navbarCollapsed
+                    ? "sideways-lr"
+                    : "horizontal-tb",
+                  paddingLeft: navbarCollapsed
+                    ? "0px"
+                    : `${DEFAULT_ELEMENT_SIZE}px`,
+                  flex: navbarCollapsed ? "0 1 auto" : undefined,
+                }}
+              >
+                {props.legalDocuments
+                  ?.filter((document) => !document.isHidden)
+                  .map((document) => (
+                    <Link
+                      key={document.path}
+                      className="legal-doc-link"
+                      style={{color: legalDocumentsColor}}
+                      to={document.path}
+                      target="_blank"
+                    >
+                      {t({key: document.titleTranslationKey})}
+                    </Link>
+                  ))}
+              </div>
+            )}
+
+            {collapsible && (
+              <i
+                onClick={() => setNavbarCollapsed(!navbarCollapsed)}
+                style={{
+                  cursor: "pointer",
+                  color: navbarCollapseArrowColor,
+                  margin: navbarCollapsed
+                    ? "8px 0px 0px 0px"
+                    : `0px ${PADDING_GAB}px 0px 0px`,
+                }}
+                className={calculateNavbarArrowFunctionColor(navbarCollapsed!)}
+              />
+            )}
+          </div>
         </div>
       </div>
     </div>

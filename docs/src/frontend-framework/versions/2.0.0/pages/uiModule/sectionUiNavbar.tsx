@@ -40,6 +40,7 @@ export const SectionUiNavbar: React.FC = () => (
 
     <Code language="typescript">{`export interface UINavbarProps {
   items: React.ReactNode[];
+  bottomItems?: React.ReactNode[];
   legalLinks?: React.ReactNode[];
   collapsed: boolean;
   collapsible: boolean;
@@ -63,9 +64,10 @@ export const SectionUiNavbar: React.FC = () => (
     <SubTitle>Default implementation</SubTitle>
     <Text>
       The default <code>UINavbar</code> implementation renders the main
-      navigation items, optional legal links and a collapse/expand control. It
-      uses the provided color and dimension settings from the UI module and
-      keeps the collapsed state in sync with the framework store.
+      navigation items, optional bottom navigation items, legal links and a
+      collapse/expand control. It uses the provided color and dimension settings
+      from the UI module and keeps the collapsed state in sync with the
+      framework store.
     </Text>
 
     <SubTitle>Custom implementation example</SubTitle>
@@ -83,6 +85,7 @@ const { Sider } = Layout;
 
 const CustomNavbar: React.FC<UINavbarProps> = ({
   items,
+  bottomItems = [],
   legalLinks = [],
   collapsed,
   collapsible,
@@ -129,12 +132,24 @@ const CustomNavbar: React.FC<UINavbarProps> = ({
         ))}
       </Space>
 
+      {!!bottomItems.length && (
+        <Space
+          direction="vertical"
+          size={6}
+          style={{ width: "100%", marginTop: "auto" }}
+        >
+          {bottomItems.map((node, i) => (
+            <div key={i}>{node}</div>
+          ))}
+        </Space>
+      )}
+
       {!!legalLinks.length && (
         <Space
           direction="vertical"
           size={4}
           style={{
-            marginTop: "auto",
+            marginTop: bottomItems.length ? 8 : "auto",
             color: colors.legalLink ?? token.colorTextSecondary,
           }}
         >

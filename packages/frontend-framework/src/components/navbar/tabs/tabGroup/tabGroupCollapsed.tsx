@@ -47,7 +47,11 @@ export const TabGroupCollapsed = (
           props.groupTabCollapsed ? "pi pi-chevron-left" : "pi pi-chevron-down"
         }
       />
-      <Tooltip content={props.name} target={ref} id="hover-image" />
+      <Tooltip
+        content={props.name}
+        target={ref as React.RefObject<HTMLElement>}
+        id="hover-image"
+      />
     </div>
   );
 };

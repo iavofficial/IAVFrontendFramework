@@ -19,8 +19,13 @@
 import React from "react";
 import {FFModule} from "../../generalModule";
 
+export interface NavbarOptions {
+  breakAfterIndex?: number;
+}
+
 export interface UINavbarProps {
   items: React.ReactNode[];
+  bottomItems?: React.ReactNode[];
   legalLinks?: React.ReactNode[];
   collapsed: boolean;
   collapsible: boolean;

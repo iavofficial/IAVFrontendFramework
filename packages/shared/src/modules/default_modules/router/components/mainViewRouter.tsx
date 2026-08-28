@@ -19,7 +19,7 @@
 import React from "react";
 import {Fragment} from "react/jsx-runtime";
 import {MainViewRouterProps} from "../../../../types/modules/router/routerModule";
-import {Route, Routes} from "react-router";
+import {Route, Routes} from "react-router-dom";
 import {generateHash} from "../../../../utils/hash";
 
 export const MainViewRouter = (props: MainViewRouterProps) => {

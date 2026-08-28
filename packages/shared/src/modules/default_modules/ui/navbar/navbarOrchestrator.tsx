@@ -18,7 +18,10 @@
 
 import React, {useContext} from "react";
 import {UINavbar} from "./uiNavbar";
-import {UINavbarProps} from "../../../../types/modules/ui/navbar/navbarModuleInterfaces";
+import {
+  NavbarOptions,
+  UINavbarProps,
+} from "../../../../types/modules/ui/navbar/navbarModuleInterfaces";
 import {useModuleTranslation} from "../../../hooks/useModuleTranslation";
 import {ColorSettingsContext} from "../../../../contexts/colorSettingsContext";
 import {
@@ -48,11 +51,13 @@ type LegalDocLike = {
 export type NavbarOrchestratorProps = {
   tabAndContentWrappers: TabAndContentWrapperLike[];
   legalDocuments?: LegalDocLike[];
+  navbarOptions?: NavbarOptions;
   uiComponent?: React.ComponentType<UINavbarProps>;
 };
 
 export const NavbarOrchestrator = (props: NavbarOrchestratorProps) => {
-  const {tabAndContentWrappers, legalDocuments, uiComponent} = props;
+  const {tabAndContentWrappers, legalDocuments, navbarOptions, uiComponent} =
+    props;
 
   const t = useModuleTranslation();
   const routerModule = useModule(MandatoryModuleNames.Router);
@@ -70,11 +75,31 @@ export const NavbarOrchestrator = (props: NavbarOrchestratorProps) => {
   const dispatch = useDefaultDispatch();
   const uiModule = useModule(MandatoryModuleNames.UI);
   const onToggleCollapse = () =>
-    dispatch(uiModule.slice.actions.toggleNavbar());
+    dispatch(uiModule.slice.actions.toggleNavbar(undefined));
 
-  const items = tabAndContentWrappers.map((w) =>
-    w.getNavbarComponent({navbarCollapsed: collapsed}),
-  );
+  const breakAfterIndex =
+    navbarOptions?.breakAfterIndex !== undefined &&
+    Number.isFinite(navbarOptions.breakAfterIndex)
+      ? Math.floor(navbarOptions.breakAfterIndex)
+      : undefined;
+
+  const bottomItemsStartIndex =
+    breakAfterIndex === undefined
+      ? tabAndContentWrappers.length
+      : Math.min(
+          Math.max(breakAfterIndex + 1, 0),
+          tabAndContentWrappers.length,
+        );
+
+  const createNavbarItem = (w: TabAndContentWrapperLike) =>
+    w.getNavbarComponent({navbarCollapsed: collapsed});
+
+  const items = tabAndContentWrappers
+    .slice(0, bottomItemsStartIndex)
+    .map(createNavbarItem);
+  const bottomItems = tabAndContentWrappers
+    .slice(bottomItemsStartIndex)
+    .map(createNavbarItem);
 
   const legalLinks =
     legalDocuments
@@ -115,6 +140,7 @@ export const NavbarOrchestrator = (props: NavbarOrchestratorProps) => {
 
   const uiProps: UINavbarProps = {
     items,
+    bottomItems,
     legalLinks,
     collapsed,
     collapsible,

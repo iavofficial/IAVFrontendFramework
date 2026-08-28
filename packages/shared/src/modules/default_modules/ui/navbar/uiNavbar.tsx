@@ -23,6 +23,7 @@ import "./navbar.css";
 import {UINavbarProps} from "../../../../types/modules/ui/navbar/navbarModuleInterfaces";
 
 export const UINavbar: React.FC<UINavbarProps> = (props) => {
+  const hasBottomItems = !!props.bottomItems?.length;
   const width = props.collapsed
     ? `${props.dims.collapsedWidth}px`
     : `${props.dims.unfoldedWidth}px`;
@@ -61,39 +62,65 @@ export const UINavbar: React.FC<UINavbarProps> = (props) => {
           style={
             props.collapsed
               ? {flexDirection: "column", width: "44px", gap: "10px"}
-              : {}
+              : {flexDirection: "column", width}
           }
           data-testid="navbar-bottom-wrapper"
         >
-          {!!props.legalLinks?.length && (
-            <div
-              id="legal-doc-links"
-              style={{
-                flexDirection: props.collapsed ? "unset" : "row",
-                writingMode: props.collapsed ? "sideways-lr" : "horizontal-tb",
-                paddingLeft: props.collapsed ? "0px" : "12px",
-              }}
-              data-testid="navbar-legal-links"
-            >
-              {props.legalLinks}
+          {hasBottomItems && (
+            <div id="navbar-bottom-items" data-testid="navbar-bottom-items">
+              {props.bottomItems?.map((el, i) => (
+                <React.Fragment key={i}>{el}</React.Fragment>
+              ))}
             </div>
           )}
 
-          {props.collapsible && (
-            <i
-              onClick={props.onToggleCollapse}
-              style={{
-                ...(props.collapsed ? {} : {position: "absolute", right: 0}),
-                cursor: "pointer",
-                color: props.colors.collapseArrow,
-                margin: props.collapsed
-                  ? "8px 0px 0px 0px"
-                  : `0px ${props.dims.paddingGab}px 0px 0px`,
-              }}
-              className={props.arrowClassName}
-              data-testid="navbar-collapse-toggle"
-            />
-          )}
+          <div
+            id="navbar-bottom-actions"
+            style={{
+              flexDirection: props.collapsed ? "column" : "row",
+              gap: props.collapsed ? "10px" : "0px",
+              justifyContent: props.collapsed
+                ? "center"
+                : props.legalLinks?.length
+                  ? "space-between"
+                  : "flex-end",
+            }}
+            data-testid="navbar-bottom-actions"
+          >
+            {!!props.legalLinks?.length && (
+              <div
+                id="legal-doc-links"
+                style={{
+                  flexDirection: props.collapsed ? "unset" : "row",
+                  writingMode: props.collapsed
+                    ? "sideways-lr"
+                    : "horizontal-tb",
+                  paddingLeft: props.collapsed
+                    ? "0px"
+                    : `${props.dims.collapsedWidth - 4}px`,
+                  flex: props.collapsed ? "0 1 auto" : undefined,
+                }}
+                data-testid="navbar-legal-links"
+              >
+                {props.legalLinks}
+              </div>
+            )}
+
+            {props.collapsible && (
+              <i
+                onClick={props.onToggleCollapse}
+                style={{
+                  cursor: "pointer",
+                  color: props.colors.collapseArrow,
+                  margin: props.collapsed
+                    ? "8px 0px 0px 0px"
+                    : `0px ${props.dims.paddingGab}px 0px 0px`,
+                }}
+                className={props.arrowClassName}
+                data-testid="navbar-collapse-toggle"
+              />
+            )}
+          </div>
         </div>
       </div>
     </div>

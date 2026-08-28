@@ -153,6 +153,7 @@ const CustomLayout: React.FC = () => {
       }}
       tabAndContentWrappers={views}
       initialPath="/"
+      navbarOptions={{ breakAfterIndex: 3 }}
       settingsMenuOptions={{}}
       legalDocuments={legalDocuments}
       headerOptions={{

@@ -33,6 +33,13 @@ export type FetchAuthedFunctionArgs = {
   settings?: object;
 };
 
+export type FetchAuthedReturnType =
+  | Response
+  | {
+      status: number;
+      body: string;
+    };
+
 export type Credentials = {
   email: string;
   password: string;
@@ -46,7 +53,7 @@ export type AuthState = {
 };
 
 export type AuthModule<TAuthState extends AuthState = AuthState> = {
-  fetchAuthed: AsyncThunk<Response, FetchAuthedFunctionArgs, any>;
+  fetchAuthed: AsyncThunk<FetchAuthedReturnType, FetchAuthedFunctionArgs, any>;
   login: AsyncThunk<void, {credentials: Credentials}, any>;
   logout: AsyncThunk<void, {error?: unknown} | undefined, any>;
 } & FFStoreModule<TAuthState>;

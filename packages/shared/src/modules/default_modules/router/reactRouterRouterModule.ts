@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import {useLocation as useLocationReactRouter} from "react-router";
+import {useLocation as useLocationReactRouter} from "react-router-dom";
 import {RouterModule} from "../../../types/modules/router/routerModule";
 import {UILayerRouter} from "./components/uiLayerRouter";
 import {MainViewRouter} from "./components/mainViewRouter";

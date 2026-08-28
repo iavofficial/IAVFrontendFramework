@@ -20,3 +20,5 @@ export enum StaticCollapsedState {
   Collapsed,
   Unfolded,
 }
+
+export type {NavbarOptions} from "@iavofficial/frontend-framework-shared/navbarModuleInterfaces";

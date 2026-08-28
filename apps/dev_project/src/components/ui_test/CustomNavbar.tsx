@@ -16,7 +16,6 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React from "react";
 import { Button, Layout, Space, theme, Typography } from "antd";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { UINavbarProps } from "@iavofficial/frontend-framework-shared/navbarModuleInterfaces";
@@ -25,6 +24,7 @@ const { Sider } = Layout;
 
 export const CustomNavbar = ({
   items,
+  bottomItems = [],
   legalLinks = [],
   collapsed,
   collapsible,
@@ -71,12 +71,24 @@ export const CustomNavbar = ({
         ))}
       </Space>
 
+      {!!bottomItems.length && (
+        <Space
+          direction="vertical"
+          size={6}
+          style={{ width: "100%", marginTop: "auto" }}
+        >
+          {bottomItems.map((node, i) => (
+            <div key={i}>{node}</div>
+          ))}
+        </Space>
+      )}
+
       {!!legalLinks.length && (
         <Space
           direction="vertical"
           size={4}
           style={{
-            marginTop: "auto",
+            marginTop: bottomItems.length ? 8 : "auto",
             color: colors.legalLink ?? token.colorTextSecondary,
           }}
         >

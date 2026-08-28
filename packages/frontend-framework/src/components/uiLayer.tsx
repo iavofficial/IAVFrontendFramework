@@ -25,7 +25,7 @@ import {useDefaultSelector} from "@iavofficial/frontend-framework-shared/moduleD
 import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
 import {AuthenticationViewProps} from "@iavofficial/frontend-framework-shared/authenticationViewProps";
-import {StaticCollapsedState} from "../types/navbarSettingsTypes";
+import {NavbarOptions} from "../types/navbarSettingsTypes";
 import {SettingsMenuOptions} from "@iavofficial/frontend-framework-shared/settingsMenu";
 import {HeaderOptions} from "@iavofficial/frontend-framework-shared/headerModuleInterfaces";
 import {UserMenuOptions} from "./header/userMenu";
@@ -63,6 +63,7 @@ export interface Props {
   headerOptions?: HeaderOptions;
   authOptions?: AuthOptions;
   hideNavbar?: boolean;
+  navbarOptions?: NavbarOptions;
 }
 
 export const UILayer: React.FC<Props> = (props) => {
@@ -121,6 +122,7 @@ export const UILayer: React.FC<Props> = (props) => {
           legalDocuments={props.legalDocuments}
           tabAndContentWrappers={props.tabAndContentWrappers}
           hideNavbar={props.hideNavbar}
+          navbarOptions={props.navbarOptions}
         />
       ),
     },
@@ -150,6 +152,7 @@ export const UILayer: React.FC<Props> = (props) => {
           legalDocuments={props.legalDocuments}
           tabAndContentWrappers={props.tabAndContentWrappers}
           hideNavbar={props.hideNavbar}
+          navbarOptions={props.navbarOptions}
         />
       )}
     </>

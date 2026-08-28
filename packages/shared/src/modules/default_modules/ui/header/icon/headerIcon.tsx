@@ -63,13 +63,13 @@ interface Props {
  * for icon-based headers.
  */
 const HeaderIcon: React.FC<PropsWithChildren<Props>> = (props) => {
-  const {onClick, onKeyDown, style, children, className, elementId} = props;
+  const {onClick, onKeyDown, style, children, className, dataTestId} = props;
 
   const {classes} = useStyles();
 
   return (
     <div
-      data-testid={elementId}
+      data-testid={dataTestId}
       className={classNames(
         "flex align-items-center justify-content-end",
         classes.wrapper,

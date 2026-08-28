@@ -272,6 +272,7 @@ const Layout = (props: Props) => {
       }}
       tabAndContentWrappers={views}
       initialPath="/"
+      navbarOptions={{ breakAfterIndex: 5 }}
       authenticationView={props.authenticationView}
       settingsMenuOptions={settingsMenuOptions}
       legalDocuments={legalDocuments}

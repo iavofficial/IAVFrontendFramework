@@ -24,7 +24,7 @@
   "scripts": {
     "setup:root": "node -e \"const fs=require('fs');process.exit(fs.existsSync('package-lock.json')?0:1)\" && npm ci || npm install",
     "checkout-docs:root": "./scripts/unix/docs_generation/copy-root-docs-and-prepare.sh",
-    "dev": "turbo run dev build-live",
+    "dev": "turbo run build:dev && turbo run dev build-live",
     "docs": "cd docs && npm run dev",
     "build:docs": "cd docs && npm run build",
     "test": "turbo run test",

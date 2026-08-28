@@ -358,6 +358,7 @@ export interface AuthenticationViewProps {
       <Code language={"typescript"}>
         {`export interface NavbarOptions {
     staticCollapsedState?: StaticCollapsedState; // Option to disable the feature to collapse the navigation bar. By setting a value of the StaticCollapsedState you set the navigation bar into a static state in which it is either collapsed or unfolded.
+    breakAfterIndex?: number; // Optional zero-based index. Items after this index are displayed at the bottom of the navigation bar, above legal links and the collapse/expand control.
 }
 
 enum StaticCollapsedState {

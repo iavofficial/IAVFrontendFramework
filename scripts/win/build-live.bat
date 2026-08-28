@@ -14,8 +14,10 @@ rem limitations under the License.
 rem 
 rem SPDX-License-Identifier: Apache-2.0
 
-rmdir /S /q dist
-mkdir dist
+if not exist dist mkdir dist
+
+if not exist dist\package.json call ..\..\scripts\win\build-once.bat
+if errorlevel 1 exit /b 1
 
 rem Using this expression to start the asynchronous tasks after package installation.
 

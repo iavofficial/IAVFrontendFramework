@@ -63,7 +63,11 @@ export const SimpleNavbarTabCollapsed = (props: NestedNavbarTabProps) => {
           color={props.iconColor}
         />
       )}
-      <Tooltip content={props.name} target={ref} id="hover-image" />
+      <Tooltip
+        content={props.name}
+        target={ref as React.RefObject<HTMLElement>}
+        id="hover-image"
+      />
     </div>
   );
 };

@@ -19,10 +19,7 @@ on:
       - 'docs/**/*'
 
 permissions:
-  contents: write
-  issues: write
-  pull-requests: write
-  id-token: write
+  contents: read
 
 concurrency:
   group: release-${{ github.ref }}
@@ -67,6 +64,11 @@ jobs:
   release:
     runs-on: ubuntu-latest
     needs: build
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
 
     steps:
       - name: Checkout
@@ -99,7 +101,6 @@ jobs:
         if: ${{ !(github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run == 'true') }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm run release
 
       - name: Skip release (Dry Run mode)

@@ -101,7 +101,6 @@ export const Navbar = (props: Props) => {
       <div id="navbar" className="h-full">
         <SimpleBar
           style={{
-            height: "inherit",
             width: navbarCollapsed
               ? `${DEFAULT_ELEMENT_SIZE + 2 * GAB_NAVBAR_COLLAPSED}px`
               : `${NAVBAR_WIDTH_UNFOLDED}px`,
@@ -110,7 +109,8 @@ export const Navbar = (props: Props) => {
             position: "relative",
             overflowX: "visible",
             marginBottom: "30px",
-            flex: "0 1 auto",
+            flex: "1 1 auto",
+            minHeight: 0,
           }}
           className="custom-scrollbar"
         >

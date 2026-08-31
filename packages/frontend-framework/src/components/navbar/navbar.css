@@ -21,6 +21,7 @@
   flex-direction: column;
   justify-content: space-between;
   padding-top: 12px;
+  min-height: 0;
 }
 
 #navbar-bottom-wrapper {
@@ -90,4 +91,6 @@
 .custom-scrollbar {
   overflow-y: scroll;
   scrollbar-width: none;
+  flex: 1 1 auto;
+  min-height: 0;
 }

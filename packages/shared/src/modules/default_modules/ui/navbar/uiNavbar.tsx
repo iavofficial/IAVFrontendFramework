@@ -41,14 +41,14 @@ export const UINavbar: React.FC<UINavbarProps> = (props) => {
         <SimpleBar
           className="custom-scrollbar"
           style={{
-            height: "inherit",
             width,
             padding,
             color: props.colors.scrollbar,
             position: "relative",
             overflowX: "visible",
             marginBottom: "30px",
-            flex: "0 1 auto",
+            flex: "1 1 auto",
+            minHeight: 0,
           }}
         >
           {props.items.map((el, i) => (

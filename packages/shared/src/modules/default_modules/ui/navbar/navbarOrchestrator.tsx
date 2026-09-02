@@ -113,6 +113,8 @@ export const NavbarOrchestrator = (props: NavbarOrchestratorProps) => {
               colorSettingsContext.currentColors.navbar.legalDocumentsLinkColor,
           }}
           to={d.path}
+          target="_blank"
+          rel="noopener noreferrer"
         >
           {t({key: d.titleTranslationKey})}
         </Link>

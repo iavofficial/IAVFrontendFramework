@@ -35,6 +35,7 @@ export class Group implements GroupableTabAndContentWrapper {
     private _logo: ReactElement,
     private _collapsible: boolean,
     private _contentWrappers: GroupableTabAndContentWrapper[],
+    private _collapsedLogo?: ReactElement,
   ) {
     _contentWrappers.forEach((contentWrapper) => {
       contentWrapper.setInsideGroup(true);
@@ -82,6 +83,7 @@ export class Group implements GroupableTabAndContentWrapper {
         key={this.getKey()}
         name={this._name}
         logo={this._logo ? this._logo : undefined}
+        collapsedLogo={this._collapsedLogo}
         collapsible={this._collapsible}
         frameworkInjectedOptions={injectedProperties}
         wrappers={this._contentWrappers}

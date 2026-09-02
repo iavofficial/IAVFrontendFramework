@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, {CSSProperties, PropsWithChildren, ReactElement} from "react";
+import React, {PropsWithChildren, ReactElement} from "react";
 import {FFModule} from "../generalModule";
 
 export type BasicRoute = {
@@ -29,9 +29,8 @@ export type BasicRoute = {
 export type LinkProps = PropsWithChildren<
   {
     to: string;
-    style?: CSSProperties;
-    target?: string;
-  } & Record<string, unknown>
+    [dataAttribute: `data-${string}`]: string | number | boolean | undefined;
+  } & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href">
 >;
 
 export type UILayerRouterProps = {

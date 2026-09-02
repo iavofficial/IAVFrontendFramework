@@ -183,6 +183,7 @@ export const Navbar = (props: Props) => {
                       style={{color: legalDocumentsColor}}
                       to={document.path}
                       target="_blank"
+                      rel="noopener noreferrer"
                     >
                       {t({key: document.titleTranslationKey})}
                     </Link>

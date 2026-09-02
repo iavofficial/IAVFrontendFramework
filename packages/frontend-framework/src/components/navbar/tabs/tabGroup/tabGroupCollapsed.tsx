@@ -19,9 +19,11 @@
 import React, {useRef} from "react";
 import {Tooltip} from "primereact/tooltip";
 import {GeneralGroupTabProps} from "./typesTabGroup";
+import {SvgIcon} from "../svgIcon";
 
 interface AdditionalProps {
   colors: {
+    iconColor: string;
     arrowColor: string;
   };
 }
@@ -30,23 +32,33 @@ export const TabGroupCollapsed = (
   props: GeneralGroupTabProps & AdditionalProps,
 ) => {
   const ref = useRef<HTMLDivElement>(null);
+  const dataTestId = props.dataTestId ?? `navBarGroup-${props.name}`;
+  const className = props.collapsedLogo
+    ? "default-nav-element-collapsed default-tab-collapsed w-full flex align-items-center justify-content-center"
+    : "default-nav-element-collapsed default-nav-group-collapsed w-full flex align-items-center";
 
   return (
-    <div
-      ref={ref}
-      className="default-nav-element-collapsed default-nav-group-collapsed w-full flex align-items-center"
-      style={{width: "100%"}}
-    >
-      <i
-        style={{
-          cursor: "pointer",
-          fontSize: "16px",
-          color: props.colors.arrowColor,
-        }}
-        className={
-          props.groupTabCollapsed ? "pi pi-chevron-left" : "pi pi-chevron-down"
-        }
-      />
+    <div ref={ref} className={className} style={{width: "100%"}}>
+      {props.collapsedLogo ? (
+        <SvgIcon
+          dataTestId={`${dataTestId}-icon`}
+          color={props.colors.iconColor}
+          element={props.collapsedLogo}
+        />
+      ) : (
+        <i
+          style={{
+            cursor: "pointer",
+            fontSize: "16px",
+            color: props.colors.arrowColor,
+          }}
+          className={
+            props.groupTabCollapsed
+              ? "pi pi-chevron-left"
+              : "pi pi-chevron-down"
+          }
+        />
+      )}
       <Tooltip
         content={props.name}
         target={ref as React.RefObject<HTMLElement>}

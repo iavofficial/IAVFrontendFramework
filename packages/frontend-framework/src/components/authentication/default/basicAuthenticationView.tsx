@@ -334,6 +334,7 @@ export const BasicAuthenticationView = (props: AuthenticationViewProps) => {
                       style={{color: legalLinkColor, fontSize: "12px"}}
                       to={document.path}
                       target="_blank"
+                      rel="noopener noreferrer"
                       data-testid={`auth-legal-${document.path}`}
                     >
                       {t({key: document.titleTranslationKey})}

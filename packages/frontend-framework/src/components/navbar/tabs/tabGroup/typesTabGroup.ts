@@ -23,5 +23,6 @@ export interface GeneralGroupTabProps {
   name: string;
   groupTabCollapsed: boolean;
   logo?: ReactElement;
+  collapsedLogo?: ReactElement;
   dataTestId?: string;
 }

@@ -20,14 +20,13 @@ import React from "react";
 import {LinkProps} from "../../../../types/modules/router/routerModule";
 import {Link as ReactRouterLink} from "react-router-dom";
 
-export const Link = (props: LinkProps) => {
+export const Link = ({to, children, ...anchorProps}: LinkProps) => {
   return (
     <ReactRouterLink
-      to={props.to}
-      style={props.style}
-      target={props.target ?? ""}
+      to={to}
+      {...anchorProps}
     >
-      {props.children}
+      {children}
     </ReactRouterLink>
   );
 };

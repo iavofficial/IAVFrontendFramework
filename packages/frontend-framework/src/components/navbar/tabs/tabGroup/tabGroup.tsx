@@ -40,6 +40,7 @@ interface Props {
   wrappers: GroupableTabAndContentWrapper[];
   frameworkInjectedOptions: InjectedOptionsByGroupToWrapper;
   logo?: ReactElement;
+  collapsedLogo?: ReactElement;
   collapsible?: boolean;
 }
 
@@ -151,6 +152,7 @@ export const TabGroup = (props: Props) => {
     name: props.name instanceof Function ? props.name(t) : props.name,
     hovering: hovering,
     logo: props.logo,
+    collapsedLogo: props.collapsedLogo,
     groupTabCollapsed: groupTabCollapsed,
     colors: {
       iconColor,

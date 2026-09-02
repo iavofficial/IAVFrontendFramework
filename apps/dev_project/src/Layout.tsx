@@ -99,6 +99,7 @@ const Layout = (props: Props) => {
           ExampleComponent2,
         ),
       ],
+      <InfoIcon />
     ),
     new BasicContentWrapper(
       "/group-example3/",
@@ -119,38 +120,45 @@ const Layout = (props: Props) => {
       }),
       ExampleComponent4,
     ),
-    new Group((t) => t({ key: "Test_group_collapsible" }), <InfoIcon />, true, [
-      new Group("Untergruppe", <InfoIcon />, true, [
+    new Group(
+      (t) => t({ key: "Test_group_collapsible" }),
+      <InfoIcon />,
+      true,
+      [
+        new Group("Untergruppe", <InfoIcon />, true, [
+          new BasicContentWrapper(
+            "/group-example51/",
+            simpleNavbarTabFactory({
+              name: (t) =>
+                t({ key: "example_component", options: { count: 5.1 } }),
+              disabled: false,
+              icon: <InfoIcon />,
+            }),
+            ExampleComponent3,
+          ),
+        ]),
         new BasicContentWrapper(
-          "/group-example51/",
+          "/group-example52/",
           simpleNavbarTabFactory({
             name: (t) =>
-              t({ key: "example_component", options: { count: 5.1 } }),
+              t({ key: "example_component", options: { count: 5.2 } }),
             disabled: false,
+            icon: <InfoIcon />,
+          }),
+          ExampleComponent4,
+        ),
+        new BasicContentWrapper(
+          "/group-example53/",
+          simpleNavbarTabFactory({
+            name: (t) =>
+              t({ key: "example_component", options: { count: 5.3 } }),
+            disabled: true,
             icon: <InfoIcon />,
           }),
           ExampleComponent3,
         ),
-      ]),
-      new BasicContentWrapper(
-        "/group-example52/",
-        simpleNavbarTabFactory({
-          name: (t) => t({ key: "example_component", options: { count: 5.2 } }),
-          disabled: false,
-          icon: <InfoIcon />,
-        }),
-        ExampleComponent4,
-      ),
-      new BasicContentWrapper(
-        "/group-example53/",
-        simpleNavbarTabFactory({
-          name: (t) => t({ key: "example_component", options: { count: 5.3 } }),
-          disabled: true,
-          icon: <InfoIcon />,
-        }),
-        ExampleComponent3,
-      ),
-    ]),
+      ]
+    ),
     new BasicContentWrapper(
       "/group-example6/",
       simpleNavbarTabFactory({

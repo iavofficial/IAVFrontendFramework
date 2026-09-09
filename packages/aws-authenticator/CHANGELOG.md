@@ -1,3 +1,9 @@
+## [@iavofficial/frontend-framework-aws-authenticator-v1.0.0-dev.8](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-aws-authenticator-v1.0.0-dev.7...@iavofficial/frontend-framework-aws-authenticator-v1.0.0-dev.8) (2026-09-09)
+
+### Features
+
+* Animation for group icons. Coloring of groups. Replaceable icons for closed navigation bar. Rework of Imprint. ([4f00a8d](https://github.com/iavofficial/IAVFrontendFramework/commit/4f00a8dfae5faef38bb06e050adee1fab4597163))
+
 ## [@iavofficial/frontend-framework-aws-authenticator-v1.0.0-dev.7](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-aws-authenticator-v1.0.0-dev.6...@iavofficial/frontend-framework-aws-authenticator-v1.0.0-dev.7) (2026-08-28)
 
 ### Features

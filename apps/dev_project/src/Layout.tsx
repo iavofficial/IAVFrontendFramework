@@ -46,6 +46,10 @@ interface Props {
   authenticationView?: React.ComponentType;
 }
 
+const bellIcon = (
+  <path d="M12 2a4 4 0 0 0-4 4v1.2c0 1.9-.7 3.7-2 5.1L4.5 14h15l-1.5-1.7a7.7 7.7 0 0 1-2-5.1V6a4 4 0 0 0-4-4Zm-2 15h4a2 2 0 0 1-4 0Z" />
+);
+
 const Layout = (props: Props) => {
   const [selectedButtonOption, setSelectedButtonOption] = useState("Simulated");
 
@@ -64,6 +68,48 @@ const Layout = (props: Props) => {
       },
     ],
   };
+
+  const colorExampleGroup = new Group(
+    "Color example group",
+    <InfoIcon />,
+    true,
+    [
+      new BasicContentWrapper(
+        "/color-example-1/",
+        simpleNavbarTabFactory({
+          name: "Color example tab 1",
+          disabled: false,
+          icon: <InfoIcon />,
+        }),
+        ExampleComponent1,
+      ),
+      new BasicContentWrapper(
+        "/color-example-2/",
+        simpleNavbarTabFactory({
+          name: "Color example tab 2",
+          disabled: false,
+          icon: <InfoIcon />,
+        }),
+        ExampleComponent2,
+      ),
+    ],
+    {
+      collapsedLogo: <InfoIcon />,
+      colors: {
+        group: {
+          defaultBackgroundColor: "#f3e8ff",
+          hoverBackgroundColor: "#e9d5ff",
+          activeBackgroundColor: "#c084fc",
+        },
+        tabs: {
+          defaultBackgroundColor: "#faf5ff",
+          hoverBackgroundColor: "#f3e8ff",
+          activeBackgroundColor: "#d8b4fe",
+          insideGroupBackgroundColor: "#faf5ff",
+        },
+      },
+    },
+  );
 
   const views = [
     new BasicContentWrapper(
@@ -84,6 +130,20 @@ const Layout = (props: Props) => {
       }),
       ExampleComponent7,
     ),
+    new BasicContentWrapper(
+      "/notifications",
+      simpleNavbarTabFactory({
+        disabled: false,
+        name: "Notifications",
+        icon: bellIcon,
+        animation: {
+          type: "pulse",
+          color: "#fff3a3",
+          duration: 1800,
+        },
+      }),
+      ExampleComponent7,
+    ),
     new Group(
       (t) => t({ key: "Test_group_not_collapsible" }),
       <InfoIcon />,
@@ -99,8 +159,11 @@ const Layout = (props: Props) => {
           ExampleComponent2,
         ),
       ],
-      <InfoIcon />
+      {
+        collapsedLogo: <InfoIcon />,
+      },
     ),
+    colorExampleGroup,
     new BasicContentWrapper(
       "/group-example3/",
       privilegedNavbarTabFactory({
@@ -157,7 +220,23 @@ const Layout = (props: Props) => {
           }),
           ExampleComponent3,
         ),
-      ]
+      ],
+      {
+        collapsedLogo: <InfoIcon />,
+        colors: {
+          group: {
+            defaultBackgroundColor: "#f4f7fb",
+            hoverBackgroundColor: "#dce8f5",
+            activeBackgroundColor: "#b7cee6",
+          },
+          tabs: {
+            defaultBackgroundColor: "#eef4fa",
+            hoverBackgroundColor: "#dce8f5",
+            activeBackgroundColor: "#b7cee6",
+            insideGroupBackgroundColor: "#eef4fa",
+          },
+        },
+      },
     ),
     new BasicContentWrapper(
       "/group-example6/",
@@ -258,10 +337,19 @@ const Layout = (props: Props) => {
 
   const legalDocuments: LegalDocument[] = [
     {
+      type: "callback",
+      id: "callback-example",
+      titleTranslationKey: "callback_example",
+      callback: () => {
+        window.alert("Callback executed");
+      },
+    },
+    {
       path: "/imprint",
       titleTranslationKey: "Imprint",
       component: ImprintDocument,
       isHidden: false,
+      target: "_self",
     },
     {
       path: "/privacy-policy",

@@ -20,6 +20,12 @@ import React, {ReactElement} from "react";
 import {InjectedOptionsGroupableByWrapperToTab} from "@iavofficial/frontend-framework-shared/typesInjectedOptions";
 import {TranslationWrapperFunction} from "@iavofficial/frontend-framework-shared/internationalizerModule";
 
+export interface NavbarTabAnimationOptions {
+  type: "pulse";
+  color?: string;
+  duration?: number;
+}
+
 /**
  * This interface contains the properties which have to be passed to a navigation tab.
  * The type of the injected options by the framework can be set as for example the tab
@@ -35,6 +41,7 @@ export interface NavbarTabProps<OptionType> {
   collapsed?: boolean;
   active?: boolean;
   basePath?: string;
+  animation?: NavbarTabAnimationOptions;
 }
 
 /**

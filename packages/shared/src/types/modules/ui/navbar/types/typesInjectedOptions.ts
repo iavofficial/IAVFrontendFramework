@@ -23,12 +23,30 @@ export interface InjectedOptionsByNavbarToWrapper {
   navbarCollapsed: boolean;
 }
 
+export interface GroupBackgroundColors {
+  defaultBackgroundColor?: string;
+  hoverBackgroundColor?: string;
+  activeBackgroundColor?: string;
+}
+
+export interface GroupTabBackgroundColors extends GroupBackgroundColors {
+  insideGroupBackgroundColor?: string;
+}
+
+export interface InjectedGroupStyleOptions {
+  colors?: {
+    group?: GroupBackgroundColors;
+    tabs?: GroupTabBackgroundColors;
+  };
+}
+
 /**
  * This interface contains the options which are passed to the wrapper by a group component for groupable tabs.
  */
 export type InjectedOptionsByGroupToWrapper =
   InjectedOptionsByNavbarToWrapper & {
     groupActive: boolean;
+    groupStyleOptions?: InjectedGroupStyleOptions;
   };
 
 /**

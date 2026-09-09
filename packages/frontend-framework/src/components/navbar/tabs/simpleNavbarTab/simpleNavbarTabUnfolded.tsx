@@ -17,10 +17,9 @@
  */
 
 import React from "react";
-import {SvgIcon} from "../svgIcon";
 import {NestedNavbarTabProps} from "./simpleNavbarTab";
 import "../tabs.css";
-import {DefaultIcon} from "../defaultIcon";
+import {NavbarTabIcon} from "./navbarTabIcon";
 
 export const SimpleNavbarTabUnfolded = (props: NestedNavbarTabProps) => {
   let className = "default-nav-element-unfolded default-tab-unfolded flex ";
@@ -38,22 +37,12 @@ export const SimpleNavbarTabUnfolded = (props: NestedNavbarTabProps) => {
       onMouseLeave={() => props.setHovering(false)}
     >
       <div className="flex align-items-center">
-        {props.icon ? (
-          <SvgIcon
-            dataTestId={
-              props.dataTestId ? `${props.dataTestId}-icon` : undefined
-            }
-            color={props.iconColor}
-            element={props.icon}
-          />
-        ) : (
-          <DefaultIcon
-            dataTestId={
-              props.dataTestId ? `${props.dataTestId}-icon` : undefined
-            }
-            color={props.iconColor}
-          />
-        )}
+        <NavbarTabIcon
+          dataTestId={props.dataTestId ? `${props.dataTestId}-icon` : undefined}
+          iconColor={props.iconColor}
+          icon={props.icon}
+          animation={props.animation}
+        />
         <span id="navbar-tab-name">{props.name}</span>
       </div>
     </div>

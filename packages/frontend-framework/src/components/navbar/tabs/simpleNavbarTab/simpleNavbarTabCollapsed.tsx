@@ -17,23 +17,13 @@
  */
 
 import React, {useRef} from "react";
-import {SvgIcon} from "../svgIcon";
 import {Tooltip} from "primereact/tooltip";
 import {NestedNavbarTabProps} from "./simpleNavbarTab";
 import "../tabs.css";
-import makeStyles from "../../../content/style_options/makeStyles";
-import {DefaultIcon} from "../defaultIcon";
-
-const useStyles = makeStyles(({iconColor}) => ({
-  icon: {
-    color: iconColor,
-  },
-}));
+import {NavbarTabIcon} from "./navbarTabIcon";
 
 export const SimpleNavbarTabCollapsed = (props: NestedNavbarTabProps) => {
   const ref = useRef<HTMLDivElement>(null);
-
-  const {classes} = useStyles({iconColor: props.iconColor});
 
   let className =
     "default-nav-element-collapsed default-tab-collapsed flex align-items-center justify-content-center";
@@ -51,18 +41,12 @@ export const SimpleNavbarTabCollapsed = (props: NestedNavbarTabProps) => {
       className={className}
       style={props.style}
     >
-      {props.icon ? (
-        <SvgIcon
-          dataTestId={props.dataTestId ? `${props.dataTestId}-icon` : undefined}
-          color={props.iconColor}
-          element={props.icon}
-        />
-      ) : (
-        <DefaultIcon
-          dataTestId={props.dataTestId ? `${props.dataTestId}-icon` : undefined}
-          color={props.iconColor}
-        />
-      )}
+      <NavbarTabIcon
+        dataTestId={props.dataTestId ? `${props.dataTestId}-icon` : undefined}
+        iconColor={props.iconColor}
+        icon={props.icon}
+        animation={props.animation}
+      />
       <Tooltip
         content={props.name}
         target={ref as React.RefObject<HTMLElement>}

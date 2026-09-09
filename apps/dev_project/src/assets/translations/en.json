@@ -29,5 +29,6 @@
   "without_applied_dark_and_lightMode": "without applied dark and lightmode",
   "car": "car",
   "wrong_password": "The username or password is incorrect. Please try again.",
-  "modules": "Modules"
+  "modules": "Modules",
+  "callback_example": "Callback example"
 }

@@ -33,6 +33,7 @@ import {
 import {ColorSettingsContext} from "@iavofficial/frontend-framework-shared/colorSettingsContext";
 import {useModuleTranslation} from "@iavofficial/frontend-framework-shared/useModuleTranslation";
 import {TranslationWrapperFunction} from "@iavofficial/frontend-framework-shared/internationalizerModule";
+import type {GroupOptions} from "../../wrappers/typesGroupOptions";
 
 interface Props {
   name: string | TranslationWrapperFunction;
@@ -40,7 +41,7 @@ interface Props {
   wrappers: GroupableTabAndContentWrapper[];
   frameworkInjectedOptions: InjectedOptionsByGroupToWrapper;
   logo?: ReactElement;
-  collapsedLogo?: ReactElement;
+  options?: GroupOptions;
   collapsible?: boolean;
 }
 
@@ -52,16 +53,23 @@ export const TabGroup = (props: Props) => {
 
   const insideActiveGroup = props.frameworkInjectedOptions.groupActive;
 
+  const parentGroupTabColors =
+    props.frameworkInjectedOptions.groupStyleOptions?.colors?.tabs;
   const insideActiveGroupColor =
+    parentGroupTabColors?.insideGroupBackgroundColor ??
     colorSettingsContext.currentColors.navbar.content.insideActiveGroupColor;
 
+  const groupColors = props.options?.colors?.group;
   const groupBackgroundDefaultColor =
+    groupColors?.defaultBackgroundColor ??
     colorSettingsContext.currentColors.navbar.content.default
       .groupBackgroundDefaultColor;
   const groupBackgroundHoverColor =
+    groupColors?.hoverBackgroundColor ??
     colorSettingsContext.currentColors.navbar.content.hover
       .groupBackgroundHoverColor;
   const groupBackgroundActiveColor =
+    groupColors?.activeBackgroundColor ??
     colorSettingsContext.currentColors.navbar.content.active
       .groupBackgroundActiveColor;
 
@@ -152,7 +160,7 @@ export const TabGroup = (props: Props) => {
     name: props.name instanceof Function ? props.name(t) : props.name,
     hovering: hovering,
     logo: props.logo,
-    collapsedLogo: props.collapsedLogo,
+    collapsedLogo: props.options?.collapsedLogo,
     groupTabCollapsed: groupTabCollapsed,
     colors: {
       iconColor,
@@ -165,6 +173,11 @@ export const TabGroup = (props: Props) => {
   ) : (
     <TabGroupUnfolded {...tabComponentProperties} />
   );
+  const groupStyleOptions = props.options?.colors
+    ? {
+        colors: props.options.colors,
+      }
+    : undefined;
 
   return (
     <>
@@ -187,6 +200,7 @@ export const TabGroup = (props: Props) => {
         props.wrappers.map((wrapper) =>
           wrapper.getNavbarComponent({
             groupActive: !groupTabCollapsed,
+            groupStyleOptions,
             navbarCollapsed: props.frameworkInjectedOptions.navbarCollapsed,
           }),
         )

@@ -36,6 +36,7 @@ import {useModule} from "@iavofficial/frontend-framework-shared/moduleContext";
 import {MandatoryModuleNames} from "@iavofficial/frontend-framework-shared/moduleNames";
 import {useModuleTranslation} from "@iavofficial/frontend-framework-shared/useModuleTranslation";
 import {generateHashOfLength} from "@iavofficial/frontend-framework-shared/hash";
+import {NavbarTabAnimationOptions} from "../typesNavbarTab";
 
 export interface NestedNavbarTabProps {
   additionalClassNames: string;
@@ -44,6 +45,7 @@ export interface NestedNavbarTabProps {
   iconColor: string;
   name: string;
   icon?: ReactElement;
+  animation?: NavbarTabAnimationOptions;
   dataTestId?: string;
 }
 
@@ -62,16 +64,22 @@ export const SimpleNavbarTab: GroupableNavbarTab = (
 
   const {isActive} = routerModule.useIsTabActive(path);
 
+  const groupTabColors =
+    props.frameworkInjectedOptions.groupStyleOptions?.colors?.tabs;
   const tabBackgroundDefaultColor =
+    groupTabColors?.defaultBackgroundColor ??
     colorSettingsContext.currentColors.navbar.content.default
       .tabBackgroundDefaultColor;
   const tabBackgroundHoverColor =
+    groupTabColors?.hoverBackgroundColor ??
     colorSettingsContext.currentColors.navbar.content.hover
       .tabBackgroundHoverColor;
   const tabBackgroundActiveColor =
+    groupTabColors?.activeBackgroundColor ??
     colorSettingsContext.currentColors.navbar.content.active
       .tabBackgroundActiveColor;
   const insideActiveGroupColor =
+    groupTabColors?.insideGroupBackgroundColor ??
     colorSettingsContext.currentColors.navbar.content.insideActiveGroupColor;
 
   const fontDefaultColor =
@@ -132,6 +140,7 @@ export const SimpleNavbarTab: GroupableNavbarTab = (
     style: tabStyleDefault,
     setHovering: setHovering,
     icon: props.icon,
+    animation: props.animation,
     name: props.name instanceof Function ? props.name(t) : props.name,
     additionalClassNames: additionalClassNames,
     iconColor: iconColor,

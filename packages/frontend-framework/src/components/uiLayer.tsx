@@ -90,11 +90,13 @@ export const UILayer: React.FC<Props> = (props) => {
   }, [props.disableCookieBanner, removeKnownCookies]);
 
   const dynamicRoutes =
-    props.legalDocuments?.map((doc) => ({
-      path: doc.path,
-      disabled: doc.isHidden ?? false,
-      element: <doc.component />,
-    })) || [];
+    props.legalDocuments
+      ?.filter((doc) => doc.type !== "callback")
+      .map((doc) => ({
+        path: doc.path,
+        disabled: doc.isHidden ?? false,
+        element: <doc.component />,
+      })) || [];
 
   const fixedRoutes = [
     {
@@ -129,7 +131,9 @@ export const UILayer: React.FC<Props> = (props) => {
   ];
 
   const routes = [...dynamicRoutes, ...fixedRoutes];
-  const legalDocumentsPaths = (props.legalDocuments ?? []).map((d) => d.path);
+  const legalDocumentsPaths = (props.legalDocuments ?? [])
+    .filter((d) => d.type !== "callback")
+    .map((d) => d.path);
 
   return (
     <>

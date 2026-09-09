@@ -37,20 +37,15 @@ import {
   useDefaultDispatch,
   useDefaultSelector,
 } from "../../../module_orchestration/moduleDefaults";
+import type {LegalDocument} from "../../../../components/imprint/legalDocument";
 
 type TabAndContentWrapperLike = {
   getNavbarComponent: (args: {navbarCollapsed: boolean}) => React.ReactElement;
 };
 
-type LegalDocLike = {
-  path: string;
-  titleTranslationKey: string;
-  isHidden?: boolean;
-};
-
 export type NavbarOrchestratorProps = {
   tabAndContentWrappers: TabAndContentWrapperLike[];
-  legalDocuments?: LegalDocLike[];
+  legalDocuments?: LegalDocument[];
   navbarOptions?: NavbarOptions;
   uiComponent?: React.ComponentType<UINavbarProps>;
 };
@@ -101,24 +96,51 @@ export const NavbarOrchestrator = (props: NavbarOrchestratorProps) => {
     .slice(bottomItemsStartIndex)
     .map(createNavbarItem);
 
+  const legalLinkStyle = {
+    color: colorSettingsContext.currentColors.navbar.legalDocumentsLinkColor,
+  };
+
   const legalLinks =
     legalDocuments
       ?.filter((d) => !d.isHidden)
-      .map((d) => (
-        <Link
-          key={d.path}
-          className="legal-doc-link"
-          style={{
-            color:
-              colorSettingsContext.currentColors.navbar.legalDocumentsLinkColor,
-          }}
-          to={d.path}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {t({key: d.titleTranslationKey})}
-        </Link>
-      )) ?? [];
+      .map((d) => {
+        const label = t({key: d.titleTranslationKey});
+
+        if (d.type === "callback") {
+          return (
+            <button
+              key={d.id}
+              type="button"
+              className="legal-doc-link"
+              style={{
+                ...legalLinkStyle,
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                padding: 0,
+              }}
+              onClick={() => void d.callback()}
+            >
+              {label}
+            </button>
+          );
+        }
+
+        const target = d.target ?? "_blank";
+
+        return (
+          <Link
+            key={d.path}
+            className="legal-doc-link"
+            style={legalLinkStyle}
+            to={d.path}
+            target={target}
+            rel={target === "_blank" ? "noopener noreferrer" : undefined}
+          >
+            {label}
+          </Link>
+        );
+      }) ?? [];
 
   const dims = {
     collapsedWidth: DEFAULT_ELEMENT_SIZE + 2 * GAB_NAVBAR_COLLAPSED,

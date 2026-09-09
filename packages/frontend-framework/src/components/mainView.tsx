@@ -52,10 +52,12 @@ export const MainView: React.FC<MainViewProps> = (props) => {
 
   const staticRoutes: BasicRoute[] = useMemo(
     () =>
-      props.legalDocuments?.map((doc) => ({
-        path: doc.path,
-        element: <doc.component />,
-      })) || [],
+      props.legalDocuments
+        ?.filter((doc) => doc.type !== "callback")
+        .map((doc) => ({
+          path: doc.path,
+          element: <doc.component />,
+        })) || [],
     [props.legalDocuments],
   );
 

@@ -16,28 +16,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React from "react";
+import type {ReactElement} from "react";
+import type {InjectedGroupStyleOptions} from "@iavofficial/frontend-framework-shared/typesInjectedOptions";
 
-interface LegalDocumentBase {
-  titleTranslationKey: string;
-  isHidden?: boolean;
+export interface GroupOptions extends InjectedGroupStyleOptions {
+  collapsedLogo?: ReactElement;
 }
-
-export type RouteLegalDocument = LegalDocumentBase & {
-  type?: "route";
-  path: string;
-  component: React.ComponentType<any>;
-  target?: React.HTMLAttributeAnchorTarget;
-  callback?: never;
-};
-
-export type CallbackLegalDocument = LegalDocumentBase & {
-  type: "callback";
-  id: string;
-  callback: () => void | Promise<void>;
-  path?: never;
-  component?: never;
-  target?: never;
-};
-
-export type LegalDocument = RouteLegalDocument | CallbackLegalDocument;

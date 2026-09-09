@@ -51,15 +51,22 @@ export class BasicContentWrapper
       InjectedOptionsByNavbarToWrapper | InjectedOptionsByGroupToWrapper,
   ) => {
     const NavbarElement = this._navbarTab;
+    const insideGroup = this.getInsideGroup();
+    const groupActive =
+      insideGroup && "groupActive" in navbarInjectedOptions
+        ? navbarInjectedOptions.groupActive
+        : false;
+    const groupStyleOptions =
+      insideGroup && "groupStyleOptions" in navbarInjectedOptions
+        ? navbarInjectedOptions.groupStyleOptions
+        : undefined;
 
     const injectedOptions: InjectedOptionsGroupableByWrapperToTab = {
-      insideGroup: this.getInsideGroup(),
+      insideGroup,
       path: this._path,
       navbarCollapsed: navbarInjectedOptions.navbarCollapsed,
-      groupActive: this.getInsideGroup()
-        ? // @ts-ignore If insideGroup is true groupActive will be contained.
-          navbarInjectedOptions.groupActive
-        : false,
+      groupActive,
+      groupStyleOptions,
     };
 
     return (

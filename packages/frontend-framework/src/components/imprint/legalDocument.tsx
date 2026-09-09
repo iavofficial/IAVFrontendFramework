@@ -16,11 +16,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React from "react";
-
-export interface LegalDocument {
-  path: string;
-  titleTranslationKey: string;
-  component: React.ComponentType<any>;
-  isHidden?: boolean;
-}
+export type {
+  CallbackLegalDocument,
+  LegalDocument,
+  RouteLegalDocument,
+} from "@iavofficial/frontend-framework-shared/legalDocument";

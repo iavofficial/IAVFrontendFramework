@@ -176,18 +176,48 @@ export const Navbar = (props: Props) => {
               >
                 {props.legalDocuments
                   ?.filter((document) => !document.isHidden)
-                  .map((document) => (
-                    <Link
-                      key={document.path}
-                      className="legal-doc-link"
-                      style={{color: legalDocumentsColor}}
-                      to={document.path}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {t({key: document.titleTranslationKey})}
-                    </Link>
-                  ))}
+                  .map((document) => {
+                    const label = t({key: document.titleTranslationKey});
+
+                    if (document.type === "callback") {
+                      return (
+                        <button
+                          key={document.id}
+                          type="button"
+                          className="legal-doc-link"
+                          style={{
+                            color: legalDocumentsColor,
+                            background: "none",
+                            border: "none",
+                            cursor: "pointer",
+                            padding: 0,
+                          }}
+                          onClick={() => void document.callback()}
+                        >
+                          {label}
+                        </button>
+                      );
+                    }
+
+                    const target = document.target ?? "_blank";
+
+                    return (
+                      <Link
+                        key={document.path}
+                        className="legal-doc-link"
+                        style={{color: legalDocumentsColor}}
+                        to={document.path}
+                        target={target}
+                        rel={
+                          target === "_blank"
+                            ? "noopener noreferrer"
+                            : undefined
+                        }
+                      >
+                        {label}
+                      </Link>
+                    );
+                  })}
               </div>
             )}
 

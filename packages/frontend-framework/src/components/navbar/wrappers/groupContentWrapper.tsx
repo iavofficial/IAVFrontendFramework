@@ -26,17 +26,23 @@ import {
 import {generateHashForValues} from "@iavofficial/frontend-framework-shared/hash";
 import {BasicRoute} from "@iavofficial/frontend-framework-shared/routerModule";
 import {TranslationWrapperFunction} from "@iavofficial/frontend-framework-shared/internationalizerModule";
+import type {GroupOptions} from "./typesGroupOptions";
+
+export type {GroupOptions} from "./typesGroupOptions";
 
 export class Group implements GroupableTabAndContentWrapper {
   private _insideGroup = false;
+  private _options: GroupOptions;
 
   constructor(
     private _name: string | TranslationWrapperFunction,
     private _logo: ReactElement,
     private _collapsible: boolean,
     private _contentWrappers: GroupableTabAndContentWrapper[],
-    private _collapsedLogo?: ReactElement,
+    options?: GroupOptions,
   ) {
+    this._options = options ?? {};
+
     _contentWrappers.forEach((contentWrapper) => {
       contentWrapper.setInsideGroup(true);
     });
@@ -66,15 +72,21 @@ export class Group implements GroupableTabAndContentWrapper {
     frameworkInjectedOptions:
       InjectedOptionsByNavbarToWrapper | InjectedOptionsByGroupToWrapper,
   ) => {
+    const insideGroup = this.getInsideGroup();
+    const groupActive =
+      insideGroup && "groupActive" in frameworkInjectedOptions
+        ? frameworkInjectedOptions.groupActive
+        : false;
+    const groupStyleOptions =
+      insideGroup && "groupStyleOptions" in frameworkInjectedOptions
+        ? frameworkInjectedOptions.groupStyleOptions
+        : undefined;
+
     const injectedProperties = {
       navbarCollapsed: frameworkInjectedOptions.navbarCollapsed,
-      insideGroup: this.getInsideGroup(),
-      // As the options origin can be the navbar component itself it has to be checked whether this
-      // wrapper is located inside a group.
-      groupActive: this.getInsideGroup()
-        ? // @ts-ignore If insideGroup is true groupActive will be contained.
-          frameworkInjectedOptions.groupActive
-        : false,
+      insideGroup,
+      groupActive,
+      groupStyleOptions,
     };
 
     return (
@@ -83,7 +95,7 @@ export class Group implements GroupableTabAndContentWrapper {
         key={this.getKey()}
         name={this._name}
         logo={this._logo ? this._logo : undefined}
-        collapsedLogo={this._collapsedLogo}
+        options={this._options}
         collapsible={this._collapsible}
         frameworkInjectedOptions={injectedProperties}
         wrappers={this._contentWrappers}

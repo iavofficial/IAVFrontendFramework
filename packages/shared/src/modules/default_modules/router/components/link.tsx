@@ -22,10 +22,7 @@ import {Link as ReactRouterLink} from "react-router-dom";
 
 export const Link = ({to, children, ...anchorProps}: LinkProps) => {
   return (
-    <ReactRouterLink
-      to={to}
-      {...anchorProps}
-    >
+    <ReactRouterLink to={to} {...anchorProps}>
       {children}
     </ReactRouterLink>
   );

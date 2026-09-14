@@ -1,3 +1,9 @@
+## [@iavofficial/frontend-framework-shared-v1.0.0-dev.18](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-shared-v1.0.0-dev.17...@iavofficial/frontend-framework-shared-v1.0.0-dev.18) (2026-09-14)
+
+### Bug Fixes
+
+* Fixed dependency resolution ([d3191a7](https://github.com/iavofficial/IAVFrontendFramework/commit/d3191a710ebd27bab7707cea700f3cf461532a56))
+
 ## [@iavofficial/frontend-framework-shared-v1.0.0-dev.17](https://github.com/iavofficial/IAVFrontendFramework/compare/@iavofficial/frontend-framework-shared-v1.0.0-dev.16...@iavofficial/frontend-framework-shared-v1.0.0-dev.17) (2026-09-09)
 
 ### Features

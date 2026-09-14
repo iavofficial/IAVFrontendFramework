@@ -17,11 +17,13 @@
  */
 
 import React, {useContext} from "react";
+import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {UINavbar} from "./uiNavbar";
 import {
   NavbarOptions,
   UINavbarProps,
 } from "../../../../types/modules/ui/navbar/navbarModuleInterfaces";
+import {UIStoreState} from "../../../../types/modules/ui/uiModuleInterfaces";
 import {useModuleTranslation} from "../../../hooks/useModuleTranslation";
 import {ColorSettingsContext} from "../../../../contexts/colorSettingsContext";
 import {
@@ -33,10 +35,6 @@ import {
 import {useModule} from "../../../../contexts/moduleContext";
 import {MandatoryModuleNames} from "../../../../constants/moduleNames";
 import {calculateNavbarArrowFunctionColor} from "../../../../utils/ui/navbar/calculateNavbarArrowFunctionColor";
-import {
-  useDefaultDispatch,
-  useDefaultSelector,
-} from "../../../module_orchestration/moduleDefaults";
 import type {LegalDocument} from "../../../../components/imprint/legalDocument";
 
 type TabAndContentWrapperLike = {
@@ -59,15 +57,16 @@ export const NavbarOrchestrator = (props: NavbarOrchestratorProps) => {
   const Link = routerModule.Link;
 
   const colorSettingsContext = useContext(ColorSettingsContext);
+  const useTypedSelector: TypedUseSelectorHook<UIStoreState> = useSelector;
 
-  const collapsed = useDefaultSelector(
+  const collapsed = useTypedSelector(
     (s) => s[MandatoryModuleNames.UI].navbarCollapsed,
   );
-  const collapsible = useDefaultSelector(
+  const collapsible = useTypedSelector(
     (s) => s[MandatoryModuleNames.UI].collapsible,
   );
 
-  const dispatch = useDefaultDispatch();
+  const dispatch = useDispatch();
   const uiModule = useModule(MandatoryModuleNames.UI);
   const onToggleCollapse = () =>
     dispatch(uiModule.slice.actions.toggleNavbar(undefined));
